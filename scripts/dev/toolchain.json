@@ -1,0 +1,8 @@
+{
+  "version": "4.6.3",
+  "version_output": "4.6.3.stable.official.7d41c59c4",
+  "engine_url": "https://github.com/godotengine/godot/releases/download/4.6.3-stable/Godot_v4.6.3-stable_win64.exe.zip",
+  "engine_sha256": "E39986A178D585CE7AC198FB8DE6EA436366DC0CC00E594810C2E3E104C04B90",
+  "templates_url": "https://github.com/godotengine/godot/releases/download/4.6.3-stable/Godot_v4.6.3-stable_export_templates.tpz",
+  "templates_sha256": "3FBE2C0E2DEC9D537AB9EC97BCF8DA91DCF23357FC51F67092DD068D839290A8"
+}

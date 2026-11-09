@@ -1,0 +1,74 @@
+{
+  "content_version": 1,
+  "npc": {
+    "npc_id": "npc_lin",
+    "name": "林照晚",
+    "role": "旧书修复师 · 原创固定人物",
+    "case_title": "一封没有寄出的邀请",
+    "opening": "我在修复一本旧书时，找到了朋友写给我的展览邀请。我们已经很久没说话了。我想去，又怕只是我一厢情愿。",
+    "returning": "我又来了。上次的谈话我记在了修复笔记里。今天只是开发回访演示，我们可以回看那次记录。"
+  },
+  "rules": {
+    "starting_coins": 40,
+    "npc_coins": 60,
+    "max_energy": 100,
+    "reading_fee": 20,
+    "reading_energy": 25,
+    "reading_minutes": 30,
+    "talk_minutes": 5,
+    "rest_minutes": 60,
+    "rest_energy": 30,
+    "opening_minute": 540,
+    "closing_minute": 1320
+  },
+  "clues": {
+    "invitation_note": {
+      "title": "邀请上的手写附言",
+      "text": "附言写着“替你留了靠窗的位置”，说明这份邀请并非群发。"
+    },
+    "unfinished_letter": {
+      "title": "没有寄出的回信",
+      "text": "照晚已经写好回信，却因担心打扰对方一直没有寄出。"
+    }
+  },
+  "topics": [
+    {
+      "topic_id": "invitation",
+      "label": "邀请上写了什么？",
+      "keywords": ["邀请", "附言", "展览", "位置"],
+      "reply_text": "邀请上有一句手写的附言：“替你留了靠窗的位置。”那是我们以前一起看书的位置。我大概一直在回避这句话。",
+      "clue_ids": ["invitation_note"]
+    },
+    {
+      "topic_id": "letter",
+      "label": "为什么还没回信？",
+      "keywords": ["回信", "担心", "害怕", "顾虑", "朋友"],
+      "reply_text": "回信其实已经写好了。我担心突然出现会打乱她的生活，所以一直把它夹在修复笔记里。也许先问一句近况会容易些。",
+      "clue_ids": ["unfinished_letter"]
+    },
+    {
+      "topic_id": "work",
+      "label": "最近修复了什么书？",
+      "keywords": ["修复", "工作", "旧书", "书店"],
+      "reply_text": "一本被雨淋过的植物图鉴。纸页要一张张晾干，急不得。我很懂得给书时间，却常常忘了也可以给关系一点时间。",
+      "clue_ids": []
+    }
+  ],
+  "cards": [
+    {
+      "card_id": "star",
+      "title": "星星 · 正位",
+      "text": "演示解读：把希望落实为一个温和的小动作。可以先确认展览时间，再决定是否赴约。这是叙事练习，不是事件准确率判定。"
+    },
+    {
+      "card_id": "hermit",
+      "title": "隐者 · 正位",
+      "text": "演示解读：先分清自己真正的愿望与对打扰别人的想象。把想问的话写短一些，让对方有从容回答的空间。"
+    },
+    {
+      "card_id": "temperance",
+      "title": "节制 · 正位",
+      "text": "演示解读：关系可以慢慢恢复。一次问候不必承担所有解释，先找到彼此都舒适的节奏。"
+    }
+  ]
+}

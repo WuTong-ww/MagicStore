@@ -1,0 +1,23 @@
+.godot/
+.tools/
+.runtime/
+build/
+dist/
+test-results/
+*.tmp
+*.bak
+*.corrupt.*
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+export_credentials.cfg
+# Keep the canonical project brief in docs/游戏介绍.md.
+/游戏介绍.md
+# Keep .gd.uid and source .import settings: Godot 4 stable references.

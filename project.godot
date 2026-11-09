@@ -1,0 +1,28 @@
+; Zero Hour / 零点杂货铺 — open this file in the pinned Godot editor.
+config_version=5
+
+[application]
+config/name="零点杂货铺"
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.6", "GL Compatibility")
+config/icon="res://assets/icon.svg"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="ZeroHourStore"
+
+[autoload]
+SaveService="*res://scripts/save/save_service.gd"
+GameState="*res://scripts/core/game_state.gd"
+
+[display]
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="canvas_items"
+window/subwindows/embed_subwindows=true
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/default_filters/use_nearest_mipmap_filter=false
+environment/defaults/default_clear_color=Color(0.055, 0.075, 0.095, 1)
