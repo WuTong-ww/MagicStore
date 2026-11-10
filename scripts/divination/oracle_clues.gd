@@ -34,14 +34,18 @@ const FOLLOW_UP := {
 static func hint(topic: String, tone: String, source: String, meaning: String) -> Dictionary:
 	return {"topic": topic, "tone": tone, "source": source, "meaning": meaning}
 
-static func decorate(signals: Array, case_id: String) -> Array:
+static func decorate(signals: Array, case_id: String, angles: Dictionary = {}) -> Array:
 	var prompts: Dictionary = FOLLOW_UP.get(case_id, {})
 	var decorated: Array = []
 	for clue: Dictionary in signals:
 		var record := clue.duplicate()
 		record["topic_label"] = TOPICS[clue.topic]
 		record["tone_label"] = TONES[clue.tone]
-		record["prompt"] = prompts.get(clue.topic, "可沿这个主题核对当前案例已有的线索。")
+		if not record.has("prompt"):
+			if angles.has(clue.topic):
+				record["prompt"] = angles[clue.topic][1]
+			else:
+				record["prompt"] = prompts.get(clue.topic, "可沿这个主题核对当前案例已有的线索。")
 		decorated.append(record)
 	return decorated
 

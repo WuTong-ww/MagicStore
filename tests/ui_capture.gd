@@ -2,6 +2,8 @@ extends SceneTree
 ## Deterministic UI smoke in an isolated directory. With a graphical renderer,
 ## also writes 1280x720 and 1920x1080 screenshots to .tools/ui-captures/.
 
+const OracleGuide = preload("res://scripts/divination/oracle_guide.gd")
+
 var game: Node
 var main: Control
 var checks := 0
@@ -42,8 +44,12 @@ func run() -> void:
 	main.screen.reading_button.pressed.emit()
 	await settle()
 	check(main.workbench.visible, "tarot button opens the workbench")
+	var question := "怎么判断这份邀请是不是单独写给我的？"
+	await select_in_workbench(question)
+	await select_in_workbench("下一步追问")
 	if await press_in_workbench("与来客确认报价"):
-		check(game.divination_view().quote.result.is_empty(), "real quote UI leaves the result hidden")
+		var quote: Dictionary = game.divination_view().quote
+		check(quote.result.is_empty() and quote.question == question, "quote preserves the selected question when the spread changes, while the cards stay hidden")
 		await capture("divination-quote-1280")
 		root.get_node("SaveService").fail_next_write = true
 		await press_in_workbench("收取报酬并揭示")
@@ -51,13 +57,25 @@ func run() -> void:
 		await press_in_workbench("收取报酬并揭示")
 		var service: Dictionary = game.divination_view().services[0]
 		check(service.result.medium.cards.size() == 3, "the paid spread exposes three cards in the UI")
+		check(find_control(main.workbench.body, func(node: Node) -> bool: return node is Label and node.text == "所问 · " + question) != null, "the paid reading shows the selected question")
 		await capture("divination-tarot-spread-1280")
+		await exercise_reading_details(service, "divination-tarot-details-1280")
+		var hypothesis := find_control(main.workbench.body, func(node: Node) -> bool: return node is LineEdit and node.placeholder_text == "写下你对现有线索的解释") as LineEdit
+		check(hypothesis != null and game.divination_view().prediction.is_empty(), "the card reading leaves the decision open")
+		if hypothesis != null:
+			main.workbench.scroll.scroll_vertical = int(hypothesis.position.y)
+			await settle()
+			await capture("divination-tarot-judgment-1280")
+			var judgment := "我想再看一份邀请。"
+			hypothesis.text = judgment
+			await press_in_workbench("记入待验证假设")
+			check(game.divination_view().hypotheses.size() == 1 and game.divination_view().hypotheses[0].text == judgment, "the player can save their judgment from the spread")
 	main.workbench.hide()
 	await settle()
 	var reading: Dictionary = game.active_visit().get("reading", {}).duplicate(true)
 	check(not reading.is_empty(), "UI reading settles")
 	check(main.screen.reading_button.disabled, "settled reading button prevents duplicate click")
-	check(main.screen.card_title.text == "塔罗三牌阵" and main.screen.card_text.text == reading.get("text"), "UI displays persisted spread")
+	check(main.screen.card_title.text == "塔罗三牌阵" and main.screen.card_text.text.contains(question) and main.screen.card_text.text.contains("可以核对"), "the consultation preview shows the saved question and a plain next step")
 	check_layout("reading1280")
 	await capture("consultation-1280")
 	main.screen.casebook_button.pressed.emit()
@@ -88,7 +106,10 @@ func run() -> void:
 	check(game.active_visit().get("reading") == reading, "continue retains original reading")
 	main.show_history()
 	await settle()
-	check(main.history_text.text.contains(reading.get("title", "")), "history includes saved card")
+	check(main.history_text.text.contains(question) and not main.history_text.text.contains(reading.get("title", "")), "history opens with a plain reading summary")
+	main.history_details.button_pressed = true
+	await settle()
+	check(main.history_text.text.contains(reading.get("title", "")), "the history toggle exposes the original saved reading")
 	main.history_window.hide()
 	root.size = Vector2i(1920, 1080)
 	root.content_scale_size = Vector2i(1920, 1080)
@@ -123,14 +144,14 @@ func exercise_methods() -> void:
 	var ordinary: String = guests.filter(func(row: Dictionary) -> bool: return row.label.ends_with("普通样例"))[0].npc_id
 	var reference: String = guests.filter(func(row: Dictionary) -> bool: return row.label.ends_with("作品参考样例"))[0].npc_id
 	for row: Array in [
-		["lenormand", "雷诺曼", "三牌线", ordinary],
-		["plum", "梅花易数", "按数字起卦", ordinary],
+		["lenormand", "雷诺曼", "三张牌排成一行", ordinary],
+		["plum", "梅花易数", "用你报的数字", ordinary],
 		["yijing", "易经", "问应对取舍", ordinary],
-		["xiaoliu", "小六壬", "傍晚 · 酉时（18:00）", ordinary],
-		["astrology", "现代占星", "90 日后 · 一季行运", ordinary],
-		["bazi", "八字", "时柱", ordinary],
-		["ziwei", "紫微斗数", "官禄", reference],
-		["past", "前世技法", "触碰旧物 · 初见", "npc_lin"]
+		["xiaoliu", "小六壬", "傍晚 18:00", ordinary],
+		["astrology", "现代占星", "看 90 天后", ordinary],
+		["bazi", "八字", "出生时刻", ordinary],
+		["ziwei", "紫微斗数", "工作与分工", reference],
+		["past", "前世技法", "看旧物里的片段", "npc_lin"]
 	]:
 		await main.run_action("next_day")
 		var learned: Dictionary = await main.run_action("learn_method", {"method_id": row[0]})
@@ -143,19 +164,19 @@ func exercise_methods() -> void:
 		await settle()
 		if not await select_in_workbench(row[1]):
 			return
-		if row[0] == "ziwei":
-			await press_in_workbench("生成紫微盘")
-		if row[0] == "plum":
+		if row[0] in ["plum", "ziwei"]:
 			await select_in_workbench(row[2])
 		else:
 			await press_in_workbench(row[2])
-		if row[0] in ["plum", "yijing"]:
+		if row[0] == "plum":
 			var spin := find_control(main.workbench.body, func(node: Node) -> bool: return node is SpinBox) as SpinBox
 			check(spin != null, "method accepts a numeric input / " + row[0])
 			if spin != null:
 				spin.value = 5
+		if row[0] == "yijing":
+			await select_in_workbench("谁能出面协调")
 		if row[0] in ["ziwei", "bazi"]:
-			await select_in_workbench("下一流年")
+			await select_in_workbench("下一年度")
 		check(main.workbench.body.get_combined_minimum_size().x <= main.workbench.scroll.size.x, "method fits scroll pane / " + row[0])
 		if not await press_in_workbench("与来客确认报价"):
 			return
@@ -164,36 +185,39 @@ func exercise_methods() -> void:
 		if row[0] in ["plum", "yijing", "bazi", "ziwei"]:
 			check(quote.get("parameter") == (1 if row[0] in ["bazi", "ziwei"] else 5), "UI quote binds selected parameter / " + row[0])
 		await press_in_workbench("收取报酬并揭示")
-		check(game.divination_view().services.size() == 1 and not game.divination_view().services[0].result.text.is_empty(), "UI paid method reveals a clue / " + row[0])
-		check(main.workbench.body.get_combined_minimum_size().x <= main.workbench.scroll.size.x, "paid media fit scroll pane / " + row[0])
-		if row[0] in ["astrology", "ziwei", "yijing", "bazi"]:
+		var view: Dictionary = game.divination_view()
+		check(view.services.size() == 1 and not view.services[0].result.text.is_empty(), "UI paid method reveals a clue / " + row[0])
+		check(view.hypotheses.is_empty() and view.prediction.is_empty(), "the reading leaves the decision to the player / " + row[0])
+		if row[0] in ["plum", "xiaoliu", "astrology", "ziwei", "yijing", "bazi"]:
 			await capture("divination-%s-1920" % row[0])
-		main.workbench.hide()
+		if not view.services.is_empty():
+			var capture_name := "divination-%s-details-1920" % row[0] if row[0] in ["yijing", "ziwei"] else ""
+			await exercise_reading_details(view.services[0], capture_name)
 		if row[0] == "past":
-			main.screen.casebook_button.pressed.emit()
-			await settle()
-			await press_in_workbench("前世手记")
+			await press_in_workbench("去前世手记")
+			var save_guess := find_control(main.workbench.body, func(node: Node) -> bool: return node is Button and node.text == "保存待验证解释") as Button
+			check(save_guess != null and save_guess.disabled, "the past-life notebook requires the player to choose an interpretation")
 			await select_in_workbench("照晚曾是撑伞送书的人")
 			await press_in_workbench("保存待验证解释")
 			check(game.divination_view().past.interpretations[0].status == "unverified", "past-life UI saves a pending interpretation")
 			await capture("divination-past-1920")
 			main.workbench.hide()
 			await verify_past_in_workbench()
+		else:
+			main.workbench.hide()
 		await main.run_action("end_visit")
 
 func verify_past_in_workbench() -> void:
 	main.screen.service_button.pressed.emit()
 	await settle()
 	await select_in_workbench("前世技法")
-	await press_in_workbench("对照旧档 · 补证")
+	await press_in_workbench("去旧档找证物")
 	var wallet: Dictionary = game.divination_view().shop
 	await select_in_workbench("%s ×2（顾客有 %d）" % [wallet.payment_item_name, wallet.payment_items])
 	await press_in_workbench("与来客确认报价")
 	await press_in_workbench("收取报酬并揭示")
-	main.workbench.hide()
-	main.screen.casebook_button.pressed.emit()
-	await settle()
-	await press_in_workbench("前世手记")
+	check(game.divination_view().past.interpretations[0].status == "unverified", "revealing evidence does not verify the player's hypothesis automatically")
+	await press_in_workbench("去前世手记")
 	await press_in_workbench("以补充证物核实此条")
 	check(game.divination_view().past.interpretations[0].status == "disproven", "past-life UI can refute a guess with independent evidence")
 	await select_in_workbench("照晚曾是替人装订旧书的人")
@@ -205,24 +229,64 @@ func verify_past_in_workbench() -> void:
 func exercise_comparison() -> void:
 	await main.run_action("new_game", {"name": "跨术式界面验收"})
 	await main.run_action("learn_method", {"method_id": "lenormand"})
+	await main.run_action("learn_method", {"method_id": "plum"})
 	await main.run_action("start_visit")
-	await main.run_action("reading")
-	main.screen.service_button.pressed.emit()
+	main.screen.reading_button.pressed.emit()
 	await settle()
+	var question := "怎么判断这份邀请是不是单独写给我的？"
+	await select_in_workbench(question)
+	await press_in_workbench("与来客确认报价")
+	await press_in_workbench("收取报酬并揭示")
+	await press_in_workbench("继续为这题选术式")
 	await select_in_workbench("雷诺曼")
-	await press_in_workbench("三牌线")
+	await press_in_workbench("三张牌排成一行")
 	await press_in_workbench("与来客确认报价")
 	await press_in_workbench("收取报酬并揭示")
 	main.workbench.hide()
+	main.screen.service_button.pressed.emit()
+	await settle()
+	await select_in_workbench("梅花易数")
+	await press_in_workbench("与来客确认报价")
+	check(game.divination_view().quote.get("question") == question, "reopening the workbench retains the question for a third technique")
+	await press_in_workbench("收取报酬并揭示")
+	await press_in_workbench("继续为这题选术式")
+	var count := find_control(main.workbench.body, func(node: Node) -> bool: return node is Label and node.text == "本题已用 3 种术式 · 3 次解读可重看")
+	check(count != null, "the chooser shows all three techniques under the same question")
+	await capture("divination-multiple-techniques-1920")
+	main.workbench.hide()
 	main.screen.casebook_button.pressed.emit()
 	await settle()
+	var view: Dictionary = game.divination_view()
+	var methods: Dictionary = {}
+	for link: Dictionary in view.oracle_links:
+		for trace: Dictionary in link.traces:
+			methods[trace.method_id] = true
 	var comparison := find_control(main.workbench.body, func(node: Node) -> bool: return node is Label and node.text == "跨术式对照") as Label
-	check(comparison != null and not game.divination_view().oracle_links.is_empty(), "casebook renders cross-method topics with paid sources")
+	check(comparison != null and methods.has_all(["tarot", "lenormand", "plum"]), "casebook renders paid sources from all three chosen techniques")
 	if comparison != null:
 		main.workbench.scroll.scroll_vertical = int(comparison.position.y)
 		await settle()
 		await capture("divination-comparison-1920")
 	main.workbench.hide()
+
+func exercise_reading_details(service: Dictionary, screenshot: String = "") -> void:
+	var method: String = service.method_id
+	for heading: String in ["这次看到什么", "可以怎么想", "接下来核对什么", "留给你判断"]:
+		var label := find_control(main.workbench.body, func(node: Node) -> bool: return node is Label and node.text == heading) as Label
+		check(label != null and label.is_visible_in_tree(), "paid reading shows %s / %s" % [heading, method])
+	var legend := find_control(main.workbench.body, func(node: Node) -> bool: return node is Label and node.text == OracleGuide.RULES[method]) as Label
+	check(legend != null and not legend.is_visible_in_tree(), "technical rules start folded / " + method)
+	var before: Dictionary = game.snapshot()
+	if await press_in_workbench("展开术语和规则"):
+		check(legend != null and legend.is_visible_in_tree(), "the player can open the original rules / " + method)
+		check(main.workbench.body.get_combined_minimum_size().x <= main.workbench.scroll.size.x, "expanded media fit the scroll pane / " + method)
+		if legend != null and not screenshot.is_empty():
+			var details := legend.get_parent() as Control
+			main.workbench.scroll.scroll_vertical = int(details.position.y)
+			await settle()
+			await capture(screenshot)
+		await press_in_workbench("收起术语和规则")
+		check(game.snapshot() == before, "opening details does not change the paid record / " + method)
 
 func find_control(scope: Node, matches: Callable) -> Node:
 	if matches.call(scope):
@@ -290,7 +354,7 @@ func capture(label: String) -> void:
 		return
 	# Wait for the screen fade; wall time here is presentation only.
 	await create_timer(0.25).timeout
-	await RenderingServer.frame_post_draw
+	RenderingServer.force_draw()
 	var directory := "res://.tools/ui-captures"
 	DirAccess.make_dir_recursive_absolute(directory)
 	var image: Image = root.get_texture().get_image()

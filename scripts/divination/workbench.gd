@@ -2,6 +2,8 @@ extends Window
 ## Shared window for the B screens. It consumes only player projections.
 
 const OracleCards = preload("res://scripts/divination/oracle_cards.gd")
+const OracleCasting = preload("res://scripts/divination/oracle_casting.gd")
+const OracleGuide = preload("res://scripts/divination/oracle_guide.gd")
 const OraclePanels = preload("res://scripts/divination/oracle_panels.gd")
 const EVALUATIONS := {
 	"aligned": "预测符合", "deviated": "预测偏离", "insufficient": "证据不足",
@@ -18,7 +20,8 @@ var scroll: ScrollContainer
 var page := ""
 var method_id := ""
 var option_id := ""
-var ziwei_open := false
+var question_id := ""
+var question_visit_id := ""
 var result_id := ""
 var notebook_tab := "knowledge"
 var view: Dictionary = {}
@@ -55,7 +58,6 @@ func open(which: String) -> void:
 	page = which
 	method_id = "tarot" if which == "tarot" else ""
 	option_id = ""
-	ziwei_open = false
 	result_id = ""
 	notebook_tab = "knowledge"
 	notice.text = ""
@@ -125,42 +127,53 @@ func _readings() -> void:
 	if view.is_empty():
 		_info("请先接待顾客。")
 		return
+	var services: Array = view.services
+	if question_visit_id != view.visit_id:
+		question_visit_id = view.visit_id
+		question_id = "" if services.is_empty() else services.back().question_id
 	var quote: Dictionary = view.quote
 	if not quote.is_empty():
+		question_id = quote.question_id
 		_section("待收款  /  %s" % quote.method_title)
 		_info("%s\n约定报酬 %s  ·  精力 %d  ·  %d 分钟" % [
 			quote.option_label + _parameter_text(quote), payment_text(quote.payment), int(quote.energy), int(quote.minutes)
 		])
-		if quote.method_id in ["tarot", "lenormand"]:
+		if quote.has("question"):
+			_info("所问：%s" % quote.question)
+		if OracleCards.is_card_method(quote.method_id):
 			OraclePanels.spread(body, OracleCards.spread_positions(quote.method_id, quote.option_id))
 		_info("报酬结算并保存后，结果会写入本次服务。")
 		var actions := _flow()
 		actions.add_child(MidnightUI.button("收取报酬并揭示", func(): await _run("settle_service", {"service_id": quote.service_id})))
 		actions.add_child(MidnightUI.button("撤回报价", func(): await _run("cancel_service", {"service_id": quote.service_id})))
 		return
-	var services: Array = view.services
-	if not services.is_empty():
-		_section("已结算 · 可重看")
-		var service_buttons := _flow()
+	if not result_id.is_empty():
 		for service: Dictionary in services:
-			service_buttons.add_child(MidnightUI.button(service.method_title + " · " + service.option_label, func():
-				result_id = service.service_id
-				_render()
-			))
-			if service.service_id == result_id:
-				_section(service.result.title)
-				var medium: Dictionary = service.result.get("medium", {})
-				OraclePanels.show_medium(body, medium)
-				if medium.get("deck") != "tarot":
-					_info(service.result.text)
-				_show_signals(service.result)
-		if not result_id.is_empty():
-			body.add_child(MidnightUI.button("返回术式选择", func():
-				result_id = ""
-				_render()
-				scroll.scroll_vertical = 0
-			))
+			if service.service_id != result_id:
+				continue
+			question_id = service.question_id
+			_paid_reading(service)
 			return
+		result_id = ""
+	var questions: Array = view.questions
+	var selected_question := maxi(0, questions.map(func(row: Dictionary) -> String: return row.question_id).find(question_id))
+	question_id = questions[selected_question].question_id
+	_section("这次想问什么？")
+	_pick(_labels(questions), selected_question, func(choice: int):
+		question_id = questions[choice].question_id
+		_render()
+	)
+	_info("按这个问题需要选择术式。每项单独报价，结算后可以继续加选，线索够了就回手记整理。")
+	var readings := services.filter(func(service: Dictionary) -> bool: return service.question_id == question_id)
+	if not readings.is_empty():
+		var used: Dictionary = {}
+		for service: Dictionary in readings:
+			used[service.method_id] = true
+		_section("本题已用 %d 种术式 · %d 次解读可重看" % [used.size(), readings.size()])
+		var service_buttons := _flow()
+		for service: Dictionary in readings:
+			var caption := "%s · %s · %s" % [service.method_title, service.option_label, clock_text(service.paid_at)]
+			service_buttons.add_child(MidnightUI.button(caption, _select_result.bind(service.service_id)))
 	var methods: Array = view.methods
 	if method_id.is_empty():
 		method_id = "tarot"
@@ -171,7 +184,6 @@ func _readings() -> void:
 	_pick(_labels(methods, func(row: Dictionary) -> String: return row.title if row.learned else row.title + " · 未学"), index, func(selected: int):
 		method_id = methods[selected].method_id
 		option_id = ""
-		ziwei_open = false
 		_render()
 	)
 	_info(method.prompt)
@@ -201,27 +213,22 @@ func _readings() -> void:
 		"plum":
 			_pick(_labels(options), option_index, _choose_option.bind(options))
 			if option_id == "number":
-				parameter = _number("报出所见物件的数量", 1, 99)
+				parameter = _number("报一个 1 到 99 的数字", 1, 99)
 			else:
-				_info("把本次报价时刻换算成农历年月日时。")
+				_info("用你确认报价的那一刻来排图。")
 		"yijing":
 			_option_buttons(options, option_index)
-			parameter = _number("查看第几爻", 1, 6)
+			_section("想从哪个角度细看？")
+			parameter = _pick(OracleCasting.LINE_FOCUS)
+			_info("拿不准就用默认的「从哪里起步」。每个角度对应卦图里的一条横线，这条线叫「爻」。")
 		"astrology":
 			_option_buttons(options, option_index)
 		"bazi":
 			_option_buttons(options, option_index)
-			parameter = _pick(["本流年", "下一流年"])
+			parameter = _pick(["本年度", "下一年度"])
 		"ziwei":
-			if not ziwei_open:
-				body.add_child(MidnightUI.button("生成紫微盘", func():
-					ziwei_open = true
-					_render()
-				))
-				return
-			_info("选择要解读的本命宫位。收款后揭示命盘和所选流年。")
-			_option_buttons(options, option_index)
-			parameter = _pick(["本流年", "下一流年"])
+			_pick(_labels(options), option_index, _choose_option.bind(options))
+			parameter = _pick(["本年度", "下一年度"])
 	if not option.blocked.is_empty():
 		_info(option.blocked)
 		return
@@ -236,12 +243,80 @@ func _readings() -> void:
 		if parameter is SpinBox:
 			number = int(parameter.value)
 		elif parameter is OptionButton:
-			number = parameter.selected
+			number = parameter.selected + (1 if method.method_id == "yijing" else 0)
 		await _run("quote_service", {
 			"method_id": method.method_id, "option_id": option.option_id,
-			"parameter": number, "payment": "coins" if payment.selected == 0 else "item"
+			"parameter": number, "payment": "coins" if payment.selected == 0 else "item",
+			"question_id": question_id
 		})
 	))
+
+func _select_result(id: String) -> void:
+	result_id = id
+	_render()
+	scroll.scroll_vertical = 0
+
+func _paid_reading(service: Dictionary) -> void:
+	var guide := OracleGuide.describe(service)
+	_section(service.method_title + " · " + service.option_label)
+	if guide.has("question"):
+		_section("所问 · " + String(guide.question))
+	_section("这次看到什么")
+	_info(guide.seen)
+	_section("可以怎么想")
+	_info(guide.reason)
+	_section("接下来核对什么")
+	for check: String in guide.checks:
+		_info(check)
+	_section("留给你判断")
+	_info(guide.get("boundary", "你可以先记下自己的解释，再决定用哪条线索核对。"))
+	if service.method_id == "past":
+		body.add_child(MidnightUI.button("去前世手记", func():
+			page = "casebook"
+			_show_tab("past")
+			scroll.scroll_vertical = 0
+		))
+	else:
+		_hypothesis_entry()
+	var next_actions := _flow()
+	next_actions.add_child(MidnightUI.button("继续为这题选术式", _select_result.bind("")))
+	next_actions.add_child(MidnightUI.button("查看案例手记", func():
+		page = "casebook"
+		_show_tab("knowledge")
+		scroll.scroll_vertical = 0
+	))
+	_reading_details(service)
+
+func _reading_details(service: Dictionary) -> void:
+	var result: Dictionary = service.result
+	var medium: Dictionary = result.get("medium", {})
+	var details := _fold("术语和规则")
+	details.add_child(MidnightUI.label(OracleGuide.RULES[service.method_id], 15))
+	var diagram := medium
+	if service.method_id == "yijing" and medium.get("moving", []).is_empty():
+		diagram = medium.duplicate()
+		diagram.erase("changed")
+	OraclePanels.show_medium(details, diagram)
+	if medium.is_empty() or (service.method_id != "past" and not result.has("inquiry")):
+		details.add_child(MidnightUI.label(result.text, 15))
+		var sources: PackedStringArray = []
+		for hint: Dictionary in result.get("signals", []):
+			sources.append("%s · %s\n%s。%s" % [hint.source, hint.tone_label, String(hint.meaning).trim_suffix("。"), hint.prompt])
+		if not sources.is_empty():
+			details.add_child(MidnightUI.label("各条提示的来源", 16, MidnightUI.GOLD))
+			details.add_child(MidnightUI.label("\n\n".join(sources), 15))
+
+func _fold(label: String) -> VBoxContainer:
+	var details := VBoxContainer.new()
+	details.add_theme_constant_override("separation", 8)
+	details.hide()
+	var toggle := MidnightUI.button("展开" + label, func(): details.visible = not details.visible)
+	details.visibility_changed.connect(func():
+		toggle.text = ("收起" if details.visible else "展开") + label
+	)
+	body.add_child(toggle)
+	body.add_child(details)
+	return details
 
 func _option_buttons(options: Array, selected: int) -> void:
 	var row := _flow()
@@ -265,9 +340,9 @@ func _parameter_text(quote: Dictionary) -> String:
 			if quote.option_id == "number":
 				return " · 数字 %d" % int(quote.parameter)
 		"yijing":
-			return " · 第 %d 爻" % int(quote.parameter)
+			return " · " + OracleCasting.LINE_FOCUS[int(quote.parameter) - 1]
 		"bazi", "ziwei":
-			return " · 本流年" if quote.parameter == 0 else " · 下一流年"
+			return " · 本年度" if quote.parameter == 0 else " · 下一年度"
 	return ""
 
 func _casebook() -> void:
@@ -320,31 +395,35 @@ func _knowledge() -> void:
 		_info(clue.title + "  /  " + clue.text)
 	_section("术式线索")
 	for service: Dictionary in view.services:
-		_info("%s · %s\n%s" % [service.method_title, service.result.title, service.result.text])
-		_show_signals(service.result)
+		_section(service.method_title + " · " + service.option_label)
+		_info(OracleGuide.summary(service))
+		_reading_details(service)
 	if not view.oracle_links.is_empty():
 		_section("跨术式对照")
+		_info("主题相近只说明术式提示了相似的方向，仍要查证案情。")
+		var question := ""
+		var sources: PackedStringArray = []
 		for comparison: Dictionary in view.oracle_links:
-			var sources: PackedStringArray = []
+			if comparison.question != question:
+				question = comparison.question
+				_section("所问：%s" % question)
+				sources.append(question)
+			_info("%s · %s" % [comparison.label, comparison.relation])
+			sources.append(comparison.label)
 			for trace: Dictionary in comparison.traces:
 				sources.append("%s · %s · %s（%s）" % [clock_text(trace.paid_at), trace.method_title, trace.source, trace.tone_label])
-			_info("%s · %s\n%s" % [comparison.label, comparison.relation, "\n".join(sources)])
+		var details := _fold("对照来源")
+		details.add_child(MidnightUI.label("\n".join(sources), 15))
 	_section("玩家的假设")
 	for note: Dictionary in view.hypotheses:
 		_info(note.text + "  ·  待验证")
 		if not note.clue_ids.is_empty():
 			_info("当时所见  /  " + _clue_titles(note.clue_ids))
+	_hypothesis_entry()
+
+func _hypothesis_entry() -> void:
 	var hypothesis := _entry("写下你对现有线索的解释")
 	body.add_child(MidnightUI.button("记入待验证假设", func(): await _run("note_hypothesis", {"text": hypothesis.text})))
-
-func _show_signals(result: Dictionary) -> void:
-	var signals: Array = result.get("signals", [])
-	if signals.is_empty():
-		_info("术式提示 · " + str(result.lead))
-		return
-	for clue: Dictionary in signals:
-		var explanation: String = clue.meaning + "。" if not String(result.text).contains(clue.meaning) else ""
-		_info("%s · %s｜%s\n%s%s" % [clue.topic_label, clue.tone_label, clue.source, explanation, clue.prompt])
 
 func _clue_titles(ids: Array) -> String:
 	var titles: PackedStringArray = []
@@ -399,9 +478,15 @@ func _past_notes() -> void:
 		_info("%s  ·  %s\n%s" % [record.label, PAST_STATUS[record.status], record.text])
 		if record.status == "unverified" and past.fragments.has("evidence"):
 			body.add_child(MidnightUI.button("以补充证物核实此条", func(): await _run("verify_past", {"interpretation_id": record.interpretation_id})))
-	var guess := _pick(_labels(past.options))
+	var guess := _pick(["选择你自己的解释"] + _labels(past.options))
+	guess.set_item_disabled(0, true)
 	var text := _entry("可以记下你这样解读的理由")
-	body.add_child(MidnightUI.button("保存待验证解释", func(): await _run("interpret_past", {"link_id": past.options[guess.selected].link_id, "text": text.text})))
+	var save_guess := MidnightUI.button("保存待验证解释", func():
+		await _run("interpret_past", {"link_id": past.options[guess.selected - 1].link_id, "text": text.text})
+	)
+	save_guess.disabled = true
+	guess.item_selected.connect(func(selected: int): save_guess.disabled = selected <= 0)
+	body.add_child(save_guess)
 	for link: Dictionary in past.confirmed_links:
 		_section("已确认关联")
 		_info("%s  /  %s" % [link.label, link.relation])

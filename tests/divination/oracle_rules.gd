@@ -43,6 +43,10 @@ func _card_rules() -> void:
 	check(ids.size() == 3 and ids[0] != ids[1] and ids[0] != ids[2] and ids[1] != ids[2], "tarot draws without replacement")
 	check(result.medium.cards[0].position == "过去的影响" and result.medium.cards[2].position == "可能的发展", "three meaningful spread positions")
 	check(result == Catalog.read_result(input, sample, game._divination.data), "same service yields identical cards, orientations and hints")
+	input.question_id = "invitation_intent"
+	var about_the_letter := Catalog.read_result(input, sample, game._divination.data)
+	check(about_the_letter.medium == result.medium and about_the_letter.inquiry.steps[0].reason != result.inquiry.steps[0].reason and about_the_letter.inquiry.steps[0].check != result.inquiry.steps[0].check, "the same tarot cards reason differently about different questions")
+	input.erase("question_id")
 	var signatures: Dictionary = {}
 	for index in range(8):
 		input.service_id = "service_sample_%d" % index
@@ -53,6 +57,17 @@ func _card_rules() -> void:
 	input.option_id = "key_house"
 	var line := Catalog.read_result(input, sample, game._divination.data)
 	check(line.medium.cards.size() == 3 and line.medium.cards[1].position == "中心" and line.signals[0].source.contains(line.medium.cards[1].name), "Lenormand line combines actual cards around its center")
+	check(line.inquiry.steps[0].source.contains(line.medium.cards[0].name) and line.inquiry.steps[1].source.contains(line.medium.cards[2].name), "Lenormand explains both adjoining pairs")
+	input.question_id = "invitation_intent"
+	var other_line := Catalog.read_result(input, sample, game._divination.data)
+	check(other_line.medium == line.medium and other_line.inquiry.steps[1].check != line.inquiry.steps[1].check, "the same Lenormand pair asks different follow-up questions")
+	input.method_id = "yijing"
+	input.option_id = "gradual"
+	input.parameter = 1
+	var about_the_invitation := Catalog.read_result(input, sample, game._divination.data)
+	input.erase("question_id")
+	var about_reconnecting := Catalog.read_result(input, sample, game._divination.data)
+	check(about_the_invitation.medium == about_reconnecting.medium and about_the_invitation.lead != about_reconnecting.lead, "the selected question changes the coin cast's follow-up without changing its recorded throws")
 
 func _cast_rules() -> void:
 	var hexagrams := Casting.load_hexagrams()

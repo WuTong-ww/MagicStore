@@ -3,6 +3,7 @@ extends Control
 const FRONT := preload("res://scenes/shop_front.tscn")
 const CONSULTATION := preload("res://scenes/consultation.tscn")
 const DivinationWorkbench := preload("res://scripts/divination/workbench.gd")
+const OracleGuide := preload("res://scripts/divination/oracle_guide.gd")
 
 var busy := false
 var current_screen := "front"
@@ -19,6 +20,7 @@ var save_entries: Array = []
 var backup_confirm: ConfirmationDialog
 var history_window: Window
 var history_text: RichTextLabel
+var history_details: CheckButton
 var open_button: Button
 var workbench: DivinationWorkbench
 
@@ -263,9 +265,18 @@ func _build_history_window() -> void:
 	history_text = MidnightUI.rich()
 	history_text.scroll_following = false
 	box.add_child(history_text)
+	history_details = CheckButton.new()
+	history_details.text = "显示术式的原始记录"
+	history_details.toggled.connect(_refresh_history)
+	box.add_child(history_details)
 	box.add_child(MidnightUI.button("合上手记", func(): history_window.hide()))
 
 func show_history() -> void:
+	history_details.set_pressed_no_signal(false)
+	_refresh_history(false)
+	history_window.popup_centered()
+
+func _refresh_history(show_details: bool) -> void:
 	var lines: PackedStringArray = []
 	var visits: Array = GameState.player_snapshot().get("visits", [])
 	for visit: Dictionary in visits:
@@ -276,7 +287,10 @@ func show_history() -> void:
 		if view.get("services", []).is_empty() and not reading.is_empty():
 			lines.append("旧档牌面  /  %s\n%s" % [reading.title, reading.text])
 		for service: Dictionary in view.get("services", []):
-			lines.append("%s  /  %s\n%s" % [service.method_title, service.result.title, service.result.text])
+			if show_details:
+				lines.append("%s  /  %s\n%s" % [service.method_title, service.result.title, service.result.text])
+			else:
+				lines.append("%s · %s\n%s" % [service.method_title, service.option_label, OracleGuide.summary(service)])
 		for entry: Dictionary in view.get("ledger", []):
 			lines.append(DivinationWorkbench.ledger_text(entry))
 		for note: Dictionary in view.get("hypotheses", []):
@@ -304,4 +318,3 @@ func show_history() -> void:
 		lines.append("────────────────────────────\n")
 	history_text.text = "\n".join(lines) if not lines.is_empty() else "手记还是空白的。完成一次接待后，故事会留在这里。"
 	history_text.scroll_to_line(0)
-	history_window.popup_centered()

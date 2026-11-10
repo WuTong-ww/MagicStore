@@ -1,5 +1,7 @@
 extends HBoxContainer
 
+const OracleGuide = preload("res://scripts/divination/oracle_guide.gd")
+
 var host
 var transcript: RichTextLabel
 var input: TextEdit
@@ -80,6 +82,7 @@ func _ready() -> void:
 	cost_label = MidnightUI.label("", 15, MidnightUI.MUTED)
 	description.add_child(cost_label)
 	card_text = MidnightUI.rich()
+	card_text.scroll_following = false
 	card_text.custom_minimum_size.y = 66
 	service.add_child(card_text)
 	var service_row := HBoxContainer.new()
@@ -156,9 +159,14 @@ func refresh() -> void:
 	cost_label.text = "原牌面已保存 · 重看免费" if paid else "塔罗 · 三张牌"
 	if not paid and not services.is_empty():
 		var last: Dictionary = services.back()
-		card_title.text = last.result.title
-		card_text.text = last.result.text
+		card_title.text = last.method_title
+		card_text.text = OracleGuide.summary(last)
 		cost_label.text = last.method_title + " · 已保存"
+	elif reading.has("cards"):
+		for service: Dictionary in services:
+			if service.result.get("medium", {}).get("cards") == reading.cards:
+				card_text.text = OracleGuide.summary(service)
+				break
 	reading_button.text = "塔罗已留存" if paid else "塔罗报价"
 	reading_button.disabled = not active or paid
 	service_button.disabled = not active
