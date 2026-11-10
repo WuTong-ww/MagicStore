@@ -38,6 +38,8 @@ try {
         Invoke-Godot @('--headless', '--path', $repo, '--import')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/smoke.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/provider_contract.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/divination/oracle_rules.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/divination/acceptance.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/ui_capture.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/restart.gd', '--', 'write')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/restart.gd', '--', 'read')

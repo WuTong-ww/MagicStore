@@ -2,6 +2,7 @@ extends Control
 
 const FRONT := preload("res://scenes/shop_front.tscn")
 const CONSULTATION := preload("res://scenes/consultation.tscn")
+const DivinationWorkbench := preload("res://scripts/divination/workbench.gd")
 
 var busy := false
 var current_screen := "front"
@@ -19,12 +20,17 @@ var backup_confirm: ConfirmationDialog
 var history_window: Window
 var history_text: RichTextLabel
 var open_button: Button
+var workbench: DivinationWorkbench
 
 func _ready() -> void:
 	DisplayServer.window_set_min_size(Vector2i(1280, 720))
 	_build_shell()
 	_build_save_window()
 	_build_history_window()
+	workbench = DivinationWorkbench.new()
+	workbench.host = self
+	workbench.theme = theme
+	add_child(workbench)
 	GameState.state_changed.connect(_refresh)
 	GameState.action_failed.connect(show_notice)
 	show_screen("front")
@@ -69,7 +75,7 @@ func _build_shell() -> void:
 	notice.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	notice.custom_minimum_size.y = 36
 	footer.add_child(notice)
-	var badge := MidnightUI.label("开发模拟 · 本地 Mock\n非正式客流 / 三张示例牌", 12, MidnightUI.MUTED)
+	var badge := MidnightUI.label("开发联调 · 本地对话", 12, MidnightUI.MUTED)
 	badge.autowrap_mode = TextServer.AUTOWRAP_OFF
 	badge.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	footer.add_child(badge)
@@ -88,18 +94,20 @@ func show_screen(which: String) -> void:
 	_refresh()
 
 func _refresh() -> void:
-	var snapshot: Dictionary = GameState.snapshot()
+	var snapshot: Dictionary = GameState.player_snapshot()
 	location.text = "一对一咨询" if current_screen == "consultation" else "店铺前台"
 	if snapshot.is_empty():
 		resources.text = "尚未打开存档  ·  新建独立店铺，或继续已有记录"
 	else:
 		var player: Dictionary = snapshot.get("player", {})
-		var npc: Dictionary = snapshot.get("npcs", {}).get("npc_lin", {})
 		var active: Dictionary = GameState.active_visit()
 		var phase: String = "等待来客"
+		var guest_budget := ""
 		if not active.is_empty():
-			phase = "已抽牌 · 接待中" if not active.get("reading", {}).is_empty() else "交谈中"
-		resources.text = "金币 %d    精力 %d / %d    %s    顾客预算 %d    %s" % [int(player.get("coins", 0)), int(player.get("energy", 0)), int(GameState.content.get("rules", {}).get("max_energy", 100)), GameState.clock_text(), int(npc.get("coins", 0)), phase]
+			var wallet: Dictionary = snapshot.npcs[active.npc_id]
+			guest_budget = "顾客预算 %d    " % int(wallet.coins)
+			phase = "接待中"
+		resources.text = "金币 %d    精力 %d / %d    %s    %s%s" % [int(player.get("coins", 0)), int(player.get("energy", 0)), int(GameState.content.get("rules", {}).get("max_energy", 100)), GameState.clock_text(), guest_budget, phase]
 	if is_instance_valid(screen):
 		screen.call("refresh")
 
@@ -111,7 +119,7 @@ func run_action(action_type: String, extra: Dictionary = {}) -> Dictionary:
 	var action: Dictionary = extra.duplicate(true)
 	action["type"] = action_type
 	action["action_id"] = GameState.make_id("ui")
-	var snapshot: Dictionary = GameState.snapshot()
+	var snapshot: Dictionary = GameState.player_snapshot()
 	if not snapshot.is_empty():
 		action["expected_version"] = snapshot.get("state_version", 0)
 	show_notice("正在保存…")
@@ -136,6 +144,10 @@ func run_action(action_type: String, extra: Dictionary = {}) -> Dictionary:
 func show_notice(message: String) -> void:
 	if is_instance_valid(notice):
 		notice.text = message
+
+func open_divination(which: String) -> void:
+	if not busy:
+		workbench.open(which)
 
 func _build_save_window() -> void:
 	save_window = Window.new()
@@ -255,17 +267,39 @@ func _build_history_window() -> void:
 
 func show_history() -> void:
 	var lines: PackedStringArray = []
-	var visits: Array = GameState.snapshot().get("visits", [])
+	var visits: Array = GameState.player_snapshot().get("visits", [])
 	for visit: Dictionary in visits:
-		lines.append("第 %d 天 · %s · %s" % [int(visit.get("day", 0)) + 1, str(GameState.content.get("npc", {}).get("name", "顾客")), "已结束" if visit.get("phase") == "ended" else "接待未结束"])
+		var view: Dictionary = GameState.divination_view(visit.visit_id)
+		var guest: Dictionary = view.get("guest", {})
+		lines.append("第 %d 天 · %s · %s" % [int(visit.day) + 1, guest.get("name", "顾客"), guest.get("case_title", "")])
 		var reading: Dictionary = visit.get("reading", {})
-		lines.append("牌面：" + str(reading.get("title", "未进行占卜")))
+		if view.get("services", []).is_empty() and not reading.is_empty():
+			lines.append("旧档牌面  /  %s\n%s" % [reading.title, reading.text])
+		for service: Dictionary in view.get("services", []):
+			lines.append("%s  /  %s\n%s" % [service.method_title, service.result.title, service.result.text])
+		for entry: Dictionary in view.get("ledger", []):
+			lines.append(DivinationWorkbench.ledger_text(entry))
+		for note: Dictionary in view.get("hypotheses", []):
+			lines.append("假设 · 待验证  /  " + note.text)
+		var event: Dictionary = view.get("event", {})
+		var prediction: Dictionary = view.get("prediction", {})
+		if not prediction.is_empty():
+			lines.append(DivinationWorkbench.prediction_text(prediction, event))
+		for advice: Dictionary in view.get("advice", []):
+			lines.append("建议  /  %s\n%s" % [advice.text, advice.reply])
+		if not event.is_empty():
+			lines.append(DivinationWorkbench.event_status(event))
+		var past: Dictionary = view.get("past", {})
+		for link: Dictionary in past.get("confirmed_links", []):
+			lines.append("前世关联  /  %s · %s" % [link.label, link.relation])
+		for story: Dictionary in past.get("stories", []):
+			lines.append("后续故事  /  " + story.text)
 		for turn: Dictionary in visit.get("dialogue", []):
 			var speaker: String = str(turn.get("speaker", ""))
 			if speaker in ["player", "shopkeeper"]:
 				speaker = "你"
-			elif speaker in ["npc", "npc_lin"]:
-				speaker = str(GameState.content.get("npc", {}).get("name", "顾客"))
+			elif speaker == "npc":
+				speaker = guest.get("name", "顾客")
 			lines.append("%s：%s" % [speaker, str(turn.get("text", ""))])
 		lines.append("────────────────────────────\n")
 	history_text.text = "\n".join(lines) if not lines.is_empty() else "手记还是空白的。完成一次接待后，故事会留在这里。"

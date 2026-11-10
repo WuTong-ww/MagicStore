@@ -1,0 +1,210 @@
+{
+  "methods": {
+    "tarot": {
+      "title": "塔罗", "prompt": "选三牌牌阵。收款后从 78 张韦特体系牌中抽三张，每张记录牌位和正逆位。",
+      "options": {
+        "situation": {"label": "当前处境"},
+        "next_question": {"label": "下一步追问"}
+      }
+    },
+    "lenormand": {
+      "title": "雷诺曼", "prompt": "从 36 张雷诺曼随机抽牌。双牌看主牌与修饰，三牌线以中间牌为焦点。",
+      "learning": {"coins": 8, "energy": 12, "minutes": 30, "requires": "tarot"},
+      "cost": {"coins": 12, "energy": 16, "minutes": 20},
+      "options": {
+        "letter_birds": {"label": "双牌组合"},
+        "key_house": {"label": "三牌线"}
+      }
+    },
+    "plum": {
+      "title": "梅花易数", "prompt": "按农历年月日时起卦，或以物数和时辰起卦。查看本卦、互卦、变卦和体用。",
+      "learning": {"coins": 10, "energy": 14, "minutes": 35, "requires": "tarot"},
+      "cost": {"coins": 14, "energy": 18, "minutes": 25},
+      "options": {
+        "clock": {"label": "按报价时刻起卦"},
+        "number": {"label": "按数字起卦"}
+      }
+    },
+    "yijing": {
+      "title": "易经", "prompt": "三枚钱连掷六次，自下往上成卦。六和九是动爻，可选一爻细看。",
+      "learning": {"coins": 12, "energy": 16, "minutes": 40, "requires": "tarot"},
+      "cost": {"coins": 15, "energy": 18, "minutes": 25},
+      "options": {
+        "gradual": {"label": "问眼下处境"},
+        "release": {"label": "问应对取舍"}
+      }
+    },
+    "xiaoliu": {
+      "title": "小六壬", "prompt": "选短期时辰，从大安起正月，按农历日和时顺数落课。",
+      "learning": {"coins": 12, "energy": 16, "minutes": 35, "requires": "plum"},
+      "cost": {"coins": 13, "energy": 16, "minutes": 15},
+      "options": {
+        "morning": {"label": "上午 · 巳时（09:00）"},
+        "afternoon": {"label": "午后 · 未时（14:00）"},
+        "evening": {"label": "傍晚 · 酉时（18:00）"}
+      }
+    },
+    "astrology": {
+      "title": "现代占星", "prompt": "按出生时刻、地点和时区计算本命盘，再看选定日期的行运相位。",
+      "needs_birth": true,
+      "learning": {"coins": 18, "energy": 24, "minutes": 65, "requires": "lenormand"},
+      "cost": {"coins": 22, "energy": 30, "minutes": 45},
+      "options": {
+        "month": {"label": "30 日后 · 近程行运"},
+        "season": {"label": "90 日后 · 一季行运"}
+      }
+    },
+    "bazi": {
+      "title": "八字", "prompt": "用节气、干支日和出生时辰排四柱，选柱查看藏干及流年十神。",
+      "needs_birth": true,
+      "learning": {"coins": 20, "energy": 26, "minutes": 70, "requires": "yijing"},
+      "cost": {"coins": 24, "energy": 32, "minutes": 50},
+      "options": {
+        "year": {"label": "年柱"},
+        "month": {"label": "月柱"},
+        "day": {"label": "日柱"},
+        "hour": {"label": "时柱"}
+      }
+    },
+    "ziwei": {
+      "title": "紫微斗数", "prompt": "按农历生辰安命身宫、五行局与主星，再选宫位和流年四化。",
+      "needs_birth": true,
+      "learning": {"coins": 24, "energy": 32, "minutes": 90, "requires": "bazi"},
+      "cost": {"coins": 26, "energy": 36, "minutes": 55},
+      "options": {
+        "life": {"label": "命宫"},
+        "siblings": {"label": "兄弟"},
+        "partner": {"label": "夫妻"},
+        "children": {"label": "子女"},
+        "wealth": {"label": "财帛"},
+        "health": {"label": "疾厄"},
+        "travel": {"label": "迁移"},
+        "friends": {"label": "交友"},
+        "career": {"label": "官禄"},
+        "home": {"label": "田宅"},
+        "fortune": {"label": "福德"},
+        "parents": {"label": "父母"}
+      }
+    },
+    "past": {
+      "title": "前世技法", "prompt": "先解读一个片段，再用独立证物验证它指向的人。",
+      "learning": {"coins": 22, "energy": 28, "minutes": 80, "requires": "yijing"},
+      "cost": {"coins": 23, "energy": 32, "minutes": 45},
+      "options": {
+        "vision": {"label": "触碰旧物 · 初见"},
+        "evidence": {"label": "对照旧档 · 补证"}
+      }
+    }
+  },
+  "clues": {
+    "venue_notice": {"title": "临时入口告示", "text": "展览改从侧门进入，原来约见的窗边位置仍保留。"},
+    "birth_details": {"title": "获准使用出生资料", "text": "来客同意将出生资料用于本次盘面。"},
+    "archive_stub": {"title": "旧物馆的借条", "text": "日期背面写有另一处档案柜编号。"}
+  },
+  "topics": [
+    {"topic_id": "venue", "label": "核对侧门告示", "keywords": ["侧门", "告示", "入口"],
+     "reply_text": "我翻到一张更新的告示。展览要从侧门进，她留的位置没有变。",
+     "requires_clue": "invitation_note", "clue_ids": ["venue_notice"], "branch_id": "confirmed_venue"},
+    {"topic_id": "birth", "label": "征求出生资料", "keywords": ["出生", "生辰", "生日"],
+     "reply_text": "可以用这份出生资料排这一次的盘。还请留在店里的手记上。",
+     "clue_ids": ["birth_details"]},
+    {"topic_id": "archive", "label": "看看这件旧物", "keywords": ["旧物", "借条", "档案"],
+     "reply_text": "我是在夹层里发现这张借条的。光凭一个印记，我也说不准它原先是谁的。",
+     "clue_ids": ["archive_stub"]}
+  ],
+  "cases": {
+    "invitation": {
+      "title": "一封没有寄出的邀请",
+      "topic_ids": ["invitation", "letter", "venue", "birth", "work"],
+      "method_ids": ["tarot", "lenormand", "plum", "yijing", "xiaoliu", "astrology", "bazi", "ziwei"],
+      "world_facts": {
+        "personal_invitation": {"value": true, "text": "邀请确实由朋友单独写给照晚。", "requires_clue": "invitation_note"},
+        "changed_entrance": {"value": true, "text": "展览从侧门入场。", "requires_clue": "venue_notice"}
+      },
+      "event": {
+        "subject_id": "npc_lin", "target_name": "林照晚与旧友能否说上话",
+        "minute_of_day": 1080, "feedback_delay": 180,
+        "outcomes": {
+          "sent": {"actual_action": "先发消息确认，再依约赴会", "outcome": "met", "evidence": "sufficient", "feedback": "delayed", "text": "我先发了短消息。她回了时间，我们在展览上说上话了。"},
+          "arrived": {"actual_action": "找到了入口，按约赴会", "outcome": "met", "evidence": "sufficient", "feedback": "delayed", "text": "我找到了入口。她真的留了靠窗的位置，我们说上话了。"},
+          "lost": {"actual_action": "到了旧入口，未能赴约", "outcome": "missed", "evidence": "sufficient", "feedback": "delayed", "text": "我在原来的入口等了很久，后来打烊了，我们没说上话。"},
+          "private": {"actual_action": "约好在侧厅私下见面", "outcome": "met", "evidence": "sufficient", "feedback": "never", "text": ""},
+          "note": {"actual_action": "把回信留在前台，未能确认收件人", "outcome": "missed", "evidence": "insufficient", "feedback": "delayed", "delay": 1140, "text": "我把信留在了前台。后来有人取走它，但工作人员没看到是谁。"},
+          "waited": {"actual_action": "暂缓赴约", "outcome": "missed", "evidence": "sufficient", "feedback": "delayed", "text": "那天我没有去，也没和她说上话。"}
+        },
+        "item_effect": {"key": "stay_and_ask", "need": "找不到原入口时，仍愿意停下来询问展览的改道安排。"},
+        "advice": {
+          "message": {"text": "先发一条消息确认，再按约去展览。", "requires_clue": "unfinished_letter"},
+          "attend": {"text": "直接去展览，按邀请寻找靠窗的位置。", "requires_clue": "invitation_note"},
+          "private": {"text": "约到侧厅私下聊，并尊重对方保密的请求。", "requires_clue": "unfinished_letter"},
+          "note": {"text": "先把信留给展馆前台，请他们转交。"},
+          "wait": {"text": "这次先不赴约，等自己准备好再联系。"}
+        }
+      }
+    },
+    "archive": {
+      "title": "借条背面的名字",
+      "topic_ids": ["archive", "birth"],
+      "method_ids": ["tarot", "lenormand", "plum", "yijing", "xiaoliu", "astrology", "bazi", "ziwei", "past"],
+      "world_facts": {
+        "archive_number": {"value": true, "text": "借条日期背面另有档案柜编号。", "requires_clue": "archive_stub"}
+      }
+    }
+  },
+  "guests": {
+    "npc_lin": {"source": "original", "profile_id": "bookbinder", "birth": "1996-03-14T06:40", "utc_offset_minutes": 480, "birthplace": "杭州", "latitude": 30.2741, "longitude": 120.1551},
+    "npc_demo_xu": {
+      "source": "original", "fixture": "ordinary", "name": "许雾桥", "role": "灯具修理师 · 普通来客样例", "coins": 150,
+      "opening": "我修一盏旧灯时发现了张借条。我想知道落款和我为什么这样熟悉。",
+      "profile_id": "ferryman", "birth": "1992-11-18T18:30", "utc_offset_minutes": 480, "birthplace": "苏州", "latitude": 31.2989, "longitude": 120.5853
+    },
+    "npc_demo_he": {
+      "source": "original", "fixture": "ordinary", "name": "何沿", "role": "钟表学徒 · 普通来客样例", "coins": 150,
+      "opening": "我在一只旧钟里发现了张借条。上面画着渡口，我总觉得见过它。",
+      "profile_id": "ferryman", "birth": "1994-09-09T17:20", "utc_offset_minutes": 480, "birthplace": "宁波", "latitude": 29.8683, "longitude": 121.544
+    },
+    "npc_demo_ji": {
+      "source": "reference", "fixture": "reference", "name": "纪寄棠", "role": "寄居旧宅的写诗人 · 作品参考样例", "coins": 150,
+      "reference_work": "《红楼梦》", "reference_character": "林黛玉",
+      "opening": "寄居时读过的书，我都留过记号。这张花笺却像是别人夹进来的。",
+      "profile_id": "gardener", "birth": "1997-04-07T07:10", "utc_offset_minutes": 480, "birthplace": "绍兴", "latitude": 30.0303, "longitude": 120.5802
+    }
+  },
+  "past_profiles": {
+    "bookbinder": {
+      "identity_id": "paper_keeper", "other_identity_id": "book_messenger", "relation": "旧书铺的装订师与送书人",
+      "vision": "有人在雨夜护着一册未装订的书。纸上有一枚鱼纹，窗边还放着另一把湿伞。",
+      "evidence": "借条写的是「装订 · 鱼纹」，送书人的印记是雁纹。旧书扉页上的鱼纹和照晚用的记号重合。",
+      "links": {
+        "binder": {"label": "照晚曾是替人装订旧书的人", "valid": true},
+        "messenger": {"label": "照晚曾是撑伞送书的人", "valid": false}
+      },
+      "story": "那次装订最终没来得及取走。照晚决定重新修好扉页，把旧日没完成的托付写进今天的修复笔记。"
+    },
+    "ferryman": {
+      "identity_id": "river_guide", "other_identity_id": "lamp_watcher", "relation": "夜渡的船夫与替船引路的守灯人",
+      "vision": "一人提灯，一人握着木桨。灯罩里的一枚刻痕和来客带来的旧物相同。",
+      "evidence": "渡口簿写着刻痕属于交还灯具的船夫，守灯人另有姓名。刻痕曾被船夫刻进自己的木桨。",
+      "links": {
+        "boat": {"label": "来客曾是凭灯认路的船夫", "valid": true},
+        "lamp": {"label": "来客曾是负责掌灯的人", "valid": false}
+      },
+      "story": "来客把灯修回能照亮窄窗的亮度，准备沿旧河道去找守灯人当年留下的位置。"
+    },
+    "gardener": {
+      "identity_id": "night_gardener", "other_identity_id": "seed_guest", "relation": "照管花圃的人与为其留种的过客",
+      "vision": "夜里有人在花木旁折起一纸短诗，身后还站着抱花盆的客人。",
+      "evidence": "花册的折痕与短诗相合，落款写着花圃看守人的记号；种子包才属于那位客人。",
+      "links": {
+        "garden": {"label": "寄棠曾经照管那座花圃", "valid": true},
+        "seeds": {"label": "寄棠曾是托人留种的客人", "valid": false}
+      },
+      "story": "寄棠把花笺重新夹进诗稿，提议在现在的窗前试种一种与花册同名的花。"
+    }
+  },
+  "economy": {
+    "payment_item_id": "bookmark", "payment_item_name": "纸纹书签",
+    "product_id": "calming_incense", "product_name": "定心香", "product_price": 6, "starting_stock": 2,
+    "gift_id": "silver_leaf", "gift_name": "银叶书夹"
+  }
+}
