@@ -6,7 +6,11 @@ extends Node
 const ENVELOPE_FORMAT := "midnight-grocery-save-v1"
 const MAX_BYTES := 16 * 1024 * 1024
 const MAX_INTEGER := 2147483647
+const DivinationCatalog = preload("res://scripts/divination/catalog.gd")
+const DivinationSave = preload("res://scripts/divination/case_save.gd")
+const DivinationSession = preload("res://scripts/divination/session.gd")
 var base_dir: String = "user://saves"
+var _divination_data: Dictionary = {}
 ## Deterministic test seam: fail before touching any file. Never enabled by UI.
 var fail_next_write: bool = false
 
@@ -132,8 +136,9 @@ func _validate(s: Dictionary) -> String:
 	for field in ["schema_version", "save_id", "name", "state_version", "clock_minutes", "player", "npcs", "active_visit_id", "visits", "processed_actions"]:
 		if not s.has(field):
 			return "缺少 " + field
-	if not _integer(s.schema_version, 1, 1):
-		return "不支持的 schema_version（当前仅支持 1）"
+	if not _integer(s.schema_version, 1, 2):
+		return "不支持的 schema_version（当前支持 1 和 2）"
+	var extended := int(s.schema_version) == 2
 	if not _safe_id(s.save_id) or not _text(s.name, 1, 80):
 		return "存档编号或名称无效"
 	if not _integer(s.state_version, 0, MAX_INTEGER) or not _integer(s.clock_minutes, 0, MAX_INTEGER):
@@ -145,6 +150,12 @@ func _validate(s: Dictionary) -> String:
 	if not parsed is Dictionary or not parsed.get("rules") is Dictionary or not parsed.get("npc") is Dictionary or not parsed.get("clues") is Dictionary or not parsed.get("cards") is Array:
 		return "内容配置不可用"
 	var config: Dictionary = parsed
+	if extended:
+		if _divination_data.is_empty():
+			_divination_data = DivinationCatalog.load_data(config)
+		if _divination_data.is_empty():
+			return "问卜内容配置不可用"
+		config["clues"] = _divination_data.clues
 	for card in config.cards:
 		if not card is Dictionary or not card.get("card_id") is String:
 			return "牌面配置不可用"
@@ -153,8 +164,16 @@ func _validate(s: Dictionary) -> String:
 		return "内容配置中的人物或精力上限无效"
 	if not s.player is Dictionary or not _integer(s.player.get("coins"), 0, MAX_INTEGER) or not _integer(s.player.get("energy"), 0, int(config.rules.max_energy)):
 		return "店长金币或精力无效"
-	if not s.npcs is Dictionary or s.npcs.size() != 1 or not s.npcs.get(npc_id) is Dictionary or not _integer(s.npcs[npc_id].get("coins"), 0, MAX_INTEGER):
+	if not s.npcs is Dictionary or not s.npcs.has(npc_id) or (not extended and s.npcs.size() != 1):
 		return "人物实例或顾客金币无效"
+	for id: String in s.npcs:
+		var npc: Variant = s.npcs[id]
+		if not _safe_id(id) or not npc is Dictionary or not _integer(npc.get("coins"), 0, MAX_INTEGER):
+			return "人物实例或顾客金币无效"
+		if extended and not DivinationSave.wallet(npc):
+			return "来客物品无效"
+	if extended and not DivinationSave.wallet(s.player):
+		return "店长物品无效"
 	if not s.active_visit_id is String or (s.active_visit_id != "" and not _safe_id(s.active_visit_id)):
 		return "当前接待编号无效"
 	if not s.visits is Array or s.visits.size() > 10000 or not s.processed_actions is Dictionary or s.processed_actions.size() > 100000:
@@ -170,12 +189,15 @@ func _validate(s: Dictionary) -> String:
 		for field in ["visit_id", "npc_id", "day", "phase", "clue_ids", "dialogue", "reading", "started_at", "ended_at"]:
 			if not v.has(field):
 				return "接待缺少 " + field
-		if not _safe_id(v.visit_id) or visit_ids.has(v.visit_id) or v.npc_id != npc_id:
+		if not _safe_id(v.visit_id) or visit_ids.has(v.visit_id) or not v.npc_id is String or not s.npcs.has(v.npc_id):
 			return "重复接待编号或未知人物引用"
-		visit_ids[v.visit_id] = true
-		if not _integer(v.started_at, 0, int(s.clock_minutes)) or not _integer(v.day, 0, MAX_INTEGER) or int(v.day) != floori(float(v.started_at) / 1440.0) or days.has(int(v.day)):
+		visit_ids[v.visit_id] = v
+		if not _integer(v.started_at, 0, int(s.clock_minutes)) or not _integer(v.day, 0, MAX_INTEGER) or int(v.day) != floori(float(v.started_at) / 1440.0):
 			return "接待日期无效或同日出现多次演示接待"
-		days[int(v.day)] = true
+		var day_key := "%s_%d" % [v.npc_id, int(v.day)]
+		if days.has(day_key):
+			return "同一顾客同日出现多次演示接待"
+		days[day_key] = true
 		if not v.phase in ["talking", "reading_done", "ended"]:
 			return "未知接待阶段"
 		if v.phase == "ended":
@@ -214,6 +236,8 @@ func _validate(s: Dictionary) -> String:
 			for card in config.get("cards", []):
 				if card.get("card_id") == r.card_id:
 					found_card = true
+			if extended and not found_card:
+				found_card = _divination_data.decks.tarot.any(func(card: Dictionary) -> bool: return card.id == r.card_id)
 			if not found_card:
 				return "未知牌面引用"
 			if not _integer(r.fee, 0, MAX_INTEGER) or not _integer(r.energy_cost, 0, MAX_INTEGER) or not _integer(r.minutes, 0, MAX_INTEGER):
@@ -226,7 +250,7 @@ func _validate(s: Dictionary) -> String:
 			return "动作编号或结果无效"
 		if not result.get("success") is bool or not result.get("error_code") is String or not result.get("message") is String or not result.get("result") is Dictionary or not _integer(result.get("state_version"), 0, int(s.state_version)):
 			return "已处理动作结果字段无效"
-		if result.has("action_type") and not result.action_type in ["start_visit", "talk", "reading", "end_visit", "rest", "next_day"]:
+		if result.has("action_type") and not result.action_type in ["start_visit", "talk", "reading", "end_visit", "rest", "next_day"] and (not extended or not result.action_type in DivinationSession.ACTIONS):
 			return "已处理动作类型无效"
 		var output: Dictionary = result.result
 		if output.has("visit_id") and (not output.visit_id is String or not visit_ids.has(output.visit_id)):
@@ -234,11 +258,7 @@ func _validate(s: Dictionary) -> String:
 		if output.has("reading"):
 			if not output.reading is Dictionary or not output.has("visit_id"):
 				return "动作牌面缺少接待引用"
-			var matches := false
-			for visit in s.visits:
-				if visit.visit_id == output.visit_id and visit.reading == output.reading:
-					matches = true
-			if not matches:
+			if visit_ids[output.visit_id].reading != output.reading:
 				return "动作牌面与持久牌面不一致"
 		if output.has("clue_ids"):
 			if not output.clue_ids is Array:
@@ -246,7 +266,7 @@ func _validate(s: Dictionary) -> String:
 			for clue in output.clue_ids:
 				if not clue is String or not config.get("clues", {}).has(clue):
 					return "动作引用未知线索"
-	return ""
+	return DivinationSave.validate(s, _divination_data, visit_ids) if extended else ""
 
 
 func _read_file(path: String, expected_id: String) -> Dictionary:

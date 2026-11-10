@@ -1,6 +1,6 @@
 # 零点杂货铺：接口与存档契约
 
-当前基线：Godot 4.6.3 stable、GDScript、Compatibility。单机开发案例，存档 `schema_version = 1`，内容 `content_version = 1`。只有 `SaveService` 和 `GameState` 两个 Autoload，按此顺序载入；对应脚本不声明同名 `class_name`。
+Godot 4.6.3 stable、GDScript、Compatibility。只有 `SaveService` 和 `GameState` 两个 Autoload，按此顺序载入。下文保留原型 v1 接口说明。B 组新增动作、可见数据查询及 v2 存档扩展见 [B 组交接](divination.md)。
 
 ## 所有权与入口
 
