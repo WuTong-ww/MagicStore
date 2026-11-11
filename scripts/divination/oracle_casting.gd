@@ -14,8 +14,7 @@ const KING_WEN := [
 	[26, 41, 22, 27, 18, 4, 52, 23], [11, 19, 36, 24, 46, 7, 15, 2]
 ]
 const LINE_FOCUS := [
-	"初爻看从哪里起步", "二爻看当事人如何应对", "三爻看走到转折前的困难",
-	"四爻看进入外部环境后会遇到什么", "五爻看谁能主事和协调", "上爻看如何收束或退出"
+	"从哪里起步", "当事人怎么应对", "转折前卡在哪", "外部有哪些条件", "谁能出面协调", "怎么收束这件事"
 ]
 const SLOTS := {"morning": 9, "afternoon": 14, "evening": 18}
 const SIX_COURTS := [
@@ -74,7 +73,7 @@ static func plum(quote: Dictionary, local: int, definitions: Array) -> Dictionar
 	]
 	return {
 		"title": "梅花易数 · %s之%s · 第 %d 爻动" % [base.name, changed.name, line],
-		"text": "%s\n%s\n%s。%s。" % [input, summary, LINE_FOCUS[moving], base.meaning],
+		"text": "%s\n%s\n第 %d 爻可看「%s」。%s。" % [input, summary, line, LINE_FOCUS[moving], base.meaning],
 		"medium": {"kind": "hexagram", "base": base, "changed": changed, "mutual": middle, "moving": [line],
 			"body": TRIGRAMS[body], "use": TRIGRAMS[use], "relation": relation.label, "input": input,
 			"local": local, "upper_sum": top_sum, "lower_sum": bottom_sum, "moving_sum": move_sum},
@@ -118,10 +117,10 @@ static func cast_coins(coins: Array, focus: int, definitions: Array) -> Dictiona
 	if not moving.is_empty():
 		clues.append(_from_hex(changed, "变卦 " + changed.name))
 	clues.append(Clues.hint("timing" if selected in [6, 9] else "choice", "observe",
-		"%s · 第 %d 爻（%s）" % [base.name, focus, types[selected]], "%s。%s" % [LINE_FOCUS[focus - 1], observation]))
+		"%s · 第 %d 爻（%s）" % [base.name, focus, types[selected]], "可从「%s」入手。%s" % [LINE_FOCUS[focus - 1], observation]))
 	return {
 		"title": "易经三钱卦 · %s · 第 %d 爻" % [base.name, focus],
-		"text": "六掷自下而上：%s\n本卦 %s · %s\n第 %d 爻：%s，%s。" % [
+		"text": "六掷自下而上：%s\n本卦 %s · %s\n第 %d 爻可看「%s」。%s。" % [
 			" / ".join(lines), base.name, "静卦" if moving.is_empty() else "变卦 " + changed.name,
 			focus, LINE_FOCUS[focus - 1], observation
 		],

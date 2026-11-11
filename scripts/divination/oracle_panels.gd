@@ -59,7 +59,10 @@ static func _hexagrams(parent: Container, medium: Dictionary) -> void:
 			var yang := (int(hexagram.bits) & (1 << index)) != 0
 			var moving: bool = key == "base" and index + 1 in medium.moving
 			var description := "%s  %d%s" % ["━━━━" if yang else "━━  ━━", index + 1, " 动" if moving else ""]
-			column.add_child(MidnightUI.label(description, 15, MidnightUI.GOLD if moving else MidnightUI.MUTED))
+			var focused: bool = key == "base" and index + 1 == medium.get("focus", 0)
+			if focused:
+				description += " · 本次细看"
+			column.add_child(MidnightUI.label(description, 15, MidnightUI.GOLD if moving or focused else MidnightUI.MUTED))
 
 static func _astrology(parent: Container, medium: Dictionary) -> void:
 	var wheel := Wheel.new()

@@ -2,6 +2,7 @@ extends RefCounted
 ## Case rules. GameState passes a candidate, advances its clock and commits it.
 
 const Catalog = preload("res://scripts/divination/catalog.gd")
+const Cards = preload("res://scripts/divination/oracle_cards.gd")
 const Economy = preload("res://scripts/divination/demo_economy.gd")
 const Events = preload("res://scripts/divination/event_rules.gd")
 const ACTIONS := [
@@ -180,6 +181,12 @@ func _quote(state: Dictionary, visit: Dictionary, case: Dictionary, action: Dict
 		return blocked
 	if not Catalog.valid_parameter(method_id, option_id, parameter):
 		return _fail("INVALID_ACTION", "操作参数超出范围。")
+	var template: Dictionary = data.cases[case.case_id]
+	var question_id: Variant = action.get("question_id", template.default_question)
+	if question_id is String and question_id.is_empty() and not Cards.is_card_method(method_id):
+		question_id = template.default_question
+	if not question_id is String or not template.questions.has(question_id):
+		return _fail("INVALID_ACTION", "请选择当前案例可以问的问题。")
 	var costs := Catalog.service_cost(method_id, data.methods[method_id], base.rules)
 	var payment: Dictionary = {"kind": kind, "amount": int(costs.coins)}
 	if kind == "item":
@@ -187,7 +194,7 @@ func _quote(state: Dictionary, visit: Dictionary, case: Dictionary, action: Dict
 	var id := _id("service", action)
 	var service: Dictionary = {
 		"service_id": id, "visit_id": visit.visit_id, "npc_id": visit.npc_id,
-		"method_id": method_id, "method_title": data.methods[method_id].title,
+		"method_id": method_id, "method_title": data.methods[method_id].title, "question_id": question_id,
 		"option_id": option_id, "option_label": data.methods[method_id].options[option_id].label, "parameter": int(parameter),
 		"payment": payment, "energy": int(costs.energy), "minutes": int(costs.minutes),
 		"quoted_at": int(state.clock_minutes), "paid_at": -1, "status": "quoted", "result": {}
@@ -209,7 +216,9 @@ func _settle(state: Dictionary, visit: Dictionary, case: Dictionary, id: Variant
 	blocked = _resource_block(state, service)
 	if not blocked.is_empty():
 		return blocked
-	var result := Catalog.read_result(service, case, data)
+	if not service.has("question_id"):
+		service["question_id"] = data.cases[case.case_id].default_question
+	var result := Catalog.read_result(service, case, data, visit.clue_ids)
 	if result.is_empty():
 		return _fail("ORACLE_INPUT_UNAVAILABLE", "当前资料无法生成结果。报价仍可撤回，未收取报酬。")
 	Economy.transfer(state, visit, service.payment, "divination", id, true)

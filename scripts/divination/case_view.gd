@@ -10,6 +10,7 @@ static func project(session, state: Dictionary, visit: Dictionary) -> Dictionary
 	var case: Dictionary = state.divination.cases[visit.visit_id]
 	var clock := int(state.clock_minutes)
 	var data: Dictionary = session.data
+	var template: Dictionary = data.cases[case.case_id]
 	var guest: Dictionary = session.guest_view(visit.npc_id, case.case_id, case.get("public_npc", {}))
 	var active: bool = visit.visit_id == state.active_visit_id
 	var view: Dictionary = {
@@ -32,12 +33,16 @@ static func project(session, state: Dictionary, visit: Dictionary) -> Dictionary
 		statement["text"] = visit.dialogue[int(entry.statement_index)].text
 		view.statements.append(statement)
 	for service: Dictionary in case.services.values():
+		if not service.status in ["paid", "quoted"]:
+			continue
+		var display := service.duplicate()
+		display.option_label = data.methods[service.method_id].options[service.option_id].label
+		display["question_id"] = service.get("question_id", template.default_question)
+		display["question"] = service.result.get("inquiry", {}).get("question", template.questions[display.question_id].label)
 		if service.status == "paid":
-			view.services.append(service)
-		elif service.status == "quoted":
-			var preview := service.duplicate()
-			preview.option_label = data.methods[service.method_id].options[service.option_id].label
-			view.quote = preview
+			view.services.append(display)
+		else:
+			view.quote = display
 	view.services.sort_custom(_earlier_service)
 	var related: Array = view.services.duplicate()
 	for prior: Dictionary in state.visits:
@@ -49,7 +54,7 @@ static func project(session, state: Dictionary, visit: Dictionary) -> Dictionary
 				if service.status == "paid":
 					related.append(service)
 	related.sort_custom(_earlier_service)
-	view["oracle_links"] = OracleClues.compare(related)
+	view["oracle_links"] = _comparisons(related, template)
 	for entry: Dictionary in state.divination.ledger:
 		if entry.visit_id == visit.visit_id:
 			view.ledger.append(entry)
@@ -60,11 +65,33 @@ static func project(session, state: Dictionary, visit: Dictionary) -> Dictionary
 static func _earlier_service(a: Dictionary, b: Dictionary) -> bool:
 	return a.paid_at < b.paid_at if a.paid_at != b.paid_at else a.service_id < b.service_id
 
+static func _comparisons(services: Array, template: Dictionary) -> Array:
+	var grouped: Dictionary = {}
+	for service: Dictionary in services:
+		# Older readings with no saved question belong to the main case question.
+		var id: String = service.get("question_id", template.default_question)
+		if not grouped.has(id):
+			grouped[id] = []
+		grouped[id].append(service)
+	var links: Array = []
+	for id: String in grouped:
+		for link: Dictionary in OracleClues.compare(grouped[id]):
+			link["question"] = template.questions[id].label
+			links.append(link)
+	return links
+
 static func _active_details(session, state: Dictionary, visit: Dictionary, case: Dictionary, view: Dictionary) -> void:
 	var data: Dictionary = session.data
 	var clock := int(state.clock_minutes)
+	var template: Dictionary = data.cases[case.case_id]
+	var question_ids: Array = template.questions.keys()
+	question_ids.erase(template.default_question)
+	question_ids.push_front(template.default_question)
+	view["questions"] = question_ids.map(func(id: String) -> Dictionary:
+		return {"question_id": id, "label": template.questions[id].label}
+	)
 	var allowed: Dictionary = session.talks(visit, case, clock)
-	for id: String in data.cases[case.case_id].topic_ids:
+	for id: String in template.topic_ids:
 		var topic: Dictionary = data.topic_index[id]
 		view.topics.append({"topic_id": id, "label": topic.label, "enabled": allowed.has(id)})
 	var chart: Dictionary = Catalog.chart_for(case, data)
@@ -79,7 +106,7 @@ static func _active_details(session, state: Dictionary, visit: Dictionary, case:
 		if not place.is_empty():
 			description += " · " + place
 		view["birth"] = {"text": description}
-	for id: String in data.cases[case.case_id].method_ids:
+	for id: String in template.method_ids:
 		var method: Dictionary = data.methods[id]
 		var options: Array = []
 		for key: String in method.options:

@@ -1,32 +1,32 @@
 {
   "methods": {
     "tarot": {
-      "title": "塔罗", "prompt": "选三牌牌阵。收款后从 78 张韦特体系牌中抽三张，每张记录牌位和正逆位。",
+      "title": "塔罗", "prompt": "先选来客想问的事。翻出三张牌后，看每张图案能让你想到这个问题的哪一部分。",
       "options": {
         "situation": {"label": "当前处境"},
         "next_question": {"label": "下一步追问"}
       }
     },
     "lenormand": {
-      "title": "雷诺曼", "prompt": "从 36 张雷诺曼随机抽牌。双牌看主牌与修饰，三牌线以中间牌为焦点。",
+      "title": "雷诺曼", "prompt": "选一个问题，再选要翻几张牌。试着看看相邻的图案放在一起，会多出什么值得问的细节。",
       "learning": {"coins": 8, "energy": 12, "minutes": 30, "requires": "tarot"},
       "cost": {"coins": 12, "energy": 16, "minutes": 20},
       "options": {
-        "letter_birds": {"label": "双牌组合"},
-        "key_house": {"label": "三牌线"}
+        "letter_birds": {"label": "两张牌"},
+        "key_house": {"label": "三张牌排成一行"}
       }
     },
     "plum": {
-      "title": "梅花易数", "prompt": "按农历年月日时起卦，或以物数和时辰起卦。查看本卦、互卦、变卦和体用。",
+      "title": "梅花易数", "prompt": "用这次的时间，或用你报的数字配上时间，画成六条线。比较哪些线保持原样、哪些有变化，再想这和眼下的条件有什么联系。",
       "learning": {"coins": 10, "energy": 14, "minutes": 35, "requires": "tarot"},
       "cost": {"coins": 14, "energy": 18, "minutes": 25},
       "options": {
-        "clock": {"label": "按报价时刻起卦"},
-        "number": {"label": "按数字起卦"}
+        "clock": {"label": "用确认报价时的时间"},
+        "number": {"label": "用你报的数字"}
       }
     },
     "yijing": {
-      "title": "易经", "prompt": "三枚钱连掷六次，自下往上成卦。六和九是动爻，可选一爻细看。",
+      "title": "易经", "prompt": "用三枚钱投六次。每次画一条横线，从底下往上排成一张卦图。选一个想观察的角度就能开始。",
       "learning": {"coins": 12, "energy": 16, "minutes": 40, "requires": "tarot"},
       "cost": {"coins": 15, "energy": 18, "minutes": 25},
       "options": {
@@ -35,64 +35,64 @@
       }
     },
     "xiaoliu": {
-      "title": "小六壬", "prompt": "选短期时辰，从大安起正月，按农历日和时顺数落课。",
+      "title": "小六壬", "prompt": "选一天里的一个时间。按日期和时间沿着一圈标记数，看看最后停在哪里，有什么值得核对。",
       "learning": {"coins": 12, "energy": 16, "minutes": 35, "requires": "plum"},
       "cost": {"coins": 13, "energy": 16, "minutes": 15},
       "options": {
-        "morning": {"label": "上午 · 巳时（09:00）"},
-        "afternoon": {"label": "午后 · 未时（14:00）"},
-        "evening": {"label": "傍晚 · 酉时（18:00）"}
+        "morning": {"label": "上午 09:00"},
+        "afternoon": {"label": "午后 14:00"},
+        "evening": {"label": "傍晚 18:00"}
       }
     },
     "astrology": {
-      "title": "现代占星", "prompt": "按出生时刻、地点和时区计算本命盘，再看选定日期的行运相位。",
+      "title": "现代占星", "prompt": "把来客出生时和选定那天的星体位置放到一张图里比较。先选想看多远的日期。",
       "needs_birth": true,
       "learning": {"coins": 18, "energy": 24, "minutes": 65, "requires": "lenormand"},
       "cost": {"coins": 22, "energy": 30, "minutes": 45},
       "options": {
-        "month": {"label": "30 日后 · 近程行运"},
-        "season": {"label": "90 日后 · 一季行运"}
+        "month": {"label": "看 30 天后"},
+        "season": {"label": "看 90 天后"}
       }
     },
     "bazi": {
-      "title": "八字", "prompt": "用节气、干支日和出生时辰排四柱，选柱查看藏干及流年十神。",
+      "title": "八字", "prompt": "把出生的年、月、日和时刻各排成一组记号。挑一组，再和你想看的年份比较。",
       "needs_birth": true,
       "learning": {"coins": 20, "energy": 26, "minutes": 70, "requires": "yijing"},
       "cost": {"coins": 24, "energy": 32, "minutes": 50},
       "options": {
-        "year": {"label": "年柱"},
-        "month": {"label": "月柱"},
-        "day": {"label": "日柱"},
-        "hour": {"label": "时柱"}
+        "year": {"label": "出生年"},
+        "month": {"label": "出生月"},
+        "day": {"label": "出生日"},
+        "hour": {"label": "出生时刻"}
       }
     },
     "ziwei": {
-      "title": "紫微斗数", "prompt": "按农历生辰安命身宫、五行局与主星，再选宫位和流年四化。",
+      "title": "紫微斗数", "prompt": "用出生资料排出十二个主题格。先选想了解的主题和年份，再看这格里有哪些值得追问的标记。",
       "needs_birth": true,
       "learning": {"coins": 24, "energy": 32, "minutes": 90, "requires": "bazi"},
       "cost": {"coins": 26, "energy": 36, "minutes": 55},
       "options": {
-        "life": {"label": "命宫"},
-        "siblings": {"label": "兄弟"},
-        "partner": {"label": "夫妻"},
-        "children": {"label": "子女"},
-        "wealth": {"label": "财帛"},
-        "health": {"label": "疾厄"},
-        "travel": {"label": "迁移"},
-        "friends": {"label": "交友"},
-        "career": {"label": "官禄"},
-        "home": {"label": "田宅"},
-        "fortune": {"label": "福德"},
-        "parents": {"label": "父母"}
+        "life": {"label": "自己怎么应对"},
+        "siblings": {"label": "同辈相处"},
+        "partner": {"label": "亲密关系"},
+        "children": {"label": "照顾与培养"},
+        "wealth": {"label": "钱与资源"},
+        "health": {"label": "体力与日常照顾"},
+        "travel": {"label": "出门与换环境"},
+        "friends": {"label": "朋友与人脉"},
+        "career": {"label": "工作与分工"},
+        "home": {"label": "住所与落脚点"},
+        "fortune": {"label": "心情与休息"},
+        "parents": {"label": "长辈与家庭"}
       }
     },
     "past": {
-      "title": "前世技法", "prompt": "先解读一个片段，再用独立证物验证它指向的人。",
+      "title": "前世技法", "prompt": "从来客的旧物里看一段片段。先想可能是谁留下了它，再用档案里的独立材料核实。",
       "learning": {"coins": 22, "energy": 28, "minutes": 80, "requires": "yijing"},
       "cost": {"coins": 23, "energy": 32, "minutes": 45},
       "options": {
-        "vision": {"label": "触碰旧物 · 初见"},
-        "evidence": {"label": "对照旧档 · 补证"}
+        "vision": {"label": "看旧物里的片段"},
+        "evidence": {"label": "去旧档找证物"}
       }
     }
   },
@@ -117,6 +117,53 @@
       "title": "一封没有寄出的邀请",
       "topic_ids": ["invitation", "letter", "venue", "birth", "work"],
       "method_ids": ["tarot", "lenormand", "plum", "yijing", "xiaoliu", "astrology", "bazi", "ziwei"],
+      "default_question": "reconnect",
+      "questions": {
+        "reconnect": {
+          "label": "这次联系旧友，眼下卡在哪一步？",
+          "frame": "想开口、把话送到、得到回应，是三个不同的环节。先看看哪一环有迹象，哪一环还只是猜测。",
+          "missing": "目前还没有核对过回信或约见细节，只知道来客想联系，又有顾虑。",
+          "boundary": "即使一方想联系，另一方的意愿仍要由本人表达。要不要开口、怎样开口，由你结合案情判断。",
+          "references": {
+            "invitation_note": "附言能说明发邀请时的用意，不能代替旧友此刻的回应。",
+            "unfinished_letter": "信已经写好，落笔和寄出之间还有一步；仍可问问是什么让来客停在那里。",
+            "venue_notice": "告示能用来核对赴约路线，至于两人是否会见面，还要看别的条件。"
+          },
+          "angles": {
+            "contact": ["可以区分来客有没有发出消息，以及旧友有没有机会收到", "目前有没有送达记录，还是只知道来客想联系？"],
+            "relation": ["可以把来客想再见一面和旧友对见面的意愿分开看", "旧友亲口说过什么？哪些是来客揣测的？"],
+            "timing": ["可以看看时间难以凑合，和迟迟不敢开口，是不是两回事", "有双方都确认过的时段吗？"],
+            "place": ["可以分清赴约路线是否明确，和两人是否愿意赴约", "邀请上的地点说明与现有的公开安排能对上吗？"],
+            "evidence": ["可以把纸上的话和已经发生的联络放在两边比较", "现有材料能核对的是邀请本身，还是后来的回应？"],
+            "choice": ["可以比较打招呼、赴约和暂缓各自需要什么前提", "哪些选项需要先得到对方的同意？"],
+            "action": ["可以分清来客手里能完成的动作和必须由旧友完成的动作", "来客能做到哪一步？哪一步要等旧友表示？"],
+            "boundary": ["可以看看对话是否给双方都留了拒绝或改期的余地", "有没有一方说过自己在什么情况下不方便？"],
+            "obstacle": ["可以区别来客害怕打扰对方，和确实遇到了无法联络的阻碍", "有实际受阻的迹象，还是来客担心可能受阻？"]
+          }
+        },
+        "invitation_intent": {
+          "label": "怎么判断这份邀请是不是单独写给我的？",
+          "frame": "邀请有两种读法：一份写给特定对象的信，或一份也会寄给其他人的通知。能区分它们的是原件和送出的方式。",
+          "missing": "还没有看到能核对收件人的材料。来客觉得它可能是群发，这仍是猜测。",
+          "boundary": "谁被邀请、对方此刻愿不愿见面，是两个问题。你可以保留两种读法，等有材料再选。",
+          "references": {
+            "invitation_note": "手写附言是能核对的原件细节。可以问那句话是否只有两个人才懂。",
+            "unfinished_letter": "没有寄出的回信能说明来客的顾虑，不能说明邀请最初写给谁。",
+            "venue_notice": "公开的展览安排可以拿来与信里较私人的细节作比较。"
+          },
+          "angles": {
+            "contact": ["可以从邀请是怎么到来客手里的查起", "它带有能认出收件人的称呼，还是经同一个渠道送给了许多人？"],
+            "relation": ["可以比较只有这两个人才懂的话和所有客人都能看懂的话", "信里有没有能由来客和写信人分别确认的共同记忆？"],
+            "timing": ["可以区别展览公开发布的时间与写信人单独联系的时间", "原件上有日期吗？能和公开通知排在一起看吗？"],
+            "place": ["可以比较所有客人都能去的位置和特意说给一个人的地点", "信里提到的位置是否也写在展览的公开安排上？"],
+            "evidence": ["可以把印刷内容、手写的字和转述分开比较", "哪一部分看得到原文，哪一部分还要靠回忆？"],
+            "choice": ["可以同时保留私人邀请和通用邀请两种解释", "哪一条细节能让这两种解释显出差别？"],
+            "action": ["可以分清写信、送出和收到三个动作是谁做的", "有谁见过这份邀请写成或被交出时的样子？"],
+            "boundary": ["可以问清公开活动安排之外，有没有两人之间另行约定的内容", "哪段信息可以和公开通知对照？哪段只能问当事人？"],
+            "obstacle": ["可以看看是信本身留下的信息太少，还是来客读信时受到了自身顾虑的影响", "能找回原件或同一场活动的另一份邀请来比较吗？"]
+          }
+        }
+      },
       "world_facts": {
         "personal_invitation": {"value": true, "text": "邀请确实由朋友单独写给照晚。", "requires_clue": "invitation_note"},
         "changed_entrance": {"value": true, "text": "展览从侧门入场。", "requires_clue": "venue_notice"}
@@ -146,6 +193,49 @@
       "title": "借条背面的名字",
       "topic_ids": ["archive", "birth"],
       "method_ids": ["tarot", "lenormand", "plum", "yijing", "xiaoliu", "astrology", "bazi", "ziwei", "past"],
+      "default_question": "origin",
+      "questions": {
+        "origin": {
+          "label": "这件旧物可能是谁留下的？",
+          "frame": "使用、代为保管和最后归还旧物的人可能不同。先分清这些角色，再看哪条痕迹能联系到具体的人。",
+          "missing": "目前只有来客对旧物的描述，还缺能独立比对的实物记录。",
+          "boundary": "牌面无法给旧物署名。哪些解释值得留下、哪条线索值得追，由你决定。",
+          "references": {
+            "archive_stub": "借条可以和独立的物品记录比对。先辨认它记录的是借出、持有还是归还。"
+          },
+          "angles": {
+            "contact": ["可以从最后一次交接往前找，区分经手人和原主", "有谁能说清旧物到这里以前交给了谁？"],
+            "relation": ["可以把物上出现的名字和各人曾担任的角色分开", "名字可能是主人、借用人还是负责登记的人？"],
+            "timing": ["可以排列制作、借用和被发现的大致日期", "有没有一处日期能排除其中一次交接？"],
+            "place": ["可以区别旧物被发现的地点和它原来所在的地点", "原来的存放记录与发现时的位置能连起来吗？"],
+            "evidence": ["可以找一项独立材料来核对物上的痕迹", "有没有别件东西也留下同样的字迹或记号？"],
+            "choice": ["可以把原主留下与后来经手人留下这两种解释一起保留", "发现什么痕迹时，会更容易区分这两种说法？"],
+            "action": ["可以分清物上哪些痕迹来自使用，哪些来自修补", "哪一道痕迹能和某个人亲手做过的事对照？"],
+            "boundary": ["可以看当时谁有权领取、借走或归还这件东西", "保管规矩能说明哪些人可能碰过它吗？"],
+            "obstacle": ["可以分开遗失的记录和仍看得见但难辨的痕迹", "空缺在物品、记录，还是见证人的说法里？"]
+          }
+        },
+        "memory": {
+          "label": "我为什么会对旧物上的记号觉得熟悉？",
+          "frame": "熟悉感可能来自见过同一个记号，也可能来自见过相似的物件或听过别人讲述。先弄清是哪一处细节让来客停住。",
+          "missing": "来客说自己觉得熟悉，还没有取出能与记忆互相核对的材料。",
+          "boundary": "感到熟悉可以是查找的起点。是否存在可验证的关联，还需要你用独立的线索判断。",
+          "references": {
+            "archive_stub": "借条是可以拿在手里比对的材料。它能供核对，却不能解释熟悉感本身是从哪来的。"
+          },
+          "angles": {
+            "contact": ["可以区别自己见过和从别人那里听过", "来客记得当时是谁拿给他看，还是只记得有人讲过？"],
+            "relation": ["可以分开想起了某个人和认出了某个具体形状", "如果遮住人名，来客还能指出哪一笔让他熟悉吗？"],
+            "timing": ["可以试着找熟悉感第一次出现的时间", "是看到旧物前就记得这个形状，还是看到之后才想起相似的事？"],
+            "place": ["可以看看来客曾在哪类场所见过相似记号", "还有哪处地方可能保存这种记号的原样？"],
+            "evidence": ["可以比较来客记得的细部和旧物上实际留下的细部", "能不能先画出记忆里的样子，再与原物比较？"],
+            "choice": ["可以保留相似物件、相似图样和直接见过三种可能", "哪一处不常见的细节能把这些可能分开？"],
+            "action": ["可以让来客指出第一眼注意到的地方，再翻看其他部分", "他最先说出的细节，和后来仔细看见的有哪些不同？"],
+            "boundary": ["可以区分来客愿意讲的回忆和手头能公开核对的痕迹", "只比对眼前的形状，能核对到哪一步？"],
+            "obstacle": ["可以分清一时想不起场合，和想起的细节互相矛盾", "哪一处还记不清？哪一处已经可以和实物对照？"]
+          }
+        }
+      },
       "world_facts": {
         "archive_number": {"value": true, "text": "借条日期背面另有档案柜编号。", "requires_clue": "archive_stub"}
       }

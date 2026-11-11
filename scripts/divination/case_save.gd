@@ -2,6 +2,7 @@ extends RefCounted
 ## Validate the v2 namespace before SaveService accepts it.
 
 const Catalog = preload("res://scripts/divination/catalog.gd")
+const Cards = preload("res://scripts/divination/oracle_cards.gd")
 const Events = preload("res://scripts/divination/event_rules.gd")
 const OracleSaved = preload("res://scripts/divination/oracle_saved.gd")
 const MAX_INT := 2147483647
@@ -106,9 +107,10 @@ static func _case_records(case: Dictionary, visit: Dictionary, data: Dictionary,
 		if not _text(note.get("text"), 500) or not note.get("clue_ids") is Array:
 			return false
 	var open_id: String = ""
+	var questions: Dictionary = data.cases[case.case_id].questions
 	for id: String in case.services:
 		var service: Variant = case.services[id]
-		if not _service(service, visit, id, data, clock):
+		if not _service(service, visit, id, data, clock, questions):
 			return false
 		if service.status == "quoted":
 			if not open_id.is_empty() or visit.phase == "ended":
@@ -136,11 +138,13 @@ static func _case_records(case: Dictionary, visit: Dictionary, data: Dictionary,
 			return false
 	return true
 
-static func _service(service: Variant, visit: Dictionary, id: String, data: Dictionary, clock: int) -> bool:
+static func _service(service: Variant, visit: Dictionary, id: String, data: Dictionary, clock: int, questions: Dictionary) -> bool:
 	if not service is Dictionary or not _text(id) or service.get("service_id") != id or service.get("visit_id") != visit.visit_id or service.get("npc_id") != visit.npc_id:
 		return false
 	var method: Dictionary = data.methods.get(service.get("method_id"), {})
 	if method.is_empty() or not method.options.has(service.get("option_id")) or not Catalog.valid_parameter(service.method_id, service.option_id, service.get("parameter")):
+		return false
+	if service.has("question_id") and (not service.question_id is String or not questions.has(service.question_id)):
 		return false
 	if not _payment(service.get("payment")) or not service.get("status") in ["quoted", "paid", "cancelled"] or not service.get("result") is Dictionary or not _text(service.get("method_title")) or not _text(service.get("option_label")):
 		return false
@@ -148,7 +152,30 @@ static func _service(service: Variant, visit: Dictionary, id: String, data: Dict
 		return false
 	if service.status != "paid":
 		return service.result.is_empty() and service.get("paid_at") == -1
-	return Catalog._integer(service.get("paid_at"), int(service.quoted_at), clock) and _text(service.result.get("clue_id")) and _text(service.result.get("title")) and _text(service.result.get("text")) and _text(service.result.get("lead")) and OracleSaved.valid(service.result, service, data)
+	if not Catalog._integer(service.get("paid_at"), int(service.quoted_at), clock) or not _text(service.result.get("clue_id")) or not _text(service.result.get("title")) or not _text(service.result.get("text")) or not _text(service.result.get("lead")) or not OracleSaved.valid(service.result, service, data):
+		return false
+	if not service.has("question_id") or not Cards.is_card_method(service.method_id):
+		return not service.result.has("inquiry")
+	return _inquiry(service.result, service, visit.clue_ids, questions[service.question_id].references)
+
+static func _inquiry(result: Dictionary, service: Dictionary, visible_ids: Array, references: Dictionary) -> bool:
+	var inquiry: Variant = result.get("inquiry")
+	if not inquiry is Dictionary or inquiry.get("question_id") != service.question_id or not result.has("medium"):
+		return false
+	for key in ["question", "frame", "known", "synthesis", "boundary"]:
+		if not _text(inquiry.get(key)):
+			return false
+	var ids: Variant = inquiry.get("known_clue_ids")
+	if not ids is Array or not ids.all(func(id: Variant) -> bool: return id in visible_ids and references.has(id)):
+		return false
+	var steps: Variant = inquiry.get("steps")
+	var expected: int = result.medium.cards.size() if service.method_id == "tarot" else result.medium.cards.size() - 1
+	if not steps is Array or steps.size() != expected:
+		return false
+	for step in steps:
+		if not step is Dictionary or not _text(step.get("source")) or not _text(step.get("reason")) or not _text(step.get("check")):
+			return false
+	return true
 
 static func _event(event: Dictionary, prediction: Dictionary, visit: Dictionary, clock: int, definition: Dictionary) -> bool:
 	if event.is_empty():

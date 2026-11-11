@@ -24,6 +24,7 @@ func run() -> void:
 	_events()
 	_methods_and_past()
 	_cross_reading()
+	_card_inquiry()
 	_v1_migration()
 	_handoff()
 	print("DIVINATION RESULT: %d checks, %d failures. Isolated saves: %s" % [checks, failures, ProjectSettings.globalize_path(saves.base_dir)])
@@ -54,11 +55,14 @@ func talk(text: String, topic: String = "") -> void:
 		fields["topic_id"] = topic
 	require_action("talk", fields)
 
-func quote(method_id: String, option_id: String, parameter: int = 0, payment: String = "coins") -> Dictionary:
-	return act("quote_service", {"method_id": method_id, "option_id": option_id, "parameter": parameter, "payment": payment})
+func quote(method_id: String, option_id: String, parameter: int = 0, payment: String = "coins", question_id: String = "") -> Dictionary:
+	var fields := {"method_id": method_id, "option_id": option_id, "parameter": parameter, "payment": payment}
+	if not question_id.is_empty():
+		fields["question_id"] = question_id
+	return act("quote_service", fields)
 
-func read(method_id: String, option_id: String, parameter: int = 0, payment: String = "coins") -> Dictionary:
-	var quoted := quote(method_id, option_id, parameter, payment)
+func read(method_id: String, option_id: String, parameter: int = 0, payment: String = "coins", question_id: String = "") -> Dictionary:
+	var quoted := quote(method_id, option_id, parameter, payment, question_id)
 	check(quoted.success, method_id + " / " + quoted.message)
 	return require_action("settle_service", {"service_id": quoted.result.get("service_id", "")}).get("service_result", {})
 
@@ -304,6 +308,50 @@ func _cross_reading() -> void:
 	check(view.facts.is_empty(), "cross-method prompts cannot promote hidden facts")
 	reload_game()
 	check(gs.divination_view().oracle_links == links, "cross-method notes preserve exact evidence after reload")
+
+func _card_inquiry() -> void:
+	fresh("问句、牌面与玩家判断")
+	require_action("learn_method", {"method_id": "lenormand"})
+	require_action("learn_method", {"method_id": "plum"})
+	require_action("learn_method", {"method_id": "yijing"})
+	require_action("rest")
+	require_action("start_visit")
+	var before: Dictionary = gs.snapshot()
+	check(quote("tarot", "next_question", 0, "coins", "memory").error_code == "INVALID_ACTION" and gs.snapshot() == before, "a question from another case cannot start a quote")
+	check(quote("plum", "number", 8, "coins", "memory").error_code == "INVALID_ACTION" and gs.snapshot() == before, "a non-card service also rejects an unrelated question")
+	var quoted := quote("tarot", "next_question", 0, "coins", "invitation_intent")
+	check(quoted.success, "the alternative question can be quoted")
+	var id: String = quoted.result.service_id
+	reload_game()
+	var pending: Dictionary = gs.divination_view().quote
+	check(pending.question_id == "invitation_intent" and pending.result.is_empty(), "the quote keeps the selected question without revealing cards")
+	var tarot: Dictionary = require_action("settle_service", {"service_id": id}).service_result
+	var view: Dictionary = gs.divination_view()
+	check(tarot.inquiry.question == pending.question and tarot.inquiry.known_clue_ids.is_empty() and not tarot.text.contains("邀请上的手写附言"), "reading cannot cite a clue that has not been discovered")
+	check(view.facts.is_empty() and view.prediction.is_empty() and view.advice.is_empty() and view.hypotheses.is_empty(), "a card reading does not commit a fact, prediction or choice")
+	talk("邀请上写了什么？", "invitation")
+	var player_text := "我先保留群发的可能，想再比对别人的邀请。"
+	require_action("note_hypothesis", {"text": player_text})
+	view = gs.divination_view()
+	check(view.hypotheses[0].text == player_text and tarot.clue_id in view.hypotheses[0].clue_ids and view.prediction.is_empty(), "the player can record their own interpretation without a prediction")
+	var unrelated := read("lenormand", "letter_birds")
+	check(unrelated.inquiry.known_clue_ids == ["invitation_note"] and unrelated.text.contains("邀请上的手写附言") and not unrelated.text.contains("临时入口告示"), "new readings use only the now-visible relevant clue")
+	check(gs.divination_view().oracle_links.is_empty(), "different questions do not produce cross-method corroboration")
+	read("lenormand", "key_house", 0, "coins", "invitation_intent")
+	read("plum", "number", 8, "coins", "invitation_intent")
+	require_action("rest")
+	read("yijing", "gradual", 1, "item", "invitation_intent")
+	view = gs.divination_view()
+	var links: Array = view.oracle_links
+	var methods: Dictionary = {}
+	for link: Dictionary in links:
+		for trace: Dictionary in link.traces:
+			methods[trace.method_id] = true
+	check(not links.is_empty() and links.all(func(link: Dictionary) -> bool: return link.question == pending.question), "only the same question shares cross-method prompts")
+	check(view.services.size() == 5 and methods.has_all(["tarot", "lenormand", "plum", "yijing"]), "four chosen techniques are paid and compared for one question in the same visit")
+	reload_game()
+	check(gs.divination_view().oracle_links == links, "the four-method comparison survives reload")
+	check(require_action("settle_service", {"service_id": id}).service_result == tarot, "reopening a paid reading preserves the exact earlier question, cards and evidence")
 
 func _v1_migration() -> void:
 	fresh("迁移样例来源")

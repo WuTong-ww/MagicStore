@@ -66,6 +66,8 @@ static func load_data(base: Dictionary) -> Dictionary:
 		for fact in template.world_facts.values():
 			if not fact is Dictionary or not fact.get("text") is String or not clues.has(fact.get("requires_clue")):
 				return {}
+		if not _valid_questions(template, clues):
+			return {}
 	if not _event_data(parsed.cases.invitation.get("event")):
 		return {}
 	for guest in parsed.guests.values():
@@ -123,6 +125,28 @@ static func _event_data(value: Variant) -> bool:
 static func _integer(value: Variant, low: int, high: int) -> bool:
 	return (value is int or value is float) and value == floorf(float(value)) and value >= low and value <= high
 
+static func _valid_questions(template: Dictionary, clues: Dictionary) -> bool:
+	var questions: Variant = template.get("questions")
+	if not questions is Dictionary or not questions.has(template.get("default_question")):
+		return false
+	for question in questions.values():
+		if not question is Dictionary or not question.get("angles") is Dictionary or not question.get("references") is Dictionary:
+			return false
+		for key in ["label", "frame", "missing", "boundary"]:
+			if not _nonempty(question.get(key)):
+				return false
+		for topic: String in Clues.TOPICS:
+			var angle: Variant = question.angles.get(topic)
+			if not angle is Array or angle.size() != 2 or not angle.all(_nonempty):
+				return false
+		for id: String in question.references:
+			if not clues.has(id) or not _nonempty(question.references[id]):
+				return false
+	return true
+
+static func _nonempty(value: Variant) -> bool:
+	return value is String and not value.strip_edges().is_empty()
+
 static func service_cost(method_id: String, method: Dictionary, rules: Dictionary) -> Dictionary:
 	if method_id == "tarot":
 		return {"coins": rules.reading_fee, "energy": rules.reading_energy, "minutes": rules.reading_minutes}
@@ -139,17 +163,20 @@ static func valid_parameter(method_id: String, option_id: String, value: Variant
 			return _integer(value, 0, 1)
 	return _integer(value, 0, 0)
 
-static func read_result(quote: Dictionary, case: Dictionary, data: Dictionary) -> Dictionary:
+static func read_result(quote: Dictionary, case: Dictionary, data: Dictionary, clue_ids: Array = []) -> Dictionary:
 	# Service IDs survive retries, failed writes and process restarts.
 	var rng := RandomNumberGenerator.new()
 	rng.seed = String(quote.service_id).sha256_text().left(15).hex_to_int()
 	var local := Almanac.shop_time(int(quote.quoted_at))
+	var template: Dictionary = data.cases[case.case_id]
+	var question_id: String = quote.get("question_id", template.default_question)
+	var question: Dictionary = template.questions[question_id]
 	var result: Dictionary = {}
 	match quote.method_id:
 		"tarot":
-			result = Cards.tarot(data.decks.tarot, quote.option_id, rng)
+			result = Cards.tarot(data.decks.tarot, quote.option_id, rng, _card_context(question_id, question, data.clues, clue_ids))
 		"lenormand":
-			result = Cards.lenormand(data.decks.lenormand, quote.option_id, rng)
+			result = Cards.lenormand(data.decks.lenormand, quote.option_id, rng, _card_context(question_id, question, data.clues, clue_ids))
 		"plum":
 			result = Casting.plum(quote, local, data.hexagrams)
 		"yijing":
@@ -182,9 +209,22 @@ static func read_result(quote: Dictionary, case: Dictionary, data: Dictionary) -
 	result["version"] = 2
 	result["clue_id"] = "oracle_" + String(quote.service_id).trim_prefix("service_")
 	result["card_id"] = result.get("card_id", "")
-	result.signals = Clues.decorate(result.signals, case.case_id)
+	result.signals = Clues.decorate(result.signals, case.case_id, question.angles)
 	result["lead"] = result.signals[0].prompt
 	return result
+
+static func _card_context(question_id: String, question: Dictionary, clues: Dictionary, clue_ids: Array) -> Dictionary:
+	var known_ids: Array = []
+	var notes: PackedStringArray = []
+	# Never read unrevealed world facts or event outcomes to interpret a card.
+	for clue_id: String in question.references:
+		if clue_id in clue_ids:
+			known_ids.append(clue_id)
+			notes.append("「%s」：%s" % [clues[clue_id].title, question.references[clue_id]])
+	return {
+		"question_id": question_id, "question": question, "known_clue_ids": known_ids,
+		"known": question.missing if notes.is_empty() else "\n".join(notes)
+	}
 
 static func chart_for(case: Dictionary, data: Dictionary) -> Dictionary:
 	return case.get("chart", data.guests.get(case.npc_id, {}))
