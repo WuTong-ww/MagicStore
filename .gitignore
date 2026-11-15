@@ -12,6 +12,8 @@ test-results/
 Thumbs.db
 .vscode/
 .idea/
+__pycache__/
+*.pyc
 .env
 .env.*
 !.env.example
