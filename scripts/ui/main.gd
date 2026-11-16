@@ -4,6 +4,12 @@ const FRONT := preload("res://scenes/shop_front.tscn")
 const CONSULTATION := preload("res://scenes/consultation.tscn")
 const DivinationWorkbench := preload("res://scripts/divination/workbench.gd")
 const OracleGuide := preload("res://scripts/divination/oracle_guide.gd")
+const SHOP_SCREEN := preload("res://scripts/shop/shop_screen.gd")
+const PEOPLE_PANEL := preload("res://scenes/people/people_panel.tscn")
+const PAGES := {"exterior": "店外", "front": "前台", "consultation": "咨询区", "inventory": "储物柜", "workshop": "工坊", "market": "原料商店", "gathering": "采集"}
+var people_window: Window
+var people_panel: Control
+var provider_badge: Label
 
 var busy := false
 var current_screen := "front"
@@ -18,11 +24,17 @@ var save_name: LineEdit
 var save_note: Label
 var save_entries: Array = []
 var backup_confirm: ConfirmationDialog
+var delete_confirm: ConfirmationDialog
+var delete_button: Button
+var _delete_target := ""
 var history_window: Window
 var history_text: RichTextLabel
 var history_details: CheckButton
 var open_button: Button
 var workbench: DivinationWorkbench
+
+func _process(_delta: float) -> void:
+	GameState.pump_background_people(busy)
 
 func _ready() -> void:
 	DisplayServer.window_set_min_size(Vector2i(1280, 720))
@@ -35,6 +47,7 @@ func _ready() -> void:
 	add_child(workbench)
 	GameState.state_changed.connect(_refresh)
 	GameState.action_failed.connect(show_notice)
+	_build_people_window()
 	show_screen("front")
 	call_deferred("open_saves")
 
@@ -64,6 +77,7 @@ func _build_shell() -> void:
 	open_button = MidnightUI.button("存档簿", open_saves)
 	open_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	header.add_child(open_button)
+	header.add_child(MidnightUI.button("设置", open_network_settings))
 	var status_panel := MidnightUI.panel()
 	layout.add_child(status_panel)
 	resources = MidnightUI.label("打开存档簿，开始经营。", 18)
@@ -81,13 +95,24 @@ func _build_shell() -> void:
 	badge.autowrap_mode = TextServer.AUTOWRAP_OFF
 	badge.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	footer.add_child(badge)
+	provider_badge = badge
+	var navigation := HFlowContainer.new()
+	for page: String in PAGES:
+		var destination := page
+		navigation.add_child(MidnightUI.button(PAGES[page], func(): show_screen(destination)))
+	navigation.add_child(MidnightUI.button("候客与档案", open_people))
+	navigation.add_child(MidnightUI.button("取消等待回复", func(): GameState.cancel_dialogue()))
+	layout.add_child(navigation)
 
 func show_screen(which: String) -> void:
 	current_screen = which
 	if is_instance_valid(screen):
 		scene_holder.remove_child(screen)
 		screen.queue_free()
-	screen = (CONSULTATION if which == "consultation" else FRONT).instantiate()
+	if which in ["front", "consultation"]:
+		screen = (CONSULTATION if which == "consultation" else FRONT).instantiate()
+	else:
+		screen = load("res://scenes/shop/%s.tscn" % which).instantiate()
 	screen.set("host", self)
 	scene_holder.add_child(screen)
 	screen.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -97,7 +122,11 @@ func show_screen(which: String) -> void:
 
 func _refresh() -> void:
 	var snapshot: Dictionary = GameState.player_snapshot()
-	location.text = "一对一咨询" if current_screen == "consultation" else "店铺前台"
+	location.text = PAGES.get(current_screen, "店铺")
+	var mode: Dictionary = GameState.provider_status()
+	provider_badge.text = "在线对话" if mode.get("mode") == "online" else "离线对话 · 本地话题"
+	if is_instance_valid(people_panel):
+		people_panel.set_view(GameState.people_view())
 	if snapshot.is_empty():
 		resources.text = "尚未打开存档  ·  新建独立店铺，或继续已有记录"
 	else:
@@ -124,7 +153,7 @@ func run_action(action_type: String, extra: Dictionary = {}) -> Dictionary:
 	var snapshot: Dictionary = GameState.player_snapshot()
 	if not snapshot.is_empty():
 		action["expected_version"] = snapshot.get("state_version", 0)
-	show_notice("正在保存…")
+	show_notice("正在等对方回应…" if action_type == "talk" else "正在保存…")
 	var result: Dictionary = await GameState.execute_action_async(action)
 	busy = false
 	open_button.disabled = false
@@ -133,15 +162,164 @@ func run_action(action_type: String, extra: Dictionary = {}) -> Dictionary:
 		if action_type in ["new_game", "load_game"]:
 			save_window.hide()
 			show_screen("consultation" if not GameState.active_visit().is_empty() else "front")
-		elif action_type == "start_visit":
+		elif action_type in ["start_visit", "start_arrival"]:
 			show_screen("consultation")
+			people_window.hide()
 		elif action_type == "end_visit":
 			show_screen("front")
+		elif action_type == "delete_game":
+			if result.get("result",{}).get("active_deleted",false):
+				workbench.hide()
+				history_window.hide()
+				people_window.hide()
+				show_screen("front")
+			_refresh_saves()
+			save_note.text = str(result.message)
 	else:
 		if save_window.visible:
 			save_note.text = str(result.get("message", "无法读取，请检查存档。"))
 	_refresh()
 	return result
+
+func _build_people_window() -> void:
+	people_window = Window.new()
+	people_window.visible = false
+	people_window.title = "候客、预约与人物档案"
+	people_window.size = Vector2i(1040, 570)
+	people_window.transient = true
+	people_window.theme = theme
+	people_window.close_requested.connect(people_window.hide)
+	add_child(people_window)
+	people_panel = PEOPLE_PANEL.instantiate()
+	people_window.add_child(people_panel)
+	people_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	people_panel.start_requested.connect(func(id: String): await run_action("start_arrival", {"arrival_id": id}))
+	people_panel.wait_requested.connect(func(minutes: int): await run_action("wait", {"minutes": minutes}))
+	people_panel.appearance_requested.connect(func(appearance: Dictionary): await run_action("save_appearance", {"appearance": appearance}))
+	people_panel.book_requested.connect(_confirm_booking)
+	people_panel.evidence_requested.connect(func(_visit: String, _action: String): show_history())
+
+func _confirm_booking(arrival_id: String, minutes: int) -> void:
+	var dialog := ConfirmationDialog.new()
+	dialog.dialog_text = "与来客协商预约到明日同一时间？确认后将保留预约记录。"
+	dialog.ok_button_text = "确认预约"
+	dialog.get_cancel_button().text = "再想想"
+	dialog.confirmed.connect(func():
+		await run_action("book_arrival", {"arrival_id": arrival_id, "at": int(GameState.player_snapshot().get("clock_minutes", 0)) + minutes, "guest_agreed": true})
+		dialog.queue_free())
+	dialog.canceled.connect(dialog.queue_free)
+	people_window.add_child(dialog)
+	dialog.popup_centered()
+
+func open_people() -> void:
+	if GameState.player_snapshot().is_empty():
+		show_notice("请先打开存档。")
+		return
+	people_panel.set_view(GameState.people_view())
+	people_window.popup_centered()
+
+func confirm_return_visit() -> void:
+	var at := GameState.next_return_time()
+	if at <= 0:
+		show_notice("先聊一会儿，再商量下次见面的时间。")
+		return
+	var dialog := ConfirmationDialog.new()
+	dialog.dialog_text = "和来客约在第 %d 天 %02d:%02d 再聊？\n对方同意后，记下时间并结束这次接待。" % [floori(float(at)/1440.0)+1,(at%1440)/60,at%60]
+	dialog.ok_button_text = "对方同意，记下来"
+	dialog.get_cancel_button().text = "再聊一会儿"
+	dialog.confirmed.connect(func():
+		await run_action("end_visit",{"return_at":at,"guest_agreed":true})
+		dialog.queue_free())
+	dialog.canceled.connect(dialog.queue_free)
+	add_child(dialog)
+	dialog.popup_centered(Vector2i(620,200))
+
+func confirm_contact_invitation() -> void:
+	var invitation := GameState.contact_invitation()
+	if invitation.is_empty():
+		return
+	var dialog := ConfirmationDialog.new()
+	dialog.dialog_text = "请来客帮忙问问，%s是否愿意找个合适的时间来坐坐？" % invitation.name
+	dialog.ok_button_text = "来客同意帮忙介绍"
+	dialog.get_cancel_button().text = "暂时不打扰"
+	dialog.confirmed.connect(func():
+		await run_action("invite_contact",{"target_npc_id":invitation.npc_id,"guest_agreed":true})
+		dialog.queue_free())
+	dialog.canceled.connect(dialog.queue_free)
+	add_child(dialog)
+	dialog.popup_centered(Vector2i(620,200))
+
+func open_network_settings() -> void:
+	var dialog := ConfirmationDialog.new()
+	dialog.title = "设置"
+	dialog.dialog_hide_on_ok = false
+	dialog.size = Vector2i(660,445)
+	dialog.ok_button_text = "应用"
+	dialog.get_cancel_button().text = "取消"
+	var box := VBoxContainer.new()
+	box.custom_minimum_size = Vector2(600,340)
+	dialog.add_child(box)
+	var description := MidnightUI.label("填写 AI 接口信息。设置只在本次游戏中有效。",18)
+	description.autowrap_mode = TextServer.AUTOWRAP_OFF
+	box.add_child(description)
+	var address_label := MidnightUI.label("URL",18)
+	address_label.autowrap_mode = TextServer.AUTOWRAP_OFF
+	box.add_child(address_label)
+	var url := LineEdit.new()
+	url.name = "ApiUrl"
+	url.placeholder_text = "http(s)://地址[:端口]/v1"
+	var settings: Dictionary = GameState.connection_settings()
+	url.text = settings.url
+	box.add_child(url)
+	var url_note := MidnightUI.label("离开输入框时会自动检查并补全接口地址。",14,MidnightUI.MUTED)
+	url_note.name = "ApiUrlNote"
+	url_note.custom_minimum_size = Vector2(600,22)
+	box.add_child(url_note)
+	var check_url := func() -> bool:
+		var checked: Dictionary = GameState.preview_api_url(url.text)
+		if not checked.success:
+			url_note.text = checked.message
+			return false
+		var changed: bool = url.text != checked.url
+		url.text = checked.url
+		url_note.text = "留空可使用本地对话。" if checked.url.is_empty() else ("已补全接口地址。" if changed else "接口地址格式正确。")
+		return true
+	url.text_changed.connect(func(_text: String): url_note.text = "离开输入框时会自动检查并补全接口地址。")
+	url.focus_exited.connect(check_url)
+	var model_label := MidnightUI.label("模型名称",18)
+	model_label.autowrap_mode = TextServer.AUTOWRAP_OFF
+	box.add_child(model_label)
+	var model := LineEdit.new()
+	model.name = "ApiModel"
+	model.text = settings.model
+	box.add_child(model)
+	var token_label := MidnightUI.label("API Key",18)
+	token_label.autowrap_mode = TextServer.AUTOWRAP_OFF
+	box.add_child(token_label)
+	var token := LineEdit.new()
+	token.name = "ApiKey"
+	token.secret = true
+	token.placeholder_text = "已设置，留空可保留" if settings.key_set else ""
+	box.add_child(token)
+	dialog.confirmed.connect(func():
+		if not check_url.call():
+			return
+		var result: Dictionary = GameState.configure_api(url.text,model.text,token.text)
+		show_notice(result.message)
+		if result.success:
+			token.text = ""
+			dialog.queue_free()
+		else:
+			url_note.text = result.message
+			dialog.popup_centered())
+	dialog.add_button("使用本地对话",true,"offline")
+	dialog.custom_action.connect(func(action: StringName):
+		if action == "offline":
+			GameState.configure_api("","","")
+			dialog.queue_free())
+	dialog.canceled.connect(dialog.queue_free)
+	add_child(dialog)
+	dialog.popup_centered()
 
 func show_notice(message: String) -> void:
 	if is_instance_valid(notice):
@@ -182,6 +360,8 @@ func _build_save_window() -> void:
 	buttons.add_child(MidnightUI.button("继续所选存档", _load_selected))
 	buttons.add_child(MidnightUI.button("从备份恢复…", _confirm_backup))
 	buttons.add_child(MidnightUI.button("刷新", _refresh_saves))
+	delete_button = MidnightUI.button("删除所选存档…", _confirm_delete_save)
+	buttons.add_child(delete_button)
 	var create_row := HBoxContainer.new()
 	layout.add_child(create_row)
 	save_name = LineEdit.new()
@@ -198,6 +378,14 @@ func _build_save_window() -> void:
 	backup_confirm.cancel_button_text = "取消"
 	backup_confirm.confirmed.connect(func(): await _load_selected(true))
 	save_window.add_child(backup_confirm)
+	delete_confirm = ConfirmationDialog.new()
+	delete_confirm.visible = false
+	delete_confirm.title = "删除存档"
+	delete_confirm.ok_button_text = "删除存档"
+	delete_confirm.cancel_button_text = "取消"
+	delete_confirm.confirmed.connect(_delete_selected)
+	delete_confirm.canceled.connect(func(): _delete_target = "")
+	save_window.add_child(delete_confirm)
 
 func open_saves() -> void:
 	if busy:
@@ -208,6 +396,7 @@ func open_saves() -> void:
 func _refresh_saves() -> void:
 	save_entries = SaveService.list_saves()
 	save_list.clear()
+	delete_button.disabled = save_entries.is_empty()
 	for entry: Dictionary in save_entries:
 		var valid: bool = entry.get("valid", false)
 		var text: String = "%s  ·  版本 %d%s" % [str(entry.get("name", entry.get("save_id", "未知存档"))), int(entry.get("state_version", 0)), "" if valid else "  [需要检查]"]
@@ -245,6 +434,23 @@ func _confirm_backup() -> void:
 		save_note.text = "此存档没有可用备份，可新建独立存档继续。"
 		return
 	backup_confirm.popup_centered()
+
+func _confirm_delete_save() -> void:
+	var selected := save_list.get_selected_items()
+	if busy or selected.is_empty():
+		save_note.text = "请先选择要删除的存档。"
+		return
+	var entry: Dictionary = save_entries[selected[0]]
+	_delete_target = entry.save_id
+	delete_confirm.dialog_text = "删除“%s”？\n这家店的进度、备份和损坏副本都会删除，无法恢复。%s" % [str(entry.get("name","所选存档")).left(32),"\n当前正在使用这个存档。删除后将返回存档簿。" if GameState.player_snapshot().get("save_id","") == _delete_target else ""]
+	delete_confirm.popup_centered(Vector2i(600,220))
+	delete_confirm.get_cancel_button().grab_focus()
+
+func _delete_selected() -> void:
+	var save_id := _delete_target
+	_delete_target = ""
+	if not save_id.is_empty():
+		await run_action("delete_game", {"save_id":save_id})
 
 func _build_history_window() -> void:
 	history_window = Window.new()

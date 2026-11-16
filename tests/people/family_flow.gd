@@ -1,6 +1,7 @@
 extends SceneTree
 
 const People = preload("res://scripts/people/people.gd")
+const FixtureConfig = preload("res://tests/people/fixture_config.gd")
 var checks := 0
 var failures := 0
 
@@ -11,13 +12,13 @@ func check(condition: bool, label: String) -> void:
 		push_error("FAMILY FAIL: " + label)
 
 func _initialize() -> void:
-	var config := People.load_config()
+	var config := FixtureConfig.reference_family()
 	config.arrival.family_percent = 100
 	config.arrival.ordinary_return_percent = 0
 	config.arrival.special_return_percent = 0
 	var people := People.create("save_family", 77, 540)
 	People.plan_day(people, config, 0, 0, 1)
-	var family_id := "family_demo_family"
+	var family_id: String = people.families.keys()[0]
 	var family: Dictionary = people.families[family_id]
 	check(family.members.size() == 2 and family.members[0] == "npc_demo_ji", "B fixture identity is reused")
 	check(people.profiles[family.members[0]].birthday != people.profiles[family.members[1]].birthday and people.profiles[family.members[0]].generation == "同辈", "family members retain distinct profiles and generation")

@@ -242,23 +242,7 @@
     }
   },
   "guests": {
-    "npc_lin": {"source": "original", "profile_id": "bookbinder", "birth": "1996-03-14T06:40", "utc_offset_minutes": 480, "birthplace": "杭州", "latitude": 30.2741, "longitude": 120.1551},
-    "npc_demo_xu": {
-      "source": "original", "fixture": "ordinary", "name": "许雾桥", "role": "灯具修理师 · 普通来客样例", "coins": 150,
-      "opening": "我修一盏旧灯时发现了张借条。我想知道落款和我为什么这样熟悉。",
-      "profile_id": "ferryman", "birth": "1992-11-18T18:30", "utc_offset_minutes": 480, "birthplace": "苏州", "latitude": 31.2989, "longitude": 120.5853
-    },
-    "npc_demo_he": {
-      "source": "original", "fixture": "ordinary", "name": "何沿", "role": "钟表学徒 · 普通来客样例", "coins": 150,
-      "opening": "我在一只旧钟里发现了张借条。上面画着渡口，我总觉得见过它。",
-      "profile_id": "ferryman", "birth": "1994-09-09T17:20", "utc_offset_minutes": 480, "birthplace": "宁波", "latitude": 29.8683, "longitude": 121.544
-    },
-    "npc_demo_ji": {
-      "source": "reference", "fixture": "reference", "name": "纪寄棠", "role": "寄居旧宅的写诗人 · 作品参考样例", "coins": 150,
-      "reference_work": "《红楼梦》", "reference_character": "林黛玉",
-      "opening": "寄居时读过的书，我都留过记号。这张花笺却像是别人夹进来的。",
-      "profile_id": "gardener", "birth": "1997-04-07T07:10", "utc_offset_minutes": 480, "birthplace": "绍兴", "latitude": 30.0303, "longitude": 120.5802
-    }
+    "npc_lin": {"source": "original", "profile_id": "bookbinder", "birth": "1996-03-14T06:40", "utc_offset_minutes": 480, "birthplace": "杭州", "latitude": 30.2741, "longitude": 120.1551}
   },
   "past_profiles": {
     "bookbinder": {

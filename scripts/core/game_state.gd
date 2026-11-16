@@ -10,6 +10,23 @@ const DivinationCatalog = preload("res://scripts/divination/catalog.gd")
 const DivinationSession = preload("res://scripts/divination/session.gd")
 const DivinationView = preload("res://scripts/divination/case_view.gd")
 const DivinationEvents = preload("res://scripts/divination/event_rules.gd")
+const Shop = preload("res://scripts/shop/shop.gd")
+const PeopleBridge = preload("res://scripts/shop/people_bridge.gd")
+const People = preload("res://scripts/people/people.gd")
+const Memory = preload("res://scripts/people/memory.gd")
+const HttpProvider = preload("res://scripts/providers/http_dialogue_provider.gd")
+const ApiEndpoint = preload("res://scripts/providers/api_endpoint.gd")
+const DialoguePolicy = preload("res://scripts/providers/dialogue_policy.gd")
+const PersonProvider = preload("res://scripts/providers/http_person_provider.gd")
+const GeneratedPerson = preload("res://scripts/people/generated_person.gd")
+const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
+const SHOP_ACTIONS := ["procure_item", "receive_material_gift", "gather_material", "sell_material", "register_demand", "research_recipe", "craft_item", "sell_product", "use_product", "review_case"]
+const PEOPLE_ACTIONS := ["book_arrival", "save_appearance", "wait", "invite_contact"]
+var shop_config: Dictionary = {}
+var people_config: Dictionary = {}
+var _api_url := ""
+var _api_model := ""
+var _api_key := ""
 
 var state: Dictionary = {}
 var content: Dictionary = {}
@@ -17,6 +34,22 @@ var content_error: String = ""
 var dialogue_provider: RefCounted
 var _divination: DivinationSession
 var _provider_pending: bool = false
+var people_generator: RefCounted
+var _generation_enabled := true
+var _generation_concurrency := 2
+var _generation_epoch := 0
+var _generation_jobs: Dictionary = {}
+var _generation_ready: Array = []
+var _generation_notice := ""
+var _generation_retry_at := 0
+var _generation_network_retry_at := 0
+var _generation_attempts: Dictionary = {}
+var _generation_sequence := 0
+var _generation_last_pump := 0
+var _gateway_url := ""
+var _gateway_token := ""
+var generation_config: Dictionary = {"enabled":true,"concurrency":2,"ready_target":6,"new_people_per_day":8,"max_attempts_per_day":16,"min_lead_minutes":30,"arrival_spacing_minutes":30}
+var _generation_role_hints: Array = ["小剧场道具师","自行车修理师","社区厨房主理人","夜校教师","园艺师","木工学徒","公交司机","自由插画师"]
 
 func _ready() -> void:
 	var loaded: Dictionary = ContentLoader.load_content()
@@ -33,6 +66,32 @@ func _ready() -> void:
 	_divination = DivinationSession.new(catalog, content)
 	dialogue_provider = MockProvider.new()
 	dialogue_provider.configure(catalog.topics + content.topics)
+	shop_config = Shop.load_config()
+	people_config = People.load_config()
+	var generation_json := JSON.new()
+	if generation_json.parse(FileAccess.get_file_as_string("res://data/people/generation.json")) == OK and generation_json.data is Dictionary:
+		var configured: Dictionary = generation_json.data
+		if configured.get("role_hints") is Array and not configured.role_hints.is_empty() and configured.role_hints.size() <= 30 and configured.role_hints.all(func(value: Variant) -> bool: return value is String and not value.is_empty() and value.length() <= 24):
+			_generation_role_hints = configured.role_hints.duplicate()
+		if configured.get("enabled") is bool and (configured.get("concurrency") is float or configured.get("concurrency") is int):
+			generation_config.enabled = configured.get("enabled",true)
+			for field: String in ["concurrency","ready_target","new_people_per_day","max_attempts_per_day","min_lead_minutes","arrival_spacing_minutes"]:
+				if configured.get(field) is float or configured.get(field) is int:
+					generation_config[field] = int(configured[field])
+	generation_config.concurrency = clampi(int(generation_config.concurrency),1,3)
+	generation_config.ready_target = clampi(int(generation_config.ready_target),1,12)
+	generation_config.new_people_per_day = clampi(int(generation_config.new_people_per_day),1,20)
+	generation_config.max_attempts_per_day = clampi(int(generation_config.max_attempts_per_day),1,40)
+	generation_config.min_lead_minutes = clampi(int(generation_config.min_lead_minutes),15,180)
+	generation_config.arrival_spacing_minutes = clampi(int(generation_config.arrival_spacing_minutes),15,120)
+	_generation_enabled = generation_config.enabled
+	_generation_concurrency = generation_config.concurrency
+	if not OS.get_environment("MAGIC_GATEWAY_URL").is_empty():
+		_gateway_url = OS.get_environment("MAGIC_GATEWAY_URL")
+		_gateway_token = OS.get_environment("MAGIC_GATEWAY_TOKEN")
+		dialogue_provider = HttpProvider.new()
+		dialogue_provider.configure(self, catalog.topics + content.topics)
+	_reset_people_generator()
 
 ## Engine and verification snapshot. UI must use player_snapshot and divination_view.
 func snapshot() -> Dictionary:
@@ -42,13 +101,306 @@ func player_snapshot() -> Dictionary:
 	var visible := state.duplicate(false)
 	visible.erase("divination")
 	visible.erase("processed_actions")
+	visible.erase("people")
 	return visible.duplicate(true)
+
+func people_view() -> Dictionary:
+	return PeopleBridge.public_view(state) if not state.is_empty() else {}
+
+func contact_invitation() -> Dictionary:
+	return PeopleBridge.contact_invitation(state,people_config) if not state.is_empty() else {}
+
+func shop_view() -> Dictionary:
+	return Shop.view(state, shop_config) if not state.is_empty() else {}
+
+func provider_status() -> Dictionary:
+	return dialogue_provider.status() if dialogue_provider.has_method("status") else {"mode": "offline", "reason": "本地对话"}
+
+func configure_network(url: String, token: String) -> void:
+	cancel_dialogue()
+	_api_url = ""
+	_api_model = ""
+	_api_key = ""
+	_gateway_url = url.strip_edges()
+	_gateway_token = token
+	if url.strip_edges().is_empty():
+		dialogue_provider = MockProvider.new()
+		dialogue_provider.configure(_divination.data.topics + content.topics)
+	else:
+		dialogue_provider = HttpProvider.new()
+		dialogue_provider.configure(self, _divination.data.topics + content.topics, url, token)
+	_reset_people_generator()
+	state_changed.emit()
+
+func connection_settings() -> Dictionary:
+	return {"url":_api_url,"model":_api_model,"key_set":not _api_key.is_empty()}
+
+func preview_api_url(url: String) -> Dictionary:
+	return ApiEndpoint.normalize_chat_url(url)
+
+func configure_api(url: String, model: String, api_key: String) -> Dictionary:
+	var normalized := preview_api_url(url)
+	if not normalized.success:
+		return normalized
+	url = normalized.url
+	model = model.strip_edges().trim_suffix("\\").strip_edges()
+	for suffix: String in ["（推荐）","(推荐)","（recommended）","(recommended)"]:
+		model = model.trim_suffix(suffix).strip_edges()
+	api_key = api_key.strip_edges()
+	if model.contains("\n") or model.contains("\r") or api_key.contains("\n") or api_key.contains("\r") or url.contains("\n") or url.contains("\r") or url.contains(" ") or url.contains("@") or url.contains("?") or url.contains("#"):
+		return {"success":false,"message":"接口地址、模型名称和密钥中不能夹带换行或额外内容。"}
+	if not url.is_empty() and (model.is_empty() or (api_key.is_empty() and (_api_key.is_empty() or url != _api_url))):
+		return {"success":false,"message":"请填写模型名称和 API Key。"}
+	cancel_dialogue()
+	_api_key = api_key if not api_key.is_empty() else (_api_key if url == _api_url else "")
+	_api_url = url
+	_api_model = model
+	if url.is_empty():
+		_api_key = ""
+		configure_network("", "")
+	else:
+		_gateway_url = ""
+		_gateway_token = ""
+		dialogue_provider = HttpProvider.new()
+		dialogue_provider.configure_api(self,_divination.data.topics + content.topics,url,model,_api_key)
+		_reset_people_generator()
+		state_changed.emit()
+	return {"success":true,"message":"设置好了。"}
+
+func people_generation_settings() -> Dictionary:
+	return {"enabled":_generation_enabled,"concurrency":_generation_concurrency}
+
+func set_people_generation_options(enabled: bool, concurrency: int = 2) -> void:
+	_generation_enabled = enabled
+	_generation_concurrency = clampi(concurrency, 1, 3)
+	_reset_people_generator()
+	state_changed.emit()
+
+func _reset_people_generator() -> void:
+	_generation_epoch += 1
+	if people_generator != null:
+		if people_generator.has_method("shutdown"):
+			people_generator.shutdown()
+		else:
+			people_generator.cancel_all()
+	people_generator = null
+	_generation_jobs.clear()
+	_generation_ready.clear()
+	_generation_retry_at = 0
+	_generation_network_retry_at = 0
+	_generation_notice = ""
+	if not _generation_enabled:
+		return
+	if _api_url.is_empty() and _gateway_url.is_empty():
+		return
+	people_generator = PersonProvider.new()
+	if not _api_url.is_empty():
+		people_generator.configure(self,_api_url,_api_model,_api_key,_generation_concurrency)
+	else:
+		people_generator.configure_gateway(self,_gateway_url,_gateway_token,_generation_concurrency)
+	people_generator.job_ready.connect(_person_ready)
+	people_generator.job_failed.connect(_person_failed)
+
+func people_generation_status() -> Dictionary:
+	var ready_count := 0
+	var upcoming := {}
+	for arrival: Dictionary in state.get("people",{}).get("arrivals",{}).values():
+		if arrival.get("state") in ["planned","queued","in_service"]:
+			upcoming[arrival.npc_id] = true
+	for profile: Dictionary in state.get("people",{}).get("profiles",{}).values():
+		if profile.get("generation_member") == "person" and not profile.get("met",false) and upcoming.has(profile.npc_id):
+			ready_count += 1
+	return {"enabled":_generation_enabled,"configured":people_generator != null,"pending":_generation_jobs.size(),"ready":ready_count,
+		"awaiting_commit":_generation_ready.size(),"concurrency":_generation_concurrency,"notice":_generation_notice}
+
+func _person_ready(job_id: String, token: String, bundle: Dictionary, provenance: Dictionary) -> void:
+	if not _generation_jobs.has(job_id) or _generation_jobs[job_id].token != token:
+		return
+	_generation_ready.append({"job_id":job_id,"token":token,"bundle":bundle.duplicate(true),"provenance":provenance.duplicate(true)})
+
+func _person_failed(job_id: String, token: String, code: String) -> void:
+	if not _generation_jobs.has(job_id) or _generation_jobs[job_id].token != token:
+		return
+	_generation_jobs.erase(job_id)
+	# A rejected setting is not a rate-limit or an outage. Discard that draft
+	# and refill its slot promptly with a new job, within the daily attempt
+	# budget. Existing network backoff must not be shortened by a later veto.
+	var delay := 1000 if code in ["INVALID_BUNDLE","REVIEW_REJECTED","ADMISSION_REJECTED","INVALID_RESPONSE"] else 30000
+	_generation_network_retry_at = maxi(_generation_network_retry_at,Time.get_ticks_msec()+delay)
+	_generation_notice = "新来客还没准备好，稍后再试。现有来客照常接待。"
+
+func pump_background_people(ui_busy: bool = false, force: bool = false) -> void:
+	# The main UI calls this heartbeat; headless rule tests never start network
+	# work implicitly. Job results wait until no foreground action is committing.
+	if people_generator == null or state.is_empty():
+		return
+	var now := Time.get_ticks_msec()
+	var foreground := ui_busy or _provider_pending
+	people_generator.set_dialogue_busy(foreground)
+	if not force and now - _generation_last_pump < 250:
+		return
+	_generation_last_pump = now
+	if foreground:
+		return
+	if not _generation_ready.is_empty() and now >= _generation_retry_at:
+		_admit_next_person()
+	if now < _generation_retry_at:
+		return
+	if now < _generation_network_retry_at:
+		return
+	var status := people_generation_status()
+	var desired := int(generation_config.ready_target) - int(status.ready) - _generation_jobs.size()
+	var planned_today := 0
+	var day := floori(float(state.clock_minutes) / 1440.0)
+	for row: Dictionary in state.people.get("generated_people",{}).values():
+		if floori(float(row.get("created_at",row.get("at",0))) / 1440.0) == day:
+			planned_today += 1
+	desired = mini(desired, int(generation_config.new_people_per_day) - planned_today - _generation_jobs.size())
+	var attempt_key := "%s:%d" % [state.save_id,day]
+	desired = mini(desired,int(generation_config.max_attempts_per_day)-int(_generation_attempts.get(attempt_key,0)))
+	for index in range(maxi(0,desired)):
+		var job_id := make_id("person")
+		var token := "%s:%d" % [state.save_id,_generation_epoch]
+		var avoid_names: Array = []
+		for profile: Dictionary in state.people.profiles.values():
+			avoid_names.append(str(profile.name))
+		var themes := ["日常工作里的一个取舍", "邻里之间的一次小约定", "搬家整理时放不下的一件事", "想和熟人商量却迟迟没开口的事"]
+		var theme: String = themes[_generation_sequence % themes.size()]
+		var role_hint: String = _generation_role_hints[_generation_sequence % _generation_role_hints.size()]
+		var context := {"generation_id":job_id,"avoid_names":avoid_names,"theme_hint":"%s。职业可以参考%s或相近工作，写出这一行自己的日常细节，不要统一成快递驿站或旧友写信。" % [theme,role_hint]}
+		_generation_jobs[job_id] = {"token":token,"save_id":state.save_id}
+		if not people_generator.enqueue(job_id,context,token):
+			_generation_jobs.erase(job_id)
+		else:
+			_generation_attempts[attempt_key] = int(_generation_attempts.get(attempt_key,0))+1
+			_generation_sequence += 1
+
+func _admit_next_person() -> void:
+	var row: Dictionary = _generation_ready[0]
+	if not _generation_jobs.has(row.job_id) or _generation_jobs[row.job_id].token != row.token or _generation_jobs[row.job_id].save_id != state.save_id:
+		_generation_ready.pop_front()
+		return
+	var preferred := int(state.clock_minutes) + int(generation_config.min_lead_minutes)
+	for arrival: Dictionary in state.people.arrivals.values():
+		if arrival.get("source") == "generated" and int(arrival.get("at",0)) >= int(state.clock_minutes):
+			preferred = maxi(preferred,int(arrival.at)+int(generation_config.arrival_spacing_minutes))
+	var at: int = People.next_available_arrival(state.people,people_config,preferred)
+	if at <= 0:
+		_generation_retry_at = Time.get_ticks_msec()+30000
+		return
+	var candidate := state.duplicate(true)
+	var applied: Dictionary = GeneratedPerson.apply(candidate.people,people_config,row.job_id,row.bundle,row.provenance,at)
+	if not applied.get("success",false):
+		_generation_ready.pop_front()
+		_person_failed(row.job_id,row.token,"ADMISSION_REJECTED")
+		return
+	var action := {"type":"admit_generated_person","action_id":"admit_" + str(row.job_id)}
+	var committed := _commit(candidate,action,"一位新来客已经约好到店时间。",applied)
+	if not committed.success:
+		_generation_retry_at = Time.get_ticks_msec() + 3000
+		_generation_notice = "新来客尚未保存，稍后重试；店铺进度没有改变。"
+		return
+	_generation_ready.pop_front()
+	_generation_jobs.erase(row.job_id)
+	_generation_notice = "新来客已经约好到店时间，可以在候客簿中留意。"
+	_sync_generated_catalog()
+
+func _sync_generated_catalog() -> void:
+	if _divination == null:
+		return
+	_divination.sync_generated(state)
+	var topics: Array = _divination.data.topics + content.topics
+	if dialogue_provider.has_method("update_topics"):
+		dialogue_provider.update_topics(topics)
+	elif dialogue_provider is MockProvider:
+		dialogue_provider.configure(topics)
+
+func ledger_view() -> Array:
+	return (state.get("shop", {}).get("ledger", []) + state.get("divination", {}).get("ledger", [])).duplicate(true)
+
+func cancel_dialogue() -> void:
+	if dialogue_provider.has_method("cancel"):
+		dialogue_provider.cancel()
 
 func divination_view(visit_id: String = "") -> Dictionary:
 	for visit: Dictionary in state.get("visits", []):
 		if visit.visit_id == (state.active_visit_id if visit_id.is_empty() else visit_id):
 			return DivinationView.project(_divination, state, visit)
 	return {}
+
+## Player-facing next questions. Model text stays with its successful dialogue
+## action and visit; newly unlocked directions can fill any remaining buttons.
+func conversation_questions() -> Array:
+	var visit := active_visit()
+	if visit.is_empty():
+		return []
+	var case: Dictionary = state.divination.cases[visit.visit_id]
+	var context := _question_context(state,visit)
+	var generated: Array = DialoguePolicy.parse_questions(visit.get("followup_questions",[]),context)
+	var result: Array = []
+	var seen := {}
+	for row: Dictionary in generated:
+		result.append({"topic_id":row.topic_id,"label":row.text,"enabled":true,"generated":true})
+		seen[row.topic_id] = true
+	var latest: Dictionary = state.processed_actions.get(visit.get("followup_action_id",""),{}).get("result",{})
+	for row: Dictionary in context.question_topics:
+		var topic: Dictionary = _divination.data.topic_index[row.topic_id]
+		if topic.get("requires_clue","") in latest.get("clue_ids",[]) and not seen.has(row.topic_id):
+			if result.size() >= 3:
+				seen.erase(result.pop_back().topic_id)
+			result.push_front({"topic_id":row.topic_id,"label":_question_label(row.label),"enabled":true,"generated":false})
+			seen[row.topic_id] = true
+			break
+	var talked := {}
+	for turn: Dictionary in case.conversation:
+		talked[turn.intent] = true
+	var local: Array = context.question_topics.duplicate(true)
+	local.sort_custom(func(left: Dictionary,right: Dictionary) -> bool:
+		var left_score := (10 if talked.has(left.topic_id) else 0) + (1 if left.topic_id.contains("birth") else 0)
+		var right_score := (10 if talked.has(right.topic_id) else 0) + (1 if right.topic_id.contains("birth") else 0)
+		return left_score < right_score)
+	for row: Dictionary in local:
+		if result.size() >= 3:
+			break
+		if not seen.has(row.topic_id):
+			result.append({"topic_id":row.topic_id,"label":_question_label(row.label),"enabled":true,"generated":false})
+			seen[row.topic_id] = true
+	return result
+
+func _question_label(label: String) -> String:
+	if label == "核对侧门告示":
+		return "能核对下入口告示吗？"
+	if label == "征求出生资料":
+		return "方便说说出生时间地点吗？"
+	if label == "你提到的这位熟人，能聊聊吗？":
+		return "能聊聊这位熟人吗？"
+	if label == "你最放不下的是哪一处？":
+		return "你最放不下什么？"
+	if label == "能说说具体的经过吗？":
+		return "能说说经过吗？"
+	if label == "有没有能核对的依据？":
+		return "有依据能核对吗？"
+	return label
+
+func _question_context(snapshot_state: Dictionary, visit: Dictionary) -> Dictionary:
+	var case: Dictionary = snapshot_state.divination.cases[visit.visit_id]
+	var allowed: Dictionary = _divination.talks(visit,case,int(snapshot_state.clock_minutes))
+	var choices: Array = []
+	for id: String in _divination.data.cases[case.case_id].topic_ids:
+		if allowed.has(id):
+			choices.append({"topic_id":id,"label":str(_divination.data.topic_index[id].label)})
+	var sources: Array = []
+	var same_person: Array = snapshot_state.visits.filter(func(row: Dictionary) -> bool: return row.npc_id == visit.npc_id).slice(-5)
+	for previous: Dictionary in same_person:
+		for turn: Dictionary in previous.dialogue.slice(-20):
+			if turn.speaker == "npc":
+				sources.append({"source_id":"known_statement_"+str(sources.size()),"text":str(turn.text),"kind":"statement"})
+		for clue: String in previous.clue_ids:
+			if _divination.data.clues.has(clue):
+				sources.append({"source_id":"known_clue_"+clue,"text":str(_divination.data.clues[clue].text),"kind":"clue"})
+	var guardrails: Array = ["替你留了靠窗的位置","侧门","临时入口告示","另一处档案柜编号"]
+	guardrails.append_array(GeneratedCases.private_anchors(case))
+	return {"question_topics":choices,"sources":sources,"_guardrails":guardrails}
 
 func divination_study() -> Array:
 	return DivinationView.study(_divination, state)
@@ -112,9 +464,15 @@ func execute_action_async(action: Dictionary) -> Dictionary:
 		return prepared
 	var version: int = int(state.state_version)
 	var save_id: String = state.save_id
+	prepared.request["action_id"] = action.action_id
+	prepared.request["request_id"] = make_id("request")
 	_provider_pending = true
+	if people_generator != null:
+		people_generator.set_dialogue_busy(true)
 	var response: Variant = await dialogue_provider.request_reply(prepared.request)
 	_provider_pending = false
+	if people_generator != null:
+		people_generator.set_dialogue_busy(false)
 	if state.is_empty() or state.save_id != save_id or state.state_version != version:
 		return _fail("STALE_VERSION", "对话期间状态已变化，请重新发送。")
 	return _complete_talk(action, prepared.input_text, response)
@@ -132,6 +490,8 @@ func execute_action(action: Dictionary) -> Dictionary:
 			return _new_game(action)
 		"load_game":
 			return _load_game(action)
+		"delete_game":
+			return _delete_game(action)
 	var preliminary: Dictionary = _preflight(action)
 	if not preliminary.is_empty():
 		return preliminary
@@ -153,6 +513,18 @@ func execute_action(action: Dictionary) -> Dictionary:
 			return _next_day(action)
 	if action.type in DivinationSession.ACTIONS:
 		return _divination_action(action)
+	if action.type == "start_arrival":
+		var candidate := state.duplicate(true)
+		var proposal := action.duplicate(true)
+		proposal["visit_id"] = make_id("visit")
+		var outcome: Dictionary = PeopleBridge.start(candidate, proposal, _divination)
+		if not outcome.success:
+			return _fail(outcome.error_code, outcome.message)
+		return _commit(candidate, action, outcome.message, outcome.result)
+	if action.type in SHOP_ACTIONS or action.type in PEOPLE_ACTIONS:
+		return _shop_action(action)
+	if action.type == "use_unlocked_option":
+		return _use_unlocked_option(action)
 	return _fail("UNKNOWN_ACTION", "不支持此动作。")
 
 func _preflight(action: Dictionary) -> Dictionary:
@@ -206,10 +578,14 @@ func _new_game(action: Dictionary) -> Dictionary:
 		"processed_actions": {}
 	}
 	_divination.initialize(candidate)
+	_initialize_integrated(candidate)
+	candidate = SaveService._normalize_numbers(candidate)
 	var saved: Dictionary = SaveService.write_save(candidate)
 	if not saved.success:
 		return _fail(saved.get("error_code", "SAVE_FAILED"), "新建失败，原存档仍保留。" + saved.get("message", ""))
 	state = candidate
+	_sync_generated_catalog()
+	_reset_people_generator()
 	state_changed.emit()
 	return _ok("新店铺已保存。", {"save_id": state.save_id})
 
@@ -222,10 +598,29 @@ func _load_game(action: Dictionary) -> Dictionary:
 		failure["backup_available"] = loaded.get("backup_available", false)
 		return failure
 	state = loaded.state.duplicate(true)
+	_divination.sync_generated(state)
 	if int(state.schema_version) == 1:
 		_divination.initialize(state)
+	_initialize_integrated(state)
+	state = SaveService._normalize_numbers(state)
+	_sync_generated_catalog()
+	_reset_people_generator()
 	state_changed.emit()
 	return _ok(loaded.get("message", "存档已载入。"), {"save_id": state.save_id})
+
+func _delete_game(action: Dictionary) -> Dictionary:
+	if not action.get("save_id") is String:
+		return _fail("INVALID_SAVE_ID", "请先选择要删除的存档。")
+	var was_active: bool = state.get("save_id", "") == action.save_id
+	var deleted: Dictionary = SaveService.delete_save(action.save_id)
+	if not deleted.success:
+		return _fail(deleted.error_code, deleted.message)
+	if was_active:
+		state = {}
+		_sync_generated_catalog()
+		_reset_people_generator()
+		state_changed.emit()
+	return _ok(deleted.message, {"deleted_save_id":action.save_id,"active_deleted":was_active,"cleanup_pending":deleted.get("cleanup_pending",false)})
 
 func _start_visit(action: Dictionary) -> Dictionary:
 	var npc_id: Variant = action.get("npc_id", content.npc.npc_id)
@@ -253,6 +648,7 @@ func _start_visit(action: Dictionary) -> Dictionary:
 	candidate.active_visit_id = visit.visit_id
 	if not _divination.add_case(candidate, visit, case_id):
 		return _fail("CASE_INVALID", "无法建立这位来客的案例。")
+	PeopleBridge.register_legacy_visit(candidate, visit, _divination)
 	return _commit(candidate, action, "接待已开始并保存。", {"visit_id": visit.visit_id})
 
 func _prepare_talk(action: Dictionary) -> Dictionary:
@@ -284,22 +680,89 @@ func _prepare_talk(action: Dictionary) -> Dictionary:
 	for previous: Dictionary in state.visits:
 		if previous.phase == "ended" and previous.npc_id == visit.npc_id:
 			history.append({"visit_id": previous.visit_id, "day": previous.day, "dialogue": previous.dialogue.duplicate(true), "clue_ids": previous.clue_ids.duplicate()})
-	return {"success": true, "input_text": input_text, "request": {
+	history = history.slice(-5)
+	var request := {
 		"npc": _divination.guest_view(visit.npc_id, case.case_id, case.get("public_npc", {})), "visit_id": visit.visit_id, "case_id": case.case_id,
 		"visible_history": history, "current_dialogue": visit.dialogue.duplicate(true),
 		"input_text": input_text, "topic_id": topic_id, "allowed_intents": allowed.keys(),
 		"allowed_clue_ids": clues, "allowed_branch_ids": branches, "allowed_effects": allowed
-	}}
+	}
+	if state.get("people", {}).get("profiles", {}).has(visit.npc_id):
+		request["known_memories"] = Memory.dialogue_context(state.people, visit.npc_id, 16)
+		var persona := People.model_persona(state.people, visit.npc_id)
+		request.npc.merge({"personality": persona.get("personality", ""), "speech_style": persona.get("speech_style", "")})
+		var profile: Dictionary = state.people.profiles[visit.npc_id]
+		request["relationship"] = {"familiarity":int(profile.familiarity),"trust":int(profile.trust)}
+	if visit.npc_id == "npc_lin" and str(request.npc.get("speech_style", "")).is_empty():
+		request.npc["speech_style"] = "说话温和，有点迟疑，愿意听人慢慢问。谈到旧书时更自在，谈到那位朋友时会斟酌措辞。用平常的口语，不堆神秘学术语。"
+	request["safe_persona"] = {}
+	for field: String in ["name","role","personality","speech_style"]:
+		request.safe_persona[field] = str(request.npc.get(field,""))
+	# UI labels may include developer annotations; they are not the NPC's job title.
+	request.safe_persona.role = str(request.safe_persona.role).split(" · ")[0]
+	var sources: Array = []
+	var generated_profile: Dictionary = state.get("people",{}).get("profiles",{}).get(visit.npc_id,{})
+	if generated_profile.has("generation_id"):
+		# Only approved public biographical fields enter dialogue. The complete
+		# creation package also holds private case facts and must stay local.
+		for field: String in ["background","preferences"]:
+			var value: Variant = generated_profile.get(field,"")
+			var text: String = "、".join(value) if value is Array else str(value)
+			if not text.is_empty():
+				sources.append({"source_id":"profile:" + field,"kind":"persona","text":text,"certainty":"approved_public_profile","audience":"both"})
+	if visit.npc_id == "npc_lin":
+		sources.append({"source_id":"knowledge:book_repair","kind":"persona","text":"受潮的纸张处理时要轻一些，用力容易使纸页破损。纸页通常需要一张张慢慢晾干，急不得。这是旧书修复的一般经验，不代表本案那本书已经裂开或被揭开过。","certainty":"general_professional_knowledge","audience":"both"})
+	var shared_clues := {}
+	for previous: Dictionary in state.visits:
+		if previous.npc_id != visit.npc_id:
+			continue
+		for id: String in previous.clue_ids:
+			shared_clues[id] = true
+	for id: String in shared_clues:
+		var clue: Dictionary = _divination.data.clues.get(id,{})
+		if not clue.is_empty():
+			sources.append({"source_id":"clue:" + id,"kind":"clue","text":str(clue.text),"certainty":"disclosed_clue","audience":"both"})
+	for previous: Dictionary in history:
+		var turns: Array = previous.dialogue
+		for index: int in range(maxi(0,turns.size()-12),turns.size()):
+			if turns[index].speaker == "npc":
+				sources.append({"source_id":"history:%s:%d" % [previous.visit_id,index],"kind":"history","text":str(turns[index].text).left(600),"certainty":"character_statement","audience":"both"})
+	for memory: Dictionary in request.get("known_memories",[]):
+		if memory.get("audience") == "both":
+			sources.append({"source_id":"memory:" + str(memory.memory_id),"kind":memory.kind,"topic_id":str(memory.get("topic_id","")),"text":str(memory.text),"certainty":"shared_statement" if memory.kind in ["statement","prediction"] else "disclosed_report","audience":"both"})
+	for index: int in range(maxi(0,visit.dialogue.size()-20),visit.dialogue.size()):
+		if visit.dialogue[index].speaker == "npc":
+			sources.append({"source_id":"history:%s:%d" % [visit.visit_id,index],"kind":"statement","text":str(visit.dialogue[index].text).left(600),"certainty":"character_statement","audience":"both"})
+	request["dialogue_sources"] = sources
+	if _divination.data.cases[case.case_id].get("generated",false):
+		# Only our trusted gateway sees this catalog. Its classifier sees labels,
+		# and only the selected authorized topic reaches the dialogue generator.
+		var custom: Array = []
+		for topic: Dictionary in _divination.data.topics:
+			if allowed.has(topic.topic_id):
+				var row := {}
+				for field: String in ["topic_id","label","reply_text","keywords","clue_ids","branch_id"]:
+					if topic.has(field):
+						row[field] = topic[field]
+				custom.append(row)
+		request["custom_topics"] = custom
+	# These anchors are local-only rejection rules, never prompt content. A selected
+	# topic can authorize the same wording; unknown clues cannot be volunteered.
+	request["private_guardrails"] = ["替你留了靠窗的位置", "侧门", "临时入口告示", "另一处档案柜编号"]
+	request.private_guardrails.append_array(GeneratedCases.private_anchors(case))
+	return {"success": true, "input_text": input_text, "request": request}
 
 func _complete_talk(action: Dictionary, input_text: String, response: Variant) -> Dictionary:
 	if not response is Dictionary or not response.get("reply_text") is String or not response.get("intent") is String or not response.get("clue_ids") is Array or not response.get("needs_clarification") is bool or not response.get("error_code") is String:
 		return _fail("PROVIDER_INVALID", "对话返回格式无效，未消耗时间。")
 	if not response.error_code.is_empty():
-		return _fail("PROVIDER_ERROR", "开发对话未能完成，未消耗时间。")
+		if response.error_code == "CANCELLED":
+			return _fail("CANCELLED", "已取消这次对话，未消耗时间。")
+		return _fail("PROVIDER_ERROR", "对话未能完成，未消耗时间。")
 	if response.reply_text.is_empty() or response.reply_text.length() > 4000:
 		return _fail("PROVIDER_INVALID", "对话文本长度无效。")
 	for key in response:
-		if not key in ["reply_text", "intent", "clue_ids", "needs_clarification", "error_code", "branch_id"]:
+		if not key in ["reply_text", "intent", "clue_ids", "needs_clarification", "error_code", "branch_id", "followup_questions"]:
 			return _fail("PROVIDER_INVALID", "对话返回了案例契约之外的提案。")
 	var active := active_visit()
 	var case: Dictionary = state.divination.cases[active.visit_id]
@@ -324,13 +787,23 @@ func _complete_talk(action: Dictionary, input_text: String, response: Variant) -
 	visit.dialogue.append({"speaker": "player", "text": input_text})
 	visit.dialogue.append({"speaker": "npc", "text": response.reply_text})
 	_divination.record_talk(candidate, visit, action, response, new_clues)
+	PeopleBridge.record_talk(candidate, visit, action, response)
+	PeopleBridge.observe(candidate, action, "question", response.intent, allowed.keys())
 	_advance(candidate, int(content.rules.talk_minutes))
+	var questions: Array = DialoguePolicy.parse_questions(response.get("followup_questions",[]),_question_context(candidate,visit))
+	visit["followup_questions"] = questions
+	visit["followup_action_id"] = action.action_id
 	var message: String = "交谈已保存。" if new_clues.is_empty() else "获得新线索，交谈已保存。"
-	return _commit(candidate, action, message, {"visit_id": visit.visit_id, "reply_text": response.reply_text, "clue_ids": new_clues, "intent": response.intent, "branch_id": branch, "needs_clarification": response.needs_clarification})
+	return _commit(candidate, action, message, {"visit_id": visit.visit_id, "reply_text": response.reply_text, "clue_ids": new_clues, "intent": response.intent, "branch_id": branch, "needs_clarification": response.needs_clarification,"followup_questions":questions})
 
 func _divination_action(action: Dictionary) -> Dictionary:
 	var candidate: Dictionary = state.duplicate(true)
 	var visit: Dictionary = _candidate_visit(candidate)
+	if action.type == "give_advice" and not visit.is_empty():
+		var case: Dictionary = candidate.divination.cases[visit.visit_id]
+		PeopleBridge.observe(candidate, action, "advice", str(action.get("advice_key", "")), _divination.data.cases[case.case_id].get("event", {}).get("advice", {}).keys())
+	elif action.type == "quote_service":
+		PeopleBridge.observe(candidate, action, "service", str(action.get("method_id", "")), _divination.data.methods.keys())
 	var outcome := _divination.handle(candidate, visit, action)
 	if not outcome.success:
 		return _fail(outcome.error_code, outcome.message)
@@ -340,13 +813,36 @@ func _divination_action(action: Dictionary) -> Dictionary:
 func _end_visit(action: Dictionary) -> Dictionary:
 	if active_visit().is_empty():
 		return _fail("NO_VISIT", "没有正在进行的接待。")
+	if action.has("return_at") and (not action.get("guest_agreed",false) is bool or not action.get("guest_agreed",false) or not People._integer(action.return_at, int(state.clock_minutes)+1,2147483647) or next_return_time() == 0):
+		return _fail("RETURN_NOT_AGREED", "请先交谈，并与来客确认合适的回访时间。")
 	var candidate: Dictionary = state.duplicate(true)
 	var visit: Dictionary = _candidate_visit(candidate)
 	_divination.cancel_open_service(candidate.divination.cases[visit.visit_id])
 	visit.phase = "ended"
 	visit.ended_at = int(candidate.clock_minutes)
+	PeopleBridge.finish(candidate, visit)
 	candidate.active_visit_id = ""
-	return _commit(candidate, action, "接待已结束，经历已保存。", {"visit_id": visit.visit_id})
+	var output := {"visit_id": visit.visit_id}
+	if action.has("return_at"):
+		var arrival_id := "return_" + str(action.action_id)
+		if not People.schedule_return(candidate.people,visit.npc_id,arrival_id,int(action.return_at),people_config):
+			return _fail("RETURN_UNAVAILABLE", "这个时段不适合回访，请重新协商；本次接待仍保留。")
+		candidate.people.arrivals[arrival_id]["agreed_return"] = true
+		candidate.people.arrivals[arrival_id]["source_visit_id"] = visit.visit_id
+		candidate.people.arrivals[arrival_id]["source_action_id"] = action.action_id
+		output["return_appointment"] = {"arrival_id":arrival_id,"at":int(action.return_at)}
+	return _commit(candidate, action, "接待已结束，回访时间也记下了。" if action.has("return_at") else "接待已结束，经历已保存。", output)
+
+func next_return_time() -> int:
+	var visit := active_visit()
+	if visit.is_empty() or visit.dialogue.size() < 3:
+		return 0
+	var profile: Dictionary = state.get("people",{}).get("profiles",{}).get(visit.npc_id,{})
+	if not profile.has("generation_id"):
+		return 0
+	var tomorrow := (floori(float(state.clock_minutes)/1440.0)+1)*1440+540
+	var proposed: int = People.next_available_arrival(state.people,people_config,maxi(tomorrow,int(profile.get("cooldown_until",0))),profile)
+	return maxi(0,proposed)
 
 func _rest(action: Dictionary) -> Dictionary:
 	if int(state.player.energy) >= int(content.rules.max_energy):
@@ -377,11 +873,13 @@ func _has_time(minutes: int) -> bool:
 	return int(state.clock_minutes) % 1440 + minutes <= int(content.rules.closing_minute)
 
 func _advance(candidate: Dictionary, minutes: int) -> void:
-	candidate.clock_minutes = int(candidate.clock_minutes) + minutes
-	if minutes > 0:
-		DivinationEvents.advance(candidate, _divination.data)
+	PeopleBridge.advance(candidate, people_config, minutes, _divination)
+	Shop.sync_effects(candidate, shop_config)
 
 func _commit(candidate: Dictionary, action: Dictionary, message: String, result: Dictionary) -> Dictionary:
+	Shop.sync_effects(candidate, shop_config)
+	PeopleBridge.sync(candidate, people_config, _divination)
+	candidate = SaveService._normalize_numbers(candidate)
 	candidate.state_version = int(state.state_version) + 1
 	var reply: Dictionary = {"success": true, "error_code": "", "message": message, "state_version": candidate.state_version, "result": result, "action_type": action.type}
 	candidate.processed_actions[action.action_id] = reply.duplicate(true)
@@ -391,6 +889,56 @@ func _commit(candidate: Dictionary, action: Dictionary, message: String, result:
 	state = candidate
 	state_changed.emit()
 	return reply
+
+func _initialize_integrated(candidate: Dictionary) -> void:
+	Shop.initialize(candidate)
+	PeopleBridge.initialize(candidate, people_config, _divination)
+	candidate.schema_version = 3
+
+func _shop_action(action: Dictionary) -> Dictionary:
+	var candidate := state.duplicate(true)
+	var outcome: Dictionary
+	if action.type in PEOPLE_ACTIONS:
+		outcome = PeopleBridge.handle(candidate, action, people_config)
+	else:
+		outcome = Shop.handle(candidate, action, shop_config)
+	if not outcome.success:
+		return _fail(outcome.error_code, outcome.message)
+	if outcome.get("result", {}).has("item_use"):
+		var use: Dictionary = outcome.result.item_use
+		if not str(use.get("event_id", "")).is_empty() and not _divination.link_item_use(candidate, _candidate_visit(candidate), use):
+			return _fail("ITEM_USE_BLOCKED", "商品不能用于当前事件，本次未消耗。")
+	_advance(candidate, int(outcome.get("minutes", 0)))
+	return _commit(candidate, action, outcome.message, outcome.get("result", {}))
+
+func _use_unlocked_option(action: Dictionary) -> Dictionary:
+	var visit := active_visit()
+	if visit.is_empty() or not _has_time(5):
+		return _fail("FOLLOWUP_UNAVAILABLE", "请在接待中、打烊前追问。")
+	var candidate := state.duplicate(true)
+	var memories := Memory.dialogue_context(candidate.people, visit.npc_id)
+	if memories.is_empty():
+		return _fail("FOLLOWUP_UNAVAILABLE", "先交谈了解来客，再温和追问。")
+	for option: Dictionary in candidate.shop.unlocked_options:
+		if option.item_use_id != action.get("item_use_id") or option.npc_id != visit.npc_id or option.get("used", false):
+			continue
+		var source: Dictionary = memories.back()
+		var current := _candidate_visit(candidate)
+		current.dialogue.append({"speaker":"player","text":"你先前提到的这件事，愿意再谈谈你的感受吗？"})
+		# An intent/topic ID is not proof that its authored fact was disclosed.
+		# Recall the actual mutually known words, preserving them as something
+		# discussed rather than promoting a statement or prediction to world truth.
+		var remembered_text: String = str(source.text).replace("\n", " ").strip_edges()
+		var reply: String = "嗯，我们先前聊到过：“%s”。你慢慢问，我也愿意接着说。" % remembered_text
+		current.dialogue.append({"speaker":"npc","text":reply})
+		option["used"] = true
+		option["action_id"] = action.action_id
+		option["memory_id"] = source.memory_id
+		option["source_visit_id"] = source.visit_id
+		option["source_kind"] = source.kind
+		_advance(candidate,5)
+		return _commit(candidate,action,"已温和追问，原话与商品来源已保留。",{"item_use_id":option.item_use_id,"visit_id":visit.visit_id,"memory_id":source.memory_id})
+	return _fail("FOLLOWUP_UNAVAILABLE", "当前来客没有可用的澄心晶追问。")
 
 func _ok(message: String, result: Dictionary) -> Dictionary:
 	return {"success": true, "error_code": "", "message": message, "state_version": state.get("state_version", 0), "result": result}

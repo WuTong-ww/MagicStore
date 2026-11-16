@@ -1,0 +1,10 @@
+{
+  "enabled": true,
+  "concurrency": 2,
+  "ready_target": 6,
+  "new_people_per_day": 8,
+  "max_attempts_per_day": 16,
+  "min_lead_minutes": 30,
+  "arrival_spacing_minutes": 30,
+  "role_hints": ["小剧场道具师", "自行车修理师", "社区厨房主理人", "夜校教师", "园艺师", "木工学徒", "公交司机", "自由插画师"]
+}

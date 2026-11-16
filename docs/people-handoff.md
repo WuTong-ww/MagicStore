@@ -1,35 +1,37 @@
-# A 组人物、客流与模型网关：开发中交接
+# 人物、来访与模型网关交接
 
-本目录是 A 组的独立开发成果，**尚未接入主游戏、公共存档或 C 的 HTTP provider，不表示 A1–A7 已验收**。新《分工》为职责基准；A 负责人物和排程，B 负责案例与可披露结果，C 负责统一资源、时钟、存档和最终集成。
+人物规则、排程、记忆、候客队列、预约和反馈已接入主游戏、统一时钟及 v3 公共存档。原创新人物通过后台生成、独立审核和正式入档流程加入游戏，不需要另开人物演示场景。当前范围见[功能清单](features.md)、[人物生成](people-generation.md)及[验收记录](verification.md)。
 
-## 当前文件
+## 模块与职责
 
-- `scripts/people/people.gd`：纯规则模块，调用方传入未提交的 A 数据候选；不直接保存、不修改 C 的钱包，也不直接揭示 B 的隐藏事实。
-- `scripts/people/memory.gd`：按知情者保存记忆、过滤模型上下文、按熟悉度和信任开放追问，并记录每次追问来源。
-- `scripts/people/director.gd`：构造有限的自主行动候选，验证模型的候选 ID 后调用 A 规则；来源事件去重，不直接改变 B 的世界事实或 C 的资源。
-- `data/people/templates.json`：普通来客、外观部件、耐心和流量样例。参考家族仅为开发样例，人物名单、来源和文案仍待策划确认，不应直接当作最终美术或剧情。
-- `scenes/people/people_panel.tscn`：独立的候客及外观占位面板，仅输出信号。尚未挂入 `scenes/main.tscn`；外观选择没有正式素材预览。
-- `start-people-demo.cmd`：A 组独立交互演示。点击等待可观察来客、预约和接待；它使用临时示例数据，关闭即清空，不读取或修改正式存档，也不代表 A/C 已集成。
-- `server/ai/gateway.py`：本机模型网关，支持对话和原创人物资料草稿。它不持有或修改游戏存档。`tests/people/test_gateway.py` 使用模拟模型测试网关；`tests/people/rules.gd` 是 Godot 人物规则测试。
+- `scripts/people/people.gd`：人物与来访规则，在调用方提供的候选状态中执行，不直接写存档、修改公共钱包或揭示隐藏案情。
+- `scripts/people/memory.gd`：按知情者保存记忆，只向对白提供双方已知材料，保留追问和披露来源。
+- `scripts/people/director.gd`：构造有限自主行动候选，验证候选 ID 与来源事件；不能直接改变世界事实或公共资源。
+- `scripts/shop/people_bridge.gd`：将人物时钟、实际队列、钱包、接待、反馈和经营动作接入公共候选提交。
+- `scenes/people/people_panel.tscn`：主游戏已使用的候客及外观面板，发出请求信号，由主界面提交正式动作。
+- `scripts/people/generated_person.gd`、`scripts/providers/http_person_provider.gd`、`scripts/divination/generated_cases.gd`：原创人物包校验、独立后台传输与专属案例投影。
+- `server/ai/gateway.py`、`server/ai/person_generation.py`、`server/ai/model_request_policy.py`：可选本机网关及同构规则，不持有或修改游戏存档。
 
-B 的旧物联调样例中已有 `npc_demo_ji`（纪寄棠）；本模块的家族样例复用该 ID。正式合入前仍须把已遇见的 B 人物及其经历映射到 A 档案，并避免 B 的联调选择入口绕过正式稀有客流。示例家族的 MBTI、生日和背景均是待确认内容。
+A 负责人物与排程，B 负责案例与可披露结果，C 负责统一资源、时钟、存档、界面及最终整合。旧独立原型见[历史说明](archive/people-prototype-history.md)，不再作为启动或待接入清单。
 
-## 与 C 的接入约定（待双方确认并实施）
+## 当前接入约束
 
-1. 在新档中调用 `People.create(save_id, seed, clock_minutes)` 并调用 `add_fixed` 注册林照晚。旧 v1/v2 档要在内存中初始化 A 命名空间，保留原人物、活动接待、时间、钱包、B 记录与备份；第一次成功业务动作时与其他字段一起写盘。升级版本及校验方式由 C 定稿，不能覆盖或重新生成现有身份。
-2. 始终在 `GameState` 的候选状态副本内执行 A 规则；C 统一检查及保存候选，保存成功才发布。读档时 `People.validate` 只是 A 命名空间的基础检查，仍需 C 校验 `save_id`、时钟及人物、接待、事件与整个存档的交叉引用。
-3. 游戏时钟推进时按共同事件顺序调用 `advance_with_schedule`，并把口碑传入 `plan_day`；同一日生成结果与排队截止时刻要持久化。时间、接待、钱包和库存必须使用 C 原有状态，不能把 A 的 `people.clock` 当第二个权威时钟。`forced_count` 仅用于测试，不能作为正式玩家入口。
-4. 主界面只消费 `visible_queue`、`public_profile`、`visible_relationships` 和已获准的历史；不要把整个 `people` 字典、未来到店计划或未认识的人物关系返回给玩家。`reveal_relationship` 仅由可信的已披露线索或事件触发，调用方须核对来源与接待。连接 `people_panel` 的信号时，协商预约必须确认顾客已同意；购物客的完整交易由 C 接入。
-5. 选中有效队列项后，C 创建或复用同一个 `npc_id` 的钱包，开始唯一 `visit_id`，并在同一候选中调用 `begin`、B 的 `DivinationSession.add_case`。`People.case_context` 只包含已披露的关系；`case_seed` 是给 B 的可信内部提案，不可直接展示给玩家或原样发给模型。B 仍需提供适配任意关系的正式案例；当前两个固定案例不能冒充随机剧情。
-6. 已验证的对话或反馈可通过 `Memory.record` 按 `player`、`npc`、`both` 知情范围保存；`Memory.dialogue_context` 只返回双方均已知道的材料，`followups` 检查熟悉度、信任和本次接待重复记录。调用 `mark_followup_asked` 前，C 必须验证对应动作和来源确实已提交。
-7. B 的 `divination_feedback_queue()` 传给 `schedule_feedback`，由 A 按事件时间、人物行程、信任及熟悉度排程；新接待里仍由 B 的 `receive_feedback` 授权披露，再调用 `record_disclosed_feedback` 记录共享记忆。B 给 A 的效果通过 `effect_id` 传给 `apply_effect`，禁止重复执行；A 不能直接发放 C 负责的金币、物品、口碑或成长。推荐需要真实关系对象；`Director` 或 `schedule_referral` 都必须再次检查目标和时间。
-8. `record_observation` 只接收有至少两个真实可选项的自愿行为，并记录选择、精力、剩余时间、队列、金币及可见线索等情境。同次接待的相同话题不会重复计数。当前报告只统计可追溯动作及接待数，满 10 条、覆盖 3 次接待才给出行为描述，不输出现实人格结论；更丰富的报告维度仍待策划确认。
+1. 新档及旧档迁移由公共状态层初始化人物命名空间；已保存的身份、钱包、活动接待、时间和案例记录不能重新生成。校验整个存档后才提交。
+2. `GameState` 在深拷贝候选内执行人物、经营和案例规则，保存成功后发布。人物 `clock` 与公共 `clock_minutes` 一致，不是另一套时钟。
+3. 正常接待使用实际队列项的 `start_arrival`。固定来客、自然客流、介绍和正式回访共用容量及营业时间规则，不能通过开发入口绕过排程。
+4. UI 只消费公开队列、已结识人物档案、已披露关系和获准历史；模型只接收限定人设、已知来源和当前话题。完整人物字典、未来到店表和隐藏案例不能直接提供给 UI 或模型。
+5. 介绍、协商回访和改期必须有明确同意，并记录实际关系、接待和动作来源；保存失败不能留下半份人物或预约。
+6. 模型人物包经过结构校验和绑定原包哈希的独立审核。后台完成信号只提出候选，最新存档再次校验并成功保存后才入档；切档、改配置和取消使旧 token 失效。
+7. 共同记忆只来自已提交的交谈和披露。内部共同往事不自动成为玩家已知事实；关联人有自己的视角，不继承主来客的私密材料。
+8. 反馈先由 B 授权披露，再记录共同记忆；效果按稳定来源去重。人物规则不直接发放金币、物品、口碑或成长。行为报告解释已记录的游戏内行为，不输出现实人格结论。
 
-## 模型服务
+人物包字段、配额与边界见[人物生成说明](people-generation.md)。问题与对白联合审核、16 字上限、问题保存和点击校验见[动态后续问题](followup-questions.md)。
 
-网关默认只监听 `127.0.0.1:8765`。上游使用已提供的兼容 Chat Completions 服务，模型默认 `deepseek-v4.1-flash`；地址和模型均可通过环境变量覆盖，上游地址必须使用 HTTPS。它不会自行部署 A100 或证明底层硬件规格。
+## 模型接法
 
-在运行网关的 PowerShell **进程**中配置密钥；不要将密钥写进 Git、游戏资源、日志或 Windows 游戏包。下例不包含真实密钥：
+首页「设置」提供直接 Chat Completions 配置：URL、模型名称和 API Key，密钥仅在当前游戏进程使用。也可使用本机网关，客户端使用临时网关令牌，上游密钥只进入网关进程。模型族参数、切换、取消和实测范围见[接口切换说明](api-model-switch.md)。
+
+网关默认监听 `127.0.0.1:8765`。在启动网关的 PowerShell 进程中设置密钥，示例不含真实凭据：
 
 ```powershell
 $secureKey = Read-Host '上游 API Key' -AsSecureString
@@ -42,28 +44,23 @@ $env:MAGIC_GATEWAY_TOKEN = [Convert]::ToBase64String($tokenBytes)
 python server/ai/gateway.py
 ```
 
-`MAGIC_GATEWAY_TOKEN` 用于客户端调用本机网关，C 的 provider 应在本地安全地取得对应进程的临时值；它不是上游 API Key。不要从包含 `MAGIC_AI_KEY` 的环境启动游戏进程，以免把上游密钥传给客户端。生产远程部署还需网关鉴权、TLS、访问限制、运维和真实压测，不能直接把当前仅限本机的服务暴露公网。
+上游地址和模型由 `MAGIC_AI_URL`、`MAGIC_AI_MODEL` 配置，支持 HTTP/HTTPS，根地址或 `/v1` 会补全为 Chat Completions 端点。网关模式的游戏进程不应继承 `MAGIC_AI_KEY`；`MAGIC_GATEWAY_TOKEN` 是客户端临时令牌，不是上游 Key。
 
-- `GET /health`：进程存活，不证明上游模型可用。
-- `POST /v1/dialogue`：请求使用现有 `GameState._prepare_talk` 结构，可由可信调用方额外传双方已知的 `known_memories` 和人物表达方式。模型只从允许的话题中识别意图；最终正文由该话题的手写文本、有限语气和同话题的共同记忆组成，防止模型额外泄露或编造事实。因此当前并非开放式生成对话。
-- `POST /v1/profile/choices`：接收 `{"profile":{"npc_id":"...","name":"...","role":"...","personality":"...","birthday":"..."}}`，从 `profile_choices` 选择三项合法 ID；`People.apply_profile_choices` 再次核验并固定文本和生成来源。将响应头 `online` 映射为来源 `model`、`offline` 映射为来源 `offline`。上游失败时使用稳定的本地候选。
-- `POST /v1/profile`：同样的输入产生自由文本草稿；它**不能**直接当作已核验人设。`People.apply_profile_draft` 只接收尚未登场的原创人物的已批准草稿；完整自动语义核验仍未实现。
-- `POST /v1/event-proposal`：只接收来源事件、公开人物、共同记忆和规则许可的 `{candidate_id,label}`；模型只能选择其中一项，调用方通过 `Director.apply` 在最新候选状态中重新校验。超时或越权时返回 `no_action`。
-- 响应头 `X-Magic-Mode` 为 `online` 或 `offline`；C 应展示实际模式并在网关不可达时使用已有本地 Mock。每次上游请求最长 12 秒，自由输入可能调用两次；C 需设置相应的总超时、取消和状态版本校验。现实等待不推进游戏时间。
+| 路径 | 当前用途 |
+| --- | --- |
+| `GET /health` | 网关存活，不证明上游模型可用 |
+| `POST /v1/dialogue` | 自由输入先选话题，再生成并独立审核；按钮跳过分类。只投影当前获准资料，通过后保留原文和已审问题 |
+| `POST /v1/person-package` | 完整人物、关联人、关系和专属案例的生成与独立审核，返回哈希绑定来源；客户端仍须正式入档 |
+| `POST /v1/profile/choices`、`POST /v1/profile` | 兼容的受约束资料选择与自由草稿接口，不代替主游戏人物包流程；草稿不能冒充已核验完整人物 |
+| `POST /v1/event-proposal` | 从规则允许的有限候选中提议动作，调用方在最新候选状态中重新验证 |
 
-## 验证和未完成
+网关单次上游请求上限为 12 秒；自由对白最多包括分类、生成、审核三次调用，客户端保留原 45 秒总期限、取消及状态校验。网络等待不推进游戏时钟。公网部署、硬件规格和压测没有由本机验证自动覆盖。
 
-本机用 Python 标准库运行：
-
-```powershell
-python -m unittest discover -s tests/people -p test_gateway.py -v
-```
-
-2026 年 11 月 15 日，固定版 Godot 已运行 A 组独立规则、真实 B 组反馈的接口联调、两个进程的隔离恢复以及面板和独立演示动作测试；200 组固定种子产生 400 次普通来客和 9 次参考人物初次接待。本机网关也用现成模型实测按钮、自由提问、人物草稿及受约束的人物候选。`-Test` 不包含 A 组脚本；以下检查是无界面测试，不能代替人工画面和输入法验收。
+## 回归与证据
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/dev/test-people.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/dev/run.ps1 -Test
 ```
 
-未完成：A 组面板的实际图形验证、A 规则与公共状态集成、正式捏脸素材、完整随机案例、自由创作文本的可靠语义校验、更加丰富的经营报告、A/B/C 联调及 Windows 包验收。当前数据与面板是开发样例，不将上述项目标为已完成。
+统一 `-Test` 已包含人物规则、主游戏整合、本机 HTTP、真实文件写盘与两进程恢复。测试及模型报告使用 `.tools` 隔离目录，不操作正式存档。具体计数、真实模型范围、图形检查和未验证项统一见[验收文档](verification.md)，不在交接文档重复维护数字。

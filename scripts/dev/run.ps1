@@ -37,17 +37,48 @@ try {
     if ($Test) {
         Invoke-Godot @('--headless', '--path', $repo, '--import')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/smoke.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/save_delete.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/provider_contract.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/dialogue/grounding.gd')
+		Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/dialogue/followup_questions.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/divination/oracle_rules.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/divination/acceptance.gd')
+		Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/divination/legacy_guests.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/divination/generated_cases.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/ui_capture.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/restart.gd', '--', 'write')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/restart.gd', '--', 'read')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/shop/rules.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/shop/integration.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/people_bridge.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/people_restart.gd', '--', 'write')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/people_restart.gd', '--', 'read')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/shop_ui.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/save_delete_ui.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/generated_people.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/generated_people_ui.gd')
+		Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/followup_questions.gd')
+		Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/followup_questions_ui.gd')
+		Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/chat_keyboard_ui.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/opening_guests.gd')
+		Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/project_cleanup.gd')
+		Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/api_settings_ui.gd')
+        & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot 'test-http.ps1')
+        if ($LASTEXITCODE -ne 0) { throw 'HTTP integration tests failed.' }
+        & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot 'test-person-http.ps1')
+        if ($LASTEXITCODE -ne 0) { throw 'Background person HTTP tests failed.' }
+        & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot 'test-people.ps1')
+        if ($LASTEXITCODE -ne 0) { throw 'People regression tests failed.' }
     } elseif ($Export) {
         $outDir = Join-Path $repo 'build/windows'
         New-Item -ItemType Directory -Force -Path $outDir | Out-Null
         Invoke-Godot @('--headless', '--path', $repo, '--export-release', 'Windows Desktop', (Join-Path $outDir 'ZeroHourStore.exe'))
         Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'play-export.ps1') -Destination (Join-Path $outDir 'play-export.ps1') -Force
+        $licenseDir = Join-Path $outDir 'licenses'
+        New-Item -ItemType Directory -Force -Path $licenseDir | Out-Null
+        foreach ($licenseFile in @('docs/GODOT-LICENSE.txt', 'docs/GODOT-COPYRIGHT.txt', 'docs/third-party.md', 'assets/fonts/OFL.txt')) {
+            Copy-Item -LiteralPath (Join-Path $repo $licenseFile) -Destination $licenseDir -Force
+        }
         @'
 @echo off
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0play-export.ps1"

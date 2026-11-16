@@ -5,6 +5,7 @@ const Catalog = preload("res://scripts/divination/catalog.gd")
 const Cards = preload("res://scripts/divination/oracle_cards.gd")
 const Events = preload("res://scripts/divination/event_rules.gd")
 const OracleSaved = preload("res://scripts/divination/oracle_saved.gd")
+const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
 const MAX_INT := 2147483647
 
 static func validate(state: Dictionary, data: Dictionary, visits: Dictionary) -> String:
@@ -25,6 +26,15 @@ static func validate(state: Dictionary, data: Dictionary, visits: Dictionary) ->
 		var case: Variant = work.cases[visit_id]
 		if not visit is Dictionary or not case is Dictionary or case.get("visit_id") != visit_id or case.get("npc_id") != visit.npc_id or not data.cases.has(case.get("case_id")):
 			return "案例未关联有效接待"
+		var template: Dictionary = data.cases[case.case_id]
+		if template.get("generated", false):
+			var inherited: Variant = case.get("inherited_clue_ids", [])
+			var allowed_clues: Array = template.world_facts.values().map(func(fact: Dictionary) -> String: return fact.requires_clue)
+			if not inherited is Array or inherited != GeneratedCases.inherited_clues(state, visit, case.case_id, allowed_clues) or not visit.get("clue_ids") is Array:
+				return "生成案例的旧知识来源无效"
+			for clue: Variant in inherited:
+				if clue not in visit.clue_ids:
+					return "生成案例遗漏了已经共同获知的事实"
 		if not _case_records(case, visit, data, int(state.clock_minutes)):
 			return "案例事实、对话、术式或预测记录无效"
 		if not case.event.is_empty():
@@ -100,6 +110,26 @@ static func _case_records(case: Dictionary, visit: Dictionary, data: Dictionary,
 	for fact in case.world_facts.values():
 		if not fact is Dictionary or not _text(fact.get("text")) or not data.clues.has(fact.get("requires_clue")):
 			return false
+	var template: Dictionary = data.cases[case.case_id]
+	if template.get("generated", false):
+		# The approved package is the canonical source. A visit cannot rewrite its
+		# private facts, borrow another person's case, or acquire unrelated clues.
+		if template.get("npc_id") != visit.npc_id or case.world_facts != template.world_facts or not case.profile_id.is_empty() or not case.event.is_empty() or case.has("chart") or not case.branches.is_empty():
+			return false
+		var public_npc: Dictionary = case.get("public_npc", {})
+		var expected: Dictionary = data.guests[visit.npc_id]
+		if public_npc.get("name") != expected.name or public_npc.get("role") != expected.role or public_npc.get("npc_id") != visit.npc_id or public_npc.get("case_title") != template.title:
+			return false
+		for clue: String in visit.clue_ids:
+			if not template.world_facts.values().any(func(fact: Dictionary) -> bool: return fact.requires_clue == clue):
+				return false
+		for topic_id: String in template.topic_ids:
+			var topic: Dictionary = data.topic_index[topic_id]
+			if topic.has("requires_clue") and topic.clue_ids.any(func(clue: String) -> bool: return clue in visit.clue_ids) and topic.requires_clue not in visit.clue_ids:
+				return false
+		for service: Variant in case.services.values():
+			if not service is Dictionary or not service.get("method_id") in template.method_ids:
+				return false
 	for entry: Dictionary in case.conversation:
 		if not Catalog._integer(entry.get("statement_index"), 1, visit.dialogue.size() - 1) or not entry.get("clue_ids") is Array or not entry.get("channel") in ["button", "free_text"] or not _text(entry.get("intent")):
 			return false

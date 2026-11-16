@@ -75,7 +75,8 @@ $sourceRules = [ordered]@{
     'data' = @('.json')
     'assets' = @('.svg', '.png', '.jpg', '.jpeg', '.webp', '.ttf', '.otf', '.txt', '.md', '.import', '.uid')
     'themes' = @('.tres', '.uid')
-    'tests' = @('.gd', '.uid', '.tscn')
+    'tests' = @('.gd', '.uid', '.tscn', '.py', '.json')
+    'server' = @('.py', '.md')
     'docs' = @('.md', '.txt')
 }
 foreach ($directory in $sourceRules.Keys) {

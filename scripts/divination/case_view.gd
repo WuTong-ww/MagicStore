@@ -27,7 +27,15 @@ static func project(session, state: Dictionary, visit: Dictionary) -> Dictionary
 	for fact_id: String in case.world_facts:
 		var fact: Dictionary = case.world_facts[fact_id]
 		if fact.requires_clue in visit.clue_ids:
-			view.facts.append({"fact_id": fact_id, "text": fact.text, "clue_id": fact.requires_clue})
+			var text: String = fact.text
+			if template.get("generated", false):
+				# Creation packages may preserve a fuller NPC-only history than a
+				# question actually disclosed. The public clue is the authority for
+				# player projection, never the full internal consistency record.
+				text = str(data.clues.get(fact.requires_clue, {}).get("text", ""))
+				if text.is_empty():
+					continue
+			view.facts.append({"fact_id": fact_id, "text": text, "clue_id": fact.requires_clue})
 	for entry: Dictionary in case.conversation:
 		var statement := entry.duplicate(true)
 		statement["text"] = visit.dialogue[int(entry.statement_index)].text

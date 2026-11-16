@@ -1,26 +1,13 @@
 extends RefCounted
-## Local C adapter. All mutations are made on GameState's uncommitted candidate.
+## Payments and shared inventory on GameState's uncommitted candidate.
 
 static func initialize(state: Dictionary, data: Dictionary, fixed_id: String) -> void:
 	var economy: Dictionary = data.economy
 	state.player["items"] = {economy.product_id: int(economy.starting_stock)}
 	state.npcs[fixed_id]["items"] = _guest_items(economy)
-	var ordinary: Array[String] = []
-	for npc_id: String in data.guests:
-		match data.guests[npc_id].get("fixture", ""):
-			"ordinary":
-				ordinary.append(npc_id)
-			"reference":
-				_add_guest(state, npc_id, data)
-	if not ordinary.is_empty():
-		ordinary.sort()
-		_add_guest(state, ordinary[posmod(String(state.save_id).hash(), ordinary.size())], data)
 
 static func _guest_items(economy: Dictionary) -> Dictionary:
 	return {economy.payment_item_id: 4, economy.gift_id: 1}
-
-static func _add_guest(state: Dictionary, npc_id: String, data: Dictionary) -> void:
-	state.npcs[npc_id] = {"coins": int(data.guests[npc_id].coins), "items": _guest_items(data.economy)}
 
 static func can_pay(wallet: Dictionary, payment: Dictionary) -> bool:
 	if payment.kind == "coins":

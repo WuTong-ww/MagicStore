@@ -1,6 +1,7 @@
 extends SceneTree
 
 const People = preload("res://scripts/people/people.gd")
+const FixtureConfig = preload("res://tests/people/fixture_config.gd")
 var failures := 0
 var checks := 0
 
@@ -47,10 +48,11 @@ func _initialize() -> void:
 	check(not People.apply_profile_choices(state, config, curated.npc_id, choices, "model"), "profile cannot regenerate after selection")
 	var rng := RandomNumberGenerator.new()
 	rng.seed = 3
-	var family_id: String = People.ensure_family(state, config, rng)
+	var family_config := FixtureConfig.reference_family()
+	var family_id: String = People.ensure_family(state, family_config, rng)
 	var family: Dictionary = state.families[family_id]
 	check(family.members.size() == 2 and state.profiles[family.members[0]].family_id == family_id, "family instantiated together")
-	check(People.ensure_family(state, config, rng) == family_id and state.families.size() == 1, "family identity does not reroll")
+	check(People.ensure_family(state, family_config, rng) == family_id and state.families.size() == 1, "family identity does not reroll")
 	var arrival: Dictionary = state.arrivals["arrival_1_0"]
 	check(arrival.case_id.is_empty(), "new random guest is not falsely assigned B's fixed archive case")
 	arrival.at = 1440 + 600

@@ -3,8 +3,9 @@ extends RefCounted
 
 const Catalog = preload("res://scripts/divination/catalog.gd")
 const Cards = preload("res://scripts/divination/oracle_cards.gd")
-const Economy = preload("res://scripts/divination/demo_economy.gd")
+const Economy = preload("res://scripts/divination/economy.gd")
 const Events = preload("res://scripts/divination/event_rules.gd")
+const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
 const ACTIONS := [
 	"quote_service", "settle_service", "cancel_service", "learn_method", "note_hypothesis",
 	"record_prediction", "give_advice", "buy_case_item", "use_case_item", "receive_feedback",
@@ -13,10 +14,19 @@ const ACTIONS := [
 
 var data: Dictionary
 var base: Dictionary
+var _base_catalog: Dictionary
 
 func _init(catalog: Dictionary, content: Dictionary) -> void:
 	data = catalog
+	_base_catalog = catalog.duplicate(true)
 	base = content
+
+func sync_generated(state: Dictionary) -> bool:
+	var projected := GeneratedCases.catalog(state, _base_catalog)
+	if projected.is_empty():
+		return false
+	data = projected
+	return true
 
 func initialize(state: Dictionary) -> void:
 	state.schema_version = 2
@@ -30,6 +40,8 @@ func initialize(state: Dictionary) -> void:
 func add_case(state: Dictionary, visit: Dictionary, case_id: String, schedule_event: bool = true, context: Dictionary = {}) -> bool:
 	var template: Dictionary = data.cases.get(case_id, {})
 	if template.is_empty() or not state.npcs.has(visit.npc_id) or state.divination.cases.has(visit.visit_id):
+		return false
+	if template.get("generated", false) and template.get("npc_id") != visit.npc_id:
 		return false
 	if not context.get("profile_id", "") is String or not context.get("subject_id", "") is String or not context.get("target_name", "") is String or not context.get("public_npc", {}) is Dictionary:
 		return false
@@ -62,6 +74,13 @@ func add_case(state: Dictionary, visit: Dictionary, case_id: String, schedule_ev
 		record["chart"] = context.chart.duplicate(true)
 	if context.has("public_npc"):
 		record["public_npc"] = guest_view(visit.npc_id, case_id, context.public_npc)
+	if template.get("generated", false):
+		var allowed_clues: Array = template.world_facts.values().map(func(fact: Dictionary) -> String: return fact.requires_clue)
+		var inherited := GeneratedCases.inherited_clues(state, visit, case_id, allowed_clues)
+		record["inherited_clue_ids"] = inherited
+		for clue: String in inherited:
+			if clue not in visit.clue_ids:
+				visit.clue_ids.append(clue)
 	state.divination.cases[visit.visit_id] = record
 	return true
 
@@ -72,9 +91,8 @@ func guest_options(state: Dictionary) -> Array:
 	]
 	for npc_id: String in state.get("npcs", {}):
 		var guest: Dictionary = data.guests.get(npc_id, {})
-		if guest.has("fixture"):
-			var label: String = "普通样例" if guest.fixture == "ordinary" else "作品参考样例"
-			guests.append({"npc_id": npc_id, "case_id": "archive", "label": "%s · %s" % [guest.name, label]})
+		if guest.get("legacy_compatibility",false):
+			guests.append({"npc_id": npc_id, "case_id": "archive", "label": "%s · 旧物案" % guest.name})
 	return guests
 
 func guest_view(npc_id: String, case_id: String, supplied: Dictionary = {}) -> Dictionary:
@@ -83,7 +101,17 @@ func guest_view(npc_id: String, case_id: String, supplied: Dictionary = {}) -> D
 		guest = base.npc if npc_id == base.npc.npc_id else data.guests.get(npc_id, {})
 	return {"npc_id": npc_id, "name": guest.get("name", "来客"), "role": guest.get("role", ""), "case_title": data.cases[case_id].title}
 
-func opening(npc_id: String, case_id: String, has_visited: bool) -> String:
+func opening(npc_id: String, case_id: String, has_visited: bool, known_clues: Array = []) -> String:
+	var generated: Dictionary = data.cases.get(case_id, {})
+	if generated.get("generated", false) and generated.get("npc_id") == npc_id:
+		if not has_visited:
+			return generated.opening
+		# Creator review can miss a semantic hint in a return line. It remains
+		# private until this character's actual detail/evidence was disclosed.
+		for kind: String in ["detail", "hidden"]:
+			if generated.world_facts.has(kind) and generated.world_facts[kind].requires_clue not in known_clues:
+				return "上次聊的事，我还想接着说说。"
+		return generated.followup
 	if npc_id != base.npc.npc_id:
 		return data.guests[npc_id].opening if not has_visited else "我又带来了那件旧物。上次看到的内容，我都还记得。"
 	if case_id == "archive":

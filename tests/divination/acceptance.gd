@@ -1,6 +1,8 @@
 extends SceneTree
 ## B1–B5. Real actions and disk persistence in an isolated save directory.
 
+const LegacyGuests = preload("res://tests/fixtures/legacy_divination_guests.gd")
+
 class InvalidBranchProvider extends RefCounted:
 	func request_reply(_request: Dictionary) -> Dictionary:
 		return {
@@ -225,13 +227,13 @@ func _event_case(row: Dictionary) -> void:
 
 func _methods_and_past() -> void:
 	fresh("B3 B5 研习及前世")
+	check(LegacyGuests.install(gs), "B3 B5 explicitly install previous-version encounter fixtures")
 	require_action("start_visit")
 	var tarot := read("tarot", "situation")
 	check(tarot.get("medium", {}).get("cards", []).size() == 3 and gs.active_visit().reading.get("cards") == tarot.medium.cards, "B3 tarot delivers and persists the three-card spread")
 	require_action("end_visit")
-	var guests: Array = gs.divination_guests()
-	var ordinary: String = guests.filter(func(row: Dictionary) -> bool: return row.label.ends_with("普通样例"))[0].npc_id
-	var reference: String = guests.filter(func(row: Dictionary) -> bool: return row.label.ends_with("作品参考样例"))[0].npc_id
+	var ordinary := "npc_demo_xu"
+	var reference := "npc_demo_ji"
 	check(act("learn_method", {"method_id": "ziwei"}).error_code == "SKILL_PREREQUISITE", "B3 advanced prerequisite")
 	for row: Array in [
 		["lenormand", "letter_birds", 0, "cards", ordinary], ["plum", "number", 7, "hexagram", ordinary],
@@ -362,6 +364,10 @@ func _v1_migration() -> void:
 	legacy.schema_version = 1
 	legacy.save_id = gs.make_id("v1_test")
 	legacy.erase("divination")
+	# A real v1 file predates both integrated namespaces. Keeping them here would
+	# create an impossible old fixture with A's original save_id attached.
+	legacy.erase("people")
+	legacy.erase("shop")
 	legacy.player.erase("items")
 	legacy.npcs = {"npc_lin": {"coins": legacy.npcs.npc_lin.coins}}
 	var card: Dictionary = gs.content.cards[0]
@@ -375,13 +381,13 @@ func _v1_migration() -> void:
 			action.result.reading = original_reading.duplicate(true)
 	check(saves.write_save(legacy).success, "B1 original schema fixture writes")
 	require_action("load_game", {"save_id": legacy.save_id})
-	check(gs.state.schema_version == 2 and gs.state.visits == legacy.visits and gs.state.clock_minutes == legacy.clock_minutes and gs.state.active_visit_id == legacy.active_visit_id and gs.state.player.coins == legacy.player.coins and gs.state.player.energy == legacy.player.energy, "B1 migration preserves paid unfinished visit, history, clocks and balances")
+	check(gs.state.schema_version == 3 and gs.state.visits == legacy.visits and gs.state.clock_minutes == legacy.clock_minutes and gs.state.active_visit_id == legacy.active_visit_id and gs.state.player.coins == legacy.player.coins and gs.state.player.energy == legacy.player.energy, "B1 migration preserves paid unfinished visit, history, clocks and balances")
 	check(gs.divination_view().event.is_empty() and saves.read_save(legacy.save_id).state.schema_version == 1, "B1 load creates no retrospective event or file write")
 	var before: Dictionary = gs.snapshot()
 	require_action("reading")
 	check(gs.snapshot() == before, "B1 migrated paid reading is still replayable for free")
 	require_action("rest")
-	check(saves.read_save(legacy.save_id).state.schema_version == 2, "B1 next transaction persists v2")
+	check(saves.read_save(legacy.save_id).state.schema_version == 3, "B1 next transaction persists integrated v3")
 	require_action("load_game", {"save_id": legacy.save_id, "recover_backup": true})
 	check(gs.state.visits == legacy.visits and gs.state.clock_minutes == legacy.clock_minutes, "B1 v1 backup restoration remains available")
 
@@ -403,6 +409,7 @@ func _handoff() -> void:
 		"chart": {"birth": "联调出生资料", "pillars": ["丙子", "辛卯", "庚戌", "己卯"], "sector": 2},
 		"subject_id": "npc_subject", "target_name": "两位旧友是否相见"
 	})
+	gs.PeopleBridge.register_legacy_visit(draft, visit, gs._divination)
 	check(registered and saves.write_save(draft).success, "B contract accepts a registered A actor and independent subject")
 	reload_game()
 	check(gs.divination_view().guest.name == "第三方来客" and gs.divination_view().event.subject_id == "npc_subject" and not gs.divination_view().has("birth"), "B contract projects only permitted A data")

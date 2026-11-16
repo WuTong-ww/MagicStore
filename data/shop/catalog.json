@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "items": {
+    "lavender": {"name":"月见草", "kind":"material", "buy":3, "sell":1, "visual_key":"lavender"},
+    "spring_water": {"name":"山泉水", "kind":"material", "buy":2, "sell":1, "visual_key":"spring_water"},
+    "quartz": {"name":"白水晶砂", "kind":"material", "buy":5, "sell":2, "visual_key":"quartz"},
+    "moon_dust": {"name":"月光树脂", "kind":"material", "buy":12, "sell":5, "requires_reputation":2, "visual_key":"moon_dust"},
+    "calming_incense": {"name":"定心香", "kind":"product", "shape":"incense", "purposes":["psychological","environment"], "sell":6, "effect":{"kind":"event","effect_key":"stay_and_ask"}, "visual_key":"calming_incense"},
+    "restorative_draught": {"name":"醒神药水", "kind":"product", "shape":"potion", "purposes":["physical"], "sell":8, "effect":{"kind":"attribute","attribute":"energy","amount":15}, "visual_key":"restorative_draught"},
+    "clarity_crystal": {"name":"澄心晶", "kind":"product", "shape":"crystal", "purposes":["psychological"], "sell":12, "effect":{"kind":"option","option_id":"gentle_followup"}, "visual_key":"clarity_crystal"}
+  },
+  "recipes": {
+    "calming_incense": {"name":"定心香配方", "output":"calming_incense", "ingredients":{"lavender":1,"spring_water":1}, "coins":3, "research_minutes":25, "research_energy":8, "minutes":20, "energy":6},
+    "restorative_draught": {"name":"醒神药水配方", "output":"restorative_draught", "ingredients":{"lavender":1,"spring_water":2}, "coins":4, "research_minutes":30, "research_energy":10, "minutes":25, "energy":8},
+    "clarity_crystal": {"name":"澄心晶配方", "output":"clarity_crystal", "ingredients":{"quartz":1,"spring_water":1}, "coins":5, "research_minutes":35, "research_energy":12, "minutes":30, "energy":10}
+  },
+  "service_material_gift":{"item_id":"quartz", "quantity":1},
+  "gather_sites": {
+    "riverside": {"name":"河畔小径", "minutes":30, "energy":12, "opening":540, "closing":1080, "daily_limit":3, "drops":{"spring_water":1,"lavender":1}, "rare_item":"moon_dust", "rare_reputation":2}
+  }
+}

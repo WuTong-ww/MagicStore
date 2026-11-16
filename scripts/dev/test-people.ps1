@@ -27,14 +27,14 @@ try {
     if (!(Test-Path -LiteralPath (Join-Path $repo '.godot/imported'))) {
         Test-Godot @('--headless', '--path', $repo, '--import')
     }
-    foreach ($name in @('rules', 'memory', 'family_flow', 'arrival_edges', 'feedback', 'distribution', 'director', 'panel', 'demo', 'b_handoff')) {
+    foreach ($name in @('rules', 'generated_person', 'production_config', 'arrival_capacity', 'opening_guests', 'memory', 'family_flow', 'arrival_edges', 'feedback', 'distribution', 'director', 'panel', 'b_handoff')) {
         Test-Godot @('--headless', '--path', $repo, '--script', "res://tests/people/$name.gd")
     }
     foreach ($mode in @('write', 'read')) {
         Test-Godot @('--headless', '--path', $repo, '--script', 'res://tests/people/restart.gd', '--', $mode)
     }
     $ErrorActionPreference = 'Continue'
-    $pythonOutput = & python -m unittest discover -s (Join-Path $repo 'tests/people') -p test_gateway.py -v 2>&1
+    $pythonOutput = & python -m unittest discover -s (Join-Path $repo 'tests/people') -p 'test_*.py' -v 2>&1
     $pythonCode = $LASTEXITCODE
     $ErrorActionPreference = 'Stop'
     $pythonOutput | ForEach-Object {

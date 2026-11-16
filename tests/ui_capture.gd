@@ -137,12 +137,12 @@ func run() -> void:
 func exercise_methods() -> void:
 	await main.run_action("end_visit")
 	await main.run_action("new_game", {"name": "术式界面验收"})
+	check(preload("res://tests/fixtures/legacy_divination_guests.gd").install(game), "method UI explicitly installs previous-version encounter fixtures")
 	await main.run_action("start_visit")
 	await main.run_action("reading")
 	await main.run_action("end_visit")
-	var guests: Array = game.divination_guests()
-	var ordinary: String = guests.filter(func(row: Dictionary) -> bool: return row.label.ends_with("普通样例"))[0].npc_id
-	var reference: String = guests.filter(func(row: Dictionary) -> bool: return row.label.ends_with("作品参考样例"))[0].npc_id
+	var ordinary := "npc_demo_xu"
+	var reference := "npc_demo_ji"
 	for row: Array in [
 		["lenormand", "雷诺曼", "三张牌排成一行", ordinary],
 		["plum", "梅花易数", "用你报的数字", ordinary],

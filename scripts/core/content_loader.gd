@@ -11,13 +11,20 @@ static func load_content(path: String = "res://data/content.json") -> Dictionary
 	if parser.parse(file.get_as_text()) != OK or not parser.data is Dictionary:
 		return _error("内容配置不是有效的 JSON 对象。")
 	var data: Dictionary = parser.data
+	# Three single-card records are retained only to validate existing saves.
+	# New readings use the complete decks in data/oracle/decks.json.
+	if not data.has("cards"):
+		var legacy := JSON.new()
+		if legacy.parse(FileAccess.get_file_as_string("res://data/compatibility/legacy_cards.json")) != OK or not legacy.data is Array:
+			return _error("旧牌面兼容配置无效。")
+		data["cards"] = legacy.data
 	if not data.get("npc") is Dictionary or not data.get("rules") is Dictionary or not data.get("cards") is Array or not data.get("topics") is Array or not data.get("clues") is Dictionary:
 		return _error("内容配置缺少 npc、rules、cards、topics 或 clues。")
 	for key: String in ["npc_id", "name", "role", "case_title", "opening", "returning"]:
 		if not data.npc.get(key) is String or data.npc[key].is_empty():
 			return _error("NPC 配置字段无效：" + key)
 	if data.npc.npc_id != "npc_lin":
-		return _error("本次演示的稳定人物 ID 必须为 npc_lin；迁移人物请先升级存档契约。")
+		return _error("固定来客的稳定人物 ID 必须为 npc_lin；迁移人物请先升级存档契约。")
 	for key: String in RULE_KEYS:
 		var value: Variant = data.rules.get(key)
 		if not (value is int or value is float) or not is_finite(float(value)) or float(value) != floor(float(value)) or value < 0:
@@ -26,7 +33,7 @@ static func load_content(path: String = "res://data/content.json") -> Dictionary
 	if data.rules.max_energy <= 0 or data.rules.opening_minute >= data.rules.closing_minute or data.rules.closing_minute >= 1440:
 		return _error("精力上限或营业时段配置无效。")
 	if data.cards.is_empty() or data.topics.is_empty():
-		return _error("演示至少需要一张牌和一个话题。")
+		return _error("内容配置至少需要一张兼容牌面和一个话题。")
 	var card_ids: Array[String] = []
 	for item: Variant in data.cards:
 		if not item is Dictionary:

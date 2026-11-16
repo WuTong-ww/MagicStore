@@ -5,6 +5,7 @@ extends RefCounted
 const CONFIG_PATH := "res://data/people/templates.json"
 const MAX_INT := 2147483647
 const Memory = preload("res://scripts/people/memory.gd")
+const GeneratedPerson = preload("res://scripts/people/generated_person.gd")
 
 static func load_config() -> Dictionary:
 	var parser := JSON.new()
@@ -43,6 +44,18 @@ static func config_valid(data: Dictionary) -> bool:
 			return false
 		personality_ids.append(personality.id)
 	var family: Dictionary = data.family
+	if not family.is_empty() and not _family_config_valid(family,data,personality_ids):
+		return false
+	var rules: Dictionary = data.arrival
+	for field in ["natural_min", "natural_max", "family_percent", "ordinary_return_percent", "special_return_percent", "family_new_limit_per_day", "family_new_limit_per_slot", "family_slot_minutes", "queue_capacity", "first_minute", "last_minute"]:
+		if not _integer(rules.get(field), 0, 1439):
+			return false
+	if not rules.get("opening_guest",false) is bool or (family.is_empty() and int(rules.family_percent) != 0):
+		return false
+	var family_size: int = family.members.size() if not family.is_empty() else 2
+	return _integer(rules.get("max_total_per_day",20),1,100) and int(rules.natural_min) <= int(rules.natural_max) and int(rules.natural_max) <= 12 and int(rules.family_percent) <= 100 and int(rules.ordinary_return_percent) <= 100 and int(rules.special_return_percent) <= 100 and int(rules.family_new_limit_per_day) >= 1 and int(rules.family_new_limit_per_day) <= family_size and int(rules.family_new_limit_per_slot) >= 1 and int(rules.family_new_limit_per_slot) <= int(rules.family_new_limit_per_day) and int(rules.family_slot_minutes) >= 30 and int(rules.queue_capacity) >= 1 and int(rules.first_minute) >= 540 and int(rules.first_minute) <= int(rules.last_minute) and int(rules.last_minute) < 1320
+
+static func _family_config_valid(family: Dictionary, data: Dictionary, personality_ids: Array) -> bool:
 	if not family.get("members") is Array or family.members.size() != 2 or not family.get("relationship") is Dictionary:
 		return false
 	for field in ["template_id", "source_work", "rarity", "background"]:
@@ -65,17 +78,15 @@ static func config_valid(data: Dictionary) -> bool:
 			return false
 		if member.has("npc_id") and (not member.npc_id is String or member.npc_id.is_empty()):
 			return false
+		if member.has("case_id") and not member.case_id is String:
+			return false
 		if member.has("npc_id"):
 			if fixed_member_ids.has(member.npc_id):
 				return false
 			fixed_member_ids[member.npc_id] = true
 	if family.members[0].key == family.members[1].key or not family.relationship.get("kind") is String or not _integer(family.relationship.get("closeness"), 0, 100):
 		return false
-	var rules: Dictionary = data.arrival
-	for field in ["natural_min", "natural_max", "family_percent", "ordinary_return_percent", "special_return_percent", "family_new_limit_per_day", "family_new_limit_per_slot", "family_slot_minutes", "queue_capacity", "first_minute", "last_minute"]:
-		if not _integer(rules.get(field), 0, 1439):
-			return false
-	return int(rules.natural_min) <= int(rules.natural_max) and int(rules.natural_max) <= 8 and int(rules.family_percent) <= 100 and int(rules.ordinary_return_percent) <= 100 and int(rules.special_return_percent) <= 100 and int(rules.family_new_limit_per_day) >= 1 and int(rules.family_new_limit_per_day) <= family.members.size() and int(rules.family_new_limit_per_slot) >= 1 and int(rules.family_new_limit_per_slot) <= int(rules.family_new_limit_per_day) and int(rules.family_slot_minutes) >= 30 and int(rules.queue_capacity) >= 1 and int(rules.first_minute) >= 540 and int(rules.first_minute) <= int(rules.last_minute) and int(rules.last_minute) < 1320
+	return true
 
 static func create(save_id: String, seed_value: int, clock: int) -> Dictionary:
 	return {
@@ -227,10 +238,17 @@ static func apply_profile_choices(people: Dictionary, config: Dictionary, npc_id
 	return true
 
 static func ensure_family(people: Dictionary, config: Dictionary, rng: RandomNumberGenerator) -> String:
-	var family_id := "family_demo_" + str(people.save_id).trim_prefix("save_")
-	if people.families.has(family_id):
-		return family_id
-	var template: Dictionary = config.family
+	var template: Dictionary = config.get("family",{})
+	if template.is_empty():
+		return ""
+	# Reuse persisted families by template, including historical IDs. New
+	# families use the same generic mechanism without a built-in sample cast.
+	var existing_ids: Array = people.families.keys()
+	existing_ids.sort()
+	for id: String in existing_ids:
+		if people.families[id].get("template_id") == template.template_id:
+			return id
+	var family_id := "family_" + str(template.template_id) + "_" + str(people.save_id).trim_prefix("save_")
 	var members: Array = []
 	var introduced: Array = []
 	# Validate all existing IDs before mutating the family or its members.
@@ -253,6 +271,7 @@ static func ensure_family(people: Dictionary, config: Dictionary, rng: RandomNum
 			"return_bias": personality.return_bias, "familiarity": 0, "trust": 0,
 			"birthday": member.birthday, "zodiac": _zodiac(int(date_parts[1]), int(date_parts[2])), "mbti": member.mbti,
 			"generation": member.generation, "preferences": member.preferences.duplicate(), "background": member.background,
+			"default_case_id": str(member.get("case_id","")),
 			"appearance": _appearance(config, rng), "memories": [], "trust_history": [], "met": false
 			}
 		else:
@@ -260,6 +279,7 @@ static func ensure_family(people: Dictionary, config: Dictionary, rng: RandomNum
 			people.profiles[id]["reference_work"] = template.source_work
 			people.profiles[id]["reference_character"] = member.reference_character
 			people.profiles[id]["rarity"] = template.rarity
+			people.profiles[id]["default_case_id"] = str(member.get("case_id",""))
 		if people.profiles[id].get("met", false):
 			introduced.append(id)
 		members.append(id)
@@ -276,20 +296,28 @@ static func ensure_family(people: Dictionary, config: Dictionary, rng: RandomNum
 	return family_id
 
 static func plan_day(people: Dictionary, config: Dictionary, day: int, reputation: int = 0, forced_count: int = -1, experience: int = 0) -> void:
+	people["arrival_limit_per_day"] = _daily_limit(people,config)
 	var key := str(day)
 	if people.days.has(key) or day < floori(float(people.clock) / 1440.0):
 		return
 	var rng := _random(int(people.seed) + day * 104729)
 	var rules: Dictionary = config.arrival
-	var upper := clampi(int(rules.natural_max) + clampi(floori(float(reputation) / 25.0), -1, 2) + clampi(floori(float(experience) / 10.0), 0, 1), 1, 8)
-	var count := clampi(forced_count, 0, 8) if forced_count >= 0 else rng.randi_range(int(rules.natural_min), upper)
+	var upper := clampi(int(rules.natural_max) + clampi(floori(float(reputation) / 25.0), -1, 3) + clampi(floori(float(experience) / 10.0), 0, 1), 1, 12)
+	var count := clampi(forced_count, 0, 12) if forced_count >= 0 else rng.randi_range(mini(int(rules.natural_min),upper), upper)
+	count = mini(count,maxi(0,_daily_limit(people,config)-arrival_count_on_day(people,day)))
 	if day == floori(float(people.clock) / 1440.0) and int(people.clock) % 1440 >= 1320:
 		count = 0
 	var ids: Array = []
 	for index in range(count):
+		if people.arrivals.has("arrival_%d_%d" % [day,index]):
+			continue
 		var npc_id := _ordinary(people, config, rng, day, index)
 		var at := day * 1440 + rng.randi_range(int(rules.first_minute), int(rules.last_minute))
 		at = maxi(at, int(people.clock))
+		# Consume the ordinary time draw above even for the opening guest, so
+		# personalities, later arrivals and family chances keep their RNG order.
+		if day > 0 and index == 0 and rules.get("opening_guest",false) and int(people.clock) <= day*1440+540:
+			at = day*1440+540
 		var id := "arrival_%d_%d" % [day, index]
 		people.arrivals[id] = {"arrival_id": id, "npc_id": npc_id, "source": "natural", "at": at,
 			"deadline": -1, "state": "planned", "intent": _pick(["divination", "shopping", "both"], rng),
@@ -303,7 +331,7 @@ static func plan_day(people: Dictionary, config: Dictionary, day: int, reputatio
 			var added := 0
 			var slots := {}
 			for npc_id: String in family.members:
-				if added >= int(rules.family_new_limit_per_day):
+				if added >= int(rules.family_new_limit_per_day) or arrival_count_on_day(people,day) >= _daily_limit(people,config):
 					break
 				var pending: bool = people.arrivals.values().any(func(row: Dictionary) -> bool: return row.npc_id == npc_id and row.state in ["planned", "queued", "in_service"])
 				if npc_id in family.introduced or pending:
@@ -318,7 +346,7 @@ static func plan_day(people: Dictionary, config: Dictionary, day: int, reputatio
 				var id := "arrival_family_%d" % day if added == 0 else "arrival_family_%d_%d" % [day, added]
 				people.arrivals[id] = {"arrival_id": id, "npc_id": npc_id, "source": "family_first", "at": family_at,
 					"deadline": -1, "state": "planned", "intent": "divination", "urgency": 5, "schedule_end": day * 1440 + 1320,
-					"referrer_npc_id": "", "case_id": "archive" if npc_id == "npc_demo_ji" else "", "visit_id": ""}
+					"referrer_npc_id": "", "case_id": _profile_case_id(people,npc_id), "visit_id": ""}
 				ids.append(id)
 				slots[slot] = int(slots.get(slot, 0)) + 1
 				added += 1
@@ -327,6 +355,8 @@ static func plan_day(people: Dictionary, config: Dictionary, day: int, reputatio
 	var known: Array = people.profiles.keys()
 	known.sort()
 	for npc_id: String in known:
+		if arrival_count_on_day(people,day) >= _daily_limit(people,config):
+			break
 		var profile: Dictionary = people.profiles[npc_id]
 		if not profile.met or int(profile.get("cooldown_until", 0)) > day * 1440 + int(rules.last_minute):
 			continue
@@ -335,10 +365,46 @@ static func plan_day(people: Dictionary, config: Dictionary, day: int, reputatio
 			var id := "arrival_return_%d_%s" % [day, npc_id]
 			var at := maxi(day * 1440 + rng.randi_range(int(rules.first_minute), int(rules.last_minute)), int(people.clock) + 1)
 			at = _next_return_slot(profile, at)
-			if at >= 0 and floori(float(at) / 1440.0) == day and schedule_return(people, npc_id, id, at):
+			if at >= 0 and floori(float(at) / 1440.0) == day and schedule_return(people, npc_id, id, at, config):
 				ids.append(id)
 				break
 	people.days[key] = {"day": day, "natural_count": count, "arrival_ids": ids}
+
+static func arrival_count_on_day(people: Dictionary, day: int) -> int:
+	var count := 0
+	for row: Dictionary in people.get("arrivals",{}).values():
+		if row.get("state") not in ["planned","queued","in_service","completed","left"]:
+			continue
+		if floori(float(row.get("at",-1440))/1440.0) == day or day in row.get("counted_days",[]):
+			count += 1
+	return count
+
+static func _daily_limit(people: Dictionary, config: Dictionary = {}) -> int:
+	return int(config.arrival.get("max_total_per_day",20)) if config.has("arrival") else int(people.get("arrival_limit_per_day",20))
+
+static func _arrival_counts_on_day(row: Dictionary, day: int) -> bool:
+	return floori(float(row.get("at",-1440))/1440.0) == day or day in row.get("counted_days",[])
+
+static func next_available_arrival(people: Dictionary, config: Dictionary, preferred: int, profile: Dictionary = {}) -> int:
+	var base_at := maxi(preferred,int(people.clock))
+	var from_at := maxi(base_at,int(profile.get("cooldown_until",0)))
+	var schedule: Variant = profile.get("return_schedule",{"weekdays":[0,1,2,3,4,5,6],"start":540,"end":1320})
+	if not _integer(from_at,0,MAX_INT) or not _valid_return_schedule(schedule):
+		return -1
+	var initial_day := floori(float(base_at)/1440.0)
+	for offset: int in range(14):
+		var day := initial_day+offset
+		var weekday_available := false
+		for weekday: Variant in schedule.weekdays:
+			if int(weekday) == (day+1)%7:
+				weekday_available = true
+				break
+		if not weekday_available or arrival_count_on_day(people,day) >= _daily_limit(people,config):
+			continue
+		var at := maxi(from_at,day*1440+maxi(540,int(schedule.start)))
+		if at < day*1440+mini(1320,int(schedule.end)) and at <= MAX_INT:
+			return at
+	return -1
 
 static func advance(people: Dictionary, config: Dictionary, until: int) -> bool:
 	if until < int(people.clock):
@@ -454,16 +520,24 @@ static func begin(people: Dictionary, arrival_id: String, visit_id: String) -> b
 			family.introduced.append(row.npc_id)
 	return true
 
-static func book(people: Dictionary, arrival_id: String, at: int, guest_agreed: bool) -> bool:
+static func book(people: Dictionary, arrival_id: String, at: int, guest_agreed: bool, config: Dictionary = {}) -> bool:
 	if not guest_agreed or not people.arrivals.has(arrival_id):
 		return false
 	var row: Dictionary = people.arrivals[arrival_id]
 	var minute := at % 1440
 	if row.state != "queued" or at <= int(people.clock) or minute < 540 or minute >= 1320:
 		return false
+	var target_day := floori(float(at)/1440.0)
+	if not _arrival_counts_on_day(row,target_day) and arrival_count_on_day(people,target_day) >= _daily_limit(people,config):
+		return false
 	for other: Dictionary in people.arrivals.values():
 		if other.arrival_id != arrival_id and other.state == "planned" and other.source == "appointment" and absi(int(other.at) - at) < 30:
 			return false
+	var counted: Array = row.get("counted_days",[]).duplicate()
+	for day: int in [floori(float(row.at)/1440.0),target_day]:
+		if day not in counted:
+			counted.append(day)
+	row["counted_days"] = counted
 	row.state = "planned"
 	row.source = "appointment"
 	row.at = at
@@ -473,7 +547,7 @@ static func book(people: Dictionary, arrival_id: String, at: int, guest_agreed: 
 	_update_referral(people, row, "scheduled", int(people.clock))
 	return true
 
-static func schedule_return(people: Dictionary, npc_id: String, arrival_id: String, at: int) -> bool:
+static func schedule_return(people: Dictionary, npc_id: String, arrival_id: String, at: int, config: Dictionary = {}) -> bool:
 	if not people.profiles.has(npc_id) or not people.profiles[npc_id].met or people.arrivals.has(arrival_id) or at <= int(people.clock):
 		return false
 	if at < int(people.profiles[npc_id].get("cooldown_until", 0)):
@@ -482,13 +556,28 @@ static func schedule_return(people: Dictionary, npc_id: String, arrival_id: Stri
 		return false
 	if at % 1440 < 540 or at % 1440 >= 1320:
 		return false
+	if arrival_count_on_day(people,floori(float(at)/1440.0)) >= _daily_limit(people,config):
+		return false
 	for existing: Dictionary in people.arrivals.values():
 		if existing.npc_id == npc_id and existing.state in ["planned", "queued", "in_service"]:
 			return false
 	people.arrivals[arrival_id] = {"arrival_id": arrival_id, "npc_id": npc_id, "source": "return", "at": at,
 		"deadline": -1, "state": "planned", "intent": "divination", "urgency": 0, "schedule_end": mini(at + 90, floori(float(at) / 1440.0) * 1440 + 1320), "referrer_npc_id": "",
-		"case_id": "invitation" if npc_id == "npc_lin" else ("archive" if npc_id == "npc_demo_ji" else ""), "visit_id": ""}
+		"case_id": _profile_case_id(people,npc_id), "visit_id": ""}
 	return true
+
+static func _profile_case_id(people: Dictionary, npc_id: String) -> String:
+	if npc_id == "npc_lin":
+		return "invitation"
+	var configured: String = str(people.profiles.get(npc_id,{}).get("default_case_id",""))
+	if not configured.is_empty():
+		return configured
+	# Old saves can retain an actual case without reintroducing its former
+	# demonstration character into the production configuration.
+	for arrival: Dictionary in people.arrivals.values():
+		if arrival.get("npc_id") == npc_id and not str(arrival.get("case_id","")).is_empty():
+			return str(arrival.case_id)
+	return ""
 
 static func finish(people: Dictionary, arrival_id: String, visit_id: String, summary: String) -> bool:
 	if not people.arrivals.has(arrival_id):
@@ -538,11 +627,13 @@ static func apply_effect(people: Dictionary, effect: Dictionary) -> bool:
 	people.effect_ids.append(effect.effect_id)
 	return true
 
-static func schedule_referral(people: Dictionary, referral_id: String, at: int) -> bool:
+static func schedule_referral(people: Dictionary, referral_id: String, at: int, config: Dictionary = {}) -> bool:
 	if not people.referrals.has(referral_id) or at <= int(people.clock) or at % 1440 < 540 or at % 1440 >= 1320:
 		return false
 	var referral: Dictionary = people.referrals[referral_id]
 	if referral.state != "proposed" or not people.profiles.has(referral.target_npc_id):
+		return false
+	if arrival_count_on_day(people,floori(float(at)/1440.0)) >= _daily_limit(people,config):
 		return false
 	for existing: Dictionary in people.arrivals.values():
 		if existing.npc_id == referral.target_npc_id and existing.state in ["planned", "queued", "in_service"]:
@@ -563,7 +654,7 @@ static func _update_referral(people: Dictionary, arrival: Dictionary, status: St
 	referral.state = status
 	referral["updated_at"] = at
 
-static func schedule_feedback(people: Dictionary, job: Dictionary) -> bool:
+static func schedule_feedback(people: Dictionary, job: Dictionary, config: Dictionary = {}) -> bool:
 	var event_id: Variant = job.get("event_id")
 	var npc_id: Variant = job.get("npc_id")
 	if not event_id is String or event_id.is_empty() or not npc_id is String or not people.profiles.has(npc_id) or people.feedback_jobs.has(event_id):
@@ -582,7 +673,7 @@ static func schedule_feedback(people: Dictionary, job: Dictionary) -> bool:
 	for existing: Dictionary in people.arrivals.values():
 		if existing.npc_id == npc_id and existing.state in ["planned", "queued", "in_service"]:
 			return false
-	var at := _next_return_slot(profile, maxi(maxi(int(job.available_at), int(people.clock) + 1), int(profile.get("cooldown_until", 0))))
+	var at := next_available_arrival(people,config,maxi(maxi(int(job.available_at), int(people.clock) + 1), int(profile.get("cooldown_until", 0))),profile)
 	if at < 0:
 		return false
 	var id: String = "arrival_feedback_" + str(event_id)
@@ -688,8 +779,14 @@ static func public_profile(people: Dictionary, npc_id: String) -> Dictionary:
 	for memory: Dictionary in profile.memories:
 		if not memory.has("memory_id"):
 			public_memories.append(memory.duplicate(true))
-	return {"npc_id": npc_id, "name": profile.name, "role": profile.role, "appearance": profile.appearance.duplicate(true),
+	var view := {"npc_id": npc_id, "name": profile.name, "role": profile.role, "appearance": profile.appearance.duplicate(true),
 		"familiarity": profile.familiarity, "trust": profile.trust, "memories": public_memories}
+	if profile.get("generation_member") == "person" and profile.get("generated_bundle") is Dictionary:
+		view.merge({"background":profile.background,"preferences":profile.preferences.duplicate(),"speech_style":profile.speech_style,"generation_source":profile.generation.source})
+	elif profile.get("generation_member") == "contact" and people.profiles.has(profile.get("generated_owner_id")):
+		var owner: Dictionary = people.profiles[profile.generated_owner_id]
+		view.merge({"background":profile.background,"preferences":profile.preferences.duplicate(),"speech_style":profile.speech_style,"generation_source":owner.get("generation",{}).get("source", "offline")})
+	return view
 
 static func model_persona(people: Dictionary, npc_id: String) -> Dictionary:
 	## Trusted server input: do not expose the full profile or undisclosed facts.
@@ -742,6 +839,8 @@ static func validate(people: Variant) -> String:
 			return "人物字段无效: " + key
 	if not people.get("effect_ids") is Array or not people.get("observations") is Array or not _integer(people.get("clock"), 0, MAX_INT):
 		return "人物时钟或记录无效"
+	if not _integer(people.get("arrival_limit_per_day",20),1,100):
+		return "每日来访上限无效"
 	for id in people.profiles:
 		var profile: Variant = people.profiles[id]
 		if not id is String or not profile is Dictionary or profile.get("npc_id") != id or not profile.get("name") is String or not profile.get("met") is bool:
@@ -798,12 +897,26 @@ static func validate(people: Variant) -> String:
 			introductions[member] = true
 	var active_count := 0
 	var visit_ids := {}
+	var daily_totals := {}
 	for id in people.arrivals:
 		var row: Variant = people.arrivals[id]
 		if not row is Dictionary or row.get("arrival_id") != id or not people.profiles.has(row.get("npc_id")) or row.get("state") not in ["planned", "queued", "in_service", "completed", "left"]:
 			return "到店记录无效"
 		if not _integer(row.get("at"), 0, MAX_INT) or not _integer(row.get("deadline"), -1, MAX_INT):
 			return "到店时间无效"
+		if not row.get("counted_days",[]) is Array:
+			return "到店名额记录无效"
+		var occupied := {floori(float(row.at)/1440.0):true}
+		var unique_days := {}
+		for day: Variant in row.get("counted_days",[]):
+			if not _integer(day,0,floori(float(MAX_INT)/1440.0)) or unique_days.has(int(day)):
+				return "到店名额日期无效"
+			unique_days[int(day)] = true
+			occupied[int(day)] = true
+		for day: int in occupied:
+			daily_totals[day] = int(daily_totals.get(day,0))+1
+			if int(daily_totals[day]) > _daily_limit(people):
+				return "每日来访人数超过上限"
 		if row.state == "queued" and int(row.deadline) <= int(people.clock):
 			return "候客已经过期"
 		if not row.get("visit_id") is String:
@@ -868,7 +981,7 @@ static func validate(people: Variant) -> String:
 			return "重复的经营行为情境"
 		observation_topics[topic_identity] = true
 		observation_ids[observation.action_id] = true
-	return ""
+	return GeneratedPerson.validate_people(people)
 
 static func _observation_context_valid(context: Dictionary, alternatives: int) -> bool:
 	var choices: Variant = context.get("choices")

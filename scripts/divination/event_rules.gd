@@ -1,7 +1,7 @@
 extends RefCounted
 ## The case outcome, forecast evaluation and player disclosure are separate records.
 
-const Economy = preload("res://scripts/divination/demo_economy.gd")
+const Economy = preload("res://scripts/divination/economy.gd")
 const CONDITIONS := {"always": "无附加条件", "if_message": "若先发消息确认", "if_attend": "若直接去展览"}
 
 static func create(visit: Dictionary, definition: Dictionary) -> Dictionary:

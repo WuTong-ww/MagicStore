@@ -1,9 +1,10 @@
 extends SceneTree
 
 const People = preload("res://scripts/people/people.gd")
+const FixtureConfig = preload("res://tests/people/fixture_config.gd")
 
 func _initialize() -> void:
-	var config := People.load_config()
+	var config := FixtureConfig.reference_family()
 	var original_total := 0
 	var reference_total := 0
 	var family_triggers := 0

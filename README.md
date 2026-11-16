@@ -1,14 +1,20 @@
 # MagicStore · 零点杂货铺
 
-一个本地运行、自动保存的 Godot 2D 桌面开发案例。**工程入口就是本目录的 `project.godot`**，主场景 `scenes/main.tscn`。原始构想保留于 `docs/游戏介绍.md`。B 组联调版可试玩正式报价、九项术式、邀请案及前世案，使用本地对话和 A/C 样例。操作及验收见 [B 组交接](docs/divination.md)。
+一个本地运行、自动保存的 Godot 2D 神秘学小店游戏。**工程入口是本目录的 `project.godot`**，主场景 `scenes/main.tscn`。当前已整合人物客流、问卜案例与经营系统：七处场景、采购和采集、顾客赠料、研发制作、商品效果、学习成长、账簿，以及可取消和回退的 HTTP 对话。原始构想见 `docs/游戏介绍.md`，当前操作与验收见 [功能清单](docs/features.md)。
 
-当前可玩的内容、演示数值和已验证范围见[功能清单](docs/features.md)。
+当前内容、数值配置和已验证范围见[功能清单](docs/features.md)。
+
+此前针对林照晚的 84 次真实交谈，以及最终 14 次平均等待 3.14 秒的测量范围，见[早期对白实测](docs/live-dialogue-evaluation.md)。原创新人物与四模型切换另行验证，结果见[新来客流程](docs/people-generation.md)及[接口切换验证](docs/api-model-switch.md)，不能将林照晚的旧数据视为所有模型与人物的表现。
+
+新增[原创新来客流程](docs/people-generation.md)：后台并发生成完整人设与专属案例，独立审核后入档并安排到店；支持熟人介绍、正式回访和跨次共同记忆。并发与客流配额留在后台配置，游戏只呈现人物和经营流程。
+
+咨询区支持[随谈话更新的后续问题](docs/followup-questions.md)：模型和对白一起返回2–3条建议，经审核后成为可点击的问题；结合已知线索继续推进，不固定重复同一排菜单。
 
 ## 环境与启动
 
-**本机默认工作目录已迁移到 `D:\MagicStore`。** 双击根目录 `start-game.cmd` 运行游戏，或 `start-editor.cmd` 打开编辑器；两个入口都会把存档、日志、缓存和临时文件留在当前工程目录。Git 历史、下载好的引擎、导出模板和交付包均已迁移。旧 C 盘路径仅保留指向 D 盘的目录链接，供当前 Codex 聊天兼容使用，不存放另一份工程。
+双击根目录 `start-game.cmd` 运行游戏，或 `start-editor.cmd` 打开编辑器。路径由脚本所在目录解析，可在 `E:\MagicStore` 或其他目录运行；存档、日志、缓存和临时文件均留在当前工程目录。
 
-四人统一使用 **Godot 4.6.3 stable 标准版**，实际引擎输出 `4.6.3.stable.official.7d41c59c4`。GDScript，Compatibility/OpenGL，Windows x86_64。版本、官方下载地址和 SHA256 锁在 `scripts/dev/toolchain.json`。无需 .NET 或额外运行库。
+协作成员统一使用 **Godot 4.6.3 stable 标准版**，实际引擎输出 `4.6.3.stable.official.7d41c59c4`。GDScript，Compatibility/OpenGL，Windows x86_64。版本、官方下载地址和 SHA256 锁在 `scripts/dev/toolchain.json`。无需 .NET 或额外运行库。
 
 ```powershell
 git clone https://github.com/WuTong-ww/MagicStore.git
@@ -19,35 +25,35 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/dev/run.ps1 -Editor
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/dev/run.ps1
 ```
 
-首次脚本联网下载官方引擎；随后游戏完全离线。仅该脚本进程使用 ExecutionPolicy Bypass，不修改系统策略。下载校验失败会停止。也可以手工从 [Godot 4.6.3 官方归档](https://godotengine.org/download/archive/4.6.3-stable/) 下载标准 Windows x86_64 引擎，解压到 `.tools/godot`，在编辑器“导入”中选择 `project.godot`，按 F6 运行主场景或 F5 运行工程。
+首次脚本联网下载官方引擎；游戏默认使用离线对话，也可在首页「设置」中填写 AI 接口 URL、模型名称及 API Key。仅该脚本进程使用 ExecutionPolicy Bypass，不修改系统策略。下载校验失败会停止。也可以手工从 [Godot 4.6.3 官方归档](https://godotengine.org/download/archive/4.6.3-stable/) 下载标准 Windows x86_64 引擎，解压到 `.tools/godot`，在编辑器“导入”中选择 `project.godot`，按 F6 运行主场景或 F5 运行工程。
 
-本机引擎：`D:\MagicStore\.tools\godot\Godot_v4.6.3-stable_win64_console.exe`。编辑器设置使用 `_sc_` 便携模式，留在 `.tools/godot/editor_data`。同伴无需采用相同绝对路径。中文字体随源代码提供，不依赖系统字体。
+引擎位置：`<工程目录>/.tools/godot/Godot_v4.6.3-stable_win64_console.exe`。编辑器设置使用 `_sc_` 便携模式，留在 `.tools/godot/editor_data`。同伴无需采用相同绝对路径。中文字体随源代码提供，不依赖系统字体。
 
-## 原型操作参考
+## 游戏操作
 
-打开存档簿新建店铺（不会覆盖旧档），或选择已有记录继续。前台请林照晚进入咨询区；提问按钮和中文自由输入均可获得回复。输入只通过“发送”按钮提交，Enter 是编辑行为。未知话题会请求澄清；界面明确标注本地开发 Mock。
+打开存档簿新建店铺（不会覆盖旧档），或选择已有记录继续。在前台接待实际候客队列中的来客，进入咨询区后可点击问题或输入中文。回车发送，Shift+回车换行，也可点击“发送”按钮。首页设置可配置在线接口；未配置或核验失败时使用获准的本地话题，界面显示实际对话模式。
 
 询问邀请、回信能获得两条线索。塔罗报价时选择本次问题，从 78 张牌中抽取三张。翻牌后会看到牌面、结合问题和已知线索的推想，以及能继续核对的细节。可把自己的解释记为待验证假设，之后免费重看原牌阵和当时的解读。用其他术式问同一个问题后，可在案例手记查看跨术式对照。回前台、继续咨询、关闭重开均可恢复。结束接待后可查看经历，次日回访沿用 `npc_id` 并生成新 `visit_id`。
 
 全部成功动作自动写盘，成功保存后才更新资源和显示结果；失败会提示并保留旧状态。不要同时运行多个游戏进程操作同一存档（当前不提供跨进程锁）。
 
-## 原型演示数值
+## 当前初始配置
 
 | 项目 | 值 |
 | --- | --- |
 | 店长起始金币 / 精力上限 | 40 / 100 |
-| 顾客初始预算 | 60，跨日保留，不自动补充 |
+| 林照晚基础预算 | 60，跨日保留，不自动补充 |
 | 三牌塔罗 | 顾客付 20 金币，店长收 20，精力 −25，时间 +30 分钟 |
 | 每次成功交谈 | 时间 +5 分钟，包括澄清；不消耗金币或精力 |
 | 休息 | +60 分钟，精力 +30，上限 100；满精力不执行 |
 | 营业时段 | 每日 09:00–22:00，动作不能越过打烊时间 |
 | 下一天 | 到次日 09:00，精力回满；必须先结束接待 |
 
-这些不是最终设计值，统一修改 `data/content.json`。现实打字、阅读、动画和等待 provider 不推进时钟。当前预算支持三次收费，之后仍可交谈、结束；正式预算补给和客流规则留待设计。
+这些基础数值配置在 `data/content.json`，并非最终平衡值；人物客流、经营商品和成长另有各自的数据配置，见[功能清单](docs/features.md)。现实打字、阅读、动画和网络等待不推进时钟。上表的基础顾客预算可支付三次该项服务，余额不足时仍可交谈或结束接待；实际来访由人物排程和统一客流规则决定。
 
 ## 存档与恢复
 
-正式存档仍使用 `user://saves`。默认通过根目录启动入口或 `scripts/dev/run.ps1` 启动时，本机实际位置为 `D:\MagicStore\.runtime\appdata\ZeroHourStore\saves`；日志同样位于 `.runtime`，测试继续使用 `.tools/test-*` 隔离目录。启动脚本只调整子进程环境，退出后恢复，不修改 Windows 的全局环境变量。此前试玩的两个存档和备份已保留到新默认目录。
+正式存档使用 `user://saves`。默认通过根目录启动入口或 `scripts/dev/run.ps1` 启动时，实际位置为 `<工程目录>/.runtime/appdata/ZeroHourStore/saves`；日志同样位于 `.runtime`，测试使用 `.tools/test-*` 隔离目录。启动脚本只调整子进程环境，退出后恢复，不修改 Windows 的全局环境变量。
 
 独立试玩包请使用随包的 `StartGame.cmd`，数据保存在解压目录内。绕过启动入口而直接运行引擎或 `ZeroHourStore.exe`，Godot 仍会采用系统 `%APPDATA%`，可能写入 C 盘，因此本机默认使用启动脚本。
 
@@ -75,11 +81,11 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/dev/run.ps1 -Export
 
 导出使用 `export_presets.cfg` 的 Windows Desktop，模板位于 `.tools/templates`；产物 `build/windows/ZeroHourStore.exe` 内嵌 PCK，无需 Godot 编辑器。发布时一并附带字体许可证和第三方说明。执行包未签名；不修改系统安全设置。具体已运行检查、画面检查及未验证项见 `docs/verification.md`。
 
-手工验收：新建 → 前台 → 接待 → 一个问题按钮 → 中文输入并发送 → 确认塔罗 → 检查双方金币/精力/时间 → 返回/继续原接待 → 关闭重开/读档检查原牌 → 结束 → 查看经历 → 休息/下一天 → 再次接待 → 切换另一存档。另请用自己常用输入法检查候选词选词和回车都不误发，在 1280×720、1920×1080 检查布局。
+手工验收：新建 → 前台 → 接待 → 一个问题按钮 → 中文输入并回车发送 → Shift+回车换行 → 确认塔罗 → 检查双方金币/精力/时间 → 返回/继续原接待 → 关闭重开/读档检查原牌 → 结束 → 查看经历 → 休息/下一天 → 再次接待 → 切换另一存档。另请用自己常用输入法检查候选词确认不会误发，在 1280×720、1920×1080 检查布局。
 
 ## 离线交接包
 
-本次实际产物放在 `build/`（均不提交 Git）：
+构建产物放在 `build/`（均不提交 Git）；具体文件是否存在取决于已运行的打包命令：
 
 - `MagicStore-source.zip`：完整工程源文件、字体、文档、测试与脚本。
 - `MagicStore-environment-win64.zip`：固定引擎、Windows 模板与许可证；解压到源码目录，和现有目录合并后即可离线开发。不要执行 bootstrap 重新下载，直接用 `run.ps1 -Editor` / `-Test` / `-Export`。
@@ -87,10 +93,12 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/dev/run.ps1 -Export
 
 源码和环境可重打包：`powershell -NoProfile -ExecutionPolicy Bypass -File scripts/dev/package.ps1 -WithEnvironment`。GitHub 拉取源代码加在线 bootstrap 是日常协作方式；离线环境包供网络受限的同伴单独传递，避免把大型二进制放进 Git 历史。
 
+主游戏统一使用 `start-game.cmd` / `project.godot`。早期独立人物演示入口已撤除，开发历史见[原型历史说明](docs/archive/people-prototype-history.md)。历史测试报告和本地证据保留，不作为当前入口。
+
 ## 协作与范围
 
 仓库使用 `main` 作为默认分支。引擎、导出模板、缓存、构建产物、测试存档和密钥都被 `.gitignore` 排除。`.gd.uid` 和资源 `.import` 设置随源码保留，团队拉取后可重新导入工程。
 
-目录与分工见 `docs/team.md`，场景树、信号、动作及 provider 示例见 `docs/contracts.md`。B 组案例在联调环境中可运行。真实 LLM、稀有家族生成、正式客流、储物柜、工坊、采购采集由各组按制作单整合。正式 AI 密钥只放代理服务端。
+目录与分工见 `docs/team.md`，场景树、信号、动作及 provider 示例见 `docs/contracts.md`。A/B/C 已通过公共状态、时钟和存档整合。本地规则来客继续使用既有案例；后台模型创作的来客拥有独立人设与专属案例。正式人物美术仍可由内容组扩充。HTTP 同时支持直接 Chat Completions 和 A 的网关：生成器结合人物、来访和共同记忆写对白，单独核验通过后保留模型原文；未通过时回退。客户端直接连接 AI 时，API Key 仅在运行内存中使用；选择 A 的网关模式时，上游密钥仍只放代理服务端。
 
 占位 SVG 是本工程原创可替换资源；中文字体为 [Google Fonts Noto Sans SC](https://github.com/google/fonts/tree/main/ofl/notosanssc)，许可证随附 `assets/fonts/OFL.txt`。来源及本机文件校验值见 `docs/third-party.md`。

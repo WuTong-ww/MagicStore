@@ -17,6 +17,8 @@ var face: OptionButton
 var hair: OptionButton
 var outfit: OptionButton
 var evidence: ItemList
+var archive: OptionButton
+var _archive_npc_id := ""
 
 func _ready() -> void:
 	var margin := MarginContainer.new()
@@ -46,6 +48,10 @@ func _ready() -> void:
 	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	columns.add_child(right)
 	right.add_child(_label("来客与本局记录", 22))
+	archive = OptionButton.new()
+	archive.name = "KnownPeople"
+	archive.item_selected.connect(_select_archive)
+	right.add_child(archive)
 	detail = RichTextLabel.new()
 	detail.bbcode_enabled = false
 	detail.fit_content = false
@@ -56,7 +62,7 @@ func _ready() -> void:
 	evidence.custom_minimum_size.y = 96
 	evidence.item_selected.connect(_evidence_activated)
 	right.add_child(evidence)
-	right.add_child(_label("店长外观（部件占位）", 16))
+	right.add_child(_label("店长外观", 16))
 	var appearance := HBoxContainer.new()
 	right.add_child(appearance)
 	face = _choice(appearance, "脸型", "face")
@@ -97,6 +103,22 @@ func refresh() -> void:
 	if not is_instance_valid(queue):
 		return
 	queue.clear()
+	archive.clear()
+	archive.add_item("查看已结识的来客")
+	archive.set_item_metadata(0,"")
+	var archive_index := 0
+	var profiles: Dictionary = view.get("profiles",{})
+	var profile_ids: Array = profiles.keys()
+	profile_ids.sort()
+	for id: String in profile_ids:
+		archive.add_item(str(profiles[id].get("name","来客")))
+		var index := archive.item_count-1
+		archive.set_item_metadata(index,id)
+		if id == _archive_npc_id:
+			archive_index = index
+	archive.select(archive_index)
+	if archive_index == 0:
+		_archive_npc_id = ""
 	evidence.clear()
 	for row: Dictionary in view.get("report", {}).get("evidence", []).slice(-5):
 		evidence.add_item("%s记录 · 查看来源" % {"question": "提问", "advice": "建议", "service": "服务"}.get(row.get("kind", ""), "行为"))
@@ -104,6 +126,9 @@ func refresh() -> void:
 	for row: Dictionary in view.get("queue", []):
 		queue.add_item("%s · %s" % [row.get("name", "来客"), row.get("waiting_hint", "等待中")])
 		queue.set_item_metadata(queue.item_count - 1, row.get("arrival_id", ""))
+	if archive_index > 0:
+		_select_archive(archive_index)
+		return
 	if queue.item_count > 0:
 		queue.select(0)
 		_select(0)
@@ -117,12 +142,18 @@ func _select(index: int) -> void:
 	if index < 0 or index >= rows.size():
 		return
 	var row: Dictionary = rows[index]
+	_archive_npc_id = ""
+	archive.select(0)
 	var intent: String = {"divination": "希望问卜", "shopping": "希望购物", "both": "希望问卜并看看商品"}.get(row.get("intent", ""), "来意待确认")
 	var introduced: String = "由%s介绍" % row.referrer_name if not str(row.get("referrer_name", "")).is_empty() else ""
 	var profile: Dictionary = view.get("profiles", {}).get(row.get("npc_id", ""), {})
 	var known := ""
 	if not profile.is_empty():
 		known = "熟悉度 %s · 信任 %s" % [profile.get("familiarity", 0), profile.get("trust", 0)]
+		if not str(profile.get("background","")).is_empty():
+			known += "\n" + str(profile.background)
+		if profile.get("preferences") is Array and not profile.preferences.is_empty():
+			known += "\n平时喜欢：" + "、".join(profile.preferences)
 		var memories: Array = profile.get("memories", [])
 		if not memories.is_empty():
 			var latest: Dictionary = memories.back()
@@ -130,6 +161,31 @@ func _select(index: int) -> void:
 	detail.text = "%s\n%s\n%s\n%s\n%s\n%s\n\n%s" % [row.get("name", "来客"), row.get("role", ""), intent, row.get("waiting_hint", ""), introduced, known, _report_text()]
 	start_button.disabled = false
 	book_button.disabled = false
+
+func _select_archive(index: int) -> void:
+	var id := str(archive.get_item_metadata(index)) if index >= 0 and index < archive.item_count else ""
+	if id.is_empty():
+		_archive_npc_id = ""
+		refresh()
+		return
+	var profile: Dictionary = view.get("profiles",{}).get(id,{})
+	if profile.is_empty():
+		return
+	_archive_npc_id = id
+	queue.deselect_all()
+	start_button.disabled = true
+	book_button.disabled = true
+	var lines: Array = [str(profile.get("name","来客")),str(profile.get("role","")),"熟悉度 %s · 信任 %s" % [profile.get("familiarity",0),profile.get("trust",0)]]
+	if not str(profile.get("background","")).is_empty():
+		lines.append(str(profile.background))
+	if profile.get("preferences") is Array and not profile.preferences.is_empty():
+		lines.append("平时喜欢：" + "、".join(profile.preferences))
+	for relation: Dictionary in profile.get("relationships",[]):
+		lines.append("%s：%s" % [str(relation.get("kind","认识的人")),str(relation.get("other_name",""))])
+	lines.append("\n一起聊过的事")
+	for memory: Dictionary in profile.get("memories",[]).slice(-6):
+		lines.append(str(memory.get("text",memory.get("summary",""))))
+	detail.text = "\n".join(lines)
 
 func _report_text() -> String:
 	var report: Dictionary = view.get("report", {})

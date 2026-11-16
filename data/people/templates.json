@@ -22,14 +22,6 @@
     "preference": {"plants": "喜欢植物。", "old_things": "喜欢留意旧物。", "music": "闲暇时喜欢听音乐。", "walks": "喜欢散步。"},
     "speech_style": {"reflective": "回答前习惯先想一想。", "gentle": "语气温和，愿意慢慢解释。", "direct": "说话简洁，偏向先讲眼前的事。"}
   },
-  "family": {
-    "template_id": "family_red_mansion_demo", "source_work": "红楼梦", "rarity": "rare",
-    "background": "住在旧宅里的亲族，彼此熟悉，也有各自没有说出口的心事。",
-    "members": [
-      {"key": "ji", "npc_id": "npc_demo_ji", "name": "纪寄棠", "role": "寄居旧宅的写诗人", "reference_character": "林黛玉", "personality": "reflective", "personality_text": "敏感细腻，重视真诚，有防备也有锋芒。", "birthday": "1997-04-07", "mbti": "INFJ", "generation": "同辈", "preferences": ["诗稿", "安静的园子"], "background": "寄居旧宅，珍视诗稿，也在意亲人是否真正理解自己。"},
-      {"key": "bao", "name": "纪宝闻", "role": "照看旧宅藏书的人", "reference_character": "贾宝玉", "personality": "outgoing", "personality_text": "重情而好奇，常用自己的方式关心亲近的人。", "birthday": "1996-06-09", "mbti": "ENFP", "generation": "同辈", "preferences": ["诗文", "朋友", "园子"], "background": "在旧宅照看藏书，习惯留意亲友的情绪，也常为他们的隔阂着急。"}
-    ],
-    "relationship": {"kind": "表亲", "closeness": 70}
-  },
-  "arrival": {"natural_min": 0, "natural_max": 5, "family_percent": 8, "ordinary_return_percent": 20, "special_return_percent": 20, "family_new_limit_per_day": 1, "family_new_limit_per_slot": 1, "family_slot_minutes": 120, "queue_capacity": 4, "first_minute": 570, "last_minute": 1200}
+  "family": {},
+  "arrival": {"natural_min": 1, "natural_max": 8, "opening_guest": true, "max_total_per_day": 20, "family_percent": 0, "ordinary_return_percent": 20, "special_return_percent": 20, "family_new_limit_per_day": 1, "family_new_limit_per_slot": 1, "family_slot_minutes": 120, "queue_capacity": 6, "first_minute": 570, "last_minute": 1200}
 }

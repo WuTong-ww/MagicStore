@@ -6,13 +6,60 @@ extends Node
 const ENVELOPE_FORMAT := "midnight-grocery-save-v1"
 const MAX_BYTES := 16 * 1024 * 1024
 const MAX_INTEGER := 2147483647
+const ContentLoader = preload("res://scripts/core/content_loader.gd")
 const DivinationCatalog = preload("res://scripts/divination/catalog.gd")
 const DivinationSave = preload("res://scripts/divination/case_save.gd")
 const DivinationSession = preload("res://scripts/divination/session.gd")
+const Shop = preload("res://scripts/shop/shop.gd")
+const PeopleBridge = preload("res://scripts/shop/people_bridge.gd")
+const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
+const SHOP_ACTIONS := ["procure_item", "receive_material_gift", "gather_material", "sell_material", "register_demand", "research_recipe", "craft_item", "sell_product", "use_product", "review_case", "use_unlocked_option", "start_arrival", "book_arrival", "save_appearance", "wait", "admit_generated_person", "invite_contact"]
 var base_dir: String = "user://saves"
 var _divination_data: Dictionary = {}
 ## Deterministic test seam: fail before touching any file. Never enabled by UI.
 var fail_next_write: bool = false
+var fail_next_delete: bool = false
+
+func delete_save(save_id: String) -> Dictionary:
+	if not _safe_id(save_id):
+		return _failure("INVALID_SAVE_ID", "存档编号无效，请从存档簿选择。")
+	var folder := DirAccess.open(base_dir)
+	if folder == null:
+		return _failure("SAVE_MISSING", "这个存档已经不存在了。")
+	var basename := save_id + ".json"
+	var files: Array[String] = []
+	var suffixes := ["", ".bak", ".bak.guard", ".tmp", ".bak.tmp", ".bak.guard.tmp", ".restore.tmp", ".rollback.tmp"]
+	for filename: String in folder.get_files():
+		if filename == basename or filename.begins_with(basename + "."):
+			var suffix := filename.substr(basename.length())
+			if suffix in suffixes or (suffix.begins_with(".corrupt.") and suffix.length() > 9):
+				files.append(filename)
+	if files.is_empty():
+		return _failure("SAVE_MISSING", "这个存档已经不存在了。")
+	if fail_next_delete:
+		fail_next_delete = false
+		return _failure("SAVE_DELETE_FAILED", "未能删除，存档和备份仍然保留。")
+	# Only validated filenames in this exact save directory are renamed. Stage all
+	# files before removing any; a staging failure can restore every moved file.
+	files.sort()
+	var marker := ".deleted_" + Crypto.new().generate_random_bytes(8).hex_encode()
+	var staged: Array[String] = []
+	for filename: String in files:
+		if folder.rename(filename, filename + marker) != OK:
+			var restored := true
+			for moved: String in staged:
+				if folder.rename(moved + marker, moved) != OK:
+					restored = false
+			return _failure("SAVE_DELETE_FAILED", "未能删除，原存档仍然保留。" if restored else "删除中断。请保留存档目录，部分文件需要恢复原文件名。")
+		staged.append(filename)
+	var pending := false
+	for filename: String in staged:
+		if folder.remove(filename + marker) != OK:
+			pending = true
+	var reply := _success("存档已从列表移除，但有文件尚未清理，请关闭其他游戏进程后检查存档目录。" if pending else "存档和备份已删除。")
+	reply["save_id"] = save_id
+	reply["cleanup_pending"] = pending
+	return reply
 
 
 func write_save(snapshot: Dictionary) -> Dictionary:
@@ -136,26 +183,27 @@ func _validate(s: Dictionary) -> String:
 	for field in ["schema_version", "save_id", "name", "state_version", "clock_minutes", "player", "npcs", "active_visit_id", "visits", "processed_actions"]:
 		if not s.has(field):
 			return "缺少 " + field
-	if not _integer(s.schema_version, 1, 2):
-		return "不支持的 schema_version（当前支持 1 和 2）"
-	var extended := int(s.schema_version) == 2
+	if not _integer(s.schema_version, 1, 3):
+		return "不支持的 schema_version（当前支持 1、2 和 3）"
+	var extended := int(s.schema_version) >= 2
 	if not _safe_id(s.save_id) or not _text(s.name, 1, 80):
 		return "存档编号或名称无效"
 	if not _integer(s.state_version, 0, MAX_INTEGER) or not _integer(s.clock_minutes, 0, MAX_INTEGER):
 		return "状态版本或游戏时钟无效"
-	var config_json := JSON.new()
-	if config_json.parse(FileAccess.get_file_as_string("res://data/content.json")) != OK:
-		return "内容配置 JSON 无法解析"
-	var parsed = config_json.data
-	if not parsed is Dictionary or not parsed.get("rules") is Dictionary or not parsed.get("npc") is Dictionary or not parsed.get("clues") is Dictionary or not parsed.get("cards") is Array:
+	var loaded: Dictionary = ContentLoader.load_content()
+	if not loaded.success:
 		return "内容配置不可用"
-	var config: Dictionary = parsed
+	var config: Dictionary = loaded.content
+	var current_data: Dictionary = {}
 	if extended:
 		if _divination_data.is_empty():
 			_divination_data = DivinationCatalog.load_data(config)
 		if _divination_data.is_empty():
 			return "问卜内容配置不可用"
-		config["clues"] = _divination_data.clues
+		current_data = GeneratedCases.catalog(s, _divination_data)
+		if current_data.is_empty():
+			return "生成人物的案例配置无效"
+		config["clues"] = current_data.clues
 	for card in config.cards:
 		if not card is Dictionary or not card.get("card_id") is String:
 			return "牌面配置不可用"
@@ -193,10 +241,10 @@ func _validate(s: Dictionary) -> String:
 			return "重复接待编号或未知人物引用"
 		visit_ids[v.visit_id] = v
 		if not _integer(v.started_at, 0, int(s.clock_minutes)) or not _integer(v.day, 0, MAX_INTEGER) or int(v.day) != floori(float(v.started_at) / 1440.0):
-			return "接待日期无效或同日出现多次演示接待"
+			return "接待日期无效或同日出现多次旧版接待"
 		var day_key := "%s_%d" % [v.npc_id, int(v.day)]
-		if days.has(day_key):
-			return "同一顾客同日出现多次演示接待"
+		if days.has(day_key) and int(s.schema_version) < 3:
+			return "同一顾客同日出现多次旧版接待"
 		days[day_key] = true
 		if not v.phase in ["talking", "reading_done", "ended"]:
 			return "未知接待阶段"
@@ -219,6 +267,32 @@ func _validate(s: Dictionary) -> String:
 		for turn in v.dialogue:
 			if not turn is Dictionary or not turn.get("speaker") in ["player", "npc"] or not _text(turn.get("text"), 1, 10000):
 				return "对话记录无效"
+		if v.has("followup_questions") or v.has("followup_action_id"):
+			if not v.get("followup_questions") is Array or v.followup_questions.size() > 3 or not v.get("followup_action_id") is String or not s.processed_actions.has(v.followup_action_id):
+				return "后续问题缺少已保存的对话来源"
+			var source: Variant = s.processed_actions[v.followup_action_id]
+			if not source is Dictionary or source.get("action_type") != "talk" or not source.get("result") is Dictionary or source.result.get("visit_id") != v.visit_id or source.result.get("followup_questions") != v.followup_questions:
+				return "后续问题与原对话来源不一致"
+			var seen_questions := {}
+			var seen_texts := {}
+			# Older validated questions remain readable; the live projection filters
+			# them through the current sixteen-character display contract.
+			for question: Variant in v.followup_questions:
+				if not question is Dictionary or question.size() != 2 or not _text(question.get("topic_id"),1,128) or not _text(question.get("text"),1,28) or seen_questions.has(question.topic_id) or seen_texts.has(question.text):
+					return "后续问题格式无效"
+				for banned: String in ["\n","\r","\t","[","]","<",">","`","http://","https://"]:
+					if question.text.to_lower().contains(banned):
+						return "后续问题包含无效文字"
+				if not extended or not s.divination.cases.has(v.visit_id):
+					return "后续问题缺少有效案例"
+				var case_id: String = s.divination.cases[v.visit_id].case_id
+				if not current_data.cases.has(case_id) or not question.topic_id in current_data.cases[case_id].topic_ids:
+					return "后续问题引用了其他来客的话题"
+				var topic: Dictionary = current_data.topic_index[question.topic_id]
+				if topic.has("requires_clue") and not topic.requires_clue in v.clue_ids:
+					return "后续问题引用未开放的话题"
+				seen_questions[question.topic_id] = true
+				seen_texts[question.text] = true
 		var r: Dictionary = v.reading
 		if r.is_empty():
 			if v.phase == "reading_done":
@@ -250,7 +324,7 @@ func _validate(s: Dictionary) -> String:
 			return "动作编号或结果无效"
 		if not result.get("success") is bool or not result.get("error_code") is String or not result.get("message") is String or not result.get("result") is Dictionary or not _integer(result.get("state_version"), 0, int(s.state_version)):
 			return "已处理动作结果字段无效"
-		if result.has("action_type") and not result.action_type in ["start_visit", "talk", "reading", "end_visit", "rest", "next_day"] and (not extended or not result.action_type in DivinationSession.ACTIONS):
+		if result.has("action_type") and not result.action_type in ["start_visit", "talk", "reading", "end_visit", "rest", "next_day"] and (not extended or not result.action_type in DivinationSession.ACTIONS) and (int(s.schema_version) < 3 or not result.action_type in SHOP_ACTIONS):
 			return "已处理动作类型无效"
 		var output: Dictionary = result.result
 		if output.has("visit_id") and (not output.visit_id is String or not visit_ids.has(output.visit_id)):
@@ -266,7 +340,14 @@ func _validate(s: Dictionary) -> String:
 			for clue in output.clue_ids:
 				if not clue is String or not config.get("clues", {}).has(clue):
 					return "动作引用未知线索"
-	return DivinationSave.validate(s, _divination_data, visit_ids) if extended else ""
+	if int(s.schema_version) >= 3:
+		var shop_error: String = Shop.validate(s)
+		if not shop_error.is_empty():
+			return shop_error
+		var people_error: String = PeopleBridge.validate(s)
+		if not people_error.is_empty():
+			return people_error
+	return DivinationSave.validate(s, current_data, visit_ids) if extended else ""
 
 
 func _read_file(path: String, expected_id: String) -> Dictionary:

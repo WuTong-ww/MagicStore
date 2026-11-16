@@ -2,6 +2,8 @@ extends RefCounted
 ## Content validation and routing for the individual oracle rules.
 
 const DATA_PATH := "res://data/divination.json"
+const LEGACY_GUESTS_PATH := "res://data/compatibility/divination_guests.json"
+const LEGACY_GUEST_IDS := ["npc_demo_xu", "npc_demo_he", "npc_demo_ji"]
 const Almanac = preload("res://scripts/divination/almanac.gd")
 const Cards = preload("res://scripts/divination/oracle_cards.gd")
 const Casting = preload("res://scripts/divination/oracle_casting.gd")
@@ -102,6 +104,31 @@ static func load_data(base: Dictionary) -> Dictionary:
 
 static func _cost(value: Variant) -> bool:
 	return value is Dictionary and _integer(value.get("coins"), 1, 10000) and _integer(value.get("energy"), 1, 10000) and _integer(value.get("minutes"), 1, 1439)
+
+## Old charts were stored by NPC ID, not copied into every case. Restore only
+## identities already present in this save; never seed them into a new game.
+static func restore_legacy_guests(state: Dictionary, data: Dictionary) -> bool:
+	if not state.get("npcs", {}) is Dictionary:
+		return false
+	for id: String in data.guests.keys():
+		if data.guests[id].get("legacy_compatibility", false):
+			data.guests.erase(id)
+	var required: Array = []
+	for id: String in LEGACY_GUEST_IDS:
+		if state.get("npcs", {}).has(id):
+			required.append(id)
+	if required.is_empty():
+		return true
+	var legacy: Variant = JSON.parse_string(FileAccess.get_file_as_string(LEGACY_GUESTS_PATH))
+	if not legacy is Dictionary:
+		return false
+	for id: String in required:
+		var guest: Variant = legacy.get(id)
+		if not guest is Dictionary or not birth_available("astrology", guest) or not data.past_profiles.has(guest.get("profile_id")) or not guest.get("name") is String or not guest.get("role") is String or not guest.get("opening") is String:
+			return false
+		data.guests[id] = guest.duplicate(true)
+		data.guests[id]["legacy_compatibility"] = true
+	return true
 
 static func _event_data(value: Variant) -> bool:
 	if not value is Dictionary or not value.get("subject_id") is String or not value.get("target_name") is String or not _integer(value.get("minute_of_day"), 0, 1439) or not _integer(value.get("feedback_delay"), 0, 10080):
