@@ -1,4 +1,5 @@
 extends SceneTree
+const UITeardown = preload("res://tests/ui_teardown.gd")
 
 const ArrivalUI = preload("res://scripts/ui/arrival_ui.gd")
 var checks := 0
@@ -99,4 +100,5 @@ func run() -> void:
 	main.queue_free()
 	await process_frame
 	print("ARRIVAL UI RESULT: %d checks, %d failures" % [checks, failures])
+	await UITeardown.drain(self)
 	quit(0 if failures == 0 else 1)

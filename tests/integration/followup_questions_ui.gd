@@ -1,4 +1,5 @@
 extends SceneTree
+const UITeardown = preload("res://tests/ui_teardown.gd")
 ## Authored provider fixtures exercise the real saved question contract and UI.
 ## No external model requests, credentials or production saves are used.
 
@@ -175,6 +176,7 @@ func run() -> void:
 	main.queue_free()
 	host.queue_free()
 	await settle()
+	await UITeardown.drain(self)
 	quit(0 if failures == 0 else 1)
 
 func inspect_render(name: String) -> void:

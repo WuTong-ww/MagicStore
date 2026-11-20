@@ -1,4 +1,5 @@
 extends SceneTree
+const UITeardown = preload("res://tests/ui_teardown.gd")
 ## Exercises delete confirmation against isolated saves only. Player saves are never opened.
 
 const CAPTURE_DIR := "res://.tools/c-ui-captures"
@@ -98,6 +99,7 @@ func run() -> void:
 	print("SAVE DELETE UI: %d checks, %d failures, %d graphical captures" % [checks,failures,captures])
 	main.queue_free()
 	await settle()
+	await UITeardown.drain(self)
 	quit(1 if failures else 0)
 
 func select_save(save_id: String) -> bool:

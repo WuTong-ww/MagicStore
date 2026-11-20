@@ -1,4 +1,5 @@
 extends SceneTree
+const UITeardown = preload("res://tests/ui_teardown.gd")
 ## Opt-in real model switching through the same GameState used by Settings.
 var game: Node
 var main: Control
@@ -46,6 +47,7 @@ func run() -> void:
 	var url := OS.get_environment("MAGIC_LIVE_API_URL")
 	var key := OS.get_environment("MAGIC_LIVE_API_KEY")
 	if url.is_empty() or key.is_empty():
+		await UITeardown.drain(self)
 		quit(2)
 		return
 	main = load("res://scenes/main.tscn").instantiate()
@@ -54,6 +56,7 @@ func run() -> void:
 	var created: Dictionary = await main.run_action("new_game",{"name":"中途切模型实测"})
 	var opened: Dictionary = await main.run_action("start_visit")
 	if not created.success or not opened.success:
+		await UITeardown.drain(self)
 		quit(2)
 		return
 	var models := ["deepseek-v4.1-flash","glm-5.3","glm-5.3-flash","qwen3.8-27b-fp8","deepseek-v4.1-flash"]
@@ -87,4 +90,5 @@ func run() -> void:
 	report["completed"] = true
 	save_report()
 	var all_online: bool = report.turns.all(func(row: Dictionary) -> bool: return row.success and row.provider.get("mode") == "online" and row.settings_keep_key and row.settings_preserve_game_state)
+	await UITeardown.drain(self)
 	quit(0 if all_online and report.same_npc_and_visit and next_result.get("started_new_guest",false) and next_result.get("reload_preserves_visit",false) else 1)

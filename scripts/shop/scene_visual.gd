@@ -10,6 +10,8 @@ var cabinet_state := "open"
 var backgrounds: Dictionary = {}
 var layer_nodes: Dictionary = {}
 var placed_nodes: Array = []
+var hotspot_labels: Array = []
+var label_occluders: Array[Control] = []
 var fade: Tween
 
 static func load_config() -> Dictionary:
@@ -63,6 +65,8 @@ static func config_valid(data: Dictionary) -> bool:
 		var scene: Variant = data.scenes.get(id)
 		if not scene is Dictionary:
 			return false
+		if not _rect_valid(scene.get("safe_rect"),canvas):
+			return false
 		for variant: String in (["day","night","closed"] if id == "S01" else ["day","night"]):
 			if not scene.get(variant) is String or not scene[variant].begins_with("res://") or not scene[variant].ends_with(".png"):
 				return false
@@ -73,6 +77,12 @@ static func config_valid(data: Dictionary) -> bool:
 				return false
 		for hotspot: Variant in scene.hotspots.values():
 			if not hotspot is Dictionary or not _rect_valid(hotspot.get("rect"),canvas) or not hotspot.get("label") is String or hotspot.label.is_empty() or not hotspot.get("target") is String or not hotspot.get("display", "button") in ["button","transparent"]:
+				return false
+			var safe: Array = scene.safe_rect
+			var rect: Array = hotspot.rect
+			if not Rect2(Vector2(safe[0],safe[1]),Vector2(safe[2],safe[3])).encloses(Rect2(Vector2(rect[0],rect[1]),Vector2(rect[2],rect[3]))):
+				return false
+			if hotspot.has("label_position") and (not hotspot.label_position is Array or hotspot.label_position.size() != 2 or not hotspot.label_position.all(func(n: Variant) -> bool: return (n is int or n is float) and is_finite(float(n)))):
 				return false
 	var required := {"S02":["door","curtain","letter","lamp_on","lamp_off"],"S04":["door_open","door_closed","slot","drawer"],"S05":["mortar","bottle","scales"],"S06":["basket"]}
 	for id: String in required:
@@ -103,12 +113,18 @@ static func fit_rect(available: Vector2, canvas: Vector2) -> Rect2:
 	var fitted := canvas*factor
 	return Rect2((available-fitted)*0.5,fitted)
 
+static func cover_rect(available: Vector2, canvas: Vector2) -> Rect2:
+	var factor := maxf(available.x/canvas.x,available.y/canvas.y)
+	var fitted := canvas*factor
+	return Rect2((available-fitted)*0.5,fitted)
+
 func setup(page: String) -> void:
 	config = load_config()
 	if config.is_empty():
 		return
 	scene_id = config.scene_pages.get(page, "")
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	clip_contents = true
 	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 	var scene: Dictionary = config.scenes[scene_id]
 	for variant: String in ["day","night","closed"]:
@@ -161,7 +177,7 @@ func place(node: Control, rectangle: Array) -> void:
 
 func projected_rect(rectangle: Array) -> Rect2:
 	var canvas := Vector2(config.scene_settings.canvas[0],config.scene_settings.canvas[1])
-	var fitted := fit_rect(size,canvas)
+	var fitted := cover_rect(size,canvas)
 	var factor := fitted.size.x/canvas.x
 	return Rect2(fitted.position+Vector2(rectangle[0],rectangle[1])*factor,Vector2(rectangle[2],rectangle[3])*factor)
 
@@ -169,7 +185,7 @@ func _layout() -> void:
 	if config.is_empty():
 		return
 	var canvas := Vector2(config.scene_settings.canvas[0],config.scene_settings.canvas[1])
-	var fitted := fit_rect(size,canvas)
+	var fitted := cover_rect(size,canvas)
 	for art: TextureRect in backgrounds.values():
 		art.position = fitted.position
 		art.size = fitted.size
@@ -179,21 +195,36 @@ func _layout() -> void:
 			var rectangle := projected_rect(row.rect)
 			row.node.position = rectangle.position
 			row.node.size = rectangle.size
+	for row: Dictionary in hotspot_labels:
+		var point := projected_rect([row.position[0],row.position[1],1,1]).position
+		var label: Label = row.node
+		label.size = label.get_combined_minimum_size()
+		label.position = Vector2(clampf(point.x-label.size.x/2.0,0,maxf(0,size.x-label.size.x)),clampf(point.y,0,maxf(0,size.y-label.size.y)))
+		label.visible = not label_occluders.any(func(occluder: Control) -> bool: return is_instance_valid(occluder) and occluder.is_visible_in_tree() and occluder.get_global_rect().intersects(label.get_global_rect()))
 
 func hotspot(key: String, callback: Callable) -> Button:
 	var entry: Dictionary = config.scenes[scene_id].hotspots[key]
-	var button := UI.button(entry.label,callback)
+	var button := UI.button("",callback)
 	button.name = "Hotspot_"+key
 	button.tooltip_text = entry.label
-	if entry.get("display", "button") == "transparent":
-		button.text = ""
-		for state: String in ["normal","hover","pressed","disabled","focus"]:
-			button.add_theme_stylebox_override(state,StyleBoxEmpty.new())
+	button.set_meta("decorative_hotspot",true)
+	for state: String in ["normal","hover","pressed","disabled","focus"]:
+		button.add_theme_stylebox_override(state,StyleBoxEmpty.new())
 	button.custom_minimum_size = Vector2.ZERO
 	button.add_theme_font_size_override("font_size",int(config.scene_settings.hotspot_font_size))
 	button.modulate.a = config.scene_settings.hotspot_alpha
 	add_child(button)
 	place(button,entry.rect)
+	if entry.get("display","button") != "transparent":
+		var label := UI.label(entry.label,int(config.scene_settings.hotspot_font_size))
+		label.name = "HotspotLabel_"+key
+		label.autowrap_mode = TextServer.AUTOWRAP_OFF
+		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		label.add_theme_color_override("font_shadow_color",Color("f3e9d6"))
+		label.add_theme_constant_override("shadow_outline_size",4)
+		add_child(label)
+		hotspot_labels.append({"node":label,"position":entry.get("label_position",[entry.rect[0]+entry.rect[2]/2.0,entry.rect[1]+entry.rect[3]/2.0])})
+		_layout()
 	return button
 
 func refresh() -> void:

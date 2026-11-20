@@ -6,7 +6,13 @@
 *.json text eol=lf
 *.md text eol=lf
 *.ps1 text eol=crlf
-*.ttf binary -filter
-*.png binary -filter
-*.ogg binary -filter
+*.ttf filter=lfs diff=lfs merge=lfs -text
+*.png filter=lfs diff=lfs merge=lfs -text
+*.ogg filter=lfs diff=lfs merge=lfs -text
+*.avi filter=lfs diff=lfs merge=lfs -text
+*.wav filter=lfs diff=lfs merge=lfs -text
 *.zip binary -filter
+# Preserve upstream license bytes so the recorded SHA256 survives checkout.
+assets/audio/KENNEY-LICENSE.txt -text
+assets/fonts/LXGWWenKai-OFL.txt -text
+* !text !filter !merge !diff

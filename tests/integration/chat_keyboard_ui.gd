@@ -1,4 +1,5 @@
 extends SceneTree
+const UITeardown = preload("res://tests/ui_teardown.gd")
 ## Focused Viewport input exercises native TextEdit/Button dispatch. Unicode
 ## fixture keys verify committed Chinese text; this does not simulate an IME.
 
@@ -237,6 +238,7 @@ func run() -> void:
 	main.queue_free()
 	host.queue_free()
 	await settle()
+	await UITeardown.drain(self)
 	quit(0 if failures == 0 else 1)
 
 func inspect_render(dimensions: Vector2i) -> void:

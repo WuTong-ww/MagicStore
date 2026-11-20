@@ -21,6 +21,7 @@ const SceneArt = preload("res://scripts/shop/scene_visual.gd")
 var scene_visual: Control
 var inventory_grid: GridContainer
 var side_panel: PanelContainer
+var drawer: Control
 
 func _ready() -> void:
 	visuals = SceneArt.load_config()
@@ -32,16 +33,12 @@ func _ready() -> void:
 	if page == "inventory":
 		scene_visual.hotspot("cabinet",_toggle_cabinet)
 		scene_visual.resized.connect(_size_inventory_cells)
-	side_panel = UI.panel()
-	side_panel.name = "SceneControls"
-	add_child(side_panel)
-	var scroll := ScrollContainer.new()
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	side_panel.add_child(scroll)
-	body = VBoxContainer.new()
-	body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	body.add_theme_constant_override("separation", 10)
-	scroll.add_child(body)
+	drawer = preload("res://scripts/ui/paper_drawer.gd").new()
+	drawer.name = "SceneControls"
+	add_child(drawer)
+	side_panel = drawer.panel
+	body = drawer.content
+	body.add_theme_constant_override("separation",10)
 	resized.connect(_layout_scene_controls)
 	_layout_scene_controls()
 	refresh()
@@ -49,10 +46,9 @@ func _ready() -> void:
 func _layout_scene_controls() -> void:
 	if visuals.is_empty():
 		return
-	var settings: Dictionary = visuals.scene_settings
-	var width := maxf(size.x*float(settings.side_ratio),float(settings.side_minimum_width))
-	side_panel.position = Vector2(maxf(0.0,size.x-width),0.0)
-	side_panel.size = Vector2(minf(width,size.x),size.y)
+	var shell: Dictionary = preload("res://scripts/ui/shell_config.gd").load_config()
+	drawer.position = Vector2(0,shell.layout.drawer_inset_top)
+	drawer.size = Vector2(size.x,maxf(0,size.y-shell.layout.drawer_inset_top-shell.layout.drawer_inset_bottom))
 
 func refresh() -> void:
 	if not is_instance_valid(body):

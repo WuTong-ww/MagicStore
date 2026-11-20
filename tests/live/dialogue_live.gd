@@ -1,4 +1,5 @@
 extends SceneTree
+const UITeardown = preload("res://tests/ui_teardown.gd")
 ## Opt-in live evaluation. Credentials arrive only through process environment.
 ## Every visit/action uses the real GameState and provider, with isolated saves.
 
@@ -49,6 +50,7 @@ func fail_setup(message: String) -> void:
 	result.setup_errors.append(message)
 	write_result()
 	print("LIVE SETUP FAILED: ",message)
+	await UITeardown.drain(self)
 	quit(2)
 
 func prepare_visit(number: int) -> bool:
@@ -89,7 +91,7 @@ func run() -> void:
 	var parsed := JSON.new()
 	if not FileAccess.file_exists(plan_path) or parsed.parse(FileAccess.get_file_as_string(plan_path)) != OK or not parsed.data is Dictionary:
 		output_path = "res://.tools/live-dialogue-invalid-plan.json"
-		fail_setup("valid JSON plan is required")
+		await fail_setup("valid JSON plan is required")
 		return
 	plan = parsed.data
 	var label := safe_label(str(plan.get("label","live")))
@@ -97,13 +99,13 @@ func run() -> void:
 	output_path = "res://.tools/live-dialogue-" + label + ".json"
 	var turns: Variant = plan.get("turns")
 	if not turns is Array or turns.is_empty():
-		fail_setup("plan.turns must be a nonempty array")
+		await fail_setup("plan.turns must be a nonempty array")
 		return
 	var api_url := OS.get_environment("MAGIC_LIVE_API_URL")
 	var model := OS.get_environment("MAGIC_LIVE_MODEL")
 	var key := OS.get_environment("MAGIC_LIVE_API_KEY")
 	if api_url.is_empty() or model.is_empty() or key.is_empty():
-		fail_setup("MAGIC_LIVE_API_URL, MAGIC_LIVE_MODEL and MAGIC_LIVE_API_KEY are required")
+		await fail_setup("MAGIC_LIVE_API_URL, MAGIC_LIVE_MODEL and MAGIC_LIVE_API_KEY are required")
 		return
 	result["model"] = model
 	result["plan_turns"] = turns.size()
@@ -118,12 +120,12 @@ func run() -> void:
 	result["measurement"] = "main.run_action plus two headless process frames; not human display latency"
 	var created: Dictionary = await main.run_action("new_game",{"name":"在线对白测试 " + label.left(20)})
 	if not created.success:
-		fail_setup("isolated save creation failed")
+		await fail_setup("isolated save creation failed")
 		return
 	save_id = game.snapshot().save_id
 	var opening: Dictionary = await main.run_action("start_visit")
 	if not opening.success:
-		fail_setup("initial customer reception failed")
+		await fail_setup("initial customer reception failed")
 		return
 	initial_npc_id = game.active_visit().npc_id
 	result.visits.append({"number":1,"npc_id":initial_npc_id,"visit_id":game.active_visit().visit_id,"clock_minutes":game.snapshot().clock_minutes})
@@ -131,18 +133,19 @@ func run() -> void:
 	# Erase the local copy after handing it to the process-only provider.
 	key = ""
 	if not configured.success:
-		fail_setup("live API settings were rejected")
+		await fail_setup("live API settings were rejected")
 		return
 	game.dialogue_provider.timeout_seconds = clampf(float(plan.get("timeout_seconds",45)),0.1,45.0)
 	write_result()
 	for index: int in range(turns.size()):
 		var turn: Variant = turns[index]
 		if not turn is Dictionary or not turn.get("text") is String or not turn.get("topic_id","") is String:
-			fail_setup("turn has invalid text/topic fields")
+			await fail_setup("turn has invalid text/topic fields")
 			return
 		var visit_prepared: bool = await prepare_visit(int(turn.get("visit",1)))
 		if not visit_prepared:
 			write_result()
+			await UITeardown.drain(self)
 			quit(2)
 			return
 		var before: Dictionary = game.snapshot()
@@ -194,4 +197,5 @@ func run() -> void:
 	write_result()
 	var enough_online := online_count >= int(plan.get("min_online",1))
 	print("LIVE RESULT: ",result.turns.size()," turns, ",online_count," online, ",offline_count," offline, ",action_failures," action failures. Output: ",ProjectSettings.globalize_path(output_path))
+	await UITeardown.drain(self)
 	quit(0 if enough_online and action_failures == 0 and result.setup_errors.is_empty() else 1)

@@ -1,6 +1,106 @@
 {
-  "version": 1,
+  "version": 2,
   "transcript_minimum_height": 100,
-  "portrait_minimum_size": [64, 48],
-  "banner_minimum_size": [720, 96]
+  "portrait_minimum_size": [
+    64,
+    48
+  ],
+  "banner_minimum_size": [
+    720,
+    96
+  ],
+  "seat_rect": [
+    950,
+    410,
+    490,
+    700
+  ],
+  "portrait_occlusion_layer": "sofa_mask",
+  "top_inset": 64,
+  "bottom_inset": 94,
+  "edge_inset": 20,
+  "dialogue_ratio": 0.333333,
+  "dialogue_minimum_height": 316,
+  "dialogue_padding": 12,
+  "dialogue_gap": 4,
+  "drawer_width": 420,
+  "drawer_bookmark_width": 70,
+  "drawer_seconds": 0.25,
+  "drawer_gap": 10,
+  "title_font_size": 22,
+  "body_font_size": 18,
+  "small_font_size": 16,
+  "input_height": 64,
+  "question_minimum_width": 180,
+  "question_height": 44,
+  "question_gap": 8,
+  "portrait_z": 10,
+  "dialogue_z": 30,
+  "drawer_z": 20,
+  "text_limit": 500,
+  "copy": {
+    "input_hint": "想问些什么？可以从这次的来意问起。",
+    "send": "发送",
+    "keyboard_hint": "回车发送 · Shift+回车换行 · 每次交谈用时 %d 分钟",
+    "drawer_open": "工具",
+    "drawer_close": "收起",
+    "tab_reading": "术式",
+    "tab_casebook": "手记",
+    "tab_shop": "账目",
+    "empty_title": "还没有来客",
+    "empty_visit": "还没有来客，先到前台看看。",
+    "guest_title": "与 %s 的一席话",
+    "clues": "线索 %d 条",
+    "case_clues": "已知线索 %d 条 · 详情见案例手记",
+    "reading_title": "问卜台",
+    "unopened_card": "尚未翻开的牌",
+    "reading_quote": "塔罗报价",
+    "all_methods": "全部术式",
+    "casebook": "案例手记 · 预测与建议",
+    "shop": "商品与账目",
+    "history": "往次记录",
+    "end": "结束接待",
+    "return": "约好下次",
+    "contact": "介绍熟人",
+    "contact_hint": "请当前来客帮忙介绍已经提到的熟人。",
+    "case_note": "对外预测、顾客说法和验证记录分别保存在案例手记中。",
+    "shop_note": "收款和商品使用都会在保存成功后更新账目。",
+    "blank_question": "先写下想问的问题。",
+    "long_question": "请把问题缩短到 %d 字以内。",
+    "player_name": "你",
+    "guest_name": "顾客",
+    "clue_stamp": "新线索"
+  },
+  "bubble_main_ratio": 4,
+  "bubble_spacer_ratio": 1,
+  "bubble_padding": [
+    8,
+    6,
+    8,
+    6
+  ],
+  "bubble_avatar_size": [
+    32,
+    42
+  ],
+  "bubble_guest_color": "#F3E9D6",
+  "bubble_player_color": "#E2D2B4",
+  "bubble_text_color": "#3B2A1E",
+  "bubble_stamp_color": "#B5654D",
+  "compact_seat": {
+    "height_limit": 720,
+    "narrow_width_limit": 900,
+    "rect": [
+      950,
+      160,
+      490,
+      700
+    ],
+    "narrow_rect": [
+      1000,
+      110,
+      380,
+      540
+    ]
+  }
 }

@@ -1,4 +1,5 @@
 extends SceneTree
+const UITeardown = preload("res://tests/ui_teardown.gd")
 ## Opt-in developer evaluation using real main UI actions and isolated saves.
 ## Raw approved bundles are written only to the ignored developer report.
 
@@ -48,6 +49,7 @@ func abort_run(message: String) -> void:
 	print("LIVE PEOPLE FAILED: ",message)
 	if game != null:
 		game.set_people_generation_options(false)
+	await UITeardown.drain(self)
 	quit(2)
 
 func model_records() -> Array:
@@ -84,16 +86,16 @@ func replay_approved_report(path: String) -> Array:
 	var safe_path := path.simplify_path().replace("\\","/")
 	var tools_root := ProjectSettings.globalize_path("res://.tools/").simplify_path().replace("\\","/").trim_suffix("/") + "/"
 	if not safe_path.to_lower().begins_with(tools_root.to_lower()) or not safe_path.ends_with(".json") or safe_path.to_lower() == output_path.simplify_path().replace("\\","/").to_lower():
-		abort_run("approved input must be a separate local report below .tools")
+		await abort_run("approved input must be a separate local report below .tools")
 		return []
 	var parsed := JSON.new()
 	if parsed.parse(FileAccess.get_file_as_string(safe_path)) != OK or not parsed.data is Dictionary:
-		abort_run("approved source report is not a valid JSON object")
+		await abort_run("approved source report is not a valid JSON object")
 		return []
 	var source: Dictionary = parsed.data
 	var packages: Variant = source.get("generated")
 	if not packages is Array or packages.size() < generation_target or packages.size() > 8:
-		abort_run("approved source report has insufficient or excessive reviewed packages")
+		await abort_run("approved source report has insufficient or excessive reviewed packages")
 		return []
 	# Validate the entire batch, names and stable IDs in a disposable snapshot
 	# before sending any simulated completion through the real admission path.
@@ -102,22 +104,22 @@ func replay_approved_report(path: String) -> Array:
 	var used_ids: Array = []
 	for row: Variant in packages:
 		if not row is Dictionary or not row.get("record") is Dictionary or not row.record.get("generation_id") is String or not row.get("provenance") is Dictionary:
-			abort_run("approved source package lacks a valid record or provenance")
+			await abort_run("approved source package lacks a valid record or provenance")
 			return []
 		var id: String = row.record.generation_id
 		var bundle: Dictionary = PersonPolicy.validate_bundle(row.get("developer_only_bundle"))
 		var provenance: Dictionary = row.provenance
 		if id in used_ids or bundle.is_empty() or provenance.get("source") != "model" or not PersonPolicy.approve_review(provenance.get("review"),bundle) or provenance.get("draft_hash") != PersonPolicy.draft_hash(bundle):
-			abort_run("approved source package failed current schema or exact review binding")
+			await abort_run("approved source package failed current schema or exact review binding")
 			return []
 		var dry: Dictionary = PersonPolicy.apply(preflight.people,game.people_config,id,bundle,provenance,int(preflight.clock_minutes)+30)
 		if not dry.get("success",false):
-			abort_run("approved source package conflicts with current names or admission rules")
+			await abort_run("approved source package conflicts with current names or admission rules")
 			return []
 		var expected: Dictionary = preflight.people.generated_people[id]
 		for field: String in ["npc_id","contact_id","relationship_id","draft_hash"]:
 			if expected[field] != row.record.get(field):
-				abort_run("approved source record does not match its canonical package identity")
+				await abort_run("approved source record does not match its canonical package identity")
 				return []
 		used_ids.append(id)
 		validated.append({"id":id,"bundle":bundle,"provenance":provenance.duplicate(true)})
@@ -135,7 +137,7 @@ func replay_approved_report(path: String) -> Array:
 			var count_before := model_records().size()
 			game._admit_next_person()
 			if model_records().size() != count_before+1:
-				abort_run("approved replay did not commit through the real admission transaction")
+				await abort_run("approved replay did not commit through the real admission transaction")
 				return []
 			await process_frame
 			capture_prepared()
@@ -326,7 +328,7 @@ func run() -> void:
 	var model := OS.get_environment("MAGIC_LIVE_MODEL")
 	var key := OS.get_environment("MAGIC_LIVE_API_KEY")
 	if url.is_empty() or model.is_empty() or key.is_empty():
-		abort_run("live API environment is required")
+		await abort_run("live API environment is required")
 		return
 	report["model"] = model
 	var requested_target := OS.get_environment("MAGIC_LIVE_PEOPLE_TARGET")
@@ -341,7 +343,7 @@ func run() -> void:
 	main.save_window.hide()
 	var created: Dictionary = await main.run_action("new_game",{"name":"真实生成来客隔离测试"})
 	if not created.get("success",false):
-		abort_run("could not create isolated save")
+		await abort_run("could not create isolated save")
 		return
 	var initial: Dictionary = game.snapshot()
 	var approved_input := OS.get_environment("MAGIC_LIVE_PEOPLE_APPROVED_INPUT")
@@ -350,7 +352,7 @@ func run() -> void:
 	var configured: Dictionary = game.configure_api(url,model,key)
 	key = ""
 	if not configured.get("success",false):
-		abort_run("live API configuration rejected")
+		await abort_run("live API configuration rejected")
 		return
 	var records: Array = []
 	var max_active := 0
@@ -388,7 +390,7 @@ func run() -> void:
 	check(generated_state.player == initial.player and generated_state.clock_minutes == initial.clock_minutes,"background creation changes neither player wallet/energy nor game clock")
 	check(generated_state.people.profiles.npc_lin == initial.people.profiles.npc_lin and generated_state.npcs.npc_lin == initial.npcs.npc_lin,"existing Lin profile and wallet stay unchanged during new creation")
 	if records.size() < generation_target:
-		abort_run("fewer than requested reviewed model-created customers admitted within generation budget")
+		await abort_run("fewer than requested reviewed model-created customers admitted within generation budget")
 		return
 	game.set_people_generation_options(false)
 	check(game.people_generator == null and game.connection_settings().key_set,"further background work stops while foreground API remains configured")
@@ -401,25 +403,25 @@ func run() -> void:
 			selected.append(record)
 			break
 	if selected.size() < 2:
-		abort_run("prepared characters do not contain two distinct occupations")
+		await abort_run("prepared characters do not contain two distinct occupations")
 		return
 	report["selected_for_reception"] = selected.duplicate(true)
 	for index: int in range(2):
 		if not await exercise_person(selected[index],index+1,index == 0):
-			abort_run("could not complete real reception or agreed return appointment")
+			await abort_run("could not complete real reception or agreed return appointment")
 			return
 	var save_id: String = game.snapshot().save_id
 	var before_reload: Dictionary = game.snapshot()
 	var next_day: Dictionary = await main.run_action("next_day")
 	var loaded: Dictionary = await main.run_action("load_game",{"save_id":save_id})
 	if not next_day.get("success",false) or not loaded.get("success",false):
-		abort_run("next-day or disk reload failed")
+		await abort_run("next-day or disk reload failed")
 		return
 	var returned_state: Dictionary = game.snapshot()
 	for record: Dictionary in records:
 		check(returned_state.people.profiles[record.npc_id].generated_bundle == before_reload.people.profiles[record.npc_id].generated_bundle and returned_state.people.profiles[record.npc_id].generation == before_reload.people.profiles[record.npc_id].generation,"approved identity and case persist after next day and reload")
 	if appointment.is_empty() or not await start_arrival(appointment.arrival_id):
-		abort_run("agreed actual return arrival could not begin")
+		await abort_run("agreed actual return arrival could not begin")
 		return
 	check(game.active_visit().npc_id == appointment.npc_id and game.active_visit().visit_id != appointment.old_visit_id,"real return uses same NPC identity and a new visit ID")
 	report["return_appointment"] = appointment
@@ -429,9 +431,10 @@ func run() -> void:
 	var last_sources: Array = report.turns[-2].authorized_before.sources
 	check(last_sources.any(func(source: Dictionary) -> bool: return str(source.get("source_id","")).begins_with("history:") or str(source.get("source_id","")).begins_with("memory:")),"return model receives typed actual shared history or memory")
 	if not await invite_and_receive_contact(selected[0]):
-		abort_run("legitimate relationship disclosure, consent and contact reception path failed")
+		await abort_run("legitimate relationship disclosure, consent and contact reception path failed")
 		return
 	report["finished_utc"] = Time.get_datetime_string_from_system(true)
 	write_report()
 	print("LIVE PEOPLE RESULT: ",report.generated.size()," generated, ",online," online turns, ",fallback," fallback turns, ",report.errors.size()," check errors. Report: ",ProjectSettings.globalize_path(output_path))
+	await UITeardown.drain(self)
 	quit(0 if report.errors.is_empty() and action_failures == 0 and online > 0 else 1)

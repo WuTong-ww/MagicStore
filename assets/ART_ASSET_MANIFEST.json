@@ -161,15 +161,21 @@
   "scene_config": "data/shop/visuals.json",
   "scenes": {
     "S01": {
-      "day": "res://assets/generated_scenes/v2/S01_day.png",
-      "night": "res://assets/generated_scenes/v2/S01_night.png",
+      "day": "res://assets/generated_scenes/runtime/v2/S01_day.png",
+      "night": "res://assets/generated_scenes/runtime/v2/S01_night.png",
       "layers": {},
       "hotspots": {},
-      "closed": "res://assets/generated_scenes/v2/S01_closed.png"
+      "closed": "res://assets/generated_scenes/runtime/v2/S01_closed.png",
+      "safe_rect": [
+        320,
+        180,
+        1920,
+        1080
+      ]
     },
     "S02": {
-      "day": "res://assets/generated_scenes/v2/S02_day.png",
-      "night": "res://assets/generated_scenes/v2/S02_night.png",
+      "day": "res://assets/generated_scenes/runtime/v2/S02_day.png",
+      "night": "res://assets/generated_scenes/runtime/v2/S02_night.png",
       "layers": {
         "door": {
           "path": "res://assets/generated_scenes/v2/slices/S02_door.png",
@@ -259,10 +265,14 @@
           "label": "店外",
           "target": "exterior",
           "rect": [
-            60,
+            320,
             400,
             280,
             250
+          ],
+          "label_position": [
+            460.0,
+            525.0
           ]
         },
         "market": {
@@ -273,6 +283,10 @@
             250,
             460,
             250
+          ],
+          "label_position": [
+            650.0,
+            375.0
           ]
         },
         "inventory": {
@@ -283,6 +297,10 @@
             680,
             460,
             250
+          ],
+          "label_position": [
+            800.0,
+            805.0
           ]
         },
         "consultation": {
@@ -293,16 +311,24 @@
             420,
             520,
             250
+          ],
+          "label_position": [
+            1460.0,
+            545.0
           ]
         },
         "workshop": {
           "label": "工坊",
           "target": "workshop",
           "rect": [
-            1870,
+            1780,
             520,
             460,
             250
+          ],
+          "label_position": [
+            2010.0,
+            645.0
           ]
         },
         "letter": {
@@ -310,22 +336,45 @@
           "target": "people",
           "rect": [
             670,
-            1110,
+            1010,
             460,
             250
+          ],
+          "label_position": [
+            900.0,
+            1135.0
           ]
         }
-      }
+      },
+      "safe_rect": [
+        320,
+        180,
+        1920,
+        1080
+      ]
     },
     "S03": {
-      "day": "res://assets/generated_scenes/v2/S03_day.png",
-      "night": "res://assets/generated_scenes/v2/S03_night.png",
+      "day": "res://assets/generated_scenes/runtime/v2/S03_day.png",
+      "night": "res://assets/generated_scenes/runtime/v2/S03_night.png",
       "layers": {},
-      "hotspots": {}
+      "hotspots": {},
+      "safe_rect": [
+        320,
+        180,
+        1920,
+        1080
+      ],
+      "seat_rect": [
+        950,
+        410,
+        490,
+        700
+      ],
+      "seat_scale": 1.0
     },
     "S04": {
-      "day": "res://assets/generated_scenes/v2/S04_day.png",
-      "night": "res://assets/generated_scenes/v2/S04_night.png",
+      "day": "res://assets/generated_scenes/runtime/v2/S04_day.png",
+      "night": "res://assets/generated_scenes/runtime/v2/S04_night.png",
       "layers": {
         "door_open": {
           "path": "res://assets/generated_scenes/v2/slices/S04_door_open.png",
@@ -420,18 +469,28 @@
           "label": "储物柜",
           "target": "cabinet",
           "rect": [
-            220,
+            320,
             180,
             1380,
             70
           ],
-          "display": "transparent"
+          "display": "transparent",
+          "label_position": [
+            1010.0,
+            215.0
+          ]
         }
-      }
+      },
+      "safe_rect": [
+        320,
+        180,
+        1920,
+        1080
+      ]
     },
     "S05": {
-      "day": "res://assets/generated_scenes/v2/S05_day.png",
-      "night": "res://assets/generated_scenes/v2/S05_night.png",
+      "day": "res://assets/generated_scenes/runtime/v2/S05_day.png",
+      "night": "res://assets/generated_scenes/runtime/v2/S05_night.png",
       "layers": {
         "mortar": {
           "path": "res://assets/generated_scenes/v2/slices/S05_mortar.png",
@@ -479,11 +538,17 @@
           ]
         }
       },
-      "hotspots": {}
+      "hotspots": {},
+      "safe_rect": [
+        320,
+        180,
+        1920,
+        1080
+      ]
     },
     "S06": {
-      "day": "res://assets/generated_scenes/v2/S06_day.png",
-      "night": "res://assets/generated_scenes/v2/S06_night.png",
+      "day": "res://assets/generated_scenes/runtime/v2/S06_day.png",
+      "night": "res://assets/generated_scenes/runtime/v2/S06_night.png",
       "layers": {
         "basket": {
           "path": "res://assets/generated_scenes/v2/slices/S06_basket.png",
@@ -501,13 +566,25 @@
           ]
         }
       },
-      "hotspots": {}
+      "hotspots": {},
+      "safe_rect": [
+        320,
+        180,
+        1920,
+        1080
+      ]
     },
     "S07": {
-      "day": "res://assets/generated_scenes/v2/S07_day.png",
-      "night": "res://assets/generated_scenes/v2/S07_night.png",
+      "day": "res://assets/generated_scenes/runtime/v2/S07_day.png",
+      "night": "res://assets/generated_scenes/runtime/v2/S07_night.png",
       "layers": {},
-      "hotspots": {}
+      "hotspots": {},
+      "safe_rect": [
+        320,
+        180,
+        1920,
+        1080
+      ]
     }
   },
   "generated_assets": [
@@ -908,5 +985,278 @@
   ],
   "a1_resolution_requirement_met": false,
   "a1_user_decision": "Continue builtin candidates and report 2560x1440 as unfinished; no API fallback or scripted upscale.",
-  "pending_generated_assets": []
+  "pending_generated_assets": [],
+  "runtime_copies": [
+    {
+      "path": "assets/generated_scenes/runtime/v2/S01_day.png",
+      "source_path": "assets/generated_scenes/v2/S01_day.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1477151965993624,
+      "native_resolution_met": false,
+      "method": "Lanczos runtime copy",
+      "script": "tools/import_scene_runtime.py",
+      "sha256": "e4ae5bb53f3e89ee7058b6abcb50e441f02f82b7bcd12fded9fe9a90780dc0b3"
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S01_night.png",
+      "source_path": "assets/generated_scenes/v2/S01_night.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1477151965993624,
+      "native_resolution_met": false,
+      "method": "Lanczos runtime copy",
+      "script": "tools/import_scene_runtime.py",
+      "sha256": "95f471a9e9e809ceabf8535c2fb6d58175005e83a265950a224c2df6781f9fe1"
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S01_closed.png",
+      "source_path": "assets/generated_scenes/v2/S01_closed.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1477151965993624,
+      "native_resolution_met": false,
+      "method": "Lanczos runtime copy",
+      "script": "tools/import_scene_runtime.py",
+      "sha256": "081653cfa5c129da364094abfea9a36ea5ac818dcd0cbc639dd26f410696694a"
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S02_day.png",
+      "source_path": "assets/generated_scenes/v2/S02_day.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1477151965993624,
+      "native_resolution_met": false,
+      "method": "Lanczos runtime copy",
+      "script": "tools/import_scene_runtime.py",
+      "sha256": "14203b36285b92b30ec497b037173fdbd43f60e3cd5ba7dc2350d1a7ba796e5e"
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S02_night.png",
+      "source_path": "assets/generated_scenes/v2/S02_night.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1477151965993624,
+      "native_resolution_met": false,
+      "method": "Lanczos runtime copy",
+      "script": "tools/import_scene_runtime.py",
+      "sha256": "c27916b3c3fff460ffb34ebdd1d77eac16eafdd20cc5d18110e2e074c582154f"
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S03_day.png",
+      "source_path": "assets/generated_scenes/v2/S03_day.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1477151965993624,
+      "native_resolution_met": false,
+      "method": "Lanczos runtime copy",
+      "script": "tools/import_scene_runtime.py",
+      "sha256": "adaea18b30e998c1ef18e36a08d4a6b2325d4ee70dd9d7a2034a8ed1f0740a74"
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S03_night.png",
+      "source_path": "assets/generated_scenes/v2/S03_night.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1477151965993624,
+      "native_resolution_met": false,
+      "method": "Lanczos runtime copy",
+      "script": "tools/import_scene_runtime.py",
+      "sha256": "c26643b0ceb6b7ea0061e916e5a509167f0de18db4df0780a78c2a043a7f783f"
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S04_day.png",
+      "source_path": "assets/generated_scenes/v2/S04_day.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1477151965993624,
+      "native_resolution_met": false,
+      "method": "Lanczos runtime copy",
+      "script": "tools/import_scene_runtime.py",
+      "sha256": "bc3fa4dd436a21c7c31966a1b678bed171943a4c346e3aefe9aecbbba81d01cd"
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S04_night.png",
+      "source_path": "assets/generated_scenes/v2/S04_night.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1477151965993624,
+      "native_resolution_met": false,
+      "method": "Lanczos runtime copy",
+      "script": "tools/import_scene_runtime.py",
+      "sha256": "cc782324cadd67b2885a4469a396ba921a4c20802508b97eb3312c46792fb8e3"
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S05_day.png",
+      "source_path": "assets/generated_scenes/v2/S05_day.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1477151965993624,
+      "native_resolution_met": false,
+      "method": "Lanczos runtime copy",
+      "script": "tools/import_scene_runtime.py",
+      "sha256": "18d6fc0f0f48acec97c722ce4d7e76de504135471db218b8d566880eae3a2ad3"
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S05_night.png",
+      "source_path": "assets/generated_scenes/v2/S05_night.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1477151965993624,
+      "native_resolution_met": false,
+      "method": "Lanczos runtime copy",
+      "script": "tools/import_scene_runtime.py",
+      "sha256": "41014a5d9eaf46ca2b71bf1203234ad66d512866e06b3721c420a70880f09dc3"
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S06_day.png",
+      "source_path": "assets/generated_scenes/v2/S06_day.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1477151965993624,
+      "native_resolution_met": false,
+      "method": "Lanczos runtime copy",
+      "script": "tools/import_scene_runtime.py",
+      "sha256": "172679ee66389058b9612ace5b0418aa20835d6dde077d53b1401fb4334e343b"
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S06_night.png",
+      "source_path": "assets/generated_scenes/v2/S06_night.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1477151965993624,
+      "native_resolution_met": false,
+      "method": "Lanczos runtime copy",
+      "script": "tools/import_scene_runtime.py",
+      "sha256": "90af96c2b2a47984faaa9dc09c37d2404e50ead9d52bd43281e5b5167570e0b3"
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S07_day.png",
+      "source_path": "assets/generated_scenes/v2/S07_day.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1477151965993624,
+      "native_resolution_met": false,
+      "method": "Lanczos runtime copy",
+      "script": "tools/import_scene_runtime.py",
+      "sha256": "13ec34285856bc468ceabcdb4a420a43f0794bac5efe8b76fb6e0d690b08b8d2"
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S07_night.png",
+      "source_path": "assets/generated_scenes/v2/S07_night.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1477151965993624,
+      "native_resolution_met": false,
+      "method": "Lanczos runtime copy",
+      "script": "tools/import_scene_runtime.py",
+      "sha256": "548f35017dc7766ddd7c12a8915884aac02c0d9fea3ce7dfcec538d3b73fc1cc"
+    }
+  ],
+  "runtime_note": "运行副本：1672×941 源图以 Lanczos 放大约 1.15 倍至 1920×1080；不是原生分辨率。"
 }

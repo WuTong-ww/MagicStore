@@ -1,6 +1,12 @@
 extends Control
 
 const UI = preload("res://scripts/ui/ui_kit.gd")
+const Shell = preload("res://scripts/ui/shell_config.gd")
+var shell_config: Dictionary = {}
+var energy_bar: ProgressBar
+var shell_header: PanelContainer
+var presentation_audio: Node
+var cancel_button: Button
 
 const FRONT := preload("res://scenes/shop_front.tscn")
 const CONSULTATION := preload("res://scenes/consultation.tscn")
@@ -39,8 +45,13 @@ func _process(_delta: float) -> void:
 	GameState.pump_background_people(busy)
 
 func _ready() -> void:
-	DisplayServer.window_set_min_size(Vector2i(1280, 720))
+	shell_config = Shell.load_config()
+	DisplayServer.window_set_min_size(Vector2i(shell_config.screen_minimum[0],shell_config.screen_minimum[1]))
 	_build_shell()
+	if ResourceLoader.exists("res://scripts/audio/shop_audio.gd"):
+		presentation_audio = load("res://scripts/audio/shop_audio.gd").new()
+		presentation_audio.name = "ShopAudio"
+		add_child(presentation_audio)
 	_build_save_window()
 	_build_history_window()
 	workbench = DivinationWorkbench.new()
@@ -54,68 +65,91 @@ func _ready() -> void:
 	call_deferred("open_saves")
 
 func _build_shell() -> void:
-	var background := ColorRect.new()
-	background.color = Color("101b21")
-	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	add_child(background)
-	var margin: MarginContainer = UI.margin(20)
-	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	add_child(margin)
-	var layout := VBoxContainer.new()
-	layout.add_theme_constant_override("separation", 10)
-	margin.add_child(layout)
-	var header := HBoxContainer.new()
-	layout.add_child(header)
-	var brand := VBoxContainer.new()
-	brand.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	brand.add_theme_constant_override("separation", 0)
-	header.add_child(brand)
-	brand.add_child(UI.label("零点杂货铺", 30, UI.GOLD))
-	brand.add_child(UI.label("ZERO HOUR  /  一盏灯，一段未完的故事", 13, UI.MUTED))
-	location = UI.label("前台", 20, UI.GOLD)
-	location.autowrap_mode = TextServer.AUTOWRAP_OFF
-	header.add_child(location)
-	open_button = UI.button("存档簿", open_saves)
-	open_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	header.add_child(open_button)
-	header.add_child(UI.button("设置", open_network_settings))
-	var status_panel := UI.panel()
-	layout.add_child(status_panel)
-	var status_row := HBoxContainer.new()
-	status_row.add_theme_constant_override("separation", 7)
-	status_panel.add_child(status_row)
-	for icon_path in ["res://assets/ui/coin_icon.png", "res://assets/ui/energy_icon.png", "res://assets/ui/time_icon.png", "res://assets/ui/reputation_icon.png"]:
-		var status_icon := UI.image(icon_path)
-		status_icon.custom_minimum_size = Vector2(28, 28)
-		status_row.add_child(status_icon)
-	resources = UI.label("打开存档簿，开始经营。", 18)
-	resources.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	status_row.add_child(resources)
 	scene_holder = Control.new()
-	scene_holder.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	layout.add_child(scene_holder)
-	var footer := HBoxContainer.new()
-	layout.add_child(footer)
-	notice = UI.label("每个成功动作都会自动保存。", 15, UI.GOLD)
-	notice.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	notice.custom_minimum_size.y = 36
-	footer.add_child(notice)
-	var badge := UI.label("开发联调 · 本地对话", 12, UI.MUTED)
-	badge.autowrap_mode = TextServer.AUTOWRAP_OFF
-	badge.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	footer.add_child(badge)
-	provider_badge = badge
-	var navigation := HFlowContainer.new()
-	for page: String in PAGES:
-		var destination := page
-		navigation.add_child(UI.button(PAGES[page], func(): show_screen(destination)))
-	navigation.add_child(UI.button("候客与档案", open_people))
-	navigation.add_child(UI.button("取消等待回复", func(): GameState.cancel_dialogue()))
-	layout.add_child(navigation)
+	scene_holder.name = "FullScreenScene"
+	add_child(scene_holder)
+	scene_holder.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	shell_header = PanelContainer.new()
+	shell_header.theme = load("res://themes/chrome.tres") if ResourceLoader.exists("res://themes/chrome.tres") else theme
+	var header_style: StyleBox = shell_header.theme.get_stylebox("panel","PanelContainer").duplicate()
+	header_style.content_margin_top = 0
+	header_style.content_margin_bottom = 0
+	shell_header.add_theme_stylebox_override("panel",header_style)
+	add_child(shell_header)
+	shell_header.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
+	shell_header.offset_bottom = shell_config.top_height
+	var header := HBoxContainer.new()
+	header.add_theme_constant_override("separation",int(shell_config.layout.gap))
+	shell_header.add_child(header)
+	var brand := UI.label(shell_config.brand,int(shell_config.layout.brand_size),Color("f3e9d6"))
+	brand.autowrap_mode = TextServer.AUTOWRAP_OFF
+	header.add_child(brand)
+	location = UI.label("",int(shell_config.layout.status_size),Color("f3e9d6"))
+	location.visible = false
+	header.add_child(location)
+	resources = UI.label(shell_config.no_save_status,int(shell_config.layout.status_size),Color("f3e9d6"))
+	resources.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	resources.autowrap_mode = TextServer.AUTOWRAP_OFF
+	header.add_child(resources)
+	energy_bar = ProgressBar.new()
+	energy_bar.custom_minimum_size.x = shell_config.layout.energy_width
+	energy_bar.show_percentage = false
+	energy_bar.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	header.add_child(energy_bar)
+	open_button = UI.button(shell_config.save_label,open_saves)
+	header.add_child(open_button)
+	header.add_child(UI.button(shell_config.settings_label,open_network_settings))
+	var dock := PanelContainer.new()
+	dock.theme = shell_header.theme
+	add_child(dock)
+	dock.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
+	var navigation := HBoxContainer.new()
+	dock.add_child(navigation)
+	for row: Dictionary in shell_config.navigation:
+		var destination: String = row.page
+		var nav := UI.button(str(row.icon)+" "+str(row.label),func():
+			if destination == "people":
+				open_people()
+			else:
+				show_screen(destination))
+		nav.name = "Navigate_"+destination
+		nav.add_theme_font_size_override("font_size",int(shell_config.layout.status_size))
+		navigation.add_child(nav)
+	var place_dock := func():
+		var width := dock.get_combined_minimum_size().x
+		dock.offset_left = -width/2.0
+		dock.offset_right = width/2.0
+		dock.offset_top = -float(shell_config.dock_height)
+		dock.offset_bottom = 0
+	navigation.minimum_size_changed.connect(place_dock)
+	place_dock.call_deferred()
+	notice = UI.label(shell_config.notice_default,int(shell_config.layout.compact_status_size),Color("f3e9d6"))
+	add_child(notice)
+	notice.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
+	notice.offset_left = shell_config.layout.margin
+	notice.offset_right = -float(shell_config.layout.margin)
+	notice.offset_top = -float(shell_config.layout.notice_bottom)
+	notice.offset_bottom = notice.offset_top+float(shell_config.layout.notice_height)
+	notice.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	cancel_button = UI.button(shell_config.cancel_label,func(): GameState.cancel_dialogue())
+	cancel_button.name = "CancelDialogue"
+	add_child(cancel_button)
+	cancel_button.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
+	cancel_button.offset_right = -float(shell_config.layout.margin)
+	cancel_button.offset_left = cancel_button.offset_right-cancel_button.get_combined_minimum_size().x
+	cancel_button.offset_bottom = -float(shell_config.dock_height)
+	cancel_button.offset_top = cancel_button.offset_bottom-cancel_button.get_combined_minimum_size().y
+	cancel_button.hide()
+	provider_badge = UI.label("",int(shell_config.layout.compact_status_size),Color("f3e9d6"))
+	provider_badge.visible = false
+	add_child(provider_badge)
+	resized.connect(func():
+		resources.add_theme_font_size_override("font_size",int(shell_config.layout.compact_status_size if size.x < shell_config.layout.compact_width else shell_config.layout.status_size)))
 
 func show_screen(which: String) -> void:
 	current_screen = which
+	if is_instance_valid(presentation_audio):
+		presentation_audio.transition(which,int(GameState.player_snapshot().get("clock_minutes",0)))
 	if is_instance_valid(screen):
 		scene_holder.remove_child(screen)
 		screen.queue_free()
@@ -132,6 +166,7 @@ func show_screen(which: String) -> void:
 
 func _refresh() -> void:
 	var snapshot: Dictionary = GameState.player_snapshot()
+	energy_bar.visible = not snapshot.is_empty()
 	location.text = PAGES.get(current_screen, "店铺")
 	var mode: Dictionary = GameState.provider_status()
 	provider_badge.text = "在线对话" if mode.get("mode") == "online" else "离线对话 · 本地话题"
@@ -141,21 +176,27 @@ func _refresh() -> void:
 		resources.text = "尚未打开存档  ·  新建独立店铺，或继续已有记录"
 	else:
 		var player: Dictionary = snapshot.get("player", {})
-		var active: Dictionary = GameState.active_visit()
-		var phase: String = "等待来客"
-		var guest_budget := ""
-		if not active.is_empty():
-			var wallet: Dictionary = snapshot.npcs[active.npc_id]
-			guest_budget = "顾客预算 %d    " % int(wallet.coins)
-			phase = "接待中"
-		resources.text = "金币 %d    精力 %d / %d    %s    %s%s" % [int(player.get("coins", 0)), int(player.get("energy", 0)), int(GameState.content.get("rules", {}).get("max_energy", 100)), GameState.clock_text(), guest_budget, phase]
+		var people: Dictionary = GameState.people_view()
+		var shop: Dictionary = GameState.shop_view().get("shop",{})
+		resources.text = shell_config.status_format % [int(player.get("coins",0)),int(shop.get("reputation",0)),GameState.clock_text(),people.get("queue",[]).size()]
+		energy_bar.max_value = int(GameState.content.get("rules",{}).get("max_energy",100))
+		energy_bar.value = int(player.get("energy",0))
+		energy_bar.tooltip_text = shell_config.energy_format % [int(energy_bar.value),int(energy_bar.max_value)]
+		var energy_fill := energy_bar.get_theme_stylebox("fill").duplicate() as StyleBoxFlat
+		if energy_fill != null:
+			energy_fill.bg_color = UI.Palette.ROSE if energy_bar.ratio < float(shell_config.layout.low_energy_ratio) else UI.Palette.MOSS
+			energy_bar.add_theme_stylebox_override("fill",energy_fill)
+
 	if is_instance_valid(screen):
 		screen.call("refresh")
+	if is_instance_valid(presentation_audio):
+		presentation_audio.transition(current_screen,int(snapshot.get("clock_minutes",0)))
 
 func run_action(action_type: String, extra: Dictionary = {}) -> Dictionary:
 	if busy:
 		return {"success": false, "error_code": "BUSY", "message": "正在处理，请稍候。"}
 	busy = true
+	cancel_button.visible = action_type == "talk"
 	open_button.disabled = true
 	var action: Dictionary = extra.duplicate(true)
 	action["type"] = action_type
@@ -166,9 +207,12 @@ func run_action(action_type: String, extra: Dictionary = {}) -> Dictionary:
 	show_notice("正在等对方回应…" if action_type == "talk" else "正在保存…")
 	var result: Dictionary = await GameState.execute_action_async(action)
 	busy = false
+	cancel_button.hide()
 	open_button.disabled = false
 	show_notice(str(result.get("message", "操作完成")))
 	if result.get("success", false):
+		if is_instance_valid(presentation_audio):
+			presentation_audio.play_ui("coin" if action_type in ["procure_item","sell_product","sell_material"] else "confirm")
 		if action_type in ["new_game", "load_game"]:
 			save_window.hide()
 			show_screen("consultation" if not GameState.active_visit().is_empty() else "front")
@@ -195,14 +239,20 @@ func _build_people_window() -> void:
 	people_window = Window.new()
 	people_window.visible = false
 	people_window.title = "候客、预约与人物档案"
-	people_window.size = Vector2i(1040, 570)
+	people_window.size = Vector2i(shell_config.dialogs.people[0],shell_config.dialogs.people[1])
 	people_window.transient = true
 	people_window.theme = theme
 	people_window.close_requested.connect(people_window.hide)
 	add_child(people_window)
+	var people_scroll := ScrollContainer.new()
+	people_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	people_window.add_child(people_scroll)
+	people_scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	people_panel = PEOPLE_PANEL.instantiate()
-	people_window.add_child(people_panel)
-	people_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	people_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	people_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	people_scroll.add_child(people_panel)
+	people_panel.custom_minimum_size = people_panel.get_child(0).get_combined_minimum_size()
 	people_panel.start_requested.connect(func(id: String): await run_action("start_arrival", {"arrival_id": id}))
 	people_panel.wait_requested.connect(func(minutes: int): await run_action("wait", {"minutes": minutes}))
 	people_panel.appearance_requested.connect(func(appearance: Dictionary): await run_action("save_appearance", {"appearance": appearance}))
@@ -226,7 +276,12 @@ func open_people() -> void:
 		show_notice("请先打开存档。")
 		return
 	people_panel.set_view(GameState.people_view())
+	_fit_window(people_window,Vector2i(shell_config.dialogs.people[0],shell_config.dialogs.people[1]))
 	people_window.popup_centered()
+
+func _fit_window(window: Window, desired: Vector2i) -> void:
+	var inset := int(shell_config.layout.margin)*2
+	window.size = desired.min(Vector2i(size)-Vector2i(inset,inset))
 
 func confirm_return_visit() -> void:
 	var at := GameState.next_return_time()
@@ -311,6 +366,8 @@ func open_network_settings() -> void:
 	token.secret = true
 	token.placeholder_text = "已设置，留空可保留" if settings.key_set else ""
 	box.add_child(token)
+	if is_instance_valid(presentation_audio):
+		presentation_audio.add_settings_controls(box)
 	dialog.confirmed.connect(func():
 		if not check_url.call():
 			return
@@ -469,7 +526,7 @@ func _build_history_window() -> void:
 	history_window = Window.new()
 	history_window.visible = false
 	history_window.title = "来客手记"
-	history_window.size = Vector2i(880, 540)
+	history_window.size = Vector2i(shell_config.dialogs.history[0],shell_config.dialogs.history[1])
 	history_window.theme = theme
 	history_window.transient = true
 	history_window.exclusive = true
@@ -493,6 +550,7 @@ func _build_history_window() -> void:
 func show_history() -> void:
 	history_details.set_pressed_no_signal(false)
 	_refresh_history(false)
+	_fit_window(history_window,Vector2i(shell_config.dialogs.history[0],shell_config.dialogs.history[1]))
 	history_window.popup_centered()
 
 func _refresh_history(show_details: bool) -> void:

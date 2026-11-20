@@ -1,0 +1,390 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started 项目初始化 (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | 正在扫描文件结构……[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | 正在加载全局类名……[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | 正在校验 GDExtension……[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | 正在创建自动加载脚本……[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | 正在初始化插件……[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | 正在启动文件扫描……[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started 正在加载编辑器 (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | 正在加载编辑器布局……[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | 正在加载停靠面板……[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS: create save
+PASS: initial resources
+PASS: unified clock starts 09:00
+PASS: start reception
+PASS: reenter retains visit
+PASS: scene return cannot multiply visits
+PASS: unfinished reception prevents next day
+PASS: configured question
+PASS: Chinese free input
+PASS: conversation discovers clue
+PASS: repeat topic permitted
+PASS: clue deduplicated
+PASS: unknown input clarifies
+PASS: clarification text stored
+PASS: failed write rejects paid result
+PASS: failed payment leaves all state unchanged and card hidden
+PASS: paid tarot succeeds
+PASS: both wallets settle together
+PASS: energy and clock settle together
+PASS: same action replay precedes stale version
+PASS: same action replay does not mutate
+PASS: new action cannot redraw same reception
+PASS: repeat payment no extra cost
+PASS: load unfinished paid reception
+PASS: reload original visit and card
+PASS: reload dialogue history
+PASS: persisted action replay after reload
+PASS: finish reception
+PASS: same-day repeat visit blocked
+PASS: rest succeeds
+PASS: rest uses unified clock and caps energy
+PASS: advance to next day 09:00
+PASS: same NPC returns next day
+PASS: stable identity new visit id
+PASS: previous record available
+PASS: reject insufficient energy
+PASS: no partial mutation for energy
+PASS: reject insufficient coins
+PASS: no partial mutation for coins
+PASS: reject insufficient time
+PASS: no partial mutation for time
+PASS: stale action rejected
+PASS: new independent save
+PASS: save isolation
+PASS: both saves retained
+PASS: switch restores original progress
+PASS: missing save keeps current state
+PASS: unsafe save id rejected
+PASS: negative wallet rejected
+PASS: invalid visit reference rejected
+PASS: corruption reported with explicit recovery
+PASS: damaged primary not silently overwritten
+PASS: backup restoration succeeds
+PASS: restored primary validates
+PASS: test removes only isolated primary
+PASS: backup-only save discoverable
+PASS: recover missing primary
+SMOKE RESULT: 57 checks, 0 failures. Isolated files: C:/Users/WT/Documents/ChatGPT/杂货铺/.tools/test-appdata/ZeroHourStore/test-runs/run_beae15f141caecd8c15f6cb8f8968284
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+DELETE SAVE: 52 checks, 0 failures; isolated files: C:/Users/WT/Documents/ChatGPT/杂货铺/.tools/test-save-delete/run_863cb5a1c0a17bb6d3f2c3d90a5e6a66
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS: create isolated provider test save
+PASS: start provider test reception
+PASS: reject provider response 0
+PASS: invalid provider response 0 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 1
+PASS: invalid provider response 1 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 2
+PASS: invalid provider response 2 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 3
+PASS: invalid provider response 3 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 4
+PASS: invalid provider response 4 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 5
+PASS: invalid provider response 5 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 6
+PASS: invalid provider response 6 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 7
+PASS: invalid provider response 7 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 8
+PASS: invalid provider response 8 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 9
+PASS: invalid provider response 9 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 10
+PASS: invalid provider response 10 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 11
+PASS: invalid provider response 11 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 12
+PASS: invalid provider response 12 cannot mutate resources, clues, dialogue or clock
+PASS: invalid provider responses leave persisted snapshot unchanged
+PASS: core deduplicates authorized provider clues
+PASS: provider text cannot change wallets or energy
+PASS: successful dialogue uses configured game time only
+PASS: provider receives structured context
+PASS: provider receives no authority or full save
+PASS: async dialogue remains pending until provider responds
+PASS: pending provider blocks synchronous state mutation
+PASS: pending provider blocks save switching
+PASS: pending provider blocks a second dialogue request
+PASS: waiting for provider consumes no game time
+PASS: async provider completion commits once
+PASS: async completion adds configured time and validated clue
+PASS: reject stale async version
+PASS: stale async response cannot overwrite newer version
+PASS: stale async version does not write to disk
+PASS: reject stale async save
+PASS: stale async response cannot overwrite newer save
+PASS: stale async save does not write to disk
+PASS: mock remains usable after async rejection
+PROVIDER RESULT: 48 checks, 0 failures. Isolated files: C:/Users/WT/Documents/ChatGPT/杂货铺/.tools/test-appdata/ZeroHourStore/test-runs/provider_465ea6a57bcf6835700228939486b1ac
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+DIALOGUE GROUNDING: 127 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+FOLLOWUP QUESTIONS: 86 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ORACLE RULES: 29 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+DIVINATION RESULT: 543 checks, 0 failures. Isolated saves: C:/Users/WT/Documents/ChatGPT/杂货铺/.tools/test-appdata/ZeroHourStore/test-runs/divination_24803dd64ffd12149cc463d74674e001
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+LEGACY DIVINATION GUESTS: 30 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+GENERATED CASES: 80 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+UI_SMOKE: 319 checks, 0 failures; captures: 
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+RESTART WRITE PASS: committed paid unfinished visit and forecast
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+RESTART READ PASS: identical resources, service and forecast; free replay and later feedback
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SHOP RULES: 87 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SHOP INTEGRATION: 78 checks, 0 failures; isolated files: C:/Users/WT/Documents/ChatGPT/杂货铺/.tools/test-appdata/ZeroHourStore/test-runs/shop_integration_run_20a43d4938203064f4ef7251a8a899d1
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PEOPLE INTEGRATION: 52 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+INTEGRATED PEOPLE RESTART WRITE: saved active paid visit, shared memory, appearance, appointment and wallets
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+INTEGRATED PEOPLE RESTART READ: original people, queue, resources and paid encounter restored
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+C UI RESULT: 695 checks, 0 failures, 0 graphical captures; renderer=headless
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SCENE VISUALS: 231 checks, 0 failures, 0 graphical captures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ARRIVAL UI RESULT: 33 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+CONSULTATION LAYOUT: 34 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ROUND2 SHELL RESULT: 1366 checks, 0 failures, 0 graphical captures; renderer=headless
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ROUND2 SHELL EDGES: 32 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ROUND2 CONSULTATION: 32 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+A3R AUDIO/THEME: 28 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ARRIVAL TRANSACTIONS: 42 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SAVE DELETE UI: 37 checks, 0 failures, 0 graphical captures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+GENERATED PEOPLE INTEGRATION: 145 checks, 0 failures. Saves: C:/Users/WT/Documents/ChatGPT/杂货铺/.tools/test-generated-people/run_531de3e186e2ad85877253335e0b9547
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+GENERATION ARRIVAL SLOTS: 30 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+GENERATED PEOPLE UI: 49 checks, 0 failures; renderer=headless
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+FOLLOWUP CORE RESULT: 29 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+FOLLOWUP QUESTIONS UI: 39 checks, 0 failures; renderer=headless captures=0
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+CHAT KEYBOARD UI: 49 checks, 0 failures; renderer=headless captures=0
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+OPENING GUEST INTEGRATION: 1212 checks, 0 failures; renderer=headless, captures=0
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PROJECT CLEANUP RESULT: 16 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+API SETTINGS UI: 45 checks, 0 failures; renderer=headless captures=0
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+API ENDPOINT: 187 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+MODEL POLICY RESULT: 38 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+HTTP RESULT: 41 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+HTTP CORE RESULT: 56 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+DIRECT API RESULT: 77 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+HTTP RECOVERY RESULT: 43 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PERSON HTTP RESULT: 64 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PEOPLE RULES: 52 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+GENERATED PERSON: 103 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PRODUCTION PEOPLE CONFIG: 11 checks, 0 failures; 200 shops x 3 days
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ARRIVAL CAPACITY: 27 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+OPENING GUEST RULES: 12 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+MEMORY RULES: 21 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+FAMILY FLOW: 16 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ARRIVAL EDGES: 28 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+FEEDBACK RULES: 11 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+DAILY DISTRIBUTION: 2000 days, zero=180 (9.00%), over capacity=70 (3.50%), bursts=110
+FAMILY DISTRIBUTION: 200 reproducible shops, ordinary=400, reference=13, family triggers=13
+DISTRIBUTION: 36 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+DIRECTOR RULES: 8 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PEOPLE PANEL: 6 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+A/B HANDOFF: 26 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PEOPLE RESTART WRITE: stable person, relationship and memory saved to isolated fixture
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PEOPLE RESTART READ: original identity, appearance, history and followup restored
+test_call_upstream_normalizes_actual_localhost_request_path_without_mutating_config (test_api_endpoint.ApiEndpointTests) ... ok
+test_call_upstream_rejects_missing_or_bad_url_before_transport (test_api_endpoint.ApiEndpointTests) ... ok
+test_dns_and_2048_character_limits_match_godot (test_api_endpoint.ApiEndpointTests) ... ok
+test_godot_canonical_url_vectors_match_python (test_api_endpoint.ApiEndpointTests) ... ok
+test_godot_invalid_structure_vectors_match_python (test_api_endpoint.ApiEndpointTests) ... ok
+test_main_accepts_http_public_ipv4_and_completes_v1_without_network (test_api_endpoint.ApiEndpointTests) ... ok
+test_main_rejects_invalid_endpoint_before_opening_a_server (test_api_endpoint.ApiEndpointTests) ... ok
+test_non_strings_fail_without_network_or_exceptions (test_api_endpoint.ApiEndpointTests) ... ok
+test_transport_accepts_existing_paths_while_chat_normalization_refuses_to_guess (test_api_endpoint.ApiEndpointTests) ... ok
+test_all_url_schemes_and_uppercase_are_rejected_like_godot (test_followup_questions.FollowupQuestionTests) ... ok
+test_arbitrary_extra_field_remains_invalid (test_followup_questions.FollowupQuestionTests) ... ok
+test_comfort_keeps_legal_questions_but_no_unasked_case_material (test_followup_questions.FollowupQuestionTests) ... ok
+test_deduplication_distinct_topic_cap_and_scan_bound_match_godot (test_followup_questions.FollowupQuestionTests) ... ok
+test_helper_rejects_absent_authority_and_handles_non_array_sources (test_followup_questions.FollowupQuestionTests) ... ok
+test_invalid_optional_suggestions_do_not_discard_valid_npc_prose (test_followup_questions.FollowupQuestionTests) ... ok
+test_label_vocabulary_is_question_only_and_never_becomes_fact_evidence (test_followup_questions.FollowupQuestionTests) ... ok
+test_legacy_three_fields_and_optional_fourth_remain_compatible (test_followup_questions.FollowupQuestionTests) ... ok
+test_loopback_discards_bad_optional_items_and_keeps_online_valid_response (test_followup_questions.FollowupQuestionTests) ... ok
+test_loopback_rejected_question_never_publishes_unreviewed_model_prose_or_suggestions (test_followup_questions.FollowupQuestionTests) ... ok
+test_loopback_serializes_reviewed_questions_without_extra_provider_calls (test_followup_questions.FollowupQuestionTests) ... ok
+test_prompts_require_player_voice_no_answers_and_joint_premise_review (test_followup_questions.FollowupQuestionTests) ... ok
+test_question_semantic_rejection_rejects_the_entire_model_candidate (test_followup_questions.FollowupQuestionTests) ... ok
+test_questions_use_existing_generation_and_review_without_extra_model_request (test_followup_questions.FollowupQuestionTests) ... ok
+test_real_repeated_self_questioning_claim_needs_a_matching_actual_source (test_followup_questions.FollowupQuestionTests) ... ok
+test_review_receives_authorized_label_without_receiving_its_unopened_answer (test_followup_questions.FollowupQuestionTests) ... ok
+test_selected_generator_and_review_receive_only_legal_direction_labels (test_followup_questions.FollowupQuestionTests) ... ok
+test_text_format_controls_markup_and_internal_id_examples_match_godot (test_followup_questions.FollowupQuestionTests) ... ok
+test_actual_core_source_metadata_and_relationship_are_preserved (test_gateway.GatewayTests) ... ok
+test_ambiguous_words_are_not_used_as_a_forced_topic (test_gateway.GatewayTests) ... ok
+test_busy_and_release (test_gateway.GatewayTests) ... ok
+test_busy_free_text_fallback_has_no_unverified_effect (test_gateway.GatewayTests) ... ok
+test_comfort_generation_gets_persona_only_without_unasked_case_details (test_gateway.GatewayTests) ... ok
+test_constrained_profile_choices_and_deterministic_fallback (test_gateway.GatewayTests) ... ok
+test_deepseek_dialogue_stages_disable_thinking_and_use_low_generation_temperature (test_gateway.GatewayTests) ... ok
+test_event_proposal_only_uses_authorized_candidates_and_shared_memory (test_gateway.GatewayTests) ... ok
+test_followup_uses_only_shared_same_topic_memory (test_gateway.GatewayTests) ... ok
+test_forged_generated_evidence_rejected_before_review (test_gateway.GatewayTests) ... ok
+test_free_text_only_receives_selected_topic_fact (test_gateway.GatewayTests) ... ok
+test_generated_profile_cannot_overwrite_identity (test_gateway.GatewayTests) ... ok
+test_generation_budget_evicts_old_sources_and_review_sees_identical_pool (test_gateway.GatewayTests) ... ok
+test_http_503_unverified_negative_or_injection_never_rescans_keywords (test_gateway.GatewayTests) ... ok
+test_http_review_failure_pins_verified_intent_and_never_reuses_other_request (test_gateway.GatewayTests) ... ok
+test_http_success_and_invalid_upstream (test_gateway.GatewayTests) ... ok
+test_internal_and_new_concrete_claims_fail_before_semantic_review (test_gateway.GatewayTests) ... ok
+test_long_history_budget_keeps_latest_shared_material (test_gateway.GatewayTests) ... ok
+test_negative_topic_keeps_successful_work_classification (test_gateway.GatewayTests) ... ok
+test_neutral_clarification_still_requires_independent_review (test_gateway.GatewayTests) ... ok
+test_offline_dialogue_uses_only_allowed_topic_or_clarifies (test_gateway.GatewayTests) ... ok
+test_online_classifier_is_not_overridden_by_keywords (test_gateway.GatewayTests) ... ok
+test_only_mutually_known_memories_reach_model (test_gateway.GatewayTests) ... ok
+test_persona_and_sources_are_explicit_and_player_turns_are_not_evidence (test_gateway.GatewayTests) ... ok
+test_persona_only_natural_reply_does_not_award_topic_effects (test_gateway.GatewayTests) ... ok
+test_persona_prefix_cannot_carry_extra_claims (test_gateway.GatewayTests) ... ok
+test_prediction_is_typed_and_cannot_be_promoted_by_approved_flag (test_gateway.GatewayTests) ... ok
+test_protected_anchors_need_actual_selected_or_shared_evidence (test_gateway.GatewayTests) ... ok
+test_public_projection_and_authorized_effects (test_gateway.GatewayTests) ... ok
+test_rejects_unknown_or_wrong_selected_intent (test_gateway.GatewayTests) ... ok
+test_review_budget_never_silently_hides_generator_sources (test_gateway.GatewayTests) ... ok
+test_review_requires_strict_verdict_matching_evidence_and_no_findings (test_gateway.GatewayTests) ... ok
+test_selected_topic_review_preserves_real_model_wording (test_gateway.GatewayTests) ... ok
+test_topic_citation_without_actual_disclosure_is_rejected_by_review (test_gateway.GatewayTests) ... ok
+test_unasked_authored_fact_is_not_sent_to_generation_or_review (test_gateway.GatewayTests) ... ok
+test_unauthorized_extra_claim_is_not_delivered (test_gateway.GatewayTests) ... ok
+test_unknown_case_information_does_not_authorize_absence_or_exclusive_claims (test_gateway.GatewayTests) ... ok
+test_upstream_truncation_is_rejected (test_gateway.GatewayTests) ... ok
+test_vetted_professional_knowledge_is_preserved_without_new_case_effects (test_gateway.GatewayTests) ... ok
+test_background_capacity_is_independent_of_front_dialogue_capacity (test_generated_gateway.GeneratedGatewayTests) ... ok
+test_dynamic_catalog_checks_npc_topic_clue_and_effect_authority (test_generated_gateway.GeneratedGatewayTests) ... ok
+test_dynamic_classification_sees_labels_without_unselected_facts (test_generated_gateway.GeneratedGatewayTests) ... ok
+test_dynamic_generation_only_gets_selected_source_and_needs_independent_review (test_generated_gateway.GeneratedGatewayTests) ... ok
+test_dynamic_http_classifier_failure_clarifies_and_review_failure_pins_current_topic (test_generated_gateway.GeneratedGatewayTests) ... ok
+test_dynamic_offline_merge_repeats_safely_and_never_rescans_unverified_free_text (test_generated_gateway.GeneratedGatewayTests) ... ok
+test_package_result_preserves_original_creation_and_exact_canonical_review (test_generated_gateway.GeneratedGatewayTests) ... ok
+test_person_http_duplicate_identities_and_existing_character_references_are_rejected (test_generated_gateway.GeneratedGatewayTests) ... ok
+test_person_http_success_authentication_and_illegal_input (test_generated_gateway.GeneratedGatewayTests) ... ok
+test_person_http_wrong_hash_rejected_review_and_unavailable_return_502 (test_generated_gateway.GeneratedGatewayTests) ... ok
+test_all_four_models_use_verified_options_for_every_dialogue_and_person_stage (test_model_request_policy.ModelRequestPolicyTests) ... ok
+test_complete_plain_and_single_fenced_json_content_pass_actual_call_parser (test_model_request_policy.ModelRequestPolicyTests) ... ok
+test_hidden_reasoning_is_never_a_substitute_for_visible_content (test_model_request_policy.ModelRequestPolicyTests) ... ok
+test_legacy_missing_finish_reason_is_distinct_from_an_explicit_null (test_model_request_policy.ModelRequestPolicyTests) ... ok
+test_truncation_incomplete_fences_and_explanations_cannot_reach_stage_validation (test_model_request_policy.ModelRequestPolicyTests) ... ok
+test_unknown_and_older_families_keep_generic_options (test_model_request_policy.ModelRequestPolicyTests) ... ok
+test_context_projection_is_bounded_and_never_forwards_existing_hidden_state (test_person_generation.PersonGenerationTests) ... ok
+test_godot_fixture_canonical_json_and_hash_match_exactly (test_person_generation.PersonGenerationTests) ... ok
+test_independent_review_is_strict_and_bound_to_this_exact_draft (test_person_generation.PersonGenerationTests) ... ok
+test_internal_markers_control_characters_and_existing_case_anchors_rejected (test_person_generation.PersonGenerationTests) ... ok
+test_natural_identity_preferences_and_text_limits_are_enforced (test_person_generation.PersonGenerationTests) ... ok
+test_new_original_fields_are_retained_without_template_choices (test_person_generation.PersonGenerationTests) ... ok
+test_private_material_and_unearned_future_result_do_not_enter_public_parts (test_person_generation.PersonGenerationTests) ... ok
+test_strict_schema_types_and_extra_fields_fail_closed (test_person_generation.PersonGenerationTests) ... ok
+----------------------------------------------------------------------
+Ran 90 tests in 9.878s
+OK
