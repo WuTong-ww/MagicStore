@@ -107,6 +107,16 @@ func player_snapshot() -> Dictionary:
 func people_view() -> Dictionary:
 	return PeopleBridge.public_view(state) if not state.is_empty() else {}
 
+func departure_risk(minutes: int) -> int:
+	if minutes <= 0 or state.is_empty():
+		return 0
+	var until := int(state.clock_minutes) + minutes
+	var count := 0
+	for row: Dictionary in state.get("people",{}).get("arrivals",{}).values():
+		if row.get("state") in ["queued","outside"] and int(row.get("deadline",-1)) <= until:
+			count += 1
+	return count
+
 func contact_invitation() -> Dictionary:
 	return PeopleBridge.contact_invitation(state,people_config) if not state.is_empty() else {}
 
@@ -250,6 +260,7 @@ func pump_background_people(ui_busy: bool = false, force: bool = false) -> void:
 		return
 	var status := people_generation_status()
 	var desired := int(generation_config.ready_target) - int(status.ready) - _generation_jobs.size()
+	desired = mini(desired, _generation_slots().size() - _generation_jobs.size())
 	var planned_today := 0
 	var day := floori(float(state.clock_minutes) / 1440.0)
 	for row: Dictionary in state.people.get("generated_people",{}).values():
@@ -280,30 +291,58 @@ func _admit_next_person() -> void:
 	if not _generation_jobs.has(row.job_id) or _generation_jobs[row.job_id].token != row.token or _generation_jobs[row.job_id].save_id != state.save_id:
 		_generation_ready.pop_front()
 		return
-	var preferred := int(state.clock_minutes) + int(generation_config.min_lead_minutes)
-	for arrival: Dictionary in state.people.arrivals.values():
-		if arrival.get("source") == "generated" and int(arrival.get("at",0)) >= int(state.clock_minutes):
-			preferred = maxi(preferred,int(arrival.at)+int(generation_config.arrival_spacing_minutes))
-	var at: int = People.next_available_arrival(state.people,people_config,preferred)
-	if at <= 0:
-		_generation_retry_at = Time.get_ticks_msec()+30000
+	var slots := _generation_slots()
+	if slots.is_empty():
+		# A reviewed draft may wait for a later day, but cannot create traffic.
 		return
-	var candidate := state.duplicate(true)
-	var applied: Dictionary = GeneratedPerson.apply(candidate.people,people_config,row.job_id,row.bundle,row.provenance,at)
-	if not applied.get("success",false):
-		_generation_ready.pop_front()
-		_person_failed(row.job_id,row.token,"ADMISSION_REJECTED")
-		return
-	var action := {"type":"admit_generated_person","action_id":"admit_" + str(row.job_id)}
-	var committed := _commit(candidate,action,"一位新来客已经约好到店时间。",applied)
+	var action := {"type":"admit_generated_person","action_id":"admit_" + str(row.job_id),"job_id":row.job_id,"slot_id":slots[0]}
+	# This internal action has no network await; admission stays atomic with
+	# foreground actions while using the same authorized async command boundary.
+	var committed: Dictionary = await execute_action_async(action)
 	if not committed.success:
+		if committed.get("error_code") == "ADMISSION_REJECTED":
+			_generation_ready.pop_front()
+			_person_failed(row.job_id,row.token,"ADMISSION_REJECTED")
+			return
 		_generation_retry_at = Time.get_ticks_msec() + 3000
 		_generation_notice = "新来客尚未保存，稍后重试；店铺进度没有改变。"
 		return
 	_generation_ready.pop_front()
 	_generation_jobs.erase(row.job_id)
 	_generation_notice = "新来客已经约好到店时间，可以在候客簿中留意。"
-	_sync_generated_catalog()
+
+func _generation_slots() -> Array[String]:
+	var slots: Array[String] = []
+	var people: Dictionary = state.get("people", {})
+	for id: String in people.get("arrivals", {}):
+		var arrival: Dictionary = people.arrivals[id]
+		if GeneratedPerson._slot_available(people, id, int(arrival.get("at", -1))):
+			slots.append(id)
+	slots.sort_custom(func(a: String, b: String) -> bool:
+		var first: int = people.arrivals[a].at
+		var second: int = people.arrivals[b].at
+		return first < second if first != second else a < b)
+	return slots
+
+func _admit_generated_person(action: Dictionary) -> Dictionary:
+	var job_id: String = str(action.get("job_id", ""))
+	var slot_id: String = str(action.get("slot_id", ""))
+	var job: Dictionary = _generation_jobs.get(job_id, {})
+	var ready: Dictionary = {}
+	for row: Dictionary in _generation_ready:
+		if row.job_id == job_id and row.token == job.get("token") and job.get("save_id") == state.save_id:
+			ready = row
+			break
+	if ready.is_empty() or slot_id.is_empty() or not state.people.arrivals.has(slot_id):
+		return _fail("ADMISSION_REJECTED", "人物草稿或审核来源无效。")
+	var candidate := state.duplicate(true)
+	var applied := GeneratedPerson.apply(candidate.people, people_config, job_id, ready.bundle, ready.provenance, int(candidate.people.arrivals[slot_id].at), slot_id)
+	if not applied.get("success", false):
+		return _fail("ADMISSION_REJECTED", applied.get("message", ""))
+	var committed := _commit(candidate, action, "一位新来客已经约好到店时间。", applied)
+	if committed.success:
+		_sync_generated_catalog()
+	return committed
 
 func _sync_generated_catalog() -> void:
 	if _divination == null:
@@ -511,13 +550,15 @@ func execute_action(action: Dictionary) -> Dictionary:
 			return _rest(action)
 		"next_day":
 			return _next_day(action)
+		"admit_generated_person":
+			return _admit_generated_person(action)
 	if action.type in DivinationSession.ACTIONS:
 		return _divination_action(action)
 	if action.type == "start_arrival":
 		var candidate := state.duplicate(true)
 		var proposal := action.duplicate(true)
 		proposal["visit_id"] = make_id("visit")
-		var outcome: Dictionary = PeopleBridge.start(candidate, proposal, _divination)
+		var outcome: Dictionary = PeopleBridge.start(candidate, proposal, _divination, people_config)
 		if not outcome.success:
 			return _fail(outcome.error_code, outcome.message)
 		return _commit(candidate, action, outcome.message, outcome.result)
@@ -893,7 +934,15 @@ func _commit(candidate: Dictionary, action: Dictionary, message: String, result:
 func _initialize_integrated(candidate: Dictionary) -> void:
 	Shop.initialize(candidate)
 	PeopleBridge.initialize(candidate, people_config, _divination)
-	candidate.schema_version = 3
+	_migrate_arrival_schema(candidate)
+
+func _migrate_arrival_schema(candidate: Dictionary) -> void:
+	# Add only schema metadata. Persisted day plans and arrivals remain unchanged;
+	# loading keeps the migration in memory until the next successful transaction.
+	if int(candidate.schema_version) < 4:
+		if not candidate.people.stats.has("lost_customers"):
+			candidate.people.stats["lost_customers"] = 0
+		candidate.schema_version = 4
 
 func _shop_action(action: Dictionary) -> Dictionary:
 	var candidate := state.duplicate(true)

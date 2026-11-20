@@ -30,7 +30,7 @@ func run() -> void:
 	saves = root.get_node("SaveService")
 	saves.base_dir = "user://test-runs/" + gs.make_id("people_integration")
 	act("new_game", {"name": "人物与公共事务整合"})
-	check(gs.state.schema_version == 3 and Bridge.validate(gs.state).is_empty(), "new integrated save validates")
+	check(gs.state.schema_version == 4 and Bridge.validate(gs.state).is_empty(), "new integrated save validates")
 	check(not gs.player_snapshot().has("people"), "public snapshot hides future arrivals and relationships")
 	var queue: Array = Bridge.public_view(gs.state).queue
 	check(queue.any(func(row: Dictionary) -> bool: return row.npc_id == "npc_lin"), "handwritten opening enters actual queue")

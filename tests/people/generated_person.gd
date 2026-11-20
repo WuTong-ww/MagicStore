@@ -181,6 +181,28 @@ func run() -> void:
 	var initial_bias: int = waiting.profiles[waiting_result.npc_id].return_bias
 	var deadline: int = waiting.arrivals[waiting_result.arrival_id].deadline
 	check(waiting_result.success and People.advance(waiting,config,deadline + 1) and waiting.profiles[waiting_result.npc_id].return_bias == maxi(-50,initial_bias - 5) and People.validate(waiting).is_empty() and People.validate(JSON.parse_string(JSON.stringify(waiting))).is_empty(), "sourced waiting departure may change return bias and still save/reload with frozen identity")
+	var crowded := fresh()
+	var crowded_config := config.duplicate(true)
+	crowded_config.arrival.queue_capacity = 1
+	crowded_config.arrival.overflow.outside_min_score = 100
+	crowded_config.arrival.overflow.appointment_min_score = 90
+	crowded_config.arrival.overflow.return_bias_penalty = 7
+	var blocked := Generated.apply(crowded, crowded_config, "overflow_generated", draft, approved(draft), 550)
+	var blocked_arrival: Dictionary = crowded.arrivals[blocked.arrival_id]
+	crowded.arrivals["capacity_holder"] = {"arrival_id": "capacity_holder", "npc_id": "npc_lin", "source": "fixture", "at": 540, "deadline": 1000, "state": "queued", "intent": "divination", "urgency": 0, "schedule_end": 1000, "referrer_npc_id": "", "case_id": "invitation", "visit_id": ""}
+	var blocked_bias := int(crowded.profiles[blocked.npc_id].return_bias)
+	check(People.advance(crowded, crowded_config, 550) and blocked_arrival.state == "left" and crowded.stats.lost_customers == 1 and crowded.profiles[blocked.npc_id].return_bias == maxi(int(crowded_config.arrival.overflow.return_bias_min), blocked_bias - 7), "generated customer capacity departure uses the configured return penalty once")
+	check(People.validate(crowded).is_empty() and People.validate(JSON.parse_string(JSON.stringify(crowded))).is_empty(), "generated capacity loss retains verifiable provenance across reload")
+	var forged_loss := crowded.duplicate(true)
+	forged_loss.arrivals[blocked.arrival_id].loss.return_bias_after += 1
+	check(not People.validate(forged_loss).is_empty(), "generated loss cannot forge the resulting return bias")
+	var custom_waiting := fresh()
+	var custom_config := config.duplicate(true)
+	custom_config.arrival.overflow.reasons.timeout = "顾客等候过久后离开"
+	custom_config.arrival.overflow.return_bias_penalty = 7
+	var custom_result := Generated.apply(custom_waiting, custom_config, "configured_waiting", draft, approved(draft), 540)
+	var custom_deadline := int(custom_waiting.arrivals[custom_result.arrival_id].deadline)
+	check(People.advance(custom_waiting, custom_config, custom_deadline) and People.validate(custom_waiting).is_empty(), "configured timeout copy and penalty remain valid generated-person history")
 	finish()
 
 func check(ok: bool, label: String) -> void:

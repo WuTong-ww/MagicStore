@@ -6,7 +6,7 @@ var failures := 0
 
 func _initialize() -> void:
 	var config := People.load_config()
-	check(config.arrival.natural_min == 1 and config.arrival.opening_guest, "normal preparation includes an opening customer")
+	check(config.arrival.natural_min == 0 and config.arrival.opening_guest, "natural arrivals allow zero while day-zero tutorial remains enabled")
 	var invalid := config.duplicate(true)
 	invalid.arrival.opening_guest = "yes"
 	check(not People.config_valid(invalid), "opening policy must be boolean")
@@ -22,8 +22,8 @@ func _initialize() -> void:
 	People.plan_day(ordinary,no_opening,1,0,3)
 	var opening := People.create("save_opening_rules",42,540)
 	People.plan_day(opening,config,1,0,3)
-	check(opening.arrivals.arrival_1_0.at == 1980, "first new natural customer is scheduled exactly at next opening")
-	check(opening.profiles == ordinary.profiles and opening.arrivals.arrival_1_1 == ordinary.arrivals.arrival_1_1 and opening.arrivals.arrival_1_2 == ordinary.arrivals.arrival_1_2 and opening.arrivals.arrival_1_0.intent == ordinary.arrivals.arrival_1_0.intent and opening.arrivals.arrival_1_0.urgency == ordinary.arrivals.arrival_1_0.urgency, "opening override preserves random stream for identities and all later arrivals")
+	check(opening.arrivals.arrival_1_0.at >= 1440 + int(config.arrival.first_minute), "later days use the configured arrival distribution instead of a guaranteed opening visitor")
+	check(opening == ordinary, "opening policy has no effect on later-day natural arrivals or identities")
 	var planned_before := ordinary.duplicate(true)
 	People.plan_day(ordinary,config,1,0,3)
 	check(ordinary == planned_before, "existing day plan is not moved by the new policy")
@@ -42,7 +42,7 @@ func _initialize() -> void:
 	check(result.success, "scheduled generated fixture is valid")
 	var reservation: Dictionary = reserved.arrivals[result.arrival_id].duplicate(true)
 	People.plan_day(reserved,config,1,0,2)
-	check(reserved.arrivals[result.arrival_id] == reservation and reserved.arrivals.arrival_1_0.at == 1980 and People.validate(reserved).is_empty(), "opening guest does not move an existing generated appointment")
+	check(reserved.arrivals[result.arrival_id] == reservation and reserved.arrivals.arrival_1_0.at >= 1440 + int(config.arrival.first_minute) and People.validate(reserved).is_empty(), "natural arrivals do not move an existing generated appointment")
 	var full := People.create("save_opening_full",42,540)
 	People.add_fixed(full,"npc_lin","林照晚","旧书修复师")
 	for index: int in range(20):

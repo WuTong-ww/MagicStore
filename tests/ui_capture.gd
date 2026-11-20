@@ -342,12 +342,21 @@ func check_layout(label: String) -> void:
 	check(main.resources.get_global_rect().end.y < main.scene_holder.get_global_rect().position.y, label + " status stays above scene")
 	check_buttons(main.screen, label)
 
-func check_buttons(node: Node, label: String) -> void:
-	if node is Button or node is TextEdit:
+func check_buttons(node: Node, label: String, scroll_parent: ScrollContainer = null) -> void:
+	if node is ScrollContainer:
+		scroll_parent = node
+		check(Rect2(Vector2.ZERO, main.size).grow(1).encloses(node.get_global_rect()), label + " scroll viewport remains inside window")
+	if (node is Button or node is TextEdit) and node.is_visible_in_tree():
 		var rect: Rect2 = node.get_global_rect()
-		check(Rect2(Vector2.ZERO, main.size).encloses(rect), label + " control remains inside window: " + str(node.name))
+		if scroll_parent == null:
+			check(Rect2(Vector2.ZERO, main.size).grow(1).encloses(rect), label + " control remains inside window: " + str(node.name))
+		else:
+			var viewport: Rect2 = scroll_parent.get_global_rect()
+			check(rect.position.x >= viewport.position.x - 1 and rect.end.x <= viewport.end.x + 1, label + " control fits scroll width: " + str(node.name))
+			var content: Control = scroll_parent.get_child(0)
+			check(content.get_global_rect().grow(1).encloses(rect), label + " control is reachable in scroll content: " + str(node.name))
 	for child in node.get_children():
-		check_buttons(child, label)
+		check_buttons(child, label, scroll_parent)
 
 func capture(label: String) -> void:
 	if DisplayServer.get_name() == "headless":

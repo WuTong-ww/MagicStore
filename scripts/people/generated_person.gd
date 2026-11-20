@@ -142,7 +142,7 @@ static func offline_bundle(generation_id: String) -> Dictionary:
 static func offline_provenance(generation_id: String) -> Dictionary:
 	return {"source":"offline","model":"","draft_hash":draft_hash(offline_bundle(generation_id)),"review":{}}
 
-static func apply(people: Dictionary, config: Dictionary, generation_id: String, bundle: Dictionary, provenance: Dictionary, at: int) -> Dictionary:
+static func apply(people: Dictionary, config: Dictionary, generation_id: String, bundle: Dictionary, provenance: Dictionary, at: int, slot_id: String = "") -> Dictionary:
 	var normalized := validate_bundle(bundle)
 	if not _generation_id_ok(generation_id) or normalized.is_empty() or not _provenance_ok(generation_id, normalized, provenance):
 		return _fail("GENERATED_PERSON_INVALID", "人物草稿或审核来源无效。")
@@ -151,12 +151,14 @@ static func apply(people: Dictionary, config: Dictionary, generation_id: String,
 	var ids := _ids(generation_id)
 	var existing: Dictionary = people.get("generated_people", {}).get(generation_id, {})
 	if not existing.is_empty():
-		if validate_people(people).is_empty() and existing.draft_hash == draft_hash(normalized) and people.profiles[existing.npc_id].generation == provenance:
+		if validate_people(people).is_empty() and existing.draft_hash == draft_hash(normalized) and people.profiles[existing.npc_id].generation == provenance and (slot_id.is_empty() or existing.arrival_id == slot_id):
 			return _ok(existing, true)
 		return _fail("GENERATED_PERSON_CONFLICT", "同一人物生成记录已有不同内容。")
 	if not _integer(at, int(people.clock), MAX_INT) or at % 1440 < 540 or at % 1440 >= 1320:
 		return _fail("GENERATED_ARRIVAL_TIME", "人物来访需安排在营业时间。")
-	if _arrival_count_on_day(people,floori(float(at)/1440.0)) >= int(config.arrival.get("max_total_per_day",20)):
+	if not slot_id.is_empty() and not _slot_available(people, slot_id, at):
+		return _fail("GENERATED_PERSON_CONFLICT", "新人物与已有档案冲突。")
+	if slot_id.is_empty() and _arrival_count_on_day(people,floori(float(at)/1440.0)) >= int(config.arrival.get("max_total_per_day",20)):
 		return _fail("GENERATED_ARRIVAL_FULL", "这天的到店安排已满，可换一天。")
 	for id: String in [ids.npc_id, ids.contact_id]:
 		if people.profiles.has(id):
@@ -184,14 +186,29 @@ static func apply(people: Dictionary, config: Dictionary, generation_id: String,
 	candidate.profiles[ids.contact_id] = contact
 	candidate.relationships[ids.relationship_id] = {"relationship_id":ids.relationship_id,"from":ids.npc_id,"to":ids.contact_id,"kind":normalized.relationship.kind,"shared_history":normalized.relationship.shared_history,"closeness":50,"changes":[],"generation_id":generation_id}
 	var immediate: bool = at == int(people.clock)
-	candidate.arrivals[ids.arrival_id] = {"arrival_id":ids.arrival_id,"npc_id":ids.npc_id,"source":"generated","at":at,"deadline":mini(at + int(main.base_patience), floori(float(at) / 1440.0) * 1440 + 1320) if immediate else -1,"state":"queued" if immediate else "planned","intent":"divination","urgency":0,"schedule_end":mini(at + 120, floori(float(at) / 1440.0) * 1440 + 1320),"referrer_npc_id":"","case_id":"","visit_id":"","generation_id":generation_id}
-	var record := {"generation_id":generation_id,"npc_id":ids.npc_id,"contact_id":ids.contact_id,"relationship_id":ids.relationship_id,"arrival_id":ids.arrival_id,"created_at":int(people.clock),"at":at,"draft_hash":draft_hash(normalized)}
+	var arrival_id: String = ids.arrival_id if slot_id.is_empty() else slot_id
+	if slot_id.is_empty():
+		candidate.arrivals[arrival_id] = {"arrival_id":arrival_id,"npc_id":ids.npc_id,"source":"generated","at":at,"deadline":mini(at + int(main.base_patience), floori(float(at) / 1440.0) * 1440 + 1320) if immediate else -1,"state":"queued" if immediate else "planned","intent":"divination","urgency":0,"schedule_end":mini(at + 120, floori(float(at) / 1440.0) * 1440 + 1320),"referrer_npc_id":"","case_id":"","visit_id":"","generation_id":generation_id}
+	else:
+		candidate.arrivals[arrival_id].npc_id = ids.npc_id
+		candidate.arrivals[arrival_id]["generation_id"] = generation_id
+		candidate.arrivals[arrival_id]["generation_slot"] = true
+	var record := {"generation_id":generation_id,"npc_id":ids.npc_id,"contact_id":ids.contact_id,"relationship_id":ids.relationship_id,"arrival_id":arrival_id,"created_at":int(people.clock),"at":at,"draft_hash":draft_hash(normalized)}
 	candidate.generated_people[generation_id] = record
 	if not validate_people(candidate).is_empty():
 		return _fail("GENERATED_PERSON_INVALID", "人物入档校验失败。")
 	people.clear()
 	people.merge(candidate, true)
 	return _ok(record)
+
+static func _slot_available(people: Dictionary, slot_id: String, at: int) -> bool:
+	var row: Dictionary = people.get("arrivals", {}).get(slot_id, {})
+	var profile: Dictionary = people.get("profiles", {}).get(row.get("npc_id", ""), {})
+	var day: Dictionary = people.get("days", {}).get(str(floori(float(at) / 1440.0)), {})
+	return not row.is_empty() and not profile.is_empty() and not profile.get("met", false) and not row.has("generation_id") and row.get("state") == "planned" and _natural_source(row.get("source", "")) and int(row.get("at", -1)) == at and at > int(people.clock) and slot_id in day.get("arrival_ids", [])
+
+static func _natural_source(source: Variant) -> bool:
+	return source is String and (source == "natural" or source.begins_with("burst_"))
 
 static func validate_people(people: Dictionary) -> String:
 	var records: Variant = people.get("generated_people", {})
@@ -204,7 +221,7 @@ static func validate_people(people: Dictionary) -> String:
 		var ids := _ids(generation_id)
 		if not _keys(record, ["generation_id", "npc_id", "contact_id", "relationship_id", "arrival_id", "created_at", "at", "draft_hash"]) or record.generation_id != generation_id:
 			return "生成的人物来源记录无效"
-		for field: String in ["npc_id", "contact_id", "relationship_id", "arrival_id"]:
+		for field: String in ["npc_id", "contact_id", "relationship_id"]:
 			if record[field] != ids[field]:
 				return "生成的人物稳定编号漂移"
 		if not _integer(record.at, 0, MAX_INT) or int(record.at) % 1440 < 540 or int(record.at) % 1440 >= 1320:
@@ -231,8 +248,18 @@ static func validate_people(people: Dictionary) -> String:
 			var question: String = bundle.case.question if is_main else "我该怎样与这位熟人继续相处？"
 			if not goal is Dictionary or goal.get("goal_id") != (ids.goal_id if is_main else ids.contact_goal_id) or goal.get("kind") != "generated_request" or goal.get("relationship_id") != ids.relationship_id or goal.get("subject_id") != (ids.contact_id if is_main else ids.npc_id) or goal.get("question") != question:
 				return "生成的人物诉求已漂移"
-		var arrival: Variant = people.get("arrivals", {}).get(ids.arrival_id)
+		var arrival: Variant = people.get("arrivals", {}).get(record.arrival_id)
 		if not arrival is Dictionary or arrival.get("generation_id") != generation_id or arrival.get("npc_id") != ids.npc_id:
+			return "生成的人物初访记录缺失"
+		if arrival.get("generation_slot", false) == true:
+			var day: Dictionary = people.get("days", {}).get(str(floori(float(record.at) / 1440.0)), {})
+			if record.arrival_id not in day.get("arrival_ids", []) or not _natural_source(arrival.get("original_source", arrival.get("source", ""))):
+				return "生成的人物初访记录缺失"
+		elif record.arrival_id != ids.arrival_id or arrival.has("generation_slot"):
+			return "生成的人物稳定编号漂移"
+	for arrival_id: String in people.get("arrivals", {}):
+		var arrival: Dictionary = people.arrivals[arrival_id]
+		if arrival.has("generation_slot") and (arrival.generation_slot != true or records.get(arrival.get("generation_id", ""), {}).get("arrival_id") != arrival_id):
 			return "生成的人物初访记录缺失"
 	for id: String in people.get("profiles", {}):
 		var profile: Dictionary = people.profiles[id]
@@ -337,7 +364,7 @@ static func _people_shape(people: Dictionary) -> bool:
 static func _arrival_count_on_day(people: Dictionary, day: int) -> int:
 	var count := 0
 	for row: Dictionary in people.arrivals.values():
-		if row.get("state") in ["planned","queued","in_service","completed","left"] and (floori(float(row.get("at",-1440))/1440.0) == day or day in row.get("counted_days",[])):
+		if row.get("state") in ["planned","queued","outside","appointment_requested","in_service","completed","left"] and (floori(float(row.get("at",-1440))/1440.0) == day or day in row.get("counted_days",[])):
 			count += 1
 	return count
 
@@ -415,15 +442,33 @@ static func _behavior_valid(people: Dictionary, profile: Dictionary) -> bool:
 	var expected := int(profile.generation_initial_return_bias)
 	var seen := {}
 	var previous_at := -1
+	var losses: Array = []
 	for incident: Variant in profile.get("waiting_incidents", []):
 		if not incident is Dictionary or not incident.get("arrival_id") is String or seen.has(incident.arrival_id) or not _integer(incident.get("at"), 0, int(people.clock)) or int(incident.at) < previous_at:
 			return false
 		var arrival: Variant = people.arrivals.get(incident.arrival_id)
-		if not arrival is Dictionary or arrival.get("npc_id") != profile.npc_id or arrival.get("state") != "left" or arrival.get("reason") != "等待超时" or arrival.get("left_at") != incident.at or incident.get("reason") != "等待超时" or not _integer(incident.get("waited_minutes"), 0, MAX_INT) or int(incident.waited_minutes) != int(incident.at) - int(arrival.at):
+		if not arrival is Dictionary or arrival.get("npc_id") != profile.npc_id or arrival.get("state") != "left" or (not arrival.has("loss") and arrival.get("reason") != "等待超时") or arrival.get("left_at") != incident.at or incident.get("reason") != arrival.get("reason") or not _integer(incident.get("waited_minutes"), 0, MAX_INT) or int(incident.waited_minutes) != int(incident.at) - int(arrival.at):
 			return false
 		seen[incident.arrival_id] = true
 		previous_at = int(incident.at)
-		expected = maxi(-50, expected - 5)
+		if not arrival.has("loss"):
+			losses.append({"at": int(incident.at), "arrival_id": incident.arrival_id, "penalty": 5, "minimum": -50})
+	for arrival: Dictionary in people.arrivals.values():
+		if arrival.get("npc_id") != profile.npc_id or not arrival.has("loss"):
+			continue
+		var loss: Variant = arrival.loss
+		if not loss is Dictionary or arrival.get("state") != "left" or not _integer(loss.get("at"), 0, int(people.clock)) or arrival.get("left_at") != loss.at or not _integer(loss.get("penalty"), 1, 100) or not _integer(loss.get("minimum"), -100, 0) or not _integer(loss.get("return_bias_before"), -100, 100) or not _integer(loss.get("return_bias_after"), -100, 100):
+			return false
+		var record: Dictionary = loss.duplicate(true)
+		record["arrival_id"] = arrival.arrival_id
+		losses.append(record)
+	losses.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return a.at < b.at if a.at != b.at else a.arrival_id < b.arrival_id)
+	for loss: Dictionary in losses:
+		if loss.has("return_bias_before") and int(loss.return_bias_before) != expected:
+			return false
+		expected = mini(expected, maxi(int(loss.minimum), expected - int(loss.penalty))) if loss.has("return_bias_before") else maxi(int(loss.minimum), expected - int(loss.penalty))
+		if loss.has("return_bias_after") and int(loss.return_bias_after) != expected:
+			return false
 	return int(profile.return_bias) == expected
 
 static func _references_existing(bundle: Dictionary, people: Dictionary) -> bool:

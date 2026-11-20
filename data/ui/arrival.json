@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "front_stage_minimum_size": [760, 270],
+  "empty_title": "今日零客日",
+  "empty_status": "今天没有安排到店的来客。",
+  "empty_advice": "趁店里清静，可以去采集原料、研习术式，或制作商品，为下次开门做准备。",
+  "suggestions": {"gathering": "去采集", "study": "去研习", "workshop": "去制作"},
+  "queue_title": "候客耐心",
+  "patience_format": "%s · %s · 还可等约 %d 分钟",
+  "patience_levels": [
+    {"minimum_ratio": 0.66, "icon": "⌛⌛⌛", "label": "耐心充足", "color": "9acfb3"},
+    {"minimum_ratio": 0.33, "icon": "⌛⌛", "label": "耐心渐少", "color": "e4c57a"},
+    {"minimum_ratio": 0.0, "icon": "⌛", "label": "即将离开", "color": "ef9b87"}
+  ],
+  "source_format": "到店缘由：%s",
+  "source_default": "自然到店",
+  "sources": {
+    "natural": "自然到店", "fixed_story": "新手来客", "generated": "新来客", "opening": "开门来客", "opening_guest": "新手来客", "return": "熟客回访",
+    "appointment": "按约到店", "referral": "熟人介绍", "feedback": "反馈回访", "family_first": "结伴来访",
+    "burst_word_of_mouth": "口碑传开 · 集中到店", "burst_group_referral": "群体转介绍 · 集中到店", "burst_festival": "节日来访 · 集中到店"
+  },
+  "outside_format": "门外等候：%d 位",
+  "requests_format": "留下预约请求：%d 位",
+  "outside_status": "门外等候",
+  "request_status": "留下预约请求 · 尚未约定时间",
+  "confirmation_title": "确认安排时间",
+  "confirmation_format": "本次行动将耗时 %d 分钟。\n将有 %d 位候客可能离开。\n确认现在开始？",
+  "confirm": "确认开始",
+  "cancel": "先照看来客",
+  "cancelled": "已暂缓安排。",
+  "dialog_size": [560, 220]
+}

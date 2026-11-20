@@ -1,58 +1,14 @@
 {
-  "pack_version": "2026-11-20-art-integration-1",
+  "pack_version": "2026-11-21-a1-candidates-v2",
   "style": "温暖水彩手绘、细线墨稿、羊皮纸、旧木、苔绿与暖金；保留深青色 Godot UI 外框",
   "logical_canvas": [
     1280,
     720
   ],
   "scene_masters": [
-    1920,
-    1080
+    1672,
+    941
   ],
-  "scenes": {
-    "S01": {
-      "master": "assets/generated_scenes/S01_exterior_1920x1080.png",
-      "crop_3_2": "assets/generated_scenes/S01_exterior_900x600.png",
-      "crop_3_1": "assets/generated_scenes/S01_exterior_900x300.png",
-      "runtime": "assets/scene_exterior.png"
-    },
-    "S02": {
-      "master": "assets/generated_scenes/S02_frontdesk_1920x1080.png",
-      "crop_3_2": "assets/generated_scenes/S02_frontdesk_900x600.png",
-      "crop_3_1": "assets/generated_scenes/S02_frontdesk_900x300.png",
-      "runtime": "assets/shop_front_scene.png"
-    },
-    "S03": {
-      "master": "assets/generated_scenes/S03_consultation_1920x1080.png",
-      "crop_3_2": "assets/generated_scenes/S03_consultation_900x600.png",
-      "crop_3_1": "assets/generated_scenes/S03_consultation_900x300.png",
-      "runtime": "assets/consultation_banner.png"
-    },
-    "S04": {
-      "master": "assets/generated_scenes/S04_storage_1920x1080.png",
-      "crop_3_2": "assets/generated_scenes/S04_storage_900x600.png",
-      "crop_3_1": "assets/generated_scenes/S04_storage_900x300.png",
-      "runtime": "assets/scene_inventory.png"
-    },
-    "S05": {
-      "master": "assets/generated_scenes/S05_workshop_1920x1080.png",
-      "crop_3_2": "assets/generated_scenes/S05_workshop_900x600.png",
-      "crop_3_1": "assets/generated_scenes/S05_workshop_900x300.png",
-      "runtime": "assets/scene_workshop.png"
-    },
-    "S06": {
-      "master": "assets/generated_scenes/S06_market_1920x1080.png",
-      "crop_3_2": "assets/generated_scenes/S06_market_900x600.png",
-      "crop_3_1": "assets/generated_scenes/S06_market_900x300.png",
-      "runtime": "assets/scene_market.png"
-    },
-    "S07": {
-      "master": "assets/generated_scenes/S07_gathering_1920x1080.png",
-      "crop_3_2": "assets/generated_scenes/S07_gathering_900x600.png",
-      "crop_3_1": "assets/generated_scenes/S07_gathering_900x300.png",
-      "runtime": "assets/scene_gathering.png"
-    }
-  },
   "portraits": {
     "npc_character_reference_sheet": "assets/portraits/npc_character_reference_sheet.png",
     "npc_lin_hesitant": "assets/portraits/npc_lin_hesitant.png",
@@ -96,5 +52,861 @@
     "atlas": "assets/items/inventory-atlas-v2.png",
     "visual_map": "data/shop/visuals.json",
     "catalog": "data/shop/catalog.json"
-  }
+  },
+  "legacy_scenes": {
+    "S01": {
+      "master": "assets/generated_scenes/S01_exterior_1920x1080.png",
+      "crop_3_2": "assets/_legacy/generated_scenes/S01_exterior_900x600.png",
+      "crop_3_1": "assets/_legacy/generated_scenes/S01_exterior_900x300.png",
+      "runtime": "assets/_legacy/scene_exterior.png",
+      "sha256": {
+        "master": "D7CE642500AC56B4BF8F580F1D4040ED3D86476CF95F44934F309C8ACFF7D853",
+        "crop_3_2": "C905E70761DC65955EA90213FEC7FD0188F492F163735561713892B46C604793",
+        "crop_3_1": "F0562BCB33BDFF6A01CF3D6EC9601575BF9020908851AD300D258C120BD50EA0",
+        "runtime": "C905E70761DC65955EA90213FEC7FD0188F492F163735561713892B46C604793"
+      }
+    },
+    "S02": {
+      "master": "assets/generated_scenes/S02_frontdesk_1920x1080.png",
+      "crop_3_2": "assets/_legacy/generated_scenes/S02_frontdesk_900x600.png",
+      "crop_3_1": "assets/_legacy/generated_scenes/S02_frontdesk_900x300.png",
+      "runtime": "assets/_legacy/shop_front_scene.png",
+      "sha256": {
+        "master": "2E74B1582A19D2C2E4951E5E08D97B35D97C3ED4C20780750B7198FCCC570E9F",
+        "crop_3_2": "97806BE7AF31F38E74BC4CCD107A26EB900F1D7F6FF4E57BD0F228E08BFC9B73",
+        "crop_3_1": "70AD0CBBF7C3D09B0DCB1AC220270EE0FDFE82B18CD7E394402E3209ACB9623B",
+        "runtime": "7B7078E1D321E2B2DE60735B25BFC45C847770682B1755C3F42FDE40C95C09F6"
+      }
+    },
+    "S03": {
+      "master": "assets/generated_scenes/S03_consultation_1920x1080.png",
+      "crop_3_2": "assets/_legacy/generated_scenes/S03_consultation_900x600.png",
+      "crop_3_1": "assets/_legacy/generated_scenes/S03_consultation_900x300.png",
+      "runtime": "assets/_legacy/consultation_banner.png",
+      "sha256": {
+        "master": "63B758C5A5310F52FCA40D84F2B89208DE58CCACB028BF2C2A17A545953A4A1C",
+        "crop_3_2": "CA1A5FA22D06F5A6D5BF2C0E70BD211EA7B5E4B0FCB7F29BD0CAEBE72A2C61BC",
+        "crop_3_1": "B8584A57D89A58771F7A310E8A1F51DEB3C98E133DCFB75F973280B9B24F7C8C",
+        "runtime": "C13A6A77E410191EB563F96281E0A079C9057AE7A72F650DB0E94A8DA447E6BD"
+      }
+    },
+    "S04": {
+      "master": "assets/generated_scenes/S04_storage_1920x1080.png",
+      "crop_3_2": "assets/_legacy/generated_scenes/S04_storage_900x600.png",
+      "crop_3_1": "assets/_legacy/generated_scenes/S04_storage_900x300.png",
+      "runtime": "assets/_legacy/scene_inventory.png",
+      "sha256": {
+        "master": "F53535F66C2B84BC13260DAB2D0C1DB792FFD1B53D7757AD4A579FB92927184E",
+        "crop_3_2": "DBFFE4245345CE49680F57096D2589F0AB85E51F989C4D9F7B698433C80BE979",
+        "crop_3_1": "CCCB509EC8A0D60F0A35AE5046BDEAFC0068EA633E8B002590DE1E0C099BDF83",
+        "runtime": "DBFFE4245345CE49680F57096D2589F0AB85E51F989C4D9F7B698433C80BE979"
+      }
+    },
+    "S05": {
+      "master": "assets/generated_scenes/S05_workshop_1920x1080.png",
+      "crop_3_2": "assets/_legacy/generated_scenes/S05_workshop_900x600.png",
+      "crop_3_1": "assets/_legacy/generated_scenes/S05_workshop_900x300.png",
+      "runtime": "assets/_legacy/scene_workshop.png",
+      "sha256": {
+        "master": "7CCBEA564980919D80B5DDC2ADDFA43B3FAD22CCE6838FEFE35A14BC8D12F687",
+        "crop_3_2": "82E7F4E2CFFFD3386FDB504B9EAD5DF4365E5F793C6EA6CE5E25FE34FA6DE833",
+        "crop_3_1": "8D221618B3C0E295134E1F6CF4F9A897A525CC505F150E67117163D0272312A8",
+        "runtime": "82E7F4E2CFFFD3386FDB504B9EAD5DF4365E5F793C6EA6CE5E25FE34FA6DE833"
+      }
+    },
+    "S06": {
+      "master": "assets/generated_scenes/S06_market_1920x1080.png",
+      "crop_3_2": "assets/_legacy/generated_scenes/S06_market_900x600.png",
+      "crop_3_1": "assets/_legacy/generated_scenes/S06_market_900x300.png",
+      "runtime": "assets/_legacy/scene_market.png",
+      "sha256": {
+        "master": "EFDA35437D791626DE41A8EE9EB8EF3BFAE0443DCFD760EE63F50F8305358B8D",
+        "crop_3_2": "4697646217DADBA07B3C0972614B5C699EE1EFF47F82E4AC83CD0A24CF1432CB",
+        "crop_3_1": "907C94E5D5D1A684749970807C15FE577CB98F1034C1C3B0180A6C9737E501FE",
+        "runtime": "4697646217DADBA07B3C0972614B5C699EE1EFF47F82E4AC83CD0A24CF1432CB"
+      }
+    },
+    "S07": {
+      "master": "assets/generated_scenes/S07_gathering_1920x1080.png",
+      "crop_3_2": "assets/_legacy/generated_scenes/S07_gathering_900x600.png",
+      "crop_3_1": "assets/_legacy/generated_scenes/S07_gathering_900x300.png",
+      "runtime": "assets/_legacy/scene_gathering.png",
+      "sha256": {
+        "master": "CD5B4F49819484374D7EB50902638285DE3292B89F7275FCF840C742CCE7C103",
+        "crop_3_2": "E4F78F5083E5E603C17B78958FDA43186C3F60150D982523525163A4BCF7CCBC",
+        "crop_3_1": "8AED4FCB92A303FA062D547DBE7D7B4B8BD175D170F667D0857CF6244E7F0C24",
+        "runtime": "E4F78F5083E5E603C17B78958FDA43186C3F60150D982523525163A4BCF7CCBC"
+      }
+    }
+  },
+  "legacy_extra": [
+    {
+      "path": "assets/_legacy/consultation_scene.png",
+      "sha256": "2FEE83AE387E8C1CF9F092164EB80C7B3AC9FA5C55F2E1071201040DDCEBD618"
+    }
+  ],
+  "requested_scene_masters": [
+    2560,
+    1440
+  ],
+  "scene_coordinate_canvas": [
+    2560,
+    1440
+  ],
+  "scene_master_note": "Requested native resolution only; actual background candidates are 1672x941. Do not interpret logical canvas as delivered pixels.",
+  "scene_actual_pixels": [
+    1672,
+    941
+  ],
+  "scene_config": "data/shop/visuals.json",
+  "scenes": {
+    "S01": {
+      "day": "res://assets/generated_scenes/v2/S01_day.png",
+      "night": "res://assets/generated_scenes/v2/S01_night.png",
+      "layers": {},
+      "hotspots": {},
+      "closed": "res://assets/generated_scenes/v2/S01_closed.png"
+    },
+    "S02": {
+      "day": "res://assets/generated_scenes/v2/S02_day.png",
+      "night": "res://assets/generated_scenes/v2/S02_night.png",
+      "layers": {
+        "door": {
+          "path": "res://assets/generated_scenes/v2/slices/S02_door.png",
+          "rect": [
+            1200,
+            160,
+            570,
+            980
+          ],
+          "hotspot": [
+            1200,
+            160,
+            570,
+            980
+          ],
+          "display": "hidden"
+        },
+        "curtain": {
+          "path": "res://assets/generated_scenes/v2/slices/S02_curtain.png",
+          "rect": [
+            1200,
+            160,
+            570,
+            980
+          ],
+          "hotspot": [
+            1200,
+            160,
+            570,
+            980
+          ]
+        },
+        "letter": {
+          "path": "res://assets/generated_scenes/v2/slices/S02_letter.png",
+          "rect": [
+            700,
+            1140,
+            260,
+            150
+          ],
+          "hotspot": [
+            700,
+            1140,
+            260,
+            150
+          ]
+        },
+        "lamp_on": {
+          "path": "res://assets/generated_scenes/v2/slices/S02_lamp_on.png",
+          "rect": [
+            380,
+            730,
+            280,
+            470
+          ],
+          "hotspot": [
+            380,
+            730,
+            280,
+            470
+          ],
+          "periods": [
+            "night"
+          ]
+        },
+        "lamp_off": {
+          "path": "res://assets/generated_scenes/v2/slices/S02_lamp_off.png",
+          "rect": [
+            380,
+            730,
+            280,
+            470
+          ],
+          "hotspot": [
+            380,
+            730,
+            280,
+            470
+          ],
+          "periods": [
+            "day"
+          ]
+        }
+      },
+      "hotspots": {
+        "exterior": {
+          "label": "店外",
+          "target": "exterior",
+          "rect": [
+            60,
+            400,
+            280,
+            250
+          ]
+        },
+        "market": {
+          "label": "原料商店",
+          "target": "market",
+          "rect": [
+            420,
+            250,
+            460,
+            250
+          ]
+        },
+        "inventory": {
+          "label": "储物柜",
+          "target": "inventory",
+          "rect": [
+            570,
+            680,
+            460,
+            250
+          ]
+        },
+        "consultation": {
+          "label": "咨询区",
+          "target": "consultation",
+          "rect": [
+            1200,
+            420,
+            520,
+            250
+          ]
+        },
+        "workshop": {
+          "label": "工坊",
+          "target": "workshop",
+          "rect": [
+            1870,
+            520,
+            460,
+            250
+          ]
+        },
+        "letter": {
+          "label": "来客信件",
+          "target": "people",
+          "rect": [
+            670,
+            1110,
+            460,
+            250
+          ]
+        }
+      }
+    },
+    "S03": {
+      "day": "res://assets/generated_scenes/v2/S03_day.png",
+      "night": "res://assets/generated_scenes/v2/S03_night.png",
+      "layers": {},
+      "hotspots": {}
+    },
+    "S04": {
+      "day": "res://assets/generated_scenes/v2/S04_day.png",
+      "night": "res://assets/generated_scenes/v2/S04_night.png",
+      "layers": {
+        "door_open": {
+          "path": "res://assets/generated_scenes/v2/slices/S04_door_open.png",
+          "rect": [
+            0,
+            180,
+            300,
+            1050
+          ],
+          "hotspot": [
+            0,
+            180,
+            300,
+            1050
+          ],
+          "state": "open",
+          "source_region": [
+            410,
+            2,
+            392,
+            1261
+          ]
+        },
+        "door_closed": {
+          "path": "res://assets/generated_scenes/v2/slices/S04_door_closed.png",
+          "rect": [
+            250,
+            130,
+            1420,
+            850
+          ],
+          "hotspot": [
+            250,
+            130,
+            1420,
+            850
+          ],
+          "state": "closed",
+          "source_region": [
+            51,
+            140,
+            1326,
+            820
+          ]
+        },
+        "slot": {
+          "path": "res://assets/generated_scenes/v2/slices/S04_slot.png",
+          "rect": [
+            0,
+            0,
+            380,
+            300
+          ],
+          "hotspot": [
+            0,
+            0,
+            380,
+            300
+          ],
+          "display": "cell",
+          "source_region": [
+            29,
+            105,
+            1478,
+            824
+          ]
+        },
+        "drawer": {
+          "path": "res://assets/generated_scenes/v2/slices/S04_drawer.png",
+          "rect": [
+            280,
+            980,
+            280,
+            120
+          ],
+          "hotspot": [
+            280,
+            980,
+            280,
+            120
+          ],
+          "source_region": [
+            32,
+            191,
+            1471,
+            643
+          ]
+        }
+      },
+      "hotspots": {
+        "cabinet": {
+          "label": "储物柜",
+          "target": "cabinet",
+          "rect": [
+            220,
+            180,
+            1380,
+            70
+          ],
+          "display": "transparent"
+        }
+      }
+    },
+    "S05": {
+      "day": "res://assets/generated_scenes/v2/S05_day.png",
+      "night": "res://assets/generated_scenes/v2/S05_night.png",
+      "layers": {
+        "mortar": {
+          "path": "res://assets/generated_scenes/v2/slices/S05_mortar.png",
+          "rect": [
+            240,
+            780,
+            340,
+            290
+          ],
+          "hotspot": [
+            240,
+            780,
+            340,
+            290
+          ]
+        },
+        "bottle": {
+          "path": "res://assets/generated_scenes/v2/slices/S05_bottle.png",
+          "rect": [
+            940,
+            720,
+            150,
+            290
+          ],
+          "hotspot": [
+            940,
+            720,
+            150,
+            290
+          ]
+        },
+        "scales": {
+          "path": "res://assets/generated_scenes/v2/slices/S05_scales.png",
+          "rect": [
+            1170,
+            430,
+            520,
+            530
+          ],
+          "hotspot": [
+            1170,
+            430,
+            520,
+            530
+          ]
+        }
+      },
+      "hotspots": {}
+    },
+    "S06": {
+      "day": "res://assets/generated_scenes/v2/S06_day.png",
+      "night": "res://assets/generated_scenes/v2/S06_night.png",
+      "layers": {
+        "basket": {
+          "path": "res://assets/generated_scenes/v2/slices/S06_basket.png",
+          "rect": [
+            260,
+            770,
+            540,
+            420
+          ],
+          "hotspot": [
+            260,
+            770,
+            540,
+            420
+          ]
+        }
+      },
+      "hotspots": {}
+    },
+    "S07": {
+      "day": "res://assets/generated_scenes/v2/S07_day.png",
+      "night": "res://assets/generated_scenes/v2/S07_night.png",
+      "layers": {},
+      "hotspots": {}
+    }
+  },
+  "generated_assets": [
+    {
+      "id": "S01_day",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people\nS01: exterior of a two-storey old stone and timber shop on a quiet cobbled lane at dusk, round arched display window glowing, wisteria over the door, potted herbs, a hanging crescent-moon sign with no text, wide composition, 16:9\nUse case: stylized-concept. Production game background plate, native resolution EXACTLY 2560 x 1440 pixels, 16:9. DAY variant: a clear daytime view between 09:00 and 17:59, softly sunlit warm afternoon rather than night; retain warm glow in the arched display window. Clean background only. Main shop facade left and center; rightmost 30% (x=1792..2559) is a simple calm blurred pale stone wall and gentle soft light with very low detail; bottommost 12% (y=1267..1439) is a soft uncluttered cobbled foreground. No interface panels, inset panels, borders, empty labels, plaques, rectangular signboards, grids or typography anywhere. The only hanging sign is a solid decorative crescent-moon silhouette without a label surface. No characters.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/S01_day.png",
+      "sha256": "5913038856ACF531F7FEB3F041232083E8CFBB399372FE7D506CBB2B28F93A4C",
+      "width": 1672,
+      "height": 941,
+      "kind": "background",
+      "requested_width": 2560,
+      "requested_height": 1440,
+      "native_resolution_met": false,
+      "review_status": "Candidate: builtin generator returned 1672x941. User accepted candidates with resolution explicitly unfinished. No upscale."
+    },
+    {
+      "id": "S01_night",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people\nS01: exterior of a two-storey old stone and timber shop on a quiet cobbled lane at dusk, round arched display window glowing, wisteria over the door, potted herbs, a hanging crescent-moon sign with no text, wide composition, 16:9\nsame scene at night, warm interior lamplight, deep teal shadows, a few fireflies or moths near lamps\nUse case: lighting-weather. The referenced image is the EDIT TARGET. Change ONLY time of day and lighting from the reference to nighttime 18:00–22:00; preserve every structural shape, camera angle, facade, flowers, door, window, objects, crescent silhouette, texture and object location exactly. Keep the rightmost30% a calm softly blurred plain wall, low detail; keep bottom12% low detail. No UI, writing, blank labels or panels. Required native output2560×1440.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/S01_night.png",
+      "sha256": "6E177882F6E42C3846B09E38717E709DCC05B7A22D31FE0BB2DDF0E4732F6CDE",
+      "width": 1672,
+      "height": 941,
+      "kind": "background",
+      "requested_width": 2560,
+      "requested_height": 1440,
+      "native_resolution_met": false,
+      "review_status": "Candidate: builtin generator returned 1672x941. User accepted candidates with resolution explicitly unfinished. No upscale."
+    },
+    {
+      "id": "S01_closed",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people\nS01: exterior of a two-storey old stone and timber shop on a quiet cobbled lane at dusk, round arched display window glowing, wisteria over the door, potted herbs, a hanging crescent-moon sign with no text, wide composition, 16:9\nUse case: lighting-weather. The referenced image is the EDIT TARGET. Same exact shop composition AFTER CLOSING late at night: all display-window lamps, door lamps and hanging lamps turned OFF, dark deep teal window interior with subtle cool moonlight reflections; quiet dark cobbled lane. Door stays closed as in reference; no boards or closing sign. Change only lighting/time: preserve every structural shape, camera angle, flowers, window, door, crescent, objects and location. Keep rightmost30% calm blurred plain wall, bottom12% low detail. No UI, labels, writing or plaques. Required native output2560×1440.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/S01_closed.png",
+      "sha256": "4B030E8215E195C9E4F1F70DE4801EC35E5D13342B8A53372220957BF55010BC",
+      "width": 1672,
+      "height": 941,
+      "kind": "background",
+      "requested_width": 2560,
+      "requested_height": 1440,
+      "native_resolution_met": false,
+      "review_status": "Candidate: builtin generator returned 1672x941. User accepted candidates with resolution explicitly unfinished. No upscale."
+    },
+    {
+      "id": "S02_day",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people\nS02: first-person view from behind a worn wooden counter, shop interior with shelves of jars and books on the left, a green velvet curtain doorway at center leading to a private room, wooden apothecary drawers at right, counter top in foreground with a brass lamp and small dish, right third kept calm and softly lit\nUse case: stylized-concept. Production game clean background plate, native resolution EXACTLY 2560 x 1440 pixels, 16:9. DAY variant: daylight from shop windows, 09:00–17:59, clear watercolor details on the left and center. Layer separation requirement: PAINT ONLY THE STATIC ENVIRONMENT. REMOVE THE DOOR LEAF, GREEN CURTAIN, LETTERS AND BRASS TABLE LAMP COMPLETELY from this background; leave an empty arched doorway centered around x=1220..1630,y=180..1120 and bare counter ledge. Those objects will be separate transparent sprites added later. Retain the small dish and immovable left wall shelves, aged wooden counter. Rightmost 30% (x=1792..2559) is a calm softly lit mostly bare wall with sparse low-detail wood, no detailed drawers or display features there; bottommost 12% (y=1267..1439) simple uncluttered softly blurred counter wood. No people, text, blank labels, UI panels, grids or empty rectangular plaques.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/S02_day.png",
+      "sha256": "880B0416168C9A62E9F2239A29E958FF4693A126D5169B50F47F6324669CDEFB",
+      "width": 1672,
+      "height": 941,
+      "kind": "background",
+      "requested_width": 2560,
+      "requested_height": 1440,
+      "native_resolution_met": false,
+      "review_status": "Candidate: builtin generator returned 1672x941. User accepted candidates with resolution explicitly unfinished. No upscale."
+    },
+    {
+      "id": "S02_night",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people\nS02: first-person view from behind a worn wooden counter, shop interior with shelves of jars and books on the left, a green velvet curtain doorway at center leading to a private room, wooden apothecary drawers at right, counter top in foreground with a brass lamp and small dish, right third kept calm and softly lit\nsame scene at night, warm interior lamplight, deep teal shadows, a few fireflies or moths near lamps\nUse case: lighting-weather. Referenced image is EDIT TARGET. Change ONLY lighting/time of day from this exact image to night 18:00–22:00. Preserve all shapes, camera, object positions and doorway precisely. Keep DOOR LEAF, CURTAIN, LETTERS AND TABLE LAMP ABSENT as in reference; these are separate sprites. Illuminate from soft warm offscreen lamps at left and from the room beyond the doorway, with deep teal shadows. Rightmost30% stays a calm bare softly lit wall; bottom12% low-detail blurred counter wood. No people, UI, labels or typography. Actual native raster PNG2560×1440.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/S02_night.png",
+      "sha256": "0A85CB4B5F4AC10CE74DC34CCEA10A12AEF6A5EA49BB13714065DAC72365FB57",
+      "width": 1672,
+      "height": 941,
+      "kind": "background",
+      "requested_width": 2560,
+      "requested_height": 1440,
+      "native_resolution_met": false,
+      "review_status": "Candidate: builtin generator returned 1672x941. User accepted candidates with resolution explicitly unfinished. No upscale."
+    },
+    {
+      "id": "S03_day",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people\nS03: intimate consultation nook, deep green sofa facing a low round table, tasselled table lamp, cushions, a small brass astrolabe and teacups, curtains half drawn, view from the reader's armchair, quiet and private\nUse case: precise-object-edit. The referenced image is the EDIT TARGET. Preserve the sofa, table, lamp, shelves, teacups, curtains, camera and composition. SINGLE CORRECTION: remove the large foreground reddish armchair completely, especially its arms and blanket across the lower left and bottom of the image; reveal a soft low-detail muted wooden floor and rug instead. This is a clean game background plate. Keep the bottom 12 percent of the picture entirely calm, blurred and empty with no chair or objects, and preserve the right30percent calm green curtain. Maintain daytime lighting. No UI elements, no borders, no text or blank labels. Required actual PNG raster2560×1440.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/S03_day.png",
+      "sha256": "1B0E1FC7FFA33D09FF86A28740A0186F0EC6694EE20C6A7E0DC135AF3D586675",
+      "width": 1672,
+      "height": 941,
+      "kind": "background",
+      "requested_width": 2560,
+      "requested_height": 1440,
+      "native_resolution_met": false,
+      "review_status": "Candidate: builtin generator returned 1672x941. User accepted candidates with resolution explicitly unfinished. No upscale."
+    },
+    {
+      "id": "S03_night",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people\nS03: intimate consultation nook, deep green sofa facing a low round table, tasselled table lamp, cushions, a small brass astrolabe and teacups, curtains half drawn, view from the reader's armchair, quiet and private\nsame scene at night, warm interior lamplight, deep teal shadows, a few fireflies or moths near lamps\nUse case: lighting-weather. Referenced image is EDIT TARGET. Change ONLY lighting/time from this exact reference to night18:00–22:00. Preserve ALL furniture, sofa, cushions, astrolabe, teacups, curtain, shelves, camera and object positions exactly. No foreground armchair. Lamps glow warm gold, outside the left window is dark teal night; deep teal shadows, few moths near lamp. Rightmost30% stays calm low-detail curtain; bottom12% low-detail floor, softly blurred. No UI, text, labels, plaques, grids, borders or people. Required native actual raster2560×1440.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/S03_night.png",
+      "sha256": "04C36FB74E329D6672A5AD04A15B08422959E8BAF78B53696B45BB88A244AB82",
+      "width": 1672,
+      "height": 941,
+      "kind": "background",
+      "requested_width": 2560,
+      "requested_height": 1440,
+      "native_resolution_met": false,
+      "review_status": "Candidate: builtin generator returned 1672x941. User accepted candidates with resolution explicitly unfinished. No upscale."
+    },
+    {
+      "id": "S04_day",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people. front view of a tall wooden storage cabinet with open shelves and rows of small drawers, empty shelves (items will be added in game), wisteria at top edges, a doorway to a stockroom at far right. Cabinet occupies left 65 percent; broad open empty timber shelves, simple lower drawers with no label slots. Do not draw a grid of individual item slots. Do not draw cabinet doors; those are separate transparent game layers. Right 30 percent is soft calm plaster wall and stockroom doorway. Production game background clean plate, exactly 2560×1440 pixels, 16:9 landscape. White-day version, natural daylight and subtle warm lamps. Bottom 12 percent is broad simple low-detail foreground, right 30 percent kept calm, softly blurred low detail for live Godot UI overlays. No baked panel, ornamental frame, empty plaques, blank paper labels, interface geometry, humans or characters. Edge-to-edge artwork.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/S04_day.png",
+      "sha256": "6A80E71A2C7C8635613C9116CADE85205B2E3CCB57DC7889AC3B88B255527042",
+      "width": 1672,
+      "height": 941,
+      "kind": "background",
+      "requested_width": 2560,
+      "requested_height": 1440,
+      "native_resolution_met": false,
+      "review_status": "Candidate: builtin generator returned 1672x941. User accepted candidates with resolution explicitly unfinished. No upscale."
+    },
+    {
+      "id": "S05_day",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people. top-down three-quarter view of a crafting workbench, empty clear area in the middle for UI, dried herbs hanging above. The mortar and pestle, brass scales and glass vials will be separate transparent layers: do not paint those into this clean plate. Aged wood tabletop with a clear uncluttered center, herbs at the upper left, quiet softly lit wall at right. Production game background clean plate, exactly 2560×1440 pixels, 16:9 landscape. White-day version, natural daylight and subtle warm lamps. Bottom 12 percent is broad simple low-detail foreground, right 30 percent kept calm, softly blurred low detail for live Godot UI overlays. No baked panel, ornamental frame, empty plaques, blank paper labels, interface geometry, humans or characters. Edge-to-edge artwork.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/S05_day.png",
+      "sha256": "34B775CDF8FCF65552428350484111CD92E153126E5C45E3B03148BCC50E8637",
+      "width": 1672,
+      "height": 941,
+      "kind": "background",
+      "requested_width": 2560,
+      "requested_height": 1440,
+      "native_resolution_met": false,
+      "review_status": "Candidate: builtin generator returned 1672x941. User accepted candidates with resolution explicitly unfinished. No upscale."
+    },
+    {
+      "id": "S06_day",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people. inside a small materials market stall, crates along a counter, hanging dried herbs, a doorway to a sunny street behind. The movable baskets will be separate transparent layers: do not paint baskets into the clean plate. Rich material detail at left only; right third calm soft plaster and warm light. Production game background clean plate, exactly 2560×1440 pixels, 16:9 landscape. White-day version, natural daylight and subtle warm lamps. Bottom 12 percent is broad simple low-detail foreground, right 30 percent kept calm, softly blurred low detail for live Godot UI overlays. No baked panel, ornamental frame, empty plaques, blank paper labels, interface geometry, humans or characters. Edge-to-edge artwork.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/S06_day.png",
+      "sha256": "09756471CD7AEA9F8EE105FF172ED3DFA1396FD91915E28E7093F0DB812883C1",
+      "width": 1672,
+      "height": 941,
+      "kind": "background",
+      "requested_width": 2560,
+      "requested_height": 1440,
+      "native_resolution_met": false,
+      "review_status": "Candidate: builtin generator returned 1672x941. User accepted candidates with resolution explicitly unfinished. No upscale."
+    },
+    {
+      "id": "S07_day",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people. a riverside footpath at the edge of a small town, stone bridge, wildflowers, crystals among moss by the water, morning light. Footpath and river details in left two thirds; right third soft low detail foliage, light and calm water. Production game background clean plate, exactly 2560×1440 pixels, 16:9 landscape. White-day version, natural daylight and subtle warm lamps. Bottom 12 percent is broad simple low-detail foreground, right 30 percent kept calm, softly blurred low detail for live Godot UI overlays. No baked panel, ornamental frame, empty plaques, blank paper labels, interface geometry, humans or characters. Edge-to-edge artwork.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/S07_day.png",
+      "sha256": "B20101E1D01044ED01F859488238A6D2BD8971CD5029C2873C05010183EFEFE0",
+      "width": 1672,
+      "height": 941,
+      "kind": "background",
+      "requested_width": 2560,
+      "requested_height": 1440,
+      "native_resolution_met": false,
+      "review_status": "Candidate: builtin generator returned 1672x941. User accepted candidates with resolution explicitly unfinished. No upscale."
+    },
+    {
+      "id": "S04_night",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people. front view of a tall wooden storage cabinet with open shelves and rows of small drawers, empty shelves (items will be added in game), wisteria at top edges, a doorway to a stockroom at far right. Cabinet occupies left 65 percent; broad open empty timber shelves, simple lower drawers with no label slots. Do not draw a grid of individual item slots. Do not draw cabinet doors; those are separate transparent game layers. Right 30 percent is soft calm plaster wall and stockroom doorway.. same scene at night, warm interior lamplight, deep teal shadows, a few fireflies or moths near lamps. Use case: lighting-weather. Referenced image is EDIT TARGET. Change ONLY lighting and time of day to night, preserve exact camera framing, object positions, architecture, shapes, material textures, clean surfaces. No new objects except a few tiny moths/fireflies. Keep right 30 percent and bottom 12 percent low detail for UI, do not add UI or labels. Output exactly 2560×1440 pixels, 16:9. All shelves remain empty for S04; no interactable objects added.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/S04_night.png",
+      "sha256": "35C212C7341B5AE454EAF16B6AF75E9769D992B534A8B16F83D26E157EB1BF98",
+      "width": 1672,
+      "height": 941,
+      "kind": "background",
+      "requested_width": 2560,
+      "requested_height": 1440,
+      "native_resolution_met": false,
+      "review_status": "Candidate: builtin generator returned 1672x941. User accepted candidates with resolution explicitly unfinished. No upscale."
+    },
+    {
+      "id": "S05_night",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people. top-down three-quarter view of a crafting workbench, empty clear area in the middle for UI, dried herbs hanging above. The mortar and pestle, brass scales and glass vials will be separate transparent layers: do not paint those into this clean plate. Aged wood tabletop with a clear uncluttered center, herbs at the upper left, quiet softly lit wall at right.. same scene at night, warm interior lamplight, deep teal shadows, a few fireflies or moths near lamps. Use case: lighting-weather. Referenced image is EDIT TARGET. Change ONLY lighting and time of day to night, preserve exact camera framing, object positions, architecture, shapes, material textures, clean surfaces. No new objects except a few tiny moths/fireflies. Keep right 30 percent and bottom 12 percent low detail for UI, do not add UI or labels. Output exactly 2560×1440 pixels, 16:9. All shelves remain empty for S04; no interactable objects added.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/S05_night.png",
+      "sha256": "3ECDA53CE4908152A1CCA91A986C0E503C7E5A88A93DC75DA8D5D9D5ACBD657C",
+      "width": 1672,
+      "height": 941,
+      "kind": "background",
+      "requested_width": 2560,
+      "requested_height": 1440,
+      "native_resolution_met": false,
+      "review_status": "Candidate: builtin generator returned 1672x941. User accepted candidates with resolution explicitly unfinished. No upscale."
+    },
+    {
+      "id": "S06_night",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people. inside a small materials market stall, crates along a counter, hanging dried herbs, a doorway to a sunny street behind. The movable baskets will be separate transparent layers: do not paint baskets into the clean plate. Rich material detail at left only; right third calm soft plaster and warm light.. same scene at night, warm interior lamplight, deep teal shadows, a few fireflies or moths near lamps. Use case: lighting-weather. Referenced image is EDIT TARGET. Change ONLY lighting and time of day to night, preserve exact camera framing, object positions, architecture, shapes, material textures, clean surfaces. No new objects except a few tiny moths/fireflies. Keep right 30 percent and bottom 12 percent low detail for UI, do not add UI or labels. Output exactly 2560×1440 pixels, 16:9. All shelves remain empty for S04; no interactable objects added.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/S06_night.png",
+      "sha256": "B068C7245309495EF952D7648E846E34429089BA2D1D12C0C7CF3BB54A8C06CF",
+      "width": 1672,
+      "height": 941,
+      "kind": "background",
+      "requested_width": 2560,
+      "requested_height": 1440,
+      "native_resolution_met": false,
+      "review_status": "Candidate: builtin generator returned 1672x941. User accepted candidates with resolution explicitly unfinished. No upscale."
+    },
+    {
+      "id": "S07_night",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people. a riverside footpath at the edge of a small town, stone bridge, wildflowers, crystals among moss by the water, morning light. Footpath and river details in left two thirds; right third soft low detail foliage, light and calm water.. same scene at night, warm interior lamplight, deep teal shadows, a few fireflies or moths near lamps. Use case: lighting-weather. Referenced image is EDIT TARGET. Change ONLY lighting and time of day to night, preserve exact camera framing, object positions, architecture, shapes, material textures, clean surfaces. No new objects except a few tiny moths/fireflies. Keep right 30 percent and bottom 12 percent low detail for UI, do not add UI or labels. Output exactly 2560×1440 pixels, 16:9. All shelves remain empty for S04; no interactable objects added.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/S07_night.png",
+      "sha256": "C56BA4FA4922297EF9B8EF7C06621EB115D04296D3A769B3DBDBF646A5476D47",
+      "width": 1672,
+      "height": 941,
+      "kind": "background",
+      "requested_width": 2560,
+      "requested_height": 1440,
+      "native_resolution_met": false,
+      "review_status": "Candidate: builtin generator returned 1672x941. User accepted candidates with resolution explicitly unfinished. No upscale."
+    },
+    {
+      "id": "S02_door",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people\nUse case: stylized-concept. Asset: standalone Godot game prop layer. a single closed aged oak interior door slab with antique brass handle and arched top. Front view with a very slight view from behind a shop counter, entire door isolated. No surrounding doorway or wall. Tall silhouette, no curtain. Transparent background with real alpha channel. No backdrop, no opaque shadow rectangle, no checkerboard drawing. Only ONE object, generous transparent margin, no crop. Native target pixel size 768×1152. Match warm parchment watercolor and fine sepia ink. No labels or writing.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/slices/S02_door.png",
+      "sha256": "1F5BBAB4004F61C303CC504330635999A6013B7D0F0534B3457E6CBA09035E41",
+      "width": 1024,
+      "height": 1536,
+      "kind": "transparent_slice",
+      "has_transparency": true,
+      "review_status": "Candidate: true alpha verified, in-game composition reviewed separately."
+    },
+    {
+      "id": "S02_curtain",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people\nUse case: stylized-concept. Asset: standalone Godot game prop layer. one deep moss green velvet curtain gathered softly toward the left, purple tie cord, suspended from a simple short brass rail. Entire fabric silhouette isolated. Front view. No wall, no door. Transparent background with real alpha channel. No backdrop, no opaque shadow rectangle, no checkerboard drawing. Only ONE object, generous transparent margin, no crop. Native target pixel size 768×1152. Match warm parchment watercolor and fine sepia ink. No labels or writing.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/slices/S02_curtain.png",
+      "sha256": "C7E9667C9B7F192917D1DB5653CC71A1A7A2EE4629E60FBFB75B5CEF658EFF40",
+      "width": 1024,
+      "height": 1536,
+      "kind": "transparent_slice",
+      "has_transparency": true,
+      "review_status": "Candidate: true alpha verified, in-game composition reviewed separately."
+    },
+    {
+      "id": "S02_letter",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people\nUse case: stylized-concept. Asset: standalone Godot game prop layer. a single sealed ivory folded letter, small plain moss-green wax seal, slightly angled on a counter seen from above three-quarter perspective. Completely blank paper, no writing, no address, no stamp. Entire silhouette isolated. Transparent background with real alpha channel. No backdrop, no opaque shadow rectangle, no checkerboard drawing. Only ONE object, generous transparent margin, no crop. Native target pixel size 768×512. Match warm parchment watercolor and fine sepia ink. No labels or writing.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/slices/S02_letter.png",
+      "sha256": "A16807CE97CF5BAE6D00FB7EFA30AB4B99EEE205CCD163750725D8ADF604CA8E",
+      "width": 1536,
+      "height": 1024,
+      "kind": "transparent_slice",
+      "has_transparency": true,
+      "review_status": "Candidate: true alpha verified, in-game composition reviewed separately."
+    },
+    {
+      "id": "S02_lamp_off",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people\nUse case: stylized-concept. Asset: independent transparent game prop sprite, one PNG for one prop. one small antique brass counter lamp, turned OFF with no light emitted, bell-shaped brass shade, curved stem, round base; three quarter view, complete single object. Required: crisp isolated silhouette on fully transparent background (true alpha=0 everywhere outside the object), NO background wash, NO halo, NO ground plane, NO cast shadow, NO brown atmospheric glow, NO surrounding scene, NO rectangular backdrop, NO checkerboard pattern. Watercolor paper grain applies to the object only. Entire silhouette with small transparent margin. Desired native dimensions 1024x1024.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/slices/S02_lamp_off.png",
+      "sha256": "D87E2CD5FA4B48973D615976DFC470E0EABAB96C8AEBA1B56EC9C59386C41924",
+      "width": 1254,
+      "height": 1254,
+      "kind": "transparent_slice",
+      "has_transparency": true,
+      "review_status": "Candidate: true alpha verified, in-game composition reviewed separately."
+    },
+    {
+      "id": "S05_mortar",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people\nUse case: stylized-concept. Asset: independent transparent game prop sprite, one PNG for one prop. one well-used heavy moss-gray stone mortar with a pestle resting inside, seen top-down three-quarter at a crafting workbench. One complete object only. Required: crisp isolated silhouette on fully transparent background (true alpha=0 everywhere outside the object), NO background wash, NO halo, NO ground plane, NO cast shadow, NO brown atmospheric glow, NO surrounding scene, NO rectangular backdrop, NO checkerboard pattern. Watercolor paper grain applies to the object only. Entire silhouette with small transparent margin. Desired native dimensions 1024x1024.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/slices/S05_mortar.png",
+      "sha256": "F8DFA41DDC74EBB26D72E3098DAA931B1440F175206515DECA8EA0F30E75554E",
+      "width": 1254,
+      "height": 1254,
+      "kind": "transparent_slice",
+      "has_transparency": true,
+      "review_status": "Candidate: true alpha verified, in-game composition reviewed separately."
+    },
+    {
+      "id": "S05_bottle",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people\nUse case: stylized-concept. Asset: independent transparent game prop sprite, one PNG for one prop. one small completely empty clear glass apothecary bottle with open mouth and purple rim highlights, no cork, no label, seen from top-down three-quarter at a crafting bench. Required: crisp isolated silhouette on fully transparent background (true alpha=0 everywhere outside the object), NO background wash, NO halo, NO ground plane, NO cast shadow, NO brown atmospheric glow, NO surrounding scene, NO rectangular backdrop, NO checkerboard pattern. Watercolor paper grain applies to the object only. Entire silhouette with small transparent margin. Desired native dimensions 768x1024.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/slices/S05_bottle.png",
+      "sha256": "02AE91794F09B528D07F5952233ABC398646AADB22CD1E096E66BBED3550B77C",
+      "width": 1086,
+      "height": 1448,
+      "kind": "transparent_slice",
+      "has_transparency": true,
+      "review_status": "Candidate: true alpha verified, in-game composition reviewed separately."
+    },
+    {
+      "id": "S05_scales",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people\nUse case: stylized-concept. Asset: independent transparent game prop sprite, one PNG for one prop. one antique brass two-pan balance scale, both pans empty, a central thin post on an aged wooden base, top-down three-quarter view at a crafting workbench. One complete object only. Required: crisp isolated silhouette on fully transparent background (true alpha=0 everywhere outside the object), NO background wash, NO halo, NO ground plane, NO cast shadow, NO brown atmospheric glow, NO surrounding scene, NO rectangular backdrop, NO checkerboard pattern. Watercolor paper grain applies to the object only. Entire silhouette with small transparent margin. Desired native dimensions 1024x1024.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/slices/S05_scales.png",
+      "sha256": "264A966BD4F982BDE387D377C224C21341DB04D8CC74C8FD90426CB8555D4BB8",
+      "width": 1254,
+      "height": 1254,
+      "kind": "transparent_slice",
+      "has_transparency": true,
+      "review_status": "Candidate: true alpha verified, in-game composition reviewed separately."
+    },
+    {
+      "id": "S06_basket",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people\nUse case: stylized-concept. Asset: independent transparent game prop sprite, one PNG for one prop. one empty wicker materials basket with thick woven rim, open top seen from a slightly elevated counter-level three-quarter angle, warm aged willow with moss green accents. One complete basket only. Required: crisp isolated silhouette on fully transparent background (true alpha=0 everywhere outside the object), NO background wash, NO halo, NO ground plane, NO cast shadow, NO brown atmospheric glow, NO surrounding scene, NO rectangular backdrop, NO checkerboard pattern. Watercolor paper grain applies to the object only. Entire silhouette with small transparent margin. Desired native dimensions 1024x1024.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/slices/S06_basket.png",
+      "sha256": "A3239218270A8E8A6394060BE6431FF6675CF672E15D3E56D6113ECFBC44354B",
+      "width": 1254,
+      "height": 1254,
+      "kind": "transparent_slice",
+      "has_transparency": true,
+      "review_status": "Candidate: true alpha verified, in-game composition reviewed separately."
+    },
+    {
+      "id": "S02_lamp_on",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people\nEdit target Image 1: isolated lamp OFF. Create exact matching lamp ON state. ONLY illuminate the underside inside of its existing lampshade with warm gold light. Strictly preserve the exact geometry, angle, dimensions, floral pattern, stem, base, silhouette, and position of the existing lamp. No new leaves or flowers. Preserve full transparent background; alpha0 outside silhouette, no glow beyond silhouette or shadow. This is a game object on/off pair requiring identical registration.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/slices/S02_lamp_on.png",
+      "sha256": "08E06A0CF1129E70A927065DEB70D9582F4976689AB853A16E76E55CE362EF07",
+      "width": 1254,
+      "height": 1254,
+      "kind": "transparent_slice",
+      "has_transparency": true,
+      "review_status": "Candidate: true alpha verified, in-game composition reviewed separately."
+    },
+    {
+      "id": "S04_door_open",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people\nUse case: precise-object-edit. Referenced image is EDIT TARGET: a narrow opened wooden cabinet door. Preserve only the outer door silhouette, hinge position, brass knob and watercolor style. Replace ALL glass panes, every scene or object seen in the glass, all plants, flowers, lamps, books, crystals, pictures, brass ornaments and moon carving with PLAIN SOLID OPAQUE WOOD PLANKS. Result must be just a simple unadorned physical wooden cupboard door leaf, no glass and absolutely nothing on the wood except natural grain, knob and hinges. The inside panel must be plain honey-brown wood. One open door leaf, near-edge-on perspective, swings to left with hinges along right edge. True transparent alpha outside the door. No paper wash, no glow, shadow bloom, ground, wall or backdrop.",
+      "version": 2,
+      "source": "builtin-imagegen",
+      "path": "assets/generated_scenes/v2/slices/S04_door_open.png",
+      "sha256": "D8952E4B6F809A01D093F3F3FB163A23B0FE004502078E79B9ACEC80468EF996",
+      "width": 1239,
+      "height": 1269,
+      "kind": "transparent_slice",
+      "has_transparency": true,
+      "review_status": "Candidate: true alpha verified, in-game composition reviewed separately."
+    },
+    {
+      "id": "S04_drawer",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people\nUse case: stylized-concept. Single isolated game prop cutout on a TRUE TRANSPARENT ALPHA BACKGROUND. One single rectangular wooden apothecary drawer viewed straight from front, aged honey-brown timber, one small round antique brass knob centered on its face, subtle fine sepia grain. It matches the drawers of a cozy antique cabinet. One drawer only, no cabinet structure, no label holders, no blank plaques, no lettering. Landscape768x512 composition with drawer almost filling canvas and narrow transparent margin. Fully alpha0 outside the physical drawer, no brown wash, paper rectangle, ambient backdrop, outer shadow, glow bloom, floor or wall.",
+      "version": 2,
+      "source": "builtin-imagegen",
+      "path": "assets/generated_scenes/v2/slices/S04_drawer.png",
+      "sha256": "0D5B51A1D5C07C41F5ECBCA874A1447590D5A9501BD687AEF52F2DF7878302C4",
+      "width": 1536,
+      "height": 1024,
+      "kind": "transparent_slice",
+      "has_transparency": true,
+      "review_status": "Candidate: true alpha verified, in-game composition reviewed separately."
+    },
+    {
+      "id": "S04_slot",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people\nUse case: stylized-concept. Asset type: single isolated game furniture cutout on a truly transparent PNG background.\nPrimary request: exactly one REAL empty wooden storage cubby / small wooden open box, straight-on front view, horizontal rectangular opening. This is a single empty cabinet compartment, with four clearly thick wooden boards forming top, bottom, left and right walls, and visible wooden inner sidewalls, floor, ceiling and back panel giving real shallow box depth. Aged warm wood, fine grain, slightly worn edges. The cubby interior is completely EMPTY: no personal objects, bottles, books, contents or decoration. The general style mentions lived-in clutter, but this individual asset must have none.\nComposition: isolated whole object centered, fully within the canvas, no clipped edges; no adjoining compartments or entire cabinet. Transparency outside the cubby silhouette must be alpha 0, including all margins. The box interior is wooden, not a transparent hole. Fine watercolor texture belongs only on the wood.\nConstraints: actual alpha transparency; no background color, paper backdrop, wash, glow, halo, drop shadow, floor, surface or scenery. No text, letters, numerals, labels, doors, glass, people, decorative frame or additional objects.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/slices/S04_slot.png",
+      "sha256": "8C3E1555B937A996A03898A276E242FAB2C35ADBDFB070B0BE0B1C1E704436D4",
+      "width": 1536,
+      "height": 1024,
+      "kind": "transparent_slice",
+      "has_transparency": true,
+      "review_status": "Candidate: true alpha verified, in-game composition reviewed separately."
+    },
+    {
+      "id": "S04_door_closed",
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people\nUse case: stylized-concept. Asset type: single isolated game furniture cutout on a truly transparent PNG background.\nPrimary request: exactly one pair of WIDE CLOSED wooden cupboard doors, straight-on front view. The pair is one combined horizontal rectangular silhouette with overall width to height ratio about 1.3:1. Two plain flat aged-wood leaves meet along a narrow vertical center seam. Exactly two small antique brass handles, one on each leaf, adjacent to the center seam at the same height. Warm old plank wood and fine sepia linework, gently worn edges, flat simple panels.\nComposition: show ONLY the closed paired doors, no cabinet body, no countertop, no legs, no drawers, no surrounding frame, no glass and no visible interior or contents. Entire door pair centered and fully within the canvas with clear transparent margins; no clipped edges. This individual object has no clutter despite the general style phrase.\nConstraints: all area outside the door pair silhouette is genuinely transparent with alpha 0. Watercolor texture is restricted to wood and brass. No background color, paper backdrop, wash, glow, halo, drop shadow, floor, surface or scenery. No text, letters, numerals, labels, people, books, bottles or decorative objects.",
+      "source": "builtin-imagegen",
+      "version": 2,
+      "path": "assets/generated_scenes/v2/slices/S04_door_closed.png",
+      "sha256": "311F3953570F5393781012CC57605E94592DA8622499601D991F597D8A24AC1B",
+      "width": 1429,
+      "height": 1100,
+      "kind": "transparent_slice",
+      "has_transparency": true,
+      "review_status": "Candidate: true alpha verified, in-game composition reviewed separately."
+    }
+  ],
+  "a1_resolution_requirement_met": false,
+  "a1_user_decision": "Continue builtin candidates and report 2560x1440 as unfinished; no API fallback or scripted upscale.",
+  "pending_generated_assets": []
 }

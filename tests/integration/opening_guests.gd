@@ -24,7 +24,13 @@ func run() -> void:
 	saves.base_dir = "res://.tools/test-opening-guests/"+game.make_id("run")
 	game.configure_api("","","")
 	game.set_people_generation_options(false,2)
-	act("new_game",{"name":"连续三日开门来客"})
+	act("new_game",{"name":"每日客流分布"})
+	# Distribution and burst statistics have dedicated tests. Isolate this
+	# transaction/UI path from simultaneous groups and returning appointments.
+	game.people_config.arrival.ordinary_return_percent = 0
+	game.people_config.arrival.special_return_percent = 0
+	game.people_config.arrival.burst.probability = 0.0
+	_planned_number_roundtrips()
 	var seen_people := {}
 	var seen_visits := {}
 	var initial_queue: Array = People.visible_queue(game.state.people)
@@ -38,16 +44,30 @@ func run() -> void:
 	for day: int in range(1,4):
 		act("next_day")
 		check(game.state.clock_minutes == day*1440+540,"next_day stops at 09:00 on day "+str(day))
-		var arrival_id := "arrival_%d_0" % day
+		check(People.visible_queue(game.state.people).is_empty(),"later openings do not manufacture a guaranteed visitor on day "+str(day))
+		check(game.state.people.days.has(str(day)),"next_day creates a persisted arrival plan even for a zero-customer day")
+		var before_load: Dictionary = game.snapshot()
+		act("load_game",{"save_id":game.state.save_id})
+		if game.state.people.days != saves._normalize_numbers(before_load.people.days):
+			print("OPENING PLAN DIFF "+JSON.stringify({"before":before_load.people.days,"after":game.state.people.days},"",true,true))
+		if game.state.people.arrivals != saves._normalize_numbers(before_load.people.arrivals):
+			print("OPENING ARRIVALS DIFF "+JSON.stringify({"before":before_load.people.arrivals,"after":game.state.people.arrivals},"",true,true))
+		check(game.state.people.days == saves._normalize_numbers(before_load.people.days) and game.state.people.arrivals == saves._normalize_numbers(before_load.people.arrivals),"loading keeps the complete day plan and existing schedules")
+		var natural: Array = game.state.people.arrivals.values().filter(func(row: Dictionary) -> bool: return row.source == "natural" and floori(float(row.at) / 1440.0) == day)
+		natural.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return int(a.at) < int(b.at) if a.at != b.at else str(a.arrival_id) < str(b.arrival_id))
+		if natural.is_empty():
+			check(int(game.state.people.days[str(day)].natural_count) == 0,"a day without natural customers remains a valid empty plan")
+			continue
+		var arrival_id: String = natural[0].arrival_id
+		var at := int(game.state.people.arrivals[arrival_id].at)
+		while int(game.state.clock_minutes) < at:
+			act("wait",{"minutes":mini(180,at-int(game.state.clock_minutes))})
 		var queued: Array = People.visible_queue(game.state.people).filter(func(row: Dictionary) -> bool: return row.arrival_id == arrival_id)
-		check(queued.size() == 1,"new natural guest is immediately visible at opening on day "+str(day))
+		check(queued.size() == 1,"natural guest becomes visible at the planned time on day "+str(day))
 		if queued.is_empty():
 			continue
 		var person: Dictionary = queued[0]
-		check(not seen_people.has(person.npc_id) and not game.state.people.profiles[person.npc_id].met,"opening guest is a new stable NPC rather than an old reception")
-		var before_load: Dictionary = game.snapshot()
-		act("load_game",{"save_id":game.state.save_id})
-		check(game.state.people.arrivals == saves._normalize_numbers(before_load.people.arrivals),"loading the opening save keeps existing schedules")
+		check(not seen_people.has(person.npc_id) and not game.state.people.profiles[person.npc_id].met,"natural guest is a new stable NPC rather than an old reception")
 		var started := act("start_arrival",{"arrival_id":arrival_id})
 		var visit_id: String = started.result.get("visit_id","")
 		check(not visit_id.is_empty() and not seen_visits.has(visit_id) and game.active_visit().npc_id == person.npc_id and game.state.people.arrivals[arrival_id].visit_id == visit_id and game.state.divination.cases.has(visit_id),"new opening guest creates a distinct linked A/B visit")
@@ -55,10 +75,32 @@ func run() -> void:
 		seen_visits[visit_id] = true
 		act("end_visit")
 		check(People.arrival_count_on_day(game.state.people,day) <= 20 and People.validate(game.state.people).is_empty(),"opening service preserves total cap and persisted people validation")
-	check(seen_people.size() == 4 and seen_visits.size() == 4,"day zero and three following openings each produce a distinct real reception")
+	check(seen_people.size() == seen_visits.size() and seen_people.size() >= 1,"every served natural guest has one distinct real reception while quiet days are allowed")
 	await front_wait_ui()
 	print("OPENING GUEST INTEGRATION: %d checks, %d failures; renderer=%s, captures=%d" % [checks,failures,DisplayServer.get_name(),captures])
 	quit(0 if failures == 0 else 1)
+
+func _planned_number_roundtrips() -> void:
+	var coefficients: Dictionary = game.people_config.arrival.expectation
+	var cases := [1.9249999999999998,1.9499999999999997]
+	for reputation in range(6):
+		for experience in range(12):
+			for weather: Dictionary in game.people_config.arrival.weather:
+				cases.append(float(coefficients.base)+reputation*float(coefficients.reputation_coefficient)+experience*float(coefficients.experience_coefficient)+float(weather.modifier))
+	for expected: float in cases:
+		var stable := People._stable_expected(expected)
+		for repeat in range(5):
+			var restored := float(JSON.parse_string(JSON.stringify(stable,"",true,true)))
+			check(restored == stable,"new expected value stays exact across repeated full-precision JSON roundtrips / "+str(expected))
+			stable = restored
+	for seed_value in range(64):
+		var people := People.create("arrival_precision_"+str(seed_value),seed_value,1980)
+		People.plan_day(people,game.people_config,1,0,-1,2)
+		var plan: Dictionary = people.days["1"]
+		var restored: Dictionary = saves._normalize_numbers(JSON.parse_string(JSON.stringify(plan,"",true,true)))
+		if plan != restored:
+			print("PLAN NUMBER ROUNDTRIP seed=%d before=%s after=%s" % [seed_value,JSON.stringify(plan,"",true,true),JSON.stringify(restored,"",true,true)])
+		check(plan == restored,"every weather seed preserves a newly planned day through the save JSON codec / "+str(seed_value))
 
 func check(ok: bool, label: String) -> void:
 	checks += 1

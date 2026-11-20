@@ -1,10 +1,9 @@
-extends HBoxContainer
+extends ScrollContainer
 
 const UI = preload("res://scripts/ui/ui_kit.gd")
+const LAYOUT_CONFIG := "res://data/ui/consultation.json"
 
-const CONSULT_BANNER := "res://assets/consultation_banner.png"
-const CONSULT_BANNER_FALLBACK := "res://assets/consultation.svg"
-const CONSULT_ROOM_ART := "res://assets/consultation_scene.png"
+const SceneArt = preload("res://scripts/shop/scene_visual.gd")
 const LIN_EXPRESSIONS := {"neutral":"res://assets/portraits/npc_lin_neutral.png", "hesitant":"res://assets/portraits/npc_lin_hesitant.png", "relieved":"res://assets/portraits/npc_lin_relieved.png"}
 
 const OracleGuide = preload("res://scripts/divination/oracle_guide.gd")
@@ -29,7 +28,7 @@ var service_button: Button
 var casebook_button: Button
 var shop_button: Button
 var card_backs: HBoxContainer
-var room_art: TextureRect
+var room_art: Control
 var guest_portrait: TextureRect
 var _question_rows: Array = []
 var _question_visit_id := ""
@@ -37,15 +36,36 @@ var _last_busy := false
 var _submitting_question := false
 var _submitting_text := false
 
+static func layout_config_valid(config: Dictionary) -> bool:
+	var height: Variant = config.get("transcript_minimum_height")
+	if config.get("version") != 1 or not (height is int or height is float) or not is_finite(float(height)) or height <= 0 or height != floor(height):
+		return false
+	for key: String in ["portrait_minimum_size","banner_minimum_size"]:
+		if not config.get(key) is Array or config[key].size() != 2 or not config[key].all(func(value: Variant) -> bool: return (value is int or value is float) and is_finite(float(value)) and value > 0 and value == floor(value)):
+			return false
+	return true
+
+static func load_layout_config() -> Dictionary:
+	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(LAYOUT_CONFIG))
+	return parsed if parsed is Dictionary and layout_config_valid(parsed) else {}
+
 func _process(_delta: float) -> void:
 	if is_instance_valid(transcript) and _interaction_busy() != _last_busy:
 		refresh()
 
 func _ready() -> void:
-	add_theme_constant_override("separation", 18)
+	var layout := load_layout_config()
+	if layout.is_empty():
+		return
+	horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	var columns := HBoxContainer.new()
+	columns.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	columns.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	columns.add_theme_constant_override("separation", 18)
+	add_child(columns)
 	var conversation_panel := UI.panel()
 	conversation_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	add_child(conversation_panel)
+	columns.add_child(conversation_panel)
 	var conversation := VBoxContainer.new()
 	conversation.add_theme_constant_override("separation",4)
 	conversation_panel.add_child(conversation)
@@ -60,14 +80,17 @@ func _ready() -> void:
 	var portrait_row := HBoxContainer.new()
 	conversation.add_child(portrait_row)
 	guest_portrait = UI.image("res://assets/portraits/npc_lin_neutral.png")
-	guest_portrait.custom_minimum_size = Vector2(82, 96)
+	guest_portrait.custom_minimum_size = Vector2(float(layout.portrait_minimum_size[0]),float(layout.portrait_minimum_size[1]))
 	guest_portrait.visible = false
 	portrait_row.add_child(guest_portrait)
-	room_art = UI.image(CONSULT_BANNER if ResourceLoader.exists(CONSULT_BANNER) else (CONSULT_ROOM_ART if ResourceLoader.exists(CONSULT_ROOM_ART) else CONSULT_BANNER_FALLBACK))
-	room_art.custom_minimum_size = Vector2(720, 240)
+	room_art = SceneArt.new()
+	room_art.name = "ConsultationArtwork"
+	room_art.custom_minimum_size = Vector2(float(layout.banner_minimum_size[0]),float(layout.banner_minimum_size[1]))
 	room_art.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	conversation.add_child(room_art)
+	portrait_row.add_child(room_art)
+	room_art.setup("consultation")
 	transcript = UI.rich()
+	transcript.custom_minimum_size.y = float(layout.transcript_minimum_height)
 	conversation.add_child(transcript)
 	clue_label = UI.label("", 14, UI.GOLD)
 	clue_label.custom_minimum_size.y = 23
@@ -90,7 +113,7 @@ func _ready() -> void:
 	conversation.add_child(UI.label("回车发送 · Shift+回车换行 · 每次交谈用时 %d 分钟" % int(GameState.content.get("rules", {}).get("talk_minutes", 5)), 12, UI.MUTED))
 	var service_panel := UI.panel()
 	service_panel.custom_minimum_size.x = 350
-	add_child(service_panel)
+	columns.add_child(service_panel)
 	var service := VBoxContainer.new()
 	service.add_theme_constant_override("separation", 4)
 	service_panel.add_child(service)
@@ -195,6 +218,8 @@ func refresh() -> void:
 	_last_busy = _interaction_busy()
 	var view: Dictionary = GameState.divination_view()
 	var guest: Dictionary = view.get("guest", {})
+	room_art.refresh()
+	room_art.visible = true
 	guest_portrait.visible = guest.get("npc_id", "") == "npc_lin"
 	if guest_portrait.visible:
 		var expression := "neutral"

@@ -24,7 +24,7 @@ static func spread(parent: Container, positions: Array, cards: Array = [], deck_
 			continue
 		var card: Dictionary = cards[index]
 		if deck_id == "tarot":
-			var tarot_art := {"星星":"res://assets/ui/tarot_star.png", "隐者":"res://assets/ui/tarot_hermit.png", "节制":"res://assets/ui/tarot_temperance.png"}.get(str(card.get("name", "")), "")
+			var tarot_art: String = {"星星":"res://assets/ui/tarot_star.png", "隐者":"res://assets/ui/tarot_hermit.png", "节制":"res://assets/ui/tarot_temperance.png"}.get(str(card.get("name", "")), "")
 			if not tarot_art.is_empty() and ResourceLoader.exists(tarot_art):
 				var illustration := UI.image(tarot_art)
 				illustration.custom_minimum_size = Vector2(76, 112)

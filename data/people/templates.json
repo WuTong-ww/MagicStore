@@ -23,5 +23,30 @@
     "speech_style": {"reflective": "回答前习惯先想一想。", "gentle": "语气温和，愿意慢慢解释。", "direct": "说话简洁，偏向先讲眼前的事。"}
   },
   "family": {},
-  "arrival": {"natural_min": 1, "natural_max": 8, "opening_guest": true, "max_total_per_day": 20, "family_percent": 0, "ordinary_return_percent": 20, "special_return_percent": 20, "family_new_limit_per_day": 1, "family_new_limit_per_slot": 1, "family_slot_minutes": 120, "queue_capacity": 6, "first_minute": 570, "last_minute": 1200}
+  "arrival": {
+    "natural_min": 0, "natural_max": 8, "opening_guest": true,
+    "max_total_per_day": 20, "family_percent": 0, "ordinary_return_percent": 20, "special_return_percent": 20,
+    "family_new_limit_per_day": 1, "family_new_limit_per_slot": 1, "family_slot_minutes": 120,
+    "queue_capacity": 6, "first_minute": 570, "last_minute": 1200,
+    "expectation": {"base": 2.4, "reputation_coefficient": 0.015, "reputation_min": -1, "reputation_max": 2.5, "experience_coefficient": 0.025, "experience_max": 1.5, "traffic_bonus_coefficient": 1, "min": 0, "max": 12},
+    "weekday": {"weekend_days": [5, 6], "workday": 0, "weekend": 0.4},
+    "weather": [
+      {"id": "sunny", "label": "晴", "weight": 45, "modifier": 0.2},
+      {"id": "cloudy", "label": "阴", "weight": 35, "modifier": 0},
+      {"id": "rainy", "label": "雨", "weight": 20, "modifier": -0.5}
+    ],
+    "timing": {"noise_weight": 20, "peaks": [
+      {"id": "noon", "weight": 38, "mean": 750, "deviation": 60},
+      {"id": "evening", "weight": 42, "mean": 1050, "deviation": 75}
+    ]},
+    "burst": {"probability": 0.06, "min_size": 3, "max_size": 5, "window_minutes": 30, "sources": [
+      {"id": "burst_word_of_mouth", "weight": 45},
+      {"id": "burst_group_referral", "weight": 35},
+      {"id": "burst_festival", "weight": 20}
+    ]},
+    "overflow": {"outside_min_score": 60, "appointment_min_score": 35, "return_bias_penalty": 5, "return_bias_min": -50,
+      "reasons": {"full": "候客区已满，先告辞了", "timeout": "等待超时", "schedule_end": "行程已结束"}},
+    "patience": {"min_minutes": 15, "max_minutes": 180},
+    "distribution_targets": {"samples": 2000, "zero_day_min": 0.05, "zero_day_max": 0.12, "overflow_day_min": 0.03, "overflow_day_max": 0.08}
+  }
 }

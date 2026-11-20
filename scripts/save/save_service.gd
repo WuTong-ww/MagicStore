@@ -183,8 +183,8 @@ func _validate(s: Dictionary) -> String:
 	for field in ["schema_version", "save_id", "name", "state_version", "clock_minutes", "player", "npcs", "active_visit_id", "visits", "processed_actions"]:
 		if not s.has(field):
 			return "缺少 " + field
-	if not _integer(s.schema_version, 1, 3):
-		return "不支持的 schema_version（当前支持 1、2 和 3）"
+	if not _integer(s.schema_version, 1, 4):
+		return "不支持的 schema_version（当前支持 1、2、3 和 4）"
 	var extended := int(s.schema_version) >= 2
 	if not _safe_id(s.save_id) or not _text(s.name, 1, 80):
 		return "存档编号或名称无效"
@@ -347,6 +347,8 @@ func _validate(s: Dictionary) -> String:
 		var people_error: String = PeopleBridge.validate(s)
 		if not people_error.is_empty():
 			return people_error
+		if int(s.schema_version) >= 4 and not _integer(s.people.stats.get("lost_customers"), 0, MAX_INTEGER):
+			return "顾客流失统计无效"
 	return DivinationSave.validate(s, current_data, visit_ids) if extended else ""
 
 
@@ -394,7 +396,9 @@ func _read_backup(save_id: String) -> Dictionary:
 
 
 func _write_checked(path: String, snapshot: Dictionary) -> Dictionary:
-	var payload := JSON.stringify(snapshot)
+	# Arrival expectations contain fractional coefficients. Preserve their exact
+	# floating-point value so reloading cannot change a committed day plan.
+	var payload := JSON.stringify(snapshot, "", true, true)
 	var encoded := JSON.stringify({"format": ENVELOPE_FORMAT, "payload": payload, "sha256": payload.sha256_text()}, "\t")
 	if encoded.to_utf8_buffer().size() > MAX_BYTES:
 		return _failure("SAVE_WRITE_FAILED", "存档超过允许大小，未提交本次动作。")

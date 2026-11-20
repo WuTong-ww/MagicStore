@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Loopback-only concurrent person-generation fixture; no real API credentials."""
 from __future__ import annotations
 import argparse

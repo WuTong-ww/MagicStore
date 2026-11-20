@@ -23,9 +23,10 @@ func _initialize() -> void:
 	first.schedule_end = 800
 	second.schedule_end = 800
 	first.urgency = 0
-	second.urgency = 0
+	second.urgency = 20
+	people.profiles[second.npc_id].base_patience = 45
 	People.advance(people, config, 600)
-	check(first.state == "queued" and second.state == "left" and second.reason == "候客区已满", "queue capacity and deterministic order")
+	check(first.state == "queued" and second.state == "left" and second.reason == config.arrival.overflow.reasons.full, "queue capacity and deterministic order")
 	check(int(people.profiles[second.npc_id].trust) == 0, "being turned away at capacity does not create a wait penalty")
 	var deadline := int(first.deadline)
 	People.advance(people, config, deadline)
@@ -66,5 +67,52 @@ func _initialize() -> void:
 	var days := People.create("save_days", 91, 540)
 	check(People.advance_with_schedule(days, config, 2 * 1440), "multi-day time advances")
 	check(days.days.has("0") and days.days.has("1") and int(days.clock) == 2 * 1440, "cross-day advance plans each intervening day")
+	_test_overflow_choices(config)
+	var low_bias := People.create("save_low_bias", 51, 1980)
+	People.plan_day(low_bias, config, 1, 0, 2)
+	for id: String in low_bias.arrivals:
+		var row: Dictionary = low_bias.arrivals[id]
+		row.at = 2040
+		row.schedule_end = 2240
+		row.urgency = 20
+		low_bias.profiles[row.npc_id].base_patience = 45
+		low_bias.profiles[row.npc_id].return_bias = -80
+	People.advance(low_bias, config, 2040)
+	check(low_bias.profiles[low_bias.arrivals.arrival_1_1.npc_id].return_bias <= -80, "capacity departure never increases an already lower return bias")
 	print("ARRIVAL EDGES: %d checks, %d failures" % [checks, failures])
 	quit(1 if failures else 0)
+
+func _test_overflow_choices(config: Dictionary) -> void:
+	var people := People.create("save_overflow_choices", 51, 1980)
+	People.plan_day(people, config, 1, 0, 4)
+	var ids: Array[String] = ["arrival_1_0", "arrival_1_1", "arrival_1_2", "arrival_1_3"]
+	var scores := [85, 85, 45, 25]
+	for index: int in range(ids.size()):
+		var row: Dictionary = people.arrivals[ids[index]]
+		row.at = 2040
+		row.schedule_end = 2240
+		row.urgency = 0
+		people.profiles[row.npc_id].base_patience = scores[index]
+		people.profiles[row.npc_id].trust = 0
+	var departing_profile: Dictionary = people.profiles[people.arrivals[ids[3]].npc_id]
+	var return_before := int(departing_profile.return_bias)
+	var expected_return_bias := maxi(int(config.arrival.overflow.return_bias_min), return_before - int(config.arrival.overflow.return_bias_penalty))
+	var lost_before := int(people.stats.get("lost_customers", 0))
+	check(People.advance(people, config, 2040), "simultaneous arrivals are processed by the real queue")
+	check(people.arrivals[ids[0]].state == "queued" and People.visible_queue(people).size() == 1, "overflow never expands the indoor queue beyond capacity")
+	check(people.arrivals[ids[1]].state == "outside" and int(people.arrivals[ids[1]].deadline) > 2040, "patient customer waits outside with a finite deadline")
+	check(people.arrivals[ids[2]].state == "appointment_requested", "moderately urgent customer leaves an appointment request")
+	check(people.arrivals[ids[3]].state == "left" and int(people.stats.get("lost_customers", 0)) == lost_before + 1 and int(departing_profile.return_bias) == expected_return_bias, "urgent customer leaves once, increments loss and applies the configured return-bias penalty")
+	var snapshot := people.duplicate(true)
+	People.advance(people, config, 2040)
+	check(people == snapshot, "repeated time advancement does not repeat overflow consequences")
+	check(People.validate(people).is_empty(), "outside waiting and appointment requests are valid persisted arrivals")
+	var outside: Dictionary = people.arrivals[ids[1]]
+	var original_deadline := int(outside.deadline)
+	check(People.begin(people, ids[0], "visit_overflow_first"), "first customer begins service and opens an indoor slot")
+	People.advance(people, config, 2040)
+	check(outside.state == "queued" and int(outside.deadline) == original_deadline and People.visible_queue(people).size() == 1, "outside customer fills a vacant slot without refreshing patience")
+	var requested: Dictionary = people.arrivals[ids[2]]
+	var before_booking := people.duplicate(true)
+	check(not People.book(people, requested.arrival_id, 3480, false, config) and people == before_booking, "appointment request requires the customer to agree before booking")
+	check(People.book(people, requested.arrival_id, 3480, true, config) and requested.state == "planned" and requested.source == "appointment", "agreed appointment request becomes a persisted future appointment")

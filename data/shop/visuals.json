@@ -83,5 +83,410 @@
   "sha256": "E897D3B34F080B22F600DC181F14AA3CC081206EA1696CDFCD0FB2B8E4BCF345",
   "original_authorship": "Project-authored SVG samples, replaceable by final art-team assets.",
   "prompt": "Extend the attached original SVG sample strip into a transparent square 3x3 inventory atlas. Match bold silhouettes, matte midnight teal fills, pale brass outlines, turquoise potion and lavender crystal. Row1 potion, crystal, incense. Row2 evening primrose herb, quartz grains, amber resin. Row3 spring water vial, silver leaf clasp, paper bookmark. Equal cells, generous margins, no text, no grid lines, readable at 64px.",
-  "review_status": "Selected simplified v2 after visual inspection at 64px; detailed first candidate retained in .tools/art-candidates."
+  "review_status": "Selected simplified v2 after visual inspection at 64px; detailed first candidate retained in .tools/art-candidates.",
+  "scene_settings": {
+    "version": 2,
+    "canvas": [
+      2560,
+      1440
+    ],
+    "day_minute": 540,
+    "night_minute": 1080,
+    "closing_minute": 1320,
+    "minutes_per_day": 1440,
+    "fade_seconds": 0.6,
+    "side_ratio": 0.3,
+    "side_minimum_width": 440,
+    "art_minimum_height": 240,
+    "inventory_columns": 3,
+    "inventory_rect": [
+      200,
+      250,
+      1420,
+      790
+    ],
+    "inventory_cell_minimum": [
+      0,
+      160
+    ],
+    "inventory_icon_size": [
+      64,
+      64
+    ],
+    "inventory_name_size": 18,
+    "inventory_quantity_size": 18,
+    "inventory_grid_gap": 10,
+    "hotspot_font_size": 18,
+    "hotspot_alpha": 0.84,
+    "cabinet_open_label": "合上储物柜",
+    "cabinet_closed_label": "打开储物柜",
+    "quantity_format": "数量 %d",
+    "inventory_names": {
+      "bookmark": "纸纹书签",
+      "silver_leaf": "银叶书夹"
+    },
+    "inventory_icon_end": 0.55,
+    "inventory_detail_gap": 4,
+    "inventory_rows": 3
+  },
+  "scene_pages": {
+    "exterior": "S01",
+    "front": "S02",
+    "consultation": "S03",
+    "inventory": "S04",
+    "workshop": "S05",
+    "market": "S06",
+    "gathering": "S07"
+  },
+  "scenes": {
+    "S01": {
+      "day": "res://assets/generated_scenes/v2/S01_day.png",
+      "night": "res://assets/generated_scenes/v2/S01_night.png",
+      "layers": {},
+      "hotspots": {},
+      "closed": "res://assets/generated_scenes/v2/S01_closed.png"
+    },
+    "S02": {
+      "day": "res://assets/generated_scenes/v2/S02_day.png",
+      "night": "res://assets/generated_scenes/v2/S02_night.png",
+      "layers": {
+        "door": {
+          "path": "res://assets/generated_scenes/v2/slices/S02_door.png",
+          "rect": [
+            1200,
+            160,
+            570,
+            980
+          ],
+          "hotspot": [
+            1200,
+            160,
+            570,
+            980
+          ],
+          "display": "hidden"
+        },
+        "curtain": {
+          "path": "res://assets/generated_scenes/v2/slices/S02_curtain.png",
+          "rect": [
+            1200,
+            160,
+            570,
+            980
+          ],
+          "hotspot": [
+            1200,
+            160,
+            570,
+            980
+          ]
+        },
+        "letter": {
+          "path": "res://assets/generated_scenes/v2/slices/S02_letter.png",
+          "rect": [
+            700,
+            1140,
+            260,
+            150
+          ],
+          "hotspot": [
+            700,
+            1140,
+            260,
+            150
+          ]
+        },
+        "lamp_on": {
+          "path": "res://assets/generated_scenes/v2/slices/S02_lamp_on.png",
+          "rect": [
+            380,
+            730,
+            280,
+            470
+          ],
+          "hotspot": [
+            380,
+            730,
+            280,
+            470
+          ],
+          "periods": [
+            "night"
+          ]
+        },
+        "lamp_off": {
+          "path": "res://assets/generated_scenes/v2/slices/S02_lamp_off.png",
+          "rect": [
+            380,
+            730,
+            280,
+            470
+          ],
+          "hotspot": [
+            380,
+            730,
+            280,
+            470
+          ],
+          "periods": [
+            "day"
+          ]
+        }
+      },
+      "hotspots": {
+        "exterior": {
+          "label": "店外",
+          "target": "exterior",
+          "rect": [
+            60,
+            400,
+            280,
+            250
+          ]
+        },
+        "market": {
+          "label": "原料商店",
+          "target": "market",
+          "rect": [
+            420,
+            250,
+            460,
+            250
+          ]
+        },
+        "inventory": {
+          "label": "储物柜",
+          "target": "inventory",
+          "rect": [
+            570,
+            680,
+            460,
+            250
+          ]
+        },
+        "consultation": {
+          "label": "咨询区",
+          "target": "consultation",
+          "rect": [
+            1200,
+            420,
+            520,
+            250
+          ]
+        },
+        "workshop": {
+          "label": "工坊",
+          "target": "workshop",
+          "rect": [
+            1870,
+            520,
+            460,
+            250
+          ]
+        },
+        "letter": {
+          "label": "来客信件",
+          "target": "people",
+          "rect": [
+            670,
+            1110,
+            460,
+            250
+          ]
+        }
+      }
+    },
+    "S03": {
+      "day": "res://assets/generated_scenes/v2/S03_day.png",
+      "night": "res://assets/generated_scenes/v2/S03_night.png",
+      "layers": {},
+      "hotspots": {}
+    },
+    "S04": {
+      "day": "res://assets/generated_scenes/v2/S04_day.png",
+      "night": "res://assets/generated_scenes/v2/S04_night.png",
+      "layers": {
+        "door_open": {
+          "path": "res://assets/generated_scenes/v2/slices/S04_door_open.png",
+          "rect": [
+            0,
+            180,
+            300,
+            1050
+          ],
+          "hotspot": [
+            0,
+            180,
+            300,
+            1050
+          ],
+          "state": "open",
+          "source_region": [
+            410,
+            2,
+            392,
+            1261
+          ]
+        },
+        "door_closed": {
+          "path": "res://assets/generated_scenes/v2/slices/S04_door_closed.png",
+          "rect": [
+            250,
+            130,
+            1420,
+            850
+          ],
+          "hotspot": [
+            250,
+            130,
+            1420,
+            850
+          ],
+          "state": "closed",
+          "source_region": [
+            51,
+            140,
+            1326,
+            820
+          ]
+        },
+        "slot": {
+          "path": "res://assets/generated_scenes/v2/slices/S04_slot.png",
+          "rect": [
+            0,
+            0,
+            380,
+            300
+          ],
+          "hotspot": [
+            0,
+            0,
+            380,
+            300
+          ],
+          "display": "cell",
+          "source_region": [
+            29,
+            105,
+            1478,
+            824
+          ]
+        },
+        "drawer": {
+          "path": "res://assets/generated_scenes/v2/slices/S04_drawer.png",
+          "rect": [
+            280,
+            980,
+            280,
+            120
+          ],
+          "hotspot": [
+            280,
+            980,
+            280,
+            120
+          ],
+          "source_region": [
+            32,
+            191,
+            1471,
+            643
+          ]
+        }
+      },
+      "hotspots": {
+        "cabinet": {
+          "label": "储物柜",
+          "target": "cabinet",
+          "rect": [
+            220,
+            180,
+            1380,
+            70
+          ],
+          "display": "transparent"
+        }
+      }
+    },
+    "S05": {
+      "day": "res://assets/generated_scenes/v2/S05_day.png",
+      "night": "res://assets/generated_scenes/v2/S05_night.png",
+      "layers": {
+        "mortar": {
+          "path": "res://assets/generated_scenes/v2/slices/S05_mortar.png",
+          "rect": [
+            240,
+            780,
+            340,
+            290
+          ],
+          "hotspot": [
+            240,
+            780,
+            340,
+            290
+          ]
+        },
+        "bottle": {
+          "path": "res://assets/generated_scenes/v2/slices/S05_bottle.png",
+          "rect": [
+            940,
+            720,
+            150,
+            290
+          ],
+          "hotspot": [
+            940,
+            720,
+            150,
+            290
+          ]
+        },
+        "scales": {
+          "path": "res://assets/generated_scenes/v2/slices/S05_scales.png",
+          "rect": [
+            1170,
+            430,
+            520,
+            530
+          ],
+          "hotspot": [
+            1170,
+            430,
+            520,
+            530
+          ]
+        }
+      },
+      "hotspots": {}
+    },
+    "S06": {
+      "day": "res://assets/generated_scenes/v2/S06_day.png",
+      "night": "res://assets/generated_scenes/v2/S06_night.png",
+      "layers": {
+        "basket": {
+          "path": "res://assets/generated_scenes/v2/slices/S06_basket.png",
+          "rect": [
+            260,
+            770,
+            540,
+            420
+          ],
+          "hotspot": [
+            260,
+            770,
+            540,
+            420
+          ]
+        }
+      },
+      "hotspots": {}
+    },
+    "S07": {
+      "day": "res://assets/generated_scenes/v2/S07_day.png",
+      "night": "res://assets/generated_scenes/v2/S07_night.png",
+      "layers": {},
+      "hotspots": {}
+    }
+  }
 }

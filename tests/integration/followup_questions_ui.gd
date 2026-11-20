@@ -45,6 +45,8 @@ const MAX_LENGTH_QUESTIONS := [
 	{"topic_id":"invitation","text":"这份邀请里你现在最想先确认什么？"},
 	{"topic_id":"letter","text":"回信这件事让你最担心的是什么呢？"},
 	{"topic_id":"work","text":"修书的时候你通常怎样让自己静心？"}]
+const People = preload("res://scripts/people/people.gd")
+const Bridge = preload("res://scripts/shop/people_bridge.gd")
 var game: Node
 var main: Control
 var provider: FixtureProvider
@@ -152,7 +154,13 @@ func run() -> void:
 	var original_screen := screen.get_instance_id()
 	direct("end_visit")
 	direct("next_day")
-	var next_arrival := "arrival_1_0"
+	# G1 permits quiet days and no longer guarantees a guest at opening. Use an
+	# explicit second guest so this callback test exercises only its own contract.
+	var next_day := floori(float(game.state.clock_minutes)/1440.0)
+	var next_npc := People._ordinary(game.state.people,game.people_config,People._random(2107),next_day,91)
+	var next_arrival := "arrival_followup_second_guest"
+	game.state.people.arrivals[next_arrival] = Bridge._arrival(next_arrival,next_npc,int(game.state.clock_minutes)+1,"natural","")
+	direct("wait",{"minutes":1})
 	direct("start_arrival",{"arrival_id":next_arrival})
 	await settle()
 	check(game.active_visit().visit_id != original_visit and main.screen.get_instance_id() == original_screen,"new visit changes core state while the same consultation surface remains")

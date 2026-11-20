@@ -13,6 +13,7 @@ function Invoke-Godot([string[]]$GodotArgs) {
 # Redirect only this process and its children; never change machine/user settings.
 # Godot still uses user://. Its Windows APPDATA parent is now on the project drive.
 $savedEnvironment = @{}
+$savedCondaDllSearch = [Environment]::GetEnvironmentVariable('CONDA_DLL_SEARCH_MODIFICATION_ENABLE', 'Process')
 $runtimePaths = @{
     APPDATA = Join-Path $repo '.runtime/appdata'
     LOCALAPPDATA = Join-Path $repo '.runtime/localappdata'
@@ -29,6 +30,11 @@ foreach ($name in $runtimePaths.Keys) {
     $savedEnvironment[$name] = [Environment]::GetEnvironmentVariable($name, 'Process')
 }
 try {
+    if ($Test) {
+        # Conda Python on Windows needs its bundled OpenSSL DLL search enabled.
+        # This affects this test process and its children only.
+        [Environment]::SetEnvironmentVariable('CONDA_DLL_SEARCH_MODIFICATION_ENABLE', '1', 'Process')
+    }
     foreach ($name in $runtimePaths.Keys) {
         New-Item -ItemType Directory -Force -Path $runtimePaths[$name] | Out-Null
         [Environment]::SetEnvironmentVariable($name, $runtimePaths[$name], 'Process')
@@ -64,8 +70,13 @@ try {
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/people_restart.gd', '--', 'write')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/people_restart.gd', '--', 'read')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/shop_ui.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/scene_visuals.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/arrival_ui.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/consultation_layout.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/arrival_transactions.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/save_delete_ui.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/generated_people.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/generation_arrival_slots.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/generated_people_ui.gd')
 		Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/followup_questions.gd')
 		Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/followup_questions_ui.gd')
@@ -103,6 +114,7 @@ if errorlevel 1 pause
         if ($LASTEXITCODE -ne 0) { throw "Godot game failed (exit $LASTEXITCODE)." }
     }
 } finally {
+    [Environment]::SetEnvironmentVariable('CONDA_DLL_SEARCH_MODIFICATION_ENABLE', $savedCondaDllSearch, 'Process')
     foreach ($name in $savedEnvironment.Keys) {
         [Environment]::SetEnvironmentVariable($name, $savedEnvironment[$name], 'Process')
     }

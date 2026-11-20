@@ -5,7 +5,6 @@ extends RefCounted
 const People = preload("res://scripts/people/people.gd")
 const Memory = preload("res://scripts/people/memory.gd")
 const Events = preload("res://scripts/divination/event_rules.gd")
-const Shop = preload("res://scripts/shop/shop.gd")
 const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
 
 static func initialize(state: Dictionary, config: Dictionary, divination: Variant = null) -> void:
@@ -20,11 +19,12 @@ static func initialize(state: Dictionary, config: Dictionary, divination: Varian
 		_import_profile(people, npc_id, divination)
 	for visit: Dictionary in state.get("visits", []):
 		register_legacy_visit(state, visit, divination)
-	People.plan_day(people, config, floori(float(state.clock_minutes) / 1440.0), _reputation(state), -1, _experience(state))
 	# The handwritten opening customer is a real queue entry, not a debug selection.
-	if state.visits.is_empty() and not people.arrivals.has("arrival_opening_lin"):
+	if int(state.clock_minutes) < 1440 and config.arrival.opening_guest and state.visits.is_empty() and not people.arrivals.has("arrival_opening_lin"):
 		var at := int(state.clock_minutes)
 		people.arrivals["arrival_opening_lin"] = _arrival("arrival_opening_lin", "npc_lin", at, "fixed_story", "invitation")
+	var day := floori(float(state.clock_minutes) / 1440.0)
+	People.plan_day(people, config, day, _reputation(state), -1, _experience(state), _traffic_bonus(state, config, day))
 	People.advance(people, config, int(state.clock_minutes))
 	if divination != null:
 		sync(state, config, divination)
@@ -111,12 +111,14 @@ static func advance(state: Dictionary, config: Dictionary, minutes: int, divinat
 		previous = at
 		state.clock_minutes = at
 		Events.advance(state, divination.data)
-		People.advance_with_schedule(state.people, config, at, _reputation(state), _experience(state))
+		var previous_day := floori(float(state.people.clock) / 1440.0)
+		People.advance_with_schedule(state.people, config, at, _reputation(state), _experience(state), _traffic_bonus(state, config, previous_day))
 		# advance_with_schedule does not plan the newly entered day when at is exactly midnight.
-		People.plan_day(state.people, config, floori(float(at) / 1440.0), _reputation(state), -1, _experience(state))
+		var day := floori(float(at) / 1440.0)
+		People.plan_day(state.people, config, day, _reputation(state), -1, _experience(state), _traffic_bonus(state, config, day))
 		sync(state, config, divination)
 
-static func start(state: Dictionary, action: Dictionary, divination: Variant) -> Dictionary:
+static func start(state: Dictionary, action: Dictionary, divination: Variant, config: Dictionary = {}) -> Dictionary:
 	if not state.get("active_visit_id", "").is_empty():
 		return _fail("ACTIVE_VISIT", "请先结束当前接待。")
 	var arrival_id: Variant = action.get("arrival_id")
@@ -160,6 +162,10 @@ static func start(state: Dictionary, action: Dictionary, divination: Variant) ->
 	if prior and divination.data.cases.get(case_id,{}).get("generated",false):
 		visit.dialogue[0].text = divination.opening(npc_id,case_id,true,visit.clue_ids)
 	row.case_id = case_id
+	# The newly freed indoor seat goes to the earliest outside guest, preserving
+	# their original deadline. This remains inside the caller's save transaction.
+	if not config.is_empty():
+		People.advance(state.people, config, int(state.clock_minutes))
 	return _ok("接待已开始。", {"visit_id": visit_id, "npc_id": npc_id, "arrival_id": arrival_id})
 
 static func finish(state: Dictionary, visit: Dictionary) -> void:
@@ -224,7 +230,7 @@ static func contact_invitation(state: Dictionary, config: Dictionary) -> Diction
 	if target.met:
 		return {}
 	for arrival: Dictionary in people.arrivals.values():
-		if arrival.npc_id == target_id and arrival.state in ["planned","queued","in_service"]:
+		if arrival.npc_id == target_id and arrival.state in ["planned","queued","outside","appointment_requested","in_service"]:
 			return {}
 	var at: int = People.next_available_arrival(people,config,int(state.clock_minutes)+60,target)
 	if at <= 0:
@@ -252,8 +258,18 @@ static func public_view(state: Dictionary) -> Dictionary:
 		var profile := People.public_profile(people, npc_id)
 		if not profile.is_empty():
 			profile["relationships"] = People.visible_relationships(people, npc_id)
+			var latest_at := -1
+			for arrival: Dictionary in people.arrivals.values():
+				if arrival.npc_id == npc_id and int(arrival.at) <= int(people.clock) and arrival.state in ["in_service", "completed"] and int(arrival.at) >= latest_at:
+					profile["arrival_source"] = arrival.get("original_source", arrival.source)
+					latest_at = int(arrival.at)
 			profiles[npc_id] = profile
-	return {"queue": People.visible_queue(people), "profiles": profiles,
+	var day := floori(float(people.clock) / 1440.0)
+	var day_view: Dictionary = people.days.get(str(day), {}).duplicate(true)
+	day_view["arrival_count"] = People.arrival_count_on_day(people, day)
+	return {"queue": People.visible_queue(people), "in_service": People.visible_queue(people, "in_service"), "outside_queue": People.visible_queue(people, "outside"),
+		"appointment_requests": People.visible_queue(people, "appointment_requested"), "day": day_view,
+		"lost_customers": int(people.stats.get("lost_customers", 0)), "profiles": profiles,
 		"report": People.style_report(people), "appearance": people.player_appearance.duplicate(true)}
 
 static func handle(state: Dictionary, action: Dictionary, config: Dictionary) -> Dictionary:
@@ -334,10 +350,23 @@ static func validate(state: Dictionary) -> String:
 	return ""
 
 static func _reputation(state: Dictionary) -> int:
-	return int(state.get("shop", {}).get("reputation", 0)) + Shop.arrival_bonus(state) * 25
+	return int(state.get("shop", {}).get("reputation", 0))
 
 static func _experience(state: Dictionary) -> int:
 	return int(state.get("shop", {}).get("experience", 0))
+
+static func _traffic_bonus(state: Dictionary, config: Dictionary, day: int) -> float:
+	var first := day * 1440 + int(config.arrival.first_minute)
+	var last := day * 1440 + int(config.arrival.last_minute)
+	if last <= first:
+		return 0.0
+	var result := 0.0
+	for effect: Dictionary in state.get("shop", {}).get("boosts", []):
+		var expires := int(effect.expires_at)
+		var end := last if expires < 0 else mini(last, expires)
+		var overlap := maxi(0, end - maxi(first, int(effect.starts_at)))
+		result += float(effect.amount) * float(overlap) / float(last - first)
+	return result
 
 static func _ok(message: String, result: Dictionary = {}, minutes: int = 0) -> Dictionary:
 	return {"success": true, "error_code": "", "message": message, "minutes": minutes, "result": result}

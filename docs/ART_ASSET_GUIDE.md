@@ -1,5 +1,7 @@
 # 美术资源与可操作界面接入说明（2026-11-20）
 
+> 2026-11-21 A1 更新：以下第 1 节和第 6 节保留为旧资源包的历史说明。当前运行时改读 `data/shop/visuals.json`，使用 `assets/generated_scenes/v2/S01_day.png` 至 `S07_night.png`、S01_closed.png 及 slices/ 下的独立透明物件。旧裁图移入 `assets/_legacy/`，不再用于运行时。逻辑画布为 2560×1440；候选底板实际为 1672×941，尚未达到要求的原生分辨率。已按用户决定继续候选，未放大像素冒充高清图。配置、时段和图层说明见 [A1 实施记录](superpowers/plans/2026-11-21-a1-scene-layers.md)。提示词与真实尺寸见 `assets/ART_ASSET_MANIFEST.json`。
+
 本说明对应本次交付的 `MagicStore-main_with_artpack.zip`。这是正式 Godot 工程资源包，不是独立网页 Demo。所有动态数值、文字、按钮和交易结果仍由 Godot 与 `GameState` 负责；AI 生成图只作为场景底图、角色肖像和 UI 装饰素材，避免把动态文字烘焙进图片。
 
 ## 1. 七个主场景与运行资源

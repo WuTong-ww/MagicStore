@@ -1,9 +1,10 @@
 extends HBoxContainer
 
 const UI = preload("res://scripts/ui/ui_kit.gd")
+const ArrivalUI = preload("res://scripts/ui/arrival_ui.gd")
 
-const FRONT_ART := "res://assets/shop_front_scene.png"
-const FRONT_ART_FALLBACK := "res://assets/shop_front.svg"
+const SceneArt = preload("res://scripts/shop/scene_visual.gd")
+var scene_visual: Control
 const LIN_PORTRAIT := "res://assets/portraits/npc_lin_neutral.png"
 const LIN_PORTRAIT_FALLBACK := "res://assets/portrait_lin.svg"
 const LIN_EXPRESSIONS := {"neutral":"res://assets/portraits/npc_lin_neutral.png", "hesitant":"res://assets/portraits/npc_lin_hesitant.png", "relieved":"res://assets/portraits/npc_lin_relieved.png"}
@@ -22,8 +23,13 @@ var guest_picker: OptionButton
 var guest_role: Label
 var portrait: TextureRect
 var guests: Array = []
+var arrival_source: Label
+var patience_list: VBoxContainer
+var quiet_suggestions: HBoxContainer
+var arrival_copy: Dictionary = {}
 
 func _ready() -> void:
+	arrival_copy = ArrivalUI.load_config()
 	add_theme_constant_override("separation", 16)
 	var left := VBoxContainer.new()
 	left.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -41,27 +47,17 @@ func _ready() -> void:
 	var hint := UI.label("前台不再只是贴图：可以直接点击店内区域，切换功能、查看来客与进入接待。", 14, UI.MUTED)
 	hint.custom_minimum_size.y = 28
 	scene_box.add_child(hint)
-	var stage := Control.new()
-	stage.custom_minimum_size = Vector2(760, 430)
+	var stage := SceneArt.new()
+	scene_visual = stage
+	var minimum_stage: Array = arrival_copy.get("front_stage_minimum_size", [])
+	if minimum_stage.size() == 2:
+		stage.custom_minimum_size = Vector2(float(minimum_stage[0]), float(minimum_stage[1]))
 	stage.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	stage.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	scene_box.add_child(stage)
-	var art := UI.image(FRONT_ART if ResourceLoader.exists(FRONT_ART) else FRONT_ART_FALLBACK)
-	art.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
-	stage.add_child(art)
-	var vignette := ColorRect.new()
-	vignette.color = Color(0.01, 0.06, 0.08, 0.12)
-	vignette.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	vignette.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	stage.add_child(vignette)
-	_add_hotspot(stage, "店外", Vector2(0.12, 0.53), Vector2(88, 52), func(): host.show_screen("exterior"))
-	_add_hotspot(stage, "原料商店", Vector2(0.53, 0.41), Vector2(124, 48), func(): host.show_screen("market"))
-	_add_hotspot(stage, "储物柜", Vector2(0.47, 0.73), Vector2(116, 48), func(): host.show_screen("inventory"))
-	_add_hotspot(stage, "咨询区", Vector2(0.75, 0.57), Vector2(108, 48), _enter_consultation)
-	_add_hotspot(stage, "工坊", Vector2(0.90, 0.50), Vector2(92, 48), func(): host.show_screen("workshop"))
-	_add_hotspot(stage, "来客信件", Vector2(0.55, 0.88), Vector2(126, 42), func(): host.open_people())
+	stage.setup("front")
+	for key: String in stage.config.scenes[stage.scene_id].hotspots:
+		_add_hotspot(stage,key)
 	var slogan := UI.label("点一点店内区域，直接与店铺互动。", 18, UI.GOLD)
 	_place_node(slogan, Vector2(0.57, 0.97), Vector2(420, 26))
 	slogan.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -89,6 +85,9 @@ func _ready() -> void:
 	column.add_theme_constant_override("separation", 8)
 	side_scroll.add_child(column)
 	column.add_child(UI.label("今日来客", 16, UI.GOLD))
+	patience_list = VBoxContainer.new()
+	patience_list.name = "ArrivalPatienceList"
+	column.add_child(patience_list)
 	guest_picker = OptionButton.new()
 	guest_picker.fit_to_longest_item = false
 	guest_picker.item_selected.connect(func(_index: int): refresh())
@@ -107,11 +106,24 @@ func _ready() -> void:
 	profile_text.add_child(guest_name)
 	guest_role = UI.label("", 16, UI.MUTED)
 	profile_text.add_child(guest_role)
+	arrival_source = UI.label("", 14, UI.MUTED)
+	profile_text.add_child(arrival_source)
 	guest_status = UI.label("", 15, UI.GOLD)
 	profile_text.add_child(guest_status)
 	case_label = UI.label("", 18)
 	case_label.custom_minimum_size.y = 52
 	column.add_child(case_label)
+	quiet_suggestions = HBoxContainer.new()
+	quiet_suggestions.name = "ZeroGuestSuggestions"
+	column.add_child(quiet_suggestions)
+	for destination: String in arrival_copy.get("suggestions", {}):
+		var suggestion := UI.button(arrival_copy.suggestions[destination], func():
+			if destination == "study":
+				host.open_divination("study")
+			else:
+				host.show_screen(destination))
+		suggestion.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		quiet_suggestions.add_child(suggestion)
 	begin_button = UI.button("请入咨询区", _begin)
 	begin_button.custom_minimum_size.y = 52
 	column.add_child(begin_button)
@@ -132,14 +144,15 @@ func _ready() -> void:
 	column.add_child(UI.label("熟客的故事，会在下一次见面继续。", 15, UI.MUTED))
 	refresh()
 
-func _add_hotspot(parent: Control, text: String, center: Vector2, size: Vector2, callback: Callable) -> Button:
-	var button := UI.button(text, callback)
-	button.custom_minimum_size = size
-	button.add_theme_font_size_override("font_size", 18)
-	button.tooltip_text = text
-	_place_node(button, center, size)
-	parent.add_child(button)
-	return button
+func _add_hotspot(parent: Control, key: String) -> Button:
+	var target: String = parent.config.scenes[parent.scene_id].hotspots[key].target
+	return parent.hotspot(key,func():
+		if target == "consultation":
+			_enter_consultation()
+		elif target == "people":
+			host.open_people()
+		else:
+			host.show_screen(target))
 
 func _place_node(node: Control, center: Vector2, size: Vector2) -> void:
 	node.anchor_left = center.x
@@ -159,20 +172,28 @@ func _enter_consultation() -> void:
 		await _begin()
 
 func refresh() -> void:
+	if is_instance_valid(scene_visual):
+		scene_visual.refresh()
 	if not is_instance_valid(begin_button):
 		return
 	var state: Dictionary = GameState.player_snapshot()
 	var no_save := state.is_empty()
 	var active: Dictionary = GameState.active_visit()
 	var previous_index := maxi(guest_picker.selected, 0)
+	var people: Dictionary = GameState.people_view()
 	guests = []
-	for arrival: Dictionary in GameState.people_view().get("queue", []):
+	for arrival: Dictionary in people.get("queue", []):
 		var case_id: String = arrival.case_id if not str(arrival.case_id).is_empty() else ("invitation" if arrival.npc_id == "npc_lin" else "archive")
-		guests.append({"npc_id":arrival.npc_id,"arrival_id":arrival.arrival_id,"case_id":case_id,"label":arrival.name,"name":arrival.name,"role":arrival.role,"case_title":"想看看店里的商品" if arrival.intent == "shopping" else "有些事想和你谈谈"})
+		var level := ArrivalUI.patience(arrival)
+		guests.append({"npc_id":arrival.npc_id,"arrival_id":arrival.arrival_id,"case_id":case_id,"label":str(arrival.name) + " · " + str(level.get("icon", "")),"name":arrival.name,"role":arrival.role,"source":arrival.get("source", ""),"case_title":"想看看店里的商品" if arrival.intent == "shopping" else "有些事想和你谈谈"})
+	_refresh_patience(people)
 	var active_view: Dictionary = GameState.divination_view()
 	if not active.is_empty() and not guests.any(func(row: Dictionary) -> bool: return row.npc_id == active.npc_id and row.case_id == active_view.case_id):
 		var returning: Dictionary = active_view.guest.duplicate()
 		returning.merge({"case_id": active_view.case_id, "label": returning.name + " · 接待中"})
+		for arrival: Dictionary in people.get("in_service", []):
+			if arrival.npc_id == active.npc_id:
+				returning.merge({"arrival_id": arrival.arrival_id, "source": arrival.source})
 		guests.append(returning)
 	guest_picker.clear()
 	for row: Dictionary in guests:
@@ -184,6 +205,7 @@ func refresh() -> void:
 	var guest: Dictionary = guests[guest_picker.selected] if guest_picker.selected >= 0 else {}
 	guest_name.text = guest.get("name", "暂时没有来客")
 	guest_role.text = guest.get("role", "")
+	arrival_source.text = ArrivalUI.source_text(guest) if guest.has("arrival_id") else ""
 	portrait.visible = guest.get("npc_id") == "npc_lin"
 	if portrait.visible:
 		var expression := "neutral"
@@ -202,6 +224,11 @@ func refresh() -> void:
 	begin_button.text = "继续原接待 →" if not active.is_empty() else "请入咨询区 →"
 	begin_button.disabled = no_save or (active.is_empty() and guests.is_empty()) or (already_today and active.is_empty())
 	var empty_shop: bool = not no_save and active.is_empty() and guests.is_empty()
+	var zero_guest_day: bool = empty_shop and ArrivalUI.zero_guest_day(people)
+	quiet_suggestions.visible = zero_guest_day
+	if zero_guest_day:
+		guest_name.text = arrival_copy.get("empty_title", "")
+		case_label.text = arrival_copy.get("empty_advice", "")
 	var remaining := maxi(0,int(GameState.content.get("rules",{}).get("closing_minute",1320))-int(state.get("clock_minutes",0))%1440)
 	wait_button.visible = empty_shop
 	wait_button.disabled = not empty_shop or remaining <= 0
@@ -211,7 +238,7 @@ func refresh() -> void:
 	elif not active.is_empty():
 		guest_status.text = "接待进行中"
 	elif empty_shop:
-		guest_status.text = "今天的营业结束了。" if remaining <= 0 else "店里暂时安静，坐一会儿吧。"
+		guest_status.text = arrival_copy.get("empty_status", "") if zero_guest_day else ("今天的营业结束了。" if remaining <= 0 else "店里暂时安静，坐一会儿吧。")
 	else:
 		guest_status.text = "今日已接待 · 明日可回访" if already_today else "等待接待"
 	var rules: Dictionary = GameState.content.get("rules", {})
@@ -220,6 +247,21 @@ func refresh() -> void:
 	next_button.disabled = no_save
 	history_button.disabled = no_save
 	study_button.disabled = no_save or not active.is_empty()
+
+func _refresh_patience(people: Dictionary) -> void:
+	for child: Node in patience_list.get_children():
+		patience_list.remove_child(child)
+		child.queue_free()
+	var waiting: Array = people.get("queue", []).duplicate()
+	waiting.append_array(people.get("outside_queue", []))
+	for row: Dictionary in waiting:
+		var level := ArrivalUI.patience(row)
+		var line := UI.label(str(row.get("name", "")) + " · " + ArrivalUI.patience_text(row), 14, Color(str(level.get("color", "ffffff"))))
+		patience_list.add_child(line)
+	for key: String in ["outside_queue", "appointment_requests"]:
+		var count: int = people.get(key, []).size()
+		if count > 0:
+			patience_list.add_child(UI.label(str(arrival_copy.get("outside_format" if key == "outside_queue" else "requests_format", "")) % count, 14, UI.GOLD))
 
 func _wait_for_guest() -> void:
 	var state: Dictionary = GameState.player_snapshot()

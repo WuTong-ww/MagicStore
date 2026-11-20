@@ -1,6 +1,7 @@
 extends Control
 
 const UI = preload("res://scripts/ui/ui_kit.gd")
+const ArrivalUI = preload("res://scripts/ui/arrival_ui.gd")
 ## Seven public destinations share layout, while all actions go through GameState.
 
 @export var page := "inventory"
@@ -16,21 +17,42 @@ var market_action_buttons: Array[Button] = []
 const TITLES := {"exterior":"灯下的杂货铺", "inventory":"储物柜与经营账簿", "workshop":"需求、研究与制作", "market":"原料商店", "gathering":"外出采集"}
 const SOURCES := {"purchase":"采购", "gather":"采集", "gift":"顾客赠料", "craft":"制作", "legacy_or_case":"开局或案例", "legacy":"开局或旧档", "case_payment":"问卜报酬"}
 const ICONS := {"restorative_draught":0,"clarity_crystal":1,"calming_incense":2,"lavender":3,"quartz":4,"moon_dust":5,"spring_water":6,"silver_leaf":7,"bookmark":8}
-const SCENE_ART := {"exterior":"res://assets/scene_exterior.png", "inventory":"res://assets/scene_inventory.png", "workshop":"res://assets/scene_workshop.png", "market":"res://assets/scene_market.png", "gathering":"res://assets/scene_gathering.png"}
-const SCENE_ART_FALLBACK := {"exterior":"res://assets/shop_front.svg"}
+const SceneArt = preload("res://scripts/shop/scene_visual.gd")
+var scene_visual: Control
+var inventory_grid: GridContainer
+var side_panel: PanelContainer
 
 func _ready() -> void:
-	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://data/shop/visuals.json"))
-	if parsed is Dictionary:
-		visuals = parsed
+	visuals = SceneArt.load_config()
+	scene_visual = SceneArt.new()
+	scene_visual.name = "SceneArtwork"
+	add_child(scene_visual)
+	scene_visual.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	scene_visual.setup(page)
+	if page == "inventory":
+		scene_visual.hotspot("cabinet",_toggle_cabinet)
+		scene_visual.resized.connect(_size_inventory_cells)
+	side_panel = UI.panel()
+	side_panel.name = "SceneControls"
+	add_child(side_panel)
 	var scroll := ScrollContainer.new()
-	scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	add_child(scroll)
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	side_panel.add_child(scroll)
 	body = VBoxContainer.new()
 	body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	body.add_theme_constant_override("separation", 10)
 	scroll.add_child(body)
+	resized.connect(_layout_scene_controls)
+	_layout_scene_controls()
 	refresh()
+
+func _layout_scene_controls() -> void:
+	if visuals.is_empty():
+		return
+	var settings: Dictionary = visuals.scene_settings
+	var width := maxf(size.x*float(settings.side_ratio),float(settings.side_minimum_width))
+	side_panel.position = Vector2(maxf(0.0,size.x-width),0.0)
+	side_panel.size = Vector2(minf(width,size.x),size.y)
 
 func refresh() -> void:
 	if not is_instance_valid(body):
@@ -38,8 +60,12 @@ func refresh() -> void:
 	for child: Node in body.get_children():
 		body.remove_child(child)
 		child.queue_free()
+	if is_instance_valid(inventory_grid):
+		scene_visual.remove_child(inventory_grid)
+		inventory_grid.queue_free()
+	inventory_grid = null
 	text(TITLES.get(page, "店铺"), 26)
-	_add_scene_art(page, Vector2(900, 600))
+	scene_visual.refresh()
 	var view: Dictionary = GameState.shop_view()
 	if view.is_empty():
 		text("请先打开存档簿，新建或继续经营。")
@@ -63,11 +89,15 @@ func refresh() -> void:
 		"gathering":
 			_gathering(view)
 
+func _toggle_cabinet() -> void:
+	cabinet_open = not cabinet_open
+	refresh()
+
 func _inventory(view: Dictionary) -> void:
 	text("口碑 %d · 经营经验 %d · 复盘成长 %d · 当前客流加成 %d" % [view.shop.reputation, view.shop.experience, view.shop.review_growth, view.arrival_bonus])
-	button("合上储物柜" if cabinet_open else "打开储物柜", func():
-		cabinet_open = not cabinet_open
-		refresh())
+	scene_visual.cabinet_state = "open" if cabinet_open else "closed"
+	scene_visual.refresh()
+	button(visuals.scene_settings.cabinet_open_label if cabinet_open else visuals.scene_settings.cabinet_closed_label,_toggle_cabinet)
 	if not cabinet_open:
 		text("柜门已经合上。打开后可查看商品、原料、来源与用途。", 16)
 		return
@@ -83,6 +113,7 @@ func _inventory(view: Dictionary) -> void:
 		inventory_filter = str(filter.get_item_metadata(index))
 		refresh())
 	body.add_child(filter)
+	_build_inventory_grid(view)
 	for id: String in view.items:
 		var item: Dictionary = view.catalog.items.get(id, {"name": {"bookmark":"纸纹书签","silver_leaf":"银叶书夹"}.get(id, id)})
 		if inventory_filter != "all" and item.get("kind", "") != inventory_filter:
@@ -226,27 +257,109 @@ func _gathering(view: Dictionary) -> void:
 		column.add_child(UI.label("耗时 %d 分钟 · 精力 %d · 每日最多 %d 次 · 开放 %02d:%02d–%02d:%02d" % [int(site.minutes), int(site.energy), int(site.daily_limit), int(int(site.opening) / 60), int(site.opening) % 60, int(int(site.closing) / 60), int(site.closing) % 60], 14, UI.MUTED))
 		column.add_child(UI.button("前往采集 · " + site.name, func(): await act("gather_material", {"site_id":id})))
 
-func _item_row(id: String, label: String) -> HBoxContainer:
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation",12)
-	body.add_child(row)
+func _item_texture(id: String) -> Texture2D:
 	var visual: Dictionary = visuals.get("items", {}).get(id, {})
-	if not visual.is_empty() and ResourceLoader.exists(visual.asset):
-		var atlas := AtlasTexture.new()
-		atlas.atlas = load(visual.asset)
-		var cell: Vector2 = atlas.atlas.get_size() / 3.0
-		var index: int = int(visual.cell)
-		atlas.region = Rect2(Vector2(index % 3, index / 3) * cell, cell)
-		var icon := TextureRect.new()
-		icon.texture = atlas
-		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		icon.custom_minimum_size = Vector2(64,64)
-		row.add_child(icon)
+	if visual.is_empty() or not ResourceLoader.exists(visual.asset):
+		return null
+	var atlas := AtlasTexture.new()
+	atlas.atlas = load(visual.asset)
+	var cell: Vector2 = atlas.atlas.get_size()/float(visuals.grid)
+	var index := int(visual.cell)
+	atlas.region = Rect2(Vector2(index%int(visuals.grid),index/int(visuals.grid))*cell,cell)
+	return atlas
+
+func _item_row(id: String, label: String) -> HBoxContainer:
+	var group := VBoxContainer.new()
+	body.add_child(group)
+	var information := HBoxContainer.new()
+	group.add_child(information)
+	var icon := TextureRect.new()
+	icon.texture = _item_texture(id)
+	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	icon.custom_minimum_size = Vector2(64,64)
+	information.add_child(icon)
 	var line := UI.label(label,20)
 	line.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	row.add_child(line)
-	return row
+	information.add_child(line)
+	var actions := HBoxContainer.new()
+	actions.name = "ItemActions"
+	actions.add_theme_constant_override("separation",12)
+	actions.child_entered_tree.connect(func(child: Node):
+		if child is Button:
+			child.clip_text = false
+			child.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING)
+	group.add_child(actions)
+	return actions
+
+func _build_inventory_grid(view: Dictionary) -> void:
+	var settings: Dictionary = visuals.scene_settings
+	inventory_grid = GridContainer.new()
+	inventory_grid.name = "InventoryGrid"
+	inventory_grid.columns = int(settings.inventory_columns)
+	inventory_grid.resized.connect(_size_inventory_cells)
+	inventory_grid.add_theme_constant_override("h_separation",int(settings.inventory_grid_gap))
+	inventory_grid.add_theme_constant_override("v_separation",int(settings.inventory_grid_gap))
+	scene_visual.add_child(inventory_grid)
+	scene_visual.place(inventory_grid,settings.inventory_rect)
+	var slot: Dictionary = visuals.scenes[visuals.scene_pages[page]].layers.slot
+	for id: String in view.items:
+		var item: Dictionary = view.catalog.items.get(id,{"name":settings.inventory_names.get(id,id)})
+		if inventory_filter != "all" and item.get("kind", "") != inventory_filter:
+			continue
+		var cell := Control.new()
+		cell.name = "InventoryCell_"+id
+		cell.size_flags_horizontal = Control.SIZE_FILL
+		cell.size_flags_vertical = Control.SIZE_FILL
+		inventory_grid.add_child(cell)
+		var backing := TextureRect.new()
+		backing.texture = SceneArt.texture_for(slot.path,slot.get("source_region",[]))
+		backing.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		backing.stretch_mode = TextureRect.STRETCH_SCALE
+		backing.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		cell.add_child(backing)
+		backing.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		var icon := TextureRect.new()
+		icon.name = "ItemIcon"
+		icon.texture = _item_texture(id)
+		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		cell.add_child(icon)
+		icon.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		icon.anchor_bottom = float(settings.inventory_icon_end)
+		var details := HBoxContainer.new()
+		details.name = "ItemDetails"
+		details.add_theme_constant_override("separation",int(settings.inventory_detail_gap))
+		cell.add_child(details)
+		details.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		details.anchor_top = float(settings.inventory_icon_end)
+		var name_label := UI.label(item.name,int(settings.inventory_name_size))
+		name_label.name = "ItemName"
+		name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		name_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		name_label.autowrap_mode = TextServer.AUTOWRAP_OFF
+		name_label.clip_text = true
+		details.add_child(name_label)
+		var quantity := UI.label(str(settings.quantity_format)%int(view.items[id]),int(settings.inventory_quantity_size))
+		quantity.name = "ItemQuantity"
+		quantity.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		quantity.autowrap_mode = TextServer.AUTOWRAP_OFF
+		details.add_child(quantity)
+	_size_inventory_cells()
+
+func _size_inventory_cells() -> void:
+	if not is_instance_valid(inventory_grid) or visuals.is_empty():
+		return
+	var settings: Dictionary = visuals.scene_settings
+	var available: Vector2 = scene_visual.projected_rect(settings.inventory_rect).size
+	var gap := float(settings.inventory_grid_gap)
+	var columns := int(settings.inventory_columns)
+	var rows := int(settings.inventory_rows)
+	var cell_size := Vector2(floorf((available.x-gap*(columns-1))/columns),floorf((available.y-gap*(rows-1))/rows)).max(Vector2.ZERO)
+	for cell: Control in inventory_grid.get_children():
+		cell.custom_minimum_size = cell_size
+	inventory_grid.size = available
 
 func text(value: String, size: int = 18) -> void:
 	body.add_child(UI.label(value,size))
@@ -255,16 +368,5 @@ func button(value: String, callback: Callable) -> void:
 	body.add_child(UI.button(value,callback))
 
 func act(kind: String, extra: Dictionary = {}) -> void:
-	await host.run_action(kind,extra)
-
-func _add_scene_art(page_key: String, min_size: Vector2 = Vector2(900, 320)) -> void:
-	var path: String = SCENE_ART.get(page_key, "")
-	if path.is_empty() or not ResourceLoader.exists(path):
-		path = SCENE_ART_FALLBACK.get(page_key, "")
-	if path.is_empty() or not ResourceLoader.exists(path):
-		return
-	var art := UI.image(path)
-	art.custom_minimum_size = min_size
-	art.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	body.add_child(art)
+	await ArrivalUI.run_action(host, self, kind, extra)
 

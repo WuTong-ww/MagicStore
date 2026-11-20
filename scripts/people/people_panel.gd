@@ -1,6 +1,7 @@
 extends Control
 
 const UI = preload("res://scripts/ui/ui_kit.gd")
+const ArrivalUI = preload("res://scripts/ui/arrival_ui.gd")
 ## A-owned presentation; the host supplies a filtered view and owns actions.
 ## This panel never touches GameState, the clock, wallets or a save directly.
 
@@ -132,8 +133,16 @@ func refresh() -> void:
 	for row: Dictionary in view.get("report", {}).get("evidence", []).slice(-5):
 		evidence.add_item("%s记录 · 查看来源" % {"question": "提问", "advice": "建议", "service": "服务"}.get(row.get("kind", ""), "行为"))
 		evidence.set_item_metadata(evidence.item_count - 1, {"visit_id": row.get("visit_id", ""), "action_id": row.get("action_id", "")})
-	for row: Dictionary in view.get("queue", []):
-		queue.add_item("%s · %s" % [row.get("name", "来客"), row.get("waiting_hint", "等待中")])
+	for row: Dictionary in _arrival_rows():
+		var hint := ArrivalUI.patience_text(row)
+		var config := ArrivalUI.load_config()
+		if row.get("state", "queued") == "appointment_requested":
+			hint = config.get("request_status", "")
+		elif row.get("state", "queued") == "outside":
+			hint = str(config.get("outside_status", "")) + " · " + hint
+		queue.add_item("%s · %s" % [row.get("name", "来客"), hint])
+		var level := ArrivalUI.patience(row)
+		queue.set_item_custom_fg_color(queue.item_count - 1, Color(str(level.get("color", "ffffff"))))
 		queue.set_item_metadata(queue.item_count - 1, row.get("arrival_id", ""))
 	if archive_index > 0:
 		_select_archive(archive_index)
@@ -142,12 +151,13 @@ func refresh() -> void:
 		queue.select(0)
 		_select(0)
 	else:
-		detail.text = "现在没有等候的来客。\n\n" + _report_text()
+		var config := ArrivalUI.load_config()
+		detail.text = (str(config.get("empty_status", "")) + "\n" + str(config.get("empty_advice", "")) if ArrivalUI.zero_guest_day(view) else "现在没有等候的来客。") + "\n\n" + _report_text()
 		start_button.disabled = true
 		book_button.disabled = true
 
 func _select(index: int) -> void:
-	var rows: Array = view.get("queue", [])
+	var rows: Array = _arrival_rows()
 	if index < 0 or index >= rows.size():
 		return
 	var row: Dictionary = rows[index]
@@ -175,9 +185,24 @@ func _select(index: int) -> void:
 		if not memories.is_empty():
 			var latest: Dictionary = memories.back()
 			known += "\n上次：" + str(latest.get("text", latest.get("summary", "")))
-	detail.text = "%s\n%s\n%s\n%s\n%s\n%s\n\n%s" % [row.get("name", "来客"), row.get("role", ""), intent, row.get("waiting_hint", ""), introduced, known, _report_text()]
-	start_button.disabled = false
+	var config := ArrivalUI.load_config()
+	var status := ArrivalUI.patience_text(row)
+	if row.get("state", "queued") == "appointment_requested":
+		status = config.get("request_status", "")
+	elif row.get("state", "queued") == "outside":
+		status = str(config.get("outside_status", "")) + " · " + status
+	detail.text = "%s\n%s\n%s\n%s\n%s\n%s\n%s\n\n%s" % [row.get("name", "来客"), row.get("role", ""), intent, status, ArrivalUI.source_text(row), introduced, known, _report_text()]
+	start_button.disabled = row.get("state", "queued") != "queued"
 	book_button.disabled = false
+
+func _arrival_rows() -> Array:
+	var rows: Array = view.get("queue", []).duplicate(true)
+	for key: String in ["outside_queue", "appointment_requests"]:
+		for row: Dictionary in view.get(key, []):
+			var entry := row.duplicate(true)
+			entry["state"] = "outside" if key == "outside_queue" else "appointment_requested"
+			rows.append(entry)
+	return rows
 
 func _select_archive(index: int) -> void:
 	var id := str(archive.get_item_metadata(index)) if index >= 0 and index < archive.item_count else ""
@@ -193,6 +218,8 @@ func _select_archive(index: int) -> void:
 	start_button.disabled = true
 	book_button.disabled = true
 	var lines: Array = [str(profile.get("name","来客")),str(profile.get("role","")),"熟悉度 %s · 信任 %s" % [profile.get("familiarity",0),profile.get("trust",0)]]
+	if profile.has("arrival_source"):
+		lines.append(ArrivalUI.source_text({"source": profile.arrival_source}))
 	var birthday := str(profile.get("birthday", ""))
 	if not birthday.is_empty():
 		lines.append("生日：%s · %s · MBTI %s" % [birthday, str(profile.get("zodiac", "星座未知")), str(profile.get("mbti", "未知"))])

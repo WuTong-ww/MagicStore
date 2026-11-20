@@ -1,6 +1,7 @@
 extends Window
 
 const UI = preload("res://scripts/ui/ui_kit.gd")
+const ArrivalUI = preload("res://scripts/ui/arrival_ui.gd")
 ## Shared window for the B screens. It consumes only player projections.
 
 const OracleCards = preload("res://scripts/divination/oracle_cards.gd")
@@ -93,7 +94,7 @@ func _render() -> void:
 			_readings()
 
 func _run(kind: String, extra: Dictionary = {}) -> bool:
-	var outcome: Dictionary = await host.run_action(kind, extra)
+	var outcome: Dictionary = await ArrivalUI.run_action(host, self, kind, extra)
 	if not is_instance_valid(body):
 		return false
 	notice.text = str(outcome.get("message", ""))

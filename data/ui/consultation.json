@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "transcript_minimum_height": 100,
+  "portrait_minimum_size": [64, 48],
+  "banner_minimum_size": [720, 96]
+}

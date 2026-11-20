@@ -64,6 +64,18 @@ func install_fake() -> FakeBackground:
 	gs.people_generator = provider
 	return provider
 
+func plan_slots(day: int, count: int) -> void:
+	# Only isolated, unmet natural plans are reset. Production scheduling remains
+	# immutable; these fixtures create real sampled slots before they are saved.
+	gs.state.people.seed = 42
+	for id: String in gs.state.people.arrivals.keys():
+		var row: Dictionary = gs.state.people.arrivals[id]
+		if floori(float(row.at) / 1440.0) == day and (row.source == "natural" or str(row.source).begins_with("burst_")) and not row.has("generation_id") and not gs.state.people.profiles[row.npc_id].met:
+			gs.state.people.arrivals.erase(id)
+	gs.state.people.days.erase(str(day))
+	People.plan_day(gs.state.people, gs.people_config, day, 0, count, 0)
+	check(int(gs.state.people.days[str(day)].natural_count) == count, "fixture creates the requested real natural slots on day " + str(day))
+
 func bundle_for(index: int) -> Dictionary:
 	# Start with the reviewed-shape offline fixture, then use fixed novel names
 	# and one distinct case to make test outcomes independent of random save IDs.
@@ -104,6 +116,9 @@ func run() -> void:
 	gs.generation_config.new_people_per_day = 2
 	gs.configure_network("","")
 	act("new_game",{"name":"生成人物隔离整合"})
+	plan_slots(0, 2)
+	plan_slots(1, 2)
+	act("wait", {"minutes": 1}) # Persist the complete slot fixture before failure/reload checks.
 	var original: Dictionary = gs.snapshot()
 	var provider := install_fake()
 	gs.pump_background_people(false,true)
@@ -146,7 +161,10 @@ func run() -> void:
 		return
 	var main_record: Dictionary = gs.state.people.generated_people[second.job_id].duplicate(true)
 	var npc: String = main_record.npc_id
-	check(gs.state.people.profiles.size() == original.people.profiles.size()+2 and gs.state.people.arrivals.size() == original.people.arrivals.size()+1, "admission creates person, contact and exactly one scheduled visit")
+	check(gs.state.people.profiles.size() == original.people.profiles.size()+2 and gs.state.people.arrivals.size() == original.people.arrivals.size() and gs.state.people.days == original.people.days, "admission creates person and contact inside one existing slot without changing daily plans or arrival count")
+	var slotted_arrival: Dictionary = gs.state.people.arrivals[main_record.arrival_id]
+	var prior_slot: Dictionary = original.people.arrivals[main_record.arrival_id]
+	check(slotted_arrival.get("generation_slot", false) and slotted_arrival.at == prior_slot.at and slotted_arrival.source == prior_slot.source and slotted_arrival.urgency == prior_slot.urgency and slotted_arrival.schedule_end == prior_slot.schedule_end, "generated identity retains the natural slot's sampled time, origin, urgency and schedule")
 	check(gs.state.player == original.player and gs.state.npcs == original.npcs and gs.state.clock_minutes == original.clock_minutes, "admission never changes old wallets, energy or game time")
 	var old_profiles_unchanged := true
 	for id: String in original.people.profiles:
@@ -160,7 +178,10 @@ func run() -> void:
 	check(gs.snapshot() == admitted and gs._generation_ready.is_empty(), "duplicate completion cannot create another profile, arrival or version")
 	check(not JSON.stringify(gs.people_view().profiles).contains(bundle_for(1).person.name), "not-yet-met scheduled character is not exposed as a public profile")
 	check(gs._divination.data.cases.has(Cases.case_id(npc)), "successful admission refreshes per-save dedicated case catalog")
-	act("wait",{"minutes":30})
+	while int(gs.state.clock_minutes) < int(main_record.at):
+		if not act("wait", {"minutes": mini(180, int(main_record.at) - int(gs.state.clock_minutes))}).success:
+			finish()
+			return
 	var start := act("start_arrival",{"arrival_id":main_record.arrival_id})
 	if not start.success:
 		finish()
@@ -311,6 +332,8 @@ func run() -> void:
 	# A new save and a configuration reset invalidate old job tokens even when
 	# a late callback comes from an object that has already been cancelled.
 	act("new_game",{"name":"另一个店铺隔离"})
+	plan_slots(0, 2)
+	act("wait", {"minutes": 1})
 	var other: Dictionary = gs.snapshot()
 	var stale := install_fake()
 	gs.pump_background_people(false,true)
@@ -351,6 +374,11 @@ func refill_tests() -> void:
 	# Keep the production 6-ready/8-new/16-attempt policy intact. This isolated
 	# fixture consumes a smaller explicit budget to prove the same boundaries.
 	act("new_game",{"name":"补位与退避隔离"})
+	# This scenario has no natural slots today; tomorrow is explicitly planned
+	# by the fixture, so background work can fill it without inventing a day.
+	plan_slots(0, 0)
+	plan_slots(1, 3)
+	act("wait", {"minutes": 1})
 	gs.generation_config.ready_target = 3
 	gs.generation_config.new_people_per_day = 3
 	gs.generation_config.max_attempts_per_day = 4
@@ -383,7 +411,6 @@ func refill_tests() -> void:
 	check(transport_deadline-Time.get_ticks_msec() >= 29000, "HTTP outage retains the longer network backoff")
 	provider.job_failed.emit(later_rejected.job_id,later_rejected.token,"INVALID_BUNDLE")
 	check(gs._generation_network_retry_at >= transport_deadline, "later semantic veto cannot shorten existing network or rate-limit backoff")
-	gs.generation_config.min_lead_minutes = 1500 # A lawful reservation on tomorrow's game day.
 	complete(provider,approved,2)
 	gs.pump_background_people(false,true)
 	check(gs.state.people.get("generated_people",{}).has(approved.job_id) and gs._generation_ready.is_empty(), "approved completed draft can commit despite another job's network failure")
@@ -421,6 +448,7 @@ func refill_tests() -> void:
 	if not act("wait",{"minutes":departure_at-int(gs.state.clock_minutes)}).success:
 		return
 	check(gs.state.people.arrivals[approved_arrival].state == "left" and not gs.state.people.profiles[approved_npc].met and gs.people_generation_status().ready == 0, "unserved person who left no longer permanently occupies the ready pool")
+	plan_slots(floori(float(gs.state.clock_minutes) / 1440.0) + 1, 1)
 	if not act("next_day").success:
 		return
 	var after_departure: Dictionary = gs.snapshot()

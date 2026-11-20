@@ -166,10 +166,35 @@ func run() -> void:
 	await main.screen._begin()
 	await settle()
 	check(game.snapshot() == without_queue, "empty front cannot bypass A admission")
+	await check_zero_guest_front()
 	print("C UI RESULT: %d checks, %d failures, %d graphical captures; renderer=%s" % [checks, failures, captures, DisplayServer.get_name()])
 	main.queue_free()
 	await settle()
 	quit(1 if failures else 0)
+
+func check_zero_guest_front() -> void:
+	# A render-only fixture leaves the real saved state untouched.
+	var original: Dictionary = game.snapshot()
+	var day := floori(float(game.state.clock_minutes) / 1440.0) + 1
+	game.state.clock_minutes = day * 1440 + 540
+	game.state.people.clock = game.state.clock_minutes
+	game.state.people.days[str(day)] = {"day": day, "natural_count": 0, "arrival_ids": [], "expected": 0.0, "weather": "rain"}
+	for row: Dictionary in game.state.people.arrivals.values():
+		if row.state in ["queued", "outside", "appointment_requested"]:
+			row.state = "left"
+	for dimensions: Vector2i in [Vector2i(1280, 720), Vector2i(1920, 1080)]:
+		root.size = dimensions
+		root.content_scale_size = dimensions
+		main.show_screen("front")
+		await settle()
+		check(main.screen.guest_name.text == "今日零客日", "zero-customer day has a dedicated title")
+		check(main.screen.case_label.text.contains("采集") and main.screen.case_label.text.contains("研习") and main.screen.case_label.text.contains("制作"), "zero-customer day gives useful suggestions")
+		check(main.screen.quiet_suggestions.visible and main.screen.quiet_suggestions.get_child_count() == 3, "zero-customer suggestions have three destinations")
+		check_layout("zero-guest-front" + str(dimensions.x))
+		await capture("zero-guest-front-" + str(dimensions.x))
+	game.state = original
+	main.show_screen("front")
+	await settle()
 
 func check_layout(label: String) -> void:
 	check(main.scene_holder.size.x > 100 and main.scene_holder.size.y > 100, label + " usable content area")
