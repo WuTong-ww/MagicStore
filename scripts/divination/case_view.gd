@@ -98,7 +98,7 @@ static func _active_details(session, state: Dictionary, visit: Dictionary, case:
 	view["questions"] = question_ids.map(func(id: String) -> Dictionary:
 		return {"question_id": id, "label": template.questions[id].label}
 	)
-	var allowed: Dictionary = session.talks(visit, case, clock)
+	var allowed: Dictionary = session.talks(visit, case, clock,state)
 	for id: String in template.topic_ids:
 		var topic: Dictionary = data.topic_index[id]
 		view.topics.append({"topic_id": id, "label": topic.label, "enabled": allowed.has(id)})
@@ -125,7 +125,7 @@ static func _active_details(session, state: Dictionary, visit: Dictionary, case:
 			"options": options, "cost": Catalog.service_cost(id, method, session.base.rules)
 		})
 	for prior: Dictionary in state.divination.cases.values():
-		if prior.npc_id == visit.npc_id and prior.visit_id != visit.visit_id and not prior.event.is_empty() and Events.can_report(prior.event, clock):
+		if prior.npc_id == visit.npc_id and not prior.event.is_empty() and (prior.visit_id != visit.visit_id or prior.event.feedback.mode == "immediate") and Events.can_report(prior.event, clock):
 			view.feedback_options.append({"event_id": prior.event.event_id, "title": data.cases[prior.case_id].title})
 	var economy: Dictionary = data.economy
 	var wallet: Dictionary = state.npcs[visit.npc_id]
@@ -146,7 +146,9 @@ static func _event(case: Dictionary, clock: int, data: Dictionary) -> Dictionary
 	var result: Dictionary = {
 		"event_id": event.event_id, "subject_id": event.subject_id, "target_name": event.target_name,
 		"due_at": event.due_at, "status": status, "report": event.feedback.report,
-		"conditions": Events.CONDITIONS, "advice_options": []
+		"conditions": Events.conditions(data.cases[case.case_id].event), "prediction_labels": Events.labels(data.cases[case.case_id].event), "advice_options": [],
+		"item_effect_available": not data.cases[case.case_id].event.get("item_effect",{}).is_empty(),
+		"evaluation": "pending" if event.feedback.report.is_empty() else event.feedback.report.evaluation
 	}
 	if status == "pending":
 		for key: String in data.cases[case.case_id].event.advice:

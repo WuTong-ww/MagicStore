@@ -2,16 +2,13 @@ extends Window
 
 const UI = preload("res://scripts/ui/ui_kit.gd")
 const ArrivalUI = preload("res://scripts/ui/arrival_ui.gd")
+const EventCopy = preload("res://scripts/divination/event_copy.gd")
 ## Shared window for the B screens. It consumes only player projections.
 
 const OracleCards = preload("res://scripts/divination/oracle_cards.gd")
 const OracleCasting = preload("res://scripts/divination/oracle_casting.gd")
 const OracleGuide = preload("res://scripts/divination/oracle_guide.gd")
 const OraclePanels = preload("res://scripts/divination/oracle_panels.gd")
-const EVALUATIONS := {
-	"aligned": "预测符合", "deviated": "预测偏离", "insufficient": "证据不足",
-	"condition_not_met": "预测条件未满足", "no_prediction": "本案没有提交对外预测"
-}
 const PAST_STATUS := {"unverified": "待验证", "disproven": "证物不支持", "confirmed": "已确认"}
 const LEDGER_CATEGORIES := {"divination": "问卜报酬", "product": "商品交易", "gift": "额外赠礼"}
 
@@ -27,10 +24,12 @@ var question_id := ""
 var question_visit_id := ""
 var result_id := ""
 var notebook_tab := "knowledge"
+var history_visit_id := ""
 var view: Dictionary = {}
 
 func _ready() -> void:
 	visible = false
+	UI.paper_window(self)
 	size = Vector2i(810, 515)
 	min_size = Vector2i(690, 430)
 	transient = true
@@ -63,6 +62,11 @@ func open(which: String) -> void:
 	option_id = ""
 	result_id = ""
 	notebook_tab = "knowledge"
+	history_visit_id = ""
+	if which == "casebook" and GameState.active_visit().is_empty():
+		var records: Array = GameState.player_snapshot().get("visits",[])
+		if not records.is_empty():
+			history_visit_id = records.back().visit_id
 	notice.text = ""
 	var viewport := get_tree().root.size
 	size = Vector2i(clampi(viewport.x - 110, 690, 880), clampi(viewport.y - 110, 480, 740))
@@ -74,7 +78,7 @@ func _render() -> void:
 	for node in body.get_children():
 		body.remove_child(node)
 		node.queue_free()
-	view = GameState.divination_view()
+	view = GameState.divination_view(history_visit_id if page == "casebook" else "")
 	match page:
 		"study":
 			title = "术式研习"
@@ -358,6 +362,10 @@ func _casebook() -> void:
 	if view.is_empty():
 		_info("请先接待顾客。")
 		return
+	_history_picker()
+	if not view.get("active",false):
+		_historical_case()
+		return
 	var evidence_art := UI.image("res://assets/ui/evidence_cards.png")
 	evidence_art.custom_minimum_size = Vector2(420, 118)
 	evidence_art.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -365,8 +373,11 @@ func _casebook() -> void:
 	for feedback: Dictionary in view.feedback_options:
 		body.add_child(UI.button("听取回访 · " + feedback.title, func():
 			if await _run("receive_feedback", {"event_id": feedback.event_id}):
-				hide()
-				host.show_history()
+				for reception: Dictionary in GameState.player_snapshot().get("visits",[]):
+					if GameState.divination_view(reception.visit_id).get("event",{}).get("event_id") == feedback.event_id:
+						history_visit_id = reception.visit_id
+						break
+				_render()
 		))
 	var tabs := _flow()
 	tabs.add_child(UI.button("案情与线索", _show_tab.bind("knowledge")))
@@ -381,6 +392,46 @@ func _casebook() -> void:
 			_past_notes()
 		_:
 			_knowledge()
+
+func _history_picker() -> void:
+	var copy := EventCopy.load_config()
+	_info(copy.history_picker)
+	var picker := OptionButton.new()
+	picker.name = "CaseHistoryPicker"
+	picker.fit_to_longest_item = false
+	body.add_child(picker)
+	var active: String = GameState.active_visit().get("visit_id","")
+	if not active.is_empty():
+		picker.add_item(copy.history_current)
+		picker.set_item_metadata(0,"")
+	var records: Array = GameState.player_snapshot().get("visits",[]).duplicate()
+	records.reverse()
+	for reception: Dictionary in records:
+		if reception.visit_id == active:
+			continue
+		var projected: Dictionary = GameState.divination_view(reception.visit_id)
+		picker.add_item(copy.history_case_format % [projected.get("guest",{}).get("name",""),int(reception.day)+1])
+		var index := picker.item_count-1
+		picker.set_item_metadata(index,reception.visit_id)
+		if reception.visit_id == history_visit_id:
+			picker.select(index)
+	picker.item_selected.connect(func(index: int):
+		history_visit_id = str(picker.get_item_metadata(index))
+		_render())
+
+func _historical_case() -> void:
+	var copy := EventCopy.load_config()
+	_section(copy.history_readonly)
+	if not view.prediction.is_empty():
+		_info(prediction_text(view.prediction,view.event))
+	if not view.event.is_empty():
+		_info(event_status(view.event))
+	for row: Array in [["facts",copy.history_facts],["statements",copy.history_statements],["clues",copy.history_clues],["hypotheses",copy.history_hypotheses]]:
+		_section(row[1])
+		for record: Dictionary in view.get(row[0],[]):
+			_info(str(record.get("text","")))
+	for service: Dictionary in view.services:
+		_info(OracleGuide.summary(service))
 
 func _show_tab(tab: String) -> void:
 	notebook_tab = tab
@@ -450,32 +501,35 @@ func _clue_titles(ids: Array) -> String:
 
 func _forecast() -> void:
 	var event: Dictionary = view.event
+	var copy := EventCopy.load_config()
 	_section(event.target_name)
-	_info("约见  /  " + clock_text(event.due_at))
+	_info(copy.event_time+"  /  " + clock_text(event.due_at))
 	_info(event_status(event))
 	var prediction: Dictionary = view.prediction
 	if not prediction.is_empty():
 		_info(prediction_text(prediction, event))
 	elif event.status == "pending":
-		var text := _entry("对来客说的预测原话")
-		var expected := _pick(["时段内会说上话", "时段内不会说上话"])
+		var text := _entry(copy.prediction_entry)
+		var labels: Dictionary = event.get("prediction_labels",copy.fallback_labels)
+		var expected := _pick([labels.met,labels.missed])
 		var keys: Array = event.conditions.keys()
 		var condition := _pick(event.conditions.values())
-		var window := _pick(["约见开始的 30 分钟内", "约见一小时后的 30 分钟内"])
-		body.add_child(UI.button("把正式预测交给来客", func():
-			var start := int(event.due_at) + 60 * window.selected
+		var window := _pick(copy.windows.map(func(row: Dictionary) -> String: return row.label))
+		body.add_child(UI.button(copy.prediction_submit, func():
+			var timing: Dictionary = copy.windows[window.selected]
+			var start := int(event.due_at) + int(timing.offset)
 			await _run("record_prediction", {
 				"text": text.text, "subject_id": event.subject_id, "condition": keys[condition.selected],
-				"expected": "met" if expected.selected == 0 else "missed", "window_start": start, "window_end": start + 30
+				"expected": "met" if expected.selected == 0 else "missed", "window_start": start, "window_end": start + int(timing.duration)
 			})
 		))
-	_section("建议与来客决定")
+	_section(copy.advice_heading)
 	for record: Dictionary in view.advice:
 		_info(record.text + "\n" + record.reply)
 	if event.status == "pending":
 		var choices: Array = event.advice_options
 		var advice := _pick(_labels(choices, func(row: Dictionary) -> String: return row.text))
-		body.add_child(UI.button("把建议说给来客", func(): await _run("give_advice", {"advice_key": choices[advice.selected].advice_key})))
+		body.add_child(UI.button(copy.advice_submit, func(): await _run("give_advice", {"advice_key": choices[advice.selected].advice_key})))
 
 func _past_notes() -> void:
 	var past_art := UI.image("res://assets/portraits/past_life_scene.png")
@@ -521,15 +575,15 @@ func _shop() -> void:
 	body.add_child(receipt_art)
 	_section("%s  ·  %d 金币" % [shop.product_name, int(shop.price)])
 	_info("店内余量 %d。" % int(shop.stock))
-	if view.event.get("status") == "pending":
-		_info("若照晚要去展览，可在约见前约定使用，帮助她遇到变动时继续找入口。")
+	if view.event.get("status") == "pending" and view.event.get("item_effect_available",false):
+		_info(EventCopy.load_config().item_hint)
 	if not view.demand.is_empty():
 		_info("案例需求  /  " + view.demand.text)
 	if view.purchase.is_empty():
 		body.add_child(UI.button("单独结算商品", func(): await _run("buy_case_item")))
 	elif not view.item_use.is_empty():
 		_info("已记录商品使用，并与购买及待处理事件关联。")
-	elif view.event.get("status") == "pending":
+	elif view.event.get("status") == "pending" and view.event.get("item_effect_available",false):
 		body.add_child(UI.button("记录来客按约使用", func(): await _run("use_case_item")))
 	_section("本次接待账目")
 	for entry: Dictionary in view.ledger:
@@ -586,26 +640,28 @@ static func clock_text(value: Variant) -> String:
 	return "第 %d 天 %02d:%02d" % [floori(float(value) / 1440.0) + 1, floori(float(minute) / 60.0), minute % 60]
 
 static func event_status(event: Dictionary) -> String:
-	match event.status:
-		"pending":
-			return "等待事件时点"
-		"awaiting_feedback":
-			return "事件时点已过 · 尚未收到反馈"
+	var copy := EventCopy.load_config()
+	if event.status in copy.status:
+		return "\n".join([copy.status[event.status],copy.report_heading+"  /  "+copy.evaluations.pending,copy.verification_heading+"  /  "+copy.unverified])
 	var report: Dictionary = event.report
-	var status: String = EVALUATIONS.get(report.evaluation, "已收到反馈")
-	var lines: PackedStringArray = [status, report.text]
-	if report.has("actual_action"):
-		lines.append("已核实的行动  /  " + report.actual_action)
-		lines.append("约见结果  /  " + ("说上话了" if report.occurrence == "occurred" else "未能说上话"))
-	elif report.evidence == "insufficient":
-		lines.append("现有证物无法核实约见结果。")
+	var status: String = copy.evaluations.get(report.evaluation,copy.evaluations.pending)
+	var verified: bool = report.get("evidence") == "sufficient" and report.has("actual_action")
+	var lines: PackedStringArray = [status,copy.report_heading+"  /  "+str(report.get("text","")),copy.verification_heading+"  /  "+str(copy.verified if verified else copy.unverified)]
+	if verified:
+		lines.append(copy.verified_action+"  /  " + report.actual_action)
+		lines.append(copy.result_heading+"  /  "+str(event.get("prediction_labels",copy.fallback_labels).get(report.get("outcome",""),"")))
+	elif report.get("evidence") in ["insufficient","partial"]:
+		lines.append(copy.partial_note)
+	else:
+		lines.append(copy.none_note)
 	if report.get("can_review", false):
-		lines.append("复盘  /  对照本次行动、预测的条件和时段，以及当时记录的线索。")
+		lines.append(copy.review_note)
 	return "\n".join(lines)
 
 static func prediction_text(prediction: Dictionary, event: Dictionary) -> String:
-	var expected := "会说上话" if prediction.expected == "met" else "不会说上话"
-	return "对外预测 · %s / %s\n%s 至 %s\n原话「%s」" % [
+	var copy := EventCopy.load_config()
+	var expected: String = event.get("prediction_labels",copy.fallback_labels).get(prediction.expected,"")
+	return copy.prediction_format % [
 		event.conditions.get(prediction.condition, ""), expected,
 		clock_text(prediction.window_start), clock_text(prediction.window_end), prediction.text
 	]

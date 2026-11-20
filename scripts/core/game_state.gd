@@ -423,7 +423,7 @@ func _question_label(label: String) -> String:
 
 func _question_context(snapshot_state: Dictionary, visit: Dictionary) -> Dictionary:
 	var case: Dictionary = snapshot_state.divination.cases[visit.visit_id]
-	var allowed: Dictionary = _divination.talks(visit,case,int(snapshot_state.clock_minutes))
+	var allowed: Dictionary = _divination.talks(visit,case,int(snapshot_state.clock_minutes),snapshot_state)
 	var choices: Array = []
 	for id: String in _divination.data.cases[case.case_id].topic_ids:
 		if allowed.has(id):
@@ -704,7 +704,7 @@ func _prepare_talk(action: Dictionary) -> Dictionary:
 	if not _has_time(int(content.rules.talk_minutes)):
 		return _fail("NOT_ENOUGH_TIME", "今天剩余营业时间不足以继续交谈。请先结束接待。")
 	var case: Dictionary = state.divination.cases[visit.visit_id]
-	var allowed := _divination.talks(visit, case, int(state.clock_minutes))
+	var allowed := _divination.talks(visit, case, int(state.clock_minutes), state)
 	var topic_id: Variant = action.get("topic_id", "")
 	if not topic_id is String or (not topic_id.is_empty() and (topic_id == "clarify" or not allowed.has(topic_id))):
 		return _fail("TOPIC_NOT_AVAILABLE", "本案尚未开放这个提问。")
@@ -807,7 +807,7 @@ func _complete_talk(action: Dictionary, input_text: String, response: Variant) -
 			return _fail("PROVIDER_INVALID", "对话返回了案例契约之外的提案。")
 	var active := active_visit()
 	var case: Dictionary = state.divination.cases[active.visit_id]
-	var allowed := _divination.talks(active, case, int(state.clock_minutes))
+	var allowed := _divination.talks(active, case, int(state.clock_minutes), state)
 	var selected: String = action.get("topic_id", "")
 	if not allowed.has(response.intent) or (not selected.is_empty() and response.intent != selected) or response.needs_clarification != (response.intent == "clarify"):
 		return _fail("PROVIDER_INVALID", "对话返回了本案未授权的话题。")
@@ -935,6 +935,7 @@ func _initialize_integrated(candidate: Dictionary) -> void:
 	Shop.initialize(candidate)
 	PeopleBridge.initialize(candidate, people_config, _divination)
 	_migrate_arrival_schema(candidate)
+	_migrate_event_schema(candidate)
 
 func _migrate_arrival_schema(candidate: Dictionary) -> void:
 	# Add only schema metadata. Persisted day plans and arrivals remain unchanged;
@@ -943,6 +944,26 @@ func _migrate_arrival_schema(candidate: Dictionary) -> void:
 		if not candidate.people.stats.has("lost_customers"):
 			candidate.people.stats["lost_customers"] = 0
 		candidate.schema_version = 4
+
+func _migrate_event_schema(candidate: Dictionary) -> void:
+	# A load changes memory only. Preserve world outcomes/effects, withdraw old
+	# unreported verdicts, and mark visits that predate the generated event rules.
+	# The next successfully committed action persists this metadata atomically.
+	if int(candidate.schema_version) < 5:
+		var eventless: Array = []
+		for visit_id: String in candidate.divination.cases:
+			if candidate.divination.cases[visit_id].event.is_empty():
+				eventless.append(visit_id)
+		eventless.sort()
+		candidate.divination["legacy_eventless_visits"] = eventless
+		for case: Dictionary in candidate.divination.cases.values():
+			var event: Dictionary = case.get("event",{})
+			if not event.is_empty() and event.get("feedback",{}).get("report",{}).is_empty():
+				event.evaluation = "pending"
+				event.evaluated_at = -1
+		if not candidate.people.has("unlocked_topics"):
+			candidate.people["unlocked_topics"] = {}
+		candidate.schema_version = 5
 
 func _shop_action(action: Dictionary) -> Dictionary:
 	var candidate := state.duplicate(true)

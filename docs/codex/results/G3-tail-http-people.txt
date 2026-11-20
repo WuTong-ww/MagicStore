@@ -1,0 +1,66 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+API ENDPOINT: 187 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+MODEL POLICY RESULT: 38 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+HTTP RESULT: 41 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+HTTP CORE RESULT: 56 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+DIRECT API RESULT: 77 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+HTTP RECOVERY RESULT: 43 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PERSON HTTP RESULT: 64 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PEOPLE RULES: 52 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+GENERATED PERSON: 103 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PRODUCTION PEOPLE CONFIG: 11 checks, 0 failures; 200 shops x 3 days
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ARRIVAL CAPACITY: 27 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+OPENING GUEST RULES: 12 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+MEMORY RULES: 21 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+FAMILY FLOW: 16 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ARRIVAL EDGES: 28 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+FEEDBACK RULES: 11 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+DAILY DISTRIBUTION: 2000 days, zero=180 (9.00%), over capacity=70 (3.50%), bursts=110
+FAMILY DISTRIBUTION: 200 reproducible shops, ordinary=400, reference=13, family triggers=13
+DISTRIBUTION: 36 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+DIRECTOR RULES: 8 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PEOPLE PANEL: 6 checks, 0 failures
+Godot_v4.6.3-stable_win64_console.exe : ERROR: A/B HANDOFF FAIL: apply B effect referral
+At C:\Users\WT\Documents\ChatGPT\杂货铺\scripts\dev\test-people.ps1:22 char:19
++         $output = & $engine @GodotArgs 2>&1
++                   ~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (ERROR: A/B HAND...effect referral:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 

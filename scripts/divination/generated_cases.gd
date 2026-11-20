@@ -3,6 +3,7 @@ extends RefCounted
 ## The catalog belongs to one save; no generated text is added to global content.
 
 const Catalog = preload("res://scripts/divination/catalog.gd")
+const EventSchema = preload("res://scripts/divination/event_schema.gd")
 
 const CASE_LIMITS := {"title":40,"opening":120,"question":80,"situation":160,"concern":120,"detail":160,"hidden_fact":160,"followup":120}
 const METHOD_IDS := ["tarot", "lenormand", "plum", "yijing", "xiaoliu"]
@@ -46,6 +47,12 @@ static func catalog(state: Dictionary, base: Dictionary) -> Dictionary:
 	var profiles: Variant = people.get("profiles", {})
 	if not profiles is Dictionary:
 		return {}
+	var event_templates: Dictionary = {}
+	if int(state.get("schema_version",0)) >= 5:
+		var template_config := EventSchema.load_templates()
+		if template_config.is_empty():
+			return {}
+		event_templates = template_config.templates
 	for npc_id: String in profiles:
 		var profile: Variant = profiles[npc_id]
 		if not profile is Dictionary or not profile.has("generated_bundle"):
@@ -57,7 +64,7 @@ static func catalog(state: Dictionary, base: Dictionary) -> Dictionary:
 			return {}
 		var public_relation := "我和%s是%s。" % [str(bundle.contact.name), str(bundle.relationship.kind)]
 		var relation_text := public_relation + str(bundle.relationship.shared_history)
-		_register(result, npc_id, profile, bundle.case, true, public_relation, relation_text)
+		_register(result, npc_id, profile, bundle.case, true, public_relation, relation_text,event_templates)
 	for npc_id: String in profiles:
 		var profile: Variant = profiles[npc_id]
 		if not profile is Dictionary or profile.get("generation_member") != "contact":
@@ -81,10 +88,10 @@ static func catalog(state: Dictionary, base: Dictionary) -> Dictionary:
 		}
 		var public_relation := "我和%s是%s。" % [str(owner.name), str(bundle.relationship.kind)]
 		var relation_text := public_relation + str(bundle.relationship.shared_history)
-		_register(result, npc_id, profile, request, false, public_relation, relation_text)
+		_register(result, npc_id, profile, request, false, public_relation, relation_text,event_templates)
 	return result
 
-static func _register(data: Dictionary, npc_id: String, profile: Dictionary, request: Dictionary, has_private_fact: bool = true, relation_text: String = "", internal_relation_text: String = "") -> void:
+static func _register(data: Dictionary, npc_id: String, profile: Dictionary, request: Dictionary, has_private_fact: bool = true, relation_text: String = "", internal_relation_text: String = "", event_templates: Dictionary = {}) -> void:
 	var topics: Array = []
 	var references := {}
 	var facts := {}
@@ -128,7 +135,31 @@ static func _register(data: Dictionary, npc_id: String, profile: Dictionary, req
 		"questions":{"personal":question},"default_question":"personal","generated":true,
 		"npc_id":npc_id,"opening":request.opening,"followup":request.followup
 	}
+	if not event_templates.is_empty():
+		data.cases[case_id(npc_id)]["event"] = event_definition(npc_id,request,event_templates)
 	data.guests[npc_id] = {"name":profile.name,"role":profile.role,"opening":request.opening,"generated":true}
+
+static func event_definition(npc_id: String, request: Dictionary, templates: Dictionary) -> Dictionary:
+	# The model supplies prose only. Choice and every condition/effect stay in
+	# the versioned local templates, with a stable order independent of JSON order.
+	var ids: Array = templates.keys()
+	ids.sort()
+	var selected: String = ids[posmod(npc_id.hash(),ids.size())]
+	var event: Dictionary = templates[selected].duplicate(true)
+	event["template_id"] = selected
+	event.subject_id = npc_id
+	event.target_name = request.question
+	for outcome: Dictionary in event.outcomes.values():
+		for key: String in ["text","actual_action"]:
+			if outcome.has(key):
+				outcome[key] = _fill_event_text(outcome[key],request)
+	return event
+
+static func _fill_event_text(value: String, request: Dictionary) -> String:
+	var result := value
+	for slot: String in ["question","situation","concern"]:
+		result = result.replace("{"+slot+"}",str(request[slot]))
+	return result
 
 static func _keywords(kind: String) -> Array:
 	match kind:

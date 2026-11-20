@@ -244,6 +244,7 @@ func _build_people_window() -> void:
 	people_window.theme = theme
 	people_window.close_requested.connect(people_window.hide)
 	add_child(people_window)
+	UI.paper_window(people_window)
 	var people_scroll := ScrollContainer.new()
 	people_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	people_window.add_child(people_scroll)
@@ -407,6 +408,7 @@ func _build_save_window() -> void:
 	save_window.theme = theme
 	save_window.close_requested.connect(func(): save_window.hide())
 	add_child(save_window)
+	UI.paper_window(save_window)
 	var margin: MarginContainer = UI.margin(22)
 	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	save_window.add_child(margin)
@@ -532,6 +534,7 @@ func _build_history_window() -> void:
 	history_window.exclusive = true
 	history_window.close_requested.connect(func(): history_window.hide())
 	add_child(history_window)
+	UI.paper_window(history_window)
 	var margin: MarginContainer = UI.margin(22)
 	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	history_window.add_child(margin)

@@ -1,0 +1,251 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started 项目初始化 (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | 正在扫描文件结构……[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | 正在加载全局类名……[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | 正在校验 GDExtension……[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | 正在创建自动加载脚本……[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | 正在初始化插件……[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | 正在启动文件扫描……[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started 正在加载编辑器 (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | 正在加载编辑器布局……[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | 正在加载停靠面板……[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS: create save
+PASS: initial resources
+PASS: unified clock starts 09:00
+PASS: start reception
+PASS: reenter retains visit
+PASS: scene return cannot multiply visits
+PASS: unfinished reception prevents next day
+PASS: configured question
+PASS: Chinese free input
+PASS: conversation discovers clue
+PASS: repeat topic permitted
+PASS: clue deduplicated
+PASS: unknown input clarifies
+PASS: clarification text stored
+PASS: failed write rejects paid result
+PASS: failed payment leaves all state unchanged and card hidden
+PASS: paid tarot succeeds
+PASS: both wallets settle together
+PASS: energy and clock settle together
+PASS: same action replay precedes stale version
+PASS: same action replay does not mutate
+PASS: new action cannot redraw same reception
+PASS: repeat payment no extra cost
+PASS: load unfinished paid reception
+PASS: reload original visit and card
+PASS: reload dialogue history
+PASS: persisted action replay after reload
+PASS: finish reception
+PASS: same-day repeat visit blocked
+PASS: rest succeeds
+PASS: rest uses unified clock and caps energy
+PASS: advance to next day 09:00
+PASS: same NPC returns next day
+PASS: stable identity new visit id
+PASS: previous record available
+PASS: reject insufficient energy
+PASS: no partial mutation for energy
+PASS: reject insufficient coins
+PASS: no partial mutation for coins
+PASS: reject insufficient time
+PASS: no partial mutation for time
+PASS: stale action rejected
+PASS: new independent save
+PASS: save isolation
+PASS: both saves retained
+PASS: switch restores original progress
+PASS: missing save keeps current state
+PASS: unsafe save id rejected
+PASS: negative wallet rejected
+PASS: invalid visit reference rejected
+PASS: corruption reported with explicit recovery
+PASS: damaged primary not silently overwritten
+PASS: backup restoration succeeds
+PASS: restored primary validates
+PASS: test removes only isolated primary
+PASS: backup-only save discoverable
+PASS: recover missing primary
+SMOKE RESULT: 57 checks, 0 failures. Isolated files: C:/Users/WT/Documents/ChatGPT/杂货铺/.tools/test-appdata/ZeroHourStore/test-runs/run_b3140f3dc1bf4f4a1e4bc140c2487534
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+DELETE SAVE: 52 checks, 0 failures; isolated files: C:/Users/WT/Documents/ChatGPT/杂货铺/.tools/test-save-delete/run_457fe875c686688548b3ec70deacc619
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS: create isolated provider test save
+PASS: start provider test reception
+PASS: reject provider response 0
+PASS: invalid provider response 0 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 1
+PASS: invalid provider response 1 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 2
+PASS: invalid provider response 2 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 3
+PASS: invalid provider response 3 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 4
+PASS: invalid provider response 4 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 5
+PASS: invalid provider response 5 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 6
+PASS: invalid provider response 6 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 7
+PASS: invalid provider response 7 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 8
+PASS: invalid provider response 8 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 9
+PASS: invalid provider response 9 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 10
+PASS: invalid provider response 10 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 11
+PASS: invalid provider response 11 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 12
+PASS: invalid provider response 12 cannot mutate resources, clues, dialogue or clock
+PASS: invalid provider responses leave persisted snapshot unchanged
+PASS: core deduplicates authorized provider clues
+PASS: provider text cannot change wallets or energy
+PASS: successful dialogue uses configured game time only
+PASS: provider receives structured context
+PASS: provider receives no authority or full save
+PASS: async dialogue remains pending until provider responds
+PASS: pending provider blocks synchronous state mutation
+PASS: pending provider blocks save switching
+PASS: pending provider blocks a second dialogue request
+PASS: waiting for provider consumes no game time
+PASS: async provider completion commits once
+PASS: async completion adds configured time and validated clue
+PASS: reject stale async version
+PASS: stale async response cannot overwrite newer version
+PASS: stale async version does not write to disk
+PASS: reject stale async save
+PASS: stale async response cannot overwrite newer save
+PASS: stale async save does not write to disk
+PASS: mock remains usable after async rejection
+PROVIDER RESULT: 48 checks, 0 failures. Isolated files: C:/Users/WT/Documents/ChatGPT/杂货铺/.tools/test-appdata/ZeroHourStore/test-runs/provider_5fedce541a0b573dadc5aec20afe2338
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+DIALOGUE GROUNDING: 127 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+FOLLOWUP QUESTIONS: 86 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ORACLE RULES: 29 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+DIVINATION RESULT: 543 checks, 0 failures. Isolated saves: C:/Users/WT/Documents/ChatGPT/杂货铺/.tools/test-appdata/ZeroHourStore/test-runs/divination_f576ef3f896af0f69342dfdf6311302e
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+LEGACY DIVINATION GUESTS: 30 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+GENERATED CASES: 80 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+EVENT GOLDEN: 100 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+EVENT DATA RULES: 72 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+EVENT MIGRATION: 112 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+G3 WORKFLOWS: 128 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+GENERIC EFFECTS: 43 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+EVENT EFFECTS: 29 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+EVENT NOTEBOOK UI: 62 checks, 0 failures, 0 graphical captures; renderer=headless
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+UI_SMOKE: 319 checks, 0 failures; captures: 
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+RESTART WRITE PASS: committed paid unfinished visit and forecast
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+RESTART READ PASS: identical resources, service and forecast; free replay and later feedback
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SHOP RULES: 87 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SHOP INTEGRATION: 78 checks, 0 failures; isolated files: C:/Users/WT/Documents/ChatGPT/杂货铺/.tools/test-appdata/ZeroHourStore/test-runs/shop_integration_run_35afaf1c7f5da927e2af953082282017
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PEOPLE INTEGRATION: 52 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+INTEGRATED PEOPLE RESTART WRITE: saved active paid visit, shared memory, appearance, appointment and wallets
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+INTEGRATED PEOPLE RESTART READ: original people, queue, resources and paid encounter restored
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+C UI RESULT: 695 checks, 0 failures, 0 graphical captures; renderer=headless
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SCENE VISUALS: 231 checks, 0 failures, 0 graphical captures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ARRIVAL UI RESULT: 33 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+CONSULTATION LAYOUT: 34 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ROUND2 SHELL RESULT: 1366 checks, 0 failures, 0 graphical captures; renderer=headless
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ROUND2 SHELL EDGES: 32 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ROUND2 CONSULTATION: 32 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+A3R AUDIO/THEME: 28 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ARRIVAL TRANSACTIONS: 42 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SAVE DELETE UI: 37 checks, 0 failures, 0 graphical captures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+GENERATED PEOPLE INTEGRATION: 145 checks, 0 failures. Saves: C:/Users/WT/Documents/ChatGPT/杂货铺/.tools/test-generated-people/run_187412a3c0c6838f0b888964ab8d2708
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+GENERATION ARRIVAL SLOTS: 30 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+GENERATED PEOPLE UI: 49 checks, 0 failures; renderer=headless
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+FOLLOWUP CORE RESULT: 29 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+FOLLOWUP QUESTIONS UI: 39 checks, 0 failures; renderer=headless captures=0
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+CHAT KEYBOARD UI: 49 checks, 0 failures; renderer=headless captures=0
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+OPENING GUEST INTEGRATION: 1214 checks, 0 failures; renderer=headless, captures=0
+Godot_v4.6.3-stable_win64_console.exe : WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+At C:\Users\WT\Documents\ChatGPT\杂货铺\scripts\dev\run.ps1:8 char:15
++     $output = & $engine @GodotArgs 2>&1
++               ~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: Object...e for details).:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 

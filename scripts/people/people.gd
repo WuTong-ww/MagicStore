@@ -146,7 +146,7 @@ static func create(save_id: String, seed_value: int, clock: int) -> Dictionary:
 	return {
 		"version": 1, "save_id": save_id, "seed": seed_value, "clock": clock,
 		"profiles": {}, "relationships": {}, "revealed_relationships": {}, "followups_asked": {}, "families": {}, "days": {},
-		"arrivals": {}, "feedback_jobs": {}, "referrals": {}, "director_decisions": {}, "effect_ids": [],
+		"arrivals": {}, "feedback_jobs": {}, "referrals": {}, "director_decisions": {}, "effect_ids": [], "unlocked_topics": {},
 		"stats": {"family_triggers": 0, "first_original": 0, "first_reference": 0, "lost_customers": 0},
 		"observations": [], "appearance_catalog_version": 1,
 		"player_appearance": {"face": "face_01", "hair": "hair_01", "outfit": "outfit_01"}
@@ -763,40 +763,80 @@ static func finish(people: Dictionary, arrival_id: String, visit_id: String, sum
 	profile.memories.append({"visit_id": visit_id, "at": int(people.clock), "summary": summary.left(500)})
 	return true
 
-static func apply_effect(people: Dictionary, effect: Dictionary) -> bool:
+static func apply_effect(people: Dictionary, effect: Dictionary, config: Dictionary = {}) -> bool:
 	if effect.get("recipient") != "A" or not effect.get("effect_id") is String or effect.effect_id.is_empty() or not effect.get("event_id") is String or effect.event_id.is_empty() or not people.profiles.has(effect.get("npc_id")):
 		return false
 	if effect.effect_id in people.effect_ids:
 		return false
-	if effect.get("kind") == "trust":
-		if not _integer(effect.get("amount"), -100, 100):
+	if not _integer(effect.get("starts_at",people.clock),0,MAX_INT) or int(effect.get("starts_at",people.clock)) > int(people.clock):
+		return false
+	if effect.get("kind") in ["trust","familiarity"]:
+		var delta: Variant = effect.get("delta",effect.get("amount"))
+		if not _integer(delta, -100, 100):
 			return false
 		var profile: Dictionary = people.profiles[effect.npc_id]
-		var previous := int(profile.trust)
-		profile.trust = clampi(previous + int(effect.amount), -100, 100)
-		if not profile.has("trust_history"):
-			profile["trust_history"] = []
-		profile.trust_history.append({"effect_id": effect.effect_id, "event_id": effect.get("event_id", ""),
-			"prediction_id": effect.get("prediction_id", ""), "at": int(people.clock), "from": previous, "to": profile.trust})
+		var attribute: String = effect.kind
+		var history := attribute+"_history"
+		var previous := int(profile[attribute])
+		profile[attribute] = clampi(previous + int(delta), -100 if attribute == "trust" else 0, 100)
+		if not profile.has(history):
+			profile[history] = []
+		profile[history].append({"effect_id": effect.effect_id, "event_id": effect.event_id,
+			"prediction_id": effect.get("prediction_id", ""), "at": int(people.clock), "from": previous, "to": profile[attribute]})
+	elif effect.get("kind") == "npc_relationship":
+		var delta: Variant = effect.get("delta",effect.get("amount"))
+		if not effect.get("rel_id") is String or not _integer(delta,-100,100) or not change_relationship(people,effect.rel_id,effect.event_id,int(delta),effect.effect_id):
+			return false
 	elif effect.get("kind") == "referral":
 		if people.referrals.has(effect.effect_id):
 			return false
-		var target := ""
-		for relation: Dictionary in people.relationships.values():
-			if relation.from == effect.npc_id:
-				target = relation.to
-				break
-			if relation.to == effect.npc_id:
-				target = relation.from
-				break
+		var target := _effect_referral_target(people,effect,config)
 		if target.is_empty():
 			return false
 		people.referrals[effect.effect_id] = {"referral_id": effect.effect_id, "event_id": effect.get("event_id", ""),
 			"referrer_npc_id": effect.npc_id, "target_npc_id": target, "created_at": int(people.clock), "state": "proposed"}
+		if effect.has("target_npc_id") or effect.has("template"):
+			people.referrals[effect.effect_id]["effect_id"] = effect.effect_id
+			if effect.has("template"):
+				people.referrals[effect.effect_id]["template"] = effect.template
+	elif effect.get("kind") == "unlock_topic":
+		if not effect.get("topic_id") is String or effect.topic_id.is_empty():
+			return false
+		if not people.has("unlocked_topics"):
+			people["unlocked_topics"] = {}
+		if not people.unlocked_topics.has(effect.npc_id):
+			people.unlocked_topics[effect.npc_id] = []
+		people.unlocked_topics[effect.npc_id].append({"effect_id":effect.effect_id,"event_id":effect.event_id,"topic_id":effect.topic_id,"at":int(people.clock)})
 	else:
 		return false
 	people.effect_ids.append(effect.effect_id)
 	return true
+
+static func _effect_referral_target(people: Dictionary, effect: Dictionary, config: Dictionary) -> String:
+	if effect.has("target_npc_id"):
+		var target: Variant = effect.target_npc_id
+		return target if target is String and target != effect.npc_id and people.profiles.has(target) else ""
+	if effect.has("template"):
+		if not effect.template is String or effect.template.is_empty():
+			return ""
+		var template: String = effect.template
+		var candidates: Array = people.profiles.keys().filter(func(id: String) -> bool: return id != effect.npc_id and people.profiles[id].get("template_id") == template)
+		candidates.sort()
+		if not candidates.is_empty():
+			return candidates[posmod(String(effect.effect_id).hash(),candidates.size())]
+		# Only the existing ordinary-person template may create a new visitor.
+		# Unknown authored/family templates remain unconsumed for later content.
+		if template not in ["ordinary","ordinary_v1"] or config.is_empty() or not config_valid(config):
+			return ""
+		var day := floori(float(people.clock)/1440.0)
+		return _ordinary(people,config,_random(int(people.seed)+absi(String(effect.effect_id).hash())),day,absi(String(effect.effect_id).hash()))
+	# Compatibility for pre-v5 effects that did not name a target.
+	for relation: Dictionary in people.relationships.values():
+		if relation.from == effect.npc_id:
+			return relation.to
+		if relation.to == effect.npc_id:
+			return relation.from
+	return ""
 
 static func schedule_referral(people: Dictionary, referral_id: String, at: int, config: Dictionary = {}) -> bool:
 	if not people.referrals.has(referral_id) or at <= int(people.clock) or at % 1440 < 540 or at % 1440 >= 1320:
@@ -830,10 +870,10 @@ static func schedule_feedback(people: Dictionary, job: Dictionary, config: Dicti
 	var npc_id: Variant = job.get("npc_id")
 	if not event_id is String or event_id.is_empty() or not npc_id is String or not people.profiles.has(npc_id) or people.feedback_jobs.has(event_id):
 		return false
-	if job.get("mode") == "never":
+	if job.get("mode") == "never" or (job.get("disclosure") is Dictionary and job.disclosure.is_empty()):
 		people.feedback_jobs[event_id] = {"event_id": event_id, "npc_id": npc_id, "state": "not_disclosed"}
 		return true
-	if job.get("mode") != "delayed" or int(job.get("available_at", -1)) < int(job.get("due_at", 0)):
+	if job.get("mode") not in ["delayed","immediate"] or int(job.get("available_at", -1)) < int(job.get("due_at", 0)):
 		return false
 	var profile: Dictionary = people.profiles[npc_id]
 	var rng := _random(int(people.seed) + absi(event_id.hash()))
@@ -907,15 +947,19 @@ static func record_disclosed_feedback(people: Dictionary, report: Dictionary) ->
 	job["feedback_id"] = feedback_id
 	return true
 
-static func change_relationship(people: Dictionary, relationship_id: String, event_id: String, amount: int) -> bool:
+static func change_relationship(people: Dictionary, relationship_id: String, event_id: String, amount: int, effect_id: String = "") -> bool:
 	if event_id.is_empty() or not people.relationships.has(relationship_id):
 		return false
 	var relation: Dictionary = people.relationships[relationship_id]
-	if relation.changes.any(func(row: Dictionary) -> bool: return row.event_id == event_id):
+	var source_id := effect_id if not effect_id.is_empty() else event_id
+	if relation.changes.any(func(row: Dictionary) -> bool: return row.get("effect_id",row.event_id) == source_id):
 		return false
 	var before := int(relation.closeness)
 	relation.closeness = clampi(before + amount, 0, 100)
-	relation.changes.append({"event_id": event_id, "at": int(people.clock), "from": before, "to": relation.closeness})
+	var change := {"event_id": event_id, "at": int(people.clock), "from": before, "to": relation.closeness}
+	if not effect_id.is_empty():
+		change["effect_id"] = effect_id
+	relation.changes.append(change)
 	return true
 
 static func reveal_relationship(people: Dictionary, relationship_id: String, visit_id: String, source_id: String) -> bool:
@@ -1013,6 +1057,17 @@ static func validate(people: Variant) -> String:
 			return "人物字段无效: " + key
 	if not people.get("effect_ids") is Array or not people.get("observations") is Array or not _integer(people.get("clock"), 0, MAX_INT):
 		return "人物时钟或记录无效"
+	if not people.get("unlocked_topics",{}) is Dictionary:
+		return "人物话题解锁记录无效"
+	var topic_effects := {}
+	for npc_id: Variant in people.get("unlocked_topics",{}):
+		var unlocks: Variant = people.unlocked_topics[npc_id]
+		if not npc_id is String or not people.profiles.has(npc_id) or not unlocks is Array:
+			return "人物话题解锁对象无效"
+		for unlock: Variant in unlocks:
+			if not unlock is Dictionary or not unlock.get("effect_id") is String or unlock.effect_id.is_empty() or topic_effects.has(unlock.effect_id) or unlock.effect_id not in people.effect_ids or not unlock.get("event_id") is String or unlock.event_id.is_empty() or not unlock.get("topic_id") is String or unlock.topic_id.is_empty() or not _integer(unlock.get("at"),0,int(people.clock)):
+				return "人物话题解锁来源无效"
+			topic_effects[unlock.effect_id] = true
 	if not _integer(people.get("arrival_limit_per_day",20),1,100):
 		return "每日来访上限无效"
 	if not _integer(people.stats.get("lost_customers", 0), 0, MAX_INT):
@@ -1122,7 +1177,8 @@ static func validate(people: Variant) -> String:
 		var related: bool = people.relationships.values().any(func(relation: Dictionary) -> bool:
 			return (relation.from == referral.referrer_npc_id and relation.to == referral.target_npc_id) or (relation.to == referral.referrer_npc_id and relation.from == referral.target_npc_id)
 		)
-		if not related:
+		var specified_by_effect: bool = referral.get("effect_id") == referral_id and referral_id in people.effect_ids
+		if not related and not specified_by_effect:
 			return "推荐人和来客缺少关系来源"
 		if referral.state != "proposed":
 			var arrival: Dictionary = people.arrivals.get(referral.get("arrival_id"), {})

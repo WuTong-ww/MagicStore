@@ -37,6 +37,19 @@ static func panel() -> PanelContainer:
 		node.theme = load("res://themes/paper.tres")
 	return node
 
+static func paper_window(window: Window) -> void:
+	# A Window owns a viewport, so its Theme alone does not paint the content
+	# canvas. Supply an explicit background behind its independent UI tree.
+	if window.has_node("PaperWindowBackground"):
+		return
+	var background := Panel.new()
+	background.name = "PaperWindowBackground"
+	background.theme = load("res://themes/paper.tres")
+	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	window.add_child(background)
+	window.move_child(background,0)
+	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+
 static func image(path: String) -> TextureRect:
 	var node := TextureRect.new()
 	node.texture = load(path)

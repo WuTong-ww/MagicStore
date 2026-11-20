@@ -169,24 +169,284 @@
         "changed_entrance": {"value": true, "text": "展览从侧门入场。", "requires_clue": "venue_notice"}
       },
       "event": {
-        "subject_id": "npc_lin", "target_name": "林照晚与旧友能否说上话",
-        "minute_of_day": 1080, "feedback_delay": 180,
+        "subject_id": "npc_lin",
+        "target_name": "林照晚与旧友能否说上话",
+        "minute_of_day": 1080,
+        "feedback_delay": 180,
         "outcomes": {
-          "sent": {"actual_action": "先发消息确认，再依约赴会", "outcome": "met", "evidence": "sufficient", "feedback": "delayed", "text": "我先发了短消息。她回了时间，我们在展览上说上话了。"},
-          "arrived": {"actual_action": "找到了入口，按约赴会", "outcome": "met", "evidence": "sufficient", "feedback": "delayed", "text": "我找到了入口。她真的留了靠窗的位置，我们说上话了。"},
-          "lost": {"actual_action": "到了旧入口，未能赴约", "outcome": "missed", "evidence": "sufficient", "feedback": "delayed", "text": "我在原来的入口等了很久，后来打烊了，我们没说上话。"},
-          "private": {"actual_action": "约好在侧厅私下见面", "outcome": "met", "evidence": "sufficient", "feedback": "never", "text": ""},
-          "note": {"actual_action": "把回信留在前台，未能确认收件人", "outcome": "missed", "evidence": "insufficient", "feedback": "delayed", "delay": 1140, "text": "我把信留在了前台。后来有人取走它，但工作人员没看到是谁。"},
-          "waited": {"actual_action": "暂缓赴约", "outcome": "missed", "evidence": "sufficient", "feedback": "delayed", "text": "那天我没有去，也没和她说上话。"}
+          "sent": {
+            "actual_action": "先发消息确认，再依约赴会",
+            "outcome": "met",
+            "evidence": "sufficient",
+            "feedback": "delayed",
+            "text": "我先发了短消息。她回了时间，我们在展览上说上话了。",
+            "delay_minutes": 180,
+            "effects": []
+          },
+          "arrived": {
+            "actual_action": "找到了入口，按约赴会",
+            "outcome": "met",
+            "evidence": "sufficient",
+            "feedback": "delayed",
+            "text": "我找到了入口。她真的留了靠窗的位置，我们说上话了。",
+            "delay_minutes": 180,
+            "effects": []
+          },
+          "lost": {
+            "actual_action": "到了旧入口，未能赴约",
+            "outcome": "missed",
+            "evidence": "sufficient",
+            "feedback": "delayed",
+            "text": "我在原来的入口等了很久，后来打烊了，我们没说上话。",
+            "delay_minutes": 180,
+            "effects": []
+          },
+          "private": {
+            "actual_action": "约好在侧厅私下见面",
+            "outcome": "met",
+            "evidence": "sufficient",
+            "feedback": "never",
+            "text": "",
+            "delay_minutes": 180,
+            "effects": []
+          },
+          "note": {
+            "actual_action": "把回信留在前台，未能确认收件人",
+            "outcome": "missed",
+            "evidence": "partial",
+            "feedback": "delayed",
+            "text": "这件事让我有些惦记，还没得到能核对的消息。",
+            "delay_minutes": 1140,
+            "effects": []
+          },
+          "waited": {
+            "actual_action": "暂缓赴约",
+            "outcome": "missed",
+            "evidence": "sufficient",
+            "feedback": "delayed",
+            "text": "那天我没有去，也没和她说上话。",
+            "delay_minutes": 180,
+            "effects": []
+          }
         },
-        "item_effect": {"key": "stay_and_ask", "need": "找不到原入口时，仍愿意停下来询问展览的改道安排。"},
+        "item_effect": {
+          "key": "stay_and_ask",
+          "need": "找不到原入口时，仍愿意停下来询问展览的改道安排。",
+          "advice_keys": [
+            "attend"
+          ]
+        },
         "advice": {
-          "message": {"text": "先发一条消息确认，再按约去展览。", "requires_clue": "unfinished_letter"},
-          "attend": {"text": "直接去展览，按邀请寻找靠窗的位置。", "requires_clue": "invitation_note"},
-          "private": {"text": "约到侧厅私下聊，并尊重对方保密的请求。", "requires_clue": "unfinished_letter"},
-          "note": {"text": "先把信留给展馆前台，请他们转交。"},
-          "wait": {"text": "这次先不赴约，等自己准备好再联系。"}
-        }
+          "message": {
+            "text": "先发一条消息确认，再按约去展览。",
+            "requires_clue": "unfinished_letter"
+          },
+          "attend": {
+            "text": "直接去展览，按邀请寻找靠窗的位置。",
+            "requires_clue": "invitation_note"
+          },
+          "private": {
+            "text": "约到侧厅私下聊，并尊重对方保密的请求。",
+            "requires_clue": "unfinished_letter"
+          },
+          "note": {
+            "text": "先把信留给展馆前台，请他们转交。"
+          },
+          "wait": {
+            "text": "这次先不赴约，等自己准备好再联系。"
+          }
+        },
+        "version": 1,
+        "world_facts": {
+          "personal_invitation": {
+            "values": [
+              true,
+              false
+            ],
+            "default": true
+          },
+          "changed_entrance": {
+            "values": [
+              true,
+              false
+            ],
+            "default": true
+          }
+        },
+        "branch_ids": [
+          "confirmed_venue"
+        ],
+        "item_effect_ids": [
+          "stay_and_ask"
+        ],
+        "prediction_conditions": {
+          "always": {
+            "label": "无附加条件"
+          },
+          "if_message": {
+            "label": "若先发消息确认",
+            "outcomes": [
+              "sent"
+            ]
+          },
+          "if_attend": {
+            "label": "若直接去展览",
+            "outcomes": [
+              "arrived",
+              "lost"
+            ]
+          }
+        },
+        "prediction_labels": {
+          "met": "约定的事情有进展",
+          "missed": "约定的事情未达成"
+        },
+        "advice_options": [
+          {
+            "key": "message",
+            "label": "先发一条消息确认，再按约去展览。",
+            "requires_clue": "unfinished_letter"
+          },
+          {
+            "key": "attend",
+            "label": "直接去展览，按邀请寻找靠窗的位置。",
+            "requires_clue": "invitation_note",
+            "item_effect_keys": [
+              "stay_and_ask"
+            ]
+          },
+          {
+            "key": "private",
+            "label": "约到侧厅私下聊，并尊重对方保密的请求。",
+            "requires_clue": "unfinished_letter"
+          },
+          {
+            "key": "note",
+            "label": "先把信留给展馆前台，请他们转交。"
+          },
+          {
+            "key": "wait",
+            "label": "这次先不赴约，等自己准备好再联系。"
+          }
+        ],
+        "rules": [
+          {
+            "when": {
+              "advice": "message",
+              "accepted": true
+            },
+            "outcome": "sent"
+          },
+          {
+            "when": {
+              "advice": "attend",
+              "accepted": true,
+              "fact": {
+                "changed_entrance": false
+              }
+            },
+            "outcome": "arrived"
+          },
+          {
+            "when": {
+              "advice": "attend",
+              "accepted": true,
+              "branch": "confirmed_venue"
+            },
+            "outcome": "arrived"
+          },
+          {
+            "when": {
+              "advice": "attend",
+              "accepted": true,
+              "item_effect": "stay_and_ask"
+            },
+            "outcome": "arrived"
+          },
+          {
+            "when": {
+              "advice": "attend",
+              "accepted": true
+            },
+            "outcome": "lost"
+          },
+          {
+            "when": {
+              "advice": "private",
+              "accepted": true
+            },
+            "outcome": "private"
+          },
+          {
+            "when": {
+              "advice": "note",
+              "accepted": true
+            },
+            "outcome": "note"
+          },
+          {
+            "when": {},
+            "outcome": "waited"
+          }
+        ],
+        "feedback_effects": [
+          {
+            "kind": "trust",
+            "amount": 2,
+            "when": {
+              "evaluation": "aligned"
+            }
+          },
+          {
+            "kind": "reputation",
+            "amount": 1,
+            "when": {
+              "evaluation": "aligned",
+              "outcome": "met"
+            }
+          },
+          {
+            "kind": "traffic_boost",
+            "minutes": 2880,
+            "amount": 1,
+            "when": {
+              "evaluation": "aligned",
+              "outcome": "met"
+            }
+          },
+          {
+            "kind": "referral",
+            "amount": 1,
+            "template": "ordinary",
+            "when": {
+              "evaluation": "aligned",
+              "outcome_id": "sent"
+            }
+          },
+          {
+            "kind": "gift",
+            "item_id": "silver_leaf",
+            "qty": 1,
+            "when": {
+              "evaluation": "aligned",
+              "outcome_id": "sent"
+            }
+          },
+          {
+            "kind": "trust",
+            "amount": -2,
+            "when": {
+              "evaluation": "deviated"
+            }
+          },
+          {
+            "kind": "review_growth",
+            "amount": 1,
+            "when": {
+              "evaluation": "deviated"
+            }
+          }
+        ]
       }
     },
     "archive": {
@@ -238,6 +498,161 @@
       },
       "world_facts": {
         "archive_number": {"value": true, "text": "借条日期背面另有档案柜编号。", "requires_clue": "archive_stub"}
+      },
+      "event": {
+        "version": 1,
+        "subject_id": "npc_lin",
+        "target_name": "旧物的来历能否得到核对",
+        "minute_of_day": 1080,
+        "feedback_delay": 180,
+        "world_facts": {
+          "archive_number": {
+            "values": [
+              true,
+              false
+            ],
+            "default": true
+          }
+        },
+        "branch_ids": [],
+        "item_effect_ids": [
+          "archive_double_check"
+        ],
+        "item_effect": {
+          "key": "archive_double_check",
+          "need": "愿意先核对，再按自己的节奏行动。",
+          "advice_keys": [
+            "verify"
+          ]
+        },
+        "advice_options": [
+          {
+            "key": "verify",
+            "label": "带借条核对档案，再联系保管人。",
+            "requires_clue": "archive_stub"
+          },
+          {
+            "key": "ask",
+            "label": "先向经手人询问交接经过。"
+          },
+          {
+            "key": "wait",
+            "label": "先保留旧物，不急着认定归属。"
+          }
+        ],
+        "advice": {
+          "verify": {
+            "text": "带借条核对档案，再联系保管人。",
+            "requires_clue": "archive_stub"
+          },
+          "ask": {
+            "text": "先向经手人询问交接经过。"
+          },
+          "wait": {
+            "text": "先保留旧物，不急着认定归属。"
+          }
+        },
+        "prediction_conditions": {
+          "always": {
+            "label": "无附加条件"
+          }
+        },
+        "prediction_labels": {
+          "met": "事情得到核对与推进",
+          "missed": "事情暂未推进"
+        },
+        "rules": [
+          {
+            "when": {
+              "advice": "verify",
+              "accepted": true,
+              "item_effect": "archive_double_check"
+            },
+            "outcome": "verified"
+          },
+          {
+            "when": {
+              "advice": "verify",
+              "accepted": true,
+              "fact": {
+                "archive_number": true
+              }
+            },
+            "outcome": "verified"
+          },
+          {
+            "when": {
+              "advice": "verify",
+              "accepted": true
+            },
+            "outcome": "uncertain"
+          },
+          {
+            "when": {
+              "advice": "ask",
+              "accepted": true
+            },
+            "outcome": "heard"
+          },
+          {
+            "when": {},
+            "outcome": "paused"
+          }
+        ],
+        "outcomes": {
+          "verified": {
+            "actual_action": "按编号找到了相互印证的保管记录",
+            "outcome": "met",
+            "evidence": "sufficient",
+            "feedback": "delayed",
+            "delay_minutes": 180,
+            "text": "我按编号查了记录，也和保管人核对过。这件旧物的交接终于能连起来了。",
+            "effects": []
+          },
+          "uncertain": {
+            "actual_action": "查找后仍缺少相互印证的记录",
+            "outcome": "missed",
+            "evidence": "partial",
+            "feedback": "delayed",
+            "delay_minutes": 240,
+            "text": "我心里安稳了一些，不过还没有足够的材料让我下结论。",
+            "effects": []
+          },
+          "heard": {
+            "actual_action": "听取了经手人的说法，尚待独立核对",
+            "outcome": "missed",
+            "evidence": "partial",
+            "feedback": "delayed",
+            "delay_minutes": 240,
+            "text": "有人愿意听我慢慢讲清楚，让我不再那么着急。",
+            "effects": []
+          },
+          "paused": {
+            "actual_action": "暂缓认定旧物归属",
+            "outcome": "missed",
+            "evidence": "sufficient",
+            "feedback": "delayed",
+            "delay_minutes": 180,
+            "text": "这次我先没有认定它属于谁，也还没有找到新的记录。",
+            "effects": []
+          }
+        },
+        "feedback_effects": [
+          {
+            "kind": "trust",
+            "amount": 1,
+            "when": {
+              "evaluation": "aligned"
+            }
+          },
+          {
+            "kind": "review_growth",
+            "amount": 1,
+            "when": {
+              "evaluation": "deviated"
+            }
+          }
+        ]
       }
     }
   },
