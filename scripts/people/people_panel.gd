@@ -1,4 +1,6 @@
 extends Control
+
+const UI = preload("res://scripts/ui/ui_kit.gd")
 ## A-owned presentation; the host supplies a filtered view and owns actions.
 ## This panel never touches GameState, the clock, wallets or a save directly.
 
@@ -48,6 +50,10 @@ func _ready() -> void:
 	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	columns.add_child(right)
 	right.add_child(_label("来客与本局记录", 22))
+	var relationship_art := UI.image("res://assets/ui/relationship_graph.png")
+	relationship_art.custom_minimum_size = Vector2(250, 100)
+	relationship_art.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	right.add_child(relationship_art)
 	archive = OptionButton.new()
 	archive.name = "KnownPeople"
 	archive.item_selected.connect(_select_archive)
@@ -58,6 +64,9 @@ func _ready() -> void:
 	detail.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	right.add_child(detail)
 	right.add_child(_label("经营记录 · 点击查看来源", 16))
+	var report_art := UI.image("res://assets/ui/report_notebook.png")
+	report_art.custom_minimum_size = Vector2(220, 84)
+	right.add_child(report_art)
 	evidence = ItemList.new()
 	evidence.custom_minimum_size.y = 96
 	evidence.item_selected.connect(_evidence_activated)
@@ -150,6 +159,14 @@ func _select(index: int) -> void:
 	var known := ""
 	if not profile.is_empty():
 		known = "熟悉度 %s · 信任 %s" % [profile.get("familiarity", 0), profile.get("trust", 0)]
+		var birthday := str(profile.get("birthday", ""))
+		var zodiac := str(profile.get("zodiac", ""))
+		var mbti := str(profile.get("mbti", ""))
+		var personality := str(profile.get("personality", ""))
+		if not birthday.is_empty() or not zodiac.is_empty() or not mbti.is_empty():
+			known += "\n档案：%s · %s · %s" % [birthday if not birthday.is_empty() else "生日未记录", zodiac if not zodiac.is_empty() else "星座未知", mbti if not mbti.is_empty() else "MBTI 未知"]
+		if not personality.is_empty():
+			known += "\n性格：" + personality
 		if not str(profile.get("background","")).is_empty():
 			known += "\n" + str(profile.background)
 		if profile.get("preferences") is Array and not profile.preferences.is_empty():
@@ -176,6 +193,11 @@ func _select_archive(index: int) -> void:
 	start_button.disabled = true
 	book_button.disabled = true
 	var lines: Array = [str(profile.get("name","来客")),str(profile.get("role","")),"熟悉度 %s · 信任 %s" % [profile.get("familiarity",0),profile.get("trust",0)]]
+	var birthday := str(profile.get("birthday", ""))
+	if not birthday.is_empty():
+		lines.append("生日：%s · %s · MBTI %s" % [birthday, str(profile.get("zodiac", "星座未知")), str(profile.get("mbti", "未知"))])
+	if not str(profile.get("personality", "")).is_empty():
+		lines.append("性格：" + str(profile.personality))
 	if not str(profile.get("background","")).is_empty():
 		lines.append(str(profile.background))
 	if profile.get("preferences") is Array and not profile.preferences.is_empty():

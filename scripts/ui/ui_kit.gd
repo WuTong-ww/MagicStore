@@ -1,10 +1,10 @@
 class_name MidnightUI
 extends RefCounted
 
-const GOLD := Color("d5bd86")
-const MUTED := Color("8da4a5")
+const GOLD := Color("e4c57a")
+const MUTED := Color("9ab1b1")
 
-static func label(text: String, size: int = 18, color: Color = Color("e6e3d4")) -> Label:
+static func label(text: String, size: int = 18, color: Color = Color("f3ead4")) -> Label:
 	var node := Label.new()
 	node.text = text
 	node.add_theme_font_size_override("font_size", size)
@@ -16,6 +16,10 @@ static func button(text: String, callback: Callable) -> Button:
 	var node := Button.new()
 	node.text = text
 	node.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	node.focus_mode = Control.FOCUS_ALL
+	node.clip_text = true
+	node.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	node.custom_minimum_size.y = 42
 	node.pressed.connect(callback)
 	return node
 

@@ -780,7 +780,10 @@ static func public_profile(people: Dictionary, npc_id: String) -> Dictionary:
 		if not memory.has("memory_id"):
 			public_memories.append(memory.duplicate(true))
 	var view := {"npc_id": npc_id, "name": profile.name, "role": profile.role, "appearance": profile.appearance.duplicate(true),
-		"familiarity": profile.familiarity, "trust": profile.trust, "memories": public_memories}
+		"familiarity": profile.familiarity, "trust": profile.trust, "memories": public_memories,
+		"birthday": profile.get("birthday", ""), "zodiac": profile.get("zodiac", ""),
+		"mbti": profile.get("mbti", ""), "personality": profile.get("personality", ""),
+		"background": profile.get("background", ""), "preferences": profile.get("preferences", []).duplicate(true)}
 	if profile.get("generation_member") == "person" and profile.get("generated_bundle") is Dictionary:
 		view.merge({"background":profile.background,"preferences":profile.preferences.duplicate(),"speech_style":profile.speech_style,"generation_source":profile.generation.source})
 	elif profile.get("generation_member") == "contact" and people.profiles.has(profile.get("generated_owner_id")):

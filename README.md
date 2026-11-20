@@ -29,6 +29,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/dev/run.ps1
 
 引擎位置：`<工程目录>/.tools/godot/Godot_v4.6.3-stable_win64_console.exe`。编辑器设置使用 `_sc_` 便携模式，留在 `.tools/godot/editor_data`。同伴无需采用相同绝对路径。中文字体随源代码提供，不依赖系统字体。
 
+## 本次美术资源接入（2026-11-20）
+
+七个主场景、林照晚三态肖像、术式示例图、证物/收据/关系/报告 UI 资源已加入 `assets/`，并接入对应 Godot 页面。具体资源键、F01–F24 对应入口、Windows 启动步骤与未完成边界见 [美术资源与可操作界面接入说明](docs/ART_ASSET_GUIDE.md)。新资源首次打开工程时由 Godot 自动导入。
+
 ## 游戏操作
 
 打开存档簿新建店铺（不会覆盖旧档），或选择已有记录继续。在前台接待实际候客队列中的来客，进入咨询区后可点击问题或输入中文。回车发送，Shift+回车换行，也可点击“发送”按钮。首页设置可配置在线接口；未配置或核验失败时使用获准的本地话题，界面显示实际对话模式。

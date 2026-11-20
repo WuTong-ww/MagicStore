@@ -1,4 +1,6 @@
 extends Window
+
+const UI = preload("res://scripts/ui/ui_kit.gd")
 ## Shared window for the B screens. It consumes only player projections.
 
 const OracleCards = preload("res://scripts/divination/oracle_cards.gd")
@@ -33,13 +35,13 @@ func _ready() -> void:
 	transient = true
 	exclusive = true
 	close_requested.connect(hide)
-	var margin := MidnightUI.margin(20)
+	var margin := UI.margin(20)
 	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(margin)
 	var layout := VBoxContainer.new()
 	layout.add_theme_constant_override("separation", 10)
 	margin.add_child(layout)
-	heading = MidnightUI.label("", 26, MidnightUI.GOLD)
+	heading = UI.label("", 26, UI.GOLD)
 	layout.add_child(heading)
 	scroll = ScrollContainer.new()
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -49,10 +51,10 @@ func _ready() -> void:
 	body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	body.add_theme_constant_override("separation", 9)
 	scroll.add_child(body)
-	notice = MidnightUI.label("", 14, MidnightUI.GOLD)
+	notice = UI.label("", 14, UI.GOLD)
 	notice.custom_minimum_size.y = 24
 	layout.add_child(notice)
-	layout.add_child(MidnightUI.button("返回", hide))
+	layout.add_child(UI.button("返回", hide))
 
 func open(which: String) -> void:
 	page = which
@@ -108,18 +110,18 @@ func _study() -> void:
 	for row: Dictionary in GameState.divination_study():
 		var line := HBoxContainer.new()
 		body.add_child(line)
-		var title_label := MidnightUI.label(row.title, 17)
+		var title_label := UI.label(row.title, 17)
 		title_label.custom_minimum_size.x = 130
 		line.add_child(title_label)
 		var learning: Dictionary = row.learning
 		var summary := "已学会" if row.learned else "%d 金币  ·  %d 精力  ·  %d 分钟  ·  前置 %s" % [
 			int(learning.coins), int(learning.energy), int(learning.minutes), row.prerequisite
 		]
-		var cost := MidnightUI.label(summary, 15, MidnightUI.MUTED)
+		var cost := UI.label(summary, 15, UI.MUTED)
 		cost.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		line.add_child(cost)
 		if not row.learned:
-			var button := MidnightUI.button("研习", func(): await _run("learn_method", {"method_id": row.method_id}))
+			var button := UI.button("研习", func(): await _run("learn_method", {"method_id": row.method_id}))
 			button.disabled = not row.can_learn
 			line.add_child(button)
 
@@ -144,8 +146,8 @@ func _readings() -> void:
 			OraclePanels.spread(body, OracleCards.spread_positions(quote.method_id, quote.option_id))
 		_info("报酬结算并保存后，结果会写入本次服务。")
 		var actions := _flow()
-		actions.add_child(MidnightUI.button("收取报酬并揭示", func(): await _run("settle_service", {"service_id": quote.service_id})))
-		actions.add_child(MidnightUI.button("撤回报价", func(): await _run("cancel_service", {"service_id": quote.service_id})))
+		actions.add_child(UI.button("收取报酬并揭示", func(): await _run("settle_service", {"service_id": quote.service_id})))
+		actions.add_child(UI.button("撤回报价", func(): await _run("cancel_service", {"service_id": quote.service_id})))
 		return
 	if not result_id.is_empty():
 		for service: Dictionary in services:
@@ -173,7 +175,7 @@ func _readings() -> void:
 		var service_buttons := _flow()
 		for service: Dictionary in readings:
 			var caption := "%s · %s · %s" % [service.method_title, service.option_label, clock_text(service.paid_at)]
-			service_buttons.add_child(MidnightUI.button(caption, _select_result.bind(service.service_id)))
+			service_buttons.add_child(UI.button(caption, _select_result.bind(service.service_id)))
 	var methods: Array = view.methods
 	if method_id.is_empty():
 		method_id = "tarot"
@@ -187,6 +189,12 @@ func _readings() -> void:
 		_render()
 	)
 	_info(method.prompt)
+	var method_art := _method_art(method_id)
+	if not method_art.is_empty() and ResourceLoader.exists(method_art):
+		var illustration := UI.image(method_art)
+		illustration.custom_minimum_size = Vector2(300, 112)
+		illustration.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		body.add_child(illustration)
 	if not method.learned:
 		_info("可在结束接待后从前台研习。")
 		return
@@ -238,7 +246,7 @@ func _readings() -> void:
 	var payment := _pick(["%d 金币（顾客有 %d）" % [int(cost.coins), int(shop.coins)],
 		"%s ×%d（顾客有 %d）" % [shop.payment_item_name, item_amount, int(shop.payment_items)]])
 	_info("预计用时 %d 分钟  ·  消耗 %d 精力" % [int(cost.minutes), int(cost.energy)])
-	body.add_child(MidnightUI.button("与来客确认报价", func():
+	body.add_child(UI.button("与来客确认报价", func():
 		var number := 0
 		if parameter is SpinBox:
 			number = int(parameter.value)
@@ -271,7 +279,7 @@ func _paid_reading(service: Dictionary) -> void:
 	_section("留给你判断")
 	_info(guide.get("boundary", "你可以先记下自己的解释，再决定用哪条线索核对。"))
 	if service.method_id == "past":
-		body.add_child(MidnightUI.button("去前世手记", func():
+		body.add_child(UI.button("去前世手记", func():
 			page = "casebook"
 			_show_tab("past")
 			scroll.scroll_vertical = 0
@@ -279,8 +287,8 @@ func _paid_reading(service: Dictionary) -> void:
 	else:
 		_hypothesis_entry()
 	var next_actions := _flow()
-	next_actions.add_child(MidnightUI.button("继续为这题选术式", _select_result.bind("")))
-	next_actions.add_child(MidnightUI.button("查看案例手记", func():
+	next_actions.add_child(UI.button("继续为这题选术式", _select_result.bind("")))
+	next_actions.add_child(UI.button("查看案例手记", func():
 		page = "casebook"
 		_show_tab("knowledge")
 		scroll.scroll_vertical = 0
@@ -291,26 +299,26 @@ func _reading_details(service: Dictionary) -> void:
 	var result: Dictionary = service.result
 	var medium: Dictionary = result.get("medium", {})
 	var details := _fold("术语和规则")
-	details.add_child(MidnightUI.label(OracleGuide.RULES[service.method_id], 15))
+	details.add_child(UI.label(OracleGuide.RULES[service.method_id], 15))
 	var diagram := medium
 	if service.method_id == "yijing" and medium.get("moving", []).is_empty():
 		diagram = medium.duplicate()
 		diagram.erase("changed")
 	OraclePanels.show_medium(details, diagram)
 	if medium.is_empty() or (service.method_id != "past" and not result.has("inquiry")):
-		details.add_child(MidnightUI.label(result.text, 15))
+		details.add_child(UI.label(result.text, 15))
 		var sources: PackedStringArray = []
 		for hint: Dictionary in result.get("signals", []):
 			sources.append("%s · %s\n%s。%s" % [hint.source, hint.tone_label, String(hint.meaning).trim_suffix("。"), hint.prompt])
 		if not sources.is_empty():
-			details.add_child(MidnightUI.label("各条提示的来源", 16, MidnightUI.GOLD))
-			details.add_child(MidnightUI.label("\n\n".join(sources), 15))
+			details.add_child(UI.label("各条提示的来源", 16, UI.GOLD))
+			details.add_child(UI.label("\n\n".join(sources), 15))
 
 func _fold(label: String) -> VBoxContainer:
 	var details := VBoxContainer.new()
 	details.add_theme_constant_override("separation", 8)
 	details.hide()
-	var toggle := MidnightUI.button("展开" + label, func(): details.visible = not details.visible)
+	var toggle := UI.button("展开" + label, func(): details.visible = not details.visible)
 	details.visibility_changed.connect(func():
 		toggle.text = ("收起" if details.visible else "展开") + label
 	)
@@ -324,7 +332,7 @@ func _option_buttons(options: Array, selected: int) -> void:
 		_choice_button(row, options[index].label, index, selected, options)
 
 func _choice_button(parent: Container, label: String, index: int, selected: int, options: Array) -> void:
-	var button := MidnightUI.button(label, _choose_option.bind(index, options))
+	var button := UI.button(label, _choose_option.bind(index, options))
 	button.toggle_mode = true
 	button.button_pressed = index == selected
 	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -349,18 +357,22 @@ func _casebook() -> void:
 	if view.is_empty():
 		_info("请先接待顾客。")
 		return
+	var evidence_art := UI.image("res://assets/ui/evidence_cards.png")
+	evidence_art.custom_minimum_size = Vector2(420, 118)
+	evidence_art.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	body.add_child(evidence_art)
 	for feedback: Dictionary in view.feedback_options:
-		body.add_child(MidnightUI.button("听取回访 · " + feedback.title, func():
+		body.add_child(UI.button("听取回访 · " + feedback.title, func():
 			if await _run("receive_feedback", {"event_id": feedback.event_id}):
 				hide()
 				host.show_history()
 		))
 	var tabs := _flow()
-	tabs.add_child(MidnightUI.button("案情与线索", _show_tab.bind("knowledge")))
+	tabs.add_child(UI.button("案情与线索", _show_tab.bind("knowledge")))
 	if not view.event.is_empty():
-		tabs.add_child(MidnightUI.button("预测与建议", _show_tab.bind("prediction")))
+		tabs.add_child(UI.button("预测与建议", _show_tab.bind("prediction")))
 	if view.case_id == "archive":
-		tabs.add_child(MidnightUI.button("前世手记", _show_tab.bind("past")))
+		tabs.add_child(UI.button("前世手记", _show_tab.bind("past")))
 	match notebook_tab:
 		"prediction":
 			_forecast()
@@ -413,7 +425,7 @@ func _knowledge() -> void:
 			for trace: Dictionary in comparison.traces:
 				sources.append("%s · %s · %s（%s）" % [clock_text(trace.paid_at), trace.method_title, trace.source, trace.tone_label])
 		var details := _fold("对照来源")
-		details.add_child(MidnightUI.label("\n".join(sources), 15))
+		details.add_child(UI.label("\n".join(sources), 15))
 	_section("玩家的假设")
 	for note: Dictionary in view.hypotheses:
 		_info(note.text + "  ·  待验证")
@@ -423,7 +435,7 @@ func _knowledge() -> void:
 
 func _hypothesis_entry() -> void:
 	var hypothesis := _entry("写下你对现有线索的解释")
-	body.add_child(MidnightUI.button("记入待验证假设", func(): await _run("note_hypothesis", {"text": hypothesis.text})))
+	body.add_child(UI.button("记入待验证假设", func(): await _run("note_hypothesis", {"text": hypothesis.text})))
 
 func _clue_titles(ids: Array) -> String:
 	var titles: PackedStringArray = []
@@ -449,7 +461,7 @@ func _forecast() -> void:
 		var keys: Array = event.conditions.keys()
 		var condition := _pick(event.conditions.values())
 		var window := _pick(["约见开始的 30 分钟内", "约见一小时后的 30 分钟内"])
-		body.add_child(MidnightUI.button("把正式预测交给来客", func():
+		body.add_child(UI.button("把正式预测交给来客", func():
 			var start := int(event.due_at) + 60 * window.selected
 			await _run("record_prediction", {
 				"text": text.text, "subject_id": event.subject_id, "condition": keys[condition.selected],
@@ -462,9 +474,13 @@ func _forecast() -> void:
 	if event.status == "pending":
 		var choices: Array = event.advice_options
 		var advice := _pick(_labels(choices, func(row: Dictionary) -> String: return row.text))
-		body.add_child(MidnightUI.button("把建议说给来客", func(): await _run("give_advice", {"advice_key": choices[advice.selected].advice_key})))
+		body.add_child(UI.button("把建议说给来客", func(): await _run("give_advice", {"advice_key": choices[advice.selected].advice_key})))
 
 func _past_notes() -> void:
+	var past_art := UI.image("res://assets/portraits/past_life_scene.png")
+	past_art.custom_minimum_size = Vector2(360, 220)
+	past_art.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	body.add_child(past_art)
 	var past: Dictionary = view.past
 	if past.is_empty():
 		_info("先询问旧物来源，再通过前世技法取得初见片段。")
@@ -477,11 +493,11 @@ func _past_notes() -> void:
 	for record: Dictionary in past.interpretations:
 		_info("%s  ·  %s\n%s" % [record.label, PAST_STATUS[record.status], record.text])
 		if record.status == "unverified" and past.fragments.has("evidence"):
-			body.add_child(MidnightUI.button("以补充证物核实此条", func(): await _run("verify_past", {"interpretation_id": record.interpretation_id})))
+			body.add_child(UI.button("以补充证物核实此条", func(): await _run("verify_past", {"interpretation_id": record.interpretation_id})))
 	var guess := _pick(["选择你自己的解释"] + _labels(past.options))
 	guess.set_item_disabled(0, true)
 	var text := _entry("可以记下你这样解读的理由")
-	var save_guess := MidnightUI.button("保存待验证解释", func():
+	var save_guess := UI.button("保存待验证解释", func():
 		await _run("interpret_past", {"link_id": past.options[guess.selected - 1].link_id, "text": text.text})
 	)
 	save_guess.disabled = true
@@ -498,6 +514,10 @@ func _shop() -> void:
 		_info("请先接待顾客。")
 		return
 	var shop: Dictionary = view.shop
+	var receipt_art := UI.image("res://assets/ui/receipt_widgets.png")
+	receipt_art.custom_minimum_size = Vector2(360, 120)
+	receipt_art.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	body.add_child(receipt_art)
 	_section("%s  ·  %d 金币" % [shop.product_name, int(shop.price)])
 	_info("店内余量 %d。" % int(shop.stock))
 	if view.event.get("status") == "pending":
@@ -505,20 +525,20 @@ func _shop() -> void:
 	if not view.demand.is_empty():
 		_info("案例需求  /  " + view.demand.text)
 	if view.purchase.is_empty():
-		body.add_child(MidnightUI.button("单独结算商品", func(): await _run("buy_case_item")))
+		body.add_child(UI.button("单独结算商品", func(): await _run("buy_case_item")))
 	elif not view.item_use.is_empty():
 		_info("已记录商品使用，并与购买及待处理事件关联。")
 	elif view.event.get("status") == "pending":
-		body.add_child(MidnightUI.button("记录来客按约使用", func(): await _run("use_case_item")))
+		body.add_child(UI.button("记录来客按约使用", func(): await _run("use_case_item")))
 	_section("本次接待账目")
 	for entry: Dictionary in view.ledger:
 		_info(ledger_text(entry))
 
 func _section(label: String) -> void:
-	body.add_child(MidnightUI.label(label, 18, MidnightUI.GOLD))
+	body.add_child(UI.label(label, 18, UI.GOLD))
 
 func _info(label: String) -> void:
-	body.add_child(MidnightUI.label(label, 15))
+	body.add_child(UI.label(label, 15))
 
 func _flow() -> HFlowContainer:
 	var row := HFlowContainer.new()
@@ -544,7 +564,7 @@ func _pick(labels: Array, selected: int = 0, callback: Callable = Callable()) ->
 func _number(label: String, minimum: int, maximum: int) -> SpinBox:
 	var row := HBoxContainer.new()
 	body.add_child(row)
-	row.add_child(MidnightUI.label(label, 15))
+	row.add_child(UI.label(label, 15))
 	var spin := SpinBox.new()
 	spin.min_value = minimum
 	spin.max_value = maximum
@@ -596,3 +616,16 @@ static func ledger_text(entry: Dictionary) -> String:
 	var label: String = LEDGER_CATEGORIES[entry.category]
 	var item: String = entry.get("item_name", "")
 	return "%s  ·  %s%s" % [label, payment_text(entry.payment), "  ·  " + item if not item.is_empty() else ""]
+
+
+func _method_art(id: String) -> String:
+	match id:
+		"tarot": return "res://assets/ui/tarot_sample_triptych.png"
+		"lenormand": return "res://assets/ui/lenormand_symbols.png"
+		"xiaoliu": return "res://assets/ui/xiaoliu_grid.png"
+		"astrology": return "res://assets/ui/astrology_wheel.png"
+		"plum", "yijing": return "res://assets/ui/bagua_board.png"
+		"bazi": return "res://assets/ui/four_pillars_frame.png"
+		"ziwei": return "res://assets/ui/ziwei_palace_frame.png"
+		"past": return "res://assets/ui/evidence_cards.png"
+	return ""

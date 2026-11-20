@@ -1,5 +1,7 @@
 extends Control
 
+const UI = preload("res://scripts/ui/ui_kit.gd")
+
 const FRONT := preload("res://scenes/shop_front.tscn")
 const CONSULTATION := preload("res://scenes/consultation.tscn")
 const DivinationWorkbench := preload("res://scripts/divination/workbench.gd")
@@ -48,7 +50,7 @@ func _ready() -> void:
 	GameState.state_changed.connect(_refresh)
 	GameState.action_failed.connect(show_notice)
 	_build_people_window()
-	show_screen("front")
+	show_screen("exterior")
 	call_deferred("open_saves")
 
 func _build_shell() -> void:
@@ -57,7 +59,7 @@ func _build_shell() -> void:
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(background)
-	var margin := MidnightUI.margin(20)
+	var margin: MarginContainer = UI.margin(20)
 	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(margin)
 	var layout := VBoxContainer.new()
@@ -69,29 +71,37 @@ func _build_shell() -> void:
 	brand.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	brand.add_theme_constant_override("separation", 0)
 	header.add_child(brand)
-	brand.add_child(MidnightUI.label("零点杂货铺", 30, MidnightUI.GOLD))
-	brand.add_child(MidnightUI.label("ZERO HOUR  /  一盏灯，一段未完的故事", 13, MidnightUI.MUTED))
-	location = MidnightUI.label("前台", 20, MidnightUI.GOLD)
+	brand.add_child(UI.label("零点杂货铺", 30, UI.GOLD))
+	brand.add_child(UI.label("ZERO HOUR  /  一盏灯，一段未完的故事", 13, UI.MUTED))
+	location = UI.label("前台", 20, UI.GOLD)
 	location.autowrap_mode = TextServer.AUTOWRAP_OFF
 	header.add_child(location)
-	open_button = MidnightUI.button("存档簿", open_saves)
+	open_button = UI.button("存档簿", open_saves)
 	open_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	header.add_child(open_button)
-	header.add_child(MidnightUI.button("设置", open_network_settings))
-	var status_panel := MidnightUI.panel()
+	header.add_child(UI.button("设置", open_network_settings))
+	var status_panel := UI.panel()
 	layout.add_child(status_panel)
-	resources = MidnightUI.label("打开存档簿，开始经营。", 18)
-	status_panel.add_child(resources)
+	var status_row := HBoxContainer.new()
+	status_row.add_theme_constant_override("separation", 7)
+	status_panel.add_child(status_row)
+	for icon_path in ["res://assets/ui/coin_icon.png", "res://assets/ui/energy_icon.png", "res://assets/ui/time_icon.png", "res://assets/ui/reputation_icon.png"]:
+		var status_icon := UI.image(icon_path)
+		status_icon.custom_minimum_size = Vector2(28, 28)
+		status_row.add_child(status_icon)
+	resources = UI.label("打开存档簿，开始经营。", 18)
+	resources.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	status_row.add_child(resources)
 	scene_holder = Control.new()
 	scene_holder.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	layout.add_child(scene_holder)
 	var footer := HBoxContainer.new()
 	layout.add_child(footer)
-	notice = MidnightUI.label("每个成功动作都会自动保存。", 15, MidnightUI.GOLD)
+	notice = UI.label("每个成功动作都会自动保存。", 15, UI.GOLD)
 	notice.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	notice.custom_minimum_size.y = 36
 	footer.add_child(notice)
-	var badge := MidnightUI.label("开发联调 · 本地对话", 12, MidnightUI.MUTED)
+	var badge := UI.label("开发联调 · 本地对话", 12, UI.MUTED)
 	badge.autowrap_mode = TextServer.AUTOWRAP_OFF
 	badge.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	footer.add_child(badge)
@@ -99,9 +109,9 @@ func _build_shell() -> void:
 	var navigation := HFlowContainer.new()
 	for page: String in PAGES:
 		var destination := page
-		navigation.add_child(MidnightUI.button(PAGES[page], func(): show_screen(destination)))
-	navigation.add_child(MidnightUI.button("候客与档案", open_people))
-	navigation.add_child(MidnightUI.button("取消等待回复", func(): GameState.cancel_dialogue()))
+		navigation.add_child(UI.button(PAGES[page], func(): show_screen(destination)))
+	navigation.add_child(UI.button("候客与档案", open_people))
+	navigation.add_child(UI.button("取消等待回复", func(): GameState.cancel_dialogue()))
 	layout.add_child(navigation)
 
 func show_screen(which: String) -> void:
@@ -259,10 +269,10 @@ func open_network_settings() -> void:
 	var box := VBoxContainer.new()
 	box.custom_minimum_size = Vector2(600,340)
 	dialog.add_child(box)
-	var description := MidnightUI.label("填写 AI 接口信息。设置只在本次游戏中有效。",18)
+	var description := UI.label("填写 AI 接口信息。设置只在本次游戏中有效。",18)
 	description.autowrap_mode = TextServer.AUTOWRAP_OFF
 	box.add_child(description)
-	var address_label := MidnightUI.label("URL",18)
+	var address_label := UI.label("URL",18)
 	address_label.autowrap_mode = TextServer.AUTOWRAP_OFF
 	box.add_child(address_label)
 	var url := LineEdit.new()
@@ -271,7 +281,7 @@ func open_network_settings() -> void:
 	var settings: Dictionary = GameState.connection_settings()
 	url.text = settings.url
 	box.add_child(url)
-	var url_note := MidnightUI.label("离开输入框时会自动检查并补全接口地址。",14,MidnightUI.MUTED)
+	var url_note := UI.label("离开输入框时会自动检查并补全接口地址。",14,UI.MUTED)
 	url_note.name = "ApiUrlNote"
 	url_note.custom_minimum_size = Vector2(600,22)
 	box.add_child(url_note)
@@ -286,14 +296,14 @@ func open_network_settings() -> void:
 		return true
 	url.text_changed.connect(func(_text: String): url_note.text = "离开输入框时会自动检查并补全接口地址。")
 	url.focus_exited.connect(check_url)
-	var model_label := MidnightUI.label("模型名称",18)
+	var model_label := UI.label("模型名称",18)
 	model_label.autowrap_mode = TextServer.AUTOWRAP_OFF
 	box.add_child(model_label)
 	var model := LineEdit.new()
 	model.name = "ApiModel"
 	model.text = settings.model
 	box.add_child(model)
-	var token_label := MidnightUI.label("API Key",18)
+	var token_label := UI.label("API Key",18)
 	token_label.autowrap_mode = TextServer.AUTOWRAP_OFF
 	box.add_child(token_label)
 	var token := LineEdit.new()
@@ -333,34 +343,37 @@ func _build_save_window() -> void:
 	save_window = Window.new()
 	save_window.visible = false
 	save_window.title = "存档簿 · 每家店都有自己的故事"
-	save_window.size = Vector2i(760, 510)
-	save_window.min_size = Vector2i(700, 490)
+	save_window.size = Vector2i(760, 550)
+	save_window.min_size = Vector2i(700, 520)
 	save_window.transient = true
 	save_window.exclusive = true
 	save_window.theme = theme
 	save_window.close_requested.connect(func(): save_window.hide())
 	add_child(save_window)
-	var margin := MidnightUI.margin(22)
+	var margin: MarginContainer = UI.margin(22)
 	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	save_window.add_child(margin)
 	var layout := VBoxContainer.new()
 	margin.add_child(layout)
-	layout.add_child(MidnightUI.label("打开你的零点", 27, MidnightUI.GOLD))
-	layout.add_child(MidnightUI.label("新建会创建独立存档。每次成功行动自动保存，关闭游戏后可以继续。", 16, MidnightUI.MUTED))
+	layout.add_child(UI.label("打开你的零点", 27, UI.GOLD))
+	var save_art := UI.image("res://assets/ui/report_notebook.png")
+	save_art.custom_minimum_size = Vector2(220, 60)
+	layout.add_child(save_art)
+	layout.add_child(UI.label("新建会创建独立存档。每次成功行动自动保存，关闭游戏后可以继续。", 16, UI.MUTED))
 	save_list = ItemList.new()
 	save_list.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	save_list.custom_minimum_size.y = 180
 	save_list.item_selected.connect(_select_save)
 	layout.add_child(save_list)
-	save_note = MidnightUI.label("", 15, MidnightUI.GOLD)
+	save_note = UI.label("", 15, UI.GOLD)
 	save_note.custom_minimum_size.y = 45
 	layout.add_child(save_note)
 	var buttons := HBoxContainer.new()
 	layout.add_child(buttons)
-	buttons.add_child(MidnightUI.button("继续所选存档", _load_selected))
-	buttons.add_child(MidnightUI.button("从备份恢复…", _confirm_backup))
-	buttons.add_child(MidnightUI.button("刷新", _refresh_saves))
-	delete_button = MidnightUI.button("删除所选存档…", _confirm_delete_save)
+	buttons.add_child(UI.button("继续所选存档", _load_selected))
+	buttons.add_child(UI.button("从备份恢复…", _confirm_backup))
+	buttons.add_child(UI.button("刷新", _refresh_saves))
+	delete_button = UI.button("删除所选存档…", _confirm_delete_save)
 	buttons.add_child(delete_button)
 	var create_row := HBoxContainer.new()
 	layout.add_child(create_row)
@@ -370,7 +383,7 @@ func _build_save_window() -> void:
 	save_name.max_length = 32
 	save_name.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	create_row.add_child(save_name)
-	create_row.add_child(MidnightUI.button("新建独立存档", func(): await run_action("new_game", {"name": save_name.text})))
+	create_row.add_child(UI.button("新建独立存档", func(): await run_action("new_game", {"name": save_name.text})))
 	backup_confirm = ConfirmationDialog.new()
 	backup_confirm.title = "确认恢复较早的备份"
 	backup_confirm.dialog_text = "备份可能比主档早一个或多个动作。\n恢复后资源、对话和牌面会回到备份时刻；最近行动可能丢失。\n确认恢复所选存档？"
@@ -462,20 +475,20 @@ func _build_history_window() -> void:
 	history_window.exclusive = true
 	history_window.close_requested.connect(func(): history_window.hide())
 	add_child(history_window)
-	var margin := MidnightUI.margin(22)
+	var margin: MarginContainer = UI.margin(22)
 	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	history_window.add_child(margin)
 	var box := VBoxContainer.new()
 	margin.add_child(box)
-	box.add_child(MidnightUI.label("来客手记 / 接待经历", 26, MidnightUI.GOLD))
-	history_text = MidnightUI.rich()
+	box.add_child(UI.label("来客手记 / 接待经历", 26, UI.GOLD))
+	history_text = UI.rich()
 	history_text.scroll_following = false
 	box.add_child(history_text)
 	history_details = CheckButton.new()
 	history_details.text = "显示术式的原始记录"
 	history_details.toggled.connect(_refresh_history)
 	box.add_child(history_details)
-	box.add_child(MidnightUI.button("合上手记", func(): history_window.hide()))
+	box.add_child(UI.button("合上手记", func(): history_window.hide()))
 
 func show_history() -> void:
 	history_details.set_pressed_no_signal(false)

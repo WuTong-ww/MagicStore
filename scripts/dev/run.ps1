@@ -34,6 +34,16 @@ try {
         [Environment]::SetEnvironmentVariable($name, $runtimePaths[$name], 'Process')
     }
     if ((& $engine --version) -ne $lock.version_output) { throw 'Engine version differs from toolchain.json.' }
+    # Fresh source ZIPs do not include Godot's generated .godot/imported cache.
+    # Import once before launching the runtime/editor so FontFile and PNG resources exist.
+    $fontImportDir = Join-Path $repo '.godot/imported'
+    $fontImportExists = $false
+    if (Test-Path -LiteralPath $fontImportDir) {
+        $fontImportExists = [bool](Get-ChildItem -LiteralPath $fontImportDir -Filter 'NotoSansSC*.fontdata' -ErrorAction SilentlyContinue | Select-Object -First 1)
+    }
+    if (!$fontImportExists -and !$Test) {
+        Invoke-Godot @('--headless', '--path', $repo, '--import')
+    }
     if ($Test) {
         Invoke-Godot @('--headless', '--path', $repo, '--import')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/smoke.gd')

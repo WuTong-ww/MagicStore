@@ -1,0 +1,100 @@
+{
+  "pack_version": "2026-11-20-art-integration-1",
+  "style": "温暖水彩手绘、细线墨稿、羊皮纸、旧木、苔绿与暖金；保留深青色 Godot UI 外框",
+  "logical_canvas": [
+    1280,
+    720
+  ],
+  "scene_masters": [
+    1920,
+    1080
+  ],
+  "scenes": {
+    "S01": {
+      "master": "assets/generated_scenes/S01_exterior_1920x1080.png",
+      "crop_3_2": "assets/generated_scenes/S01_exterior_900x600.png",
+      "crop_3_1": "assets/generated_scenes/S01_exterior_900x300.png",
+      "runtime": "assets/scene_exterior.png"
+    },
+    "S02": {
+      "master": "assets/generated_scenes/S02_frontdesk_1920x1080.png",
+      "crop_3_2": "assets/generated_scenes/S02_frontdesk_900x600.png",
+      "crop_3_1": "assets/generated_scenes/S02_frontdesk_900x300.png",
+      "runtime": "assets/shop_front_scene.png"
+    },
+    "S03": {
+      "master": "assets/generated_scenes/S03_consultation_1920x1080.png",
+      "crop_3_2": "assets/generated_scenes/S03_consultation_900x600.png",
+      "crop_3_1": "assets/generated_scenes/S03_consultation_900x300.png",
+      "runtime": "assets/consultation_banner.png"
+    },
+    "S04": {
+      "master": "assets/generated_scenes/S04_storage_1920x1080.png",
+      "crop_3_2": "assets/generated_scenes/S04_storage_900x600.png",
+      "crop_3_1": "assets/generated_scenes/S04_storage_900x300.png",
+      "runtime": "assets/scene_inventory.png"
+    },
+    "S05": {
+      "master": "assets/generated_scenes/S05_workshop_1920x1080.png",
+      "crop_3_2": "assets/generated_scenes/S05_workshop_900x600.png",
+      "crop_3_1": "assets/generated_scenes/S05_workshop_900x300.png",
+      "runtime": "assets/scene_workshop.png"
+    },
+    "S06": {
+      "master": "assets/generated_scenes/S06_market_1920x1080.png",
+      "crop_3_2": "assets/generated_scenes/S06_market_900x600.png",
+      "crop_3_1": "assets/generated_scenes/S06_market_900x300.png",
+      "runtime": "assets/scene_market.png"
+    },
+    "S07": {
+      "master": "assets/generated_scenes/S07_gathering_1920x1080.png",
+      "crop_3_2": "assets/generated_scenes/S07_gathering_900x600.png",
+      "crop_3_1": "assets/generated_scenes/S07_gathering_900x300.png",
+      "runtime": "assets/scene_gathering.png"
+    }
+  },
+  "portraits": {
+    "npc_character_reference_sheet": "assets/portraits/npc_character_reference_sheet.png",
+    "npc_lin_hesitant": "assets/portraits/npc_lin_hesitant.png",
+    "npc_lin_neutral": "assets/portraits/npc_lin_neutral.png",
+    "npc_lin_relieved": "assets/portraits/npc_lin_relieved.png",
+    "npc_reference_01": "assets/portraits/npc_reference_01.png",
+    "npc_reference_02": "assets/portraits/npc_reference_02.png",
+    "npc_reference_03": "assets/portraits/npc_reference_03.png",
+    "npc_reference_04": "assets/portraits/npc_reference_04.png",
+    "npc_reference_05": "assets/portraits/npc_reference_05.png",
+    "npc_reference_06": "assets/portraits/npc_reference_06.png",
+    "past_life_scene": "assets/portraits/past_life_scene.png"
+  },
+  "ui": {
+    "astrology_wheel": "assets/ui/astrology_wheel.png",
+    "bagua_board": "assets/ui/bagua_board.png",
+    "coin_icon": "assets/ui/coin_icon.png",
+    "energy_icon": "assets/ui/energy_icon.png",
+    "evidence_cards": "assets/ui/evidence_cards.png",
+    "evidence_divination_components": "assets/ui/evidence_divination_components.png",
+    "four_pillars_frame": "assets/ui/four_pillars_frame.png",
+    "lenormand_symbols": "assets/ui/lenormand_symbols.png",
+    "navigation_states": "assets/ui/navigation_states.png",
+    "receipt_widgets": "assets/ui/receipt_widgets.png",
+    "relationship_graph": "assets/ui/relationship_graph.png",
+    "report_notebook": "assets/ui/report_notebook.png",
+    "reputation_icon": "assets/ui/reputation_icon.png",
+    "service_transaction_widgets": "assets/ui/service_transaction_widgets.png",
+    "status_and_profile_widgets": "assets/ui/status_and_profile_widgets.png",
+    "status_widgets": "assets/ui/status_widgets.png",
+    "tarot_hermit": "assets/ui/tarot_hermit.png",
+    "tarot_sample_triptych": "assets/ui/tarot_sample_triptych.png",
+    "tarot_star": "assets/ui/tarot_star.png",
+    "tarot_temperance": "assets/ui/tarot_temperance.png",
+    "time_icon": "assets/ui/time_icon.png",
+    "ui_kit_reference_sheet": "assets/ui/ui_kit_reference_sheet.png",
+    "xiaoliu_grid": "assets/ui/xiaoliu_grid.png",
+    "ziwei_palace_frame": "assets/ui/ziwei_palace_frame.png"
+  },
+  "items": {
+    "atlas": "assets/items/inventory-atlas-v2.png",
+    "visual_map": "data/shop/visuals.json",
+    "catalog": "data/shop/catalog.json"
+  }
+}

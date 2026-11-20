@@ -1,5 +1,12 @@
 extends HBoxContainer
 
+const UI = preload("res://scripts/ui/ui_kit.gd")
+
+const CONSULT_BANNER := "res://assets/consultation_banner.png"
+const CONSULT_BANNER_FALLBACK := "res://assets/consultation.svg"
+const CONSULT_ROOM_ART := "res://assets/consultation_scene.png"
+const LIN_EXPRESSIONS := {"neutral":"res://assets/portraits/npc_lin_neutral.png", "hesitant":"res://assets/portraits/npc_lin_hesitant.png", "relieved":"res://assets/portraits/npc_lin_relieved.png"}
+
 const OracleGuide = preload("res://scripts/divination/oracle_guide.gd")
 
 var host
@@ -22,6 +29,8 @@ var service_button: Button
 var casebook_button: Button
 var shop_button: Button
 var card_backs: HBoxContainer
+var room_art: TextureRect
+var guest_portrait: TextureRect
 var _question_rows: Array = []
 var _question_visit_id := ""
 var _last_busy := false
@@ -34,7 +43,7 @@ func _process(_delta: float) -> void:
 
 func _ready() -> void:
 	add_theme_constant_override("separation", 18)
-	var conversation_panel := MidnightUI.panel()
+	var conversation_panel := UI.panel()
 	conversation_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	add_child(conversation_panel)
 	var conversation := VBoxContainer.new()
@@ -42,18 +51,25 @@ func _ready() -> void:
 	conversation_panel.add_child(conversation)
 	var title_row := HBoxContainer.new()
 	conversation.add_child(title_row)
-	title = MidnightUI.label("", 24, MidnightUI.GOLD)
+	title = UI.label("", 24, UI.GOLD)
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	title_row.add_child(title)
-	var room := MidnightUI.image("res://assets/consultation.svg")
-	room.custom_minimum_size = Vector2(144, 48)
-	title_row.add_child(room)
-	title_row.add_child(MidnightUI.button("← 返回前台", func(): host.show_screen("front")))
-	visit_label = MidnightUI.label("", 13, MidnightUI.MUTED)
+	title_row.add_child(UI.button("← 返回前台", func(): host.show_screen("front")))
+	visit_label = UI.label("", 13, UI.MUTED)
 	conversation.add_child(visit_label)
-	transcript = MidnightUI.rich()
+	var portrait_row := HBoxContainer.new()
+	conversation.add_child(portrait_row)
+	guest_portrait = UI.image("res://assets/portraits/npc_lin_neutral.png")
+	guest_portrait.custom_minimum_size = Vector2(82, 96)
+	guest_portrait.visible = false
+	portrait_row.add_child(guest_portrait)
+	room_art = UI.image(CONSULT_BANNER if ResourceLoader.exists(CONSULT_BANNER) else (CONSULT_ROOM_ART if ResourceLoader.exists(CONSULT_ROOM_ART) else CONSULT_BANNER_FALLBACK))
+	room_art.custom_minimum_size = Vector2(720, 240)
+	room_art.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	conversation.add_child(room_art)
+	transcript = UI.rich()
 	conversation.add_child(transcript)
-	clue_label = MidnightUI.label("", 14, MidnightUI.GOLD)
+	clue_label = UI.label("", 14, UI.GOLD)
 	clue_label.custom_minimum_size.y = 23
 	conversation.add_child(clue_label)
 	questions = HFlowContainer.new()
@@ -69,64 +85,64 @@ func _ready() -> void:
 	input.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY
 	input.gui_input.connect(_on_input_gui_input)
 	input_row.add_child(input)
-	send_button = MidnightUI.button("发送", _send_text)
+	send_button = UI.button("发送", _send_text)
 	input_row.add_child(send_button)
-	conversation.add_child(MidnightUI.label("回车发送 · Shift+回车换行 · 每次交谈用时 %d 分钟" % int(GameState.content.get("rules", {}).get("talk_minutes", 5)), 12, MidnightUI.MUTED))
-	var service_panel := MidnightUI.panel()
+	conversation.add_child(UI.label("回车发送 · Shift+回车换行 · 每次交谈用时 %d 分钟" % int(GameState.content.get("rules", {}).get("talk_minutes", 5)), 12, UI.MUTED))
+	var service_panel := UI.panel()
 	service_panel.custom_minimum_size.x = 350
 	add_child(service_panel)
 	var service := VBoxContainer.new()
 	service.add_theme_constant_override("separation", 4)
 	service_panel.add_child(service)
-	service.add_child(MidnightUI.label("问 卜 台", 17, MidnightUI.GOLD))
+	service.add_child(UI.label("问 卜 台", 17, UI.GOLD))
 	var card_row := HBoxContainer.new()
 	service.add_child(card_row)
 	card_backs = HBoxContainer.new()
 	card_row.add_child(card_backs)
 	for index in range(3):
-		var card_art := MidnightUI.image("res://assets/card_back.svg")
+		var card_art := UI.image("res://assets/card_back.svg")
 		card_art.custom_minimum_size = Vector2(25, 52)
 		card_backs.add_child(card_art)
 	var description := VBoxContainer.new()
 	description.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	card_row.add_child(description)
-	card_title = MidnightUI.label("尚未翻开的牌", 22)
+	card_title = UI.label("尚未翻开的牌", 22)
 	description.add_child(card_title)
-	cost_label = MidnightUI.label("", 15, MidnightUI.MUTED)
+	cost_label = UI.label("", 15, UI.MUTED)
 	description.add_child(cost_label)
-	card_text = MidnightUI.rich()
+	card_text = UI.rich()
 	card_text.scroll_following = false
 	card_text.custom_minimum_size.y = 58
 	service.add_child(card_text)
 	var service_row := HBoxContainer.new()
 	service.add_child(service_row)
-	reading_button = MidnightUI.button("塔罗报价", func(): host.open_divination("tarot"))
+	reading_button = UI.button("塔罗报价", func(): host.open_divination("tarot"))
 	reading_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	service_row.add_child(reading_button)
-	service_button = MidnightUI.button("全部术式", func(): host.open_divination("reading"))
+	service_button = UI.button("全部术式", func(): host.open_divination("reading"))
 	service_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	service_row.add_child(service_button)
-	service_summary = MidnightUI.label("", 13, MidnightUI.MUTED)
+	service_summary = UI.label("", 13, UI.MUTED)
 	service.add_child(service_summary)
-	casebook_button = MidnightUI.button("案例手记 · 预测与建议", func(): host.open_divination("casebook"))
+	casebook_button = UI.button("案例手记 · 预测与建议", func(): host.open_divination("casebook"))
 	service.add_child(casebook_button)
 	var shop_row := HBoxContainer.new()
 	service.add_child(shop_row)
-	shop_button = MidnightUI.button("商品与账目", func(): host.open_divination("shop"))
+	shop_button = UI.button("商品与账目", func(): host.open_divination("shop"))
 	shop_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	shop_row.add_child(shop_button)
-	var history := MidnightUI.button("往次记录", func(): host.show_history())
+	var history := UI.button("往次记录", func(): host.show_history())
 	history.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	shop_row.add_child(history)
 	var ending := HBoxContainer.new()
 	service.add_child(ending)
-	end_button = MidnightUI.button("结束接待", func(): await host.run_action("end_visit"))
+	end_button = UI.button("结束接待", func(): await host.run_action("end_visit"))
 	end_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	ending.add_child(end_button)
-	return_button = MidnightUI.button("约好下次", func(): host.confirm_return_visit())
+	return_button = UI.button("约好下次", func(): host.confirm_return_visit())
 	return_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	ending.add_child(return_button)
-	contact_button = MidnightUI.button("介绍熟人", func(): host.confirm_contact_invitation())
+	contact_button = UI.button("介绍熟人", func(): host.confirm_contact_invitation())
 	contact_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	contact_button.tooltip_text = "请当前来客帮忙介绍已经提到的熟人。"
 	ending.add_child(contact_button)
@@ -179,6 +195,18 @@ func refresh() -> void:
 	_last_busy = _interaction_busy()
 	var view: Dictionary = GameState.divination_view()
 	var guest: Dictionary = view.get("guest", {})
+	guest_portrait.visible = guest.get("npc_id", "") == "npc_lin"
+	if guest_portrait.visible:
+		var expression := "neutral"
+		for turn: Dictionary in visit.get("dialogue", []):
+			var line := str(turn.get("text", ""))
+			if line.contains("担心") or line.contains("犹豫") or line.contains("害怕"):
+				expression = "hesitant"
+			elif line.contains("放心") or line.contains("轻松") or line.contains("谢谢"):
+				expression = "relieved"
+		var portrait_path: String = LIN_EXPRESSIONS.get(expression, LIN_EXPRESSIONS.neutral)
+		if ResourceLoader.exists(portrait_path):
+			guest_portrait.texture = load(portrait_path)
 	title.text = "与 %s 的一席话" % guest.get("name", "来客")
 	visit_label.text = "%s  /  接待 %s" % [guest.get("case_title", ""), str(visit.get("visit_id", "")).right(8)] if active else "当前没有未结束接待，请返回前台。"
 	var lines: PackedStringArray = []
@@ -255,7 +283,7 @@ func _refresh_topics(topics: Array, visit_id: String = "") -> void:
 		_question_rows = topics.duplicate(true)
 		_question_visit_id = visit_id
 		for topic: Dictionary in topics:
-			var button := MidnightUI.button(topic.label, _submit_question.bind(visit_id,str(topic.topic_id),str(topic.label)))
+			var button := UI.button(topic.label, _submit_question.bind(visit_id,str(topic.topic_id),str(topic.label)))
 			button.add_theme_font_size_override("font_size", 18)
 			button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 			button.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING

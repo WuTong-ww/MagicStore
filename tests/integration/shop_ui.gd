@@ -133,7 +133,24 @@ func run() -> void:
 		buy.pressed.emit()
 		await settle()
 		check(int(game.state.player.coins) < before_coins and not game.shop_view().shop.ledger.is_empty(), "market button pays and records procurement")
-	await capture("market-after-purchase-1920")
+	var sell_tab := find_control(main.screen, func(node: Node) -> bool: return node is Button and node.text == "卖出原料") as Button
+	check(sell_tab != null, "market exposes a separate sell-material tab")
+	if sell_tab != null:
+		sell_tab.pressed.emit()
+		await settle()
+		var sell_button := find_control(main.screen, func(node: Node) -> bool: return node is Button and node.text == "出售 ×1") as Button
+		check(sell_button != null and not sell_button.disabled, "market sell tab enables selling available inventory")
+		if sell_button != null and not sell_button.disabled:
+			var before_sell := int(game.state.player.coins)
+			sell_button.pressed.emit()
+			await settle()
+			check(int(game.state.player.coins) > before_sell, "market sell action updates shared wallet")
+	await capture("market-after-trade-1920")
+	main.show_screen("gathering")
+	await settle()
+	check(find_control(main.screen, func(node: Node) -> bool: return node is Button and node.text == "前往采集 · 河畔小径") != null, "gathering page exposes riverside point")
+	check(find_control(main.screen, func(node: Node) -> bool: return node is Button and node.text == "前往采集 · 林缘草地") != null, "gathering page exposes woodland point")
+	await capture("gathering-1920")
 	await capture_icon_gallery(visuals)
 	# The production front desk also enters the real A queue, never a fixture picker.
 	await main.run_action("new_game", {"name": "前台真实候客入口"})

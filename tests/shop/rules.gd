@@ -11,6 +11,7 @@ var data: Dictionary
 func _initialize() -> void:
 	data = Shop.load_config()
 	check(not data.is_empty(), "configuration loads")
+	check(data.gather_sites.has("riverside") and data.gather_sites.has("woodland_glade"), "two independent gathering locations are configured")
 	if data.is_empty():
 		quit(1)
 		return
@@ -69,6 +70,8 @@ func _initialize() -> void:
 	check(act("gather_material").success and act("gather_material").success and act("gather_material").success, "new day resource has configured three harvests")
 	check(not act("gather_material").success, "site daily stock exhausts")
 	check(int(state.player.items.moon_dust) == 4, "reputation reveals rare gather resource")
+	check(act("gather_material", {"site_id":"woodland_glade"}).success, "second gathering location uses the same validated inventory flow")
+	check(int(state.player.items.lavender) >= 5 and int(state.player.items.quartz) >= 1, "woodland gathering yields its configured herbs and quartz")
 	_effect_tests()
 	_use_tests()
 	_shared_rules_tests()

@@ -1,4 +1,6 @@
 extends Control
+
+const UI = preload("res://scripts/ui/ui_kit.gd")
 ## Seven public destinations share layout, while all actions go through GameState.
 
 @export var page := "inventory"
@@ -6,9 +8,16 @@ var host
 var body: VBoxContainer
 var show_details := false
 var visuals: Dictionary = {}
-const TITLES := {"exterior":"灯下的杂货铺", "inventory":"储物柜与经营账簿", "workshop":"需求、研究与制作", "market":"原料商店", "gathering":"河畔采集"}
+var cabinet_open := true
+var inventory_filter := "all"
+var market_mode := "buy"
+var market_quantity := 1
+var market_action_buttons: Array[Button] = []
+const TITLES := {"exterior":"灯下的杂货铺", "inventory":"储物柜与经营账簿", "workshop":"需求、研究与制作", "market":"原料商店", "gathering":"外出采集"}
 const SOURCES := {"purchase":"采购", "gather":"采集", "gift":"顾客赠料", "craft":"制作", "legacy_or_case":"开局或案例", "legacy":"开局或旧档", "case_payment":"问卜报酬"}
 const ICONS := {"restorative_draught":0,"clarity_crystal":1,"calming_incense":2,"lavender":3,"quartz":4,"moon_dust":5,"spring_water":6,"silver_leaf":7,"bookmark":8}
+const SCENE_ART := {"exterior":"res://assets/scene_exterior.png", "inventory":"res://assets/scene_inventory.png", "workshop":"res://assets/scene_workshop.png", "market":"res://assets/scene_market.png", "gathering":"res://assets/scene_gathering.png"}
+const SCENE_ART_FALLBACK := {"exterior":"res://assets/shop_front.svg"}
 
 func _ready() -> void:
 	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://data/shop/visuals.json"))
@@ -30,15 +39,17 @@ func refresh() -> void:
 		body.remove_child(child)
 		child.queue_free()
 	text(TITLES.get(page, "店铺"), 26)
+	_add_scene_art(page, Vector2(900, 600))
 	var view: Dictionary = GameState.shop_view()
 	if view.is_empty():
 		text("请先打开存档簿，新建或继续经营。")
 		return
 	match page:
 		"exterior":
-			var art := MidnightUI.image("res://assets/shop_front.svg")
-			art.custom_minimum_size = Vector2(500, 220)
-			body.add_child(art)
+			var snapshot: Dictionary = GameState.player_snapshot()
+			var minute := int(snapshot.get("clock_minutes", 540)) % 1440
+			var is_open := minute >= 540 and minute < 1320
+			text("营业牌：%s · 当前时间 %02d:%02d" % ["营业中" if is_open else "今日打烊", int(minute / 60), minute % 60])
 			text("灯已经亮起。候客、预约和旧故事都在这里继续。")
 			button("看看正在等候的来客", func(): host.open_people())
 			button("等待 30 分钟", func(): await act("wait", {"minutes":30}))
@@ -50,23 +61,39 @@ func refresh() -> void:
 		"market":
 			_market(view)
 		"gathering":
-			for id: String in view.catalog.gather_sites:
-				var site: Dictionary = view.catalog.gather_sites[id]
-				text("%s · %d 分钟 · 精力 %d · 每日最多 %d 次" % [site.name, site.minutes, site.energy, site.daily_limit])
-				text("开放 09:00–18:00，收集山泉水与月见草；口碑足够时能找到稀有材料。")
-				button("前往" + site.name, func(): await act("gather_material", {"site_id":id}))
+			_gathering(view)
 
 func _inventory(view: Dictionary) -> void:
 	text("口碑 %d · 经营经验 %d · 复盘成长 %d · 当前客流加成 %d" % [view.shop.reputation, view.shop.experience, view.shop.review_growth, view.arrival_bonus])
+	button("合上储物柜" if cabinet_open else "打开储物柜", func():
+		cabinet_open = not cabinet_open
+		refresh())
+	if not cabinet_open:
+		text("柜门已经合上。打开后可查看商品、原料、来源与用途。", 16)
+		return
+	var filter := OptionButton.new()
+	filter.add_item("全部物品")
+	filter.set_item_metadata(0, "all")
+	filter.add_item("原料")
+	filter.set_item_metadata(1, "material")
+	filter.add_item("成品商品")
+	filter.set_item_metadata(2, "product")
+	filter.select(["all", "material", "product"].find(inventory_filter))
+	filter.item_selected.connect(func(index: int):
+		inventory_filter = str(filter.get_item_metadata(index))
+		refresh())
+	body.add_child(filter)
 	for id: String in view.items:
 		var item: Dictionary = view.catalog.items.get(id, {"name": {"bookmark":"纸纹书签","silver_leaf":"银叶书夹"}.get(id, id)})
+		if inventory_filter != "all" and item.get("kind", "") != inventory_filter:
+			continue
 		var row := _item_row(id, "%s × %d" % [item.name, view.items[id]])
 		if item.get("kind") == "material":
-			row.add_child(MidnightUI.button("出售一份", func(): await act("sell_material", {"item_id":id})))
+			row.add_child(UI.button("出售一份", func(): await act("sell_material", {"item_id":id})))
 		elif item.get("kind") == "product":
-			row.add_child(MidnightUI.button("出售给当前来客", func(): await act("sell_product", {"item_id":id})))
+			row.add_child(UI.button("出售给当前来客", func(): await act("sell_product", {"item_id":id})))
 			if item.effect.kind != "event":
-				row.add_child(MidnightUI.button("店长使用", func(): await act("use_product", {"item_id":id})))
+				row.add_child(UI.button("店长使用", func(): await act("use_product", {"item_id":id})))
 	for entry: Dictionary in view.shop.ledger:
 		if entry.category == "product" and not entry.result.get("used", false):
 			var sale: Dictionary = entry.result
@@ -113,19 +140,91 @@ func _workshop(view: Dictionary) -> void:
 		text(str(demand.get("text","")) + (" · " + str(demand.visit_id) if show_details else ""),18)
 
 func _market(view: Dictionary) -> void:
-	text("采购消耗 10 分钟与 2 精力，原料直接进入储物柜。")
+	var player: Dictionary = GameState.player_snapshot().get("player", {})
+	text("当前金币 %d · 采购消耗 10 分钟与 2 精力；出售消耗 5 分钟。" % int(player.get("coins", 0)))
+	var tabs := HBoxContainer.new()
+	body.add_child(tabs)
+	tabs.add_child(UI.button("买入原料", func():
+		market_mode = "buy"
+		refresh()))
+	tabs.add_child(UI.button("卖出原料", func():
+		market_mode = "sell"
+		refresh()))
+	var quantity_row := HBoxContainer.new()
+	body.add_child(quantity_row)
+	quantity_row.add_child(UI.label("数量", 16))
+	market_action_buttons.clear()
+	var quantity := SpinBox.new()
+	quantity.min_value = 1
+	quantity.max_value = 99
+	quantity.step = 1
+	quantity.value = market_quantity
+	quantity.value_changed.connect(func(value: float):
+		market_quantity = int(value)
+		_update_market_action_buttons())
+	quantity_row.add_child(quantity)
+	text("买入：原料会进入储物柜。卖出：仅出售现有库存，不会出售成品。", 15)
 	for id: String in view.catalog.items:
 		var item: Dictionary = view.catalog.items[id]
 		if item.kind != "material":
 			continue
-		var row := _item_row(id, "%s · %d 金币" % [item.name,item.buy])
-		row.add_child(MidnightUI.button("购买一份", func(): await act("procure_item", {"item_id":id})))
+		var stock := int(view.items.get(id, 0))
+		var unit_price := int(item.buy if market_mode == "buy" else item.sell)
+		var row := _item_row(id, "%s · %d 金币/份 · 库存 %d" % [item.name, unit_price, stock])
+		if market_mode == "buy":
+			var buy_label := "购买一份" if market_quantity == 1 else "购买 ×%d" % market_quantity
+			var buy_button := UI.button(buy_label, func(): await act("procure_item", {"item_id":id,"quantity":market_quantity}))
+			buy_button.set_meta("item_id", id)
+			buy_button.set_meta("trade_kind", "buy")
+			if int(view.shop.reputation) < int(item.get("requires_reputation", 0)):
+				buy_button.disabled = true
+				buy_button.tooltip_text = "需要口碑 %d" % int(item.requires_reputation)
+			market_action_buttons.append(buy_button)
+			row.add_child(buy_button)
+		else:
+			var sell_button := UI.button("出售 ×%d" % market_quantity, func(): await act("sell_material", {"item_id":id,"quantity":market_quantity}))
+			sell_button.set_meta("item_id", id)
+			sell_button.set_meta("trade_kind", "sell")
+			sell_button.disabled = stock < market_quantity
+			market_action_buttons.append(sell_button)
+			row.add_child(sell_button)
 		if item.has("requires_reputation"):
-			text("解锁口碑：%d" % item.requires_reputation,18)
-	for visit: Dictionary in GameState.player_snapshot().get("visits", []):
-		if visit.phase == "ended" and visit.visit_id not in view.shop.gift_visits:
-			var guest: Dictionary = GameState.divination_view(visit.visit_id).get("guest", {})
-			button("收下" + str(guest.get("name","客人")) + "留下的原料", func(): await act("receive_material_gift", {"visit_id":visit.visit_id}))
+			text("%s · 解锁口碑 %d" % [item.name, int(item.requires_reputation)], 14)
+	if market_mode == "buy":
+		for visit: Dictionary in GameState.player_snapshot().get("visits", []):
+			if visit.phase == "ended" and visit.visit_id not in view.shop.gift_visits:
+				var guest: Dictionary = GameState.divination_view(visit.visit_id).get("guest", {})
+				button("收下" + str(guest.get("name","客人")) + "留下的原料", func(): await act("receive_material_gift", {"visit_id":visit.visit_id}))
+
+
+func _update_market_action_buttons() -> void:
+	var stock_view: Dictionary = GameState.shop_view().get("items", {})
+	for trade_button: Button in market_action_buttons:
+		var item_id := str(trade_button.get_meta("item_id", ""))
+		var kind := str(trade_button.get_meta("trade_kind", "buy"))
+		if kind == "buy":
+			trade_button.text = "购买一份" if market_quantity == 1 else "购买 ×%d" % market_quantity
+		else:
+			trade_button.text = "出售 ×%d" % market_quantity
+			trade_button.disabled = int(stock_view.get(item_id, 0)) < market_quantity
+
+func _gathering(view: Dictionary) -> void:
+	text("选择一个采集点。不同地点的材料、耗时和每日次数独立计算。")
+	var site_ids: Array = view.catalog.gather_sites.keys()
+	site_ids.sort()
+	for id: String in site_ids:
+		var site: Dictionary = view.catalog.gather_sites[id]
+		var drops: PackedStringArray = []
+		for item_id: String in site.drops:
+			drops.append("%s ×%d" % [view.catalog.items[item_id].name, int(site.drops[item_id])])
+		var panel := UI.panel()
+		body.add_child(panel)
+		var column := VBoxContainer.new()
+		panel.add_child(column)
+		column.add_child(UI.label(site.name, 20, UI.GOLD))
+		column.add_child(UI.label("可能获得：%s" % "、".join(drops), 15))
+		column.add_child(UI.label("耗时 %d 分钟 · 精力 %d · 每日最多 %d 次 · 开放 %02d:%02d–%02d:%02d" % [int(site.minutes), int(site.energy), int(site.daily_limit), int(int(site.opening) / 60), int(site.opening) % 60, int(int(site.closing) / 60), int(site.closing) % 60], 14, UI.MUTED))
+		column.add_child(UI.button("前往采集 · " + site.name, func(): await act("gather_material", {"site_id":id})))
 
 func _item_row(id: String, label: String) -> HBoxContainer:
 	var row := HBoxContainer.new()
@@ -144,16 +243,28 @@ func _item_row(id: String, label: String) -> HBoxContainer:
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		icon.custom_minimum_size = Vector2(64,64)
 		row.add_child(icon)
-	var line := MidnightUI.label(label,20)
+	var line := UI.label(label,20)
 	line.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(line)
 	return row
 
 func text(value: String, size: int = 18) -> void:
-	body.add_child(MidnightUI.label(value,size))
+	body.add_child(UI.label(value,size))
 
 func button(value: String, callback: Callable) -> void:
-	body.add_child(MidnightUI.button(value,callback))
+	body.add_child(UI.button(value,callback))
 
 func act(kind: String, extra: Dictionary = {}) -> void:
 	await host.run_action(kind,extra)
+
+func _add_scene_art(page_key: String, min_size: Vector2 = Vector2(900, 320)) -> void:
+	var path: String = SCENE_ART.get(page_key, "")
+	if path.is_empty() or not ResourceLoader.exists(path):
+		path = SCENE_ART_FALLBACK.get(page_key, "")
+	if path.is_empty() or not ResourceLoader.exists(path):
+		return
+	var art := UI.image(path)
+	art.custom_minimum_size = min_size
+	art.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	body.add_child(art)
+

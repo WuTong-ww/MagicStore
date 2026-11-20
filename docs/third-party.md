@@ -19,3 +19,10 @@ Godot Engine **4.6.3.stable.official.7d41c59c4**，MIT。官方引擎与 Windows
 `assets/shop_front.svg`、`consultation.svg`、`portrait_lin.svg`、`card_back.svg`、`icon.svg` 为本次工程制作的原创矢量占位图；林照晚、案例、对白与牌面解释为本次原创开发内容。未复制影视或其他游戏人物。根仓库未替团队选择整体开源许可证；对外开放源代码许可由仓库所有者决定，第三方许可继续独立适用。
 
 不含在线 AI、密钥、客户资料、账号配置或真实存档。
+
+
+## 本次新增原创 AI 美术素材（2026-11-20）
+
+`assets/generated_scenes/`、`assets/portraits/`、`assets/ui/` 中的七个场景背景、林照晚表情、人物设定参考、术式插画和 UI 图集由本项目使用 OpenAI 图像生成工具按《零点杂货铺》已确认的水彩手绘、羊皮纸、旧木、苔绿与暖金风格生成并裁切整理。素材清单见 `assets/ART_ASSET_MANIFEST.json`，接入和运行用途见 `docs/ART_ASSET_GUIDE.md`。这些素材不是从影视、小说插画或其他游戏提取的角色图；NPC 参考稿用于本项目原创角色造型，不代表已绑定到具体随机 NPC。
+
+`assets/items/inventory-atlas-v2.png` 为原项目已有的原创商品/原料图标图集，仍由 `data/shop/visuals.json` 映射到统一 `item_id`；本轮没有复制或替换第三方商品图标。
