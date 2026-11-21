@@ -1,0 +1,7681 @@
+{
+  "version": 1,
+  "kind": "real_pixel_extraction",
+  "processing_script": "tools/art/real_scene_layers.py",
+  "scene_id": "S07",
+  "period": "night",
+  "revision": "real2",
+  "inputs": {
+    "original": {
+      "path": "assets/_incoming/a1r_real/S07/night_C.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "ab5895f553dbcfe0103d08bdf0c30912f360fc31df1c2117b57e7744f9080ea7"
+    },
+    "raw_cleanplate": {
+      "path": "assets/_incoming/a1r_real/S07/night_raw_cleanplate.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "67e99d8856e54afbac9cbc2f9ead2d4293932522dfbc293896f48974641a9db2"
+    },
+    "style": {
+      "path": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "391ef0b702653eaf7a2bf98f90595bb12502587b6bcc9f0b5653aecdf9766833"
+    }
+  },
+  "specification": {
+    "version": 1,
+    "scene_id": "S07",
+    "period": "night",
+    "revision": "real2",
+    "native_size": [
+      1672,
+      941
+    ],
+    "original_path": "assets/_incoming/a1r_real/S07/night_C.png",
+    "raw_cleanplate_path": "assets/_incoming/a1r_real/S07/night_raw_cleanplate.png",
+    "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+    "composite_prompt": "Use case: lighting-weather.\nAsset type: S07 riverside NIGHT full composite C, matching the existing DAY composite.\nInput Image 1 is the exact EDIT TARGET. Change ONLY time of day into a quiet readable early night. Preserve the exact camera, composition, tree trunk and branch structure, tree canopy outline, all grass tufts and flowers, three pale stones, bridge arch and masonry shapes, curving path, riverbank boundaries, horizon, water brush marks, crop and native dimensions.\nUse muted dusty-teal and warm-grey night sky and cool shadows; the path and bridge remain visible in soft ambient night light. Water is slightly deeper dusty teal, still a matte gouache surface. No actual light source is visible and none should be added: no moon, stars, lamps, lanterns, fireflies, people, animals or bright sparkles. No magical glow or reflections. Do not add foliage, buildings or extra rocks. The rightmost 30 percent and broad bottom area retain their low detail.\nMaintain gouache picture-book illustration, visible strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes and slightly imperfect perspective, seven muted color families (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), cool-tinted shadows, few props, one focal point, matte paper texture.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria, text, letters, numbers, UI, labels, blank plaques, frames, borders.",
+    "cleanplate_prompt": "Use case: precise-object-edit.\nAsset type: S07 NIGHT raw cleanplate B_all for true extracted foreground grass and tree-canopy layers.\nInput Image 1 is the exact EDIT TARGET. Remove ONLY the following:\n1. All leaves of the foreground tree canopy across the upper-left/top edge. Keep the main tree trunk and thick bare branch structure in their original positions and fill behind removed leaves with the original painted sky.\n2. The foreground grass tufts along the lower-left riverbank and beside the curving path, including the small wildflower stalks that grow among those tufts. Fill behind them with the plausible plain earth path/bank or water immediately behind the specific blades.\nKeep the three pale stones and their moss, the static tree trunk/branches, bridge masonry, every riverbank boundary, background distant vegetation, path position and sky/clouds unchanged. IMPORTANT: retain the water itself and its existing painted brush marks; do not erase the river, replace it with land, or invent water waves. Water will later use an exact region mask from this original composite, not a regenerated ripple image.\nKeep NIGHT lighting, color, camera, crop and same native dimensions; preserve unrelated pixels as closely as possible. Maintain the matte gouache medium, visible dry-brush strokes, slightly wobbly colored-pencil outline and muted seven-family palette.\nNo new objects, people, animals, text, numbers, UI, plaques, borders, glow, bloom, bright sparkles or photorealism.\nThe target is NIGHT: preserve its dim cool-grey/teal ambient light and dark sky, with no added moon, stars, lamps or fireflies. Do not turn it into daylight.",
+    "annotation_notes": "Second manual annotation: S01 includes full flower racemes and lower canopy leaves; S07 includes complete foreground flower stalks and excludes grass polygons from the retained-original water mask. No independently redrawn Li.",
+    "layers": [
+      {
+        "id": "water_mask",
+        "preserve_base": true,
+        "polygons": [
+          [
+            [
+              435,
+              477
+            ],
+            [
+              673,
+              464
+            ],
+            [
+              1671,
+              448
+            ],
+            [
+              1671,
+              880
+            ],
+            [
+              1445,
+              875
+            ],
+            [
+              1184,
+              840
+            ],
+            [
+              983,
+              795
+            ],
+            [
+              815,
+              747
+            ],
+            [
+              666,
+              687
+            ],
+            [
+              529,
+              615
+            ],
+            [
+              405,
+              551
+            ],
+            [
+              368,
+              518
+            ]
+          ]
+        ],
+        "pivot_px": [
+          1020,
+          667
+        ],
+        "z_index": 1,
+        "motion": {
+          "type": "flow",
+          "parameters": {
+            "speed": 0.004
+          }
+        },
+        "holes": [
+          [
+            [
+              0,
+              630
+            ],
+            [
+              41,
+              609
+            ],
+            [
+              53,
+              647
+            ],
+            [
+              78,
+              575
+            ],
+            [
+              89,
+              648
+            ],
+            [
+              128,
+              533
+            ],
+            [
+              116,
+              605
+            ],
+            [
+              161,
+              544
+            ],
+            [
+              141,
+              617
+            ],
+            [
+              184,
+              576
+            ],
+            [
+              164,
+              641
+            ],
+            [
+              198,
+              642
+            ],
+            [
+              218,
+              603
+            ],
+            [
+              211,
+              645
+            ],
+            [
+              231,
+              594
+            ],
+            [
+              249,
+              613
+            ],
+            [
+              274,
+              580
+            ],
+            [
+              287,
+              609
+            ],
+            [
+              285,
+              641
+            ],
+            [
+              307,
+              618
+            ],
+            [
+              300,
+              656
+            ],
+            [
+              312,
+              651
+            ],
+            [
+              311,
+              684
+            ],
+            [
+              349,
+              697
+            ],
+            [
+              371,
+              741
+            ],
+            [
+              337,
+              764
+            ],
+            [
+              314,
+              780
+            ],
+            [
+              328,
+              808
+            ],
+            [
+              280,
+              842
+            ],
+            [
+              207,
+              844
+            ],
+            [
+              147,
+              821
+            ],
+            [
+              100,
+              824
+            ],
+            [
+              102,
+              854
+            ],
+            [
+              157,
+              876
+            ],
+            [
+              125,
+              882
+            ],
+            [
+              94,
+              899
+            ],
+            [
+              98,
+              925
+            ],
+            [
+              67,
+              940
+            ],
+            [
+              0,
+              940
+            ]
+          ],
+          [
+            [
+              350,
+              534
+            ],
+            [
+              350,
+              493
+            ],
+            [
+              362,
+              519
+            ],
+            [
+              378,
+              502
+            ],
+            [
+              374,
+              535
+            ],
+            [
+              395,
+              513
+            ],
+            [
+              385,
+              546
+            ],
+            [
+              414,
+              527
+            ],
+            [
+              403,
+              551
+            ],
+            [
+              379,
+              558
+            ]
+          ],
+          [
+            [
+              470,
+              588
+            ],
+            [
+              474,
+              554
+            ],
+            [
+              488,
+              579
+            ],
+            [
+              498,
+              539
+            ],
+            [
+              504,
+              571
+            ],
+            [
+              541,
+              541
+            ],
+            [
+              519,
+              582
+            ],
+            [
+              557,
+              565
+            ],
+            [
+              535,
+              594
+            ],
+            [
+              564,
+              588
+            ],
+            [
+              555,
+              611
+            ],
+            [
+              510,
+              612
+            ],
+            [
+              486,
+              602
+            ]
+          ],
+          [
+            [
+              605,
+              653
+            ],
+            [
+              610,
+              624
+            ],
+            [
+              619,
+              646
+            ],
+            [
+              629,
+              612
+            ],
+            [
+              634,
+              646
+            ],
+            [
+              654,
+              621
+            ],
+            [
+              645,
+              653
+            ],
+            [
+              669,
+              648
+            ],
+            [
+              656,
+              671
+            ],
+            [
+              623,
+              675
+            ]
+          ],
+          [
+            [
+              684,
+              709
+            ],
+            [
+              695,
+              681
+            ],
+            [
+              699,
+              706
+            ],
+            [
+              727,
+              661
+            ],
+            [
+              724,
+              695
+            ],
+            [
+              754,
+              678
+            ],
+            [
+              739,
+              708
+            ],
+            [
+              778,
+              706
+            ],
+            [
+              754,
+              728
+            ],
+            [
+              713,
+              731
+            ]
+          ],
+          [
+            [
+              210,
+              576
+            ],
+            [
+              242,
+              577
+            ],
+            [
+              265,
+              569
+            ],
+            [
+              286,
+              575
+            ],
+            [
+              296,
+              604
+            ],
+            [
+              316,
+              621
+            ],
+            [
+              313,
+              664
+            ],
+            [
+              303,
+              705
+            ],
+            [
+              289,
+              737
+            ],
+            [
+              229,
+              733
+            ],
+            [
+              214,
+              689
+            ],
+            [
+              215,
+              647
+            ],
+            [
+              208,
+              625
+            ]
+          ]
+        ]
+      },
+      {
+        "id": "tree_canopy",
+        "polygons": [
+          [
+            [
+              0,
+              0
+            ],
+            [
+              876,
+              0
+            ],
+            [
+              867,
+              22
+            ],
+            [
+              835,
+              25
+            ],
+            [
+              830,
+              58
+            ],
+            [
+              803,
+              65
+            ],
+            [
+              790,
+              103
+            ],
+            [
+              751,
+              124
+            ],
+            [
+              718,
+              153
+            ],
+            [
+              689,
+              151
+            ],
+            [
+              672,
+              179
+            ],
+            [
+              636,
+              176
+            ],
+            [
+              624,
+              200
+            ],
+            [
+              583,
+              198
+            ],
+            [
+              567,
+              218
+            ],
+            [
+              534,
+              203
+            ],
+            [
+              510,
+              223
+            ],
+            [
+              472,
+              210
+            ],
+            [
+              457,
+              236
+            ],
+            [
+              430,
+              232
+            ],
+            [
+              415,
+              254
+            ],
+            [
+              376,
+              257
+            ],
+            [
+              362,
+              247
+            ],
+            [
+              340,
+              266
+            ],
+            [
+              313,
+              251
+            ],
+            [
+              294,
+              236
+            ],
+            [
+              271,
+              248
+            ],
+            [
+              255,
+              222
+            ],
+            [
+              224,
+              222
+            ],
+            [
+              215,
+              190
+            ],
+            [
+              177,
+              181
+            ],
+            [
+              160,
+              155
+            ],
+            [
+              134,
+              150
+            ],
+            [
+              122,
+              122
+            ],
+            [
+              95,
+              125
+            ],
+            [
+              85,
+              102
+            ],
+            [
+              57,
+              110
+            ],
+            [
+              40,
+              88
+            ],
+            [
+              17,
+              93
+            ],
+            [
+              0,
+              210
+            ]
+          ]
+        ],
+        "holes": [
+          [
+            [
+              97,
+              271
+            ],
+            [
+              148,
+              259
+            ],
+            [
+              194,
+              176
+            ],
+            [
+              233,
+              120
+            ],
+            [
+              278,
+              65
+            ],
+            [
+              310,
+              33
+            ],
+            [
+              275,
+              18
+            ],
+            [
+              250,
+              53
+            ],
+            [
+              231,
+              23
+            ],
+            [
+              215,
+              42
+            ],
+            [
+              193,
+              22
+            ],
+            [
+              173,
+              46
+            ],
+            [
+              149,
+              54
+            ],
+            [
+              121,
+              85
+            ],
+            [
+              96,
+              132
+            ],
+            [
+              60,
+              80
+            ],
+            [
+              32,
+              64
+            ],
+            [
+              18,
+              73
+            ],
+            [
+              50,
+              123
+            ],
+            [
+              62,
+              184
+            ],
+            [
+              56,
+              237
+            ]
+          ],
+          [
+            [
+              135,
+              241
+            ],
+            [
+              159,
+              269
+            ],
+            [
+              254,
+              200
+            ],
+            [
+              322,
+              170
+            ],
+            [
+              387,
+              133
+            ],
+            [
+              430,
+              119
+            ],
+            [
+              488,
+              98
+            ],
+            [
+              566,
+              67
+            ],
+            [
+              560,
+              60
+            ],
+            [
+              492,
+              83
+            ],
+            [
+              445,
+              99
+            ],
+            [
+              432,
+              75
+            ],
+            [
+              421,
+              101
+            ],
+            [
+              388,
+              111
+            ],
+            [
+              374,
+              69
+            ],
+            [
+              365,
+              67
+            ],
+            [
+              348,
+              117
+            ],
+            [
+              313,
+              136
+            ],
+            [
+              279,
+              146
+            ],
+            [
+              241,
+              165
+            ],
+            [
+              207,
+              185
+            ],
+            [
+              167,
+              217
+            ]
+          ]
+        ],
+        "pivot_px": [
+          184,
+          210
+        ],
+        "z_index": 2,
+        "motion": {
+          "type": "sway_shader",
+          "parameters": {
+            "amplitude": 1.3,
+            "frequency": 0.19
+          }
+        }
+      },
+      {
+        "id": "grass",
+        "polygons": [
+          [
+            [
+              0,
+              630
+            ],
+            [
+              41,
+              609
+            ],
+            [
+              53,
+              647
+            ],
+            [
+              78,
+              575
+            ],
+            [
+              89,
+              648
+            ],
+            [
+              128,
+              533
+            ],
+            [
+              116,
+              605
+            ],
+            [
+              161,
+              544
+            ],
+            [
+              141,
+              617
+            ],
+            [
+              184,
+              576
+            ],
+            [
+              164,
+              641
+            ],
+            [
+              198,
+              642
+            ],
+            [
+              218,
+              603
+            ],
+            [
+              211,
+              645
+            ],
+            [
+              231,
+              594
+            ],
+            [
+              249,
+              613
+            ],
+            [
+              274,
+              580
+            ],
+            [
+              287,
+              609
+            ],
+            [
+              285,
+              641
+            ],
+            [
+              307,
+              618
+            ],
+            [
+              300,
+              656
+            ],
+            [
+              312,
+              651
+            ],
+            [
+              311,
+              684
+            ],
+            [
+              349,
+              697
+            ],
+            [
+              371,
+              741
+            ],
+            [
+              337,
+              764
+            ],
+            [
+              314,
+              780
+            ],
+            [
+              328,
+              808
+            ],
+            [
+              280,
+              842
+            ],
+            [
+              207,
+              844
+            ],
+            [
+              147,
+              821
+            ],
+            [
+              100,
+              824
+            ],
+            [
+              102,
+              854
+            ],
+            [
+              157,
+              876
+            ],
+            [
+              125,
+              882
+            ],
+            [
+              94,
+              899
+            ],
+            [
+              98,
+              925
+            ],
+            [
+              67,
+              940
+            ],
+            [
+              0,
+              940
+            ]
+          ],
+          [
+            [
+              350,
+              534
+            ],
+            [
+              350,
+              493
+            ],
+            [
+              362,
+              519
+            ],
+            [
+              378,
+              502
+            ],
+            [
+              374,
+              535
+            ],
+            [
+              395,
+              513
+            ],
+            [
+              385,
+              546
+            ],
+            [
+              414,
+              527
+            ],
+            [
+              403,
+              551
+            ],
+            [
+              379,
+              558
+            ]
+          ],
+          [
+            [
+              470,
+              588
+            ],
+            [
+              474,
+              554
+            ],
+            [
+              488,
+              579
+            ],
+            [
+              498,
+              539
+            ],
+            [
+              504,
+              571
+            ],
+            [
+              541,
+              541
+            ],
+            [
+              519,
+              582
+            ],
+            [
+              557,
+              565
+            ],
+            [
+              535,
+              594
+            ],
+            [
+              564,
+              588
+            ],
+            [
+              555,
+              611
+            ],
+            [
+              510,
+              612
+            ],
+            [
+              486,
+              602
+            ]
+          ],
+          [
+            [
+              605,
+              653
+            ],
+            [
+              610,
+              624
+            ],
+            [
+              619,
+              646
+            ],
+            [
+              629,
+              612
+            ],
+            [
+              634,
+              646
+            ],
+            [
+              654,
+              621
+            ],
+            [
+              645,
+              653
+            ],
+            [
+              669,
+              648
+            ],
+            [
+              656,
+              671
+            ],
+            [
+              623,
+              675
+            ]
+          ],
+          [
+            [
+              684,
+              709
+            ],
+            [
+              695,
+              681
+            ],
+            [
+              699,
+              706
+            ],
+            [
+              727,
+              661
+            ],
+            [
+              724,
+              695
+            ],
+            [
+              754,
+              678
+            ],
+            [
+              739,
+              708
+            ],
+            [
+              778,
+              706
+            ],
+            [
+              754,
+              728
+            ],
+            [
+              713,
+              731
+            ]
+          ],
+          [
+            [
+              210,
+              576
+            ],
+            [
+              242,
+              577
+            ],
+            [
+              265,
+              569
+            ],
+            [
+              286,
+              575
+            ],
+            [
+              296,
+              604
+            ],
+            [
+              316,
+              621
+            ],
+            [
+              313,
+              664
+            ],
+            [
+              303,
+              705
+            ],
+            [
+              289,
+              737
+            ],
+            [
+              229,
+              733
+            ],
+            [
+              214,
+              689
+            ],
+            [
+              215,
+              647
+            ],
+            [
+              208,
+              625
+            ]
+          ]
+        ],
+        "holes": [
+          [
+            [
+              67,
+              744
+            ],
+            [
+              103,
+              704
+            ],
+            [
+              147,
+              690
+            ],
+            [
+              185,
+              706
+            ],
+            [
+              223,
+              750
+            ],
+            [
+              239,
+              745
+            ],
+            [
+              281,
+              759
+            ],
+            [
+              315,
+              785
+            ],
+            [
+              305,
+              804
+            ],
+            [
+              264,
+              807
+            ],
+            [
+              229,
+              828
+            ],
+            [
+              183,
+              829
+            ],
+            [
+              145,
+              815
+            ],
+            [
+              102,
+              797
+            ],
+            [
+              68,
+              792
+            ]
+          ]
+        ],
+        "pivot_px": [
+          95,
+          834
+        ],
+        "z_index": 3,
+        "motion": {
+          "type": "sway_shader",
+          "parameters": {
+            "amplitude": 1,
+            "frequency": 0.27
+          }
+        }
+      }
+    ]
+  },
+  "processing_prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+  "cleanplate_method": "AI raw B is normalized with equal-aspect cover; final B_i/B_all are a soft-mask patch over actual C. The 6px dilation is retained as AI authorization evidence; undamaged context outside the soft mask is copied from C, never claimed as unchanged AI output.",
+  "mask_usage_notice": "本批rawB已先以C作参考生成，内置工具未接收这些显式mask。1px软mask与6px扩区在随后人工标图后生成，用作可审阅的局部合成边界及后续重生目标，不声称已作为本轮生图参数。",
+  "configuration": {
+    "version": 1,
+    "kind": "real_pixel_extraction",
+    "pipeline_config": "data/art/pipeline.json",
+    "output_root": "assets/generated_scenes/v3_real",
+    "runtime_root": "assets/generated_scenes/runtime/v3_real",
+    "logical_canvas": [
+      2560,
+      1440
+    ],
+    "required_mask": {
+      "feather_pixels": 1,
+      "inpaint_dilation_pixels": 6
+    },
+    "motion_types": [
+      "static",
+      "sway_shader",
+      "pendulum",
+      "flow"
+    ],
+    "maximum_polygon_vertices": 2048,
+    "cleanplate_method": "AI raw B is normalized with equal-aspect cover; final B_i/B_all are a soft-mask patch over actual C. The 6px dilation is retained as AI authorization evidence; undamaged context outside the soft mask is copied from C, never claimed as unchanged AI output.",
+    "mask_usage_notice": "本批rawB已先以C作参考生成，内置工具未接收这些显式mask。1px软mask与6px扩区在随后人工标图后生成，用作可审阅的局部合成边界及后续重生目标，不声称已作为本轮生图参数。",
+    "processing_prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。"
+  },
+  "mask_parameters": {
+    "feather_pixels": 1,
+    "inpaint_dilation_pixels": 6,
+    "hard_recovery_threshold": 128
+  },
+  "qa_bounds": {
+    "core_max_error": 0,
+    "unedited_max_error": 0,
+    "inpaint_ring_max_error": 0,
+    "feather_mae": 3,
+    "feather_p95": 12,
+    "percentile": 0.95
+  },
+  "raw_cleanplate_normalization": {
+    "source_path": "assets/_incoming/a1r_real/S07/night_raw_cleanplate.png",
+    "native_size": [
+      1672,
+      941
+    ],
+    "normalized_path": "assets/generated_scenes/v3_real/S07/night/real2/raw_cleanplate_normalized.png",
+    "normalized_size": [
+      1672,
+      941
+    ],
+    "transform": {
+      "method": "equal_aspect_cover",
+      "filter": "Lanczos",
+      "scale": 1.0,
+      "source_crop": [
+        0.0,
+        0.0,
+        1672.0,
+        941.0
+      ],
+      "runtime_size": [
+        1672,
+        941
+      ]
+    }
+  },
+  "original_path": "assets/generated_scenes/v3_real/S07/night/real2/C.png",
+  "base_path": "assets/generated_scenes/v3_real/S07/night/real2/B_all.png",
+  "base_runtime_path": "assets/generated_scenes/runtime/v3_real/S07/night/real2/B_all.png",
+  "artifacts": [
+    {
+      "path": "assets/generated_scenes/v3_real/S07/night/real2/C.png",
+      "role": "retained_original_C",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "ab5895f553dbcfe0103d08bdf0c30912f360fc31df1c2117b57e7744f9080ea7"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S07/night/real2/raw_cleanplate_normalized.png",
+      "role": "normalized_AI_cleanplate",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "c727e44eb2121738c9c8a05093098f4052b6b5fe8686e4a412c8f5b3ddf3dc43"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S07/night/real2/layers/water_mask.png",
+      "role": "actual_C_matted_layer",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "e969d2035dd243e702dc06a398f2099cb1033a0b5620053eab883847102ccb7b"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S07/night/real2/cleanplates/water_mask.png",
+      "role": "single_object_cleanplate_B_i",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "f3773c53fa5f824b7c2e53ed0d2e25225552ccd0056366aa8ee67628fc640be8"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S07/night/real2/masks/water_mask_hard.png",
+      "role": "manual_hard_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "5aed2e12925105c7e32476d3017887626af2a01784e24e2f3f96ae4280d72475"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S07/night/real2/masks/water_mask_soft.png",
+      "role": "one_pixel_feather_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "75459a73c1bc48cc39ef75a60a92a21a4068876009c71f0f9ff9bf2fddb14342"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S07/night/real2/masks/water_mask_inpaint6.png",
+      "role": "six_pixel_AI_authorization_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "5ac16bad17587c1ac2b032542c6b6245821f9d170b0a8b43589003990a301c40"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S07/night/real2/layers/tree_canopy.png",
+      "role": "actual_C_matted_layer",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "78fffe7480b46f5585dc48a6c1ab168be7b74f1d44977a7e3ca5df88b1bc995d"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S07/night/real2/cleanplates/tree_canopy.png",
+      "role": "single_object_cleanplate_B_i",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "a9ea0cb5e896b99955d4ecf9c4e1332922ea59ae955219d71abf1bb53dcb2fa4"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S07/night/real2/masks/tree_canopy_hard.png",
+      "role": "manual_hard_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "21f336afa66fd6c6dd8648c4914057495a23c5d025c786e42a18ed31479afa63"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S07/night/real2/masks/tree_canopy_soft.png",
+      "role": "one_pixel_feather_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "11a09ab13585e8eb66e393db908662551273c3ea0f85577af09012c6cfa77eac"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S07/night/real2/masks/tree_canopy_inpaint6.png",
+      "role": "six_pixel_AI_authorization_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "7d9da4c718dc48811186f21c2bc805ae723542ae98c842a0843def34b35f2687"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S07/night/real2/layers/grass.png",
+      "role": "actual_C_matted_layer",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "36062332a31b99cfc0f91335605ae656265a642460aa96e907e986f911415095"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S07/night/real2/cleanplates/grass.png",
+      "role": "single_object_cleanplate_B_i",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "c7dfd31420c6026203fa418fd4e64a8354f9a158e646b8bf2c6e83ccf71fef4c"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S07/night/real2/masks/grass_hard.png",
+      "role": "manual_hard_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "92a390a634fcab26241e30e4bad4be9bd2e43b7f4309d2b0a7c2ddaaa4834992"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S07/night/real2/masks/grass_soft.png",
+      "role": "one_pixel_feather_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "cac901c66b5d1ea0ae7cff7222c62eacab19dc553489ba559da16cee2069c788"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S07/night/real2/masks/grass_inpaint6.png",
+      "role": "six_pixel_AI_authorization_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "dcfb0f036b6f270c72eca61784b5d62a7ec56c76f2c2d118a9245ae590478670"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S07/night/real2/B_all.png",
+      "role": "all_object_cleanplate_B_all",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "2b5fdb57beba3778991afd6095a1c960bb47844b57d8a8b367fd185a56fc39fb"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S07/night/real2/recomposed_all.png",
+      "role": "all_layers_recomposition",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "ae13b0cbdea76800e321314e55cd1c61d53ca7c964b149bf2a43beb7bfece286"
+    }
+  ],
+  "runtime_copies": [
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S07/night/real2/C.png",
+      "source_path": "assets/generated_scenes/v3_real/S07/night/real2/C.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "ab5895f553dbcfe0103d08bdf0c30912f360fc31df1c2117b57e7744f9080ea7",
+      "sha256": "166eeda5ed1ea9a42c17eed44b85457e5ad397987f2cc0342dfa84f62c9db9ab",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S07/night/real2/layers/water_mask.png",
+      "source_path": "assets/generated_scenes/v3_real/S07/night/real2/layers/water_mask.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "e969d2035dd243e702dc06a398f2099cb1033a0b5620053eab883847102ccb7b",
+      "sha256": "95158bd433194a7c9d6444601e64c30283d7558453d3fc6d69962386dd408d6b",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S07/night/real2/layers/tree_canopy.png",
+      "source_path": "assets/generated_scenes/v3_real/S07/night/real2/layers/tree_canopy.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "78fffe7480b46f5585dc48a6c1ab168be7b74f1d44977a7e3ca5df88b1bc995d",
+      "sha256": "7b8619e16871f59a78eb8dcb29dd66a01c31da77d4a9369af8b5131e2e34e09e",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S07/night/real2/layers/grass.png",
+      "source_path": "assets/generated_scenes/v3_real/S07/night/real2/layers/grass.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "36062332a31b99cfc0f91335605ae656265a642460aa96e907e986f911415095",
+      "sha256": "21e4d9494c255db3482d4ac09e0a451d44060b5bc1976780a36fa70614f74dee",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S07/night/real2/B_all.png",
+      "source_path": "assets/generated_scenes/v3_real/S07/night/real2/B_all.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "2b5fdb57beba3778991afd6095a1c960bb47844b57d8a8b367fd185a56fc39fb",
+      "sha256": "0ff3897fa49fb86f6848c85c83d847a4e8647da91c3e755b4d688ddcf0a7bd84",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    }
+  ],
+  "layers": [
+    {
+      "id": "water_mask",
+      "preserve_base": true,
+      "polygons": [
+        [
+          [
+            435,
+            477
+          ],
+          [
+            673,
+            464
+          ],
+          [
+            1671,
+            448
+          ],
+          [
+            1671,
+            880
+          ],
+          [
+            1445,
+            875
+          ],
+          [
+            1184,
+            840
+          ],
+          [
+            983,
+            795
+          ],
+          [
+            815,
+            747
+          ],
+          [
+            666,
+            687
+          ],
+          [
+            529,
+            615
+          ],
+          [
+            405,
+            551
+          ],
+          [
+            368,
+            518
+          ]
+        ]
+      ],
+      "pivot_px": [
+        1020,
+        667
+      ],
+      "z_index": 1,
+      "motion": {
+        "type": "flow",
+        "parameters": {
+          "speed": 0.004
+        }
+      },
+      "holes": [
+        [
+          [
+            0,
+            630
+          ],
+          [
+            41,
+            609
+          ],
+          [
+            53,
+            647
+          ],
+          [
+            78,
+            575
+          ],
+          [
+            89,
+            648
+          ],
+          [
+            128,
+            533
+          ],
+          [
+            116,
+            605
+          ],
+          [
+            161,
+            544
+          ],
+          [
+            141,
+            617
+          ],
+          [
+            184,
+            576
+          ],
+          [
+            164,
+            641
+          ],
+          [
+            198,
+            642
+          ],
+          [
+            218,
+            603
+          ],
+          [
+            211,
+            645
+          ],
+          [
+            231,
+            594
+          ],
+          [
+            249,
+            613
+          ],
+          [
+            274,
+            580
+          ],
+          [
+            287,
+            609
+          ],
+          [
+            285,
+            641
+          ],
+          [
+            307,
+            618
+          ],
+          [
+            300,
+            656
+          ],
+          [
+            312,
+            651
+          ],
+          [
+            311,
+            684
+          ],
+          [
+            349,
+            697
+          ],
+          [
+            371,
+            741
+          ],
+          [
+            337,
+            764
+          ],
+          [
+            314,
+            780
+          ],
+          [
+            328,
+            808
+          ],
+          [
+            280,
+            842
+          ],
+          [
+            207,
+            844
+          ],
+          [
+            147,
+            821
+          ],
+          [
+            100,
+            824
+          ],
+          [
+            102,
+            854
+          ],
+          [
+            157,
+            876
+          ],
+          [
+            125,
+            882
+          ],
+          [
+            94,
+            899
+          ],
+          [
+            98,
+            925
+          ],
+          [
+            67,
+            940
+          ],
+          [
+            0,
+            940
+          ]
+        ],
+        [
+          [
+            350,
+            534
+          ],
+          [
+            350,
+            493
+          ],
+          [
+            362,
+            519
+          ],
+          [
+            378,
+            502
+          ],
+          [
+            374,
+            535
+          ],
+          [
+            395,
+            513
+          ],
+          [
+            385,
+            546
+          ],
+          [
+            414,
+            527
+          ],
+          [
+            403,
+            551
+          ],
+          [
+            379,
+            558
+          ]
+        ],
+        [
+          [
+            470,
+            588
+          ],
+          [
+            474,
+            554
+          ],
+          [
+            488,
+            579
+          ],
+          [
+            498,
+            539
+          ],
+          [
+            504,
+            571
+          ],
+          [
+            541,
+            541
+          ],
+          [
+            519,
+            582
+          ],
+          [
+            557,
+            565
+          ],
+          [
+            535,
+            594
+          ],
+          [
+            564,
+            588
+          ],
+          [
+            555,
+            611
+          ],
+          [
+            510,
+            612
+          ],
+          [
+            486,
+            602
+          ]
+        ],
+        [
+          [
+            605,
+            653
+          ],
+          [
+            610,
+            624
+          ],
+          [
+            619,
+            646
+          ],
+          [
+            629,
+            612
+          ],
+          [
+            634,
+            646
+          ],
+          [
+            654,
+            621
+          ],
+          [
+            645,
+            653
+          ],
+          [
+            669,
+            648
+          ],
+          [
+            656,
+            671
+          ],
+          [
+            623,
+            675
+          ]
+        ],
+        [
+          [
+            684,
+            709
+          ],
+          [
+            695,
+            681
+          ],
+          [
+            699,
+            706
+          ],
+          [
+            727,
+            661
+          ],
+          [
+            724,
+            695
+          ],
+          [
+            754,
+            678
+          ],
+          [
+            739,
+            708
+          ],
+          [
+            778,
+            706
+          ],
+          [
+            754,
+            728
+          ],
+          [
+            713,
+            731
+          ]
+        ],
+        [
+          [
+            210,
+            576
+          ],
+          [
+            242,
+            577
+          ],
+          [
+            265,
+            569
+          ],
+          [
+            286,
+            575
+          ],
+          [
+            296,
+            604
+          ],
+          [
+            316,
+            621
+          ],
+          [
+            313,
+            664
+          ],
+          [
+            303,
+            705
+          ],
+          [
+            289,
+            737
+          ],
+          [
+            229,
+            733
+          ],
+          [
+            214,
+            689
+          ],
+          [
+            215,
+            647
+          ],
+          [
+            208,
+            625
+          ]
+        ]
+      ],
+      "native_size": [
+        1672,
+        941
+      ],
+      "layer_path": "assets/generated_scenes/v3_real/S07/night/real2/layers/water_mask.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S07/night/real2/cleanplates/water_mask.png",
+      "hard_mask_path": "assets/generated_scenes/v3_real/S07/night/real2/masks/water_mask_hard.png",
+      "soft_mask_path": "assets/generated_scenes/v3_real/S07/night/real2/masks/water_mask_soft.png",
+      "inpaint_mask_path": "assets/generated_scenes/v3_real/S07/night/real2/masks/water_mask_inpaint6.png",
+      "single_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 392996,
+            "samples": 1178988,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 7991,
+            "samples": 23973,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "inpaint_ring": {
+            "pixels": 21362,
+            "samples": 64086,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1151003,
+            "samples": 3453009,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "matte_clamping": {
+        "clipped_pixels": 0,
+        "clipped_channels": 0,
+        "maximum_unassociated_clamp": 0.0
+      },
+      "descriptor": {
+        "path": "res://assets/generated_scenes/runtime/v3_real/S07/night/real2/layers/water_mask.png",
+        "rect": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "hotspot": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "native_size": [
+          1672,
+          941
+        ],
+        "pivot_px": [
+          1020,
+          667
+        ],
+        "z_index": 1,
+        "motion": {
+          "type": "flow",
+          "parameters": {
+            "speed": 0.004
+          }
+        },
+        "source_transform": {
+          "method": "equal_aspect_cover",
+          "filter": "Lanczos",
+          "scale": 1.1483253588516746,
+          "source_crop": [
+            0.0,
+            0.25,
+            1672.0,
+            940.75
+          ],
+          "runtime_size": [
+            1920,
+            1080
+          ],
+          "native_size": [
+            1672,
+            941
+          ]
+        }
+      }
+    },
+    {
+      "id": "tree_canopy",
+      "polygons": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            876,
+            0
+          ],
+          [
+            867,
+            22
+          ],
+          [
+            835,
+            25
+          ],
+          [
+            830,
+            58
+          ],
+          [
+            803,
+            65
+          ],
+          [
+            790,
+            103
+          ],
+          [
+            751,
+            124
+          ],
+          [
+            718,
+            153
+          ],
+          [
+            689,
+            151
+          ],
+          [
+            672,
+            179
+          ],
+          [
+            636,
+            176
+          ],
+          [
+            624,
+            200
+          ],
+          [
+            583,
+            198
+          ],
+          [
+            567,
+            218
+          ],
+          [
+            534,
+            203
+          ],
+          [
+            510,
+            223
+          ],
+          [
+            472,
+            210
+          ],
+          [
+            457,
+            236
+          ],
+          [
+            430,
+            232
+          ],
+          [
+            415,
+            254
+          ],
+          [
+            376,
+            257
+          ],
+          [
+            362,
+            247
+          ],
+          [
+            340,
+            266
+          ],
+          [
+            313,
+            251
+          ],
+          [
+            294,
+            236
+          ],
+          [
+            271,
+            248
+          ],
+          [
+            255,
+            222
+          ],
+          [
+            224,
+            222
+          ],
+          [
+            215,
+            190
+          ],
+          [
+            177,
+            181
+          ],
+          [
+            160,
+            155
+          ],
+          [
+            134,
+            150
+          ],
+          [
+            122,
+            122
+          ],
+          [
+            95,
+            125
+          ],
+          [
+            85,
+            102
+          ],
+          [
+            57,
+            110
+          ],
+          [
+            40,
+            88
+          ],
+          [
+            17,
+            93
+          ],
+          [
+            0,
+            210
+          ]
+        ]
+      ],
+      "holes": [
+        [
+          [
+            97,
+            271
+          ],
+          [
+            148,
+            259
+          ],
+          [
+            194,
+            176
+          ],
+          [
+            233,
+            120
+          ],
+          [
+            278,
+            65
+          ],
+          [
+            310,
+            33
+          ],
+          [
+            275,
+            18
+          ],
+          [
+            250,
+            53
+          ],
+          [
+            231,
+            23
+          ],
+          [
+            215,
+            42
+          ],
+          [
+            193,
+            22
+          ],
+          [
+            173,
+            46
+          ],
+          [
+            149,
+            54
+          ],
+          [
+            121,
+            85
+          ],
+          [
+            96,
+            132
+          ],
+          [
+            60,
+            80
+          ],
+          [
+            32,
+            64
+          ],
+          [
+            18,
+            73
+          ],
+          [
+            50,
+            123
+          ],
+          [
+            62,
+            184
+          ],
+          [
+            56,
+            237
+          ]
+        ],
+        [
+          [
+            135,
+            241
+          ],
+          [
+            159,
+            269
+          ],
+          [
+            254,
+            200
+          ],
+          [
+            322,
+            170
+          ],
+          [
+            387,
+            133
+          ],
+          [
+            430,
+            119
+          ],
+          [
+            488,
+            98
+          ],
+          [
+            566,
+            67
+          ],
+          [
+            560,
+            60
+          ],
+          [
+            492,
+            83
+          ],
+          [
+            445,
+            99
+          ],
+          [
+            432,
+            75
+          ],
+          [
+            421,
+            101
+          ],
+          [
+            388,
+            111
+          ],
+          [
+            374,
+            69
+          ],
+          [
+            365,
+            67
+          ],
+          [
+            348,
+            117
+          ],
+          [
+            313,
+            136
+          ],
+          [
+            279,
+            146
+          ],
+          [
+            241,
+            165
+          ],
+          [
+            207,
+            185
+          ],
+          [
+            167,
+            217
+          ]
+        ]
+      ],
+      "pivot_px": [
+        184,
+        210
+      ],
+      "z_index": 2,
+      "motion": {
+        "type": "sway_shader",
+        "parameters": {
+          "amplitude": 1.3,
+          "frequency": 0.19
+        }
+      },
+      "native_size": [
+        1672,
+        941
+      ],
+      "layer_path": "assets/generated_scenes/v3_real/S07/night/real2/layers/tree_canopy.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S07/night/real2/cleanplates/tree_canopy.png",
+      "hard_mask_path": "assets/generated_scenes/v3_real/S07/night/real2/masks/tree_canopy_hard.png",
+      "soft_mask_path": "assets/generated_scenes/v3_real/S07/night/real2/masks/tree_canopy_soft.png",
+      "inpaint_mask_path": "assets/generated_scenes/v3_real/S07/night/real2/masks/tree_canopy_inpaint6.png",
+      "single_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 121184,
+            "samples": 363552,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 6521,
+            "samples": 19563,
+            "mae": 0.00040893523488217553,
+            "p95": 0,
+            "max_error": 3
+          },
+          "inpaint_ring": {
+            "pixels": 18400,
+            "samples": 55200,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1427247,
+            "samples": 4281741,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "matte_clamping": {
+        "clipped_pixels": 2,
+        "clipped_channels": 5,
+        "maximum_unassociated_clamp": 22.964285714285715
+      },
+      "descriptor": {
+        "path": "res://assets/generated_scenes/runtime/v3_real/S07/night/real2/layers/tree_canopy.png",
+        "rect": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "hotspot": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "native_size": [
+          1672,
+          941
+        ],
+        "pivot_px": [
+          184,
+          210
+        ],
+        "z_index": 2,
+        "motion": {
+          "type": "sway_shader",
+          "parameters": {
+            "amplitude": 1.3,
+            "frequency": 0.19
+          }
+        },
+        "source_transform": {
+          "method": "equal_aspect_cover",
+          "filter": "Lanczos",
+          "scale": 1.1483253588516746,
+          "source_crop": [
+            0.0,
+            0.25,
+            1672.0,
+            940.75
+          ],
+          "runtime_size": [
+            1920,
+            1080
+          ],
+          "native_size": [
+            1672,
+            941
+          ]
+        }
+      }
+    },
+    {
+      "id": "grass",
+      "polygons": [
+        [
+          [
+            0,
+            630
+          ],
+          [
+            41,
+            609
+          ],
+          [
+            53,
+            647
+          ],
+          [
+            78,
+            575
+          ],
+          [
+            89,
+            648
+          ],
+          [
+            128,
+            533
+          ],
+          [
+            116,
+            605
+          ],
+          [
+            161,
+            544
+          ],
+          [
+            141,
+            617
+          ],
+          [
+            184,
+            576
+          ],
+          [
+            164,
+            641
+          ],
+          [
+            198,
+            642
+          ],
+          [
+            218,
+            603
+          ],
+          [
+            211,
+            645
+          ],
+          [
+            231,
+            594
+          ],
+          [
+            249,
+            613
+          ],
+          [
+            274,
+            580
+          ],
+          [
+            287,
+            609
+          ],
+          [
+            285,
+            641
+          ],
+          [
+            307,
+            618
+          ],
+          [
+            300,
+            656
+          ],
+          [
+            312,
+            651
+          ],
+          [
+            311,
+            684
+          ],
+          [
+            349,
+            697
+          ],
+          [
+            371,
+            741
+          ],
+          [
+            337,
+            764
+          ],
+          [
+            314,
+            780
+          ],
+          [
+            328,
+            808
+          ],
+          [
+            280,
+            842
+          ],
+          [
+            207,
+            844
+          ],
+          [
+            147,
+            821
+          ],
+          [
+            100,
+            824
+          ],
+          [
+            102,
+            854
+          ],
+          [
+            157,
+            876
+          ],
+          [
+            125,
+            882
+          ],
+          [
+            94,
+            899
+          ],
+          [
+            98,
+            925
+          ],
+          [
+            67,
+            940
+          ],
+          [
+            0,
+            940
+          ]
+        ],
+        [
+          [
+            350,
+            534
+          ],
+          [
+            350,
+            493
+          ],
+          [
+            362,
+            519
+          ],
+          [
+            378,
+            502
+          ],
+          [
+            374,
+            535
+          ],
+          [
+            395,
+            513
+          ],
+          [
+            385,
+            546
+          ],
+          [
+            414,
+            527
+          ],
+          [
+            403,
+            551
+          ],
+          [
+            379,
+            558
+          ]
+        ],
+        [
+          [
+            470,
+            588
+          ],
+          [
+            474,
+            554
+          ],
+          [
+            488,
+            579
+          ],
+          [
+            498,
+            539
+          ],
+          [
+            504,
+            571
+          ],
+          [
+            541,
+            541
+          ],
+          [
+            519,
+            582
+          ],
+          [
+            557,
+            565
+          ],
+          [
+            535,
+            594
+          ],
+          [
+            564,
+            588
+          ],
+          [
+            555,
+            611
+          ],
+          [
+            510,
+            612
+          ],
+          [
+            486,
+            602
+          ]
+        ],
+        [
+          [
+            605,
+            653
+          ],
+          [
+            610,
+            624
+          ],
+          [
+            619,
+            646
+          ],
+          [
+            629,
+            612
+          ],
+          [
+            634,
+            646
+          ],
+          [
+            654,
+            621
+          ],
+          [
+            645,
+            653
+          ],
+          [
+            669,
+            648
+          ],
+          [
+            656,
+            671
+          ],
+          [
+            623,
+            675
+          ]
+        ],
+        [
+          [
+            684,
+            709
+          ],
+          [
+            695,
+            681
+          ],
+          [
+            699,
+            706
+          ],
+          [
+            727,
+            661
+          ],
+          [
+            724,
+            695
+          ],
+          [
+            754,
+            678
+          ],
+          [
+            739,
+            708
+          ],
+          [
+            778,
+            706
+          ],
+          [
+            754,
+            728
+          ],
+          [
+            713,
+            731
+          ]
+        ],
+        [
+          [
+            210,
+            576
+          ],
+          [
+            242,
+            577
+          ],
+          [
+            265,
+            569
+          ],
+          [
+            286,
+            575
+          ],
+          [
+            296,
+            604
+          ],
+          [
+            316,
+            621
+          ],
+          [
+            313,
+            664
+          ],
+          [
+            303,
+            705
+          ],
+          [
+            289,
+            737
+          ],
+          [
+            229,
+            733
+          ],
+          [
+            214,
+            689
+          ],
+          [
+            215,
+            647
+          ],
+          [
+            208,
+            625
+          ]
+        ]
+      ],
+      "holes": [
+        [
+          [
+            67,
+            744
+          ],
+          [
+            103,
+            704
+          ],
+          [
+            147,
+            690
+          ],
+          [
+            185,
+            706
+          ],
+          [
+            223,
+            750
+          ],
+          [
+            239,
+            745
+          ],
+          [
+            281,
+            759
+          ],
+          [
+            315,
+            785
+          ],
+          [
+            305,
+            804
+          ],
+          [
+            264,
+            807
+          ],
+          [
+            229,
+            828
+          ],
+          [
+            183,
+            829
+          ],
+          [
+            145,
+            815
+          ],
+          [
+            102,
+            797
+          ],
+          [
+            68,
+            792
+          ]
+        ]
+      ],
+      "pivot_px": [
+        95,
+        834
+      ],
+      "z_index": 3,
+      "motion": {
+        "type": "sway_shader",
+        "parameters": {
+          "amplitude": 1,
+          "frequency": 0.27
+        }
+      },
+      "native_size": [
+        1672,
+        941
+      ],
+      "layer_path": "assets/generated_scenes/v3_real/S07/night/real2/layers/grass.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S07/night/real2/cleanplates/grass.png",
+      "hard_mask_path": "assets/generated_scenes/v3_real/S07/night/real2/masks/grass_hard.png",
+      "soft_mask_path": "assets/generated_scenes/v3_real/S07/night/real2/masks/grass_soft.png",
+      "inpaint_mask_path": "assets/generated_scenes/v3_real/S07/night/real2/masks/grass_inpaint6.png",
+      "single_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 73425,
+            "samples": 220275,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 9161,
+            "samples": 27483,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "inpaint_ring": {
+            "pixels": 26080,
+            "samples": 78240,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1464686,
+            "samples": 4394058,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "matte_clamping": {
+        "clipped_pixels": 1,
+        "clipped_channels": 1,
+        "maximum_unassociated_clamp": 3.75
+      },
+      "descriptor": {
+        "path": "res://assets/generated_scenes/runtime/v3_real/S07/night/real2/layers/grass.png",
+        "rect": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "hotspot": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "native_size": [
+          1672,
+          941
+        ],
+        "pivot_px": [
+          95,
+          834
+        ],
+        "z_index": 3,
+        "motion": {
+          "type": "sway_shader",
+          "parameters": {
+            "amplitude": 1,
+            "frequency": 0.27
+          }
+        },
+        "source_transform": {
+          "method": "equal_aspect_cover",
+          "filter": "Lanczos",
+          "scale": 1.1483253588516746,
+          "source_crop": [
+            0.0,
+            0.25,
+            1672.0,
+            940.75
+          ],
+          "runtime_size": [
+            1920,
+            1080
+          ],
+          "native_size": [
+            1672,
+            941
+          ]
+        }
+      }
+    }
+  ],
+  "overlap_pairs": [
+    {
+      "layers": [
+        "water_mask",
+        "grass"
+      ],
+      "hard_overlap_pixels": 0,
+      "soft_overlap_pixels": 2548,
+      "note": "B_i retains C outside its own soft mask; occluded ownership is not inferred. B_all recomposition remains an independent strict check."
+    }
+  ],
+  "recomposition_qa": {
+    "passed": true,
+    "regions": {
+      "core": {
+        "pixels": 587605,
+        "samples": 1762815,
+        "mae": 0.0,
+        "p95": 0,
+        "max_error": 0
+      },
+      "feather": {
+        "pixels": 21125,
+        "samples": 63375,
+        "mae": 0.08528599605522683,
+        "p95": 1,
+        "max_error": 8
+      },
+      "inpaint_ring": {
+        "pixels": 53331,
+        "samples": 159993,
+        "mae": 0.0,
+        "p95": 0,
+        "max_error": 0
+      },
+      "unedited": {
+        "pixels": 911291,
+        "samples": 2733873,
+        "mae": 0.0,
+        "p95": 0,
+        "max_error": 0
+      }
+    },
+    "bounds": {
+      "core_max_error": 0,
+      "unedited_max_error": 0,
+      "inpaint_ring_max_error": 0,
+      "feather_mae": 3,
+      "feather_p95": 12,
+      "percentile": 0.95
+    },
+    "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+  },
+  "geometry_passed": true,
+  "art_passed": false,
+  "visual_review": "not_evaluated",
+  "manifest_modified": false,
+  "recipes": [
+    {
+      "status": "complete",
+      "version": "real2",
+      "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "attempts": [],
+      "processing_script": "tools/art/real_scene_layers.py",
+      "qa_kind": "art",
+      "generator": "real_C_pixel_extraction",
+      "id": "S07_night_real2_base",
+      "group": "scenes",
+      "operation": "runtime_copy",
+      "prompt": "Use case: precise-object-edit.\nAsset type: S07 NIGHT raw cleanplate B_all for true extracted foreground grass and tree-canopy layers.\nInput Image 1 is the exact EDIT TARGET. Remove ONLY the following:\n1. All leaves of the foreground tree canopy across the upper-left/top edge. Keep the main tree trunk and thick bare branch structure in their original positions and fill behind removed leaves with the original painted sky.\n2. The foreground grass tufts along the lower-left riverbank and beside the curving path, including the small wildflower stalks that grow among those tufts. Fill behind them with the plausible plain earth path/bank or water immediately behind the specific blades.\nKeep the three pale stones and their moss, the static tree trunk/branches, bridge masonry, every riverbank boundary, background distant vegetation, path position and sky/clouds unchanged. IMPORTANT: retain the water itself and its existing painted brush marks; do not erase the river, replace it with land, or invent water waves. Water will later use an exact region mask from this original composite, not a regenerated ripple image.\nKeep NIGHT lighting, color, camera, crop and same native dimensions; preserve unrelated pixels as closely as possible. Maintain the matte gouache medium, visible dry-brush strokes, slightly wobbly colored-pencil outline and muted seven-family palette.\nNo new objects, people, animals, text, numbers, UI, plaques, borders, glow, bloom, bright sparkles or photorealism.\nThe target is NIGHT: preserve its dim cool-grey/teal ambient light and dark sky, with no added moon, stars, lamps or fireflies. Do not turn it into daylight.\n从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+      "source_path": "assets/generated_scenes/v3_real/S07/night/real2/B_all.png",
+      "runtime_path": "assets/generated_scenes/runtime/v3_real/S07/night/real2/B_all.png"
+    },
+    {
+      "status": "complete",
+      "version": "real2",
+      "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "attempts": [],
+      "processing_script": "tools/art/real_scene_layers.py",
+      "qa_kind": "art",
+      "generator": "real_C_pixel_extraction",
+      "id": "S07_night_real2_water_mask",
+      "group": "layers",
+      "operation": "extract_layer",
+      "prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+      "source_path": "assets/generated_scenes/v3_real/S07/night/real2/layers/water_mask.png",
+      "runtime_path": "assets/generated_scenes/runtime/v3_real/S07/night/real2/layers/water_mask.png",
+      "original_path": "assets/generated_scenes/v3_real/S07/night/real2/C.png",
+      "mask_path": "assets/generated_scenes/v3_real/S07/night/real2/masks/water_mask_soft.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S07/night/real2/cleanplates/water_mask.png",
+      "processing_parameters": {
+        "version": 1,
+        "scene_id": "S07",
+        "period": "night",
+        "revision": "real2",
+        "native_size": [
+          1672,
+          941
+        ],
+        "original_path": "assets/_incoming/a1r_real/S07/night_C.png",
+        "raw_cleanplate_path": "assets/_incoming/a1r_real/S07/night_raw_cleanplate.png",
+        "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+        "composite_prompt": "Use case: lighting-weather.\nAsset type: S07 riverside NIGHT full composite C, matching the existing DAY composite.\nInput Image 1 is the exact EDIT TARGET. Change ONLY time of day into a quiet readable early night. Preserve the exact camera, composition, tree trunk and branch structure, tree canopy outline, all grass tufts and flowers, three pale stones, bridge arch and masonry shapes, curving path, riverbank boundaries, horizon, water brush marks, crop and native dimensions.\nUse muted dusty-teal and warm-grey night sky and cool shadows; the path and bridge remain visible in soft ambient night light. Water is slightly deeper dusty teal, still a matte gouache surface. No actual light source is visible and none should be added: no moon, stars, lamps, lanterns, fireflies, people, animals or bright sparkles. No magical glow or reflections. Do not add foliage, buildings or extra rocks. The rightmost 30 percent and broad bottom area retain their low detail.\nMaintain gouache picture-book illustration, visible strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes and slightly imperfect perspective, seven muted color families (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), cool-tinted shadows, few props, one focal point, matte paper texture.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria, text, letters, numbers, UI, labels, blank plaques, frames, borders.",
+        "cleanplate_prompt": "Use case: precise-object-edit.\nAsset type: S07 NIGHT raw cleanplate B_all for true extracted foreground grass and tree-canopy layers.\nInput Image 1 is the exact EDIT TARGET. Remove ONLY the following:\n1. All leaves of the foreground tree canopy across the upper-left/top edge. Keep the main tree trunk and thick bare branch structure in their original positions and fill behind removed leaves with the original painted sky.\n2. The foreground grass tufts along the lower-left riverbank and beside the curving path, including the small wildflower stalks that grow among those tufts. Fill behind them with the plausible plain earth path/bank or water immediately behind the specific blades.\nKeep the three pale stones and their moss, the static tree trunk/branches, bridge masonry, every riverbank boundary, background distant vegetation, path position and sky/clouds unchanged. IMPORTANT: retain the water itself and its existing painted brush marks; do not erase the river, replace it with land, or invent water waves. Water will later use an exact region mask from this original composite, not a regenerated ripple image.\nKeep NIGHT lighting, color, camera, crop and same native dimensions; preserve unrelated pixels as closely as possible. Maintain the matte gouache medium, visible dry-brush strokes, slightly wobbly colored-pencil outline and muted seven-family palette.\nNo new objects, people, animals, text, numbers, UI, plaques, borders, glow, bloom, bright sparkles or photorealism.\nThe target is NIGHT: preserve its dim cool-grey/teal ambient light and dark sky, with no added moon, stars, lamps or fireflies. Do not turn it into daylight.",
+        "annotation_notes": "Second manual annotation: S01 includes full flower racemes and lower canopy leaves; S07 includes complete foreground flower stalks and excludes grass polygons from the retained-original water mask. No independently redrawn Li.",
+        "layers": [
+          {
+            "id": "water_mask",
+            "preserve_base": true,
+            "polygons": [
+              [
+                [
+                  435,
+                  477
+                ],
+                [
+                  673,
+                  464
+                ],
+                [
+                  1671,
+                  448
+                ],
+                [
+                  1671,
+                  880
+                ],
+                [
+                  1445,
+                  875
+                ],
+                [
+                  1184,
+                  840
+                ],
+                [
+                  983,
+                  795
+                ],
+                [
+                  815,
+                  747
+                ],
+                [
+                  666,
+                  687
+                ],
+                [
+                  529,
+                  615
+                ],
+                [
+                  405,
+                  551
+                ],
+                [
+                  368,
+                  518
+                ]
+              ]
+            ],
+            "pivot_px": [
+              1020,
+              667
+            ],
+            "z_index": 1,
+            "motion": {
+              "type": "flow",
+              "parameters": {
+                "speed": 0.004
+              }
+            },
+            "holes": [
+              [
+                [
+                  0,
+                  630
+                ],
+                [
+                  41,
+                  609
+                ],
+                [
+                  53,
+                  647
+                ],
+                [
+                  78,
+                  575
+                ],
+                [
+                  89,
+                  648
+                ],
+                [
+                  128,
+                  533
+                ],
+                [
+                  116,
+                  605
+                ],
+                [
+                  161,
+                  544
+                ],
+                [
+                  141,
+                  617
+                ],
+                [
+                  184,
+                  576
+                ],
+                [
+                  164,
+                  641
+                ],
+                [
+                  198,
+                  642
+                ],
+                [
+                  218,
+                  603
+                ],
+                [
+                  211,
+                  645
+                ],
+                [
+                  231,
+                  594
+                ],
+                [
+                  249,
+                  613
+                ],
+                [
+                  274,
+                  580
+                ],
+                [
+                  287,
+                  609
+                ],
+                [
+                  285,
+                  641
+                ],
+                [
+                  307,
+                  618
+                ],
+                [
+                  300,
+                  656
+                ],
+                [
+                  312,
+                  651
+                ],
+                [
+                  311,
+                  684
+                ],
+                [
+                  349,
+                  697
+                ],
+                [
+                  371,
+                  741
+                ],
+                [
+                  337,
+                  764
+                ],
+                [
+                  314,
+                  780
+                ],
+                [
+                  328,
+                  808
+                ],
+                [
+                  280,
+                  842
+                ],
+                [
+                  207,
+                  844
+                ],
+                [
+                  147,
+                  821
+                ],
+                [
+                  100,
+                  824
+                ],
+                [
+                  102,
+                  854
+                ],
+                [
+                  157,
+                  876
+                ],
+                [
+                  125,
+                  882
+                ],
+                [
+                  94,
+                  899
+                ],
+                [
+                  98,
+                  925
+                ],
+                [
+                  67,
+                  940
+                ],
+                [
+                  0,
+                  940
+                ]
+              ],
+              [
+                [
+                  350,
+                  534
+                ],
+                [
+                  350,
+                  493
+                ],
+                [
+                  362,
+                  519
+                ],
+                [
+                  378,
+                  502
+                ],
+                [
+                  374,
+                  535
+                ],
+                [
+                  395,
+                  513
+                ],
+                [
+                  385,
+                  546
+                ],
+                [
+                  414,
+                  527
+                ],
+                [
+                  403,
+                  551
+                ],
+                [
+                  379,
+                  558
+                ]
+              ],
+              [
+                [
+                  470,
+                  588
+                ],
+                [
+                  474,
+                  554
+                ],
+                [
+                  488,
+                  579
+                ],
+                [
+                  498,
+                  539
+                ],
+                [
+                  504,
+                  571
+                ],
+                [
+                  541,
+                  541
+                ],
+                [
+                  519,
+                  582
+                ],
+                [
+                  557,
+                  565
+                ],
+                [
+                  535,
+                  594
+                ],
+                [
+                  564,
+                  588
+                ],
+                [
+                  555,
+                  611
+                ],
+                [
+                  510,
+                  612
+                ],
+                [
+                  486,
+                  602
+                ]
+              ],
+              [
+                [
+                  605,
+                  653
+                ],
+                [
+                  610,
+                  624
+                ],
+                [
+                  619,
+                  646
+                ],
+                [
+                  629,
+                  612
+                ],
+                [
+                  634,
+                  646
+                ],
+                [
+                  654,
+                  621
+                ],
+                [
+                  645,
+                  653
+                ],
+                [
+                  669,
+                  648
+                ],
+                [
+                  656,
+                  671
+                ],
+                [
+                  623,
+                  675
+                ]
+              ],
+              [
+                [
+                  684,
+                  709
+                ],
+                [
+                  695,
+                  681
+                ],
+                [
+                  699,
+                  706
+                ],
+                [
+                  727,
+                  661
+                ],
+                [
+                  724,
+                  695
+                ],
+                [
+                  754,
+                  678
+                ],
+                [
+                  739,
+                  708
+                ],
+                [
+                  778,
+                  706
+                ],
+                [
+                  754,
+                  728
+                ],
+                [
+                  713,
+                  731
+                ]
+              ],
+              [
+                [
+                  210,
+                  576
+                ],
+                [
+                  242,
+                  577
+                ],
+                [
+                  265,
+                  569
+                ],
+                [
+                  286,
+                  575
+                ],
+                [
+                  296,
+                  604
+                ],
+                [
+                  316,
+                  621
+                ],
+                [
+                  313,
+                  664
+                ],
+                [
+                  303,
+                  705
+                ],
+                [
+                  289,
+                  737
+                ],
+                [
+                  229,
+                  733
+                ],
+                [
+                  214,
+                  689
+                ],
+                [
+                  215,
+                  647
+                ],
+                [
+                  208,
+                  625
+                ]
+              ]
+            ]
+          },
+          {
+            "id": "tree_canopy",
+            "polygons": [
+              [
+                [
+                  0,
+                  0
+                ],
+                [
+                  876,
+                  0
+                ],
+                [
+                  867,
+                  22
+                ],
+                [
+                  835,
+                  25
+                ],
+                [
+                  830,
+                  58
+                ],
+                [
+                  803,
+                  65
+                ],
+                [
+                  790,
+                  103
+                ],
+                [
+                  751,
+                  124
+                ],
+                [
+                  718,
+                  153
+                ],
+                [
+                  689,
+                  151
+                ],
+                [
+                  672,
+                  179
+                ],
+                [
+                  636,
+                  176
+                ],
+                [
+                  624,
+                  200
+                ],
+                [
+                  583,
+                  198
+                ],
+                [
+                  567,
+                  218
+                ],
+                [
+                  534,
+                  203
+                ],
+                [
+                  510,
+                  223
+                ],
+                [
+                  472,
+                  210
+                ],
+                [
+                  457,
+                  236
+                ],
+                [
+                  430,
+                  232
+                ],
+                [
+                  415,
+                  254
+                ],
+                [
+                  376,
+                  257
+                ],
+                [
+                  362,
+                  247
+                ],
+                [
+                  340,
+                  266
+                ],
+                [
+                  313,
+                  251
+                ],
+                [
+                  294,
+                  236
+                ],
+                [
+                  271,
+                  248
+                ],
+                [
+                  255,
+                  222
+                ],
+                [
+                  224,
+                  222
+                ],
+                [
+                  215,
+                  190
+                ],
+                [
+                  177,
+                  181
+                ],
+                [
+                  160,
+                  155
+                ],
+                [
+                  134,
+                  150
+                ],
+                [
+                  122,
+                  122
+                ],
+                [
+                  95,
+                  125
+                ],
+                [
+                  85,
+                  102
+                ],
+                [
+                  57,
+                  110
+                ],
+                [
+                  40,
+                  88
+                ],
+                [
+                  17,
+                  93
+                ],
+                [
+                  0,
+                  210
+                ]
+              ]
+            ],
+            "holes": [
+              [
+                [
+                  97,
+                  271
+                ],
+                [
+                  148,
+                  259
+                ],
+                [
+                  194,
+                  176
+                ],
+                [
+                  233,
+                  120
+                ],
+                [
+                  278,
+                  65
+                ],
+                [
+                  310,
+                  33
+                ],
+                [
+                  275,
+                  18
+                ],
+                [
+                  250,
+                  53
+                ],
+                [
+                  231,
+                  23
+                ],
+                [
+                  215,
+                  42
+                ],
+                [
+                  193,
+                  22
+                ],
+                [
+                  173,
+                  46
+                ],
+                [
+                  149,
+                  54
+                ],
+                [
+                  121,
+                  85
+                ],
+                [
+                  96,
+                  132
+                ],
+                [
+                  60,
+                  80
+                ],
+                [
+                  32,
+                  64
+                ],
+                [
+                  18,
+                  73
+                ],
+                [
+                  50,
+                  123
+                ],
+                [
+                  62,
+                  184
+                ],
+                [
+                  56,
+                  237
+                ]
+              ],
+              [
+                [
+                  135,
+                  241
+                ],
+                [
+                  159,
+                  269
+                ],
+                [
+                  254,
+                  200
+                ],
+                [
+                  322,
+                  170
+                ],
+                [
+                  387,
+                  133
+                ],
+                [
+                  430,
+                  119
+                ],
+                [
+                  488,
+                  98
+                ],
+                [
+                  566,
+                  67
+                ],
+                [
+                  560,
+                  60
+                ],
+                [
+                  492,
+                  83
+                ],
+                [
+                  445,
+                  99
+                ],
+                [
+                  432,
+                  75
+                ],
+                [
+                  421,
+                  101
+                ],
+                [
+                  388,
+                  111
+                ],
+                [
+                  374,
+                  69
+                ],
+                [
+                  365,
+                  67
+                ],
+                [
+                  348,
+                  117
+                ],
+                [
+                  313,
+                  136
+                ],
+                [
+                  279,
+                  146
+                ],
+                [
+                  241,
+                  165
+                ],
+                [
+                  207,
+                  185
+                ],
+                [
+                  167,
+                  217
+                ]
+              ]
+            ],
+            "pivot_px": [
+              184,
+              210
+            ],
+            "z_index": 2,
+            "motion": {
+              "type": "sway_shader",
+              "parameters": {
+                "amplitude": 1.3,
+                "frequency": 0.19
+              }
+            }
+          },
+          {
+            "id": "grass",
+            "polygons": [
+              [
+                [
+                  0,
+                  630
+                ],
+                [
+                  41,
+                  609
+                ],
+                [
+                  53,
+                  647
+                ],
+                [
+                  78,
+                  575
+                ],
+                [
+                  89,
+                  648
+                ],
+                [
+                  128,
+                  533
+                ],
+                [
+                  116,
+                  605
+                ],
+                [
+                  161,
+                  544
+                ],
+                [
+                  141,
+                  617
+                ],
+                [
+                  184,
+                  576
+                ],
+                [
+                  164,
+                  641
+                ],
+                [
+                  198,
+                  642
+                ],
+                [
+                  218,
+                  603
+                ],
+                [
+                  211,
+                  645
+                ],
+                [
+                  231,
+                  594
+                ],
+                [
+                  249,
+                  613
+                ],
+                [
+                  274,
+                  580
+                ],
+                [
+                  287,
+                  609
+                ],
+                [
+                  285,
+                  641
+                ],
+                [
+                  307,
+                  618
+                ],
+                [
+                  300,
+                  656
+                ],
+                [
+                  312,
+                  651
+                ],
+                [
+                  311,
+                  684
+                ],
+                [
+                  349,
+                  697
+                ],
+                [
+                  371,
+                  741
+                ],
+                [
+                  337,
+                  764
+                ],
+                [
+                  314,
+                  780
+                ],
+                [
+                  328,
+                  808
+                ],
+                [
+                  280,
+                  842
+                ],
+                [
+                  207,
+                  844
+                ],
+                [
+                  147,
+                  821
+                ],
+                [
+                  100,
+                  824
+                ],
+                [
+                  102,
+                  854
+                ],
+                [
+                  157,
+                  876
+                ],
+                [
+                  125,
+                  882
+                ],
+                [
+                  94,
+                  899
+                ],
+                [
+                  98,
+                  925
+                ],
+                [
+                  67,
+                  940
+                ],
+                [
+                  0,
+                  940
+                ]
+              ],
+              [
+                [
+                  350,
+                  534
+                ],
+                [
+                  350,
+                  493
+                ],
+                [
+                  362,
+                  519
+                ],
+                [
+                  378,
+                  502
+                ],
+                [
+                  374,
+                  535
+                ],
+                [
+                  395,
+                  513
+                ],
+                [
+                  385,
+                  546
+                ],
+                [
+                  414,
+                  527
+                ],
+                [
+                  403,
+                  551
+                ],
+                [
+                  379,
+                  558
+                ]
+              ],
+              [
+                [
+                  470,
+                  588
+                ],
+                [
+                  474,
+                  554
+                ],
+                [
+                  488,
+                  579
+                ],
+                [
+                  498,
+                  539
+                ],
+                [
+                  504,
+                  571
+                ],
+                [
+                  541,
+                  541
+                ],
+                [
+                  519,
+                  582
+                ],
+                [
+                  557,
+                  565
+                ],
+                [
+                  535,
+                  594
+                ],
+                [
+                  564,
+                  588
+                ],
+                [
+                  555,
+                  611
+                ],
+                [
+                  510,
+                  612
+                ],
+                [
+                  486,
+                  602
+                ]
+              ],
+              [
+                [
+                  605,
+                  653
+                ],
+                [
+                  610,
+                  624
+                ],
+                [
+                  619,
+                  646
+                ],
+                [
+                  629,
+                  612
+                ],
+                [
+                  634,
+                  646
+                ],
+                [
+                  654,
+                  621
+                ],
+                [
+                  645,
+                  653
+                ],
+                [
+                  669,
+                  648
+                ],
+                [
+                  656,
+                  671
+                ],
+                [
+                  623,
+                  675
+                ]
+              ],
+              [
+                [
+                  684,
+                  709
+                ],
+                [
+                  695,
+                  681
+                ],
+                [
+                  699,
+                  706
+                ],
+                [
+                  727,
+                  661
+                ],
+                [
+                  724,
+                  695
+                ],
+                [
+                  754,
+                  678
+                ],
+                [
+                  739,
+                  708
+                ],
+                [
+                  778,
+                  706
+                ],
+                [
+                  754,
+                  728
+                ],
+                [
+                  713,
+                  731
+                ]
+              ],
+              [
+                [
+                  210,
+                  576
+                ],
+                [
+                  242,
+                  577
+                ],
+                [
+                  265,
+                  569
+                ],
+                [
+                  286,
+                  575
+                ],
+                [
+                  296,
+                  604
+                ],
+                [
+                  316,
+                  621
+                ],
+                [
+                  313,
+                  664
+                ],
+                [
+                  303,
+                  705
+                ],
+                [
+                  289,
+                  737
+                ],
+                [
+                  229,
+                  733
+                ],
+                [
+                  214,
+                  689
+                ],
+                [
+                  215,
+                  647
+                ],
+                [
+                  208,
+                  625
+                ]
+              ]
+            ],
+            "holes": [
+              [
+                [
+                  67,
+                  744
+                ],
+                [
+                  103,
+                  704
+                ],
+                [
+                  147,
+                  690
+                ],
+                [
+                  185,
+                  706
+                ],
+                [
+                  223,
+                  750
+                ],
+                [
+                  239,
+                  745
+                ],
+                [
+                  281,
+                  759
+                ],
+                [
+                  315,
+                  785
+                ],
+                [
+                  305,
+                  804
+                ],
+                [
+                  264,
+                  807
+                ],
+                [
+                  229,
+                  828
+                ],
+                [
+                  183,
+                  829
+                ],
+                [
+                  145,
+                  815
+                ],
+                [
+                  102,
+                  797
+                ],
+                [
+                  68,
+                  792
+                ]
+              ]
+            ],
+            "pivot_px": [
+              95,
+              834
+            ],
+            "z_index": 3,
+            "motion": {
+              "type": "sway_shader",
+              "parameters": {
+                "amplitude": 1,
+                "frequency": 0.27
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "status": "complete",
+      "version": "real2",
+      "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "attempts": [],
+      "processing_script": "tools/art/real_scene_layers.py",
+      "qa_kind": "art",
+      "generator": "real_C_pixel_extraction",
+      "id": "S07_night_real2_tree_canopy",
+      "group": "layers",
+      "operation": "extract_layer",
+      "prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+      "source_path": "assets/generated_scenes/v3_real/S07/night/real2/layers/tree_canopy.png",
+      "runtime_path": "assets/generated_scenes/runtime/v3_real/S07/night/real2/layers/tree_canopy.png",
+      "original_path": "assets/generated_scenes/v3_real/S07/night/real2/C.png",
+      "mask_path": "assets/generated_scenes/v3_real/S07/night/real2/masks/tree_canopy_soft.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S07/night/real2/cleanplates/tree_canopy.png",
+      "processing_parameters": {
+        "version": 1,
+        "scene_id": "S07",
+        "period": "night",
+        "revision": "real2",
+        "native_size": [
+          1672,
+          941
+        ],
+        "original_path": "assets/_incoming/a1r_real/S07/night_C.png",
+        "raw_cleanplate_path": "assets/_incoming/a1r_real/S07/night_raw_cleanplate.png",
+        "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+        "composite_prompt": "Use case: lighting-weather.\nAsset type: S07 riverside NIGHT full composite C, matching the existing DAY composite.\nInput Image 1 is the exact EDIT TARGET. Change ONLY time of day into a quiet readable early night. Preserve the exact camera, composition, tree trunk and branch structure, tree canopy outline, all grass tufts and flowers, three pale stones, bridge arch and masonry shapes, curving path, riverbank boundaries, horizon, water brush marks, crop and native dimensions.\nUse muted dusty-teal and warm-grey night sky and cool shadows; the path and bridge remain visible in soft ambient night light. Water is slightly deeper dusty teal, still a matte gouache surface. No actual light source is visible and none should be added: no moon, stars, lamps, lanterns, fireflies, people, animals or bright sparkles. No magical glow or reflections. Do not add foliage, buildings or extra rocks. The rightmost 30 percent and broad bottom area retain their low detail.\nMaintain gouache picture-book illustration, visible strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes and slightly imperfect perspective, seven muted color families (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), cool-tinted shadows, few props, one focal point, matte paper texture.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria, text, letters, numbers, UI, labels, blank plaques, frames, borders.",
+        "cleanplate_prompt": "Use case: precise-object-edit.\nAsset type: S07 NIGHT raw cleanplate B_all for true extracted foreground grass and tree-canopy layers.\nInput Image 1 is the exact EDIT TARGET. Remove ONLY the following:\n1. All leaves of the foreground tree canopy across the upper-left/top edge. Keep the main tree trunk and thick bare branch structure in their original positions and fill behind removed leaves with the original painted sky.\n2. The foreground grass tufts along the lower-left riverbank and beside the curving path, including the small wildflower stalks that grow among those tufts. Fill behind them with the plausible plain earth path/bank or water immediately behind the specific blades.\nKeep the three pale stones and their moss, the static tree trunk/branches, bridge masonry, every riverbank boundary, background distant vegetation, path position and sky/clouds unchanged. IMPORTANT: retain the water itself and its existing painted brush marks; do not erase the river, replace it with land, or invent water waves. Water will later use an exact region mask from this original composite, not a regenerated ripple image.\nKeep NIGHT lighting, color, camera, crop and same native dimensions; preserve unrelated pixels as closely as possible. Maintain the matte gouache medium, visible dry-brush strokes, slightly wobbly colored-pencil outline and muted seven-family palette.\nNo new objects, people, animals, text, numbers, UI, plaques, borders, glow, bloom, bright sparkles or photorealism.\nThe target is NIGHT: preserve its dim cool-grey/teal ambient light and dark sky, with no added moon, stars, lamps or fireflies. Do not turn it into daylight.",
+        "annotation_notes": "Second manual annotation: S01 includes full flower racemes and lower canopy leaves; S07 includes complete foreground flower stalks and excludes grass polygons from the retained-original water mask. No independently redrawn Li.",
+        "layers": [
+          {
+            "id": "water_mask",
+            "preserve_base": true,
+            "polygons": [
+              [
+                [
+                  435,
+                  477
+                ],
+                [
+                  673,
+                  464
+                ],
+                [
+                  1671,
+                  448
+                ],
+                [
+                  1671,
+                  880
+                ],
+                [
+                  1445,
+                  875
+                ],
+                [
+                  1184,
+                  840
+                ],
+                [
+                  983,
+                  795
+                ],
+                [
+                  815,
+                  747
+                ],
+                [
+                  666,
+                  687
+                ],
+                [
+                  529,
+                  615
+                ],
+                [
+                  405,
+                  551
+                ],
+                [
+                  368,
+                  518
+                ]
+              ]
+            ],
+            "pivot_px": [
+              1020,
+              667
+            ],
+            "z_index": 1,
+            "motion": {
+              "type": "flow",
+              "parameters": {
+                "speed": 0.004
+              }
+            },
+            "holes": [
+              [
+                [
+                  0,
+                  630
+                ],
+                [
+                  41,
+                  609
+                ],
+                [
+                  53,
+                  647
+                ],
+                [
+                  78,
+                  575
+                ],
+                [
+                  89,
+                  648
+                ],
+                [
+                  128,
+                  533
+                ],
+                [
+                  116,
+                  605
+                ],
+                [
+                  161,
+                  544
+                ],
+                [
+                  141,
+                  617
+                ],
+                [
+                  184,
+                  576
+                ],
+                [
+                  164,
+                  641
+                ],
+                [
+                  198,
+                  642
+                ],
+                [
+                  218,
+                  603
+                ],
+                [
+                  211,
+                  645
+                ],
+                [
+                  231,
+                  594
+                ],
+                [
+                  249,
+                  613
+                ],
+                [
+                  274,
+                  580
+                ],
+                [
+                  287,
+                  609
+                ],
+                [
+                  285,
+                  641
+                ],
+                [
+                  307,
+                  618
+                ],
+                [
+                  300,
+                  656
+                ],
+                [
+                  312,
+                  651
+                ],
+                [
+                  311,
+                  684
+                ],
+                [
+                  349,
+                  697
+                ],
+                [
+                  371,
+                  741
+                ],
+                [
+                  337,
+                  764
+                ],
+                [
+                  314,
+                  780
+                ],
+                [
+                  328,
+                  808
+                ],
+                [
+                  280,
+                  842
+                ],
+                [
+                  207,
+                  844
+                ],
+                [
+                  147,
+                  821
+                ],
+                [
+                  100,
+                  824
+                ],
+                [
+                  102,
+                  854
+                ],
+                [
+                  157,
+                  876
+                ],
+                [
+                  125,
+                  882
+                ],
+                [
+                  94,
+                  899
+                ],
+                [
+                  98,
+                  925
+                ],
+                [
+                  67,
+                  940
+                ],
+                [
+                  0,
+                  940
+                ]
+              ],
+              [
+                [
+                  350,
+                  534
+                ],
+                [
+                  350,
+                  493
+                ],
+                [
+                  362,
+                  519
+                ],
+                [
+                  378,
+                  502
+                ],
+                [
+                  374,
+                  535
+                ],
+                [
+                  395,
+                  513
+                ],
+                [
+                  385,
+                  546
+                ],
+                [
+                  414,
+                  527
+                ],
+                [
+                  403,
+                  551
+                ],
+                [
+                  379,
+                  558
+                ]
+              ],
+              [
+                [
+                  470,
+                  588
+                ],
+                [
+                  474,
+                  554
+                ],
+                [
+                  488,
+                  579
+                ],
+                [
+                  498,
+                  539
+                ],
+                [
+                  504,
+                  571
+                ],
+                [
+                  541,
+                  541
+                ],
+                [
+                  519,
+                  582
+                ],
+                [
+                  557,
+                  565
+                ],
+                [
+                  535,
+                  594
+                ],
+                [
+                  564,
+                  588
+                ],
+                [
+                  555,
+                  611
+                ],
+                [
+                  510,
+                  612
+                ],
+                [
+                  486,
+                  602
+                ]
+              ],
+              [
+                [
+                  605,
+                  653
+                ],
+                [
+                  610,
+                  624
+                ],
+                [
+                  619,
+                  646
+                ],
+                [
+                  629,
+                  612
+                ],
+                [
+                  634,
+                  646
+                ],
+                [
+                  654,
+                  621
+                ],
+                [
+                  645,
+                  653
+                ],
+                [
+                  669,
+                  648
+                ],
+                [
+                  656,
+                  671
+                ],
+                [
+                  623,
+                  675
+                ]
+              ],
+              [
+                [
+                  684,
+                  709
+                ],
+                [
+                  695,
+                  681
+                ],
+                [
+                  699,
+                  706
+                ],
+                [
+                  727,
+                  661
+                ],
+                [
+                  724,
+                  695
+                ],
+                [
+                  754,
+                  678
+                ],
+                [
+                  739,
+                  708
+                ],
+                [
+                  778,
+                  706
+                ],
+                [
+                  754,
+                  728
+                ],
+                [
+                  713,
+                  731
+                ]
+              ],
+              [
+                [
+                  210,
+                  576
+                ],
+                [
+                  242,
+                  577
+                ],
+                [
+                  265,
+                  569
+                ],
+                [
+                  286,
+                  575
+                ],
+                [
+                  296,
+                  604
+                ],
+                [
+                  316,
+                  621
+                ],
+                [
+                  313,
+                  664
+                ],
+                [
+                  303,
+                  705
+                ],
+                [
+                  289,
+                  737
+                ],
+                [
+                  229,
+                  733
+                ],
+                [
+                  214,
+                  689
+                ],
+                [
+                  215,
+                  647
+                ],
+                [
+                  208,
+                  625
+                ]
+              ]
+            ]
+          },
+          {
+            "id": "tree_canopy",
+            "polygons": [
+              [
+                [
+                  0,
+                  0
+                ],
+                [
+                  876,
+                  0
+                ],
+                [
+                  867,
+                  22
+                ],
+                [
+                  835,
+                  25
+                ],
+                [
+                  830,
+                  58
+                ],
+                [
+                  803,
+                  65
+                ],
+                [
+                  790,
+                  103
+                ],
+                [
+                  751,
+                  124
+                ],
+                [
+                  718,
+                  153
+                ],
+                [
+                  689,
+                  151
+                ],
+                [
+                  672,
+                  179
+                ],
+                [
+                  636,
+                  176
+                ],
+                [
+                  624,
+                  200
+                ],
+                [
+                  583,
+                  198
+                ],
+                [
+                  567,
+                  218
+                ],
+                [
+                  534,
+                  203
+                ],
+                [
+                  510,
+                  223
+                ],
+                [
+                  472,
+                  210
+                ],
+                [
+                  457,
+                  236
+                ],
+                [
+                  430,
+                  232
+                ],
+                [
+                  415,
+                  254
+                ],
+                [
+                  376,
+                  257
+                ],
+                [
+                  362,
+                  247
+                ],
+                [
+                  340,
+                  266
+                ],
+                [
+                  313,
+                  251
+                ],
+                [
+                  294,
+                  236
+                ],
+                [
+                  271,
+                  248
+                ],
+                [
+                  255,
+                  222
+                ],
+                [
+                  224,
+                  222
+                ],
+                [
+                  215,
+                  190
+                ],
+                [
+                  177,
+                  181
+                ],
+                [
+                  160,
+                  155
+                ],
+                [
+                  134,
+                  150
+                ],
+                [
+                  122,
+                  122
+                ],
+                [
+                  95,
+                  125
+                ],
+                [
+                  85,
+                  102
+                ],
+                [
+                  57,
+                  110
+                ],
+                [
+                  40,
+                  88
+                ],
+                [
+                  17,
+                  93
+                ],
+                [
+                  0,
+                  210
+                ]
+              ]
+            ],
+            "holes": [
+              [
+                [
+                  97,
+                  271
+                ],
+                [
+                  148,
+                  259
+                ],
+                [
+                  194,
+                  176
+                ],
+                [
+                  233,
+                  120
+                ],
+                [
+                  278,
+                  65
+                ],
+                [
+                  310,
+                  33
+                ],
+                [
+                  275,
+                  18
+                ],
+                [
+                  250,
+                  53
+                ],
+                [
+                  231,
+                  23
+                ],
+                [
+                  215,
+                  42
+                ],
+                [
+                  193,
+                  22
+                ],
+                [
+                  173,
+                  46
+                ],
+                [
+                  149,
+                  54
+                ],
+                [
+                  121,
+                  85
+                ],
+                [
+                  96,
+                  132
+                ],
+                [
+                  60,
+                  80
+                ],
+                [
+                  32,
+                  64
+                ],
+                [
+                  18,
+                  73
+                ],
+                [
+                  50,
+                  123
+                ],
+                [
+                  62,
+                  184
+                ],
+                [
+                  56,
+                  237
+                ]
+              ],
+              [
+                [
+                  135,
+                  241
+                ],
+                [
+                  159,
+                  269
+                ],
+                [
+                  254,
+                  200
+                ],
+                [
+                  322,
+                  170
+                ],
+                [
+                  387,
+                  133
+                ],
+                [
+                  430,
+                  119
+                ],
+                [
+                  488,
+                  98
+                ],
+                [
+                  566,
+                  67
+                ],
+                [
+                  560,
+                  60
+                ],
+                [
+                  492,
+                  83
+                ],
+                [
+                  445,
+                  99
+                ],
+                [
+                  432,
+                  75
+                ],
+                [
+                  421,
+                  101
+                ],
+                [
+                  388,
+                  111
+                ],
+                [
+                  374,
+                  69
+                ],
+                [
+                  365,
+                  67
+                ],
+                [
+                  348,
+                  117
+                ],
+                [
+                  313,
+                  136
+                ],
+                [
+                  279,
+                  146
+                ],
+                [
+                  241,
+                  165
+                ],
+                [
+                  207,
+                  185
+                ],
+                [
+                  167,
+                  217
+                ]
+              ]
+            ],
+            "pivot_px": [
+              184,
+              210
+            ],
+            "z_index": 2,
+            "motion": {
+              "type": "sway_shader",
+              "parameters": {
+                "amplitude": 1.3,
+                "frequency": 0.19
+              }
+            }
+          },
+          {
+            "id": "grass",
+            "polygons": [
+              [
+                [
+                  0,
+                  630
+                ],
+                [
+                  41,
+                  609
+                ],
+                [
+                  53,
+                  647
+                ],
+                [
+                  78,
+                  575
+                ],
+                [
+                  89,
+                  648
+                ],
+                [
+                  128,
+                  533
+                ],
+                [
+                  116,
+                  605
+                ],
+                [
+                  161,
+                  544
+                ],
+                [
+                  141,
+                  617
+                ],
+                [
+                  184,
+                  576
+                ],
+                [
+                  164,
+                  641
+                ],
+                [
+                  198,
+                  642
+                ],
+                [
+                  218,
+                  603
+                ],
+                [
+                  211,
+                  645
+                ],
+                [
+                  231,
+                  594
+                ],
+                [
+                  249,
+                  613
+                ],
+                [
+                  274,
+                  580
+                ],
+                [
+                  287,
+                  609
+                ],
+                [
+                  285,
+                  641
+                ],
+                [
+                  307,
+                  618
+                ],
+                [
+                  300,
+                  656
+                ],
+                [
+                  312,
+                  651
+                ],
+                [
+                  311,
+                  684
+                ],
+                [
+                  349,
+                  697
+                ],
+                [
+                  371,
+                  741
+                ],
+                [
+                  337,
+                  764
+                ],
+                [
+                  314,
+                  780
+                ],
+                [
+                  328,
+                  808
+                ],
+                [
+                  280,
+                  842
+                ],
+                [
+                  207,
+                  844
+                ],
+                [
+                  147,
+                  821
+                ],
+                [
+                  100,
+                  824
+                ],
+                [
+                  102,
+                  854
+                ],
+                [
+                  157,
+                  876
+                ],
+                [
+                  125,
+                  882
+                ],
+                [
+                  94,
+                  899
+                ],
+                [
+                  98,
+                  925
+                ],
+                [
+                  67,
+                  940
+                ],
+                [
+                  0,
+                  940
+                ]
+              ],
+              [
+                [
+                  350,
+                  534
+                ],
+                [
+                  350,
+                  493
+                ],
+                [
+                  362,
+                  519
+                ],
+                [
+                  378,
+                  502
+                ],
+                [
+                  374,
+                  535
+                ],
+                [
+                  395,
+                  513
+                ],
+                [
+                  385,
+                  546
+                ],
+                [
+                  414,
+                  527
+                ],
+                [
+                  403,
+                  551
+                ],
+                [
+                  379,
+                  558
+                ]
+              ],
+              [
+                [
+                  470,
+                  588
+                ],
+                [
+                  474,
+                  554
+                ],
+                [
+                  488,
+                  579
+                ],
+                [
+                  498,
+                  539
+                ],
+                [
+                  504,
+                  571
+                ],
+                [
+                  541,
+                  541
+                ],
+                [
+                  519,
+                  582
+                ],
+                [
+                  557,
+                  565
+                ],
+                [
+                  535,
+                  594
+                ],
+                [
+                  564,
+                  588
+                ],
+                [
+                  555,
+                  611
+                ],
+                [
+                  510,
+                  612
+                ],
+                [
+                  486,
+                  602
+                ]
+              ],
+              [
+                [
+                  605,
+                  653
+                ],
+                [
+                  610,
+                  624
+                ],
+                [
+                  619,
+                  646
+                ],
+                [
+                  629,
+                  612
+                ],
+                [
+                  634,
+                  646
+                ],
+                [
+                  654,
+                  621
+                ],
+                [
+                  645,
+                  653
+                ],
+                [
+                  669,
+                  648
+                ],
+                [
+                  656,
+                  671
+                ],
+                [
+                  623,
+                  675
+                ]
+              ],
+              [
+                [
+                  684,
+                  709
+                ],
+                [
+                  695,
+                  681
+                ],
+                [
+                  699,
+                  706
+                ],
+                [
+                  727,
+                  661
+                ],
+                [
+                  724,
+                  695
+                ],
+                [
+                  754,
+                  678
+                ],
+                [
+                  739,
+                  708
+                ],
+                [
+                  778,
+                  706
+                ],
+                [
+                  754,
+                  728
+                ],
+                [
+                  713,
+                  731
+                ]
+              ],
+              [
+                [
+                  210,
+                  576
+                ],
+                [
+                  242,
+                  577
+                ],
+                [
+                  265,
+                  569
+                ],
+                [
+                  286,
+                  575
+                ],
+                [
+                  296,
+                  604
+                ],
+                [
+                  316,
+                  621
+                ],
+                [
+                  313,
+                  664
+                ],
+                [
+                  303,
+                  705
+                ],
+                [
+                  289,
+                  737
+                ],
+                [
+                  229,
+                  733
+                ],
+                [
+                  214,
+                  689
+                ],
+                [
+                  215,
+                  647
+                ],
+                [
+                  208,
+                  625
+                ]
+              ]
+            ],
+            "holes": [
+              [
+                [
+                  67,
+                  744
+                ],
+                [
+                  103,
+                  704
+                ],
+                [
+                  147,
+                  690
+                ],
+                [
+                  185,
+                  706
+                ],
+                [
+                  223,
+                  750
+                ],
+                [
+                  239,
+                  745
+                ],
+                [
+                  281,
+                  759
+                ],
+                [
+                  315,
+                  785
+                ],
+                [
+                  305,
+                  804
+                ],
+                [
+                  264,
+                  807
+                ],
+                [
+                  229,
+                  828
+                ],
+                [
+                  183,
+                  829
+                ],
+                [
+                  145,
+                  815
+                ],
+                [
+                  102,
+                  797
+                ],
+                [
+                  68,
+                  792
+                ]
+              ]
+            ],
+            "pivot_px": [
+              95,
+              834
+            ],
+            "z_index": 3,
+            "motion": {
+              "type": "sway_shader",
+              "parameters": {
+                "amplitude": 1,
+                "frequency": 0.27
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "status": "complete",
+      "version": "real2",
+      "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "attempts": [],
+      "processing_script": "tools/art/real_scene_layers.py",
+      "qa_kind": "art",
+      "generator": "real_C_pixel_extraction",
+      "id": "S07_night_real2_grass",
+      "group": "layers",
+      "operation": "extract_layer",
+      "prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+      "source_path": "assets/generated_scenes/v3_real/S07/night/real2/layers/grass.png",
+      "runtime_path": "assets/generated_scenes/runtime/v3_real/S07/night/real2/layers/grass.png",
+      "original_path": "assets/generated_scenes/v3_real/S07/night/real2/C.png",
+      "mask_path": "assets/generated_scenes/v3_real/S07/night/real2/masks/grass_soft.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S07/night/real2/cleanplates/grass.png",
+      "processing_parameters": {
+        "version": 1,
+        "scene_id": "S07",
+        "period": "night",
+        "revision": "real2",
+        "native_size": [
+          1672,
+          941
+        ],
+        "original_path": "assets/_incoming/a1r_real/S07/night_C.png",
+        "raw_cleanplate_path": "assets/_incoming/a1r_real/S07/night_raw_cleanplate.png",
+        "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+        "composite_prompt": "Use case: lighting-weather.\nAsset type: S07 riverside NIGHT full composite C, matching the existing DAY composite.\nInput Image 1 is the exact EDIT TARGET. Change ONLY time of day into a quiet readable early night. Preserve the exact camera, composition, tree trunk and branch structure, tree canopy outline, all grass tufts and flowers, three pale stones, bridge arch and masonry shapes, curving path, riverbank boundaries, horizon, water brush marks, crop and native dimensions.\nUse muted dusty-teal and warm-grey night sky and cool shadows; the path and bridge remain visible in soft ambient night light. Water is slightly deeper dusty teal, still a matte gouache surface. No actual light source is visible and none should be added: no moon, stars, lamps, lanterns, fireflies, people, animals or bright sparkles. No magical glow or reflections. Do not add foliage, buildings or extra rocks. The rightmost 30 percent and broad bottom area retain their low detail.\nMaintain gouache picture-book illustration, visible strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes and slightly imperfect perspective, seven muted color families (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), cool-tinted shadows, few props, one focal point, matte paper texture.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria, text, letters, numbers, UI, labels, blank plaques, frames, borders.",
+        "cleanplate_prompt": "Use case: precise-object-edit.\nAsset type: S07 NIGHT raw cleanplate B_all for true extracted foreground grass and tree-canopy layers.\nInput Image 1 is the exact EDIT TARGET. Remove ONLY the following:\n1. All leaves of the foreground tree canopy across the upper-left/top edge. Keep the main tree trunk and thick bare branch structure in their original positions and fill behind removed leaves with the original painted sky.\n2. The foreground grass tufts along the lower-left riverbank and beside the curving path, including the small wildflower stalks that grow among those tufts. Fill behind them with the plausible plain earth path/bank or water immediately behind the specific blades.\nKeep the three pale stones and their moss, the static tree trunk/branches, bridge masonry, every riverbank boundary, background distant vegetation, path position and sky/clouds unchanged. IMPORTANT: retain the water itself and its existing painted brush marks; do not erase the river, replace it with land, or invent water waves. Water will later use an exact region mask from this original composite, not a regenerated ripple image.\nKeep NIGHT lighting, color, camera, crop and same native dimensions; preserve unrelated pixels as closely as possible. Maintain the matte gouache medium, visible dry-brush strokes, slightly wobbly colored-pencil outline and muted seven-family palette.\nNo new objects, people, animals, text, numbers, UI, plaques, borders, glow, bloom, bright sparkles or photorealism.\nThe target is NIGHT: preserve its dim cool-grey/teal ambient light and dark sky, with no added moon, stars, lamps or fireflies. Do not turn it into daylight.",
+        "annotation_notes": "Second manual annotation: S01 includes full flower racemes and lower canopy leaves; S07 includes complete foreground flower stalks and excludes grass polygons from the retained-original water mask. No independently redrawn Li.",
+        "layers": [
+          {
+            "id": "water_mask",
+            "preserve_base": true,
+            "polygons": [
+              [
+                [
+                  435,
+                  477
+                ],
+                [
+                  673,
+                  464
+                ],
+                [
+                  1671,
+                  448
+                ],
+                [
+                  1671,
+                  880
+                ],
+                [
+                  1445,
+                  875
+                ],
+                [
+                  1184,
+                  840
+                ],
+                [
+                  983,
+                  795
+                ],
+                [
+                  815,
+                  747
+                ],
+                [
+                  666,
+                  687
+                ],
+                [
+                  529,
+                  615
+                ],
+                [
+                  405,
+                  551
+                ],
+                [
+                  368,
+                  518
+                ]
+              ]
+            ],
+            "pivot_px": [
+              1020,
+              667
+            ],
+            "z_index": 1,
+            "motion": {
+              "type": "flow",
+              "parameters": {
+                "speed": 0.004
+              }
+            },
+            "holes": [
+              [
+                [
+                  0,
+                  630
+                ],
+                [
+                  41,
+                  609
+                ],
+                [
+                  53,
+                  647
+                ],
+                [
+                  78,
+                  575
+                ],
+                [
+                  89,
+                  648
+                ],
+                [
+                  128,
+                  533
+                ],
+                [
+                  116,
+                  605
+                ],
+                [
+                  161,
+                  544
+                ],
+                [
+                  141,
+                  617
+                ],
+                [
+                  184,
+                  576
+                ],
+                [
+                  164,
+                  641
+                ],
+                [
+                  198,
+                  642
+                ],
+                [
+                  218,
+                  603
+                ],
+                [
+                  211,
+                  645
+                ],
+                [
+                  231,
+                  594
+                ],
+                [
+                  249,
+                  613
+                ],
+                [
+                  274,
+                  580
+                ],
+                [
+                  287,
+                  609
+                ],
+                [
+                  285,
+                  641
+                ],
+                [
+                  307,
+                  618
+                ],
+                [
+                  300,
+                  656
+                ],
+                [
+                  312,
+                  651
+                ],
+                [
+                  311,
+                  684
+                ],
+                [
+                  349,
+                  697
+                ],
+                [
+                  371,
+                  741
+                ],
+                [
+                  337,
+                  764
+                ],
+                [
+                  314,
+                  780
+                ],
+                [
+                  328,
+                  808
+                ],
+                [
+                  280,
+                  842
+                ],
+                [
+                  207,
+                  844
+                ],
+                [
+                  147,
+                  821
+                ],
+                [
+                  100,
+                  824
+                ],
+                [
+                  102,
+                  854
+                ],
+                [
+                  157,
+                  876
+                ],
+                [
+                  125,
+                  882
+                ],
+                [
+                  94,
+                  899
+                ],
+                [
+                  98,
+                  925
+                ],
+                [
+                  67,
+                  940
+                ],
+                [
+                  0,
+                  940
+                ]
+              ],
+              [
+                [
+                  350,
+                  534
+                ],
+                [
+                  350,
+                  493
+                ],
+                [
+                  362,
+                  519
+                ],
+                [
+                  378,
+                  502
+                ],
+                [
+                  374,
+                  535
+                ],
+                [
+                  395,
+                  513
+                ],
+                [
+                  385,
+                  546
+                ],
+                [
+                  414,
+                  527
+                ],
+                [
+                  403,
+                  551
+                ],
+                [
+                  379,
+                  558
+                ]
+              ],
+              [
+                [
+                  470,
+                  588
+                ],
+                [
+                  474,
+                  554
+                ],
+                [
+                  488,
+                  579
+                ],
+                [
+                  498,
+                  539
+                ],
+                [
+                  504,
+                  571
+                ],
+                [
+                  541,
+                  541
+                ],
+                [
+                  519,
+                  582
+                ],
+                [
+                  557,
+                  565
+                ],
+                [
+                  535,
+                  594
+                ],
+                [
+                  564,
+                  588
+                ],
+                [
+                  555,
+                  611
+                ],
+                [
+                  510,
+                  612
+                ],
+                [
+                  486,
+                  602
+                ]
+              ],
+              [
+                [
+                  605,
+                  653
+                ],
+                [
+                  610,
+                  624
+                ],
+                [
+                  619,
+                  646
+                ],
+                [
+                  629,
+                  612
+                ],
+                [
+                  634,
+                  646
+                ],
+                [
+                  654,
+                  621
+                ],
+                [
+                  645,
+                  653
+                ],
+                [
+                  669,
+                  648
+                ],
+                [
+                  656,
+                  671
+                ],
+                [
+                  623,
+                  675
+                ]
+              ],
+              [
+                [
+                  684,
+                  709
+                ],
+                [
+                  695,
+                  681
+                ],
+                [
+                  699,
+                  706
+                ],
+                [
+                  727,
+                  661
+                ],
+                [
+                  724,
+                  695
+                ],
+                [
+                  754,
+                  678
+                ],
+                [
+                  739,
+                  708
+                ],
+                [
+                  778,
+                  706
+                ],
+                [
+                  754,
+                  728
+                ],
+                [
+                  713,
+                  731
+                ]
+              ],
+              [
+                [
+                  210,
+                  576
+                ],
+                [
+                  242,
+                  577
+                ],
+                [
+                  265,
+                  569
+                ],
+                [
+                  286,
+                  575
+                ],
+                [
+                  296,
+                  604
+                ],
+                [
+                  316,
+                  621
+                ],
+                [
+                  313,
+                  664
+                ],
+                [
+                  303,
+                  705
+                ],
+                [
+                  289,
+                  737
+                ],
+                [
+                  229,
+                  733
+                ],
+                [
+                  214,
+                  689
+                ],
+                [
+                  215,
+                  647
+                ],
+                [
+                  208,
+                  625
+                ]
+              ]
+            ]
+          },
+          {
+            "id": "tree_canopy",
+            "polygons": [
+              [
+                [
+                  0,
+                  0
+                ],
+                [
+                  876,
+                  0
+                ],
+                [
+                  867,
+                  22
+                ],
+                [
+                  835,
+                  25
+                ],
+                [
+                  830,
+                  58
+                ],
+                [
+                  803,
+                  65
+                ],
+                [
+                  790,
+                  103
+                ],
+                [
+                  751,
+                  124
+                ],
+                [
+                  718,
+                  153
+                ],
+                [
+                  689,
+                  151
+                ],
+                [
+                  672,
+                  179
+                ],
+                [
+                  636,
+                  176
+                ],
+                [
+                  624,
+                  200
+                ],
+                [
+                  583,
+                  198
+                ],
+                [
+                  567,
+                  218
+                ],
+                [
+                  534,
+                  203
+                ],
+                [
+                  510,
+                  223
+                ],
+                [
+                  472,
+                  210
+                ],
+                [
+                  457,
+                  236
+                ],
+                [
+                  430,
+                  232
+                ],
+                [
+                  415,
+                  254
+                ],
+                [
+                  376,
+                  257
+                ],
+                [
+                  362,
+                  247
+                ],
+                [
+                  340,
+                  266
+                ],
+                [
+                  313,
+                  251
+                ],
+                [
+                  294,
+                  236
+                ],
+                [
+                  271,
+                  248
+                ],
+                [
+                  255,
+                  222
+                ],
+                [
+                  224,
+                  222
+                ],
+                [
+                  215,
+                  190
+                ],
+                [
+                  177,
+                  181
+                ],
+                [
+                  160,
+                  155
+                ],
+                [
+                  134,
+                  150
+                ],
+                [
+                  122,
+                  122
+                ],
+                [
+                  95,
+                  125
+                ],
+                [
+                  85,
+                  102
+                ],
+                [
+                  57,
+                  110
+                ],
+                [
+                  40,
+                  88
+                ],
+                [
+                  17,
+                  93
+                ],
+                [
+                  0,
+                  210
+                ]
+              ]
+            ],
+            "holes": [
+              [
+                [
+                  97,
+                  271
+                ],
+                [
+                  148,
+                  259
+                ],
+                [
+                  194,
+                  176
+                ],
+                [
+                  233,
+                  120
+                ],
+                [
+                  278,
+                  65
+                ],
+                [
+                  310,
+                  33
+                ],
+                [
+                  275,
+                  18
+                ],
+                [
+                  250,
+                  53
+                ],
+                [
+                  231,
+                  23
+                ],
+                [
+                  215,
+                  42
+                ],
+                [
+                  193,
+                  22
+                ],
+                [
+                  173,
+                  46
+                ],
+                [
+                  149,
+                  54
+                ],
+                [
+                  121,
+                  85
+                ],
+                [
+                  96,
+                  132
+                ],
+                [
+                  60,
+                  80
+                ],
+                [
+                  32,
+                  64
+                ],
+                [
+                  18,
+                  73
+                ],
+                [
+                  50,
+                  123
+                ],
+                [
+                  62,
+                  184
+                ],
+                [
+                  56,
+                  237
+                ]
+              ],
+              [
+                [
+                  135,
+                  241
+                ],
+                [
+                  159,
+                  269
+                ],
+                [
+                  254,
+                  200
+                ],
+                [
+                  322,
+                  170
+                ],
+                [
+                  387,
+                  133
+                ],
+                [
+                  430,
+                  119
+                ],
+                [
+                  488,
+                  98
+                ],
+                [
+                  566,
+                  67
+                ],
+                [
+                  560,
+                  60
+                ],
+                [
+                  492,
+                  83
+                ],
+                [
+                  445,
+                  99
+                ],
+                [
+                  432,
+                  75
+                ],
+                [
+                  421,
+                  101
+                ],
+                [
+                  388,
+                  111
+                ],
+                [
+                  374,
+                  69
+                ],
+                [
+                  365,
+                  67
+                ],
+                [
+                  348,
+                  117
+                ],
+                [
+                  313,
+                  136
+                ],
+                [
+                  279,
+                  146
+                ],
+                [
+                  241,
+                  165
+                ],
+                [
+                  207,
+                  185
+                ],
+                [
+                  167,
+                  217
+                ]
+              ]
+            ],
+            "pivot_px": [
+              184,
+              210
+            ],
+            "z_index": 2,
+            "motion": {
+              "type": "sway_shader",
+              "parameters": {
+                "amplitude": 1.3,
+                "frequency": 0.19
+              }
+            }
+          },
+          {
+            "id": "grass",
+            "polygons": [
+              [
+                [
+                  0,
+                  630
+                ],
+                [
+                  41,
+                  609
+                ],
+                [
+                  53,
+                  647
+                ],
+                [
+                  78,
+                  575
+                ],
+                [
+                  89,
+                  648
+                ],
+                [
+                  128,
+                  533
+                ],
+                [
+                  116,
+                  605
+                ],
+                [
+                  161,
+                  544
+                ],
+                [
+                  141,
+                  617
+                ],
+                [
+                  184,
+                  576
+                ],
+                [
+                  164,
+                  641
+                ],
+                [
+                  198,
+                  642
+                ],
+                [
+                  218,
+                  603
+                ],
+                [
+                  211,
+                  645
+                ],
+                [
+                  231,
+                  594
+                ],
+                [
+                  249,
+                  613
+                ],
+                [
+                  274,
+                  580
+                ],
+                [
+                  287,
+                  609
+                ],
+                [
+                  285,
+                  641
+                ],
+                [
+                  307,
+                  618
+                ],
+                [
+                  300,
+                  656
+                ],
+                [
+                  312,
+                  651
+                ],
+                [
+                  311,
+                  684
+                ],
+                [
+                  349,
+                  697
+                ],
+                [
+                  371,
+                  741
+                ],
+                [
+                  337,
+                  764
+                ],
+                [
+                  314,
+                  780
+                ],
+                [
+                  328,
+                  808
+                ],
+                [
+                  280,
+                  842
+                ],
+                [
+                  207,
+                  844
+                ],
+                [
+                  147,
+                  821
+                ],
+                [
+                  100,
+                  824
+                ],
+                [
+                  102,
+                  854
+                ],
+                [
+                  157,
+                  876
+                ],
+                [
+                  125,
+                  882
+                ],
+                [
+                  94,
+                  899
+                ],
+                [
+                  98,
+                  925
+                ],
+                [
+                  67,
+                  940
+                ],
+                [
+                  0,
+                  940
+                ]
+              ],
+              [
+                [
+                  350,
+                  534
+                ],
+                [
+                  350,
+                  493
+                ],
+                [
+                  362,
+                  519
+                ],
+                [
+                  378,
+                  502
+                ],
+                [
+                  374,
+                  535
+                ],
+                [
+                  395,
+                  513
+                ],
+                [
+                  385,
+                  546
+                ],
+                [
+                  414,
+                  527
+                ],
+                [
+                  403,
+                  551
+                ],
+                [
+                  379,
+                  558
+                ]
+              ],
+              [
+                [
+                  470,
+                  588
+                ],
+                [
+                  474,
+                  554
+                ],
+                [
+                  488,
+                  579
+                ],
+                [
+                  498,
+                  539
+                ],
+                [
+                  504,
+                  571
+                ],
+                [
+                  541,
+                  541
+                ],
+                [
+                  519,
+                  582
+                ],
+                [
+                  557,
+                  565
+                ],
+                [
+                  535,
+                  594
+                ],
+                [
+                  564,
+                  588
+                ],
+                [
+                  555,
+                  611
+                ],
+                [
+                  510,
+                  612
+                ],
+                [
+                  486,
+                  602
+                ]
+              ],
+              [
+                [
+                  605,
+                  653
+                ],
+                [
+                  610,
+                  624
+                ],
+                [
+                  619,
+                  646
+                ],
+                [
+                  629,
+                  612
+                ],
+                [
+                  634,
+                  646
+                ],
+                [
+                  654,
+                  621
+                ],
+                [
+                  645,
+                  653
+                ],
+                [
+                  669,
+                  648
+                ],
+                [
+                  656,
+                  671
+                ],
+                [
+                  623,
+                  675
+                ]
+              ],
+              [
+                [
+                  684,
+                  709
+                ],
+                [
+                  695,
+                  681
+                ],
+                [
+                  699,
+                  706
+                ],
+                [
+                  727,
+                  661
+                ],
+                [
+                  724,
+                  695
+                ],
+                [
+                  754,
+                  678
+                ],
+                [
+                  739,
+                  708
+                ],
+                [
+                  778,
+                  706
+                ],
+                [
+                  754,
+                  728
+                ],
+                [
+                  713,
+                  731
+                ]
+              ],
+              [
+                [
+                  210,
+                  576
+                ],
+                [
+                  242,
+                  577
+                ],
+                [
+                  265,
+                  569
+                ],
+                [
+                  286,
+                  575
+                ],
+                [
+                  296,
+                  604
+                ],
+                [
+                  316,
+                  621
+                ],
+                [
+                  313,
+                  664
+                ],
+                [
+                  303,
+                  705
+                ],
+                [
+                  289,
+                  737
+                ],
+                [
+                  229,
+                  733
+                ],
+                [
+                  214,
+                  689
+                ],
+                [
+                  215,
+                  647
+                ],
+                [
+                  208,
+                  625
+                ]
+              ]
+            ],
+            "holes": [
+              [
+                [
+                  67,
+                  744
+                ],
+                [
+                  103,
+                  704
+                ],
+                [
+                  147,
+                  690
+                ],
+                [
+                  185,
+                  706
+                ],
+                [
+                  223,
+                  750
+                ],
+                [
+                  239,
+                  745
+                ],
+                [
+                  281,
+                  759
+                ],
+                [
+                  315,
+                  785
+                ],
+                [
+                  305,
+                  804
+                ],
+                [
+                  264,
+                  807
+                ],
+                [
+                  229,
+                  828
+                ],
+                [
+                  183,
+                  829
+                ],
+                [
+                  145,
+                  815
+                ],
+                [
+                  102,
+                  797
+                ],
+                [
+                  68,
+                  792
+                ]
+              ]
+            ],
+            "pivot_px": [
+              95,
+              834
+            ],
+            "z_index": 3,
+            "motion": {
+              "type": "sway_shader",
+              "parameters": {
+                "amplitude": 1,
+                "frequency": 0.27
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "recompositions": [
+    {
+      "id": "S07_night_real2",
+      "qa_kind": "art",
+      "original_path": "assets/generated_scenes/v3_real/S07/night/real2/C.png",
+      "base_path": "assets/generated_scenes/v3_real/S07/night/real2/B_all.png",
+      "layers": [
+        {
+          "path": "assets/generated_scenes/v3_real/S07/night/real2/layers/water_mask.png",
+          "z_index": 1
+        },
+        {
+          "path": "assets/generated_scenes/v3_real/S07/night/real2/layers/tree_canopy.png",
+          "z_index": 2
+        },
+        {
+          "path": "assets/generated_scenes/v3_real/S07/night/real2/layers/grass.png",
+          "z_index": 3
+        }
+      ]
+    }
+  ],
+  "scene_descriptors": {
+    "S07": {
+      "layer_format": "aligned_full_canvas",
+      "night": "res://assets/generated_scenes/runtime/v3_real/S07/night/real2/B_all.png",
+      "layers": {
+        "water_mask": {
+          "path": "res://assets/generated_scenes/runtime/v3_real/S07/night/real2/layers/water_mask.png",
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            1672,
+            941
+          ],
+          "pivot_px": [
+            1020,
+            667
+          ],
+          "z_index": 1,
+          "motion": {
+            "type": "flow",
+            "parameters": {
+              "speed": 0.004
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 1.1483253588516746,
+            "source_crop": [
+              0.0,
+              0.25,
+              1672.0,
+              940.75
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              1672,
+              941
+            ]
+          },
+          "variants": {
+            "night": "res://assets/generated_scenes/runtime/v3_real/S07/night/real2/layers/water_mask.png"
+          },
+          "variant_transforms": {
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 1.1483253588516746,
+              "source_crop": [
+                0.0,
+                0.25,
+                1672.0,
+                940.75
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                1672,
+                941
+              ]
+            }
+          }
+        },
+        "tree_canopy": {
+          "path": "res://assets/generated_scenes/runtime/v3_real/S07/night/real2/layers/tree_canopy.png",
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            1672,
+            941
+          ],
+          "pivot_px": [
+            184,
+            210
+          ],
+          "z_index": 2,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude": 1.3,
+              "frequency": 0.19
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 1.1483253588516746,
+            "source_crop": [
+              0.0,
+              0.25,
+              1672.0,
+              940.75
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              1672,
+              941
+            ]
+          },
+          "variants": {
+            "night": "res://assets/generated_scenes/runtime/v3_real/S07/night/real2/layers/tree_canopy.png"
+          },
+          "variant_transforms": {
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 1.1483253588516746,
+              "source_crop": [
+                0.0,
+                0.25,
+                1672.0,
+                940.75
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                1672,
+                941
+              ]
+            }
+          }
+        },
+        "grass": {
+          "path": "res://assets/generated_scenes/runtime/v3_real/S07/night/real2/layers/grass.png",
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            1672,
+            941
+          ],
+          "pivot_px": [
+            95,
+            834
+          ],
+          "z_index": 3,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude": 1,
+              "frequency": 0.27
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 1.1483253588516746,
+            "source_crop": [
+              0.0,
+              0.25,
+              1672.0,
+              940.75
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              1672,
+              941
+            ]
+          },
+          "variants": {
+            "night": "res://assets/generated_scenes/runtime/v3_real/S07/night/real2/layers/grass.png"
+          },
+          "variant_transforms": {
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 1.1483253588516746,
+              "source_crop": [
+                0.0,
+                0.25,
+                1672.0,
+                940.75
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                1672,
+                941
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "receipt_path": "assets/generated_scenes/v3_real/S07/night/real2/receipt.json"
+}

@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "kind": "real_pixel_extraction",
+  "pipeline_config": "data/art/pipeline.json",
+  "output_root": "assets/generated_scenes/v3_real",
+  "runtime_root": "assets/generated_scenes/runtime/v3_real",
+  "logical_canvas": [2560, 1440],
+  "required_mask": {"feather_pixels": 1, "inpaint_dilation_pixels": 6},
+  "motion_types": ["static", "sway_shader", "pendulum", "flow"],
+  "maximum_polygon_vertices": 2048,
+  "cleanplate_method": "AI raw B is normalized with equal-aspect cover; final B_i/B_all are a soft-mask patch over actual C. The 6px dilation is retained as AI authorization evidence; undamaged context outside the soft mask is copied from C, never claimed as unchanged AI output.",
+  "mask_usage_notice": "本批rawB已先以C作参考生成，内置工具未接收这些显式mask。1px软mask与6px扩区在随后人工标图后生成，用作可审阅的局部合成边界及后续重生目标，不声称已作为本轮生图参数。",
+  "processing_prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+  "jobs": []
+}

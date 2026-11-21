@@ -1,0 +1,472 @@
+{
+  "version": 1,
+  "scene_id": "S07",
+  "generator": "builtin_imagegen",
+  "tool": "image_gen.imagegen",
+  "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+  "attempt_limit": 4,
+  "formal_scene_config_modified": false,
+  "images": {
+    "day_C": {
+      "path": "assets/_incoming/a1r_real/S07/day_C.png",
+      "sha256": "fa0e3dd90e08476b2476f7aedc8a139afcf52474b61f4bfe738c8a62b6ac9110",
+      "native_size": [
+        1672,
+        941
+      ],
+      "reference_sha256": {
+        "D:/MagicStore/assets/_incoming/a1r_pilot/candidate_3.png": "391ef0b702653eaf7a2bf98f90595bb12502587b6bcc9f0b5653aecdf9766833"
+      },
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "full_composite_C",
+      "prompt": "Use case: stylized-concept.\nAsset type: S07 riverside gathering scene, DAY complete original composite C for a quiet game.\nInput Image 1 is STYLE REFERENCE ONLY. Match its coarse visible gouache strokes, dry-brush edges, colored-pencil contour marks, sparse forms and muted matte palette. Do not reproduce the indoor subject.\nScene: a riverside footpath at the edge of a small town in soft diffuse morning daylight. A simple low stone arch bridge crosses the narrow river in the left background. A broad bare earth footpath curves along the left bank. One clearly structured plain tree trunk rises at the far-left edge with a single readable sage canopy extending across the upper-left. A few simple foreground grass tufts along the left riverbank, one restrained clump of tiny wildflowers, and a small cluster of three pale quartz stones among moss beside the path. Keep these few objects readable and separate.\nComposition: 16:9 wide edge-to-edge. River bend, path and bridge occupy the left two thirds; rightmost 30 percent is smooth quiet dusty-teal river surface with only a few broad horizontal brush marks and a low distant bank. Bottom 12 percent mainly plain ground and quiet water, with the few foreground grass tufts near lower-left only. Soft modest sky; no houses in view, people, boats, animals, lamps, ornamental structures or dense foliage clutter. Water is matte paint, not photorealistic reflection.\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse daylight, cool-tinted shadows, generous empty wall and floor space interpreted here as generous quiet open bank and water, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, numbers, UI, labels, blank plaques, interface frames, borders.\nRequested native 2560×1440 if available, otherwise actual largest native 16:9. Do not draw resolution text.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_pilot/candidate_3.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-510a6337-54f6-464d-babf-e5e9ddc23624.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "左侧树干与树冠、前景草丛、素石桥和弯曲小径均可辨；水面大面积留白，右30%低细节。只有少量花与三块浅色石，无发光水晶或杂物。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S07/day_C.png",
+          "sha256": "fa0e3dd90e08476b2476f7aedc8a139afcf52474b61f4bfe738c8a62b6ac9110",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: stylized-concept.\nAsset type: S07 riverside gathering scene, DAY complete original composite C for a quiet game.\nInput Image 1 is STYLE REFERENCE ONLY. Match its coarse visible gouache strokes, dry-brush edges, colored-pencil contour marks, sparse forms and muted matte palette. Do not reproduce the indoor subject.\nScene: a riverside footpath at the edge of a small town in soft diffuse morning daylight. A simple low stone arch bridge crosses the narrow river in the left background. A broad bare earth footpath curves along the left bank. One clearly structured plain tree trunk rises at the far-left edge with a single readable sage canopy extending across the upper-left. A few simple foreground grass tufts along the left riverbank, one restrained clump of tiny wildflowers, and a small cluster of three pale quartz stones among moss beside the path. Keep these few objects readable and separate.\nComposition: 16:9 wide edge-to-edge. River bend, path and bridge occupy the left two thirds; rightmost 30 percent is smooth quiet dusty-teal river surface with only a few broad horizontal brush marks and a low distant bank. Bottom 12 percent mainly plain ground and quiet water, with the few foreground grass tufts near lower-left only. Soft modest sky; no houses in view, people, boats, animals, lamps, ornamental structures or dense foliage clutter. Water is matte paint, not photorealistic reflection.\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse daylight, cool-tinted shadows, generous empty wall and floor space interpreted here as generous quiet open bank and water, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, numbers, UI, labels, blank plaques, interface frames, borders.\nRequested native 2560×1440 if available, otherwise actual largest native 16:9. Do not draw resolution text.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_pilot/candidate_3.png"
+          ]
+        }
+      ]
+    },
+    "night_C": {
+      "path": "assets/_incoming/a1r_real/S07/night_C.png",
+      "sha256": "ab5895f553dbcfe0103d08bdf0c30912f360fc31df1c2117b57e7744f9080ea7",
+      "native_size": [
+        1672,
+        941
+      ],
+      "reference_sha256": {
+        "D:/MagicStore/assets/_incoming/a1r_real/S07/day_C.png": "fa0e3dd90e08476b2476f7aedc8a139afcf52474b61f4bfe738c8a62b6ac9110"
+      },
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "full_composite_C",
+      "prompt": "Use case: lighting-weather.\nAsset type: S07 riverside NIGHT full composite C, matching the existing DAY composite.\nInput Image 1 is the exact EDIT TARGET. Change ONLY time of day into a quiet readable early night. Preserve the exact camera, composition, tree trunk and branch structure, tree canopy outline, all grass tufts and flowers, three pale stones, bridge arch and masonry shapes, curving path, riverbank boundaries, horizon, water brush marks, crop and native dimensions.\nUse muted dusty-teal and warm-grey night sky and cool shadows; the path and bridge remain visible in soft ambient night light. Water is slightly deeper dusty teal, still a matte gouache surface. No actual light source is visible and none should be added: no moon, stars, lamps, lanterns, fireflies, people, animals or bright sparkles. No magical glow or reflections. Do not add foliage, buildings or extra rocks. The rightmost 30 percent and broad bottom area retain their low detail.\nMaintain gouache picture-book illustration, visible strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes and slightly imperfect perspective, seven muted color families (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), cool-tinted shadows, few props, one focal point, matte paper texture.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria, text, letters, numbers, UI, labels, blank plaques, frames, borders.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_real/S07/day_C.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-477cd307-c1bc-4fd0-ba85-01ba26fd2bf0.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "夜版保持桥、河岸、小径、草丛和树形位置；灰青环境夜色中仍能阅读，无月亮/萤火/魔法发光，水面仍为哑光笔触。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S07/night_C.png",
+          "sha256": "ab5895f553dbcfe0103d08bdf0c30912f360fc31df1c2117b57e7744f9080ea7",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: lighting-weather.\nAsset type: S07 riverside NIGHT full composite C, matching the existing DAY composite.\nInput Image 1 is the exact EDIT TARGET. Change ONLY time of day into a quiet readable early night. Preserve the exact camera, composition, tree trunk and branch structure, tree canopy outline, all grass tufts and flowers, three pale stones, bridge arch and masonry shapes, curving path, riverbank boundaries, horizon, water brush marks, crop and native dimensions.\nUse muted dusty-teal and warm-grey night sky and cool shadows; the path and bridge remain visible in soft ambient night light. Water is slightly deeper dusty teal, still a matte gouache surface. No actual light source is visible and none should be added: no moon, stars, lamps, lanterns, fireflies, people, animals or bright sparkles. No magical glow or reflections. Do not add foliage, buildings or extra rocks. The rightmost 30 percent and broad bottom area retain their low detail.\nMaintain gouache picture-book illustration, visible strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes and slightly imperfect perspective, seven muted color families (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), cool-tinted shadows, few props, one focal point, matte paper texture.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria, text, letters, numbers, UI, labels, blank plaques, frames, borders.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_real/S07/day_C.png"
+          ]
+        }
+      ]
+    },
+    "day_raw_cleanplate": {
+      "path": "assets/_incoming/a1r_real/S07/day_raw_cleanplate.png",
+      "sha256": "4bcd01a00d23038e8f23709a8124733c46e009039838e3f573e08636d853d506",
+      "native_size": [
+        1672,
+        941
+      ],
+      "reference_sha256": {
+        "D:/MagicStore/assets/_incoming/a1r_real/S07/day_C.png": "fa0e3dd90e08476b2476f7aedc8a139afcf52474b61f4bfe738c8a62b6ac9110"
+      },
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "raw_cleanplate_B_all",
+      "prompt": "Use case: precise-object-edit.\nAsset type: S07 DAY raw cleanplate B_all for true extracted foreground grass and tree-canopy layers.\nInput Image 1 is the exact EDIT TARGET. Remove ONLY the following:\n1. All leaves of the foreground tree canopy across the upper-left/top edge. Keep the main tree trunk and thick bare branch structure in their original positions and fill behind removed leaves with the original painted sky.\n2. The foreground grass tufts along the lower-left riverbank and beside the curving path, including the small wildflower stalks that grow among those tufts. Fill behind them with the plausible plain earth path/bank or water immediately behind the specific blades.\nKeep the three pale stones and their moss, the static tree trunk/branches, bridge masonry, every riverbank boundary, background distant vegetation, path position and sky/clouds unchanged. IMPORTANT: retain the water itself and its existing painted brush marks; do not erase the river, replace it with land, or invent water waves. Water will later use an exact region mask from this original composite, not a regenerated ripple image.\nKeep DAY lighting, color, camera, crop and same native dimensions; preserve unrelated pixels as closely as possible. Maintain the matte gouache medium, visible dry-brush strokes, slightly wobbly colored-pencil outline and muted seven-family palette.\nNo new objects, people, animals, text, numbers, UI, plaques, borders, glow, bloom, bright sparkles or photorealism.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_real/S07/day_C.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-42d2f24f-fe50-49b4-b76f-bcf007a9d64a.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "树叶与前景草丛（含其中花茎）已移除，裸树干粗枝、三块石与桥保留；水面仍存在。raw河岸边界轻微变化仅可用于草mask补底，flow水面将保留原C不移。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S07/day_raw_cleanplate.png",
+          "sha256": "4bcd01a00d23038e8f23709a8124733c46e009039838e3f573e08636d853d506",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: precise-object-edit.\nAsset type: S07 DAY raw cleanplate B_all for true extracted foreground grass and tree-canopy layers.\nInput Image 1 is the exact EDIT TARGET. Remove ONLY the following:\n1. All leaves of the foreground tree canopy across the upper-left/top edge. Keep the main tree trunk and thick bare branch structure in their original positions and fill behind removed leaves with the original painted sky.\n2. The foreground grass tufts along the lower-left riverbank and beside the curving path, including the small wildflower stalks that grow among those tufts. Fill behind them with the plausible plain earth path/bank or water immediately behind the specific blades.\nKeep the three pale stones and their moss, the static tree trunk/branches, bridge masonry, every riverbank boundary, background distant vegetation, path position and sky/clouds unchanged. IMPORTANT: retain the water itself and its existing painted brush marks; do not erase the river, replace it with land, or invent water waves. Water will later use an exact region mask from this original composite, not a regenerated ripple image.\nKeep DAY lighting, color, camera, crop and same native dimensions; preserve unrelated pixels as closely as possible. Maintain the matte gouache medium, visible dry-brush strokes, slightly wobbly colored-pencil outline and muted seven-family palette.\nNo new objects, people, animals, text, numbers, UI, plaques, borders, glow, bloom, bright sparkles or photorealism.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_real/S07/day_C.png"
+          ]
+        }
+      ]
+    },
+    "night_raw_cleanplate": {
+      "path": "assets/_incoming/a1r_real/S07/night_raw_cleanplate.png",
+      "sha256": "67e99d8856e54afbac9cbc2f9ead2d4293932522dfbc293896f48974641a9db2",
+      "native_size": [
+        1672,
+        941
+      ],
+      "reference_sha256": {
+        "D:/MagicStore/assets/_incoming/a1r_real/S07/night_C.png": "ab5895f553dbcfe0103d08bdf0c30912f360fc31df1c2117b57e7744f9080ea7"
+      },
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "raw_cleanplate_B_all",
+      "prompt": "Use case: precise-object-edit.\nAsset type: S07 NIGHT raw cleanplate B_all for true extracted foreground grass and tree-canopy layers.\nInput Image 1 is the exact EDIT TARGET. Remove ONLY the following:\n1. All leaves of the foreground tree canopy across the upper-left/top edge. Keep the main tree trunk and thick bare branch structure in their original positions and fill behind removed leaves with the original painted sky.\n2. The foreground grass tufts along the lower-left riverbank and beside the curving path, including the small wildflower stalks that grow among those tufts. Fill behind them with the plausible plain earth path/bank or water immediately behind the specific blades.\nKeep the three pale stones and their moss, the static tree trunk/branches, bridge masonry, every riverbank boundary, background distant vegetation, path position and sky/clouds unchanged. IMPORTANT: retain the water itself and its existing painted brush marks; do not erase the river, replace it with land, or invent water waves. Water will later use an exact region mask from this original composite, not a regenerated ripple image.\nKeep NIGHT lighting, color, camera, crop and same native dimensions; preserve unrelated pixels as closely as possible. Maintain the matte gouache medium, visible dry-brush strokes, slightly wobbly colored-pencil outline and muted seven-family palette.\nNo new objects, people, animals, text, numbers, UI, plaques, borders, glow, bloom, bright sparkles or photorealism.\nThe target is NIGHT: preserve its dim cool-grey/teal ambient light and dark sky, with no added moon, stars, lamps or fireflies. Do not turn it into daylight.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_real/S07/night_C.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-3782f972-dcda-43bb-b304-48438833c214.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "夜版实际补底移除前景草/花茎及树叶，保留裸树、桥、石块和水面。无新增光源；水面最终flow层使用原C。raw少量河岸漂移限定于草mask内使用。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S07/night_raw_cleanplate.png",
+          "sha256": "67e99d8856e54afbac9cbc2f9ead2d4293932522dfbc293896f48974641a9db2",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: precise-object-edit.\nAsset type: S07 NIGHT raw cleanplate B_all for true extracted foreground grass and tree-canopy layers.\nInput Image 1 is the exact EDIT TARGET. Remove ONLY the following:\n1. All leaves of the foreground tree canopy across the upper-left/top edge. Keep the main tree trunk and thick bare branch structure in their original positions and fill behind removed leaves with the original painted sky.\n2. The foreground grass tufts along the lower-left riverbank and beside the curving path, including the small wildflower stalks that grow among those tufts. Fill behind them with the plausible plain earth path/bank or water immediately behind the specific blades.\nKeep the three pale stones and their moss, the static tree trunk/branches, bridge masonry, every riverbank boundary, background distant vegetation, path position and sky/clouds unchanged. IMPORTANT: retain the water itself and its existing painted brush marks; do not erase the river, replace it with land, or invent water waves. Water will later use an exact region mask from this original composite, not a regenerated ripple image.\nKeep NIGHT lighting, color, camera, crop and same native dimensions; preserve unrelated pixels as closely as possible. Maintain the matte gouache medium, visible dry-brush strokes, slightly wobbly colored-pencil outline and muted seven-family palette.\nNo new objects, people, animals, text, numbers, UI, plaques, borders, glow, bloom, bright sparkles or photorealism.\nThe target is NIGHT: preserve its dim cool-grey/teal ambient light and dark sky, with no added moon, stars, lamps or fireflies. Do not turn it into daylight.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_real/S07/night_C.png"
+          ]
+        }
+      ]
+    }
+  },
+  "style_sha256": "391ef0b702653eaf7a2bf98f90595bb12502587b6bcc9f0b5653aecdf9766833",
+  "records": [
+    {
+      "path": "assets/_incoming/a1r_real/S07/day_C.png",
+      "sha256": "fa0e3dd90e08476b2476f7aedc8a139afcf52474b61f4bfe738c8a62b6ac9110",
+      "native_size": [
+        1672,
+        941
+      ],
+      "reference_sha256": {
+        "D:/MagicStore/assets/_incoming/a1r_pilot/candidate_3.png": "391ef0b702653eaf7a2bf98f90595bb12502587b6bcc9f0b5653aecdf9766833"
+      },
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "full_composite_C",
+      "prompt": "Use case: stylized-concept.\nAsset type: S07 riverside gathering scene, DAY complete original composite C for a quiet game.\nInput Image 1 is STYLE REFERENCE ONLY. Match its coarse visible gouache strokes, dry-brush edges, colored-pencil contour marks, sparse forms and muted matte palette. Do not reproduce the indoor subject.\nScene: a riverside footpath at the edge of a small town in soft diffuse morning daylight. A simple low stone arch bridge crosses the narrow river in the left background. A broad bare earth footpath curves along the left bank. One clearly structured plain tree trunk rises at the far-left edge with a single readable sage canopy extending across the upper-left. A few simple foreground grass tufts along the left riverbank, one restrained clump of tiny wildflowers, and a small cluster of three pale quartz stones among moss beside the path. Keep these few objects readable and separate.\nComposition: 16:9 wide edge-to-edge. River bend, path and bridge occupy the left two thirds; rightmost 30 percent is smooth quiet dusty-teal river surface with only a few broad horizontal brush marks and a low distant bank. Bottom 12 percent mainly plain ground and quiet water, with the few foreground grass tufts near lower-left only. Soft modest sky; no houses in view, people, boats, animals, lamps, ornamental structures or dense foliage clutter. Water is matte paint, not photorealistic reflection.\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse daylight, cool-tinted shadows, generous empty wall and floor space interpreted here as generous quiet open bank and water, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, numbers, UI, labels, blank plaques, interface frames, borders.\nRequested native 2560×1440 if available, otherwise actual largest native 16:9. Do not draw resolution text.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_pilot/candidate_3.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-510a6337-54f6-464d-babf-e5e9ddc23624.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "左侧树干与树冠、前景草丛、素石桥和弯曲小径均可辨；水面大面积留白，右30%低细节。只有少量花与三块浅色石，无发光水晶或杂物。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S07/day_C.png",
+          "sha256": "fa0e3dd90e08476b2476f7aedc8a139afcf52474b61f4bfe738c8a62b6ac9110",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: stylized-concept.\nAsset type: S07 riverside gathering scene, DAY complete original composite C for a quiet game.\nInput Image 1 is STYLE REFERENCE ONLY. Match its coarse visible gouache strokes, dry-brush edges, colored-pencil contour marks, sparse forms and muted matte palette. Do not reproduce the indoor subject.\nScene: a riverside footpath at the edge of a small town in soft diffuse morning daylight. A simple low stone arch bridge crosses the narrow river in the left background. A broad bare earth footpath curves along the left bank. One clearly structured plain tree trunk rises at the far-left edge with a single readable sage canopy extending across the upper-left. A few simple foreground grass tufts along the left riverbank, one restrained clump of tiny wildflowers, and a small cluster of three pale quartz stones among moss beside the path. Keep these few objects readable and separate.\nComposition: 16:9 wide edge-to-edge. River bend, path and bridge occupy the left two thirds; rightmost 30 percent is smooth quiet dusty-teal river surface with only a few broad horizontal brush marks and a low distant bank. Bottom 12 percent mainly plain ground and quiet water, with the few foreground grass tufts near lower-left only. Soft modest sky; no houses in view, people, boats, animals, lamps, ornamental structures or dense foliage clutter. Water is matte paint, not photorealistic reflection.\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse daylight, cool-tinted shadows, generous empty wall and floor space interpreted here as generous quiet open bank and water, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, numbers, UI, labels, blank plaques, interface frames, borders.\nRequested native 2560×1440 if available, otherwise actual largest native 16:9. Do not draw resolution text.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_pilot/candidate_3.png"
+          ]
+        }
+      ],
+      "id": "S07_day_C",
+      "generator": "builtin_imagegen",
+      "source_path": "assets/_incoming/a1r_real/S07/day_C.png",
+      "ref_paths": [
+        "assets/_incoming/a1r_pilot/candidate_3.png"
+      ],
+      "native_resolution_met": false
+    },
+    {
+      "path": "assets/_incoming/a1r_real/S07/night_C.png",
+      "sha256": "ab5895f553dbcfe0103d08bdf0c30912f360fc31df1c2117b57e7744f9080ea7",
+      "native_size": [
+        1672,
+        941
+      ],
+      "reference_sha256": {
+        "D:/MagicStore/assets/_incoming/a1r_real/S07/day_C.png": "fa0e3dd90e08476b2476f7aedc8a139afcf52474b61f4bfe738c8a62b6ac9110"
+      },
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "full_composite_C",
+      "prompt": "Use case: lighting-weather.\nAsset type: S07 riverside NIGHT full composite C, matching the existing DAY composite.\nInput Image 1 is the exact EDIT TARGET. Change ONLY time of day into a quiet readable early night. Preserve the exact camera, composition, tree trunk and branch structure, tree canopy outline, all grass tufts and flowers, three pale stones, bridge arch and masonry shapes, curving path, riverbank boundaries, horizon, water brush marks, crop and native dimensions.\nUse muted dusty-teal and warm-grey night sky and cool shadows; the path and bridge remain visible in soft ambient night light. Water is slightly deeper dusty teal, still a matte gouache surface. No actual light source is visible and none should be added: no moon, stars, lamps, lanterns, fireflies, people, animals or bright sparkles. No magical glow or reflections. Do not add foliage, buildings or extra rocks. The rightmost 30 percent and broad bottom area retain their low detail.\nMaintain gouache picture-book illustration, visible strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes and slightly imperfect perspective, seven muted color families (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), cool-tinted shadows, few props, one focal point, matte paper texture.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria, text, letters, numbers, UI, labels, blank plaques, frames, borders.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_real/S07/day_C.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-477cd307-c1bc-4fd0-ba85-01ba26fd2bf0.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "夜版保持桥、河岸、小径、草丛和树形位置；灰青环境夜色中仍能阅读，无月亮/萤火/魔法发光，水面仍为哑光笔触。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S07/night_C.png",
+          "sha256": "ab5895f553dbcfe0103d08bdf0c30912f360fc31df1c2117b57e7744f9080ea7",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: lighting-weather.\nAsset type: S07 riverside NIGHT full composite C, matching the existing DAY composite.\nInput Image 1 is the exact EDIT TARGET. Change ONLY time of day into a quiet readable early night. Preserve the exact camera, composition, tree trunk and branch structure, tree canopy outline, all grass tufts and flowers, three pale stones, bridge arch and masonry shapes, curving path, riverbank boundaries, horizon, water brush marks, crop and native dimensions.\nUse muted dusty-teal and warm-grey night sky and cool shadows; the path and bridge remain visible in soft ambient night light. Water is slightly deeper dusty teal, still a matte gouache surface. No actual light source is visible and none should be added: no moon, stars, lamps, lanterns, fireflies, people, animals or bright sparkles. No magical glow or reflections. Do not add foliage, buildings or extra rocks. The rightmost 30 percent and broad bottom area retain their low detail.\nMaintain gouache picture-book illustration, visible strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes and slightly imperfect perspective, seven muted color families (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), cool-tinted shadows, few props, one focal point, matte paper texture.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria, text, letters, numbers, UI, labels, blank plaques, frames, borders.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_real/S07/day_C.png"
+          ]
+        }
+      ],
+      "id": "S07_night_C",
+      "generator": "builtin_imagegen",
+      "source_path": "assets/_incoming/a1r_real/S07/night_C.png",
+      "ref_paths": [
+        "assets/_incoming/a1r_real/S07/day_C.png"
+      ],
+      "native_resolution_met": false
+    },
+    {
+      "path": "assets/_incoming/a1r_real/S07/day_raw_cleanplate.png",
+      "sha256": "4bcd01a00d23038e8f23709a8124733c46e009039838e3f573e08636d853d506",
+      "native_size": [
+        1672,
+        941
+      ],
+      "reference_sha256": {
+        "D:/MagicStore/assets/_incoming/a1r_real/S07/day_C.png": "fa0e3dd90e08476b2476f7aedc8a139afcf52474b61f4bfe738c8a62b6ac9110"
+      },
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "raw_cleanplate_B_all",
+      "prompt": "Use case: precise-object-edit.\nAsset type: S07 DAY raw cleanplate B_all for true extracted foreground grass and tree-canopy layers.\nInput Image 1 is the exact EDIT TARGET. Remove ONLY the following:\n1. All leaves of the foreground tree canopy across the upper-left/top edge. Keep the main tree trunk and thick bare branch structure in their original positions and fill behind removed leaves with the original painted sky.\n2. The foreground grass tufts along the lower-left riverbank and beside the curving path, including the small wildflower stalks that grow among those tufts. Fill behind them with the plausible plain earth path/bank or water immediately behind the specific blades.\nKeep the three pale stones and their moss, the static tree trunk/branches, bridge masonry, every riverbank boundary, background distant vegetation, path position and sky/clouds unchanged. IMPORTANT: retain the water itself and its existing painted brush marks; do not erase the river, replace it with land, or invent water waves. Water will later use an exact region mask from this original composite, not a regenerated ripple image.\nKeep DAY lighting, color, camera, crop and same native dimensions; preserve unrelated pixels as closely as possible. Maintain the matte gouache medium, visible dry-brush strokes, slightly wobbly colored-pencil outline and muted seven-family palette.\nNo new objects, people, animals, text, numbers, UI, plaques, borders, glow, bloom, bright sparkles or photorealism.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_real/S07/day_C.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-42d2f24f-fe50-49b4-b76f-bcf007a9d64a.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "树叶与前景草丛（含其中花茎）已移除，裸树干粗枝、三块石与桥保留；水面仍存在。raw河岸边界轻微变化仅可用于草mask补底，flow水面将保留原C不移。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S07/day_raw_cleanplate.png",
+          "sha256": "4bcd01a00d23038e8f23709a8124733c46e009039838e3f573e08636d853d506",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: precise-object-edit.\nAsset type: S07 DAY raw cleanplate B_all for true extracted foreground grass and tree-canopy layers.\nInput Image 1 is the exact EDIT TARGET. Remove ONLY the following:\n1. All leaves of the foreground tree canopy across the upper-left/top edge. Keep the main tree trunk and thick bare branch structure in their original positions and fill behind removed leaves with the original painted sky.\n2. The foreground grass tufts along the lower-left riverbank and beside the curving path, including the small wildflower stalks that grow among those tufts. Fill behind them with the plausible plain earth path/bank or water immediately behind the specific blades.\nKeep the three pale stones and their moss, the static tree trunk/branches, bridge masonry, every riverbank boundary, background distant vegetation, path position and sky/clouds unchanged. IMPORTANT: retain the water itself and its existing painted brush marks; do not erase the river, replace it with land, or invent water waves. Water will later use an exact region mask from this original composite, not a regenerated ripple image.\nKeep DAY lighting, color, camera, crop and same native dimensions; preserve unrelated pixels as closely as possible. Maintain the matte gouache medium, visible dry-brush strokes, slightly wobbly colored-pencil outline and muted seven-family palette.\nNo new objects, people, animals, text, numbers, UI, plaques, borders, glow, bloom, bright sparkles or photorealism.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_real/S07/day_C.png"
+          ]
+        }
+      ],
+      "id": "S07_day_raw_cleanplate",
+      "generator": "builtin_imagegen",
+      "source_path": "assets/_incoming/a1r_real/S07/day_raw_cleanplate.png",
+      "ref_paths": [
+        "assets/_incoming/a1r_real/S07/day_C.png"
+      ],
+      "native_resolution_met": false
+    },
+    {
+      "path": "assets/_incoming/a1r_real/S07/night_raw_cleanplate.png",
+      "sha256": "67e99d8856e54afbac9cbc2f9ead2d4293932522dfbc293896f48974641a9db2",
+      "native_size": [
+        1672,
+        941
+      ],
+      "reference_sha256": {
+        "D:/MagicStore/assets/_incoming/a1r_real/S07/night_C.png": "ab5895f553dbcfe0103d08bdf0c30912f360fc31df1c2117b57e7744f9080ea7"
+      },
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "raw_cleanplate_B_all",
+      "prompt": "Use case: precise-object-edit.\nAsset type: S07 NIGHT raw cleanplate B_all for true extracted foreground grass and tree-canopy layers.\nInput Image 1 is the exact EDIT TARGET. Remove ONLY the following:\n1. All leaves of the foreground tree canopy across the upper-left/top edge. Keep the main tree trunk and thick bare branch structure in their original positions and fill behind removed leaves with the original painted sky.\n2. The foreground grass tufts along the lower-left riverbank and beside the curving path, including the small wildflower stalks that grow among those tufts. Fill behind them with the plausible plain earth path/bank or water immediately behind the specific blades.\nKeep the three pale stones and their moss, the static tree trunk/branches, bridge masonry, every riverbank boundary, background distant vegetation, path position and sky/clouds unchanged. IMPORTANT: retain the water itself and its existing painted brush marks; do not erase the river, replace it with land, or invent water waves. Water will later use an exact region mask from this original composite, not a regenerated ripple image.\nKeep NIGHT lighting, color, camera, crop and same native dimensions; preserve unrelated pixels as closely as possible. Maintain the matte gouache medium, visible dry-brush strokes, slightly wobbly colored-pencil outline and muted seven-family palette.\nNo new objects, people, animals, text, numbers, UI, plaques, borders, glow, bloom, bright sparkles or photorealism.\nThe target is NIGHT: preserve its dim cool-grey/teal ambient light and dark sky, with no added moon, stars, lamps or fireflies. Do not turn it into daylight.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_real/S07/night_C.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-3782f972-dcda-43bb-b304-48438833c214.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "夜版实际补底移除前景草/花茎及树叶，保留裸树、桥、石块和水面。无新增光源；水面最终flow层使用原C。raw少量河岸漂移限定于草mask内使用。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S07/night_raw_cleanplate.png",
+          "sha256": "67e99d8856e54afbac9cbc2f9ead2d4293932522dfbc293896f48974641a9db2",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: precise-object-edit.\nAsset type: S07 NIGHT raw cleanplate B_all for true extracted foreground grass and tree-canopy layers.\nInput Image 1 is the exact EDIT TARGET. Remove ONLY the following:\n1. All leaves of the foreground tree canopy across the upper-left/top edge. Keep the main tree trunk and thick bare branch structure in their original positions and fill behind removed leaves with the original painted sky.\n2. The foreground grass tufts along the lower-left riverbank and beside the curving path, including the small wildflower stalks that grow among those tufts. Fill behind them with the plausible plain earth path/bank or water immediately behind the specific blades.\nKeep the three pale stones and their moss, the static tree trunk/branches, bridge masonry, every riverbank boundary, background distant vegetation, path position and sky/clouds unchanged. IMPORTANT: retain the water itself and its existing painted brush marks; do not erase the river, replace it with land, or invent water waves. Water will later use an exact region mask from this original composite, not a regenerated ripple image.\nKeep NIGHT lighting, color, camera, crop and same native dimensions; preserve unrelated pixels as closely as possible. Maintain the matte gouache medium, visible dry-brush strokes, slightly wobbly colored-pencil outline and muted seven-family palette.\nNo new objects, people, animals, text, numbers, UI, plaques, borders, glow, bloom, bright sparkles or photorealism.\nThe target is NIGHT: preserve its dim cool-grey/teal ambient light and dark sky, with no added moon, stars, lamps or fireflies. Do not turn it into daylight.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_real/S07/night_C.png"
+          ]
+        }
+      ],
+      "id": "S07_night_raw_cleanplate",
+      "generator": "builtin_imagegen",
+      "source_path": "assets/_incoming/a1r_real/S07/night_raw_cleanplate.png",
+      "ref_paths": [
+        "assets/_incoming/a1r_real/S07/night_C.png"
+      ],
+      "native_resolution_met": false
+    }
+  ],
+  "mask_annotation_rounds": [
+    {
+      "revision": "real1",
+      "kind": "annotation_only",
+      "strict_geometry_evaluated": false,
+      "visual_review": "failed: partial flower coverage and water/grass overlap"
+    },
+    {
+      "revision": "real2",
+      "kind": "processing_round",
+      "round": 1,
+      "strict_geometry_passed": true,
+      "visual_review": "failed: residual grass/flower pieces"
+    },
+    {
+      "revision": "real3",
+      "kind": "processing_round",
+      "round": 2,
+      "strict_geometry_passed": true,
+      "visual_review": "failed: low-saturation water paint included in grass alpha"
+    },
+    {
+      "revision": "real4",
+      "kind": "processing_round",
+      "round": 3,
+      "strict_geometry_passed": true,
+      "selected_for_geometry_registry": true,
+      "visual_review": "partial: fragmented low-saturation night grass and retained bank/branch context"
+    }
+  ],
+  "art_passed": false,
+  "layer_art_passed": false,
+  "final_layer_review_path": "assets/_incoming/a1r_real/S07/final_review.json",
+  "final_layer_visual_status": "partial_visual_quality",
+  "selected_geometry_receipts": [
+    "assets/generated_scenes/v3_real/S07/day/real4/receipt.json",
+    "assets/generated_scenes/v3_real/S07/night/real4/receipt.json"
+  ]
+}

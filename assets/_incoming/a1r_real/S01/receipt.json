@@ -1,0 +1,673 @@
+{
+  "version": 1,
+  "scene_id": "S01",
+  "generator": "builtin_imagegen",
+  "tool": "image_gen.imagegen",
+  "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+  "attempt_limit": 4,
+  "formal_scene_config_modified": false,
+  "images": {
+    "day_C": {
+      "path": "assets/_incoming/a1r_real/S01/day_C.png",
+      "sha256": "8c04d2ef36b7d15626333bac66f2031a9b06524ca70ba0a13b589cced4aed5ea",
+      "native_size": [
+        1672,
+        941
+      ],
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "full_composite_C",
+      "prompt": "Use case: stylized-concept.\nAsset type: complete original scene composite C for the game 零点杂货铺, S01 exterior, daytime. This is a full scene painting, not a UI mockup.\nInput Image 1 is STYLE REFERENCE ONLY. Match its coarse matte gouache brushwork, hand-drawn colored-pencil edges, muted colors and deliberately sparse composition; do not copy its indoor subject.\nScene subject: exterior of a two-storey old stone and timber curio shop on a quiet cobbled lane, a simple round-arched display window, a plain solid wooden entrance door, one wisteria vine directly above the entrance, two simple pots of herbs, and ONE small physically crescent-shaped wooden hanging sign on a simple iron bracket, with no text or plaque. A few broad sage tree leaves form a readable canopy at the upper-left edge; a small soft-edged cloud is visible in the open sky.\nComposition: wide 16:9 landscape, edge-to-edge painted artwork. The shop is the single clear focal point in the left two thirds. Rightmost 30 percent is a broad quiet low-detail cream plaster return wall and empty lane; bottom 12 percent is broad simple cobbles with little detail. Keep architectural supports and frame joints plausible, avoid excessive symmetry. No shelves, stock items, street crowds, ornate shopfront or decorative clutter.\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse daylight, cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, numbers, UI, labels, blank labels, blank plaques, rectangular hanging signs, interface frames, borders.\nRequested native size 2560×1440 if available, otherwise the tool's actual largest native 16:9 output. Do not draw resolution text.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_pilot/candidate_3.png"
+      ],
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "整幅铺满；月牙吊件为物理轮廓，不是空白牌匾。右侧主要为空墙，底部为空铺石。实际原生1672×941，未冒称2560×1440。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S01/day_C.png",
+          "sha256": "8c04d2ef36b7d15626333bac66f2031a9b06524ca70ba0a13b589cced4aed5ea",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: stylized-concept.\nAsset type: complete original scene composite C for the game 零点杂货铺, S01 exterior, daytime. This is a full scene painting, not a UI mockup.\nInput Image 1 is STYLE REFERENCE ONLY. Match its coarse matte gouache brushwork, hand-drawn colored-pencil edges, muted colors and deliberately sparse composition; do not copy its indoor subject.\nScene subject: exterior of a two-storey old stone and timber curio shop on a quiet cobbled lane, a simple round-arched display window, a plain solid wooden entrance door, one wisteria vine directly above the entrance, two simple pots of herbs, and ONE small physically crescent-shaped wooden hanging sign on a simple iron bracket, with no text or plaque. A few broad sage tree leaves form a readable canopy at the upper-left edge; a small soft-edged cloud is visible in the open sky.\nComposition: wide 16:9 landscape, edge-to-edge painted artwork. The shop is the single clear focal point in the left two thirds. Rightmost 30 percent is a broad quiet low-detail cream plaster return wall and empty lane; bottom 12 percent is broad simple cobbles with little detail. Keep architectural supports and frame joints plausible, avoid excessive symmetry. No shelves, stock items, street crowds, ornate shopfront or decorative clutter.\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse daylight, cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, numbers, UI, labels, blank labels, blank plaques, rectangular hanging signs, interface frames, borders.\nRequested native size 2560×1440 if available, otherwise the tool's actual largest native 16:9 output. Do not draw resolution text.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_pilot/candidate_3.png"
+          ]
+        }
+      ]
+    },
+    "night_C": {
+      "path": "assets/_incoming/a1r_real/S01/night_C.png",
+      "sha256": "a2d3688384ed321be33bff3aaaa9317c86d999cc548f1f8f10cfe6967b15ae75",
+      "native_size": [
+        1672,
+        941
+      ],
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "full_composite_C",
+      "prompt": "Use case: lighting-weather.\nAsset type: S01 exterior NIGHT variant of the existing full composite C.\nInput Image 1 is the EDIT TARGET, not a loose reference. Preserve its exact camera, composition, object positions, architecture, door and window shapes, tree branches and canopy silhouette, vine, crescent hanging sign, pots, paving and image dimensions. Change ONLY time of day and painted light colors.\nMake it quiet early night: muted dusty-teal sky, cool warm-grey and teal shadows, the same arched ground-floor window and two upstairs windows carry a soft flat ochre-cream interior-light color. Do not emit light beams or add glow around them. Door remains closed exactly as in the day target. Keep the rightmost wall and bottom lane low detail. No additional lantern, objects, stars, moon, letters or plaques. Preserve the existing cloud as a dim soft grey shape.\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse painted night lighting, cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, extra wisteria, text, letters, numbers, UI, labels, blank plaques, interface frames, borders.\nOutput a single edge-to-edge landscape image at the same native dimensions as Image 1.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_real/S01/day_C.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-96dd58f5-e85f-4d82-a2fc-b145c93aebb0.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "与白日同构图，窗面用平涂赭黄表达夜灯，无光晕；编辑不是逐像素光照变换，后续严格同幅层以本夜版C为准。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S01/night_C.png",
+          "sha256": "a2d3688384ed321be33bff3aaaa9317c86d999cc548f1f8f10cfe6967b15ae75",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: lighting-weather.\nAsset type: S01 exterior NIGHT variant of the existing full composite C.\nInput Image 1 is the EDIT TARGET, not a loose reference. Preserve its exact camera, composition, object positions, architecture, door and window shapes, tree branches and canopy silhouette, vine, crescent hanging sign, pots, paving and image dimensions. Change ONLY time of day and painted light colors.\nMake it quiet early night: muted dusty-teal sky, cool warm-grey and teal shadows, the same arched ground-floor window and two upstairs windows carry a soft flat ochre-cream interior-light color. Do not emit light beams or add glow around them. Door remains closed exactly as in the day target. Keep the rightmost wall and bottom lane low detail. No additional lantern, objects, stars, moon, letters or plaques. Preserve the existing cloud as a dim soft grey shape.\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse painted night lighting, cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, extra wisteria, text, letters, numbers, UI, labels, blank plaques, interface frames, borders.\nOutput a single edge-to-edge landscape image at the same native dimensions as Image 1.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_real/S01/day_C.png"
+          ]
+        }
+      ]
+    },
+    "closed_C": {
+      "path": "assets/_incoming/a1r_real/S01/closed_C.png",
+      "sha256": "d67cb6c33540d5bfe57363f14462bf5c4522eb0f0799949d6492231fe2c8ed1f",
+      "native_size": [
+        1672,
+        941
+      ],
+      "reference_sha256": {
+        "D:/MagicStore/assets/_incoming/a1r_real/S01/night_C.png": "a2d3688384ed321be33bff3aaaa9317c86d999cc548f1f8f10cfe6967b15ae75"
+      },
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "full_composite_C",
+      "prompt": "Use case: lighting-weather.\nAsset type: S01 exterior CLOSED-FOR-THE-NIGHT variant of the existing full composite C.\nInput Image 1 is the exact EDIT TARGET. Make only one scene-state change: all three visible windows have their interior lamps turned OFF. The glass should now be quiet dark dusty teal/grey with faint matte painted reflection rather than yellow illumination. Keep the sky, wall, roof, cloud, door, window frames, crescent hanging sign, tree canopy, vine, pots, paving, every position and shape, crop and native image dimensions unchanged. The existing wooden entrance door stays shut. Do not add shutters, padlocks, text signs, labels, people, moon, stars or any new object. Keep soft ambient night visibility so the wall and lane remain readable; do not crush the painting to black.\nPreserve the existing gouache picture-book medium: visible brush strokes and dry-brush edges, slightly wobbly colored-pencil outlines, simplified shapes, slightly imperfect perspective, seven muted color families (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse night light, cool-tinted shadows, sparse props, one focal point, matte paper. Full-bleed wide landscape.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy/plastic surfaces, hyper-detailed clutter, photorealism, extra wisteria, text, letters, numbers, UI, blank labels or plaques, borders.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_real/S01/night_C.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-c7027309-ea61-4c1a-a9b5-7ae69f96b1c4.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "与夜版保持构图；三扇窗关闭内灯，仍保留环境夜光。无新增牌匾/锁具/人物。原生1672×941；后续每版以各自C扣像素，不能宣称生成编辑逐像素不变。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S01/closed_C.png",
+          "sha256": "d67cb6c33540d5bfe57363f14462bf5c4522eb0f0799949d6492231fe2c8ed1f",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: lighting-weather.\nAsset type: S01 exterior CLOSED-FOR-THE-NIGHT variant of the existing full composite C.\nInput Image 1 is the exact EDIT TARGET. Make only one scene-state change: all three visible windows have their interior lamps turned OFF. The glass should now be quiet dark dusty teal/grey with faint matte painted reflection rather than yellow illumination. Keep the sky, wall, roof, cloud, door, window frames, crescent hanging sign, tree canopy, vine, pots, paving, every position and shape, crop and native image dimensions unchanged. The existing wooden entrance door stays shut. Do not add shutters, padlocks, text signs, labels, people, moon, stars or any new object. Keep soft ambient night visibility so the wall and lane remain readable; do not crush the painting to black.\nPreserve the existing gouache picture-book medium: visible brush strokes and dry-brush edges, slightly wobbly colored-pencil outlines, simplified shapes, slightly imperfect perspective, seven muted color families (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse night light, cool-tinted shadows, sparse props, one focal point, matte paper. Full-bleed wide landscape.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy/plastic surfaces, hyper-detailed clutter, photorealism, extra wisteria, text, letters, numbers, UI, blank labels or plaques, borders.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_real/S01/night_C.png"
+          ]
+        }
+      ]
+    },
+    "day_raw_cleanplate": {
+      "path": "assets/_incoming/a1r_real/S01/day_raw_cleanplate.png",
+      "sha256": "05d6a98f1338eeb42a72852489e707ee5aaa314c78daf4d29a6fe488633fbf7a",
+      "native_size": [
+        1672,
+        941
+      ],
+      "reference_sha256": {
+        "D:/MagicStore/assets/_incoming/a1r_real/S01/day_C.png": "8c04d2ef36b7d15626333bac66f2031a9b06524ca70ba0a13b589cced4aed5ea"
+      },
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "raw_cleanplate_B_all",
+      "prompt": "Use case: precise-object-edit.\nAsset type: S01 DAY raw cleanplate B_all for actual same-position extraction of game layers.\nInput Image 1 is the exact EDIT TARGET. This is a local removal/edit, not a new scene. Remove ALL of these movable pieces from the existing painting and fill their previous locations with the plausible wall, roof, timber or sky behind them:\n1. The leafy tree canopy at upper-left; retain the static main bare trunk and thick branches wherever visible, but remove the leaves.\n2. The entire wisteria vine immediately above and down the left side of the entrance, including leaves, flowers and its winding vine stem. Restore the simple plaster and timber behind it.\n3. The small crescent-shaped hanging wooden sign at upper-right of the door, including its little hanging chain and supporting metal bracket; restore plain cream wall.\n4. The small white cloud in the sky.\nKeep the entrance door and ring handle, all window panes and frames, stone wall, timber structure, roof, both herb pots, cobbled foreground, overall camera and crop EXACTLY as they are. Preserve all unedited pixels as closely as possible. Add no new objects, openings, labels or decoration. This remains the same DAY lighting. Do not alter lamp states or the colors of the remaining objects.\nMaintain Image 1's matte gouache strokes, dry-brush marks, slightly wobbly colored-pencil edges and limited muted palette. Full-bleed landscape at the same native dimensions. No text, UI, plaques, frames, borders, people, glow, bloom or photorealism.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_real/S01/day_C.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-1980627d-a4f0-4e36-bb1f-70b4cbd30cd3.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "树冠叶片、门上紫藤、月牙吊件含挂架及云已移除；裸树干/粗枝、建筑和盆栽保留。补出墙、木梁与天空。此为真实builtin编辑rawB，整图编码/细节漂移仍需局部mask贴回。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S01/day_raw_cleanplate.png",
+          "sha256": "05d6a98f1338eeb42a72852489e707ee5aaa314c78daf4d29a6fe488633fbf7a",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: precise-object-edit.\nAsset type: S01 DAY raw cleanplate B_all for actual same-position extraction of game layers.\nInput Image 1 is the exact EDIT TARGET. This is a local removal/edit, not a new scene. Remove ALL of these movable pieces from the existing painting and fill their previous locations with the plausible wall, roof, timber or sky behind them:\n1. The leafy tree canopy at upper-left; retain the static main bare trunk and thick branches wherever visible, but remove the leaves.\n2. The entire wisteria vine immediately above and down the left side of the entrance, including leaves, flowers and its winding vine stem. Restore the simple plaster and timber behind it.\n3. The small crescent-shaped hanging wooden sign at upper-right of the door, including its little hanging chain and supporting metal bracket; restore plain cream wall.\n4. The small white cloud in the sky.\nKeep the entrance door and ring handle, all window panes and frames, stone wall, timber structure, roof, both herb pots, cobbled foreground, overall camera and crop EXACTLY as they are. Preserve all unedited pixels as closely as possible. Add no new objects, openings, labels or decoration. This remains the same DAY lighting. Do not alter lamp states or the colors of the remaining objects.\nMaintain Image 1's matte gouache strokes, dry-brush marks, slightly wobbly colored-pencil edges and limited muted palette. Full-bleed landscape at the same native dimensions. No text, UI, plaques, frames, borders, people, glow, bloom or photorealism.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_real/S01/day_C.png"
+          ]
+        }
+      ]
+    },
+    "night_raw_cleanplate": {
+      "path": "assets/_incoming/a1r_real/S01/night_raw_cleanplate.png",
+      "sha256": "32c2e8703444bd02ea48161eeab12a1d1ea997d667b445639b9e3043b79d06df",
+      "native_size": [
+        1672,
+        941
+      ],
+      "reference_sha256": {
+        "D:/MagicStore/assets/_incoming/a1r_real/S01/night_C.png": "a2d3688384ed321be33bff3aaaa9317c86d999cc548f1f8f10cfe6967b15ae75"
+      },
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "raw_cleanplate_B_all",
+      "prompt": "Use case: precise-object-edit.\nAsset type: S01 NIGHT raw cleanplate B_all for actual same-position extraction of game layers.\nInput Image 1 is the exact EDIT TARGET. This is a local removal/edit, not a new scene. Remove ALL of these movable pieces from the existing painting and fill their previous locations with the plausible wall, roof, timber or sky behind them:\n1. The leafy tree canopy at upper-left; retain the static main bare trunk and thick branches wherever visible, but remove the leaves.\n2. The entire wisteria vine immediately above and down the left side of the entrance, including leaves, flowers and its winding vine stem. Restore the simple plaster and timber behind it.\n3. The small crescent-shaped hanging wooden sign at upper-right of the door, including its little hanging chain and supporting metal bracket; restore plain cream wall.\n4. The small white cloud in the sky.\nKeep the entrance door and ring handle, all window panes and frames, stone wall, timber structure, roof, both herb pots, cobbled foreground, overall camera and crop EXACTLY as they are. Preserve all unedited pixels as closely as possible. Add no new objects, openings, labels or decoration. This remains the same NIGHT lighting, with all three original window interiors still ON in flat ochre-cream. Keep their frame geometry and painted intensity unchanged. Do not alter lamp states or the colors of the remaining objects.\nMaintain Image 1's matte gouache strokes, dry-brush marks, slightly wobbly colored-pencil edges and limited muted palette. Full-bleed landscape at the same native dimensions. No text, UI, plaques, frames, borders, people, glow, bloom or photorealism.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_real/S01/night_C.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-025a8e05-5db0-451c-8a15-d063b0aaa5b0.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "实际夜版C补底：全部指定可动件移除，原三扇窗的平涂夜灯仍打开；建筑门窗、盆栽与裸枝保留，严格局部外环将由公共工具保证。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S01/night_raw_cleanplate.png",
+          "sha256": "32c2e8703444bd02ea48161eeab12a1d1ea997d667b445639b9e3043b79d06df",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: precise-object-edit.\nAsset type: S01 NIGHT raw cleanplate B_all for actual same-position extraction of game layers.\nInput Image 1 is the exact EDIT TARGET. This is a local removal/edit, not a new scene. Remove ALL of these movable pieces from the existing painting and fill their previous locations with the plausible wall, roof, timber or sky behind them:\n1. The leafy tree canopy at upper-left; retain the static main bare trunk and thick branches wherever visible, but remove the leaves.\n2. The entire wisteria vine immediately above and down the left side of the entrance, including leaves, flowers and its winding vine stem. Restore the simple plaster and timber behind it.\n3. The small crescent-shaped hanging wooden sign at upper-right of the door, including its little hanging chain and supporting metal bracket; restore plain cream wall.\n4. The small white cloud in the sky.\nKeep the entrance door and ring handle, all window panes and frames, stone wall, timber structure, roof, both herb pots, cobbled foreground, overall camera and crop EXACTLY as they are. Preserve all unedited pixels as closely as possible. Add no new objects, openings, labels or decoration. This remains the same NIGHT lighting, with all three original window interiors still ON in flat ochre-cream. Keep their frame geometry and painted intensity unchanged. Do not alter lamp states or the colors of the remaining objects.\nMaintain Image 1's matte gouache strokes, dry-brush marks, slightly wobbly colored-pencil edges and limited muted palette. Full-bleed landscape at the same native dimensions. No text, UI, plaques, frames, borders, people, glow, bloom or photorealism.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_real/S01/night_C.png"
+          ]
+        }
+      ]
+    },
+    "closed_raw_cleanplate": {
+      "path": "assets/_incoming/a1r_real/S01/closed_raw_cleanplate.png",
+      "sha256": "da9ae0a333afe61f1dfc8f220d7781b6698ba777b7cefc64e555268bae426047",
+      "native_size": [
+        1672,
+        941
+      ],
+      "reference_sha256": {
+        "D:/MagicStore/assets/_incoming/a1r_real/S01/closed_C.png": "d67cb6c33540d5bfe57363f14462bf5c4522eb0f0799949d6492231fe2c8ed1f"
+      },
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "raw_cleanplate_B_all",
+      "prompt": "Use case: precise-object-edit.\nAsset type: S01 CLOSED raw cleanplate B_all for actual same-position extraction of game layers.\nInput Image 1 is the exact EDIT TARGET. This is a local removal/edit, not a new scene. Remove ALL of these movable pieces from the existing painting and fill their previous locations with the plausible wall, roof, timber or sky behind them:\n1. The leafy tree canopy at upper-left; retain the static main bare trunk and thick branches wherever visible, but remove the leaves.\n2. The entire wisteria vine immediately above and down the left side of the entrance, including leaves, flowers and its winding vine stem. Restore the simple plaster and timber behind it.\n3. The small crescent-shaped hanging wooden sign at upper-right of the door, including its little hanging chain and supporting metal bracket; restore plain cream wall.\n4. The small white cloud in the sky.\nKeep the entrance door and ring handle, all window panes and frames, stone wall, timber structure, roof, both herb pots, cobbled foreground, overall camera and crop EXACTLY as they are. Preserve all unedited pixels as closely as possible. Add no new objects, openings, labels or decoration. This remains the same closed-for-night ambient lighting, with all original windows still dark and all interior lamps OFF. Keep their painted dark glass and frame geometry unchanged. Do not alter lamp states or the colors of the remaining objects.\nMaintain Image 1's matte gouache strokes, dry-brush marks, slightly wobbly colored-pencil edges and limited muted palette. Full-bleed landscape at the same native dimensions. No text, UI, plaques, frames, borders, people, glow, bloom or photorealism.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_real/S01/closed_C.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-f5543696-c69c-4333-b769-e9408a5a199a.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "打烊C的真实局部清理输出，窗灯仍关闭；树叶、藤蔓、月牙挂件及云已移除，裸枝和固定建筑保留。原始整图漂移不冒充严格像素保真。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S01/closed_raw_cleanplate.png",
+          "sha256": "da9ae0a333afe61f1dfc8f220d7781b6698ba777b7cefc64e555268bae426047",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: precise-object-edit.\nAsset type: S01 CLOSED raw cleanplate B_all for actual same-position extraction of game layers.\nInput Image 1 is the exact EDIT TARGET. This is a local removal/edit, not a new scene. Remove ALL of these movable pieces from the existing painting and fill their previous locations with the plausible wall, roof, timber or sky behind them:\n1. The leafy tree canopy at upper-left; retain the static main bare trunk and thick branches wherever visible, but remove the leaves.\n2. The entire wisteria vine immediately above and down the left side of the entrance, including leaves, flowers and its winding vine stem. Restore the simple plaster and timber behind it.\n3. The small crescent-shaped hanging wooden sign at upper-right of the door, including its little hanging chain and supporting metal bracket; restore plain cream wall.\n4. The small white cloud in the sky.\nKeep the entrance door and ring handle, all window panes and frames, stone wall, timber structure, roof, both herb pots, cobbled foreground, overall camera and crop EXACTLY as they are. Preserve all unedited pixels as closely as possible. Add no new objects, openings, labels or decoration. This remains the same closed-for-night ambient lighting, with all original windows still dark and all interior lamps OFF. Keep their painted dark glass and frame geometry unchanged. Do not alter lamp states or the colors of the remaining objects.\nMaintain Image 1's matte gouache strokes, dry-brush marks, slightly wobbly colored-pencil edges and limited muted palette. Full-bleed landscape at the same native dimensions. No text, UI, plaques, frames, borders, people, glow, bloom or photorealism.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_real/S01/closed_C.png"
+          ]
+        }
+      ]
+    }
+  },
+  "style_sha256": "391ef0b702653eaf7a2bf98f90595bb12502587b6bcc9f0b5653aecdf9766833",
+  "records": [
+    {
+      "path": "assets/_incoming/a1r_real/S01/day_C.png",
+      "sha256": "8c04d2ef36b7d15626333bac66f2031a9b06524ca70ba0a13b589cced4aed5ea",
+      "native_size": [
+        1672,
+        941
+      ],
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "full_composite_C",
+      "prompt": "Use case: stylized-concept.\nAsset type: complete original scene composite C for the game 零点杂货铺, S01 exterior, daytime. This is a full scene painting, not a UI mockup.\nInput Image 1 is STYLE REFERENCE ONLY. Match its coarse matte gouache brushwork, hand-drawn colored-pencil edges, muted colors and deliberately sparse composition; do not copy its indoor subject.\nScene subject: exterior of a two-storey old stone and timber curio shop on a quiet cobbled lane, a simple round-arched display window, a plain solid wooden entrance door, one wisteria vine directly above the entrance, two simple pots of herbs, and ONE small physically crescent-shaped wooden hanging sign on a simple iron bracket, with no text or plaque. A few broad sage tree leaves form a readable canopy at the upper-left edge; a small soft-edged cloud is visible in the open sky.\nComposition: wide 16:9 landscape, edge-to-edge painted artwork. The shop is the single clear focal point in the left two thirds. Rightmost 30 percent is a broad quiet low-detail cream plaster return wall and empty lane; bottom 12 percent is broad simple cobbles with little detail. Keep architectural supports and frame joints plausible, avoid excessive symmetry. No shelves, stock items, street crowds, ornate shopfront or decorative clutter.\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse daylight, cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, numbers, UI, labels, blank labels, blank plaques, rectangular hanging signs, interface frames, borders.\nRequested native size 2560×1440 if available, otherwise the tool's actual largest native 16:9 output. Do not draw resolution text.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_pilot/candidate_3.png"
+      ],
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "整幅铺满；月牙吊件为物理轮廓，不是空白牌匾。右侧主要为空墙，底部为空铺石。实际原生1672×941，未冒称2560×1440。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S01/day_C.png",
+          "sha256": "8c04d2ef36b7d15626333bac66f2031a9b06524ca70ba0a13b589cced4aed5ea",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: stylized-concept.\nAsset type: complete original scene composite C for the game 零点杂货铺, S01 exterior, daytime. This is a full scene painting, not a UI mockup.\nInput Image 1 is STYLE REFERENCE ONLY. Match its coarse matte gouache brushwork, hand-drawn colored-pencil edges, muted colors and deliberately sparse composition; do not copy its indoor subject.\nScene subject: exterior of a two-storey old stone and timber curio shop on a quiet cobbled lane, a simple round-arched display window, a plain solid wooden entrance door, one wisteria vine directly above the entrance, two simple pots of herbs, and ONE small physically crescent-shaped wooden hanging sign on a simple iron bracket, with no text or plaque. A few broad sage tree leaves form a readable canopy at the upper-left edge; a small soft-edged cloud is visible in the open sky.\nComposition: wide 16:9 landscape, edge-to-edge painted artwork. The shop is the single clear focal point in the left two thirds. Rightmost 30 percent is a broad quiet low-detail cream plaster return wall and empty lane; bottom 12 percent is broad simple cobbles with little detail. Keep architectural supports and frame joints plausible, avoid excessive symmetry. No shelves, stock items, street crowds, ornate shopfront or decorative clutter.\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse daylight, cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, numbers, UI, labels, blank labels, blank plaques, rectangular hanging signs, interface frames, borders.\nRequested native size 2560×1440 if available, otherwise the tool's actual largest native 16:9 output. Do not draw resolution text.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_pilot/candidate_3.png"
+          ]
+        }
+      ],
+      "id": "S01_day_C",
+      "generator": "builtin_imagegen",
+      "source_path": "assets/_incoming/a1r_real/S01/day_C.png",
+      "ref_paths": [
+        "assets/_incoming/a1r_pilot/candidate_3.png"
+      ],
+      "native_resolution_met": false
+    },
+    {
+      "path": "assets/_incoming/a1r_real/S01/night_C.png",
+      "sha256": "a2d3688384ed321be33bff3aaaa9317c86d999cc548f1f8f10cfe6967b15ae75",
+      "native_size": [
+        1672,
+        941
+      ],
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "full_composite_C",
+      "prompt": "Use case: lighting-weather.\nAsset type: S01 exterior NIGHT variant of the existing full composite C.\nInput Image 1 is the EDIT TARGET, not a loose reference. Preserve its exact camera, composition, object positions, architecture, door and window shapes, tree branches and canopy silhouette, vine, crescent hanging sign, pots, paving and image dimensions. Change ONLY time of day and painted light colors.\nMake it quiet early night: muted dusty-teal sky, cool warm-grey and teal shadows, the same arched ground-floor window and two upstairs windows carry a soft flat ochre-cream interior-light color. Do not emit light beams or add glow around them. Door remains closed exactly as in the day target. Keep the rightmost wall and bottom lane low detail. No additional lantern, objects, stars, moon, letters or plaques. Preserve the existing cloud as a dim soft grey shape.\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse painted night lighting, cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, extra wisteria, text, letters, numbers, UI, labels, blank plaques, interface frames, borders.\nOutput a single edge-to-edge landscape image at the same native dimensions as Image 1.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_real/S01/day_C.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-96dd58f5-e85f-4d82-a2fc-b145c93aebb0.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "与白日同构图，窗面用平涂赭黄表达夜灯，无光晕；编辑不是逐像素光照变换，后续严格同幅层以本夜版C为准。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S01/night_C.png",
+          "sha256": "a2d3688384ed321be33bff3aaaa9317c86d999cc548f1f8f10cfe6967b15ae75",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: lighting-weather.\nAsset type: S01 exterior NIGHT variant of the existing full composite C.\nInput Image 1 is the EDIT TARGET, not a loose reference. Preserve its exact camera, composition, object positions, architecture, door and window shapes, tree branches and canopy silhouette, vine, crescent hanging sign, pots, paving and image dimensions. Change ONLY time of day and painted light colors.\nMake it quiet early night: muted dusty-teal sky, cool warm-grey and teal shadows, the same arched ground-floor window and two upstairs windows carry a soft flat ochre-cream interior-light color. Do not emit light beams or add glow around them. Door remains closed exactly as in the day target. Keep the rightmost wall and bottom lane low detail. No additional lantern, objects, stars, moon, letters or plaques. Preserve the existing cloud as a dim soft grey shape.\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse painted night lighting, cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, extra wisteria, text, letters, numbers, UI, labels, blank plaques, interface frames, borders.\nOutput a single edge-to-edge landscape image at the same native dimensions as Image 1.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_real/S01/day_C.png"
+          ]
+        }
+      ],
+      "id": "S01_night_C",
+      "generator": "builtin_imagegen",
+      "source_path": "assets/_incoming/a1r_real/S01/night_C.png",
+      "ref_paths": [
+        "assets/_incoming/a1r_real/S01/day_C.png"
+      ],
+      "native_resolution_met": false
+    },
+    {
+      "path": "assets/_incoming/a1r_real/S01/closed_C.png",
+      "sha256": "d67cb6c33540d5bfe57363f14462bf5c4522eb0f0799949d6492231fe2c8ed1f",
+      "native_size": [
+        1672,
+        941
+      ],
+      "reference_sha256": {
+        "D:/MagicStore/assets/_incoming/a1r_real/S01/night_C.png": "a2d3688384ed321be33bff3aaaa9317c86d999cc548f1f8f10cfe6967b15ae75"
+      },
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "full_composite_C",
+      "prompt": "Use case: lighting-weather.\nAsset type: S01 exterior CLOSED-FOR-THE-NIGHT variant of the existing full composite C.\nInput Image 1 is the exact EDIT TARGET. Make only one scene-state change: all three visible windows have their interior lamps turned OFF. The glass should now be quiet dark dusty teal/grey with faint matte painted reflection rather than yellow illumination. Keep the sky, wall, roof, cloud, door, window frames, crescent hanging sign, tree canopy, vine, pots, paving, every position and shape, crop and native image dimensions unchanged. The existing wooden entrance door stays shut. Do not add shutters, padlocks, text signs, labels, people, moon, stars or any new object. Keep soft ambient night visibility so the wall and lane remain readable; do not crush the painting to black.\nPreserve the existing gouache picture-book medium: visible brush strokes and dry-brush edges, slightly wobbly colored-pencil outlines, simplified shapes, slightly imperfect perspective, seven muted color families (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse night light, cool-tinted shadows, sparse props, one focal point, matte paper. Full-bleed wide landscape.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy/plastic surfaces, hyper-detailed clutter, photorealism, extra wisteria, text, letters, numbers, UI, blank labels or plaques, borders.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_real/S01/night_C.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-c7027309-ea61-4c1a-a9b5-7ae69f96b1c4.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "与夜版保持构图；三扇窗关闭内灯，仍保留环境夜光。无新增牌匾/锁具/人物。原生1672×941；后续每版以各自C扣像素，不能宣称生成编辑逐像素不变。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S01/closed_C.png",
+          "sha256": "d67cb6c33540d5bfe57363f14462bf5c4522eb0f0799949d6492231fe2c8ed1f",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: lighting-weather.\nAsset type: S01 exterior CLOSED-FOR-THE-NIGHT variant of the existing full composite C.\nInput Image 1 is the exact EDIT TARGET. Make only one scene-state change: all three visible windows have their interior lamps turned OFF. The glass should now be quiet dark dusty teal/grey with faint matte painted reflection rather than yellow illumination. Keep the sky, wall, roof, cloud, door, window frames, crescent hanging sign, tree canopy, vine, pots, paving, every position and shape, crop and native image dimensions unchanged. The existing wooden entrance door stays shut. Do not add shutters, padlocks, text signs, labels, people, moon, stars or any new object. Keep soft ambient night visibility so the wall and lane remain readable; do not crush the painting to black.\nPreserve the existing gouache picture-book medium: visible brush strokes and dry-brush edges, slightly wobbly colored-pencil outlines, simplified shapes, slightly imperfect perspective, seven muted color families (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse night light, cool-tinted shadows, sparse props, one focal point, matte paper. Full-bleed wide landscape.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy/plastic surfaces, hyper-detailed clutter, photorealism, extra wisteria, text, letters, numbers, UI, blank labels or plaques, borders.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_real/S01/night_C.png"
+          ]
+        }
+      ],
+      "id": "S01_closed_C",
+      "generator": "builtin_imagegen",
+      "source_path": "assets/_incoming/a1r_real/S01/closed_C.png",
+      "ref_paths": [
+        "assets/_incoming/a1r_real/S01/night_C.png"
+      ],
+      "native_resolution_met": false
+    },
+    {
+      "path": "assets/_incoming/a1r_real/S01/day_raw_cleanplate.png",
+      "sha256": "05d6a98f1338eeb42a72852489e707ee5aaa314c78daf4d29a6fe488633fbf7a",
+      "native_size": [
+        1672,
+        941
+      ],
+      "reference_sha256": {
+        "D:/MagicStore/assets/_incoming/a1r_real/S01/day_C.png": "8c04d2ef36b7d15626333bac66f2031a9b06524ca70ba0a13b589cced4aed5ea"
+      },
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "raw_cleanplate_B_all",
+      "prompt": "Use case: precise-object-edit.\nAsset type: S01 DAY raw cleanplate B_all for actual same-position extraction of game layers.\nInput Image 1 is the exact EDIT TARGET. This is a local removal/edit, not a new scene. Remove ALL of these movable pieces from the existing painting and fill their previous locations with the plausible wall, roof, timber or sky behind them:\n1. The leafy tree canopy at upper-left; retain the static main bare trunk and thick branches wherever visible, but remove the leaves.\n2. The entire wisteria vine immediately above and down the left side of the entrance, including leaves, flowers and its winding vine stem. Restore the simple plaster and timber behind it.\n3. The small crescent-shaped hanging wooden sign at upper-right of the door, including its little hanging chain and supporting metal bracket; restore plain cream wall.\n4. The small white cloud in the sky.\nKeep the entrance door and ring handle, all window panes and frames, stone wall, timber structure, roof, both herb pots, cobbled foreground, overall camera and crop EXACTLY as they are. Preserve all unedited pixels as closely as possible. Add no new objects, openings, labels or decoration. This remains the same DAY lighting. Do not alter lamp states or the colors of the remaining objects.\nMaintain Image 1's matte gouache strokes, dry-brush marks, slightly wobbly colored-pencil edges and limited muted palette. Full-bleed landscape at the same native dimensions. No text, UI, plaques, frames, borders, people, glow, bloom or photorealism.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_real/S01/day_C.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-1980627d-a4f0-4e36-bb1f-70b4cbd30cd3.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "树冠叶片、门上紫藤、月牙吊件含挂架及云已移除；裸树干/粗枝、建筑和盆栽保留。补出墙、木梁与天空。此为真实builtin编辑rawB，整图编码/细节漂移仍需局部mask贴回。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S01/day_raw_cleanplate.png",
+          "sha256": "05d6a98f1338eeb42a72852489e707ee5aaa314c78daf4d29a6fe488633fbf7a",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: precise-object-edit.\nAsset type: S01 DAY raw cleanplate B_all for actual same-position extraction of game layers.\nInput Image 1 is the exact EDIT TARGET. This is a local removal/edit, not a new scene. Remove ALL of these movable pieces from the existing painting and fill their previous locations with the plausible wall, roof, timber or sky behind them:\n1. The leafy tree canopy at upper-left; retain the static main bare trunk and thick branches wherever visible, but remove the leaves.\n2. The entire wisteria vine immediately above and down the left side of the entrance, including leaves, flowers and its winding vine stem. Restore the simple plaster and timber behind it.\n3. The small crescent-shaped hanging wooden sign at upper-right of the door, including its little hanging chain and supporting metal bracket; restore plain cream wall.\n4. The small white cloud in the sky.\nKeep the entrance door and ring handle, all window panes and frames, stone wall, timber structure, roof, both herb pots, cobbled foreground, overall camera and crop EXACTLY as they are. Preserve all unedited pixels as closely as possible. Add no new objects, openings, labels or decoration. This remains the same DAY lighting. Do not alter lamp states or the colors of the remaining objects.\nMaintain Image 1's matte gouache strokes, dry-brush marks, slightly wobbly colored-pencil edges and limited muted palette. Full-bleed landscape at the same native dimensions. No text, UI, plaques, frames, borders, people, glow, bloom or photorealism.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_real/S01/day_C.png"
+          ]
+        }
+      ],
+      "id": "S01_day_raw_cleanplate",
+      "generator": "builtin_imagegen",
+      "source_path": "assets/_incoming/a1r_real/S01/day_raw_cleanplate.png",
+      "ref_paths": [
+        "assets/_incoming/a1r_real/S01/day_C.png"
+      ],
+      "native_resolution_met": false
+    },
+    {
+      "path": "assets/_incoming/a1r_real/S01/night_raw_cleanplate.png",
+      "sha256": "32c2e8703444bd02ea48161eeab12a1d1ea997d667b445639b9e3043b79d06df",
+      "native_size": [
+        1672,
+        941
+      ],
+      "reference_sha256": {
+        "D:/MagicStore/assets/_incoming/a1r_real/S01/night_C.png": "a2d3688384ed321be33bff3aaaa9317c86d999cc548f1f8f10cfe6967b15ae75"
+      },
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "raw_cleanplate_B_all",
+      "prompt": "Use case: precise-object-edit.\nAsset type: S01 NIGHT raw cleanplate B_all for actual same-position extraction of game layers.\nInput Image 1 is the exact EDIT TARGET. This is a local removal/edit, not a new scene. Remove ALL of these movable pieces from the existing painting and fill their previous locations with the plausible wall, roof, timber or sky behind them:\n1. The leafy tree canopy at upper-left; retain the static main bare trunk and thick branches wherever visible, but remove the leaves.\n2. The entire wisteria vine immediately above and down the left side of the entrance, including leaves, flowers and its winding vine stem. Restore the simple plaster and timber behind it.\n3. The small crescent-shaped hanging wooden sign at upper-right of the door, including its little hanging chain and supporting metal bracket; restore plain cream wall.\n4. The small white cloud in the sky.\nKeep the entrance door and ring handle, all window panes and frames, stone wall, timber structure, roof, both herb pots, cobbled foreground, overall camera and crop EXACTLY as they are. Preserve all unedited pixels as closely as possible. Add no new objects, openings, labels or decoration. This remains the same NIGHT lighting, with all three original window interiors still ON in flat ochre-cream. Keep their frame geometry and painted intensity unchanged. Do not alter lamp states or the colors of the remaining objects.\nMaintain Image 1's matte gouache strokes, dry-brush marks, slightly wobbly colored-pencil edges and limited muted palette. Full-bleed landscape at the same native dimensions. No text, UI, plaques, frames, borders, people, glow, bloom or photorealism.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_real/S01/night_C.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-025a8e05-5db0-451c-8a15-d063b0aaa5b0.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "实际夜版C补底：全部指定可动件移除，原三扇窗的平涂夜灯仍打开；建筑门窗、盆栽与裸枝保留，严格局部外环将由公共工具保证。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S01/night_raw_cleanplate.png",
+          "sha256": "32c2e8703444bd02ea48161eeab12a1d1ea997d667b445639b9e3043b79d06df",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: precise-object-edit.\nAsset type: S01 NIGHT raw cleanplate B_all for actual same-position extraction of game layers.\nInput Image 1 is the exact EDIT TARGET. This is a local removal/edit, not a new scene. Remove ALL of these movable pieces from the existing painting and fill their previous locations with the plausible wall, roof, timber or sky behind them:\n1. The leafy tree canopy at upper-left; retain the static main bare trunk and thick branches wherever visible, but remove the leaves.\n2. The entire wisteria vine immediately above and down the left side of the entrance, including leaves, flowers and its winding vine stem. Restore the simple plaster and timber behind it.\n3. The small crescent-shaped hanging wooden sign at upper-right of the door, including its little hanging chain and supporting metal bracket; restore plain cream wall.\n4. The small white cloud in the sky.\nKeep the entrance door and ring handle, all window panes and frames, stone wall, timber structure, roof, both herb pots, cobbled foreground, overall camera and crop EXACTLY as they are. Preserve all unedited pixels as closely as possible. Add no new objects, openings, labels or decoration. This remains the same NIGHT lighting, with all three original window interiors still ON in flat ochre-cream. Keep their frame geometry and painted intensity unchanged. Do not alter lamp states or the colors of the remaining objects.\nMaintain Image 1's matte gouache strokes, dry-brush marks, slightly wobbly colored-pencil edges and limited muted palette. Full-bleed landscape at the same native dimensions. No text, UI, plaques, frames, borders, people, glow, bloom or photorealism.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_real/S01/night_C.png"
+          ]
+        }
+      ],
+      "id": "S01_night_raw_cleanplate",
+      "generator": "builtin_imagegen",
+      "source_path": "assets/_incoming/a1r_real/S01/night_raw_cleanplate.png",
+      "ref_paths": [
+        "assets/_incoming/a1r_real/S01/night_C.png"
+      ],
+      "native_resolution_met": false
+    },
+    {
+      "path": "assets/_incoming/a1r_real/S01/closed_raw_cleanplate.png",
+      "sha256": "da9ae0a333afe61f1dfc8f220d7781b6698ba777b7cefc64e555268bae426047",
+      "native_size": [
+        1672,
+        941
+      ],
+      "reference_sha256": {
+        "D:/MagicStore/assets/_incoming/a1r_real/S01/closed_C.png": "d67cb6c33540d5bfe57363f14462bf5c4522eb0f0799949d6492231fe2c8ed1f"
+      },
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "raw_cleanplate_B_all",
+      "prompt": "Use case: precise-object-edit.\nAsset type: S01 CLOSED raw cleanplate B_all for actual same-position extraction of game layers.\nInput Image 1 is the exact EDIT TARGET. This is a local removal/edit, not a new scene. Remove ALL of these movable pieces from the existing painting and fill their previous locations with the plausible wall, roof, timber or sky behind them:\n1. The leafy tree canopy at upper-left; retain the static main bare trunk and thick branches wherever visible, but remove the leaves.\n2. The entire wisteria vine immediately above and down the left side of the entrance, including leaves, flowers and its winding vine stem. Restore the simple plaster and timber behind it.\n3. The small crescent-shaped hanging wooden sign at upper-right of the door, including its little hanging chain and supporting metal bracket; restore plain cream wall.\n4. The small white cloud in the sky.\nKeep the entrance door and ring handle, all window panes and frames, stone wall, timber structure, roof, both herb pots, cobbled foreground, overall camera and crop EXACTLY as they are. Preserve all unedited pixels as closely as possible. Add no new objects, openings, labels or decoration. This remains the same closed-for-night ambient lighting, with all original windows still dark and all interior lamps OFF. Keep their painted dark glass and frame geometry unchanged. Do not alter lamp states or the colors of the remaining objects.\nMaintain Image 1's matte gouache strokes, dry-brush marks, slightly wobbly colored-pencil edges and limited muted palette. Full-bleed landscape at the same native dimensions. No text, UI, plaques, frames, borders, people, glow, bloom or photorealism.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_real/S01/closed_C.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-f5543696-c69c-4333-b769-e9408a5a199a.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "打烊C的真实局部清理输出，窗灯仍关闭；树叶、藤蔓、月牙挂件及云已移除，裸枝和固定建筑保留。原始整图漂移不冒充严格像素保真。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S01/closed_raw_cleanplate.png",
+          "sha256": "da9ae0a333afe61f1dfc8f220d7781b6698ba777b7cefc64e555268bae426047",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: precise-object-edit.\nAsset type: S01 CLOSED raw cleanplate B_all for actual same-position extraction of game layers.\nInput Image 1 is the exact EDIT TARGET. This is a local removal/edit, not a new scene. Remove ALL of these movable pieces from the existing painting and fill their previous locations with the plausible wall, roof, timber or sky behind them:\n1. The leafy tree canopy at upper-left; retain the static main bare trunk and thick branches wherever visible, but remove the leaves.\n2. The entire wisteria vine immediately above and down the left side of the entrance, including leaves, flowers and its winding vine stem. Restore the simple plaster and timber behind it.\n3. The small crescent-shaped hanging wooden sign at upper-right of the door, including its little hanging chain and supporting metal bracket; restore plain cream wall.\n4. The small white cloud in the sky.\nKeep the entrance door and ring handle, all window panes and frames, stone wall, timber structure, roof, both herb pots, cobbled foreground, overall camera and crop EXACTLY as they are. Preserve all unedited pixels as closely as possible. Add no new objects, openings, labels or decoration. This remains the same closed-for-night ambient lighting, with all original windows still dark and all interior lamps OFF. Keep their painted dark glass and frame geometry unchanged. Do not alter lamp states or the colors of the remaining objects.\nMaintain Image 1's matte gouache strokes, dry-brush marks, slightly wobbly colored-pencil edges and limited muted palette. Full-bleed landscape at the same native dimensions. No text, UI, plaques, frames, borders, people, glow, bloom or photorealism.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_real/S01/closed_C.png"
+          ]
+        }
+      ],
+      "id": "S01_closed_raw_cleanplate",
+      "generator": "builtin_imagegen",
+      "source_path": "assets/_incoming/a1r_real/S01/closed_raw_cleanplate.png",
+      "ref_paths": [
+        "assets/_incoming/a1r_real/S01/closed_C.png"
+      ],
+      "native_resolution_met": false
+    }
+  ],
+  "mask_annotation_rounds": [
+    {
+      "revision": "real1",
+      "kind": "annotation_only",
+      "strict_geometry_evaluated": false,
+      "visual_review": "failed: incomplete flower/canopy coverage"
+    },
+    {
+      "revision": "real2",
+      "kind": "processing_round",
+      "round": 1,
+      "strict_geometry_passed": true,
+      "visual_review": "failed: visible residuals in B_all"
+    },
+    {
+      "revision": "real3",
+      "kind": "processing_round",
+      "round": 2,
+      "strict_geometry_passed": false,
+      "failed_periods": [
+        "night",
+        "closed"
+      ],
+      "reason": "tree/vine soft-mask overlap; whole core max 6/4, single-layer checks passed"
+    },
+    {
+      "revision": "real4",
+      "kind": "processing_round",
+      "round": 3,
+      "strict_geometry_passed": true,
+      "selected_for_geometry_registry": true,
+      "visual_review": "partial: retained background/architecture in alpha layers; no independent motion approval"
+    }
+  ],
+  "art_passed": false,
+  "layer_art_passed": false,
+  "final_layer_review_path": "assets/_incoming/a1r_real/S01/final_review.json",
+  "final_layer_visual_status": "partial_visual_quality",
+  "selected_geometry_receipts": [
+    "assets/generated_scenes/v3_real/S01/day/real4/receipt.json",
+    "assets/generated_scenes/v3_real/S01/night/real4/receipt.json",
+    "assets/generated_scenes/v3_real/S01/closed/real4/receipt.json"
+  ]
+}

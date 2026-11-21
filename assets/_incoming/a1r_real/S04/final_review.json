@@ -1,0 +1,569 @@
+{
+  "version": 1,
+  "scene_id": "S04",
+  "status": "partial_visual_quality",
+  "generation_images": 8,
+  "generation_attempts_each": 1,
+  "source_native_size": [
+    1672,
+    941
+  ],
+  "source_images_reviewed_six_categories": true,
+  "production_config_modified": false,
+  "approved_for_production": false,
+  "art_passed": false,
+  "processing_round_limit": 3,
+  "processing_rounds_used": 3,
+  "selected_receipts": [
+    {
+      "period_state": "day_open",
+      "revision": "real3",
+      "receipt_path": "assets/generated_scenes/v3_real/S04/day_open/real3/receipt.json",
+      "receipt_sha256": "7d2c1126f3a94142389c2c8fd955145a871d9de253b7ccb2859d5a6966c0215d",
+      "geometry_passed": true,
+      "visual_review_status": "needs_mask_refinement",
+      "contact_sheet": "assets/_incoming/a1r_real/S04/day_open_layers_review_real3.png",
+      "reviewed_layers": [
+        "door_open",
+        "lamp"
+      ]
+    },
+    {
+      "period_state": "day_closed",
+      "revision": "real3",
+      "receipt_path": "assets/generated_scenes/v3_real/S04/day_closed/real3/receipt.json",
+      "receipt_sha256": "87ee5bec71e28b4759e2b6f8c94e33475100f5104cf286ea37ea5d6b440aeccb",
+      "geometry_passed": true,
+      "visual_review_status": "needs_mask_refinement",
+      "contact_sheet": "assets/_incoming/a1r_real/S04/day_closed_layers_review_real3.png",
+      "reviewed_layers": [
+        "door_closed",
+        "lamp"
+      ]
+    },
+    {
+      "period_state": "night_open",
+      "revision": "real3",
+      "receipt_path": "assets/generated_scenes/v3_real/S04/night_open/real3/receipt.json",
+      "receipt_sha256": "ebe34c998cc71fadf026b14b19bac107242b1be48f4ad8c8dcfd5c4b1eb79587",
+      "geometry_passed": true,
+      "visual_review_status": "needs_mask_refinement",
+      "contact_sheet": "assets/_incoming/a1r_real/S04/night_open_layers_review_real3.png",
+      "reviewed_layers": [
+        "door_open",
+        "lamp"
+      ]
+    },
+    {
+      "period_state": "night_closed",
+      "revision": "real3",
+      "receipt_path": "assets/generated_scenes/v3_real/S04/night_closed/real3/receipt.json",
+      "receipt_sha256": "773f39ef4b1c17b89ecdace9ffd3c26ba8e0f3145db4329797865f570be187b0",
+      "geometry_passed": true,
+      "visual_review_status": "needs_mask_refinement",
+      "contact_sheet": "assets/_incoming/a1r_real/S04/night_closed_layers_review_real3.png",
+      "reviewed_layers": [
+        "door_closed",
+        "lamp"
+      ]
+    }
+  ],
+  "visual_findings": {
+    "lamp": "A narrow source-wall safety collar remains around the pendant silhouette and cord. Tighter trim is needed before independent motion.",
+    "doors": "Door states and empty shelves are visually plausible; a small amount of fixed frame/context is retained at extraction bounds."
+  },
+  "qa_thresholds_modified": false,
+  "independent_dynamic_motion_approved": false,
+  "review_method": "Every final C/B_all/recomposition and every individual Li inspected in labeled checkerboard contact sheets; Li tiles use alpha used-bbox zoom. Full native pixels/alpha and ROI metrics remain in receipts.",
+  "strict_comparisons": 12,
+  "known_unfinished": "After three processing/self-review rounds, object-only alpha trim remains incomplete. Mathematical reconstruction is passed separately. Retain formal production v2; do not claim art_passed or activate motion from these masks.",
+  "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+  "style_sha256": "391ef0b702653eaf7a2bf98f90595bb12502587b6bcc9f0b5653aecdf9766833",
+  "records": [
+    {
+      "path": "assets/_incoming/a1r_real/S04/day_open_C.png",
+      "sha256": "8cf1886048e55ffb1018110462c49511f6491a8edffafa4eca746eb4e5ee2ac3",
+      "native_size": [
+        1672,
+        941
+      ],
+      "reference_sha256": {
+        "D:/MagicStore/assets/_incoming/a1r_pilot/candidate_3.png": "391ef0b702653eaf7a2bf98f90595bb12502587b6bcc9f0b5653aecdf9766833"
+      },
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "full_composite_C",
+      "prompt": "Use case: stylized-concept.\nAsset type: complete original scene composite C, S04 storage cabinet, DAY with cupboard doors OPEN. Full scene artwork for a game, not a UI mockup.\nInput Image 1 is STYLE REFERENCE ONLY: copy its visibly brushed matte gouache and sparse hand-drawn colored-pencil outlines, not its room objects.\nSubject: front view of one tall wide plain walnut wooden storage cupboard occupying the left 65 percent. Three broad continuous horizontal EMPTY shelf boards form four open storage tiers. Every shelf is entirely bare for game items added later. The cabinet has two plain solid wooden door leaves hinged at the outer left and outer right, both swung open outwards so the shelf interior remains visible. Simple physically credible hinges and planks; no glass, labels, plaque holders or carvings. At the very bottom are just two simple broad drawers with one small plain round knob each. The whole cabinet, including both open door leaves and its simple feet, fits inside the painting.\nOne small simple matte ochre pendant lamp hangs near the cabinet's upper-left, a readable dome shade and short straight cord; no fanciful metalwork. No other objects. No wisteria or plant here.\nComposition: 16:9 wide, full bleed. Rightmost 30 percent is mostly empty cream plaster wall with a simple dim stockroom doorway at the far right edge, without a sign. Bottom 12 percent plain muted warm-grey floor. Sparse and calm, one focal point. Do not arrange shelves as individual square cells.\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse daylight, cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, numbers, UI, labels, empty labels, blank plaques, interface frames, borders, jars, books, bottles, baskets, stock on shelves.\nRequested native 2560×1440 if available; otherwise use actual largest native 16:9. No resolution text.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_pilot/candidate_3.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-782175cc-1d49-47fb-8c82-0d9a7f63bf57.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "三条连续层板形成四层空置空间，无物品/箱格/标签；开门、合页、柜脚结构可辨。右侧低细节墙面和远端储物间口。单盏吊灯无光晕。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S04/day_open_C.png",
+          "sha256": "8cf1886048e55ffb1018110462c49511f6491a8edffafa4eca746eb4e5ee2ac3",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: stylized-concept.\nAsset type: complete original scene composite C, S04 storage cabinet, DAY with cupboard doors OPEN. Full scene artwork for a game, not a UI mockup.\nInput Image 1 is STYLE REFERENCE ONLY: copy its visibly brushed matte gouache and sparse hand-drawn colored-pencil outlines, not its room objects.\nSubject: front view of one tall wide plain walnut wooden storage cupboard occupying the left 65 percent. Three broad continuous horizontal EMPTY shelf boards form four open storage tiers. Every shelf is entirely bare for game items added later. The cabinet has two plain solid wooden door leaves hinged at the outer left and outer right, both swung open outwards so the shelf interior remains visible. Simple physically credible hinges and planks; no glass, labels, plaque holders or carvings. At the very bottom are just two simple broad drawers with one small plain round knob each. The whole cabinet, including both open door leaves and its simple feet, fits inside the painting.\nOne small simple matte ochre pendant lamp hangs near the cabinet's upper-left, a readable dome shade and short straight cord; no fanciful metalwork. No other objects. No wisteria or plant here.\nComposition: 16:9 wide, full bleed. Rightmost 30 percent is mostly empty cream plaster wall with a simple dim stockroom doorway at the far right edge, without a sign. Bottom 12 percent plain muted warm-grey floor. Sparse and calm, one focal point. Do not arrange shelves as individual square cells.\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse daylight, cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, numbers, UI, labels, empty labels, blank plaques, interface frames, borders, jars, books, bottles, baskets, stock on shelves.\nRequested native 2560×1440 if available; otherwise use actual largest native 16:9. No resolution text.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_pilot/candidate_3.png"
+          ]
+        }
+      ],
+      "id": "S04_day_open_C",
+      "generator": "builtin_imagegen",
+      "source_path": "assets/_incoming/a1r_real/S04/day_open_C.png",
+      "ref_paths": [
+        "assets/_incoming/a1r_pilot/candidate_3.png"
+      ],
+      "native_resolution_met": false
+    },
+    {
+      "path": "assets/_incoming/a1r_real/S04/day_closed_C.png",
+      "sha256": "22cb65e65740ea6bf82e1c44960da2ea059dc8684c7dcdf62e0dfad1ec5314f0",
+      "native_size": [
+        1672,
+        941
+      ],
+      "reference_sha256": {
+        "D:/MagicStore/assets/_incoming/a1r_real/S04/day_open_C.png": "8cf1886048e55ffb1018110462c49511f6491a8edffafa4eca746eb4e5ee2ac3"
+      },
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "full_composite_C",
+      "prompt": "Use case: precise-object-edit.\nAsset type: S04 storage cupboard DAY CLOSED state, matching the existing DAY OPEN full composite.\nInput Image 1 is the exact EDIT TARGET. Change ONLY the two hinged upper cupboard doors from their open outward positions to fully shut across the shelf opening. The two plain walnut door leaves meet at one vertical center seam and conceal the four empty shelf tiers. Give the pair two very small simple round wooden knobs beside the central seam; no lock plates or labels. Their external framing and wood planks must match the existing door leaves. Preserve the cabinet body, crown board, width, height, feet, lower two drawers and their knobs exactly; the closed upper doors stop above those bottom drawers. Remove the old open leaves from their former open positions so the cream plaster wall is revealed behind them. This change is restricted to the upper door-opening/wing region, not a redesign of the cabinet.\nKeep the camera, scale, crop, pendant lamp, surrounding wall, floor, far-right stockroom doorway, light and every unrelated object unchanged, and keep the same native image dimensions. No new objects or stock items.\nRetain visible matte gouache brush strokes, dry-brush edges, slightly wobbly colored-pencil outlines, seven muted color families, soft diffuse daytime light and cool shadows. Full-bleed landscape.\nNEGATIVE: text, letters, numbers, labels, blank plaques, UI, borders, gold filigree, ornate carving, glow, bloom, beams, bokeh, glossy plastic, photorealism, vines, plants, jars, books, stock.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_real/S04/day_open_C.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-df319ce1-771f-48a5-a82f-de9d40f1da4e.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "只改变上柜门开合状态；门合后遮住层板，底部两抽屉仍可见，吊灯/墙面/远端门口构图一致。生成编辑有细微纹理变化，后续需限制状态编辑贴合区域以共用背景。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S04/day_closed_C.png",
+          "sha256": "22cb65e65740ea6bf82e1c44960da2ea059dc8684c7dcdf62e0dfad1ec5314f0",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: precise-object-edit.\nAsset type: S04 storage cupboard DAY CLOSED state, matching the existing DAY OPEN full composite.\nInput Image 1 is the exact EDIT TARGET. Change ONLY the two hinged upper cupboard doors from their open outward positions to fully shut across the shelf opening. The two plain walnut door leaves meet at one vertical center seam and conceal the four empty shelf tiers. Give the pair two very small simple round wooden knobs beside the central seam; no lock plates or labels. Their external framing and wood planks must match the existing door leaves. Preserve the cabinet body, crown board, width, height, feet, lower two drawers and their knobs exactly; the closed upper doors stop above those bottom drawers. Remove the old open leaves from their former open positions so the cream plaster wall is revealed behind them. This change is restricted to the upper door-opening/wing region, not a redesign of the cabinet.\nKeep the camera, scale, crop, pendant lamp, surrounding wall, floor, far-right stockroom doorway, light and every unrelated object unchanged, and keep the same native image dimensions. No new objects or stock items.\nRetain visible matte gouache brush strokes, dry-brush edges, slightly wobbly colored-pencil outlines, seven muted color families, soft diffuse daytime light and cool shadows. Full-bleed landscape.\nNEGATIVE: text, letters, numbers, labels, blank plaques, UI, borders, gold filigree, ornate carving, glow, bloom, beams, bokeh, glossy plastic, photorealism, vines, plants, jars, books, stock.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_real/S04/day_open_C.png"
+          ]
+        }
+      ],
+      "id": "S04_day_closed_C",
+      "generator": "builtin_imagegen",
+      "source_path": "assets/_incoming/a1r_real/S04/day_closed_C.png",
+      "ref_paths": [
+        "assets/_incoming/a1r_real/S04/day_open_C.png"
+      ],
+      "native_resolution_met": false
+    },
+    {
+      "path": "assets/_incoming/a1r_real/S04/night_open_C.png",
+      "sha256": "a5467174bd73a203bbd8b9957b5f055d5924f007449c60d071fa5c7a3027febb",
+      "native_size": [
+        1672,
+        941
+      ],
+      "reference_sha256": {
+        "D:/MagicStore/assets/_incoming/a1r_real/S04/day_open_C.png": "8cf1886048e55ffb1018110462c49511f6491a8edffafa4eca746eb4e5ee2ac3"
+      },
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "full_composite_C",
+      "prompt": "Use case: lighting-weather.\nAsset type: S04 storage cupboard NIGHT OPEN full scene composite, paired with existing DAY OPEN.\nInput Image 1 is the exact EDIT TARGET. Preserve the camera, composition, crop, every cabinet board and foot, the four completely EMPTY shelf tiers, both doors in the same open outward positions, lower two drawers and their knobs, pendant lamp silhouette/cord, wall, floor and far-right stockroom doorway. Preserve the same native dimensions. Change ONLY daylight into restrained indoor night lighting.\nThe existing pendant lamp is switched ON with a small flat cream-ochre painted interior under its shade. Keep the lamp's silhouette unchanged. Ambient room colors are dimmer, cool dusty teal and warm grey in the shelves and stockroom; wood remains readable warm walnut. Paint soft broad shadows with no light ray, pool graphic, bloom, outer halo or luminous aura. Rightmost wall and bottom floor stay empty and low detail. Do not add windows, candles, wall sconces, stock objects or plants.\nKeep gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly colored-pencil outlines, simplified forms and imperfect perspective, seven muted color families (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), matte paper.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, gloss, plastic, photorealism, hyper-detailed clutter, wisteria, text, letters, numbers, UI, labels, empty plaques, frames, borders.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_real/S04/day_open_C.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-2ef3dab2-a2e4-440e-b5e0-4b006ae4e647.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "保持白日开柜构图，夜版以灰青阴影和灯罩内赭黄平涂表达；四层架面仍全空，右侧无额外物件，无光束/镜头效果。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S04/night_open_C.png",
+          "sha256": "a5467174bd73a203bbd8b9957b5f055d5924f007449c60d071fa5c7a3027febb",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: lighting-weather.\nAsset type: S04 storage cupboard NIGHT OPEN full scene composite, paired with existing DAY OPEN.\nInput Image 1 is the exact EDIT TARGET. Preserve the camera, composition, crop, every cabinet board and foot, the four completely EMPTY shelf tiers, both doors in the same open outward positions, lower two drawers and their knobs, pendant lamp silhouette/cord, wall, floor and far-right stockroom doorway. Preserve the same native dimensions. Change ONLY daylight into restrained indoor night lighting.\nThe existing pendant lamp is switched ON with a small flat cream-ochre painted interior under its shade. Keep the lamp's silhouette unchanged. Ambient room colors are dimmer, cool dusty teal and warm grey in the shelves and stockroom; wood remains readable warm walnut. Paint soft broad shadows with no light ray, pool graphic, bloom, outer halo or luminous aura. Rightmost wall and bottom floor stay empty and low detail. Do not add windows, candles, wall sconces, stock objects or plants.\nKeep gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly colored-pencil outlines, simplified forms and imperfect perspective, seven muted color families (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), matte paper.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, gloss, plastic, photorealism, hyper-detailed clutter, wisteria, text, letters, numbers, UI, labels, empty plaques, frames, borders.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_real/S04/day_open_C.png"
+          ]
+        }
+      ],
+      "id": "S04_night_open_C",
+      "generator": "builtin_imagegen",
+      "source_path": "assets/_incoming/a1r_real/S04/night_open_C.png",
+      "ref_paths": [
+        "assets/_incoming/a1r_real/S04/day_open_C.png"
+      ],
+      "native_resolution_met": false
+    },
+    {
+      "path": "assets/_incoming/a1r_real/S04/night_closed_C.png",
+      "sha256": "0a0ca8b67f0a23112f9b6f2b01a4bf3e35f53f3a582b3c40e9b1425802e25c38",
+      "native_size": [
+        1672,
+        941
+      ],
+      "reference_sha256": {
+        "D:/MagicStore/assets/_incoming/a1r_real/S04/night_open_C.png": "a5467174bd73a203bbd8b9957b5f055d5924f007449c60d071fa5c7a3027febb"
+      },
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "full_composite_C",
+      "prompt": "Use case: precise-object-edit.\nAsset type: S04 storage cupboard NIGHT CLOSED state, paired with the existing NIGHT OPEN composite.\nInput Image 1 is the exact EDIT TARGET. Change ONLY the upper cupboard's two door leaves from their open outward positions to shut across the entire shelf opening. Their plain walnut frames and wood planks match the existing open leaves; the two leaves meet at a single vertical seam, with two small plain round wooden knobs close to the seam. They cover the empty shelf tiers and stop above the lower two drawers. Remove the formerly open leaf positions and reveal the wall that would be behind them.\nPreserve the cabinet body outline, top trim, base, feet, lower two drawers, their handles, lamp and cord, far-right doorway, surrounding wall, floor, camera, crop and dimensions. Preserve EXACTLY the nighttime brightness, cool grey-teal shadow palette and soft ochre pendant lighting of Image 1. Do not brighten to daylight. No new furniture or objects.\nMaintain its visible matte gouache strokes, dry-brush marks and slightly wobbly colored-pencil edges. Simple plausible hinge structure. No ornate decoration.\nNEGATIVE: text, letters, numbers, UI, labels, blank plaques, frame border, gold filigree, carving, bloom, glow, rays, glossy surfaces, photorealism, clutter, plants, stock items. Output one landscape at the same native dimensions.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_real/S04/night_open_C.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-b0129093-30e1-4343-b34e-cb5b95a80bfa.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "夜版闭门状态；与夜版开柜保持相同空间与灯光，闭门遮住层板、下方抽屉仍独立。木纹有少量生成编辑漂移，后续共享B_all会限制到实际门区。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S04/night_closed_C.png",
+          "sha256": "0a0ca8b67f0a23112f9b6f2b01a4bf3e35f53f3a582b3c40e9b1425802e25c38",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: precise-object-edit.\nAsset type: S04 storage cupboard NIGHT CLOSED state, paired with the existing NIGHT OPEN composite.\nInput Image 1 is the exact EDIT TARGET. Change ONLY the upper cupboard's two door leaves from their open outward positions to shut across the entire shelf opening. Their plain walnut frames and wood planks match the existing open leaves; the two leaves meet at a single vertical seam, with two small plain round wooden knobs close to the seam. They cover the empty shelf tiers and stop above the lower two drawers. Remove the formerly open leaf positions and reveal the wall that would be behind them.\nPreserve the cabinet body outline, top trim, base, feet, lower two drawers, their handles, lamp and cord, far-right doorway, surrounding wall, floor, camera, crop and dimensions. Preserve EXACTLY the nighttime brightness, cool grey-teal shadow palette and soft ochre pendant lighting of Image 1. Do not brighten to daylight. No new furniture or objects.\nMaintain its visible matte gouache strokes, dry-brush marks and slightly wobbly colored-pencil edges. Simple plausible hinge structure. No ornate decoration.\nNEGATIVE: text, letters, numbers, UI, labels, blank plaques, frame border, gold filigree, carving, bloom, glow, rays, glossy surfaces, photorealism, clutter, plants, stock items. Output one landscape at the same native dimensions.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_real/S04/night_open_C.png"
+          ]
+        }
+      ],
+      "id": "S04_night_closed_C",
+      "generator": "builtin_imagegen",
+      "source_path": "assets/_incoming/a1r_real/S04/night_closed_C.png",
+      "ref_paths": [
+        "assets/_incoming/a1r_real/S04/night_open_C.png"
+      ],
+      "native_resolution_met": false
+    },
+    {
+      "path": "assets/_incoming/a1r_real/S04/day_open_raw_cleanplate.png",
+      "sha256": "3c3e21a109a618017c2c07788f93527e270ca522f80997e74148044c7eb0855c",
+      "native_size": [
+        1672,
+        941
+      ],
+      "reference_sha256": {
+        "D:/MagicStore/assets/_incoming/a1r_real/S04/day_open_C.png": "8cf1886048e55ffb1018110462c49511f6491a8edffafa4eca746eb4e5ee2ac3"
+      },
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "raw_cleanplate_B_all",
+      "prompt": "Use case: precise-object-edit.\nAsset type: S04 DAY OPEN raw cleanplate B_all, used beneath true extracted door and lamp layers.\nInput Image 1 is the exact EDIT TARGET. Remove ONLY the following movable objects: BOTH open upper cupboard door leaves, including any hinges belonging to the leaves, and the hanging pendant lamp together with its vertical cord. Fill the former door-wing and lamp locations with the same plain cream plaster wall behind them.\nIMPORTANT: Keep the cabinet's fixed outer frame, top crown board, inner left/right rails, three horizontal empty shelf boards forming four empty tiers, rear wooden panels, bottom floor of the cabinet, both bottom drawers with their knobs, feet and every fixed structural board. The cabinet must remain a fully plausible open cupboard with no doors attached, not an empty hole or a new shape. All shelves remain entirely bare.\nKeep camera, crop, cabinet scale and exact position, floor, far-right stockroom doorway, daytime colors, light and every unrelated pixel unchanged as closely as possible. No extra shelves, jars, books, plants, labels or objects. Preserve visible gouache brush strokes, dry-brush marks, slightly wobbly colored-pencil edges, seven muted color families and matte paper. Full-bleed landscape at the same native dimensions.\nNEGATIVE: glow, bloom, rays, glossy plastic, photorealism, ornate carving, gold filigree, clutter, text, letters, numbers, UI, labels, blank plaques, borders.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_real/S04/day_open_C.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-e015bc22-b864-4eb5-9309-7e4fe0b5304b.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "开柜C移除双门叶与吊灯，空架、柜框、三层板及底抽屉保留；门后墙面已补出。raw整图柜框有少量重绘漂移，最终仅门/灯mask区域取补底。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S04/day_open_raw_cleanplate.png",
+          "sha256": "3c3e21a109a618017c2c07788f93527e270ca522f80997e74148044c7eb0855c",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: precise-object-edit.\nAsset type: S04 DAY OPEN raw cleanplate B_all, used beneath true extracted door and lamp layers.\nInput Image 1 is the exact EDIT TARGET. Remove ONLY the following movable objects: BOTH open upper cupboard door leaves, including any hinges belonging to the leaves, and the hanging pendant lamp together with its vertical cord. Fill the former door-wing and lamp locations with the same plain cream plaster wall behind them.\nIMPORTANT: Keep the cabinet's fixed outer frame, top crown board, inner left/right rails, three horizontal empty shelf boards forming four empty tiers, rear wooden panels, bottom floor of the cabinet, both bottom drawers with their knobs, feet and every fixed structural board. The cabinet must remain a fully plausible open cupboard with no doors attached, not an empty hole or a new shape. All shelves remain entirely bare.\nKeep camera, crop, cabinet scale and exact position, floor, far-right stockroom doorway, daytime colors, light and every unrelated pixel unchanged as closely as possible. No extra shelves, jars, books, plants, labels or objects. Preserve visible gouache brush strokes, dry-brush marks, slightly wobbly colored-pencil edges, seven muted color families and matte paper. Full-bleed landscape at the same native dimensions.\nNEGATIVE: glow, bloom, rays, glossy plastic, photorealism, ornate carving, gold filigree, clutter, text, letters, numbers, UI, labels, blank plaques, borders.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_real/S04/day_open_C.png"
+          ]
+        }
+      ],
+      "id": "S04_day_open_raw_cleanplate",
+      "generator": "builtin_imagegen",
+      "source_path": "assets/_incoming/a1r_real/S04/day_open_raw_cleanplate.png",
+      "ref_paths": [
+        "assets/_incoming/a1r_real/S04/day_open_C.png"
+      ],
+      "native_resolution_met": false
+    },
+    {
+      "path": "assets/_incoming/a1r_real/S04/day_closed_raw_cleanplate.png",
+      "sha256": "b24eaacb92d077c76c02a89c2f6390885eae0af5c4289697831b75595e15ee57",
+      "native_size": [
+        1672,
+        941
+      ],
+      "reference_sha256": {
+        "D:/MagicStore/assets/_incoming/a1r_real/S04/day_closed_C.png": "22cb65e65740ea6bf82e1c44960da2ea059dc8684c7dcdf62e0dfad1ec5314f0",
+        "D:/MagicStore/assets/_incoming/a1r_real/S04/day_open_C.png": "8cf1886048e55ffb1018110462c49511f6491a8edffafa4eca746eb4e5ee2ac3"
+      },
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "raw_cleanplate_B_all",
+      "prompt": "Use case: precise-object-edit.\nAsset type: S04 DAY CLOSED raw cleanplate B_all, under true extracted closed-door and pendant-lamp layers.\nInput Image 1 is the EDIT TARGET. Image 2 is a SUPPORTING GEOMETRY REFERENCE showing the exact same cabinet with its doors open, so the hidden three shelf boards/four empty tiers can be restored plausibly.\nRemove the two closed upper wooden door leaves, their center knobs and leaf-mounted hinges from Image 1. Reveal the EMPTY cabinet interior behind them: three continuous horizontal shelf boards, four bare storage tiers, plain walnut rear boards, matching the shelf heights and structure visible in Image 2. Remove the hanging pendant lamp and its cord from Image 1 and fill with the same plain plaster wall.\nDo NOT replace the whole target with Image 2: there must be NO open door leaves either. Keep Image 1's fixed cabinet outer frame, crown, scale, position, feet, lower two drawers and their knobs, surrounding wall, floor and far-right stockroom doorway intact. Preserve DAY lighting, camera, crop and native dimensions. No stock, labels, plants, jars, books or extra objects. Preserve all unrelated pixels as closely as possible.\nPreserve matte visible gouache strokes, dry-brush edges, wobbly colored-pencil contour marks and seven muted color families. No glow, bloom, rays, glossy plastic, gold ornament, text, numbers, UI, blank plaques or border.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_real/S04/day_closed_C.png",
+        "D:/MagicStore/assets/_incoming/a1r_real/S04/day_open_C.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-74a8313c-f946-4ef4-9779-b8104848985d.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "以闭柜C为编辑target、开柜C只作隐藏层板结构参考；闭门和灯具均已移除，恢复三条空层板/四层架面，下抽屉与固定柜框保留。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S04/day_closed_raw_cleanplate.png",
+          "sha256": "b24eaacb92d077c76c02a89c2f6390885eae0af5c4289697831b75595e15ee57",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: precise-object-edit.\nAsset type: S04 DAY CLOSED raw cleanplate B_all, under true extracted closed-door and pendant-lamp layers.\nInput Image 1 is the EDIT TARGET. Image 2 is a SUPPORTING GEOMETRY REFERENCE showing the exact same cabinet with its doors open, so the hidden three shelf boards/four empty tiers can be restored plausibly.\nRemove the two closed upper wooden door leaves, their center knobs and leaf-mounted hinges from Image 1. Reveal the EMPTY cabinet interior behind them: three continuous horizontal shelf boards, four bare storage tiers, plain walnut rear boards, matching the shelf heights and structure visible in Image 2. Remove the hanging pendant lamp and its cord from Image 1 and fill with the same plain plaster wall.\nDo NOT replace the whole target with Image 2: there must be NO open door leaves either. Keep Image 1's fixed cabinet outer frame, crown, scale, position, feet, lower two drawers and their knobs, surrounding wall, floor and far-right stockroom doorway intact. Preserve DAY lighting, camera, crop and native dimensions. No stock, labels, plants, jars, books or extra objects. Preserve all unrelated pixels as closely as possible.\nPreserve matte visible gouache strokes, dry-brush edges, wobbly colored-pencil contour marks and seven muted color families. No glow, bloom, rays, glossy plastic, gold ornament, text, numbers, UI, blank plaques or border.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_real/S04/day_closed_C.png",
+            "D:/MagicStore/assets/_incoming/a1r_real/S04/day_open_C.png"
+          ]
+        }
+      ],
+      "id": "S04_day_closed_raw_cleanplate",
+      "generator": "builtin_imagegen",
+      "source_path": "assets/_incoming/a1r_real/S04/day_closed_raw_cleanplate.png",
+      "ref_paths": [
+        "assets/_incoming/a1r_real/S04/day_closed_C.png",
+        "assets/_incoming/a1r_real/S04/day_open_C.png"
+      ],
+      "native_resolution_met": false
+    },
+    {
+      "path": "assets/_incoming/a1r_real/S04/night_open_raw_cleanplate.png",
+      "sha256": "09058319724e1d0208c2c7783e365ba74ea74ab79d3c8ec1b8c4087d925407df",
+      "native_size": [
+        1672,
+        941
+      ],
+      "reference_sha256": {
+        "D:/MagicStore/assets/_incoming/a1r_real/S04/night_open_C.png": "a5467174bd73a203bbd8b9957b5f055d5924f007449c60d071fa5c7a3027febb"
+      },
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "raw_cleanplate_B_all",
+      "prompt": "Use case: precise-object-edit.\nAsset type: S04 NIGHT OPEN raw cleanplate B_all, used beneath true extracted door and lamp layers.\nInput Image 1 is the exact EDIT TARGET. Remove ONLY the following movable objects: BOTH open upper cupboard door leaves, including any hinges belonging to the leaves, and the hanging pendant lamp together with its vertical cord. Fill the former door-wing and lamp locations with the same plain cream plaster wall behind them.\nIMPORTANT: Keep the cabinet's fixed outer frame, top crown board, inner left/right rails, three horizontal empty shelf boards forming four empty tiers, rear wooden panels, bottom floor of the cabinet, both bottom drawers with their knobs, feet and every fixed structural board. The cabinet must remain a fully plausible open cupboard with no doors attached, not an empty hole or a new shape. All shelves remain entirely bare.\nKeep camera, crop, cabinet scale and exact position, floor, far-right stockroom doorway, nighttime cool-grey/teal shadows and warm walnut colors, light and every unrelated pixel unchanged as closely as possible. No extra shelves, jars, books, plants, labels or objects. Preserve visible gouache brush strokes, dry-brush marks, slightly wobbly colored-pencil edges, seven muted color families and matte paper. Full-bleed landscape at the same native dimensions.\nNEGATIVE: glow, bloom, rays, glossy plastic, photorealism, ornate carving, gold filigree, clutter, text, letters, numbers, UI, labels, blank plaques, borders.\nImportant: the lamp OBJECT and cord disappear, but the existing room nighttime lighting and overall brightness remain unchanged; do not relight as day or add a replacement light source.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_real/S04/night_open_C.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-cac2f679-9eaa-4f28-935b-2c0f2f0674ac.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "夜开柜C移除双门和吊灯，保留夜间室内色彩与固定空架，未新增替代光源；raw柜框轻微重绘漂移会被最终局部贴回限制。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S04/night_open_raw_cleanplate.png",
+          "sha256": "09058319724e1d0208c2c7783e365ba74ea74ab79d3c8ec1b8c4087d925407df",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: precise-object-edit.\nAsset type: S04 NIGHT OPEN raw cleanplate B_all, used beneath true extracted door and lamp layers.\nInput Image 1 is the exact EDIT TARGET. Remove ONLY the following movable objects: BOTH open upper cupboard door leaves, including any hinges belonging to the leaves, and the hanging pendant lamp together with its vertical cord. Fill the former door-wing and lamp locations with the same plain cream plaster wall behind them.\nIMPORTANT: Keep the cabinet's fixed outer frame, top crown board, inner left/right rails, three horizontal empty shelf boards forming four empty tiers, rear wooden panels, bottom floor of the cabinet, both bottom drawers with their knobs, feet and every fixed structural board. The cabinet must remain a fully plausible open cupboard with no doors attached, not an empty hole or a new shape. All shelves remain entirely bare.\nKeep camera, crop, cabinet scale and exact position, floor, far-right stockroom doorway, nighttime cool-grey/teal shadows and warm walnut colors, light and every unrelated pixel unchanged as closely as possible. No extra shelves, jars, books, plants, labels or objects. Preserve visible gouache brush strokes, dry-brush marks, slightly wobbly colored-pencil edges, seven muted color families and matte paper. Full-bleed landscape at the same native dimensions.\nNEGATIVE: glow, bloom, rays, glossy plastic, photorealism, ornate carving, gold filigree, clutter, text, letters, numbers, UI, labels, blank plaques, borders.\nImportant: the lamp OBJECT and cord disappear, but the existing room nighttime lighting and overall brightness remain unchanged; do not relight as day or add a replacement light source.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_real/S04/night_open_C.png"
+          ]
+        }
+      ],
+      "id": "S04_night_open_raw_cleanplate",
+      "generator": "builtin_imagegen",
+      "source_path": "assets/_incoming/a1r_real/S04/night_open_raw_cleanplate.png",
+      "ref_paths": [
+        "assets/_incoming/a1r_real/S04/night_open_C.png"
+      ],
+      "native_resolution_met": false
+    },
+    {
+      "path": "assets/_incoming/a1r_real/S04/night_closed_raw_cleanplate.png",
+      "sha256": "e71129401cbcdb16a5f3a9fe0d83c18381664a2d48e8d50a4b87be5ddedb809a",
+      "native_size": [
+        1672,
+        941
+      ],
+      "reference_sha256": {
+        "D:/MagicStore/assets/_incoming/a1r_real/S04/night_closed_C.png": "0a0ca8b67f0a23112f9b6f2b01a4bf3e35f53f3a582b3c40e9b1425802e25c38",
+        "D:/MagicStore/assets/_incoming/a1r_real/S04/night_open_C.png": "a5467174bd73a203bbd8b9957b5f055d5924f007449c60d071fa5c7a3027febb"
+      },
+      "status": "complete",
+      "version": "a1r-real-v1",
+      "role": "raw_cleanplate_B_all",
+      "prompt": "Use case: precise-object-edit.\nAsset type: S04 NIGHT CLOSED raw cleanplate B_all, under true extracted closed-door and pendant-lamp layers.\nInput Image 1 is the EDIT TARGET. Image 2 is a SUPPORTING GEOMETRY REFERENCE showing the exact same cabinet with its doors open, so the hidden three shelf boards/four empty tiers can be restored plausibly.\nRemove the two closed upper wooden door leaves, their center knobs and leaf-mounted hinges from Image 1. Reveal the EMPTY cabinet interior behind them: three continuous horizontal shelf boards, four bare storage tiers, plain walnut rear boards, matching the shelf heights and structure visible in Image 2. Remove the hanging pendant lamp and its cord from Image 1 and fill with the same plain plaster wall.\nDo NOT replace the whole target with Image 2: there must be NO open door leaves either. Keep Image 1's fixed cabinet outer frame, crown, scale, position, feet, lower two drawers and their knobs, surrounding wall, floor and far-right stockroom doorway intact. Preserve NIGHT lighting, camera, crop and native dimensions. No stock, labels, plants, jars, books or extra objects. Preserve all unrelated pixels as closely as possible.\nPreserve matte visible gouache strokes, dry-brush edges, wobbly colored-pencil contour marks and seven muted color families. No glow, bloom, rays, glossy plastic, gold ornament, text, numbers, UI, blank plaques or border.\nPreserve the target's dim cool grey-teal room and warm walnut nighttime illumination even though the pendant lamp object is removed; do not switch to daylight or invent a new light source.",
+      "reference_paths": [
+        "D:/MagicStore/assets/_incoming/a1r_real/S04/night_closed_C.png",
+        "D:/MagicStore/assets/_incoming/a1r_real/S04/night_open_C.png"
+      ],
+      "source_default_path": "C:\\Users\\WT\\.codex\\generated_images\\01a1fc89-8063-7f61-b34a-2b3d5ee25b82\\exec-8e618cb1-7316-4e89-a1a0-bfba9c182289.png",
+      "processing": "unaltered native tool output copied byte-for-byte; no resize",
+      "native_resolution_requirement_met": false,
+      "visual_review": {
+        "status": "passed",
+        "checks": {
+          "visible_brushwork": "pass",
+          "readable_sparse_objects": "pass",
+          "plausible_architecture": "pass",
+          "no_excess_symmetry_or_ornament": "pass",
+          "no_glow_bloom_or_lens_artifacts": "pass",
+          "no_text_ui_or_blank_plaques": "pass"
+        },
+        "notes": "夜闭柜C为target，夜开柜仅作隐藏层板参考；完整移除门叶/灯具，恢复夜色空层板且保持下抽屉和固定柜框。允许raw生成细节漂移，最终mask外保留原C。"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "output_path": "assets/_incoming/a1r_real/S04/night_closed_raw_cleanplate.png",
+          "sha256": "e71129401cbcdb16a5f3a9fe0d83c18381664a2d48e8d50a4b87be5ddedb809a",
+          "native_size": [
+            1672,
+            941
+          ],
+          "prompt": "Use case: precise-object-edit.\nAsset type: S04 NIGHT CLOSED raw cleanplate B_all, under true extracted closed-door and pendant-lamp layers.\nInput Image 1 is the EDIT TARGET. Image 2 is a SUPPORTING GEOMETRY REFERENCE showing the exact same cabinet with its doors open, so the hidden three shelf boards/four empty tiers can be restored plausibly.\nRemove the two closed upper wooden door leaves, their center knobs and leaf-mounted hinges from Image 1. Reveal the EMPTY cabinet interior behind them: three continuous horizontal shelf boards, four bare storage tiers, plain walnut rear boards, matching the shelf heights and structure visible in Image 2. Remove the hanging pendant lamp and its cord from Image 1 and fill with the same plain plaster wall.\nDo NOT replace the whole target with Image 2: there must be NO open door leaves either. Keep Image 1's fixed cabinet outer frame, crown, scale, position, feet, lower two drawers and their knobs, surrounding wall, floor and far-right stockroom doorway intact. Preserve NIGHT lighting, camera, crop and native dimensions. No stock, labels, plants, jars, books or extra objects. Preserve all unrelated pixels as closely as possible.\nPreserve matte visible gouache strokes, dry-brush edges, wobbly colored-pencil contour marks and seven muted color families. No glow, bloom, rays, glossy plastic, gold ornament, text, numbers, UI, blank plaques or border.\nPreserve the target's dim cool grey-teal room and warm walnut nighttime illumination even though the pendant lamp object is removed; do not switch to daylight or invent a new light source.",
+          "reference_paths": [
+            "D:/MagicStore/assets/_incoming/a1r_real/S04/night_closed_C.png",
+            "D:/MagicStore/assets/_incoming/a1r_real/S04/night_open_C.png"
+          ]
+        }
+      ],
+      "id": "S04_night_closed_raw_cleanplate",
+      "generator": "builtin_imagegen",
+      "source_path": "assets/_incoming/a1r_real/S04/night_closed_raw_cleanplate.png",
+      "ref_paths": [
+        "assets/_incoming/a1r_real/S04/night_closed_C.png",
+        "assets/_incoming/a1r_real/S04/night_open_C.png"
+      ],
+      "native_resolution_met": false
+    }
+  ],
+  "generation_receipt": "assets/_incoming/a1r_real/S04/receipt.json",
+  "processing_history": [
+    {
+      "revision": "real1",
+      "kind": "processing_round",
+      "round": 1,
+      "strict_geometry_passed": true,
+      "visual_review": "failed: door/lamp outline residuals"
+    },
+    {
+      "revision": "real2",
+      "kind": "processing_round",
+      "round": 2,
+      "strict_geometry_passed": false,
+      "failed_states": [
+        "day_open",
+        "night_open"
+      ],
+      "reason": "door/lamp soft-mask near-contact overlap; whole core max27/13, single-layer checks passed"
+    },
+    {
+      "revision": "real3",
+      "kind": "processing_round",
+      "round": 3,
+      "strict_geometry_passed": true,
+      "selected_for_geometry_registry": true,
+      "visual_review": "partial: narrow source-wall collar around pendant; door states remain plausible"
+    }
+  ]
+}

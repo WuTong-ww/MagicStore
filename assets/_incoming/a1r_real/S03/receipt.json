@@ -1,0 +1,541 @@
+{
+  "version": 1,
+  "scene_id": "S03",
+  "stage": "layer_visual_review_completed_with_limits",
+  "status": "complete",
+  "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+  "style_sha256": "391ef0b702653eaf7a2bf98f90595bb12502587b6bcc9f0b5653aecdf9766833",
+  "records": [
+    {
+      "id": "S03_day",
+      "period": "day",
+      "path": "assets/_incoming/a1r_real/S03/day_C.png",
+      "source_path": "assets/_incoming/a1r_real/S03/day_C.png",
+      "prompt": "为 Godot 游戏《零点杂货铺》制作 S03 咨询小客厅白日版原始完整合成 C。参考图仅提供笔触、纸感、哑光材料、柔和光线与七色族，不沿用参考图的柜台、门和货架场景。单张全幅横向16:9，尽可能原生2560×1440或工具实际最大16:9尺寸；不画边框或场景卡片。\n主体：从读者扶手椅的位置看向一间安静私密的小咨询客厅。朴素深鼠尾草绿双人沙发在中央偏左，沙发正面的完整坐垫和左右扶手结构清楚，中央偏左留一块宽敞、没有物件挡住的空坐位，以后可让人物坐进去。沙发最前缘有一块略突出的普通靠垫/坐垫边，可作为独立前景遮罩覆盖人物底部；不要把整块沙发遮在桌后。沙发前偏左是一张矮圆木茶几，只放一只朴素陶茶杯，杯口上方一缕很细的短热汽与杯子明显分离。左侧窗边一幅素色布帘，顶部左侧一盏无花纹的小吊灯。日光从左窗漫射进来，稍冷阴影。右侧至少30%保留连续空奶油暖灰灰泥墙，下方12%简单地面。所有可动件（吊灯、单幅帘、茶杯和短热汽、沙发前缘靠垫）都必须在这张完整C里清楚出现，后续按实际像素扣层。道具少于15个，家具腿、扶手和茶几透视正确，不追求过度对称。\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse daylight, cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, UI, labels. 绝无人物、字母、汉字、数字、名字、空白招牌、空白牌匾、空白吊签、格子面板或界面框。避免塑料亮面和装饰金边；不加紫藤。",
+      "ref_paths": [
+        "assets/_incoming/a1r_pilot/candidate_3.png"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "elapsed_ms": 24416
+        }
+      ],
+      "status": "complete",
+      "sha256": "cb24b0f8fffa7dc0c2ad143a13efcc41a503cf52e716903d6661e435ca9ff226",
+      "native_size": [
+        1672,
+        941
+      ],
+      "source_resolution": "native_tool_output",
+      "original_bytes_preserved": true,
+      "generation_tool": "image_gen.imagegen",
+      "visual_review": {
+        "status": "pass",
+        "ai_artifacts": {
+          "glow": {
+            "passed": true,
+            "reason": "灯内仅平涂奶油/赭黄面，无光圈或光束；茶汽为细线。"
+          },
+          "gold_patterns": {
+            "passed": true,
+            "reason": "无金边、金色纹样或奇幻雕刻。"
+          },
+          "structure": {
+            "passed": true,
+            "reason": "沙发扶手、两片坐垫、茶几桌面与桌腿结构可成立。"
+          },
+          "unrecognizable_objects": {
+            "passed": true,
+            "reason": "沙发、两靠枕、植物、单幅帘、吊灯、茶几与茶杯均可一眼识别。"
+          },
+          "excess_symmetry": {
+            "passed": true,
+            "reason": "左窗、偏左茶几与右侧留白形成自然不对称布局。"
+          },
+          "plastic_gloss": {
+            "passed": true,
+            "reason": "墙面、木桌与布面都有可见哑光厚涂笔触，没有塑料高光。"
+          }
+        },
+        "scene_checks": {
+          "full_bleed": {
+            "passed": true,
+            "reason": "绘画铺满画布，无卡片框或黑边。"
+          },
+          "no_baked_text": {
+            "passed": true,
+            "reason": "无文字数字、招牌、空吊签或UI。"
+          },
+          "seat": {
+            "passed": true,
+            "reason": "沙发中央偏左空坐位清楚，前坐垫缘可供后续独立遮罩。"
+          },
+          "required_layers": {
+            "passed": true,
+            "reason": "吊灯、单幅帘、杯和短热汽、沙发前坐垫缘均在C中。"
+          },
+          "empty_wall": {
+            "passed": true,
+            "reason": "右侧约34%为连续空墙。"
+          },
+          "composition": {
+            "passed": true,
+            "reason": "完整合成包含所有待扣物件，道具少于15。"
+          }
+        }
+      },
+      "kind": "composite",
+      "prompt_version": "round2-style-v2-candidate3"
+    },
+    {
+      "id": "S03_night",
+      "period": "night",
+      "path": "assets/_incoming/a1r_real/S03/night_C.png",
+      "source_path": "assets/_incoming/a1r_real/S03/night_C.png",
+      "prompt": "编辑第一张图片（S03咨询客厅白日完整合成C）为同一机位、同一构图的夜间灯下版本。第二张图片只提供整套游戏的笔触/配色参考。\n必须保留第一张图全部家具和物件的形状、精确位置、大小、透视和留白：中央偏左的深鼠尾草绿沙发、清楚的空坐位与前坐垫缘、右侧两只靠枕、左侧植物和单幅窗帘、顶部左侧吊灯、左下矮圆茶几、茶杯与独立的短热汽。一件也不加减、不移位、不改镜头，不增加帘或杯子。右侧30%以上空墙和简单地面保持空。\n只改光线与时段：窗外树轮廓保持相同，天空变灰青深蓝的平涂夜色；室内阴影偏灰青，墙和沙发仍足够明亮能辨认。吊灯内面用小块温暖赭黄奶油平涂色表达灯亮，周围没有发光光圈、光束、bloom或金边。整体像纸上画出的夜晚，绝不是黑暗写实光效。\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, UI, labels. 不要任何人物、字母、汉字、数字、名字、空白招牌、空吊签、牌匾、UI或边框。保留原始横向画布尺寸和全部边缘。",
+      "ref_paths": [
+        "assets/_incoming/a1r_real/S03/day_C.png",
+        "assets/_incoming/a1r_pilot/candidate_3.png"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "elapsed_ms": 31528
+        }
+      ],
+      "status": "complete",
+      "sha256": "216803b4bf844fed878c4f728239a07d825fb5047968259f0f19ac788a3414ae",
+      "native_size": [
+        1672,
+        941
+      ],
+      "source_resolution": "native_tool_output",
+      "original_bytes_preserved": true,
+      "generation_tool": "image_gen.imagegen",
+      "visual_review": {
+        "status": "pass",
+        "ai_artifacts": {
+          "glow": {
+            "passed": true,
+            "reason": "灯内仅平涂奶油/赭黄面，无光圈或光束；茶汽为细线。"
+          },
+          "gold_patterns": {
+            "passed": true,
+            "reason": "无金边、金色纹样或奇幻雕刻。"
+          },
+          "structure": {
+            "passed": true,
+            "reason": "沙发扶手、两片坐垫、茶几桌面与桌腿结构可成立。"
+          },
+          "unrecognizable_objects": {
+            "passed": true,
+            "reason": "沙发、两靠枕、植物、单幅帘、吊灯、茶几与茶杯均可一眼识别。"
+          },
+          "excess_symmetry": {
+            "passed": true,
+            "reason": "左窗、偏左茶几与右侧留白形成自然不对称布局。"
+          },
+          "plastic_gloss": {
+            "passed": true,
+            "reason": "墙面、木桌与布面都有可见哑光厚涂笔触，没有塑料高光。"
+          }
+        },
+        "scene_checks": {
+          "full_bleed": {
+            "passed": true,
+            "reason": "绘画铺满画布，无卡片框或黑边。"
+          },
+          "no_baked_text": {
+            "passed": true,
+            "reason": "无文字数字、招牌、空吊签或UI。"
+          },
+          "seat": {
+            "passed": true,
+            "reason": "沙发中央偏左空坐位清楚，前坐垫缘可供后续独立遮罩。"
+          },
+          "required_layers": {
+            "passed": true,
+            "reason": "吊灯、单幅帘、杯和短热汽、沙发前坐垫缘均在C中。"
+          },
+          "empty_wall": {
+            "passed": true,
+            "reason": "右侧约34%为连续空墙。"
+          },
+          "composition": {
+            "passed": true,
+            "reason": "目视家具和道具布局保持白日版位置；尚未进行分层像素检验。"
+          }
+        }
+      },
+      "kind": "composite",
+      "prompt_version": "round2-style-v2-candidate3"
+    },
+    {
+      "id": "S03_day_raw_cleanplate",
+      "kind": "raw_cleanplate",
+      "period": "day",
+      "path": "assets/_incoming/a1r_real/S03/day_raw_cleanplate_attempt2.png",
+      "source_path": "assets/_incoming/a1r_real/S03/day_raw_cleanplate_attempt2.png",
+      "original_path": "assets/_incoming/a1r_real/S03/day_C.png",
+      "prompt_version": "round2-style-v2-candidate3",
+      "prompt": "请局部修补第一张S03白日完整C。第二张是实际原生画布上的移除范围参考：白色区允许补底，黑色区必须保持第一张，不是绘画内容，也不能把遮罩画进成品。输出完整同幅1672×941原生PNG。\n移除吊灯含悬线、左窗布帘、茶几上杯与细热汽；沙发前坐垫包边仅平顺补成原来同色绿色布面，绝对保留整张沙发、空坐位、右侧两靠枕、植物、茶几和窗框。与第一张逐像素保持相同机位、位置和亮度，不加任何新东西。\n关键：补出的墙面必须匹配第一张临近灰粉暖灰墙的真实暗度和干笔纹理，尤其吊灯周围墙约RGB(207,186,170)，不要用亮奶油白覆盖，不能留下一个浅色灯罩形补丁、白色物体轮廓或光晕。移除茶杯要连最外面浅色抗锯齿边和热汽一起完全移掉，桌面应连续，不能留下杯的白色细线。补底边界自然连续，未编辑区不漂白、不重新铺纹理。仍是哑光水粉绘本，保持原七色族和笔触，无人物、字母、汉字、数字、牌匾、UI、边框、金纹、光束、发光或塑料高光。第二张仅作为位置mask参考，不得输出黑白mask。",
+      "ref_paths": [
+        "assets/_incoming/a1r_real/S03/day_C.png",
+        "assets/_incoming/a1r_real/S03/day_inpaint_real3.png"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "elapsed_ms": 42532,
+          "output_path": "assets/_incoming/a1r_real/S03/day_raw_cleanplate.png",
+          "sha256": "315a119a1cc0dd2ff635d791a2c7301c7d9f050c379ddebc8628faaf7673b526",
+          "native_size": [
+            1672,
+            941
+          ],
+          "visual_review": "pass",
+          "prompt": "对附件这张S03白日咨询客厅原始完整合成C做局部移除补底，输出同尺寸1672×941的raw cleanplate B_all候选。不要重画房间、不要改构图、镜头、颜色或光照。只在以下物件原占据的位置补出可信的背后表面，其余像素尽可能逐像素保留：\n1. 移除顶部偏左的小吊灯和它的悬线，用连续奶油灰泥墙补齐。\n2. 移除左窗前整幅布帘及布挂环，露出后方原有窗框、灰泥和窗外树；保留木窗框及帘杆，不新增窗格。\n3. 移除左下圆茶几上唯一的陶茶杯及其上方短热汽，补出同笔触连续木桌面和它后面的沙发布面。\n4. 仅将沙发坐垫最前缘、朝镜头凸出的狭窄包边/褶皱（大约x370到1010、y630到705的局部前缘）补成平顺连续绿色布面，这是以后可盖住坐着人物底部的前景遮罩。绝不能删除整个坐垫、坐位、沙发底座、扶手或主体；中央偏左空坐位保留。右边紫色和赭黄色两只装饰靠枕属于静态家具，原位保留。\n保留植物、沙发整体轮廓、两只靠枕、茶几全部桌腿与桌面、左窗外树、右30%以上空墙和地面。补底仍是选定画风的哑光厚涂水粉、可见干笔和少量色铅笔轮廓，保持原笔触与七个低饱和色族，不平滑成塑料。没有人物、文字、数字、空牌匾、UI、边框、金纹、发光晕或光束。不要添加任何新物件。此图是移除背景的raw原生候选，后续会仅取实际mask内区域，所以画布/构图必须不变。",
+          "ref_paths": [
+            "assets/_incoming/a1r_real/S03/day_C.png"
+          ],
+          "note": "原始rawB保留；real2局部贴回后目视补墙存在色差，因此在第3轮视觉自检前进行第2次补底生成。"
+        },
+        {
+          "attempt": 2,
+          "status": "complete",
+          "elapsed_ms": 56943,
+          "prompt": "请局部修补第一张S03白日完整C。第二张是实际原生画布上的移除范围参考：白色区允许补底，黑色区必须保持第一张，不是绘画内容，也不能把遮罩画进成品。输出完整同幅1672×941原生PNG。\n移除吊灯含悬线、左窗布帘、茶几上杯与细热汽；沙发前坐垫包边仅平顺补成原来同色绿色布面，绝对保留整张沙发、空坐位、右侧两靠枕、植物、茶几和窗框。与第一张逐像素保持相同机位、位置和亮度，不加任何新东西。\n关键：补出的墙面必须匹配第一张临近灰粉暖灰墙的真实暗度和干笔纹理，尤其吊灯周围墙约RGB(207,186,170)，不要用亮奶油白覆盖，不能留下一个浅色灯罩形补丁、白色物体轮廓或光晕。移除茶杯要连最外面浅色抗锯齿边和热汽一起完全移掉，桌面应连续，不能留下杯的白色细线。补底边界自然连续，未编辑区不漂白、不重新铺纹理。仍是哑光水粉绘本，保持原七色族和笔触，无人物、字母、汉字、数字、牌匾、UI、边框、金纹、光束、发光或塑料高光。第二张仅作为位置mask参考，不得输出黑白mask。",
+          "output_path": "assets/_incoming/a1r_real/S03/day_raw_cleanplate_attempt2.png",
+          "sha256": "b90e4d427b8333d823f5065700292880d7b5cf1d92e8eb1e4c63aa5c625a82e8",
+          "native_size": [
+            1672,
+            941
+          ],
+          "ref_paths": [
+            "assets/_incoming/a1r_real/S03/day_C.png",
+            "assets/_incoming/a1r_real/S03/day_inpaint_real3.png"
+          ],
+          "mask_input_mode": "reference_image_instruction; no dedicated API mask parameter",
+          "visual_review": "pass"
+        }
+      ],
+      "status": "complete",
+      "sha256": "b90e4d427b8333d823f5065700292880d7b5cf1d92e8eb1e4c63aa5c625a82e8",
+      "native_size": [
+        1672,
+        941
+      ],
+      "source_resolution": "native_tool_output",
+      "original_bytes_preserved": true,
+      "generation_tool": "image_gen.imagegen",
+      "requires_cover_normalization": false,
+      "visual_review": {
+        "status": "pass",
+        "ai_artifacts": {
+          "glow": {
+            "passed": true,
+            "reason": "补底保留原有哑光平涂光线，无新光圈光束。"
+          },
+          "gold_patterns": {
+            "passed": true,
+            "reason": "无新金边或金色花纹。"
+          },
+          "structure": {
+            "passed": true,
+            "reason": "静态家具结构目视保持，移除处补出连续墙、布面或街景。"
+          },
+          "unrecognizable_objects": {
+            "passed": true,
+            "reason": "未新增零碎物件，移除目标清楚。"
+          },
+          "excess_symmetry": {
+            "passed": true,
+            "reason": "保持原有不对称构图，没有新增对称装饰。"
+          },
+          "plastic_gloss": {
+            "passed": true,
+            "reason": "补底与原画同为可见干笔的哑光水粉，无塑料反光。"
+          }
+        },
+        "removed_targets": {
+          "passed": true,
+          "reason": "吊灯、布帘、杯汽已移除；沙发主体、空座和右靠枕保留，前缘补为连续布面。"
+        },
+        "pixel_preservation": {
+          "status": "pending",
+          "reason": "这是内置编辑rawB，不能冒称编辑区外像素不变；后处理只贴mask局部并严格验ROI。"
+        }
+      },
+      "mask_input_mode": "reference_image_instruction; no dedicated API mask parameter"
+    },
+    {
+      "id": "S03_night_raw_cleanplate",
+      "kind": "raw_cleanplate",
+      "period": "night",
+      "path": "assets/_incoming/a1r_real/S03/night_raw_cleanplate_attempt2.png",
+      "source_path": "assets/_incoming/a1r_real/S03/night_raw_cleanplate_attempt2.png",
+      "original_path": "assets/_incoming/a1r_real/S03/night_C.png",
+      "prompt_version": "round2-style-v2-candidate3",
+      "prompt": "请局部修补第一张S03夜间完整C。第二张是实际原生画布上的移除范围参考：白色区允许补底，黑色区必须保持第一张，不是绘画内容，也不能把遮罩画进成品。输出完整同幅1672×941原生PNG。\n移除吊灯含悬线、左窗布帘、茶几上杯与细热汽；沙发前坐垫包边仅平顺补成原来同色绿色布面，绝对保留整张沙发、空坐位、右侧两靠枕、植物、茶几和窗框。与第一张逐像素保持相同机位、位置和亮度，不加任何新东西。\n关键：补出的墙面必须匹配第一张临近灰粉暖灰墙的真实暗度和干笔纹理，尤其吊灯周围墙约RGB(168,156,143)，不要用亮奶油白覆盖，不能留下一个浅色灯罩形补丁、白色物体轮廓或光晕。移除茶杯要连最外面浅色抗锯齿边和热汽一起完全移掉，桌面应连续，不能留下杯的白色细线。补底边界自然连续，未编辑区不漂白、不重新铺纹理。仍是哑光水粉绘本，保持原七色族和笔触，无人物、字母、汉字、数字、牌匾、UI、边框、金纹、光束、发光或塑料高光。第二张仅作为位置mask参考，不得输出黑白mask。 必须保持第一张深灰青窗外夜色和室内暗暖灰墙，不增亮成白日。",
+      "ref_paths": [
+        "assets/_incoming/a1r_real/S03/night_C.png",
+        "assets/_incoming/a1r_real/S03/night_inpaint_real3.png"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "elapsed_ms": 32027,
+          "output_path": "assets/_incoming/a1r_real/S03/night_raw_cleanplate.png",
+          "sha256": "421fdc46f4cb95efe72edac5f6b05eb7dbb1691da922a3508794c29250aca2cf",
+          "native_size": [
+            1672,
+            941
+          ],
+          "visual_review": "pass",
+          "prompt": "对附件这张S03夜间咨询客厅原始完整合成C做局部移除补底，输出同尺寸1672×941的raw cleanplate B_all候选。不要重画房间、不要改构图、镜头、夜间颜色或光照。只在以下物件原占据的位置补出可信的背后表面，其余像素尽可能逐像素保留：\n1. 移除顶部偏左的小吊灯和它的悬线，用连续奶油灰泥墙补齐。\n2. 移除左窗前整幅布帘及布挂环，露出后方原有窗框、灰泥和窗外树；保留木窗框及帘杆，不新增窗格。\n3. 移除左下圆茶几上唯一的陶茶杯及其上方短热汽，补出同笔触连续木桌面和它后面的沙发布面。\n4. 仅将沙发坐垫最前缘、朝镜头凸出的狭窄包边/褶皱（大约x370到1010、y630到705的局部前缘）补成平顺连续绿色布面，这是以后可盖住坐着人物底部的前景遮罩。绝不能删除整个坐垫、坐位、沙发底座、扶手或主体；中央偏左空坐位保留。右边紫色和赭黄色两只装饰靠枕属于静态家具，原位保留。\n保留植物、沙发整体轮廓、两只靠枕、茶几全部桌腿与桌面、左窗外树、右30%以上空墙和地面。补底仍是选定画风的哑光厚涂水粉、可见干笔和少量色铅笔轮廓，保持原笔触与七个低饱和色族，不平滑成塑料。没有人物、文字、数字、空牌匾、UI、边框、金纹、发光晕或光束。不要添加任何新物件。此图是移除背景的raw原生候选，后续会仅取实际mask内区域，所以画布/构图必须不变。 保持附件的深灰青窗外夜色和室内暖灰平涂夜色，不能恢复成白日。",
+          "ref_paths": [
+            "assets/_incoming/a1r_real/S03/night_C.png"
+          ],
+          "note": "原始rawB保留；real2局部贴回后目视补墙存在色差，因此在第3轮视觉自检前进行第2次补底生成。"
+        },
+        {
+          "attempt": 2,
+          "status": "complete",
+          "elapsed_ms": 34363,
+          "prompt": "请局部修补第一张S03夜间完整C。第二张是实际原生画布上的移除范围参考：白色区允许补底，黑色区必须保持第一张，不是绘画内容，也不能把遮罩画进成品。输出完整同幅1672×941原生PNG。\n移除吊灯含悬线、左窗布帘、茶几上杯与细热汽；沙发前坐垫包边仅平顺补成原来同色绿色布面，绝对保留整张沙发、空坐位、右侧两靠枕、植物、茶几和窗框。与第一张逐像素保持相同机位、位置和亮度，不加任何新东西。\n关键：补出的墙面必须匹配第一张临近灰粉暖灰墙的真实暗度和干笔纹理，尤其吊灯周围墙约RGB(168,156,143)，不要用亮奶油白覆盖，不能留下一个浅色灯罩形补丁、白色物体轮廓或光晕。移除茶杯要连最外面浅色抗锯齿边和热汽一起完全移掉，桌面应连续，不能留下杯的白色细线。补底边界自然连续，未编辑区不漂白、不重新铺纹理。仍是哑光水粉绘本，保持原七色族和笔触，无人物、字母、汉字、数字、牌匾、UI、边框、金纹、光束、发光或塑料高光。第二张仅作为位置mask参考，不得输出黑白mask。 必须保持第一张深灰青窗外夜色和室内暗暖灰墙，不增亮成白日。",
+          "output_path": "assets/_incoming/a1r_real/S03/night_raw_cleanplate_attempt2.png",
+          "sha256": "f5208e34427e415bb4e4c740f68aa2f1417baee9a08f00822d25b776f44a36ce",
+          "native_size": [
+            1672,
+            941
+          ],
+          "ref_paths": [
+            "assets/_incoming/a1r_real/S03/night_C.png",
+            "assets/_incoming/a1r_real/S03/night_inpaint_real3.png"
+          ],
+          "mask_input_mode": "reference_image_instruction; no dedicated API mask parameter",
+          "visual_review": "pass"
+        }
+      ],
+      "status": "complete",
+      "sha256": "f5208e34427e415bb4e4c740f68aa2f1417baee9a08f00822d25b776f44a36ce",
+      "native_size": [
+        1672,
+        941
+      ],
+      "source_resolution": "native_tool_output",
+      "original_bytes_preserved": true,
+      "generation_tool": "image_gen.imagegen",
+      "requires_cover_normalization": false,
+      "visual_review": {
+        "status": "pass",
+        "ai_artifacts": {
+          "glow": {
+            "passed": true,
+            "reason": "补底保留原有哑光平涂光线，无新光圈光束。"
+          },
+          "gold_patterns": {
+            "passed": true,
+            "reason": "无新金边或金色花纹。"
+          },
+          "structure": {
+            "passed": true,
+            "reason": "静态家具结构目视保持，移除处补出连续墙、布面或街景。"
+          },
+          "unrecognizable_objects": {
+            "passed": true,
+            "reason": "未新增零碎物件，移除目标清楚。"
+          },
+          "excess_symmetry": {
+            "passed": true,
+            "reason": "保持原有不对称构图，没有新增对称装饰。"
+          },
+          "plastic_gloss": {
+            "passed": true,
+            "reason": "补底与原画同为可见干笔的哑光水粉，无塑料反光。"
+          }
+        },
+        "removed_targets": {
+          "passed": true,
+          "reason": "吊灯、布帘、杯汽已移除；沙发主体、空座和右靠枕保留，前缘补为连续布面。"
+        },
+        "pixel_preservation": {
+          "status": "pending",
+          "reason": "这是内置编辑rawB，不能冒称编辑区外像素不变；后处理只贴mask局部并严格验ROI。"
+        }
+      },
+      "mask_input_mode": "reference_image_instruction; no dedicated API mask parameter"
+    }
+  ],
+  "limitations": [
+    "三轮视觉自检已止；剩余未通过项见layer_visual_review.periods各期remaining_visual_failures，不能仅凭数值重组全绿宣称美术完工。",
+    "原生C/rawB与real1/real2 spec和输出保留；所选receipt_path和QA对照图可审阅。",
+    "未修改正式v2、中央manifest、游戏配置或作者工具；衍生输出只在各版本专用目录。"
+  ],
+  "art_passed": false,
+  "layer_visual_review": {
+    "status": "partial",
+    "rounds": [
+      {
+        "revision": "real1",
+        "status": "failed",
+        "reason": "首轮语义漏扣：S03灯罩上半/顶座，S06右下叶簇；旧spec保留。"
+      },
+      {
+        "revision": "real2",
+        "status": "geometry_passed_visual_partial",
+        "reason": "主体修复且严格ROI过；S03补底色差/杯汽细边、S06夜版细叶缘仍可见。"
+      },
+      {
+        "revision": "real3",
+        "status": "reviewed_and_stopped",
+        "reason": "最后一次修边；S03真实builtin第2次补底含union mask参考，S06边缘扩大，最终按各期选较佳。"
+      }
+    ],
+    "periods": {
+      "day": {
+        "selected_revision": "real3",
+        "receipt_path": "assets/generated_scenes/v3_real/S03/day/real3/receipt.json",
+        "visual_review_sheet": "assets/_incoming/a1r_real/S03/day_real3_visual_review.png",
+        "status": "partial",
+        "iteration_count": 3,
+        "geometry_passed": true,
+        "single_layer_checks_passed": 5,
+        "single_layer_checks_total": 5,
+        "all_layer_recomposition_passed": true,
+        "overlap_pairs": 0,
+        "core_max_error": 0,
+        "unedited_max_error": 0,
+        "inpaint_ring_max_error": 0,
+        "worst_feather_mae": 0.0858843537414966,
+        "worst_feather_p95": 0,
+        "ai_artifacts": {
+          "glow": {
+            "passed": true,
+            "reason": "已打开本期B_all与全部透明Li对照检查；无新增该类AI痕迹。"
+          },
+          "gold_patterns": {
+            "passed": true,
+            "reason": "已打开本期B_all与全部透明Li对照检查；无新增该类AI痕迹。"
+          },
+          "structure": {
+            "passed": true,
+            "reason": "已打开本期B_all与全部透明Li对照检查；无新增该类AI痕迹。"
+          },
+          "unrecognizable_objects": {
+            "passed": true,
+            "reason": "已打开本期B_all与全部透明Li对照检查；无新增该类AI痕迹。"
+          },
+          "excess_symmetry": {
+            "passed": true,
+            "reason": "已打开本期B_all与全部透明Li对照检查；无新增该类AI痕迹。"
+          },
+          "plastic_gloss": {
+            "passed": true,
+            "reason": "已打开本期B_all与全部透明Li对照检查；无新增该类AI痕迹。"
+          }
+        },
+        "mask_checks": {
+          "whole_object_extraction": {
+            "passed": true,
+            "reason": "吊灯含上半罩/顶座已完整扣取，杯与汽分开、sofa前缘留汽线hole无soft重叠。"
+          },
+          "no_visible_residual_edge": {
+            "passed": false,
+            "reason": "局部贴回后灯原位置仍有浅色墙面补丁，夜版已减轻但不宣称自然补底完全通过。 / 杯的整圈白线已消除；茶汽经过沙发前缘处仍有少量浅线/边缘残留。"
+          },
+          "no_baked_text": {
+            "passed": true,
+            "reason": "实际游戏源图和Li无文字数字、UI、牌匾；对照表技术标签仅在QA图。"
+          },
+          "full_canvas_alignment": {
+            "passed": true,
+            "reason": "源C/全幅层同位；raw尺寸差按真实cover记录，运行副本单独Lanczos。"
+          }
+        },
+        "remaining_visual_failures": [
+          "局部贴回后灯原位置仍有浅色墙面补丁，夜版已减轻但不宣称自然补底完全通过。",
+          "杯的整圈白线已消除；茶汽经过沙发前缘处仍有少量浅线/边缘残留。"
+        ],
+        "art_passed": false,
+        "selection_reason": "最后一轮消除主体漏扣，严格QA全绿；边缘残留如实保留，不越三轮。"
+      },
+      "night": {
+        "selected_revision": "real3",
+        "receipt_path": "assets/generated_scenes/v3_real/S03/night/real3/receipt.json",
+        "visual_review_sheet": "assets/_incoming/a1r_real/S03/night_real3_visual_review.png",
+        "status": "partial",
+        "iteration_count": 3,
+        "geometry_passed": true,
+        "single_layer_checks_passed": 5,
+        "single_layer_checks_total": 5,
+        "all_layer_recomposition_passed": true,
+        "overlap_pairs": 0,
+        "core_max_error": 0,
+        "unedited_max_error": 0,
+        "inpaint_ring_max_error": 0,
+        "worst_feather_mae": 0.0744047619047619,
+        "worst_feather_p95": 0,
+        "ai_artifacts": {
+          "glow": {
+            "passed": true,
+            "reason": "已打开本期B_all与全部透明Li对照检查；无新增该类AI痕迹。"
+          },
+          "gold_patterns": {
+            "passed": true,
+            "reason": "已打开本期B_all与全部透明Li对照检查；无新增该类AI痕迹。"
+          },
+          "structure": {
+            "passed": true,
+            "reason": "已打开本期B_all与全部透明Li对照检查；无新增该类AI痕迹。"
+          },
+          "unrecognizable_objects": {
+            "passed": true,
+            "reason": "已打开本期B_all与全部透明Li对照检查；无新增该类AI痕迹。"
+          },
+          "excess_symmetry": {
+            "passed": true,
+            "reason": "已打开本期B_all与全部透明Li对照检查；无新增该类AI痕迹。"
+          },
+          "plastic_gloss": {
+            "passed": true,
+            "reason": "已打开本期B_all与全部透明Li对照检查；无新增该类AI痕迹。"
+          }
+        },
+        "mask_checks": {
+          "whole_object_extraction": {
+            "passed": true,
+            "reason": "吊灯含上半罩/顶座已完整扣取，杯与汽分开、sofa前缘留汽线hole无soft重叠。"
+          },
+          "no_visible_residual_edge": {
+            "passed": false,
+            "reason": "局部贴回后灯原位置仍有浅色墙面补丁，夜版已减轻但不宣称自然补底完全通过。 / 杯的整圈白线已消除；茶汽经过沙发前缘处仍有少量浅线/边缘残留。"
+          },
+          "no_baked_text": {
+            "passed": true,
+            "reason": "实际游戏源图和Li无文字数字、UI、牌匾；对照表技术标签仅在QA图。"
+          },
+          "full_canvas_alignment": {
+            "passed": true,
+            "reason": "源C/全幅层同位；raw尺寸差按真实cover记录，运行副本单独Lanczos。"
+          }
+        },
+        "remaining_visual_failures": [
+          "局部贴回后灯原位置仍有浅色墙面补丁，夜版已减轻但不宣称自然补底完全通过。",
+          "杯的整圈白线已消除；茶汽经过沙发前缘处仍有少量浅线/边缘残留。"
+        ],
+        "art_passed": false,
+        "selection_reason": "最后一轮消除主体漏扣，严格QA全绿；边缘残留如实保留，不越三轮。"
+      }
+    },
+    "iteration_cap_reached": true,
+    "further_retries_performed": false,
+    "author_files_changed": false,
+    "central_manifest_changed": false
+  }
+}

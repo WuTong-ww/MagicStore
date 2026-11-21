@@ -1,0 +1,1459 @@
+{
+  "version": 1,
+  "kind": "real_pixel_extraction",
+  "processing_script": "tools/art/real_scene_layers.py",
+  "scene_id": "S04",
+  "period": "night",
+  "revision": "real2",
+  "inputs": {
+    "original": {
+      "path": "assets/_incoming/a1r_real/S04/night_open_C.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "a5467174bd73a203bbd8b9957b5f055d5924f007449c60d071fa5c7a3027febb"
+    },
+    "raw_cleanplate": {
+      "path": "assets/_incoming/a1r_real/S04/night_open_raw_cleanplate.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "09058319724e1d0208c2c7783e365ba74ea74ab79d3c8ec1b8c4087d925407df"
+    },
+    "style": {
+      "path": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "391ef0b702653eaf7a2bf98f90595bb12502587b6bcc9f0b5653aecdf9766833"
+    }
+  },
+  "specification": {
+    "version": 1,
+    "scene_id": "S04",
+    "period": "night",
+    "state": "open",
+    "revision": "real2",
+    "native_size": [
+      1672,
+      941
+    ],
+    "original_path": "assets/_incoming/a1r_real/S04/night_open_C.png",
+    "raw_cleanplate_path": "assets/_incoming/a1r_real/S04/night_open_raw_cleanplate.png",
+    "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+    "composite_prompt": "Use case: lighting-weather.\nAsset type: S04 storage cupboard NIGHT OPEN full scene composite, paired with existing DAY OPEN.\nInput Image 1 is the exact EDIT TARGET. Preserve the camera, composition, crop, every cabinet board and foot, the four completely EMPTY shelf tiers, both doors in the same open outward positions, lower two drawers and their knobs, pendant lamp silhouette/cord, wall, floor and far-right stockroom doorway. Preserve the same native dimensions. Change ONLY daylight into restrained indoor night lighting.\nThe existing pendant lamp is switched ON with a small flat cream-ochre painted interior under its shade. Keep the lamp's silhouette unchanged. Ambient room colors are dimmer, cool dusty teal and warm grey in the shelves and stockroom; wood remains readable warm walnut. Paint soft broad shadows with no light ray, pool graphic, bloom, outer halo or luminous aura. Rightmost wall and bottom floor stay empty and low detail. Do not add windows, candles, wall sconces, stock objects or plants.\nKeep gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly colored-pencil outlines, simplified forms and imperfect perspective, seven muted color families (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), matte paper.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, gloss, plastic, photorealism, hyper-detailed clutter, wisteria, text, letters, numbers, UI, labels, empty plaques, frames, borders.",
+    "cleanplate_prompt": "Use case: precise-object-edit.\nAsset type: S04 NIGHT OPEN raw cleanplate B_all, used beneath true extracted door and lamp layers.\nInput Image 1 is the exact EDIT TARGET. Remove ONLY the following movable objects: BOTH open upper cupboard door leaves, including any hinges belonging to the leaves, and the hanging pendant lamp together with its vertical cord. Fill the former door-wing and lamp locations with the same plain cream plaster wall behind them.\nIMPORTANT: Keep the cabinet's fixed outer frame, top crown board, inner left/right rails, three horizontal empty shelf boards forming four empty tiers, rear wooden panels, bottom floor of the cabinet, both bottom drawers with their knobs, feet and every fixed structural board. The cabinet must remain a fully plausible open cupboard with no doors attached, not an empty hole or a new shape. All shelves remain entirely bare.\nKeep camera, crop, cabinet scale and exact position, floor, far-right stockroom doorway, nighttime cool-grey/teal shadows and warm walnut colors, light and every unrelated pixel unchanged as closely as possible. No extra shelves, jars, books, plants, labels or objects. Preserve visible gouache brush strokes, dry-brush marks, slightly wobbly colored-pencil edges, seven muted color families and matte paper. Full-bleed landscape at the same native dimensions.\nNEGATIVE: glow, bloom, rays, glossy plastic, photorealism, ornate carving, gold filigree, clutter, text, letters, numbers, UI, labels, blank plaques, borders.\nImportant: the lamp OBJECT and cord disappear, but the existing room nighttime lighting and overall brightness remain unchanged; do not relight as day or add a replacement light source.",
+    "annotation_notes": "Second native annotation pads beyond visible door/lamp outlines so 1px feather does not leave ghost contours; closed-door seam is one continuous mask. No QA thresholds changed.",
+    "layers": [
+      {
+        "id": "door_open",
+        "polygons": [
+          [
+            [
+              139,
+              29
+            ],
+            [
+              314,
+              91
+            ],
+            [
+              316,
+              750
+            ],
+            [
+              139,
+              802
+            ]
+          ],
+          [
+            [
+              956,
+              90
+            ],
+            [
+              1135,
+              28
+            ],
+            [
+              1135,
+              802
+            ],
+            [
+              956,
+              746
+            ]
+          ]
+        ],
+        "pivot_px": [
+          307,
+          421
+        ],
+        "z_index": 1,
+        "motion": {
+          "type": "static",
+          "parameters": {}
+        }
+      },
+      {
+        "id": "lamp",
+        "polygons": [
+          [
+            [
+              84,
+              0
+            ],
+            [
+              101,
+              0
+            ],
+            [
+              101,
+              62
+            ],
+            [
+              114,
+              65
+            ],
+            [
+              116,
+              80
+            ],
+            [
+              132,
+              89
+            ],
+            [
+              143,
+              111
+            ],
+            [
+              150,
+              145
+            ],
+            [
+              145,
+              157
+            ],
+            [
+              35,
+              158
+            ],
+            [
+              29,
+              147
+            ],
+            [
+              38,
+              113
+            ],
+            [
+              48,
+              88
+            ],
+            [
+              66,
+              78
+            ],
+            [
+              68,
+              62
+            ],
+            [
+              84,
+              61
+            ]
+          ]
+        ],
+        "pivot_px": [
+          92,
+          0
+        ],
+        "z_index": 2,
+        "motion": {
+          "type": "pendulum",
+          "parameters": {
+            "amplitude": 0.4,
+            "frequency": 0.25
+          }
+        }
+      }
+    ]
+  },
+  "processing_prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+  "cleanplate_method": "AI raw B is normalized with equal-aspect cover; final B_i/B_all are a soft-mask patch over actual C. The 6px dilation is retained as AI authorization evidence; undamaged context outside the soft mask is copied from C, never claimed as unchanged AI output.",
+  "mask_usage_notice": "本批rawB已先以C作参考生成，内置工具未接收这些显式mask。1px软mask与6px扩区在随后人工标图后生成，用作可审阅的局部合成边界及后续重生目标，不声称已作为本轮生图参数。",
+  "configuration": {
+    "version": 1,
+    "kind": "real_pixel_extraction",
+    "pipeline_config": "data/art/pipeline.json",
+    "output_root": "assets/generated_scenes/v3_real",
+    "runtime_root": "assets/generated_scenes/runtime/v3_real",
+    "logical_canvas": [
+      2560,
+      1440
+    ],
+    "required_mask": {
+      "feather_pixels": 1,
+      "inpaint_dilation_pixels": 6
+    },
+    "motion_types": [
+      "static",
+      "sway_shader",
+      "pendulum",
+      "flow"
+    ],
+    "maximum_polygon_vertices": 2048,
+    "cleanplate_method": "AI raw B is normalized with equal-aspect cover; final B_i/B_all are a soft-mask patch over actual C. The 6px dilation is retained as AI authorization evidence; undamaged context outside the soft mask is copied from C, never claimed as unchanged AI output.",
+    "mask_usage_notice": "本批rawB已先以C作参考生成，内置工具未接收这些显式mask。1px软mask与6px扩区在随后人工标图后生成，用作可审阅的局部合成边界及后续重生目标，不声称已作为本轮生图参数。",
+    "processing_prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。"
+  },
+  "mask_parameters": {
+    "feather_pixels": 1,
+    "inpaint_dilation_pixels": 6,
+    "hard_recovery_threshold": 128
+  },
+  "qa_bounds": {
+    "core_max_error": 0,
+    "unedited_max_error": 0,
+    "inpaint_ring_max_error": 0,
+    "feather_mae": 3,
+    "feather_p95": 12,
+    "percentile": 0.95
+  },
+  "raw_cleanplate_normalization": {
+    "source_path": "assets/_incoming/a1r_real/S04/night_open_raw_cleanplate.png",
+    "native_size": [
+      1672,
+      941
+    ],
+    "normalized_path": "assets/generated_scenes/v3_real/S04/night_open/real2/raw_cleanplate_normalized.png",
+    "normalized_size": [
+      1672,
+      941
+    ],
+    "transform": {
+      "method": "equal_aspect_cover",
+      "filter": "Lanczos",
+      "scale": 1.0,
+      "source_crop": [
+        0.0,
+        0.0,
+        1672.0,
+        941.0
+      ],
+      "runtime_size": [
+        1672,
+        941
+      ]
+    }
+  },
+  "original_path": "assets/generated_scenes/v3_real/S04/night_open/real2/C.png",
+  "base_path": "assets/generated_scenes/v3_real/S04/night_open/real2/B_all.png",
+  "base_runtime_path": "assets/generated_scenes/runtime/v3_real/S04/night_open/real2/B_all.png",
+  "artifacts": [
+    {
+      "path": "assets/generated_scenes/v3_real/S04/night_open/real2/C.png",
+      "role": "retained_original_C",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "a5467174bd73a203bbd8b9957b5f055d5924f007449c60d071fa5c7a3027febb"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S04/night_open/real2/raw_cleanplate_normalized.png",
+      "role": "normalized_AI_cleanplate",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "591d3b08285298996c81dc2bd9bdb767fc016ba55a8c0d9d0451b7460520f466"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S04/night_open/real2/layers/door_open.png",
+      "role": "actual_C_matted_layer",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "c121cbf532a37e549aee2802609e91fa45f9f17cc68772d3516578481d3919a3"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S04/night_open/real2/cleanplates/door_open.png",
+      "role": "single_object_cleanplate_B_i",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "b3a7316d97d20e731d90cd6d0755fa47da0b1fb6eec9586a45c450e7585cd9b5"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S04/night_open/real2/masks/door_open_hard.png",
+      "role": "manual_hard_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "32d96d1883ae120d778cae011d9f543ed7afd3a5d40f09065f06dd1297deabd3"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S04/night_open/real2/masks/door_open_soft.png",
+      "role": "one_pixel_feather_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "97a2604f0ba320c0a510bbcec69ce279871b971f790fed015b7e071caf9391b7"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S04/night_open/real2/masks/door_open_inpaint6.png",
+      "role": "six_pixel_AI_authorization_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "177e643ec1c3969a526cde717e1c481ed16f436a454d6c38cf4f4ec142cdfe6d"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S04/night_open/real2/layers/lamp.png",
+      "role": "actual_C_matted_layer",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "b0d769dbe49c3734f1dd13733aa92133c92b20345f58c5f26fcf892eabcbb1c3"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S04/night_open/real2/cleanplates/lamp.png",
+      "role": "single_object_cleanplate_B_i",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "44bd07f61597172475bd2a27d674df1cc4b0cf3f5d48b2ba65949c33bb345b0a"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S04/night_open/real2/masks/lamp_hard.png",
+      "role": "manual_hard_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "45af8e26cbe0e75c5b822003d7055467d0938defedbc65cdb943256dfd11d286"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S04/night_open/real2/masks/lamp_soft.png",
+      "role": "one_pixel_feather_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "255d6b4938a97f0e7ee617c2dcbf783264fac2adcd25aa77c3f7f3b45d67bf20"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S04/night_open/real2/masks/lamp_inpaint6.png",
+      "role": "six_pixel_AI_authorization_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "4552651a2f3c69bcfa56e029f203c2ab9b00d605cd73ee538b21daf907e0af0c"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S04/night_open/real2/B_all.png",
+      "role": "all_object_cleanplate_B_all",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "43f5312db3ed583c7936a4c85f7ceebfc5ee963e7b598303c18d661b8f62648f"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S04/night_open/real2/recomposed_all.png",
+      "role": "all_layers_recomposition",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "a883345f92996fef397a9ee8e00daf367d8daca0f7b84488178a0963137f63fe"
+    }
+  ],
+  "runtime_copies": [
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S04/night_open/real2/C.png",
+      "source_path": "assets/generated_scenes/v3_real/S04/night_open/real2/C.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "a5467174bd73a203bbd8b9957b5f055d5924f007449c60d071fa5c7a3027febb",
+      "sha256": "9f62bccbe55c8fcaefe7bb90bed9ff877ab768585410c0b27c82fc543b1a0762",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S04/night_open/real2/layers/door_open.png",
+      "source_path": "assets/generated_scenes/v3_real/S04/night_open/real2/layers/door_open.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "c121cbf532a37e549aee2802609e91fa45f9f17cc68772d3516578481d3919a3",
+      "sha256": "24752e1cba8e300347630b284f9bd91b722c788fd76af467419fc044b32d9a65",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S04/night_open/real2/layers/lamp.png",
+      "source_path": "assets/generated_scenes/v3_real/S04/night_open/real2/layers/lamp.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "b0d769dbe49c3734f1dd13733aa92133c92b20345f58c5f26fcf892eabcbb1c3",
+      "sha256": "ec2d48852418a5a2611a14c0a8b3246202f3aecf0be63aee2a5f84f8f136f7f7",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S04/night_open/real2/B_all.png",
+      "source_path": "assets/generated_scenes/v3_real/S04/night_open/real2/B_all.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "43f5312db3ed583c7936a4c85f7ceebfc5ee963e7b598303c18d661b8f62648f",
+      "sha256": "8b6d27b710e423835312a6bc8edddd4afb757d52f94d3c8c881c0b01e6c65b41",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    }
+  ],
+  "layers": [
+    {
+      "id": "door_open",
+      "polygons": [
+        [
+          [
+            139,
+            29
+          ],
+          [
+            314,
+            91
+          ],
+          [
+            316,
+            750
+          ],
+          [
+            139,
+            802
+          ]
+        ],
+        [
+          [
+            956,
+            90
+          ],
+          [
+            1135,
+            28
+          ],
+          [
+            1135,
+            802
+          ],
+          [
+            956,
+            746
+          ]
+        ]
+      ],
+      "pivot_px": [
+        307,
+        421
+      ],
+      "z_index": 1,
+      "motion": {
+        "type": "static",
+        "parameters": {}
+      },
+      "native_size": [
+        1672,
+        941
+      ],
+      "layer_path": "assets/generated_scenes/v3_real/S04/night_open/real2/layers/door_open.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S04/night_open/real2/cleanplates/door_open.png",
+      "hard_mask_path": "assets/generated_scenes/v3_real/S04/night_open/real2/masks/door_open_hard.png",
+      "soft_mask_path": "assets/generated_scenes/v3_real/S04/night_open/real2/masks/door_open_soft.png",
+      "inpaint_mask_path": "assets/generated_scenes/v3_real/S04/night_open/real2/masks/door_open_inpaint6.png",
+      "single_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 251741,
+            "samples": 755223,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 7624,
+            "samples": 22872,
+            "mae": 0.0015739769150052466,
+            "p95": 0,
+            "max_error": 11
+          },
+          "inpaint_ring": {
+            "pixels": 23268,
+            "samples": 69804,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1290719,
+            "samples": 3872157,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "matte_clamping": {
+        "clipped_pixels": 8,
+        "clipped_channels": 8,
+        "maximum_unassociated_clamp": 33.0
+      },
+      "descriptor": {
+        "path": "res://assets/generated_scenes/runtime/v3_real/S04/night_open/real2/layers/door_open.png",
+        "rect": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "hotspot": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "native_size": [
+          1672,
+          941
+        ],
+        "pivot_px": [
+          307,
+          421
+        ],
+        "z_index": 1,
+        "motion": {
+          "type": "static",
+          "parameters": {}
+        },
+        "source_transform": {
+          "method": "equal_aspect_cover",
+          "filter": "Lanczos",
+          "scale": 1.1483253588516746,
+          "source_crop": [
+            0.0,
+            0.25,
+            1672.0,
+            940.75
+          ],
+          "runtime_size": [
+            1920,
+            1080
+          ],
+          "native_size": [
+            1672,
+            941
+          ]
+        }
+      }
+    },
+    {
+      "id": "lamp",
+      "polygons": [
+        [
+          [
+            84,
+            0
+          ],
+          [
+            101,
+            0
+          ],
+          [
+            101,
+            62
+          ],
+          [
+            114,
+            65
+          ],
+          [
+            116,
+            80
+          ],
+          [
+            132,
+            89
+          ],
+          [
+            143,
+            111
+          ],
+          [
+            150,
+            145
+          ],
+          [
+            145,
+            157
+          ],
+          [
+            35,
+            158
+          ],
+          [
+            29,
+            147
+          ],
+          [
+            38,
+            113
+          ],
+          [
+            48,
+            88
+          ],
+          [
+            66,
+            78
+          ],
+          [
+            68,
+            62
+          ],
+          [
+            84,
+            61
+          ]
+        ]
+      ],
+      "pivot_px": [
+        92,
+        0
+      ],
+      "z_index": 2,
+      "motion": {
+        "type": "pendulum",
+        "parameters": {
+          "amplitude": 0.4,
+          "frequency": 0.25
+        }
+      },
+      "native_size": [
+        1672,
+        941
+      ],
+      "layer_path": "assets/generated_scenes/v3_real/S04/night_open/real2/layers/lamp.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S04/night_open/real2/cleanplates/lamp.png",
+      "hard_mask_path": "assets/generated_scenes/v3_real/S04/night_open/real2/masks/lamp_hard.png",
+      "soft_mask_path": "assets/generated_scenes/v3_real/S04/night_open/real2/masks/lamp_soft.png",
+      "inpaint_mask_path": "assets/generated_scenes/v3_real/S04/night_open/real2/masks/lamp_inpaint6.png",
+      "single_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 9502,
+            "samples": 28506,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 1087,
+            "samples": 3261,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "inpaint_ring": {
+            "pixels": 3360,
+            "samples": 10080,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1559403,
+            "samples": 4678209,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "matte_clamping": {
+        "clipped_pixels": 0,
+        "clipped_channels": 0,
+        "maximum_unassociated_clamp": 0.0
+      },
+      "descriptor": {
+        "path": "res://assets/generated_scenes/runtime/v3_real/S04/night_open/real2/layers/lamp.png",
+        "rect": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "hotspot": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "native_size": [
+          1672,
+          941
+        ],
+        "pivot_px": [
+          92,
+          0
+        ],
+        "z_index": 2,
+        "motion": {
+          "type": "pendulum",
+          "parameters": {
+            "amplitude": 0.4,
+            "frequency": 0.25
+          }
+        },
+        "source_transform": {
+          "method": "equal_aspect_cover",
+          "filter": "Lanczos",
+          "scale": 1.1483253588516746,
+          "source_crop": [
+            0.0,
+            0.25,
+            1672.0,
+            940.75
+          ],
+          "runtime_size": [
+            1920,
+            1080
+          ],
+          "native_size": [
+            1672,
+            941
+          ]
+        }
+      }
+    }
+  ],
+  "overlap_pairs": [
+    {
+      "layers": [
+        "door_open",
+        "lamp"
+      ],
+      "hard_overlap_pixels": 428,
+      "soft_overlap_pixels": 572,
+      "note": "B_i retains C outside its own soft mask; occluded ownership is not inferred. B_all recomposition remains an independent strict check."
+    }
+  ],
+  "recomposition_qa": {
+    "passed": false,
+    "regions": {
+      "core": {
+        "pixels": 260943,
+        "samples": 782829,
+        "mae": 0.0030964616793705906,
+        "p95": 0,
+        "max_error": 13
+      },
+      "feather": {
+        "pixels": 8439,
+        "samples": 25317,
+        "mae": 0.002567444799936801,
+        "p95": 0,
+        "max_error": 5
+      },
+      "inpaint_ring": {
+        "pixels": 25470,
+        "samples": 76410,
+        "mae": 0.0,
+        "p95": 0,
+        "max_error": 0
+      },
+      "unedited": {
+        "pixels": 1278500,
+        "samples": 3835500,
+        "mae": 0.0,
+        "p95": 0,
+        "max_error": 0
+      }
+    },
+    "bounds": {
+      "core_max_error": 0,
+      "unedited_max_error": 0,
+      "inpaint_ring_max_error": 0,
+      "feather_mae": 3,
+      "feather_p95": 12,
+      "percentile": 0.95
+    },
+    "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+  },
+  "geometry_passed": false,
+  "art_passed": false,
+  "visual_review": "not_evaluated",
+  "manifest_modified": false,
+  "state": "open",
+  "recipes": [
+    {
+      "status": "complete",
+      "version": "real2",
+      "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "attempts": [],
+      "processing_script": "tools/art/real_scene_layers.py",
+      "qa_kind": "art",
+      "generator": "real_C_pixel_extraction",
+      "id": "S04_night_open_real2_base",
+      "group": "scenes",
+      "operation": "runtime_copy",
+      "prompt": "Use case: precise-object-edit.\nAsset type: S04 NIGHT OPEN raw cleanplate B_all, used beneath true extracted door and lamp layers.\nInput Image 1 is the exact EDIT TARGET. Remove ONLY the following movable objects: BOTH open upper cupboard door leaves, including any hinges belonging to the leaves, and the hanging pendant lamp together with its vertical cord. Fill the former door-wing and lamp locations with the same plain cream plaster wall behind them.\nIMPORTANT: Keep the cabinet's fixed outer frame, top crown board, inner left/right rails, three horizontal empty shelf boards forming four empty tiers, rear wooden panels, bottom floor of the cabinet, both bottom drawers with their knobs, feet and every fixed structural board. The cabinet must remain a fully plausible open cupboard with no doors attached, not an empty hole or a new shape. All shelves remain entirely bare.\nKeep camera, crop, cabinet scale and exact position, floor, far-right stockroom doorway, nighttime cool-grey/teal shadows and warm walnut colors, light and every unrelated pixel unchanged as closely as possible. No extra shelves, jars, books, plants, labels or objects. Preserve visible gouache brush strokes, dry-brush marks, slightly wobbly colored-pencil edges, seven muted color families and matte paper. Full-bleed landscape at the same native dimensions.\nNEGATIVE: glow, bloom, rays, glossy plastic, photorealism, ornate carving, gold filigree, clutter, text, letters, numbers, UI, labels, blank plaques, borders.\nImportant: the lamp OBJECT and cord disappear, but the existing room nighttime lighting and overall brightness remain unchanged; do not relight as day or add a replacement light source.\n从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+      "source_path": "assets/generated_scenes/v3_real/S04/night_open/real2/B_all.png",
+      "runtime_path": "assets/generated_scenes/runtime/v3_real/S04/night_open/real2/B_all.png"
+    },
+    {
+      "status": "complete",
+      "version": "real2",
+      "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "attempts": [],
+      "processing_script": "tools/art/real_scene_layers.py",
+      "qa_kind": "art",
+      "generator": "real_C_pixel_extraction",
+      "id": "S04_night_open_real2_door_open",
+      "group": "layers",
+      "operation": "extract_layer",
+      "prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+      "source_path": "assets/generated_scenes/v3_real/S04/night_open/real2/layers/door_open.png",
+      "runtime_path": "assets/generated_scenes/runtime/v3_real/S04/night_open/real2/layers/door_open.png",
+      "original_path": "assets/generated_scenes/v3_real/S04/night_open/real2/C.png",
+      "mask_path": "assets/generated_scenes/v3_real/S04/night_open/real2/masks/door_open_soft.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S04/night_open/real2/cleanplates/door_open.png",
+      "processing_parameters": {
+        "version": 1,
+        "scene_id": "S04",
+        "period": "night",
+        "state": "open",
+        "revision": "real2",
+        "native_size": [
+          1672,
+          941
+        ],
+        "original_path": "assets/_incoming/a1r_real/S04/night_open_C.png",
+        "raw_cleanplate_path": "assets/_incoming/a1r_real/S04/night_open_raw_cleanplate.png",
+        "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+        "composite_prompt": "Use case: lighting-weather.\nAsset type: S04 storage cupboard NIGHT OPEN full scene composite, paired with existing DAY OPEN.\nInput Image 1 is the exact EDIT TARGET. Preserve the camera, composition, crop, every cabinet board and foot, the four completely EMPTY shelf tiers, both doors in the same open outward positions, lower two drawers and their knobs, pendant lamp silhouette/cord, wall, floor and far-right stockroom doorway. Preserve the same native dimensions. Change ONLY daylight into restrained indoor night lighting.\nThe existing pendant lamp is switched ON with a small flat cream-ochre painted interior under its shade. Keep the lamp's silhouette unchanged. Ambient room colors are dimmer, cool dusty teal and warm grey in the shelves and stockroom; wood remains readable warm walnut. Paint soft broad shadows with no light ray, pool graphic, bloom, outer halo or luminous aura. Rightmost wall and bottom floor stay empty and low detail. Do not add windows, candles, wall sconces, stock objects or plants.\nKeep gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly colored-pencil outlines, simplified forms and imperfect perspective, seven muted color families (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), matte paper.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, gloss, plastic, photorealism, hyper-detailed clutter, wisteria, text, letters, numbers, UI, labels, empty plaques, frames, borders.",
+        "cleanplate_prompt": "Use case: precise-object-edit.\nAsset type: S04 NIGHT OPEN raw cleanplate B_all, used beneath true extracted door and lamp layers.\nInput Image 1 is the exact EDIT TARGET. Remove ONLY the following movable objects: BOTH open upper cupboard door leaves, including any hinges belonging to the leaves, and the hanging pendant lamp together with its vertical cord. Fill the former door-wing and lamp locations with the same plain cream plaster wall behind them.\nIMPORTANT: Keep the cabinet's fixed outer frame, top crown board, inner left/right rails, three horizontal empty shelf boards forming four empty tiers, rear wooden panels, bottom floor of the cabinet, both bottom drawers with their knobs, feet and every fixed structural board. The cabinet must remain a fully plausible open cupboard with no doors attached, not an empty hole or a new shape. All shelves remain entirely bare.\nKeep camera, crop, cabinet scale and exact position, floor, far-right stockroom doorway, nighttime cool-grey/teal shadows and warm walnut colors, light and every unrelated pixel unchanged as closely as possible. No extra shelves, jars, books, plants, labels or objects. Preserve visible gouache brush strokes, dry-brush marks, slightly wobbly colored-pencil edges, seven muted color families and matte paper. Full-bleed landscape at the same native dimensions.\nNEGATIVE: glow, bloom, rays, glossy plastic, photorealism, ornate carving, gold filigree, clutter, text, letters, numbers, UI, labels, blank plaques, borders.\nImportant: the lamp OBJECT and cord disappear, but the existing room nighttime lighting and overall brightness remain unchanged; do not relight as day or add a replacement light source.",
+        "annotation_notes": "Second native annotation pads beyond visible door/lamp outlines so 1px feather does not leave ghost contours; closed-door seam is one continuous mask. No QA thresholds changed.",
+        "layers": [
+          {
+            "id": "door_open",
+            "polygons": [
+              [
+                [
+                  139,
+                  29
+                ],
+                [
+                  314,
+                  91
+                ],
+                [
+                  316,
+                  750
+                ],
+                [
+                  139,
+                  802
+                ]
+              ],
+              [
+                [
+                  956,
+                  90
+                ],
+                [
+                  1135,
+                  28
+                ],
+                [
+                  1135,
+                  802
+                ],
+                [
+                  956,
+                  746
+                ]
+              ]
+            ],
+            "pivot_px": [
+              307,
+              421
+            ],
+            "z_index": 1,
+            "motion": {
+              "type": "static",
+              "parameters": {}
+            }
+          },
+          {
+            "id": "lamp",
+            "polygons": [
+              [
+                [
+                  84,
+                  0
+                ],
+                [
+                  101,
+                  0
+                ],
+                [
+                  101,
+                  62
+                ],
+                [
+                  114,
+                  65
+                ],
+                [
+                  116,
+                  80
+                ],
+                [
+                  132,
+                  89
+                ],
+                [
+                  143,
+                  111
+                ],
+                [
+                  150,
+                  145
+                ],
+                [
+                  145,
+                  157
+                ],
+                [
+                  35,
+                  158
+                ],
+                [
+                  29,
+                  147
+                ],
+                [
+                  38,
+                  113
+                ],
+                [
+                  48,
+                  88
+                ],
+                [
+                  66,
+                  78
+                ],
+                [
+                  68,
+                  62
+                ],
+                [
+                  84,
+                  61
+                ]
+              ]
+            ],
+            "pivot_px": [
+              92,
+              0
+            ],
+            "z_index": 2,
+            "motion": {
+              "type": "pendulum",
+              "parameters": {
+                "amplitude": 0.4,
+                "frequency": 0.25
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "status": "complete",
+      "version": "real2",
+      "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "attempts": [],
+      "processing_script": "tools/art/real_scene_layers.py",
+      "qa_kind": "art",
+      "generator": "real_C_pixel_extraction",
+      "id": "S04_night_open_real2_lamp",
+      "group": "layers",
+      "operation": "extract_layer",
+      "prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+      "source_path": "assets/generated_scenes/v3_real/S04/night_open/real2/layers/lamp.png",
+      "runtime_path": "assets/generated_scenes/runtime/v3_real/S04/night_open/real2/layers/lamp.png",
+      "original_path": "assets/generated_scenes/v3_real/S04/night_open/real2/C.png",
+      "mask_path": "assets/generated_scenes/v3_real/S04/night_open/real2/masks/lamp_soft.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S04/night_open/real2/cleanplates/lamp.png",
+      "processing_parameters": {
+        "version": 1,
+        "scene_id": "S04",
+        "period": "night",
+        "state": "open",
+        "revision": "real2",
+        "native_size": [
+          1672,
+          941
+        ],
+        "original_path": "assets/_incoming/a1r_real/S04/night_open_C.png",
+        "raw_cleanplate_path": "assets/_incoming/a1r_real/S04/night_open_raw_cleanplate.png",
+        "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+        "composite_prompt": "Use case: lighting-weather.\nAsset type: S04 storage cupboard NIGHT OPEN full scene composite, paired with existing DAY OPEN.\nInput Image 1 is the exact EDIT TARGET. Preserve the camera, composition, crop, every cabinet board and foot, the four completely EMPTY shelf tiers, both doors in the same open outward positions, lower two drawers and their knobs, pendant lamp silhouette/cord, wall, floor and far-right stockroom doorway. Preserve the same native dimensions. Change ONLY daylight into restrained indoor night lighting.\nThe existing pendant lamp is switched ON with a small flat cream-ochre painted interior under its shade. Keep the lamp's silhouette unchanged. Ambient room colors are dimmer, cool dusty teal and warm grey in the shelves and stockroom; wood remains readable warm walnut. Paint soft broad shadows with no light ray, pool graphic, bloom, outer halo or luminous aura. Rightmost wall and bottom floor stay empty and low detail. Do not add windows, candles, wall sconces, stock objects or plants.\nKeep gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly colored-pencil outlines, simplified forms and imperfect perspective, seven muted color families (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), matte paper.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, gloss, plastic, photorealism, hyper-detailed clutter, wisteria, text, letters, numbers, UI, labels, empty plaques, frames, borders.",
+        "cleanplate_prompt": "Use case: precise-object-edit.\nAsset type: S04 NIGHT OPEN raw cleanplate B_all, used beneath true extracted door and lamp layers.\nInput Image 1 is the exact EDIT TARGET. Remove ONLY the following movable objects: BOTH open upper cupboard door leaves, including any hinges belonging to the leaves, and the hanging pendant lamp together with its vertical cord. Fill the former door-wing and lamp locations with the same plain cream plaster wall behind them.\nIMPORTANT: Keep the cabinet's fixed outer frame, top crown board, inner left/right rails, three horizontal empty shelf boards forming four empty tiers, rear wooden panels, bottom floor of the cabinet, both bottom drawers with their knobs, feet and every fixed structural board. The cabinet must remain a fully plausible open cupboard with no doors attached, not an empty hole or a new shape. All shelves remain entirely bare.\nKeep camera, crop, cabinet scale and exact position, floor, far-right stockroom doorway, nighttime cool-grey/teal shadows and warm walnut colors, light and every unrelated pixel unchanged as closely as possible. No extra shelves, jars, books, plants, labels or objects. Preserve visible gouache brush strokes, dry-brush marks, slightly wobbly colored-pencil edges, seven muted color families and matte paper. Full-bleed landscape at the same native dimensions.\nNEGATIVE: glow, bloom, rays, glossy plastic, photorealism, ornate carving, gold filigree, clutter, text, letters, numbers, UI, labels, blank plaques, borders.\nImportant: the lamp OBJECT and cord disappear, but the existing room nighttime lighting and overall brightness remain unchanged; do not relight as day or add a replacement light source.",
+        "annotation_notes": "Second native annotation pads beyond visible door/lamp outlines so 1px feather does not leave ghost contours; closed-door seam is one continuous mask. No QA thresholds changed.",
+        "layers": [
+          {
+            "id": "door_open",
+            "polygons": [
+              [
+                [
+                  139,
+                  29
+                ],
+                [
+                  314,
+                  91
+                ],
+                [
+                  316,
+                  750
+                ],
+                [
+                  139,
+                  802
+                ]
+              ],
+              [
+                [
+                  956,
+                  90
+                ],
+                [
+                  1135,
+                  28
+                ],
+                [
+                  1135,
+                  802
+                ],
+                [
+                  956,
+                  746
+                ]
+              ]
+            ],
+            "pivot_px": [
+              307,
+              421
+            ],
+            "z_index": 1,
+            "motion": {
+              "type": "static",
+              "parameters": {}
+            }
+          },
+          {
+            "id": "lamp",
+            "polygons": [
+              [
+                [
+                  84,
+                  0
+                ],
+                [
+                  101,
+                  0
+                ],
+                [
+                  101,
+                  62
+                ],
+                [
+                  114,
+                  65
+                ],
+                [
+                  116,
+                  80
+                ],
+                [
+                  132,
+                  89
+                ],
+                [
+                  143,
+                  111
+                ],
+                [
+                  150,
+                  145
+                ],
+                [
+                  145,
+                  157
+                ],
+                [
+                  35,
+                  158
+                ],
+                [
+                  29,
+                  147
+                ],
+                [
+                  38,
+                  113
+                ],
+                [
+                  48,
+                  88
+                ],
+                [
+                  66,
+                  78
+                ],
+                [
+                  68,
+                  62
+                ],
+                [
+                  84,
+                  61
+                ]
+              ]
+            ],
+            "pivot_px": [
+              92,
+              0
+            ],
+            "z_index": 2,
+            "motion": {
+              "type": "pendulum",
+              "parameters": {
+                "amplitude": 0.4,
+                "frequency": 0.25
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "recompositions": [
+    {
+      "id": "S04_night_open_real2",
+      "qa_kind": "art",
+      "original_path": "assets/generated_scenes/v3_real/S04/night_open/real2/C.png",
+      "base_path": "assets/generated_scenes/v3_real/S04/night_open/real2/B_all.png",
+      "layers": [
+        {
+          "path": "assets/generated_scenes/v3_real/S04/night_open/real2/layers/door_open.png",
+          "z_index": 1
+        },
+        {
+          "path": "assets/generated_scenes/v3_real/S04/night_open/real2/layers/lamp.png",
+          "z_index": 2
+        }
+      ]
+    }
+  ],
+  "scene_descriptors": {
+    "S04": {
+      "layer_format": "aligned_full_canvas",
+      "night": "res://assets/generated_scenes/runtime/v3_real/S04/night_open/real2/B_all.png",
+      "layers": {
+        "door_open": {
+          "path": "res://assets/generated_scenes/runtime/v3_real/S04/night_open/real2/layers/door_open.png",
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            1672,
+            941
+          ],
+          "pivot_px": [
+            307,
+            421
+          ],
+          "z_index": 1,
+          "motion": {
+            "type": "static",
+            "parameters": {}
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 1.1483253588516746,
+            "source_crop": [
+              0.0,
+              0.25,
+              1672.0,
+              940.75
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              1672,
+              941
+            ]
+          },
+          "variants": {
+            "night": "res://assets/generated_scenes/runtime/v3_real/S04/night_open/real2/layers/door_open.png"
+          },
+          "variant_transforms": {
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 1.1483253588516746,
+              "source_crop": [
+                0.0,
+                0.25,
+                1672.0,
+                940.75
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                1672,
+                941
+              ]
+            }
+          },
+          "state": "open"
+        },
+        "lamp": {
+          "path": "res://assets/generated_scenes/runtime/v3_real/S04/night_open/real2/layers/lamp.png",
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            1672,
+            941
+          ],
+          "pivot_px": [
+            92,
+            0
+          ],
+          "z_index": 2,
+          "motion": {
+            "type": "pendulum",
+            "parameters": {
+              "amplitude": 0.4,
+              "frequency": 0.25
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 1.1483253588516746,
+            "source_crop": [
+              0.0,
+              0.25,
+              1672.0,
+              940.75
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              1672,
+              941
+            ]
+          },
+          "variants": {
+            "night": "res://assets/generated_scenes/runtime/v3_real/S04/night_open/real2/layers/lamp.png"
+          },
+          "variant_transforms": {
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 1.1483253588516746,
+              "source_crop": [
+                0.0,
+                0.25,
+                1672.0,
+                940.75
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                1672,
+                941
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "receipt_path": "assets/generated_scenes/v3_real/S04/night_open/real2/receipt.json"
+}

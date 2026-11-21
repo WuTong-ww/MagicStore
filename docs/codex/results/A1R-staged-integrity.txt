@@ -1,0 +1,1 @@
+{"staged_files": 3419, "png_lfs_verified": 1686, "hashed_receipts_byte_exact": 54, "result": "PASS"}

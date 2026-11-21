@@ -80,6 +80,10 @@ try {
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/people_restart.gd', '--', 'read')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/shop_ui.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/scene_visuals.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/aligned_scene_layers.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/scene_asset_acceptance.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/scene_asset_acceptance.gd', '--', '--config', 'res://data/art/scene_preview.json')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/scene_asset_acceptance.gd', '--', '--config', 'res://data/art/scene_review.json')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/arrival_ui.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/consultation_layout.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/round2_shell.gd')
@@ -104,6 +108,18 @@ try {
         if ($LASTEXITCODE -ne 0) { throw 'Background person HTTP tests failed.' }
         & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot 'test-people.ps1')
         if ($LASTEXITCODE -ne 0) { throw 'People regression tests failed.' }
+        $artErrorPreference = $ErrorActionPreference
+        $ErrorActionPreference = 'Continue'
+        $artTestOutput = & python -m unittest discover -s (Join-Path $repo 'tests/art') -p 'test_*.py' -v 2>&1
+        $artTestCode = $LASTEXITCODE
+        $ErrorActionPreference = $artErrorPreference
+        $artTestOutput | ForEach-Object {
+            $line = [string]$_
+            if (![string]::IsNullOrWhiteSpace($line) -and $line -ne 'System.Management.Automation.RemoteException') { Write-Host $line }
+        }
+        if ($artTestCode -ne 0) { throw 'Art pipeline regression tests failed.' }
+        & python -B (Join-Path $repo 'tools/art/register_real_scenes.py') --validate-only
+        if ($LASTEXITCODE -ne 0) { throw 'Retained real scene data validation failed.' }
     } elseif ($Export) {
         $outDir = Join-Path $repo 'build/windows'
         New-Item -ItemType Directory -Force -Path $outDir | Out-Null

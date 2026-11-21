@@ -1,0 +1,345 @@
+{
+  "version": 1,
+  "scene_id": "S05",
+  "stage": "raw_cleanplates_ready_for_layering",
+  "status": "complete",
+  "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+  "style_sha256": "391ef0b702653eaf7a2bf98f90595bb12502587b6bcc9f0b5653aecdf9766833",
+  "records": [
+    {
+      "id": "S05_day",
+      "period": "day",
+      "path": "assets/_incoming/a1r_real/S05/day_C.png",
+      "source_path": "assets/_incoming/a1r_real/S05/day_C.png",
+      "prompt_version": "round2-style-v2-candidate3",
+      "prompt": "为 Godot 游戏《零点杂货铺》制作 S05 制作工坊白日版原始完整合成C。附件是选定风格参考，只借用纸面厚涂笔触、哑光材质、低饱和七色族与柔和光线，不复制参考中的前台柜台/绿色门帘布局。单张横向16:9全幅场景，尽可能原生2560×1440或工具实际最大16:9尺寸，无边框。\n主体：俯视三分之四角度看一张质朴的旧木工坊工作台，桌子占左下至中央，墙和空间向右延伸。桌面中央一大片干净空白木面，用于日后叠放Godot制作操作；不是画空白UI牌子。桌左边只有一只清楚的大石研钵和木研杵；左后角一架简单、结构正确的哑光小黄铜天平（一个横梁和两只浅盘，绝无装饰花纹）；旁边两只形状简单的无标签小玻璃瓶，玻璃用灰青/暖灰平涂，不画摄影反射。左上墙边悬一小束干草，草束和挂线形状分离清楚供后续扣层。台面后边一只很简单的陶蒸汽壶/低矮蒸汽口，顶部有一缕短短的细蒸汽，蒸汽与器具明显分开，作为后续独立层。窗外日光从左上漫射进来，右侧至少30%为没有搁板、摆件、管线、画框的空奶油暖灰墙，下方12%保持简单地面。所有可动件在本张C里，后续只按真实像素扣层，不另画相似物件。道具少于15个，只有一个视觉重点：安静的木台与研钵。\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse daylight, cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, UI, labels. 绝无人物、字母、汉字、数字、名字、空白牌匾/空吊签/标签、格子面板、UI、边框。不要满墙干草和零碎，不加紫藤，不加发光魔法道具，不画任何金币或金色纹样。",
+      "ref_paths": [
+        "assets/_incoming/a1r_pilot/candidate_3.png"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "elapsed_ms": 43891
+        }
+      ],
+      "status": "complete",
+      "sha256": "01f4274e20a80a9108cbb62043e774344a003e4704bcdd2cfd5e304807adcffd",
+      "native_size": [
+        1672,
+        941
+      ],
+      "source_resolution": "native_tool_output",
+      "original_bytes_preserved": true,
+      "generation_tool": "image_gen.imagegen",
+      "visual_review": {
+        "status": "pass",
+        "ai_artifacts": {
+          "glow": {
+            "passed": true,
+            "reason": "无光圈光束；陶壶和短蒸汽不发光，夜色仅用平涂颜色表达。"
+          },
+          "gold_patterns": {
+            "passed": true,
+            "reason": "天平只是哑光赭黄材质，无金色花纹、雕刻或金边。"
+          },
+          "structure": {
+            "passed": true,
+            "reason": "研钵和研杵、桌边桌脚、天平单横梁和两盘结构清楚。"
+          },
+          "unrecognizable_objects": {
+            "passed": true,
+            "reason": "仅研钵、天平、两瓶、陶壶和一束干草，各件功能可辨。"
+          },
+          "excess_symmetry": {
+            "passed": true,
+            "reason": "用具集中左侧，桌面空区和右侧墙形成自然不对称。"
+          },
+          "plastic_gloss": {
+            "passed": true,
+            "reason": "玻璃使用灰青平涂，无摄影高光；木和石有可见哑光笔触。"
+          }
+        },
+        "scene_checks": {
+          "full_bleed": {
+            "passed": true,
+            "reason": "木台、墙、窗和地面铺满画布，无卡片边框。"
+          },
+          "no_baked_text": {
+            "passed": true,
+            "reason": "无标签、文字数字、空招牌、UI或牌匾。"
+          },
+          "work_area": {
+            "passed": true,
+            "reason": "工作台中央留一大片连续空木面。"
+          },
+          "required_layers": {
+            "passed": true,
+            "reason": "上方一束干草与陶壶上方短蒸汽可分别扣出。"
+          },
+          "empty_wall": {
+            "passed": true,
+            "reason": "右侧约40%连续空墙，物件均集中左侧。"
+          },
+          "composition": {
+            "passed": true,
+            "reason": "完整合成包含全部工具与可动件，道具少于15。"
+          }
+        }
+      },
+      "kind": "composite"
+    },
+    {
+      "id": "S05_night",
+      "period": "night",
+      "path": "assets/_incoming/a1r_real/S05/night_C.png",
+      "source_path": "assets/_incoming/a1r_real/S05/night_C.png",
+      "prompt_version": "round2-style-v2-candidate3",
+      "prompt": "将第一张S05工坊白日完整合成C编辑成相同机位、相同构图和物件像素位置的夜间版，第二张只提供整套游戏的画风参考。严格保留木台边缘与桌脚、前左石研钵和木研杵、左后小天平的横梁和两盘、两只无标签瓶、陶蒸汽壶、壶上独立短蒸汽、左上干草束、左窗格与树干的全部形状位置，不加减任何家具、道具或挂件。桌面中央仍是一大片空白木面，右侧约40%连续空灰泥墙。绝不在桌面或右墙画UI框。\n只调时段与颜色：窗外树形不动，天空为暗灰青平涂夜色；室内由画面外左上方柔和暖灯照亮，不增加画内灯具。木台与研钵亮度足以辨识，阴影偏灰青。玻璃瓶保持灰青暖灰哑光平涂，无摄影反光；陶壶不发光，茶汽只是一缕浅色细线。夜色用平涂颜色表达，没有灯光光圈、光束、泛光或金边。\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, UI, labels. 无人物、任何文字数字、空白招牌、空吊签、牌匾、格子面板、标签或边框。保持第一张的横向原始画布尺寸与全幅边缘。",
+      "ref_paths": [
+        "assets/_incoming/a1r_real/S05/day_C.png",
+        "assets/_incoming/a1r_pilot/candidate_3.png"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "elapsed_ms": 72671
+        }
+      ],
+      "status": "complete",
+      "sha256": "df15d23a2537b5b74744a338be6330de985bfbb56336db8d0d889f82f1670d77",
+      "native_size": [
+        1672,
+        941
+      ],
+      "source_resolution": "native_tool_output",
+      "original_bytes_preserved": true,
+      "generation_tool": "image_gen.imagegen",
+      "visual_review": {
+        "status": "pass",
+        "ai_artifacts": {
+          "glow": {
+            "passed": true,
+            "reason": "无光圈光束；陶壶和短蒸汽不发光，夜色仅用平涂颜色表达。"
+          },
+          "gold_patterns": {
+            "passed": true,
+            "reason": "天平只是哑光赭黄材质，无金色花纹、雕刻或金边。"
+          },
+          "structure": {
+            "passed": true,
+            "reason": "研钵和研杵、桌边桌脚、天平单横梁和两盘结构清楚。"
+          },
+          "unrecognizable_objects": {
+            "passed": true,
+            "reason": "仅研钵、天平、两瓶、陶壶和一束干草，各件功能可辨。"
+          },
+          "excess_symmetry": {
+            "passed": true,
+            "reason": "用具集中左侧，桌面空区和右侧墙形成自然不对称。"
+          },
+          "plastic_gloss": {
+            "passed": true,
+            "reason": "玻璃使用灰青平涂，无摄影高光；木和石有可见哑光笔触。"
+          }
+        },
+        "scene_checks": {
+          "full_bleed": {
+            "passed": true,
+            "reason": "木台、墙、窗和地面铺满画布，无卡片边框。"
+          },
+          "no_baked_text": {
+            "passed": true,
+            "reason": "无标签、文字数字、空招牌、UI或牌匾。"
+          },
+          "work_area": {
+            "passed": true,
+            "reason": "工作台中央留一大片连续空木面。"
+          },
+          "required_layers": {
+            "passed": true,
+            "reason": "上方一束干草与陶壶上方短蒸汽可分别扣出。"
+          },
+          "empty_wall": {
+            "passed": true,
+            "reason": "右侧约40%连续空墙，物件均集中左侧。"
+          },
+          "composition": {
+            "passed": true,
+            "reason": "目视窗格、树干、用具、桌边和干草保持白日布局，未加画内灯具；待后续分层像素检验。"
+          }
+        }
+      },
+      "kind": "composite"
+    },
+    {
+      "id": "S05_day_raw_cleanplate",
+      "kind": "raw_cleanplate",
+      "period": "day",
+      "path": "assets/_incoming/a1r_real/S05/day_raw_cleanplate.png",
+      "source_path": "assets/_incoming/a1r_real/S05/day_raw_cleanplate.png",
+      "original_path": "assets/_incoming/a1r_real/S05/day_C.png",
+      "prompt_version": "round2-style-v2-candidate3",
+      "prompt": "对附件S05白日工坊完整合成C做局部移除补底，输出同尺寸1672×941的raw cleanplate B_all。只有两类物件需要移除：左上方墙边悬挂的一束干草（包括草束、绑绳和挂线，用相同灰泥墙补齐）；以及桌后陶壶盖上方的一缕白色蒸汽（只去汽线，用同光线墙面补齐）。陶壶本体、盖子、壶嘴、壶脚完全保留原位，器皿是静态家具，不能消失或变形。\n除此以外所有东西都原样保留：左窗和窗外树、木工作台的桌面和支撑腿、左前石研钵与木研杵、左后单横梁双盘天平、两只灰青/暖灰瓶、桌面空区、右侧连续空墙和地面。不要移动、缩放、添加任何物件；不要改镜头构图或白日亮度，不要对整图换风格。补墙仅用附件相同的哑光水粉平涂与可见干笔，保留奶油暖灰、木棕、鼠尾草、灰青等七色族。无文字、数字、人物、空牌匾、UI、边框、发光、金纹、塑料反光。未经编辑的区域尽可能逐像素原样。原图画布边缘和分辨率不得变化。",
+      "ref_paths": [
+        "assets/_incoming/a1r_real/S05/day_C.png"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "elapsed_ms": 22668,
+          "output_path": "assets/_incoming/a1r_real/S05/day_raw_cleanplate.png",
+          "sha256": "ce384d2461475f166691cb5f95509c90d4cbdbae0f74b67387c9f5c67b5392b5",
+          "native_size": [
+            1672,
+            941
+          ],
+          "visual_review": "pass"
+        }
+      ],
+      "status": "complete",
+      "sha256": "ce384d2461475f166691cb5f95509c90d4cbdbae0f74b67387c9f5c67b5392b5",
+      "native_size": [
+        1672,
+        941
+      ],
+      "source_resolution": "native_tool_output",
+      "original_bytes_preserved": true,
+      "generation_tool": "image_gen.imagegen",
+      "requires_cover_normalization": false,
+      "visual_review": {
+        "status": "pass",
+        "ai_artifacts": {
+          "glow": {
+            "passed": true,
+            "reason": "补底保留原有哑光平涂光线，无新光圈光束。"
+          },
+          "gold_patterns": {
+            "passed": true,
+            "reason": "无新金边或金色花纹。"
+          },
+          "structure": {
+            "passed": true,
+            "reason": "静态家具结构目视保持，移除处补出连续墙、布面或街景。"
+          },
+          "unrecognizable_objects": {
+            "passed": true,
+            "reason": "未新增零碎物件，移除目标清楚。"
+          },
+          "excess_symmetry": {
+            "passed": true,
+            "reason": "保持原有不对称构图，没有新增对称装饰。"
+          },
+          "plastic_gloss": {
+            "passed": true,
+            "reason": "补底与原画同为可见干笔的哑光水粉，无塑料反光。"
+          }
+        },
+        "removed_targets": {
+          "passed": true,
+          "reason": "干草和蒸汽已移除，陶壶/研钵/天平/瓶均保留。"
+        },
+        "pixel_preservation": {
+          "status": "pending",
+          "reason": "这是内置编辑rawB，不能冒称编辑区外像素不变；后处理只贴mask局部并严格验ROI。"
+        }
+      }
+    },
+    {
+      "id": "S05_night_raw_cleanplate",
+      "kind": "raw_cleanplate",
+      "period": "night",
+      "path": "assets/_incoming/a1r_real/S05/night_raw_cleanplate_attempt2.png",
+      "source_path": "assets/_incoming/a1r_real/S05/night_raw_cleanplate_attempt2.png",
+      "original_path": "assets/_incoming/a1r_real/S05/night_C.png",
+      "prompt_version": "round2-style-v2-candidate3",
+      "prompt": "对附件S05夜间工坊完整合成C做局部移除补底，输出同尺寸1672×941的raw cleanplate B_all。只有两类物件需要移除：左上方墙边悬挂的一束干草（包括草束、绑绳和挂线，用相同灰泥墙补齐）；以及桌后陶壶盖上方的一缕白色蒸汽（只去汽线，用同光线墙面补齐）。陶壶本体、盖子、壶嘴、壶脚完全保留原位，器皿是静态家具，不能消失或变形。\n除此以外所有东西都原样保留：左窗和窗外树、木工作台的桌面和支撑腿、左前石研钵与木研杵、左后单横梁双盘天平、两只灰青/暖灰瓶、桌面空区、右侧连续空墙和地面。不要移动、缩放、添加任何物件；不要改镜头构图或夜间亮度，不要对整图换风格。补墙仅用附件相同的哑光水粉平涂与可见干笔，保留奶油暖灰、木棕、鼠尾草、灰青等七色族。无文字、数字、人物、空牌匾、UI、边框、发光、金纹、塑料反光。未经编辑的区域尽可能逐像素原样。原图画布边缘和分辨率不得变化。 保持附件窗外深灰青夜色和左侧画外暖灯的原有平涂色，不能恢复成白天，不能增加任何灯具。 上次输出少了一列像素，验收不通过。本次必须保持附件原始画布宽1672高941，不能输出1671宽或裁去边缘。只移干草与蒸汽，陶壶等其它物件不要变。",
+      "ref_paths": [
+        "assets/_incoming/a1r_real/S05/night_C.png"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "elapsed_ms": 46432,
+          "output_path": "assets/_incoming/a1r_real/S05/night_raw_cleanplate.png",
+          "sha256": "01f045a837974fe1a3d6795630cbc8fb750a37b9fb25cb69595a3a7713ee8a3e",
+          "native_size": [
+            1671,
+            941
+          ],
+          "visual_review": "pass",
+          "note": "原生宽度比C少1px，允许真实cover归一化；不是AI质量失败。第2次在无需重试指示到达前已完成，选同幅输出。"
+        },
+        {
+          "attempt": 2,
+          "status": "complete",
+          "prompt": "对附件S05夜间工坊完整合成C做局部移除补底，输出同尺寸1672×941的raw cleanplate B_all。只有两类物件需要移除：左上方墙边悬挂的一束干草（包括草束、绑绳和挂线，用相同灰泥墙补齐）；以及桌后陶壶盖上方的一缕白色蒸汽（只去汽线，用同光线墙面补齐）。陶壶本体、盖子、壶嘴、壶脚完全保留原位，器皿是静态家具，不能消失或变形。\n除此以外所有东西都原样保留：左窗和窗外树、木工作台的桌面和支撑腿、左前石研钵与木研杵、左后单横梁双盘天平、两只灰青/暖灰瓶、桌面空区、右侧连续空墙和地面。不要移动、缩放、添加任何物件；不要改镜头构图或夜间亮度，不要对整图换风格。补墙仅用附件相同的哑光水粉平涂与可见干笔，保留奶油暖灰、木棕、鼠尾草、灰青等七色族。无文字、数字、人物、空牌匾、UI、边框、发光、金纹、塑料反光。未经编辑的区域尽可能逐像素原样。原图画布边缘和分辨率不得变化。 保持附件窗外深灰青夜色和左侧画外暖灯的原有平涂色，不能恢复成白天，不能增加任何灯具。 上次输出少了一列像素，验收不通过。本次必须保持附件原始画布宽1672高941，不能输出1671宽或裁去边缘。只移干草与蒸汽，陶壶等其它物件不要变。",
+          "elapsed_ms": 37163,
+          "output_path": "assets/_incoming/a1r_real/S05/night_raw_cleanplate_attempt2.png",
+          "sha256": "91249583d26b87150113a5d1fcb57ecc4edf1a5a85f86b82fab4172c02d0157b",
+          "native_size": [
+            1672,
+            941
+          ],
+          "visual_review": "pass"
+        }
+      ],
+      "status": "complete",
+      "sha256": "91249583d26b87150113a5d1fcb57ecc4edf1a5a85f86b82fab4172c02d0157b",
+      "native_size": [
+        1672,
+        941
+      ],
+      "source_resolution": "native_tool_output",
+      "original_bytes_preserved": true,
+      "generation_tool": "image_gen.imagegen",
+      "requires_cover_normalization": false,
+      "visual_review": {
+        "status": "pass",
+        "ai_artifacts": {
+          "glow": {
+            "passed": true,
+            "reason": "补底保留原有哑光平涂光线，无新光圈光束。"
+          },
+          "gold_patterns": {
+            "passed": true,
+            "reason": "无新金边或金色花纹。"
+          },
+          "structure": {
+            "passed": true,
+            "reason": "静态家具结构目视保持，移除处补出连续墙、布面或街景。"
+          },
+          "unrecognizable_objects": {
+            "passed": true,
+            "reason": "未新增零碎物件，移除目标清楚。"
+          },
+          "excess_symmetry": {
+            "passed": true,
+            "reason": "保持原有不对称构图，没有新增对称装饰。"
+          },
+          "plastic_gloss": {
+            "passed": true,
+            "reason": "补底与原画同为可见干笔的哑光水粉，无塑料反光。"
+          }
+        },
+        "removed_targets": {
+          "passed": true,
+          "reason": "干草和蒸汽已移除，陶壶/研钵/天平/瓶均保留。"
+        },
+        "pixel_preservation": {
+          "status": "pending",
+          "reason": "这是内置编辑rawB，不能冒称编辑区外像素不变；后处理只贴mask局部并严格验ROI。"
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "真实扣层、多边形边缘复核和单层/全部层严格ROI重组尚待共用工具处理。",
+    "rawB原始字节保留；尺寸有差异时只生成独立equal-aspect cover/Lanczos归一化工作副本并记真实变换。",
+    "未修改正式v2、中央manifest、运行图或游戏配置。"
+  ],
+  "art_passed": false
+}

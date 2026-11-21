@@ -1,0 +1,329 @@
+{
+  "version": 1,
+  "scene_id": "S05",
+  "period": "day",
+  "revision": "real3",
+  "native_size": [
+    1672,
+    941
+  ],
+  "original_path": "assets/_incoming/a1r_real/S05/day_C.png",
+  "raw_cleanplate_path": "assets/_incoming/a1r_real/S05/day_raw_cleanplate.png",
+  "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+  "composite_prompt": "为 Godot 游戏《零点杂货铺》制作 S05 制作工坊白日版原始完整合成C。附件是选定风格参考，只借用纸面厚涂笔触、哑光材质、低饱和七色族与柔和光线，不复制参考中的前台柜台/绿色门帘布局。单张横向16:9全幅场景，尽可能原生2560×1440或工具实际最大16:9尺寸，无边框。\n主体：俯视三分之四角度看一张质朴的旧木工坊工作台，桌子占左下至中央，墙和空间向右延伸。桌面中央一大片干净空白木面，用于日后叠放Godot制作操作；不是画空白UI牌子。桌左边只有一只清楚的大石研钵和木研杵；左后角一架简单、结构正确的哑光小黄铜天平（一个横梁和两只浅盘，绝无装饰花纹）；旁边两只形状简单的无标签小玻璃瓶，玻璃用灰青/暖灰平涂，不画摄影反射。左上墙边悬一小束干草，草束和挂线形状分离清楚供后续扣层。台面后边一只很简单的陶蒸汽壶/低矮蒸汽口，顶部有一缕短短的细蒸汽，蒸汽与器具明显分开，作为后续独立层。窗外日光从左上漫射进来，右侧至少30%为没有搁板、摆件、管线、画框的空奶油暖灰墙，下方12%保持简单地面。所有可动件在本张C里，后续只按真实像素扣层，不另画相似物件。道具少于15个，只有一个视觉重点：安静的木台与研钵。\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse daylight, cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, UI, labels. 绝无人物、字母、汉字、数字、名字、空白牌匾/空吊签/标签、格子面板、UI、边框。不要满墙干草和零碎，不加紫藤，不加发光魔法道具，不画任何金币或金色纹样。",
+  "cleanplate_prompt": "对附件S05白日工坊完整合成C做局部移除补底，输出同尺寸1672×941的raw cleanplate B_all。只有两类物件需要移除：左上方墙边悬挂的一束干草（包括草束、绑绳和挂线，用相同灰泥墙补齐）；以及桌后陶壶盖上方的一缕白色蒸汽（只去汽线，用同光线墙面补齐）。陶壶本体、盖子、壶嘴、壶脚完全保留原位，器皿是静态家具，不能消失或变形。\n除此以外所有东西都原样保留：左窗和窗外树、木工作台的桌面和支撑腿、左前石研钵与木研杵、左后单横梁双盘天平、两只灰青/暖灰瓶、桌面空区、右侧连续空墙和地面。不要移动、缩放、添加任何物件；不要改镜头构图或白日亮度，不要对整图换风格。补墙仅用附件相同的哑光水粉平涂与可见干笔，保留奶油暖灰、木棕、鼠尾草、灰青等七色族。无文字、数字、人物、空牌匾、UI、边框、发光、金纹、塑料反光。未经编辑的区域尽可能逐像素原样。原图画布边缘和分辨率不得变化。",
+  "layers": [
+    {
+      "id": "dried_grass",
+      "polygons": [
+        [
+          [
+            391,
+            37
+          ],
+          [
+            420,
+            37
+          ],
+          [
+            427,
+            112
+          ],
+          [
+            437,
+            158
+          ],
+          [
+            452,
+            177
+          ],
+          [
+            474,
+            195
+          ],
+          [
+            488,
+            224
+          ],
+          [
+            493,
+            251
+          ],
+          [
+            486,
+            281
+          ],
+          [
+            472,
+            311
+          ],
+          [
+            450,
+            335
+          ],
+          [
+            425,
+            356
+          ],
+          [
+            403,
+            355
+          ],
+          [
+            379,
+            343
+          ],
+          [
+            357,
+            322
+          ],
+          [
+            346,
+            294
+          ],
+          [
+            344,
+            264
+          ],
+          [
+            344,
+            235
+          ],
+          [
+            344,
+            210
+          ],
+          [
+            350,
+            188
+          ],
+          [
+            370,
+            161
+          ],
+          [
+            383,
+            124
+          ],
+          [
+            388,
+            82
+          ]
+        ],
+        [
+          [
+            420,
+            68
+          ],
+          [
+            428,
+            98
+          ],
+          [
+            433,
+            123
+          ],
+          [
+            444,
+            158
+          ],
+          [
+            460,
+            183
+          ],
+          [
+            474,
+            197
+          ],
+          [
+            486,
+            219
+          ],
+          [
+            500,
+            244
+          ],
+          [
+            503,
+            268
+          ],
+          [
+            494,
+            294
+          ],
+          [
+            489,
+            313
+          ],
+          [
+            476,
+            333
+          ],
+          [
+            461,
+            347
+          ],
+          [
+            444,
+            353
+          ],
+          [
+            452,
+            333
+          ],
+          [
+            463,
+            309
+          ],
+          [
+            474,
+            281
+          ],
+          [
+            479,
+            251
+          ],
+          [
+            471,
+            224
+          ],
+          [
+            451,
+            192
+          ],
+          [
+            433,
+            160
+          ],
+          [
+            424,
+            124
+          ],
+          [
+            417,
+            97
+          ]
+        ]
+      ],
+      "pivot_px": [
+        405,
+        46
+      ],
+      "z_index": 1,
+      "motion": {
+        "type": "pendulum",
+        "parameters": {
+          "amplitude_px": 4,
+          "frequency_hz": 0.28,
+          "max_degrees": 1.5,
+          "damping": 3.5,
+          "stiffness": 8
+        }
+      }
+    },
+    {
+      "id": "steam",
+      "polygons": [
+        [
+          [
+            692,
+            349
+          ],
+          [
+            703,
+            360
+          ],
+          [
+            704,
+            374
+          ],
+          [
+            698,
+            385
+          ],
+          [
+            687,
+            399
+          ],
+          [
+            686,
+            407
+          ],
+          [
+            693,
+            422
+          ],
+          [
+            696,
+            438
+          ],
+          [
+            689,
+            452
+          ],
+          [
+            685,
+            466
+          ],
+          [
+            673,
+            466
+          ],
+          [
+            675,
+            449
+          ],
+          [
+            680,
+            437
+          ],
+          [
+            677,
+            427
+          ],
+          [
+            668,
+            414
+          ],
+          [
+            668,
+            402
+          ],
+          [
+            672,
+            387
+          ],
+          [
+            683,
+            374
+          ],
+          [
+            686,
+            368
+          ],
+          [
+            685,
+            357
+          ]
+        ]
+      ],
+      "pivot_px": [
+        681,
+        460
+      ],
+      "z_index": 2,
+      "motion": {
+        "type": "flow",
+        "parameters": {
+          "speed_px_s": 4,
+          "distortion_px": 2
+        }
+      }
+    }
+  ],
+  "notes": [
+    "人工按本期真实C原生坐标标多边形，不独立生成相似Li。",
+    "rawB仅在softmask局部补回C，1px羽化/6px授权及ROI由共用工具验证。",
+    "静态器皿/树干/门框保持原始C。"
+  ]
+}

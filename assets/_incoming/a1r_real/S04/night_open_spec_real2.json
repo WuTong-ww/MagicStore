@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "scene_id": "S04",
+  "period": "night",
+  "state": "open",
+  "revision": "real2",
+  "native_size": [
+    1672,
+    941
+  ],
+  "original_path": "assets/_incoming/a1r_real/S04/night_open_C.png",
+  "raw_cleanplate_path": "assets/_incoming/a1r_real/S04/night_open_raw_cleanplate.png",
+  "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+  "composite_prompt": "Use case: lighting-weather.\nAsset type: S04 storage cupboard NIGHT OPEN full scene composite, paired with existing DAY OPEN.\nInput Image 1 is the exact EDIT TARGET. Preserve the camera, composition, crop, every cabinet board and foot, the four completely EMPTY shelf tiers, both doors in the same open outward positions, lower two drawers and their knobs, pendant lamp silhouette/cord, wall, floor and far-right stockroom doorway. Preserve the same native dimensions. Change ONLY daylight into restrained indoor night lighting.\nThe existing pendant lamp is switched ON with a small flat cream-ochre painted interior under its shade. Keep the lamp's silhouette unchanged. Ambient room colors are dimmer, cool dusty teal and warm grey in the shelves and stockroom; wood remains readable warm walnut. Paint soft broad shadows with no light ray, pool graphic, bloom, outer halo or luminous aura. Rightmost wall and bottom floor stay empty and low detail. Do not add windows, candles, wall sconces, stock objects or plants.\nKeep gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly colored-pencil outlines, simplified forms and imperfect perspective, seven muted color families (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), matte paper.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, gloss, plastic, photorealism, hyper-detailed clutter, wisteria, text, letters, numbers, UI, labels, empty plaques, frames, borders.",
+  "cleanplate_prompt": "Use case: precise-object-edit.\nAsset type: S04 NIGHT OPEN raw cleanplate B_all, used beneath true extracted door and lamp layers.\nInput Image 1 is the exact EDIT TARGET. Remove ONLY the following movable objects: BOTH open upper cupboard door leaves, including any hinges belonging to the leaves, and the hanging pendant lamp together with its vertical cord. Fill the former door-wing and lamp locations with the same plain cream plaster wall behind them.\nIMPORTANT: Keep the cabinet's fixed outer frame, top crown board, inner left/right rails, three horizontal empty shelf boards forming four empty tiers, rear wooden panels, bottom floor of the cabinet, both bottom drawers with their knobs, feet and every fixed structural board. The cabinet must remain a fully plausible open cupboard with no doors attached, not an empty hole or a new shape. All shelves remain entirely bare.\nKeep camera, crop, cabinet scale and exact position, floor, far-right stockroom doorway, nighttime cool-grey/teal shadows and warm walnut colors, light and every unrelated pixel unchanged as closely as possible. No extra shelves, jars, books, plants, labels or objects. Preserve visible gouache brush strokes, dry-brush marks, slightly wobbly colored-pencil edges, seven muted color families and matte paper. Full-bleed landscape at the same native dimensions.\nNEGATIVE: glow, bloom, rays, glossy plastic, photorealism, ornate carving, gold filigree, clutter, text, letters, numbers, UI, labels, blank plaques, borders.\nImportant: the lamp OBJECT and cord disappear, but the existing room nighttime lighting and overall brightness remain unchanged; do not relight as day or add a replacement light source.",
+  "annotation_notes": "Second native annotation pads beyond visible door/lamp outlines so 1px feather does not leave ghost contours; closed-door seam is one continuous mask. No QA thresholds changed.",
+  "layers": [
+    {
+      "id": "door_open",
+      "polygons": [
+        [
+          [
+            139,
+            29
+          ],
+          [
+            314,
+            91
+          ],
+          [
+            316,
+            750
+          ],
+          [
+            139,
+            802
+          ]
+        ],
+        [
+          [
+            956,
+            90
+          ],
+          [
+            1135,
+            28
+          ],
+          [
+            1135,
+            802
+          ],
+          [
+            956,
+            746
+          ]
+        ]
+      ],
+      "pivot_px": [
+        307,
+        421
+      ],
+      "z_index": 1,
+      "motion": {
+        "type": "static",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "lamp",
+      "polygons": [
+        [
+          [
+            84,
+            0
+          ],
+          [
+            101,
+            0
+          ],
+          [
+            101,
+            62
+          ],
+          [
+            114,
+            65
+          ],
+          [
+            116,
+            80
+          ],
+          [
+            132,
+            89
+          ],
+          [
+            143,
+            111
+          ],
+          [
+            150,
+            145
+          ],
+          [
+            145,
+            157
+          ],
+          [
+            35,
+            158
+          ],
+          [
+            29,
+            147
+          ],
+          [
+            38,
+            113
+          ],
+          [
+            48,
+            88
+          ],
+          [
+            66,
+            78
+          ],
+          [
+            68,
+            62
+          ],
+          [
+            84,
+            61
+          ]
+        ]
+      ],
+      "pivot_px": [
+        92,
+        0
+      ],
+      "z_index": 2,
+      "motion": {
+        "type": "pendulum",
+        "parameters": {
+          "amplitude": 0.4,
+          "frequency": 0.25
+        }
+      }
+    }
+  ]
+}

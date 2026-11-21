@@ -870,18 +870,22 @@ def make_handler(config, topics, limits, model=call_model, profile_model=call_pr
                     result = normalize_event_proposal(event_model(context, config), context)
                 else:
                     result = normalize_profile(profile_model(context, config))
-                return self.send_json(200, result, "online")
+                response = (200, result, "online")
             except (ValueError, KeyError, TypeError, IndexError, OSError, urllib.error.URLError):
                 if self.path == "/v1/dialogue":
-                    return self.send_json(200, offline_dialogue(request, topics,
-                                          verified_intent=selection_state.get("intent", ""), allow_keywords=False), "offline")
-                if self.path == "/v1/profile/choices":
-                    return self.send_json(200, offline_profile_choices(context, profile_options), "offline")
-                if self.path == "/v1/event-proposal":
-                    return self.send_json(200, {"candidate_id": "no_action", "trigger_id": context["trigger_id"]}, "offline")
-                return self.send_json(502, {"error": "UPSTREAM_INVALID_OR_UNAVAILABLE"})
+                    response = (200, offline_dialogue(request, topics,
+                                verified_intent=selection_state.get("intent", ""), allow_keywords=False), "offline")
+                elif self.path == "/v1/profile/choices":
+                    response = (200, offline_profile_choices(context, profile_options), "offline")
+                elif self.path == "/v1/event-proposal":
+                    response = (200, {"candidate_id": "no_action", "trigger_id": context["trigger_id"]}, "offline")
+                else:
+                    response = (502, {"error": "UPSTREAM_INVALID_OR_UNAVAILABLE"})
             finally:
                 limiter.release()
+            # A client can consume the complete body before this worker is
+            # scheduled again. Release model capacity before publishing it.
+            return self.send_json(*response)
     return Handler
 
 

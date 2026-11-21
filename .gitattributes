@@ -15,4 +15,8 @@
 # Preserve upstream license bytes so the recorded SHA256 survives checkout.
 assets/audio/KENNEY-LICENSE.txt -text
 assets/fonts/LXGWWenKai-OFL.txt -text
+# These generated provenance receipts are hashed as encoded bytes. Preserve
+# their original line endings so checkout cannot invalidate their SHA256.
+assets/_incoming/**/receipt.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/generated_scenes/v3_real/**/receipt.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 * !text !filter !merge !diff

@@ -1,0 +1,238 @@
+{
+  "version": 1,
+  "kind": "real_scene_registry",
+  "preview_only": true,
+  "art_passed": false,
+  "manifest": "assets/ART_ASSET_MANIFEST.json",
+  "baseline": "data/art/scene_preview.json",
+  "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+  "style_sha256": "391ef0b702653eaf7a2bf98f90595bb12502587b6bcc9f0b5653aecdf9766833",
+  "generation_receipts": [
+    "assets/_incoming/a1r_real/S01/receipt.json",
+    "assets/_incoming/a1r_real/S02/receipt.json",
+    "assets/_incoming/a1r_real/S03/receipt.json",
+    "assets/_incoming/a1r_real/S04/receipt.json",
+    "assets/_incoming/a1r_real/S05/receipt.json",
+    "assets/_incoming/a1r_real/S06/receipt.json",
+    "assets/_incoming/a1r_real/S07/receipt.json"
+  ],
+  "selected_receipts": [
+    {
+      "scene_id": "S01",
+      "period": "day",
+      "receipt_path": "assets/generated_scenes/v3_real/S01/day/real4/receipt.json"
+    },
+    {
+      "scene_id": "S01",
+      "period": "night",
+      "receipt_path": "assets/generated_scenes/v3_real/S01/night/real4/receipt.json"
+    },
+    {
+      "scene_id": "S01",
+      "period": "closed",
+      "receipt_path": "assets/generated_scenes/v3_real/S01/closed/real4/receipt.json"
+    },
+    {
+      "scene_id": "S02",
+      "period": "day",
+      "receipt_path": "assets/generated_scenes/v3_real/S02/day/real3/receipt.json"
+    },
+    {
+      "scene_id": "S02",
+      "period": "night",
+      "receipt_path": "assets/generated_scenes/v3_real/S02/night/real3/receipt.json"
+    },
+    {
+      "scene_id": "S03",
+      "period": "day",
+      "receipt_path": "assets/generated_scenes/v3_real/S03/day/real3/receipt.json"
+    },
+    {
+      "scene_id": "S03",
+      "period": "night",
+      "receipt_path": "assets/generated_scenes/v3_real/S03/night/real3/receipt.json"
+    },
+    {
+      "scene_id": "S04",
+      "period": "day",
+      "state": "open",
+      "receipt_path": "assets/generated_scenes/v3_real/S04/day_open/real3/receipt.json"
+    },
+    {
+      "scene_id": "S04",
+      "period": "day",
+      "state": "closed",
+      "receipt_path": "assets/generated_scenes/v3_real/S04/day_closed/real3/receipt.json"
+    },
+    {
+      "scene_id": "S04",
+      "period": "night",
+      "state": "open",
+      "receipt_path": "assets/generated_scenes/v3_real/S04/night_open/real3/receipt.json"
+    },
+    {
+      "scene_id": "S04",
+      "period": "night",
+      "state": "closed",
+      "receipt_path": "assets/generated_scenes/v3_real/S04/night_closed/real3/receipt.json"
+    },
+    {
+      "scene_id": "S05",
+      "period": "day",
+      "receipt_path": "assets/generated_scenes/v3_real/S05/day/real3/receipt.json"
+    },
+    {
+      "scene_id": "S05",
+      "period": "night",
+      "receipt_path": "assets/generated_scenes/v3_real/S05/night/real3/receipt.json"
+    },
+    {
+      "scene_id": "S06",
+      "period": "day",
+      "receipt_path": "assets/generated_scenes/v3_real/S06/day/real2/receipt.json"
+    },
+    {
+      "scene_id": "S06",
+      "period": "night",
+      "receipt_path": "assets/generated_scenes/v3_real/S06/night/real3/receipt.json"
+    },
+    {
+      "scene_id": "S07",
+      "period": "day",
+      "receipt_path": "assets/generated_scenes/v3_real/S07/day/real4/receipt.json"
+    },
+    {
+      "scene_id": "S07",
+      "period": "night",
+      "receipt_path": "assets/generated_scenes/v3_real/S07/night/real4/receipt.json"
+    }
+  ],
+  "scene_overrides": {
+    "S01": {},
+    "S02": {
+      "hotspots": {
+        "exterior": {
+          "rect": [
+            336.842105,
+            244.593301,
+            107.177033,
+            336.842105
+          ],
+          "label_position": [
+            390.430622,
+            382.392344
+          ]
+        },
+        "market": {
+          "rect": [
+            466.985646,
+            275.215311,
+            260.287081,
+            214.354067
+          ],
+          "label_position": [
+            597.129187,
+            359.425837
+          ]
+        },
+        "inventory": {
+          "rect": [
+            466.985646,
+            543.157895,
+            267.942584,
+            229.665072
+          ],
+          "label_position": [
+            604.784689,
+            680.956938
+          ]
+        },
+        "consultation": {
+          "rect": [
+            1010.526316,
+            244.593301,
+            459.330144,
+            535.885167
+          ],
+          "label_position": [
+            1255.502392,
+            627.368421
+          ]
+        },
+        "workshop": {
+          "rect": [
+            1301.435407,
+            948.899522,
+            321.5311,
+            137.799043
+          ],
+          "label_position": [
+            1462.200957,
+            1017.799043
+          ]
+        },
+        "letter": {
+          "rect": [
+            459.330144,
+            1117.320574,
+            336.842105,
+            107.177033
+          ],
+          "label_position": [
+            627.751196,
+            1163.253589
+          ]
+        }
+      }
+    },
+    "S03": {
+      "seat_compact_rect": [
+        535.885167,
+        152.727273,
+        581.818182,
+        888.038278
+      ],
+      "seat_narrow_rect": [
+        535.885167,
+        152.727273,
+        581.818182,
+        888.038278
+      ]
+    },
+    "S04": {
+      "hotspots": {
+        "cabinet": {
+          "rect": [
+            535.885167,
+            282.870813,
+            842.105263,
+            91.866029
+          ],
+          "label_position": [
+            956.937799,
+            328.803828
+          ]
+        }
+      }
+    },
+    "S05": {},
+    "S06": {},
+    "S07": {}
+  },
+  "seat_source_overrides": {
+    "S03": {
+      "rect": [
+        350,
+        100,
+        380,
+        580
+      ],
+      "native_size": [
+        1672,
+        941
+      ],
+      "scale": 1
+    }
+  },
+  "notes": "仅输出拟稿；根任务填写实际热区、座位源坐标及最终S03/S06版本后执行。正式v2保持不变。所有透明层美术缺口继续保留，geometry_passed不等于art_passed。"
+}

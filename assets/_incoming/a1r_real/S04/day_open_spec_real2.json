@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "scene_id": "S04",
+  "period": "day",
+  "state": "open",
+  "revision": "real2",
+  "native_size": [
+    1672,
+    941
+  ],
+  "original_path": "assets/_incoming/a1r_real/S04/day_open_C.png",
+  "raw_cleanplate_path": "assets/_incoming/a1r_real/S04/day_open_raw_cleanplate.png",
+  "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+  "composite_prompt": "Use case: stylized-concept.\nAsset type: complete original scene composite C, S04 storage cabinet, DAY with cupboard doors OPEN. Full scene artwork for a game, not a UI mockup.\nInput Image 1 is STYLE REFERENCE ONLY: copy its visibly brushed matte gouache and sparse hand-drawn colored-pencil outlines, not its room objects.\nSubject: front view of one tall wide plain walnut wooden storage cupboard occupying the left 65 percent. Three broad continuous horizontal EMPTY shelf boards form four open storage tiers. Every shelf is entirely bare for game items added later. The cabinet has two plain solid wooden door leaves hinged at the outer left and outer right, both swung open outwards so the shelf interior remains visible. Simple physically credible hinges and planks; no glass, labels, plaque holders or carvings. At the very bottom are just two simple broad drawers with one small plain round knob each. The whole cabinet, including both open door leaves and its simple feet, fits inside the painting.\nOne small simple matte ochre pendant lamp hangs near the cabinet's upper-left, a readable dome shade and short straight cord; no fanciful metalwork. No other objects. No wisteria or plant here.\nComposition: 16:9 wide, full bleed. Rightmost 30 percent is mostly empty cream plaster wall with a simple dim stockroom doorway at the far right edge, without a sign. Bottom 12 percent plain muted warm-grey floor. Sparse and calm, one focal point. Do not arrange shelves as individual square cells.\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse daylight, cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, numbers, UI, labels, empty labels, blank plaques, interface frames, borders, jars, books, bottles, baskets, stock on shelves.\nRequested native 2560×1440 if available; otherwise use actual largest native 16:9. No resolution text.",
+  "cleanplate_prompt": "Use case: precise-object-edit.\nAsset type: S04 DAY OPEN raw cleanplate B_all, used beneath true extracted door and lamp layers.\nInput Image 1 is the exact EDIT TARGET. Remove ONLY the following movable objects: BOTH open upper cupboard door leaves, including any hinges belonging to the leaves, and the hanging pendant lamp together with its vertical cord. Fill the former door-wing and lamp locations with the same plain cream plaster wall behind them.\nIMPORTANT: Keep the cabinet's fixed outer frame, top crown board, inner left/right rails, three horizontal empty shelf boards forming four empty tiers, rear wooden panels, bottom floor of the cabinet, both bottom drawers with their knobs, feet and every fixed structural board. The cabinet must remain a fully plausible open cupboard with no doors attached, not an empty hole or a new shape. All shelves remain entirely bare.\nKeep camera, crop, cabinet scale and exact position, floor, far-right stockroom doorway, daytime colors, light and every unrelated pixel unchanged as closely as possible. No extra shelves, jars, books, plants, labels or objects. Preserve visible gouache brush strokes, dry-brush marks, slightly wobbly colored-pencil edges, seven muted color families and matte paper. Full-bleed landscape at the same native dimensions.\nNEGATIVE: glow, bloom, rays, glossy plastic, photorealism, ornate carving, gold filigree, clutter, text, letters, numbers, UI, labels, blank plaques, borders.",
+  "annotation_notes": "Second native annotation pads beyond visible door/lamp outlines so 1px feather does not leave ghost contours; closed-door seam is one continuous mask. No QA thresholds changed.",
+  "layers": [
+    {
+      "id": "door_open",
+      "polygons": [
+        [
+          [
+            139,
+            29
+          ],
+          [
+            314,
+            91
+          ],
+          [
+            316,
+            750
+          ],
+          [
+            139,
+            802
+          ]
+        ],
+        [
+          [
+            956,
+            90
+          ],
+          [
+            1135,
+            28
+          ],
+          [
+            1135,
+            802
+          ],
+          [
+            956,
+            746
+          ]
+        ]
+      ],
+      "pivot_px": [
+        307,
+        421
+      ],
+      "z_index": 1,
+      "motion": {
+        "type": "static",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "lamp",
+      "polygons": [
+        [
+          [
+            84,
+            0
+          ],
+          [
+            101,
+            0
+          ],
+          [
+            101,
+            62
+          ],
+          [
+            114,
+            65
+          ],
+          [
+            116,
+            80
+          ],
+          [
+            132,
+            89
+          ],
+          [
+            143,
+            111
+          ],
+          [
+            150,
+            145
+          ],
+          [
+            145,
+            157
+          ],
+          [
+            35,
+            158
+          ],
+          [
+            29,
+            147
+          ],
+          [
+            38,
+            113
+          ],
+          [
+            48,
+            88
+          ],
+          [
+            66,
+            78
+          ],
+          [
+            68,
+            62
+          ],
+          [
+            84,
+            61
+          ]
+        ]
+      ],
+      "pivot_px": [
+        92,
+        0
+      ],
+      "z_index": 2,
+      "motion": {
+        "type": "pendulum",
+        "parameters": {
+          "amplitude": 0.4,
+          "frequency": 0.25
+        }
+      }
+    }
+  ]
+}

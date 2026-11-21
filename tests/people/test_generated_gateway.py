@@ -54,9 +54,11 @@ def selected_reply(context, _config):
 
 
 @contextmanager
-def running_gateway(**callbacks):
+def running_gateway(handler_wrapper=None, **callbacks):
     limits = callbacks.pop("limits", gateway.Limits(per_minute=100))
     handler = gateway.make_handler(CONFIG, gateway.load_topics(), limits, **callbacks)
+    if handler_wrapper is not None:
+        handler = handler_wrapper(handler)
     server = ThreadingHTTPServer(("127.0.0.1", 0), handler)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
@@ -239,6 +241,51 @@ class GeneratedGatewayTests(unittest.TestCase):
                 self.assertEqual(post(base, "/v1/person-package", {})[0], 200)
             finally:
                 foreground.release()
+
+    def test_completed_http_response_releases_capacity_before_client_can_request_again(self):
+        def unavailable(_context, _config):
+            raise ValueError("synthetic unavailable model")
+
+        for path, model, creator, expected_status, expected_mode in (
+                ("/v1/dialogue", selected_reply, self.creator, 200, "online"),
+                ("/v1/dialogue", unavailable, self.creator, 200, "offline"),
+                ("/v1/person-package", selected_reply, self.creator, 200, "online"),
+                ("/v1/person-package", selected_reply, unavailable, 502, None)):
+            with self.subTest(path=path, mode=expected_mode):
+                foreground = gateway.Limits(concurrent=1, per_minute=100)
+                background = gateway.Limits(concurrent=1, per_minute=100)
+                response_written = threading.Event()
+                allow_handler_return = threading.Event()
+
+                def pause_after_response(handler_type):
+                    class PausedAfterResponse(handler_type):
+                        def send_json(self, *reply):
+                            super().send_json(*reply)
+                            response_written.set()
+                            # Hold the HTTP worker after the actual complete
+                            # body is visible, making the client/worker race
+                            # deterministic without sleeping or retrying.
+                            allow_handler_return.wait(timeout=3)
+                    return PausedAfterResponse
+
+                with running_gateway(limits=foreground, background_limits=background,
+                                     handler_wrapper=pause_after_response, model=model,
+                                     dialogue_reviewer=approve_dialogue, person_creator=creator,
+                                     person_auditor=approve_person) as base:
+                    try:
+                        request = generated_request() if path == "/v1/dialogue" else {}
+                        status, _body, mode = post(base, path, request)
+                        self.assertEqual((status, mode), (expected_status, expected_mode))
+                        self.assertTrue(response_written.wait(timeout=3))
+                        limiter = foreground if path == "/v1/dialogue" else background
+                        acquired = limiter.acquire()
+                        try:
+                            self.assertTrue(acquired, "a completed response must not retain model capacity")
+                        finally:
+                            if acquired:
+                                limiter.release()
+                    finally:
+                        allow_handler_return.set()
 
     def test_dynamic_catalog_checks_npc_topic_clue_and_effect_authority(self):
         request = generated_request()

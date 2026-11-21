@@ -1,0 +1,6672 @@
+{
+  "version": 1,
+  "kind": "real_pixel_extraction",
+  "processing_script": "tools/art/real_scene_layers.py",
+  "scene_id": "S03",
+  "period": "night",
+  "revision": "real2",
+  "inputs": {
+    "original": {
+      "path": "assets/_incoming/a1r_real/S03/night_C.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "216803b4bf844fed878c4f728239a07d825fb5047968259f0f19ac788a3414ae"
+    },
+    "raw_cleanplate": {
+      "path": "assets/_incoming/a1r_real/S03/night_raw_cleanplate.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "421fdc46f4cb95efe72edac5f6b05eb7dbb1691da922a3508794c29250aca2cf"
+    },
+    "style": {
+      "path": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "391ef0b702653eaf7a2bf98f90595bb12502587b6bcc9f0b5653aecdf9766833"
+    }
+  },
+  "specification": {
+    "version": 1,
+    "scene_id": "S03",
+    "period": "night",
+    "revision": "real2",
+    "native_size": [
+      1672,
+      941
+    ],
+    "original_path": "assets/_incoming/a1r_real/S03/night_C.png",
+    "raw_cleanplate_path": "assets/_incoming/a1r_real/S03/night_raw_cleanplate.png",
+    "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+    "composite_prompt": "编辑第一张图片（S03咨询客厅白日完整合成C）为同一机位、同一构图的夜间灯下版本。第二张图片只提供整套游戏的笔触/配色参考。\n必须保留第一张图全部家具和物件的形状、精确位置、大小、透视和留白：中央偏左的深鼠尾草绿沙发、清楚的空坐位与前坐垫缘、右侧两只靠枕、左侧植物和单幅窗帘、顶部左侧吊灯、左下矮圆茶几、茶杯与独立的短热汽。一件也不加减、不移位、不改镜头，不增加帘或杯子。右侧30%以上空墙和简单地面保持空。\n只改光线与时段：窗外树轮廓保持相同，天空变灰青深蓝的平涂夜色；室内阴影偏灰青，墙和沙发仍足够明亮能辨认。吊灯内面用小块温暖赭黄奶油平涂色表达灯亮，周围没有发光光圈、光束、bloom或金边。整体像纸上画出的夜晚，绝不是黑暗写实光效。\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, UI, labels. 不要任何人物、字母、汉字、数字、名字、空白招牌、空吊签、牌匾、UI或边框。保留原始横向画布尺寸和全部边缘。",
+    "cleanplate_prompt": "对附件这张S03夜间咨询客厅原始完整合成C做局部移除补底，输出同尺寸1672×941的raw cleanplate B_all候选。不要重画房间、不要改构图、镜头、夜间颜色或光照。只在以下物件原占据的位置补出可信的背后表面，其余像素尽可能逐像素保留：\n1. 移除顶部偏左的小吊灯和它的悬线，用连续奶油灰泥墙补齐。\n2. 移除左窗前整幅布帘及布挂环，露出后方原有窗框、灰泥和窗外树；保留木窗框及帘杆，不新增窗格。\n3. 移除左下圆茶几上唯一的陶茶杯及其上方短热汽，补出同笔触连续木桌面和它后面的沙发布面。\n4. 仅将沙发坐垫最前缘、朝镜头凸出的狭窄包边/褶皱（大约x370到1010、y630到705的局部前缘）补成平顺连续绿色布面，这是以后可盖住坐着人物底部的前景遮罩。绝不能删除整个坐垫、坐位、沙发底座、扶手或主体；中央偏左空坐位保留。右边紫色和赭黄色两只装饰靠枕属于静态家具，原位保留。\n保留植物、沙发整体轮廓、两只靠枕、茶几全部桌腿与桌面、左窗外树、右30%以上空墙和地面。补底仍是选定画风的哑光厚涂水粉、可见干笔和少量色铅笔轮廓，保持原笔触与七个低饱和色族，不平滑成塑料。没有人物、文字、数字、空牌匾、UI、边框、金纹、发光晕或光束。不要添加任何新物件。此图是移除背景的raw原生候选，后续会仅取实际mask内区域，所以画布/构图必须不变。 保持附件的深灰青窗外夜色和室内暖灰平涂夜色，不能恢复成白日。",
+    "layers": [
+      {
+        "id": "lamp",
+        "polygons": [
+          [
+            [
+              375,
+              0
+            ],
+            [
+              382,
+              0
+            ],
+            [
+              382,
+              78
+            ],
+            [
+              375,
+              78
+            ]
+          ],
+          [
+            [
+              365,
+              76
+            ],
+            [
+              384,
+              76
+            ],
+            [
+              391,
+              80
+            ],
+            [
+              394,
+              97
+            ],
+            [
+              406,
+              101
+            ],
+            [
+              418,
+              108
+            ],
+            [
+              429,
+              120
+            ],
+            [
+              438,
+              136
+            ],
+            [
+              444,
+              153
+            ],
+            [
+              447,
+              166
+            ],
+            [
+              442,
+              172
+            ],
+            [
+              429,
+              177
+            ],
+            [
+              412,
+              181
+            ],
+            [
+              390,
+              183
+            ],
+            [
+              367,
+              183
+            ],
+            [
+              344,
+              179
+            ],
+            [
+              327,
+              174
+            ],
+            [
+              313,
+              169
+            ],
+            [
+              310,
+              165
+            ],
+            [
+              314,
+              148
+            ],
+            [
+              321,
+              132
+            ],
+            [
+              332,
+              117
+            ],
+            [
+              344,
+              107
+            ],
+            [
+              357,
+              101
+            ],
+            [
+              360,
+              85
+            ]
+          ]
+        ],
+        "pivot_px": [
+          378,
+          0
+        ],
+        "z_index": 1,
+        "motion": {
+          "type": "pendulum",
+          "parameters": {
+            "amplitude_px": 4,
+            "frequency_hz": 0.28,
+            "max_degrees": 1.5,
+            "damping": 3.5,
+            "stiffness": 8
+          }
+        },
+        "annotation_note": "原生坐标放大复核后重描整盏灯罩/顶座/悬线，包含上半罩，边界约1至2px保守余量。"
+      },
+      {
+        "id": "curtain",
+        "polygons": [
+          [
+            [
+              151,
+              36
+            ],
+            [
+              164,
+              38
+            ],
+            [
+              178,
+              45
+            ],
+            [
+              191,
+              46
+            ],
+            [
+              204,
+              54
+            ],
+            [
+              216,
+              52
+            ],
+            [
+              228,
+              61
+            ],
+            [
+              240,
+              60
+            ],
+            [
+              253,
+              69
+            ],
+            [
+              251,
+              203
+            ],
+            [
+              249,
+              357
+            ],
+            [
+              249,
+              481
+            ],
+            [
+              246,
+              586
+            ],
+            [
+              247,
+              699
+            ],
+            [
+              240,
+              721
+            ],
+            [
+              226,
+              725
+            ],
+            [
+              215,
+              732
+            ],
+            [
+              201,
+              727
+            ],
+            [
+              186,
+              734
+            ],
+            [
+              173,
+              730
+            ],
+            [
+              160,
+              734
+            ],
+            [
+              144,
+              729
+            ],
+            [
+              134,
+              734
+            ],
+            [
+              117,
+              727
+            ],
+            [
+              117,
+              698
+            ],
+            [
+              123,
+              618
+            ],
+            [
+              124,
+              499
+            ],
+            [
+              127,
+              391
+            ],
+            [
+              130,
+              270
+            ],
+            [
+              137,
+              160
+            ],
+            [
+              142,
+              72
+            ],
+            [
+              147,
+              43
+            ]
+          ]
+        ],
+        "holes": [
+          [
+            [
+              232,
+              402
+            ],
+            [
+              246,
+              395
+            ],
+            [
+              260,
+              396
+            ],
+            [
+              278,
+              404
+            ],
+            [
+              290,
+              414
+            ],
+            [
+              287,
+              424
+            ],
+            [
+              262,
+              425
+            ],
+            [
+              245,
+              418
+            ]
+          ],
+          [
+            [
+              225,
+              468
+            ],
+            [
+              239,
+              452
+            ],
+            [
+              261,
+              446
+            ],
+            [
+              282,
+              451
+            ],
+            [
+              299,
+              463
+            ],
+            [
+              288,
+              478
+            ],
+            [
+              263,
+              485
+            ],
+            [
+              241,
+              483
+            ]
+          ]
+        ],
+        "pivot_px": [
+          196,
+          49
+        ],
+        "z_index": 2,
+        "motion": {
+          "type": "sway_shader",
+          "parameters": {
+            "amplitude_px": 4,
+            "frequency_hz": 0.22
+          }
+        }
+      },
+      {
+        "id": "teacup",
+        "polygons": [
+          [
+            [
+              391,
+              718
+            ],
+            [
+              398,
+              711
+            ],
+            [
+              419,
+              708
+            ],
+            [
+              442,
+              710
+            ],
+            [
+              453,
+              715
+            ],
+            [
+              455,
+              723
+            ],
+            [
+              468,
+              723
+            ],
+            [
+              478,
+              730
+            ],
+            [
+              481,
+              739
+            ],
+            [
+              477,
+              747
+            ],
+            [
+              468,
+              755
+            ],
+            [
+              453,
+              755
+            ],
+            [
+              449,
+              764
+            ],
+            [
+              441,
+              771
+            ],
+            [
+              421,
+              775
+            ],
+            [
+              406,
+              769
+            ],
+            [
+              398,
+              759
+            ],
+            [
+              394,
+              744
+            ]
+          ]
+        ],
+        "holes": [
+          [
+            [
+              455,
+              732
+            ],
+            [
+              466,
+              732
+            ],
+            [
+              471,
+              737
+            ],
+            [
+              469,
+              744
+            ],
+            [
+              461,
+              747
+            ],
+            [
+              454,
+              747
+            ]
+          ]
+        ],
+        "pivot_px": [
+          429,
+          772
+        ],
+        "z_index": 3,
+        "motion": {
+          "type": "static",
+          "parameters": {}
+        }
+      },
+      {
+        "id": "tea_steam",
+        "polygons": [
+          [
+            [
+              428,
+              636
+            ],
+            [
+              432,
+              641
+            ],
+            [
+              429,
+              651
+            ],
+            [
+              426,
+              659
+            ],
+            [
+              428,
+              666
+            ],
+            [
+              435,
+              674
+            ],
+            [
+              437,
+              681
+            ],
+            [
+              433,
+              688
+            ],
+            [
+              429,
+              694
+            ],
+            [
+              430,
+              699
+            ],
+            [
+              426,
+              701
+            ],
+            [
+              424,
+              695
+            ],
+            [
+              428,
+              685
+            ],
+            [
+              432,
+              679
+            ],
+            [
+              429,
+              673
+            ],
+            [
+              423,
+              665
+            ],
+            [
+              422,
+              656
+            ],
+            [
+              426,
+              646
+            ]
+          ]
+        ],
+        "pivot_px": [
+          429,
+          701
+        ],
+        "z_index": 4,
+        "motion": {
+          "type": "flow",
+          "parameters": {
+            "speed_px_s": 4,
+            "distortion_px": 2
+          }
+        }
+      },
+      {
+        "id": "sofa_mask",
+        "polygons": [
+          [
+            [
+              371,
+              638
+            ],
+            [
+              456,
+              637
+            ],
+            [
+              562,
+              639
+            ],
+            [
+              653,
+              643
+            ],
+            [
+              686,
+              645
+            ],
+            [
+              707,
+              640
+            ],
+            [
+              806,
+              638
+            ],
+            [
+              903,
+              638
+            ],
+            [
+              1005,
+              641
+            ],
+            [
+              1006,
+              673
+            ],
+            [
+              998,
+              689
+            ],
+            [
+              984,
+              699
+            ],
+            [
+              881,
+              700
+            ],
+            [
+              790,
+              701
+            ],
+            [
+              707,
+              700
+            ],
+            [
+              688,
+              690
+            ],
+            [
+              677,
+              698
+            ],
+            [
+              561,
+              700
+            ],
+            [
+              448,
+              699
+            ],
+            [
+              391,
+              696
+            ],
+            [
+              378,
+              690
+            ],
+            [
+              372,
+              676
+            ]
+          ]
+        ],
+        "pivot_px": [
+          688,
+          700
+        ],
+        "z_index": 11,
+        "motion": {
+          "type": "static",
+          "parameters": {}
+        },
+        "holes": [
+          [
+            [
+              418,
+              632
+            ],
+            [
+              441,
+              632
+            ],
+            [
+              441,
+              705
+            ],
+            [
+              418,
+              705
+            ]
+          ]
+        ],
+        "annotation_note": "前坐垫缘仅为遮挡人物底部的静态层；茶汽经过处保留窄hole避免把汽同时扣进sofa_mask。"
+      }
+    ],
+    "notes": [
+      "人工按本期真实C原生坐标标多边形，不独立生成相似Li。",
+      "rawB仅在softmask局部补回C，1px羽化/6px授权及ROI由共用工具验证。",
+      "沙发仅前坐垫缘为z11遮罩，静态主体/座位/右装饰靠枕保留。",
+      "视觉复核第1轮real1语义漏扣；real2修正，原real1 spec另存保留。"
+    ]
+  },
+  "processing_prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+  "cleanplate_method": "AI raw B is normalized with equal-aspect cover; final B_i/B_all are a soft-mask patch over actual C. The 6px dilation is retained as AI authorization evidence; undamaged context outside the soft mask is copied from C, never claimed as unchanged AI output.",
+  "mask_usage_notice": "本批rawB已先以C作参考生成，内置工具未接收这些显式mask。1px软mask与6px扩区在随后人工标图后生成，用作可审阅的局部合成边界及后续重生目标，不声称已作为本轮生图参数。",
+  "configuration": {
+    "version": 1,
+    "kind": "real_pixel_extraction",
+    "pipeline_config": "data/art/pipeline.json",
+    "output_root": "assets/generated_scenes/v3_real",
+    "runtime_root": "assets/generated_scenes/runtime/v3_real",
+    "logical_canvas": [
+      2560,
+      1440
+    ],
+    "required_mask": {
+      "feather_pixels": 1,
+      "inpaint_dilation_pixels": 6
+    },
+    "motion_types": [
+      "static",
+      "sway_shader",
+      "pendulum",
+      "flow"
+    ],
+    "maximum_polygon_vertices": 2048,
+    "cleanplate_method": "AI raw B is normalized with equal-aspect cover; final B_i/B_all are a soft-mask patch over actual C. The 6px dilation is retained as AI authorization evidence; undamaged context outside the soft mask is copied from C, never claimed as unchanged AI output.",
+    "mask_usage_notice": "本批rawB已先以C作参考生成，内置工具未接收这些显式mask。1px软mask与6px扩区在随后人工标图后生成，用作可审阅的局部合成边界及后续重生目标，不声称已作为本轮生图参数。",
+    "processing_prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。"
+  },
+  "mask_parameters": {
+    "feather_pixels": 1,
+    "inpaint_dilation_pixels": 6,
+    "hard_recovery_threshold": 128
+  },
+  "qa_bounds": {
+    "core_max_error": 0,
+    "unedited_max_error": 0,
+    "inpaint_ring_max_error": 0,
+    "feather_mae": 3,
+    "feather_p95": 12,
+    "percentile": 0.95
+  },
+  "raw_cleanplate_normalization": {
+    "source_path": "assets/_incoming/a1r_real/S03/night_raw_cleanplate.png",
+    "native_size": [
+      1672,
+      941
+    ],
+    "normalized_path": "assets/generated_scenes/v3_real/S03/night/real2/raw_cleanplate_normalized.png",
+    "normalized_size": [
+      1672,
+      941
+    ],
+    "transform": {
+      "method": "equal_aspect_cover",
+      "filter": "Lanczos",
+      "scale": 1.0,
+      "source_crop": [
+        0.0,
+        0.0,
+        1672.0,
+        941.0
+      ],
+      "runtime_size": [
+        1672,
+        941
+      ]
+    }
+  },
+  "original_path": "assets/generated_scenes/v3_real/S03/night/real2/C.png",
+  "base_path": "assets/generated_scenes/v3_real/S03/night/real2/B_all.png",
+  "base_runtime_path": "assets/generated_scenes/runtime/v3_real/S03/night/real2/B_all.png",
+  "artifacts": [
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/C.png",
+      "role": "retained_original_C",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "216803b4bf844fed878c4f728239a07d825fb5047968259f0f19ac788a3414ae"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/raw_cleanplate_normalized.png",
+      "role": "normalized_AI_cleanplate",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "c21d2dd2fb7402f248b74859aa9f42dd7c4e5b616fa39300297d8f11c793a3f6"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/layers/lamp.png",
+      "role": "actual_C_matted_layer",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "25bae33b0d3d72396bc60fda685c9b48414d42b3bce358feae1aaa79a8312b94"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/cleanplates/lamp.png",
+      "role": "single_object_cleanplate_B_i",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "df221919fc209b822c2d21dc1931aa62d395e080eca846e75eec4146e8ef4417"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/masks/lamp_hard.png",
+      "role": "manual_hard_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "d8b2a16564ef7181364a0dd7a010ac4678e21639f106bd3be01ba3497b0562f9"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/masks/lamp_soft.png",
+      "role": "one_pixel_feather_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "ea037c4288670594cacea861bd2431823ac3c971720b5fa6e582d2ebdacbe76f"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/masks/lamp_inpaint6.png",
+      "role": "six_pixel_AI_authorization_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "12a5fc47a8e426b2e336303be4028137134e1e6b20c313451501fd5fb434df5f"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/layers/curtain.png",
+      "role": "actual_C_matted_layer",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "7f1d2da354684eeab5599bec4371649c631214cc5b1eb0bf061f4ff0fc7215e6"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/cleanplates/curtain.png",
+      "role": "single_object_cleanplate_B_i",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "6221156abb346d0786068d3a30a11f520d6b0d2dc9ba9a64d256da83269212c8"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/masks/curtain_hard.png",
+      "role": "manual_hard_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "e5fafae1b5e7156989e290128cd2251bdbc2dfc344fa910a03ab25fa630ba421"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/masks/curtain_soft.png",
+      "role": "one_pixel_feather_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "34336788f09e909bb80fde8b4b6bb83d6af8f20e8adb320d312b55f048424f4f"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/masks/curtain_inpaint6.png",
+      "role": "six_pixel_AI_authorization_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "9821ecc7f5d8c6b33b7d81ae6c60923ece783245a126472a0a65934e56fa37a1"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/layers/teacup.png",
+      "role": "actual_C_matted_layer",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "3ebe74c201135c607979a366d29d564966e25e368d4dfead79bd77bfb67f9729"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/cleanplates/teacup.png",
+      "role": "single_object_cleanplate_B_i",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "f61617879e097a85789e745c2cd172e211dda49c6bfa3dfb7de85e9c94ce247d"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/masks/teacup_hard.png",
+      "role": "manual_hard_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "3901017ac91c0b878de2733397a8c06a0c645517e4076345989047ad4bec0ad1"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/masks/teacup_soft.png",
+      "role": "one_pixel_feather_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "370f6c58262eee0483a1e821c68e9de9d79ae8faad0bb2979c3f463a3db0a5d9"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/masks/teacup_inpaint6.png",
+      "role": "six_pixel_AI_authorization_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "9fc37f09f2efbfd3a6deed63913883a5ab0962c5d2f5a756ed34d5ebd73e6ba1"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/layers/tea_steam.png",
+      "role": "actual_C_matted_layer",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "b176823b785d82bb231f45c223fc271374b008637ab360f8cba8521362d97f0e"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/cleanplates/tea_steam.png",
+      "role": "single_object_cleanplate_B_i",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "d99af77dc9802e9b9d663e202b0b588826eb4177b8a8513858297cc643a0767b"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/masks/tea_steam_hard.png",
+      "role": "manual_hard_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "4f305df8977d71558df32fe7744a7eae8bae0dd1b7fb05582b2f19a86729ea3b"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/masks/tea_steam_soft.png",
+      "role": "one_pixel_feather_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "9b3e5aaf9e8bb4a689dfc8f83182baf3a494ba3534be8f8211ba137c4970d0c8"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/masks/tea_steam_inpaint6.png",
+      "role": "six_pixel_AI_authorization_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "ff027a5d8ff16e41b62a27e72ee0be64556977a1e86d6f7eb0b185ac0e0ea69a"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/layers/sofa_mask.png",
+      "role": "actual_C_matted_layer",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "f37cc8e3eb0418f3d3d22eca421e8b6f1bf14e143006b5bcd6742f923efcdde9"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/cleanplates/sofa_mask.png",
+      "role": "single_object_cleanplate_B_i",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "95e400bf676124bf67f04f596691dd965531038f2d95d13c55493fd460c749f8"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/masks/sofa_mask_hard.png",
+      "role": "manual_hard_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "a7f5ede4c45a6ba2c2fa9361e88786296eecca8921ef7f32acded7bad8768196"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/masks/sofa_mask_soft.png",
+      "role": "one_pixel_feather_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "9b998ee588c7cbb849b2f58b1b3b2724d9be74214200610af410e8111f2081fd"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/masks/sofa_mask_inpaint6.png",
+      "role": "six_pixel_AI_authorization_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "9eb45f98db993cec27269282241eb83c632588b43efc4f18b192cd9bfca8445e"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/B_all.png",
+      "role": "all_object_cleanplate_B_all",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "1dfe876a0d8f97cdbce08a24df21f780318f961b2c9067157aa3101751ea9c4f"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S03/night/real2/recomposed_all.png",
+      "role": "all_layers_recomposition",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "c6136831e04632659342c3aa20b2de3d294c9b1ef341e7feb544e9ef2e658c37"
+    }
+  ],
+  "runtime_copies": [
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S03/night/real2/C.png",
+      "source_path": "assets/generated_scenes/v3_real/S03/night/real2/C.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "216803b4bf844fed878c4f728239a07d825fb5047968259f0f19ac788a3414ae",
+      "sha256": "1179f77b4b06162c1204aeb9b27f5581c604c4f7abdc3eca7c2718fff36d5804",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S03/night/real2/layers/lamp.png",
+      "source_path": "assets/generated_scenes/v3_real/S03/night/real2/layers/lamp.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "25bae33b0d3d72396bc60fda685c9b48414d42b3bce358feae1aaa79a8312b94",
+      "sha256": "37e8177439b13b06280cfe9864b5f37c21a8cb83f33f4739c817a4e29e401197",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S03/night/real2/layers/curtain.png",
+      "source_path": "assets/generated_scenes/v3_real/S03/night/real2/layers/curtain.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "7f1d2da354684eeab5599bec4371649c631214cc5b1eb0bf061f4ff0fc7215e6",
+      "sha256": "460f0069328de1339fcdce53ff2786773c69b57d45fa571334d67048d660f9e8",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S03/night/real2/layers/teacup.png",
+      "source_path": "assets/generated_scenes/v3_real/S03/night/real2/layers/teacup.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "3ebe74c201135c607979a366d29d564966e25e368d4dfead79bd77bfb67f9729",
+      "sha256": "3bbe69914ec6e92a361c89eb9e959959b362ffff31650e939dd5dd56d8ae89fc",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S03/night/real2/layers/tea_steam.png",
+      "source_path": "assets/generated_scenes/v3_real/S03/night/real2/layers/tea_steam.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "b176823b785d82bb231f45c223fc271374b008637ab360f8cba8521362d97f0e",
+      "sha256": "78fcdecce5f041f8ee1cc460b31fdf4c3399fcd289eceb09d5a2e7957befd11c",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S03/night/real2/layers/sofa_mask.png",
+      "source_path": "assets/generated_scenes/v3_real/S03/night/real2/layers/sofa_mask.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "f37cc8e3eb0418f3d3d22eca421e8b6f1bf14e143006b5bcd6742f923efcdde9",
+      "sha256": "9f27ee9a26a506e9a2611bc74dfd9b327215f472ece349e7ffefc339858cc097",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S03/night/real2/B_all.png",
+      "source_path": "assets/generated_scenes/v3_real/S03/night/real2/B_all.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "1dfe876a0d8f97cdbce08a24df21f780318f961b2c9067157aa3101751ea9c4f",
+      "sha256": "5f67d83b203cbcb0233ee3ec326be181835d2475ecaf486df267f027a32a6944",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    }
+  ],
+  "layers": [
+    {
+      "id": "lamp",
+      "polygons": [
+        [
+          [
+            375,
+            0
+          ],
+          [
+            382,
+            0
+          ],
+          [
+            382,
+            78
+          ],
+          [
+            375,
+            78
+          ]
+        ],
+        [
+          [
+            365,
+            76
+          ],
+          [
+            384,
+            76
+          ],
+          [
+            391,
+            80
+          ],
+          [
+            394,
+            97
+          ],
+          [
+            406,
+            101
+          ],
+          [
+            418,
+            108
+          ],
+          [
+            429,
+            120
+          ],
+          [
+            438,
+            136
+          ],
+          [
+            444,
+            153
+          ],
+          [
+            447,
+            166
+          ],
+          [
+            442,
+            172
+          ],
+          [
+            429,
+            177
+          ],
+          [
+            412,
+            181
+          ],
+          [
+            390,
+            183
+          ],
+          [
+            367,
+            183
+          ],
+          [
+            344,
+            179
+          ],
+          [
+            327,
+            174
+          ],
+          [
+            313,
+            169
+          ],
+          [
+            310,
+            165
+          ],
+          [
+            314,
+            148
+          ],
+          [
+            321,
+            132
+          ],
+          [
+            332,
+            117
+          ],
+          [
+            344,
+            107
+          ],
+          [
+            357,
+            101
+          ],
+          [
+            360,
+            85
+          ]
+        ]
+      ],
+      "pivot_px": [
+        378,
+        0
+      ],
+      "z_index": 1,
+      "motion": {
+        "type": "pendulum",
+        "parameters": {
+          "amplitude_px": 4,
+          "frequency_hz": 0.28,
+          "max_degrees": 1.5,
+          "damping": 3.5,
+          "stiffness": 8
+        }
+      },
+      "annotation_note": "原生坐标放大复核后重描整盏灯罩/顶座/悬线，包含上半罩，边界约1至2px保守余量。",
+      "native_size": [
+        1672,
+        941
+      ],
+      "layer_path": "assets/generated_scenes/v3_real/S03/night/real2/layers/lamp.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S03/night/real2/cleanplates/lamp.png",
+      "hard_mask_path": "assets/generated_scenes/v3_real/S03/night/real2/masks/lamp_hard.png",
+      "soft_mask_path": "assets/generated_scenes/v3_real/S03/night/real2/masks/lamp_soft.png",
+      "inpaint_mask_path": "assets/generated_scenes/v3_real/S03/night/real2/masks/lamp_inpaint6.png",
+      "single_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 9731,
+            "samples": 29193,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 1272,
+            "samples": 3816,
+            "mae": 0.003930817610062893,
+            "p95": 0,
+            "max_error": 3
+          },
+          "inpaint_ring": {
+            "pixels": 3912,
+            "samples": 11736,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1558437,
+            "samples": 4675311,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "matte_clamping": {
+        "clipped_pixels": 14,
+        "clipped_channels": 14,
+        "maximum_unassociated_clamp": 18.535714285714278
+      },
+      "descriptor": {
+        "path": "res://assets/generated_scenes/runtime/v3_real/S03/night/real2/layers/lamp.png",
+        "rect": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "hotspot": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "native_size": [
+          1672,
+          941
+        ],
+        "pivot_px": [
+          378,
+          0
+        ],
+        "z_index": 1,
+        "motion": {
+          "type": "pendulum",
+          "parameters": {
+            "amplitude_px": 4,
+            "frequency_hz": 0.28,
+            "max_degrees": 1.5,
+            "damping": 3.5,
+            "stiffness": 8
+          }
+        },
+        "source_transform": {
+          "method": "equal_aspect_cover",
+          "filter": "Lanczos",
+          "scale": 1.1483253588516746,
+          "source_crop": [
+            0.0,
+            0.25,
+            1672.0,
+            940.75
+          ],
+          "runtime_size": [
+            1920,
+            1080
+          ],
+          "native_size": [
+            1672,
+            941
+          ]
+        }
+      }
+    },
+    {
+      "id": "curtain",
+      "polygons": [
+        [
+          [
+            151,
+            36
+          ],
+          [
+            164,
+            38
+          ],
+          [
+            178,
+            45
+          ],
+          [
+            191,
+            46
+          ],
+          [
+            204,
+            54
+          ],
+          [
+            216,
+            52
+          ],
+          [
+            228,
+            61
+          ],
+          [
+            240,
+            60
+          ],
+          [
+            253,
+            69
+          ],
+          [
+            251,
+            203
+          ],
+          [
+            249,
+            357
+          ],
+          [
+            249,
+            481
+          ],
+          [
+            246,
+            586
+          ],
+          [
+            247,
+            699
+          ],
+          [
+            240,
+            721
+          ],
+          [
+            226,
+            725
+          ],
+          [
+            215,
+            732
+          ],
+          [
+            201,
+            727
+          ],
+          [
+            186,
+            734
+          ],
+          [
+            173,
+            730
+          ],
+          [
+            160,
+            734
+          ],
+          [
+            144,
+            729
+          ],
+          [
+            134,
+            734
+          ],
+          [
+            117,
+            727
+          ],
+          [
+            117,
+            698
+          ],
+          [
+            123,
+            618
+          ],
+          [
+            124,
+            499
+          ],
+          [
+            127,
+            391
+          ],
+          [
+            130,
+            270
+          ],
+          [
+            137,
+            160
+          ],
+          [
+            142,
+            72
+          ],
+          [
+            147,
+            43
+          ]
+        ]
+      ],
+      "holes": [
+        [
+          [
+            232,
+            402
+          ],
+          [
+            246,
+            395
+          ],
+          [
+            260,
+            396
+          ],
+          [
+            278,
+            404
+          ],
+          [
+            290,
+            414
+          ],
+          [
+            287,
+            424
+          ],
+          [
+            262,
+            425
+          ],
+          [
+            245,
+            418
+          ]
+        ],
+        [
+          [
+            225,
+            468
+          ],
+          [
+            239,
+            452
+          ],
+          [
+            261,
+            446
+          ],
+          [
+            282,
+            451
+          ],
+          [
+            299,
+            463
+          ],
+          [
+            288,
+            478
+          ],
+          [
+            263,
+            485
+          ],
+          [
+            241,
+            483
+          ]
+        ]
+      ],
+      "pivot_px": [
+        196,
+        49
+      ],
+      "z_index": 2,
+      "motion": {
+        "type": "sway_shader",
+        "parameters": {
+          "amplitude_px": 4,
+          "frequency_hz": 0.22
+        }
+      },
+      "native_size": [
+        1672,
+        941
+      ],
+      "layer_path": "assets/generated_scenes/v3_real/S03/night/real2/layers/curtain.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S03/night/real2/cleanplates/curtain.png",
+      "hard_mask_path": "assets/generated_scenes/v3_real/S03/night/real2/masks/curtain_hard.png",
+      "soft_mask_path": "assets/generated_scenes/v3_real/S03/night/real2/masks/curtain_soft.png",
+      "inpaint_mask_path": "assets/generated_scenes/v3_real/S03/night/real2/masks/curtain_inpaint6.png",
+      "single_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 80086,
+            "samples": 240258,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 3582,
+            "samples": 10746,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "inpaint_ring": {
+            "pixels": 10805,
+            "samples": 32415,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1478879,
+            "samples": 4436637,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "matte_clamping": {
+        "clipped_pixels": 0,
+        "clipped_channels": 0,
+        "maximum_unassociated_clamp": 0.0
+      },
+      "descriptor": {
+        "path": "res://assets/generated_scenes/runtime/v3_real/S03/night/real2/layers/curtain.png",
+        "rect": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "hotspot": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "native_size": [
+          1672,
+          941
+        ],
+        "pivot_px": [
+          196,
+          49
+        ],
+        "z_index": 2,
+        "motion": {
+          "type": "sway_shader",
+          "parameters": {
+            "amplitude_px": 4,
+            "frequency_hz": 0.22
+          }
+        },
+        "source_transform": {
+          "method": "equal_aspect_cover",
+          "filter": "Lanczos",
+          "scale": 1.1483253588516746,
+          "source_crop": [
+            0.0,
+            0.25,
+            1672.0,
+            940.75
+          ],
+          "runtime_size": [
+            1920,
+            1080
+          ],
+          "native_size": [
+            1672,
+            941
+          ]
+        }
+      }
+    },
+    {
+      "id": "teacup",
+      "polygons": [
+        [
+          [
+            391,
+            718
+          ],
+          [
+            398,
+            711
+          ],
+          [
+            419,
+            708
+          ],
+          [
+            442,
+            710
+          ],
+          [
+            453,
+            715
+          ],
+          [
+            455,
+            723
+          ],
+          [
+            468,
+            723
+          ],
+          [
+            478,
+            730
+          ],
+          [
+            481,
+            739
+          ],
+          [
+            477,
+            747
+          ],
+          [
+            468,
+            755
+          ],
+          [
+            453,
+            755
+          ],
+          [
+            449,
+            764
+          ],
+          [
+            441,
+            771
+          ],
+          [
+            421,
+            775
+          ],
+          [
+            406,
+            769
+          ],
+          [
+            398,
+            759
+          ],
+          [
+            394,
+            744
+          ]
+        ]
+      ],
+      "holes": [
+        [
+          [
+            455,
+            732
+          ],
+          [
+            466,
+            732
+          ],
+          [
+            471,
+            737
+          ],
+          [
+            469,
+            744
+          ],
+          [
+            461,
+            747
+          ],
+          [
+            454,
+            747
+          ]
+        ]
+      ],
+      "pivot_px": [
+        429,
+        772
+      ],
+      "z_index": 3,
+      "motion": {
+        "type": "static",
+        "parameters": {}
+      },
+      "native_size": [
+        1672,
+        941
+      ],
+      "layer_path": "assets/generated_scenes/v3_real/S03/night/real2/layers/teacup.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S03/night/real2/cleanplates/teacup.png",
+      "hard_mask_path": "assets/generated_scenes/v3_real/S03/night/real2/masks/teacup_hard.png",
+      "soft_mask_path": "assets/generated_scenes/v3_real/S03/night/real2/masks/teacup_soft.png",
+      "inpaint_mask_path": "assets/generated_scenes/v3_real/S03/night/real2/masks/teacup_inpaint6.png",
+      "single_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 3691,
+            "samples": 11073,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 770,
+            "samples": 2310,
+            "mae": 0.2519480519480519,
+            "p95": 0,
+            "max_error": 22
+          },
+          "inpaint_ring": {
+            "pixels": 2271,
+            "samples": 6813,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1566620,
+            "samples": 4699860,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "matte_clamping": {
+        "clipped_pixels": 67,
+        "clipped_channels": 92,
+        "maximum_unassociated_clamp": 70.39285714285717
+      },
+      "descriptor": {
+        "path": "res://assets/generated_scenes/runtime/v3_real/S03/night/real2/layers/teacup.png",
+        "rect": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "hotspot": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "native_size": [
+          1672,
+          941
+        ],
+        "pivot_px": [
+          429,
+          772
+        ],
+        "z_index": 3,
+        "motion": {
+          "type": "static",
+          "parameters": {}
+        },
+        "source_transform": {
+          "method": "equal_aspect_cover",
+          "filter": "Lanczos",
+          "scale": 1.1483253588516746,
+          "source_crop": [
+            0.0,
+            0.25,
+            1672.0,
+            940.75
+          ],
+          "runtime_size": [
+            1920,
+            1080
+          ],
+          "native_size": [
+            1672,
+            941
+          ]
+        }
+      }
+    },
+    {
+      "id": "tea_steam",
+      "polygons": [
+        [
+          [
+            428,
+            636
+          ],
+          [
+            432,
+            641
+          ],
+          [
+            429,
+            651
+          ],
+          [
+            426,
+            659
+          ],
+          [
+            428,
+            666
+          ],
+          [
+            435,
+            674
+          ],
+          [
+            437,
+            681
+          ],
+          [
+            433,
+            688
+          ],
+          [
+            429,
+            694
+          ],
+          [
+            430,
+            699
+          ],
+          [
+            426,
+            701
+          ],
+          [
+            424,
+            695
+          ],
+          [
+            428,
+            685
+          ],
+          [
+            432,
+            679
+          ],
+          [
+            429,
+            673
+          ],
+          [
+            423,
+            665
+          ],
+          [
+            422,
+            656
+          ],
+          [
+            426,
+            646
+          ]
+        ]
+      ],
+      "pivot_px": [
+        429,
+        701
+      ],
+      "z_index": 4,
+      "motion": {
+        "type": "flow",
+        "parameters": {
+          "speed_px_s": 4,
+          "distortion_px": 2
+        }
+      },
+      "native_size": [
+        1672,
+        941
+      ],
+      "layer_path": "assets/generated_scenes/v3_real/S03/night/real2/layers/tea_steam.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S03/night/real2/cleanplates/tea_steam.png",
+      "hard_mask_path": "assets/generated_scenes/v3_real/S03/night/real2/masks/tea_steam_hard.png",
+      "soft_mask_path": "assets/generated_scenes/v3_real/S03/night/real2/masks/tea_steam_soft.png",
+      "inpaint_mask_path": "assets/generated_scenes/v3_real/S03/night/real2/masks/tea_steam_inpaint6.png",
+      "single_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 183,
+            "samples": 549,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 386,
+            "samples": 1158,
+            "mae": 0.023316062176165803,
+            "p95": 0,
+            "max_error": 3
+          },
+          "inpaint_ring": {
+            "pixels": 1303,
+            "samples": 3909,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1571480,
+            "samples": 4714440,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "matte_clamping": {
+        "clipped_pixels": 13,
+        "clipped_channels": 15,
+        "maximum_unassociated_clamp": 31.071428571428555
+      },
+      "descriptor": {
+        "path": "res://assets/generated_scenes/runtime/v3_real/S03/night/real2/layers/tea_steam.png",
+        "rect": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "hotspot": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "native_size": [
+          1672,
+          941
+        ],
+        "pivot_px": [
+          429,
+          701
+        ],
+        "z_index": 4,
+        "motion": {
+          "type": "flow",
+          "parameters": {
+            "speed_px_s": 4,
+            "distortion_px": 2
+          }
+        },
+        "source_transform": {
+          "method": "equal_aspect_cover",
+          "filter": "Lanczos",
+          "scale": 1.1483253588516746,
+          "source_crop": [
+            0.0,
+            0.25,
+            1672.0,
+            940.75
+          ],
+          "runtime_size": [
+            1920,
+            1080
+          ],
+          "native_size": [
+            1672,
+            941
+          ]
+        }
+      }
+    },
+    {
+      "id": "sofa_mask",
+      "polygons": [
+        [
+          [
+            371,
+            638
+          ],
+          [
+            456,
+            637
+          ],
+          [
+            562,
+            639
+          ],
+          [
+            653,
+            643
+          ],
+          [
+            686,
+            645
+          ],
+          [
+            707,
+            640
+          ],
+          [
+            806,
+            638
+          ],
+          [
+            903,
+            638
+          ],
+          [
+            1005,
+            641
+          ],
+          [
+            1006,
+            673
+          ],
+          [
+            998,
+            689
+          ],
+          [
+            984,
+            699
+          ],
+          [
+            881,
+            700
+          ],
+          [
+            790,
+            701
+          ],
+          [
+            707,
+            700
+          ],
+          [
+            688,
+            690
+          ],
+          [
+            677,
+            698
+          ],
+          [
+            561,
+            700
+          ],
+          [
+            448,
+            699
+          ],
+          [
+            391,
+            696
+          ],
+          [
+            378,
+            690
+          ],
+          [
+            372,
+            676
+          ]
+        ]
+      ],
+      "pivot_px": [
+        688,
+        700
+      ],
+      "z_index": 11,
+      "motion": {
+        "type": "static",
+        "parameters": {}
+      },
+      "holes": [
+        [
+          [
+            418,
+            632
+          ],
+          [
+            441,
+            632
+          ],
+          [
+            441,
+            705
+          ],
+          [
+            418,
+            705
+          ]
+        ]
+      ],
+      "annotation_note": "前坐垫缘仅为遮挡人物底部的静态层；茶汽经过处保留窄hole避免把汽同时扣进sofa_mask。",
+      "native_size": [
+        1672,
+        941
+      ],
+      "layer_path": "assets/generated_scenes/v3_real/S03/night/real2/layers/sofa_mask.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S03/night/real2/cleanplates/sofa_mask.png",
+      "hard_mask_path": "assets/generated_scenes/v3_real/S03/night/real2/masks/sofa_mask_hard.png",
+      "soft_mask_path": "assets/generated_scenes/v3_real/S03/night/real2/masks/sofa_mask_soft.png",
+      "inpaint_mask_path": "assets/generated_scenes/v3_real/S03/night/real2/masks/sofa_mask_inpaint6.png",
+      "single_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 34836,
+            "samples": 104508,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 3013,
+            "samples": 9039,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "inpaint_ring": {
+            "pixels": 9406,
+            "samples": 28218,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1526097,
+            "samples": 4578291,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "matte_clamping": {
+        "clipped_pixels": 0,
+        "clipped_channels": 0,
+        "maximum_unassociated_clamp": 0.0
+      },
+      "descriptor": {
+        "path": "res://assets/generated_scenes/runtime/v3_real/S03/night/real2/layers/sofa_mask.png",
+        "rect": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "hotspot": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "native_size": [
+          1672,
+          941
+        ],
+        "pivot_px": [
+          688,
+          700
+        ],
+        "z_index": 11,
+        "motion": {
+          "type": "static",
+          "parameters": {}
+        },
+        "source_transform": {
+          "method": "equal_aspect_cover",
+          "filter": "Lanczos",
+          "scale": 1.1483253588516746,
+          "source_crop": [
+            0.0,
+            0.25,
+            1672.0,
+            940.75
+          ],
+          "runtime_size": [
+            1920,
+            1080
+          ],
+          "native_size": [
+            1672,
+            941
+          ]
+        }
+      }
+    }
+  ],
+  "overlap_pairs": [],
+  "recomposition_qa": {
+    "passed": true,
+    "regions": {
+      "core": {
+        "pixels": 128527,
+        "samples": 385581,
+        "mae": 0.0,
+        "p95": 0,
+        "max_error": 0
+      },
+      "feather": {
+        "pixels": 9023,
+        "samples": 27069,
+        "mae": 0.02305219993350327,
+        "p95": 0,
+        "max_error": 22
+      },
+      "inpaint_ring": {
+        "pixels": 26412,
+        "samples": 79236,
+        "mae": 0.0,
+        "p95": 0,
+        "max_error": 0
+      },
+      "unedited": {
+        "pixels": 1409390,
+        "samples": 4228170,
+        "mae": 0.0,
+        "p95": 0,
+        "max_error": 0
+      }
+    },
+    "bounds": {
+      "core_max_error": 0,
+      "unedited_max_error": 0,
+      "inpaint_ring_max_error": 0,
+      "feather_mae": 3,
+      "feather_p95": 12,
+      "percentile": 0.95
+    },
+    "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+  },
+  "geometry_passed": true,
+  "art_passed": false,
+  "visual_review": "not_evaluated",
+  "manifest_modified": false,
+  "recipes": [
+    {
+      "status": "complete",
+      "version": "real2",
+      "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "attempts": [],
+      "processing_script": "tools/art/real_scene_layers.py",
+      "qa_kind": "art",
+      "generator": "real_C_pixel_extraction",
+      "id": "S03_night_real2_base",
+      "group": "scenes",
+      "operation": "runtime_copy",
+      "prompt": "对附件这张S03夜间咨询客厅原始完整合成C做局部移除补底，输出同尺寸1672×941的raw cleanplate B_all候选。不要重画房间、不要改构图、镜头、夜间颜色或光照。只在以下物件原占据的位置补出可信的背后表面，其余像素尽可能逐像素保留：\n1. 移除顶部偏左的小吊灯和它的悬线，用连续奶油灰泥墙补齐。\n2. 移除左窗前整幅布帘及布挂环，露出后方原有窗框、灰泥和窗外树；保留木窗框及帘杆，不新增窗格。\n3. 移除左下圆茶几上唯一的陶茶杯及其上方短热汽，补出同笔触连续木桌面和它后面的沙发布面。\n4. 仅将沙发坐垫最前缘、朝镜头凸出的狭窄包边/褶皱（大约x370到1010、y630到705的局部前缘）补成平顺连续绿色布面，这是以后可盖住坐着人物底部的前景遮罩。绝不能删除整个坐垫、坐位、沙发底座、扶手或主体；中央偏左空坐位保留。右边紫色和赭黄色两只装饰靠枕属于静态家具，原位保留。\n保留植物、沙发整体轮廓、两只靠枕、茶几全部桌腿与桌面、左窗外树、右30%以上空墙和地面。补底仍是选定画风的哑光厚涂水粉、可见干笔和少量色铅笔轮廓，保持原笔触与七个低饱和色族，不平滑成塑料。没有人物、文字、数字、空牌匾、UI、边框、金纹、发光晕或光束。不要添加任何新物件。此图是移除背景的raw原生候选，后续会仅取实际mask内区域，所以画布/构图必须不变。 保持附件的深灰青窗外夜色和室内暖灰平涂夜色，不能恢复成白日。\n从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+      "source_path": "assets/generated_scenes/v3_real/S03/night/real2/B_all.png",
+      "runtime_path": "assets/generated_scenes/runtime/v3_real/S03/night/real2/B_all.png"
+    },
+    {
+      "status": "complete",
+      "version": "real2",
+      "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "attempts": [],
+      "processing_script": "tools/art/real_scene_layers.py",
+      "qa_kind": "art",
+      "generator": "real_C_pixel_extraction",
+      "id": "S03_night_real2_lamp",
+      "group": "layers",
+      "operation": "extract_layer",
+      "prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+      "source_path": "assets/generated_scenes/v3_real/S03/night/real2/layers/lamp.png",
+      "runtime_path": "assets/generated_scenes/runtime/v3_real/S03/night/real2/layers/lamp.png",
+      "original_path": "assets/generated_scenes/v3_real/S03/night/real2/C.png",
+      "mask_path": "assets/generated_scenes/v3_real/S03/night/real2/masks/lamp_soft.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S03/night/real2/cleanplates/lamp.png",
+      "processing_parameters": {
+        "version": 1,
+        "scene_id": "S03",
+        "period": "night",
+        "revision": "real2",
+        "native_size": [
+          1672,
+          941
+        ],
+        "original_path": "assets/_incoming/a1r_real/S03/night_C.png",
+        "raw_cleanplate_path": "assets/_incoming/a1r_real/S03/night_raw_cleanplate.png",
+        "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+        "composite_prompt": "编辑第一张图片（S03咨询客厅白日完整合成C）为同一机位、同一构图的夜间灯下版本。第二张图片只提供整套游戏的笔触/配色参考。\n必须保留第一张图全部家具和物件的形状、精确位置、大小、透视和留白：中央偏左的深鼠尾草绿沙发、清楚的空坐位与前坐垫缘、右侧两只靠枕、左侧植物和单幅窗帘、顶部左侧吊灯、左下矮圆茶几、茶杯与独立的短热汽。一件也不加减、不移位、不改镜头，不增加帘或杯子。右侧30%以上空墙和简单地面保持空。\n只改光线与时段：窗外树轮廓保持相同，天空变灰青深蓝的平涂夜色；室内阴影偏灰青，墙和沙发仍足够明亮能辨认。吊灯内面用小块温暖赭黄奶油平涂色表达灯亮，周围没有发光光圈、光束、bloom或金边。整体像纸上画出的夜晚，绝不是黑暗写实光效。\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, UI, labels. 不要任何人物、字母、汉字、数字、名字、空白招牌、空吊签、牌匾、UI或边框。保留原始横向画布尺寸和全部边缘。",
+        "cleanplate_prompt": "对附件这张S03夜间咨询客厅原始完整合成C做局部移除补底，输出同尺寸1672×941的raw cleanplate B_all候选。不要重画房间、不要改构图、镜头、夜间颜色或光照。只在以下物件原占据的位置补出可信的背后表面，其余像素尽可能逐像素保留：\n1. 移除顶部偏左的小吊灯和它的悬线，用连续奶油灰泥墙补齐。\n2. 移除左窗前整幅布帘及布挂环，露出后方原有窗框、灰泥和窗外树；保留木窗框及帘杆，不新增窗格。\n3. 移除左下圆茶几上唯一的陶茶杯及其上方短热汽，补出同笔触连续木桌面和它后面的沙发布面。\n4. 仅将沙发坐垫最前缘、朝镜头凸出的狭窄包边/褶皱（大约x370到1010、y630到705的局部前缘）补成平顺连续绿色布面，这是以后可盖住坐着人物底部的前景遮罩。绝不能删除整个坐垫、坐位、沙发底座、扶手或主体；中央偏左空坐位保留。右边紫色和赭黄色两只装饰靠枕属于静态家具，原位保留。\n保留植物、沙发整体轮廓、两只靠枕、茶几全部桌腿与桌面、左窗外树、右30%以上空墙和地面。补底仍是选定画风的哑光厚涂水粉、可见干笔和少量色铅笔轮廓，保持原笔触与七个低饱和色族，不平滑成塑料。没有人物、文字、数字、空牌匾、UI、边框、金纹、发光晕或光束。不要添加任何新物件。此图是移除背景的raw原生候选，后续会仅取实际mask内区域，所以画布/构图必须不变。 保持附件的深灰青窗外夜色和室内暖灰平涂夜色，不能恢复成白日。",
+        "layers": [
+          {
+            "id": "lamp",
+            "polygons": [
+              [
+                [
+                  375,
+                  0
+                ],
+                [
+                  382,
+                  0
+                ],
+                [
+                  382,
+                  78
+                ],
+                [
+                  375,
+                  78
+                ]
+              ],
+              [
+                [
+                  365,
+                  76
+                ],
+                [
+                  384,
+                  76
+                ],
+                [
+                  391,
+                  80
+                ],
+                [
+                  394,
+                  97
+                ],
+                [
+                  406,
+                  101
+                ],
+                [
+                  418,
+                  108
+                ],
+                [
+                  429,
+                  120
+                ],
+                [
+                  438,
+                  136
+                ],
+                [
+                  444,
+                  153
+                ],
+                [
+                  447,
+                  166
+                ],
+                [
+                  442,
+                  172
+                ],
+                [
+                  429,
+                  177
+                ],
+                [
+                  412,
+                  181
+                ],
+                [
+                  390,
+                  183
+                ],
+                [
+                  367,
+                  183
+                ],
+                [
+                  344,
+                  179
+                ],
+                [
+                  327,
+                  174
+                ],
+                [
+                  313,
+                  169
+                ],
+                [
+                  310,
+                  165
+                ],
+                [
+                  314,
+                  148
+                ],
+                [
+                  321,
+                  132
+                ],
+                [
+                  332,
+                  117
+                ],
+                [
+                  344,
+                  107
+                ],
+                [
+                  357,
+                  101
+                ],
+                [
+                  360,
+                  85
+                ]
+              ]
+            ],
+            "pivot_px": [
+              378,
+              0
+            ],
+            "z_index": 1,
+            "motion": {
+              "type": "pendulum",
+              "parameters": {
+                "amplitude_px": 4,
+                "frequency_hz": 0.28,
+                "max_degrees": 1.5,
+                "damping": 3.5,
+                "stiffness": 8
+              }
+            },
+            "annotation_note": "原生坐标放大复核后重描整盏灯罩/顶座/悬线，包含上半罩，边界约1至2px保守余量。"
+          },
+          {
+            "id": "curtain",
+            "polygons": [
+              [
+                [
+                  151,
+                  36
+                ],
+                [
+                  164,
+                  38
+                ],
+                [
+                  178,
+                  45
+                ],
+                [
+                  191,
+                  46
+                ],
+                [
+                  204,
+                  54
+                ],
+                [
+                  216,
+                  52
+                ],
+                [
+                  228,
+                  61
+                ],
+                [
+                  240,
+                  60
+                ],
+                [
+                  253,
+                  69
+                ],
+                [
+                  251,
+                  203
+                ],
+                [
+                  249,
+                  357
+                ],
+                [
+                  249,
+                  481
+                ],
+                [
+                  246,
+                  586
+                ],
+                [
+                  247,
+                  699
+                ],
+                [
+                  240,
+                  721
+                ],
+                [
+                  226,
+                  725
+                ],
+                [
+                  215,
+                  732
+                ],
+                [
+                  201,
+                  727
+                ],
+                [
+                  186,
+                  734
+                ],
+                [
+                  173,
+                  730
+                ],
+                [
+                  160,
+                  734
+                ],
+                [
+                  144,
+                  729
+                ],
+                [
+                  134,
+                  734
+                ],
+                [
+                  117,
+                  727
+                ],
+                [
+                  117,
+                  698
+                ],
+                [
+                  123,
+                  618
+                ],
+                [
+                  124,
+                  499
+                ],
+                [
+                  127,
+                  391
+                ],
+                [
+                  130,
+                  270
+                ],
+                [
+                  137,
+                  160
+                ],
+                [
+                  142,
+                  72
+                ],
+                [
+                  147,
+                  43
+                ]
+              ]
+            ],
+            "holes": [
+              [
+                [
+                  232,
+                  402
+                ],
+                [
+                  246,
+                  395
+                ],
+                [
+                  260,
+                  396
+                ],
+                [
+                  278,
+                  404
+                ],
+                [
+                  290,
+                  414
+                ],
+                [
+                  287,
+                  424
+                ],
+                [
+                  262,
+                  425
+                ],
+                [
+                  245,
+                  418
+                ]
+              ],
+              [
+                [
+                  225,
+                  468
+                ],
+                [
+                  239,
+                  452
+                ],
+                [
+                  261,
+                  446
+                ],
+                [
+                  282,
+                  451
+                ],
+                [
+                  299,
+                  463
+                ],
+                [
+                  288,
+                  478
+                ],
+                [
+                  263,
+                  485
+                ],
+                [
+                  241,
+                  483
+                ]
+              ]
+            ],
+            "pivot_px": [
+              196,
+              49
+            ],
+            "z_index": 2,
+            "motion": {
+              "type": "sway_shader",
+              "parameters": {
+                "amplitude_px": 4,
+                "frequency_hz": 0.22
+              }
+            }
+          },
+          {
+            "id": "teacup",
+            "polygons": [
+              [
+                [
+                  391,
+                  718
+                ],
+                [
+                  398,
+                  711
+                ],
+                [
+                  419,
+                  708
+                ],
+                [
+                  442,
+                  710
+                ],
+                [
+                  453,
+                  715
+                ],
+                [
+                  455,
+                  723
+                ],
+                [
+                  468,
+                  723
+                ],
+                [
+                  478,
+                  730
+                ],
+                [
+                  481,
+                  739
+                ],
+                [
+                  477,
+                  747
+                ],
+                [
+                  468,
+                  755
+                ],
+                [
+                  453,
+                  755
+                ],
+                [
+                  449,
+                  764
+                ],
+                [
+                  441,
+                  771
+                ],
+                [
+                  421,
+                  775
+                ],
+                [
+                  406,
+                  769
+                ],
+                [
+                  398,
+                  759
+                ],
+                [
+                  394,
+                  744
+                ]
+              ]
+            ],
+            "holes": [
+              [
+                [
+                  455,
+                  732
+                ],
+                [
+                  466,
+                  732
+                ],
+                [
+                  471,
+                  737
+                ],
+                [
+                  469,
+                  744
+                ],
+                [
+                  461,
+                  747
+                ],
+                [
+                  454,
+                  747
+                ]
+              ]
+            ],
+            "pivot_px": [
+              429,
+              772
+            ],
+            "z_index": 3,
+            "motion": {
+              "type": "static",
+              "parameters": {}
+            }
+          },
+          {
+            "id": "tea_steam",
+            "polygons": [
+              [
+                [
+                  428,
+                  636
+                ],
+                [
+                  432,
+                  641
+                ],
+                [
+                  429,
+                  651
+                ],
+                [
+                  426,
+                  659
+                ],
+                [
+                  428,
+                  666
+                ],
+                [
+                  435,
+                  674
+                ],
+                [
+                  437,
+                  681
+                ],
+                [
+                  433,
+                  688
+                ],
+                [
+                  429,
+                  694
+                ],
+                [
+                  430,
+                  699
+                ],
+                [
+                  426,
+                  701
+                ],
+                [
+                  424,
+                  695
+                ],
+                [
+                  428,
+                  685
+                ],
+                [
+                  432,
+                  679
+                ],
+                [
+                  429,
+                  673
+                ],
+                [
+                  423,
+                  665
+                ],
+                [
+                  422,
+                  656
+                ],
+                [
+                  426,
+                  646
+                ]
+              ]
+            ],
+            "pivot_px": [
+              429,
+              701
+            ],
+            "z_index": 4,
+            "motion": {
+              "type": "flow",
+              "parameters": {
+                "speed_px_s": 4,
+                "distortion_px": 2
+              }
+            }
+          },
+          {
+            "id": "sofa_mask",
+            "polygons": [
+              [
+                [
+                  371,
+                  638
+                ],
+                [
+                  456,
+                  637
+                ],
+                [
+                  562,
+                  639
+                ],
+                [
+                  653,
+                  643
+                ],
+                [
+                  686,
+                  645
+                ],
+                [
+                  707,
+                  640
+                ],
+                [
+                  806,
+                  638
+                ],
+                [
+                  903,
+                  638
+                ],
+                [
+                  1005,
+                  641
+                ],
+                [
+                  1006,
+                  673
+                ],
+                [
+                  998,
+                  689
+                ],
+                [
+                  984,
+                  699
+                ],
+                [
+                  881,
+                  700
+                ],
+                [
+                  790,
+                  701
+                ],
+                [
+                  707,
+                  700
+                ],
+                [
+                  688,
+                  690
+                ],
+                [
+                  677,
+                  698
+                ],
+                [
+                  561,
+                  700
+                ],
+                [
+                  448,
+                  699
+                ],
+                [
+                  391,
+                  696
+                ],
+                [
+                  378,
+                  690
+                ],
+                [
+                  372,
+                  676
+                ]
+              ]
+            ],
+            "pivot_px": [
+              688,
+              700
+            ],
+            "z_index": 11,
+            "motion": {
+              "type": "static",
+              "parameters": {}
+            },
+            "holes": [
+              [
+                [
+                  418,
+                  632
+                ],
+                [
+                  441,
+                  632
+                ],
+                [
+                  441,
+                  705
+                ],
+                [
+                  418,
+                  705
+                ]
+              ]
+            ],
+            "annotation_note": "前坐垫缘仅为遮挡人物底部的静态层；茶汽经过处保留窄hole避免把汽同时扣进sofa_mask。"
+          }
+        ],
+        "notes": [
+          "人工按本期真实C原生坐标标多边形，不独立生成相似Li。",
+          "rawB仅在softmask局部补回C，1px羽化/6px授权及ROI由共用工具验证。",
+          "沙发仅前坐垫缘为z11遮罩，静态主体/座位/右装饰靠枕保留。",
+          "视觉复核第1轮real1语义漏扣；real2修正，原real1 spec另存保留。"
+        ]
+      }
+    },
+    {
+      "status": "complete",
+      "version": "real2",
+      "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "attempts": [],
+      "processing_script": "tools/art/real_scene_layers.py",
+      "qa_kind": "art",
+      "generator": "real_C_pixel_extraction",
+      "id": "S03_night_real2_curtain",
+      "group": "layers",
+      "operation": "extract_layer",
+      "prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+      "source_path": "assets/generated_scenes/v3_real/S03/night/real2/layers/curtain.png",
+      "runtime_path": "assets/generated_scenes/runtime/v3_real/S03/night/real2/layers/curtain.png",
+      "original_path": "assets/generated_scenes/v3_real/S03/night/real2/C.png",
+      "mask_path": "assets/generated_scenes/v3_real/S03/night/real2/masks/curtain_soft.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S03/night/real2/cleanplates/curtain.png",
+      "processing_parameters": {
+        "version": 1,
+        "scene_id": "S03",
+        "period": "night",
+        "revision": "real2",
+        "native_size": [
+          1672,
+          941
+        ],
+        "original_path": "assets/_incoming/a1r_real/S03/night_C.png",
+        "raw_cleanplate_path": "assets/_incoming/a1r_real/S03/night_raw_cleanplate.png",
+        "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+        "composite_prompt": "编辑第一张图片（S03咨询客厅白日完整合成C）为同一机位、同一构图的夜间灯下版本。第二张图片只提供整套游戏的笔触/配色参考。\n必须保留第一张图全部家具和物件的形状、精确位置、大小、透视和留白：中央偏左的深鼠尾草绿沙发、清楚的空坐位与前坐垫缘、右侧两只靠枕、左侧植物和单幅窗帘、顶部左侧吊灯、左下矮圆茶几、茶杯与独立的短热汽。一件也不加减、不移位、不改镜头，不增加帘或杯子。右侧30%以上空墙和简单地面保持空。\n只改光线与时段：窗外树轮廓保持相同，天空变灰青深蓝的平涂夜色；室内阴影偏灰青，墙和沙发仍足够明亮能辨认。吊灯内面用小块温暖赭黄奶油平涂色表达灯亮，周围没有发光光圈、光束、bloom或金边。整体像纸上画出的夜晚，绝不是黑暗写实光效。\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, UI, labels. 不要任何人物、字母、汉字、数字、名字、空白招牌、空吊签、牌匾、UI或边框。保留原始横向画布尺寸和全部边缘。",
+        "cleanplate_prompt": "对附件这张S03夜间咨询客厅原始完整合成C做局部移除补底，输出同尺寸1672×941的raw cleanplate B_all候选。不要重画房间、不要改构图、镜头、夜间颜色或光照。只在以下物件原占据的位置补出可信的背后表面，其余像素尽可能逐像素保留：\n1. 移除顶部偏左的小吊灯和它的悬线，用连续奶油灰泥墙补齐。\n2. 移除左窗前整幅布帘及布挂环，露出后方原有窗框、灰泥和窗外树；保留木窗框及帘杆，不新增窗格。\n3. 移除左下圆茶几上唯一的陶茶杯及其上方短热汽，补出同笔触连续木桌面和它后面的沙发布面。\n4. 仅将沙发坐垫最前缘、朝镜头凸出的狭窄包边/褶皱（大约x370到1010、y630到705的局部前缘）补成平顺连续绿色布面，这是以后可盖住坐着人物底部的前景遮罩。绝不能删除整个坐垫、坐位、沙发底座、扶手或主体；中央偏左空坐位保留。右边紫色和赭黄色两只装饰靠枕属于静态家具，原位保留。\n保留植物、沙发整体轮廓、两只靠枕、茶几全部桌腿与桌面、左窗外树、右30%以上空墙和地面。补底仍是选定画风的哑光厚涂水粉、可见干笔和少量色铅笔轮廓，保持原笔触与七个低饱和色族，不平滑成塑料。没有人物、文字、数字、空牌匾、UI、边框、金纹、发光晕或光束。不要添加任何新物件。此图是移除背景的raw原生候选，后续会仅取实际mask内区域，所以画布/构图必须不变。 保持附件的深灰青窗外夜色和室内暖灰平涂夜色，不能恢复成白日。",
+        "layers": [
+          {
+            "id": "lamp",
+            "polygons": [
+              [
+                [
+                  375,
+                  0
+                ],
+                [
+                  382,
+                  0
+                ],
+                [
+                  382,
+                  78
+                ],
+                [
+                  375,
+                  78
+                ]
+              ],
+              [
+                [
+                  365,
+                  76
+                ],
+                [
+                  384,
+                  76
+                ],
+                [
+                  391,
+                  80
+                ],
+                [
+                  394,
+                  97
+                ],
+                [
+                  406,
+                  101
+                ],
+                [
+                  418,
+                  108
+                ],
+                [
+                  429,
+                  120
+                ],
+                [
+                  438,
+                  136
+                ],
+                [
+                  444,
+                  153
+                ],
+                [
+                  447,
+                  166
+                ],
+                [
+                  442,
+                  172
+                ],
+                [
+                  429,
+                  177
+                ],
+                [
+                  412,
+                  181
+                ],
+                [
+                  390,
+                  183
+                ],
+                [
+                  367,
+                  183
+                ],
+                [
+                  344,
+                  179
+                ],
+                [
+                  327,
+                  174
+                ],
+                [
+                  313,
+                  169
+                ],
+                [
+                  310,
+                  165
+                ],
+                [
+                  314,
+                  148
+                ],
+                [
+                  321,
+                  132
+                ],
+                [
+                  332,
+                  117
+                ],
+                [
+                  344,
+                  107
+                ],
+                [
+                  357,
+                  101
+                ],
+                [
+                  360,
+                  85
+                ]
+              ]
+            ],
+            "pivot_px": [
+              378,
+              0
+            ],
+            "z_index": 1,
+            "motion": {
+              "type": "pendulum",
+              "parameters": {
+                "amplitude_px": 4,
+                "frequency_hz": 0.28,
+                "max_degrees": 1.5,
+                "damping": 3.5,
+                "stiffness": 8
+              }
+            },
+            "annotation_note": "原生坐标放大复核后重描整盏灯罩/顶座/悬线，包含上半罩，边界约1至2px保守余量。"
+          },
+          {
+            "id": "curtain",
+            "polygons": [
+              [
+                [
+                  151,
+                  36
+                ],
+                [
+                  164,
+                  38
+                ],
+                [
+                  178,
+                  45
+                ],
+                [
+                  191,
+                  46
+                ],
+                [
+                  204,
+                  54
+                ],
+                [
+                  216,
+                  52
+                ],
+                [
+                  228,
+                  61
+                ],
+                [
+                  240,
+                  60
+                ],
+                [
+                  253,
+                  69
+                ],
+                [
+                  251,
+                  203
+                ],
+                [
+                  249,
+                  357
+                ],
+                [
+                  249,
+                  481
+                ],
+                [
+                  246,
+                  586
+                ],
+                [
+                  247,
+                  699
+                ],
+                [
+                  240,
+                  721
+                ],
+                [
+                  226,
+                  725
+                ],
+                [
+                  215,
+                  732
+                ],
+                [
+                  201,
+                  727
+                ],
+                [
+                  186,
+                  734
+                ],
+                [
+                  173,
+                  730
+                ],
+                [
+                  160,
+                  734
+                ],
+                [
+                  144,
+                  729
+                ],
+                [
+                  134,
+                  734
+                ],
+                [
+                  117,
+                  727
+                ],
+                [
+                  117,
+                  698
+                ],
+                [
+                  123,
+                  618
+                ],
+                [
+                  124,
+                  499
+                ],
+                [
+                  127,
+                  391
+                ],
+                [
+                  130,
+                  270
+                ],
+                [
+                  137,
+                  160
+                ],
+                [
+                  142,
+                  72
+                ],
+                [
+                  147,
+                  43
+                ]
+              ]
+            ],
+            "holes": [
+              [
+                [
+                  232,
+                  402
+                ],
+                [
+                  246,
+                  395
+                ],
+                [
+                  260,
+                  396
+                ],
+                [
+                  278,
+                  404
+                ],
+                [
+                  290,
+                  414
+                ],
+                [
+                  287,
+                  424
+                ],
+                [
+                  262,
+                  425
+                ],
+                [
+                  245,
+                  418
+                ]
+              ],
+              [
+                [
+                  225,
+                  468
+                ],
+                [
+                  239,
+                  452
+                ],
+                [
+                  261,
+                  446
+                ],
+                [
+                  282,
+                  451
+                ],
+                [
+                  299,
+                  463
+                ],
+                [
+                  288,
+                  478
+                ],
+                [
+                  263,
+                  485
+                ],
+                [
+                  241,
+                  483
+                ]
+              ]
+            ],
+            "pivot_px": [
+              196,
+              49
+            ],
+            "z_index": 2,
+            "motion": {
+              "type": "sway_shader",
+              "parameters": {
+                "amplitude_px": 4,
+                "frequency_hz": 0.22
+              }
+            }
+          },
+          {
+            "id": "teacup",
+            "polygons": [
+              [
+                [
+                  391,
+                  718
+                ],
+                [
+                  398,
+                  711
+                ],
+                [
+                  419,
+                  708
+                ],
+                [
+                  442,
+                  710
+                ],
+                [
+                  453,
+                  715
+                ],
+                [
+                  455,
+                  723
+                ],
+                [
+                  468,
+                  723
+                ],
+                [
+                  478,
+                  730
+                ],
+                [
+                  481,
+                  739
+                ],
+                [
+                  477,
+                  747
+                ],
+                [
+                  468,
+                  755
+                ],
+                [
+                  453,
+                  755
+                ],
+                [
+                  449,
+                  764
+                ],
+                [
+                  441,
+                  771
+                ],
+                [
+                  421,
+                  775
+                ],
+                [
+                  406,
+                  769
+                ],
+                [
+                  398,
+                  759
+                ],
+                [
+                  394,
+                  744
+                ]
+              ]
+            ],
+            "holes": [
+              [
+                [
+                  455,
+                  732
+                ],
+                [
+                  466,
+                  732
+                ],
+                [
+                  471,
+                  737
+                ],
+                [
+                  469,
+                  744
+                ],
+                [
+                  461,
+                  747
+                ],
+                [
+                  454,
+                  747
+                ]
+              ]
+            ],
+            "pivot_px": [
+              429,
+              772
+            ],
+            "z_index": 3,
+            "motion": {
+              "type": "static",
+              "parameters": {}
+            }
+          },
+          {
+            "id": "tea_steam",
+            "polygons": [
+              [
+                [
+                  428,
+                  636
+                ],
+                [
+                  432,
+                  641
+                ],
+                [
+                  429,
+                  651
+                ],
+                [
+                  426,
+                  659
+                ],
+                [
+                  428,
+                  666
+                ],
+                [
+                  435,
+                  674
+                ],
+                [
+                  437,
+                  681
+                ],
+                [
+                  433,
+                  688
+                ],
+                [
+                  429,
+                  694
+                ],
+                [
+                  430,
+                  699
+                ],
+                [
+                  426,
+                  701
+                ],
+                [
+                  424,
+                  695
+                ],
+                [
+                  428,
+                  685
+                ],
+                [
+                  432,
+                  679
+                ],
+                [
+                  429,
+                  673
+                ],
+                [
+                  423,
+                  665
+                ],
+                [
+                  422,
+                  656
+                ],
+                [
+                  426,
+                  646
+                ]
+              ]
+            ],
+            "pivot_px": [
+              429,
+              701
+            ],
+            "z_index": 4,
+            "motion": {
+              "type": "flow",
+              "parameters": {
+                "speed_px_s": 4,
+                "distortion_px": 2
+              }
+            }
+          },
+          {
+            "id": "sofa_mask",
+            "polygons": [
+              [
+                [
+                  371,
+                  638
+                ],
+                [
+                  456,
+                  637
+                ],
+                [
+                  562,
+                  639
+                ],
+                [
+                  653,
+                  643
+                ],
+                [
+                  686,
+                  645
+                ],
+                [
+                  707,
+                  640
+                ],
+                [
+                  806,
+                  638
+                ],
+                [
+                  903,
+                  638
+                ],
+                [
+                  1005,
+                  641
+                ],
+                [
+                  1006,
+                  673
+                ],
+                [
+                  998,
+                  689
+                ],
+                [
+                  984,
+                  699
+                ],
+                [
+                  881,
+                  700
+                ],
+                [
+                  790,
+                  701
+                ],
+                [
+                  707,
+                  700
+                ],
+                [
+                  688,
+                  690
+                ],
+                [
+                  677,
+                  698
+                ],
+                [
+                  561,
+                  700
+                ],
+                [
+                  448,
+                  699
+                ],
+                [
+                  391,
+                  696
+                ],
+                [
+                  378,
+                  690
+                ],
+                [
+                  372,
+                  676
+                ]
+              ]
+            ],
+            "pivot_px": [
+              688,
+              700
+            ],
+            "z_index": 11,
+            "motion": {
+              "type": "static",
+              "parameters": {}
+            },
+            "holes": [
+              [
+                [
+                  418,
+                  632
+                ],
+                [
+                  441,
+                  632
+                ],
+                [
+                  441,
+                  705
+                ],
+                [
+                  418,
+                  705
+                ]
+              ]
+            ],
+            "annotation_note": "前坐垫缘仅为遮挡人物底部的静态层；茶汽经过处保留窄hole避免把汽同时扣进sofa_mask。"
+          }
+        ],
+        "notes": [
+          "人工按本期真实C原生坐标标多边形，不独立生成相似Li。",
+          "rawB仅在softmask局部补回C，1px羽化/6px授权及ROI由共用工具验证。",
+          "沙发仅前坐垫缘为z11遮罩，静态主体/座位/右装饰靠枕保留。",
+          "视觉复核第1轮real1语义漏扣；real2修正，原real1 spec另存保留。"
+        ]
+      }
+    },
+    {
+      "status": "complete",
+      "version": "real2",
+      "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "attempts": [],
+      "processing_script": "tools/art/real_scene_layers.py",
+      "qa_kind": "art",
+      "generator": "real_C_pixel_extraction",
+      "id": "S03_night_real2_teacup",
+      "group": "layers",
+      "operation": "extract_layer",
+      "prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+      "source_path": "assets/generated_scenes/v3_real/S03/night/real2/layers/teacup.png",
+      "runtime_path": "assets/generated_scenes/runtime/v3_real/S03/night/real2/layers/teacup.png",
+      "original_path": "assets/generated_scenes/v3_real/S03/night/real2/C.png",
+      "mask_path": "assets/generated_scenes/v3_real/S03/night/real2/masks/teacup_soft.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S03/night/real2/cleanplates/teacup.png",
+      "processing_parameters": {
+        "version": 1,
+        "scene_id": "S03",
+        "period": "night",
+        "revision": "real2",
+        "native_size": [
+          1672,
+          941
+        ],
+        "original_path": "assets/_incoming/a1r_real/S03/night_C.png",
+        "raw_cleanplate_path": "assets/_incoming/a1r_real/S03/night_raw_cleanplate.png",
+        "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+        "composite_prompt": "编辑第一张图片（S03咨询客厅白日完整合成C）为同一机位、同一构图的夜间灯下版本。第二张图片只提供整套游戏的笔触/配色参考。\n必须保留第一张图全部家具和物件的形状、精确位置、大小、透视和留白：中央偏左的深鼠尾草绿沙发、清楚的空坐位与前坐垫缘、右侧两只靠枕、左侧植物和单幅窗帘、顶部左侧吊灯、左下矮圆茶几、茶杯与独立的短热汽。一件也不加减、不移位、不改镜头，不增加帘或杯子。右侧30%以上空墙和简单地面保持空。\n只改光线与时段：窗外树轮廓保持相同，天空变灰青深蓝的平涂夜色；室内阴影偏灰青，墙和沙发仍足够明亮能辨认。吊灯内面用小块温暖赭黄奶油平涂色表达灯亮，周围没有发光光圈、光束、bloom或金边。整体像纸上画出的夜晚，绝不是黑暗写实光效。\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, UI, labels. 不要任何人物、字母、汉字、数字、名字、空白招牌、空吊签、牌匾、UI或边框。保留原始横向画布尺寸和全部边缘。",
+        "cleanplate_prompt": "对附件这张S03夜间咨询客厅原始完整合成C做局部移除补底，输出同尺寸1672×941的raw cleanplate B_all候选。不要重画房间、不要改构图、镜头、夜间颜色或光照。只在以下物件原占据的位置补出可信的背后表面，其余像素尽可能逐像素保留：\n1. 移除顶部偏左的小吊灯和它的悬线，用连续奶油灰泥墙补齐。\n2. 移除左窗前整幅布帘及布挂环，露出后方原有窗框、灰泥和窗外树；保留木窗框及帘杆，不新增窗格。\n3. 移除左下圆茶几上唯一的陶茶杯及其上方短热汽，补出同笔触连续木桌面和它后面的沙发布面。\n4. 仅将沙发坐垫最前缘、朝镜头凸出的狭窄包边/褶皱（大约x370到1010、y630到705的局部前缘）补成平顺连续绿色布面，这是以后可盖住坐着人物底部的前景遮罩。绝不能删除整个坐垫、坐位、沙发底座、扶手或主体；中央偏左空坐位保留。右边紫色和赭黄色两只装饰靠枕属于静态家具，原位保留。\n保留植物、沙发整体轮廓、两只靠枕、茶几全部桌腿与桌面、左窗外树、右30%以上空墙和地面。补底仍是选定画风的哑光厚涂水粉、可见干笔和少量色铅笔轮廓，保持原笔触与七个低饱和色族，不平滑成塑料。没有人物、文字、数字、空牌匾、UI、边框、金纹、发光晕或光束。不要添加任何新物件。此图是移除背景的raw原生候选，后续会仅取实际mask内区域，所以画布/构图必须不变。 保持附件的深灰青窗外夜色和室内暖灰平涂夜色，不能恢复成白日。",
+        "layers": [
+          {
+            "id": "lamp",
+            "polygons": [
+              [
+                [
+                  375,
+                  0
+                ],
+                [
+                  382,
+                  0
+                ],
+                [
+                  382,
+                  78
+                ],
+                [
+                  375,
+                  78
+                ]
+              ],
+              [
+                [
+                  365,
+                  76
+                ],
+                [
+                  384,
+                  76
+                ],
+                [
+                  391,
+                  80
+                ],
+                [
+                  394,
+                  97
+                ],
+                [
+                  406,
+                  101
+                ],
+                [
+                  418,
+                  108
+                ],
+                [
+                  429,
+                  120
+                ],
+                [
+                  438,
+                  136
+                ],
+                [
+                  444,
+                  153
+                ],
+                [
+                  447,
+                  166
+                ],
+                [
+                  442,
+                  172
+                ],
+                [
+                  429,
+                  177
+                ],
+                [
+                  412,
+                  181
+                ],
+                [
+                  390,
+                  183
+                ],
+                [
+                  367,
+                  183
+                ],
+                [
+                  344,
+                  179
+                ],
+                [
+                  327,
+                  174
+                ],
+                [
+                  313,
+                  169
+                ],
+                [
+                  310,
+                  165
+                ],
+                [
+                  314,
+                  148
+                ],
+                [
+                  321,
+                  132
+                ],
+                [
+                  332,
+                  117
+                ],
+                [
+                  344,
+                  107
+                ],
+                [
+                  357,
+                  101
+                ],
+                [
+                  360,
+                  85
+                ]
+              ]
+            ],
+            "pivot_px": [
+              378,
+              0
+            ],
+            "z_index": 1,
+            "motion": {
+              "type": "pendulum",
+              "parameters": {
+                "amplitude_px": 4,
+                "frequency_hz": 0.28,
+                "max_degrees": 1.5,
+                "damping": 3.5,
+                "stiffness": 8
+              }
+            },
+            "annotation_note": "原生坐标放大复核后重描整盏灯罩/顶座/悬线，包含上半罩，边界约1至2px保守余量。"
+          },
+          {
+            "id": "curtain",
+            "polygons": [
+              [
+                [
+                  151,
+                  36
+                ],
+                [
+                  164,
+                  38
+                ],
+                [
+                  178,
+                  45
+                ],
+                [
+                  191,
+                  46
+                ],
+                [
+                  204,
+                  54
+                ],
+                [
+                  216,
+                  52
+                ],
+                [
+                  228,
+                  61
+                ],
+                [
+                  240,
+                  60
+                ],
+                [
+                  253,
+                  69
+                ],
+                [
+                  251,
+                  203
+                ],
+                [
+                  249,
+                  357
+                ],
+                [
+                  249,
+                  481
+                ],
+                [
+                  246,
+                  586
+                ],
+                [
+                  247,
+                  699
+                ],
+                [
+                  240,
+                  721
+                ],
+                [
+                  226,
+                  725
+                ],
+                [
+                  215,
+                  732
+                ],
+                [
+                  201,
+                  727
+                ],
+                [
+                  186,
+                  734
+                ],
+                [
+                  173,
+                  730
+                ],
+                [
+                  160,
+                  734
+                ],
+                [
+                  144,
+                  729
+                ],
+                [
+                  134,
+                  734
+                ],
+                [
+                  117,
+                  727
+                ],
+                [
+                  117,
+                  698
+                ],
+                [
+                  123,
+                  618
+                ],
+                [
+                  124,
+                  499
+                ],
+                [
+                  127,
+                  391
+                ],
+                [
+                  130,
+                  270
+                ],
+                [
+                  137,
+                  160
+                ],
+                [
+                  142,
+                  72
+                ],
+                [
+                  147,
+                  43
+                ]
+              ]
+            ],
+            "holes": [
+              [
+                [
+                  232,
+                  402
+                ],
+                [
+                  246,
+                  395
+                ],
+                [
+                  260,
+                  396
+                ],
+                [
+                  278,
+                  404
+                ],
+                [
+                  290,
+                  414
+                ],
+                [
+                  287,
+                  424
+                ],
+                [
+                  262,
+                  425
+                ],
+                [
+                  245,
+                  418
+                ]
+              ],
+              [
+                [
+                  225,
+                  468
+                ],
+                [
+                  239,
+                  452
+                ],
+                [
+                  261,
+                  446
+                ],
+                [
+                  282,
+                  451
+                ],
+                [
+                  299,
+                  463
+                ],
+                [
+                  288,
+                  478
+                ],
+                [
+                  263,
+                  485
+                ],
+                [
+                  241,
+                  483
+                ]
+              ]
+            ],
+            "pivot_px": [
+              196,
+              49
+            ],
+            "z_index": 2,
+            "motion": {
+              "type": "sway_shader",
+              "parameters": {
+                "amplitude_px": 4,
+                "frequency_hz": 0.22
+              }
+            }
+          },
+          {
+            "id": "teacup",
+            "polygons": [
+              [
+                [
+                  391,
+                  718
+                ],
+                [
+                  398,
+                  711
+                ],
+                [
+                  419,
+                  708
+                ],
+                [
+                  442,
+                  710
+                ],
+                [
+                  453,
+                  715
+                ],
+                [
+                  455,
+                  723
+                ],
+                [
+                  468,
+                  723
+                ],
+                [
+                  478,
+                  730
+                ],
+                [
+                  481,
+                  739
+                ],
+                [
+                  477,
+                  747
+                ],
+                [
+                  468,
+                  755
+                ],
+                [
+                  453,
+                  755
+                ],
+                [
+                  449,
+                  764
+                ],
+                [
+                  441,
+                  771
+                ],
+                [
+                  421,
+                  775
+                ],
+                [
+                  406,
+                  769
+                ],
+                [
+                  398,
+                  759
+                ],
+                [
+                  394,
+                  744
+                ]
+              ]
+            ],
+            "holes": [
+              [
+                [
+                  455,
+                  732
+                ],
+                [
+                  466,
+                  732
+                ],
+                [
+                  471,
+                  737
+                ],
+                [
+                  469,
+                  744
+                ],
+                [
+                  461,
+                  747
+                ],
+                [
+                  454,
+                  747
+                ]
+              ]
+            ],
+            "pivot_px": [
+              429,
+              772
+            ],
+            "z_index": 3,
+            "motion": {
+              "type": "static",
+              "parameters": {}
+            }
+          },
+          {
+            "id": "tea_steam",
+            "polygons": [
+              [
+                [
+                  428,
+                  636
+                ],
+                [
+                  432,
+                  641
+                ],
+                [
+                  429,
+                  651
+                ],
+                [
+                  426,
+                  659
+                ],
+                [
+                  428,
+                  666
+                ],
+                [
+                  435,
+                  674
+                ],
+                [
+                  437,
+                  681
+                ],
+                [
+                  433,
+                  688
+                ],
+                [
+                  429,
+                  694
+                ],
+                [
+                  430,
+                  699
+                ],
+                [
+                  426,
+                  701
+                ],
+                [
+                  424,
+                  695
+                ],
+                [
+                  428,
+                  685
+                ],
+                [
+                  432,
+                  679
+                ],
+                [
+                  429,
+                  673
+                ],
+                [
+                  423,
+                  665
+                ],
+                [
+                  422,
+                  656
+                ],
+                [
+                  426,
+                  646
+                ]
+              ]
+            ],
+            "pivot_px": [
+              429,
+              701
+            ],
+            "z_index": 4,
+            "motion": {
+              "type": "flow",
+              "parameters": {
+                "speed_px_s": 4,
+                "distortion_px": 2
+              }
+            }
+          },
+          {
+            "id": "sofa_mask",
+            "polygons": [
+              [
+                [
+                  371,
+                  638
+                ],
+                [
+                  456,
+                  637
+                ],
+                [
+                  562,
+                  639
+                ],
+                [
+                  653,
+                  643
+                ],
+                [
+                  686,
+                  645
+                ],
+                [
+                  707,
+                  640
+                ],
+                [
+                  806,
+                  638
+                ],
+                [
+                  903,
+                  638
+                ],
+                [
+                  1005,
+                  641
+                ],
+                [
+                  1006,
+                  673
+                ],
+                [
+                  998,
+                  689
+                ],
+                [
+                  984,
+                  699
+                ],
+                [
+                  881,
+                  700
+                ],
+                [
+                  790,
+                  701
+                ],
+                [
+                  707,
+                  700
+                ],
+                [
+                  688,
+                  690
+                ],
+                [
+                  677,
+                  698
+                ],
+                [
+                  561,
+                  700
+                ],
+                [
+                  448,
+                  699
+                ],
+                [
+                  391,
+                  696
+                ],
+                [
+                  378,
+                  690
+                ],
+                [
+                  372,
+                  676
+                ]
+              ]
+            ],
+            "pivot_px": [
+              688,
+              700
+            ],
+            "z_index": 11,
+            "motion": {
+              "type": "static",
+              "parameters": {}
+            },
+            "holes": [
+              [
+                [
+                  418,
+                  632
+                ],
+                [
+                  441,
+                  632
+                ],
+                [
+                  441,
+                  705
+                ],
+                [
+                  418,
+                  705
+                ]
+              ]
+            ],
+            "annotation_note": "前坐垫缘仅为遮挡人物底部的静态层；茶汽经过处保留窄hole避免把汽同时扣进sofa_mask。"
+          }
+        ],
+        "notes": [
+          "人工按本期真实C原生坐标标多边形，不独立生成相似Li。",
+          "rawB仅在softmask局部补回C，1px羽化/6px授权及ROI由共用工具验证。",
+          "沙发仅前坐垫缘为z11遮罩，静态主体/座位/右装饰靠枕保留。",
+          "视觉复核第1轮real1语义漏扣；real2修正，原real1 spec另存保留。"
+        ]
+      }
+    },
+    {
+      "status": "complete",
+      "version": "real2",
+      "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "attempts": [],
+      "processing_script": "tools/art/real_scene_layers.py",
+      "qa_kind": "art",
+      "generator": "real_C_pixel_extraction",
+      "id": "S03_night_real2_tea_steam",
+      "group": "layers",
+      "operation": "extract_layer",
+      "prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+      "source_path": "assets/generated_scenes/v3_real/S03/night/real2/layers/tea_steam.png",
+      "runtime_path": "assets/generated_scenes/runtime/v3_real/S03/night/real2/layers/tea_steam.png",
+      "original_path": "assets/generated_scenes/v3_real/S03/night/real2/C.png",
+      "mask_path": "assets/generated_scenes/v3_real/S03/night/real2/masks/tea_steam_soft.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S03/night/real2/cleanplates/tea_steam.png",
+      "processing_parameters": {
+        "version": 1,
+        "scene_id": "S03",
+        "period": "night",
+        "revision": "real2",
+        "native_size": [
+          1672,
+          941
+        ],
+        "original_path": "assets/_incoming/a1r_real/S03/night_C.png",
+        "raw_cleanplate_path": "assets/_incoming/a1r_real/S03/night_raw_cleanplate.png",
+        "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+        "composite_prompt": "编辑第一张图片（S03咨询客厅白日完整合成C）为同一机位、同一构图的夜间灯下版本。第二张图片只提供整套游戏的笔触/配色参考。\n必须保留第一张图全部家具和物件的形状、精确位置、大小、透视和留白：中央偏左的深鼠尾草绿沙发、清楚的空坐位与前坐垫缘、右侧两只靠枕、左侧植物和单幅窗帘、顶部左侧吊灯、左下矮圆茶几、茶杯与独立的短热汽。一件也不加减、不移位、不改镜头，不增加帘或杯子。右侧30%以上空墙和简单地面保持空。\n只改光线与时段：窗外树轮廓保持相同，天空变灰青深蓝的平涂夜色；室内阴影偏灰青，墙和沙发仍足够明亮能辨认。吊灯内面用小块温暖赭黄奶油平涂色表达灯亮，周围没有发光光圈、光束、bloom或金边。整体像纸上画出的夜晚，绝不是黑暗写实光效。\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, UI, labels. 不要任何人物、字母、汉字、数字、名字、空白招牌、空吊签、牌匾、UI或边框。保留原始横向画布尺寸和全部边缘。",
+        "cleanplate_prompt": "对附件这张S03夜间咨询客厅原始完整合成C做局部移除补底，输出同尺寸1672×941的raw cleanplate B_all候选。不要重画房间、不要改构图、镜头、夜间颜色或光照。只在以下物件原占据的位置补出可信的背后表面，其余像素尽可能逐像素保留：\n1. 移除顶部偏左的小吊灯和它的悬线，用连续奶油灰泥墙补齐。\n2. 移除左窗前整幅布帘及布挂环，露出后方原有窗框、灰泥和窗外树；保留木窗框及帘杆，不新增窗格。\n3. 移除左下圆茶几上唯一的陶茶杯及其上方短热汽，补出同笔触连续木桌面和它后面的沙发布面。\n4. 仅将沙发坐垫最前缘、朝镜头凸出的狭窄包边/褶皱（大约x370到1010、y630到705的局部前缘）补成平顺连续绿色布面，这是以后可盖住坐着人物底部的前景遮罩。绝不能删除整个坐垫、坐位、沙发底座、扶手或主体；中央偏左空坐位保留。右边紫色和赭黄色两只装饰靠枕属于静态家具，原位保留。\n保留植物、沙发整体轮廓、两只靠枕、茶几全部桌腿与桌面、左窗外树、右30%以上空墙和地面。补底仍是选定画风的哑光厚涂水粉、可见干笔和少量色铅笔轮廓，保持原笔触与七个低饱和色族，不平滑成塑料。没有人物、文字、数字、空牌匾、UI、边框、金纹、发光晕或光束。不要添加任何新物件。此图是移除背景的raw原生候选，后续会仅取实际mask内区域，所以画布/构图必须不变。 保持附件的深灰青窗外夜色和室内暖灰平涂夜色，不能恢复成白日。",
+        "layers": [
+          {
+            "id": "lamp",
+            "polygons": [
+              [
+                [
+                  375,
+                  0
+                ],
+                [
+                  382,
+                  0
+                ],
+                [
+                  382,
+                  78
+                ],
+                [
+                  375,
+                  78
+                ]
+              ],
+              [
+                [
+                  365,
+                  76
+                ],
+                [
+                  384,
+                  76
+                ],
+                [
+                  391,
+                  80
+                ],
+                [
+                  394,
+                  97
+                ],
+                [
+                  406,
+                  101
+                ],
+                [
+                  418,
+                  108
+                ],
+                [
+                  429,
+                  120
+                ],
+                [
+                  438,
+                  136
+                ],
+                [
+                  444,
+                  153
+                ],
+                [
+                  447,
+                  166
+                ],
+                [
+                  442,
+                  172
+                ],
+                [
+                  429,
+                  177
+                ],
+                [
+                  412,
+                  181
+                ],
+                [
+                  390,
+                  183
+                ],
+                [
+                  367,
+                  183
+                ],
+                [
+                  344,
+                  179
+                ],
+                [
+                  327,
+                  174
+                ],
+                [
+                  313,
+                  169
+                ],
+                [
+                  310,
+                  165
+                ],
+                [
+                  314,
+                  148
+                ],
+                [
+                  321,
+                  132
+                ],
+                [
+                  332,
+                  117
+                ],
+                [
+                  344,
+                  107
+                ],
+                [
+                  357,
+                  101
+                ],
+                [
+                  360,
+                  85
+                ]
+              ]
+            ],
+            "pivot_px": [
+              378,
+              0
+            ],
+            "z_index": 1,
+            "motion": {
+              "type": "pendulum",
+              "parameters": {
+                "amplitude_px": 4,
+                "frequency_hz": 0.28,
+                "max_degrees": 1.5,
+                "damping": 3.5,
+                "stiffness": 8
+              }
+            },
+            "annotation_note": "原生坐标放大复核后重描整盏灯罩/顶座/悬线，包含上半罩，边界约1至2px保守余量。"
+          },
+          {
+            "id": "curtain",
+            "polygons": [
+              [
+                [
+                  151,
+                  36
+                ],
+                [
+                  164,
+                  38
+                ],
+                [
+                  178,
+                  45
+                ],
+                [
+                  191,
+                  46
+                ],
+                [
+                  204,
+                  54
+                ],
+                [
+                  216,
+                  52
+                ],
+                [
+                  228,
+                  61
+                ],
+                [
+                  240,
+                  60
+                ],
+                [
+                  253,
+                  69
+                ],
+                [
+                  251,
+                  203
+                ],
+                [
+                  249,
+                  357
+                ],
+                [
+                  249,
+                  481
+                ],
+                [
+                  246,
+                  586
+                ],
+                [
+                  247,
+                  699
+                ],
+                [
+                  240,
+                  721
+                ],
+                [
+                  226,
+                  725
+                ],
+                [
+                  215,
+                  732
+                ],
+                [
+                  201,
+                  727
+                ],
+                [
+                  186,
+                  734
+                ],
+                [
+                  173,
+                  730
+                ],
+                [
+                  160,
+                  734
+                ],
+                [
+                  144,
+                  729
+                ],
+                [
+                  134,
+                  734
+                ],
+                [
+                  117,
+                  727
+                ],
+                [
+                  117,
+                  698
+                ],
+                [
+                  123,
+                  618
+                ],
+                [
+                  124,
+                  499
+                ],
+                [
+                  127,
+                  391
+                ],
+                [
+                  130,
+                  270
+                ],
+                [
+                  137,
+                  160
+                ],
+                [
+                  142,
+                  72
+                ],
+                [
+                  147,
+                  43
+                ]
+              ]
+            ],
+            "holes": [
+              [
+                [
+                  232,
+                  402
+                ],
+                [
+                  246,
+                  395
+                ],
+                [
+                  260,
+                  396
+                ],
+                [
+                  278,
+                  404
+                ],
+                [
+                  290,
+                  414
+                ],
+                [
+                  287,
+                  424
+                ],
+                [
+                  262,
+                  425
+                ],
+                [
+                  245,
+                  418
+                ]
+              ],
+              [
+                [
+                  225,
+                  468
+                ],
+                [
+                  239,
+                  452
+                ],
+                [
+                  261,
+                  446
+                ],
+                [
+                  282,
+                  451
+                ],
+                [
+                  299,
+                  463
+                ],
+                [
+                  288,
+                  478
+                ],
+                [
+                  263,
+                  485
+                ],
+                [
+                  241,
+                  483
+                ]
+              ]
+            ],
+            "pivot_px": [
+              196,
+              49
+            ],
+            "z_index": 2,
+            "motion": {
+              "type": "sway_shader",
+              "parameters": {
+                "amplitude_px": 4,
+                "frequency_hz": 0.22
+              }
+            }
+          },
+          {
+            "id": "teacup",
+            "polygons": [
+              [
+                [
+                  391,
+                  718
+                ],
+                [
+                  398,
+                  711
+                ],
+                [
+                  419,
+                  708
+                ],
+                [
+                  442,
+                  710
+                ],
+                [
+                  453,
+                  715
+                ],
+                [
+                  455,
+                  723
+                ],
+                [
+                  468,
+                  723
+                ],
+                [
+                  478,
+                  730
+                ],
+                [
+                  481,
+                  739
+                ],
+                [
+                  477,
+                  747
+                ],
+                [
+                  468,
+                  755
+                ],
+                [
+                  453,
+                  755
+                ],
+                [
+                  449,
+                  764
+                ],
+                [
+                  441,
+                  771
+                ],
+                [
+                  421,
+                  775
+                ],
+                [
+                  406,
+                  769
+                ],
+                [
+                  398,
+                  759
+                ],
+                [
+                  394,
+                  744
+                ]
+              ]
+            ],
+            "holes": [
+              [
+                [
+                  455,
+                  732
+                ],
+                [
+                  466,
+                  732
+                ],
+                [
+                  471,
+                  737
+                ],
+                [
+                  469,
+                  744
+                ],
+                [
+                  461,
+                  747
+                ],
+                [
+                  454,
+                  747
+                ]
+              ]
+            ],
+            "pivot_px": [
+              429,
+              772
+            ],
+            "z_index": 3,
+            "motion": {
+              "type": "static",
+              "parameters": {}
+            }
+          },
+          {
+            "id": "tea_steam",
+            "polygons": [
+              [
+                [
+                  428,
+                  636
+                ],
+                [
+                  432,
+                  641
+                ],
+                [
+                  429,
+                  651
+                ],
+                [
+                  426,
+                  659
+                ],
+                [
+                  428,
+                  666
+                ],
+                [
+                  435,
+                  674
+                ],
+                [
+                  437,
+                  681
+                ],
+                [
+                  433,
+                  688
+                ],
+                [
+                  429,
+                  694
+                ],
+                [
+                  430,
+                  699
+                ],
+                [
+                  426,
+                  701
+                ],
+                [
+                  424,
+                  695
+                ],
+                [
+                  428,
+                  685
+                ],
+                [
+                  432,
+                  679
+                ],
+                [
+                  429,
+                  673
+                ],
+                [
+                  423,
+                  665
+                ],
+                [
+                  422,
+                  656
+                ],
+                [
+                  426,
+                  646
+                ]
+              ]
+            ],
+            "pivot_px": [
+              429,
+              701
+            ],
+            "z_index": 4,
+            "motion": {
+              "type": "flow",
+              "parameters": {
+                "speed_px_s": 4,
+                "distortion_px": 2
+              }
+            }
+          },
+          {
+            "id": "sofa_mask",
+            "polygons": [
+              [
+                [
+                  371,
+                  638
+                ],
+                [
+                  456,
+                  637
+                ],
+                [
+                  562,
+                  639
+                ],
+                [
+                  653,
+                  643
+                ],
+                [
+                  686,
+                  645
+                ],
+                [
+                  707,
+                  640
+                ],
+                [
+                  806,
+                  638
+                ],
+                [
+                  903,
+                  638
+                ],
+                [
+                  1005,
+                  641
+                ],
+                [
+                  1006,
+                  673
+                ],
+                [
+                  998,
+                  689
+                ],
+                [
+                  984,
+                  699
+                ],
+                [
+                  881,
+                  700
+                ],
+                [
+                  790,
+                  701
+                ],
+                [
+                  707,
+                  700
+                ],
+                [
+                  688,
+                  690
+                ],
+                [
+                  677,
+                  698
+                ],
+                [
+                  561,
+                  700
+                ],
+                [
+                  448,
+                  699
+                ],
+                [
+                  391,
+                  696
+                ],
+                [
+                  378,
+                  690
+                ],
+                [
+                  372,
+                  676
+                ]
+              ]
+            ],
+            "pivot_px": [
+              688,
+              700
+            ],
+            "z_index": 11,
+            "motion": {
+              "type": "static",
+              "parameters": {}
+            },
+            "holes": [
+              [
+                [
+                  418,
+                  632
+                ],
+                [
+                  441,
+                  632
+                ],
+                [
+                  441,
+                  705
+                ],
+                [
+                  418,
+                  705
+                ]
+              ]
+            ],
+            "annotation_note": "前坐垫缘仅为遮挡人物底部的静态层；茶汽经过处保留窄hole避免把汽同时扣进sofa_mask。"
+          }
+        ],
+        "notes": [
+          "人工按本期真实C原生坐标标多边形，不独立生成相似Li。",
+          "rawB仅在softmask局部补回C，1px羽化/6px授权及ROI由共用工具验证。",
+          "沙发仅前坐垫缘为z11遮罩，静态主体/座位/右装饰靠枕保留。",
+          "视觉复核第1轮real1语义漏扣；real2修正，原real1 spec另存保留。"
+        ]
+      }
+    },
+    {
+      "status": "complete",
+      "version": "real2",
+      "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "attempts": [],
+      "processing_script": "tools/art/real_scene_layers.py",
+      "qa_kind": "art",
+      "generator": "real_C_pixel_extraction",
+      "id": "S03_night_real2_sofa_mask",
+      "group": "layers",
+      "operation": "extract_layer",
+      "prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+      "source_path": "assets/generated_scenes/v3_real/S03/night/real2/layers/sofa_mask.png",
+      "runtime_path": "assets/generated_scenes/runtime/v3_real/S03/night/real2/layers/sofa_mask.png",
+      "original_path": "assets/generated_scenes/v3_real/S03/night/real2/C.png",
+      "mask_path": "assets/generated_scenes/v3_real/S03/night/real2/masks/sofa_mask_soft.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S03/night/real2/cleanplates/sofa_mask.png",
+      "processing_parameters": {
+        "version": 1,
+        "scene_id": "S03",
+        "period": "night",
+        "revision": "real2",
+        "native_size": [
+          1672,
+          941
+        ],
+        "original_path": "assets/_incoming/a1r_real/S03/night_C.png",
+        "raw_cleanplate_path": "assets/_incoming/a1r_real/S03/night_raw_cleanplate.png",
+        "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+        "composite_prompt": "编辑第一张图片（S03咨询客厅白日完整合成C）为同一机位、同一构图的夜间灯下版本。第二张图片只提供整套游戏的笔触/配色参考。\n必须保留第一张图全部家具和物件的形状、精确位置、大小、透视和留白：中央偏左的深鼠尾草绿沙发、清楚的空坐位与前坐垫缘、右侧两只靠枕、左侧植物和单幅窗帘、顶部左侧吊灯、左下矮圆茶几、茶杯与独立的短热汽。一件也不加减、不移位、不改镜头，不增加帘或杯子。右侧30%以上空墙和简单地面保持空。\n只改光线与时段：窗外树轮廓保持相同，天空变灰青深蓝的平涂夜色；室内阴影偏灰青，墙和沙发仍足够明亮能辨认。吊灯内面用小块温暖赭黄奶油平涂色表达灯亮，周围没有发光光圈、光束、bloom或金边。整体像纸上画出的夜晚，绝不是黑暗写实光效。\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, UI, labels. 不要任何人物、字母、汉字、数字、名字、空白招牌、空吊签、牌匾、UI或边框。保留原始横向画布尺寸和全部边缘。",
+        "cleanplate_prompt": "对附件这张S03夜间咨询客厅原始完整合成C做局部移除补底，输出同尺寸1672×941的raw cleanplate B_all候选。不要重画房间、不要改构图、镜头、夜间颜色或光照。只在以下物件原占据的位置补出可信的背后表面，其余像素尽可能逐像素保留：\n1. 移除顶部偏左的小吊灯和它的悬线，用连续奶油灰泥墙补齐。\n2. 移除左窗前整幅布帘及布挂环，露出后方原有窗框、灰泥和窗外树；保留木窗框及帘杆，不新增窗格。\n3. 移除左下圆茶几上唯一的陶茶杯及其上方短热汽，补出同笔触连续木桌面和它后面的沙发布面。\n4. 仅将沙发坐垫最前缘、朝镜头凸出的狭窄包边/褶皱（大约x370到1010、y630到705的局部前缘）补成平顺连续绿色布面，这是以后可盖住坐着人物底部的前景遮罩。绝不能删除整个坐垫、坐位、沙发底座、扶手或主体；中央偏左空坐位保留。右边紫色和赭黄色两只装饰靠枕属于静态家具，原位保留。\n保留植物、沙发整体轮廓、两只靠枕、茶几全部桌腿与桌面、左窗外树、右30%以上空墙和地面。补底仍是选定画风的哑光厚涂水粉、可见干笔和少量色铅笔轮廓，保持原笔触与七个低饱和色族，不平滑成塑料。没有人物、文字、数字、空牌匾、UI、边框、金纹、发光晕或光束。不要添加任何新物件。此图是移除背景的raw原生候选，后续会仅取实际mask内区域，所以画布/构图必须不变。 保持附件的深灰青窗外夜色和室内暖灰平涂夜色，不能恢复成白日。",
+        "layers": [
+          {
+            "id": "lamp",
+            "polygons": [
+              [
+                [
+                  375,
+                  0
+                ],
+                [
+                  382,
+                  0
+                ],
+                [
+                  382,
+                  78
+                ],
+                [
+                  375,
+                  78
+                ]
+              ],
+              [
+                [
+                  365,
+                  76
+                ],
+                [
+                  384,
+                  76
+                ],
+                [
+                  391,
+                  80
+                ],
+                [
+                  394,
+                  97
+                ],
+                [
+                  406,
+                  101
+                ],
+                [
+                  418,
+                  108
+                ],
+                [
+                  429,
+                  120
+                ],
+                [
+                  438,
+                  136
+                ],
+                [
+                  444,
+                  153
+                ],
+                [
+                  447,
+                  166
+                ],
+                [
+                  442,
+                  172
+                ],
+                [
+                  429,
+                  177
+                ],
+                [
+                  412,
+                  181
+                ],
+                [
+                  390,
+                  183
+                ],
+                [
+                  367,
+                  183
+                ],
+                [
+                  344,
+                  179
+                ],
+                [
+                  327,
+                  174
+                ],
+                [
+                  313,
+                  169
+                ],
+                [
+                  310,
+                  165
+                ],
+                [
+                  314,
+                  148
+                ],
+                [
+                  321,
+                  132
+                ],
+                [
+                  332,
+                  117
+                ],
+                [
+                  344,
+                  107
+                ],
+                [
+                  357,
+                  101
+                ],
+                [
+                  360,
+                  85
+                ]
+              ]
+            ],
+            "pivot_px": [
+              378,
+              0
+            ],
+            "z_index": 1,
+            "motion": {
+              "type": "pendulum",
+              "parameters": {
+                "amplitude_px": 4,
+                "frequency_hz": 0.28,
+                "max_degrees": 1.5,
+                "damping": 3.5,
+                "stiffness": 8
+              }
+            },
+            "annotation_note": "原生坐标放大复核后重描整盏灯罩/顶座/悬线，包含上半罩，边界约1至2px保守余量。"
+          },
+          {
+            "id": "curtain",
+            "polygons": [
+              [
+                [
+                  151,
+                  36
+                ],
+                [
+                  164,
+                  38
+                ],
+                [
+                  178,
+                  45
+                ],
+                [
+                  191,
+                  46
+                ],
+                [
+                  204,
+                  54
+                ],
+                [
+                  216,
+                  52
+                ],
+                [
+                  228,
+                  61
+                ],
+                [
+                  240,
+                  60
+                ],
+                [
+                  253,
+                  69
+                ],
+                [
+                  251,
+                  203
+                ],
+                [
+                  249,
+                  357
+                ],
+                [
+                  249,
+                  481
+                ],
+                [
+                  246,
+                  586
+                ],
+                [
+                  247,
+                  699
+                ],
+                [
+                  240,
+                  721
+                ],
+                [
+                  226,
+                  725
+                ],
+                [
+                  215,
+                  732
+                ],
+                [
+                  201,
+                  727
+                ],
+                [
+                  186,
+                  734
+                ],
+                [
+                  173,
+                  730
+                ],
+                [
+                  160,
+                  734
+                ],
+                [
+                  144,
+                  729
+                ],
+                [
+                  134,
+                  734
+                ],
+                [
+                  117,
+                  727
+                ],
+                [
+                  117,
+                  698
+                ],
+                [
+                  123,
+                  618
+                ],
+                [
+                  124,
+                  499
+                ],
+                [
+                  127,
+                  391
+                ],
+                [
+                  130,
+                  270
+                ],
+                [
+                  137,
+                  160
+                ],
+                [
+                  142,
+                  72
+                ],
+                [
+                  147,
+                  43
+                ]
+              ]
+            ],
+            "holes": [
+              [
+                [
+                  232,
+                  402
+                ],
+                [
+                  246,
+                  395
+                ],
+                [
+                  260,
+                  396
+                ],
+                [
+                  278,
+                  404
+                ],
+                [
+                  290,
+                  414
+                ],
+                [
+                  287,
+                  424
+                ],
+                [
+                  262,
+                  425
+                ],
+                [
+                  245,
+                  418
+                ]
+              ],
+              [
+                [
+                  225,
+                  468
+                ],
+                [
+                  239,
+                  452
+                ],
+                [
+                  261,
+                  446
+                ],
+                [
+                  282,
+                  451
+                ],
+                [
+                  299,
+                  463
+                ],
+                [
+                  288,
+                  478
+                ],
+                [
+                  263,
+                  485
+                ],
+                [
+                  241,
+                  483
+                ]
+              ]
+            ],
+            "pivot_px": [
+              196,
+              49
+            ],
+            "z_index": 2,
+            "motion": {
+              "type": "sway_shader",
+              "parameters": {
+                "amplitude_px": 4,
+                "frequency_hz": 0.22
+              }
+            }
+          },
+          {
+            "id": "teacup",
+            "polygons": [
+              [
+                [
+                  391,
+                  718
+                ],
+                [
+                  398,
+                  711
+                ],
+                [
+                  419,
+                  708
+                ],
+                [
+                  442,
+                  710
+                ],
+                [
+                  453,
+                  715
+                ],
+                [
+                  455,
+                  723
+                ],
+                [
+                  468,
+                  723
+                ],
+                [
+                  478,
+                  730
+                ],
+                [
+                  481,
+                  739
+                ],
+                [
+                  477,
+                  747
+                ],
+                [
+                  468,
+                  755
+                ],
+                [
+                  453,
+                  755
+                ],
+                [
+                  449,
+                  764
+                ],
+                [
+                  441,
+                  771
+                ],
+                [
+                  421,
+                  775
+                ],
+                [
+                  406,
+                  769
+                ],
+                [
+                  398,
+                  759
+                ],
+                [
+                  394,
+                  744
+                ]
+              ]
+            ],
+            "holes": [
+              [
+                [
+                  455,
+                  732
+                ],
+                [
+                  466,
+                  732
+                ],
+                [
+                  471,
+                  737
+                ],
+                [
+                  469,
+                  744
+                ],
+                [
+                  461,
+                  747
+                ],
+                [
+                  454,
+                  747
+                ]
+              ]
+            ],
+            "pivot_px": [
+              429,
+              772
+            ],
+            "z_index": 3,
+            "motion": {
+              "type": "static",
+              "parameters": {}
+            }
+          },
+          {
+            "id": "tea_steam",
+            "polygons": [
+              [
+                [
+                  428,
+                  636
+                ],
+                [
+                  432,
+                  641
+                ],
+                [
+                  429,
+                  651
+                ],
+                [
+                  426,
+                  659
+                ],
+                [
+                  428,
+                  666
+                ],
+                [
+                  435,
+                  674
+                ],
+                [
+                  437,
+                  681
+                ],
+                [
+                  433,
+                  688
+                ],
+                [
+                  429,
+                  694
+                ],
+                [
+                  430,
+                  699
+                ],
+                [
+                  426,
+                  701
+                ],
+                [
+                  424,
+                  695
+                ],
+                [
+                  428,
+                  685
+                ],
+                [
+                  432,
+                  679
+                ],
+                [
+                  429,
+                  673
+                ],
+                [
+                  423,
+                  665
+                ],
+                [
+                  422,
+                  656
+                ],
+                [
+                  426,
+                  646
+                ]
+              ]
+            ],
+            "pivot_px": [
+              429,
+              701
+            ],
+            "z_index": 4,
+            "motion": {
+              "type": "flow",
+              "parameters": {
+                "speed_px_s": 4,
+                "distortion_px": 2
+              }
+            }
+          },
+          {
+            "id": "sofa_mask",
+            "polygons": [
+              [
+                [
+                  371,
+                  638
+                ],
+                [
+                  456,
+                  637
+                ],
+                [
+                  562,
+                  639
+                ],
+                [
+                  653,
+                  643
+                ],
+                [
+                  686,
+                  645
+                ],
+                [
+                  707,
+                  640
+                ],
+                [
+                  806,
+                  638
+                ],
+                [
+                  903,
+                  638
+                ],
+                [
+                  1005,
+                  641
+                ],
+                [
+                  1006,
+                  673
+                ],
+                [
+                  998,
+                  689
+                ],
+                [
+                  984,
+                  699
+                ],
+                [
+                  881,
+                  700
+                ],
+                [
+                  790,
+                  701
+                ],
+                [
+                  707,
+                  700
+                ],
+                [
+                  688,
+                  690
+                ],
+                [
+                  677,
+                  698
+                ],
+                [
+                  561,
+                  700
+                ],
+                [
+                  448,
+                  699
+                ],
+                [
+                  391,
+                  696
+                ],
+                [
+                  378,
+                  690
+                ],
+                [
+                  372,
+                  676
+                ]
+              ]
+            ],
+            "pivot_px": [
+              688,
+              700
+            ],
+            "z_index": 11,
+            "motion": {
+              "type": "static",
+              "parameters": {}
+            },
+            "holes": [
+              [
+                [
+                  418,
+                  632
+                ],
+                [
+                  441,
+                  632
+                ],
+                [
+                  441,
+                  705
+                ],
+                [
+                  418,
+                  705
+                ]
+              ]
+            ],
+            "annotation_note": "前坐垫缘仅为遮挡人物底部的静态层；茶汽经过处保留窄hole避免把汽同时扣进sofa_mask。"
+          }
+        ],
+        "notes": [
+          "人工按本期真实C原生坐标标多边形，不独立生成相似Li。",
+          "rawB仅在softmask局部补回C，1px羽化/6px授权及ROI由共用工具验证。",
+          "沙发仅前坐垫缘为z11遮罩，静态主体/座位/右装饰靠枕保留。",
+          "视觉复核第1轮real1语义漏扣；real2修正，原real1 spec另存保留。"
+        ]
+      }
+    }
+  ],
+  "recompositions": [
+    {
+      "id": "S03_night_real2",
+      "qa_kind": "art",
+      "original_path": "assets/generated_scenes/v3_real/S03/night/real2/C.png",
+      "base_path": "assets/generated_scenes/v3_real/S03/night/real2/B_all.png",
+      "layers": [
+        {
+          "path": "assets/generated_scenes/v3_real/S03/night/real2/layers/lamp.png",
+          "z_index": 1
+        },
+        {
+          "path": "assets/generated_scenes/v3_real/S03/night/real2/layers/curtain.png",
+          "z_index": 2
+        },
+        {
+          "path": "assets/generated_scenes/v3_real/S03/night/real2/layers/teacup.png",
+          "z_index": 3
+        },
+        {
+          "path": "assets/generated_scenes/v3_real/S03/night/real2/layers/tea_steam.png",
+          "z_index": 4
+        },
+        {
+          "path": "assets/generated_scenes/v3_real/S03/night/real2/layers/sofa_mask.png",
+          "z_index": 11
+        }
+      ]
+    }
+  ],
+  "scene_descriptors": {
+    "S03": {
+      "layer_format": "aligned_full_canvas",
+      "night": "res://assets/generated_scenes/runtime/v3_real/S03/night/real2/B_all.png",
+      "layers": {
+        "lamp": {
+          "path": "res://assets/generated_scenes/runtime/v3_real/S03/night/real2/layers/lamp.png",
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            1672,
+            941
+          ],
+          "pivot_px": [
+            378,
+            0
+          ],
+          "z_index": 1,
+          "motion": {
+            "type": "pendulum",
+            "parameters": {
+              "amplitude_px": 4,
+              "frequency_hz": 0.28,
+              "max_degrees": 1.5,
+              "damping": 3.5,
+              "stiffness": 8
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 1.1483253588516746,
+            "source_crop": [
+              0.0,
+              0.25,
+              1672.0,
+              940.75
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              1672,
+              941
+            ]
+          },
+          "variants": {
+            "night": "res://assets/generated_scenes/runtime/v3_real/S03/night/real2/layers/lamp.png"
+          },
+          "variant_transforms": {
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 1.1483253588516746,
+              "source_crop": [
+                0.0,
+                0.25,
+                1672.0,
+                940.75
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                1672,
+                941
+              ]
+            }
+          }
+        },
+        "curtain": {
+          "path": "res://assets/generated_scenes/runtime/v3_real/S03/night/real2/layers/curtain.png",
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            1672,
+            941
+          ],
+          "pivot_px": [
+            196,
+            49
+          ],
+          "z_index": 2,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude_px": 4,
+              "frequency_hz": 0.22
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 1.1483253588516746,
+            "source_crop": [
+              0.0,
+              0.25,
+              1672.0,
+              940.75
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              1672,
+              941
+            ]
+          },
+          "variants": {
+            "night": "res://assets/generated_scenes/runtime/v3_real/S03/night/real2/layers/curtain.png"
+          },
+          "variant_transforms": {
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 1.1483253588516746,
+              "source_crop": [
+                0.0,
+                0.25,
+                1672.0,
+                940.75
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                1672,
+                941
+              ]
+            }
+          }
+        },
+        "teacup": {
+          "path": "res://assets/generated_scenes/runtime/v3_real/S03/night/real2/layers/teacup.png",
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            1672,
+            941
+          ],
+          "pivot_px": [
+            429,
+            772
+          ],
+          "z_index": 3,
+          "motion": {
+            "type": "static",
+            "parameters": {}
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 1.1483253588516746,
+            "source_crop": [
+              0.0,
+              0.25,
+              1672.0,
+              940.75
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              1672,
+              941
+            ]
+          },
+          "variants": {
+            "night": "res://assets/generated_scenes/runtime/v3_real/S03/night/real2/layers/teacup.png"
+          },
+          "variant_transforms": {
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 1.1483253588516746,
+              "source_crop": [
+                0.0,
+                0.25,
+                1672.0,
+                940.75
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                1672,
+                941
+              ]
+            }
+          }
+        },
+        "tea_steam": {
+          "path": "res://assets/generated_scenes/runtime/v3_real/S03/night/real2/layers/tea_steam.png",
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            1672,
+            941
+          ],
+          "pivot_px": [
+            429,
+            701
+          ],
+          "z_index": 4,
+          "motion": {
+            "type": "flow",
+            "parameters": {
+              "speed_px_s": 4,
+              "distortion_px": 2
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 1.1483253588516746,
+            "source_crop": [
+              0.0,
+              0.25,
+              1672.0,
+              940.75
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              1672,
+              941
+            ]
+          },
+          "variants": {
+            "night": "res://assets/generated_scenes/runtime/v3_real/S03/night/real2/layers/tea_steam.png"
+          },
+          "variant_transforms": {
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 1.1483253588516746,
+              "source_crop": [
+                0.0,
+                0.25,
+                1672.0,
+                940.75
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                1672,
+                941
+              ]
+            }
+          }
+        },
+        "sofa_mask": {
+          "path": "res://assets/generated_scenes/runtime/v3_real/S03/night/real2/layers/sofa_mask.png",
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            1672,
+            941
+          ],
+          "pivot_px": [
+            688,
+            700
+          ],
+          "z_index": 11,
+          "motion": {
+            "type": "static",
+            "parameters": {}
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 1.1483253588516746,
+            "source_crop": [
+              0.0,
+              0.25,
+              1672.0,
+              940.75
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              1672,
+              941
+            ]
+          },
+          "variants": {
+            "night": "res://assets/generated_scenes/runtime/v3_real/S03/night/real2/layers/sofa_mask.png"
+          },
+          "variant_transforms": {
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 1.1483253588516746,
+              "source_crop": [
+                0.0,
+                0.25,
+                1672.0,
+                940.75
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                1672,
+                941
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "receipt_path": "assets/generated_scenes/v3_real/S03/night/real2/receipt.json"
+}

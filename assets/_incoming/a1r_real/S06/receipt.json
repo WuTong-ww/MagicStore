@@ -1,0 +1,487 @@
+{
+  "version": 1,
+  "scene_id": "S06",
+  "stage": "layer_visual_review_completed_with_limits",
+  "status": "complete",
+  "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+  "style_sha256": "391ef0b702653eaf7a2bf98f90595bb12502587b6bcc9f0b5653aecdf9766833",
+  "records": [
+    {
+      "id": "S06_day",
+      "period": "day",
+      "path": "assets/_incoming/a1r_real/S06/day_C.png",
+      "source_path": "assets/_incoming/a1r_real/S06/day_C.png",
+      "prompt_version": "round2-style-v2-candidate3",
+      "prompt": "为 Godot 游戏《零点杂货铺》制作 S06 原料小店白日版原始完整合成C。附件只作整套游戏的笔触、哑光材料、七色族和光线参考，不复制附件前台的绿色门帘/柜架布局。单张16:9全幅横向场景，尽可能原生2560×1440或工具实际最大16:9尺寸，无边框。\n主体：站在一间安静朴素的原料小店里看向旧木柜台。柜台占左侧至中间偏左，不挡满全屏。柜台上只放两只简单的藤编原料篮，一篮清楚的绿色宽叶草、一篮几颗浅灰白小石块；下方只一只普通木箱，不画格子墙。左侧敞门/宽窗通向安静的白日街道，门外仅一棵灰绿街树的树干和明确叶簇，不出现路人、店招或车辆。门口内侧仅一幅自然下垂的素色布帘（不要两幅对称帘），布帘和窗外街树叶片彼此分开，便于以后从本张C按实际像素拆层。柜台背后只一小束干草，不堆货架、瓶子或神秘杂物。右侧至少30%是一大片连续空暖灰奶油墙，底部12%简单木地或灰土地面。只有一个视觉焦点：柜台上的两个材料篮，所有篮子、柜脚、木箱结构正确，篮内材料轮廓可辨，总道具少于15。\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse daylight, cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, UI, labels. 绝无人物、字母、汉字、数字、名字、空白招牌、空白吊签、价签、标签、空牌匾、格子面板、UI或框。绝不出现一排不可识别的小物件。无紫藤、光晕、金边和塑料光泽。",
+      "ref_paths": [
+        "assets/_incoming/a1r_pilot/candidate_3.png"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "elapsed_ms": 32464
+        }
+      ],
+      "status": "complete",
+      "sha256": "dd2cfbd1e10883946b6048c10e6ba0c3912df225ee998d7f516fcc5bc1f1cf9f",
+      "native_size": [
+        1672,
+        941
+      ],
+      "source_resolution": "native_tool_output",
+      "original_bytes_preserved": true,
+      "generation_tool": "image_gen.imagegen",
+      "visual_review": {
+        "status": "pass",
+        "ai_artifacts": {
+          "glow": {
+            "passed": true,
+            "reason": "暖光以墙/木面的平涂色和投影表达，无发光光圈、光束或bloom。"
+          },
+          "gold_patterns": {
+            "passed": true,
+            "reason": "篮子、干草和木头无金边或金色装饰。"
+          },
+          "structure": {
+            "passed": true,
+            "reason": "柜台桌面与支脚、两篮编织外形、前方木箱与门框结构清楚。"
+          },
+          "unrecognizable_objects": {
+            "passed": true,
+            "reason": "两篮分别为宽叶草和浅色石块，草束、木箱、布帘均可辨。"
+          },
+          "excess_symmetry": {
+            "passed": true,
+            "reason": "柜台与单侧布帘偏左，右侧留白，无对称奇幻陈列。"
+          },
+          "plastic_gloss": {
+            "passed": true,
+            "reason": "木、藤编、草和石块均为哑光厚涂，没有塑料反光。"
+          }
+        },
+        "scene_checks": {
+          "full_bleed": {
+            "passed": true,
+            "reason": "门口、柜台、墙、地面铺满画布，无边框或卡片。"
+          },
+          "no_baked_text": {
+            "passed": true,
+            "reason": "无文字数字、价签、空招牌、吊签、牌匾或UI。"
+          },
+          "materials": {
+            "passed": true,
+            "reason": "两篮原料轮廓清楚，道具少于15。"
+          },
+          "required_layers": {
+            "passed": true,
+            "reason": "门外街树叶片与室内单侧布帘相互可分，均在实际C里。"
+          },
+          "empty_wall": {
+            "passed": true,
+            "reason": "右侧约40%连续空墙，下方地面简洁。"
+          },
+          "composition": {
+            "passed": true,
+            "reason": "原料店单一柜台焦点，前景笔触与底图一致。"
+          }
+        }
+      },
+      "kind": "composite"
+    },
+    {
+      "id": "S06_night",
+      "period": "night",
+      "path": "assets/_incoming/a1r_real/S06/night_C.png",
+      "source_path": "assets/_incoming/a1r_real/S06/night_C.png",
+      "prompt_version": "round2-style-v2-candidate3",
+      "prompt": "编辑第一张S06原料小店白日完整合成C为同一机位与构图的夜晚灯下版，第二张只作游戏笔触配色参考。严格保持原图所有物件形状、精确位置、大小、透视、边缘和留白：左侧敞门与街树树干/叶簇轮廓、一幅单侧浅鼠尾草布帘、木柜台的桌面和四周结构、两只原料篮（宽叶草与浅色石块）、墙上一小束干草、柜台前唯一木箱。完全不加减，不移动、不变镜头，不画顾客。\n只调光线时段：门外街道与树用暗灰青蓝平涂夜色，树轮廓原位；室内由画外左上暖灯漫射照亮，不增加画内灯具、灯笼或招牌。柜台、材料与右侧40%空墙仍可清楚辨识，阴影偏灰青，木头赭棕温暖但无金边。纸面哑光夜景，无光圈、光束、bloom或任何发光魔法。右边连续空墙与下方空地面不能加内容。\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, UI, labels. 无人物、字母汉字数字、名字、空白招牌、空吊签、价签标签、格子面板、牌匾、UI、边框。保留第一张原始横向全幅画布尺寸。",
+      "ref_paths": [
+        "assets/_incoming/a1r_real/S06/day_C.png",
+        "assets/_incoming/a1r_pilot/candidate_3.png"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "elapsed_ms": 51164
+        }
+      ],
+      "status": "complete",
+      "sha256": "f9c21fa58ee1239e30f03b44c1b99799a91a0f30b392777396e941907be75320",
+      "native_size": [
+        1672,
+        941
+      ],
+      "source_resolution": "native_tool_output",
+      "original_bytes_preserved": true,
+      "generation_tool": "image_gen.imagegen",
+      "visual_review": {
+        "status": "pass",
+        "ai_artifacts": {
+          "glow": {
+            "passed": true,
+            "reason": "暖光以墙/木面的平涂色和投影表达，无发光光圈、光束或bloom。"
+          },
+          "gold_patterns": {
+            "passed": true,
+            "reason": "篮子、干草和木头无金边或金色装饰。"
+          },
+          "structure": {
+            "passed": true,
+            "reason": "柜台桌面与支脚、两篮编织外形、前方木箱与门框结构清楚。"
+          },
+          "unrecognizable_objects": {
+            "passed": true,
+            "reason": "两篮分别为宽叶草和浅色石块，草束、木箱、布帘均可辨。"
+          },
+          "excess_symmetry": {
+            "passed": true,
+            "reason": "柜台与单侧布帘偏左，右侧留白，无对称奇幻陈列。"
+          },
+          "plastic_gloss": {
+            "passed": true,
+            "reason": "木、藤编、草和石块均为哑光厚涂，没有塑料反光。"
+          }
+        },
+        "scene_checks": {
+          "full_bleed": {
+            "passed": true,
+            "reason": "门口、柜台、墙、地面铺满画布，无边框或卡片。"
+          },
+          "no_baked_text": {
+            "passed": true,
+            "reason": "无文字数字、价签、空招牌、吊签、牌匾或UI。"
+          },
+          "materials": {
+            "passed": true,
+            "reason": "两篮原料轮廓清楚，道具少于15。"
+          },
+          "required_layers": {
+            "passed": true,
+            "reason": "门外街树叶片与室内单侧布帘相互可分，均在实际C里。"
+          },
+          "empty_wall": {
+            "passed": true,
+            "reason": "右侧约40%连续空墙，下方地面简洁。"
+          },
+          "composition": {
+            "passed": true,
+            "reason": "目视柜台、篮、箱、窗帘、干草和街树布局保持白日版；待后续分层像素检验。"
+          }
+        }
+      },
+      "kind": "composite"
+    },
+    {
+      "id": "S06_day_raw_cleanplate",
+      "kind": "raw_cleanplate",
+      "period": "day",
+      "path": "assets/_incoming/a1r_real/S06/day_raw_cleanplate.png",
+      "source_path": "assets/_incoming/a1r_real/S06/day_raw_cleanplate.png",
+      "original_path": "assets/_incoming/a1r_real/S06/day_C.png",
+      "prompt_version": "round2-style-v2-candidate3",
+      "prompt": "编辑附件S06白日原料小店完整合成C，只局部移除指定的两个动态物件，输出同尺寸1672×941 raw cleanplate B_all。第一：移除左侧门口内的一整幅浅绿色布帘和布挂环，保留木帘杆、门框和门外街道，补出后方同光线的墙面/开口。第二：移除门外街树的全部灰绿色树叶叶簇，保留原来的树干、分叉树枝、树根和街道，补出相同白日天空与街墙。树叶位于画面最左侧门口可见区域，不要删除木框或树干。\n所有其它东西完全保留位置、形状、大小和光照：木柜台和支脚、两只藤篮及里面的宽叶草和白色石块、柜台前木箱、墙上唯一干草束、大片空墙与地面。篮中绿叶是静态原料，绝不能移除，只有门外树叶需要移除。不要添加家具、人、灯、文字、数字、标牌、空吊签、UI或边框；不要改变镜头或整体画风，不要把篮筐重新画成塑料。补底保持原图哑光厚涂水粉和可见干笔、七个低饱和色族，没有发光光圈/光束、金色花纹或摄影反光。未经编辑区域尽可能逐像素不变。",
+      "ref_paths": [
+        "assets/_incoming/a1r_real/S06/day_C.png"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "elapsed_ms": 47414,
+          "output_path": "assets/_incoming/a1r_real/S06/day_raw_cleanplate.png",
+          "sha256": "2d4345e9a7c6ae9c37c3207cc1f780fa7d7975cf6ee1546b0f51e9e3c10e2a08",
+          "native_size": [
+            1671,
+            941
+          ],
+          "visual_review": "pass"
+        }
+      ],
+      "status": "complete",
+      "sha256": "2d4345e9a7c6ae9c37c3207cc1f780fa7d7975cf6ee1546b0f51e9e3c10e2a08",
+      "native_size": [
+        1671,
+        941
+      ],
+      "source_resolution": "native_tool_output",
+      "original_bytes_preserved": true,
+      "generation_tool": "image_gen.imagegen",
+      "requires_cover_normalization": true,
+      "visual_review": {
+        "status": "pass",
+        "ai_artifacts": {
+          "glow": {
+            "passed": true,
+            "reason": "补底保留原有哑光平涂光线，无新光圈光束。"
+          },
+          "gold_patterns": {
+            "passed": true,
+            "reason": "无新金边或金色花纹。"
+          },
+          "structure": {
+            "passed": true,
+            "reason": "静态家具结构目视保持，移除处补出连续墙、布面或街景。"
+          },
+          "unrecognizable_objects": {
+            "passed": true,
+            "reason": "未新增零碎物件，移除目标清楚。"
+          },
+          "excess_symmetry": {
+            "passed": true,
+            "reason": "保持原有不对称构图，没有新增对称装饰。"
+          },
+          "plastic_gloss": {
+            "passed": true,
+            "reason": "补底与原画同为可见干笔的哑光水粉，无塑料反光。"
+          }
+        },
+        "removed_targets": {
+          "passed": true,
+          "reason": "门外树叶与布帘已移除，篮中原料绿叶、树干枝条、门框和柜台保留。"
+        },
+        "pixel_preservation": {
+          "status": "pending",
+          "reason": "这是内置编辑rawB，不能冒称编辑区外像素不变；后处理只贴mask局部并严格验ROI。"
+        }
+      }
+    },
+    {
+      "id": "S06_night_raw_cleanplate",
+      "kind": "raw_cleanplate",
+      "period": "night",
+      "path": "assets/_incoming/a1r_real/S06/night_raw_cleanplate.png",
+      "source_path": "assets/_incoming/a1r_real/S06/night_raw_cleanplate.png",
+      "original_path": "assets/_incoming/a1r_real/S06/night_C.png",
+      "prompt_version": "round2-style-v2-candidate3",
+      "prompt": "编辑附件S06夜间原料小店完整合成C，只局部移除指定的两个动态物件，输出同尺寸1672×941 raw cleanplate B_all。第一：移除左侧门口内的一整幅浅绿色布帘和布挂环，保留木帘杆、门框和门外街道，补出后方同光线的墙面/开口。第二：移除门外街树的全部灰绿色树叶叶簇，保留原来的树干、分叉树枝、树根和街道，补出相同夜间灰青天空与街墙。树叶位于画面最左侧门口可见区域，不要删除木框或树干。\n所有其它东西完全保留位置、形状、大小和光照：木柜台和支脚、两只藤篮及里面的宽叶草和白色石块、柜台前木箱、墙上唯一干草束、大片空墙与地面。篮中绿叶是静态原料，绝不能移除，只有门外树叶需要移除。不要添加家具、人、灯、文字、数字、标牌、空吊签、UI或边框；不要改变镜头或整体画风，不要把篮筐重新画成塑料。补底保持原图哑光厚涂水粉和可见干笔、七个低饱和色族，没有发光光圈/光束、金色花纹或摄影反光。未经编辑区域尽可能逐像素不变。 保持附件街道深灰青夜色、室内画外暖灯的原有明暗和平涂投影，不恢复白天，不增加画内灯具。",
+      "ref_paths": [
+        "assets/_incoming/a1r_real/S06/night_C.png"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "status": "complete",
+          "elapsed_ms": 119466,
+          "output_path": "assets/_incoming/a1r_real/S06/night_raw_cleanplate.png",
+          "sha256": "373e8285fe553ea8ff5be28376563b43d02f143c735fa4441a73dbafe14fb2a3",
+          "native_size": [
+            1672,
+            941
+          ],
+          "visual_review": "pass"
+        }
+      ],
+      "status": "complete",
+      "sha256": "373e8285fe553ea8ff5be28376563b43d02f143c735fa4441a73dbafe14fb2a3",
+      "native_size": [
+        1672,
+        941
+      ],
+      "source_resolution": "native_tool_output",
+      "original_bytes_preserved": true,
+      "generation_tool": "image_gen.imagegen",
+      "requires_cover_normalization": false,
+      "visual_review": {
+        "status": "pass",
+        "ai_artifacts": {
+          "glow": {
+            "passed": true,
+            "reason": "补底保留原有哑光平涂光线，无新光圈光束。"
+          },
+          "gold_patterns": {
+            "passed": true,
+            "reason": "无新金边或金色花纹。"
+          },
+          "structure": {
+            "passed": true,
+            "reason": "静态家具结构目视保持，移除处补出连续墙、布面或街景。"
+          },
+          "unrecognizable_objects": {
+            "passed": true,
+            "reason": "未新增零碎物件，移除目标清楚。"
+          },
+          "excess_symmetry": {
+            "passed": true,
+            "reason": "保持原有不对称构图，没有新增对称装饰。"
+          },
+          "plastic_gloss": {
+            "passed": true,
+            "reason": "补底与原画同为可见干笔的哑光水粉，无塑料反光。"
+          }
+        },
+        "removed_targets": {
+          "passed": true,
+          "reason": "门外树叶与布帘已移除，篮中原料绿叶、树干枝条、门框和柜台保留。"
+        },
+        "pixel_preservation": {
+          "status": "pending",
+          "reason": "这是内置编辑rawB，不能冒称编辑区外像素不变；后处理只贴mask局部并严格验ROI。"
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "三轮视觉自检已止；剩余未通过项见layer_visual_review.periods各期remaining_visual_failures，不能仅凭数值重组全绿宣称美术完工。",
+    "原生C/rawB与real1/real2 spec和输出保留；所选receipt_path和QA对照图可审阅。",
+    "未修改正式v2、中央manifest、游戏配置或作者工具；衍生输出只在各版本专用目录。"
+  ],
+  "art_passed": false,
+  "layer_visual_review": {
+    "status": "partial",
+    "rounds": [
+      {
+        "revision": "real1",
+        "status": "failed",
+        "reason": "首轮语义漏扣：S03灯罩上半/顶座，S06右下叶簇；旧spec保留。"
+      },
+      {
+        "revision": "real2",
+        "status": "geometry_passed_visual_partial",
+        "reason": "主体修复且严格ROI过；S03补底色差/杯汽细边、S06夜版细叶缘仍可见。"
+      },
+      {
+        "revision": "real3",
+        "status": "reviewed_and_stopped",
+        "reason": "最后一次修边；S03真实builtin第2次补底含union mask参考，S06边缘扩大，最终按各期选较佳。"
+      }
+    ],
+    "periods": {
+      "day": {
+        "selected_revision": "real2",
+        "receipt_path": "assets/generated_scenes/v3_real/S06/day/real2/receipt.json",
+        "visual_review_sheet": "assets/_incoming/a1r_real/S06/day_real2_visual_review.png",
+        "status": "complete",
+        "iteration_count": 3,
+        "geometry_passed": true,
+        "single_layer_checks_passed": 2,
+        "single_layer_checks_total": 2,
+        "all_layer_recomposition_passed": true,
+        "overlap_pairs": 0,
+        "core_max_error": 0,
+        "unedited_max_error": 0,
+        "inpaint_ring_max_error": 0,
+        "worst_feather_mae": 0.015037593984962405,
+        "worst_feather_p95": 0,
+        "ai_artifacts": {
+          "glow": {
+            "passed": true,
+            "reason": "已打开本期B_all与全部透明Li对照检查；无新增该类AI痕迹。"
+          },
+          "gold_patterns": {
+            "passed": true,
+            "reason": "已打开本期B_all与全部透明Li对照检查；无新增该类AI痕迹。"
+          },
+          "structure": {
+            "passed": true,
+            "reason": "已打开本期B_all与全部透明Li对照检查；无新增该类AI痕迹。"
+          },
+          "unrecognizable_objects": {
+            "passed": true,
+            "reason": "已打开本期B_all与全部透明Li对照检查；无新增该类AI痕迹。"
+          },
+          "excess_symmetry": {
+            "passed": true,
+            "reason": "已打开本期B_all与全部透明Li对照检查；无新增该类AI痕迹。"
+          },
+          "plastic_gloss": {
+            "passed": true,
+            "reason": "已打开本期B_all与全部透明Li对照检查；无新增该类AI痕迹。"
+          }
+        },
+        "mask_checks": {
+          "whole_object_extraction": {
+            "passed": true,
+            "reason": "右下叶簇已扣取；窗框/树干仍留底，篮内静态绿叶保留。"
+          },
+          "no_visible_residual_edge": {
+            "passed": true,
+            "reason": "已看实际B_all/Li；无可见大块漏叶，白日选real2保树枝轮廓较好。"
+          },
+          "no_baked_text": {
+            "passed": true,
+            "reason": "实际游戏源图和Li无文字数字、UI、牌匾；对照表技术标签仅在QA图。"
+          },
+          "full_canvas_alignment": {
+            "passed": true,
+            "reason": "源C/全幅层同位；raw尺寸差按真实cover记录，运行副本单独Lanczos。"
+          }
+        },
+        "remaining_visual_failures": [],
+        "art_passed": true,
+        "selection_reason": "real2对白日真实叶色轮廓更精确，较real3少带树枝边，选择可回滚较佳版本。"
+      },
+      "night": {
+        "selected_revision": "real3",
+        "receipt_path": "assets/generated_scenes/v3_real/S06/night/real3/receipt.json",
+        "visual_review_sheet": "assets/_incoming/a1r_real/S06/night_real3_visual_review.png",
+        "status": "partial",
+        "iteration_count": 3,
+        "geometry_passed": true,
+        "single_layer_checks_passed": 2,
+        "single_layer_checks_total": 2,
+        "all_layer_recomposition_passed": true,
+        "overlap_pairs": 0,
+        "core_max_error": 0,
+        "unedited_max_error": 0,
+        "inpaint_ring_max_error": 0,
+        "worst_feather_mae": 0.0,
+        "worst_feather_p95": 0,
+        "ai_artifacts": {
+          "glow": {
+            "passed": true,
+            "reason": "已打开本期B_all与全部透明Li对照检查；无新增该类AI痕迹。"
+          },
+          "gold_patterns": {
+            "passed": true,
+            "reason": "已打开本期B_all与全部透明Li对照检查；无新增该类AI痕迹。"
+          },
+          "structure": {
+            "passed": true,
+            "reason": "已打开本期B_all与全部透明Li对照检查；无新增该类AI痕迹。"
+          },
+          "unrecognizable_objects": {
+            "passed": true,
+            "reason": "已打开本期B_all与全部透明Li对照检查；无新增该类AI痕迹。"
+          },
+          "excess_symmetry": {
+            "passed": true,
+            "reason": "已打开本期B_all与全部透明Li对照检查；无新增该类AI痕迹。"
+          },
+          "plastic_gloss": {
+            "passed": true,
+            "reason": "已打开本期B_all与全部透明Li对照检查；无新增该类AI痕迹。"
+          }
+        },
+        "mask_checks": {
+          "whole_object_extraction": {
+            "passed": true,
+            "reason": "右下叶簇已扣取；窗框/树干仍留底，篮内静态绿叶保留。"
+          },
+          "no_visible_residual_edge": {
+            "passed": false,
+            "reason": "重大右下叶簇漏扣已修；顶部/细枝邻域仍有少量夜版抗锯齿叶缘残留。"
+          },
+          "no_baked_text": {
+            "passed": true,
+            "reason": "实际游戏源图和Li无文字数字、UI、牌匾；对照表技术标签仅在QA图。"
+          },
+          "full_canvas_alignment": {
+            "passed": true,
+            "reason": "源C/全幅层同位；raw尺寸差按真实cover记录，运行副本单独Lanczos。"
+          }
+        },
+        "remaining_visual_failures": [
+          "重大右下叶簇漏扣已修；顶部/细枝邻域仍有少量夜版抗锯齿叶缘残留。"
+        ],
+        "art_passed": false,
+        "selection_reason": "最后一轮消除主体漏扣，严格QA全绿；边缘残留如实保留，不越三轮。"
+      }
+    },
+    "iteration_cap_reached": true,
+    "further_retries_performed": false,
+    "author_files_changed": false,
+    "central_manifest_changed": false
+  }
+}

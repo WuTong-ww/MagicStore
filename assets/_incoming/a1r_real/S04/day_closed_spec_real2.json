@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "scene_id": "S04",
+  "period": "day",
+  "state": "closed",
+  "revision": "real2",
+  "native_size": [
+    1672,
+    941
+  ],
+  "original_path": "assets/_incoming/a1r_real/S04/day_closed_C.png",
+  "raw_cleanplate_path": "assets/_incoming/a1r_real/S04/day_closed_raw_cleanplate.png",
+  "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+  "composite_prompt": "Use case: precise-object-edit.\nAsset type: S04 storage cupboard DAY CLOSED state, matching the existing DAY OPEN full composite.\nInput Image 1 is the exact EDIT TARGET. Change ONLY the two hinged upper cupboard doors from their open outward positions to fully shut across the shelf opening. The two plain walnut door leaves meet at one vertical center seam and conceal the four empty shelf tiers. Give the pair two very small simple round wooden knobs beside the central seam; no lock plates or labels. Their external framing and wood planks must match the existing door leaves. Preserve the cabinet body, crown board, width, height, feet, lower two drawers and their knobs exactly; the closed upper doors stop above those bottom drawers. Remove the old open leaves from their former open positions so the cream plaster wall is revealed behind them. This change is restricted to the upper door-opening/wing region, not a redesign of the cabinet.\nKeep the camera, scale, crop, pendant lamp, surrounding wall, floor, far-right stockroom doorway, light and every unrelated object unchanged, and keep the same native image dimensions. No new objects or stock items.\nRetain visible matte gouache brush strokes, dry-brush edges, slightly wobbly colored-pencil outlines, seven muted color families, soft diffuse daytime light and cool shadows. Full-bleed landscape.\nNEGATIVE: text, letters, numbers, labels, blank plaques, UI, borders, gold filigree, ornate carving, glow, bloom, beams, bokeh, glossy plastic, photorealism, vines, plants, jars, books, stock.",
+  "cleanplate_prompt": "Use case: precise-object-edit.\nAsset type: S04 DAY CLOSED raw cleanplate B_all, under true extracted closed-door and pendant-lamp layers.\nInput Image 1 is the EDIT TARGET. Image 2 is a SUPPORTING GEOMETRY REFERENCE showing the exact same cabinet with its doors open, so the hidden three shelf boards/four empty tiers can be restored plausibly.\nRemove the two closed upper wooden door leaves, their center knobs and leaf-mounted hinges from Image 1. Reveal the EMPTY cabinet interior behind them: three continuous horizontal shelf boards, four bare storage tiers, plain walnut rear boards, matching the shelf heights and structure visible in Image 2. Remove the hanging pendant lamp and its cord from Image 1 and fill with the same plain plaster wall.\nDo NOT replace the whole target with Image 2: there must be NO open door leaves either. Keep Image 1's fixed cabinet outer frame, crown, scale, position, feet, lower two drawers and their knobs, surrounding wall, floor and far-right stockroom doorway intact. Preserve DAY lighting, camera, crop and native dimensions. No stock, labels, plants, jars, books or extra objects. Preserve all unrelated pixels as closely as possible.\nPreserve matte visible gouache strokes, dry-brush edges, wobbly colored-pencil contour marks and seven muted color families. No glow, bloom, rays, glossy plastic, gold ornament, text, numbers, UI, blank plaques or border.",
+  "annotation_notes": "Second native annotation pads beyond visible door/lamp outlines so 1px feather does not leave ghost contours; closed-door seam is one continuous mask. No QA thresholds changed.",
+  "layers": [
+    {
+      "id": "door_closed",
+      "polygons": [
+        [
+          [
+            294,
+            88
+          ],
+          [
+            967,
+            88
+          ],
+          [
+            967,
+            742
+          ],
+          [
+            294,
+            742
+          ]
+        ]
+      ],
+      "pivot_px": [
+        307,
+        421
+      ],
+      "z_index": 1,
+      "motion": {
+        "type": "static",
+        "parameters": {}
+      }
+    },
+    {
+      "id": "lamp",
+      "polygons": [
+        [
+          [
+            84,
+            0
+          ],
+          [
+            101,
+            0
+          ],
+          [
+            101,
+            62
+          ],
+          [
+            114,
+            65
+          ],
+          [
+            116,
+            80
+          ],
+          [
+            132,
+            89
+          ],
+          [
+            143,
+            111
+          ],
+          [
+            150,
+            145
+          ],
+          [
+            145,
+            157
+          ],
+          [
+            35,
+            158
+          ],
+          [
+            29,
+            147
+          ],
+          [
+            38,
+            113
+          ],
+          [
+            48,
+            88
+          ],
+          [
+            66,
+            78
+          ],
+          [
+            68,
+            62
+          ],
+          [
+            84,
+            61
+          ]
+        ]
+      ],
+      "pivot_px": [
+        92,
+        0
+      ],
+      "z_index": 2,
+      "motion": {
+        "type": "pendulum",
+        "parameters": {
+          "amplitude": 0.4,
+          "frequency": 0.25
+        }
+      }
+    }
+  ]
+}

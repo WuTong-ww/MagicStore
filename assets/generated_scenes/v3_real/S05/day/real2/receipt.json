@@ -1,0 +1,1788 @@
+{
+  "version": 1,
+  "kind": "real_pixel_extraction",
+  "processing_script": "tools/art/real_scene_layers.py",
+  "scene_id": "S05",
+  "period": "day",
+  "revision": "real2",
+  "inputs": {
+    "original": {
+      "path": "assets/_incoming/a1r_real/S05/day_C.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "01f4274e20a80a9108cbb62043e774344a003e4704bcdd2cfd5e304807adcffd"
+    },
+    "raw_cleanplate": {
+      "path": "assets/_incoming/a1r_real/S05/day_raw_cleanplate.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "ce384d2461475f166691cb5f95509c90d4cbdbae0f74b67387c9f5c67b5392b5"
+    },
+    "style": {
+      "path": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "391ef0b702653eaf7a2bf98f90595bb12502587b6bcc9f0b5653aecdf9766833"
+    }
+  },
+  "specification": {
+    "version": 1,
+    "scene_id": "S05",
+    "period": "day",
+    "revision": "real2",
+    "native_size": [
+      1672,
+      941
+    ],
+    "original_path": "assets/_incoming/a1r_real/S05/day_C.png",
+    "raw_cleanplate_path": "assets/_incoming/a1r_real/S05/day_raw_cleanplate.png",
+    "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+    "composite_prompt": "为 Godot 游戏《零点杂货铺》制作 S05 制作工坊白日版原始完整合成C。附件是选定风格参考，只借用纸面厚涂笔触、哑光材质、低饱和七色族与柔和光线，不复制参考中的前台柜台/绿色门帘布局。单张横向16:9全幅场景，尽可能原生2560×1440或工具实际最大16:9尺寸，无边框。\n主体：俯视三分之四角度看一张质朴的旧木工坊工作台，桌子占左下至中央，墙和空间向右延伸。桌面中央一大片干净空白木面，用于日后叠放Godot制作操作；不是画空白UI牌子。桌左边只有一只清楚的大石研钵和木研杵；左后角一架简单、结构正确的哑光小黄铜天平（一个横梁和两只浅盘，绝无装饰花纹）；旁边两只形状简单的无标签小玻璃瓶，玻璃用灰青/暖灰平涂，不画摄影反射。左上墙边悬一小束干草，草束和挂线形状分离清楚供后续扣层。台面后边一只很简单的陶蒸汽壶/低矮蒸汽口，顶部有一缕短短的细蒸汽，蒸汽与器具明显分开，作为后续独立层。窗外日光从左上漫射进来，右侧至少30%为没有搁板、摆件、管线、画框的空奶油暖灰墙，下方12%保持简单地面。所有可动件在本张C里，后续只按真实像素扣层，不另画相似物件。道具少于15个，只有一个视觉重点：安静的木台与研钵。\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse daylight, cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, UI, labels. 绝无人物、字母、汉字、数字、名字、空白牌匾/空吊签/标签、格子面板、UI、边框。不要满墙干草和零碎，不加紫藤，不加发光魔法道具，不画任何金币或金色纹样。",
+    "cleanplate_prompt": "对附件S05白日工坊完整合成C做局部移除补底，输出同尺寸1672×941的raw cleanplate B_all。只有两类物件需要移除：左上方墙边悬挂的一束干草（包括草束、绑绳和挂线，用相同灰泥墙补齐）；以及桌后陶壶盖上方的一缕白色蒸汽（只去汽线，用同光线墙面补齐）。陶壶本体、盖子、壶嘴、壶脚完全保留原位，器皿是静态家具，不能消失或变形。\n除此以外所有东西都原样保留：左窗和窗外树、木工作台的桌面和支撑腿、左前石研钵与木研杵、左后单横梁双盘天平、两只灰青/暖灰瓶、桌面空区、右侧连续空墙和地面。不要移动、缩放、添加任何物件；不要改镜头构图或白日亮度，不要对整图换风格。补墙仅用附件相同的哑光水粉平涂与可见干笔，保留奶油暖灰、木棕、鼠尾草、灰青等七色族。无文字、数字、人物、空牌匾、UI、边框、发光、金纹、塑料反光。未经编辑的区域尽可能逐像素原样。原图画布边缘和分辨率不得变化。",
+    "layers": [
+      {
+        "id": "dried_grass",
+        "polygons": [
+          [
+            [
+              391,
+              37
+            ],
+            [
+              420,
+              37
+            ],
+            [
+              427,
+              112
+            ],
+            [
+              437,
+              158
+            ],
+            [
+              452,
+              177
+            ],
+            [
+              474,
+              195
+            ],
+            [
+              488,
+              224
+            ],
+            [
+              493,
+              251
+            ],
+            [
+              486,
+              281
+            ],
+            [
+              472,
+              311
+            ],
+            [
+              450,
+              335
+            ],
+            [
+              425,
+              356
+            ],
+            [
+              403,
+              355
+            ],
+            [
+              379,
+              343
+            ],
+            [
+              357,
+              322
+            ],
+            [
+              346,
+              294
+            ],
+            [
+              344,
+              264
+            ],
+            [
+              344,
+              235
+            ],
+            [
+              344,
+              210
+            ],
+            [
+              350,
+              188
+            ],
+            [
+              370,
+              161
+            ],
+            [
+              383,
+              124
+            ],
+            [
+              388,
+              82
+            ]
+          ]
+        ],
+        "pivot_px": [
+          405,
+          46
+        ],
+        "z_index": 1,
+        "motion": {
+          "type": "pendulum",
+          "parameters": {
+            "amplitude_px": 4,
+            "frequency_hz": 0.28,
+            "max_degrees": 1.5,
+            "damping": 3.5,
+            "stiffness": 8
+          }
+        }
+      },
+      {
+        "id": "steam",
+        "polygons": [
+          [
+            [
+              692,
+              349
+            ],
+            [
+              703,
+              360
+            ],
+            [
+              704,
+              374
+            ],
+            [
+              698,
+              385
+            ],
+            [
+              687,
+              399
+            ],
+            [
+              686,
+              407
+            ],
+            [
+              693,
+              422
+            ],
+            [
+              696,
+              438
+            ],
+            [
+              689,
+              452
+            ],
+            [
+              685,
+              466
+            ],
+            [
+              673,
+              466
+            ],
+            [
+              675,
+              449
+            ],
+            [
+              680,
+              437
+            ],
+            [
+              677,
+              427
+            ],
+            [
+              668,
+              414
+            ],
+            [
+              668,
+              402
+            ],
+            [
+              672,
+              387
+            ],
+            [
+              683,
+              374
+            ],
+            [
+              686,
+              368
+            ],
+            [
+              685,
+              357
+            ]
+          ]
+        ],
+        "pivot_px": [
+          681,
+          460
+        ],
+        "z_index": 2,
+        "motion": {
+          "type": "flow",
+          "parameters": {
+            "speed_px_s": 4,
+            "distortion_px": 2
+          }
+        }
+      }
+    ],
+    "notes": [
+      "人工按本期真实C原生坐标标多边形，不独立生成相似Li。",
+      "rawB仅在softmask局部补回C，1px羽化/6px授权及ROI由共用工具验证。",
+      "静态器皿/树干/门框保持原始C。"
+    ]
+  },
+  "processing_prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+  "cleanplate_method": "AI raw B is normalized with equal-aspect cover; final B_i/B_all are a soft-mask patch over actual C. The 6px dilation is retained as AI authorization evidence; undamaged context outside the soft mask is copied from C, never claimed as unchanged AI output.",
+  "mask_usage_notice": "本批rawB已先以C作参考生成，内置工具未接收这些显式mask。1px软mask与6px扩区在随后人工标图后生成，用作可审阅的局部合成边界及后续重生目标，不声称已作为本轮生图参数。",
+  "configuration": {
+    "version": 1,
+    "kind": "real_pixel_extraction",
+    "pipeline_config": "data/art/pipeline.json",
+    "output_root": "assets/generated_scenes/v3_real",
+    "runtime_root": "assets/generated_scenes/runtime/v3_real",
+    "logical_canvas": [
+      2560,
+      1440
+    ],
+    "required_mask": {
+      "feather_pixels": 1,
+      "inpaint_dilation_pixels": 6
+    },
+    "motion_types": [
+      "static",
+      "sway_shader",
+      "pendulum",
+      "flow"
+    ],
+    "maximum_polygon_vertices": 2048,
+    "cleanplate_method": "AI raw B is normalized with equal-aspect cover; final B_i/B_all are a soft-mask patch over actual C. The 6px dilation is retained as AI authorization evidence; undamaged context outside the soft mask is copied from C, never claimed as unchanged AI output.",
+    "mask_usage_notice": "本批rawB已先以C作参考生成，内置工具未接收这些显式mask。1px软mask与6px扩区在随后人工标图后生成，用作可审阅的局部合成边界及后续重生目标，不声称已作为本轮生图参数。",
+    "processing_prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。"
+  },
+  "mask_parameters": {
+    "feather_pixels": 1,
+    "inpaint_dilation_pixels": 6,
+    "hard_recovery_threshold": 128
+  },
+  "qa_bounds": {
+    "core_max_error": 0,
+    "unedited_max_error": 0,
+    "inpaint_ring_max_error": 0,
+    "feather_mae": 3,
+    "feather_p95": 12,
+    "percentile": 0.95
+  },
+  "raw_cleanplate_normalization": {
+    "source_path": "assets/_incoming/a1r_real/S05/day_raw_cleanplate.png",
+    "native_size": [
+      1672,
+      941
+    ],
+    "normalized_path": "assets/generated_scenes/v3_real/S05/day/real2/raw_cleanplate_normalized.png",
+    "normalized_size": [
+      1672,
+      941
+    ],
+    "transform": {
+      "method": "equal_aspect_cover",
+      "filter": "Lanczos",
+      "scale": 1.0,
+      "source_crop": [
+        0.0,
+        0.0,
+        1672.0,
+        941.0
+      ],
+      "runtime_size": [
+        1672,
+        941
+      ]
+    }
+  },
+  "original_path": "assets/generated_scenes/v3_real/S05/day/real2/C.png",
+  "base_path": "assets/generated_scenes/v3_real/S05/day/real2/B_all.png",
+  "base_runtime_path": "assets/generated_scenes/runtime/v3_real/S05/day/real2/B_all.png",
+  "artifacts": [
+    {
+      "path": "assets/generated_scenes/v3_real/S05/day/real2/C.png",
+      "role": "retained_original_C",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "01f4274e20a80a9108cbb62043e774344a003e4704bcdd2cfd5e304807adcffd"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S05/day/real2/raw_cleanplate_normalized.png",
+      "role": "normalized_AI_cleanplate",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "7311eb6f557630085b47e84025ce8a22bc932067f6fdbde198f9da29a587037c"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S05/day/real2/layers/dried_grass.png",
+      "role": "actual_C_matted_layer",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "a1b9f232e146a6c840a4c9a514879bc0e700e35482989b57eae7c2ef3000a773"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S05/day/real2/cleanplates/dried_grass.png",
+      "role": "single_object_cleanplate_B_i",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "567181ad87fc01da8f630b5da605a02533cb169dd55ef9d7ddce0e7857bf0907"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S05/day/real2/masks/dried_grass_hard.png",
+      "role": "manual_hard_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "0a7f15532b85fbd10a34be40b4e0c20a3fe5e7204bbb412804d2017346893ef2"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S05/day/real2/masks/dried_grass_soft.png",
+      "role": "one_pixel_feather_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "4a292cf0cd8f6bf4de14e9cbec508369ab1a0f174085838be05aff0acae52478"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S05/day/real2/masks/dried_grass_inpaint6.png",
+      "role": "six_pixel_AI_authorization_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "b8f8d1cca40ef21f2d8298c165b59b8f12f376b24644d4e174c04d0ceb7c33bd"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S05/day/real2/layers/steam.png",
+      "role": "actual_C_matted_layer",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "c88702560510d19b3f3cc20a8c36340fb04693504d62875c64b7f65995c2b5ee"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S05/day/real2/cleanplates/steam.png",
+      "role": "single_object_cleanplate_B_i",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "dd72e4bc4ced3ce5ec0998bd940b0d36b7070e2a80bde4911104669eeb4965a3"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S05/day/real2/masks/steam_hard.png",
+      "role": "manual_hard_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "d494b989aa4fd30cb2e2c12672767683e0395383d9abd2ebb55795c81a0657b3"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S05/day/real2/masks/steam_soft.png",
+      "role": "one_pixel_feather_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "3a14fc83d7f567ba575b4b9d5349e4fa05b5be75bbcc587678c28436e8b8f535"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S05/day/real2/masks/steam_inpaint6.png",
+      "role": "six_pixel_AI_authorization_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "1af5b800dc3153649f2efe825e220622e85794716733e68dc46514fbd9fa6c7a"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S05/day/real2/B_all.png",
+      "role": "all_object_cleanplate_B_all",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "6bd2667a27b78abe39f59d72b4d7b5f4c97349356fc50b2aaba4a45e7680b148"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S05/day/real2/recomposed_all.png",
+      "role": "all_layers_recomposition",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "716e64132b76424d2533406add4ed63cac97798145c3917798484667af177013"
+    }
+  ],
+  "runtime_copies": [
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S05/day/real2/C.png",
+      "source_path": "assets/generated_scenes/v3_real/S05/day/real2/C.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "01f4274e20a80a9108cbb62043e774344a003e4704bcdd2cfd5e304807adcffd",
+      "sha256": "321a300e09caece0644df6438713f1054c83f9199a79520d4e202f7d0e1d8265",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S05/day/real2/layers/dried_grass.png",
+      "source_path": "assets/generated_scenes/v3_real/S05/day/real2/layers/dried_grass.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "a1b9f232e146a6c840a4c9a514879bc0e700e35482989b57eae7c2ef3000a773",
+      "sha256": "e30bc90683d201ac15ac43ad1d03c24dceeaa459b9d077171e6643f3123db9b5",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S05/day/real2/layers/steam.png",
+      "source_path": "assets/generated_scenes/v3_real/S05/day/real2/layers/steam.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "c88702560510d19b3f3cc20a8c36340fb04693504d62875c64b7f65995c2b5ee",
+      "sha256": "42fb0735ede5795f7a8f9919a100c7ad20d91f04bed123725e9d47df9d6285f9",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S05/day/real2/B_all.png",
+      "source_path": "assets/generated_scenes/v3_real/S05/day/real2/B_all.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "6bd2667a27b78abe39f59d72b4d7b5f4c97349356fc50b2aaba4a45e7680b148",
+      "sha256": "400865fc909197ccbe664b6ec6e13a201a78f11e98210175b3a783c531eb7be3",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    }
+  ],
+  "layers": [
+    {
+      "id": "dried_grass",
+      "polygons": [
+        [
+          [
+            391,
+            37
+          ],
+          [
+            420,
+            37
+          ],
+          [
+            427,
+            112
+          ],
+          [
+            437,
+            158
+          ],
+          [
+            452,
+            177
+          ],
+          [
+            474,
+            195
+          ],
+          [
+            488,
+            224
+          ],
+          [
+            493,
+            251
+          ],
+          [
+            486,
+            281
+          ],
+          [
+            472,
+            311
+          ],
+          [
+            450,
+            335
+          ],
+          [
+            425,
+            356
+          ],
+          [
+            403,
+            355
+          ],
+          [
+            379,
+            343
+          ],
+          [
+            357,
+            322
+          ],
+          [
+            346,
+            294
+          ],
+          [
+            344,
+            264
+          ],
+          [
+            344,
+            235
+          ],
+          [
+            344,
+            210
+          ],
+          [
+            350,
+            188
+          ],
+          [
+            370,
+            161
+          ],
+          [
+            383,
+            124
+          ],
+          [
+            388,
+            82
+          ]
+        ]
+      ],
+      "pivot_px": [
+        405,
+        46
+      ],
+      "z_index": 1,
+      "motion": {
+        "type": "pendulum",
+        "parameters": {
+          "amplitude_px": 4,
+          "frequency_hz": 0.28,
+          "max_degrees": 1.5,
+          "damping": 3.5,
+          "stiffness": 8
+        }
+      },
+      "native_size": [
+        1672,
+        941
+      ],
+      "layer_path": "assets/generated_scenes/v3_real/S05/day/real2/layers/dried_grass.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S05/day/real2/cleanplates/dried_grass.png",
+      "hard_mask_path": "assets/generated_scenes/v3_real/S05/day/real2/masks/dried_grass_hard.png",
+      "soft_mask_path": "assets/generated_scenes/v3_real/S05/day/real2/masks/dried_grass_soft.png",
+      "inpaint_mask_path": "assets/generated_scenes/v3_real/S05/day/real2/masks/dried_grass_inpaint6.png",
+      "single_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 27705,
+            "samples": 83115,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 1879,
+            "samples": 5637,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "inpaint_ring": {
+            "pixels": 5832,
+            "samples": 17496,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1537936,
+            "samples": 4613808,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "matte_clamping": {
+        "clipped_pixels": 0,
+        "clipped_channels": 0,
+        "maximum_unassociated_clamp": 0.0
+      },
+      "descriptor": {
+        "path": "res://assets/generated_scenes/runtime/v3_real/S05/day/real2/layers/dried_grass.png",
+        "rect": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "hotspot": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "native_size": [
+          1672,
+          941
+        ],
+        "pivot_px": [
+          405,
+          46
+        ],
+        "z_index": 1,
+        "motion": {
+          "type": "pendulum",
+          "parameters": {
+            "amplitude_px": 4,
+            "frequency_hz": 0.28,
+            "max_degrees": 1.5,
+            "damping": 3.5,
+            "stiffness": 8
+          }
+        },
+        "source_transform": {
+          "method": "equal_aspect_cover",
+          "filter": "Lanczos",
+          "scale": 1.1483253588516746,
+          "source_crop": [
+            0.0,
+            0.25,
+            1672.0,
+            940.75
+          ],
+          "runtime_size": [
+            1920,
+            1080
+          ],
+          "native_size": [
+            1672,
+            941
+          ]
+        }
+      }
+    },
+    {
+      "id": "steam",
+      "polygons": [
+        [
+          [
+            692,
+            349
+          ],
+          [
+            703,
+            360
+          ],
+          [
+            704,
+            374
+          ],
+          [
+            698,
+            385
+          ],
+          [
+            687,
+            399
+          ],
+          [
+            686,
+            407
+          ],
+          [
+            693,
+            422
+          ],
+          [
+            696,
+            438
+          ],
+          [
+            689,
+            452
+          ],
+          [
+            685,
+            466
+          ],
+          [
+            673,
+            466
+          ],
+          [
+            675,
+            449
+          ],
+          [
+            680,
+            437
+          ],
+          [
+            677,
+            427
+          ],
+          [
+            668,
+            414
+          ],
+          [
+            668,
+            402
+          ],
+          [
+            672,
+            387
+          ],
+          [
+            683,
+            374
+          ],
+          [
+            686,
+            368
+          ],
+          [
+            685,
+            357
+          ]
+        ]
+      ],
+      "pivot_px": [
+        681,
+        460
+      ],
+      "z_index": 2,
+      "motion": {
+        "type": "flow",
+        "parameters": {
+          "speed_px_s": 4,
+          "distortion_px": 2
+        }
+      },
+      "native_size": [
+        1672,
+        941
+      ],
+      "layer_path": "assets/generated_scenes/v3_real/S05/day/real2/layers/steam.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S05/day/real2/cleanplates/steam.png",
+      "hard_mask_path": "assets/generated_scenes/v3_real/S05/day/real2/masks/steam_hard.png",
+      "soft_mask_path": "assets/generated_scenes/v3_real/S05/day/real2/masks/steam_soft.png",
+      "inpaint_mask_path": "assets/generated_scenes/v3_real/S05/day/real2/masks/steam_inpaint6.png",
+      "single_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 1817,
+            "samples": 5451,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 691,
+            "samples": 2073,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "inpaint_ring": {
+            "pixels": 2235,
+            "samples": 6705,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1568609,
+            "samples": 4705827,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "matte_clamping": {
+        "clipped_pixels": 0,
+        "clipped_channels": 0,
+        "maximum_unassociated_clamp": 0.0
+      },
+      "descriptor": {
+        "path": "res://assets/generated_scenes/runtime/v3_real/S05/day/real2/layers/steam.png",
+        "rect": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "hotspot": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "native_size": [
+          1672,
+          941
+        ],
+        "pivot_px": [
+          681,
+          460
+        ],
+        "z_index": 2,
+        "motion": {
+          "type": "flow",
+          "parameters": {
+            "speed_px_s": 4,
+            "distortion_px": 2
+          }
+        },
+        "source_transform": {
+          "method": "equal_aspect_cover",
+          "filter": "Lanczos",
+          "scale": 1.1483253588516746,
+          "source_crop": [
+            0.0,
+            0.25,
+            1672.0,
+            940.75
+          ],
+          "runtime_size": [
+            1920,
+            1080
+          ],
+          "native_size": [
+            1672,
+            941
+          ]
+        }
+      }
+    }
+  ],
+  "overlap_pairs": [],
+  "recomposition_qa": {
+    "passed": true,
+    "regions": {
+      "core": {
+        "pixels": 29522,
+        "samples": 88566,
+        "mae": 0.0,
+        "p95": 0,
+        "max_error": 0
+      },
+      "feather": {
+        "pixels": 2570,
+        "samples": 7710,
+        "mae": 0.0,
+        "p95": 0,
+        "max_error": 0
+      },
+      "inpaint_ring": {
+        "pixels": 8067,
+        "samples": 24201,
+        "mae": 0.0,
+        "p95": 0,
+        "max_error": 0
+      },
+      "unedited": {
+        "pixels": 1533193,
+        "samples": 4599579,
+        "mae": 0.0,
+        "p95": 0,
+        "max_error": 0
+      }
+    },
+    "bounds": {
+      "core_max_error": 0,
+      "unedited_max_error": 0,
+      "inpaint_ring_max_error": 0,
+      "feather_mae": 3,
+      "feather_p95": 12,
+      "percentile": 0.95
+    },
+    "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+  },
+  "geometry_passed": true,
+  "art_passed": false,
+  "visual_review": "not_evaluated",
+  "manifest_modified": false,
+  "recipes": [
+    {
+      "status": "complete",
+      "version": "real2",
+      "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "attempts": [],
+      "processing_script": "tools/art/real_scene_layers.py",
+      "qa_kind": "art",
+      "generator": "real_C_pixel_extraction",
+      "id": "S05_day_real2_base",
+      "group": "scenes",
+      "operation": "runtime_copy",
+      "prompt": "对附件S05白日工坊完整合成C做局部移除补底，输出同尺寸1672×941的raw cleanplate B_all。只有两类物件需要移除：左上方墙边悬挂的一束干草（包括草束、绑绳和挂线，用相同灰泥墙补齐）；以及桌后陶壶盖上方的一缕白色蒸汽（只去汽线，用同光线墙面补齐）。陶壶本体、盖子、壶嘴、壶脚完全保留原位，器皿是静态家具，不能消失或变形。\n除此以外所有东西都原样保留：左窗和窗外树、木工作台的桌面和支撑腿、左前石研钵与木研杵、左后单横梁双盘天平、两只灰青/暖灰瓶、桌面空区、右侧连续空墙和地面。不要移动、缩放、添加任何物件；不要改镜头构图或白日亮度，不要对整图换风格。补墙仅用附件相同的哑光水粉平涂与可见干笔，保留奶油暖灰、木棕、鼠尾草、灰青等七色族。无文字、数字、人物、空牌匾、UI、边框、发光、金纹、塑料反光。未经编辑的区域尽可能逐像素原样。原图画布边缘和分辨率不得变化。\n从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+      "source_path": "assets/generated_scenes/v3_real/S05/day/real2/B_all.png",
+      "runtime_path": "assets/generated_scenes/runtime/v3_real/S05/day/real2/B_all.png"
+    },
+    {
+      "status": "complete",
+      "version": "real2",
+      "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "attempts": [],
+      "processing_script": "tools/art/real_scene_layers.py",
+      "qa_kind": "art",
+      "generator": "real_C_pixel_extraction",
+      "id": "S05_day_real2_dried_grass",
+      "group": "layers",
+      "operation": "extract_layer",
+      "prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+      "source_path": "assets/generated_scenes/v3_real/S05/day/real2/layers/dried_grass.png",
+      "runtime_path": "assets/generated_scenes/runtime/v3_real/S05/day/real2/layers/dried_grass.png",
+      "original_path": "assets/generated_scenes/v3_real/S05/day/real2/C.png",
+      "mask_path": "assets/generated_scenes/v3_real/S05/day/real2/masks/dried_grass_soft.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S05/day/real2/cleanplates/dried_grass.png",
+      "processing_parameters": {
+        "version": 1,
+        "scene_id": "S05",
+        "period": "day",
+        "revision": "real2",
+        "native_size": [
+          1672,
+          941
+        ],
+        "original_path": "assets/_incoming/a1r_real/S05/day_C.png",
+        "raw_cleanplate_path": "assets/_incoming/a1r_real/S05/day_raw_cleanplate.png",
+        "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+        "composite_prompt": "为 Godot 游戏《零点杂货铺》制作 S05 制作工坊白日版原始完整合成C。附件是选定风格参考，只借用纸面厚涂笔触、哑光材质、低饱和七色族与柔和光线，不复制参考中的前台柜台/绿色门帘布局。单张横向16:9全幅场景，尽可能原生2560×1440或工具实际最大16:9尺寸，无边框。\n主体：俯视三分之四角度看一张质朴的旧木工坊工作台，桌子占左下至中央，墙和空间向右延伸。桌面中央一大片干净空白木面，用于日后叠放Godot制作操作；不是画空白UI牌子。桌左边只有一只清楚的大石研钵和木研杵；左后角一架简单、结构正确的哑光小黄铜天平（一个横梁和两只浅盘，绝无装饰花纹）；旁边两只形状简单的无标签小玻璃瓶，玻璃用灰青/暖灰平涂，不画摄影反射。左上墙边悬一小束干草，草束和挂线形状分离清楚供后续扣层。台面后边一只很简单的陶蒸汽壶/低矮蒸汽口，顶部有一缕短短的细蒸汽，蒸汽与器具明显分开，作为后续独立层。窗外日光从左上漫射进来，右侧至少30%为没有搁板、摆件、管线、画框的空奶油暖灰墙，下方12%保持简单地面。所有可动件在本张C里，后续只按真实像素扣层，不另画相似物件。道具少于15个，只有一个视觉重点：安静的木台与研钵。\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse daylight, cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, UI, labels. 绝无人物、字母、汉字、数字、名字、空白牌匾/空吊签/标签、格子面板、UI、边框。不要满墙干草和零碎，不加紫藤，不加发光魔法道具，不画任何金币或金色纹样。",
+        "cleanplate_prompt": "对附件S05白日工坊完整合成C做局部移除补底，输出同尺寸1672×941的raw cleanplate B_all。只有两类物件需要移除：左上方墙边悬挂的一束干草（包括草束、绑绳和挂线，用相同灰泥墙补齐）；以及桌后陶壶盖上方的一缕白色蒸汽（只去汽线，用同光线墙面补齐）。陶壶本体、盖子、壶嘴、壶脚完全保留原位，器皿是静态家具，不能消失或变形。\n除此以外所有东西都原样保留：左窗和窗外树、木工作台的桌面和支撑腿、左前石研钵与木研杵、左后单横梁双盘天平、两只灰青/暖灰瓶、桌面空区、右侧连续空墙和地面。不要移动、缩放、添加任何物件；不要改镜头构图或白日亮度，不要对整图换风格。补墙仅用附件相同的哑光水粉平涂与可见干笔，保留奶油暖灰、木棕、鼠尾草、灰青等七色族。无文字、数字、人物、空牌匾、UI、边框、发光、金纹、塑料反光。未经编辑的区域尽可能逐像素原样。原图画布边缘和分辨率不得变化。",
+        "layers": [
+          {
+            "id": "dried_grass",
+            "polygons": [
+              [
+                [
+                  391,
+                  37
+                ],
+                [
+                  420,
+                  37
+                ],
+                [
+                  427,
+                  112
+                ],
+                [
+                  437,
+                  158
+                ],
+                [
+                  452,
+                  177
+                ],
+                [
+                  474,
+                  195
+                ],
+                [
+                  488,
+                  224
+                ],
+                [
+                  493,
+                  251
+                ],
+                [
+                  486,
+                  281
+                ],
+                [
+                  472,
+                  311
+                ],
+                [
+                  450,
+                  335
+                ],
+                [
+                  425,
+                  356
+                ],
+                [
+                  403,
+                  355
+                ],
+                [
+                  379,
+                  343
+                ],
+                [
+                  357,
+                  322
+                ],
+                [
+                  346,
+                  294
+                ],
+                [
+                  344,
+                  264
+                ],
+                [
+                  344,
+                  235
+                ],
+                [
+                  344,
+                  210
+                ],
+                [
+                  350,
+                  188
+                ],
+                [
+                  370,
+                  161
+                ],
+                [
+                  383,
+                  124
+                ],
+                [
+                  388,
+                  82
+                ]
+              ]
+            ],
+            "pivot_px": [
+              405,
+              46
+            ],
+            "z_index": 1,
+            "motion": {
+              "type": "pendulum",
+              "parameters": {
+                "amplitude_px": 4,
+                "frequency_hz": 0.28,
+                "max_degrees": 1.5,
+                "damping": 3.5,
+                "stiffness": 8
+              }
+            }
+          },
+          {
+            "id": "steam",
+            "polygons": [
+              [
+                [
+                  692,
+                  349
+                ],
+                [
+                  703,
+                  360
+                ],
+                [
+                  704,
+                  374
+                ],
+                [
+                  698,
+                  385
+                ],
+                [
+                  687,
+                  399
+                ],
+                [
+                  686,
+                  407
+                ],
+                [
+                  693,
+                  422
+                ],
+                [
+                  696,
+                  438
+                ],
+                [
+                  689,
+                  452
+                ],
+                [
+                  685,
+                  466
+                ],
+                [
+                  673,
+                  466
+                ],
+                [
+                  675,
+                  449
+                ],
+                [
+                  680,
+                  437
+                ],
+                [
+                  677,
+                  427
+                ],
+                [
+                  668,
+                  414
+                ],
+                [
+                  668,
+                  402
+                ],
+                [
+                  672,
+                  387
+                ],
+                [
+                  683,
+                  374
+                ],
+                [
+                  686,
+                  368
+                ],
+                [
+                  685,
+                  357
+                ]
+              ]
+            ],
+            "pivot_px": [
+              681,
+              460
+            ],
+            "z_index": 2,
+            "motion": {
+              "type": "flow",
+              "parameters": {
+                "speed_px_s": 4,
+                "distortion_px": 2
+              }
+            }
+          }
+        ],
+        "notes": [
+          "人工按本期真实C原生坐标标多边形，不独立生成相似Li。",
+          "rawB仅在softmask局部补回C，1px羽化/6px授权及ROI由共用工具验证。",
+          "静态器皿/树干/门框保持原始C。"
+        ]
+      }
+    },
+    {
+      "status": "complete",
+      "version": "real2",
+      "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "attempts": [],
+      "processing_script": "tools/art/real_scene_layers.py",
+      "qa_kind": "art",
+      "generator": "real_C_pixel_extraction",
+      "id": "S05_day_real2_steam",
+      "group": "layers",
+      "operation": "extract_layer",
+      "prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+      "source_path": "assets/generated_scenes/v3_real/S05/day/real2/layers/steam.png",
+      "runtime_path": "assets/generated_scenes/runtime/v3_real/S05/day/real2/layers/steam.png",
+      "original_path": "assets/generated_scenes/v3_real/S05/day/real2/C.png",
+      "mask_path": "assets/generated_scenes/v3_real/S05/day/real2/masks/steam_soft.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S05/day/real2/cleanplates/steam.png",
+      "processing_parameters": {
+        "version": 1,
+        "scene_id": "S05",
+        "period": "day",
+        "revision": "real2",
+        "native_size": [
+          1672,
+          941
+        ],
+        "original_path": "assets/_incoming/a1r_real/S05/day_C.png",
+        "raw_cleanplate_path": "assets/_incoming/a1r_real/S05/day_raw_cleanplate.png",
+        "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+        "composite_prompt": "为 Godot 游戏《零点杂货铺》制作 S05 制作工坊白日版原始完整合成C。附件是选定风格参考，只借用纸面厚涂笔触、哑光材质、低饱和七色族与柔和光线，不复制参考中的前台柜台/绿色门帘布局。单张横向16:9全幅场景，尽可能原生2560×1440或工具实际最大16:9尺寸，无边框。\n主体：俯视三分之四角度看一张质朴的旧木工坊工作台，桌子占左下至中央，墙和空间向右延伸。桌面中央一大片干净空白木面，用于日后叠放Godot制作操作；不是画空白UI牌子。桌左边只有一只清楚的大石研钵和木研杵；左后角一架简单、结构正确的哑光小黄铜天平（一个横梁和两只浅盘，绝无装饰花纹）；旁边两只形状简单的无标签小玻璃瓶，玻璃用灰青/暖灰平涂，不画摄影反射。左上墙边悬一小束干草，草束和挂线形状分离清楚供后续扣层。台面后边一只很简单的陶蒸汽壶/低矮蒸汽口，顶部有一缕短短的细蒸汽，蒸汽与器具明显分开，作为后续独立层。窗外日光从左上漫射进来，右侧至少30%为没有搁板、摆件、管线、画框的空奶油暖灰墙，下方12%保持简单地面。所有可动件在本张C里，后续只按真实像素扣层，不另画相似物件。道具少于15个，只有一个视觉重点：安静的木台与研钵。\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse daylight, cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, UI, labels. 绝无人物、字母、汉字、数字、名字、空白牌匾/空吊签/标签、格子面板、UI、边框。不要满墙干草和零碎，不加紫藤，不加发光魔法道具，不画任何金币或金色纹样。",
+        "cleanplate_prompt": "对附件S05白日工坊完整合成C做局部移除补底，输出同尺寸1672×941的raw cleanplate B_all。只有两类物件需要移除：左上方墙边悬挂的一束干草（包括草束、绑绳和挂线，用相同灰泥墙补齐）；以及桌后陶壶盖上方的一缕白色蒸汽（只去汽线，用同光线墙面补齐）。陶壶本体、盖子、壶嘴、壶脚完全保留原位，器皿是静态家具，不能消失或变形。\n除此以外所有东西都原样保留：左窗和窗外树、木工作台的桌面和支撑腿、左前石研钵与木研杵、左后单横梁双盘天平、两只灰青/暖灰瓶、桌面空区、右侧连续空墙和地面。不要移动、缩放、添加任何物件；不要改镜头构图或白日亮度，不要对整图换风格。补墙仅用附件相同的哑光水粉平涂与可见干笔，保留奶油暖灰、木棕、鼠尾草、灰青等七色族。无文字、数字、人物、空牌匾、UI、边框、发光、金纹、塑料反光。未经编辑的区域尽可能逐像素原样。原图画布边缘和分辨率不得变化。",
+        "layers": [
+          {
+            "id": "dried_grass",
+            "polygons": [
+              [
+                [
+                  391,
+                  37
+                ],
+                [
+                  420,
+                  37
+                ],
+                [
+                  427,
+                  112
+                ],
+                [
+                  437,
+                  158
+                ],
+                [
+                  452,
+                  177
+                ],
+                [
+                  474,
+                  195
+                ],
+                [
+                  488,
+                  224
+                ],
+                [
+                  493,
+                  251
+                ],
+                [
+                  486,
+                  281
+                ],
+                [
+                  472,
+                  311
+                ],
+                [
+                  450,
+                  335
+                ],
+                [
+                  425,
+                  356
+                ],
+                [
+                  403,
+                  355
+                ],
+                [
+                  379,
+                  343
+                ],
+                [
+                  357,
+                  322
+                ],
+                [
+                  346,
+                  294
+                ],
+                [
+                  344,
+                  264
+                ],
+                [
+                  344,
+                  235
+                ],
+                [
+                  344,
+                  210
+                ],
+                [
+                  350,
+                  188
+                ],
+                [
+                  370,
+                  161
+                ],
+                [
+                  383,
+                  124
+                ],
+                [
+                  388,
+                  82
+                ]
+              ]
+            ],
+            "pivot_px": [
+              405,
+              46
+            ],
+            "z_index": 1,
+            "motion": {
+              "type": "pendulum",
+              "parameters": {
+                "amplitude_px": 4,
+                "frequency_hz": 0.28,
+                "max_degrees": 1.5,
+                "damping": 3.5,
+                "stiffness": 8
+              }
+            }
+          },
+          {
+            "id": "steam",
+            "polygons": [
+              [
+                [
+                  692,
+                  349
+                ],
+                [
+                  703,
+                  360
+                ],
+                [
+                  704,
+                  374
+                ],
+                [
+                  698,
+                  385
+                ],
+                [
+                  687,
+                  399
+                ],
+                [
+                  686,
+                  407
+                ],
+                [
+                  693,
+                  422
+                ],
+                [
+                  696,
+                  438
+                ],
+                [
+                  689,
+                  452
+                ],
+                [
+                  685,
+                  466
+                ],
+                [
+                  673,
+                  466
+                ],
+                [
+                  675,
+                  449
+                ],
+                [
+                  680,
+                  437
+                ],
+                [
+                  677,
+                  427
+                ],
+                [
+                  668,
+                  414
+                ],
+                [
+                  668,
+                  402
+                ],
+                [
+                  672,
+                  387
+                ],
+                [
+                  683,
+                  374
+                ],
+                [
+                  686,
+                  368
+                ],
+                [
+                  685,
+                  357
+                ]
+              ]
+            ],
+            "pivot_px": [
+              681,
+              460
+            ],
+            "z_index": 2,
+            "motion": {
+              "type": "flow",
+              "parameters": {
+                "speed_px_s": 4,
+                "distortion_px": 2
+              }
+            }
+          }
+        ],
+        "notes": [
+          "人工按本期真实C原生坐标标多边形，不独立生成相似Li。",
+          "rawB仅在softmask局部补回C，1px羽化/6px授权及ROI由共用工具验证。",
+          "静态器皿/树干/门框保持原始C。"
+        ]
+      }
+    }
+  ],
+  "recompositions": [
+    {
+      "id": "S05_day_real2",
+      "qa_kind": "art",
+      "original_path": "assets/generated_scenes/v3_real/S05/day/real2/C.png",
+      "base_path": "assets/generated_scenes/v3_real/S05/day/real2/B_all.png",
+      "layers": [
+        {
+          "path": "assets/generated_scenes/v3_real/S05/day/real2/layers/dried_grass.png",
+          "z_index": 1
+        },
+        {
+          "path": "assets/generated_scenes/v3_real/S05/day/real2/layers/steam.png",
+          "z_index": 2
+        }
+      ]
+    }
+  ],
+  "scene_descriptors": {
+    "S05": {
+      "layer_format": "aligned_full_canvas",
+      "day": "res://assets/generated_scenes/runtime/v3_real/S05/day/real2/B_all.png",
+      "layers": {
+        "dried_grass": {
+          "path": "res://assets/generated_scenes/runtime/v3_real/S05/day/real2/layers/dried_grass.png",
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            1672,
+            941
+          ],
+          "pivot_px": [
+            405,
+            46
+          ],
+          "z_index": 1,
+          "motion": {
+            "type": "pendulum",
+            "parameters": {
+              "amplitude_px": 4,
+              "frequency_hz": 0.28,
+              "max_degrees": 1.5,
+              "damping": 3.5,
+              "stiffness": 8
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 1.1483253588516746,
+            "source_crop": [
+              0.0,
+              0.25,
+              1672.0,
+              940.75
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              1672,
+              941
+            ]
+          },
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3_real/S05/day/real2/layers/dried_grass.png"
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 1.1483253588516746,
+              "source_crop": [
+                0.0,
+                0.25,
+                1672.0,
+                940.75
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                1672,
+                941
+              ]
+            }
+          }
+        },
+        "steam": {
+          "path": "res://assets/generated_scenes/runtime/v3_real/S05/day/real2/layers/steam.png",
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            1672,
+            941
+          ],
+          "pivot_px": [
+            681,
+            460
+          ],
+          "z_index": 2,
+          "motion": {
+            "type": "flow",
+            "parameters": {
+              "speed_px_s": 4,
+              "distortion_px": 2
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 1.1483253588516746,
+            "source_crop": [
+              0.0,
+              0.25,
+              1672.0,
+              940.75
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              1672,
+              941
+            ]
+          },
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3_real/S05/day/real2/layers/steam.png"
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 1.1483253588516746,
+              "source_crop": [
+                0.0,
+                0.25,
+                1672.0,
+                940.75
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                1672,
+                941
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "receipt_path": "assets/generated_scenes/v3_real/S05/day/real2/receipt.json"
+}

@@ -1,0 +1,1 @@
+{"scene_period_states": 17, "generation_receipts": 7, "runtime_copies": 94, "geometry_passed": true, "art_passed": false, "preview_only": true, "central_files_modified": false, "proposed_manifest": ".tools/art/a1r-real-registration-v2/proposed_manifest.json", "scene_review": ".tools/art/a1r-real-registration-v2/scene_review.json"}

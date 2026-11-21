@@ -1,0 +1,6802 @@
+{
+  "version": 1,
+  "kind": "real_pixel_extraction",
+  "processing_script": "tools/art/real_scene_layers.py",
+  "scene_id": "S01",
+  "period": "day",
+  "revision": "real2",
+  "inputs": {
+    "original": {
+      "path": "assets/_incoming/a1r_real/S01/day_C.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "8c04d2ef36b7d15626333bac66f2031a9b06524ca70ba0a13b589cced4aed5ea"
+    },
+    "raw_cleanplate": {
+      "path": "assets/_incoming/a1r_real/S01/day_raw_cleanplate.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "05d6a98f1338eeb42a72852489e707ee5aaa314c78daf4d29a6fe488633fbf7a"
+    },
+    "style": {
+      "path": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "391ef0b702653eaf7a2bf98f90595bb12502587b6bcc9f0b5653aecdf9766833"
+    }
+  },
+  "specification": {
+    "version": 1,
+    "scene_id": "S01",
+    "period": "day",
+    "revision": "real2",
+    "native_size": [
+      1672,
+      941
+    ],
+    "original_path": "assets/_incoming/a1r_real/S01/day_C.png",
+    "raw_cleanplate_path": "assets/_incoming/a1r_real/S01/day_raw_cleanplate.png",
+    "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+    "composite_prompt": "Use case: stylized-concept.\nAsset type: complete original scene composite C for the game 零点杂货铺, S01 exterior, daytime. This is a full scene painting, not a UI mockup.\nInput Image 1 is STYLE REFERENCE ONLY. Match its coarse matte gouache brushwork, hand-drawn colored-pencil edges, muted colors and deliberately sparse composition; do not copy its indoor subject.\nScene subject: exterior of a two-storey old stone and timber curio shop on a quiet cobbled lane, a simple round-arched display window, a plain solid wooden entrance door, one wisteria vine directly above the entrance, two simple pots of herbs, and ONE small physically crescent-shaped wooden hanging sign on a simple iron bracket, with no text or plaque. A few broad sage tree leaves form a readable canopy at the upper-left edge; a small soft-edged cloud is visible in the open sky.\nComposition: wide 16:9 landscape, edge-to-edge painted artwork. The shop is the single clear focal point in the left two thirds. Rightmost 30 percent is a broad quiet low-detail cream plaster return wall and empty lane; bottom 12 percent is broad simple cobbles with little detail. Keep architectural supports and frame joints plausible, avoid excessive symmetry. No shelves, stock items, street crowds, ornate shopfront or decorative clutter.\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse daylight, cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, numbers, UI, labels, blank labels, blank plaques, rectangular hanging signs, interface frames, borders.\nRequested native size 2560×1440 if available, otherwise the tool's actual largest native 16:9 output. Do not draw resolution text.",
+    "cleanplate_prompt": "Use case: precise-object-edit.\nAsset type: S01 DAY raw cleanplate B_all for actual same-position extraction of game layers.\nInput Image 1 is the exact EDIT TARGET. This is a local removal/edit, not a new scene. Remove ALL of these movable pieces from the existing painting and fill their previous locations with the plausible wall, roof, timber or sky behind them:\n1. The leafy tree canopy at upper-left; retain the static main bare trunk and thick branches wherever visible, but remove the leaves.\n2. The entire wisteria vine immediately above and down the left side of the entrance, including leaves, flowers and its winding vine stem. Restore the simple plaster and timber behind it.\n3. The small crescent-shaped hanging wooden sign at upper-right of the door, including its little hanging chain and supporting metal bracket; restore plain cream wall.\n4. The small white cloud in the sky.\nKeep the entrance door and ring handle, all window panes and frames, stone wall, timber structure, roof, both herb pots, cobbled foreground, overall camera and crop EXACTLY as they are. Preserve all unedited pixels as closely as possible. Add no new objects, openings, labels or decoration. This remains the same DAY lighting. Do not alter lamp states or the colors of the remaining objects.\nMaintain Image 1's matte gouache strokes, dry-brush marks, slightly wobbly colored-pencil edges and limited muted palette. Full-bleed landscape at the same native dimensions. No text, UI, plaques, frames, borders, people, glow, bloom or photorealism.",
+    "annotation_notes": "Second manual annotation: S01 includes full flower racemes and lower canopy leaves; S07 includes complete foreground flower stalks and excludes grass polygons from the retained-original water mask. No independently redrawn Li.",
+    "layers": [
+      {
+        "id": "cloud",
+        "polygons": [
+          [
+            [
+              1278,
+              110
+            ],
+            [
+              1292,
+              93
+            ],
+            [
+              1330,
+              88
+            ],
+            [
+              1345,
+              64
+            ],
+            [
+              1370,
+              69
+            ],
+            [
+              1382,
+              41
+            ],
+            [
+              1419,
+              37
+            ],
+            [
+              1444,
+              64
+            ],
+            [
+              1480,
+              73
+            ],
+            [
+              1494,
+              88
+            ],
+            [
+              1524,
+              92
+            ],
+            [
+              1541,
+              118
+            ],
+            [
+              1510,
+              134
+            ],
+            [
+              1478,
+              139
+            ],
+            [
+              1455,
+              131
+            ],
+            [
+              1410,
+              143
+            ],
+            [
+              1385,
+              126
+            ],
+            [
+              1337,
+              131
+            ],
+            [
+              1309,
+              121
+            ]
+          ]
+        ],
+        "pivot_px": [
+          1408,
+          98
+        ],
+        "z_index": 1,
+        "motion": {
+          "type": "flow",
+          "parameters": {
+            "speed": 0.002
+          }
+        }
+      },
+      {
+        "id": "tree_canopy",
+        "polygons": [
+          [
+            [
+              0,
+              0
+            ],
+            [
+              610,
+              0
+            ],
+            [
+              603,
+              25
+            ],
+            [
+              579,
+              30
+            ],
+            [
+              563,
+              62
+            ],
+            [
+              528,
+              70
+            ],
+            [
+              509,
+              106
+            ],
+            [
+              475,
+              102
+            ],
+            [
+              456,
+              147
+            ],
+            [
+              417,
+              125
+            ],
+            [
+              399,
+              150
+            ],
+            [
+              371,
+              122
+            ],
+            [
+              346,
+              131
+            ],
+            [
+              329,
+              100
+            ],
+            [
+              294,
+              108
+            ],
+            [
+              274,
+              79
+            ],
+            [
+              246,
+              88
+            ],
+            [
+              222,
+              56
+            ],
+            [
+              182,
+              76
+            ],
+            [
+              157,
+              97
+            ],
+            [
+              147,
+              142
+            ],
+            [
+              162,
+              153
+            ],
+            [
+              205,
+              147
+            ],
+            [
+              246,
+              168
+            ],
+            [
+              273,
+              185
+            ],
+            [
+              283,
+              217
+            ],
+            [
+              261,
+              228
+            ],
+            [
+              259,
+              265
+            ],
+            [
+              235,
+              286
+            ],
+            [
+              208,
+              278
+            ],
+            [
+              192,
+              294
+            ],
+            [
+              165,
+              280
+            ],
+            [
+              140,
+              286
+            ],
+            [
+              128,
+              263
+            ],
+            [
+              101,
+              271
+            ],
+            [
+              97,
+              245
+            ],
+            [
+              72,
+              250
+            ],
+            [
+              63,
+              220
+            ],
+            [
+              37,
+              233
+            ],
+            [
+              17,
+              255
+            ],
+            [
+              0,
+              258
+            ]
+          ],
+          [
+            [
+              0,
+              230
+            ],
+            [
+              29,
+              225
+            ],
+            [
+              49,
+              243
+            ],
+            [
+              70,
+              243
+            ],
+            [
+              85,
+              266
+            ],
+            [
+              66,
+              288
+            ],
+            [
+              48,
+              312
+            ],
+            [
+              24,
+              315
+            ],
+            [
+              10,
+              296
+            ],
+            [
+              0,
+              301
+            ]
+          ]
+        ],
+        "holes": [
+          [
+            [
+              0,
+              184
+            ],
+            [
+              0,
+              227
+            ],
+            [
+              55,
+              180
+            ],
+            [
+              100,
+              146
+            ],
+            [
+              142,
+              114
+            ],
+            [
+              186,
+              60
+            ],
+            [
+              231,
+              0
+            ],
+            [
+              197,
+              0
+            ],
+            [
+              169,
+              44
+            ],
+            [
+              119,
+              94
+            ],
+            [
+              84,
+              126
+            ],
+            [
+              39,
+              163
+            ]
+          ],
+          [
+            [
+              99,
+              141
+            ],
+            [
+              121,
+              156
+            ],
+            [
+              215,
+              77
+            ],
+            [
+              292,
+              37
+            ],
+            [
+              342,
+              0
+            ],
+            [
+              315,
+              0
+            ],
+            [
+              269,
+              23
+            ],
+            [
+              198,
+              58
+            ]
+          ]
+        ],
+        "pivot_px": [
+          130,
+          148
+        ],
+        "z_index": 2,
+        "motion": {
+          "type": "sway_shader",
+          "parameters": {
+            "amplitude": 1.2,
+            "frequency": 0.2
+          }
+        }
+      },
+      {
+        "id": "vine",
+        "polygons": [
+          [
+            [
+              552,
+              371
+            ],
+            [
+              568,
+              342
+            ],
+            [
+              599,
+              333
+            ],
+            [
+              613,
+              302
+            ],
+            [
+              648,
+              313
+            ],
+            [
+              661,
+              280
+            ],
+            [
+              691,
+              287
+            ],
+            [
+              709,
+              274
+            ],
+            [
+              744,
+              303
+            ],
+            [
+              774,
+              298
+            ],
+            [
+              796,
+              318
+            ],
+            [
+              826,
+              292
+            ],
+            [
+              849,
+              311
+            ],
+            [
+              884,
+              296
+            ],
+            [
+              899,
+              326
+            ],
+            [
+              933,
+              312
+            ],
+            [
+              955,
+              333
+            ],
+            [
+              990,
+              337
+            ],
+            [
+              1005,
+              356
+            ],
+            [
+              1029,
+              350
+            ],
+            [
+              1043,
+              379
+            ],
+            [
+              1023,
+              400
+            ],
+            [
+              1027,
+              441
+            ],
+            [
+              1014,
+              474
+            ],
+            [
+              1004,
+              488
+            ],
+            [
+              991,
+              466
+            ],
+            [
+              983,
+              431
+            ],
+            [
+              970,
+              421
+            ],
+            [
+              964,
+              463
+            ],
+            [
+              949,
+              496
+            ],
+            [
+              936,
+              517
+            ],
+            [
+              923,
+              512
+            ],
+            [
+              919,
+              477
+            ],
+            [
+              907,
+              461
+            ],
+            [
+              886,
+              435
+            ],
+            [
+              882,
+              474
+            ],
+            [
+              869,
+              484
+            ],
+            [
+              858,
+              457
+            ],
+            [
+              848,
+              431
+            ],
+            [
+              837,
+              463
+            ],
+            [
+              824,
+              459
+            ],
+            [
+              817,
+              421
+            ],
+            [
+              793,
+              407
+            ],
+            [
+              781,
+              425
+            ],
+            [
+              773,
+              412
+            ],
+            [
+              767,
+              385
+            ],
+            [
+              755,
+              383
+            ],
+            [
+              754,
+              421
+            ],
+            [
+              746,
+              446
+            ],
+            [
+              735,
+              452
+            ],
+            [
+              732,
+              474
+            ],
+            [
+              715,
+              488
+            ],
+            [
+              700,
+              489
+            ],
+            [
+              686,
+              475
+            ],
+            [
+              679,
+              448
+            ],
+            [
+              675,
+              427
+            ],
+            [
+              665,
+              411
+            ],
+            [
+              653,
+              385
+            ],
+            [
+              638,
+              381
+            ],
+            [
+              631,
+              411
+            ],
+            [
+              614,
+              429
+            ],
+            [
+              606,
+              457
+            ],
+            [
+              588,
+              454
+            ],
+            [
+              578,
+              437
+            ],
+            [
+              564,
+              417
+            ]
+          ],
+          [
+            [
+              588,
+              396
+            ],
+            [
+              606,
+              404
+            ],
+            [
+              600,
+              447
+            ],
+            [
+              615,
+              468
+            ],
+            [
+              630,
+              477
+            ],
+            [
+              636,
+              514
+            ],
+            [
+              654,
+              542
+            ],
+            [
+              650,
+              571
+            ],
+            [
+              641,
+              590
+            ],
+            [
+              652,
+              607
+            ],
+            [
+              649,
+              633
+            ],
+            [
+              666,
+              655
+            ],
+            [
+              660,
+              668
+            ],
+            [
+              641,
+              651
+            ],
+            [
+              637,
+              622
+            ],
+            [
+              628,
+              604
+            ],
+            [
+              629,
+              577
+            ],
+            [
+              641,
+              553
+            ],
+            [
+              623,
+              528
+            ],
+            [
+              620,
+              497
+            ],
+            [
+              602,
+              480
+            ],
+            [
+              592,
+              456
+            ],
+            [
+              587,
+              431
+            ]
+          ]
+        ],
+        "pivot_px": [
+          768,
+          333
+        ],
+        "z_index": 3,
+        "motion": {
+          "type": "sway_shader",
+          "parameters": {
+            "amplitude": 1.2,
+            "frequency": 0.22
+          }
+        }
+      },
+      {
+        "id": "hanging_sign",
+        "polygons": [
+          [
+            [
+              1114,
+              316
+            ],
+            [
+              1122,
+              316
+            ],
+            [
+              1123,
+              339
+            ],
+            [
+              1149,
+              336
+            ],
+            [
+              1144,
+              346
+            ],
+            [
+              1124,
+              354
+            ],
+            [
+              1114,
+              377
+            ],
+            [
+              1113,
+              400
+            ],
+            [
+              1124,
+              421
+            ],
+            [
+              1147,
+              430
+            ],
+            [
+              1175,
+              420
+            ],
+            [
+              1179,
+              429
+            ],
+            [
+              1164,
+              443
+            ],
+            [
+              1143,
+              453
+            ],
+            [
+              1118,
+              451
+            ],
+            [
+              1097,
+              442
+            ],
+            [
+              1084,
+              425
+            ],
+            [
+              1077,
+              403
+            ],
+            [
+              1080,
+              376
+            ],
+            [
+              1091,
+              356
+            ],
+            [
+              1112,
+              343
+            ]
+          ]
+        ],
+        "pivot_px": [
+          1118,
+          321
+        ],
+        "z_index": 4,
+        "motion": {
+          "type": "pendulum",
+          "parameters": {
+            "amplitude": 0.7,
+            "frequency": 0.35
+          }
+        }
+      }
+    ]
+  },
+  "processing_prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+  "cleanplate_method": "AI raw B is normalized with equal-aspect cover; final B_i/B_all are a soft-mask patch over actual C. The 6px dilation is retained as AI authorization evidence; undamaged context outside the soft mask is copied from C, never claimed as unchanged AI output.",
+  "mask_usage_notice": "本批rawB已先以C作参考生成，内置工具未接收这些显式mask。1px软mask与6px扩区在随后人工标图后生成，用作可审阅的局部合成边界及后续重生目标，不声称已作为本轮生图参数。",
+  "configuration": {
+    "version": 1,
+    "kind": "real_pixel_extraction",
+    "pipeline_config": "data/art/pipeline.json",
+    "output_root": "assets/generated_scenes/v3_real",
+    "runtime_root": "assets/generated_scenes/runtime/v3_real",
+    "logical_canvas": [
+      2560,
+      1440
+    ],
+    "required_mask": {
+      "feather_pixels": 1,
+      "inpaint_dilation_pixels": 6
+    },
+    "motion_types": [
+      "static",
+      "sway_shader",
+      "pendulum",
+      "flow"
+    ],
+    "maximum_polygon_vertices": 2048,
+    "cleanplate_method": "AI raw B is normalized with equal-aspect cover; final B_i/B_all are a soft-mask patch over actual C. The 6px dilation is retained as AI authorization evidence; undamaged context outside the soft mask is copied from C, never claimed as unchanged AI output.",
+    "mask_usage_notice": "本批rawB已先以C作参考生成，内置工具未接收这些显式mask。1px软mask与6px扩区在随后人工标图后生成，用作可审阅的局部合成边界及后续重生目标，不声称已作为本轮生图参数。",
+    "processing_prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。"
+  },
+  "mask_parameters": {
+    "feather_pixels": 1,
+    "inpaint_dilation_pixels": 6,
+    "hard_recovery_threshold": 128
+  },
+  "qa_bounds": {
+    "core_max_error": 0,
+    "unedited_max_error": 0,
+    "inpaint_ring_max_error": 0,
+    "feather_mae": 3,
+    "feather_p95": 12,
+    "percentile": 0.95
+  },
+  "raw_cleanplate_normalization": {
+    "source_path": "assets/_incoming/a1r_real/S01/day_raw_cleanplate.png",
+    "native_size": [
+      1672,
+      941
+    ],
+    "normalized_path": "assets/generated_scenes/v3_real/S01/day/real2/raw_cleanplate_normalized.png",
+    "normalized_size": [
+      1672,
+      941
+    ],
+    "transform": {
+      "method": "equal_aspect_cover",
+      "filter": "Lanczos",
+      "scale": 1.0,
+      "source_crop": [
+        0.0,
+        0.0,
+        1672.0,
+        941.0
+      ],
+      "runtime_size": [
+        1672,
+        941
+      ]
+    }
+  },
+  "original_path": "assets/generated_scenes/v3_real/S01/day/real2/C.png",
+  "base_path": "assets/generated_scenes/v3_real/S01/day/real2/B_all.png",
+  "base_runtime_path": "assets/generated_scenes/runtime/v3_real/S01/day/real2/B_all.png",
+  "artifacts": [
+    {
+      "path": "assets/generated_scenes/v3_real/S01/day/real2/C.png",
+      "role": "retained_original_C",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "8c04d2ef36b7d15626333bac66f2031a9b06524ca70ba0a13b589cced4aed5ea"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S01/day/real2/raw_cleanplate_normalized.png",
+      "role": "normalized_AI_cleanplate",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "4e5dd3b6f94389d6976c4d31accca31d904910fb0223c3627a7b940e4cf44519"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S01/day/real2/layers/cloud.png",
+      "role": "actual_C_matted_layer",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "1b32700cb175ccd8a5397bd6df7b393bd164fc401d86e37362173057a529d82c"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S01/day/real2/cleanplates/cloud.png",
+      "role": "single_object_cleanplate_B_i",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "e84f723dbb72742a937c3a3dc8be4d9a3278a8f654e56a40236aa3a1493fd21b"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S01/day/real2/masks/cloud_hard.png",
+      "role": "manual_hard_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "79056a6b0f5f0785a543d85eac94aa0327cd87ffe01d99a72598a2e1379bb0cb"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S01/day/real2/masks/cloud_soft.png",
+      "role": "one_pixel_feather_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "08f5978768c91251c7acb4b5784ef2c9ed2f8d8d4cc013f6a6d2efb041246c4f"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S01/day/real2/masks/cloud_inpaint6.png",
+      "role": "six_pixel_AI_authorization_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "adbd1afe57bc8dbb4b457d9a221ea82822781d74cf3e98d25a0f95fb73e0bb1d"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S01/day/real2/layers/tree_canopy.png",
+      "role": "actual_C_matted_layer",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "fdba37340c90ab25e49c4927aaf042047aa0d6f836da846e0e5320591296ef02"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S01/day/real2/cleanplates/tree_canopy.png",
+      "role": "single_object_cleanplate_B_i",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "efaffa316ab6a78b10e6ef825afc770dd516ac488fa78ec170a43acac777b6ee"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S01/day/real2/masks/tree_canopy_hard.png",
+      "role": "manual_hard_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "cd13a27b1652cafc60ee302f320d177452738c791c7233f065ebc3e46fa9a64d"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S01/day/real2/masks/tree_canopy_soft.png",
+      "role": "one_pixel_feather_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "93516e0ebac2cfa1c56ec3611979c5a93022b6014a84eec850f8d6a92041a2f8"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S01/day/real2/masks/tree_canopy_inpaint6.png",
+      "role": "six_pixel_AI_authorization_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "bc2dbbd786612afc40337aa3403dc0be63bdf1353ad9f4ba65e0c4bfb672cb8d"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S01/day/real2/layers/vine.png",
+      "role": "actual_C_matted_layer",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "bac99bf1f15dcdea4867da7e955733a25955f18a4baf4d90099a724f59f89611"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S01/day/real2/cleanplates/vine.png",
+      "role": "single_object_cleanplate_B_i",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "7d29edb377c52478c495548104bc882bccacfc7e7a711b80f7cb3e7847c9c454"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S01/day/real2/masks/vine_hard.png",
+      "role": "manual_hard_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "63da526dc62270e6f68689d4cfa22f4ef850e16ea0d3104930e03fd023ed8de8"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S01/day/real2/masks/vine_soft.png",
+      "role": "one_pixel_feather_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "4824b0c7fb758b4835af94dccec6faedd5c630800e9d42c1a0c21505360507f3"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S01/day/real2/masks/vine_inpaint6.png",
+      "role": "six_pixel_AI_authorization_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "1a81a0751642e8d170375261bb31afbbde94597bff05fea43deca83666faeb96"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S01/day/real2/layers/hanging_sign.png",
+      "role": "actual_C_matted_layer",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "41cca12a0df5e8f4c19e1bce174da59db61c01f260304bf602a99670ec04454a"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S01/day/real2/cleanplates/hanging_sign.png",
+      "role": "single_object_cleanplate_B_i",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "070f8c36d1c116764f716af2c56185ab3761da801aaea78767bce055b1c31340"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S01/day/real2/masks/hanging_sign_hard.png",
+      "role": "manual_hard_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "d273ff29e74228b48088163a8413200e4dc7a345d92462c55d176e4f5e651fba"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S01/day/real2/masks/hanging_sign_soft.png",
+      "role": "one_pixel_feather_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "86944d37cd3e1a1a142152bd6c6f80a9ef06e0ef726daa6cd8448a4c21a5d6aa"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S01/day/real2/masks/hanging_sign_inpaint6.png",
+      "role": "six_pixel_AI_authorization_mask",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "8b0dd1ca70a26bd6271eea359999e1f096c619ca90eeab5c04f9337d93d7c069"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S01/day/real2/B_all.png",
+      "role": "all_object_cleanplate_B_all",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "f1584716d6bc495de9b6585aa9b1f05044b5f2a25a2855852b107aa44aed759f"
+    },
+    {
+      "path": "assets/generated_scenes/v3_real/S01/day/real2/recomposed_all.png",
+      "role": "all_layers_recomposition",
+      "native_size": [
+        1672,
+        941
+      ],
+      "sha256": "8537e0f288dc6974072db8316c90cdb2557fff11dc78de0414b6c3edc7a42bb3"
+    }
+  ],
+  "runtime_copies": [
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S01/day/real2/C.png",
+      "source_path": "assets/generated_scenes/v3_real/S01/day/real2/C.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "8c04d2ef36b7d15626333bac66f2031a9b06524ca70ba0a13b589cced4aed5ea",
+      "sha256": "86db0ab86c370790c9aae1ad8a37b587892fc798f5413d6b4f08d0670e0615ee",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S01/day/real2/layers/cloud.png",
+      "source_path": "assets/generated_scenes/v3_real/S01/day/real2/layers/cloud.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "1b32700cb175ccd8a5397bd6df7b393bd164fc401d86e37362173057a529d82c",
+      "sha256": "6f5038c055d1dc98375c2d19386b241910aaadf78467d2e6fc8930f175c70566",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S01/day/real2/layers/tree_canopy.png",
+      "source_path": "assets/generated_scenes/v3_real/S01/day/real2/layers/tree_canopy.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "fdba37340c90ab25e49c4927aaf042047aa0d6f836da846e0e5320591296ef02",
+      "sha256": "dd3e21348da71b2f0fb2311d0d73335eb0128853b5a6a18c3d2020a5ffbc3f67",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S01/day/real2/layers/vine.png",
+      "source_path": "assets/generated_scenes/v3_real/S01/day/real2/layers/vine.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "bac99bf1f15dcdea4867da7e955733a25955f18a4baf4d90099a724f59f89611",
+      "sha256": "2420205732d687cad7f6cd15e2525f5a1b1268f6505ee03f1ec6858025840d30",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S01/day/real2/layers/hanging_sign.png",
+      "source_path": "assets/generated_scenes/v3_real/S01/day/real2/layers/hanging_sign.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "41cca12a0df5e8f4c19e1bce174da59db61c01f260304bf602a99670ec04454a",
+      "sha256": "5bbb527c14465c6c0dd2a9c12e330f7dbd5b485012dbbfb0ab812e71260e2923",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_real/S01/day/real2/B_all.png",
+      "source_path": "assets/generated_scenes/v3_real/S01/day/real2/B_all.png",
+      "native_size": [
+        1672,
+        941
+      ],
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "scale_x": 1.1483253588516746,
+      "scale_y": 1.1483253588516746,
+      "method": "equal-aspect cover crop, Lanczos runtime copy",
+      "transform": {
+        "method": "equal_aspect_cover",
+        "filter": "Lanczos",
+        "scale": 1.1483253588516746,
+        "source_crop": [
+          0.0,
+          0.25,
+          1672.0,
+          940.75
+        ],
+        "runtime_size": [
+          1920,
+          1080
+        ]
+      },
+      "source_sha256": "f1584716d6bc495de9b6585aa9b1f05044b5f2a25a2855852b107aa44aed759f",
+      "sha256": "d4fd6d6ee9191e222b91c7528ecb4fb979c3d07af05fa2d99c20e75814ef23eb",
+      "native_resolution_met": false,
+      "origin": "real_C_pixel_extraction",
+      "art_passed": false
+    }
+  ],
+  "layers": [
+    {
+      "id": "cloud",
+      "polygons": [
+        [
+          [
+            1278,
+            110
+          ],
+          [
+            1292,
+            93
+          ],
+          [
+            1330,
+            88
+          ],
+          [
+            1345,
+            64
+          ],
+          [
+            1370,
+            69
+          ],
+          [
+            1382,
+            41
+          ],
+          [
+            1419,
+            37
+          ],
+          [
+            1444,
+            64
+          ],
+          [
+            1480,
+            73
+          ],
+          [
+            1494,
+            88
+          ],
+          [
+            1524,
+            92
+          ],
+          [
+            1541,
+            118
+          ],
+          [
+            1510,
+            134
+          ],
+          [
+            1478,
+            139
+          ],
+          [
+            1455,
+            131
+          ],
+          [
+            1410,
+            143
+          ],
+          [
+            1385,
+            126
+          ],
+          [
+            1337,
+            131
+          ],
+          [
+            1309,
+            121
+          ]
+        ]
+      ],
+      "pivot_px": [
+        1408,
+        98
+      ],
+      "z_index": 1,
+      "motion": {
+        "type": "flow",
+        "parameters": {
+          "speed": 0.002
+        }
+      },
+      "native_size": [
+        1672,
+        941
+      ],
+      "layer_path": "assets/generated_scenes/v3_real/S01/day/real2/layers/cloud.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S01/day/real2/cleanplates/cloud.png",
+      "hard_mask_path": "assets/generated_scenes/v3_real/S01/day/real2/masks/cloud_hard.png",
+      "soft_mask_path": "assets/generated_scenes/v3_real/S01/day/real2/masks/cloud_soft.png",
+      "inpaint_mask_path": "assets/generated_scenes/v3_real/S01/day/real2/masks/cloud_inpaint6.png",
+      "single_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 14429,
+            "samples": 43287,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 1549,
+            "samples": 4647,
+            "mae": 0.08155799440499246,
+            "p95": 0,
+            "max_error": 7
+          },
+          "inpaint_ring": {
+            "pixels": 4833,
+            "samples": 14499,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1552541,
+            "samples": 4657623,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "matte_clamping": {
+        "clipped_pixels": 189,
+        "clipped_channels": 189,
+        "maximum_unassociated_clamp": 25.535714285714278
+      },
+      "descriptor": {
+        "path": "res://assets/generated_scenes/runtime/v3_real/S01/day/real2/layers/cloud.png",
+        "rect": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "hotspot": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "native_size": [
+          1672,
+          941
+        ],
+        "pivot_px": [
+          1408,
+          98
+        ],
+        "z_index": 1,
+        "motion": {
+          "type": "flow",
+          "parameters": {
+            "speed": 0.002
+          }
+        },
+        "source_transform": {
+          "method": "equal_aspect_cover",
+          "filter": "Lanczos",
+          "scale": 1.1483253588516746,
+          "source_crop": [
+            0.0,
+            0.25,
+            1672.0,
+            940.75
+          ],
+          "runtime_size": [
+            1920,
+            1080
+          ],
+          "native_size": [
+            1672,
+            941
+          ]
+        }
+      }
+    },
+    {
+      "id": "tree_canopy",
+      "polygons": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            610,
+            0
+          ],
+          [
+            603,
+            25
+          ],
+          [
+            579,
+            30
+          ],
+          [
+            563,
+            62
+          ],
+          [
+            528,
+            70
+          ],
+          [
+            509,
+            106
+          ],
+          [
+            475,
+            102
+          ],
+          [
+            456,
+            147
+          ],
+          [
+            417,
+            125
+          ],
+          [
+            399,
+            150
+          ],
+          [
+            371,
+            122
+          ],
+          [
+            346,
+            131
+          ],
+          [
+            329,
+            100
+          ],
+          [
+            294,
+            108
+          ],
+          [
+            274,
+            79
+          ],
+          [
+            246,
+            88
+          ],
+          [
+            222,
+            56
+          ],
+          [
+            182,
+            76
+          ],
+          [
+            157,
+            97
+          ],
+          [
+            147,
+            142
+          ],
+          [
+            162,
+            153
+          ],
+          [
+            205,
+            147
+          ],
+          [
+            246,
+            168
+          ],
+          [
+            273,
+            185
+          ],
+          [
+            283,
+            217
+          ],
+          [
+            261,
+            228
+          ],
+          [
+            259,
+            265
+          ],
+          [
+            235,
+            286
+          ],
+          [
+            208,
+            278
+          ],
+          [
+            192,
+            294
+          ],
+          [
+            165,
+            280
+          ],
+          [
+            140,
+            286
+          ],
+          [
+            128,
+            263
+          ],
+          [
+            101,
+            271
+          ],
+          [
+            97,
+            245
+          ],
+          [
+            72,
+            250
+          ],
+          [
+            63,
+            220
+          ],
+          [
+            37,
+            233
+          ],
+          [
+            17,
+            255
+          ],
+          [
+            0,
+            258
+          ]
+        ],
+        [
+          [
+            0,
+            230
+          ],
+          [
+            29,
+            225
+          ],
+          [
+            49,
+            243
+          ],
+          [
+            70,
+            243
+          ],
+          [
+            85,
+            266
+          ],
+          [
+            66,
+            288
+          ],
+          [
+            48,
+            312
+          ],
+          [
+            24,
+            315
+          ],
+          [
+            10,
+            296
+          ],
+          [
+            0,
+            301
+          ]
+        ]
+      ],
+      "holes": [
+        [
+          [
+            0,
+            184
+          ],
+          [
+            0,
+            227
+          ],
+          [
+            55,
+            180
+          ],
+          [
+            100,
+            146
+          ],
+          [
+            142,
+            114
+          ],
+          [
+            186,
+            60
+          ],
+          [
+            231,
+            0
+          ],
+          [
+            197,
+            0
+          ],
+          [
+            169,
+            44
+          ],
+          [
+            119,
+            94
+          ],
+          [
+            84,
+            126
+          ],
+          [
+            39,
+            163
+          ]
+        ],
+        [
+          [
+            99,
+            141
+          ],
+          [
+            121,
+            156
+          ],
+          [
+            215,
+            77
+          ],
+          [
+            292,
+            37
+          ],
+          [
+            342,
+            0
+          ],
+          [
+            315,
+            0
+          ],
+          [
+            269,
+            23
+          ],
+          [
+            198,
+            58
+          ]
+        ]
+      ],
+      "pivot_px": [
+        130,
+        148
+      ],
+      "z_index": 2,
+      "motion": {
+        "type": "sway_shader",
+        "parameters": {
+          "amplitude": 1.2,
+          "frequency": 0.2
+        }
+      },
+      "native_size": [
+        1672,
+        941
+      ],
+      "layer_path": "assets/generated_scenes/v3_real/S01/day/real2/layers/tree_canopy.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S01/day/real2/cleanplates/tree_canopy.png",
+      "hard_mask_path": "assets/generated_scenes/v3_real/S01/day/real2/masks/tree_canopy_hard.png",
+      "soft_mask_path": "assets/generated_scenes/v3_real/S01/day/real2/masks/tree_canopy_soft.png",
+      "inpaint_mask_path": "assets/generated_scenes/v3_real/S01/day/real2/masks/tree_canopy_inpaint6.png",
+      "single_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 85829,
+            "samples": 257487,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 5619,
+            "samples": 16857,
+            "mae": 0.012042474936228273,
+            "p95": 0,
+            "max_error": 9
+          },
+          "inpaint_ring": {
+            "pixels": 16547,
+            "samples": 49641,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1465357,
+            "samples": 4396071,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "matte_clamping": {
+        "clipped_pixels": 38,
+        "clipped_channels": 52,
+        "maximum_unassociated_clamp": 51.178571428571445
+      },
+      "descriptor": {
+        "path": "res://assets/generated_scenes/runtime/v3_real/S01/day/real2/layers/tree_canopy.png",
+        "rect": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "hotspot": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "native_size": [
+          1672,
+          941
+        ],
+        "pivot_px": [
+          130,
+          148
+        ],
+        "z_index": 2,
+        "motion": {
+          "type": "sway_shader",
+          "parameters": {
+            "amplitude": 1.2,
+            "frequency": 0.2
+          }
+        },
+        "source_transform": {
+          "method": "equal_aspect_cover",
+          "filter": "Lanczos",
+          "scale": 1.1483253588516746,
+          "source_crop": [
+            0.0,
+            0.25,
+            1672.0,
+            940.75
+          ],
+          "runtime_size": [
+            1920,
+            1080
+          ],
+          "native_size": [
+            1672,
+            941
+          ]
+        }
+      }
+    },
+    {
+      "id": "vine",
+      "polygons": [
+        [
+          [
+            552,
+            371
+          ],
+          [
+            568,
+            342
+          ],
+          [
+            599,
+            333
+          ],
+          [
+            613,
+            302
+          ],
+          [
+            648,
+            313
+          ],
+          [
+            661,
+            280
+          ],
+          [
+            691,
+            287
+          ],
+          [
+            709,
+            274
+          ],
+          [
+            744,
+            303
+          ],
+          [
+            774,
+            298
+          ],
+          [
+            796,
+            318
+          ],
+          [
+            826,
+            292
+          ],
+          [
+            849,
+            311
+          ],
+          [
+            884,
+            296
+          ],
+          [
+            899,
+            326
+          ],
+          [
+            933,
+            312
+          ],
+          [
+            955,
+            333
+          ],
+          [
+            990,
+            337
+          ],
+          [
+            1005,
+            356
+          ],
+          [
+            1029,
+            350
+          ],
+          [
+            1043,
+            379
+          ],
+          [
+            1023,
+            400
+          ],
+          [
+            1027,
+            441
+          ],
+          [
+            1014,
+            474
+          ],
+          [
+            1004,
+            488
+          ],
+          [
+            991,
+            466
+          ],
+          [
+            983,
+            431
+          ],
+          [
+            970,
+            421
+          ],
+          [
+            964,
+            463
+          ],
+          [
+            949,
+            496
+          ],
+          [
+            936,
+            517
+          ],
+          [
+            923,
+            512
+          ],
+          [
+            919,
+            477
+          ],
+          [
+            907,
+            461
+          ],
+          [
+            886,
+            435
+          ],
+          [
+            882,
+            474
+          ],
+          [
+            869,
+            484
+          ],
+          [
+            858,
+            457
+          ],
+          [
+            848,
+            431
+          ],
+          [
+            837,
+            463
+          ],
+          [
+            824,
+            459
+          ],
+          [
+            817,
+            421
+          ],
+          [
+            793,
+            407
+          ],
+          [
+            781,
+            425
+          ],
+          [
+            773,
+            412
+          ],
+          [
+            767,
+            385
+          ],
+          [
+            755,
+            383
+          ],
+          [
+            754,
+            421
+          ],
+          [
+            746,
+            446
+          ],
+          [
+            735,
+            452
+          ],
+          [
+            732,
+            474
+          ],
+          [
+            715,
+            488
+          ],
+          [
+            700,
+            489
+          ],
+          [
+            686,
+            475
+          ],
+          [
+            679,
+            448
+          ],
+          [
+            675,
+            427
+          ],
+          [
+            665,
+            411
+          ],
+          [
+            653,
+            385
+          ],
+          [
+            638,
+            381
+          ],
+          [
+            631,
+            411
+          ],
+          [
+            614,
+            429
+          ],
+          [
+            606,
+            457
+          ],
+          [
+            588,
+            454
+          ],
+          [
+            578,
+            437
+          ],
+          [
+            564,
+            417
+          ]
+        ],
+        [
+          [
+            588,
+            396
+          ],
+          [
+            606,
+            404
+          ],
+          [
+            600,
+            447
+          ],
+          [
+            615,
+            468
+          ],
+          [
+            630,
+            477
+          ],
+          [
+            636,
+            514
+          ],
+          [
+            654,
+            542
+          ],
+          [
+            650,
+            571
+          ],
+          [
+            641,
+            590
+          ],
+          [
+            652,
+            607
+          ],
+          [
+            649,
+            633
+          ],
+          [
+            666,
+            655
+          ],
+          [
+            660,
+            668
+          ],
+          [
+            641,
+            651
+          ],
+          [
+            637,
+            622
+          ],
+          [
+            628,
+            604
+          ],
+          [
+            629,
+            577
+          ],
+          [
+            641,
+            553
+          ],
+          [
+            623,
+            528
+          ],
+          [
+            620,
+            497
+          ],
+          [
+            602,
+            480
+          ],
+          [
+            592,
+            456
+          ],
+          [
+            587,
+            431
+          ]
+        ]
+      ],
+      "pivot_px": [
+        768,
+        333
+      ],
+      "z_index": 3,
+      "motion": {
+        "type": "sway_shader",
+        "parameters": {
+          "amplitude": 1.2,
+          "frequency": 0.22
+        }
+      },
+      "native_size": [
+        1672,
+        941
+      ],
+      "layer_path": "assets/generated_scenes/v3_real/S01/day/real2/layers/vine.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S01/day/real2/cleanplates/vine.png",
+      "hard_mask_path": "assets/generated_scenes/v3_real/S01/day/real2/masks/vine_hard.png",
+      "soft_mask_path": "assets/generated_scenes/v3_real/S01/day/real2/masks/vine_soft.png",
+      "inpaint_mask_path": "assets/generated_scenes/v3_real/S01/day/real2/masks/vine_inpaint6.png",
+      "single_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 65269,
+            "samples": 195807,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 5855,
+            "samples": 17565,
+            "mae": 0.04417876458867065,
+            "p95": 0,
+            "max_error": 12
+          },
+          "inpaint_ring": {
+            "pixels": 17188,
+            "samples": 51564,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1485040,
+            "samples": 4455120,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "matte_clamping": {
+        "clipped_pixels": 153,
+        "clipped_channels": 225,
+        "maximum_unassociated_clamp": 51.96428571428572
+      },
+      "descriptor": {
+        "path": "res://assets/generated_scenes/runtime/v3_real/S01/day/real2/layers/vine.png",
+        "rect": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "hotspot": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "native_size": [
+          1672,
+          941
+        ],
+        "pivot_px": [
+          768,
+          333
+        ],
+        "z_index": 3,
+        "motion": {
+          "type": "sway_shader",
+          "parameters": {
+            "amplitude": 1.2,
+            "frequency": 0.22
+          }
+        },
+        "source_transform": {
+          "method": "equal_aspect_cover",
+          "filter": "Lanczos",
+          "scale": 1.1483253588516746,
+          "source_crop": [
+            0.0,
+            0.25,
+            1672.0,
+            940.75
+          ],
+          "runtime_size": [
+            1920,
+            1080
+          ],
+          "native_size": [
+            1672,
+            941
+          ]
+        }
+      }
+    },
+    {
+      "id": "hanging_sign",
+      "polygons": [
+        [
+          [
+            1114,
+            316
+          ],
+          [
+            1122,
+            316
+          ],
+          [
+            1123,
+            339
+          ],
+          [
+            1149,
+            336
+          ],
+          [
+            1144,
+            346
+          ],
+          [
+            1124,
+            354
+          ],
+          [
+            1114,
+            377
+          ],
+          [
+            1113,
+            400
+          ],
+          [
+            1124,
+            421
+          ],
+          [
+            1147,
+            430
+          ],
+          [
+            1175,
+            420
+          ],
+          [
+            1179,
+            429
+          ],
+          [
+            1164,
+            443
+          ],
+          [
+            1143,
+            453
+          ],
+          [
+            1118,
+            451
+          ],
+          [
+            1097,
+            442
+          ],
+          [
+            1084,
+            425
+          ],
+          [
+            1077,
+            403
+          ],
+          [
+            1080,
+            376
+          ],
+          [
+            1091,
+            356
+          ],
+          [
+            1112,
+            343
+          ]
+        ]
+      ],
+      "pivot_px": [
+        1118,
+        321
+      ],
+      "z_index": 4,
+      "motion": {
+        "type": "pendulum",
+        "parameters": {
+          "amplitude": 0.7,
+          "frequency": 0.35
+        }
+      },
+      "native_size": [
+        1672,
+        941
+      ],
+      "layer_path": "assets/generated_scenes/v3_real/S01/day/real2/layers/hanging_sign.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S01/day/real2/cleanplates/hanging_sign.png",
+      "hard_mask_path": "assets/generated_scenes/v3_real/S01/day/real2/masks/hanging_sign_hard.png",
+      "soft_mask_path": "assets/generated_scenes/v3_real/S01/day/real2/masks/hanging_sign_soft.png",
+      "inpaint_mask_path": "assets/generated_scenes/v3_real/S01/day/real2/masks/hanging_sign_inpaint6.png",
+      "single_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 4760,
+            "samples": 14280,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 1155,
+            "samples": 3465,
+            "mae": 0.03261183261183261,
+            "p95": 0,
+            "max_error": 14
+          },
+          "inpaint_ring": {
+            "pixels": 3651,
+            "samples": 10953,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1563786,
+            "samples": 4691358,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "matte_clamping": {
+        "clipped_pixels": 30,
+        "clipped_channels": 46,
+        "maximum_unassociated_clamp": 42.0
+      },
+      "descriptor": {
+        "path": "res://assets/generated_scenes/runtime/v3_real/S01/day/real2/layers/hanging_sign.png",
+        "rect": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "hotspot": [
+          0,
+          0,
+          2560,
+          1440
+        ],
+        "native_size": [
+          1672,
+          941
+        ],
+        "pivot_px": [
+          1118,
+          321
+        ],
+        "z_index": 4,
+        "motion": {
+          "type": "pendulum",
+          "parameters": {
+            "amplitude": 0.7,
+            "frequency": 0.35
+          }
+        },
+        "source_transform": {
+          "method": "equal_aspect_cover",
+          "filter": "Lanczos",
+          "scale": 1.1483253588516746,
+          "source_crop": [
+            0.0,
+            0.25,
+            1672.0,
+            940.75
+          ],
+          "runtime_size": [
+            1920,
+            1080
+          ],
+          "native_size": [
+            1672,
+            941
+          ]
+        }
+      }
+    }
+  ],
+  "overlap_pairs": [],
+  "recomposition_qa": {
+    "passed": true,
+    "regions": {
+      "core": {
+        "pixels": 170287,
+        "samples": 510861,
+        "mae": 0.0,
+        "p95": 0,
+        "max_error": 0
+      },
+      "feather": {
+        "pixels": 14178,
+        "samples": 42534,
+        "mae": 0.034584097427940004,
+        "p95": 0,
+        "max_error": 14
+      },
+      "inpaint_ring": {
+        "pixels": 42219,
+        "samples": 126657,
+        "mae": 0.0,
+        "p95": 0,
+        "max_error": 0
+      },
+      "unedited": {
+        "pixels": 1346668,
+        "samples": 4040004,
+        "mae": 0.0,
+        "p95": 0,
+        "max_error": 0
+      }
+    },
+    "bounds": {
+      "core_max_error": 0,
+      "unedited_max_error": 0,
+      "inpaint_ring_max_error": 0,
+      "feather_mae": 3,
+      "feather_p95": 12,
+      "percentile": 0.95
+    },
+    "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+  },
+  "geometry_passed": true,
+  "art_passed": false,
+  "visual_review": "not_evaluated",
+  "manifest_modified": false,
+  "recipes": [
+    {
+      "status": "complete",
+      "version": "real2",
+      "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "attempts": [],
+      "processing_script": "tools/art/real_scene_layers.py",
+      "qa_kind": "art",
+      "generator": "real_C_pixel_extraction",
+      "id": "S01_day_real2_base",
+      "group": "scenes",
+      "operation": "runtime_copy",
+      "prompt": "Use case: precise-object-edit.\nAsset type: S01 DAY raw cleanplate B_all for actual same-position extraction of game layers.\nInput Image 1 is the exact EDIT TARGET. This is a local removal/edit, not a new scene. Remove ALL of these movable pieces from the existing painting and fill their previous locations with the plausible wall, roof, timber or sky behind them:\n1. The leafy tree canopy at upper-left; retain the static main bare trunk and thick branches wherever visible, but remove the leaves.\n2. The entire wisteria vine immediately above and down the left side of the entrance, including leaves, flowers and its winding vine stem. Restore the simple plaster and timber behind it.\n3. The small crescent-shaped hanging wooden sign at upper-right of the door, including its little hanging chain and supporting metal bracket; restore plain cream wall.\n4. The small white cloud in the sky.\nKeep the entrance door and ring handle, all window panes and frames, stone wall, timber structure, roof, both herb pots, cobbled foreground, overall camera and crop EXACTLY as they are. Preserve all unedited pixels as closely as possible. Add no new objects, openings, labels or decoration. This remains the same DAY lighting. Do not alter lamp states or the colors of the remaining objects.\nMaintain Image 1's matte gouache strokes, dry-brush marks, slightly wobbly colored-pencil edges and limited muted palette. Full-bleed landscape at the same native dimensions. No text, UI, plaques, frames, borders, people, glow, bloom or photorealism.\n从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+      "source_path": "assets/generated_scenes/v3_real/S01/day/real2/B_all.png",
+      "runtime_path": "assets/generated_scenes/runtime/v3_real/S01/day/real2/B_all.png"
+    },
+    {
+      "status": "complete",
+      "version": "real2",
+      "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "attempts": [],
+      "processing_script": "tools/art/real_scene_layers.py",
+      "qa_kind": "art",
+      "generator": "real_C_pixel_extraction",
+      "id": "S01_day_real2_cloud",
+      "group": "layers",
+      "operation": "extract_layer",
+      "prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+      "source_path": "assets/generated_scenes/v3_real/S01/day/real2/layers/cloud.png",
+      "runtime_path": "assets/generated_scenes/runtime/v3_real/S01/day/real2/layers/cloud.png",
+      "original_path": "assets/generated_scenes/v3_real/S01/day/real2/C.png",
+      "mask_path": "assets/generated_scenes/v3_real/S01/day/real2/masks/cloud_soft.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S01/day/real2/cleanplates/cloud.png",
+      "processing_parameters": {
+        "version": 1,
+        "scene_id": "S01",
+        "period": "day",
+        "revision": "real2",
+        "native_size": [
+          1672,
+          941
+        ],
+        "original_path": "assets/_incoming/a1r_real/S01/day_C.png",
+        "raw_cleanplate_path": "assets/_incoming/a1r_real/S01/day_raw_cleanplate.png",
+        "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+        "composite_prompt": "Use case: stylized-concept.\nAsset type: complete original scene composite C for the game 零点杂货铺, S01 exterior, daytime. This is a full scene painting, not a UI mockup.\nInput Image 1 is STYLE REFERENCE ONLY. Match its coarse matte gouache brushwork, hand-drawn colored-pencil edges, muted colors and deliberately sparse composition; do not copy its indoor subject.\nScene subject: exterior of a two-storey old stone and timber curio shop on a quiet cobbled lane, a simple round-arched display window, a plain solid wooden entrance door, one wisteria vine directly above the entrance, two simple pots of herbs, and ONE small physically crescent-shaped wooden hanging sign on a simple iron bracket, with no text or plaque. A few broad sage tree leaves form a readable canopy at the upper-left edge; a small soft-edged cloud is visible in the open sky.\nComposition: wide 16:9 landscape, edge-to-edge painted artwork. The shop is the single clear focal point in the left two thirds. Rightmost 30 percent is a broad quiet low-detail cream plaster return wall and empty lane; bottom 12 percent is broad simple cobbles with little detail. Keep architectural supports and frame joints plausible, avoid excessive symmetry. No shelves, stock items, street crowds, ornate shopfront or decorative clutter.\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse daylight, cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, numbers, UI, labels, blank labels, blank plaques, rectangular hanging signs, interface frames, borders.\nRequested native size 2560×1440 if available, otherwise the tool's actual largest native 16:9 output. Do not draw resolution text.",
+        "cleanplate_prompt": "Use case: precise-object-edit.\nAsset type: S01 DAY raw cleanplate B_all for actual same-position extraction of game layers.\nInput Image 1 is the exact EDIT TARGET. This is a local removal/edit, not a new scene. Remove ALL of these movable pieces from the existing painting and fill their previous locations with the plausible wall, roof, timber or sky behind them:\n1. The leafy tree canopy at upper-left; retain the static main bare trunk and thick branches wherever visible, but remove the leaves.\n2. The entire wisteria vine immediately above and down the left side of the entrance, including leaves, flowers and its winding vine stem. Restore the simple plaster and timber behind it.\n3. The small crescent-shaped hanging wooden sign at upper-right of the door, including its little hanging chain and supporting metal bracket; restore plain cream wall.\n4. The small white cloud in the sky.\nKeep the entrance door and ring handle, all window panes and frames, stone wall, timber structure, roof, both herb pots, cobbled foreground, overall camera and crop EXACTLY as they are. Preserve all unedited pixels as closely as possible. Add no new objects, openings, labels or decoration. This remains the same DAY lighting. Do not alter lamp states or the colors of the remaining objects.\nMaintain Image 1's matte gouache strokes, dry-brush marks, slightly wobbly colored-pencil edges and limited muted palette. Full-bleed landscape at the same native dimensions. No text, UI, plaques, frames, borders, people, glow, bloom or photorealism.",
+        "annotation_notes": "Second manual annotation: S01 includes full flower racemes and lower canopy leaves; S07 includes complete foreground flower stalks and excludes grass polygons from the retained-original water mask. No independently redrawn Li.",
+        "layers": [
+          {
+            "id": "cloud",
+            "polygons": [
+              [
+                [
+                  1278,
+                  110
+                ],
+                [
+                  1292,
+                  93
+                ],
+                [
+                  1330,
+                  88
+                ],
+                [
+                  1345,
+                  64
+                ],
+                [
+                  1370,
+                  69
+                ],
+                [
+                  1382,
+                  41
+                ],
+                [
+                  1419,
+                  37
+                ],
+                [
+                  1444,
+                  64
+                ],
+                [
+                  1480,
+                  73
+                ],
+                [
+                  1494,
+                  88
+                ],
+                [
+                  1524,
+                  92
+                ],
+                [
+                  1541,
+                  118
+                ],
+                [
+                  1510,
+                  134
+                ],
+                [
+                  1478,
+                  139
+                ],
+                [
+                  1455,
+                  131
+                ],
+                [
+                  1410,
+                  143
+                ],
+                [
+                  1385,
+                  126
+                ],
+                [
+                  1337,
+                  131
+                ],
+                [
+                  1309,
+                  121
+                ]
+              ]
+            ],
+            "pivot_px": [
+              1408,
+              98
+            ],
+            "z_index": 1,
+            "motion": {
+              "type": "flow",
+              "parameters": {
+                "speed": 0.002
+              }
+            }
+          },
+          {
+            "id": "tree_canopy",
+            "polygons": [
+              [
+                [
+                  0,
+                  0
+                ],
+                [
+                  610,
+                  0
+                ],
+                [
+                  603,
+                  25
+                ],
+                [
+                  579,
+                  30
+                ],
+                [
+                  563,
+                  62
+                ],
+                [
+                  528,
+                  70
+                ],
+                [
+                  509,
+                  106
+                ],
+                [
+                  475,
+                  102
+                ],
+                [
+                  456,
+                  147
+                ],
+                [
+                  417,
+                  125
+                ],
+                [
+                  399,
+                  150
+                ],
+                [
+                  371,
+                  122
+                ],
+                [
+                  346,
+                  131
+                ],
+                [
+                  329,
+                  100
+                ],
+                [
+                  294,
+                  108
+                ],
+                [
+                  274,
+                  79
+                ],
+                [
+                  246,
+                  88
+                ],
+                [
+                  222,
+                  56
+                ],
+                [
+                  182,
+                  76
+                ],
+                [
+                  157,
+                  97
+                ],
+                [
+                  147,
+                  142
+                ],
+                [
+                  162,
+                  153
+                ],
+                [
+                  205,
+                  147
+                ],
+                [
+                  246,
+                  168
+                ],
+                [
+                  273,
+                  185
+                ],
+                [
+                  283,
+                  217
+                ],
+                [
+                  261,
+                  228
+                ],
+                [
+                  259,
+                  265
+                ],
+                [
+                  235,
+                  286
+                ],
+                [
+                  208,
+                  278
+                ],
+                [
+                  192,
+                  294
+                ],
+                [
+                  165,
+                  280
+                ],
+                [
+                  140,
+                  286
+                ],
+                [
+                  128,
+                  263
+                ],
+                [
+                  101,
+                  271
+                ],
+                [
+                  97,
+                  245
+                ],
+                [
+                  72,
+                  250
+                ],
+                [
+                  63,
+                  220
+                ],
+                [
+                  37,
+                  233
+                ],
+                [
+                  17,
+                  255
+                ],
+                [
+                  0,
+                  258
+                ]
+              ],
+              [
+                [
+                  0,
+                  230
+                ],
+                [
+                  29,
+                  225
+                ],
+                [
+                  49,
+                  243
+                ],
+                [
+                  70,
+                  243
+                ],
+                [
+                  85,
+                  266
+                ],
+                [
+                  66,
+                  288
+                ],
+                [
+                  48,
+                  312
+                ],
+                [
+                  24,
+                  315
+                ],
+                [
+                  10,
+                  296
+                ],
+                [
+                  0,
+                  301
+                ]
+              ]
+            ],
+            "holes": [
+              [
+                [
+                  0,
+                  184
+                ],
+                [
+                  0,
+                  227
+                ],
+                [
+                  55,
+                  180
+                ],
+                [
+                  100,
+                  146
+                ],
+                [
+                  142,
+                  114
+                ],
+                [
+                  186,
+                  60
+                ],
+                [
+                  231,
+                  0
+                ],
+                [
+                  197,
+                  0
+                ],
+                [
+                  169,
+                  44
+                ],
+                [
+                  119,
+                  94
+                ],
+                [
+                  84,
+                  126
+                ],
+                [
+                  39,
+                  163
+                ]
+              ],
+              [
+                [
+                  99,
+                  141
+                ],
+                [
+                  121,
+                  156
+                ],
+                [
+                  215,
+                  77
+                ],
+                [
+                  292,
+                  37
+                ],
+                [
+                  342,
+                  0
+                ],
+                [
+                  315,
+                  0
+                ],
+                [
+                  269,
+                  23
+                ],
+                [
+                  198,
+                  58
+                ]
+              ]
+            ],
+            "pivot_px": [
+              130,
+              148
+            ],
+            "z_index": 2,
+            "motion": {
+              "type": "sway_shader",
+              "parameters": {
+                "amplitude": 1.2,
+                "frequency": 0.2
+              }
+            }
+          },
+          {
+            "id": "vine",
+            "polygons": [
+              [
+                [
+                  552,
+                  371
+                ],
+                [
+                  568,
+                  342
+                ],
+                [
+                  599,
+                  333
+                ],
+                [
+                  613,
+                  302
+                ],
+                [
+                  648,
+                  313
+                ],
+                [
+                  661,
+                  280
+                ],
+                [
+                  691,
+                  287
+                ],
+                [
+                  709,
+                  274
+                ],
+                [
+                  744,
+                  303
+                ],
+                [
+                  774,
+                  298
+                ],
+                [
+                  796,
+                  318
+                ],
+                [
+                  826,
+                  292
+                ],
+                [
+                  849,
+                  311
+                ],
+                [
+                  884,
+                  296
+                ],
+                [
+                  899,
+                  326
+                ],
+                [
+                  933,
+                  312
+                ],
+                [
+                  955,
+                  333
+                ],
+                [
+                  990,
+                  337
+                ],
+                [
+                  1005,
+                  356
+                ],
+                [
+                  1029,
+                  350
+                ],
+                [
+                  1043,
+                  379
+                ],
+                [
+                  1023,
+                  400
+                ],
+                [
+                  1027,
+                  441
+                ],
+                [
+                  1014,
+                  474
+                ],
+                [
+                  1004,
+                  488
+                ],
+                [
+                  991,
+                  466
+                ],
+                [
+                  983,
+                  431
+                ],
+                [
+                  970,
+                  421
+                ],
+                [
+                  964,
+                  463
+                ],
+                [
+                  949,
+                  496
+                ],
+                [
+                  936,
+                  517
+                ],
+                [
+                  923,
+                  512
+                ],
+                [
+                  919,
+                  477
+                ],
+                [
+                  907,
+                  461
+                ],
+                [
+                  886,
+                  435
+                ],
+                [
+                  882,
+                  474
+                ],
+                [
+                  869,
+                  484
+                ],
+                [
+                  858,
+                  457
+                ],
+                [
+                  848,
+                  431
+                ],
+                [
+                  837,
+                  463
+                ],
+                [
+                  824,
+                  459
+                ],
+                [
+                  817,
+                  421
+                ],
+                [
+                  793,
+                  407
+                ],
+                [
+                  781,
+                  425
+                ],
+                [
+                  773,
+                  412
+                ],
+                [
+                  767,
+                  385
+                ],
+                [
+                  755,
+                  383
+                ],
+                [
+                  754,
+                  421
+                ],
+                [
+                  746,
+                  446
+                ],
+                [
+                  735,
+                  452
+                ],
+                [
+                  732,
+                  474
+                ],
+                [
+                  715,
+                  488
+                ],
+                [
+                  700,
+                  489
+                ],
+                [
+                  686,
+                  475
+                ],
+                [
+                  679,
+                  448
+                ],
+                [
+                  675,
+                  427
+                ],
+                [
+                  665,
+                  411
+                ],
+                [
+                  653,
+                  385
+                ],
+                [
+                  638,
+                  381
+                ],
+                [
+                  631,
+                  411
+                ],
+                [
+                  614,
+                  429
+                ],
+                [
+                  606,
+                  457
+                ],
+                [
+                  588,
+                  454
+                ],
+                [
+                  578,
+                  437
+                ],
+                [
+                  564,
+                  417
+                ]
+              ],
+              [
+                [
+                  588,
+                  396
+                ],
+                [
+                  606,
+                  404
+                ],
+                [
+                  600,
+                  447
+                ],
+                [
+                  615,
+                  468
+                ],
+                [
+                  630,
+                  477
+                ],
+                [
+                  636,
+                  514
+                ],
+                [
+                  654,
+                  542
+                ],
+                [
+                  650,
+                  571
+                ],
+                [
+                  641,
+                  590
+                ],
+                [
+                  652,
+                  607
+                ],
+                [
+                  649,
+                  633
+                ],
+                [
+                  666,
+                  655
+                ],
+                [
+                  660,
+                  668
+                ],
+                [
+                  641,
+                  651
+                ],
+                [
+                  637,
+                  622
+                ],
+                [
+                  628,
+                  604
+                ],
+                [
+                  629,
+                  577
+                ],
+                [
+                  641,
+                  553
+                ],
+                [
+                  623,
+                  528
+                ],
+                [
+                  620,
+                  497
+                ],
+                [
+                  602,
+                  480
+                ],
+                [
+                  592,
+                  456
+                ],
+                [
+                  587,
+                  431
+                ]
+              ]
+            ],
+            "pivot_px": [
+              768,
+              333
+            ],
+            "z_index": 3,
+            "motion": {
+              "type": "sway_shader",
+              "parameters": {
+                "amplitude": 1.2,
+                "frequency": 0.22
+              }
+            }
+          },
+          {
+            "id": "hanging_sign",
+            "polygons": [
+              [
+                [
+                  1114,
+                  316
+                ],
+                [
+                  1122,
+                  316
+                ],
+                [
+                  1123,
+                  339
+                ],
+                [
+                  1149,
+                  336
+                ],
+                [
+                  1144,
+                  346
+                ],
+                [
+                  1124,
+                  354
+                ],
+                [
+                  1114,
+                  377
+                ],
+                [
+                  1113,
+                  400
+                ],
+                [
+                  1124,
+                  421
+                ],
+                [
+                  1147,
+                  430
+                ],
+                [
+                  1175,
+                  420
+                ],
+                [
+                  1179,
+                  429
+                ],
+                [
+                  1164,
+                  443
+                ],
+                [
+                  1143,
+                  453
+                ],
+                [
+                  1118,
+                  451
+                ],
+                [
+                  1097,
+                  442
+                ],
+                [
+                  1084,
+                  425
+                ],
+                [
+                  1077,
+                  403
+                ],
+                [
+                  1080,
+                  376
+                ],
+                [
+                  1091,
+                  356
+                ],
+                [
+                  1112,
+                  343
+                ]
+              ]
+            ],
+            "pivot_px": [
+              1118,
+              321
+            ],
+            "z_index": 4,
+            "motion": {
+              "type": "pendulum",
+              "parameters": {
+                "amplitude": 0.7,
+                "frequency": 0.35
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "status": "complete",
+      "version": "real2",
+      "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "attempts": [],
+      "processing_script": "tools/art/real_scene_layers.py",
+      "qa_kind": "art",
+      "generator": "real_C_pixel_extraction",
+      "id": "S01_day_real2_tree_canopy",
+      "group": "layers",
+      "operation": "extract_layer",
+      "prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+      "source_path": "assets/generated_scenes/v3_real/S01/day/real2/layers/tree_canopy.png",
+      "runtime_path": "assets/generated_scenes/runtime/v3_real/S01/day/real2/layers/tree_canopy.png",
+      "original_path": "assets/generated_scenes/v3_real/S01/day/real2/C.png",
+      "mask_path": "assets/generated_scenes/v3_real/S01/day/real2/masks/tree_canopy_soft.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S01/day/real2/cleanplates/tree_canopy.png",
+      "processing_parameters": {
+        "version": 1,
+        "scene_id": "S01",
+        "period": "day",
+        "revision": "real2",
+        "native_size": [
+          1672,
+          941
+        ],
+        "original_path": "assets/_incoming/a1r_real/S01/day_C.png",
+        "raw_cleanplate_path": "assets/_incoming/a1r_real/S01/day_raw_cleanplate.png",
+        "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+        "composite_prompt": "Use case: stylized-concept.\nAsset type: complete original scene composite C for the game 零点杂货铺, S01 exterior, daytime. This is a full scene painting, not a UI mockup.\nInput Image 1 is STYLE REFERENCE ONLY. Match its coarse matte gouache brushwork, hand-drawn colored-pencil edges, muted colors and deliberately sparse composition; do not copy its indoor subject.\nScene subject: exterior of a two-storey old stone and timber curio shop on a quiet cobbled lane, a simple round-arched display window, a plain solid wooden entrance door, one wisteria vine directly above the entrance, two simple pots of herbs, and ONE small physically crescent-shaped wooden hanging sign on a simple iron bracket, with no text or plaque. A few broad sage tree leaves form a readable canopy at the upper-left edge; a small soft-edged cloud is visible in the open sky.\nComposition: wide 16:9 landscape, edge-to-edge painted artwork. The shop is the single clear focal point in the left two thirds. Rightmost 30 percent is a broad quiet low-detail cream plaster return wall and empty lane; bottom 12 percent is broad simple cobbles with little detail. Keep architectural supports and frame joints plausible, avoid excessive symmetry. No shelves, stock items, street crowds, ornate shopfront or decorative clutter.\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse daylight, cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, numbers, UI, labels, blank labels, blank plaques, rectangular hanging signs, interface frames, borders.\nRequested native size 2560×1440 if available, otherwise the tool's actual largest native 16:9 output. Do not draw resolution text.",
+        "cleanplate_prompt": "Use case: precise-object-edit.\nAsset type: S01 DAY raw cleanplate B_all for actual same-position extraction of game layers.\nInput Image 1 is the exact EDIT TARGET. This is a local removal/edit, not a new scene. Remove ALL of these movable pieces from the existing painting and fill their previous locations with the plausible wall, roof, timber or sky behind them:\n1. The leafy tree canopy at upper-left; retain the static main bare trunk and thick branches wherever visible, but remove the leaves.\n2. The entire wisteria vine immediately above and down the left side of the entrance, including leaves, flowers and its winding vine stem. Restore the simple plaster and timber behind it.\n3. The small crescent-shaped hanging wooden sign at upper-right of the door, including its little hanging chain and supporting metal bracket; restore plain cream wall.\n4. The small white cloud in the sky.\nKeep the entrance door and ring handle, all window panes and frames, stone wall, timber structure, roof, both herb pots, cobbled foreground, overall camera and crop EXACTLY as they are. Preserve all unedited pixels as closely as possible. Add no new objects, openings, labels or decoration. This remains the same DAY lighting. Do not alter lamp states or the colors of the remaining objects.\nMaintain Image 1's matte gouache strokes, dry-brush marks, slightly wobbly colored-pencil edges and limited muted palette. Full-bleed landscape at the same native dimensions. No text, UI, plaques, frames, borders, people, glow, bloom or photorealism.",
+        "annotation_notes": "Second manual annotation: S01 includes full flower racemes and lower canopy leaves; S07 includes complete foreground flower stalks and excludes grass polygons from the retained-original water mask. No independently redrawn Li.",
+        "layers": [
+          {
+            "id": "cloud",
+            "polygons": [
+              [
+                [
+                  1278,
+                  110
+                ],
+                [
+                  1292,
+                  93
+                ],
+                [
+                  1330,
+                  88
+                ],
+                [
+                  1345,
+                  64
+                ],
+                [
+                  1370,
+                  69
+                ],
+                [
+                  1382,
+                  41
+                ],
+                [
+                  1419,
+                  37
+                ],
+                [
+                  1444,
+                  64
+                ],
+                [
+                  1480,
+                  73
+                ],
+                [
+                  1494,
+                  88
+                ],
+                [
+                  1524,
+                  92
+                ],
+                [
+                  1541,
+                  118
+                ],
+                [
+                  1510,
+                  134
+                ],
+                [
+                  1478,
+                  139
+                ],
+                [
+                  1455,
+                  131
+                ],
+                [
+                  1410,
+                  143
+                ],
+                [
+                  1385,
+                  126
+                ],
+                [
+                  1337,
+                  131
+                ],
+                [
+                  1309,
+                  121
+                ]
+              ]
+            ],
+            "pivot_px": [
+              1408,
+              98
+            ],
+            "z_index": 1,
+            "motion": {
+              "type": "flow",
+              "parameters": {
+                "speed": 0.002
+              }
+            }
+          },
+          {
+            "id": "tree_canopy",
+            "polygons": [
+              [
+                [
+                  0,
+                  0
+                ],
+                [
+                  610,
+                  0
+                ],
+                [
+                  603,
+                  25
+                ],
+                [
+                  579,
+                  30
+                ],
+                [
+                  563,
+                  62
+                ],
+                [
+                  528,
+                  70
+                ],
+                [
+                  509,
+                  106
+                ],
+                [
+                  475,
+                  102
+                ],
+                [
+                  456,
+                  147
+                ],
+                [
+                  417,
+                  125
+                ],
+                [
+                  399,
+                  150
+                ],
+                [
+                  371,
+                  122
+                ],
+                [
+                  346,
+                  131
+                ],
+                [
+                  329,
+                  100
+                ],
+                [
+                  294,
+                  108
+                ],
+                [
+                  274,
+                  79
+                ],
+                [
+                  246,
+                  88
+                ],
+                [
+                  222,
+                  56
+                ],
+                [
+                  182,
+                  76
+                ],
+                [
+                  157,
+                  97
+                ],
+                [
+                  147,
+                  142
+                ],
+                [
+                  162,
+                  153
+                ],
+                [
+                  205,
+                  147
+                ],
+                [
+                  246,
+                  168
+                ],
+                [
+                  273,
+                  185
+                ],
+                [
+                  283,
+                  217
+                ],
+                [
+                  261,
+                  228
+                ],
+                [
+                  259,
+                  265
+                ],
+                [
+                  235,
+                  286
+                ],
+                [
+                  208,
+                  278
+                ],
+                [
+                  192,
+                  294
+                ],
+                [
+                  165,
+                  280
+                ],
+                [
+                  140,
+                  286
+                ],
+                [
+                  128,
+                  263
+                ],
+                [
+                  101,
+                  271
+                ],
+                [
+                  97,
+                  245
+                ],
+                [
+                  72,
+                  250
+                ],
+                [
+                  63,
+                  220
+                ],
+                [
+                  37,
+                  233
+                ],
+                [
+                  17,
+                  255
+                ],
+                [
+                  0,
+                  258
+                ]
+              ],
+              [
+                [
+                  0,
+                  230
+                ],
+                [
+                  29,
+                  225
+                ],
+                [
+                  49,
+                  243
+                ],
+                [
+                  70,
+                  243
+                ],
+                [
+                  85,
+                  266
+                ],
+                [
+                  66,
+                  288
+                ],
+                [
+                  48,
+                  312
+                ],
+                [
+                  24,
+                  315
+                ],
+                [
+                  10,
+                  296
+                ],
+                [
+                  0,
+                  301
+                ]
+              ]
+            ],
+            "holes": [
+              [
+                [
+                  0,
+                  184
+                ],
+                [
+                  0,
+                  227
+                ],
+                [
+                  55,
+                  180
+                ],
+                [
+                  100,
+                  146
+                ],
+                [
+                  142,
+                  114
+                ],
+                [
+                  186,
+                  60
+                ],
+                [
+                  231,
+                  0
+                ],
+                [
+                  197,
+                  0
+                ],
+                [
+                  169,
+                  44
+                ],
+                [
+                  119,
+                  94
+                ],
+                [
+                  84,
+                  126
+                ],
+                [
+                  39,
+                  163
+                ]
+              ],
+              [
+                [
+                  99,
+                  141
+                ],
+                [
+                  121,
+                  156
+                ],
+                [
+                  215,
+                  77
+                ],
+                [
+                  292,
+                  37
+                ],
+                [
+                  342,
+                  0
+                ],
+                [
+                  315,
+                  0
+                ],
+                [
+                  269,
+                  23
+                ],
+                [
+                  198,
+                  58
+                ]
+              ]
+            ],
+            "pivot_px": [
+              130,
+              148
+            ],
+            "z_index": 2,
+            "motion": {
+              "type": "sway_shader",
+              "parameters": {
+                "amplitude": 1.2,
+                "frequency": 0.2
+              }
+            }
+          },
+          {
+            "id": "vine",
+            "polygons": [
+              [
+                [
+                  552,
+                  371
+                ],
+                [
+                  568,
+                  342
+                ],
+                [
+                  599,
+                  333
+                ],
+                [
+                  613,
+                  302
+                ],
+                [
+                  648,
+                  313
+                ],
+                [
+                  661,
+                  280
+                ],
+                [
+                  691,
+                  287
+                ],
+                [
+                  709,
+                  274
+                ],
+                [
+                  744,
+                  303
+                ],
+                [
+                  774,
+                  298
+                ],
+                [
+                  796,
+                  318
+                ],
+                [
+                  826,
+                  292
+                ],
+                [
+                  849,
+                  311
+                ],
+                [
+                  884,
+                  296
+                ],
+                [
+                  899,
+                  326
+                ],
+                [
+                  933,
+                  312
+                ],
+                [
+                  955,
+                  333
+                ],
+                [
+                  990,
+                  337
+                ],
+                [
+                  1005,
+                  356
+                ],
+                [
+                  1029,
+                  350
+                ],
+                [
+                  1043,
+                  379
+                ],
+                [
+                  1023,
+                  400
+                ],
+                [
+                  1027,
+                  441
+                ],
+                [
+                  1014,
+                  474
+                ],
+                [
+                  1004,
+                  488
+                ],
+                [
+                  991,
+                  466
+                ],
+                [
+                  983,
+                  431
+                ],
+                [
+                  970,
+                  421
+                ],
+                [
+                  964,
+                  463
+                ],
+                [
+                  949,
+                  496
+                ],
+                [
+                  936,
+                  517
+                ],
+                [
+                  923,
+                  512
+                ],
+                [
+                  919,
+                  477
+                ],
+                [
+                  907,
+                  461
+                ],
+                [
+                  886,
+                  435
+                ],
+                [
+                  882,
+                  474
+                ],
+                [
+                  869,
+                  484
+                ],
+                [
+                  858,
+                  457
+                ],
+                [
+                  848,
+                  431
+                ],
+                [
+                  837,
+                  463
+                ],
+                [
+                  824,
+                  459
+                ],
+                [
+                  817,
+                  421
+                ],
+                [
+                  793,
+                  407
+                ],
+                [
+                  781,
+                  425
+                ],
+                [
+                  773,
+                  412
+                ],
+                [
+                  767,
+                  385
+                ],
+                [
+                  755,
+                  383
+                ],
+                [
+                  754,
+                  421
+                ],
+                [
+                  746,
+                  446
+                ],
+                [
+                  735,
+                  452
+                ],
+                [
+                  732,
+                  474
+                ],
+                [
+                  715,
+                  488
+                ],
+                [
+                  700,
+                  489
+                ],
+                [
+                  686,
+                  475
+                ],
+                [
+                  679,
+                  448
+                ],
+                [
+                  675,
+                  427
+                ],
+                [
+                  665,
+                  411
+                ],
+                [
+                  653,
+                  385
+                ],
+                [
+                  638,
+                  381
+                ],
+                [
+                  631,
+                  411
+                ],
+                [
+                  614,
+                  429
+                ],
+                [
+                  606,
+                  457
+                ],
+                [
+                  588,
+                  454
+                ],
+                [
+                  578,
+                  437
+                ],
+                [
+                  564,
+                  417
+                ]
+              ],
+              [
+                [
+                  588,
+                  396
+                ],
+                [
+                  606,
+                  404
+                ],
+                [
+                  600,
+                  447
+                ],
+                [
+                  615,
+                  468
+                ],
+                [
+                  630,
+                  477
+                ],
+                [
+                  636,
+                  514
+                ],
+                [
+                  654,
+                  542
+                ],
+                [
+                  650,
+                  571
+                ],
+                [
+                  641,
+                  590
+                ],
+                [
+                  652,
+                  607
+                ],
+                [
+                  649,
+                  633
+                ],
+                [
+                  666,
+                  655
+                ],
+                [
+                  660,
+                  668
+                ],
+                [
+                  641,
+                  651
+                ],
+                [
+                  637,
+                  622
+                ],
+                [
+                  628,
+                  604
+                ],
+                [
+                  629,
+                  577
+                ],
+                [
+                  641,
+                  553
+                ],
+                [
+                  623,
+                  528
+                ],
+                [
+                  620,
+                  497
+                ],
+                [
+                  602,
+                  480
+                ],
+                [
+                  592,
+                  456
+                ],
+                [
+                  587,
+                  431
+                ]
+              ]
+            ],
+            "pivot_px": [
+              768,
+              333
+            ],
+            "z_index": 3,
+            "motion": {
+              "type": "sway_shader",
+              "parameters": {
+                "amplitude": 1.2,
+                "frequency": 0.22
+              }
+            }
+          },
+          {
+            "id": "hanging_sign",
+            "polygons": [
+              [
+                [
+                  1114,
+                  316
+                ],
+                [
+                  1122,
+                  316
+                ],
+                [
+                  1123,
+                  339
+                ],
+                [
+                  1149,
+                  336
+                ],
+                [
+                  1144,
+                  346
+                ],
+                [
+                  1124,
+                  354
+                ],
+                [
+                  1114,
+                  377
+                ],
+                [
+                  1113,
+                  400
+                ],
+                [
+                  1124,
+                  421
+                ],
+                [
+                  1147,
+                  430
+                ],
+                [
+                  1175,
+                  420
+                ],
+                [
+                  1179,
+                  429
+                ],
+                [
+                  1164,
+                  443
+                ],
+                [
+                  1143,
+                  453
+                ],
+                [
+                  1118,
+                  451
+                ],
+                [
+                  1097,
+                  442
+                ],
+                [
+                  1084,
+                  425
+                ],
+                [
+                  1077,
+                  403
+                ],
+                [
+                  1080,
+                  376
+                ],
+                [
+                  1091,
+                  356
+                ],
+                [
+                  1112,
+                  343
+                ]
+              ]
+            ],
+            "pivot_px": [
+              1118,
+              321
+            ],
+            "z_index": 4,
+            "motion": {
+              "type": "pendulum",
+              "parameters": {
+                "amplitude": 0.7,
+                "frequency": 0.35
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "status": "complete",
+      "version": "real2",
+      "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "attempts": [],
+      "processing_script": "tools/art/real_scene_layers.py",
+      "qa_kind": "art",
+      "generator": "real_C_pixel_extraction",
+      "id": "S01_day_real2_vine",
+      "group": "layers",
+      "operation": "extract_layer",
+      "prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+      "source_path": "assets/generated_scenes/v3_real/S01/day/real2/layers/vine.png",
+      "runtime_path": "assets/generated_scenes/runtime/v3_real/S01/day/real2/layers/vine.png",
+      "original_path": "assets/generated_scenes/v3_real/S01/day/real2/C.png",
+      "mask_path": "assets/generated_scenes/v3_real/S01/day/real2/masks/vine_soft.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S01/day/real2/cleanplates/vine.png",
+      "processing_parameters": {
+        "version": 1,
+        "scene_id": "S01",
+        "period": "day",
+        "revision": "real2",
+        "native_size": [
+          1672,
+          941
+        ],
+        "original_path": "assets/_incoming/a1r_real/S01/day_C.png",
+        "raw_cleanplate_path": "assets/_incoming/a1r_real/S01/day_raw_cleanplate.png",
+        "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+        "composite_prompt": "Use case: stylized-concept.\nAsset type: complete original scene composite C for the game 零点杂货铺, S01 exterior, daytime. This is a full scene painting, not a UI mockup.\nInput Image 1 is STYLE REFERENCE ONLY. Match its coarse matte gouache brushwork, hand-drawn colored-pencil edges, muted colors and deliberately sparse composition; do not copy its indoor subject.\nScene subject: exterior of a two-storey old stone and timber curio shop on a quiet cobbled lane, a simple round-arched display window, a plain solid wooden entrance door, one wisteria vine directly above the entrance, two simple pots of herbs, and ONE small physically crescent-shaped wooden hanging sign on a simple iron bracket, with no text or plaque. A few broad sage tree leaves form a readable canopy at the upper-left edge; a small soft-edged cloud is visible in the open sky.\nComposition: wide 16:9 landscape, edge-to-edge painted artwork. The shop is the single clear focal point in the left two thirds. Rightmost 30 percent is a broad quiet low-detail cream plaster return wall and empty lane; bottom 12 percent is broad simple cobbles with little detail. Keep architectural supports and frame joints plausible, avoid excessive symmetry. No shelves, stock items, street crowds, ornate shopfront or decorative clutter.\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse daylight, cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, numbers, UI, labels, blank labels, blank plaques, rectangular hanging signs, interface frames, borders.\nRequested native size 2560×1440 if available, otherwise the tool's actual largest native 16:9 output. Do not draw resolution text.",
+        "cleanplate_prompt": "Use case: precise-object-edit.\nAsset type: S01 DAY raw cleanplate B_all for actual same-position extraction of game layers.\nInput Image 1 is the exact EDIT TARGET. This is a local removal/edit, not a new scene. Remove ALL of these movable pieces from the existing painting and fill their previous locations with the plausible wall, roof, timber or sky behind them:\n1. The leafy tree canopy at upper-left; retain the static main bare trunk and thick branches wherever visible, but remove the leaves.\n2. The entire wisteria vine immediately above and down the left side of the entrance, including leaves, flowers and its winding vine stem. Restore the simple plaster and timber behind it.\n3. The small crescent-shaped hanging wooden sign at upper-right of the door, including its little hanging chain and supporting metal bracket; restore plain cream wall.\n4. The small white cloud in the sky.\nKeep the entrance door and ring handle, all window panes and frames, stone wall, timber structure, roof, both herb pots, cobbled foreground, overall camera and crop EXACTLY as they are. Preserve all unedited pixels as closely as possible. Add no new objects, openings, labels or decoration. This remains the same DAY lighting. Do not alter lamp states or the colors of the remaining objects.\nMaintain Image 1's matte gouache strokes, dry-brush marks, slightly wobbly colored-pencil edges and limited muted palette. Full-bleed landscape at the same native dimensions. No text, UI, plaques, frames, borders, people, glow, bloom or photorealism.",
+        "annotation_notes": "Second manual annotation: S01 includes full flower racemes and lower canopy leaves; S07 includes complete foreground flower stalks and excludes grass polygons from the retained-original water mask. No independently redrawn Li.",
+        "layers": [
+          {
+            "id": "cloud",
+            "polygons": [
+              [
+                [
+                  1278,
+                  110
+                ],
+                [
+                  1292,
+                  93
+                ],
+                [
+                  1330,
+                  88
+                ],
+                [
+                  1345,
+                  64
+                ],
+                [
+                  1370,
+                  69
+                ],
+                [
+                  1382,
+                  41
+                ],
+                [
+                  1419,
+                  37
+                ],
+                [
+                  1444,
+                  64
+                ],
+                [
+                  1480,
+                  73
+                ],
+                [
+                  1494,
+                  88
+                ],
+                [
+                  1524,
+                  92
+                ],
+                [
+                  1541,
+                  118
+                ],
+                [
+                  1510,
+                  134
+                ],
+                [
+                  1478,
+                  139
+                ],
+                [
+                  1455,
+                  131
+                ],
+                [
+                  1410,
+                  143
+                ],
+                [
+                  1385,
+                  126
+                ],
+                [
+                  1337,
+                  131
+                ],
+                [
+                  1309,
+                  121
+                ]
+              ]
+            ],
+            "pivot_px": [
+              1408,
+              98
+            ],
+            "z_index": 1,
+            "motion": {
+              "type": "flow",
+              "parameters": {
+                "speed": 0.002
+              }
+            }
+          },
+          {
+            "id": "tree_canopy",
+            "polygons": [
+              [
+                [
+                  0,
+                  0
+                ],
+                [
+                  610,
+                  0
+                ],
+                [
+                  603,
+                  25
+                ],
+                [
+                  579,
+                  30
+                ],
+                [
+                  563,
+                  62
+                ],
+                [
+                  528,
+                  70
+                ],
+                [
+                  509,
+                  106
+                ],
+                [
+                  475,
+                  102
+                ],
+                [
+                  456,
+                  147
+                ],
+                [
+                  417,
+                  125
+                ],
+                [
+                  399,
+                  150
+                ],
+                [
+                  371,
+                  122
+                ],
+                [
+                  346,
+                  131
+                ],
+                [
+                  329,
+                  100
+                ],
+                [
+                  294,
+                  108
+                ],
+                [
+                  274,
+                  79
+                ],
+                [
+                  246,
+                  88
+                ],
+                [
+                  222,
+                  56
+                ],
+                [
+                  182,
+                  76
+                ],
+                [
+                  157,
+                  97
+                ],
+                [
+                  147,
+                  142
+                ],
+                [
+                  162,
+                  153
+                ],
+                [
+                  205,
+                  147
+                ],
+                [
+                  246,
+                  168
+                ],
+                [
+                  273,
+                  185
+                ],
+                [
+                  283,
+                  217
+                ],
+                [
+                  261,
+                  228
+                ],
+                [
+                  259,
+                  265
+                ],
+                [
+                  235,
+                  286
+                ],
+                [
+                  208,
+                  278
+                ],
+                [
+                  192,
+                  294
+                ],
+                [
+                  165,
+                  280
+                ],
+                [
+                  140,
+                  286
+                ],
+                [
+                  128,
+                  263
+                ],
+                [
+                  101,
+                  271
+                ],
+                [
+                  97,
+                  245
+                ],
+                [
+                  72,
+                  250
+                ],
+                [
+                  63,
+                  220
+                ],
+                [
+                  37,
+                  233
+                ],
+                [
+                  17,
+                  255
+                ],
+                [
+                  0,
+                  258
+                ]
+              ],
+              [
+                [
+                  0,
+                  230
+                ],
+                [
+                  29,
+                  225
+                ],
+                [
+                  49,
+                  243
+                ],
+                [
+                  70,
+                  243
+                ],
+                [
+                  85,
+                  266
+                ],
+                [
+                  66,
+                  288
+                ],
+                [
+                  48,
+                  312
+                ],
+                [
+                  24,
+                  315
+                ],
+                [
+                  10,
+                  296
+                ],
+                [
+                  0,
+                  301
+                ]
+              ]
+            ],
+            "holes": [
+              [
+                [
+                  0,
+                  184
+                ],
+                [
+                  0,
+                  227
+                ],
+                [
+                  55,
+                  180
+                ],
+                [
+                  100,
+                  146
+                ],
+                [
+                  142,
+                  114
+                ],
+                [
+                  186,
+                  60
+                ],
+                [
+                  231,
+                  0
+                ],
+                [
+                  197,
+                  0
+                ],
+                [
+                  169,
+                  44
+                ],
+                [
+                  119,
+                  94
+                ],
+                [
+                  84,
+                  126
+                ],
+                [
+                  39,
+                  163
+                ]
+              ],
+              [
+                [
+                  99,
+                  141
+                ],
+                [
+                  121,
+                  156
+                ],
+                [
+                  215,
+                  77
+                ],
+                [
+                  292,
+                  37
+                ],
+                [
+                  342,
+                  0
+                ],
+                [
+                  315,
+                  0
+                ],
+                [
+                  269,
+                  23
+                ],
+                [
+                  198,
+                  58
+                ]
+              ]
+            ],
+            "pivot_px": [
+              130,
+              148
+            ],
+            "z_index": 2,
+            "motion": {
+              "type": "sway_shader",
+              "parameters": {
+                "amplitude": 1.2,
+                "frequency": 0.2
+              }
+            }
+          },
+          {
+            "id": "vine",
+            "polygons": [
+              [
+                [
+                  552,
+                  371
+                ],
+                [
+                  568,
+                  342
+                ],
+                [
+                  599,
+                  333
+                ],
+                [
+                  613,
+                  302
+                ],
+                [
+                  648,
+                  313
+                ],
+                [
+                  661,
+                  280
+                ],
+                [
+                  691,
+                  287
+                ],
+                [
+                  709,
+                  274
+                ],
+                [
+                  744,
+                  303
+                ],
+                [
+                  774,
+                  298
+                ],
+                [
+                  796,
+                  318
+                ],
+                [
+                  826,
+                  292
+                ],
+                [
+                  849,
+                  311
+                ],
+                [
+                  884,
+                  296
+                ],
+                [
+                  899,
+                  326
+                ],
+                [
+                  933,
+                  312
+                ],
+                [
+                  955,
+                  333
+                ],
+                [
+                  990,
+                  337
+                ],
+                [
+                  1005,
+                  356
+                ],
+                [
+                  1029,
+                  350
+                ],
+                [
+                  1043,
+                  379
+                ],
+                [
+                  1023,
+                  400
+                ],
+                [
+                  1027,
+                  441
+                ],
+                [
+                  1014,
+                  474
+                ],
+                [
+                  1004,
+                  488
+                ],
+                [
+                  991,
+                  466
+                ],
+                [
+                  983,
+                  431
+                ],
+                [
+                  970,
+                  421
+                ],
+                [
+                  964,
+                  463
+                ],
+                [
+                  949,
+                  496
+                ],
+                [
+                  936,
+                  517
+                ],
+                [
+                  923,
+                  512
+                ],
+                [
+                  919,
+                  477
+                ],
+                [
+                  907,
+                  461
+                ],
+                [
+                  886,
+                  435
+                ],
+                [
+                  882,
+                  474
+                ],
+                [
+                  869,
+                  484
+                ],
+                [
+                  858,
+                  457
+                ],
+                [
+                  848,
+                  431
+                ],
+                [
+                  837,
+                  463
+                ],
+                [
+                  824,
+                  459
+                ],
+                [
+                  817,
+                  421
+                ],
+                [
+                  793,
+                  407
+                ],
+                [
+                  781,
+                  425
+                ],
+                [
+                  773,
+                  412
+                ],
+                [
+                  767,
+                  385
+                ],
+                [
+                  755,
+                  383
+                ],
+                [
+                  754,
+                  421
+                ],
+                [
+                  746,
+                  446
+                ],
+                [
+                  735,
+                  452
+                ],
+                [
+                  732,
+                  474
+                ],
+                [
+                  715,
+                  488
+                ],
+                [
+                  700,
+                  489
+                ],
+                [
+                  686,
+                  475
+                ],
+                [
+                  679,
+                  448
+                ],
+                [
+                  675,
+                  427
+                ],
+                [
+                  665,
+                  411
+                ],
+                [
+                  653,
+                  385
+                ],
+                [
+                  638,
+                  381
+                ],
+                [
+                  631,
+                  411
+                ],
+                [
+                  614,
+                  429
+                ],
+                [
+                  606,
+                  457
+                ],
+                [
+                  588,
+                  454
+                ],
+                [
+                  578,
+                  437
+                ],
+                [
+                  564,
+                  417
+                ]
+              ],
+              [
+                [
+                  588,
+                  396
+                ],
+                [
+                  606,
+                  404
+                ],
+                [
+                  600,
+                  447
+                ],
+                [
+                  615,
+                  468
+                ],
+                [
+                  630,
+                  477
+                ],
+                [
+                  636,
+                  514
+                ],
+                [
+                  654,
+                  542
+                ],
+                [
+                  650,
+                  571
+                ],
+                [
+                  641,
+                  590
+                ],
+                [
+                  652,
+                  607
+                ],
+                [
+                  649,
+                  633
+                ],
+                [
+                  666,
+                  655
+                ],
+                [
+                  660,
+                  668
+                ],
+                [
+                  641,
+                  651
+                ],
+                [
+                  637,
+                  622
+                ],
+                [
+                  628,
+                  604
+                ],
+                [
+                  629,
+                  577
+                ],
+                [
+                  641,
+                  553
+                ],
+                [
+                  623,
+                  528
+                ],
+                [
+                  620,
+                  497
+                ],
+                [
+                  602,
+                  480
+                ],
+                [
+                  592,
+                  456
+                ],
+                [
+                  587,
+                  431
+                ]
+              ]
+            ],
+            "pivot_px": [
+              768,
+              333
+            ],
+            "z_index": 3,
+            "motion": {
+              "type": "sway_shader",
+              "parameters": {
+                "amplitude": 1.2,
+                "frequency": 0.22
+              }
+            }
+          },
+          {
+            "id": "hanging_sign",
+            "polygons": [
+              [
+                [
+                  1114,
+                  316
+                ],
+                [
+                  1122,
+                  316
+                ],
+                [
+                  1123,
+                  339
+                ],
+                [
+                  1149,
+                  336
+                ],
+                [
+                  1144,
+                  346
+                ],
+                [
+                  1124,
+                  354
+                ],
+                [
+                  1114,
+                  377
+                ],
+                [
+                  1113,
+                  400
+                ],
+                [
+                  1124,
+                  421
+                ],
+                [
+                  1147,
+                  430
+                ],
+                [
+                  1175,
+                  420
+                ],
+                [
+                  1179,
+                  429
+                ],
+                [
+                  1164,
+                  443
+                ],
+                [
+                  1143,
+                  453
+                ],
+                [
+                  1118,
+                  451
+                ],
+                [
+                  1097,
+                  442
+                ],
+                [
+                  1084,
+                  425
+                ],
+                [
+                  1077,
+                  403
+                ],
+                [
+                  1080,
+                  376
+                ],
+                [
+                  1091,
+                  356
+                ],
+                [
+                  1112,
+                  343
+                ]
+              ]
+            ],
+            "pivot_px": [
+              1118,
+              321
+            ],
+            "z_index": 4,
+            "motion": {
+              "type": "pendulum",
+              "parameters": {
+                "amplitude": 0.7,
+                "frequency": 0.35
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "status": "complete",
+      "version": "real2",
+      "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+      "attempts": [],
+      "processing_script": "tools/art/real_scene_layers.py",
+      "qa_kind": "art",
+      "generator": "real_C_pixel_extraction",
+      "id": "S01_day_real2_hanging_sign",
+      "group": "layers",
+      "operation": "extract_layer",
+      "prompt": "从真实完整合成C按人工硬多边形取得1px羽化软mask；以6px外扩mask保存AI补底授权证据。rawB只通过软mask局部贴回C，保留其余原像素；用C、该软mask和B_i反解Li，不生成或独立重画物件。单层与全部层均按严格ROI阈值检查，重叠、边缘反解裁值和未通过项目如实记录。",
+      "source_path": "assets/generated_scenes/v3_real/S01/day/real2/layers/hanging_sign.png",
+      "runtime_path": "assets/generated_scenes/runtime/v3_real/S01/day/real2/layers/hanging_sign.png",
+      "original_path": "assets/generated_scenes/v3_real/S01/day/real2/C.png",
+      "mask_path": "assets/generated_scenes/v3_real/S01/day/real2/masks/hanging_sign_soft.png",
+      "cleanplate_path": "assets/generated_scenes/v3_real/S01/day/real2/cleanplates/hanging_sign.png",
+      "processing_parameters": {
+        "version": 1,
+        "scene_id": "S01",
+        "period": "day",
+        "revision": "real2",
+        "native_size": [
+          1672,
+          941
+        ],
+        "original_path": "assets/_incoming/a1r_real/S01/day_C.png",
+        "raw_cleanplate_path": "assets/_incoming/a1r_real/S01/day_raw_cleanplate.png",
+        "style_reference": "assets/_incoming/a1r_pilot/candidate_3.png",
+        "composite_prompt": "Use case: stylized-concept.\nAsset type: complete original scene composite C for the game 零点杂货铺, S01 exterior, daytime. This is a full scene painting, not a UI mockup.\nInput Image 1 is STYLE REFERENCE ONLY. Match its coarse matte gouache brushwork, hand-drawn colored-pencil edges, muted colors and deliberately sparse composition; do not copy its indoor subject.\nScene subject: exterior of a two-storey old stone and timber curio shop on a quiet cobbled lane, a simple round-arched display window, a plain solid wooden entrance door, one wisteria vine directly above the entrance, two simple pots of herbs, and ONE small physically crescent-shaped wooden hanging sign on a simple iron bracket, with no text or plaque. A few broad sage tree leaves form a readable canopy at the upper-left edge; a small soft-edged cloud is visible in the open sky.\nComposition: wide 16:9 landscape, edge-to-edge painted artwork. The shop is the single clear focal point in the left two thirds. Rightmost 30 percent is a broad quiet low-detail cream plaster return wall and empty lane; bottom 12 percent is broad simple cobbles with little detail. Keep architectural supports and frame joints plausible, avoid excessive symmetry. No shelves, stock items, street crowds, ornate shopfront or decorative clutter.\nSTYLE_V2: gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse daylight, cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people.\nNEGATIVE: glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, numbers, UI, labels, blank labels, blank plaques, rectangular hanging signs, interface frames, borders.\nRequested native size 2560×1440 if available, otherwise the tool's actual largest native 16:9 output. Do not draw resolution text.",
+        "cleanplate_prompt": "Use case: precise-object-edit.\nAsset type: S01 DAY raw cleanplate B_all for actual same-position extraction of game layers.\nInput Image 1 is the exact EDIT TARGET. This is a local removal/edit, not a new scene. Remove ALL of these movable pieces from the existing painting and fill their previous locations with the plausible wall, roof, timber or sky behind them:\n1. The leafy tree canopy at upper-left; retain the static main bare trunk and thick branches wherever visible, but remove the leaves.\n2. The entire wisteria vine immediately above and down the left side of the entrance, including leaves, flowers and its winding vine stem. Restore the simple plaster and timber behind it.\n3. The small crescent-shaped hanging wooden sign at upper-right of the door, including its little hanging chain and supporting metal bracket; restore plain cream wall.\n4. The small white cloud in the sky.\nKeep the entrance door and ring handle, all window panes and frames, stone wall, timber structure, roof, both herb pots, cobbled foreground, overall camera and crop EXACTLY as they are. Preserve all unedited pixels as closely as possible. Add no new objects, openings, labels or decoration. This remains the same DAY lighting. Do not alter lamp states or the colors of the remaining objects.\nMaintain Image 1's matte gouache strokes, dry-brush marks, slightly wobbly colored-pencil edges and limited muted palette. Full-bleed landscape at the same native dimensions. No text, UI, plaques, frames, borders, people, glow, bloom or photorealism.",
+        "annotation_notes": "Second manual annotation: S01 includes full flower racemes and lower canopy leaves; S07 includes complete foreground flower stalks and excludes grass polygons from the retained-original water mask. No independently redrawn Li.",
+        "layers": [
+          {
+            "id": "cloud",
+            "polygons": [
+              [
+                [
+                  1278,
+                  110
+                ],
+                [
+                  1292,
+                  93
+                ],
+                [
+                  1330,
+                  88
+                ],
+                [
+                  1345,
+                  64
+                ],
+                [
+                  1370,
+                  69
+                ],
+                [
+                  1382,
+                  41
+                ],
+                [
+                  1419,
+                  37
+                ],
+                [
+                  1444,
+                  64
+                ],
+                [
+                  1480,
+                  73
+                ],
+                [
+                  1494,
+                  88
+                ],
+                [
+                  1524,
+                  92
+                ],
+                [
+                  1541,
+                  118
+                ],
+                [
+                  1510,
+                  134
+                ],
+                [
+                  1478,
+                  139
+                ],
+                [
+                  1455,
+                  131
+                ],
+                [
+                  1410,
+                  143
+                ],
+                [
+                  1385,
+                  126
+                ],
+                [
+                  1337,
+                  131
+                ],
+                [
+                  1309,
+                  121
+                ]
+              ]
+            ],
+            "pivot_px": [
+              1408,
+              98
+            ],
+            "z_index": 1,
+            "motion": {
+              "type": "flow",
+              "parameters": {
+                "speed": 0.002
+              }
+            }
+          },
+          {
+            "id": "tree_canopy",
+            "polygons": [
+              [
+                [
+                  0,
+                  0
+                ],
+                [
+                  610,
+                  0
+                ],
+                [
+                  603,
+                  25
+                ],
+                [
+                  579,
+                  30
+                ],
+                [
+                  563,
+                  62
+                ],
+                [
+                  528,
+                  70
+                ],
+                [
+                  509,
+                  106
+                ],
+                [
+                  475,
+                  102
+                ],
+                [
+                  456,
+                  147
+                ],
+                [
+                  417,
+                  125
+                ],
+                [
+                  399,
+                  150
+                ],
+                [
+                  371,
+                  122
+                ],
+                [
+                  346,
+                  131
+                ],
+                [
+                  329,
+                  100
+                ],
+                [
+                  294,
+                  108
+                ],
+                [
+                  274,
+                  79
+                ],
+                [
+                  246,
+                  88
+                ],
+                [
+                  222,
+                  56
+                ],
+                [
+                  182,
+                  76
+                ],
+                [
+                  157,
+                  97
+                ],
+                [
+                  147,
+                  142
+                ],
+                [
+                  162,
+                  153
+                ],
+                [
+                  205,
+                  147
+                ],
+                [
+                  246,
+                  168
+                ],
+                [
+                  273,
+                  185
+                ],
+                [
+                  283,
+                  217
+                ],
+                [
+                  261,
+                  228
+                ],
+                [
+                  259,
+                  265
+                ],
+                [
+                  235,
+                  286
+                ],
+                [
+                  208,
+                  278
+                ],
+                [
+                  192,
+                  294
+                ],
+                [
+                  165,
+                  280
+                ],
+                [
+                  140,
+                  286
+                ],
+                [
+                  128,
+                  263
+                ],
+                [
+                  101,
+                  271
+                ],
+                [
+                  97,
+                  245
+                ],
+                [
+                  72,
+                  250
+                ],
+                [
+                  63,
+                  220
+                ],
+                [
+                  37,
+                  233
+                ],
+                [
+                  17,
+                  255
+                ],
+                [
+                  0,
+                  258
+                ]
+              ],
+              [
+                [
+                  0,
+                  230
+                ],
+                [
+                  29,
+                  225
+                ],
+                [
+                  49,
+                  243
+                ],
+                [
+                  70,
+                  243
+                ],
+                [
+                  85,
+                  266
+                ],
+                [
+                  66,
+                  288
+                ],
+                [
+                  48,
+                  312
+                ],
+                [
+                  24,
+                  315
+                ],
+                [
+                  10,
+                  296
+                ],
+                [
+                  0,
+                  301
+                ]
+              ]
+            ],
+            "holes": [
+              [
+                [
+                  0,
+                  184
+                ],
+                [
+                  0,
+                  227
+                ],
+                [
+                  55,
+                  180
+                ],
+                [
+                  100,
+                  146
+                ],
+                [
+                  142,
+                  114
+                ],
+                [
+                  186,
+                  60
+                ],
+                [
+                  231,
+                  0
+                ],
+                [
+                  197,
+                  0
+                ],
+                [
+                  169,
+                  44
+                ],
+                [
+                  119,
+                  94
+                ],
+                [
+                  84,
+                  126
+                ],
+                [
+                  39,
+                  163
+                ]
+              ],
+              [
+                [
+                  99,
+                  141
+                ],
+                [
+                  121,
+                  156
+                ],
+                [
+                  215,
+                  77
+                ],
+                [
+                  292,
+                  37
+                ],
+                [
+                  342,
+                  0
+                ],
+                [
+                  315,
+                  0
+                ],
+                [
+                  269,
+                  23
+                ],
+                [
+                  198,
+                  58
+                ]
+              ]
+            ],
+            "pivot_px": [
+              130,
+              148
+            ],
+            "z_index": 2,
+            "motion": {
+              "type": "sway_shader",
+              "parameters": {
+                "amplitude": 1.2,
+                "frequency": 0.2
+              }
+            }
+          },
+          {
+            "id": "vine",
+            "polygons": [
+              [
+                [
+                  552,
+                  371
+                ],
+                [
+                  568,
+                  342
+                ],
+                [
+                  599,
+                  333
+                ],
+                [
+                  613,
+                  302
+                ],
+                [
+                  648,
+                  313
+                ],
+                [
+                  661,
+                  280
+                ],
+                [
+                  691,
+                  287
+                ],
+                [
+                  709,
+                  274
+                ],
+                [
+                  744,
+                  303
+                ],
+                [
+                  774,
+                  298
+                ],
+                [
+                  796,
+                  318
+                ],
+                [
+                  826,
+                  292
+                ],
+                [
+                  849,
+                  311
+                ],
+                [
+                  884,
+                  296
+                ],
+                [
+                  899,
+                  326
+                ],
+                [
+                  933,
+                  312
+                ],
+                [
+                  955,
+                  333
+                ],
+                [
+                  990,
+                  337
+                ],
+                [
+                  1005,
+                  356
+                ],
+                [
+                  1029,
+                  350
+                ],
+                [
+                  1043,
+                  379
+                ],
+                [
+                  1023,
+                  400
+                ],
+                [
+                  1027,
+                  441
+                ],
+                [
+                  1014,
+                  474
+                ],
+                [
+                  1004,
+                  488
+                ],
+                [
+                  991,
+                  466
+                ],
+                [
+                  983,
+                  431
+                ],
+                [
+                  970,
+                  421
+                ],
+                [
+                  964,
+                  463
+                ],
+                [
+                  949,
+                  496
+                ],
+                [
+                  936,
+                  517
+                ],
+                [
+                  923,
+                  512
+                ],
+                [
+                  919,
+                  477
+                ],
+                [
+                  907,
+                  461
+                ],
+                [
+                  886,
+                  435
+                ],
+                [
+                  882,
+                  474
+                ],
+                [
+                  869,
+                  484
+                ],
+                [
+                  858,
+                  457
+                ],
+                [
+                  848,
+                  431
+                ],
+                [
+                  837,
+                  463
+                ],
+                [
+                  824,
+                  459
+                ],
+                [
+                  817,
+                  421
+                ],
+                [
+                  793,
+                  407
+                ],
+                [
+                  781,
+                  425
+                ],
+                [
+                  773,
+                  412
+                ],
+                [
+                  767,
+                  385
+                ],
+                [
+                  755,
+                  383
+                ],
+                [
+                  754,
+                  421
+                ],
+                [
+                  746,
+                  446
+                ],
+                [
+                  735,
+                  452
+                ],
+                [
+                  732,
+                  474
+                ],
+                [
+                  715,
+                  488
+                ],
+                [
+                  700,
+                  489
+                ],
+                [
+                  686,
+                  475
+                ],
+                [
+                  679,
+                  448
+                ],
+                [
+                  675,
+                  427
+                ],
+                [
+                  665,
+                  411
+                ],
+                [
+                  653,
+                  385
+                ],
+                [
+                  638,
+                  381
+                ],
+                [
+                  631,
+                  411
+                ],
+                [
+                  614,
+                  429
+                ],
+                [
+                  606,
+                  457
+                ],
+                [
+                  588,
+                  454
+                ],
+                [
+                  578,
+                  437
+                ],
+                [
+                  564,
+                  417
+                ]
+              ],
+              [
+                [
+                  588,
+                  396
+                ],
+                [
+                  606,
+                  404
+                ],
+                [
+                  600,
+                  447
+                ],
+                [
+                  615,
+                  468
+                ],
+                [
+                  630,
+                  477
+                ],
+                [
+                  636,
+                  514
+                ],
+                [
+                  654,
+                  542
+                ],
+                [
+                  650,
+                  571
+                ],
+                [
+                  641,
+                  590
+                ],
+                [
+                  652,
+                  607
+                ],
+                [
+                  649,
+                  633
+                ],
+                [
+                  666,
+                  655
+                ],
+                [
+                  660,
+                  668
+                ],
+                [
+                  641,
+                  651
+                ],
+                [
+                  637,
+                  622
+                ],
+                [
+                  628,
+                  604
+                ],
+                [
+                  629,
+                  577
+                ],
+                [
+                  641,
+                  553
+                ],
+                [
+                  623,
+                  528
+                ],
+                [
+                  620,
+                  497
+                ],
+                [
+                  602,
+                  480
+                ],
+                [
+                  592,
+                  456
+                ],
+                [
+                  587,
+                  431
+                ]
+              ]
+            ],
+            "pivot_px": [
+              768,
+              333
+            ],
+            "z_index": 3,
+            "motion": {
+              "type": "sway_shader",
+              "parameters": {
+                "amplitude": 1.2,
+                "frequency": 0.22
+              }
+            }
+          },
+          {
+            "id": "hanging_sign",
+            "polygons": [
+              [
+                [
+                  1114,
+                  316
+                ],
+                [
+                  1122,
+                  316
+                ],
+                [
+                  1123,
+                  339
+                ],
+                [
+                  1149,
+                  336
+                ],
+                [
+                  1144,
+                  346
+                ],
+                [
+                  1124,
+                  354
+                ],
+                [
+                  1114,
+                  377
+                ],
+                [
+                  1113,
+                  400
+                ],
+                [
+                  1124,
+                  421
+                ],
+                [
+                  1147,
+                  430
+                ],
+                [
+                  1175,
+                  420
+                ],
+                [
+                  1179,
+                  429
+                ],
+                [
+                  1164,
+                  443
+                ],
+                [
+                  1143,
+                  453
+                ],
+                [
+                  1118,
+                  451
+                ],
+                [
+                  1097,
+                  442
+                ],
+                [
+                  1084,
+                  425
+                ],
+                [
+                  1077,
+                  403
+                ],
+                [
+                  1080,
+                  376
+                ],
+                [
+                  1091,
+                  356
+                ],
+                [
+                  1112,
+                  343
+                ]
+              ]
+            ],
+            "pivot_px": [
+              1118,
+              321
+            ],
+            "z_index": 4,
+            "motion": {
+              "type": "pendulum",
+              "parameters": {
+                "amplitude": 0.7,
+                "frequency": 0.35
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "recompositions": [
+    {
+      "id": "S01_day_real2",
+      "qa_kind": "art",
+      "original_path": "assets/generated_scenes/v3_real/S01/day/real2/C.png",
+      "base_path": "assets/generated_scenes/v3_real/S01/day/real2/B_all.png",
+      "layers": [
+        {
+          "path": "assets/generated_scenes/v3_real/S01/day/real2/layers/cloud.png",
+          "z_index": 1
+        },
+        {
+          "path": "assets/generated_scenes/v3_real/S01/day/real2/layers/tree_canopy.png",
+          "z_index": 2
+        },
+        {
+          "path": "assets/generated_scenes/v3_real/S01/day/real2/layers/vine.png",
+          "z_index": 3
+        },
+        {
+          "path": "assets/generated_scenes/v3_real/S01/day/real2/layers/hanging_sign.png",
+          "z_index": 4
+        }
+      ]
+    }
+  ],
+  "scene_descriptors": {
+    "S01": {
+      "layer_format": "aligned_full_canvas",
+      "day": "res://assets/generated_scenes/runtime/v3_real/S01/day/real2/B_all.png",
+      "layers": {
+        "cloud": {
+          "path": "res://assets/generated_scenes/runtime/v3_real/S01/day/real2/layers/cloud.png",
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            1672,
+            941
+          ],
+          "pivot_px": [
+            1408,
+            98
+          ],
+          "z_index": 1,
+          "motion": {
+            "type": "flow",
+            "parameters": {
+              "speed": 0.002
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 1.1483253588516746,
+            "source_crop": [
+              0.0,
+              0.25,
+              1672.0,
+              940.75
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              1672,
+              941
+            ]
+          },
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3_real/S01/day/real2/layers/cloud.png"
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 1.1483253588516746,
+              "source_crop": [
+                0.0,
+                0.25,
+                1672.0,
+                940.75
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                1672,
+                941
+              ]
+            }
+          }
+        },
+        "tree_canopy": {
+          "path": "res://assets/generated_scenes/runtime/v3_real/S01/day/real2/layers/tree_canopy.png",
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            1672,
+            941
+          ],
+          "pivot_px": [
+            130,
+            148
+          ],
+          "z_index": 2,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude": 1.2,
+              "frequency": 0.2
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 1.1483253588516746,
+            "source_crop": [
+              0.0,
+              0.25,
+              1672.0,
+              940.75
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              1672,
+              941
+            ]
+          },
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3_real/S01/day/real2/layers/tree_canopy.png"
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 1.1483253588516746,
+              "source_crop": [
+                0.0,
+                0.25,
+                1672.0,
+                940.75
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                1672,
+                941
+              ]
+            }
+          }
+        },
+        "vine": {
+          "path": "res://assets/generated_scenes/runtime/v3_real/S01/day/real2/layers/vine.png",
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            1672,
+            941
+          ],
+          "pivot_px": [
+            768,
+            333
+          ],
+          "z_index": 3,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude": 1.2,
+              "frequency": 0.22
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 1.1483253588516746,
+            "source_crop": [
+              0.0,
+              0.25,
+              1672.0,
+              940.75
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              1672,
+              941
+            ]
+          },
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3_real/S01/day/real2/layers/vine.png"
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 1.1483253588516746,
+              "source_crop": [
+                0.0,
+                0.25,
+                1672.0,
+                940.75
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                1672,
+                941
+              ]
+            }
+          }
+        },
+        "hanging_sign": {
+          "path": "res://assets/generated_scenes/runtime/v3_real/S01/day/real2/layers/hanging_sign.png",
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            1672,
+            941
+          ],
+          "pivot_px": [
+            1118,
+            321
+          ],
+          "z_index": 4,
+          "motion": {
+            "type": "pendulum",
+            "parameters": {
+              "amplitude": 0.7,
+              "frequency": 0.35
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 1.1483253588516746,
+            "source_crop": [
+              0.0,
+              0.25,
+              1672.0,
+              940.75
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              1672,
+              941
+            ]
+          },
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3_real/S01/day/real2/layers/hanging_sign.png"
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 1.1483253588516746,
+              "source_crop": [
+                0.0,
+                0.25,
+                1672.0,
+                940.75
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                1672,
+                941
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "receipt_path": "assets/generated_scenes/v3_real/S01/day/real2/receipt.json"
+}

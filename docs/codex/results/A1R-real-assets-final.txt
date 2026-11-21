@@ -1,0 +1,5 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+
+
+SCENE ASSET ACCEPTANCE: 1649 checks, 0 failures; native sizes verified from source files, formal art approval remains separate
