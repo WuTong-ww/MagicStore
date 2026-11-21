@@ -1,0 +1,36 @@
+test_actual_dimensions_and_claimed_geometry_are_verified (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_bad_actual_sha_prevents_all_proposed_writes (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_checked_in_registry_lists_selected_sources_without_requiring_pending_files (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_compact_matched_alternate_uses_its_actual_prompt_and_mask_references (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_compact_proposal_keeps_detailed_work_outside_the_canonical_manifest (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_compact_registration_writes_independent_immutable_audit_and_never_reads_retired_style (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_completed_real_artifacts_keep_scene_and_layer_regen_queues_complete (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_descriptor_cannot_substitute_an_opaque_verified_background_for_a_layer (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_descriptor_geometry_cannot_override_the_verified_source_annotation (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_escaped_recipe_and_recomposition_fragments_are_rejected (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_generation_style_and_scene_identity_cannot_be_substituted (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_json_overrides_and_source_seat_use_common_cover_transform (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_manifest_replaces_duplicate_paths_and_separates_engineering_groups (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_output_collision_is_preflighted_before_the_other_file_is_written (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_outputs_cannot_overwrite_a_manifest_source (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_recomputed_pixel_qa_rejects_forged_recorded_success (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_registration_is_idempotent_and_never_changes_central_inputs (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_registry_requires_exactly_seventeen_unique_scene_period_states (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_row_descriptor_and_recipe_cannot_jointly_redirect_the_verified_fragment (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_s04_uses_four_state_backgrounds_and_state_specific_lamps (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_scene_regen_keeps_complete_C_prompt_and_schedules_its_all_object_cleanplate (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_source_join_allows_retained_successful_attempt_bytes_at_another_path (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_unrelated_generation_records_cannot_certify_processing_sources (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_unverified_descriptor_crop_cannot_move_the_runtime_pivot (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_validate_only_cli_checks_all_files_without_creating_outputs (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_variants_merge_nested_transforms_and_preserve_legacy_slot (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_compact_updates_canonical_paths_and_real_sizes_without_overwriting_inputs (test_import_scene_runtime.RuntimeImportTests) ... ok
+test_conflicting_runtime_bytes_are_refused_before_any_proposal_write (test_import_scene_runtime.RuntimeImportTests) ... ok
+test_forged_source_hash_or_dimensions_are_rejected (test_import_scene_runtime.RuntimeImportTests) ... ok
+test_legacy_keeps_old_manifest_fields_and_scene_map (test_import_scene_runtime.RuntimeImportTests) ... ok
+test_output_path_cannot_escape_or_alias_a_retained_input (test_import_scene_runtime.RuntimeImportTests) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 135.230s
+
+OK

@@ -1,0 +1,73 @@
+test_completed_http_response_releases_capacity_before_client_can_request_again (test_generated_gateway.GeneratedGatewayTests) ...
+
+======================================================================
+
+FAIL: test_completed_http_response_releases_capacity_before_client_can_request_again (test_generated_gateway.GeneratedGatewayTests) (path='/v1/dialogue', mode='online')
+
+----------------------------------------------------------------------
+
+Traceback (most recent call last):
+
+  File "D:\MagicStore\tests\people\test_generated_gateway.py", line 283, in test_completed_http_response_releases_capacity_before_client_can_request_again
+
+    self.assertTrue(acquired, "a completed response must not retain model capacity")
+
+AssertionError: False is not true : a completed response must not retain model capacity
+
+
+
+======================================================================
+
+FAIL: test_completed_http_response_releases_capacity_before_client_can_request_again (test_generated_gateway.GeneratedGatewayTests) (path='/v1/dialogue', mode='offline')
+
+----------------------------------------------------------------------
+
+Traceback (most recent call last):
+
+  File "D:\MagicStore\tests\people\test_generated_gateway.py", line 283, in test_completed_http_response_releases_capacity_before_client_can_request_again
+
+    self.assertTrue(acquired, "a completed response must not retain model capacity")
+
+AssertionError: False is not true : a completed response must not retain model capacity
+
+
+
+======================================================================
+
+FAIL: test_completed_http_response_releases_capacity_before_client_can_request_again (test_generated_gateway.GeneratedGatewayTests) (path='/v1/person-package', mode='online')
+
+----------------------------------------------------------------------
+
+Traceback (most recent call last):
+
+  File "D:\MagicStore\tests\people\test_generated_gateway.py", line 283, in test_completed_http_response_releases_capacity_before_client_can_request_again
+
+    self.assertTrue(acquired, "a completed response must not retain model capacity")
+
+AssertionError: False is not true : a completed response must not retain model capacity
+
+
+
+======================================================================
+
+FAIL: test_completed_http_response_releases_capacity_before_client_can_request_again (test_generated_gateway.GeneratedGatewayTests) (path='/v1/person-package', mode=None)
+
+----------------------------------------------------------------------
+
+Traceback (most recent call last):
+
+  File "D:\MagicStore\tests\people\test_generated_gateway.py", line 283, in test_completed_http_response_releases_capacity_before_client_can_request_again
+
+    self.assertTrue(acquired, "a completed response must not retain model capacity")
+
+AssertionError: False is not true : a completed response must not retain model capacity
+
+
+
+----------------------------------------------------------------------
+
+Ran 1 test in 2.054s
+
+
+
+FAILED (failures=4)

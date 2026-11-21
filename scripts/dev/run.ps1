@@ -10,6 +10,19 @@ function Invoke-Godot([string[]]$GodotArgs) {
     $output | ForEach-Object { Write-Host $_ }
     if ($code -ne 0 -or ($output -match 'SCRIPT ERROR:|ERROR:').Count -gt 0) { throw "Godot validation failed (exit $code)." }
 }
+function Test-OptionalLocalArt([string]$RelativeConfig) {
+    $metadata = Get-Content -LiteralPath (Join-Path $repo $RelativeConfig) -Raw -Encoding UTF8 | ConvertFrom-Json
+    if (!($metadata.PSObject.Properties.Name -contains 'local_audit_descriptor')) { return $true }
+    if (!($metadata.local_audit_descriptor -is [string])) { throw 'Local art audit descriptor must be a relative path.' }
+    $auditOutput = & python -B (Join-Path $repo 'tools/art/local_audit.py') --workspace $repo --descriptor $metadata.local_audit_descriptor
+    if ($LASTEXITCODE -ne 0) { throw 'Optional art audit metadata is corrupt; it cannot be treated as a skip.' }
+    $audit = ($auditOutput -join "`n") | ConvertFrom-Json
+    if ($audit.status -in @('retired', 'skipped')) {
+        Write-Host "SKIP LOCAL ART: $RelativeConfig / $($audit.code); no archived image acceptance claimed."
+        return $false
+    }
+    return $true
+}
 # Redirect only this process and its children; never change machine/user settings.
 # Godot still uses user://. Its Windows APPDATA parent is now on the project drive.
 $savedEnvironment = @{}
@@ -80,6 +93,13 @@ try {
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/people_restart.gd', '--', 'read')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/shop_ui.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/scene_visuals.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/aligned_scene_layers.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/scene_asset_acceptance.gd')
+        foreach ($localPreview in @('data/art/scene_preview.json', 'data/art/scene_review.json')) {
+            if (Test-OptionalLocalArt $localPreview) {
+                Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/scene_asset_acceptance.gd', '--', '--config', "res://$localPreview")
+            }
+        }
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/arrival_ui.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/consultation_layout.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/round2_shell.gd')
@@ -104,6 +124,22 @@ try {
         if ($LASTEXITCODE -ne 0) { throw 'Background person HTTP tests failed.' }
         & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot 'test-people.ps1')
         if ($LASTEXITCODE -ne 0) { throw 'People regression tests failed.' }
+        $artErrorPreference = $ErrorActionPreference
+        $ErrorActionPreference = 'Continue'
+        $artTestOutput = & python -m unittest discover -s (Join-Path $repo 'tests/art') -p 'test_*.py' -v 2>&1
+        $artTestCode = $LASTEXITCODE
+        $ErrorActionPreference = $artErrorPreference
+        $artTestOutput | ForEach-Object {
+            $line = [string]$_
+            if (![string]::IsNullOrWhiteSpace($line) -and $line -ne 'System.Management.Automation.RemoteException') { Write-Host $line }
+        }
+        if ($artTestCode -ne 0) { throw 'Art pipeline regression tests failed.' }
+        & python -B (Join-Path $repo 'tools/art/validate_formal_manifest.py') --workspace $repo
+        if ($LASTEXITCODE -ne 0) { throw 'Formal art manifest validation failed.' }
+        if (Test-OptionalLocalArt 'data/art/real_scene_registry.json') {
+            & python -B (Join-Path $repo 'tools/art/register_real_scenes.py') --validate-only
+            if ($LASTEXITCODE -ne 0) { throw 'Retained real scene data validation failed.' }
+        }
     } elseif ($Export) {
         $outDir = Join-Path $repo 'build/windows'
         New-Item -ItemType Directory -Force -Path $outDir | Out-Null

@@ -53,3 +53,16 @@ root已把Windows Compatibility当前17张原图中的六关键帧转质量85 JP
 |verified-1920x1080.jpg|通过：全窗场景|通过：返回/导航完整|通过：手记纸底|通过：验证与事实分控件|通过：此帧无新增架物叠图|
 
 四张G3 JPG已root逐张打开；它们如实保留“✕位于弹窗外、标题透出”的旧UI缺口，计入下一步A3R收尾，不能误写为本轮已修。任务JPG数A3R=6、G3=4；其余原图均本地保留。
+
+## 工具链集成终态
+
+- 基线已提交1878b6c。A1R工具48路径恢复后，compact清单68246B/92条资源/15条正式运行来源，196行逐层JSONL只在ignored本地。
+- 保留旧strict合成路径，新增compact队列、v3别名、独立runtime/registry提案；不会将旧round2_art再次写回中央。新提案geometry通过仍art_passed=false，必须由本轮实看评分决定。
+- 备选成功attempt的提示词/参考路径取错问题已通过RED→GREEN修复，31项registry/runtime专项通过；队列专项50/50，本地audit13/13、0skip。
+- 新完整第1轮在Windows PowerShell默认编码读取UTF8中文JSON处失败；明确UTF8后第2轮exit0：Godot7539/7539、gateway Python94/94、art Python117/117，总7750/7750，无错误/警告/单测skip。
+- 完整第2轮刻意临时移走ignored JSONL，三项旧实图审计明确SKIP_LOCAL_AUDIT_MISSING；生产资源、同位合成fixture、全部117工具测试无条件运行。finally恢复审计文件并验证SHA9d1a7b…c8a3a。没有把不存在的旧图片算通过。
+- 最终生产代码源码SHA冻结后重新图形验收1383/1383和718/718；逐图39行矩阵在results/CLEAN-visual-review.md。早期截图预热不作最终证据，旧视觉缺口如实留后续任务。
+
+自检：本地备份通过（69路径原字节/56个v2源SHA）；被拒目录新历史未追踪通过；不带旧18da祖先通过（新分支从e274开始）；资源清单<500KB通过；JPG质量85且A3R6/G3 4通过；完整必需测试7750/7750通过。最终体积/第二提交/远端hash待补记，之后才进入v3美术。
+
+最终第3轮：为防头像误用含No people的房间模板，增加独立portrait模板约束与一项语义回归，限定51/51通过。完整末轮exit0：Godot7527、gateway94、art118，总7739/7739，0错误/警告/单测skip；检查数随两个顾客集成样例分支变化，未删测试。三项退役实图只报缺本地JSONL的SKIP，生产实际资产与合成测试仍全部执行。旧预览单独验证正常退役SKIP0、损坏SHA严格exit1。最终结果以CLEAN-tools-test-summary.json为准。所有测试进程终态，56原v2源SHA再验无变化，接下来只做提交与上传。

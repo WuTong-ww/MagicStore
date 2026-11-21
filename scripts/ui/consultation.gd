@@ -127,7 +127,7 @@ func _ready() -> void:
 	# A1R may supply this layer; no synthetic opaque rectangle covers the guest.
 	var occlusion: CanvasItem = room_art.layer_nodes.get(layout_config.portrait_occlusion_layer)
 	if occlusion != null:
-		occlusion.z_index = guest_portrait.z_index + 1
+		_fit_portrait_occlusion(occlusion)
 
 	dialogue_panel = UI.panel()
 	dialogue_panel.name = "PaperConversation"
@@ -267,6 +267,12 @@ func _layout_consultation() -> void:
 	drawer_toggle.position = Vector2(drawer_panel.position.x - float(layout_config.drawer_bookmark_width), float(layout_config.top_inset))
 	drawer_toggle.size.x = float(layout_config.drawer_bookmark_width)
 
+func _fit_portrait_occlusion(occlusion: CanvasItem) -> void:
+	if room_art.config.scene_settings.version == 3:
+		guest_portrait.z_index = mini(int(layout_config.portrait_z),occlusion.z_index-1)
+	else:
+		occlusion.z_index = clampi(occlusion.z_index,guest_portrait.z_index+1,mini(int(layout_config.dialogue_z),int(layout_config.drawer_z))-1)
+
 func _layout_portrait() -> void:
 	# Short windows reserve more than a third for readable dialogue. A separate
 	# source-space pose keeps the guest's face above that paper without moving
@@ -275,6 +281,9 @@ func _layout_portrait() -> void:
 	var seat: Array = _default_seat
 	if size.y <= float(compact.height_limit):
 		seat = compact.narrow_rect if size.x <= float(compact.narrow_width_limit) else compact.rect
+		if room_art.config.get("scene_settings",{}).get("version",2) == 3:
+			var scene: Dictionary = room_art.config.scenes[room_art.scene_id]
+			seat = scene.get("seat_narrow_rect",seat) if size.x <= float(compact.narrow_width_limit) else scene.get("seat_compact_rect",seat)
 	for row: Dictionary in room_art.placed_nodes:
 		if row.node == guest_portrait:
 			row.rect = seat

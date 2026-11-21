@@ -1,0 +1,54 @@
+{
+  "shell": {
+    "expected_current_files": 17,
+    "same_rgba_pixels_as_previously_viewed": [],
+    "requires_new_view": [
+      "consultation-1280x720.png",
+      "consultation-1920x1080.png",
+      "consultation-2560x1080.png",
+      "consultation-800x600.png",
+      "consultation-active-1280x720.png",
+      "consultation-active-1920x1080.png",
+      "consultation-active-2560x1080.png",
+      "consultation-active-800x600.png",
+      "front-1280x720.png",
+      "front-1920x1080.png",
+      "front-2560x1080.png",
+      "front-800x600.png",
+      "inventory-1280x720.png",
+      "inventory-1920x1080.png",
+      "inventory-2560x1080.png",
+      "inventory-800x600.png",
+      "zero-guest-front.png"
+    ]
+  },
+  "shop": {
+    "expected_current_files": 22,
+    "same_rgba_pixels_as_previously_viewed": [
+      "catalog-icons-64px.png",
+      "consultation-1280.png",
+      "consultation-1920.png",
+      "exterior-1280.png",
+      "exterior-1920.png",
+      "front-1280.png",
+      "front-1920.png",
+      "gathering-1280.png",
+      "gathering-1920.png",
+      "inventory-1280.png",
+      "inventory-1920.png",
+      "market-1280.png",
+      "market-1920.png",
+      "market-after-trade-1920.png",
+      "network-1280.png",
+      "network-1920.png",
+      "people-1280.png",
+      "people-1920.png",
+      "workshop-1280.png",
+      "workshop-1920.png"
+    ],
+    "requires_new_view": [
+      "zero-guest-front-1280.png",
+      "zero-guest-front-1920.png"
+    ]
+  }
+}

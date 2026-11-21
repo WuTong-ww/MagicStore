@@ -297,6 +297,8 @@ func _build_inventory_grid(view: Dictionary) -> void:
 	inventory_grid.add_theme_constant_override("h_separation",int(settings.inventory_grid_gap))
 	inventory_grid.add_theme_constant_override("v_separation",int(settings.inventory_grid_gap))
 	scene_visual.add_child(inventory_grid)
+	if visuals.scene_settings.version == 3:
+		inventory_grid.z_index = scene_visual.interaction_z_index()
 	scene_visual.place(inventory_grid,settings.inventory_rect)
 	var slot: Dictionary = visuals.scenes[visuals.scene_pages[page]].layers.slot
 	for id: String in view.items:

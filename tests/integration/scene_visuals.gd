@@ -1,5 +1,6 @@
 extends SceneTree
 const UITeardown = preload("res://tests/ui_teardown.gd")
+const LegacyFixture = preload("res://tests/fixtures/scene_visual_config.gd")
 var checks := 0
 var failures := 0
 var captures := 0
@@ -22,25 +23,27 @@ func run() -> void:
 		return
 	var visual_script: Script = load("res://scripts/shop/scene_visual.gd")
 	check(visual_script.config_valid(parsed), "scene configuration validates")
+	var legacy := LegacyFixture.legacy(parsed)
+	check(visual_script.config_valid(legacy),"original v2 slice contract remains supported independently of the active art version")
 	for row: Array in [[539,"closed"],[540,"day"],[1079,"day"],[1080,"night"],[1320,"night"],[1321,"closed"],[1980,"day"]]:
 		check(visual_script.period(parsed,"S01",row[0]) == row[1], "exterior clock boundary " + str(row[0]))
 	check(visual_script.period(parsed,"S02",1321) == "night", "indoor scenes keep night lamps after closing")
-	var invalid := parsed.duplicate(true)
+	var invalid := legacy.duplicate(true)
 	invalid.scenes.S02.layers.letter.rect = [2500,1400,200,200]
 	check(not visual_script.config_valid(invalid), "out of bounds slice is rejected")
-	invalid = parsed.duplicate(true)
+	invalid = legacy.duplicate(true)
 	invalid.scene_settings.fade_seconds = -0.5
 	check(not visual_script.config_valid(invalid), "negative fade duration is rejected")
-	invalid = parsed.duplicate(true)
+	invalid = legacy.duplicate(true)
 	invalid.scenes.S02.layers.lamp_on.periods = ["unknown"]
 	check(not visual_script.config_valid(invalid),"unknown layer period is rejected")
-	invalid = parsed.duplicate(true)
+	invalid = legacy.duplicate(true)
 	invalid.scenes.S04.layers.erase("slot")
 	check(not visual_script.config_valid(invalid),"missing required storage cell is rejected")
-	invalid = parsed.duplicate(true)
+	invalid = legacy.duplicate(true)
 	invalid.scene_settings.inventory_columns = 0.5
 	check(not visual_script.config_valid(invalid),"fractional grid column count is rejected")
-	invalid = parsed.duplicate(true)
+	invalid = legacy.duplicate(true)
 	invalid.scenes.S04.layers.door_open.source_region = [-1,0,392,1261]
 	check(not visual_script.config_valid(invalid),"negative source texture crop coordinate is rejected")
 	var fitted: Rect2 = visual_script.fit_rect(Vector2(1000,400), Vector2(2560,1440))
@@ -49,7 +52,7 @@ func run() -> void:
 		var covered: Rect2 = visual_script.cover_rect(dimensions,Vector2(2560,1440))
 		check(covered.grow(1).encloses(Rect2(Vector2.ZERO,dimensions)) and is_equal_approx(covered.size.x/covered.size.y,2560.0/1440.0),"cover canvas fills window without stretching / "+str(dimensions))
 		check((covered.position-(dimensions-covered.size)*0.5).length() < 0.1,"cover canvas crops symmetrically / "+str(dimensions))
-	var door: Dictionary = parsed.scenes.S04.layers.door_open
+	var door: Dictionary = legacy.scenes.S04.layers.door_open
 	var cropped: Texture2D = visual_script.texture_for(door.path,door.source_region)
 	check(cropped is AtlasTexture and cropped.region == Rect2(410,2,392,1261),"door uses configured source PNG region through an AtlasTexture")
 	check(cropped != null and cropped.get_size() == Vector2(392,1261),"door cropped dimensions follow source pixels rather than the scene target rectangle")

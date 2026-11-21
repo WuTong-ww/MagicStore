@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "runtime_size": [1920, 1080],
+  "maximum_generation_attempts": 4,
+  "statuses": ["placeholder", "needs_builtin_generation", "generation_failed", "complete"],
+  "operations": ["generate", "extract_layer", "inpaint_cleanplate", "runtime_copy", "procedural_placeholder"],
+  "mask": {"feather_pixels": 1, "inpaint_dilation_pixels": 6, "hard_recovery_threshold": 128},
+  "qa": {"core_max_error": 0, "unedited_max_error": 0, "inpaint_ring_max_error": 0, "feather_mae": 3, "feather_p95": 12, "percentile": 0.95},
+  "generation": {
+    "tool": "image_gen.imagegen",
+    "target_size_prompt": "横向16:9，尽可能输出原生2560×1440或工具实际最大16:9尺寸；实际输出尺寸由导入时读取，不得冒称原生。",
+    "style_prompt": "风格参考图只用于笔触、配色和光线。禁止将任何文字、数字、UI或边框烘焙到图里。",
+    "inpaint_prompt": "只移除遮罩标出的物件并补出背后的墙面或天空；保持原画布尺寸、构图及遮罩外所有像素不变。附加的膨胀mask是需要局部补底的范围。",
+    "composite_prompt": "当前任务优先于后续单层或空底说明：制作包含全部指定可动层的原始完整合成C。整体更换为风格参考的笔触、配色和光线；以原始C保持构图、所有物件身份和位置，不画独立贴片。后续扣层只能从这个新C取像素。",
+    "all_cleanplate_prompt": "当前任务是从原始完整合成C移除所有所附mask覆盖的可动层，生成B_all。保留所有静态家具；不是重新绘制一个相似房间。",
+    "mask_prompt": "补底前以原硬mask外扩6px的目标遮罩为准；如果只有1px软mask，先按alpha>=128还原硬区域再外扩。遮罩外像素须保持，导入后逐ROI验证。",
+    "not_callable_message": "离线脚本不能调用会话内置imagegen。由Codex逐条执行任务队列、检查图像并把输出复制到工作区，再用ImportMap导入；没有使用API或付费CLI。"
+  }
+}

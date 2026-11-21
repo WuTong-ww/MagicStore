@@ -1,0 +1,13 @@
+test_completed_http_response_releases_capacity_before_client_can_request_again (test_generated_gateway.GeneratedGatewayTests) ... ok
+
+test_background_capacity_is_independent_of_front_dialogue_capacity (test_generated_gateway.GeneratedGatewayTests) ... ok
+
+
+
+----------------------------------------------------------------------
+
+Ran 2 tests in 2.593s
+
+
+
+OK

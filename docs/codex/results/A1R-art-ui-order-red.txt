@@ -1,0 +1,7 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+
+
+ALIGNED SCENE LAYERS FAIL: positive local art z stays below the main paper/chrome canvas
+
+ALIGNED SCENE LAYERS: 66 checks, 1 failures

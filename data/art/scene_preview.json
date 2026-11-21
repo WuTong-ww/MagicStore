@@ -1,0 +1,3100 @@
+{
+  "selected_version": 2,
+  "schema_version": 1,
+  "grid": 3,
+  "review": "2026-11-15: selected simplified atlas for readable 64px silhouettes; detailed candidate archived under .tools",
+  "items": {
+    "bookmark": {
+      "version": 2,
+      "cell": 8,
+      "source": "builtin-imagegen",
+      "asset": "res://assets/items/inventory-atlas-v2.png",
+      "item_id": "bookmark",
+      "reference": "res://assets/items/inventory-reference.png"
+    },
+    "silver_leaf": {
+      "version": 2,
+      "cell": 7,
+      "source": "builtin-imagegen",
+      "asset": "res://assets/items/inventory-atlas-v2.png",
+      "item_id": "silver_leaf",
+      "reference": "res://assets/items/inventory-reference.png"
+    },
+    "restorative_draught": {
+      "version": 2,
+      "cell": 0,
+      "source": "builtin-imagegen",
+      "asset": "res://assets/items/inventory-atlas-v2.png",
+      "item_id": "restorative_draught",
+      "reference": "res://assets/items/inventory-reference.png"
+    },
+    "clarity_crystal": {
+      "version": 2,
+      "cell": 1,
+      "source": "builtin-imagegen",
+      "asset": "res://assets/items/inventory-atlas-v2.png",
+      "item_id": "clarity_crystal",
+      "reference": "res://assets/items/inventory-reference.png"
+    },
+    "spring_water": {
+      "version": 2,
+      "cell": 6,
+      "source": "builtin-imagegen",
+      "asset": "res://assets/items/inventory-atlas-v2.png",
+      "item_id": "spring_water",
+      "reference": "res://assets/items/inventory-reference.png"
+    },
+    "moon_dust": {
+      "version": 2,
+      "cell": 5,
+      "source": "builtin-imagegen",
+      "asset": "res://assets/items/inventory-atlas-v2.png",
+      "item_id": "moon_dust",
+      "reference": "res://assets/items/inventory-reference.png"
+    },
+    "quartz": {
+      "version": 2,
+      "cell": 4,
+      "source": "builtin-imagegen",
+      "asset": "res://assets/items/inventory-atlas-v2.png",
+      "item_id": "quartz",
+      "reference": "res://assets/items/inventory-reference.png"
+    },
+    "calming_incense": {
+      "version": 2,
+      "cell": 2,
+      "source": "builtin-imagegen",
+      "asset": "res://assets/items/inventory-atlas-v2.png",
+      "item_id": "calming_incense",
+      "reference": "res://assets/items/inventory-reference.png"
+    },
+    "lavender": {
+      "version": 2,
+      "cell": 3,
+      "source": "builtin-imagegen",
+      "asset": "res://assets/items/inventory-atlas-v2.png",
+      "item_id": "lavender",
+      "reference": "res://assets/items/inventory-reference.png"
+    }
+  },
+  "original_sources": [
+    "res://assets/items/inventory-reference.svg"
+  ],
+  "sha256": "E897D3B34F080B22F600DC181F14AA3CC081206EA1696CDFCD0FB2B8E4BCF345",
+  "original_authorship": "Project-authored SVG samples, replaceable by final art-team assets.",
+  "prompt": "Extend the attached original SVG sample strip into a transparent square 3x3 inventory atlas. Match bold silhouettes, matte midnight teal fills, pale brass outlines, turquoise potion and lavender crystal. Row1 potion, crystal, incense. Row2 evening primrose herb, quartz grains, amber resin. Row3 spring water vial, silver leaf clasp, paper bookmark. Equal cells, generous margins, no text, no grid lines, readable at 64px.",
+  "review_status": "Selected simplified v2 after visual inspection at 64px; detailed first candidate retained in .tools/art-candidates.",
+  "scene_settings": {
+    "version": 3,
+    "canvas": [
+      2560,
+      1440
+    ],
+    "day_minute": 540,
+    "night_minute": 1080,
+    "closing_minute": 1320,
+    "minutes_per_day": 1440,
+    "fade_seconds": 0.6,
+    "side_ratio": 0.3,
+    "side_minimum_width": 440,
+    "art_minimum_height": 240,
+    "inventory_columns": 3,
+    "inventory_rect": [
+      320,
+      250,
+      1300,
+      790
+    ],
+    "inventory_cell_minimum": [
+      0,
+      160
+    ],
+    "inventory_icon_size": [
+      64,
+      64
+    ],
+    "inventory_name_size": 18,
+    "inventory_quantity_size": 18,
+    "inventory_grid_gap": 10,
+    "hotspot_font_size": 18,
+    "hotspot_alpha": 0.84,
+    "cabinet_open_label": "合上储物柜",
+    "cabinet_closed_label": "打开储物柜",
+    "quantity_format": "数量 %d",
+    "inventory_names": {
+      "bookmark": "纸纹书签",
+      "silver_leaf": "银叶书夹"
+    },
+    "inventory_icon_end": 0.55,
+    "inventory_detail_gap": 4,
+    "inventory_rows": 3,
+    "art_root_z": -2048,
+    "layer_z_bounds": [
+      -1024,
+      1024
+    ]
+  },
+  "scene_pages": {
+    "exterior": "S01",
+    "front": "S02",
+    "consultation": "S03",
+    "inventory": "S04",
+    "workshop": "S05",
+    "market": "S06",
+    "gathering": "S07"
+  },
+  "scenes": {
+    "S01": {
+      "day": "res://assets/generated_scenes/runtime/v3/S01_day.png",
+      "night": "res://assets/generated_scenes/runtime/v3/S01_night.png",
+      "layers": {
+        "tree_canopy": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S01_day_tree_canopy.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S01_day_tree_canopy.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S01_night_tree_canopy.png",
+            "closed": "res://assets/generated_scenes/runtime/v3/layers/S01_closed_tree_canopy.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            340,
+            520
+          ],
+          "z_index": 1,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude_px": 8,
+              "frequency_hz": 0.22
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "closed": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        },
+        "vine": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S01_day_vine.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S01_day_vine.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S01_night_vine.png",
+            "closed": "res://assets/generated_scenes/runtime/v3/layers/S01_closed_vine.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            900,
+            410
+          ],
+          "z_index": 2,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude_px": 8,
+              "frequency_hz": 0.22
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "closed": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        },
+        "hanging_sign": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S01_day_hanging_sign.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S01_day_hanging_sign.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S01_night_hanging_sign.png",
+            "closed": "res://assets/generated_scenes/runtime/v3/layers/S01_closed_hanging_sign.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            1515,
+            430
+          ],
+          "z_index": 3,
+          "motion": {
+            "type": "pendulum",
+            "parameters": {
+              "amplitude_px": 6,
+              "frequency_hz": 0.28,
+              "max_degrees": 1.5,
+              "damping": 3.5,
+              "stiffness": 8.0
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "closed": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        },
+        "cloud": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S01_day_cloud.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S01_day_cloud.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S01_night_cloud.png",
+            "closed": "res://assets/generated_scenes/runtime/v3/layers/S01_closed_cloud.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            1250,
+            150
+          ],
+          "z_index": 0,
+          "motion": {
+            "type": "flow",
+            "parameters": {
+              "speed_px_s": 4,
+              "distortion_px": 3
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "closed": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        }
+      },
+      "hotspots": {},
+      "closed": "res://assets/generated_scenes/runtime/v3/S01_closed.png",
+      "safe_rect": [
+        320,
+        180,
+        1920,
+        1080
+      ],
+      "layer_format": "aligned_full_canvas"
+    },
+    "S02": {
+      "day": "res://assets/generated_scenes/runtime/v3/S02_day.png",
+      "night": "res://assets/generated_scenes/runtime/v3/S02_night.png",
+      "layers": {
+        "outside_leaves": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S02_day_outside_leaves.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S02_day_outside_leaves.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S02_night_outside_leaves.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            310,
+            340
+          ],
+          "z_index": 0,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude_px": 8,
+              "frequency_hz": 0.22
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        },
+        "inside_leaves": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S02_day_inside_leaves.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S02_day_inside_leaves.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S02_night_inside_leaves.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            623,
+            650
+          ],
+          "z_index": 1,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude_px": 8,
+              "frequency_hz": 0.22
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        },
+        "window_vine": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S02_day_window_vine.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S02_day_window_vine.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S02_night_window_vine.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            620,
+            278
+          ],
+          "z_index": 2,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude_px": 8,
+              "frequency_hz": 0.22
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        },
+        "dried_flowers": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S02_day_dried_flowers.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S02_day_dried_flowers.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S02_night_dried_flowers.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            908,
+            125
+          ],
+          "z_index": 3,
+          "motion": {
+            "type": "pendulum",
+            "parameters": {
+              "amplitude_px": 6,
+              "frequency_hz": 0.28,
+              "max_degrees": 1.5,
+              "damping": 3.5,
+              "stiffness": 8.0
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        },
+        "wind_chime": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S02_day_wind_chime.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S02_day_wind_chime.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S02_night_wind_chime.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            1120,
+            274
+          ],
+          "z_index": 4,
+          "motion": {
+            "type": "pendulum",
+            "parameters": {
+              "amplitude_px": 6,
+              "frequency_hz": 0.28,
+              "max_degrees": 1.5,
+              "damping": 3.5,
+              "stiffness": 8.0
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        },
+        "curtain_left": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S02_day_curtain_left.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S02_day_curtain_left.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S02_night_curtain_left.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            1320,
+            240
+          ],
+          "z_index": 5,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude_px": 8,
+              "frequency_hz": 0.22
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        },
+        "curtain_right": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S02_day_curtain_right.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S02_day_curtain_right.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S02_night_curtain_right.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            1545,
+            240
+          ],
+          "z_index": 6,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude_px": 8,
+              "frequency_hz": 0.22
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        },
+        "incense_burner": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S02_day_incense_burner.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S02_day_incense_burner.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S02_night_incense_burner.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            1135,
+            1043
+          ],
+          "z_index": 7,
+          "motion": {
+            "type": "static",
+            "parameters": {}
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        },
+        "incense_smoke": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S02_day_incense_smoke.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S02_day_incense_smoke.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S02_night_incense_smoke.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            1135,
+            979
+          ],
+          "z_index": 8,
+          "motion": {
+            "type": "flow",
+            "parameters": {
+              "speed_px_s": 4,
+              "distortion_px": 3
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        }
+      },
+      "hotspots": {
+        "exterior": {
+          "label": "店外",
+          "target": "exterior",
+          "rect": [
+            320,
+            400,
+            280,
+            250
+          ],
+          "label_position": [
+            460.0,
+            525.0
+          ]
+        },
+        "market": {
+          "label": "原料商店",
+          "target": "market",
+          "rect": [
+            420,
+            250,
+            460,
+            250
+          ],
+          "label_position": [
+            650.0,
+            375.0
+          ]
+        },
+        "inventory": {
+          "label": "储物柜",
+          "target": "inventory",
+          "rect": [
+            570,
+            680,
+            460,
+            250
+          ],
+          "label_position": [
+            800.0,
+            805.0
+          ]
+        },
+        "consultation": {
+          "label": "咨询区",
+          "target": "consultation",
+          "rect": [
+            1200,
+            420,
+            520,
+            250
+          ],
+          "label_position": [
+            1460.0,
+            545.0
+          ]
+        },
+        "workshop": {
+          "label": "工坊",
+          "target": "workshop",
+          "rect": [
+            1780,
+            520,
+            460,
+            250
+          ],
+          "label_position": [
+            2010.0,
+            645.0
+          ]
+        },
+        "letter": {
+          "label": "来客信件",
+          "target": "people",
+          "rect": [
+            670,
+            1010,
+            460,
+            250
+          ],
+          "label_position": [
+            900.0,
+            1135.0
+          ]
+        }
+      },
+      "safe_rect": [
+        320,
+        180,
+        1920,
+        1080
+      ],
+      "layer_format": "aligned_full_canvas"
+    },
+    "S03": {
+      "day": "res://assets/generated_scenes/runtime/v3/S03_day.png",
+      "night": "res://assets/generated_scenes/runtime/v3/S03_night.png",
+      "layers": {
+        "lamp": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S03_day_lamp.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S03_day_lamp.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S03_night_lamp.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            728,
+            80
+          ],
+          "z_index": 0,
+          "motion": {
+            "type": "pendulum",
+            "parameters": {
+              "amplitude_px": 6,
+              "frequency_hz": 0.28,
+              "max_degrees": 1.5,
+              "damping": 3.5,
+              "stiffness": 8.0
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        },
+        "curtain": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S03_day_curtain.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S03_day_curtain.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S03_night_curtain.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            365,
+            280
+          ],
+          "z_index": 1,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude_px": 8,
+              "frequency_hz": 0.22
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        },
+        "teacup": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S03_day_teacup.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S03_day_teacup.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S03_night_teacup.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            568,
+            1071
+          ],
+          "z_index": 2,
+          "motion": {
+            "type": "static",
+            "parameters": {}
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        },
+        "tea_steam": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S03_day_tea_steam.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S03_day_tea_steam.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S03_night_tea_steam.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            563,
+            990
+          ],
+          "z_index": 3,
+          "motion": {
+            "type": "flow",
+            "parameters": {
+              "speed_px_s": 4,
+              "distortion_px": 3
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        },
+        "sofa_mask": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S03_day_sofa_mask.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S03_day_sofa_mask.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S03_night_sofa_mask.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            1200,
+            1115
+          ],
+          "z_index": 15,
+          "motion": {
+            "type": "static",
+            "parameters": {}
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        }
+      },
+      "hotspots": {},
+      "safe_rect": [
+        320,
+        180,
+        1920,
+        1080
+      ],
+      "seat_rect": [
+        950,
+        410,
+        490,
+        700
+      ],
+      "seat_scale": 1.0,
+      "layer_format": "aligned_full_canvas"
+    },
+    "S04": {
+      "day": "res://assets/generated_scenes/runtime/v3/S04_day.png",
+      "night": "res://assets/generated_scenes/runtime/v3/S04_night.png",
+      "layers": {
+        "door_open": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S04_day_door_open.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S04_day_door_open.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S04_night_door_open.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            297,
+            730
+          ],
+          "z_index": 1,
+          "motion": {
+            "type": "static",
+            "parameters": {}
+          },
+          "state": "open",
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        },
+        "door_closed": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S04_day_door_closed.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S04_day_door_closed.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S04_night_door_closed.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            350,
+            700
+          ],
+          "z_index": 1,
+          "motion": {
+            "type": "static",
+            "parameters": {}
+          },
+          "state": "closed",
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        },
+        "lamp": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S04_day_lamp.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S04_day_lamp.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S04_night_lamp.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            1110,
+            40
+          ],
+          "z_index": 0,
+          "motion": {
+            "type": "pendulum",
+            "parameters": {
+              "amplitude_px": 6,
+              "frequency_hz": 0.28,
+              "max_degrees": 1.5,
+              "damping": 3.5,
+              "stiffness": 8.0
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        },
+        "slot": {
+          "path": "res://assets/generated_scenes/v2/slices/S04_slot.png",
+          "rect": [
+            0,
+            0,
+            380,
+            300
+          ],
+          "hotspot": [
+            0,
+            0,
+            380,
+            300
+          ],
+          "display": "cell",
+          "source_region": [
+            29,
+            105,
+            1478,
+            824
+          ],
+          "legacy": true
+        }
+      },
+      "hotspots": {
+        "cabinet": {
+          "label": "储物柜",
+          "target": "cabinet",
+          "rect": [
+            320,
+            180,
+            1380,
+            70
+          ],
+          "display": "transparent",
+          "label_position": [
+            1010.0,
+            215.0
+          ]
+        }
+      },
+      "safe_rect": [
+        320,
+        180,
+        1920,
+        1080
+      ],
+      "layer_format": "aligned_full_canvas"
+    },
+    "S05": {
+      "day": "res://assets/generated_scenes/runtime/v3/S05_day.png",
+      "night": "res://assets/generated_scenes/runtime/v3/S05_night.png",
+      "layers": {
+        "dried_grass": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S05_day_dried_grass.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S05_day_dried_grass.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S05_night_dried_grass.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            470,
+            170
+          ],
+          "z_index": 0,
+          "motion": {
+            "type": "pendulum",
+            "parameters": {
+              "amplitude_px": 6,
+              "frequency_hz": 0.28,
+              "max_degrees": 1.5,
+              "damping": 3.5,
+              "stiffness": 8.0
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        },
+        "steam": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S05_day_steam.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S05_day_steam.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S05_night_steam.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            850,
+            711
+          ],
+          "z_index": 1,
+          "motion": {
+            "type": "flow",
+            "parameters": {
+              "speed_px_s": 4,
+              "distortion_px": 3
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        }
+      },
+      "hotspots": {},
+      "safe_rect": [
+        320,
+        180,
+        1920,
+        1080
+      ],
+      "layer_format": "aligned_full_canvas"
+    },
+    "S06": {
+      "day": "res://assets/generated_scenes/runtime/v3/S06_day.png",
+      "night": "res://assets/generated_scenes/runtime/v3/S06_night.png",
+      "layers": {
+        "street_leaves": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S06_day_street_leaves.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S06_day_street_leaves.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S06_night_street_leaves.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            750,
+            400
+          ],
+          "z_index": 0,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude_px": 8,
+              "frequency_hz": 0.22
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        },
+        "cloth_curtain": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S06_day_cloth_curtain.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S06_day_cloth_curtain.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S06_night_cloth_curtain.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            1190,
+            245
+          ],
+          "z_index": 1,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude_px": 8,
+              "frequency_hz": 0.22
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        }
+      },
+      "hotspots": {},
+      "safe_rect": [
+        320,
+        180,
+        1920,
+        1080
+      ],
+      "layer_format": "aligned_full_canvas"
+    },
+    "S07": {
+      "day": "res://assets/generated_scenes/runtime/v3/S07_day.png",
+      "night": "res://assets/generated_scenes/runtime/v3/S07_night.png",
+      "layers": {
+        "grass": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S07_day_grass.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S07_day_grass.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S07_night_grass.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            450,
+            1203
+          ],
+          "z_index": 2,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude_px": 8,
+              "frequency_hz": 0.22
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        },
+        "tree_canopy": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S07_day_tree_canopy.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S07_day_tree_canopy.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S07_night_tree_canopy.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            246,
+            510
+          ],
+          "z_index": 1,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude_px": 8,
+              "frequency_hz": 0.22
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        },
+        "water_mask": {
+          "path": "res://assets/generated_scenes/runtime/v3/layers/S07_day_water_mask.png",
+          "variants": {
+            "day": "res://assets/generated_scenes/runtime/v3/layers/S07_day_water_mask.png",
+            "night": "res://assets/generated_scenes/runtime/v3/layers/S07_night_water_mask.png"
+          },
+          "rect": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "hotspot": [
+            0,
+            0,
+            2560,
+            1440
+          ],
+          "native_size": [
+            2560,
+            1440
+          ],
+          "pivot_px": [
+            1430,
+            1000
+          ],
+          "z_index": 0,
+          "motion": {
+            "type": "flow",
+            "parameters": {
+              "speed_px_s": 4,
+              "distortion_px": 3
+            }
+          },
+          "source_transform": {
+            "method": "equal_aspect_cover",
+            "filter": "Lanczos",
+            "scale": 0.75,
+            "source_crop": [
+              0.0,
+              0.0,
+              2560.0,
+              1440.0
+            ],
+            "runtime_size": [
+              1920,
+              1080
+            ],
+            "native_size": [
+              2560,
+              1440
+            ]
+          },
+          "variant_transforms": {
+            "day": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            },
+            "night": {
+              "method": "equal_aspect_cover",
+              "filter": "Lanczos",
+              "scale": 0.75,
+              "source_crop": [
+                0.0,
+                0.0,
+                2560.0,
+                1440.0
+              ],
+              "runtime_size": [
+                1920,
+                1080
+              ],
+              "native_size": [
+                2560,
+                1440
+              ]
+            }
+          }
+        }
+      },
+      "hotspots": {},
+      "safe_rect": [
+        320,
+        180,
+        1920,
+        1080
+      ],
+      "layer_format": "aligned_full_canvas"
+    }
+  },
+  "preview_only": true,
+  "art_passed": false,
+  "art_status": "procedural_placeholder",
+  "source_receipt": "assets/_incoming/a1r_placeholders/receipt.json",
+  "local_audit_descriptor": "data/art/local_audit.json"
+}

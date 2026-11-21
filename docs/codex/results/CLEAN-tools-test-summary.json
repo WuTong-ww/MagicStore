@@ -1,0 +1,14 @@
+{
+  "exit_code": 0,
+  "godot": 7527,
+  "python_gateway": 94,
+  "python_art": 118,
+  "total_passed": 7739,
+  "total_required": 7739,
+  "optional_local_art_not_run": [
+    "SKIP LOCAL ART: data/art/scene_preview.json / SKIP_LOCAL_AUDIT_MISSING; no archived image acceptance claimed.",
+    "SKIP LOCAL ART: data/art/scene_review.json / SKIP_LOCAL_AUDIT_MISSING; no archived image acceptance claimed.",
+    "SKIP LOCAL ART: data/art/real_scene_registry.json / SKIP_LOCAL_AUDIT_MISSING; no archived image acceptance claimed."
+  ],
+  "local_audit_restored_sha256": "9d1a7b8055c97b692fae8bbac9f1e6f4afa5d359ae3e2a0dbb20964b3b5c8a3a"
+}

@@ -1,0 +1,7 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+OpenGL API 3.3.0 - Build 31.0.101.4502 - Compatibility - Using Device: Intel - Intel(R) Iris(R) Xe Graphics
+
+
+
+C UI RESULT: 718 checks, 0 failures, 23 graphical captures; renderer=Windows

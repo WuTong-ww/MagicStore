@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "kind": "local_art_audit",
+  "path": "docs/codex/results/art_audit/round2-v2-rejected.jsonl",
+  "sha256": "9d1a7b8055c97b692fae8bbac9f1e6f4afa5d359ae3e2a0dbb20964b3b5c8a3a",
+  "source_commit": "18da84a23b287fbb7be506b50e3778b727850f3a",
+  "optional": true,
+  "status": "retired",
+  "reason": "策划否决：太冷清"
+}

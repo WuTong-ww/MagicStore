@@ -45,3 +45,26 @@ size-garbage: 15.24 MiB
 ```
 
 This is the pre-commit staged snapshot; the small text report files themselves are added afterwards. Binary totals are exact and unchanged by those text-only additions.
+
+
+## CLEAN final staged snapshot
+
+- Required tests: 7739/7739, exit 0; three optional retired image audits explicitly skipped when local JSONL is absent. No artwork approval implied.
+- Graphic checks: round2_shell 1383/1383 (17 frames); shop_ui 718/718 (22 current frames). Root review: 39-row matrix in results/CLEAN-visual-review.md.
+- Preserved v2 originals: all 56 SHA256 unchanged.
+- New unique blob bytes: 83714531; new binary bytes: 81098416 (<150000000); this pending toolchain commit adds 0 binary bytes.
+- Manifest: 68246 bytes (<500000). Forbidden index/history paths: 0. Screenshots: A3R 6 JPG, G3 4 JPG, quality 85.
+- Measurement: staged snapshot before adding these small text reports; binary totals remain exact.
+
+`	ext
+count: 4662
+size: 159.76 MiB
+in-pack: 4064
+packs: 2
+size-pack: 1.12 GiB
+prune-packable: 2053
+garbage: 3
+size-garbage: 15.24 MiB
+`
+
+Local storage above includes old backups, not upload volume. Final size evidence: results/CLEAN-tools-size.json. Clean push is the next action; old remote round2 and main stay unchanged.

@@ -1,0 +1,22 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "894D2F2B13F60077C113AA33B58B46A5A882197E99971AA218FB9AAFFF8D2BE9",
+    "Path": "D:\\MagicStore\\scripts\\shop\\scene_visual.gd"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "64AB13A4B3A014367ABB0181CC98BA3C26139518FDF51C4F61CEED3855C0D1A3",
+    "Path": "D:\\MagicStore\\scripts\\ui\\consultation.gd"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "8780CF39429E70A30DDEB835FCE8BEBCC8FAADBFB1F17A002494615A81C28CC6",
+    "Path": "D:\\MagicStore\\scripts\\ui\\main.gd"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "656C220BFF5CC4135872582975033570CD6707EA0CA88699FCDA5EF36EBDD412",
+    "Path": "D:\\MagicStore\\tests\\integration\\round2_shell.gd"
+  }
+]

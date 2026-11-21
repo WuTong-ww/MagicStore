@@ -27,3 +27,11 @@ A2R v3、A7、A6、A4、G2、G4、G5、G6｜待执行｜—｜依用户新顺序
 所有后续素材以用户v3新提示词为准；候选/中间不提交，只有通过自评的定稿与运行副本可进入新分支。详细审计JSONL仅本地；每任务最多6张JPG，原图放.tools。最终REVIEW_PACKET追加v3改向，并在待确认提醒策划手动删除远端codex/round2释放空间。
 
 **BASE最新终态**：session14193已exit0，Godot7246/7246（62计数组）+Python94/94=7340/7340，0错误/警告。文本证据results/CLEAN-base-full-tests.txt。当前仅待图形逐图报告和体积检查后首个干净提交；A1R工具链还未正式恢复。原进度/上传/审阅全文已保存在history/round2-v2-*，避免旧结论冒充v3当前结果。
+
+**CLEAN最新终态（覆盖以上过程）**：首个干净提交1878b6c已建立，保留A3R/G3共享基线，全套7340/7340，新增二进制81,098,416B。A1R工具链48路径已恢复并完成compact双格式适配、local_audit模块和可选旧资源门控；正式manifest68,246B/92条，详细196行JSONL只本地。TOOLS第1轮定位Windows PowerShell按默认编码读UTF8中文JSON失败，已明确UTF8；第2轮session37634已exit0，Godot7539+Python94+美术117=7750/7750，0错误/警告/单测skip；模拟缺本地JSONL时三项退役实图审计明确SKIP，不算视觉通过，finally已恢复审计SHA9d1a7b…c8a3a。证据results/CLEAN-tools-*.txt/json。
+
+当前全部root/图形会话终态，代码已冻结。最新实际图形：root73083 round2_shell1383/1383、17PNG；agent10547 shop_ui718/718、23写入/22当前PNG。此前预热不作最终证据。root已看全部17壳图（六关键JPG与此前已看者字节一致）及shop两个变动零客帧；其余20个shop PNG与前轮root逐张审过的正式v2截图SHA完全一致。底层目录另11张a1旧PNG是旧工具残留，不计本轮22。图形原图仅.tools，docs仅6A3R+4G3 JPG。
+
+下一步只剩完善39图矩阵/体积终核→第二干净工具链提交→推送codex/round2-clean（尚未推送）。然后第2步复制.tools/clean-rebuild/style_v3.md.draft至docs/art/style_v3.md并更新HANDBOOK取代说明，做A3R收尾。A3R短计划在.tools/clean-rebuild/A3R-tail-plan.md。不要重复历史回放、不要再生成旧绘本图、不要丢失ignored A2R工具备份。所有v3图尚未生成。
+
+**最终第3轮终态**：TOOLS session93327已exit0并关闭，不再poll。头像模板已单独采用templates.portrait，缺它不能使用带No people的场景模板。当前完整结果Godot7527/7527+Python94/94+art118/118=7739/7739，0错误/警告/单测skip；三个旧本地实图检查按缺审计规则明确跳过，finally恢复JSONL。与第2轮相比Godot检查数差12来自GENERATED PEOPLE INTEGRATION 150→143、OPENING GUEST INTEGRATION 1209→1204的实际样例分支，测试未削减。正式结果已覆盖results/CLEAN-tools-full-tests.txt和summary JSON。旧预览入口又经独立smoke验证：正常retired退出0明确SKIP，故意损坏SHA fixture退出1不能伪装跳过。39图矩阵已完成，原始v2 56文件再验SHA仍完全一致。下一动作：暂存第二工具链组、重算体积并提交，再推送clean；不再改生产代码或扩查。

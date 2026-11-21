@@ -1,0 +1,3408 @@
+{
+  "version": 1,
+  "kind": "procedural_placeholder",
+  "canvas": [
+    2560,
+    1440
+  ],
+  "output_dir": "assets/_incoming/a1r_placeholders",
+  "pilot_dir": "assets/_incoming/a1r_pilot",
+  "runtime_dir": "assets/generated_scenes/runtime/v3",
+  "seed": 73129,
+  "palette": {
+    "cream": "#F3E9D6",
+    "warm_grey": "#AAA49B",
+    "walnut": "#765444",
+    "sage": "#8A987A",
+    "teal": "#607F80",
+    "plum": "#96818E",
+    "ochre": "#BD9F66"
+  },
+  "style": "gouache picture-book illustration, visible brush strokes and dry-brush edges, slightly wobbly hand-drawn colored-pencil outlines, simplified shapes, slightly imperfect perspective, limited palette of seven muted colors (cream, warm grey, walnut brown, sage green, dusty teal, faded plum, ochre), soft diffuse daylight, cool-tinted shadows, generous empty wall and floor space, only a few props, one clear focal point, calm and quiet, matte paper texture, no text, no people",
+  "negative": "glow, bloom, light rays, god rays, lens flare, bokeh, depth of field blur, gold filigree, ornate carvings, glossy or plastic surfaces, hyper-detailed clutter, photorealism, symmetrical fantasy composition, wisteria everywhere, text, letters, UI, labels",
+  "placeholder_notice": "明确的代码绘本工程占位；内置生图连续四次连接失败后按授权生成。不是AI生图、不是正式三候选、无正式评分、未做艺术定稿或真实局部重绘。仅验证同位几何与资源接入。",
+  "qa_kind": "geometry_only",
+  "render": {
+    "outline_color": "walnut",
+    "outline_width": 4,
+    "outline_jitter_px": 1.2,
+    "outline_step_px": 28,
+    "feather_px": 1,
+    "paper_grid": [
+      320,
+      180
+    ],
+    "paper_amplitude": 2,
+    "paper_opacity": 0.55,
+    "night_mix_color": "teal",
+    "night_mix": 0.26,
+    "closed_mix": 0.44,
+    "light_surface_color": "ochre",
+    "paper_seed_offset": 1000
+  },
+  "pilot_variants": [
+    {
+      "id": "engineering_1",
+      "scene": "S02",
+      "period": "day",
+      "seed_offset": 0,
+      "offset_px": [
+        -14,
+        0
+      ]
+    },
+    {
+      "id": "engineering_2",
+      "scene": "S02",
+      "period": "day",
+      "seed_offset": 17,
+      "offset_px": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "engineering_3",
+      "scene": "S02",
+      "period": "day",
+      "seed_offset": 31,
+      "offset_px": [
+        14,
+        -5
+      ]
+    }
+  ],
+  "scenes": {
+    "S01": {
+      "subject": "街道对面略有透视的两层石木小店，弧窗与门为焦点，一处紫藤，右侧朴素街墙；吊牌是无字新月剪影而不是空白牌匾。",
+      "periods": [
+        "day",
+        "night",
+        "closed"
+      ],
+      "background": "teal",
+      "static": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              1040
+            ],
+            [
+              2560,
+              1048
+            ],
+            [
+              2560,
+              1440
+            ],
+            [
+              0,
+              1440
+            ]
+          ],
+          "fill": "warm_grey",
+          "outline_width": 0
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              350,
+              290
+            ],
+            [
+              1460,
+              320
+            ],
+            [
+              1460,
+              1100
+            ],
+            [
+              350,
+              1085
+            ]
+          ],
+          "fill": "cream"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              270,
+              310
+            ],
+            [
+              830,
+              130
+            ],
+            [
+              1530,
+              325
+            ]
+          ],
+          "fill": "walnut"
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            1020,
+            560,
+            1335,
+            1090
+          ],
+          "fill": "walnut"
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            1050,
+            590,
+            1305,
+            1085
+          ],
+          "fill": "sage"
+        },
+        {
+          "type": "ellipse",
+          "box": [
+            450,
+            510,
+            890,
+            940
+          ],
+          "fill": "teal"
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            450,
+            715,
+            890,
+            950
+          ],
+          "fill": "teal"
+        },
+        {
+          "type": "line",
+          "points": [
+            [
+              670,
+              515
+            ],
+            [
+              670,
+              950
+            ]
+          ],
+          "fill": "walnut",
+          "width": 11
+        },
+        {
+          "type": "line",
+          "points": [
+            [
+              455,
+              715
+            ],
+            [
+              885,
+              715
+            ]
+          ],
+          "fill": "walnut",
+          "width": 11
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            410,
+            420,
+            1390,
+            439
+          ],
+          "fill": "walnut"
+        },
+        {
+          "type": "ellipse",
+          "box": [
+            380,
+            1000,
+            520,
+            1095
+          ],
+          "fill": "sage"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              400,
+              1080
+            ],
+            [
+              500,
+              1080
+            ],
+            [
+              488,
+              1175
+            ],
+            [
+              414,
+              1175
+            ]
+          ],
+          "fill": "walnut"
+        },
+        {
+          "type": "line",
+          "points": [
+            [
+              0,
+              1210
+            ],
+            [
+              1760,
+              1190
+            ]
+          ],
+          "fill": "teal",
+          "width": 3
+        }
+      ],
+      "layers": [
+        {
+          "id": "tree_canopy",
+          "shapes": [
+            {
+              "type": "ellipse",
+              "box": [
+                116.0,
+                289.2,
+                300.0,
+                406.0
+              ],
+              "fill": "sage"
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                228.0,
+                246.0,
+                404.0,
+                388.4
+              ],
+              "fill": "sage"
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                188.0,
+                334.0,
+                364.0,
+                454.0
+              ],
+              "fill": "sage"
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                102.0,
+                414.4,
+                240.0,
+                502.0
+              ],
+              "fill": "sage"
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                186.0,
+                382.0,
+                318.0,
+                488.8
+              ],
+              "fill": "sage"
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                156.0,
+                448.0,
+                288.0,
+                538.0
+              ],
+              "fill": "sage"
+            }
+          ],
+          "pivot_px": [
+            340,
+            520
+          ],
+          "z_index": 1,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude_px": 8,
+              "frequency_hz": 0.22
+            }
+          }
+        },
+        {
+          "id": "vine",
+          "shapes": [
+            {
+              "type": "line",
+              "points": [
+                [
+                  900,
+                  410
+                ],
+                [
+                  930,
+                  450
+                ],
+                [
+                  913,
+                  500
+                ],
+                [
+                  940,
+                  540
+                ]
+              ],
+              "fill": "sage",
+              "width": 9
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                895,
+                430,
+                925,
+                457
+              ],
+              "fill": "plum"
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                929,
+                480,
+                955,
+                510
+              ],
+              "fill": "plum"
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                903,
+                516,
+                933,
+                545
+              ],
+              "fill": "plum"
+            }
+          ],
+          "pivot_px": [
+            900,
+            410
+          ],
+          "z_index": 2,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude_px": 8,
+              "frequency_hz": 0.22
+            }
+          }
+        },
+        {
+          "id": "hanging_sign",
+          "shapes": [
+            {
+              "type": "line",
+              "points": [
+                [
+                  1430,
+                  430
+                ],
+                [
+                  1515,
+                  430
+                ],
+                [
+                  1515,
+                  475
+                ]
+              ],
+              "fill": "walnut",
+              "width": 7
+            },
+            {
+              "type": "polygon",
+              "points": [
+                [
+                  1510,
+                  470
+                ],
+                [
+                  1477,
+                  502
+                ],
+                [
+                  1480,
+                  550
+                ],
+                [
+                  1520,
+                  570
+                ],
+                [
+                  1552,
+                  545
+                ],
+                [
+                  1522,
+                  553
+                ],
+                [
+                  1500,
+                  532
+                ],
+                [
+                  1498,
+                  500
+                ]
+              ],
+              "fill": "ochre"
+            }
+          ],
+          "pivot_px": [
+            1515,
+            430
+          ],
+          "z_index": 3,
+          "motion": {
+            "type": "pendulum",
+            "parameters": {
+              "amplitude_px": 6,
+              "frequency_hz": 0.28,
+              "max_degrees": 1.5,
+              "damping": 3.5,
+              "stiffness": 8.0
+            }
+          }
+        },
+        {
+          "id": "cloud",
+          "shapes": [
+            {
+              "type": "ellipse",
+              "box": [
+                1080,
+                110,
+                1260,
+                178
+              ],
+              "fill": "cream"
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                1160,
+                81,
+                1320,
+                177
+              ],
+              "fill": "cream"
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                1245,
+                115,
+                1410,
+                180
+              ],
+              "fill": "cream"
+            }
+          ],
+          "pivot_px": [
+            1250,
+            150
+          ],
+          "z_index": 0,
+          "motion": {
+            "type": "flow",
+            "parameters": {
+              "speed_px_s": 4,
+              "distortion_px": 3
+            }
+          }
+        }
+      ]
+    },
+    "S02": {
+      "subject": "第一人称旧木柜台；左边小货架上只有两瓶两书，最左窗外树影，中间绿布帘门，右三成素墙；台面一盆栽一陶碟，干花风铃香炉各一。",
+      "periods": [
+        "day",
+        "night"
+      ],
+      "background": "cream",
+      "static": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              1130
+            ],
+            [
+              2560,
+              1120
+            ],
+            [
+              2560,
+              1440
+            ],
+            [
+              0,
+              1440
+            ]
+          ],
+          "fill": "warm_grey",
+          "outline_width": 0
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            260,
+            250,
+            600,
+            710
+          ],
+          "fill": "walnut"
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            280,
+            272,
+            580,
+            690
+          ],
+          "fill": "teal"
+        },
+        {
+          "type": "line",
+          "points": [
+            [
+              430,
+              272
+            ],
+            [
+              430,
+              690
+            ]
+          ],
+          "fill": "walnut",
+          "width": 9
+        },
+        {
+          "type": "line",
+          "points": [
+            [
+              280,
+              480
+            ],
+            [
+              580,
+              480
+            ]
+          ],
+          "fill": "walnut",
+          "width": 9
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              680,
+              320
+            ],
+            [
+              1030,
+              328
+            ],
+            [
+              1030,
+              850
+            ],
+            [
+              680,
+              850
+            ]
+          ],
+          "fill": "walnut"
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            703,
+            348,
+            1004,
+            829
+          ],
+          "fill": "cream"
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            690,
+            565,
+            1020,
+            580
+          ],
+          "fill": "walnut"
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            730,
+            440,
+            775,
+            557
+          ],
+          "fill": "sage"
+        },
+        {
+          "type": "ellipse",
+          "box": [
+            730,
+            423,
+            775,
+            455
+          ],
+          "fill": "sage"
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            814,
+            462,
+            858,
+            557
+          ],
+          "fill": "plum"
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            887,
+            402,
+            923,
+            557
+          ],
+          "fill": "teal"
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            930,
+            390,
+            961,
+            557
+          ],
+          "fill": "ochre"
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            1210,
+            215,
+            1670,
+            1028
+          ],
+          "fill": "walnut"
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            1230,
+            238,
+            1650,
+            1010
+          ],
+          "fill": "warm_grey"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              130,
+              1030
+            ],
+            [
+              1730,
+              1038
+            ],
+            [
+              1760,
+              1197
+            ],
+            [
+              120,
+              1180
+            ]
+          ],
+          "fill": "walnut"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              120,
+              1180
+            ],
+            [
+              1760,
+              1197
+            ],
+            [
+              1760,
+              1440
+            ],
+            [
+              120,
+              1440
+            ]
+          ],
+          "fill": "warm_grey",
+          "outline_width": 0
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              790,
+              1020
+            ],
+            [
+              870,
+              1020
+            ],
+            [
+              858,
+              1090
+            ],
+            [
+              802,
+              1090
+            ]
+          ],
+          "fill": "ochre"
+        },
+        {
+          "type": "ellipse",
+          "box": [
+            775,
+            945,
+            834,
+            1030
+          ],
+          "fill": "sage"
+        },
+        {
+          "type": "ellipse",
+          "box": [
+            823,
+            930,
+            882,
+            1026
+          ],
+          "fill": "sage"
+        },
+        {
+          "type": "ellipse",
+          "box": [
+            1430,
+            1080,
+            1555,
+            1110
+          ],
+          "fill": "cream"
+        }
+      ],
+      "layers": [
+        {
+          "id": "outside_leaves",
+          "shapes": [
+            {
+              "type": "polygon",
+              "points": [
+                [
+                  300,
+                  338
+                ],
+                [
+                  337,
+                  286
+                ],
+                [
+                  400,
+                  315
+                ],
+                [
+                  454,
+                  300
+                ],
+                [
+                  510,
+                  352
+                ],
+                [
+                  478,
+                  416
+                ],
+                [
+                  383,
+                  399
+                ],
+                [
+                  323,
+                  433
+                ]
+              ],
+              "fill": "sage"
+            }
+          ],
+          "pivot_px": [
+            310,
+            340
+          ],
+          "z_index": 0,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude_px": 8,
+              "frequency_hz": 0.22
+            }
+          }
+        },
+        {
+          "id": "inside_leaves",
+          "shapes": [
+            {
+              "type": "line",
+              "points": [
+                [
+                  623,
+                  650
+                ],
+                [
+                  620,
+                  735
+                ]
+              ],
+              "fill": "sage",
+              "width": 6
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                600,
+                670,
+                633,
+                700
+              ],
+              "fill": "sage"
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                624,
+                707,
+                660,
+                736
+              ],
+              "fill": "sage"
+            }
+          ],
+          "pivot_px": [
+            623,
+            650
+          ],
+          "z_index": 1,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude_px": 8,
+              "frequency_hz": 0.22
+            }
+          }
+        },
+        {
+          "id": "window_vine",
+          "shapes": [
+            {
+              "type": "line",
+              "points": [
+                [
+                  620,
+                  278
+                ],
+                [
+                  647,
+                  318
+                ],
+                [
+                  631,
+                  357
+                ],
+                [
+                  651,
+                  403
+                ]
+              ],
+              "fill": "sage",
+              "width": 6
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                635,
+                310,
+                659,
+                342
+              ],
+              "fill": "plum"
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                620,
+                359,
+                647,
+                393
+              ],
+              "fill": "plum"
+            }
+          ],
+          "pivot_px": [
+            620,
+            278
+          ],
+          "z_index": 2,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude_px": 8,
+              "frequency_hz": 0.22
+            }
+          }
+        },
+        {
+          "id": "dried_flowers",
+          "shapes": [
+            {
+              "type": "line",
+              "points": [
+                [
+                  908,
+                  125
+                ],
+                [
+                  908,
+                  198
+                ]
+              ],
+              "fill": "walnut",
+              "width": 4
+            },
+            {
+              "type": "polygon",
+              "points": [
+                [
+                  904,
+                  180
+                ],
+                [
+                  872,
+                  240
+                ],
+                [
+                  944,
+                  245
+                ]
+              ],
+              "fill": "ochre"
+            },
+            {
+              "type": "line",
+              "points": [
+                [
+                  908,
+                  180
+                ],
+                [
+                  893,
+                  240
+                ]
+              ],
+              "fill": "sage",
+              "width": 4
+            },
+            {
+              "type": "line",
+              "points": [
+                [
+                  908,
+                  180
+                ],
+                [
+                  930,
+                  240
+                ]
+              ],
+              "fill": "sage",
+              "width": 4
+            }
+          ],
+          "pivot_px": [
+            908,
+            125
+          ],
+          "z_index": 3,
+          "motion": {
+            "type": "pendulum",
+            "parameters": {
+              "amplitude_px": 6,
+              "frequency_hz": 0.28,
+              "max_degrees": 1.5,
+              "damping": 3.5,
+              "stiffness": 8.0
+            }
+          }
+        },
+        {
+          "id": "wind_chime",
+          "shapes": [
+            {
+              "type": "line",
+              "points": [
+                [
+                  1120,
+                  274
+                ],
+                [
+                  1120,
+                  350
+                ]
+              ],
+              "fill": "walnut",
+              "width": 3
+            },
+            {
+              "type": "polygon",
+              "points": [
+                [
+                  1091,
+                  343
+                ],
+                [
+                  1150,
+                  342
+                ],
+                [
+                  1162,
+                  382
+                ],
+                [
+                  1084,
+                  382
+                ]
+              ],
+              "fill": "ochre"
+            },
+            {
+              "type": "line",
+              "points": [
+                [
+                  1120,
+                  382
+                ],
+                [
+                  1120,
+                  431
+                ]
+              ],
+              "fill": "walnut",
+              "width": 3
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                1109,
+                421,
+                1132,
+                443
+              ],
+              "fill": "warm_grey"
+            }
+          ],
+          "pivot_px": [
+            1120,
+            274
+          ],
+          "z_index": 4,
+          "motion": {
+            "type": "pendulum",
+            "parameters": {
+              "amplitude_px": 6,
+              "frequency_hz": 0.28,
+              "max_degrees": 1.5,
+              "damping": 3.5,
+              "stiffness": 8.0
+            }
+          }
+        },
+        {
+          "id": "curtain_left",
+          "shapes": [
+            {
+              "type": "polygon",
+              "points": [
+                [
+                  1234,
+                  240
+                ],
+                [
+                  1416,
+                  240
+                ],
+                [
+                  1398,
+                  920
+                ],
+                [
+                  1240,
+                  977
+                ]
+              ],
+              "fill": "sage"
+            },
+            {
+              "type": "line",
+              "points": [
+                [
+                  1275,
+                  267
+                ],
+                [
+                  1290,
+                  882
+                ]
+              ],
+              "fill": "teal",
+              "width": 4
+            },
+            {
+              "type": "line",
+              "points": [
+                [
+                  1360,
+                  266
+                ],
+                [
+                  1355,
+                  864
+                ]
+              ],
+              "fill": "teal",
+              "width": 3
+            }
+          ],
+          "pivot_px": [
+            1320,
+            240
+          ],
+          "z_index": 5,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude_px": 8,
+              "frequency_hz": 0.22
+            }
+          }
+        },
+        {
+          "id": "curtain_right",
+          "shapes": [
+            {
+              "type": "polygon",
+              "points": [
+                [
+                  1442,
+                  240
+                ],
+                [
+                  1646,
+                  240
+                ],
+                [
+                  1642,
+                  977
+                ],
+                [
+                  1464,
+                  927
+                ]
+              ],
+              "fill": "sage"
+            },
+            {
+              "type": "line",
+              "points": [
+                [
+                  1487,
+                  270
+                ],
+                [
+                  1500,
+                  871
+                ]
+              ],
+              "fill": "teal",
+              "width": 3
+            },
+            {
+              "type": "line",
+              "points": [
+                [
+                  1595,
+                  265
+                ],
+                [
+                  1580,
+                  899
+                ]
+              ],
+              "fill": "teal",
+              "width": 4
+            }
+          ],
+          "pivot_px": [
+            1545,
+            240
+          ],
+          "z_index": 6,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude_px": 8,
+              "frequency_hz": 0.22
+            }
+          }
+        },
+        {
+          "id": "incense_burner",
+          "shapes": [
+            {
+              "type": "ellipse",
+              "box": [
+                1090,
+                1000,
+                1180,
+                1043
+              ],
+              "fill": "warm_grey"
+            },
+            {
+              "type": "line",
+              "points": [
+                [
+                  1104,
+                  1040
+                ],
+                [
+                  1098,
+                  1056
+                ]
+              ],
+              "fill": "walnut",
+              "width": 4
+            },
+            {
+              "type": "line",
+              "points": [
+                [
+                  1168,
+                  1040
+                ],
+                [
+                  1175,
+                  1055
+                ]
+              ],
+              "fill": "walnut",
+              "width": 4
+            }
+          ],
+          "pivot_px": [
+            1135,
+            1043
+          ],
+          "z_index": 7,
+          "motion": {
+            "type": "static",
+            "parameters": {}
+          }
+        },
+        {
+          "id": "incense_smoke",
+          "shapes": [
+            {
+              "type": "line",
+              "points": [
+                [
+                  1132,
+                  976
+                ],
+                [
+                  1148,
+                  935
+                ],
+                [
+                  1124,
+                  894
+                ],
+                [
+                  1140,
+                  845
+                ]
+              ],
+              "fill": "warm_grey",
+              "width": 15,
+              "opacity": 100
+            }
+          ],
+          "pivot_px": [
+            1135,
+            979
+          ],
+          "z_index": 8,
+          "motion": {
+            "type": "flow",
+            "parameters": {
+              "speed_px_s": 4,
+              "distortion_px": 3
+            }
+          }
+        }
+      ]
+    },
+    "S03": {
+      "subject": "安静私密的空咨询角；对面绿色沙发与圆矮桌，座位锚点为950,410,490,700，前缘遮住来客胸像底部，脸部空间留空。",
+      "periods": [
+        "day",
+        "night"
+      ],
+      "background": "cream",
+      "static": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              1120
+            ],
+            [
+              2560,
+              1110
+            ],
+            [
+              2560,
+              1440
+            ],
+            [
+              0,
+              1440
+            ]
+          ],
+          "fill": "warm_grey",
+          "outline_width": 0
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            250,
+            250,
+            490,
+            960
+          ],
+          "fill": "walnut"
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            269,
+            270,
+            471,
+            937
+          ],
+          "fill": "teal"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              843,
+              775
+            ],
+            [
+              856,
+              669
+            ],
+            [
+              1517,
+              678
+            ],
+            [
+              1558,
+              1000
+            ],
+            [
+              832,
+              1000
+            ]
+          ],
+          "fill": "sage"
+        },
+        {
+          "type": "ellipse",
+          "box": [
+            388,
+            1040,
+            790,
+            1175
+          ],
+          "fill": "walnut"
+        },
+        {
+          "type": "line",
+          "points": [
+            [
+              490,
+              1150
+            ],
+            [
+              474,
+              1242
+            ]
+          ],
+          "fill": "walnut",
+          "width": 12
+        },
+        {
+          "type": "line",
+          "points": [
+            [
+              708,
+              1150
+            ],
+            [
+              726,
+              1235
+            ]
+          ],
+          "fill": "walnut",
+          "width": 12
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              1640,
+              580
+            ],
+            [
+              1700,
+              580
+            ],
+            [
+              1722,
+              900
+            ],
+            [
+              1618,
+              900
+            ]
+          ],
+          "fill": "warm_grey"
+        }
+      ],
+      "layers": [
+        {
+          "id": "lamp",
+          "shapes": [
+            {
+              "type": "line",
+              "points": [
+                [
+                  728,
+                  80
+                ],
+                [
+                  728,
+                  200
+                ]
+              ],
+              "fill": "walnut",
+              "width": 5
+            },
+            {
+              "type": "polygon",
+              "points": [
+                [
+                  678,
+                  197
+                ],
+                [
+                  775,
+                  200
+                ],
+                [
+                  807,
+                  297
+                ],
+                [
+                  647,
+                  297
+                ]
+              ],
+              "fill": "ochre"
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                648,
+                285,
+                806,
+                313
+              ],
+              "fill": "cream"
+            }
+          ],
+          "pivot_px": [
+            728,
+            80
+          ],
+          "z_index": 0,
+          "motion": {
+            "type": "pendulum",
+            "parameters": {
+              "amplitude_px": 6,
+              "frequency_hz": 0.28,
+              "max_degrees": 1.5,
+              "damping": 3.5,
+              "stiffness": 8.0
+            }
+          }
+        },
+        {
+          "id": "curtain",
+          "shapes": [
+            {
+              "type": "polygon",
+              "points": [
+                [
+                  275,
+                  280
+                ],
+                [
+                  456,
+                  280
+                ],
+                [
+                  441,
+                  926
+                ],
+                [
+                  281,
+                  933
+                ]
+              ],
+              "fill": "plum"
+            },
+            {
+              "type": "line",
+              "points": [
+                [
+                  310,
+                  300
+                ],
+                [
+                  329,
+                  879
+                ]
+              ],
+              "fill": "warm_grey",
+              "width": 4
+            },
+            {
+              "type": "line",
+              "points": [
+                [
+                  400,
+                  298
+                ],
+                [
+                  394,
+                  876
+                ]
+              ],
+              "fill": "warm_grey",
+              "width": 4
+            }
+          ],
+          "pivot_px": [
+            365,
+            280
+          ],
+          "z_index": 1,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude_px": 8,
+              "frequency_hz": 0.22
+            }
+          }
+        },
+        {
+          "id": "teacup",
+          "shapes": [
+            {
+              "type": "ellipse",
+              "box": [
+                524,
+                1010,
+                610,
+                1045
+              ],
+              "fill": "cream"
+            },
+            {
+              "type": "rectangle",
+              "box": [
+                531,
+                1020,
+                601,
+                1071
+              ],
+              "fill": "cream"
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                587,
+                1024,
+                625,
+                1059
+              ],
+              "fill": "cream"
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                598,
+                1033,
+                617,
+                1050
+              ],
+              "fill": "walnut"
+            }
+          ],
+          "pivot_px": [
+            568,
+            1071
+          ],
+          "z_index": 2,
+          "motion": {
+            "type": "static",
+            "parameters": {}
+          }
+        },
+        {
+          "id": "tea_steam",
+          "shapes": [
+            {
+              "type": "line",
+              "points": [
+                [
+                  562,
+                  987
+                ],
+                [
+                  550,
+                  955
+                ],
+                [
+                  573,
+                  918
+                ],
+                [
+                  561,
+                  876
+                ]
+              ],
+              "fill": "cream",
+              "width": 13,
+              "opacity": 120
+            }
+          ],
+          "pivot_px": [
+            563,
+            990
+          ],
+          "z_index": 3,
+          "motion": {
+            "type": "flow",
+            "parameters": {
+              "speed_px_s": 4,
+              "distortion_px": 3
+            }
+          }
+        },
+        {
+          "id": "sofa_mask",
+          "shapes": [
+            {
+              "type": "polygon",
+              "points": [
+                [
+                  824,
+                  952
+                ],
+                [
+                  857,
+                  920
+                ],
+                [
+                  857,
+                  865
+                ],
+                [
+                  933,
+                  864
+                ],
+                [
+                  946,
+                  957
+                ],
+                [
+                  1445,
+                  957
+                ],
+                [
+                  1467,
+                  864
+                ],
+                [
+                  1545,
+                  866
+                ],
+                [
+                  1551,
+                  932
+                ],
+                [
+                  1583,
+                  955
+                ],
+                [
+                  1570,
+                  1124
+                ],
+                [
+                  833,
+                  1120
+                ]
+              ],
+              "fill": "sage"
+            },
+            {
+              "type": "line",
+              "points": [
+                [
+                  856,
+                  1002
+                ],
+                [
+                  1545,
+                  1009
+                ]
+              ],
+              "fill": "teal",
+              "width": 6
+            },
+            {
+              "type": "line",
+              "points": [
+                [
+                  867,
+                  1090
+                ],
+                [
+                  1533,
+                  1095
+                ]
+              ],
+              "fill": "teal",
+              "width": 4
+            }
+          ],
+          "pivot_px": [
+            1200,
+            1115
+          ],
+          "z_index": 15,
+          "motion": {
+            "type": "static",
+            "parameters": {}
+          }
+        }
+      ],
+      "seat_rect": [
+        950,
+        410,
+        490,
+        700
+      ]
+    },
+    "S04": {
+      "subject": "正视木储物柜，所有层板留空，右侧素墙，开合门各有独立合成原图；不画商品、文字、空标签或装饰箱格。",
+      "periods": [
+        "day",
+        "night"
+      ],
+      "background": "cream",
+      "static": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              1180
+            ],
+            [
+              2560,
+              1173
+            ],
+            [
+              2560,
+              1440
+            ],
+            [
+              0,
+              1440
+            ]
+          ],
+          "fill": "warm_grey",
+          "outline_width": 0
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              310,
+              250
+            ],
+            [
+              1665,
+              263
+            ],
+            [
+              1665,
+              1190
+            ],
+            [
+              310,
+              1190
+            ]
+          ],
+          "fill": "walnut"
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            342,
+            290,
+            1632,
+            1126
+          ],
+          "fill": "warm_grey"
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            342,
+            455,
+            1632,
+            476
+          ],
+          "fill": "walnut"
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            342,
+            679,
+            1632,
+            701
+          ],
+          "fill": "walnut"
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            342,
+            904,
+            1632,
+            927
+          ],
+          "fill": "walnut"
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            344,
+            1127,
+            1630,
+            1165
+          ],
+          "fill": "walnut"
+        },
+        {
+          "type": "line",
+          "points": [
+            [
+              390,
+              1185
+            ],
+            [
+              382,
+              1243
+            ]
+          ],
+          "fill": "walnut",
+          "width": 14
+        },
+        {
+          "type": "line",
+          "points": [
+            [
+              1601,
+              1185
+            ],
+            [
+              1608,
+              1242
+            ]
+          ],
+          "fill": "walnut",
+          "width": 14
+        }
+      ],
+      "layers": [
+        {
+          "id": "door_open",
+          "shapes": [
+            {
+              "type": "polygon",
+              "points": [
+                [
+                  296,
+                  285
+                ],
+                [
+                  170,
+                  340
+                ],
+                [
+                  181,
+                  1138
+                ],
+                [
+                  297,
+                  1174
+                ]
+              ],
+              "fill": "walnut"
+            },
+            {
+              "type": "line",
+              "points": [
+                [
+                  209,
+                  391
+                ],
+                [
+                  213,
+                  1052
+                ]
+              ],
+              "fill": "ochre",
+              "width": 4
+            }
+          ],
+          "pivot_px": [
+            297,
+            730
+          ],
+          "z_index": 1,
+          "motion": {
+            "type": "static",
+            "parameters": {}
+          },
+          "state": "open"
+        },
+        {
+          "id": "door_closed",
+          "shapes": [
+            {
+              "type": "polygon",
+              "points": [
+                [
+                  350,
+                  300
+                ],
+                [
+                  1588,
+                  306
+                ],
+                [
+                  1588,
+                  1110
+                ],
+                [
+                  350,
+                  1110
+                ]
+              ],
+              "fill": "walnut"
+            },
+            {
+              "type": "line",
+              "points": [
+                [
+                  972,
+                  310
+                ],
+                [
+                  972,
+                  1106
+                ]
+              ],
+              "fill": "warm_grey",
+              "width": 7
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                925,
+                690,
+                945,
+                726
+              ],
+              "fill": "ochre"
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                1002,
+                690,
+                1022,
+                726
+              ],
+              "fill": "ochre"
+            }
+          ],
+          "pivot_px": [
+            350,
+            700
+          ],
+          "z_index": 1,
+          "motion": {
+            "type": "static",
+            "parameters": {}
+          },
+          "state": "closed"
+        },
+        {
+          "id": "lamp",
+          "shapes": [
+            {
+              "type": "line",
+              "points": [
+                [
+                  1110,
+                  40
+                ],
+                [
+                  1110,
+                  114
+                ]
+              ],
+              "fill": "walnut",
+              "width": 4
+            },
+            {
+              "type": "polygon",
+              "points": [
+                [
+                  1068,
+                  111
+                ],
+                [
+                  1154,
+                  111
+                ],
+                [
+                  1181,
+                  181
+                ],
+                [
+                  1041,
+                  181
+                ]
+              ],
+              "fill": "ochre"
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                1044,
+                175,
+                1179,
+                194
+              ],
+              "fill": "cream"
+            }
+          ],
+          "pivot_px": [
+            1110,
+            40
+          ],
+          "z_index": 0,
+          "motion": {
+            "type": "pendulum",
+            "parameters": {
+              "amplitude_px": 6,
+              "frequency_hz": 0.28,
+              "max_degrees": 1.5,
+              "damping": 3.5,
+              "stiffness": 8.0
+            }
+          }
+        }
+      ],
+      "default_state": "open"
+    },
+    "S05": {
+      "subject": "略俯视简洁工作台，中间大片无物空间，左侧研钵、右侧天平、单只玻璃瓶，上方吊挂干草与独立蒸汽。",
+      "periods": [
+        "day",
+        "night"
+      ],
+      "background": "cream",
+      "static": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              1070
+            ],
+            [
+              2560,
+              1080
+            ],
+            [
+              2560,
+              1440
+            ],
+            [
+              0,
+              1440
+            ]
+          ],
+          "fill": "warm_grey",
+          "outline_width": 0
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              270,
+              735
+            ],
+            [
+              1580,
+              724
+            ],
+            [
+              1760,
+              1134
+            ],
+            [
+              205,
+              1154
+            ]
+          ],
+          "fill": "walnut"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              205,
+              1154
+            ],
+            [
+              1760,
+              1134
+            ],
+            [
+              1755,
+              1230
+            ],
+            [
+              214,
+              1255
+            ]
+          ],
+          "fill": "warm_grey"
+        },
+        {
+          "type": "ellipse",
+          "box": [
+            380,
+            913,
+            628,
+            988
+          ],
+          "fill": "warm_grey"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              390,
+              956
+            ],
+            [
+              618,
+              956
+            ],
+            [
+              584,
+              1065
+            ],
+            [
+              427,
+              1072
+            ]
+          ],
+          "fill": "warm_grey"
+        },
+        {
+          "type": "line",
+          "points": [
+            [
+              480,
+              949
+            ],
+            [
+              548,
+              850
+            ]
+          ],
+          "fill": "walnut",
+          "width": 24
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            954,
+            840,
+            1020,
+            1000
+          ],
+          "fill": "teal"
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            967,
+            805,
+            1007,
+            850
+          ],
+          "fill": "teal"
+        },
+        {
+          "type": "line",
+          "points": [
+            [
+              1390,
+              735
+            ],
+            [
+              1390,
+              998
+            ]
+          ],
+          "fill": "ochre",
+          "width": 9
+        },
+        {
+          "type": "line",
+          "points": [
+            [
+              1280,
+              774
+            ],
+            [
+              1510,
+              769
+            ]
+          ],
+          "fill": "ochre",
+          "width": 7
+        },
+        {
+          "type": "line",
+          "points": [
+            [
+              1300,
+              780
+            ],
+            [
+              1265,
+              881
+            ],
+            [
+              1343,
+              881
+            ],
+            [
+              1300,
+              780
+            ]
+          ],
+          "fill": "warm_grey",
+          "width": 5
+        },
+        {
+          "type": "line",
+          "points": [
+            [
+              1484,
+              778
+            ],
+            [
+              1448,
+              879
+            ],
+            [
+              1524,
+              879
+            ],
+            [
+              1484,
+              778
+            ]
+          ],
+          "fill": "warm_grey",
+          "width": 5
+        },
+        {
+          "type": "ellipse",
+          "box": [
+            1330,
+            984,
+            1451,
+            1015
+          ],
+          "fill": "ochre"
+        },
+        {
+          "type": "ellipse",
+          "box": [
+            803,
+            724,
+            902,
+            752
+          ],
+          "fill": "warm_grey"
+        }
+      ],
+      "layers": [
+        {
+          "id": "dried_grass",
+          "shapes": [
+            {
+              "type": "line",
+              "points": [
+                [
+                  470,
+                  170
+                ],
+                [
+                  470,
+                  270
+                ]
+              ],
+              "fill": "walnut",
+              "width": 5
+            },
+            {
+              "type": "polygon",
+              "points": [
+                [
+                  466,
+                  264
+                ],
+                [
+                  414,
+                  455
+                ],
+                [
+                  487,
+                  505
+                ],
+                [
+                  533,
+                  446
+                ]
+              ],
+              "fill": "ochre"
+            },
+            {
+              "type": "line",
+              "points": [
+                [
+                  470,
+                  279
+                ],
+                [
+                  445,
+                  462
+                ]
+              ],
+              "fill": "sage",
+              "width": 5
+            },
+            {
+              "type": "line",
+              "points": [
+                [
+                  473,
+                  280
+                ],
+                [
+                  499,
+                  452
+                ]
+              ],
+              "fill": "sage",
+              "width": 5
+            }
+          ],
+          "pivot_px": [
+            470,
+            170
+          ],
+          "z_index": 0,
+          "motion": {
+            "type": "pendulum",
+            "parameters": {
+              "amplitude_px": 6,
+              "frequency_hz": 0.28,
+              "max_degrees": 1.5,
+              "damping": 3.5,
+              "stiffness": 8.0
+            }
+          }
+        },
+        {
+          "id": "steam",
+          "shapes": [
+            {
+              "type": "line",
+              "points": [
+                [
+                  851,
+                  710
+                ],
+                [
+                  837,
+                  671
+                ],
+                [
+                  864,
+                  636
+                ],
+                [
+                  842,
+                  590
+                ],
+                [
+                  862,
+                  553
+                ]
+              ],
+              "fill": "cream",
+              "width": 22,
+              "opacity": 125
+            }
+          ],
+          "pivot_px": [
+            850,
+            711
+          ],
+          "z_index": 1,
+          "motion": {
+            "type": "flow",
+            "parameters": {
+              "speed_px_s": 4,
+              "distortion_px": 3
+            }
+          }
+        }
+      ]
+    },
+    "S06": {
+      "subject": "朴素原料铺摊位内景，左侧门外可见街树，几只空篮和空箱，一幅布帘，右三成素墙。",
+      "periods": [
+        "day",
+        "night"
+      ],
+      "background": "cream",
+      "static": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              1110
+            ],
+            [
+              2560,
+              1103
+            ],
+            [
+              2560,
+              1440
+            ],
+            [
+              0,
+              1440
+            ]
+          ],
+          "fill": "warm_grey",
+          "outline_width": 0
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            425,
+            206,
+            971,
+            954
+          ],
+          "fill": "walnut"
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            450,
+            229,
+            948,
+            932
+          ],
+          "fill": "cream"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              453,
+              737
+            ],
+            [
+              944,
+              737
+            ],
+            [
+              944,
+              931
+            ],
+            [
+              453,
+              931
+            ]
+          ],
+          "fill": "warm_grey"
+        },
+        {
+          "type": "line",
+          "points": [
+            [
+              760,
+              391
+            ],
+            [
+              750,
+              736
+            ]
+          ],
+          "fill": "walnut",
+          "width": 24
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              230,
+              942
+            ],
+            [
+              1550,
+              944
+            ],
+            [
+              1700,
+              1160
+            ],
+            [
+              210,
+              1174
+            ]
+          ],
+          "fill": "walnut"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              340,
+              976
+            ],
+            [
+              600,
+              979
+            ],
+            [
+              567,
+              1136
+            ],
+            [
+              366,
+              1146
+            ]
+          ],
+          "fill": "ochre"
+        },
+        {
+          "type": "ellipse",
+          "box": [
+            341,
+            951,
+            599,
+            1005
+          ],
+          "fill": "cream"
+        },
+        {
+          "type": "line",
+          "points": [
+            [
+              365,
+              1006
+            ],
+            [
+              386,
+              1102
+            ]
+          ],
+          "fill": "walnut",
+          "width": 4
+        },
+        {
+          "type": "line",
+          "points": [
+            [
+              572,
+              1007
+            ],
+            [
+              550,
+              1113
+            ]
+          ],
+          "fill": "walnut",
+          "width": 4
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              750,
+              1032
+            ],
+            [
+              1020,
+              1036
+            ],
+            [
+              1020,
+              1170
+            ],
+            [
+              751,
+              1167
+            ]
+          ],
+          "fill": "warm_grey"
+        },
+        {
+          "type": "line",
+          "points": [
+            [
+              768,
+              1075
+            ],
+            [
+              1005,
+              1078
+            ]
+          ],
+          "fill": "walnut",
+          "width": 5
+        },
+        {
+          "type": "line",
+          "points": [
+            [
+              770,
+              1123
+            ],
+            [
+              1005,
+              1126
+            ]
+          ],
+          "fill": "walnut",
+          "width": 5
+        },
+        {
+          "type": "rectangle",
+          "box": [
+            1062,
+            225,
+            1316,
+            800
+          ],
+          "fill": "walnut"
+        }
+      ],
+      "layers": [
+        {
+          "id": "street_leaves",
+          "shapes": [
+            {
+              "type": "ellipse",
+              "box": [
+                566.5,
+                277.5,
+                767.75,
+                405.25
+              ],
+              "fill": "sage"
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                689.0,
+                230.25,
+                881.5,
+                386.0
+              ],
+              "fill": "sage"
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                645.25,
+                326.5,
+                837.75,
+                457.75
+              ],
+              "fill": "sage"
+            }
+          ],
+          "pivot_px": [
+            750,
+            400
+          ],
+          "z_index": 0,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude_px": 8,
+              "frequency_hz": 0.22
+            }
+          }
+        },
+        {
+          "id": "cloth_curtain",
+          "shapes": [
+            {
+              "type": "polygon",
+              "points": [
+                [
+                  1080,
+                  245
+                ],
+                [
+                  1299,
+                  246
+                ],
+                [
+                  1274,
+                  777
+                ],
+                [
+                  1089,
+                  774
+                ]
+              ],
+              "fill": "plum"
+            },
+            {
+              "type": "line",
+              "points": [
+                [
+                  1123,
+                  267
+                ],
+                [
+                  1145,
+                  730
+                ]
+              ],
+              "fill": "warm_grey",
+              "width": 4
+            },
+            {
+              "type": "line",
+              "points": [
+                [
+                  1240,
+                  267
+                ],
+                [
+                  1224,
+                  734
+                ]
+              ],
+              "fill": "warm_grey",
+              "width": 4
+            }
+          ],
+          "pivot_px": [
+            1190,
+            245
+          ],
+          "z_index": 1,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude_px": 8,
+              "frequency_hz": 0.22
+            }
+          }
+        }
+      ]
+    },
+    "S07": {
+      "subject": "小镇边缘河畔步道，左侧石桥和朴素树冠，低饱和草地、水面，右侧三成宁静天空与河流。",
+      "periods": [
+        "day",
+        "night"
+      ],
+      "background": "cream",
+      "static": [
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              640
+            ],
+            [
+              1570,
+              690
+            ],
+            [
+              2560,
+              750
+            ],
+            [
+              2560,
+              1440
+            ],
+            [
+              0,
+              1440
+            ]
+          ],
+          "fill": "sage",
+          "outline_width": 0
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              1000,
+              722
+            ],
+            [
+              1560,
+              690
+            ],
+            [
+              2030,
+              1440
+            ],
+            [
+              1145,
+              1440
+            ],
+            [
+              1240,
+              1060
+            ]
+          ],
+          "fill": "teal",
+          "outline_width": 0
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              0,
+              1000
+            ],
+            [
+              410,
+              815
+            ],
+            [
+              880,
+              796
+            ],
+            [
+              1150,
+              1040
+            ],
+            [
+              1090,
+              1196
+            ],
+            [
+              601,
+              962
+            ],
+            [
+              310,
+              1000
+            ],
+            [
+              0,
+              1180
+            ]
+          ],
+          "fill": "warm_grey",
+          "outline_width": 0
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              340,
+              802
+            ],
+            [
+              348,
+              692
+            ],
+            [
+              790,
+              689
+            ],
+            [
+              911,
+              797
+            ],
+            [
+              860,
+              831
+            ],
+            [
+              762,
+              762
+            ],
+            [
+              390,
+              764
+            ]
+          ],
+          "fill": "cream"
+        },
+        {
+          "type": "line",
+          "points": [
+            [
+              220,
+              510
+            ],
+            [
+              250,
+              825
+            ]
+          ],
+          "fill": "walnut",
+          "width": 32
+        },
+        {
+          "type": "ellipse",
+          "box": [
+            660,
+            1010,
+            890,
+            1080
+          ],
+          "fill": "sage"
+        },
+        {
+          "type": "polygon",
+          "points": [
+            [
+              760,
+              1050
+            ],
+            [
+              795,
+              995
+            ],
+            [
+              837,
+              1047
+            ]
+          ],
+          "fill": "plum"
+        },
+        {
+          "type": "line",
+          "points": [
+            [
+              0,
+              1253
+            ],
+            [
+              1010,
+              1247
+            ]
+          ],
+          "fill": "warm_grey",
+          "width": 5
+        }
+      ],
+      "layers": [
+        {
+          "id": "grass",
+          "shapes": [
+            {
+              "type": "polygon",
+              "points": [
+                [
+                  210,
+                  1194
+                ],
+                [
+                  225,
+                  1085
+                ],
+                [
+                  248,
+                  1170
+                ],
+                [
+                  274,
+                  1057
+                ],
+                [
+                  292,
+                  1173
+                ],
+                [
+                  315,
+                  1100
+                ],
+                [
+                  334,
+                  1195
+                ]
+              ],
+              "fill": "sage"
+            },
+            {
+              "type": "polygon",
+              "points": [
+                [
+                  610,
+                  1199
+                ],
+                [
+                  627,
+                  1111
+                ],
+                [
+                  647,
+                  1182
+                ],
+                [
+                  673,
+                  1080
+                ],
+                [
+                  688,
+                  1188
+                ],
+                [
+                  711,
+                  1128
+                ],
+                [
+                  727,
+                  1202
+                ]
+              ],
+              "fill": "sage"
+            }
+          ],
+          "pivot_px": [
+            450,
+            1203
+          ],
+          "z_index": 2,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude_px": 8,
+              "frequency_hz": 0.22
+            }
+          }
+        },
+        {
+          "id": "tree_canopy",
+          "shapes": [
+            {
+              "type": "ellipse",
+              "box": [
+                36.99999999999997,
+                281.4,
+                290.0,
+                442.0
+              ],
+              "fill": "sage"
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                191.0,
+                222.0,
+                433.0,
+                417.8
+              ],
+              "fill": "sage"
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                136.0,
+                343.0,
+                378.0,
+                508.0
+              ],
+              "fill": "sage"
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                287.0,
+                358.0,
+                459.5,
+                467.5
+              ],
+              "fill": "sage"
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                392.0,
+                317.5,
+                557.0,
+                451.0
+              ],
+              "fill": "sage"
+            },
+            {
+              "type": "ellipse",
+              "box": [
+                354.5,
+                400.0,
+                519.5,
+                512.5
+              ],
+              "fill": "sage"
+            }
+          ],
+          "pivot_px": [
+            246,
+            510
+          ],
+          "z_index": 1,
+          "motion": {
+            "type": "sway_shader",
+            "parameters": {
+              "amplitude_px": 8,
+              "frequency_hz": 0.22
+            }
+          }
+        },
+        {
+          "id": "water_mask",
+          "shapes": [
+            {
+              "type": "polygon",
+              "points": [
+                [
+                  1284,
+                  793
+                ],
+                [
+                  1510,
+                  783
+                ],
+                [
+                  1710,
+                  1190
+                ],
+                [
+                  1290,
+                  1190
+                ],
+                [
+                  1340,
+                  1063
+                ]
+              ],
+              "fill": "teal"
+            },
+            {
+              "type": "line",
+              "points": [
+                [
+                  1360,
+                  884
+                ],
+                [
+                  1502,
+                  881
+                ]
+              ],
+              "fill": "warm_grey",
+              "width": 3
+            },
+            {
+              "type": "line",
+              "points": [
+                [
+                  1431,
+                  1027
+                ],
+                [
+                  1577,
+                  1029
+                ]
+              ],
+              "fill": "warm_grey",
+              "width": 3
+            },
+            {
+              "type": "line",
+              "points": [
+                [
+                  1420,
+                  1153
+                ],
+                [
+                  1614,
+                  1155
+                ]
+              ],
+              "fill": "warm_grey",
+              "width": 3
+            }
+          ],
+          "pivot_px": [
+            1430,
+            1000
+          ],
+          "z_index": 0,
+          "motion": {
+            "type": "flow",
+            "parameters": {
+              "speed_px_s": 4,
+              "distortion_px": 3
+            }
+          }
+        }
+      ]
+    }
+  },
+  "scene_defaults": {
+    "safe_rect": [
+      320,
+      180,
+      1920,
+      1080
+    ],
+    "seat_scale": 1.0
+  },
+  "receipt_text": {
+    "background_prompt_template": "{subject} 时段：{period}。仅空场景与静态家具B_all，不含可动层。",
+    "layer_prompt_template": "{subject} 时段：{period}；独立同幅同位层{layer_id}，从实际C按软mask扣像素，已知B_i反解羽化边缘颜色，不单独重画替代物。",
+    "pilot_prompt_suffix": " 工程布局参考；不是正式生图候选、不评分、不定稿。",
+    "native_size_note": "原生代码绘制画布尺寸；不是AI原生高清。",
+    "prompt_template": "{style}. {subject} Negative: {negative}. {notice}"
+  }
+}

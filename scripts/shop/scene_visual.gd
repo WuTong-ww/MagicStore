@@ -32,13 +32,85 @@ static func _region_valid(value: Variant) -> bool:
 static func _rect_valid(value: Variant, canvas: Vector2) -> bool:
 	return _region_valid(value) and value[0]+value[2] <= canvas.x and value[1]+value[3] <= canvas.y
 
+static func _png_path(value: Variant) -> bool:
+	return value is String and value.begins_with("res://") and value.ends_with(".png")
+
+static func _integer(value: Variant, low: int, high: int) -> bool:
+	return (value is int or value is float) and is_finite(float(value)) and value == floor(float(value)) and value >= low and value <= high
+
+static func _native_size_valid(value: Variant) -> bool:
+	return value is Array and value.size() == 2 and value.all(func(n: Variant) -> bool: return _integer(n,1,2147483647))
+
+static func source_transform_valid(value: Variant, reference_native: Array) -> bool:
+	if not value is Dictionary or value.get("method") != "equal_aspect_cover" or value.get("filter") != "Lanczos" or not _positive_number(value.get("scale")):
+		return false
+	var native: Variant = value.get("native_size",reference_native)
+	if not _native_size_valid(native) or not _native_size_valid(value.get("runtime_size")):
+		return false
+	var crop: Variant = value.get("source_crop")
+	if not crop is Array or crop.size() != 4 or not crop.all(func(n: Variant) -> bool: return (n is int or n is float) and is_finite(float(n))):
+		return false
+	if crop[0] < 0 or crop[1] < 0 or crop[2] <= crop[0] or crop[3] <= crop[1] or crop[2] > native[0] or crop[3] > native[1]:
+		return false
+	return is_equal_approx(float(value.scale),float(value.runtime_size[0])/float(crop[2]-crop[0])) and is_equal_approx(float(value.scale),float(value.runtime_size[1])/float(crop[3]-crop[1]))
+
+static func _aligned_layer_valid(layer: Dictionary, canvas: Vector2, z_bounds: Array) -> bool:
+	if not _png_path(layer.get("path")) or layer.has("source_region"):
+		return false
+	for key: String in ["rect","hotspot"]:
+		var rectangle: Array = layer[key]
+		if rectangle[0] != 0 or rectangle[1] != 0 or rectangle[2] != canvas.x or rectangle[3] != canvas.y:
+			return false
+	var native: Variant = layer.get("native_size")
+	if not _native_size_valid(native):
+		return false
+	var pivot: Variant = layer.get("pivot_px")
+	if not pivot is Array or pivot.size() != 2:
+		return false
+	for axis: int in range(2):
+		if not (pivot[axis] is int or pivot[axis] is float) or not is_finite(float(pivot[axis])) or pivot[axis] < 0 or pivot[axis] > native[axis]:
+			return false
+	if not _integer(layer.get("z_index"),int(z_bounds[0]),int(z_bounds[1])):
+		return false
+	var motion: Variant = layer.get("motion")
+	if not motion is Dictionary or not motion.get("type") in ["static","sway_shader","pendulum","flow"] or not motion.get("parameters") is Dictionary:
+		return false
+	for key: Variant in motion.parameters:
+		var value: Variant = motion.parameters[key]
+		if not key is String or key.is_empty() or not (value is int or value is float) or not is_finite(float(value)):
+			return false
+	if layer.has("variants"):
+		var variants: Variant = layer.variants
+		if not variants is Dictionary or not variants.has("day") or not variants.has("night"):
+			return false
+		for variant: Variant in variants:
+			if not variant in ["day","night","closed"] or not _png_path(variants[variant]):
+				return false
+	if layer.has("source_transform") and not source_transform_valid(layer.source_transform,native):
+		return false
+	if layer.has("variant_transforms"):
+		if not layer.variant_transforms is Dictionary:
+			return false
+		for variant: Variant in layer.variant_transforms:
+			if not variant in ["day","night","closed"] or not layer.get("variants",{}).has(variant) or not source_transform_valid(layer.variant_transforms[variant],native):
+				return false
+	return true
+
 static func config_valid(data: Dictionary) -> bool:
 	var settings: Variant = data.get("scene_settings")
-	if not settings is Dictionary or settings.get("version") != 2:
+	if not settings is Dictionary or not _integer(settings.get("version"),2,3):
 		return false
 	if not settings.get("canvas") is Array or settings.canvas.size() != 2 or not settings.canvas.all(_positive_number):
 		return false
 	var canvas := Vector2(settings.canvas[0],settings.canvas[1])
+	var z_bounds: Array = []
+	if settings.version == 3:
+		var limits: Variant = settings.get("layer_z_bounds")
+		if not _integer(settings.get("art_root_z"),-4096,-1) or not limits is Array or limits.size() != 2 or not limits.all(func(n: Variant) -> bool: return _integer(n,-4096,4096)):
+			return false
+		z_bounds = limits
+		if limits[0] > limits[1] or settings.art_root_z+limits[0]-1 < -4096 or settings.art_root_z+maxi(0,int(limits[1]))+1 >= 0:
+			return false
 	for key: String in ["day_minute","night_minute","closing_minute","minutes_per_day","fade_seconds","side_ratio","side_minimum_width","art_minimum_height","inventory_columns","inventory_rows","inventory_name_size","inventory_quantity_size","inventory_grid_gap","hotspot_font_size","hotspot_alpha","inventory_icon_end","inventory_detail_gap"]:
 		if not _positive_number(settings.get(key)):
 			return false
@@ -67,13 +139,49 @@ static func config_valid(data: Dictionary) -> bool:
 			return false
 		if not _rect_valid(scene.get("safe_rect"),canvas):
 			return false
+		if settings.version == 3:
+			for seat_key: String in ["seat_rect","seat_compact_rect","seat_narrow_rect"]:
+				if scene.has(seat_key) and (id != "S03" or not _rect_valid(scene[seat_key],canvas)):
+					return false
+			if scene.has("seat_scale") and (id != "S03" or not _positive_number(scene.seat_scale)):
+				return false
 		for variant: String in (["day","night","closed"] if id == "S01" else ["day","night"]):
 			if not scene.get(variant) is String or not scene[variant].begins_with("res://") or not scene[variant].ends_with(".png"):
 				return false
 		if not scene.get("layers") is Dictionary or not scene.get("hotspots") is Dictionary:
 			return false
-		for layer: Variant in scene.layers.values():
+		var aligned: bool = settings.version == 3 and scene.get("layer_format") == "aligned_full_canvas"
+		if settings.version == 3 and not scene.get("layer_format") in ["legacy_slices","aligned_full_canvas"]:
+			return false
+		if settings.version == 3 and scene.has("state_backgrounds"):
+			if id != "S04" or not aligned or not scene.state_backgrounds is Dictionary or scene.state_backgrounds.size() != 2:
+				return false
+			for state: String in ["open","closed"]:
+				var backgrounds_by_period: Variant = scene.state_backgrounds.get(state)
+				if not backgrounds_by_period is Dictionary or backgrounds_by_period.size() != 2:
+					return false
+				for scene_period: String in ["day","night"]:
+					var path: Variant = backgrounds_by_period.get(scene_period)
+					if not path is String or not path.begins_with("res://") or not path.ends_with(".png"):
+						return false
+		for key: Variant in scene.layers:
+			var layer: Variant = scene.layers[key]
 			if not layer is Dictionary or not layer.get("path") is String or not layer.path.begins_with("res://") or not _rect_valid(layer.get("rect"),canvas) or not _rect_valid(layer.get("hotspot"),canvas) or (layer.has("source_region") and not _region_valid(layer.source_region)):
+				return false
+			if aligned:
+				if layer.has("legacy") and not layer.legacy is bool:
+					return false
+				if layer.get("legacy",false):
+					if id != "S04" or key != "slot" or layer.get("legacy") != true or layer.get("display") != "cell":
+						return false
+				elif not _aligned_layer_valid(layer,canvas,z_bounds):
+					return false
+		if aligned and id == "S03" and not scene.layers.has("sofa_mask"):
+			return false
+		if aligned and id == "S04":
+			if not scene.layers.has("slot") or scene.layers.slot.get("legacy") != true or not scene.layers.has("door_open") or not scene.layers.has("door_closed"):
+				return false
+			if scene.layers.door_open.get("state") != "open" or scene.layers.door_closed.get("state") != "closed":
 				return false
 		for hotspot: Variant in scene.hotspots.values():
 			if not hotspot is Dictionary or not _rect_valid(hotspot.get("rect"),canvas) or not hotspot.get("label") is String or hotspot.label.is_empty() or not hotspot.get("target") is String or not hotspot.get("display", "button") in ["button","transparent"]:
@@ -86,6 +194,8 @@ static func config_valid(data: Dictionary) -> bool:
 				return false
 	var required := {"S02":["door","curtain","letter","lamp_on","lamp_off"],"S04":["door_open","door_closed","slot","drawer"],"S05":["mortar","bottle","scales"],"S06":["basket"]}
 	for id: String in required:
+		if settings.version == 3 and data.scenes[id].get("layer_format") == "aligned_full_canvas":
+			continue
 		for key: String in required[id]:
 			if not data.scenes[id].layers.has(key):
 				return false
@@ -118,11 +228,12 @@ static func cover_rect(available: Vector2, canvas: Vector2) -> Rect2:
 	var fitted := canvas*factor
 	return Rect2((available-fitted)*0.5,fitted)
 
-func setup(page: String) -> void:
-	config = load_config()
+func setup(page: String, supplied_config: Dictionary = {}) -> void:
+	config = load_config() if supplied_config.is_empty() else (supplied_config.duplicate(true) if config_valid(supplied_config) else {})
 	if config.is_empty():
 		return
 	scene_id = config.scene_pages.get(page, "")
+	z_index = int(config.scene_settings.art_root_z) if config.scene_settings.version == 3 else 0
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	clip_contents = true
 	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
@@ -130,7 +241,9 @@ func setup(page: String) -> void:
 	for variant: String in ["day","night","closed"]:
 		if not scene.has(variant):
 			continue
-		var art := _image(scene[variant])
+		var art := _image(background_path(scene,variant,cabinet_state) if _aligned_scene() else scene[variant])
+		# All valid signed layer z values must remain in front of the backdrop.
+		art.z_index = -4096
 		art.modulate.a = 0.0
 		backgrounds[variant] = art
 		add_child(art)
@@ -138,12 +251,17 @@ func setup(page: String) -> void:
 		var layer: Dictionary = scene.layers[key]
 		if layer.get("display", "") in ["cell","hidden"]:
 			continue
-		var art := _image(layer.path,true,layer.get("source_region",[]))
+		var aligned: bool = _aligned_scene() and not layer.get("legacy",false)
+		var art := _image(layer_path(layer,current_period) if aligned else layer.path,not aligned,layer.get("source_region",[]))
 		art.name = key
+		if aligned:
+			art.z_index = int(layer.z_index)
+			art.set_meta("motion",layer.motion.duplicate(true))
 		layer_nodes[key] = art
 		add_child(art)
 		place(art,layer.rect)
-	resized.connect(_layout)
+	if not resized.is_connected(_layout):
+		resized.connect(_layout)
 	refresh()
 
 static func texture_for(path: String, source_region: Array = []) -> Texture2D:
@@ -195,6 +313,10 @@ func _layout() -> void:
 			var rectangle := projected_rect(row.rect)
 			row.node.position = rectangle.position
 			row.node.size = rectangle.size
+	for key: String in layer_nodes:
+		var layer: Dictionary = config.scenes[scene_id].layers[key]
+		if _aligned_scene() and not layer.get("legacy",false):
+			layer_nodes[key].pivot_offset = layer_pivot(layer,current_period,layer_nodes[key].size)
 	for row: Dictionary in hotspot_labels:
 		var point := projected_rect([row.position[0],row.position[1],1,1]).position
 		var label: Label = row.node
@@ -202,12 +324,19 @@ func _layout() -> void:
 		label.position = Vector2(clampf(point.x-label.size.x/2.0,0,maxf(0,size.x-label.size.x)),clampf(point.y,0,maxf(0,size.y-label.size.y)))
 		label.visible = not label_occluders.any(func(occluder: Control) -> bool: return is_instance_valid(occluder) and occluder.is_visible_in_tree() and occluder.get_global_rect().intersects(label.get_global_rect()))
 
+func interaction_z_index() -> int:
+	var foreground_z := 0
+	for art: CanvasItem in layer_nodes.values():
+		foreground_z = maxi(foreground_z,art.z_index)
+	return foreground_z+1
+
 func hotspot(key: String, callback: Callable) -> Button:
 	var entry: Dictionary = config.scenes[scene_id].hotspots[key]
 	var button := UI.button("",callback)
 	button.name = "Hotspot_"+key
 	button.tooltip_text = entry.label
 	button.set_meta("decorative_hotspot",true)
+	button.z_index = mini(interaction_z_index(),4096)
 	for state: String in ["normal","hover","pressed","disabled","focus"]:
 		button.add_theme_stylebox_override(state,StyleBoxEmpty.new())
 	button.custom_minimum_size = Vector2.ZERO
@@ -217,6 +346,7 @@ func hotspot(key: String, callback: Callable) -> Button:
 	place(button,entry.rect)
 	if entry.get("display","button") != "transparent":
 		var label := UI.label(entry.label,int(config.scene_settings.hotspot_font_size))
+		label.z_index = button.z_index
 		label.name = "HotspotLabel_"+key
 		label.autowrap_mode = TextServer.AUTOWRAP_OFF
 		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -234,6 +364,11 @@ func refresh() -> void:
 	var snapshot: Dictionary = game.player_snapshot()
 	var next := period(config,scene_id,int(snapshot.get("clock_minutes",config.scene_settings.day_minute)))
 	var previous := current_period
+	if _aligned_scene():
+		for variant: String in backgrounds:
+			var texture := texture_for(background_path(config.scenes[scene_id],variant,cabinet_state))
+			if backgrounds[variant].texture != texture:
+				backgrounds[variant].texture = texture
 	if next != current_period:
 		if fade != null and fade.is_running():
 			fade.kill()
@@ -247,6 +382,10 @@ func refresh() -> void:
 		current_period = next
 	for key: String in layer_nodes:
 		var layer: Dictionary = config.scenes[scene_id].layers[key]
+		if _aligned_scene() and not layer.get("legacy",false):
+			var texture: Texture2D = texture_for(layer_path(layer,current_period))
+			if layer_nodes[key].texture != texture:
+				layer_nodes[key].texture = texture
 		layer_nodes[key].visible = layer.get("state",cabinet_state) == cabinet_state
 		var alpha := 1.0 if current_period in layer.get("periods",[current_period]) else 0.0
 		if next != previous and not previous.is_empty():
@@ -254,3 +393,28 @@ func refresh() -> void:
 		elif previous.is_empty() or fade == null or not fade.is_running():
 			layer_nodes[key].modulate.a = alpha
 	_layout()
+
+static func background_path(scene: Dictionary, scene_period: String, state: String) -> String:
+	var states: Variant = scene.get("state_backgrounds",{})
+	if states is Dictionary and states.get(state) is Dictionary and states[state].get(scene_period) is String:
+		return states[state][scene_period]
+	return scene[scene_period]
+
+static func layer_path(layer: Dictionary, scene_period: String) -> String:
+	var variants: Dictionary = layer.variants if layer.get("variants") is Dictionary else {}
+	return variants.get(scene_period,variants.get("night",layer.path) if scene_period == "closed" else layer.path)
+
+static func layer_pivot(layer: Dictionary, scene_period: String, rendered_size: Vector2) -> Vector2:
+	var transforms: Dictionary = layer.get("variant_transforms",{})
+	var selected := scene_period
+	if selected == "closed" and not layer.get("variants",{}).has("closed"):
+		selected = "night"
+	var transform: Dictionary = transforms.get(selected,layer.get("source_transform",{}))
+	var reference := Vector2(layer.native_size[0],layer.native_size[1])
+	var native: Array = transform.get("native_size",layer.native_size)
+	var pivot := Vector2(layer.pivot_px[0],layer.pivot_px[1])/reference*Vector2(native[0],native[1])
+	var crop: Array = transform.get("source_crop",[0,0,native[0],native[1]])
+	return rendered_size*(pivot-Vector2(crop[0],crop[1]))/Vector2(crop[2]-crop[0],crop[3]-crop[1])
+
+func _aligned_scene() -> bool:
+	return config.scene_settings.version == 3 and config.scenes[scene_id].get("layer_format") == "aligned_full_canvas"
