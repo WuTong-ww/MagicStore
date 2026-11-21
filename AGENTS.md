@@ -12,7 +12,7 @@
    6. 游戏内文字一律简体中文。技术 ID 默认不显示。
    7. 美术资源只作底图与装饰，任何数字、名字、状态都由 Godot 控件动态绘制，不烘焙在图里。
    8. 新增的外部资源必须在 docs/third-party.md 登记来源 URL、授权、作者与 SHA256；自生成的图在 assets/ART_ASSET_MANIFEST.json 登记提示词与版本。
-   9. 新增 .png/.ogg/.ttf 等二进制文件走 Git LFS（先在 .gitattributes 加规则）。
+   9. 按用户2026-11-21新指令：.png/.ogg/.ttf等二进制文件使用普通Git上传，不使用Git LFS；.gitattributes须停用对应LFS过滤器。不得改写main。
    10. 不确定的设计问题，写进回报的「待确认」而不是自行决定。
 
    ## 每次任务完成前必做

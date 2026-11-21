@@ -6,11 +6,13 @@
 *.json text eol=lf
 *.md text eol=lf
 *.ps1 text eol=crlf
-*.ttf filter=lfs diff=lfs merge=lfs -text
-*.png filter=lfs diff=lfs merge=lfs -text
-*.ogg filter=lfs diff=lfs merge=lfs -text
-*.avi filter=lfs diff=lfs merge=lfs -text
-*.wav filter=lfs diff=lfs merge=lfs -text
+*.py text eol=lf
+# User instruction, 2026-11-21: store assets in ordinary Git, without LFS.
+*.ttf binary -filter
+*.png binary -filter
+*.ogg binary -filter
+*.avi binary -filter
+*.wav binary -filter
 *.zip binary -filter
 # Preserve upstream license bytes so the recorded SHA256 survives checkout.
 assets/audio/KENNEY-LICENSE.txt -text
@@ -19,4 +21,3 @@ assets/fonts/LXGWWenKai-OFL.txt -text
 # their original line endings so checkout cannot invalidate their SHA256.
 assets/_incoming/**/receipt.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 assets/generated_scenes/v3_real/**/receipt.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
-* !text !filter !merge !diff

@@ -4,6 +4,8 @@
 
 当前内容、数值配置和已验证范围见[功能清单](docs/features.md)。
 
+第二轮已验收内容在 `codex/round2` 分支，素材使用普通 Git 文件，无需 Git LFS。上传范围、原提交映射和验收边界见[本次上传快照](docs/codex/UPLOAD_STATUS.md)；`main` 保持不变。
+
 此前针对林照晚的 84 次真实交谈，以及最终 14 次平均等待 3.14 秒的测量范围，见[早期对白实测](docs/live-dialogue-evaluation.md)。原创新人物与四模型切换另行验证，结果见[新来客流程](docs/people-generation.md)及[接口切换验证](docs/api-model-switch.md)，不能将林照晚的旧数据视为所有模型与人物的表现。
 
 新增[原创新来客流程](docs/people-generation.md)：后台并发生成完整人设与专属案例，独立审核后入档并安排到店；支持熟人介绍、正式回访和跨次共同记忆。并发与客流配额留在后台配置，游戏只呈现人物和经营流程。

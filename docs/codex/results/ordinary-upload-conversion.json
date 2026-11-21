@@ -1,0 +1,54 @@
+{
+  "commits": [
+    {
+      "old": "ab201e748d3e4dff349becc0b9d27cb65cadfa94",
+      "new": "e07dfff45785fb5d988b6b9eb6352e5e3c0dfc17",
+      "files": 564,
+      "materialized_paths": 39,
+      "zero_lfs_pointers": true,
+      "code_and_other_bytes_identical": true,
+      "author_committer_message_preserved": true
+    },
+    {
+      "old": "10284b99cc636f9b21ed8a6ab6a404aba81c371c",
+      "new": "b5797d226ba634d5e53f1cc4a16e2ef949cd5598",
+      "files": 591,
+      "materialized_paths": 43,
+      "zero_lfs_pointers": true,
+      "code_and_other_bytes_identical": true,
+      "author_committer_message_preserved": true
+    },
+    {
+      "old": "0847036f02c385ad594070487b6b9d3c3612b119",
+      "new": "a6ba49677d50e738a7a7ae1dc3288a8efe8a360f",
+      "files": 593,
+      "materialized_paths": 43,
+      "zero_lfs_pointers": true,
+      "code_and_other_bytes_identical": true,
+      "author_committer_message_preserved": true
+    },
+    {
+      "old": "11a0e1a38b670ef1bbe13a573ac28808c158c4d1",
+      "new": "4789a5bbe8a1d7c3ff676ee9a72fb3e872a73d97",
+      "files": 605,
+      "materialized_paths": 43,
+      "zero_lfs_pointers": true,
+      "code_and_other_bytes_identical": true,
+      "author_committer_message_preserved": true
+    },
+    {
+      "old": "0b62df428403bc5fcf95d1cc9894d07b9eaf419f",
+      "new": "56d09b197cf766ba1be1382c6d7da54e6aaf0110",
+      "files": 4013,
+      "materialized_paths": 1729,
+      "zero_lfs_pointers": true,
+      "code_and_other_bytes_identical": true,
+      "author_committer_message_preserved": true
+    }
+  ],
+  "unique_materialized_blobs": 1275,
+  "source_cache_restored_from_verified_blobs": 1275,
+  "additional_worktree_cache_objects_restored": 166,
+  "main_unchanged": true,
+  "no_game_code_or_scene_config_changed": true
+}
