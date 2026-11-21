@@ -2,6 +2,20 @@
 
 > 2026-11-21策划审阅：**策划否决：太冷清**。以下是旧绘本风轮次的历史计划、评分与证据，不代表v3定稿。a1r_pilot已移至本地assets/_incoming/a1r_pilot_rejected/；旧画及分层中间文件不进入clean分支。v3将从原始v2 S02_day编辑生成三候选，采用用户新十项清单，不沿用旧“道具少于15件”标准。
 
+## 当前计划：v3重做（2026-11-22）
+
+目标：不透明广告颜料的传统动画手绘背景，丰富而整洁，主光合理；正式v2只作输入和回退，不移动或删除。输入为实际存在的assets/generated_scenes/v2/S02_day.png，以docs/art/style_v3.md的V3_EDIT执行内置图像编辑，三候选保存assets/_incoming/a1r_v3_pilot/。逐项实际打开评分，每项1分，8分以上合格；每图最多4轮，记录所有失败及最高分选择，不等待人审。
+
+选定后用同样图生图方式改S01–S07白日，夜灯从对应白日定稿编辑，另S01打烊、S04开合变体；S04层板清空。每图十项给分、AI痕迹检查，不合格最多4轮。仅自评通过的定稿与运行副本进入Git；未过图保留incoming并列人工项，不能以旧绘本冒充v3。
+
+改动文件：assets/ART_ASSET_MANIFEST.json、data/art/既有层配置与新版本注册数据、data/shop/visuals.json、docs/features.md、tools/ART_PIPELINE.md；复用tools/art/real_scene_layers.py、register_real_scenes.py、import_scene_runtime.py与regen_art.ps1，不重写工具链。定稿建议使用assets/generated_scenes/v3_final/与runtime/v3_final/；mask/候选/补底中间物及逐层JSONL只放本地incoming/审计目录。提示词、输入、参考、实际尺寸和SHA均登记紧凑清单，支持-Style v3及显式参考图路径。
+
+分层验收：按手册每场景动件，原生同幅硬mask→1px羽化扣层→6px扩区参考局部重绘补底；单层与全层叠回按data/art/pipeline.json阈值做真实像素差。单独查看每个透明层和补底，几何通过不等于美术通过。生成器实际尺寸如不足1920×1080才Lanczos放大，并写真实倍数，不冒称原生。无新增依赖/付费服务/存档变更。
+
+每轮验收：完整run.ps1 -Test；真实shop_ui及分层预览1280×720/1920×1080；root逐张打开并写五项通用检查和本任务十项理由。最多3轮自检；尚不能通过就部分完成并列明原因继续A2R。提交每任务最多6张质量85 JPG，其余PNG本地。最终审阅包追加所有分数、S02三候选选择、未达8分图与同场景前后对比路径。
+
+以下旧v2计划为历史，不覆盖本节。
+
 **目标**：按手册v2制作七场景昼/夜与S01打烊版，保留三候选评分；以真实同位扣图、补底和重组证据支持A6动态。G3已在11a0e1a全绿，开始本任务；按最新指令只本地提交。
 
 **依据**：HANDBOOK第二轮美术方向、动态表、A1R；用户覆盖“试点等审”为自主评分选择，生成图每张最多4次。
