@@ -55,6 +55,228 @@ class CompactRegenTests(unittest.TestCase):
         return {"path": path, "sha256": hashlib.sha256(target.read_bytes()).hexdigest(),
                 "dim": [16, 12], "prompt": "RETIRED OLD STYLE INSTRUCTIONS MUST NOT BE USED"}
 
+    def formal_scene(self, scene, period, state=None):
+        suffix = period + ("_" + state if state else "")
+        row = self.image_record(f"assets/generated_scenes/v3_final/{scene}/{suffix}/v3r1/C.png")
+        row.update(group="scenes", scene_id=scene, period=period)
+        if state:
+            row["state"] = state
+        return row
+
+    def formal_slice(self, composite, operation="extract_layer"):
+        suffix = "layers/door_open.png" if operation == "extract_layer" else "B_all.png"
+        row = self.image_record(composite["path"].removesuffix("C.png") + suffix)
+        row.update(group="slices", operation=operation, composite_source=composite["path"],
+                   processing_script="tools/art/real_scene_layers.py", local_spec=".tools/day_layers.json")
+        return row
+
+    def use_formal_rows(self, *rows):
+        self.manifest["assets"] = list(rows)
+        self.manifest["runtime_copies"] = []
+
+    def test_formal_c_night_metadata_pairs_the_same_scene_and_state_day(self):
+        module = implementation()
+        rows = [self.formal_scene("S04", period, state)
+                for state in ("open", "closed") for period in ("day", "night")]
+        self.use_formal_rows(*rows)
+        tasks = module.build_queue(self.root, self.manifest, "v3", "scenes")["tasks"]
+        for state in ("open", "closed"):
+            day = next(t for t in tasks if f"/day_{state}/" in t["previous_source_path"])
+            night = next(t for t in tasks if f"/night_{state}/" in t["previous_source_path"])
+            with self.subTest(state=state):
+                self.assertTrue(night["arguments"]["prompt"].startswith("USER V3 NIGHT"))
+                self.assertEqual(night["depends_on"], [day["source_destination"]])
+                self.assertFalse(night["can_generate"])
+                self.assertIn(str((self.root / day["source_destination"]).resolve()),
+                              night["arguments"]["referenced_image_paths"])
+
+    def test_formal_s01_closed_uses_closed_template_and_new_night(self):
+        module = implementation()
+        self.use_formal_rows(*(self.formal_scene("S01", p) for p in ("day", "night", "closed")))
+        self.manifest["style_profiles"]["v3"]["templates"]["closed"] = "USER V3 CLOSED. Shut the shop."
+        tasks = module.build_queue(self.root, self.manifest, "v3", "scenes")["tasks"]
+        night = next(t for t in tasks if "/night/" in t["previous_source_path"])
+        closed = next(t for t in tasks if "/closed/" in t["previous_source_path"])
+        self.assertTrue(closed["arguments"]["prompt"].startswith("USER V3 CLOSED"))
+        self.assertEqual(closed["depends_on"], [night["source_destination"]])
+        self.assertFalse(closed["can_generate"])
+
+    def test_formal_closed_missing_template_is_pending_not_day_repaint(self):
+        module = implementation()
+        self.use_formal_rows(*(self.formal_scene("S01", p) for p in ("day", "night", "closed")))
+        queue = module.build_queue(self.root, self.manifest, "v3", "scenes")
+        self.assertEqual(queue["status"], "pending_templates")
+        self.assertEqual(queue["missing_templates"], ["closed"])
+        self.assertEqual(queue["tasks"], [])
+
+    def test_formal_night_never_borrows_day_from_another_state(self):
+        module = implementation()
+        self.use_formal_rows(self.formal_scene("S04", "day", "closed"),
+                             self.formal_scene("S04", "night", "open"))
+        with self.assertRaisesRegex(ValueError, "day"):
+            module.build_queue(self.root, self.manifest, "v3", "scenes")
+
+    def test_formal_processing_rows_are_offline_without_room_templates(self):
+        module = implementation()
+        composite = self.formal_scene("S04", "day", "open")
+        layer = self.formal_slice(composite)
+        cleanplate = self.formal_slice(composite, "inpaint_cleanplate")
+        layer["mask_path"] = ".tools/missing_mask.png"
+        layer["source_receipt"] = ".tools/missing_old_audit.json"
+        self.use_formal_rows(composite, layer, cleanplate)
+        self.manifest["style_profiles"]["v3"]["templates"] = {}
+        queue = module.build_queue(self.root, self.manifest, "v3", "slices")
+        self.assertEqual(queue["tasks"], [])
+        self.assertEqual(queue["status"], "needs_mask_review")
+        self.assertEqual({t["operation"] for t in queue["offline_tasks"]},
+                         {"extract_layer", "inpaint_cleanplate"})
+        task = next(t for t in queue["offline_tasks"] if t["operation"] == "extract_layer")
+        self.assertEqual(task["status"], "needs_mask_review")
+        self.assertEqual(task["phase"], "awaiting_composite")
+        self.assertFalse(task["can_process"])
+        self.assertEqual(task["processing_script"], "tools/art/real_scene_layers.py")
+        self.assertEqual(task["local_spec"], ".tools/day_layers.json")
+        self.assertIn(".tools/day_layers.json", task["missing_paths"])
+        self.assertIn(".tools/missing_mask.png", task["missing_paths"])
+        self.assertIn(".tools/missing_old_audit.json", task["missing_paths"])
+        self.assertEqual(task["depends_on"], [
+            "assets/art_versions/v3/draft1/generated_scenes/v3_final/S04/day_open/v3r1/C.png"])
+
+    def test_formal_runtime_waits_for_its_processed_layer_not_composite(self):
+        module = implementation()
+        composite = self.formal_scene("S04", "day", "open")
+        layer = self.formal_slice(composite)
+        runtime = self.image_record("assets/generated_scenes/runtime/v3_final/S04/day_open/v3r1/layers/door_open.png")
+        self.use_formal_rows(composite, layer, runtime)
+        self.manifest["runtime_copies"] = [{"path": runtime["path"], "source_path": layer["path"]}]
+        queue = module.build_queue(self.root, self.manifest, "v3", "all")
+        self.assertEqual(len(queue["tasks"]), 1)
+        processed = next(t for t in queue["offline_tasks"] if t["operation"] == "extract_layer")
+        copied = next(t for t in queue["offline_tasks"] if t["operation"] == "runtime_copy")
+        self.assertEqual(processed["source_destination"],
+                         "assets/generated_scenes/v3_regen/draft1/S04/day_open/v3r1/layers/door_open.png")
+        self.assertEqual(copied["source_path"], processed["source_destination"])
+        self.assertEqual(copied["depends_on"], [processed["source_destination"]])
+        self.assertEqual(copied["runtime_path"],
+                         "assets/generated_scenes/runtime/v3_regen/draft1/S04/day_open/v3r1/layers/door_open.png")
+        self.assertNotEqual(copied["source_path"], queue["tasks"][0]["source_destination"])
+
+    def test_processing_runtime_aliases_preserve_additional_copy_destinations(self):
+        module = implementation()
+        composite = self.formal_scene("S04", "day", "open")
+        layer = self.formal_slice(composite)
+        runtime = self.image_record("assets/generated_scenes/runtime/v3_final/S04/day_open/v3r1/layers/door_open.png")
+        alias = self.image_record("assets/generated_scenes/runtime/extra/S04/day_open/v3r1/layers/door_open.png")
+        self.use_formal_rows(composite, layer, runtime, alias)
+        self.manifest["runtime_copies"] = [{"path": runtime["path"], "source_path": layer["path"]},
+                                           {"path": alias["path"], "source_path": runtime["path"]}]
+        queue = module.build_queue(self.root, self.manifest, "v3", "slices")
+        copies = [t for t in queue["offline_tasks"] if t["operation"] == "runtime_copy"]
+        self.assertEqual(len(copies), 2)
+        self.assertEqual(len({t["runtime_path"] for t in copies}), 2)
+        self.assertEqual({t["source_path"] for t in copies}, {
+            "assets/generated_scenes/v3_regen/draft1/S04/day_open/v3r1/layers/door_open.png"})
+        self.assertIn("assets/generated_scenes/runtime/v3_regen/draft1/S04/day_open/v3r1/layers/door_open.png",
+                      {t["runtime_path"] for t in copies})
+
+    def test_new_composite_and_old_spec_still_require_manual_mask_review(self):
+        module = implementation()
+        composite = self.formal_scene("S04", "day", "open")
+        layer = self.formal_slice(composite)
+        self.use_formal_rows(composite, layer)
+        for path, text in ((layer["processing_script"], "# existing offline CLI"),
+                           (layer["local_spec"], json.dumps({"original_path": composite["path"]}))):
+            target = self.root / path
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(text, encoding="utf-8")
+        self.image_record("assets/art_versions/v3/draft1/generated_scenes/v3_final/S04/day_open/v3r1/C.png")
+        queue = module.build_queue(self.root, self.manifest, "v3", "slices")
+        self.assertEqual(len(queue["offline_tasks"]), 1)
+        task = queue["offline_tasks"][0]
+        self.assertEqual(task["phase"], "mask_review")
+        self.assertEqual(task["status"], "needs_mask_review")
+        self.assertFalse(task["can_process"])
+        self.assertEqual(task["missing_paths"], [])
+
+    def test_formal_processing_references_keep_existing_safe_path_boundary(self):
+        module = implementation()
+        composite = self.formal_scene("S04", "day", "open")
+        for field in ("composite_source", "processing_script", "local_spec", "mask_path", "source_receipt"):
+            layer = self.formal_slice(composite)
+            layer[field] = "../escape"
+            self.use_formal_rows(composite, layer)
+            with self.subTest(field=field), self.assertRaisesRegex(ValueError, "path"):
+                module.build_queue(self.root, self.manifest, "v3", "slices")
+
+    def test_scene_generation_appends_constraints_from_asset_data(self):
+        module = implementation()
+        for scene, state, constraints in (
+                ("S04", "open", "Keep every shelf empty and both cabinet doors open."),
+                ("S02", None, "Preserve the room-specific window layout.")):
+            row = self.formal_scene(scene, "day", state)
+            row["regeneration_constraints"] = constraints
+            self.use_formal_rows(row)
+            queue = module.build_queue(self.root, self.manifest, "v3", "scenes")
+            prompt = queue["tasks"][0]["arguments"]["prompt"]
+            with self.subTest(scene=scene):
+                self.assertTrue(prompt.startswith("USER V3 EDIT"))
+                self.assertTrue(prompt.endswith(constraints))
+
+    def test_scene_constraints_reject_non_string_data(self):
+        module = implementation()
+        row = self.formal_scene("S04", "day", "open")
+        row["regeneration_constraints"] = {"shelves": "empty"}
+        self.use_formal_rows(row)
+        with self.assertRaisesRegex(ValueError, "constraints"):
+            module.build_queue(self.root, self.manifest, "v3", "scenes")
+
+    def test_new_native_c_requires_scene_and_period_metadata(self):
+        module = implementation()
+        for period in ("day", "night"):
+            for removed in (("scene_id",), ("period",), ("scene_id", "period")):
+                row = self.formal_scene("S02", period)
+                for field in removed:
+                    row.pop(field)
+                self.use_formal_rows(row)
+                with self.subTest(period=period, removed=removed), self.assertRaisesRegex(ValueError, "identity|metadata"):
+                    module.build_queue(self.root, self.manifest, "v3", "scenes")
+
+    def test_native_c_metadata_validation_uses_asset_path_with_style_inputs(self):
+        module = implementation()
+        row = self.formal_scene("S02", "night")
+        row["inputs"] = [self.style["path"]]
+        for field in ("scene_id", "period", "state"):
+            row.pop(field, None)
+        self.use_formal_rows(row)
+        with self.assertRaisesRegex(ValueError, "identity|metadata"):
+            module.build_queue(self.root, self.manifest, "v3", "scenes")
+
+    def test_s04_native_c_requires_explicit_open_or_closed_state(self):
+        module = implementation()
+        for period in ("day", "night"):
+            for value in (None, "missing"):
+                row = self.formal_scene("S04", period, "open")
+                if value == "missing":
+                    row.pop("state")
+                else:
+                    row["state"] = value
+                self.use_formal_rows(row)
+                with self.subTest(period=period, state=value), self.assertRaisesRegex(ValueError, "state"):
+                    module.validate_compact_manifest(self.root, self.manifest)
+
+    def test_explicit_slice_operation_never_falls_back_to_imagegen(self):
+        module = implementation()
+        composite = self.formal_scene("S04", "day", "open")
+        for operation in ("extract_layer_typo", "generate", None):
+            layer = self.formal_slice(composite)
+            if operation is None:
+                layer.pop("operation")
+            else:
+                layer["operation"] = operation
+            self.use_formal_rows(composite, layer)
+            with self.subTest(operation=operation), self.assertRaisesRegex(ValueError, "operation"):
+                module.build_queue(self.root, self.manifest, "v3", "slices")
+
     def test_missing_or_unselected_v3_profile_is_explicit_pending_without_generation(self):
         module = implementation()
         for profile in (None, {"status": "pending"}, {"status": "retired"}):

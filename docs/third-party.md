@@ -34,7 +34,7 @@ Godot Engine **4.6.3.stable.official.7d41c59c4**，MIT。官方引擎与 Windows
 | 文件 | SHA256 |
 | --- | --- |
 | `assets/fonts/LXGWWenKai-Regular.ttf` | `2D73EEA94AD808999D90C0000C239A84A33B09D4BC6AB6C5B8BBF1EDA8A7FC8B` |
-| `assets/fonts/LXGWWenKai-OFL.txt` | `1A25E35DA1031C6C3436FDE545BB9CB5ACA954E9873AFE510C834B8B79BD21A0` |
+| `assets/fonts/LXGWWenKai-OFL.txt` | `CB973995026E28C931886A1D127397152187E03E53B2F71864E86CEE8C25E54A` |
 
 界面音效：作者 Kenney；来源 [Interface Sounds 1.0 官方页](https://kenney.nl/assets/interface-sounds)，Creative Commons Zero（CC0 1.0）。从官方免费包抽取以下六个未修改的 Ogg 文件，仅重命名；许可保留于 `assets/audio/KENNEY-LICENSE.txt`（SHA256 `F7966C773BBED0ECA6A9C75081C44A178B38EAE112724DBB5FDFBD4192D118A9`）。
 

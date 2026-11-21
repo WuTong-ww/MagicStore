@@ -2,8 +2,9 @@
 
 ## Clean branch and style v3
 
-The picture-book pilot was rejected. Production still uses the original v2
-fallback art; `scene_preview.json`, `scene_review.json`, and the old real-scene
+The picture-book pilot was rejected. Production now uses the reviewed v3
+paintings with six accepted cutouts; other objects remain in their static C.
+All 56 original v2 inputs remain unchanged. `scene_preview.json`, `scene_review.json`, and the old real-scene
 registry reference `data/art/local_audit.json` as retired local history.
 Detailed history lives only in ignored JSONL. Missing optional JSONL is an
 explicit SKIP, while corrupt metadata fails; production source/runtime pixels
@@ -17,7 +18,8 @@ work-manifest format remains supported for isolated processing fixtures.
 
 `regen_art.ps1 -Style v3 -Only scenes` resolves `style_profiles.v3`. A profile
 contains `status`, `reference: {path, sha256}`, optional `revision`, and
-`templates: {edit, night, item}`. Only the supplied new templates form generation
+`templates: {edit, night, closed, item}` (portrait is required separately for A4).
+Only the supplied new templates form generation
 prompts. Missing pilot/reference/templates produces an honest pending queue;
 it does not reactivate rejected art. An explicit `-Style <path>` records that
 new reference's real SHA. Native inputs are read-only and outputs are versioned.
@@ -36,11 +38,14 @@ cannot create duplicate Godot resource UIDs.
 
 ## Real scene processing and review
 
-The current production visual configuration remains v2. The engineering
-preview is `data/art/scene_preview.json`; the independently generated real-art
-preview is `data/art/scene_review.json`. Neither is an automatic activation.
-The selected 17 scene/period/state receipts are explicit in
-`data/art/real_scene_registry.json`; their `art_passed:false` is intentional.
+The current production configuration is `data/shop/visuals.json`, with 17 v3
+scene/state/period combinations. Only S03 sofa, S04 closed door and S07 water
+have accepted day/night cutouts. S04 open doors are rendered from complete C;
+the hidden `door_open` alias is semantic compatibility, not a cutout. See
+`docs/codex/results/A1R-v3-art-review.json` for actual review scores and limits.
+The old engineering and real-art previews and registry are retired local
+history, not current production approval. The commands below describe that
+legacy processing contract; use each actual versioned v3 spec for new work.
 
 ```powershell
 python -B tools/art/real_scene_layers.py --spec assets/_incoming/a1r_real/S02/day_layers.json
@@ -65,6 +70,24 @@ clouds, water, and seated portraits cannot cover the paper/chrome UI.
 The detailed review and remaining edge/cleanplate defects are recorded in
 `docs/codex/plans/A1R.md`. Do not treat static recomposition success as approval
 of independent motion, or overwrite v2 with an engineering placeholder.
+
+Native scene assets use `group: scenes`, `scene_id`, `period` and (for S04)
+`state`. A night C depends on its matching new day C; S01 closed depends on
+the new night C and requires the closed template. Derived B_all/Li use
+`group: slices`, `operation: inpaint_cleanplate|extract_layer`,
+`composite_source`, `processing_script`, and `local_spec`. They are never
+independent image-generation tasks. `-Only slices` returns offline tasks
+with `needs_mask_review` and `can_process:false` until the new C and reviewed
+local masks exist. Original outputs are immutable and new outputs are
+versioned. Missing ignored masks/specs on another checkout are explicitly
+pending; they are not silently approved.
+
+All 1099 rejected processing files were moved, with SHA verification, into
+`assets/_incoming/a1r_v3_processing_evidence/`; its `relocation-index.jsonl`
+maps historical paths to actual local paths. Processing receipts retain
+their original paths and failure status. The ignored
+`docs/codex/results/art_audit/v3-current.jsonl` preserves the full history;
+the compact formal manifest contains only selected images and provenance.
 
 The PowerShell entry point uses only an existing Python with Pillow. It does
 not call a generator, require an API key, install packages, or change the live

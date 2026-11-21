@@ -7,6 +7,7 @@
 *.md text eol=lf
 *.ps1 text eol=crlf
 *.py text eol=lf
+assets/items/inventory-reference.svg text eol=lf
 # User instruction, 2026-11-21: store assets in ordinary Git, without LFS.
 *.ttf binary -filter
 *.png binary -filter

@@ -1,0 +1,498 @@
+{
+  "status": "inspected_only_reviewed_finals_no_intermediates",
+  "pending_binary_bytes": 119811515,
+  "pending_unique_binary_blobs": 59,
+  "authorized_final_png_paths": 59,
+  "review_jpg_paths": 6,
+  "prohibited_index_or_history_paths": 0,
+  "lfs_filters": 0,
+  "native_v2_files_sha_unchanged": 56,
+  "manifest_bytes": 229143,
+  "clean_build_initial_binary_bytes": 81098416,
+  "clean_history_with_A1R_binary_bytes": 203137565,
+  "raw_clean_helper_failed_checks": [
+    "new_binary_total",
+    "pending_commit_binary"
+  ],
+  "policy_interpretation": "Initial CLEAN step <150MB was completed before art. Current task exceeds100MB and was stopped for this explicit inspection as required; every new binary is an approved final or review JPG. No hard per-task size cap or permission gate is added. Future tasks retain the same review rule.",
+  "pending_binary_blobs": [
+    {
+      "oid": "bfd9d41b57d345879b1ce00e5a5e2835ad751fde",
+      "bytes": 3864903,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/runtime/v3_final/S01/day/v3r3/C.png"
+      ]
+    },
+    {
+      "oid": "ddc5b623b83cc3fd8706accbeab779e146dfaa8f",
+      "bytes": 3797897,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/runtime/v3_final/S07/day/v3r3_selected/B_all.png",
+        "assets/generated_scenes/runtime/v3_final/S07/day/v3r3_selected/C.png"
+      ]
+    },
+    {
+      "oid": "3f779b930bbb8175286b5cebfa6bf19f1533f68f",
+      "bytes": 3682883,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/runtime/v3_final/S06/day/v3r3/C.png"
+      ]
+    },
+    {
+      "oid": "98091b303a7dc72d507ed2f859b8c0257b710320",
+      "bytes": 3589958,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/runtime/v3_final/S05/day/v3r2/C.png"
+      ]
+    },
+    {
+      "oid": "a80ed7ef924ff01603813346951d2d445efb1d1a",
+      "bytes": 3515718,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/runtime/v3_final/S02/day/v3r3/C.png"
+      ]
+    },
+    {
+      "oid": "0932a389b35618fbc07240f3f17e7fb8155cf448",
+      "bytes": 3509365,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/runtime/v3_final/S03/day/v3r3_subset/B_all.png",
+        "assets/generated_scenes/runtime/v3_final/S03/day/v3r3_subset/C.png"
+      ]
+    },
+    {
+      "oid": "2b36f1b3922b6bd1e1e94fdf276db58178f88103",
+      "bytes": 3367284,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/runtime/v3_final/S01/night/v3r3/C.png"
+      ]
+    },
+    {
+      "oid": "abe6ae43776b449d959bb5a080731f0400d673ca",
+      "bytes": 3293603,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/runtime/v3_final/S05/night/v3r2/C.png"
+      ]
+    },
+    {
+      "oid": "1e3be11c925d27926b2feaf1fa9ac8942fa6dc64",
+      "bytes": 3214917,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/runtime/v3_final/S07/night/v3r3_selected/B_all.png",
+        "assets/generated_scenes/runtime/v3_final/S07/night/v3r3_selected/C.png"
+      ]
+    },
+    {
+      "oid": "f90fb15744d55102b4ae7cfd73ef40f629f48e7d",
+      "bytes": 3181194,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/runtime/v3_final/S01/closed/v3r3/C.png"
+      ]
+    },
+    {
+      "oid": "5ef832958ba97cf43d345d294651368a8bd8aac7",
+      "bytes": 3067305,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/runtime/v3_final/S02/night/v3r3/C.png"
+      ]
+    },
+    {
+      "oid": "0d24bec484a47d091367f9df7596b83f434a753f",
+      "bytes": 3052128,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/runtime/v3_final/S06/night/v3r3/C.png"
+      ]
+    },
+    {
+      "oid": "a7de274b853f4ad83b3b95888e08d048ff006879",
+      "bytes": 3034106,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S07/day/v3r3_selected/B_all.png"
+      ]
+    },
+    {
+      "oid": "b29c6fcd831074da64d91d886f87752ac39c63be",
+      "bytes": 2976801,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/runtime/v3_final/S04/day_open/v3r2/C.png"
+      ]
+    },
+    {
+      "oid": "2a4f4f107e5cc9684e7ef8398aef8325199a46b2",
+      "bytes": 2854466,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/runtime/v3_final/S03/night/v3r3_subset/B_all.png",
+        "assets/generated_scenes/runtime/v3_final/S03/night/v3r3_subset/C.png"
+      ]
+    },
+    {
+      "oid": "5b68db8d3bbcf5609b3e4fcef833aaf023d2a5d5",
+      "bytes": 2839929,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/runtime/v3_final/S04/day_closed/v3r3_subset/C.png"
+      ]
+    },
+    {
+      "oid": "b5a8a9de120a5f308fdd5adec03124cfad47b94a",
+      "bytes": 2810198,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S03/day/v3r3_subset/B_all.png"
+      ]
+    },
+    {
+      "oid": "48c389613f484078b7f1c1da03c29929c3b75159",
+      "bytes": 2809071,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S01/day/v3r3/C.png"
+      ]
+    },
+    {
+      "oid": "1bc37edbbd46c3187fa82caa105f456308e86fd0",
+      "bytes": 2783687,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/runtime/v3_final/S04/day_closed/v3r3_subset/B_all.png"
+      ]
+    },
+    {
+      "oid": "7e93c6b43c73d08b7145e4b3ad53ed88a89c5ed4",
+      "bytes": 2714047,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S07/day/v3r3_selected/C.png"
+      ]
+    },
+    {
+      "oid": "007551ce2407882234d9c6939f79d4425b0eb824",
+      "bytes": 2672940,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S06/day/v3r3/C.png"
+      ]
+    },
+    {
+      "oid": "6c904f5b3ca0bc1791e5d3737ff965cfb887957a",
+      "bytes": 2592680,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S05/day/v3r2/C.png"
+      ]
+    },
+    {
+      "oid": "9e0dceb3fb54f9770c35976d04f31be001038e9a",
+      "bytes": 2561738,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S07/night/v3r3_selected/B_all.png"
+      ]
+    },
+    {
+      "oid": "83fd88dcf8bc61b94c5949d477d64bcfdbe4ff26",
+      "bytes": 2558197,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/runtime/v3_final/S04/night_open/v3r2/C.png"
+      ]
+    },
+    {
+      "oid": "23e363381137962513e4dccd8895dc03bb7ac640",
+      "bytes": 2515201,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S03/day/v3r3_subset/C.png"
+      ]
+    },
+    {
+      "oid": "a05f30f0e7baed232263b00dbc6c4239d41dea05",
+      "bytes": 2505312,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+        "assets/generated_scenes/v3_final/style_reference.png"
+      ]
+    },
+    {
+      "oid": "a64921b6cdc96cf781623ca252999c16ab6b5d07",
+      "bytes": 2476257,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/runtime/v3_final/S04/night_closed/v3r3_subset/C.png"
+      ]
+    },
+    {
+      "oid": "838048bfa19467ed390525b7a1b60ec589680821",
+      "bytes": 2441830,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/runtime/v3_final/S04/night_closed/v3r3_subset/B_all.png"
+      ]
+    },
+    {
+      "oid": "0615f5777a63298f588cf900797281d13c4f918d",
+      "bytes": 2344840,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S05/night/v3r2/C.png"
+      ]
+    },
+    {
+      "oid": "e1479e387314aaa35417eb3dcffa86cfe5333091",
+      "bytes": 2344431,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S01/night/v3r3/C.png"
+      ]
+    },
+    {
+      "oid": "07768584896390916a80ad86358c63e934acfeda",
+      "bytes": 2277023,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S03/night/v3r3_subset/B_all.png"
+      ]
+    },
+    {
+      "oid": "5480bd9753e153bcb63a77753b7a53b401108924",
+      "bytes": 2244049,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S07/night/v3r3_selected/C.png"
+      ]
+    },
+    {
+      "oid": "6ecd74fcffe5e327ecaae3c42f1fb5aac1d36aeb",
+      "bytes": 2223425,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S04/day_closed/v3r3_subset/B_all.png"
+      ]
+    },
+    {
+      "oid": "0eb47a014cf58a5604a780c1abd5c606322009da",
+      "bytes": 2211948,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S01/closed/v3r3/C.png"
+      ]
+    },
+    {
+      "oid": "14915f7f8ffe54852e621ccd544808deaa87171b",
+      "bytes": 2182411,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S06/night/v3r3/C.png"
+      ]
+    },
+    {
+      "oid": "f59da2cf53b80f4f01b1bc4c20f77e588e314445",
+      "bytes": 2169416,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S02/night/v3r3/C.png"
+      ]
+    },
+    {
+      "oid": "0288a26e383ca4f6c216a8e4f51fe2e06d147872",
+      "bytes": 2094280,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S04/day_open/v3r2/C.png"
+      ]
+    },
+    {
+      "oid": "ab42c5f6f9c2b6671fb688e00c5af34d841c4848",
+      "bytes": 2044553,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S03/night/v3r3_subset/C.png"
+      ]
+    },
+    {
+      "oid": "3fccbe9a1473c19c5c28506ffe09e2018b669999",
+      "bytes": 1997391,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S04/day_closed/v3r3_subset/C.png"
+      ]
+    },
+    {
+      "oid": "65397f29e4b8560c72f9aac78024d30ac8dac190",
+      "bytes": 1945988,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S04/night_closed/v3r3_subset/B_all.png"
+      ]
+    },
+    {
+      "oid": "9c2b236a015006f56886de0ffc46cb19d701c465",
+      "bytes": 1846575,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S04/night_open/v3r2/C.png"
+      ]
+    },
+    {
+      "oid": "e9b9b50865f1ec5687848aa183387a34ff79dfa1",
+      "bytes": 1799200,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S04/night_closed/v3r3_subset/C.png"
+      ]
+    },
+    {
+      "oid": "ccaab3a018b0b8946ef6add21a53b37ded6521d8",
+      "bytes": 851064,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/runtime/v3_final/S04/day_closed/v3r3_subset/layers/door_closed.png"
+      ]
+    },
+    {
+      "oid": "ccb4402bb90aa8e57f6c7082a65803ee667b69c5",
+      "bytes": 733741,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/runtime/v3_final/S04/night_closed/v3r3_subset/layers/door_closed.png"
+      ]
+    },
+    {
+      "oid": "08b950b029fc7382375e68ee9c969d726641d172",
+      "bytes": 673701,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S04/day_closed/v3r3_subset/layers/door_closed.png"
+      ]
+    },
+    {
+      "oid": "e4581e449f80ebc81ae2031892469a269a8e8a80",
+      "bytes": 583425,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S04/night_closed/v3r3_subset/layers/door_closed.png"
+      ]
+    },
+    {
+      "oid": "22328b32d4dd3ccf8f5b08a864ae638e4716e7b7",
+      "bytes": 462197,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/runtime/v3_final/S07/day/v3r3_selected/layers/water_mask.png"
+      ]
+    },
+    {
+      "oid": "d58daf3a21da0ad3bbadcdc679f62463d180769d",
+      "bytes": 401396,
+      "binary": true,
+      "paths": [
+        "docs/screenshots/round2/A1R/s02-v3-day-1920.jpg"
+      ]
+    },
+    {
+      "oid": "0449f09c8970d092890b82886f0d2ef7d7a164e1",
+      "bytes": 366810,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S07/day/v3r3_selected/layers/water_mask.png"
+      ]
+    },
+    {
+      "oid": "96cfe0465995a6d91beb83a678f27f4302d31a31",
+      "bytes": 366235,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/runtime/v3_final/S07/night/v3r3_selected/layers/water_mask.png"
+      ]
+    },
+    {
+      "oid": "defa094d0ffd9473e7dd95c4575869331e9f688b",
+      "bytes": 317036,
+      "binary": true,
+      "paths": [
+        "docs/screenshots/round2/A1R/s04-v3-open-day-1920-legacy-slot.jpg"
+      ]
+    },
+    {
+      "oid": "5a91e005edcea54ee3c154e446877c106e21ae64",
+      "bytes": 287822,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S07/night/v3r3_selected/layers/water_mask.png"
+      ]
+    },
+    {
+      "oid": "1dbf22ab85948688c7e18f79c6f50145a1ae7a84",
+      "bytes": 284461,
+      "binary": true,
+      "paths": [
+        "docs/screenshots/round2/A1R/s03-v3-night-1920.jpg"
+      ]
+    },
+    {
+      "oid": "a4cd4e063df3188ca8019164d356da8baf37a04b",
+      "bytes": 216007,
+      "binary": true,
+      "paths": [
+        "docs/screenshots/round2/A1R/s02-v3-day-1280.jpg"
+      ]
+    },
+    {
+      "oid": "4453c11986aa642a2964f4a21ac00ffb093e3b72",
+      "bytes": 130831,
+      "binary": true,
+      "paths": [
+        "docs/screenshots/round2/A1R/s04-v3-closed-night-1280.jpg"
+      ]
+    },
+    {
+      "oid": "de0232ad282955c3f50bc31c3c85f15c0fb104ca",
+      "bytes": 38785,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/runtime/v3_final/S03/day/v3r3_subset/layers/sofa_mask.png"
+      ]
+    },
+    {
+      "oid": "12207616fbfdc0a25547b971ea01ce364e224ba8",
+      "bytes": 33627,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/runtime/v3_final/S03/night/v3r3_subset/layers/sofa_mask.png"
+      ]
+    },
+    {
+      "oid": "2bcde86ee9222c473ebcf894b07b57bf90918ed7",
+      "bytes": 29619,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S03/day/v3r3_subset/layers/sofa_mask.png"
+      ]
+    },
+    {
+      "oid": "0e46f3506ddb9d8f139225b8fb75bbd6dbb758eb",
+      "bytes": 25613,
+      "binary": true,
+      "paths": [
+        "assets/generated_scenes/v3_final/S03/night/v3r3_subset/layers/sofa_mask.png"
+      ]
+    }
+  ],
+  "git_count_objects_vH": "count: 4905\nsize: 275.11 MiB\nin-pack: 4064\npacks: 2\nsize-pack: 1.12 GiB\nprune-packable: 2053\ngarbage: 3\nsize-garbage: 15.24 MiB"
+}

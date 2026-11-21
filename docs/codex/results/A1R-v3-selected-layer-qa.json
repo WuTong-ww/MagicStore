@@ -1,0 +1,558 @@
+{
+  "kind": "selected_actual_receipt_metrics",
+  "thresholds_unchanged": true,
+  "layers": [
+    {
+      "layer": "assets/generated_scenes/v3_final/S03/day/v3r3_subset/layers/sofa_mask.png",
+      "source": "assets/generated_scenes/v3_final/S03/day/v3r3_subset/C.png",
+      "receipt_original_path": "assets/generated_scenes/v3_final/S03/day/v3r3_subset/receipt.json",
+      "receipt_actual_path": "assets/_incoming/a1r_v3_processing_evidence/assets/generated_scenes/v3_final/S03/day/v3r3_subset/receipt.json",
+      "receipt_sha256": "14c7aa5680dae9f763727cd184f4e2c0bdb7049f20b3cd4492adde8b06d0e011",
+      "single_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 8684,
+            "samples": 26052,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 1077,
+            "samples": 3231,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "inpaint_ring": {
+            "pixels": 3432,
+            "samples": 10296,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1560159,
+            "samples": 4680477,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "all_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 8684,
+            "samples": 26052,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 1077,
+            "samples": 3231,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "inpaint_ring": {
+            "pixels": 3432,
+            "samples": 10296,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1560159,
+            "samples": 4680477,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "selected_art_review": "root actual transparent layer and C opened; accepted with documented static/preserve_base limits"
+    },
+    {
+      "layer": "assets/generated_scenes/v3_final/S03/night/v3r3_subset/layers/sofa_mask.png",
+      "source": "assets/generated_scenes/v3_final/S03/night/v3r3_subset/C.png",
+      "receipt_original_path": "assets/generated_scenes/v3_final/S03/night/v3r3_subset/receipt.json",
+      "receipt_actual_path": "assets/_incoming/a1r_v3_processing_evidence/assets/generated_scenes/v3_final/S03/night/v3r3_subset/receipt.json",
+      "receipt_sha256": "84f29b6e6fde134f5fbe4b9061614bbaebc2f8a87712e9dc5a23915e4b2e8be8",
+      "single_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 8684,
+            "samples": 26052,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 1077,
+            "samples": 3231,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "inpaint_ring": {
+            "pixels": 3432,
+            "samples": 10296,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1560159,
+            "samples": 4680477,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "all_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 8684,
+            "samples": 26052,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 1077,
+            "samples": 3231,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "inpaint_ring": {
+            "pixels": 3432,
+            "samples": 10296,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1560159,
+            "samples": 4680477,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "selected_art_review": "root actual transparent layer and C opened; accepted with documented static/preserve_base limits"
+    },
+    {
+      "layer": "assets/generated_scenes/v3_final/S04/day_closed/v3r3_subset/layers/door_closed.png",
+      "source": "assets/generated_scenes/v3_final/S04/day_closed/v3r3_subset/C.png",
+      "receipt_original_path": "assets/generated_scenes/v3_final/S04/day_closed/v3r3_subset/receipt.json",
+      "receipt_actual_path": "assets/_incoming/a1r_v3_processing_evidence/assets/generated_scenes/v3_final/S04/day_closed/v3r3_subset/receipt.json",
+      "receipt_sha256": "eed1853b0e2df4775704b26ec1600bcdc492a7be932add6884ff4b45262ee7b2",
+      "single_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 418320,
+            "samples": 1254960,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 5368,
+            "samples": 16104,
+            "mae": 0.007327372081470442,
+            "p95": 0,
+            "max_error": 3
+          },
+          "inpaint_ring": {
+            "pixels": 16296,
+            "samples": 48888,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1133368,
+            "samples": 3400104,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "all_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 418320,
+            "samples": 1254960,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 5368,
+            "samples": 16104,
+            "mae": 0.007327372081470442,
+            "p95": 0,
+            "max_error": 3
+          },
+          "inpaint_ring": {
+            "pixels": 16296,
+            "samples": 48888,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1133368,
+            "samples": 3400104,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "selected_art_review": "root actual transparent layer and C opened; accepted with documented static/preserve_base limits"
+    },
+    {
+      "layer": "assets/generated_scenes/v3_final/S04/night_closed/v3r3_subset/layers/door_closed.png",
+      "source": "assets/generated_scenes/v3_final/S04/night_closed/v3r3_subset/C.png",
+      "receipt_original_path": "assets/generated_scenes/v3_final/S04/night_closed/v3r3_subset/receipt.json",
+      "receipt_actual_path": "assets/_incoming/a1r_v3_processing_evidence/assets/generated_scenes/v3_final/S04/night_closed/v3r3_subset/receipt.json",
+      "receipt_sha256": "13eff7a9ed3e5a02e878ecb964d644c7e37f46ce918be63b5530675aa6b73d68",
+      "single_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 418320,
+            "samples": 1254960,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 5368,
+            "samples": 16104,
+            "mae": 0.00527819175360159,
+            "p95": 0,
+            "max_error": 6
+          },
+          "inpaint_ring": {
+            "pixels": 16296,
+            "samples": 48888,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1133368,
+            "samples": 3400104,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "all_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 418320,
+            "samples": 1254960,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 5368,
+            "samples": 16104,
+            "mae": 0.00527819175360159,
+            "p95": 0,
+            "max_error": 6
+          },
+          "inpaint_ring": {
+            "pixels": 16296,
+            "samples": 48888,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1133368,
+            "samples": 3400104,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "selected_art_review": "root actual transparent layer and C opened; accepted with documented static/preserve_base limits"
+    },
+    {
+      "layer": "assets/generated_scenes/v3_final/S07/day/v3r3_selected/layers/water_mask.png",
+      "source": "assets/generated_scenes/v3_final/S07/day/v3r3_selected/C.png",
+      "receipt_original_path": "assets/generated_scenes/v3_final/S07/day/v3r3_selected/receipt.json",
+      "receipt_actual_path": "assets/_incoming/a1r_v3_processing_evidence/assets/generated_scenes/v3_final/S07/day/v3r3_selected/receipt.json",
+      "receipt_sha256": "9556ce3c9765e94aae0fb72ac0f2e0d0a156a705288181ccd9dc16ff19be45e9",
+      "single_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 216241,
+            "samples": 648723,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 3637,
+            "samples": 10911,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "inpaint_ring": {
+            "pixels": 11016,
+            "samples": 33048,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1342458,
+            "samples": 4027374,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "all_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 216241,
+            "samples": 648723,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 3637,
+            "samples": 10911,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "inpaint_ring": {
+            "pixels": 11016,
+            "samples": 33048,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1342458,
+            "samples": 4027374,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "selected_art_review": "root actual transparent layer and C opened; accepted with documented static/preserve_base limits"
+    },
+    {
+      "layer": "assets/generated_scenes/v3_final/S07/night/v3r3_selected/layers/water_mask.png",
+      "source": "assets/generated_scenes/v3_final/S07/night/v3r3_selected/C.png",
+      "receipt_original_path": "assets/generated_scenes/v3_final/S07/night/v3r3_selected/receipt.json",
+      "receipt_actual_path": "assets/_incoming/a1r_v3_processing_evidence/assets/generated_scenes/v3_final/S07/night/v3r3_selected/receipt.json",
+      "receipt_sha256": "9b5251ee8654148b20cf00a9e0e0a538a8c22601a6577880210603f08a630a86",
+      "single_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 216241,
+            "samples": 648723,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 3637,
+            "samples": 10911,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "inpaint_ring": {
+            "pixels": 11016,
+            "samples": 33048,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1342458,
+            "samples": 4027374,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "all_layer_qa": {
+        "passed": true,
+        "regions": {
+          "core": {
+            "pixels": 216241,
+            "samples": 648723,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "feather": {
+            "pixels": 3637,
+            "samples": 10911,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "inpaint_ring": {
+            "pixels": 11016,
+            "samples": 33048,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          },
+          "unedited": {
+            "pixels": 1342458,
+            "samples": 4027374,
+            "mae": 0.0,
+            "p95": 0,
+            "max_error": 0
+          }
+        },
+        "bounds": {
+          "core_max_error": 0,
+          "unedited_max_error": 0,
+          "inpaint_ring_max_error": 0,
+          "feather_mae": 3,
+          "feather_p95": 12,
+          "percentile": 0.95
+        },
+        "metric": "absolute RGB byte differences; MAE/P95 over channels within each nonempty ROI"
+      },
+      "selected_art_review": "root actual transparent layer and C opened; accepted with documented static/preserve_base limits"
+    }
+  ]
+}

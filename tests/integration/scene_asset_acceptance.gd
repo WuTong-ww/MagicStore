@@ -25,6 +25,17 @@ func png_pixels(path: String) -> Image:
 	var result := Image.new()
 	return result if result.load_png_from_buffer(FileAccess.get_file_as_bytes(path)) == OK else null
 
+func state_background_alias_matches(scene: Dictionary, layer: Dictionary, path: String, variant: String) -> bool:
+	# A hidden state key is an API alias for the actual full-room background,
+	# not a transparent foreground cutout. It must name that exact background.
+	if layer.get("display") != "hidden" or not scene.get("state_backgrounds") is Dictionary:
+		return false
+	var state: Variant = layer.get("state")
+	if not state is String or not scene.state_backgrounds.get(state) is Dictionary:
+		return false
+	var backgrounds: Dictionary = scene.state_backgrounds[state]
+	return path in backgrounds.values() if variant == "fallback" else backgrounds.get(variant) == path
+
 func run() -> void:
 	var config_path := Visual.CONFIG_PATH
 	var arguments := OS.get_cmdline_user_args()
@@ -68,6 +79,10 @@ func run() -> void:
 			var seen: Array = []
 			for variant: String in paths:
 				var path: String = paths[variant]
+				if aligned and layer.get("display") == "hidden":
+					# Different periods can accidentally name one resource. Validate
+					# each semantic mapping before deduplicating pixel/provenance IO.
+					check(state_background_alias_matches(scene,layer,path,variant),"hidden state alias names its actual matching background / "+id+" "+key+" "+variant)
 				if path in seen:
 					continue
 				seen.append(path)
@@ -75,7 +90,10 @@ func run() -> void:
 				if not FileAccess.file_exists(path):
 					continue
 				var source := png_pixels(path)
-				check(source != null and source.detect_alpha() != Image.ALPHA_NONE and source.get_used_rect().has_area(),"layer has genuine alpha and visible content / "+id+" "+key+" "+variant)
+				if aligned and layer.get("display") == "hidden":
+					check(source != null and source.get_used_rect().has_area(),"hidden background alias has genuine visible pixels / "+id+" "+key+" "+variant)
+				else:
+					check(source != null and source.detect_alpha() != Image.ALPHA_NONE and source.get_used_rect().has_area(),"layer has genuine alpha and visible content / "+id+" "+key+" "+variant)
 				if aligned:
 					var transform: Dictionary = layer.get("variant_transforms",{}).get(variant,layer.get("source_transform",{}))
 					check_runtime(path,id+" "+key+" "+variant,transform.get("native_size",layer.native_size),transform)

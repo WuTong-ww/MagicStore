@@ -1,0 +1,2177 @@
+{
+  "kind": "root_actual_graphical_visual_review",
+  "current_raw_frames": 56,
+  "selected_jpg_frames": 6,
+  "checks": [
+    "全屏铺满",
+    "按钮文字",
+    "古纸长文字",
+    "无烘焙文字",
+    "光照/笔触统一"
+  ],
+  "scope": "34 production display fixtures +22 actual shop frames +6 final JPG; full native art scoring is separate",
+  "passed_checks": 259,
+  "total_checks": 310,
+  "frames": [
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S01-closed-1280x720.png",
+      "sha256": "b747f88d62b89fd9a6013a0562e1925bebb3e19d3906ae64fd75806031e7069a",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S01-closed-1920x1080.png",
+      "sha256": "63b96f467838d5c925a75f6e136c77a942e3630c08551692270c669d830e512e",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S01-day-1280x720.png",
+      "sha256": "951d9585a2ce201cf7c94e133e9a129bdc7895de83704567f2437427148f5a07",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S01-day-1920x1080.png",
+      "sha256": "8ae20c626a050807584d7d38ac0b412a69c199096587e2a2e491b6c9da293dc5",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S01-night-1280x720.png",
+      "sha256": "8578aa0af26dbcb1b1077918ea893f0db2306b889134144a7d682a9bceaffe0c",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S01-night-1920x1080.png",
+      "sha256": "aa626d70f0179d11de8e72dd77ae661b9f1a7eb4fc3936b81018b38b2e8f3cbf",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S02-day-1280x720.png",
+      "sha256": "fda3597cf21f8df5b2d41411c88dd5fdef2a99f497d3d1844380d5b79b04ead7",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "场景本体一致，但手帐旧头像尚未改为v3，A4处理"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S02-day-1920x1080.png",
+      "sha256": "2b618a86dfaa718317ebfaa1739fbc959eedd4bdccd80f8a02650635b83c39bc",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "场景本体一致，但手帐旧头像尚未改为v3，A4处理"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S02-night-1280x720.png",
+      "sha256": "8e3cbdb11241161e93ca1ecb8a0157e1582f24ebf50f9f865d79410aacab90a1",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "场景本体一致，但手帐旧头像尚未改为v3，A4处理"
+        }
+      ],
+      "notes": [
+        "上层天花近黑，对应原画清单第3项扣分，其余光源仍可解释。"
+      ],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S02-night-1920x1080.png",
+      "sha256": "6de7196b5afd2bc76954f1e5f309c6925bd6bea09f93ae87a36462a24b837a11",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "场景本体一致，但手帐旧头像尚未改为v3，A4处理"
+        }
+      ],
+      "notes": [
+        "上层天花近黑，对应原画清单第3项扣分，其余光源仍可解释。"
+      ],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S03-day-1280x720.png",
+      "sha256": "a92259a474929c6c74dc8e68e1417d26c5d85d9e5e95d9a7b3d5839af0b257a3",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "场景与沙发层一致；旧来客像仍为旧线稿/服装且夜色未统一，A4处理"
+        }
+      ],
+      "notes": [
+        "来客在中央偏右，普通窗口沙发前缘遮底；720高窗口下身由纸面遮住，灯罩靠近头顶的构图可再改善。",
+        "窗边与靠枕两处紫藤，原画第6项扣分。"
+      ],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S03-day-1920x1080.png",
+      "sha256": "35510362f5c67333057620d69e417f982af632917bb87ebcc3edba37d3db3c0e",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "场景与沙发层一致；旧来客像仍为旧线稿/服装且夜色未统一，A4处理"
+        }
+      ],
+      "notes": [
+        "来客在中央偏右，普通窗口沙发前缘遮底；720高窗口下身由纸面遮住，灯罩靠近头顶的构图可再改善。",
+        "窗边与靠枕两处紫藤，原画第6项扣分。"
+      ],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S03-night-1280x720.png",
+      "sha256": "64031f7656e8a14b49ddcd125198612ea0c2938f33c496b66df24c08c41d3e70",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "场景与沙发层一致；旧来客像仍为旧线稿/服装且夜色未统一，A4处理"
+        }
+      ],
+      "notes": [
+        "来客在中央偏右，普通窗口沙发前缘遮底；720高窗口下身由纸面遮住，灯罩靠近头顶的构图可再改善。",
+        "窗边与靠枕两处紫藤，原画第6项扣分。"
+      ],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S03-night-1920x1080.png",
+      "sha256": "40cd4c2814b6b0dbadaaa37d63fdc5efedb8dfdfd39fbbbe82b02d9a7edb217a",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "场景与沙发层一致；旧来客像仍为旧线稿/服装且夜色未统一，A4处理"
+        }
+      ],
+      "notes": [
+        "来客在中央偏右，普通窗口沙发前缘遮底；720高窗口下身由纸面遮住，灯罩靠近头顶的构图可再改善。",
+        "窗边与靠枕两处紫藤，原画第6项扣分。"
+      ],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S04-day-closed-1280x720.png",
+      "sha256": "bcc9e08f358bfe3284e752fb071711075c5ec39081ccfa6b0804e4423ed2b66a",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [
+        "对应昼夜B_all加真正闭门Li，门框无错位；隐藏open alias未绘制。"
+      ],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S04-day-closed-1920x1080.png",
+      "sha256": "61d69a5a35f298e32953b8169d98212c92c1d31e1b79992ab1de05cf722ee642",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [
+        "对应昼夜B_all加真正闭门Li，门框无错位；隐藏open alias未绘制。"
+      ],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S04-day-open-1280x720.png",
+      "sha256": "57c0077233b5687b52bb50fd55ba51ae9a74fe960581683f6e892cdf1d20ff52",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": false,
+          "reason": "主导航与操作按钮完整；旧库存单元名称/数量压在木箱边或被遮，A7处理"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧slot木箱悬空、旧平涂物品与新柜不一致，A2R/A7处理；底图四层板已清空"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S04-day-open-1920x1080.png",
+      "sha256": "9d681ea47936f9cbd2ca284ae50698c3007143ab149a913107f3b96729b3b49c",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": false,
+          "reason": "主导航与操作按钮完整；旧库存单元名称/数量压在木箱边或被遮，A7处理"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧slot木箱悬空、旧平涂物品与新柜不一致，A2R/A7处理；底图四层板已清空"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S04-night-closed-1280x720.png",
+      "sha256": "39909c4279bbb83a05831fa1ab5e5ea36695894173149c9480c903fe23cf025c",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [
+        "对应昼夜B_all加真正闭门Li，门框无错位；隐藏open alias未绘制。"
+      ],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S04-night-closed-1920x1080.png",
+      "sha256": "20efac44ffc68feb27f623650c641e0f426fc093a270825a4acfb37279fbebc4",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [
+        "对应昼夜B_all加真正闭门Li，门框无错位；隐藏open alias未绘制。"
+      ],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S04-night-open-1280x720.png",
+      "sha256": "9313134f61a49a200a56301c9c4b5a0640002ed8429321066918fac3c3c6b974",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": false,
+          "reason": "主导航与操作按钮完整；旧库存单元名称/数量压在木箱边或被遮，A7处理"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧slot木箱悬空、旧平涂物品与新柜不一致，A2R/A7处理；底图四层板已清空"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S04-night-open-1920x1080.png",
+      "sha256": "413132d7ab1479e2f5b5480b0b716f7c65f89f2b5f8f8ff8e39ea843a6727cb4",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": false,
+          "reason": "主导航与操作按钮完整；旧库存单元名称/数量压在木箱边或被遮，A7处理"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧slot木箱悬空、旧平涂物品与新柜不一致，A2R/A7处理；底图四层板已清空"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S05-day-1280x720.png",
+      "sha256": "a19c79d86d3f5b6bc24ad9285ae7f086c524adef6b4e9376dd9627827601f55d",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "场景没有新贴片；手帐列表仍用旧平涂物品图，待A2R统一笔触"
+        }
+      ],
+      "notes": [
+        "前景书封仍留细金纹，原画第5项扣分；蒸汽为静态原画。"
+      ],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S05-day-1920x1080.png",
+      "sha256": "52cd43ecac765c412a6edc211d5f675d9f127e5def08721c9070a985bdb24f0d",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "场景没有新贴片；手帐列表仍用旧平涂物品图，待A2R统一笔触"
+        }
+      ],
+      "notes": [
+        "前景书封仍留细金纹，原画第5项扣分；蒸汽为静态原画。"
+      ],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S05-night-1280x720.png",
+      "sha256": "6f7f4bf8a20d451f4ec06601f234a9ec5b59ff67f4342f61168e8fa600f5908e",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "场景没有新贴片；手帐列表仍用旧平涂物品图，待A2R统一笔触"
+        }
+      ],
+      "notes": [
+        "前景书封仍留细金纹，原画第5项扣分；蒸汽为静态原画。"
+      ],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S05-night-1920x1080.png",
+      "sha256": "c3dcc8c59f876ee504773efe7eb51afec4190ad5bca4cb306533c3b5716fe687",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "场景没有新贴片；手帐列表仍用旧平涂物品图，待A2R统一笔触"
+        }
+      ],
+      "notes": [
+        "前景书封仍留细金纹，原画第5项扣分；蒸汽为静态原画。"
+      ],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S06-day-1280x720.png",
+      "sha256": "bbbcac3d37a0097a6a6113e26c65cf2fe930caf6e3af986ce77eeffed35efe9a",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "场景没有新贴片；手帐列表仍用旧平涂物品图，待A2R统一笔触"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S06-day-1920x1080.png",
+      "sha256": "67d49245262b4c9b094300b420736cd612eba543c636e8345a4ea6afe67d93a2",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "场景没有新贴片；手帐列表仍用旧平涂物品图，待A2R统一笔触"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S06-night-1280x720.png",
+      "sha256": "223f86d84f2f4f60fc65753e0eb58c789847e8489eb01d8791bb91749b405a5d",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "场景没有新贴片；手帐列表仍用旧平涂物品图，待A2R统一笔触"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S06-night-1920x1080.png",
+      "sha256": "5b8aeaa22ab104c588c4fb10d3c5b792bd4de9046aff47fbf45fbb2b564fb84f",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "场景没有新贴片；手帐列表仍用旧平涂物品图，待A2R统一笔触"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S07-day-1280x720.png",
+      "sha256": "b6811bdbabccc151a906349b3c22b23565d30aacfdb3080a04a7fe0fcb096668",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [
+        "水面静态叠回无可见边缝；运动验收留给A6。"
+      ],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S07-day-1920x1080.png",
+      "sha256": "509740eef0829c3141cf7cf64e45f4cd644af8fadd500f645dab9964301c1079",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [
+        "水面静态叠回无可见边缝；运动验收留给A6。"
+      ],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S07-night-1280x720.png",
+      "sha256": "45c47b464499c2e76cc853b284aa53f702456138c1a4f9180c95a8b90eb2ea99",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [
+        "水面静态叠回无可见边缝；运动验收留给A6。"
+      ],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/art/previews/A1R/v3-production/v3-production-S07-night-1920x1080.png",
+      "sha256": "2777a01c2a21e7f915aae096633e1534a8119733303b54f3df91f3cee605c74c",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [
+        "水面静态叠回无可见边缝；运动验收留给A6。"
+      ],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/c-ui-captures/exterior-1280.png",
+      "sha256": "71f7f0aee249622789d897e22450ccefc17bd59abab91390876e132762388d52",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/c-ui-captures/exterior-1920.png",
+      "sha256": "9074f345e1ef3b59cda4c9875622470410392896dddde58f3d962d3f833d79e4",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/c-ui-captures/front-1280.png",
+      "sha256": "78e2045998dfb643688d6a4cd0b01e45c71b2d0241314e554e3ec16f8888cb2e",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "手帐内旧头像还未按v3统一，A4处理；场景本体通过"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/c-ui-captures/front-1920.png",
+      "sha256": "31300f69ba5e78e961a990c2dcb0d0a77aec15e89db17968fe7692c5d1d08d72",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "手帐内旧头像还未按v3统一，A4处理；场景本体通过"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/c-ui-captures/consultation-1280.png",
+      "sha256": "8b9604a91f754a7f068fbb691851f71a3bf878364a99314982ab7607b282bd88",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [
+        "真实无接待状态显示空沙发与还没有来客，未误放肖像。"
+      ],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/c-ui-captures/consultation-1920.png",
+      "sha256": "d2093409ff6c65a10ff7886e2bf612e33aa3c02bb43ba5334e845c68190f1711",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [
+        "真实无接待状态显示空沙发与还没有来客，未误放肖像。"
+      ],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/c-ui-captures/inventory-1280.png",
+      "sha256": "bb2a47e163078cfe45ff30e125bb90eeaad48fc36d296a84650e3b7c40a1c996",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": false,
+          "reason": "旧库存单元名称/数量贴边或被遮；其余可见按钮文字完整，A7处理"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧木箱slot与平涂物品悬于新层板前，A2R/A7处理"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/c-ui-captures/inventory-1920.png",
+      "sha256": "86896ee8864935241de8d9bada7d45546ec1235cfd5c420d91991b1ea8bc7fdb",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": false,
+          "reason": "旧库存单元名称/数量贴边或被遮；其余可见按钮文字完整，A7处理"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧木箱slot与平涂物品悬于新层板前，A2R/A7处理"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/c-ui-captures/workshop-1280.png",
+      "sha256": "9d7dcf159347aab64067682f976a9774251f5560bf7ee8e0dcda13a3c9ba64e3",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "手帐列表仍用旧平涂物品图，A2R处理；场景本体通过"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/c-ui-captures/workshop-1920.png",
+      "sha256": "b24eaa182c3835a3087c2846bc44e469738b23f87c7ec8ab3285e016a2673fce",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "手帐列表仍用旧平涂物品图，A2R处理；场景本体通过"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/c-ui-captures/market-1280.png",
+      "sha256": "1d1c6fd10d23725ef5a1f0925245b87dda92f823991ba5e9155b6c507de810ea",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "手帐列表仍用旧平涂物品图，A2R处理；场景本体通过"
+        }
+      ],
+      "notes": [
+        "数量标签在输入框旁被排成竖行，虽非按钮截字，仍列UI后续修整项。"
+      ],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/c-ui-captures/market-1920.png",
+      "sha256": "c9f3483dfe02cb2b3aabb6c29f7357eb410406372265ab6d918ac4fd8d623d6f",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "手帐列表仍用旧平涂物品图，A2R处理；场景本体通过"
+        }
+      ],
+      "notes": [
+        "数量标签在输入框旁被排成竖行，虽非按钮截字，仍列UI后续修整项。"
+      ],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/c-ui-captures/gathering-1280.png",
+      "sha256": "1e46b0f3e5acde8d6ce7a9d7b89e74b1fed7978207db6f42f73122864e66c77f",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/c-ui-captures/gathering-1920.png",
+      "sha256": "169f59c9a610ed732c8bdc74b2c6a7190fc31bf6bcfa107f8fa6681e2a163482",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/c-ui-captures/people-1280.png",
+      "sha256": "902f9345702b72846477363b2620c70100bd6cea99147bd0efa0264b3f2b65e2",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": false,
+          "reason": "滚动区底部露出被裁按钮；窗口标题/关闭钮仍在外侧，A4整理"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": false,
+          "reason": "旧人物卡装饰内烘有问号状态符号，A4换动态控件"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧金纹纸卡与新v3场景尚未统一，A4整理"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/c-ui-captures/people-1920.png",
+      "sha256": "38dcfdcc898c4102d73dd4493b0f2c8a605a3608373bfd18e1332b74bbc4ced0",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": false,
+          "reason": "滚动区底部露出被裁按钮；窗口标题/关闭钮仍在外侧，A4整理"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": false,
+          "reason": "旧人物卡装饰内烘有问号状态符号，A4换动态控件"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧金纹纸卡与新v3场景尚未统一，A4整理"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/c-ui-captures/network-1280.png",
+      "sha256": "542da72b96be287674979e1da25be6411c4322e04838b9cdc9e86096c1676695",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "手帐内旧头像还未按v3统一，A4处理；场景本体通过"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/c-ui-captures/network-1920.png",
+      "sha256": "bc21fd507362e5914ca964c31af4cd576afda704e8be2e506690912ef664f961",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "手帐内旧头像还未按v3统一，A4处理；场景本体通过"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/c-ui-captures/zero-guest-front-1280.png",
+      "sha256": "d51254b075d7c2f6e297b75810de3b53cf4f7e47f6db2719af225ee86750a37c",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [
+        "零客日空下拉隐藏，去采集/研习/制作及等候操作均完整可读。"
+      ],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/c-ui-captures/zero-guest-front-1920.png",
+      "sha256": "6db72069a50e78a8dd0d4b89d562b49253596276ea46cecd873801e1ff5d17a6",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [
+        "零客日空下拉隐藏，去采集/研习/制作及等候操作均完整可读。"
+      ],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/c-ui-captures/market-after-trade-1920.png",
+      "sha256": "e9ec8c1df578e7c74ed9ba5e5a5ccfadf92d7b1b7f4297202caa056d9bc73fe6",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "手帐列表仍用旧平涂物品图，A2R处理；场景本体通过"
+        }
+      ],
+      "notes": [
+        "数量标签在输入框旁被排成竖行，虽非按钮截字，仍列UI后续修整项。"
+      ],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": ".tools/c-ui-captures/catalog-icons-64px.png",
+      "sha256": "0ae4aab83f6cb6d739e803385fa652077f8ad8328a2570308f8f147b40cf6868",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": false,
+          "reason": "测试专用64px图例仍为深色卡，墨字低对比；非生产页面，但如实不通过，A2R修测试背景"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "九图仍为旧平涂图标，A2R重做"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual full image opened"
+    },
+    {
+      "path": "docs/screenshots/round2/A1R/s02-before-v2-1280.jpg",
+      "source": "docs/screenshots/round2/A3R/front-1280x720.jpg",
+      "source_sha256": "cfa90be5f3b7c90b8ec4b66e00778d407f92d7ee2fd4055955d612a33b1dabaa",
+      "sha256": "cfa90be5f3b7c90b8ec4b66e00778d407f92d7ee2fd4055955d612a33b1dabaa",
+      "size": [
+        1280,
+        720
+      ],
+      "quality": 85,
+      "operation": "preserved existing quality85 JPG",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "旧v2历史对比图仍铺满窗口"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "旧图按钮/热区牌可读完整"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "旧图长文字在古纸手帐"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称/状态为控件，不是图中文字"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "历史v2不按新v3笔触评为统一；只作改向前对比"
+        }
+      ],
+      "notes": [
+        "质量85 JPG已另逐张打开，文字未因压缩而不可读。"
+      ],
+      "reviewer": "root actual final JPG opened"
+    },
+    {
+      "path": "docs/screenshots/round2/A1R/s02-v3-day-1280.jpg",
+      "source": ".tools/art/previews/A1R/v3-production/v3-production-S02-day-1280x720.png",
+      "source_sha256": "fda3597cf21f8df5b2d41411c88dd5fdef2a99f497d3d1844380d5b79b04ead7",
+      "sha256": "267fc9b2b48621fd3db7c2406c5e6711a5b9c5185842e4e850c157bcb803071a",
+      "size": [
+        1280,
+        720
+      ],
+      "quality": 85,
+      "operation": "PNG to JPEG quality85",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "场景本体一致，但手帐旧头像尚未改为v3，A4处理"
+        }
+      ],
+      "notes": [
+        "质量85 JPG已另逐张打开，文字未因压缩而不可读。"
+      ],
+      "reviewer": "root actual final JPG opened"
+    },
+    {
+      "path": "docs/screenshots/round2/A1R/s02-v3-day-1920.jpg",
+      "source": ".tools/art/previews/A1R/v3-production/v3-production-S02-day-1920x1080.png",
+      "source_sha256": "2b618a86dfaa718317ebfaa1739fbc959eedd4bdccd80f8a02650635b83c39bc",
+      "sha256": "5c06208e93661d8a4ce52a6f2bb6b0e26a8da0dfbd12a69984589235e5b7b246",
+      "size": [
+        1920,
+        1080
+      ],
+      "quality": 85,
+      "operation": "PNG to JPEG quality85",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "场景本体一致，但手帐旧头像尚未改为v3，A4处理"
+        }
+      ],
+      "notes": [
+        "质量85 JPG已另逐张打开，文字未因压缩而不可读。"
+      ],
+      "reviewer": "root actual final JPG opened"
+    },
+    {
+      "path": "docs/screenshots/round2/A1R/s03-v3-night-1920.jpg",
+      "source": ".tools/art/previews/A1R/v3-production/v3-production-S03-night-1920x1080.png",
+      "source_sha256": "40cd4c2814b6b0dbadaaa37d63fdc5efedb8dfdfd39fbbbe82b02d9a7edb217a",
+      "sha256": "3af651f6282d065eefc49f190ca92c7d631541459484adf59e55ca73a6035022",
+      "size": [
+        1920,
+        1080
+      ],
+      "quality": 85,
+      "operation": "PNG to JPEG quality85",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "场景与沙发层一致；旧来客像仍为旧线稿/服装且夜色未统一，A4处理"
+        }
+      ],
+      "notes": [
+        "质量85 JPG已另逐张打开，文字未因压缩而不可读。"
+      ],
+      "reviewer": "root actual final JPG opened"
+    },
+    {
+      "path": "docs/screenshots/round2/A1R/s04-v3-open-day-1920-legacy-slot.jpg",
+      "source": ".tools/art/previews/A1R/v3-production/v3-production-S04-day-open-1920x1080.png",
+      "source_sha256": "9d681ea47936f9cbd2ca284ae50698c3007143ab149a913107f3b96729b3b49c",
+      "sha256": "5f391121f5bbcd8e340818de304c2a96731a84ba07d589993e5d32edb9edb6a4",
+      "size": [
+        1920,
+        1080
+      ],
+      "quality": 85,
+      "operation": "PNG to JPEG quality85",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": false,
+          "reason": "主导航与操作按钮完整；旧库存单元名称/数量压在木箱边或被遮，A7处理"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧slot木箱悬空、旧平涂物品与新柜不一致，A2R/A7处理；底图四层板已清空"
+        }
+      ],
+      "notes": [
+        "质量85 JPG已另逐张打开，文字未因压缩而不可读。"
+      ],
+      "reviewer": "root actual final JPG opened"
+    },
+    {
+      "path": "docs/screenshots/round2/A1R/s04-v3-closed-night-1280.jpg",
+      "source": ".tools/art/previews/A1R/v3-production/v3-production-S04-night-closed-1280x720.png",
+      "source_sha256": "39909c4279bbb83a05831fa1ab5e5ea36695894173149c9480c903fe23cf025c",
+      "sha256": "f1c1fd6fedc7e40d8f1a49507def15f1a5abcadee8bf0974cceccb222d01a797",
+      "size": [
+        1280,
+        720
+      ],
+      "quality": 85,
+      "operation": "PNG to JPEG quality85",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [
+        "质量85 JPG已另逐张打开，文字未因压缩而不可读。"
+      ],
+      "reviewer": "root actual final JPG opened"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "mandatory_full": {
+    "exit_code": 0,
+    "godot_checks": 8130,
+    "gateway_tests": 94,
+    "art_tests": 138,
+    "passed": 8362,
+    "total": 8362,
+    "errors": 0,
+    "warnings": 0,
+    "unit_skips": 0,
+    "optional_retired_local_audits_skipped": 3,
+    "log_sha256": "43d52741ca9613255d1c7c1910a913ba5551bed100a5d27403ec3be06d13e851"
+  },
+  "graphics": {
+    "production": {
+      "checks": 1502,
+      "failures": 0,
+      "raw_frames": 34
+    },
+    "shop": {
+      "checks": 718,
+      "failures": 0,
+      "writes": 23,
+      "current_raw_frames": 22
+    }
+  },
+  "source_acceptance": {
+    "positive": 478,
+    "failures": 0,
+    "hidden_wrong_night_negative": {
+      "checks": 461,
+      "expected_failures": 1,
+      "exit_code": 1
+    }
+  },
+  "formal_actual_files": 151,
+  "manifest_bytes": 229143,
+  "regen": {
+    "adapter_tests": 66,
+    "formal_cli_tests": 5,
+    "scene_tasks": 17,
+    "dependencies": 9,
+    "derived_tasks": 12,
+    "mask_review_required": true
+  },
+  "limits": "C art all >=8; only six layer cutouts accepted; A1R partial"
+}

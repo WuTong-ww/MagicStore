@@ -1,0 +1,1239 @@
+{
+  "kind": "root_actual_opened_native_image_review",
+  "criteria": [
+    "可见笔触及松墙角",
+    "主光与光斑",
+    "冷暗部不黑",
+    "光源可解释且无光效伪影",
+    "无金纹雕花",
+    "紫藤至多一处",
+    "成组留空",
+    "物件可辨",
+    "结构合理",
+    "右30%底12%低细节"
+  ],
+  "pilot_candidates": [
+    {
+      "file": "assets/_incoming/a1r_v3_pilot/candidate_1_round1.png",
+      "score": 9,
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "墙与柜面可见宽笔"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "左窗格暖斑方向明确"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "右墙灰蓝绿不黑"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "光源为左窗、无光晕"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "木架无金纹"
+        },
+        {
+          "item": 6,
+          "score": 0,
+          "reason": "不通过：顶挂紫束与窗边紫藤可能是两处，保守扣分"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "罐书分组且架上有空位"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "玻璃罐、书与盆可辨"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "门框窗格和层板连续"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "右墙与底部柜台低细节"
+        }
+      ]
+    },
+    {
+      "file": "assets/_incoming/a1r_v3_pilot/candidate_2_round1.png",
+      "score": 9,
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "墙角宽笔与木柜干笔清楚"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "左窗斜阳和柜面窗格斑最清楚"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "门洞冷青影可读"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "暖边只在左窗直射处，无星点"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "木框朴素无雕花"
+        },
+        {
+          "item": 6,
+          "score": 0,
+          "reason": "不通过：顶挂紫色束疑似第二处紫藤"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "日常罐书三至五成组，留白清楚"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "秤、罐、书、篮、干草识别清楚"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "柜架和门拱最完整"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "右第三墙和底柜留白完整"
+        }
+      ]
+    },
+    {
+      "file": "assets/_incoming/a1r_v3_pilot/candidate_3_round1.png",
+      "score": 9,
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "松墙角与颜料块清楚"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "左窗日光和地面光斑合理"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "阴影灰蓝绿可读"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "亮处来自窗，无自发光"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "无金纹堆叠"
+        },
+        {
+          "item": 6,
+          "score": 0,
+          "reason": "不通过：顶挂紫束与窗边紫藤有重复风险"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "架物分组并有空隙"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "书罐盆均可辨"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "窗格门框连续"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "右墙底部低细节；额外不采用理由是奶油色破纸外边框"
+        }
+      ]
+    },
+    {
+      "file": "assets/_incoming/a1r_v3_pilot/candidate_2_round2.png",
+      "score": 10,
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "墙面和右侧角落有松笔，柜台木纹是可见色块"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "左窗斜阳在柜台与架子形成软边窗格斑"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "远离窗户的墙与门洞呈柔和灰蓝绿"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "暖罐缘、柜面与地面均对应左窗，灯未点亮，无闪点"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "层架及木框朴素，无金色雕花"
+        },
+        {
+          "item": 6,
+          "score": 1,
+          "reason": "仅左窗紫藤，顶部为褐色干草与鼠尾草束"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "瓶罐书本三至五件分组，层板有约四分之一空位"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "玻璃罐、书、秤、干草、风铃、帘与陶香炉可辨"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "柜架横板、门拱、瓶口和帘边结构完整"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "右墙与底部柜台大片低细节，留给UI"
+        }
+      ]
+    }
+  ],
+  "selected": "candidate_2_round2",
+  "selection_reason": "首轮三张9分并列，候选2主光窗格、普通物件与架间留空最清楚；候选3有破纸外框。候选2第二次编辑消除顶部紫花歧义，并补风铃、左右帘与陶香炉，10分定稿。",
+  "scenes": [
+    {
+      "scene": "S01",
+      "period": "day",
+      "score": 10,
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "石墙、木门和路面有不透明干笔，天空与边角较松"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "左上日光落在立面和石路，投影背向左侧"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "右侧灰蓝天空与冷石路仍可辨认"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "亮部来自太阳"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "木招牌、门窗只用朴素边框，没有金雕花"
+        },
+        {
+          "item": 6,
+          "score": 1,
+          "reason": "仅门边一处紫藤，其余是绿色常春藤"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "窗内罐书成组且有空隙，门边花盆独立成组"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "招牌、门、花盆、窗内罐书均可识别"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "窗格、门框、招牌链与路沿无融化"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "右侧天空与下缘石路较松，不挤占UI"
+        }
+      ],
+      "reviewer": "root, actual opened native C"
+    },
+    {
+      "scene": "S01",
+      "period": "night",
+      "score": 10,
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "石墙、木门和路面有不透明干笔，天空与边角较松"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "橱窗台灯与门口吊灯形成两处暖光池"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "右侧灰蓝天空与冷石路仍可辨认"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "暖部来自实际窗内台灯与门口吊灯，无散射光晕"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "木招牌、门窗只用朴素边框，没有金雕花"
+        },
+        {
+          "item": 6,
+          "score": 1,
+          "reason": "仅门边一处紫藤，其余是绿色常春藤"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "窗内罐书成组且有空隙，门边花盆独立成组"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "招牌、门、花盆、窗内罐书均可识别"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "窗格、门框、招牌链与路沿无融化"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "右侧天空与下缘石路较松，不挤占UI"
+        }
+      ],
+      "reviewer": "root, actual opened native C"
+    },
+    {
+      "scene": "S01",
+      "period": "closed",
+      "score": 10,
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "石墙、木门和路面有不透明干笔，天空与边角较松"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "打烊关闭内部灯，仅门口安全灯照亮局部"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "右侧灰蓝天空与冷石路仍可辨认"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "亮部来自门口灯，已关闭橱窗内部光源；打烊例外如实记录"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "木招牌、门窗只用朴素边框，没有金雕花"
+        },
+        {
+          "item": 6,
+          "score": 1,
+          "reason": "仅门边一处紫藤，其余是绿色常春藤"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "窗内罐书成组且有空隙，门边花盆独立成组"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "招牌、门、花盆、窗内罐书均可识别"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "窗格、门框、招牌链与路沿无融化"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "右侧天空与下缘石路较松，不挤占UI"
+        }
+      ],
+      "reviewer": "root, actual opened native C"
+    },
+    {
+      "scene": "S02",
+      "period": "day",
+      "score": 10,
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "墙面和右侧角落有松笔，柜台木纹是可见色块"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "左窗斜阳在柜台与架子形成软边窗格斑"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "远离窗户的墙与门洞呈柔和灰蓝绿"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "暖罐缘、柜面与地面均对应左窗，灯未点亮，无闪点"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "层架及木框朴素，无金色雕花"
+        },
+        {
+          "item": 6,
+          "score": 1,
+          "reason": "仅左窗紫藤，顶部为褐色干草与鼠尾草束"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "瓶罐书本三至五件分组，层板有约四分之一空位"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "玻璃罐、书、秤、干草、风铃、帘与陶香炉可辨"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "柜架横板、门拱、瓶口和帘边结构完整"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "右墙与底部柜台大片低细节，留给UI"
+        }
+      ],
+      "reviewer": "root, actual opened native C"
+    },
+    {
+      "scene": "S02",
+      "period": "night",
+      "score": 9,
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "夜色下仍能看到墙面宽笔与木柜干笔"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "左侧台灯与右吊灯各形成局部光池"
+        },
+        {
+          "item": 3,
+          "score": 0,
+          "reason": "不通过：上方天花和高层架一大片接近黑色，冷阴影表现不足"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "灯罩因透光明亮，柜面亮部随距离减弱，无光晕闪点"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "夜灯未把柜缘描成金色纹样"
+        },
+        {
+          "item": 6,
+          "score": 1,
+          "reason": "保留单处窗边紫藤，干花束未变成第二处紫藤"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "沿用白日成组架物与空位，没有新添杂物"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "罐书、干花、风铃、帘、香炉在光池附近均可辨"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "门框、柜沿与瓶口仍连续，没有融合"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "右墙和底部柜台维持安静留白"
+        }
+      ],
+      "reviewer": "root, actual opened native C"
+    },
+    {
+      "scene": "S03",
+      "period": "day",
+      "score": 9,
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "沙发、墙面及地毯有颜料笔触，右墙宽笔较松"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "左窗光斑跨地板、沙发和茶桌"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "右侧帘幕和角落冷灰绿，仍可读"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "白天亮部由左窗解释，无散射星点"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "沙发、茶桌和灯没有金雕花"
+        },
+        {
+          "item": 6,
+          "score": 0,
+          "reason": "不通过：窗边紫藤之外，靠枕还留紫藤图案，按两处处理"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "茶杯、书、盆罐分组，桌面与壁架有空隙"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "杯碟、书、罐、沙发、帘均可辨"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "沙发和茶桌腿、盆口、门框结构合理"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "右侧大帘与底部地毯为低细节区"
+        }
+      ],
+      "reviewer": "root, actual opened native C"
+    },
+    {
+      "scene": "S03",
+      "period": "night",
+      "score": 9,
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "沙发、墙面及地毯有颜料笔触，右墙宽笔较松"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "台灯与吊灯两处暖池，窗侧带冷色"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "右侧帘幕和角落冷灰绿，仍可读"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "桌灯与吊灯实体可见，暖光衰减，没有自发光茶具"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "沙发、茶桌和灯没有金雕花"
+        },
+        {
+          "item": 6,
+          "score": 0,
+          "reason": "不通过：窗边紫藤之外，靠枕还留紫藤图案，按两处处理"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "茶杯、书、盆罐分组，桌面与壁架有空隙"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "杯碟、书、罐、沙发、帘均可辨"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "沙发和茶桌腿、盆口、门框结构合理"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "右侧大帘与底部地毯为低细节区"
+        }
+      ],
+      "reviewer": "root, actual opened native C"
+    },
+    {
+      "scene": "S04",
+      "period": "day_open",
+      "score": 10,
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "柜面、墙与地板以广告颜料宽笔绘成，角落松"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "左窗暖色窗格斜落在层板与地面"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "右墙和门洞为可辨认的冷灰绿阴影"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "亮斑均对应左窗，无描金边"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "仅普通黄铜抽屉把手，无纹样雕花"
+        },
+        {
+          "item": 6,
+          "score": 1,
+          "reason": "左窗只有一处紫藤"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "按A7明确例外：所有可见层板清空，不用物件密度条目扣分"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "空柜、木门、把手、灯与窗可直接辨认"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "横板平直，抽屉与门铰链没有扭曲"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "右墙和底部地面宽笔低细节"
+        }
+      ],
+      "reviewer": "root, actual opened native C"
+    },
+    {
+      "scene": "S04",
+      "period": "day_closed",
+      "score": 10,
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "柜面、墙与地板以广告颜料宽笔绘成，角落松"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "左窗暖色窗格斜落在层板与地面"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "右墙和门洞为可辨认的冷灰绿阴影"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "亮斑均对应左窗，无描金边"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "仅普通黄铜抽屉把手，无纹样雕花"
+        },
+        {
+          "item": 6,
+          "score": 1,
+          "reason": "左窗只有一处紫藤"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "闭门无陈列物；来自已清空层板版本，不新增占位物"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "空柜、木门、把手、灯与窗可直接辨认"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "横板平直，抽屉与门铰链没有扭曲"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "右墙和底部地面宽笔低细节"
+        }
+      ],
+      "reviewer": "root, actual opened native C"
+    },
+    {
+      "scene": "S04",
+      "period": "night_open",
+      "score": 10,
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "柜面、墙与地板以广告颜料宽笔绘成，角落松"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "左台灯与右吊灯照亮柜体，窗侧留冷光"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "右墙和门洞为可辨认的冷灰绿阴影"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "暖亮对应两盏实际灯，远处衰减，无光晕"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "仅普通黄铜抽屉把手，无纹样雕花"
+        },
+        {
+          "item": 6,
+          "score": 1,
+          "reason": "左窗只有一处紫藤"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "按A7明确例外：所有可见层板清空，不用物件密度条目扣分"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "空柜、木门、把手、灯与窗可直接辨认"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "横板平直，抽屉与门铰链没有扭曲"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "右墙和底部地面宽笔低细节"
+        }
+      ],
+      "reviewer": "root, actual opened native C"
+    },
+    {
+      "scene": "S04",
+      "period": "night_closed",
+      "score": 10,
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "柜面、墙与地板以广告颜料宽笔绘成，角落松"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "左台灯与右吊灯照亮柜体，窗侧留冷光"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "右墙和门洞为可辨认的冷灰绿阴影"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "暖亮对应两盏实际灯，远处衰减，无光晕"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "仅普通黄铜抽屉把手，无纹样雕花"
+        },
+        {
+          "item": 6,
+          "score": 1,
+          "reason": "左窗只有一处紫藤"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "闭门无陈列物；来自已清空层板版本，不新增占位物"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "空柜、木门、把手、灯与窗可直接辨认"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "横板平直，抽屉与门铰链没有扭曲"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "右墙和底部地面宽笔低细节"
+        }
+      ],
+      "reviewer": "root, actual opened native C"
+    },
+    {
+      "scene": "S05",
+      "period": "day",
+      "score": 9,
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "石墙与木桌可见宽笔，右角松"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "左窗光斑沿工作桌和地面方向一致"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "远墙为灰蓝绿，工坊角落仍可辨认"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "暖边来自窗，金属口蒸汽有实体来源，无自发光"
+        },
+        {
+          "item": 5,
+          "score": 0,
+          "reason": "不通过：左前景书封仍有细金色卷纹"
+        },
+        {
+          "item": 6,
+          "score": 1,
+          "reason": "仅窗边一处紫藤，吊束为干草"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "书、铁盒、工具罐、三小罐和秤分组，工作台留空"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "研钵、秤、篮、蒸汽金属口、罐书可辨"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "桌腿、书脊与秤架连续，没有融化"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "右墙与底部木地板较松"
+        }
+      ],
+      "reviewer": "root, actual opened native C"
+    },
+    {
+      "scene": "S05",
+      "period": "night",
+      "score": 9,
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "石墙与木桌可见宽笔，右角松"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "两盏布灯提供局部暖光池"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "远墙为灰蓝绿，工坊角落仍可辨认"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "灯罩与桌面亮处对应实体灯，蒸汽不是光束"
+        },
+        {
+          "item": 5,
+          "score": 0,
+          "reason": "不通过：左前景书封仍有细金色卷纹"
+        },
+        {
+          "item": 6,
+          "score": 1,
+          "reason": "仅窗边一处紫藤，吊束为干草"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "书、铁盒、工具罐、三小罐和秤分组，工作台留空"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "研钵、秤、篮、蒸汽金属口、罐书可辨"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "桌腿、书脊与秤架连续，没有融化"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "右墙与底部木地板较松"
+        }
+      ],
+      "reviewer": "root, actual opened native C"
+    },
+    {
+      "scene": "S06",
+      "period": "day",
+      "score": 10,
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "灰泥墙、木箱和桌沿有松笔与干笔"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "左窗下午光跨桌面地面"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "右侧门洞和墙面冷蓝绿，未黑成一块"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "暖罐缘和地板对应左窗，无塑料高光"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "箱子和层架简单，无堆叠金纹"
+        },
+        {
+          "item": 6,
+          "score": 1,
+          "reason": "左窗大紫藤一处；顶部细窄薰衣草束可辨为干草，不计第二处紫藤"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "罐书铁盒分组，三只散装箱与篮成一组，货架留空"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "罐、箱、篮、秤、书、帘和门外树都可辨"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "罐口、门框、箱沿、秤与帘杆结构完整"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "右墙留白、底部地板宽笔，适合UI"
+        }
+      ],
+      "reviewer": "root, actual opened native C"
+    },
+    {
+      "scene": "S06",
+      "period": "night",
+      "score": 10,
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "灰泥墙、木箱和桌沿有松笔与干笔"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "台灯与吊灯提供两个有衰减的光池"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "右侧门洞和墙面冷蓝绿，未黑成一块"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "亮处对应实体灯，未照亮的盒罐没有自发光"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "箱子和层架简单，无堆叠金纹"
+        },
+        {
+          "item": 6,
+          "score": 1,
+          "reason": "左窗大紫藤一处；顶部细窄薰衣草束可辨为干草，不计第二处紫藤"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "罐书铁盒分组，三只散装箱与篮成一组，货架留空"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "罐、箱、篮、秤、书、帘和门外树都可辨"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "罐口、门框、箱沿、秤与帘杆结构完整"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "右墙留白、底部地板宽笔，适合UI"
+        }
+      ],
+      "reviewer": "root, actual opened native C"
+    },
+    {
+      "scene": "S07",
+      "period": "day",
+      "score": 10,
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "山、石路、树与河面都见不透明宽笔"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "左上自然光照亮店墙与小路"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "河面、远山与桥为可读的冷蓝绿"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "白日受光面与投影对应左上天空，无闪点"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "桥栏、窗框与店墙无金雕花"
+        },
+        {
+          "item": 6,
+          "score": 1,
+          "reason": "仅店窗边一处紫藤"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "店窗罐书分组留空，外侧两篮为独立小组"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "河、桥、长凳、窗内罐书、篮和树可辨"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "桥栏、凳脚、门窗与水岸结构合理"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "右侧大片水面与底部小路松笔低细节"
+        }
+      ],
+      "reviewer": "root, actual opened native C"
+    },
+    {
+      "scene": "S07",
+      "period": "night",
+      "score": 10,
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "山、石路、树与河面都见不透明宽笔"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "橱窗台灯与门内吊灯两处暖光，外墙灯关闭"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "河面、远山与桥为可读的冷蓝绿"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "亮部限窗与门口光源附近，远桥无自发光"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "桥栏、窗框与店墙无金雕花"
+        },
+        {
+          "item": 6,
+          "score": 1,
+          "reason": "仅店窗边一处紫藤"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "店窗罐书分组留空，外侧两篮为独立小组"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "河、桥、长凳、窗内罐书、篮和树可辨"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "桥栏、凳脚、门窗与水岸结构合理"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "右侧大片水面与底部小路松笔低细节"
+        }
+      ],
+      "reviewer": "root, actual opened native C"
+    }
+  ],
+  "unqualified_after_four_rounds": [],
+  "layer_review": {
+    "approved_native_layers": 6,
+    "S03_sofa": "昼夜透明层为原座位前缘窄片，静态遮挡；preserve_base，不能称移动靠枕。",
+    "S04_closed": "昼夜闭门透明层保留完整木门/铰链。root另打开两张B_all：横板清空、木纹光照连续，无明显补丁，叠回严格差分另见各组几何报告。",
+    "S07_water": "昼夜仅水内区域，无前景草石；preserve_base；A6仍须做边缘衰减以免UV边界显露。",
+    "rejected": "其余动层三轮后仍有墙/窗/街景夹带、残边或补底接缝，均不接入。"
+  }
+}

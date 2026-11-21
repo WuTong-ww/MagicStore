@@ -139,8 +139,23 @@ def validate_compact_manifest(workspace, manifest):
                      all(_integer(n, 1) for n in asset["dim"]), "invalid compact asset dimensions")
         if "inputs" in asset:
             _require(isinstance(asset["inputs"], list), "compact asset inputs must be an array")
-            for path in asset["inputs"]:
-                safe_path(workspace, path)
+            for input_path in asset["inputs"]:
+                safe_path(workspace, input_path)
+        if asset.get("group") == "scenes" and PurePosixPath(path).name == "C.png":
+            scene, period = asset.get("scene_id"), asset.get("period")
+            _require(isinstance(scene, str) and re.fullmatch(r"S\d{2}", scene) and period in ("day", "night", "closed"),
+                     "native C requires complete formal scene identity metadata")
+            _require(scene != "S04" or asset.get("state") in ("open", "closed"), "S04 native C requires an open/closed state")
+        if "regeneration_constraints" in asset:
+            _require(isinstance(asset["regeneration_constraints"], str) and asset["regeneration_constraints"].strip(),
+                     "regeneration_constraints must be nonempty text")
+        if asset.get("group") == "slices":
+            _require(asset.get("operation") in ("extract_layer", "inpaint_cleanplate"), "unsupported formal slice operation")
+        if asset.get("group") == "slices" and asset.get("operation") in ("extract_layer", "inpaint_cleanplate"):
+            for field in ("composite_source", "processing_script", "local_spec", "local_config", "mask_path",
+                          "inpaint_mask_path", "source_receipt"):
+                if field in asset:
+                    safe_path(workspace, asset[field])
     copies = manifest.get("runtime_copies", [])
     _require(isinstance(copies, list), "compact runtime_copies must be an array")
     for row in copies:
@@ -242,14 +257,28 @@ def build_compact_queue(workspace, manifest, style, only, config=None):
     templates = profile.get("templates", {})
     _require(isinstance(templates, dict), "v3 templates must be an object")
 
-    def template_key(source, group):
+    def processing(group, row):
+        return group == "slices" and row.get("operation") in ("extract_layer", "inpaint_cleanplate")
+
+    def scene_identity(source, row):
+        if any(field in row for field in ("scene_id", "period", "state")):
+            scene, period, state = row.get("scene_id"), row.get("period"), row.get("state")
+            _require(isinstance(scene, str) and re.fullmatch(r"S\d{2}", scene) and
+                     period in ("day", "night", "closed"), "invalid formal scene identity")
+            _require(state is None or scene == "S04" and state in ("open", "closed"), "invalid formal scene state")
+            _require(period != "closed" or scene == "S01", "closed period belongs to S01")
+            return scene, period, state
+        legacy = re.fullmatch(r"assets/generated_scenes/v2/(S\d{2})_(day|night|closed)\.png", source)
+        return (legacy[1], legacy[2], None) if legacy else None
+
+    def template_key(source, group, row):
         if group == "portraits":
             return "portrait"
-        return "item" if group == "items" else "night" if group == "scenes" and source.endswith("_night.png") else "edit"
+        identity = scene_identity(source, row) if group == "scenes" else None
+        return "item" if group == "items" else identity[1] if identity and identity[1] in ("night", "closed") else "edit"
 
-    missing = sorted({template_key(source, group) for source, (group, row) in selected.items()
-                      if not isinstance(templates.get(template_key(source, group)), str) or
-                      not templates[template_key(source, group)].strip()})
+    required = {template_key(source, group, row) for source, (group, row) in selected.items() if not processing(group, row)}
+    missing = sorted(key for key in required if not isinstance(templates.get(key), str) or not templates[key].strip())
     if missing:
         return pending("pending_templates", "explicit v3 templates are missing", missing_templates=missing)
     revision = profile.get("revision", "style_" + digest[:12])
@@ -258,8 +287,19 @@ def build_compact_queue(workspace, manifest, style, only, config=None):
     # its human revision label, so changing only -Style cannot reuse outputs.
     if not alias:
         revision += "_" + digest[:12]
+    processing_root = "assets/generated_scenes/v3_regen/" + revision
 
     def destination(source):
+        group, row = resources.get(source, (None, {}))
+        if processing(group, row):
+            composite = row.get("composite_source")
+            _require(composite in resources and resources[composite][0] == "scenes",
+                     "processing requires its canonical composite source")
+            identity = scene_identity(composite, resources[composite][1])
+            parts = PurePosixPath(source).parts
+            _require(identity and source.startswith("assets/generated_scenes/") and identity[0] in parts,
+                     "processing requires a formal scene path")
+            return processing_root + "/" + "/".join(parts[parts.index(identity[0]):])
         return "assets/art_versions/v3/" + revision + "/" + source.removeprefix("assets/")
 
     for source, (group, row) in selected.items():
@@ -272,16 +312,40 @@ def build_compact_queue(workspace, manifest, style, only, config=None):
             raise FileExistsError("versioned output already exists; select a new revision: " + target)
         edit_target = source
         dependencies = []
-        if group == "scenes" and source.endswith("_night.png"):
-            day = source[:-len("night.png")] + "day.png"
-            _require(day in selected, "night regeneration requires its canonical day source")
-            edit_target = destination(day)
+        if processing(group, row):
+            composite = row["composite_source"]
+            edit_target = destination(composite)
+            fields = ("processing_script", "local_spec", "local_config", "mask_path", "inpaint_mask_path", "source_receipt")
+            missing_paths = [row[field] for field in fields if field in row and not safe_path(workspace, row[field]).is_file()]
+            command = ["python", row["processing_script"], "--workspace", str(Path(workspace).resolve()), "--spec", row["local_spec"]] if all(row.get(f) for f in ("processing_script", "local_spec")) else None
+            if command and row.get("local_config"):
+                command += ["--config", row["local_config"]]
+            queue["offline_tasks"].append({"operation": row["operation"], "previous_source_path": source,
+                "source_destination": target, "previous_composite_source": composite, "composite_source": edit_target,
+                "depends_on": [edit_target], "missing_dependencies": [] if safe_path(workspace, edit_target).is_file() else [edit_target],
+                "status": "needs_mask_review", "phase": "mask_review" if safe_path(workspace, edit_target).is_file() else "awaiting_composite",
+                "ready": False, "can_process": False, "processing_script": row.get("processing_script"),
+                "local_spec": row.get("local_spec"), "command_after_review": command, "missing_paths": missing_paths,
+                "missing_metadata": [f for f in ("processing_script", "local_spec") if not row.get(f)],
+                "processing_output_root": processing_root,
+                "processing_runtime_root": "assets/generated_scenes/runtime/v3_regen/" + revision,
+                "review_required": "新C就绪后重新确认原生轮廓、支点和1px/6px mask，更新本地spec的C/rawB与配置输出根，再执行已有CLI；旧mask或审计不能批准新画风，不保证生成器逐像素不变。"})
+            continue
+        identity = scene_identity(source, row) if group == "scenes" else None
+        if identity and identity[1] in ("night", "closed"):
+            previous_period = "day" if identity[1] == "night" else "night"
+            matches = [p for p, (g, r) in selected.items() if g == "scenes" and
+                       scene_identity(p, r) == (identity[0], previous_period, identity[2])]
+            _require(len(matches) == 1, identity[1] + " regeneration requires its canonical " + previous_period + " source in the same scene/state")
+            edit_target = destination(matches[0])
             dependencies.append(edit_target)
         references = list(dict.fromkeys([str(file), str(safe_path(workspace, edit_target))]))
         missing_dependencies = [p for p in dependencies if not safe_path(workspace, p).is_file()]
-        key = template_key(source, group)
+        key = template_key(source, group, row)
         prompt = templates[key] + "\nResource identity: " + PurePosixPath(source).stem
         prompt += "\nInput roles: first image is the selected v3 style reference; second image is the edit target."
+        if group == "scenes" and "regeneration_constraints" in row:
+            prompt += "\n" + row["regeneration_constraints"]
         queue["tasks"].append({"recipe_id": PurePosixPath(source).stem + "_" + hashlib.sha256(source.encode()).hexdigest()[:8],
             "group": group, "version": revision, "status": "needs_builtin_generation", "operation": "generate",
             "tool": config["generation"]["tool"], "previous_source_path": source, "previous_source_sha256": row["sha256"],
@@ -292,12 +356,16 @@ def build_compact_queue(workspace, manifest, style, only, config=None):
     for runtime, source in aliases.items():
         if source not in selected:
             continue
+        native = destination(source)
         target = destination(runtime)
+        if processing(*resources[source]) and runtime == source.replace("assets/generated_scenes/", "assets/generated_scenes/runtime/", 1):
+            target = native.replace("assets/generated_scenes/", "assets/generated_scenes/runtime/", 1)
         if safe_path(workspace, target).exists():
             raise FileExistsError("versioned runtime already exists; select a new revision: " + target)
-        queue["offline_tasks"].append({"operation": "runtime_copy", "source_path": destination(source),
-                                       "runtime_path": target, "depends_on": [destination(source)]})
-    queue["status"] = "needs_builtin_generation" if queue["tasks"] else "no_matching_resources"
+        queue["offline_tasks"].append({"operation": "runtime_copy", "source_path": native,
+                                       "runtime_path": target, "depends_on": [native]})
+    queue["status"] = ("needs_builtin_generation" if queue["tasks"] else "needs_mask_review"
+                       if any(task["operation"] != "runtime_copy" for task in queue["offline_tasks"]) else "no_matching_resources")
     return queue
 
 

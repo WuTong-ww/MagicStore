@@ -76,3 +76,25 @@ Local storage above includes old backups, not upload volume. Final size evidence
 - Graphics: shell1383/1383, shop718/718, notebook140/140; 51 raw frames and 10 quality-85 JPGs reviewed.
 - Pending commit new binary: 2227634 B; clean-history new binary total: 83326050 B. Manifest 68246 B; forbidden paths 0; current screenshot counts A3R=6, G3=4.
 - Final evidence: results/A3R-tail-size.json. This staged size snapshot precedes small text report additions only.
+
+## A1R v3 提交前体积复查（2026-11-22）
+
+- 完整测试8362/8362，exit0；实际生产图形1502/1502、shop718/718。62张原帧/最终JPG已逐项审查，任务按部分完成收口。
+- 暂存快照新增唯一blob共207,154,082B；从main以来新增二进制203,137,565B。**本次A1R新增二进制119,811,515B（59个新唯一二进制blob）**，全部属于59个明确通过的PNG路径及6个关键JPG路径，未包含候选/拒图/mask/B_i/逐层receipt。
+- 超过单提交100MB检查线后已暂停提交、逐OID/路径复查。新增PNG全是17态C、6个合格B_all、6个Li及运行副本和风格参考；重复内容按Git blob去重。1,099个中间文件、1,048,783,624B均保留在ignored incoming，禁止追踪目录0。
+- 原CLEAN专用脚本仍输出FAIL（new_binary_total与pending_commit_binary），没有篡改其阈值或把原始结果改成绿。第1步干净重建的<150MB已以81,098,416B完成；此处是之后新增正式v3图，用户全程规则为>100MB先检查，本次已完成该检查，不代表重新满足初始150MB预算。
+- Manifest229,143B，所有151正式文件实际SHA/栅格尺寸强制校验；原v2 56文件SHA仍一致；LFS过滤器0；截图A1R=6、A3R=6、G3=4，均质量85 JPG。
+- 证据：results/A1R-v3-size-inspection.json；原CLEAN脚本完整快照只保留本地.tools/clean-rebuild/A1R-v3-size.json。下面count-objects包含旧备份与旧大图对象，不能当本次上传流量。
+
+```text
+count: 4905
+size: 275.11 MiB
+in-pack: 4064
+packs: 2
+size-pack: 1.12 GiB
+prune-packable: 2053
+garbage: 3
+size-garbage: 15.24 MiB
+```
+
+本快照先于本段及小型文本报告的暂存，二进制字节不会因这些文本追加变化。不删除旧远端round2，尚未释放其空间。
