@@ -1,0 +1,90 @@
+[
+  {
+    "path": "catalog-icons-64px.png",
+    "same": true
+  },
+  {
+    "path": "consultation-1280.png",
+    "same": true
+  },
+  {
+    "path": "consultation-1920.png",
+    "same": true
+  },
+  {
+    "path": "exterior-1280.png",
+    "same": true
+  },
+  {
+    "path": "exterior-1920.png",
+    "same": true
+  },
+  {
+    "path": "front-1280.png",
+    "same": true
+  },
+  {
+    "path": "front-1920.png",
+    "same": true
+  },
+  {
+    "path": "gathering-1280.png",
+    "same": true
+  },
+  {
+    "path": "gathering-1920.png",
+    "same": true
+  },
+  {
+    "path": "inventory-1280.png",
+    "same": true
+  },
+  {
+    "path": "inventory-1920.png",
+    "same": true
+  },
+  {
+    "path": "market-1280.png",
+    "same": true
+  },
+  {
+    "path": "market-1920.png",
+    "same": true
+  },
+  {
+    "path": "market-after-trade-1920.png",
+    "same": true
+  },
+  {
+    "path": "network-1280.png",
+    "same": true
+  },
+  {
+    "path": "network-1920.png",
+    "same": true
+  },
+  {
+    "path": "people-1280.png",
+    "same": false
+  },
+  {
+    "path": "people-1920.png",
+    "same": false
+  },
+  {
+    "path": "workshop-1280.png",
+    "same": true
+  },
+  {
+    "path": "workshop-1920.png",
+    "same": true
+  },
+  {
+    "path": "zero-guest-front-1280.png",
+    "same": true
+  },
+  {
+    "path": "zero-guest-front-1920.png",
+    "same": true
+  }
+]

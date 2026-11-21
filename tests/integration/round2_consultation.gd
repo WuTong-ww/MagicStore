@@ -37,7 +37,10 @@ func run() -> void:
 		check(viewport.encloses(screen.input.get_global_rect()) and viewport.encloses(screen.send_button.get_global_rect()), "editor remains in viewport / " + str(dimensions))
 		check(screen.transcript.size.y >= 100, "history has readable height / " + str(dimensions))
 		check(screen.guest_portrait.visible, "fixed guest sits in scene / " + str(dimensions))
+		check(screen.dialogue_panel.size.x <= 1101, "paper dialogue respects its 1100px width cap / " + str(dimensions))
+		check(absf(screen.dialogue_panel.get_global_rect().get_center().x-float(dimensions.x)/2.0) <= 1.0, "paper dialogue is horizontally centered / " + str(dimensions))
 		var portrait_rect: Rect2 = screen.guest_portrait.get_global_rect()
+		check(portrait_rect.get_center().x > float(dimensions.x)*0.5 and portrait_rect.get_center().x < float(dimensions.x)*0.7, "seated guest stays slightly right of center / " + str(dimensions))
 		check(portrait_rect.position.y+portrait_rect.size.y*0.5 < screen.dialogue_panel.get_global_rect().position.y, "guest face clears paper dialogue / " + str(dimensions))
 		if DisplayServer.get_name() != "headless":
 			await create_timer(0.3).timeout
@@ -46,6 +49,10 @@ func run() -> void:
 			check(root.get_texture().get_image().save_png("res://.tools/round2-consultation-captures/consultation-"+str(dimensions.x)+".png") == OK, "save graphical consultation capture")
 	var config: Dictionary = main.screen.load_layout_config()
 	check(main.screen.layout_config_valid(config), "layout JSON validates")
+	for value: Variant in [0,INF,1099.5,"1100"]:
+		var invalid := config.duplicate(true)
+		invalid["dialogue_max_width"] = value
+		check(not main.screen.layout_config_valid(invalid),"dialogue maximum rejects malformed or non-integer width / "+str(value))
 	config["seat_rect"] = [-1,0,10,10]
 	check(not main.screen.layout_config_valid(config), "invalid portrait seat is rejected")
 	check(main.screen.has_method("history_bbcode"), "dialogue renders distinct safe bubbles")

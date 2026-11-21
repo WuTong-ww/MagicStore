@@ -1,0 +1,2453 @@
+{
+  "version": 1,
+  "passed": true,
+  "repository": "D:\\MagicStore",
+  "baseline": {
+    "requested": "e27441b",
+    "oid": "e27441b51a4415777971cf2d8142ce4c725437e5",
+    "reachable_object_count": 745,
+    "explicit_oid_set_sha256": "f100463b40331194633f11b4878a8b2c994125d95f27860a32ec3bafd9cb9ade"
+  },
+  "head": "135c26fa647555c4f151bffc433d28a15eca3463",
+  "index_listing_sha256": "c8e94cfab0fd90ea17877a32fd012d23172d62634b15b0063e1c8d548d26f646",
+  "method": "(all objects reachable from HEAD union stage-0 index blob OIDs) minus explicit all objects reachable from base; then unique blob OIDs only",
+  "binary_definition": "Git default binary heuristic: NUL byte in first 8000 blob bytes, independent of filename",
+  "scope_note": "Committed clean history and staged tree only; unstaged and untracked working files are excluded. No index/tree/ref writes were performed.",
+  "new_unique_blobs": {
+    "count": 284,
+    "bytes": 86417751,
+    "binary_count": 42,
+    "binary_bytes": 83326050,
+    "objects": [
+      {
+        "oid": "7f8f031dc5c6c5ba1913d93c36d4667c1e311cea",
+        "bytes": 25928940,
+        "binary": true,
+        "paths": [
+          "assets/fonts/LXGWWenKai-Regular.ttf"
+        ]
+      },
+      {
+        "oid": "ed0fa736e24d274bc25f8b9858542fbd6e08d539",
+        "bytes": 3873591,
+        "binary": true,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S01_night.png"
+        ]
+      },
+      {
+        "oid": "479805647b8afbfccc2bb68ca978889c248d9a32",
+        "bytes": 3845433,
+        "binary": true,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S01_day.png"
+        ]
+      },
+      {
+        "oid": "2fbdb25858d0fb1b891b065287c5b7c373decd44",
+        "bytes": 3786001,
+        "binary": true,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S07_day.png"
+        ]
+      },
+      {
+        "oid": "f3d76adf9aedc1aa31e929408eaeb3a585557ceb",
+        "bytes": 3752068,
+        "binary": true,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S01_closed.png"
+        ]
+      },
+      {
+        "oid": "4fe0db539fe13efff906651457776863eb720b2e",
+        "bytes": 3633625,
+        "binary": true,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S06_day.png"
+        ]
+      },
+      {
+        "oid": "9c3eb671c851e9e1413cf30d65a823ab6c861a98",
+        "bytes": 3543148,
+        "binary": true,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S06_night.png"
+        ]
+      },
+      {
+        "oid": "c64b7defbe46bf640ec5100aef7cb9e985473299",
+        "bytes": 3522103,
+        "binary": true,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S02_day.png"
+        ]
+      },
+      {
+        "oid": "bd4fbc18318db301e9e8cde7e68c406fd7b5b715",
+        "bytes": 3481960,
+        "binary": true,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S03_day.png"
+        ]
+      },
+      {
+        "oid": "b9178223b19cf5630bf911265fee1db25b8f52ce",
+        "bytes": 3473521,
+        "binary": true,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S07_night.png"
+        ]
+      },
+      {
+        "oid": "9867a7d94ca72fc1f2a687037f55ae630a9e8486",
+        "bytes": 3338964,
+        "binary": true,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S03_night.png"
+        ]
+      },
+      {
+        "oid": "9bba6787e24236f68f045548228b45acf0550e9a",
+        "bytes": 3336170,
+        "binary": true,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S02_night.png"
+        ]
+      },
+      {
+        "oid": "21ad32e68088b6bdb1b8422fe0c36df3b2550f60",
+        "bytes": 3212151,
+        "binary": true,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S05_day.png"
+        ]
+      },
+      {
+        "oid": "89dd8346ca167e2211fe8d8d3eaf5b2bf91376f3",
+        "bytes": 3195793,
+        "binary": true,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S04_day.png"
+        ]
+      },
+      {
+        "oid": "9d4253dd88db76ffb37be6cb6be3f1ca41c0161d",
+        "bytes": 3116031,
+        "binary": true,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S04_night.png"
+        ]
+      },
+      {
+        "oid": "f315547a511c10a90e67b46f1b7b697c6082c204",
+        "bytes": 3032192,
+        "binary": true,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S05_night.png"
+        ]
+      },
+      {
+        "oid": "2182d2372d4017e903428e09c23892381d431a55",
+        "bytes": 597572,
+        "binary": true,
+        "paths": [
+          "docs/screenshots/round2/A3R/front-2560x1080.jpg"
+        ]
+      },
+      {
+        "oid": "fe708d4b1539950e89a61afc0e49802e8501a0ca",
+        "bytes": 592639,
+        "binary": true,
+        "paths": [
+          "docs/screenshots/round2/A3R/front-2560x1080.jpg"
+        ]
+      },
+      {
+        "oid": "172b2f73a330c3db4072c34748af3227a86f7a72",
+        "bytes": 504247,
+        "binary": true,
+        "paths": [
+          "docs/screenshots/round2/A3R/front-1920x1080.jpg"
+        ]
+      },
+      {
+        "oid": "54e1a94fddb0426d2fd499bb32ada1f875aca32c",
+        "bytes": 424252,
+        "binary": true,
+        "paths": [
+          "docs/screenshots/round2/A3R/consultation-active-1920x1080.jpg"
+        ]
+      },
+      {
+        "oid": "ec14c7f477693e91439839771d6d8f6af0927af0",
+        "bytes": 389235,
+        "binary": true,
+        "paths": [
+          "docs/screenshots/round2/A3R/consultation-active-1920x1080.jpg"
+        ]
+      },
+      {
+        "oid": "f1ba92413a850d711faf6a643fd18f7dc6ec8d0b",
+        "bytes": 328111,
+        "binary": true,
+        "paths": [
+          "docs/screenshots/round2/G3/verified-1920x1080.jpg"
+        ]
+      },
+      {
+        "oid": "7d043e5f242ebc369358706541f5bc363f934b14",
+        "bytes": 321780,
+        "binary": true,
+        "paths": [
+          "docs/screenshots/round2/G3/pending-1920x1080.jpg"
+        ]
+      },
+      {
+        "oid": "4c9df7e0cb97ed2c3caead9efd1a69a6ee983ed1",
+        "bytes": 260516,
+        "binary": true,
+        "paths": [
+          "docs/screenshots/round2/A3R/front-1280x720.jpg"
+        ]
+      },
+      {
+        "oid": "0811814cab6757372abdec1107dad161ea823af7",
+        "bytes": 255197,
+        "binary": true,
+        "paths": [
+          "docs/screenshots/round2/A3R/front-1280x720.jpg"
+        ]
+      },
+      {
+        "oid": "94bbb2ca25eb45f2cbe3930785ac450ad4b263cc",
+        "bytes": 225451,
+        "binary": true,
+        "paths": [
+          "docs/screenshots/round2/G3/verified-1920x1080.jpg"
+        ]
+      },
+      {
+        "oid": "7f04886531d094a09d4bb9c38c16e046f355b8b1",
+        "bytes": 220024,
+        "binary": true,
+        "paths": [
+          "docs/screenshots/round2/G3/pending-1920x1080.jpg"
+        ]
+      },
+      {
+        "oid": "f0fb1f3cafbfd0beb546fab6ef1c3b49341b5655",
+        "bytes": 197960,
+        "binary": false,
+        "paths": [
+          "tests/fixtures/G3/invitation_golden.json"
+        ]
+      },
+      {
+        "oid": "cf17459f3033db6a8a0041c9fcb2cd69f9a46267",
+        "bytes": 185907,
+        "binary": true,
+        "paths": [
+          "docs/screenshots/round2/A3R/consultation-active-1280x720.jpg"
+        ]
+      },
+      {
+        "oid": "f3c7c933ac0916c0882ae6c52d31378ba615eabd",
+        "bytes": 137161,
+        "binary": true,
+        "paths": [
+          "docs/screenshots/round2/G3/pending-1280x720.jpg"
+        ]
+      },
+      {
+        "oid": "f06bed9a7d5a9df1e84fcca234d7066622a5b1f8",
+        "bytes": 135491,
+        "binary": true,
+        "paths": [
+          "docs/screenshots/round2/G3/verified-1280x720.jpg"
+        ]
+      },
+      {
+        "oid": "323bab5a441943960c2e0a17b8f27c51e348f1d6",
+        "bytes": 113524,
+        "binary": true,
+        "paths": [
+          "docs/screenshots/round2/A3R/consultation-active-800x600.jpg"
+        ]
+      },
+      {
+        "oid": "d8eb2c22ec7b68098a5e2ff41cc342136190f728",
+        "bytes": 111705,
+        "binary": true,
+        "paths": [
+          "docs/screenshots/round2/A3R/consultation-active-800x600.jpg"
+        ]
+      },
+      {
+        "oid": "50df44323d4195f8ff921539b957e5d71384991a",
+        "bytes": 104260,
+        "binary": true,
+        "paths": [
+          "docs/screenshots/round2/A3R/notebook-closed-800x600.jpg"
+        ]
+      },
+      {
+        "oid": "ecaa837066f4976e5eef5550a64033f3ad13db2f",
+        "bytes": 101515,
+        "binary": true,
+        "paths": [
+          "docs/screenshots/round2/G3/verified-1280x720.jpg"
+        ]
+      },
+      {
+        "oid": "58449f2dc4df85e6f9ac67e01fc8412a20b108da",
+        "bytes": 100483,
+        "binary": true,
+        "paths": [
+          "docs/screenshots/round2/G3/pending-1280x720.jpg"
+        ]
+      },
+      {
+        "oid": "e35923a7dc0b68143d88c2b13ff6826f344af08e",
+        "bytes": 92108,
+        "binary": true,
+        "paths": [
+          "docs/screenshots/round2/A3R/notebook-open-1280x720.jpg"
+        ]
+      },
+      {
+        "oid": "8ec3de379ed8d2ba578466416cfb4a9793d85b5a",
+        "bytes": 81621,
+        "binary": false,
+        "paths": [
+          "data/art/scene_review.json"
+        ]
+      },
+      {
+        "oid": "eb4934f1fc27ce4721315a80469b38b766bfa42e",
+        "bytes": 77112,
+        "binary": false,
+        "paths": [
+          "data/art/scene_preview.json"
+        ]
+      },
+      {
+        "oid": "b8f66de1f575068691849d6cbd8d3bfc74992910",
+        "bytes": 74176,
+        "binary": false,
+        "paths": [
+          "scripts/people/people.gd"
+        ]
+      },
+      {
+        "oid": "34b56f697316d85e27318cb27a2cb402252bd0c0",
+        "bytes": 73519,
+        "binary": false,
+        "paths": [
+          "assets/ART_ASSET_MANIFEST.json"
+        ]
+      },
+      {
+        "oid": "cd3dfc92690f00c8ead6f236f071e64f1f7612b4",
+        "bytes": 69186,
+        "binary": false,
+        "paths": [
+          "data/art/placeholder_scenes.json"
+        ]
+      },
+      {
+        "oid": "7455ed131e3afcb2392e02d5d07402f23d53e0b4",
+        "bytes": 68246,
+        "binary": false,
+        "paths": [
+          "assets/ART_ASSET_MANIFEST.json"
+        ]
+      },
+      {
+        "oid": "f9608df6d4ee55e4aebdded451803e292954032d",
+        "bytes": 59202,
+        "binary": false,
+        "paths": [
+          "tools/art_pipeline.py"
+        ]
+      },
+      {
+        "oid": "98cc89f5fa6ec15e26ba2912023c6cd22ddd5454",
+        "bytes": 58673,
+        "binary": false,
+        "paths": [
+          "server/ai/gateway.py"
+        ]
+      },
+      {
+        "oid": "3e316e217bccb0ba4b25934cb2b2e113627f2a69",
+        "bytes": 53530,
+        "binary": false,
+        "paths": [
+          "scripts/core/game_state.gd"
+        ]
+      },
+      {
+        "oid": "e4af637062539362585e0d0e71b3d101557bf261",
+        "bytes": 53109,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/CLEAN-tools-size.json"
+        ]
+      },
+      {
+        "oid": "9deeb669c8a559a95e2a74b9a375a71f9b6b0504",
+        "bytes": 50343,
+        "binary": false,
+        "paths": [
+          "docs/codex/HANDBOOK.md"
+        ]
+      },
+      {
+        "oid": "b7bf3b669928f2bf6cfb9baf551f63ebe2fa7b80",
+        "bytes": 50304,
+        "binary": false,
+        "paths": [
+          "docs/codex/HANDBOOK.md"
+        ]
+      },
+      {
+        "oid": "73a203979f2a356fbc0873b068f14bba725b9446",
+        "bytes": 46031,
+        "binary": false,
+        "paths": [
+          "docs/codex/plans/A3R.md"
+        ]
+      },
+      {
+        "oid": "3e4db67bb978a57c92bdb25b932a96d1de8b1f5d",
+        "bytes": 39851,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/CLEAN-base-size.json"
+        ]
+      },
+      {
+        "oid": "3b3d2515da5abab6696dc7058a9b00b74d90ccb2",
+        "bytes": 39681,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A3R-tail-full-tests.txt"
+        ]
+      },
+      {
+        "oid": "700629d57d19914c177544e5613e2066a9e5f071",
+        "bytes": 39420,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/CLEAN-tools-full-tests.txt"
+        ]
+      },
+      {
+        "oid": "43caf140144811cb31dd7ec936529aa9e63b6e24",
+        "bytes": 36773,
+        "binary": false,
+        "paths": [
+          "tests/art/test_real_scene_registry.py"
+        ]
+      },
+      {
+        "oid": "3460a4cecf5f818bab548da28167487a82d3105d",
+        "bytes": 36483,
+        "binary": false,
+        "paths": [
+          "scripts/shop/shop.gd"
+        ]
+      },
+      {
+        "oid": "870d1f27fe1d0e6e2ef7b39a145d68657010bf28",
+        "bytes": 35953,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A1R-full-tests.txt"
+        ]
+      },
+      {
+        "oid": "f01d3c01f8dc128d79180ac16a1301056b7f9f27",
+        "bytes": 35873,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A1R-full-tests-final.txt"
+        ]
+      },
+      {
+        "oid": "0a41b5bd40619b7895f74d6b0e377870b0d96eb2",
+        "bytes": 35860,
+        "binary": false,
+        "paths": [
+          "tools/art/register_real_scenes.py"
+        ]
+      },
+      {
+        "oid": "8ad566a82f7a288511cac6f7aac6fe1a7ab8280d",
+        "bytes": 34210,
+        "binary": false,
+        "paths": [
+          "tests/art/test_art_pipeline.py"
+        ]
+      },
+      {
+        "oid": "5f6b0be7ff7c1b5ee5233d574c99b943a4e46c6e",
+        "bytes": 33586,
+        "binary": false,
+        "paths": [
+          "tools/art/real_scene_layers.py"
+        ]
+      },
+      {
+        "oid": "d42f30ac127fd8e62550016e11852bbeeea2ecc6",
+        "bytes": 31752,
+        "binary": false,
+        "paths": [
+          "scripts/divination/workbench.gd"
+        ]
+      },
+      {
+        "oid": "a57754f70527acbdc2f442aec2ff1d4b80179bcd",
+        "bytes": 31060,
+        "binary": false,
+        "paths": [
+          "scripts/divination/session.gd"
+        ]
+      },
+      {
+        "oid": "fbe13be1eba38043ee158eb35c4401d5f10ebed3",
+        "bytes": 31029,
+        "binary": false,
+        "paths": [
+          "data/divination.json"
+        ]
+      },
+      {
+        "oid": "c524546e37db1b94c2b287784793058061dc05b1",
+        "bytes": 28982,
+        "binary": false,
+        "paths": [
+          "tools/art/placeholder_scenes.py"
+        ]
+      },
+      {
+        "oid": "2b0f8b155c86cd888ce3f3e326c455f1fc4c27a8",
+        "bytes": 28754,
+        "binary": false,
+        "paths": [
+          "scripts/ui/main.gd"
+        ]
+      },
+      {
+        "oid": "dcf3837602b5c2d8d84b60fde5678cf2c0706f68",
+        "bytes": 28260,
+        "binary": false,
+        "paths": [
+          "scripts/divination/workbench.gd"
+        ]
+      },
+      {
+        "oid": "c22c5f742b73f2e8848d1024f322d97be7e632e0",
+        "bytes": 27968,
+        "binary": false,
+        "paths": [
+          "scripts/ui/main.gd"
+        ]
+      },
+      {
+        "oid": "aa201553d24be6cb604c02ca7d1bfcc0ce171ae8",
+        "bytes": 27764,
+        "binary": false,
+        "paths": [
+          "tests/divination/acceptance.gd"
+        ]
+      },
+      {
+        "oid": "64f93c7c440d2fa50ab2dac04913a1177ff928b3",
+        "bytes": 27589,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A1R-full-tests-round2-failed.txt"
+        ]
+      },
+      {
+        "oid": "ac3d62a69ee3dee4b093747bb986063d36793d34",
+        "bytes": 27387,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A3R-tail-visual-review.md"
+        ]
+      },
+      {
+        "oid": "d947fd63fd0deb0780a12711dd3f444eef83be93",
+        "bytes": 26424,
+        "binary": false,
+        "paths": [
+          "docs/codex/plans/A1R.md"
+        ]
+      },
+      {
+        "oid": "3483a55fbdb39511ea80107c4818396bdb0b48b6",
+        "bytes": 26374,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/CLEAN-base-full-tests.txt"
+        ]
+      },
+      {
+        "oid": "29ad3e37de26a101d2e7011e15238c0d4dd8ae2d",
+        "bytes": 26194,
+        "binary": false,
+        "paths": [
+          "scripts/divination/case_save.gd"
+        ]
+      },
+      {
+        "oid": "ebd3f22058185ee68e06a0f8a63d8936a7d000b3",
+        "bytes": 25430,
+        "binary": false,
+        "paths": [
+          "scripts/ui/consultation.gd"
+        ]
+      },
+      {
+        "oid": "43c7bd887ee379a9585030f9c19927cd9da61ab4",
+        "bytes": 25092,
+        "binary": false,
+        "paths": [
+          "scripts/ui/consultation.gd"
+        ]
+      },
+      {
+        "oid": "06f4792fbee4d5a3a46c11d2dfbed3b4406bb45d",
+        "bytes": 25073,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/G3-recovery-tests.txt"
+        ]
+      },
+      {
+        "oid": "1d7cdead31aba98e2012cb67ffa1eb7c05106e35",
+        "bytes": 25027,
+        "binary": false,
+        "paths": [
+          "tests/live/generated_people_live.gd"
+        ]
+      },
+      {
+        "oid": "fea15f24ca1181b4ca852380f36061663866ebaa",
+        "bytes": 24954,
+        "binary": false,
+        "paths": [
+          "scripts/shop/scene_visual.gd"
+        ]
+      },
+      {
+        "oid": "3920b11ef1c80a7076989c56f8d72d6e31bba342",
+        "bytes": 24493,
+        "binary": false,
+        "paths": [
+          "scripts/ui/consultation.gd"
+        ]
+      },
+      {
+        "oid": "2ff6927ef9877fdfc7daa184d4c787da8a3a7dd1",
+        "bytes": 24461,
+        "binary": false,
+        "paths": [
+          "scripts/save/save_service.gd"
+        ]
+      },
+      {
+        "oid": "4e98ee7b028faaf1d5f6fd0b8d9f3be9b742bea0",
+        "bytes": 23765,
+        "binary": false,
+        "paths": [
+          "scripts/shop/people_bridge.gd"
+        ]
+      },
+      {
+        "oid": "6c071e74b02ccc5987e2e382b5878704fb034be0",
+        "bytes": 23706,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A3R-tests.txt"
+        ]
+      },
+      {
+        "oid": "af96d9100c42f863a81534e30894cbe37350871f",
+        "bytes": 22227,
+        "binary": false,
+        "paths": [
+          "tests/people/test_generated_gateway.py"
+        ]
+      },
+      {
+        "oid": "faf1bec72fa385efbd32c13d5ca3c2eff9c894de",
+        "bytes": 22055,
+        "binary": false,
+        "paths": [
+          "docs/features.md"
+        ]
+      },
+      {
+        "oid": "906c5be906fb9c20dec24e3af4b7414415f8593a",
+        "bytes": 21919,
+        "binary": false,
+        "paths": [
+          "scripts/shop/scene_visual.gd"
+        ]
+      },
+      {
+        "oid": "71c2d3ebaa288792d3b989590c12d39ec03840b4",
+        "bytes": 21633,
+        "binary": true,
+        "paths": [
+          "assets/audio/ui/page.ogg"
+        ]
+      },
+      {
+        "oid": "342b5cb97be2b4f8e26d0a982e53c8a4a1c956f4",
+        "bytes": 20808,
+        "binary": false,
+        "paths": [
+          "docs/features.md"
+        ]
+      },
+      {
+        "oid": "f62e000461bd80b8bfdac3606a37168bbf8c46ee",
+        "bytes": 20479,
+        "binary": false,
+        "paths": [
+          "tests/integration/scene_visuals.gd"
+        ]
+      },
+      {
+        "oid": "0f460b094f6f6b0767c03f57ea0fab7553041800",
+        "bytes": 20257,
+        "binary": false,
+        "paths": [
+          "tests/ui_capture.gd"
+        ]
+      },
+      {
+        "oid": "5d0a551da1bf63ca73eedc811a05ed4e250bf6f6",
+        "bytes": 19891,
+        "binary": false,
+        "paths": [
+          "tests/integration/shop_ui.gd"
+        ]
+      },
+      {
+        "oid": "60aed85bc370da0ba9f264505b4b8f2283054a2a",
+        "bytes": 18976,
+        "binary": false,
+        "paths": [
+          "docs/features.md"
+        ]
+      },
+      {
+        "oid": "4244aad06e611938a3d985dc0144ba73e9546122",
+        "bytes": 18866,
+        "binary": false,
+        "paths": [
+          "tests/divination/event_migration.gd"
+        ]
+      },
+      {
+        "oid": "b35fa5f83bc8d8d2369451ccc82514c9c578cee1",
+        "bytes": 18328,
+        "binary": false,
+        "paths": [
+          "scripts/shop/shop_screen.gd"
+        ]
+      },
+      {
+        "oid": "a4a15034d4c8c851bc5a0d592eb3265cf2e1d877",
+        "bytes": 18225,
+        "binary": false,
+        "paths": [
+          "scripts/shop/shop_screen.gd"
+        ]
+      },
+      {
+        "oid": "b474a53beebdc57b3de5801b6452970bc9476f02",
+        "bytes": 16587,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A1R-real-round1-visual-review.md"
+        ]
+      },
+      {
+        "oid": "c1f762702091aa7c3fee35e7c5127448e2b52ad4",
+        "bytes": 15887,
+        "binary": false,
+        "paths": [
+          "tests/art/test_compact_regen.py"
+        ]
+      },
+      {
+        "oid": "594e82069b6452d7ee0cd4b867e244124e4d747f",
+        "bytes": 15002,
+        "binary": false,
+        "paths": [
+          "docs/codex/plans/G3.md"
+        ]
+      },
+      {
+        "oid": "71305ade0d1ada3934dd18067e68e599c34a78bb",
+        "bytes": 14495,
+        "binary": false,
+        "paths": [
+          "tests/shop/integration.gd"
+        ]
+      },
+      {
+        "oid": "1303080733fef1a5076d25e2cc9cc343c78642fc",
+        "bytes": 14028,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/CLEAN-visual-review.md"
+        ]
+      },
+      {
+        "oid": "4943371c7b7113b3a2c6c91aa9d58aeb0e64e048",
+        "bytes": 14024,
+        "binary": false,
+        "paths": [
+          "tests/integration/scene_visuals.gd"
+        ]
+      },
+      {
+        "oid": "83b05ecb8c8190003f7b7b54e7e2247fc2784085",
+        "bytes": 13828,
+        "binary": false,
+        "paths": [
+          "scripts/divination/event_schema.gd"
+        ]
+      },
+      {
+        "oid": "2b4c0740edd05a70ebe7844a377aae1c2b621f55",
+        "bytes": 13822,
+        "binary": false,
+        "paths": [
+          "tests/divination/event_data_rules.gd"
+        ]
+      },
+      {
+        "oid": "12eb82b5e8c6afaa51369845f4256e0949b466cd",
+        "bytes": 13773,
+        "binary": false,
+        "paths": [
+          "tests/integration/scene_visuals.gd"
+        ]
+      },
+      {
+        "oid": "c6f9ecf5354b38331d4ffe463b96f396a0d7c3e5",
+        "bytes": 13506,
+        "binary": false,
+        "paths": [
+          "scripts/divination/catalog.gd"
+        ]
+      },
+      {
+        "oid": "eb1b723f345cc33c652647e29da0fe6e0bb0f193",
+        "bytes": 13441,
+        "binary": false,
+        "paths": [
+          "data/shop/visuals.json"
+        ]
+      },
+      {
+        "oid": "67f0de905606e0c177e8d3df2fbc5d0cd192b63c",
+        "bytes": 13440,
+        "binary": false,
+        "paths": [
+          "data/shop/visuals.json"
+        ]
+      },
+      {
+        "oid": "44fbc30dfe0ec9a4253c2234a6d47bca55345028",
+        "bytes": 13286,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/G3-recovery-audio.txt"
+        ]
+      },
+      {
+        "oid": "e68855a84cf54ec1656b374ef7f01874ef38985c",
+        "bytes": 13110,
+        "binary": false,
+        "paths": [
+          "tests/integration/opening_guests.gd"
+        ]
+      },
+      {
+        "oid": "c6b662ff63a9b7fe6768f48895968e7dec985b99",
+        "bytes": 13100,
+        "binary": false,
+        "paths": [
+          "tests/integration/round2_shell_edges.gd"
+        ]
+      },
+      {
+        "oid": "7384370a1b1b766c6ea3f848f5bec0fbc7b0df8c",
+        "bytes": 13057,
+        "binary": false,
+        "paths": [
+          "docs/codex/history/round2-v2-REVIEW_PACKET.md"
+        ]
+      },
+      {
+        "oid": "1925948fdef3f62cb56ff55b4c1ac73ca4c4eb8a",
+        "bytes": 12889,
+        "binary": false,
+        "paths": [
+          "tests/integration/chat_keyboard_ui.gd"
+        ]
+      },
+      {
+        "oid": "545cfb2a5b03597563044f0f2e99f0be27c68db3",
+        "bytes": 12800,
+        "binary": false,
+        "paths": [
+          "tests/art/test_local_audit.py"
+        ]
+      },
+      {
+        "oid": "7641256d623c045d6c95ef528596d6477ef7d11d",
+        "bytes": 12719,
+        "binary": false,
+        "paths": [
+          "scripts/dev/run.ps1"
+        ]
+      },
+      {
+        "oid": "788945cb54edc209b172fd870810d452bc813b1a",
+        "bytes": 12712,
+        "binary": false,
+        "paths": [
+          "scripts/shop/scene_visual.gd"
+        ]
+      },
+      {
+        "oid": "917a3dc04db65895e38ac36b6da66a90b14feaf5",
+        "bytes": 12650,
+        "binary": false,
+        "paths": [
+          "tests/integration/aligned_scene_layers.gd"
+        ]
+      },
+      {
+        "oid": "ebedc0f24087a5fe3e157227bfdace17314c3f43",
+        "bytes": 12383,
+        "binary": false,
+        "paths": [
+          "tests/integration/a1r_scene_preview.gd"
+        ]
+      },
+      {
+        "oid": "59f36fba5b23654611c0791d14f6ffd7c175c61b",
+        "bytes": 12252,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/G3-tail-remaining.txt"
+        ]
+      },
+      {
+        "oid": "f17251fcfe69c29a9779a206704369d47b6e26a2",
+        "bytes": 12031,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/G3-tests.txt"
+        ]
+      },
+      {
+        "oid": "1391a53463706e6b5fc639c7769dead594871a5e",
+        "bytes": 11989,
+        "binary": false,
+        "paths": [
+          "tools/ART_PIPELINE.md"
+        ]
+      },
+      {
+        "oid": "de9b0fc5a26b00ec6c16c248ae479d213919d3dc",
+        "bytes": 11966,
+        "binary": false,
+        "paths": [
+          "tests/integration/event_notebook_ui.gd"
+        ]
+      },
+      {
+        "oid": "5c2ba29405506da44a3af0f171f12485a8cc3c3b",
+        "bytes": 11935,
+        "binary": false,
+        "paths": [
+          "tests/divination/event_workflows.gd"
+        ]
+      },
+      {
+        "oid": "9162aec8ec8542e9d81d6a97b950e50b5b1cf2c0",
+        "bytes": 11882,
+        "binary": false,
+        "paths": [
+          "tests/art/test_real_scene_layers.py"
+        ]
+      },
+      {
+        "oid": "b81f7706ffa5ccc7a285fb546fc4ea9ee4798171",
+        "bytes": 11863,
+        "binary": false,
+        "paths": [
+          "scripts/divination/event_rules.gd"
+        ]
+      },
+      {
+        "oid": "a1b9fbc3ceb8ab48f5b9320fd7394569669754e9",
+        "bytes": 11674,
+        "binary": false,
+        "paths": [
+          "scripts/ui/shop_front.gd"
+        ]
+      },
+      {
+        "oid": "0e59864479a2f464bb554da048627b5bcbdab617",
+        "bytes": 11609,
+        "binary": false,
+        "paths": [
+          "scripts/divination/generated_cases.gd"
+        ]
+      },
+      {
+        "oid": "c763e1a194b69422fbd8b6c8af0c2a997f1942b4",
+        "bytes": 11447,
+        "binary": false,
+        "paths": [
+          "README.md"
+        ]
+      },
+      {
+        "oid": "daeb261e9f0afac1c6ec7a5d940f5aad6f945b0f",
+        "bytes": 11155,
+        "binary": false,
+        "paths": [
+          "docs/codex/plans/A3R.md"
+        ]
+      },
+      {
+        "oid": "477c295e497d521e3c23cb4576114fb847e79339",
+        "bytes": 10814,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A1R-production-visual-review.md"
+        ]
+      },
+      {
+        "oid": "af2eb1888b53d598a34cbf055477bc787154b1f9",
+        "bytes": 10668,
+        "binary": false,
+        "paths": [
+          "tests/integration/followup_questions_ui.gd"
+        ]
+      },
+      {
+        "oid": "4cef327690dcbb6f0e9b3909e84e709eb7461588",
+        "bytes": 10266,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/G3-recovery-python.txt"
+        ]
+      },
+      {
+        "oid": "37fc2b862ec0eb38d0897c64e6ab912ddd179aac",
+        "bytes": 10173,
+        "binary": false,
+        "paths": [
+          "scripts/dev/run.ps1"
+        ]
+      },
+      {
+        "oid": "25ec4baf35c6e313383e4f63e717913ef5fab570",
+        "bytes": 9985,
+        "binary": false,
+        "paths": [
+          "tools/art/local_audit.py"
+        ]
+      },
+      {
+        "oid": "8729d73925b3f434576108ca57f7f3817efc2e12",
+        "bytes": 9749,
+        "binary": false,
+        "paths": [
+          "tests/live/dialogue_live.gd"
+        ]
+      },
+      {
+        "oid": "9fe98d2067e9e6218a2028a8ea8423f29221ed18",
+        "bytes": 9474,
+        "binary": false,
+        "paths": [
+          "scripts/divination/case_view.gd"
+        ]
+      },
+      {
+        "oid": "f9e8f967499803a7968b2ac7b00ff8213a80287e",
+        "bytes": 9468,
+        "binary": false,
+        "paths": [
+          "tests/integration/round2_shell.gd"
+        ]
+      },
+      {
+        "oid": "0edc84931d22a5540ff2ad9d88638b411e0a7544",
+        "bytes": 9414,
+        "binary": false,
+        "paths": [
+          "tests/art/test_placeholder_scenes.py"
+        ]
+      },
+      {
+        "oid": "cdf233c945e7491ebc2cac7706d85e8c94486685",
+        "bytes": 9144,
+        "binary": false,
+        "paths": [
+          "data/divination/event_templates.json"
+        ]
+      },
+      {
+        "oid": "bda2af51762679d1c243ddff86ca91f64e5ead8a",
+        "bytes": 9110,
+        "binary": false,
+        "paths": [
+          "tests/integration/api_settings_ui.gd"
+        ]
+      },
+      {
+        "oid": "2201acf768da8d0beb04d64ce9e8ae83b2311960",
+        "bytes": 9027,
+        "binary": false,
+        "paths": [
+          "scripts/audio/shop_audio.gd"
+        ]
+      },
+      {
+        "oid": "78f119c626bd8e9c18a19c0c9175d3e37d3a7a22",
+        "bytes": 8968,
+        "binary": true,
+        "paths": [
+          "assets/audio/ui/confirm.ogg"
+        ]
+      },
+      {
+        "oid": "e7dd0732617f653ecdfff71ab12e0d810c86f4ef",
+        "bytes": 8961,
+        "binary": false,
+        "paths": [
+          "tests/live/followup_questions_live.gd"
+        ]
+      },
+      {
+        "oid": "6ad268f59d55ec3c6ee70fdb3d80f29ff9a56c92",
+        "bytes": 8819,
+        "binary": false,
+        "paths": [
+          "docs/codex/plans/CLEAN.md"
+        ]
+      },
+      {
+        "oid": "9dc7ebdef43e99b94616071ffc739bbe6327e107",
+        "bytes": 8811,
+        "binary": false,
+        "paths": [
+          "tools/import_scene_runtime.py"
+        ]
+      },
+      {
+        "oid": "e7f29cd20014742c4616ed8faa65c84537e5e249",
+        "bytes": 8729,
+        "binary": false,
+        "paths": [
+          "tests/people/generic_effects.gd"
+        ]
+      },
+      {
+        "oid": "94c27af2296f5942679b201c1ca69449c020b8a9",
+        "bytes": 8394,
+        "binary": false,
+        "paths": [
+          "tests/integration/people_bridge.gd"
+        ]
+      },
+      {
+        "oid": "64394c856043e74736a5859cc2083f0f3f1bd71c",
+        "bytes": 8127,
+        "binary": false,
+        "paths": [
+          "tests/integration/scene_asset_acceptance.gd"
+        ]
+      },
+      {
+        "oid": "226aad350e433992ffd4b532e3eb3f232c1092bf",
+        "bytes": 7954,
+        "binary": false,
+        "paths": [
+          "tests/integration/event_effects.gd"
+        ]
+      },
+      {
+        "oid": "556959921507956784c6fdc026b6bb220583a0c8",
+        "bytes": 7911,
+        "binary": false,
+        "paths": [
+          "tests/integration/round2_shell_edges.gd"
+        ]
+      },
+      {
+        "oid": "d16270eef703889cfa1446ca5c5606c69d7f04b8",
+        "bytes": 7850,
+        "binary": false,
+        "paths": [
+          "tests/integration/audio_lifecycle.gd"
+        ]
+      },
+      {
+        "oid": "bc5b4d0a0d142968577a043c49b6b9d8065e0eeb",
+        "bytes": 7634,
+        "binary": false,
+        "paths": [
+          "tests/fixtures/G3/invitation_feedback_golden.json"
+        ]
+      },
+      {
+        "oid": "db40193a6c995b0d46c94ccb86f8b373bd544934",
+        "bytes": 7504,
+        "binary": false,
+        "paths": [
+          "tests/integration/save_delete_ui.gd"
+        ]
+      },
+      {
+        "oid": "47d80c009129026d60c76aa2edb320a8a2912842",
+        "bytes": 7415,
+        "binary": false,
+        "paths": [
+          "docs/codex/PROGRESS.md"
+        ]
+      },
+      {
+        "oid": "c04da7eb0f8b35f7d488f3a204c90921ee402c15",
+        "bytes": 7221,
+        "binary": false,
+        "paths": [
+          "tests/integration/invitation_referral.gd"
+        ]
+      },
+      {
+        "oid": "952a325fe171efa47f3faeae62c8773370d79ed2",
+        "bytes": 7088,
+        "binary": false,
+        "paths": [
+          "tests/integration/event_notebook_ui.gd"
+        ]
+      },
+      {
+        "oid": "06c5e72c4fd2773438de35ce26bd90caad730031",
+        "bytes": 6997,
+        "binary": true,
+        "paths": [
+          "assets/audio/ui/cancel.ogg"
+        ]
+      },
+      {
+        "oid": "2272d4f3ea774c0417ce04e609245815a068c361",
+        "bytes": 6943,
+        "binary": false,
+        "paths": [
+          "tests/integration/generated_people_ui.gd"
+        ]
+      },
+      {
+        "oid": "bb37c434bbb28ff130167b600a872f95eff15dc3",
+        "bytes": 6702,
+        "binary": false,
+        "paths": [
+          "docs/codex/PROGRESS.md"
+        ]
+      },
+      {
+        "oid": "ded145383bb337cb68f3a07c45fbc091a4ea290e",
+        "bytes": 6698,
+        "binary": false,
+        "paths": [
+          "tests/divination/invitation_feedback_golden.gd"
+        ]
+      },
+      {
+        "oid": "350d6763fa5b2e16a4c2b2b8625924b78b254b7a",
+        "bytes": 6600,
+        "binary": false,
+        "paths": [
+          "docs/codex/plans/CLEAN.md"
+        ]
+      },
+      {
+        "oid": "d1392b078df4faa46e02f7cd9abbc8f627fa1571",
+        "bytes": 6215,
+        "binary": false,
+        "paths": [
+          "docs/art/style_v3.md"
+        ]
+      },
+      {
+        "oid": "e091cb3962039677b6a5271a3e35279077e92aaa",
+        "bytes": 6101,
+        "binary": false,
+        "paths": [
+          "tests/integration/arrival_ui.gd"
+        ]
+      },
+      {
+        "oid": "5cd32cb54eabdc8df2a33a37cee2180305697fc9",
+        "bytes": 6023,
+        "binary": false,
+        "paths": [
+          "data/art/real_scene_registry.json"
+        ]
+      },
+      {
+        "oid": "091750a730dafb33f7aefd781af78ea9633b08d9",
+        "bytes": 5859,
+        "binary": true,
+        "paths": [
+          "assets/audio/ui/coin.ogg"
+        ]
+      },
+      {
+        "oid": "3c7e7f2d0cd83ea9e9c73878a03af23d06660558",
+        "bytes": 5678,
+        "binary": false,
+        "paths": [
+          "docs/codex/history/round2-v2-PROGRESS.md"
+        ]
+      },
+      {
+        "oid": "52030f24a53e9c320d26324c17c012b5f86562b1",
+        "bytes": 5341,
+        "binary": false,
+        "paths": [
+          "docs/third-party.md"
+        ]
+      },
+      {
+        "oid": "768cc5d04437104361369e3cebc8c66e720dfec0",
+        "bytes": 5277,
+        "binary": false,
+        "paths": [
+          "tests/live/model_switch_live.gd"
+        ]
+      },
+      {
+        "oid": "fcc777b35218d469bec523616753eca1f024bd3c",
+        "bytes": 5265,
+        "binary": false,
+        "paths": [
+          "assets/fonts/LXGWWenKai-OFL.txt"
+        ]
+      },
+      {
+        "oid": "a25a636f97fb6dbcdab90140d2de596d7ad86da9",
+        "bytes": 5157,
+        "binary": false,
+        "paths": [
+          "docs/third-party.md"
+        ]
+      },
+      {
+        "oid": "3821803f98672c0599fdae04d136127d357d91e8",
+        "bytes": 4901,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A3R-tail-header-review.md"
+        ]
+      },
+      {
+        "oid": "7ca77c7186126ce177640aad0c7ccc4c59bf4446",
+        "bytes": 4876,
+        "binary": true,
+        "paths": [
+          "assets/audio/ui/click.ogg"
+        ]
+      },
+      {
+        "oid": "35ca7d387a7e82e02f0d2a1ef981cf028ad02195",
+        "bytes": 4860,
+        "binary": false,
+        "paths": [
+          "tests/art/test_import_scene_runtime.py"
+        ]
+      },
+      {
+        "oid": "562ddb329e06f5913232c866909eecf6ece87f7d",
+        "bytes": 4848,
+        "binary": true,
+        "paths": [
+          "assets/audio/ui/notify.ogg"
+        ]
+      },
+      {
+        "oid": "5eecd4e18c15d642e052a6359d853f45ff5c11ae",
+        "bytes": 4801,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A3R-tail-consultation-review.md"
+        ]
+      },
+      {
+        "oid": "69f100f55ad7bbdee91904ad7b880fbc631b3235",
+        "bytes": 4600,
+        "binary": false,
+        "paths": [
+          "tests/integration/round2_consultation.gd"
+        ]
+      },
+      {
+        "oid": "bf60e5d75650519cc47682dd4b091ff270e571de",
+        "bytes": 4528,
+        "binary": false,
+        "paths": [
+          "tests/integration/round2_audio_theme.gd"
+        ]
+      },
+      {
+        "oid": "1c80f02a0cc7fb5d27da9fa824eec7dcb5480e6a",
+        "bytes": 4304,
+        "binary": false,
+        "paths": [
+          "tests/people/b_handoff.gd"
+        ]
+      },
+      {
+        "oid": "e5c2e01ea8fd9835a251deb4c6d804be494699b0",
+        "bytes": 4249,
+        "binary": false,
+        "paths": [
+          "tests/integration/round2_audio_theme.gd"
+        ]
+      },
+      {
+        "oid": "4b8d0324d981a33ecb8340e85bd46e96657b02cb",
+        "bytes": 4200,
+        "binary": false,
+        "paths": [
+          "docs/codex/PROGRESS.md"
+        ]
+      },
+      {
+        "oid": "942eca43dacaadbc1bb732b3454f70ad8dd94671",
+        "bytes": 4087,
+        "binary": false,
+        "paths": [
+          "scripts/ui/palette.gd"
+        ]
+      },
+      {
+        "oid": "5489da2df474a5f35c99ea25aba3f067f63a6fd7",
+        "bytes": 4035,
+        "binary": false,
+        "paths": [
+          "scripts/ui/palette.gd"
+        ]
+      },
+      {
+        "oid": "2ed4674d0cf270de285bd18f8628ddabd95938a8",
+        "bytes": 3925,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/CLEAN-tools-registry-runtime.txt"
+        ]
+      },
+      {
+        "oid": "16e0df5bba14c089f086e39de5c84e82cc6ee94a",
+        "bytes": 3877,
+        "binary": false,
+        "paths": [
+          "tests/integration/round2_consultation.gd"
+        ]
+      },
+      {
+        "oid": "10f9c3ad645afc43c1dc5879e94050650c6bdabc",
+        "bytes": 3703,
+        "binary": false,
+        "paths": [
+          "tests/divination/event_golden.gd"
+        ]
+      },
+      {
+        "oid": "73e65b413995d1670171b37d12081857a1f16c5f",
+        "bytes": 3630,
+        "binary": false,
+        "paths": [
+          "docs/codex/UPLOAD_STATUS.md"
+        ]
+      },
+      {
+        "oid": "025770d4cf36f01452602d6a80ea6bd3cdc6406b",
+        "bytes": 3556,
+        "binary": false,
+        "paths": [
+          "docs/codex/UPLOAD_STATUS.md"
+        ]
+      },
+      {
+        "oid": "12202ff2a7268af982f1e5b199df53359d078a1b",
+        "bytes": 3339,
+        "binary": false,
+        "paths": [
+          "tests/integration/project_cleanup.gd"
+        ]
+      },
+      {
+        "oid": "2bafe6a61a0c4ba97b45b1efd9e327876843c707",
+        "bytes": 3251,
+        "binary": false,
+        "paths": [
+          "docs/codex/history/round2-v2-UPLOAD_STATUS.md"
+        ]
+      },
+      {
+        "oid": "33104d2ee282fe95f7079c4d4ef8670585181785",
+        "bytes": 3186,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A3R-tail-hotspot-review.md"
+        ]
+      },
+      {
+        "oid": "b8629d47f918cad74afd801646b47eec09628c6b",
+        "bytes": 3013,
+        "binary": false,
+        "paths": [
+          "scripts/ui/shell_config.gd"
+        ]
+      },
+      {
+        "oid": "7ac66c9536f64bfb17e07be4b05d3d3d90123236",
+        "bytes": 2988,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A1R-gateway-capacity-red.txt"
+        ]
+      },
+      {
+        "oid": "94d24d594f062fb9e4e4808098214be91a55be5d",
+        "bytes": 2934,
+        "binary": false,
+        "paths": [
+          "tests/integration/consultation_layout.gd"
+        ]
+      },
+      {
+        "oid": "b94e56c4335466b8ec90c2ff163e7795d4f74e44",
+        "bytes": 2783,
+        "binary": false,
+        "paths": [
+          "scripts/ui/shell_config.gd"
+        ]
+      },
+      {
+        "oid": "8faae0a6cdf77620eb0d8f122b6c790920fcb24e",
+        "bytes": 2748,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/G3-tail-http-people.txt"
+        ]
+      },
+      {
+        "oid": "194273808fea8023348d08c89bb4890eb9b6692c",
+        "bytes": 2706,
+        "binary": false,
+        "paths": [
+          "data/ui/consultation.json"
+        ]
+      },
+      {
+        "oid": "9ebe54f9a6686d6afdc7fc2ad23bf885e57e8321",
+        "bytes": 2682,
+        "binary": false,
+        "paths": [
+          "tests/fixtures/scene_visual_config.gd"
+        ]
+      },
+      {
+        "oid": "ddbeca4b57c37c460e38968bab225eb0dadffe99",
+        "bytes": 2674,
+        "binary": false,
+        "paths": [
+          "data/ui/consultation.json"
+        ]
+      },
+      {
+        "oid": "1614bcc732d11c16645bac49abc11e70356511b8",
+        "bytes": 2561,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A3R-tail-jpg-receipts.json"
+        ]
+      },
+      {
+        "oid": "2b47b9f7b9edc99a212779576d8973f9a6496809",
+        "bytes": 2549,
+        "binary": false,
+        "paths": [
+          "scripts/ui/ui_kit.gd"
+        ]
+      },
+      {
+        "oid": "607121e8485d50d7b2a7ec6484373e6a1c1f4e24",
+        "bytes": 2503,
+        "binary": false,
+        "paths": [
+          "docs/codex/UPLOAD_STATUS.md"
+        ]
+      },
+      {
+        "oid": "c634a938415fa936cd36e08a332c8dd415b30aeb",
+        "bytes": 2313,
+        "binary": false,
+        "paths": [
+          "tools/import_scene_runtime.py"
+        ]
+      },
+      {
+        "oid": "4246c0d86ae80ede31d010373606e12f85ac78e5",
+        "bytes": 2263,
+        "binary": false,
+        "paths": [
+          "data/ui/events.json"
+        ]
+      },
+      {
+        "oid": "d834bc424e643879049d4cb37a072fa39f04ccd5",
+        "bytes": 2156,
+        "binary": false,
+        "paths": [
+          "scripts/divination/event_copy.gd"
+        ]
+      },
+      {
+        "oid": "ae285f2904c3f37f9d06b9e091780c832e68643d",
+        "bytes": 2147,
+        "binary": false,
+        "paths": [
+          "AGENTS.md"
+        ]
+      },
+      {
+        "oid": "ec21f2b2c8ff934930ae1ce7699bbfca573f7d1b",
+        "bytes": 2029,
+        "binary": false,
+        "paths": [
+          "docs/art/style_v2.md"
+        ]
+      },
+      {
+        "oid": "c7569314b736b95896f9c4b49e4a91ce5471e157",
+        "bytes": 2011,
+        "binary": false,
+        "paths": [
+          "data/art/pipeline.json"
+        ]
+      },
+      {
+        "oid": "3648caf69e8dbc99b62513051a58ce69101cd418",
+        "bytes": 2005,
+        "binary": false,
+        "paths": [
+          "scripts/ui/paper_drawer.gd"
+        ]
+      },
+      {
+        "oid": "9f9f0941ccc44d16e4d625303199f3666c563ae1",
+        "bytes": 1983,
+        "binary": false,
+        "paths": [
+          "data/ui/arrival.json"
+        ]
+      },
+      {
+        "oid": "9707680da8b06cbae3adb6d2a75db5371943928a",
+        "bytes": 1798,
+        "binary": false,
+        "paths": [
+          "data/ui/shell.json"
+        ]
+      },
+      {
+        "oid": "ffe4097c0f45550290592f8ce984089df50bbb01",
+        "bytes": 1777,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/ordinary-upload-conversion.json"
+        ]
+      },
+      {
+        "oid": "b72f18d6f0b978b8d6ea6b10fd4bd808ce447795",
+        "bytes": 1748,
+        "binary": false,
+        "paths": [
+          "data/ui/shell.json"
+        ]
+      },
+      {
+        "oid": "c7b31313186aa44ae63ae322067298a8dd391623",
+        "bytes": 1634,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A3R-tail-source-sha256.json"
+        ]
+      },
+      {
+        "oid": "76c02d859394936def4d19ab024a7095f5219429",
+        "bytes": 1475,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/CLEAN-tools-graphic-identity.json"
+        ]
+      },
+      {
+        "oid": "077940c41164d90a9af6bd1ba5a2fdc6c95af006",
+        "bytes": 1358,
+        "binary": false,
+        "paths": [
+          "data/ui/audio.json"
+        ]
+      },
+      {
+        "oid": "2820cff7ff4bdbfe3e868c6b89310456cddba002",
+        "bytes": 1351,
+        "binary": false,
+        "paths": [
+          "data/art/real_scene_layers.json"
+        ]
+      },
+      {
+        "oid": "a4065da886cede93c920f934bcdf891e58677fa4",
+        "bytes": 1329,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A3R-tail-shop-identity.json"
+        ]
+      },
+      {
+        "oid": "c78a5259da4631c13bd3e10972b57928aeb9d0b0",
+        "bytes": 1198,
+        "binary": false,
+        "paths": [
+          "tools/regen_art.ps1"
+        ]
+      },
+      {
+        "oid": "79faa492d5170a600d35f618f7078f0718cc4154",
+        "bytes": 1070,
+        "binary": false,
+        "paths": [
+          "tools/art/validate_formal_manifest.py"
+        ]
+      },
+      {
+        "oid": "7962c3edeb2e55d0ad385cdbffed8b6b8d02378f",
+        "bytes": 1061,
+        "binary": false,
+        "paths": [
+          ".gitattributes"
+        ]
+      },
+      {
+        "oid": "0225ccb2eed0a2da2a2045811b595a1dbc37fe63",
+        "bytes": 969,
+        "binary": false,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S01_closed.png.import"
+        ]
+      },
+      {
+        "oid": "4781fb46408bc0fb62cdc991d988a32db5fbb840",
+        "bytes": 966,
+        "binary": false,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S07_night.png.import"
+        ]
+      },
+      {
+        "oid": "ada32ab2f5d14bbf970cc42ba382ab248f5a8397",
+        "bytes": 966,
+        "binary": false,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S04_night.png.import"
+        ]
+      },
+      {
+        "oid": "ee93e850fe3cb0d2cc7a0e3c34c2d48e544dd5f1",
+        "bytes": 966,
+        "binary": false,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S03_night.png.import"
+        ]
+      },
+      {
+        "oid": "53c2ffe55481b9314035ceb09e1e3dee7a4af35b",
+        "bytes": 965,
+        "binary": false,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S02_night.png.import"
+        ]
+      },
+      {
+        "oid": "7286f6700497b91ff40dbd64d03bd37ac0124ede",
+        "bytes": 965,
+        "binary": false,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S01_night.png.import"
+        ]
+      },
+      {
+        "oid": "7fbe401e1c8b2e247940d4c42b3bf87773a3e8c4",
+        "bytes": 965,
+        "binary": false,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S06_night.png.import"
+        ]
+      },
+      {
+        "oid": "fa5d309db5a096aaa0f168dbf3635aca50ae682b",
+        "bytes": 965,
+        "binary": false,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S05_night.png.import"
+        ]
+      },
+      {
+        "oid": "40bb54745198c6ca1669aa6f853d3fd8b6601743",
+        "bytes": 960,
+        "binary": false,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S04_day.png.import"
+        ]
+      },
+      {
+        "oid": "9b720f9cde0e4356de86442928639ce54ab5298c",
+        "bytes": 960,
+        "binary": false,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S02_day.png.import"
+        ]
+      },
+      {
+        "oid": "9dd956434b227dda6abfcdceaf62978a116bafaf",
+        "bytes": 960,
+        "binary": false,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S01_day.png.import"
+        ]
+      },
+      {
+        "oid": "c2f3504533dcb536676a0bdd0c60ff3b390187cb",
+        "bytes": 960,
+        "binary": false,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S05_day.png.import"
+        ]
+      },
+      {
+        "oid": "cda44c71a66d452fb2f9b641760db79a0d587791",
+        "bytes": 960,
+        "binary": false,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S06_day.png.import"
+        ]
+      },
+      {
+        "oid": "d880ef0c25360d9105c7cdbc3d83f67b601c3e23",
+        "bytes": 960,
+        "binary": false,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S07_day.png.import"
+        ]
+      },
+      {
+        "oid": "e615913a14a26242f7d1d660977872223fb2330e",
+        "bytes": 960,
+        "binary": false,
+        "paths": [
+          "assets/generated_scenes/runtime/v2/S03_day.png.import"
+        ]
+      },
+      {
+        "oid": "1f990bc25bb744019af1f4663dcb58f2bc308615",
+        "bytes": 938,
+        "binary": false,
+        "paths": [
+          "tests/fixtures/round2_shell_red.txt"
+        ]
+      },
+      {
+        "oid": "73e4dd10eaaca56191ceeef9234772d5e0a2c83c",
+        "bytes": 889,
+        "binary": false,
+        "paths": [
+          "tests/ui_teardown.gd"
+        ]
+      },
+      {
+        "oid": "ad5496f3b547eb40a87c060a9d41d50020fe205c",
+        "bytes": 792,
+        "binary": false,
+        "paths": [
+          "assets/fonts/LXGWWenKai-Regular.ttf.import"
+        ]
+      },
+      {
+        "oid": "5be1e68c2b27adb73b59a5a20d942e39ff998074",
+        "bytes": 704,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/CLEAN-tools-graphics-source.json"
+        ]
+      },
+      {
+        "oid": "4fdf5ff29d4a521beb642183efa39d5534bf67c1",
+        "bytes": 628,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/CLEAN-tools-test-summary.json"
+        ]
+      },
+      {
+        "oid": "d8cb9af9d03f0e7fbe539ee815d04fab86d53ecb",
+        "bytes": 581,
+        "binary": false,
+        "paths": [
+          ".gitignore"
+        ]
+      },
+      {
+        "oid": "1fc5acf8243a8ac899403e7297f8c5efdc4258f2",
+        "bytes": 574,
+        "binary": false,
+        "paths": [
+          "assets/audio/KENNEY-LICENSE.txt"
+        ]
+      },
+      {
+        "oid": "2e7f93905ff559077f3681a28dcf32e2aa536d2b",
+        "bytes": 531,
+        "binary": false,
+        "paths": [
+          "data/ui/workbench.json"
+        ]
+      },
+      {
+        "oid": "f370bc27e0cba25859b30ed228c7aaca78a0a271",
+        "bytes": 511,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A3R-tail-test-summary.json"
+        ]
+      },
+      {
+        "oid": "14c31e29960b5f50f6c2d2b718b8cfef57a8a72f",
+        "bytes": 507,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/G3-tail-warning.txt"
+        ]
+      },
+      {
+        "oid": "3158864ef38ab855abbc62bdc1d4935bef17f697",
+        "bytes": 393,
+        "binary": false,
+        "paths": [
+          "assets/audio/ui/confirm.ogg.import"
+        ]
+      },
+      {
+        "oid": "0593de91db4b54c6686500da7047ef97bd1f5cc7",
+        "bytes": 390,
+        "binary": false,
+        "paths": [
+          "assets/audio/ui/notify.ogg.import"
+        ]
+      },
+      {
+        "oid": "3cefaa44218471a2fbe0fa96dd2d7afd3aa240f3",
+        "bytes": 390,
+        "binary": false,
+        "paths": [
+          "assets/audio/ui/cancel.ogg.import"
+        ]
+      },
+      {
+        "oid": "8911c8fa2cc2c1e8c4509f96e96f8e7d70af92e5",
+        "bytes": 386,
+        "binary": false,
+        "paths": [
+          "assets/audio/ui/click.ogg.import"
+        ]
+      },
+      {
+        "oid": "812f6882c932404528256a77231c18b4725bb357",
+        "bytes": 384,
+        "binary": false,
+        "paths": [
+          "assets/audio/ui/coin.ogg.import"
+        ]
+      },
+      {
+        "oid": "985b3066ddde55b5a72d3d3425d4f9f67693bfa3",
+        "bytes": 383,
+        "binary": false,
+        "paths": [
+          "assets/audio/ui/page.ogg.import"
+        ]
+      },
+      {
+        "oid": "5ad42532fe0604c21c82022ffaba8424d0949c68",
+        "bytes": 358,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A1R-gateway-capacity-green.txt"
+        ]
+      },
+      {
+        "oid": "7a165f1ee599a55e0a434dd2e99f051e511240bd",
+        "bytes": 341,
+        "binary": false,
+        "paths": [
+          "data/art/local_audit.json"
+        ]
+      },
+      {
+        "oid": "9079756ed4e6e4de3e32626daef7d9941d66c6a6",
+        "bytes": 333,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A1R-register-final-v2.txt"
+        ]
+      },
+      {
+        "oid": "fd5f1ef923537c680962e23db97965d025d783a2",
+        "bytes": 311,
+        "binary": false,
+        "paths": [
+          "data/ui/hotspots.json"
+        ]
+      },
+      {
+        "oid": "513919f1e4b1524f545b32600a18d52ced77178d",
+        "bytes": 290,
+        "binary": false,
+        "paths": [
+          "scenes/consultation.tscn"
+        ]
+      },
+      {
+        "oid": "6be831658776a61725cdb2c253ad498ebec91947",
+        "bytes": 285,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A1R-real-preview-final.txt"
+        ]
+      },
+      {
+        "oid": "d62fe472162ddd2dee3e4ddf029c0b1b3ea6c878",
+        "bytes": 285,
+        "binary": false,
+        "paths": [
+          "scenes/shop_front.tscn"
+        ]
+      },
+      {
+        "oid": "734659bc28cb7edfa9ec4f9c756c3aeeb7df3946",
+        "bytes": 270,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/G3-push.txt"
+        ]
+      },
+      {
+        "oid": "6df469858dd9620c98bca7f12f7bbf7108567a5f",
+        "bytes": 267,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A3R-graphics.txt",
+          "docs/codex/results/A3R-tail-shell-graphics.txt",
+          "docs/codex/results/CLEAN-base-graphics.txt",
+          "docs/codex/results/CLEAN-tools-graphics.txt"
+        ]
+      },
+      {
+        "oid": "5cab99e7e64f803694e1da12ab77b14ef8ba7847",
+        "bytes": 264,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A3R-tail-notebook-graphics.txt"
+        ]
+      },
+      {
+        "oid": "365be805b55891629cac9accb5730f7049b8816b",
+        "bytes": 262,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/G3-graphics.txt",
+          "docs/codex/results/G3-recovery-graphics.txt"
+        ]
+      },
+      {
+        "oid": "1661cb67b27af7b9dbcbd40518bdbc7471cc4d96",
+        "bytes": 261,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A1R-shop-ui-final.txt"
+        ]
+      },
+      {
+        "oid": "f916f7bb76c812d92b818dc5fcf82505f41c3465",
+        "bytes": 258,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A3R-tail-shop-graphics.txt",
+          "docs/codex/results/CLEAN-base-shop-ui.txt",
+          "docs/codex/results/CLEAN-tools-shop-ui.txt",
+          "docs/codex/results/G3-recovery-shop-ui.txt"
+        ]
+      },
+      {
+        "oid": "ef0792f321a5c07abc4e8601259b44eb53e2b59f",
+        "bytes": 209,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A1R-art-ui-order-red.txt"
+        ]
+      },
+      {
+        "oid": "9cdcae36878003716f73f462e638d016fa4fb3b0",
+        "bytes": 202,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A1R-real-assets-final.txt"
+        ]
+      },
+      {
+        "oid": "0e7ce5e8017652188cf8e224a643f93d1bd67708",
+        "bytes": 189,
+        "binary": false,
+        "paths": [
+          "themes/chrome.tres"
+        ]
+      },
+      {
+        "oid": "54f65d2e554e3a290563c6aa7110c1127907a074",
+        "bytes": 186,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A3R-music-retry.json"
+        ]
+      },
+      {
+        "oid": "c81989074042b7f9621afe9dd86808b289ec3196",
+        "bytes": 175,
+        "binary": false,
+        "paths": [
+          "themes/midnight.tres",
+          "themes/paper.tres"
+        ]
+      },
+      {
+        "oid": "24ccd5f6f175d5a4fc18833d9ac6dd55c58c3964",
+        "bytes": 142,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/G3-tail-api.txt"
+        ]
+      },
+      {
+        "oid": "db62986717d7416fbbdbcd751f0cbec0b8b37772",
+        "bytes": 123,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/G3-recovery-feedback-golden.txt"
+        ]
+      },
+      {
+        "oid": "204921015e7a347a7ce2f90fcc75817d3fc4b6a9",
+        "bytes": 119,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A1R-art-ui-order-green.txt"
+        ]
+      },
+      {
+        "oid": "d6703ebb6adb9c8e873ec7218287c5afd7a3f4e6",
+        "bytes": 119,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A1R-aligned-final.txt"
+        ]
+      },
+      {
+        "oid": "53e8afacdf8e94df312b2c97fb7819d193476b26",
+        "bytes": 116,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/G3-recovery-referral.txt"
+        ]
+      },
+      {
+        "oid": "28fc87b7a58c8f6b70333eccc6051c8b70da16aa",
+        "bytes": 113,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/G3-migration.txt"
+        ]
+      },
+      {
+        "oid": "00b514ec37987fd3d2ebb201f0c31133b98430ac",
+        "bytes": 110,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/G3-workflows.txt"
+        ]
+      },
+      {
+        "oid": "19ee5e17a56834d20f5c394c2b9c01820670f4fc",
+        "bytes": 108,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/G3-recovery-handoff.txt"
+        ]
+      },
+      {
+        "oid": "ce448e5c8a7335166f068c4a33404ec922c4a43f",
+        "bytes": 101,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/A1R-staged-integrity.txt"
+        ]
+      },
+      {
+        "oid": "ebebddb64e464b73d1595883dde06ec4d6321676",
+        "bytes": 95,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/CLEAN-base-test-summary.json"
+        ]
+      },
+      {
+        "oid": "9144a7dbcfde36a7a51cb72c22e3b07694470032",
+        "bytes": 60,
+        "binary": false,
+        "paths": [
+          "docs/codex/results/ordinary-upload-cache.json"
+        ]
+      },
+      {
+        "oid": "28d6b0bd2d6e014b58d507e38a20d5ec495f7436",
+        "bytes": 20,
+        "binary": false,
+        "paths": [
+          "scripts/divination/event_schema.gd.uid"
+        ]
+      },
+      {
+        "oid": "50ec5afe58c54162ff47285d7e3c342a61b8cbc6",
+        "bytes": 20,
+        "binary": false,
+        "paths": [
+          "scripts/ui/shell_config.gd.uid"
+        ]
+      },
+      {
+        "oid": "8620254d30a5fa0f23160b3f72b0ea68a73e7c39",
+        "bytes": 20,
+        "binary": false,
+        "paths": [
+          "scripts/ui/paper_drawer.gd.uid"
+        ]
+      },
+      {
+        "oid": "d20780c5a3fd077debe34e5c950e9f63ea238db2",
+        "bytes": 20,
+        "binary": false,
+        "paths": [
+          "scripts/divination/event_copy.gd.uid"
+        ]
+      },
+      {
+        "oid": "e61a564035fa36430f7c7636282929a6bc44d07b",
+        "bytes": 20,
+        "binary": false,
+        "paths": [
+          "scripts/ui/palette.gd.uid"
+        ]
+      },
+      {
+        "oid": "08e6fe10909ca305a75008a4448f570d81709e9e",
+        "bytes": 19,
+        "binary": false,
+        "paths": [
+          "scripts/audio/shop_audio.gd.uid"
+        ]
+      }
+    ]
+  },
+  "maximum_new_blob": {
+    "oid": "7f8f031dc5c6c5ba1913d93c36d4667c1e311cea",
+    "bytes": 25928940,
+    "binary": true,
+    "paths": [
+      "assets/fonts/LXGWWenKai-Regular.ttf"
+    ]
+  },
+  "current_head_commit": {
+    "oid": "135c26fa647555c4f151bffc433d28a15eca3463",
+    "subject": "[CLEAN] 保留分层工具并压缩清单与本地审计",
+    "new_blob_count": 64,
+    "new_blob_bytes": 1077026,
+    "new_binary_bytes": 0
+  },
+  "pending_index_commit": {
+    "new_blob_count": 44,
+    "new_binary_bytes": 2227634
+  },
+  "clean_commits": [
+    {
+      "oid": "135c26fa647555c4f151bffc433d28a15eca3463",
+      "subject": "[CLEAN] 保留分层工具并压缩清单与本地审计",
+      "new_blob_count": 64,
+      "new_blob_bytes": 1077026,
+      "new_binary_bytes": 0
+    },
+    {
+      "oid": "1878b6c508f37905a744169c197409e8072b5fa6",
+      "subject": "[CLEAN] 保留A3R与G3全绿基线并隔离被拒美术",
+      "new_blob_count": 176,
+      "new_blob_bytes": 82694170,
+      "new_binary_bytes": 81098416
+    }
+  ],
+  "forbidden_prefixes": [
+    "assets/_incoming/",
+    "assets/generated_scenes/v3_real/",
+    "assets/generated_scenes/runtime/v3_real/",
+    "assets/generated_scenes/runtime/v3/",
+    "docs/codex/results/art_audit/",
+    ".tools/",
+    ".godot/"
+  ],
+  "forbidden_index_paths": [],
+  "forbidden_history": [],
+  "unmerged_index_entries": [],
+  "screenshots": {
+    "tasks": {
+      "A3R": {
+        "count": 6,
+        "paths": [
+          "docs/screenshots/round2/A3R/consultation-active-1920x1080.jpg",
+          "docs/screenshots/round2/A3R/consultation-active-800x600.jpg",
+          "docs/screenshots/round2/A3R/front-1280x720.jpg",
+          "docs/screenshots/round2/A3R/front-2560x1080.jpg",
+          "docs/screenshots/round2/A3R/notebook-closed-800x600.jpg",
+          "docs/screenshots/round2/A3R/notebook-open-1280x720.jpg"
+        ]
+      },
+      "G3": {
+        "count": 4,
+        "paths": [
+          "docs/screenshots/round2/G3/pending-1280x720.jpg",
+          "docs/screenshots/round2/G3/pending-1920x1080.jpg",
+          "docs/screenshots/round2/G3/verified-1280x720.jpg",
+          "docs/screenshots/round2/G3/verified-1920x1080.jpg"
+        ]
+      }
+    },
+    "bad_format_paths": [],
+    "over_limit_tasks": []
+  },
+  "screenshot_history_violations": [],
+  "manifest": {
+    "path": "assets/ART_ASSET_MANIFEST.json",
+    "oid": "7455ed131e3afcb2392e02d5d07402f23d53e0b4",
+    "bytes": 68246
+  },
+  "git_count_objects_vH": "count: 4726\nsize: 161.96 MiB\nin-pack: 4064\npacks: 2\nsize-pack: 1.12 GiB\nprune-packable: 2053\ngarbage: 3\nsize-garbage: 15.24 MiB",
+  "storage_note": "count-objects includes all local object storage, old backup refs, packs and unreachable/loose objects. It is not this branch's upload estimate.",
+  "checks": [
+    {
+      "id": "snapshot_stable",
+      "passed": true
+    },
+    {
+      "id": "base_is_ancestor",
+      "passed": true
+    },
+    {
+      "id": "index_has_no_unmerged_entries",
+      "passed": true
+    },
+    {
+      "id": "new_binary_total",
+      "passed": true,
+      "actual": 83326050,
+      "limit": "<150000000"
+    },
+    {
+      "id": "current_commit_binary",
+      "passed": true,
+      "actual": 0,
+      "limit": "<=100000000"
+    },
+    {
+      "id": "pending_commit_binary",
+      "passed": true,
+      "actual": 2227634,
+      "limit": "<=100000000"
+    },
+    {
+      "id": "each_clean_commit_binary",
+      "passed": true
+    },
+    {
+      "id": "forbidden_tracked_paths",
+      "passed": true,
+      "actual": 0,
+      "limit": 0
+    },
+    {
+      "id": "forbidden_history_paths",
+      "passed": true,
+      "actual": 0,
+      "limit": 0
+    },
+    {
+      "id": "screenshot_format",
+      "passed": true,
+      "limit": "real JPG only"
+    },
+    {
+      "id": "screenshot_count",
+      "passed": true,
+      "limit": "<=6 per task"
+    },
+    {
+      "id": "screenshot_history",
+      "passed": true
+    },
+    {
+      "id": "manifest_size",
+      "passed": true,
+      "actual": 68246,
+      "limit": "<500000"
+    }
+  ]
+}

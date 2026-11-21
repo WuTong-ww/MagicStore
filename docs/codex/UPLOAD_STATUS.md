@@ -1,6 +1,6 @@
 # codex/round2-clean 上传状态
 
-2026-11-21按用户指令从main e27441b重建；当前整理中，尚未推送。旧远端codex/round2（18da84a）保持不动，本地备份codex/round2-backup-20261121。
+2026-11-21按用户指令从main e27441b重建；已普通Git推送codex/round2-clean（135c26f）。旧远端codex/round2（18da84a）保持不动，本地备份codex/round2-backup-20261121。远端main核验仍为e27441b。
 
 只取用代码、测试、数据、文字证据、字体音效和正式v2/runtime/v2。被否决的绘本图、incoming、中间物与大批PNG截图不进入新提交。截图只用质量85的JPG，每任务最多6张。Manifest目标<500KB，逐层审计JSONL仅本地。
 
@@ -10,7 +10,7 @@
 
 ## 复验
 
-A3R基线首轮因备份.import重复UID中止，已给本地拒图目录加.gdignore；第二轮完整测试进行中。全部三组干净范围完整测试通过并通过体积检查后才推送codex/round2-clean。不得强推，不合并main。
+A3R基线首轮因备份.import重复UID中止，已给本地拒图目录加.gdignore。最终按共享基线与分层工具两个范围整理，完整测试7739/7739、39帧审阅矩阵和体积检查通过后已推送codex/round2-clean。不得强推，不合并main。
 
 ## 远端保留事项
 
@@ -68,3 +68,11 @@ size-garbage: 15.24 MiB
 `
 
 Local storage above includes old backups, not upload volume. Final size evidence: results/CLEAN-tools-size.json. Clean push is the next action; old remote round2 and main stay unchanged.
+
+
+## A3R tail pre-commit (2026-11-22)
+
+- Full required tests: 8077/8077, exit 0; optional retired local audits explicitly skipped (3).
+- Graphics: shell1383/1383, shop718/718, notebook140/140; 51 raw frames and 10 quality-85 JPGs reviewed.
+- Pending commit new binary: 2227634 B; clean-history new binary total: 83326050 B. Manifest 68246 B; forbidden paths 0; current screenshot counts A3R=6, G3=4.
+- Final evidence: results/A3R-tail-size.json. This staged size snapshot precedes small text report additions only.

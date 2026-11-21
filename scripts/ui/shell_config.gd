@@ -24,9 +24,14 @@ static func config_valid(data: Dictionary) -> bool:
 			return false
 	if not data.get("layout") is Dictionary:
 		return false
-	for key: String in ["margin","gap","notice_bottom","notice_height","energy_width","compact_width","brand_size","status_size","compact_status_size","drawer_inset_top","drawer_inset_bottom","low_energy_ratio"]:
+	for key: String in ["margin","gap","notice_bottom","notice_height","energy_width","energy_bar_height","energy_gap","compact_width","brand_size","status_size","compact_status_size","drawer_inset_top","drawer_inset_bottom","low_energy_ratio"]:
 		var value: Variant = data.layout.get(key)
 		if not (value is int or value is float) or not is_finite(value) or value <= 0:
+			return false
+		if key != "low_energy_ratio" and value != floor(float(value)):
+			return false
+	for key: String in ["brand_size","status_size","compact_status_size"]:
+		if data.layout[key] < 16:
 			return false
 	if data.layout.low_energy_ratio > 1:
 		return false

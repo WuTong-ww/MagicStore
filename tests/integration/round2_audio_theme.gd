@@ -62,6 +62,13 @@ func run() -> void:
 	var paper: Theme = load("res://themes/paper.tres")
 	var chrome: Theme = load("res://themes/chrome.tres")
 	check(paper.get_color("font_color", "Label") == Color("3b2a1e"), "paper uses ink text")
+	var queue := ItemList.new()
+	queue.theme = paper
+	root.add_child(queue)
+	queue.add_item("候客与预约")
+	queue.select(0)
+	check(queue.get_theme_color("font_selected_color").is_equal_approx(Color("3b2a1e")), "selected paper queue keeps readable ink text")
+	queue.queue_free()
 	check(paper.get_stylebox("panel", "PanelContainer").bg_color == Color("f3e9d6"), "paper uses parchment background")
 	check(chrome.get_stylebox("panel", "PanelContainer").bg_color.is_equal_approx(Color(31.0/255.0,58.0/255.0,61.0/255.0,0.8)), "chrome uses translucent night teal")
 	check(paper.get_font("normal_font", "Dialogue").resource_path.ends_with("LXGWWenKai-Regular.ttf"), "dialogue uses WenKai")

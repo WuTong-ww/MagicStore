@@ -55,6 +55,9 @@ static func layout_config_valid(config: Dictionary) -> bool:
 	for key: String in ["portrait_minimum_size","banner_minimum_size"]:
 		if not config.get(key) is Array or config[key].size() != 2 or not config[key].all(func(value: Variant) -> bool: return (value is int or value is float) and is_finite(float(value)) and value > 0 and value == floor(value)):
 			return false
+	var maximum_width: Variant = config.get("dialogue_max_width")
+	if not (maximum_width is int or maximum_width is float) or not is_finite(float(maximum_width)) or maximum_width != floor(float(maximum_width)) or maximum_width < config.banner_minimum_size[0]:
+		return false
 	for key: String in ["top_inset","bottom_inset","edge_inset","dialogue_ratio","dialogue_minimum_height","dialogue_padding","dialogue_gap","drawer_width","drawer_bookmark_width","drawer_seconds","drawer_gap","title_font_size","body_font_size","small_font_size","input_height","question_minimum_width","question_height","question_gap","portrait_z","dialogue_z","drawer_z","text_limit","bubble_main_ratio","bubble_spacer_ratio"]:
 		var value: Variant = config.get(key)
 		if not (value is int or value is float) or not is_finite(float(value)) or value <= 0:
@@ -252,12 +255,12 @@ func _layout_consultation() -> void:
 	if not is_instance_valid(dialogue_panel):
 		return
 	var edge := float(layout_config.edge_inset)
-	var available_width := maxf(0.0, size.x - edge * 2.0)
+	var available_width := minf(float(layout_config.dialogue_max_width),maxf(0.0,size.x-edge*2.0))
 	var minimum_height := dialogue_panel.get_combined_minimum_size().y
 	var desired_height := maxf(float(layout_config.dialogue_minimum_height), size.y * float(layout_config.dialogue_ratio))
 	var height := maxf(minimum_height, desired_height)
 	dialogue_panel.size = Vector2(available_width, height)
-	dialogue_panel.position = Vector2(edge, size.y - float(layout_config.bottom_inset) - dialogue_panel.size.y)
+	dialogue_panel.position = Vector2((size.x-dialogue_panel.size.x)*0.5,size.y-float(layout_config.bottom_inset)-dialogue_panel.size.y)
 	_layout_portrait()
 	if drawer_tween != null and drawer_tween.is_running():
 		drawer_tween.kill()

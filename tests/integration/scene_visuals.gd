@@ -23,6 +23,7 @@ func run() -> void:
 		return
 	var visual_script: Script = load("res://scripts/shop/scene_visual.gd")
 	check(visual_script.config_valid(parsed), "scene configuration validates")
+	check_hotspot_settings(visual_script)
 	var legacy := LegacyFixture.legacy(parsed)
 	check(visual_script.config_valid(legacy),"original v2 slice contract remains supported independently of the active art version")
 	for row: Array in [[539,"closed"],[540,"day"],[1079,"day"],[1080,"night"],[1320,"night"],[1321,"closed"],[1980,"day"]]:
@@ -63,6 +64,7 @@ func run() -> void:
 		var crop_fitted: Rect2 = visual_script.fit_rect(region.size,cropped.get_size())
 		var uncropped_fitted: Rect2 = visual_script.fit_rect(region.size,uncropped.get_size())
 		check(crop_fitted.size.y > uncropped_fitted.size.y and crop_fitted.size.y > region.size.y*0.9,"removing transparent PNG margins lets the door fill the intended tall target rectangle")
+	await check_hotspot_cards(visual_script,parsed)
 	await check_runtime(parsed)
 	print("SCENE VISUALS: %d checks, %d failures, %d graphical captures" % [checks, failures, captures])
 	await UITeardown.drain(self)
@@ -71,6 +73,105 @@ func run() -> void:
 func settle() -> void:
 	for frame: int in range(12):
 		await process_frame
+
+func check_hotspot_settings(visual_script: Script) -> void:
+	var path := "res://data/ui/hotspots.json"
+	check(FileAccess.file_exists(path),"hotspot paper styling has its own validated JSON")
+	if not FileAccess.file_exists(path):
+		return
+	var settings: Dictionary = visual_script.load_hotspot_settings()
+	check(not settings.is_empty() and visual_script.hotspot_settings_valid(settings),"hotspot settings validate through the actual JSON decoder")
+	for change: Array in [["paper_color","not-a-color"],["paper_alpha",NAN],["padding",[-1,6]],["border_width",1.5],["tooltip_format",""]]:
+		var invalid := settings.duplicate(true)
+		invalid[change[0]] = change[1]
+		check(not visual_script.hotspot_settings_valid(invalid),"reject invalid hotspot paper setting / "+str(change[0]))
+
+func check_hotspot_cards(visual_script: Script, config: Dictionary) -> void:
+	var game := root.get_node("GameState")
+	var committed: Dictionary = game.snapshot()
+	var stage: Control = visual_script.new()
+	root.add_child(stage)
+	stage.setup("front",config)
+	for key: String in config.scenes.S02.hotspots:
+		stage.hotspot(key,func(): pass)
+	var settings: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/ui/hotspots.json")) if FileAccess.file_exists("res://data/ui/hotspots.json") else {}
+	for dimensions: Vector2i in [Vector2i(800,600),Vector2i(1280,720),Vector2i(1920,1080),Vector2i(2560,1080)]:
+		root.size = dimensions
+		root.content_scale_size = dimensions
+		stage.size = dimensions
+		await settle()
+		for key: String in config.scenes.S02.hotspots:
+			var button: Button = stage.get_node("Hotspot_"+key)
+			check(button.get_rect().is_equal_approx(stage.projected_rect(config.scenes.S02.hotspots[key].rect)),"paper decoration preserves original cover click rectangle / "+key+" / "+str(dimensions))
+			if config.scenes.S02.hotspots[key].get("display","button") == "transparent":
+				continue
+			var label := stage.get_node("HotspotLabel_"+key) as Label
+			check(label != null,"paper keeps the public Label interface / "+key)
+			if label == null:
+				continue
+			var paper := label.get_theme_stylebox("normal") as StyleBoxFlat
+			check(paper != null,"hotspot has a real paper background instead of a pale text outline / "+key)
+			check(Rect2(Vector2.ZERO,Vector2(dimensions)).encloses(label.get_global_rect()),"whole hotspot paper stays inside the viewport including 800px / "+key)
+			if paper != null and not settings.is_empty():
+				var text_width := label.get_theme_font("font").get_string_size(label.text,HORIZONTAL_ALIGNMENT_LEFT,-1,label.get_theme_font_size("font_size")).x
+				check(label.size.x+1 >= text_width+2*settings.padding[0],"paper width includes complete text and both horizontal paddings / "+key)
+				check(paper.get_border_width(SIDE_LEFT) == 1 and paper.border_color.is_equal_approx(Color(settings.border_color)) and paper.corner_radius_top_left == settings.corner_radius,"paper uses a rounded 1px lamp-gold border / "+key)
+				check(paper.bg_color.a > 0 and paper.bg_color.a < 1 and is_equal_approx(label.modulate.a,1.0) and is_equal_approx(label.get_theme_color("font_color").a,1.0),"only paper is translucent; ink stays opaque / "+key)
+				check(label.get_theme_color("font_color").is_equal_approx(Color(settings.font_color)) and label.get_theme_constant("shadow_outline_size") == 0,"hotspot ink replaces the former pale outlined text / "+key)
+		await capture_hotspots(dimensions)
+	var key: String = config.scenes.S02.hotspots.keys().filter(func(id: String) -> bool: return config.scenes.S02.hotspots[id].get("display","button") != "transparent")[0]
+	var button: Button = stage.get_node("Hotspot_"+key)
+	var label: Label = stage.get_node("HotspotLabel_"+key)
+	var click_rect := button.get_rect()
+	var label_rect := label.get_rect()
+	button.grab_focus()
+	await settle()
+	var focused := label.get_theme_stylebox("normal") as StyleBoxFlat
+	check(focused != null and not settings.is_empty() and focused.bg_color.is_equal_approx(Color(Color(settings.hover_color),settings.hover_alpha)),"keyboard focus deepens the same paper card")
+	button.release_focus()
+	var motion := InputEventMouseMotion.new()
+	motion.position = button.get_global_rect().get_center()
+	root.push_input(motion)
+	await settle()
+	var hovered := label.get_theme_stylebox("normal") as StyleBoxFlat
+	check(hovered != null and not settings.is_empty() and hovered.bg_color.is_equal_approx(Color(Color(settings.hover_color),settings.hover_alpha)),"real mouse hover deepens the paper background")
+	check(button.get_rect().is_equal_approx(click_rect) and label.get_rect().is_equal_approx(label_rect),"hover and focus never change the hit rectangle or paper size")
+	motion = InputEventMouseMotion.new()
+	motion.position = Vector2.ZERO
+	root.push_input(motion)
+	await settle()
+	var normal := label.get_theme_stylebox("normal") as StyleBoxFlat
+	check(normal != null and not settings.is_empty() and normal.bg_color.is_equal_approx(Color(Color(settings.paper_color),settings.paper_alpha)),"mouse exit restores the normal translucent paper")
+	var occluder := Control.new()
+	occluder.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	stage.add_child(occluder)
+	occluder.position = label.position+Vector2(label.size.x-1,0)
+	occluder.size = Vector2(1,label.size.y)
+	stage.label_occluders.append(occluder)
+	stage._layout()
+	check(not label.visible,"an occluder touching only the paper edge hides the entire card")
+	stage.label_occluders.clear()
+	stage._layout()
+	check(label.visible,"clearing the occluder restores the complete paper card")
+	check(game.snapshot() == committed,"hotspot hover, focus and occlusion change no committed state")
+	stage.queue_free()
+	await settle()
+
+func capture_hotspots(dimensions: Vector2i) -> void:
+	if DisplayServer.get_name() == "headless":
+		return
+	# Neutral pointer placement avoids capturing a native tooltip left over
+	# from a previous window size, rather than altering the production hint.
+	var motion := InputEventMouseMotion.new()
+	motion.position = Vector2.ZERO
+	root.push_input(motion)
+	await settle()
+	await process_frame
+	RenderingServer.force_draw()
+	var directory := "res://.tools/clean-rebuild/hotspot-captures"
+	DirAccess.make_dir_recursive_absolute(directory)
+	check(root.get_texture().get_image().save_png(directory+"/front-"+str(dimensions.x)+"x"+str(dimensions.y)+".png") == OK,"save actual hotspot paper capture / "+str(dimensions))
+	captures += 1
 
 func check_runtime(config: Dictionary) -> void:
 	var game := root.get_node("GameState")

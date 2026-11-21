@@ -67,10 +67,12 @@
     "notice_bottom": 90,
     "notice_height": 24,
     "energy_width": 70,
+    "energy_bar_height": 12,
+    "energy_gap": 2,
     "compact_width": 1000,
     "brand_size": 20,
     "status_size": 16,
-    "compact_status_size": 14,
+    "compact_status_size": 16,
     "drawer_inset_top": 64,
     "drawer_inset_bottom": 104,
     "low_energy_ratio": 0.25

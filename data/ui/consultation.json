@@ -10,7 +10,7 @@
     96
   ],
   "seat_rect": [
-    950,
+    1180,
     410,
     490,
     700
@@ -21,6 +21,7 @@
   "edge_inset": 20,
   "dialogue_ratio": 0.333333,
   "dialogue_minimum_height": 316,
+  "dialogue_max_width": 1100,
   "dialogue_padding": 12,
   "dialogue_gap": 4,
   "drawer_width": 420,
@@ -91,13 +92,13 @@
     "height_limit": 720,
     "narrow_width_limit": 900,
     "rect": [
-      950,
+      1180,
       160,
       490,
       700
     ],
     "narrow_rect": [
-      1000,
+      1235,
       110,
       380,
       540

@@ -1,0 +1,18 @@
+{
+  "data/shop/visuals.json": "c9f8817e6c152063877d56088538fc73d0052a1792b1edebad487a257a32ac0f",
+  "data/ui/consultation.json": "559d87c4ae4146b74d7fe7190f6a488c5d49256b97ebc62531c8b642772aef1f",
+  "data/ui/shell.json": "3e95074fb76699061169dc4d43ea18a4a4610386429c35acf8da314c651e466a",
+  "scripts/divination/workbench.gd": "512c8a0812298cd49811253744e784addc6cca3eda7d8a7d43bfbc0139b879c7",
+  "scripts/shop/scene_visual.gd": "8bcd2f25af9972e8f96114c50dc46472d5fc65cb5aa504fc83d9a92d4c4a2c47",
+  "scripts/ui/consultation.gd": "23e9f7174001ddbc6f52f78fab29fe9d400b3e090d2d91d46b1219797483f534",
+  "scripts/ui/main.gd": "43daa5e9da87b2b74b778b80b5c6dc4a011e76be23d6c94278310c94842ae5ea",
+  "scripts/ui/palette.gd": "227e1b3b2389fc236848441ea2a4d57a1c94e6ae9b474404b0a6ba039d36a9ef",
+  "scripts/ui/shell_config.gd": "c7ad3338a0df369bb6de72900005ca1c86dddb91beb77ec266c6750664c36365",
+  "tests/integration/event_notebook_ui.gd": "fa8bad500d0926a2781ffed3685400160499ec14a82ab48664bb066ce90bb465",
+  "tests/integration/round2_audio_theme.gd": "221ba1bcaff04e6c02d7b6bea03ea44b4164160717d88b057f35507ed702c6fc",
+  "tests/integration/round2_consultation.gd": "2be1f3569cf381d3ac41d3170b9b2b4f3ca0b10aa9327eb20ec8c5067365e5c9",
+  "tests/integration/round2_shell_edges.gd": "0c31ff0126548d0e2fbf92a09f2a6e6e34ec064c2ec186b405ade0aea80ecde0",
+  "tests/integration/scene_visuals.gd": "e68937324d503033729580abb5004c5a94b1efd88d10e8c750bc680e3784d735",
+  "data/ui/hotspots.json": "b7fb24671aae26095b2bd99f0170b93d6a881ef92763dcc12ab48e7194b11800",
+  "data/ui/workbench.json": "dc9253a515cdb0276244262d9e726112c2928757d6c3404626edd57423f6e435"
+}

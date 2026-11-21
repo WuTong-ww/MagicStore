@@ -3,6 +3,7 @@ extends Window
 const UI = preload("res://scripts/ui/ui_kit.gd")
 const ArrivalUI = preload("res://scripts/ui/arrival_ui.gd")
 const EventCopy = preload("res://scripts/divination/event_copy.gd")
+const FRAME_PATH := "res://data/ui/workbench.json"
 ## Shared window for the B screens. It consumes only player projections.
 
 const OracleCards = preload("res://scripts/divination/oracle_cards.gd")
@@ -26,37 +27,108 @@ var result_id := ""
 var notebook_tab := "knowledge"
 var history_visit_id := ""
 var view: Dictionary = {}
+var frame_config: Dictionary = {}
+var close_button: Button
+var modal_mask: ColorRect
+
+static func _frame_integer(value: Variant, low: int, high: int) -> bool:
+	return (value is int or value is float) and is_finite(float(value)) and value == floor(float(value)) and value >= low and value <= high
+
+static func frame_config_valid(config: Dictionary) -> bool:
+	if config.get("version") != 1:
+		return false
+	for field: String in ["initial_size","minimum_size","minimum_open_size","maximum_open_size","viewport_inset","close_minimum_size"]:
+		if not config.get(field) is Array or config[field].size() != 2 or not config[field].all(func(value: Variant) -> bool: return _frame_integer(value,1,4096)):
+			return false
+	for axis: int in range(2):
+		if config.minimum_size[axis] > config.minimum_open_size[axis] or config.minimum_open_size[axis] > config.maximum_open_size[axis] or config.initial_size[axis] < config.minimum_size[axis] or config.initial_size[axis] > config.maximum_open_size[axis]:
+			return false
+	for field: String in ["content_margin","layout_gap","body_gap","heading_font_size","notice_font_size","notice_minimum_height","close_font_size","backdrop_z_index"]:
+		if not _frame_integer(config.get(field),1,4096):
+			return false
+	for field: String in ["close_symbol","close_tooltip","back_label"]:
+		if not config.get(field) is String or config[field].strip_edges().is_empty():
+			return false
+	if not config.get("backdrop_color") is String or not Color.html_is_valid(config.backdrop_color):
+		return false
+	var opacity := Color(config.backdrop_color).a
+	return opacity > 0.0 and opacity < 1.0
+
+static func load_frame_config() -> Dictionary:
+	if not FileAccess.file_exists(FRAME_PATH):
+		return {}
+	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(FRAME_PATH))
+	return parsed if parsed is Dictionary and frame_config_valid(parsed) else {}
+
+func _sync_modal_mask() -> void:
+	if is_instance_valid(modal_mask):
+		modal_mask.visible = visible
+
+func _exit_tree() -> void:
+	if is_instance_valid(modal_mask):
+		modal_mask.queue_free()
 
 func _ready() -> void:
 	visible = false
+	frame_config = load_frame_config()
+	if frame_config.is_empty():
+		return
 	UI.paper_window(self)
-	size = Vector2i(810, 515)
-	min_size = Vector2i(690, 430)
+	borderless = true
+	size = Vector2i(frame_config.initial_size[0],frame_config.initial_size[1])
+	min_size = Vector2i(frame_config.minimum_size[0],frame_config.minimum_size[1])
 	transient = true
 	exclusive = true
 	close_requested.connect(hide)
-	var margin := UI.margin(20)
+	# The Window owns a separate viewport. Its backdrop belongs to the host
+	# canvas so it covers the parent header as well as the scene behind it.
+	modal_mask = ColorRect.new()
+	modal_mask.name = "WorkbenchModalMask"
+	modal_mask.color = Color(frame_config.backdrop_color)
+	modal_mask.z_index = int(frame_config.backdrop_z_index)
+	modal_mask.mouse_filter = Control.MOUSE_FILTER_STOP
+	modal_mask.visible = false
+	var mask_parent: Node = host if is_instance_valid(host) else get_parent()
+	mask_parent.add_child(modal_mask)
+	modal_mask.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	visibility_changed.connect(_sync_modal_mask)
+	var margin := UI.margin(int(frame_config.content_margin))
 	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(margin)
 	var layout := VBoxContainer.new()
-	layout.add_theme_constant_override("separation", 10)
+	layout.add_theme_constant_override("separation",int(frame_config.layout_gap))
 	margin.add_child(layout)
-	heading = UI.label("", 26, UI.GOLD)
-	layout.add_child(heading)
+	var header := HBoxContainer.new()
+	header.name = "NotebookHeader"
+	header.add_theme_constant_override("separation",int(frame_config.layout_gap))
+	layout.add_child(header)
+	heading = UI.label("",int(frame_config.heading_font_size),UI.GOLD)
+	heading.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	heading.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	header.add_child(heading)
+	close_button = UI.button(frame_config.close_symbol,hide)
+	close_button.name = "NotebookClose"
+	close_button.tooltip_text = frame_config.close_tooltip
+	close_button.custom_minimum_size = Vector2(frame_config.close_minimum_size[0],frame_config.close_minimum_size[1])
+	close_button.add_theme_font_size_override("font_size",int(frame_config.close_font_size))
+	close_button.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	header.add_child(close_button)
 	scroll = ScrollContainer.new()
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	layout.add_child(scroll)
 	body = VBoxContainer.new()
 	body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	body.add_theme_constant_override("separation", 9)
+	body.add_theme_constant_override("separation",int(frame_config.body_gap))
 	scroll.add_child(body)
-	notice = UI.label("", 14, UI.GOLD)
-	notice.custom_minimum_size.y = 24
+	notice = UI.label("",int(frame_config.notice_font_size),UI.GOLD)
+	notice.custom_minimum_size.y = frame_config.notice_minimum_height
 	layout.add_child(notice)
-	layout.add_child(UI.button("返回", hide))
+	layout.add_child(UI.button(frame_config.back_label,hide))
 
 func open(which: String) -> void:
+	if frame_config.is_empty():
+		return
 	page = which
 	method_id = "tarot" if which == "tarot" else ""
 	option_id = ""
@@ -69,7 +141,7 @@ func open(which: String) -> void:
 			history_visit_id = records.back().visit_id
 	notice.text = ""
 	var viewport := get_tree().root.size
-	size = Vector2i(clampi(viewport.x - 110, 690, 880), clampi(viewport.y - 110, 480, 740))
+	size = Vector2i(clampi(viewport.x-int(frame_config.viewport_inset[0]),int(frame_config.minimum_open_size[0]),int(frame_config.maximum_open_size[0])),clampi(viewport.y-int(frame_config.viewport_inset[1]),int(frame_config.minimum_open_size[1]),int(frame_config.maximum_open_size[1])))
 	_render()
 	scroll.scroll_vertical = 0
 	popup_centered()
@@ -366,10 +438,6 @@ func _casebook() -> void:
 	if not view.get("active",false):
 		_historical_case()
 		return
-	var evidence_art := UI.image("res://assets/ui/evidence_cards.png")
-	evidence_art.custom_minimum_size = Vector2(420, 118)
-	evidence_art.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	body.add_child(evidence_art)
 	for feedback: Dictionary in view.feedback_options:
 		body.add_child(UI.button("听取回访 · " + feedback.title, func():
 			if await _run("receive_feedback", {"event_id": feedback.event_id}):
@@ -569,10 +637,6 @@ func _shop() -> void:
 		_info("请先接待顾客。")
 		return
 	var shop: Dictionary = view.shop
-	var receipt_art := UI.image("res://assets/ui/receipt_widgets.png")
-	receipt_art.custom_minimum_size = Vector2(360, 120)
-	receipt_art.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	body.add_child(receipt_art)
 	_section("%s  ·  %d 金币" % [shop.product_name, int(shop.price)])
 	_info("店内余量 %d。" % int(shop.stock))
 	if view.event.get("status") == "pending" and view.event.get("item_effect_available",false):
@@ -682,7 +746,4 @@ func _method_art(id: String) -> String:
 		"xiaoliu": return "res://assets/ui/xiaoliu_grid.png"
 		"astrology": return "res://assets/ui/astrology_wheel.png"
 		"plum", "yijing": return "res://assets/ui/bagua_board.png"
-		"bazi": return "res://assets/ui/four_pillars_frame.png"
-		"ziwei": return "res://assets/ui/ziwei_palace_frame.png"
-		"past": return "res://assets/ui/evidence_cards.png"
 	return ""

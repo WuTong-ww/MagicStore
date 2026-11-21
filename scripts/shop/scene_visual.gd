@@ -2,6 +2,7 @@ class_name SceneVisual
 extends Control
 ## Presentation only: reads the committed public snapshot, never advances time.
 const CONFIG_PATH := "res://data/shop/visuals.json"
+const HOTSPOT_SETTINGS_PATH := "res://data/ui/hotspots.json"
 const UI = preload("res://scripts/ui/ui_kit.gd")
 var config: Dictionary = {}
 var scene_id := ""
@@ -13,6 +14,42 @@ var placed_nodes: Array = []
 var hotspot_labels: Array = []
 var label_occluders: Array[Control] = []
 var fade: Tween
+
+static func hotspot_settings_valid(settings: Dictionary) -> bool:
+	if not _integer(settings.get("version"),1,1):
+		return false
+	for field: String in ["font_color","paper_color","hover_color","border_color"]:
+		if not settings.get(field) is String or not Color.html_is_valid(settings[field]) or not is_equal_approx(Color(settings[field]).a,1.0):
+			return false
+	for field: String in ["paper_alpha","hover_alpha"]:
+		var alpha: Variant = settings.get(field)
+		if not (alpha is int or alpha is float) or not is_finite(float(alpha)) or alpha <= 0 or alpha > 1:
+			return false
+	if settings.paper_alpha >= 1:
+		return false
+	if not _integer(settings.get("font_size"),1,128) or not _integer(settings.get("border_width"),1,1) or not _integer(settings.get("corner_radius"),0,128) or not _integer(settings.get("viewport_margin"),0,256):
+		return false
+	var padding: Variant = settings.get("padding")
+	if not padding is Array or padding.size() != 2 or not padding.all(func(n: Variant) -> bool: return _integer(n,0,256)):
+		return false
+	var tooltip: Variant = settings.get("tooltip_format")
+	return tooltip is String and tooltip.count("%s") == 1 and not tooltip.replace("%s","").contains("%")
+
+static func load_hotspot_settings() -> Dictionary:
+	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(HOTSPOT_SETTINGS_PATH))
+	return parsed if parsed is Dictionary and hotspot_settings_valid(parsed) else {}
+
+static func _hotspot_paper(settings: Dictionary, highlighted: bool) -> StyleBoxFlat:
+	var paper := StyleBoxFlat.new()
+	paper.bg_color = Color(Color(settings.hover_color if highlighted else settings.paper_color),settings.hover_alpha if highlighted else settings.paper_alpha)
+	paper.border_color = Color(settings.border_color)
+	paper.set_border_width_all(int(settings.border_width))
+	paper.set_corner_radius_all(int(settings.corner_radius))
+	paper.content_margin_left = settings.padding[0]
+	paper.content_margin_right = settings.padding[0]
+	paper.content_margin_top = settings.padding[1]
+	paper.content_margin_bottom = settings.padding[1]
+	return paper
 
 static func load_config() -> Dictionary:
 	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(CONFIG_PATH))
@@ -321,7 +358,8 @@ func _layout() -> void:
 		var point := projected_rect([row.position[0],row.position[1],1,1]).position
 		var label: Label = row.node
 		label.size = label.get_combined_minimum_size()
-		label.position = Vector2(clampf(point.x-label.size.x/2.0,0,maxf(0,size.x-label.size.x)),clampf(point.y,0,maxf(0,size.y-label.size.y)))
+		var margin: float = row.get("viewport_margin",0)
+		label.position = Vector2(clampf(point.x-label.size.x/2.0,margin,maxf(margin,size.x-label.size.x-margin)),clampf(point.y,margin,maxf(margin,size.y-label.size.y-margin)))
 		label.visible = not label_occluders.any(func(occluder: Control) -> bool: return is_instance_valid(occluder) and occluder.is_visible_in_tree() and occluder.get_global_rect().intersects(label.get_global_rect()))
 
 func interaction_z_index() -> int:
@@ -332,9 +370,13 @@ func interaction_z_index() -> int:
 
 func hotspot(key: String, callback: Callable) -> Button:
 	var entry: Dictionary = config.scenes[scene_id].hotspots[key]
+	var settings := load_hotspot_settings()
+	if settings.is_empty():
+		push_error("Invalid hotspot paper settings")
+		return null
 	var button := UI.button("",callback)
 	button.name = "Hotspot_"+key
-	button.tooltip_text = entry.label
+	button.tooltip_text = str(settings.tooltip_format)%entry.label
 	button.set_meta("decorative_hotspot",true)
 	button.z_index = mini(interaction_z_index(),4096)
 	for state: String in ["normal","hover","pressed","disabled","focus"]:
@@ -345,15 +387,27 @@ func hotspot(key: String, callback: Callable) -> Button:
 	add_child(button)
 	place(button,entry.rect)
 	if entry.get("display","button") != "transparent":
-		var label := UI.label(entry.label,int(config.scene_settings.hotspot_font_size))
+		var label := UI.label(entry.label,int(settings.font_size),Color(settings.font_color))
 		label.z_index = button.z_index
 		label.name = "HotspotLabel_"+key
 		label.autowrap_mode = TextServer.AUTOWRAP_OFF
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		label.add_theme_color_override("font_shadow_color",Color("f3e9d6"))
-		label.add_theme_constant_override("shadow_outline_size",4)
+		label.add_theme_color_override("font_shadow_color",Color.TRANSPARENT)
+		label.add_theme_constant_override("shadow_outline_size",0)
+		label.add_theme_constant_override("outline_size",0)
+		var paper := _hotspot_paper(settings,false)
+		var highlighted := _hotspot_paper(settings,true)
+		label.add_theme_stylebox_override("normal",paper)
+		var restyle := func():
+			label.add_theme_stylebox_override("normal",highlighted if button.is_hovered() or button.has_focus() else paper)
+		button.mouse_entered.connect(restyle)
+		button.mouse_exited.connect(restyle)
+		button.focus_entered.connect(restyle)
+		button.focus_exited.connect(restyle)
 		add_child(label)
-		hotspot_labels.append({"node":label,"position":entry.get("label_position",[entry.rect[0]+entry.rect[2]/2.0,entry.rect[1]+entry.rect[3]/2.0])})
+		hotspot_labels.append({"node":label,"position":entry.get("label_position",[entry.rect[0]+entry.rect[2]/2.0,entry.rect[1]+entry.rect[3]/2.0]),"viewport_margin":settings.viewport_margin})
 		_layout()
 	return button
 

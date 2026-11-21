@@ -62,6 +62,7 @@ func _build() -> void:
 		set_color("font_focus_color", type, text)
 		set_color("font_disabled_color", type, secondary)
 	set_color("default_color", "RichTextLabel", text)
+	set_color("font_selected_color", "ItemList", text)
 	set_color("font_placeholder_color", "LineEdit", secondary)
 	set_color("font_placeholder_color", "TextEdit", secondary)
 	for type: String in ["Button", "OptionButton"]:

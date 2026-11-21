@@ -4,7 +4,14 @@
 
 ## 当前恢复点
 
-正在第1步CLEAN：逐路径取用后按可独立验收边界形成A3R/G3共享基线、A1R工具链两个干净提交；禁止把18da84a整体cherry-pick或merge为祖先。
+第1步CLEAN已完成并普通Git推送：1878b6c为A3R/G3共享基线，135c26f为A1R分层工具链与紧凑清单。远端main仍e27441b、旧round2仍18da84a；新增二进制81,098,416B，清单68,246B，必需测试7739/7739，三个退役本地实图审计按缺文件规则明确跳过。详见UPLOAD_STATUS.md。
+
+当前执行A3R收尾：古纸热区牌、统一顶栏精力数字、手记遮罩与内置关闭、咨询座位和对白宽度。v3规则原文已落地docs/art/style_v3.md；尚未生成或定稿任何v3图。以下早期过程已由本段及文末最终记录取代。
+
+任务ID｜状态｜提交｜一句话说明
+---｜---｜---｜---
+CLEAN｜完成｜1878b6c、135c26f｜新历史仅保留代码/正式v2/字体音效与10张JPG，已推送clean。
+G3（干净复验）｜完成｜1878b6c｜保留总监通过的邀请推荐修复，完整7739项复验通过。
 
 - A2R未提交69个路径已逐字节备份，物品图移入assets/_incoming/a2r_v2_rejected/；代码、JSON、补丁也在该目录worktree内。A2R v3时再复用去背/check_alpha/bottom_y/64流程。
 - 原incoming、v3_real、runtime/v3_real、runtime/v3均保留本地但忽略；a1r_pilot已改名a1r_pilot_rejected。旧原始截图在.tools/clean-rebuild/preserved/docs/screenshots/round2。

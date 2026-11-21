@@ -4,6 +4,8 @@ const UI = preload("res://scripts/ui/ui_kit.gd")
 const Shell = preload("res://scripts/ui/shell_config.gd")
 var shell_config: Dictionary = {}
 var energy_bar: ProgressBar
+var energy_label: Label
+var energy_group: VBoxContainer
 var shell_header: PanelContainer
 var presentation_audio: Node
 var cancel_button: Button
@@ -121,16 +123,29 @@ func _build_shell() -> void:
 	header.add_child(location)
 	resources = UI.label(shell_config.no_save_status,int(shell_config.layout.status_size),Color("f3e9d6"))
 	resources.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	resources.autowrap_mode = TextServer.AUTOWRAP_OFF
+	resources.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	resources.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	header.add_child(resources)
+	energy_group = VBoxContainer.new()
+	energy_group.add_theme_constant_override("separation",int(shell_config.layout.energy_gap))
+	energy_group.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	header.add_child(energy_group)
+	energy_label = UI.label("",int(shell_config.layout.status_size),Color("f3e9d6"))
+	energy_label.name = "EnergyText"
+	energy_label.autowrap_mode = TextServer.AUTOWRAP_OFF
+	energy_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	energy_group.add_child(energy_label)
 	energy_bar = ProgressBar.new()
-	energy_bar.custom_minimum_size.x = shell_config.layout.energy_width
+	energy_bar.custom_minimum_size = Vector2(shell_config.layout.energy_width,shell_config.layout.energy_bar_height)
 	energy_bar.show_percentage = false
-	energy_bar.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	header.add_child(energy_bar)
+	energy_bar.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	energy_group.add_child(energy_bar)
 	open_button = UI.button(shell_config.save_label,open_saves)
+	open_button.add_theme_font_size_override("font_size",int(shell_config.layout.status_size))
 	header.add_child(open_button)
-	header.add_child(UI.button(shell_config.settings_label,open_network_settings))
+	var settings_button := UI.button(shell_config.settings_label,open_network_settings)
+	settings_button.add_theme_font_size_override("font_size",int(shell_config.layout.status_size))
+	header.add_child(settings_button)
 	var dock := PanelContainer.new()
 	dock.theme = shell_header.theme
 	add_child(dock)
@@ -175,8 +190,6 @@ func _build_shell() -> void:
 	provider_badge = UI.label("",int(shell_config.layout.compact_status_size),Color("f3e9d6"))
 	provider_badge.visible = false
 	add_child(provider_badge)
-	resized.connect(func():
-		resources.add_theme_font_size_override("font_size",int(shell_config.layout.compact_status_size if size.x < shell_config.layout.compact_width else shell_config.layout.status_size)))
 
 func show_screen(which: String) -> void:
 	current_screen = which
@@ -199,21 +212,24 @@ func show_screen(which: String) -> void:
 func _refresh() -> void:
 	var snapshot: Dictionary = GameState.player_snapshot()
 	energy_bar.visible = not snapshot.is_empty()
+	energy_label.visible = not snapshot.is_empty()
+	energy_group.visible = not snapshot.is_empty()
 	location.text = PAGES.get(current_screen, "店铺")
 	var mode: Dictionary = GameState.provider_status()
 	provider_badge.text = "在线对话" if mode.get("mode") == "online" else "离线对话 · 本地话题"
 	if is_instance_valid(people_panel):
 		people_panel.set_view(GameState.people_view())
 	if snapshot.is_empty():
-		resources.text = "尚未打开存档  ·  新建独立店铺，或继续已有记录"
+		resources.text = shell_config.no_save_status
 	else:
 		var player: Dictionary = snapshot.get("player", {})
 		var people: Dictionary = GameState.people_view()
 		var shop: Dictionary = GameState.shop_view().get("shop",{})
 		resources.text = shell_config.status_format % [int(player.get("coins",0)),int(shop.get("reputation",0)),GameState.clock_text(),people.get("queue",[]).size()]
-		energy_bar.max_value = int(GameState.content.get("rules",{}).get("max_energy",100))
+		energy_bar.max_value = int(GameState.content.rules.max_energy)
 		energy_bar.value = int(player.get("energy",0))
-		energy_bar.tooltip_text = shell_config.energy_format % [int(energy_bar.value),int(energy_bar.max_value)]
+		energy_label.text = shell_config.energy_format % [int(player.get("energy",0)),int(GameState.content.rules.max_energy)]
+		energy_bar.tooltip_text = energy_label.text
 		var energy_fill := energy_bar.get_theme_stylebox("fill").duplicate() as StyleBoxFlat
 		if energy_fill != null:
 			energy_fill.bg_color = UI.Palette.ROSE if energy_bar.ratio < float(shell_config.layout.low_energy_ratio) else UI.Palette.MOSS

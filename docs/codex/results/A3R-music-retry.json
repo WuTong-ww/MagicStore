@@ -1,0 +1,6 @@
+{
+  "url": "https://pizzadoggy.itch.io/cozy-tunes/purchase",
+  "error": "URLError",
+  "status": null,
+  "message": "<urlopen error EOF occurred in violation of protocol (_ssl.c:1123)>"
+}

@@ -3,7 +3,7 @@ const UITeardown = preload("res://tests/ui_teardown.gd")
 var main: Control
 var game: Node
 const SIZES := [Vector2i(1280,720),Vector2i(1920,1080)]
-const CAPTURE_DIR := "res://docs/screenshots/round2/G3"
+const CAPTURE_DIR := "res://.tools/round2/G3"
 const PREDICTION := "先核对旧档的编号，再听取实际结果。"
 var captures := 0
 var checks := 0
@@ -55,12 +55,99 @@ func run() -> void:
 	await act("receive_feedback",{"event_id":event.event_id})
 	for dimensions: Vector2i in SIZES:
 		await inspect_notebook(origin,dimensions,true)
+	await check_decorative_images()
+	await check_modal_frame()
 	print("EVENT NOTEBOOK UI: %d checks, %d failures, %d graphical captures; renderer=%s" % [checks,failures,captures,DisplayServer.get_name()])
 	await UITeardown.release_audio(main)
 	main.queue_free()
 	await settle()
 	await UITeardown.drain(self)
 	quit(1 if failures else 0)
+
+func check_decorative_images() -> void:
+	for page_name: String in ["casebook","shop"]:
+		main.open_divination(page_name)
+		await settle()
+		check(not has_text_banner(main.workbench.body),"dynamic notebook records have no baked-text decorative banner / "+page_name)
+	for method: String in ["past","bazi","ziwei"]:
+		check(main.workbench._method_art(method).is_empty(),"empty method diagrams cannot bake labels into decoration / "+method)
+
+func has_text_banner(node: Node) -> bool:
+	if node is TextureRect and node.texture != null and node.texture.resource_path in ["res://assets/ui/evidence_cards.png","res://assets/ui/receipt_widgets.png"]:
+		return true
+	for child: Node in node.get_children():
+		if has_text_banner(child):
+			return true
+	return false
+
+func check_modal_frame() -> void:
+	var notebook: Window = main.workbench
+	check(notebook.has_method("load_frame_config"),"workbench frame has a validated JSON contract")
+	if notebook.has_method("load_frame_config"):
+		var config: Dictionary = notebook.load_frame_config()
+		check(notebook.frame_config_valid(config),"workbench frame JSON validates")
+		for field: String in ["backdrop_color","close_symbol","backdrop_z_index"]:
+			var invalid := config.duplicate(true)
+			invalid[field] = {"backdrop_color":"invalid-color","close_symbol":"","backdrop_z_index":NAN}[field]
+			check(not notebook.frame_config_valid(invalid),"workbench frame rejects malformed field / "+field)
+	for dimensions: Vector2i in [Vector2i(800,600),Vector2i(1280,720),Vector2i(1920,1080),Vector2i(2560,1080)]:
+		notebook.hide()
+		root.size = dimensions
+		root.content_scale_size = dimensions
+		await settle()
+		main.open_divination("casebook")
+		await settle()
+		var close := notebook.find_child("NotebookClose",true,false) as Button
+		var mask := main.get_node_or_null("WorkbenchModalMask") as ColorRect
+		check(close != null,"paper notebook exposes its own close control / "+str(dimensions))
+		check(mask != null,"notebook owns a full-window backdrop / "+str(dimensions))
+		if close == null or mask == null:
+			notebook.hide()
+			return
+		check(notebook.borderless,"native titlebar cannot draw a second central notebook title")
+		check(mask.visible and mask.get_global_rect().is_equal_approx(Rect2(Vector2.ZERO,Vector2(dimensions))),"visible backdrop covers the whole parent viewport / "+str(dimensions))
+		check(mask.get_global_rect().encloses(main.shell_header.get_global_rect()) and mask.z_index > main.shell_header.z_index,"backdrop actually includes the parent top bar")
+		check(mask.mouse_filter == Control.MOUSE_FILTER_STOP and mask.color.a > 0.0 and mask.color.a < 1.0,"backdrop blocks parent clicks and retains the scene through translucency")
+		check(close.get_parent() is HBoxContainer and close.get_parent().get_global_rect().encloses(close.get_global_rect()),"close control belongs inside the paper header")
+		if DisplayServer.get_name() != "headless":
+			check(Rect2(Vector2.ZERO,Vector2(notebook.size)).encloses(close.get_global_rect()),"close glyph fits inside the actual notebook viewport")
+			await capture("frame-open-"+str(dimensions.x)+"x"+str(dimensions.y))
+		var before: Dictionary = game.snapshot()
+		if DisplayServer.get_name() == "headless":
+			# Native headless subwindows report a 1px OS sentinel; graphical runs
+			# below exercise the real pointer route in the Window viewport.
+			close.pressed.emit()
+		else:
+			# Embedded Windows receive pointer routing through their parent viewport.
+			# Pushing directly into the child bypasses its hover state, preventing
+			# a genuine button release even when gui_input receives both events.
+			var point := Vector2(notebook.position)+close.get_global_rect().get_center()
+			var motion := InputEventMouseMotion.new()
+			motion.position = point
+			motion.global_position = point
+			root.push_input(motion,true)
+			await process_frame
+			for pressed: bool in [true,false]:
+				var event := InputEventMouseButton.new()
+				event.position = point
+				event.global_position = point
+				event.button_index = MOUSE_BUTTON_LEFT
+				event.pressed = pressed
+				root.push_input(event,true)
+				await process_frame
+		await settle()
+		check(not notebook.visible and not mask.visible,"paper close hides the notebook and its backdrop / "+str(dimensions))
+		check(game.snapshot() == before,"closing the notebook never changes the committed game")
+		if DisplayServer.get_name() != "headless":
+			await process_frame
+			RenderingServer.force_draw()
+			check(root.get_texture().get_image().save_png(CAPTURE_DIR+"/frame-closed-"+str(dimensions.x)+"x"+str(dimensions.y)+".png") == OK,"save closed-backdrop graphical capture")
+			captures += 1
+		main.open_divination("casebook")
+		await settle()
+		notebook.close_requested.emit()
+		await settle()
+		check(not notebook.visible and not mask.visible,"native close request also releases the backdrop")
 
 func act(kind: String, extra: Dictionary = {}) -> Dictionary:
 	var result: Dictionary = await main.run_action(kind,extra)

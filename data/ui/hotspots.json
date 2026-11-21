@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "font_size": 20,
+  "font_color": "#3B2A1E",
+  "paper_color": "#F3E9D6",
+  "hover_color": "#E2D2B4",
+  "border_color": "#C99A4B",
+  "paper_alpha": 0.88,
+  "hover_alpha": 0.96,
+  "border_width": 1,
+  "corner_radius": 6,
+  "padding": [12, 6],
+  "viewport_margin": 4,
+  "tooltip_format": "%s"
+}

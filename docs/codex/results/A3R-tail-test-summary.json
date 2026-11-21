@@ -1,0 +1,13 @@
+{
+  "exit_code": 0,
+  "godot": 7865,
+  "python_gateway": 94,
+  "python_art": 118,
+  "total_passed": 8077,
+  "total_required": 8077,
+  "optional_local_art_not_run": [
+    "SKIP LOCAL ART: data/art/scene_preview.json / LOCAL_AUDIT_RETIRED; no archived image acceptance claimed.",
+    "SKIP LOCAL ART: data/art/scene_review.json / LOCAL_AUDIT_RETIRED; no archived image acceptance claimed.",
+    "SKIP LOCAL ART: data/art/real_scene_registry.json / LOCAL_AUDIT_RETIRED; no archived image acceptance claimed."
+  ]
+}

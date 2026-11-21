@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "initial_size": [810, 515],
+  "minimum_size": [690, 430],
+  "minimum_open_size": [690, 480],
+  "maximum_open_size": [880, 740],
+  "viewport_inset": [110, 110],
+  "content_margin": 20,
+  "layout_gap": 10,
+  "body_gap": 9,
+  "heading_font_size": 26,
+  "notice_font_size": 14,
+  "notice_minimum_height": 24,
+  "close_font_size": 22,
+  "close_minimum_size": [42, 42],
+  "close_symbol": "✕",
+  "close_tooltip": "关闭手帐",
+  "back_label": "返回",
+  "backdrop_color": "#1F3A3DA6",
+  "backdrop_z_index": 100
+}

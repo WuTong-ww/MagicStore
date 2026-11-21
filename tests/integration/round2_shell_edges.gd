@@ -76,10 +76,14 @@ func run() -> void:
 	main = load("res://scenes/main.tscn").instantiate()
 	root.add_child(main)
 	await settle()
+	var empty_energy := main.find_child("EnergyText", true, false) as Label
+	check(empty_energy != null and not empty_energy.is_visible_in_tree() and not main.energy_bar.is_visible_in_tree(), "empty save hides numeric energy and its bar together")
 	check((await main.run_action("new_game", {"name":"界面边界回归"})).success, "create isolated save")
+	await check_header()
 	await check_popups()
 	await check_drawer()
 	await check_cancel()
+	await check_header_transactions()
 	await UITeardown.release_audio(main)
 	main.queue_free()
 	await settle()
@@ -108,6 +112,64 @@ func check_config_edges() -> void:
 	invalid = config.duplicate(true)
 	invalid.layout.low_energy_ratio = 1.1
 	check(not Shell.config_valid(invalid), "low energy threshold rejects ratio above one")
+	for value: Variant in [15,16.5,INF]:
+		invalid = config.duplicate(true)
+		invalid.layout.status_size = value
+		check(not Shell.config_valid(invalid), "header font rejects too-small, fractional or infinite size / " + str(value))
+	invalid = config.duplicate(true)
+	invalid.layout.energy_bar_height = 0
+	check(not Shell.config_valid(invalid), "energy bar height rejects zero pixels")
+	invalid = config.duplicate(true)
+	invalid.layout.energy_gap = 1.5
+	check(not Shell.config_valid(invalid), "energy stack gap rejects fractional pixels")
+
+func check_header() -> void:
+	var energy := main.find_child("EnergyText", true, false) as Label
+	check(energy != null, "header has a genuine numeric energy label")
+	var expected_size := int(main.shell_config.layout.status_size)
+	var before: Dictionary = game.snapshot()
+	for dimensions: Vector2i in [Vector2i(1280,720),Vector2i(1920,1080),Vector2i(2560,1080),Vector2i(800,600)]:
+		root.size = dimensions
+		root.content_scale_size = dimensions
+		await settle()
+		var header: Rect2 = main.shell_header.get_global_rect()
+		check(is_equal_approx(header.size.y,float(main.shell_config.top_height)), "header retains configured height / " + str(dimensions))
+		check(Rect2(Vector2.ZERO,Vector2(dimensions)).encloses(header), "header fits viewport / " + str(dimensions))
+		check(main.resources.get_theme_font_size("font_size") == expected_size and expected_size >= 16, "coins reputation date queue keep one readable font / " + str(dimensions))
+		check(header.encloses(main.resources.get_global_rect()) and main.resources.get_visible_line_count() >= main.resources.get_line_count(), "status wraps completely within header without clipping / " + str(dimensions))
+		check(main.resources.size.y + 1 >= main.resources.get_line_count() * main.resources.get_line_height(), "every status line has its full height / " + str(dimensions))
+		for child: Node in main.shell_header.find_children("*","Button",true,false):
+			var button := child as Button
+			check(button.get_theme_font_size("font_size") == expected_size and header.encloses(button.get_global_rect()), "header actions share readable size and fit / " + button.text + " / " + str(dimensions))
+		if energy != null:
+			check(energy.is_visible_in_tree() and energy.text == main.shell_config.energy_format % [int(game.state.player.energy),int(game.content.rules.max_energy)], "energy text uses the actual snapshot and configured maximum / " + str(dimensions))
+			check(energy.get_theme_font_size("font_size") == expected_size and header.encloses(energy.get_global_rect()) and header.encloses(main.energy_bar.get_global_rect()), "energy label and bar fit at the same font size / " + str(dimensions))
+			check(energy.size.x + 1 >= energy.get_theme_font("font").get_string_size(energy.text,HORIZONTAL_ALIGNMENT_LEFT,-1,expected_size).x, "energy digits remain fully visible / " + str(dimensions))
+		if DisplayServer.get_name() != "headless":
+			await RenderingServer.frame_post_draw
+			DirAccess.make_dir_recursive_absolute("res://.tools/A3R-tail-header/captures")
+			check(root.get_texture().get_image().save_png("res://.tools/A3R-tail-header/captures/header-%dx%d.png" % [dimensions.x,dimensions.y]) == OK, "capture actual header pixels / " + str(dimensions))
+	check(game.snapshot() == before, "header relayout never changes saved game state")
+	root.size = Vector2i(800,600)
+	root.content_scale_size = root.size
+	await settle()
+
+func check_header_transactions() -> void:
+	var energy := main.find_child("EnergyText", true, false) as Label
+	if energy == null:
+		return
+	var before: Dictionary = game.snapshot()
+	var old_text := energy.text
+	root.get_node("SaveService").fail_next_write = true
+	var failed: Dictionary = await main.run_action("reading")
+	check(not failed.get("success",false) and failed.get("error_code") == "SAVE_WRITE_FAILED", "genuine energy-consuming reading reaches failed-save path")
+	check(game.snapshot() == before and energy.text == old_text and int(main.energy_bar.value) == int(before.player.energy), "failed save publishes neither numeric nor bar energy")
+	var result: Dictionary = await main.run_action("reading")
+	check(result.get("success",false), "genuine paid reading commits normally")
+	check(int(game.state.player.energy) == int(before.player.energy)-int(game.content.rules.reading_energy), "reading changes actual committed energy")
+	check(energy.text == main.shell_config.energy_format % [int(game.state.player.energy),int(game.content.rules.max_energy)] and int(main.energy_bar.value) == int(game.state.player.energy), "numeric energy and bar refresh together only after commit")
+	check((await main.run_action("rest")).get("success",false), "normal rest commits a different real energy value")
+	check(energy.text == main.shell_config.energy_format % [int(game.state.player.energy),int(game.content.rules.max_energy)], "numeric energy follows later rest rather than a fixed sample")
 
 func check_popups() -> void:
 	var before: Dictionary = game.snapshot()

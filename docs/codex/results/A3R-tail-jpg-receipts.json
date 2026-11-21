@@ -1,0 +1,72 @@
+[
+  {
+    "source": ".tools/round2/A3R/front-1280x720.png",
+    "path": "docs/screenshots/round2/A3R/front-1280x720.jpg",
+    "quality": 85,
+    "sha256": "cfa90be5f3b7c90b8ec4b66e00778d407f92d7ee2fd4055955d612a33b1dabaa",
+    "bytes": 255197
+  },
+  {
+    "source": ".tools/round2/A3R/front-2560x1080.png",
+    "path": "docs/screenshots/round2/A3R/front-2560x1080.jpg",
+    "quality": 85,
+    "sha256": "59aef9ff25d7a95d8fcb2dbe6f12bfcec4fc0f428b79312e0bda24f2822600c3",
+    "bytes": 592639
+  },
+  {
+    "source": ".tools/round2/A3R/consultation-active-1920x1080.png",
+    "path": "docs/screenshots/round2/A3R/consultation-active-1920x1080.jpg",
+    "quality": 85,
+    "sha256": "533f6c0baf677c2fc7110f55a364d582121f7ceb08878b93fbfb9568f809ad66",
+    "bytes": 424252
+  },
+  {
+    "source": ".tools/round2/A3R/consultation-active-800x600.png",
+    "path": "docs/screenshots/round2/A3R/consultation-active-800x600.jpg",
+    "quality": 85,
+    "sha256": "716d7c11e10272f6b267e68afeef1489f940ebcfa0ffd4de1e24688786869e35",
+    "bytes": 111705
+  },
+  {
+    "source": ".tools/round2/G3/frame-open-1280x720.png",
+    "path": "docs/screenshots/round2/A3R/notebook-open-1280x720.jpg",
+    "quality": 85,
+    "sha256": "610079eeb5e667abaa91064713eb1a2b5f5684652df3ca04d151a4e99182b078",
+    "bytes": 92108
+  },
+  {
+    "source": ".tools/round2/G3/frame-closed-800x600.png",
+    "path": "docs/screenshots/round2/A3R/notebook-closed-800x600.jpg",
+    "quality": 85,
+    "sha256": "8e5c3c4543e0d8b2c1d772f55bce8183fdd16c2caa95d2d4221b9c07bbb646c0",
+    "bytes": 104260
+  },
+  {
+    "source": ".tools/round2/G3/pending-1280x720.png",
+    "path": "docs/screenshots/round2/G3/pending-1280x720.jpg",
+    "quality": 85,
+    "sha256": "ffd53c01334a3ac16e21b60a9d86fb4309bbf82945ab32842b916aff698b267a",
+    "bytes": 100483
+  },
+  {
+    "source": ".tools/round2/G3/pending-1920x1080.png",
+    "path": "docs/screenshots/round2/G3/pending-1920x1080.jpg",
+    "quality": 85,
+    "sha256": "9942bb5027412ce8cdfd4998afb19c8fc73b3a47d1ec49d3e50210784276ee4a",
+    "bytes": 220024
+  },
+  {
+    "source": ".tools/round2/G3/verified-1280x720.png",
+    "path": "docs/screenshots/round2/G3/verified-1280x720.jpg",
+    "quality": 85,
+    "sha256": "c6d395fd66eaa45cd7f19cf1580fe2f42aaeb5611a844d379998caff745c136d",
+    "bytes": 101515
+  },
+  {
+    "source": ".tools/round2/G3/verified-1920x1080.png",
+    "path": "docs/screenshots/round2/G3/verified-1920x1080.jpg",
+    "quality": 85,
+    "sha256": "92c482041fca2acc2720871bfce55fd137333150670d073ebe14d678299f0e2d",
+    "bytes": 225451
+  }
+]
