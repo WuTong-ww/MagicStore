@@ -1,0 +1,6 @@
+Godot_v4.6.3-stable_win64_console.exe : WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+At C:\Users\WT\Documents\ChatGPT\杂货铺\.tools\g3-final-tail.ps1:8 char:15
++ ...   $output = & '.tools/godot/Godot_v4.6.3-stable_win64_console.exe' -- ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: Object...e for details).:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError

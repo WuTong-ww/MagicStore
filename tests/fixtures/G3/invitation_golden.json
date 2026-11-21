@@ -1,0 +1,8979 @@
+{
+	"boundary_count": 2,
+	"captured_before_refactor": true,
+	"data_sha256": "5494fa9d1873bd50fa76a2033abc989b374f95dc7694d8ad9f9baafad1e909ed",
+	"definition": {
+		"advice": {
+			"attend": {
+				"requires_clue": "invitation_note",
+				"text": "直接去展览，按邀请寻找靠窗的位置。"
+			},
+			"message": {
+				"requires_clue": "unfinished_letter",
+				"text": "先发一条消息确认，再按约去展览。"
+			},
+			"note": {
+				"text": "先把信留给展馆前台，请他们转交。"
+			},
+			"private": {
+				"requires_clue": "unfinished_letter",
+				"text": "约到侧厅私下聊，并尊重对方保密的请求。"
+			},
+			"wait": {
+				"text": "这次先不赴约，等自己准备好再联系。"
+			}
+		},
+		"feedback_delay": 180.0,
+		"item_effect": {
+			"key": "stay_and_ask",
+			"need": "找不到原入口时，仍愿意停下来询问展览的改道安排。"
+		},
+		"minute_of_day": 1080.0,
+		"outcomes": {
+			"arrived": {
+				"actual_action": "找到了入口，按约赴会",
+				"evidence": "sufficient",
+				"feedback": "delayed",
+				"outcome": "met",
+				"text": "我找到了入口。她真的留了靠窗的位置，我们说上话了。"
+			},
+			"lost": {
+				"actual_action": "到了旧入口，未能赴约",
+				"evidence": "sufficient",
+				"feedback": "delayed",
+				"outcome": "missed",
+				"text": "我在原来的入口等了很久，后来打烊了，我们没说上话。"
+			},
+			"note": {
+				"actual_action": "把回信留在前台，未能确认收件人",
+				"delay": 1140.0,
+				"evidence": "insufficient",
+				"feedback": "delayed",
+				"outcome": "missed",
+				"text": "我把信留在了前台。后来有人取走它，但工作人员没看到是谁。"
+			},
+			"private": {
+				"actual_action": "约好在侧厅私下见面",
+				"evidence": "sufficient",
+				"feedback": "never",
+				"outcome": "met",
+				"text": ""
+			},
+			"sent": {
+				"actual_action": "先发消息确认，再依约赴会",
+				"evidence": "sufficient",
+				"feedback": "delayed",
+				"outcome": "met",
+				"text": "我先发了短消息。她回了时间，我们在展览上说上话了。"
+			},
+			"waited": {
+				"actual_action": "暂缓赴约",
+				"evidence": "sufficient",
+				"feedback": "delayed",
+				"outcome": "missed",
+				"text": "那天我没有去，也没和她说上话。"
+			}
+		},
+		"subject_id": "npc_lin",
+		"target_name": "林照晚与旧友能否说上话"
+	},
+	"engine": {
+		"build": "official",
+		"hash": "7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+		"hex": 263683,
+		"major": 4,
+		"minor": 6,
+		"patch": 3,
+		"status": "stable",
+		"string": "4.6.3-stable (official)",
+		"timestamp": 0
+	},
+	"format": "invitation_resolve_golden_v1",
+	"matrix_count": 96,
+	"records": [
+		{
+			"case_before": {
+				"advice": [],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_000",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_000",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_000",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "none",
+				"branch": false,
+				"changed_entrance": false,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_001",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_001",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_001",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "none",
+				"branch": false,
+				"changed_entrance": false,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_002",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_002",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_002",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "none",
+				"branch": true,
+				"changed_entrance": false,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_003",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_003",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_003",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "none",
+				"branch": true,
+				"changed_entrance": false,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_004",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_004",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_004",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "none",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_005",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_005",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_005",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "none",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_006",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_006",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_006",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "none",
+				"branch": true,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_007",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_007",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_007",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "none",
+				"branch": true,
+				"changed_entrance": true,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_008",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_008",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_008",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "none",
+				"branch": false,
+				"changed_entrance": false,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_009",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_009",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_009",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "none",
+				"branch": false,
+				"changed_entrance": false,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_010",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_010",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_010",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "none",
+				"branch": true,
+				"changed_entrance": false,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_011",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_011",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_011",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "none",
+				"branch": true,
+				"changed_entrance": false,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_012",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_012",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_012",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "none",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_013",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_013",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_013",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "none",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_014",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_014",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_014",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "none",
+				"branch": true,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_015",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_015",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_015",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "none",
+				"branch": true,
+				"changed_entrance": true,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "message"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_016",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_016",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_016",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "message",
+				"branch": false,
+				"changed_entrance": false,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "message"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_017",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_017",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_017",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "message",
+				"branch": false,
+				"changed_entrance": false,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "message"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_018",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_018",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_018",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "message",
+				"branch": true,
+				"changed_entrance": false,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "message"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_019",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_019",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_019",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "message",
+				"branch": true,
+				"changed_entrance": false,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "message"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_020",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_020",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_020",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "message",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "message"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_021",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_021",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_021",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "message",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "message"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_022",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_022",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_022",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "message",
+				"branch": true,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "message"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_023",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_023",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_023",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "message",
+				"branch": true,
+				"changed_entrance": true,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "message"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_024",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_024",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "先发消息确认，再依约赴会",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_024",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "先发消息确认，再依约赴会",
+						"evidence": "sufficient",
+						"occurred_at": 1080,
+						"occurrence": "occurred",
+						"outcome": "met",
+						"text": "我先发了短消息。她回了时间，我们在展览上说上话了。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "occurred",
+				"outcome": "met",
+				"outcome_id": "sent",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "message",
+				"branch": false,
+				"changed_entrance": false,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "message"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_025",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_025",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "先发消息确认，再依约赴会",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_025",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "先发消息确认，再依约赴会",
+						"evidence": "sufficient",
+						"occurred_at": 1080,
+						"occurrence": "occurred",
+						"outcome": "met",
+						"text": "我先发了短消息。她回了时间，我们在展览上说上话了。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "occurred",
+				"outcome": "met",
+				"outcome_id": "sent",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "message",
+				"branch": false,
+				"changed_entrance": false,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "message"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_026",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_026",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "先发消息确认，再依约赴会",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_026",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "先发消息确认，再依约赴会",
+						"evidence": "sufficient",
+						"occurred_at": 1080,
+						"occurrence": "occurred",
+						"outcome": "met",
+						"text": "我先发了短消息。她回了时间，我们在展览上说上话了。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "occurred",
+				"outcome": "met",
+				"outcome_id": "sent",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "message",
+				"branch": true,
+				"changed_entrance": false,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "message"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_027",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_027",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "先发消息确认，再依约赴会",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_027",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "先发消息确认，再依约赴会",
+						"evidence": "sufficient",
+						"occurred_at": 1080,
+						"occurrence": "occurred",
+						"outcome": "met",
+						"text": "我先发了短消息。她回了时间，我们在展览上说上话了。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "occurred",
+				"outcome": "met",
+				"outcome_id": "sent",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "message",
+				"branch": true,
+				"changed_entrance": false,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "message"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_028",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_028",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "先发消息确认，再依约赴会",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_028",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "先发消息确认，再依约赴会",
+						"evidence": "sufficient",
+						"occurred_at": 1080,
+						"occurrence": "occurred",
+						"outcome": "met",
+						"text": "我先发了短消息。她回了时间，我们在展览上说上话了。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "occurred",
+				"outcome": "met",
+				"outcome_id": "sent",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "message",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "message"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_029",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_029",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "先发消息确认，再依约赴会",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_029",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "先发消息确认，再依约赴会",
+						"evidence": "sufficient",
+						"occurred_at": 1080,
+						"occurrence": "occurred",
+						"outcome": "met",
+						"text": "我先发了短消息。她回了时间，我们在展览上说上话了。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "occurred",
+				"outcome": "met",
+				"outcome_id": "sent",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "message",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "message"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_030",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_030",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "先发消息确认，再依约赴会",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_030",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "先发消息确认，再依约赴会",
+						"evidence": "sufficient",
+						"occurred_at": 1080,
+						"occurrence": "occurred",
+						"outcome": "met",
+						"text": "我先发了短消息。她回了时间，我们在展览上说上话了。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "occurred",
+				"outcome": "met",
+				"outcome_id": "sent",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "message",
+				"branch": true,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "message"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_031",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_031",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "先发消息确认，再依约赴会",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_031",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "先发消息确认，再依约赴会",
+						"evidence": "sufficient",
+						"occurred_at": 1080,
+						"occurrence": "occurred",
+						"outcome": "met",
+						"text": "我先发了短消息。她回了时间，我们在展览上说上话了。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "occurred",
+				"outcome": "met",
+				"outcome_id": "sent",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "message",
+				"branch": true,
+				"changed_entrance": true,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "attend"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_032",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_032",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_032",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "attend",
+				"branch": false,
+				"changed_entrance": false,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "attend"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_033",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_033",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_033",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "attend",
+				"branch": false,
+				"changed_entrance": false,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "attend"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_034",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_034",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_034",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "attend",
+				"branch": true,
+				"changed_entrance": false,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "attend"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_035",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_035",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_035",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "attend",
+				"branch": true,
+				"changed_entrance": false,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "attend"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_036",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_036",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_036",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "attend",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "attend"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_037",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_037",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_037",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "attend",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "attend"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_038",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_038",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_038",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "attend",
+				"branch": true,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "attend"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_039",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_039",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_039",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "attend",
+				"branch": true,
+				"changed_entrance": true,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "attend"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_040",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_040",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "找到了入口，按约赴会",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_040",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "找到了入口，按约赴会",
+						"evidence": "sufficient",
+						"occurred_at": 1080,
+						"occurrence": "occurred",
+						"outcome": "met",
+						"text": "我找到了入口。她真的留了靠窗的位置，我们说上话了。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "occurred",
+				"outcome": "met",
+				"outcome_id": "arrived",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "attend",
+				"branch": false,
+				"changed_entrance": false,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "attend"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_041",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_041",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "找到了入口，按约赴会",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_041",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "找到了入口，按约赴会",
+						"evidence": "sufficient",
+						"occurred_at": 1080,
+						"occurrence": "occurred",
+						"outcome": "met",
+						"text": "我找到了入口。她真的留了靠窗的位置，我们说上话了。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "use_golden",
+				"occurrence": "occurred",
+				"outcome": "met",
+				"outcome_id": "arrived",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "attend",
+				"branch": false,
+				"changed_entrance": false,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "attend"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_042",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_042",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "找到了入口，按约赴会",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_042",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "找到了入口，按约赴会",
+						"evidence": "sufficient",
+						"occurred_at": 1080,
+						"occurrence": "occurred",
+						"outcome": "met",
+						"text": "我找到了入口。她真的留了靠窗的位置，我们说上话了。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "occurred",
+				"outcome": "met",
+				"outcome_id": "arrived",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "attend",
+				"branch": true,
+				"changed_entrance": false,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "attend"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_043",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_043",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "找到了入口，按约赴会",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_043",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "找到了入口，按约赴会",
+						"evidence": "sufficient",
+						"occurred_at": 1080,
+						"occurrence": "occurred",
+						"outcome": "met",
+						"text": "我找到了入口。她真的留了靠窗的位置，我们说上话了。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "use_golden",
+				"occurrence": "occurred",
+				"outcome": "met",
+				"outcome_id": "arrived",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "attend",
+				"branch": true,
+				"changed_entrance": false,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "attend"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_044",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_044",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "到了旧入口，未能赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_044",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "到了旧入口，未能赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "我在原来的入口等了很久，后来打烊了，我们没说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "lost",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "attend",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "attend"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_045",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_045",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "找到了入口，按约赴会",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_045",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "找到了入口，按约赴会",
+						"evidence": "sufficient",
+						"occurred_at": 1080,
+						"occurrence": "occurred",
+						"outcome": "met",
+						"text": "我找到了入口。她真的留了靠窗的位置，我们说上话了。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "use_golden",
+				"occurrence": "occurred",
+				"outcome": "met",
+				"outcome_id": "arrived",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "attend",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "attend"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_046",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_046",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "找到了入口，按约赴会",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_046",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "找到了入口，按约赴会",
+						"evidence": "sufficient",
+						"occurred_at": 1080,
+						"occurrence": "occurred",
+						"outcome": "met",
+						"text": "我找到了入口。她真的留了靠窗的位置，我们说上话了。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "occurred",
+				"outcome": "met",
+				"outcome_id": "arrived",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "attend",
+				"branch": true,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "attend"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_047",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_047",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "找到了入口，按约赴会",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_047",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "找到了入口，按约赴会",
+						"evidence": "sufficient",
+						"occurred_at": 1080,
+						"occurrence": "occurred",
+						"outcome": "met",
+						"text": "我找到了入口。她真的留了靠窗的位置，我们说上话了。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "use_golden",
+				"occurrence": "occurred",
+				"outcome": "met",
+				"outcome_id": "arrived",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "attend",
+				"branch": true,
+				"changed_entrance": true,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "private"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_048",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_048",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_048",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "private",
+				"branch": false,
+				"changed_entrance": false,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "private"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_049",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_049",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_049",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "private",
+				"branch": false,
+				"changed_entrance": false,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "private"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_050",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_050",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_050",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "private",
+				"branch": true,
+				"changed_entrance": false,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "private"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_051",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_051",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_051",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "private",
+				"branch": true,
+				"changed_entrance": false,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "private"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_052",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_052",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_052",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "private",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "private"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_053",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_053",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_053",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "private",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "private"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_054",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_054",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_054",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "private",
+				"branch": true,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "private"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_055",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_055",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_055",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "private",
+				"branch": true,
+				"changed_entrance": true,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "private"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_056",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_056",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "约好在侧厅私下见面",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_056",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": -1,
+					"disclosure": {
+
+					},
+					"mode": "never",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "occurred",
+				"outcome": "met",
+				"outcome_id": "private",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "private",
+				"branch": false,
+				"changed_entrance": false,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "private"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_057",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_057",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "约好在侧厅私下见面",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_057",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": -1,
+					"disclosure": {
+
+					},
+					"mode": "never",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "occurred",
+				"outcome": "met",
+				"outcome_id": "private",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "private",
+				"branch": false,
+				"changed_entrance": false,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "private"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_058",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_058",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "约好在侧厅私下见面",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_058",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": -1,
+					"disclosure": {
+
+					},
+					"mode": "never",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "occurred",
+				"outcome": "met",
+				"outcome_id": "private",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "private",
+				"branch": true,
+				"changed_entrance": false,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "private"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_059",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_059",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "约好在侧厅私下见面",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_059",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": -1,
+					"disclosure": {
+
+					},
+					"mode": "never",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "occurred",
+				"outcome": "met",
+				"outcome_id": "private",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "private",
+				"branch": true,
+				"changed_entrance": false,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "private"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_060",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_060",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "约好在侧厅私下见面",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_060",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": -1,
+					"disclosure": {
+
+					},
+					"mode": "never",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "occurred",
+				"outcome": "met",
+				"outcome_id": "private",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "private",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "private"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_061",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_061",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "约好在侧厅私下见面",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_061",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": -1,
+					"disclosure": {
+
+					},
+					"mode": "never",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "occurred",
+				"outcome": "met",
+				"outcome_id": "private",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "private",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "private"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_062",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_062",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "约好在侧厅私下见面",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_062",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": -1,
+					"disclosure": {
+
+					},
+					"mode": "never",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "occurred",
+				"outcome": "met",
+				"outcome_id": "private",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "private",
+				"branch": true,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "private"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_063",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_063",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "约好在侧厅私下见面",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_063",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": -1,
+					"disclosure": {
+
+					},
+					"mode": "never",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "occurred",
+				"outcome": "met",
+				"outcome_id": "private",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "private",
+				"branch": true,
+				"changed_entrance": true,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "note"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_064",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_064",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_064",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "note",
+				"branch": false,
+				"changed_entrance": false,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "note"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_065",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_065",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_065",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "note",
+				"branch": false,
+				"changed_entrance": false,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "note"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_066",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_066",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_066",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "note",
+				"branch": true,
+				"changed_entrance": false,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "note"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_067",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_067",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_067",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "note",
+				"branch": true,
+				"changed_entrance": false,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "note"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_068",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_068",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_068",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "note",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "note"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_069",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_069",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_069",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "note",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "note"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_070",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_070",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_070",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "note",
+				"branch": true,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "note"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_071",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_071",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_071",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "note",
+				"branch": true,
+				"changed_entrance": true,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "note"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_072",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_072",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "把回信留在前台，未能确认收件人",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_072",
+				"evidence": "insufficient",
+				"feedback": {
+					"available_at": 2220,
+					"disclosure": {
+						"evidence": "insufficient",
+						"text": "我把信留在了前台。后来有人取走它，但工作人员没看到是谁。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "note",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "note",
+				"branch": false,
+				"changed_entrance": false,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "note"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_073",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_073",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "把回信留在前台，未能确认收件人",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_073",
+				"evidence": "insufficient",
+				"feedback": {
+					"available_at": 2220,
+					"disclosure": {
+						"evidence": "insufficient",
+						"text": "我把信留在了前台。后来有人取走它，但工作人员没看到是谁。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "note",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "note",
+				"branch": false,
+				"changed_entrance": false,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "note"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_074",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_074",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "把回信留在前台，未能确认收件人",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_074",
+				"evidence": "insufficient",
+				"feedback": {
+					"available_at": 2220,
+					"disclosure": {
+						"evidence": "insufficient",
+						"text": "我把信留在了前台。后来有人取走它，但工作人员没看到是谁。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "note",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "note",
+				"branch": true,
+				"changed_entrance": false,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "note"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_075",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_075",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "把回信留在前台，未能确认收件人",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_075",
+				"evidence": "insufficient",
+				"feedback": {
+					"available_at": 2220,
+					"disclosure": {
+						"evidence": "insufficient",
+						"text": "我把信留在了前台。后来有人取走它，但工作人员没看到是谁。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "note",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "note",
+				"branch": true,
+				"changed_entrance": false,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "note"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_076",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_076",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "把回信留在前台，未能确认收件人",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_076",
+				"evidence": "insufficient",
+				"feedback": {
+					"available_at": 2220,
+					"disclosure": {
+						"evidence": "insufficient",
+						"text": "我把信留在了前台。后来有人取走它，但工作人员没看到是谁。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "note",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "note",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "note"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_077",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_077",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "把回信留在前台，未能确认收件人",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_077",
+				"evidence": "insufficient",
+				"feedback": {
+					"available_at": 2220,
+					"disclosure": {
+						"evidence": "insufficient",
+						"text": "我把信留在了前台。后来有人取走它，但工作人员没看到是谁。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "note",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "note",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "note"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_078",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_078",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "把回信留在前台，未能确认收件人",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_078",
+				"evidence": "insufficient",
+				"feedback": {
+					"available_at": 2220,
+					"disclosure": {
+						"evidence": "insufficient",
+						"text": "我把信留在了前台。后来有人取走它，但工作人员没看到是谁。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "note",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "note",
+				"branch": true,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "note"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_079",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_079",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "把回信留在前台，未能确认收件人",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_079",
+				"evidence": "insufficient",
+				"feedback": {
+					"available_at": 2220,
+					"disclosure": {
+						"evidence": "insufficient",
+						"text": "我把信留在了前台。后来有人取走它，但工作人员没看到是谁。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "note",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "note",
+				"branch": true,
+				"changed_entrance": true,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "wait"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_080",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_080",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_080",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "wait",
+				"branch": false,
+				"changed_entrance": false,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "wait"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_081",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_081",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_081",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "wait",
+				"branch": false,
+				"changed_entrance": false,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "wait"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_082",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_082",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_082",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "wait",
+				"branch": true,
+				"changed_entrance": false,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "wait"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_083",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_083",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_083",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "wait",
+				"branch": true,
+				"changed_entrance": false,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "wait"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_084",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_084",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_084",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "wait",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "wait"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_085",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_085",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_085",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "wait",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "wait"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_086",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_086",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_086",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "wait",
+				"branch": true,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": false,
+						"advice_id": "advice_golden",
+						"advice_key": "wait"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_087",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_087",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_087",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "wait",
+				"branch": true,
+				"changed_entrance": true,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "wait"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_088",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_088",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_088",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "wait",
+				"branch": false,
+				"changed_entrance": false,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "wait"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_089",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_089",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_089",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "wait",
+				"branch": false,
+				"changed_entrance": false,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "wait"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_090",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_090",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_090",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "wait",
+				"branch": true,
+				"changed_entrance": false,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "wait"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_091",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_091",
+				"world_facts": {
+					"changed_entrance": {
+						"value": false
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_091",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "wait",
+				"branch": true,
+				"changed_entrance": false,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "wait"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_092",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_092",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_092",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "wait",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "wait"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_093",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_093",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_093",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "wait",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "wait"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_094",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_094",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_094",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "wait",
+				"branch": true,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_golden",
+						"advice_key": "wait"
+					}
+				],
+				"branches": [
+					"confirmed_venue"
+				],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_095",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "stay_and_ask",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_095",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_golden",
+				"branch_id": "confirmed_venue",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_095",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "wait",
+				"branch": true,
+				"changed_entrance": true,
+				"matching_item": true
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_prior",
+						"advice_key": "message"
+					},
+					{
+						"accepted": false,
+						"advice_id": "advice_latest",
+						"advice_key": "attend"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_096",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_096",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "先发消息确认，再依约赴会",
+				"advice_id": "advice_prior",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_096",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "先发消息确认，再依约赴会",
+						"evidence": "sufficient",
+						"occurred_at": 1080,
+						"occurrence": "occurred",
+						"outcome": "met",
+						"text": "我先发了短消息。她回了时间，我们在展览上说上话了。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "occurred",
+				"outcome": "met",
+				"outcome_id": "sent",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": false,
+				"advice": "attend",
+				"advice_records": [
+					{
+						"accepted": true,
+						"advice_id": "advice_prior",
+						"advice_key": "message"
+					},
+					{
+						"accepted": false,
+						"advice_id": "advice_latest",
+						"advice_key": "attend"
+					}
+				],
+				"boundary": "latest_refused_keeps_prior_accepted",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		},
+		{
+			"case_before": {
+				"advice": [
+					{
+						"accepted": true,
+						"advice_id": "advice_prior",
+						"advice_key": "message"
+					},
+					{
+						"accepted": true,
+						"advice_id": "advice_latest",
+						"advice_key": "wait"
+					}
+				],
+				"branches": [],
+				"event": {
+					"actual_action": "",
+					"advice_id": "",
+					"branch_id": "",
+					"due_at": 1080,
+					"evaluated_at": -1,
+					"evaluation": "pending",
+					"event_id": "event_golden_097",
+					"evidence": "pending",
+					"feedback": {
+						"available_at": -1,
+						"disclosure": {
+
+						},
+						"mode": "pending",
+						"report": {
+
+						}
+					},
+					"item_use_id": "",
+					"occurrence": "pending",
+					"outcome": "",
+					"outcome_id": "",
+					"resolved_at": -1,
+					"subject_id": "npc_lin",
+					"target_name": "林照晚与旧友能否说上话"
+				},
+				"item_use": {
+					"effect_key": "unmatched_effect",
+					"item_use_id": "use_golden"
+				},
+				"prediction": {
+					"window_end": 1110
+				},
+				"visit_id": "visit_golden_097",
+				"world_facts": {
+					"changed_entrance": {
+						"value": true
+					}
+				}
+			},
+			"event_after": {
+				"actual_action": "暂缓赴约",
+				"advice_id": "advice_latest",
+				"branch_id": "",
+				"due_at": 1080,
+				"evaluated_at": -1,
+				"evaluation": "pending",
+				"event_id": "event_golden_097",
+				"evidence": "sufficient",
+				"feedback": {
+					"available_at": 1260,
+					"disclosure": {
+						"actual_action": "暂缓赴约",
+						"evidence": "sufficient",
+						"occurred_at": -1,
+						"occurrence": "did_not_occur",
+						"outcome": "missed",
+						"text": "那天我没有去，也没和她说上话。"
+					},
+					"mode": "delayed",
+					"report": {
+
+					}
+				},
+				"item_use_id": "",
+				"occurrence": "did_not_occur",
+				"outcome": "missed",
+				"outcome_id": "waited",
+				"resolved_at": 1080,
+				"subject_id": "npc_lin",
+				"target_name": "林照晚与旧友能否说上话"
+			},
+			"input": {
+				"accepted": true,
+				"advice": "wait",
+				"advice_records": [
+					{
+						"accepted": true,
+						"advice_id": "advice_prior",
+						"advice_key": "message"
+					},
+					{
+						"accepted": true,
+						"advice_id": "advice_latest",
+						"advice_key": "wait"
+					}
+				],
+				"boundary": "latest_accepted_wins",
+				"branch": false,
+				"changed_entrance": true,
+				"matching_item": false
+			}
+		}
+	],
+	"source": "res://scripts/divination/event_rules.gd",
+	"source_sha256": "b6ad07d355415ae1228c45e3b198934df92116afab597f154ba495f0b673351d"
+}

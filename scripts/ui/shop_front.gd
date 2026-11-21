@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends Control
 
 const UI = preload("res://scripts/ui/ui_kit.gd")
 const ArrivalUI = preload("res://scripts/ui/arrival_ui.gd")
@@ -30,60 +30,24 @@ var arrival_copy: Dictionary = {}
 
 func _ready() -> void:
 	arrival_copy = ArrivalUI.load_config()
-	add_theme_constant_override("separation", 16)
-	var left := VBoxContainer.new()
-	left.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	left.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	add_child(left)
-	var scene_panel := UI.panel()
-	scene_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	scene_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	left.add_child(scene_panel)
-	var scene_box := VBoxContainer.new()
-	scene_box.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	scene_box.add_theme_constant_override("separation", 10)
-	scene_panel.add_child(scene_box)
-	scene_box.add_child(UI.label("灯亮着，故事就会来。", 24, UI.GOLD))
-	var hint := UI.label("前台不再只是贴图：可以直接点击店内区域，切换功能、查看来客与进入接待。", 14, UI.MUTED)
-	hint.custom_minimum_size.y = 28
-	scene_box.add_child(hint)
 	var stage := SceneArt.new()
 	scene_visual = stage
-	var minimum_stage: Array = arrival_copy.get("front_stage_minimum_size", [])
-	if minimum_stage.size() == 2:
-		stage.custom_minimum_size = Vector2(float(minimum_stage[0]), float(minimum_stage[1]))
-	stage.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	stage.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	scene_box.add_child(stage)
+	add_child(stage)
+	stage.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	stage.setup("front")
 	for key: String in stage.config.scenes[stage.scene_id].hotspots:
 		_add_hotspot(stage,key)
-	var slogan := UI.label("点一点店内区域，直接与店铺互动。", 18, UI.GOLD)
-	_place_node(slogan, Vector2(0.57, 0.97), Vector2(420, 26))
-	slogan.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	slogan.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	stage.add_child(slogan)
-	var shortcut_row := HBoxContainer.new()
-	shortcut_row.alignment = BoxContainer.ALIGNMENT_CENTER
-	left.add_child(shortcut_row)
-	var browse_button := UI.button("查看候客、预约与人物档案", func(): host.open_people())
-	browse_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	shortcut_row.add_child(browse_button)
-	var consult_button := UI.button("进入咨询区", _enter_consultation)
-	consult_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	shortcut_row.add_child(consult_button)
-	var side := UI.panel()
-	side.custom_minimum_size.x = 360
-	side.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	add_child(side)
-	var side_scroll := ScrollContainer.new()
-	side_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	side_scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	side.add_child(side_scroll)
-	var column := VBoxContainer.new()
-	column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	column.add_theme_constant_override("separation", 8)
-	side_scroll.add_child(column)
+	var drawer := preload("res://scripts/ui/paper_drawer.gd").new()
+	drawer.name = "FrontDrawer"
+	add_child(drawer)
+	drawer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var shell: Dictionary = preload("res://scripts/ui/shell_config.gd").load_config()
+	drawer.offset_top = shell.layout.drawer_inset_top
+	drawer.offset_bottom = -float(shell.layout.drawer_inset_bottom)
+	stage.label_occluders.append(drawer.panel)
+	drawer.panel.item_rect_changed.connect(stage._layout)
+	drawer.panel.visibility_changed.connect(stage._layout)
+	var column: VBoxContainer = drawer.content
 	column.add_child(UI.label("今日来客", 16, UI.GOLD))
 	patience_list = VBoxContainer.new()
 	patience_list.name = "ArrivalPatienceList"
@@ -195,6 +159,7 @@ func refresh() -> void:
 			if arrival.npc_id == active.npc_id:
 				returning.merge({"arrival_id": arrival.arrival_id, "source": arrival.source})
 		guests.append(returning)
+	guest_picker.visible = not guests.is_empty()
 	guest_picker.clear()
 	for row: Dictionary in guests:
 		guest_picker.add_item(row.label)

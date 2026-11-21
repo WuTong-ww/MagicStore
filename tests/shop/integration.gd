@@ -17,7 +17,7 @@ func run() -> void:
 	saves = root.get_node("SaveService")
 	saves.base_dir = "user://test-runs/shop_integration_" + gs.make_id("run")
 	require_action("new_game", {"name":"经营与人物案例整合"})
-	check(int(gs.state.schema_version) == 4 and gs.state.has("shop") and gs.state.has("people"), "new game initializes all three modules at current schema")
+	check(int(gs.state.schema_version) == 5 and gs.state.has("shop") and gs.state.has("people"), "new game initializes all three modules at current schema")
 	check(not gs.player_snapshot().has("people"), "public state hides internal arrival schedule")
 	require_action("start_visit")
 	var first: String = gs.state.active_visit_id
@@ -119,10 +119,10 @@ func _migration() -> void:
 	if not legacy_save.success:
 		return
 	require_action("load_game", {"save_id":legacy.save_id})
-	check(gs.state.schema_version == 4 and gs.state.player.coins == migrated_coins and gs.state.clock_minutes == migrated_clock and gs.state.visits == migrated_visits, "v2 migration retains wallets, clock, original cards and visits")
+	check(gs.state.schema_version == 5 and gs.state.player.coins == migrated_coins and gs.state.clock_minutes == migrated_clock and gs.state.visits == migrated_visits, "v2 migration retains wallets, clock, original cards and visits")
 	check(saves.read_save(legacy.save_id).state.schema_version == 2, "migration does not rewrite disk until successful business action")
 	require_action("wait", {"minutes":1})
-	check(saves.read_save(legacy.save_id).state.schema_version == 4, "first successful action commits integrated version atomically")
+	check(saves.read_save(legacy.save_id).state.schema_version == 5, "first successful action commits integrated version atomically")
 	var damaged: Dictionary = gs.snapshot()
 	damaged.player.items.quartz = int(damaged.player.items.get("quartz", 0)) + 1
 	check(not saves.write_save(damaged).success, "public save rejects malformed shared inventory provenance")
@@ -143,7 +143,7 @@ func _arrival_schema_migration() -> void:
 	var planned_arrivals: Dictionary = original.people.arrivals.duplicate(true)
 	var previous_stats: Dictionary = original.people.stats.duplicate(true)
 	require_action("load_game", {"save_id":legacy.save_id})
-	check(int(gs.state.schema_version) == 4 and gs.state.people.stats.lost_customers == 0, "G1 v3 load migrates loss statistics in memory")
+	check(int(gs.state.schema_version) == 5 and gs.state.people.stats.lost_customers == 0, "G1 v3 load migrates loss statistics in memory")
 	check(gs.state.people.days == planned_days and gs.state.people.arrivals == planned_arrivals, "G1 migration preserves every existing day plan and arrival exactly")
 	var expected_stats := previous_stats.duplicate(true)
 	expected_stats["lost_customers"] = 0
@@ -155,7 +155,7 @@ func _arrival_schema_migration() -> void:
 	var failed: Dictionary = await gs.execute_action_async(action)
 	check(not failed.success and gs.snapshot() == before and saves.read_save(legacy.save_id).state == original, "G1 failed action preserves migrated memory and original v3 file")
 	var committed: Dictionary = await gs.execute_action_async(action)
-	check(committed.success and saves.read_save(legacy.save_id).state.schema_version == 4, "G1 next successful action atomically persists v4")
+	check(committed.success and saves.read_save(legacy.save_id).state.schema_version == 5, "G1 next successful action atomically persists current schema")
 	check(gs.state.people.days == planned_days, "G1 successful action does not recalculate an existing day")
 	before = gs.snapshot()
 	var replayed: Dictionary = await gs.execute_action_async(action)

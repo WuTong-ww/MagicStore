@@ -26,3 +26,29 @@ Godot Engine **4.6.3.stable.official.7d41c59c4**，MIT。官方引擎与 Windows
 `assets/generated_scenes/`、`assets/portraits/`、`assets/ui/` 中的七个场景背景、林照晚表情、人物设定参考、术式插画和 UI 图集由本项目使用 OpenAI 图像生成工具按《零点杂货铺》已确认的水彩手绘、羊皮纸、旧木、苔绿与暖金风格生成并裁切整理。素材清单见 `assets/ART_ASSET_MANIFEST.json`，接入和运行用途见 `docs/ART_ASSET_GUIDE.md`。这些素材不是从影视、小说插画或其他游戏提取的角色图；NPC 参考稿用于本项目原创角色造型，不代表已绑定到具体随机 NPC。
 
 `assets/items/inventory-atlas-v2.png` 为原项目已有的原创商品/原料图标图集，仍由 `data/shop/visuals.json` 映射到统一 `item_id`；本轮没有复制或替换第三方商品图标。
+
+## A3R 字体与界面音效（2026-11-21）
+
+霞鹜文楷：作者 LXGW；上游字形来自 The Klee Project Authors / Fontworks。来源：[官方仓库](https://github.com/lxgw/LxgwWenKai)，下载 [Regular TTF](https://raw.githubusercontent.com/lxgw/LxgwWenKai/main/fonts/TTF/LXGWWenKai-Regular.ttf)，许可 SIL Open Font License 1.1。保留原始字体与完整许可，不做子集、字形修改或单独售卖。
+
+| 文件 | SHA256 |
+| --- | --- |
+| `assets/fonts/LXGWWenKai-Regular.ttf` | `2D73EEA94AD808999D90C0000C239A84A33B09D4BC6AB6C5B8BBF1EDA8A7FC8B` |
+| `assets/fonts/LXGWWenKai-OFL.txt` | `1A25E35DA1031C6C3436FDE545BB9CB5ACA954E9873AFE510C834B8B79BD21A0` |
+
+界面音效：作者 Kenney；来源 [Interface Sounds 1.0 官方页](https://kenney.nl/assets/interface-sounds)，Creative Commons Zero（CC0 1.0）。从官方免费包抽取以下六个未修改的 Ogg 文件，仅重命名；许可保留于 `assets/audio/KENNEY-LICENSE.txt`（SHA256 `F7966C773BBED0ECA6A9C75081C44A178B38EAE112724DBB5FDFBD4192D118A9`）。
+
+| 项目文件 | 原包文件 | SHA256 |
+| --- | --- | --- |
+| `assets/audio/ui/click.ogg` | `Audio/click_001.ogg` | `ccfb7fa0cccdd9faec0eb16033c732b1e308d139d80f799161495d58f7adcdb9` |
+| `assets/audio/ui/page.ogg` | `Audio/scroll_001.ogg` | `320c6aafb2c7a503eae508dc443b72d7f7c0a317bfd16813157ed400cd04cf16` |
+| `assets/audio/ui/confirm.ogg` | `Audio/confirmation_001.ogg` | `063564703b6094d70718a3e787a55cc9141611e4ecd6b6637f8828f79b4a8c3a` |
+| `assets/audio/ui/cancel.ogg` | `Audio/back_001.ogg` | `07db973f79f6ae0f2edc34561e7592e24d0577455919fb602cb8ecc0da991dcf` |
+| `assets/audio/ui/coin.ogg` | `Audio/drop_001.ogg` | `692ee3a6f1821402ca649ff735bee9591dc4846c8098fc7d6a90fd15fa57c1af` |
+| `assets/audio/ui/notify.ogg` | `Audio/bong_001.ogg` | `d21d0f0b782445db579d11e2506b24cd1ac9d664ee33aeaf807761aa7b6fd710` |
+
+## A3R 待补音乐
+
+指定来源为 [Cozy Tunes + Cozy FX](https://pizzadoggy.itch.io/cozy-tunes)，作者 Pizza Doggy。2026-11-21 官方页面可读取，实际下载请求返回 HTTP 429；尚未取得三首音乐及完整包内许可，因此本仓库**没有收录或伪造这些音乐**，也没有音乐文件 SHA256。
+
+`data/ui/audio.json` 的 day/night/consultation 三个路径为空并标记 missing；播放器保留 Music 总线、时钟切换与交叉淡入流程，缺文件时安静回退。人工补齐路径分别为 `assets/audio/music/day.ogg`、`night.ogg`、`consultation.ogg`。补入前须核验当时包内许可并登记曲名、来源和 SHA256；遵守手册约束：不得作为素材单独再发布、不得训练 AI、音乐不得进入任何模型请求。当前未取得的许可不被冒称为 CC0 或 OFL。

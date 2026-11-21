@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "day_minute": 540,
+  "night_minute": 1080,
+  "minutes_per_day": 1440,
+  "crossfade_seconds": 1.2,
+  "silence_db": -60.0,
+  "ui_voices": 4,
+  "shutdown_timeout_seconds": 2.0,
+  "shutdown_poll_frames": 1,
+  "settings_path": "user://presentation.cfg",
+  "defaults": {"music": 0.5, "ui": 0.65},
+  "labels": {"music": "音乐音量", "ui": "界面音量", "save_failed": "音量设置未能保存。", "shutdown_failed": "声音资源尚未释放，请稍后再关闭。", "close_failed": "当前操作尚未结束，请稍后再关闭。"},
+  "tracks": {
+    "day": {"path": "", "status": "missing", "expected_path": "res://assets/audio/music/day.ogg", "source": "https://pizzadoggy.itch.io/cozy-tunes"},
+    "night": {"path": "", "status": "missing", "expected_path": "res://assets/audio/music/night.ogg", "source": "https://pizzadoggy.itch.io/cozy-tunes"},
+    "consultation": {"path": "", "status": "missing", "expected_path": "res://assets/audio/music/consultation.ogg", "source": "https://pizzadoggy.itch.io/cozy-tunes"}
+  },
+  "sounds": {
+    "click": "res://assets/audio/ui/click.ogg",
+    "page": "res://assets/audio/ui/page.ogg",
+    "confirm": "res://assets/audio/ui/confirm.ogg",
+    "cancel": "res://assets/audio/ui/cancel.ogg",
+    "coin": "res://assets/audio/ui/coin.ogg",
+    "notify": "res://assets/audio/ui/notify.ogg"
+  }
+}

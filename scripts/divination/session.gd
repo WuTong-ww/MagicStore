@@ -6,6 +6,7 @@ const Cards = preload("res://scripts/divination/oracle_cards.gd")
 const Economy = preload("res://scripts/divination/economy.gd")
 const Events = preload("res://scripts/divination/event_rules.gd")
 const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
+const EventCopy = preload("res://scripts/divination/event_copy.gd")
 const ACTIONS := [
 	"quote_service", "settle_service", "cancel_service", "learn_method", "note_hypothesis",
 	"record_prediction", "give_advice", "buy_case_item", "use_case_item", "receive_feedback",
@@ -120,11 +121,13 @@ func opening(npc_id: String, case_id: String, has_visited: bool, known_clues: Ar
 		return "我又来了。上次的话我记在修复笔记里，也想看看当时留下的记录。"
 	return base.npc.opening + " 也许只是群发邀请，我不敢肯定。"
 
-func talks(visit: Dictionary, case: Dictionary, clock: int) -> Dictionary:
+func talks(visit: Dictionary, case: Dictionary, clock: int, state: Dictionary = {}) -> Dictionary:
 	var allowed: Dictionary = {"clarify": {"clue_ids": [], "branch_id": ""}}
+	var unlocked: Array = state.get("people",{}).get("unlocked_topics",{}).get(visit.npc_id,[])
 	for id: String in data.cases[case.case_id].topic_ids:
 		var topic: Dictionary = data.topic_index[id]
-		if topic.has("requires_clue") and not topic.requires_clue in visit.clue_ids:
+		var unlocked_here := unlocked.any(func(row: Dictionary) -> bool: return row.get("topic_id") == id)
+		if topic.has("requires_clue") and not topic.requires_clue in visit.clue_ids and not unlocked_here:
 			continue
 		var branch: String = topic.get("branch_id", "") if _event_open(case, clock) else ""
 		allowed[id] = {"clue_ids": topic.clue_ids.duplicate(), "branch_id": branch}
@@ -342,10 +345,12 @@ func _prediction(state: Dictionary, visit: Dictionary, case: Dictionary, action:
 		return _fail("NEEDS_PAID_SERVICE", "请先完成正式问卜，再把预测交给来客。")
 	var start: Variant = action.get("window_start")
 	var end: Variant = action.get("window_end")
-	if not _valid_text(action.get("text")) or action.get("subject_id") != event.subject_id or not action.get("expected") in ["met", "missed"] or not Events.CONDITIONS.has(action.get("condition")):
+	if not _valid_text(action.get("text")) or action.get("subject_id") != event.subject_id or not action.get("expected") in ["met", "missed"] or not Events.conditions(data.cases[case.case_id].event).has(action.get("condition")):
 		return _fail("INVALID_PREDICTION", "请填写预测原话，并选择本案的对象、结果和条件。")
-	if not Catalog._integer(start, int(state.clock_minutes), int(event.due_at) + 1440) or not Catalog._integer(end, int(start), int(event.due_at) + 1440):
-		return _fail("INVALID_PREDICTION", "预测时段应从当前游戏时间之后开始，结束不晚于约见后一天。")
+	var copy := EventCopy.load_config()
+	var limit := int(event.due_at)+int(copy.prediction_limit_minutes)
+	if not Catalog._integer(start, int(state.clock_minutes), limit) or not Catalog._integer(end, int(start), limit):
+		return _fail("INVALID_PREDICTION",copy.prediction_window_error)
 	var id := _id("prediction", action)
 	case.prediction = {
 		"prediction_id": id, "event_id": event.event_id, "subject_id": event.subject_id,
@@ -371,14 +376,15 @@ func _advice(state: Dictionary, visit: Dictionary, case: Dictionary, action: Dic
 		return _fail("INVALID_ADVICE", "请选择此案支持的建议。")
 	var choice: Dictionary = choices[key]
 	var accepted: bool = not choice.has("requires_clue") or choice.requires_clue in visit.clue_ids
+	var copy := EventCopy.load_config()
 	var id := _id("advice", action)
 	case.advice.append({
 		"advice_id": id, "event_id": case.event.event_id, "advice_key": key,
 		"text": choice.text, "accepted": accepted, "at": int(state.clock_minutes),
-		"reply": "我愿意按这个计划试试。" if accepted else "我还没弄清前因后果，暂时不愿意这样做。"
+		"reply": copy.advice_accepted if accepted else copy.advice_refused
 	})
-	if accepted and key == "attend" and not case.has("demand"):
-		var effect: Dictionary = data.cases[case.case_id].event.item_effect
+	var effect: Dictionary = data.cases[case.case_id].event.get("item_effect",{})
+	if accepted and key in effect.get("advice_keys",[]) and not case.has("demand"):
 		case["demand"] = {
 			"demand_id": "demand_" + String(case.event.event_id).trim_prefix("event_"),
 			"event_id": case.event.event_id, "case_id": case.case_id, "visit_id": visit.visit_id,
@@ -406,6 +412,9 @@ func _purchase(state: Dictionary, visit: Dictionary, case: Dictionary, action: D
 func _use_item(state: Dictionary, visit: Dictionary, case: Dictionary, action: Dictionary) -> Dictionary:
 	if case.event.is_empty() or case.purchase.is_empty():
 		return _fail("ITEM_USE_BLOCKED", "须在事件发生前使用本次购得的商品。")
+	var effect: Dictionary = data.cases[case.case_id].event.get("item_effect",{})
+	if effect.is_empty():
+		return _fail("ITEM_USE_BLOCKED",EventCopy.load_config().item_not_applicable)
 	var guest: Dictionary = state.npcs[visit.npc_id]
 	var item_id: String = case.purchase.item_id
 	if int(guest.items.get(item_id, 0)) < 1:
@@ -413,20 +422,20 @@ func _use_item(state: Dictionary, visit: Dictionary, case: Dictionary, action: D
 	var id := _id("item_use", action)
 	var linked := link_item_use(state, visit, {
 		"item_use_id": id, "event_id": case.event.event_id, "item_id": item_id,
-		"transaction_id": case.purchase.transaction_id, "effect_key": data.cases[case.case_id].event.item_effect.key
+		"transaction_id": case.purchase.transaction_id, "effect_key": effect.key
 	})
 	if not linked:
 		return _fail("ITEM_USE_BLOCKED", "须在事件发生前使用本次购得的商品。")
 	guest.items[item_id] -= 1
-	return _ok("已记录用香。照晚愿意在找不到旧入口时多停一会，向工作人员问路。", {"item_use_id": id, "visit_id": visit.visit_id})
+	return _ok(EventCopy.load_config().item_recorded, {"item_use_id": id, "visit_id": visit.visit_id})
 
 ## C calls this on the candidate in the same transaction as its inventory action.
 func link_item_use(state: Dictionary, visit: Dictionary, item_use: Dictionary) -> bool:
 	var case: Dictionary = state.divination.cases.get(visit.visit_id, {})
 	if case.is_empty() or state.active_visit_id != visit.visit_id or not _event_open(case, int(state.clock_minutes)) or not case.item_use.is_empty():
 		return false
-	var required: Dictionary = data.cases[case.case_id].event.item_effect
-	if item_use.get("event_id") != case.event.event_id or item_use.get("effect_key") != required.key:
+	var required: Dictionary = data.cases[case.case_id].event.get("item_effect",{})
+	if required.is_empty() or item_use.get("event_id") != case.event.event_id or item_use.get("effect_key") != required.key:
 		return false
 	for key in ["item_use_id", "item_id", "transaction_id"]:
 		if not item_use.get(key) is String or item_use[key].is_empty():
@@ -441,10 +450,10 @@ func _feedback(state: Dictionary, current: Dictionary, event_id: Variant) -> Dic
 	if not event_id is String:
 		return _fail("INVALID_ACTION", "请选择可听取的事件反馈。")
 	for case: Dictionary in state.divination.cases.values():
-		if case.event.get("event_id") != event_id or case.npc_id != current.npc_id or case.visit_id == current.visit_id:
+		if case.event.get("event_id") != event_id or case.npc_id != current.npc_id or (case.visit_id == current.visit_id and case.event.feedback.mode != "immediate"):
 			continue
 		if Events.can_report(case.event, int(state.clock_minutes)):
-			var report := Events.disclose(state, case, current, data.economy)
+			var report := Events.disclose(state, case, current, data.economy,data.cases[case.case_id].event)
 			return _ok("来客的反馈已写入原案手记。", {"feedback": report.duplicate(true), "visit_id": current.visit_id})
 		break
 	return _fail("FEEDBACK_UNAVAILABLE", "这位来客还没有可听取的反馈。")
@@ -458,7 +467,8 @@ func feedback_queue(state: Dictionary) -> Array:
 		queue.append({
 			"npc_id": case.npc_id, "visit_id": case.visit_id, "event_id": event.event_id, "due_at": event.due_at,
 			"case_id": case.case_id, "prediction_id": case.prediction.get("prediction_id", ""), "subject_id": event.subject_id,
-			"available_at": event.feedback.available_at, "mode": event.feedback.mode,
+			"available_at": event.feedback.available_at if event.evidence != "none" else -1,
+			"mode": event.feedback.mode if event.evidence != "none" else "never", "evidence": event.evidence,
 			"disclosure": event.feedback.disclosure.duplicate(true)
 		})
 	queue.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return a.due_at < b.due_at if a.due_at != b.due_at else a.event_id < b.event_id)

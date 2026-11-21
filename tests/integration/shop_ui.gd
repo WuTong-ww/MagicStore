@@ -1,4 +1,5 @@
 extends SceneTree
+const UITeardown = preload("res://tests/ui_teardown.gd")
 ## Seven destinations and the integrated A panel. Real rendering is optional;
 ## headless layout results are never described as visual acceptance.
 
@@ -168,8 +169,10 @@ func run() -> void:
 	check(game.snapshot() == without_queue, "empty front cannot bypass A admission")
 	await check_zero_guest_front()
 	print("C UI RESULT: %d checks, %d failures, %d graphical captures; renderer=%s" % [checks, failures, captures, DisplayServer.get_name()])
+	await UITeardown.release_audio(main)
 	main.queue_free()
 	await settle()
+	await UITeardown.drain(self)
 	quit(1 if failures else 0)
 
 func check_zero_guest_front() -> void:
@@ -190,6 +193,7 @@ func check_zero_guest_front() -> void:
 		check(main.screen.guest_name.text == "今日零客日", "zero-customer day has a dedicated title")
 		check(main.screen.case_label.text.contains("采集") and main.screen.case_label.text.contains("研习") and main.screen.case_label.text.contains("制作"), "zero-customer day gives useful suggestions")
 		check(main.screen.quiet_suggestions.visible and main.screen.quiet_suggestions.get_child_count() == 3, "zero-customer suggestions have three destinations")
+		check(not main.screen.guest_picker.visible, "zero-customer day hides empty guest dropdown")
 		check_layout("zero-guest-front" + str(dimensions.x))
 		await capture("zero-guest-front-" + str(dimensions.x))
 	game.state = original
@@ -197,10 +201,10 @@ func check_zero_guest_front() -> void:
 	await settle()
 
 func check_layout(label: String) -> void:
-	check(main.scene_holder.size.x > 100 and main.scene_holder.size.y > 100, label + " usable content area")
+	check(main.scene_holder.get_global_rect().is_equal_approx(Rect2(Vector2.ZERO,main.size)), label + " scene fills window behind floating chrome")
 	check(main.screen.get_combined_minimum_size().y <= main.scene_holder.size.y + 1, label + " destination fits vertical area")
-	check(main.screen.get_global_rect().end.y <= main.notice.get_global_rect().position.y + 1, label + " destination clears footer")
-	check(main.resources.get_global_rect().end.y < main.scene_holder.get_global_rect().position.y, label + " resource bar stays above destination")
+	check(main.screen.get_global_rect().is_equal_approx(main.scene_holder.get_global_rect()), label + " destination covers scene holder")
+	check(Rect2(Vector2.ZERO,main.size).encloses(main.resources.get_global_rect()), label + " floating resource text stays inside window")
 	check_controls(main.screen, label)
 
 func check_controls(node: Node, label: String, scroll_parent: ScrollContainer = null) -> void:

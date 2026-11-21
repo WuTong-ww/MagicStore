@@ -1,4 +1,5 @@
 extends SceneTree
+const UITeardown = preload("res://tests/ui_teardown.gd")
 ## URL preview/apply regression. The public address is only a string fixture:
 ## background generation is disabled, no talk is submitted, and no HTTP starts.
 
@@ -56,7 +57,7 @@ func run() -> void:
 	check((await main.run_action("new_game",{"name":"接口地址设置本地回归"})).success,"create isolated settings UI save")
 	check(game.has_method("preview_api_url"),"pure URL preview API is available")
 	if not game.has_method("preview_api_url"):
-		finish()
+		await finish()
 		return
 	var original_state: Dictionary = game.snapshot()
 	var original_settings: Dictionary = game.connection_settings()
@@ -137,7 +138,7 @@ func run() -> void:
 		check(no_http_nodes(root) and not game.people_generation_settings().enabled,"all settings operations remain local with background generation off")
 	game.configure_api("","","")
 	check(game.snapshot() == original_state,"entire settings workflow leaves time, money and save version unchanged")
-	finish()
+	await finish()
 
 func capture(dialog: ConfirmationDialog, name: String) -> void:
 	if DisplayServer.get_name() == "headless":
@@ -163,5 +164,7 @@ func find_node(node: Node, predicate: Callable) -> Node:
 
 func finish() -> void:
 	print("API SETTINGS UI: %d checks, %d failures; renderer=%s captures=%d" % [checks,failures,DisplayServer.get_name(),captures])
+	await UITeardown.release_audio(main)
 	main.queue_free()
+	await UITeardown.drain(self)
 	quit(0 if failures == 0 else 1)

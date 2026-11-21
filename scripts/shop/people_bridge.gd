@@ -182,7 +182,12 @@ static func sync(state: Dictionary, _config: Dictionary, divination: Variant) ->
 	var people: Dictionary = state.people
 	for effect: Dictionary in state.divination.effects:
 		if effect.get("recipient") == "A":
-			People.apply_effect(people, effect)
+			if effect.get("kind") == "unlock_topic":
+				var source_case: Dictionary = state.divination.cases.get(effect.get("visit_id",""),{})
+				var definition: Dictionary = divination.data.cases.get(source_case.get("case_id",""),{})
+				if source_case.get("npc_id") != effect.get("npc_id") or not divination.data.topic_index.has(effect.get("topic_id")) or effect.get("topic_id") not in definition.get("topic_ids",[]):
+					continue
+			People.apply_effect(people, effect, _config)
 	for job: Dictionary in divination.feedback_queue(state):
 		People.schedule_feedback(people, job, _config)
 	for case: Dictionary in state.divination.cases.values():
@@ -311,6 +316,25 @@ static func validate(state: Dictionary) -> String:
 	var people: Dictionary = state.people
 	if people.save_id != state.save_id or int(people.clock) != int(state.clock_minutes):
 		return "人物命名空间与存档或时钟不一致"
+	var effects := {}
+	for effect: Dictionary in state.get("divination",{}).get("effects",[]):
+		effects[effect.get("effect_id","")] = effect
+	for referral: Dictionary in people.referrals.values():
+		if not referral.has("effect_id"):
+			continue
+		var source: Dictionary = effects.get(referral.effect_id,{})
+		if source.get("recipient") != "A" or source.get("kind") != "referral" or source.get("event_id") != referral.event_id or source.get("npc_id") != referral.referrer_npc_id:
+			return "推荐记录无效"
+		if source.has("target_npc_id"):
+			if source.target_npc_id != referral.target_npc_id:
+				return "推荐记录无效"
+		elif source.get("template","").is_empty() or source.template != referral.get("template") or people.profiles[referral.target_npc_id].get("template_id") != ("ordinary_v1" if source.template == "ordinary" else source.template):
+			return "推荐记录无效"
+	for npc_id: String in people.get("unlocked_topics",{}):
+		for unlock: Dictionary in people.unlocked_topics[npc_id]:
+			var source: Dictionary = effects.get(unlock.effect_id,{})
+			if source.get("recipient") != "A" or source.get("kind") != "unlock_topic" or source.get("npc_id") != npc_id or source.get("event_id") != unlock.event_id or source.get("topic_id") != unlock.topic_id:
+				return "人物话题解锁来源无效"
 	var visits := {}
 	for visit: Dictionary in state.visits:
 		visits[visit.visit_id] = visit

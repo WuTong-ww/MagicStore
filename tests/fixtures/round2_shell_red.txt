@@ -1,0 +1,14 @@
+A3R regression baseline, 2026-11-21
+Command: Godot_v4.6.3-stable_win64_console.exe --headless --path D:/MagicStore --script res://tests/integration/round2_shell.gd
+Process APPDATA, LOCALAPPDATA, TEMP, TMP point into project .tools test directories.
+Result: ROUND2 SHELL RESULT: 785 checks, 292 failures, 0 graphical captures; renderer=headless
+Exit code: 1
+Representative failures:
+- scene holder fills window / front / (1280, 720)
+- cover background has no uncovered edges / front / (1280, 720)
+- button text and padding fit / front / (1280, 720) / 存档簿 / required=86.0 actual=32.0
+- button text and padding fit / front / (1280, 720) / 设置 / required=68.0 actual=32.0
+- button text and padding fit / front / (1280, 720) / 原料商店 / required=104.0 actual=86.57
+- zero-customer day hides empty guest dropdown
+- consultation input fits window / (800, 600)
+This is intentional pre-fix evidence, not the final acceptance result.

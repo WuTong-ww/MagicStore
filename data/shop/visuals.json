@@ -100,9 +100,9 @@
     "art_minimum_height": 240,
     "inventory_columns": 3,
     "inventory_rect": [
-      200,
+      320,
       250,
-      1420,
+      1300,
       790
     ],
     "inventory_cell_minimum": [
@@ -140,15 +140,21 @@
   },
   "scenes": {
     "S01": {
-      "day": "res://assets/generated_scenes/v2/S01_day.png",
-      "night": "res://assets/generated_scenes/v2/S01_night.png",
+      "day": "res://assets/generated_scenes/runtime/v2/S01_day.png",
+      "night": "res://assets/generated_scenes/runtime/v2/S01_night.png",
       "layers": {},
       "hotspots": {},
-      "closed": "res://assets/generated_scenes/v2/S01_closed.png"
+      "closed": "res://assets/generated_scenes/runtime/v2/S01_closed.png",
+      "safe_rect": [
+        320,
+        180,
+        1920,
+        1080
+      ]
     },
     "S02": {
-      "day": "res://assets/generated_scenes/v2/S02_day.png",
-      "night": "res://assets/generated_scenes/v2/S02_night.png",
+      "day": "res://assets/generated_scenes/runtime/v2/S02_day.png",
+      "night": "res://assets/generated_scenes/runtime/v2/S02_night.png",
       "layers": {
         "door": {
           "path": "res://assets/generated_scenes/v2/slices/S02_door.png",
@@ -238,10 +244,14 @@
           "label": "店外",
           "target": "exterior",
           "rect": [
-            60,
+            320,
             400,
             280,
             250
+          ],
+          "label_position": [
+            460.0,
+            525.0
           ]
         },
         "market": {
@@ -252,6 +262,10 @@
             250,
             460,
             250
+          ],
+          "label_position": [
+            650.0,
+            375.0
           ]
         },
         "inventory": {
@@ -262,6 +276,10 @@
             680,
             460,
             250
+          ],
+          "label_position": [
+            800.0,
+            805.0
           ]
         },
         "consultation": {
@@ -272,16 +290,24 @@
             420,
             520,
             250
+          ],
+          "label_position": [
+            1460.0,
+            545.0
           ]
         },
         "workshop": {
           "label": "工坊",
           "target": "workshop",
           "rect": [
-            1870,
+            1780,
             520,
             460,
             250
+          ],
+          "label_position": [
+            2010.0,
+            645.0
           ]
         },
         "letter": {
@@ -289,22 +315,45 @@
           "target": "people",
           "rect": [
             670,
-            1110,
+            1010,
             460,
             250
+          ],
+          "label_position": [
+            900.0,
+            1135.0
           ]
         }
-      }
+      },
+      "safe_rect": [
+        320,
+        180,
+        1920,
+        1080
+      ]
     },
     "S03": {
-      "day": "res://assets/generated_scenes/v2/S03_day.png",
-      "night": "res://assets/generated_scenes/v2/S03_night.png",
+      "day": "res://assets/generated_scenes/runtime/v2/S03_day.png",
+      "night": "res://assets/generated_scenes/runtime/v2/S03_night.png",
       "layers": {},
-      "hotspots": {}
+      "hotspots": {},
+      "safe_rect": [
+        320,
+        180,
+        1920,
+        1080
+      ],
+      "seat_rect": [
+        950,
+        410,
+        490,
+        700
+      ],
+      "seat_scale": 1.0
     },
     "S04": {
-      "day": "res://assets/generated_scenes/v2/S04_day.png",
-      "night": "res://assets/generated_scenes/v2/S04_night.png",
+      "day": "res://assets/generated_scenes/runtime/v2/S04_day.png",
+      "night": "res://assets/generated_scenes/runtime/v2/S04_night.png",
       "layers": {
         "door_open": {
           "path": "res://assets/generated_scenes/v2/slices/S04_door_open.png",
@@ -399,18 +448,28 @@
           "label": "储物柜",
           "target": "cabinet",
           "rect": [
-            220,
+            320,
             180,
             1380,
             70
           ],
-          "display": "transparent"
+          "display": "transparent",
+          "label_position": [
+            1010.0,
+            215.0
+          ]
         }
-      }
+      },
+      "safe_rect": [
+        320,
+        180,
+        1920,
+        1080
+      ]
     },
     "S05": {
-      "day": "res://assets/generated_scenes/v2/S05_day.png",
-      "night": "res://assets/generated_scenes/v2/S05_night.png",
+      "day": "res://assets/generated_scenes/runtime/v2/S05_day.png",
+      "night": "res://assets/generated_scenes/runtime/v2/S05_night.png",
       "layers": {
         "mortar": {
           "path": "res://assets/generated_scenes/v2/slices/S05_mortar.png",
@@ -458,11 +517,17 @@
           ]
         }
       },
-      "hotspots": {}
+      "hotspots": {},
+      "safe_rect": [
+        320,
+        180,
+        1920,
+        1080
+      ]
     },
     "S06": {
-      "day": "res://assets/generated_scenes/v2/S06_day.png",
-      "night": "res://assets/generated_scenes/v2/S06_night.png",
+      "day": "res://assets/generated_scenes/runtime/v2/S06_day.png",
+      "night": "res://assets/generated_scenes/runtime/v2/S06_night.png",
       "layers": {
         "basket": {
           "path": "res://assets/generated_scenes/v2/slices/S06_basket.png",
@@ -480,13 +545,25 @@
           ]
         }
       },
-      "hotspots": {}
+      "hotspots": {},
+      "safe_rect": [
+        320,
+        180,
+        1920,
+        1080
+      ]
     },
     "S07": {
-      "day": "res://assets/generated_scenes/v2/S07_day.png",
-      "night": "res://assets/generated_scenes/v2/S07_night.png",
+      "day": "res://assets/generated_scenes/runtime/v2/S07_day.png",
+      "night": "res://assets/generated_scenes/runtime/v2/S07_night.png",
       "layers": {},
-      "hotspots": {}
+      "hotspots": {},
+      "safe_rect": [
+        320,
+        180,
+        1920,
+        1080
+      ]
     }
   }
 }

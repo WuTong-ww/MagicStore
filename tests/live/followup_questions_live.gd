@@ -1,4 +1,5 @@
 extends SceneTree
+const UITeardown = preload("res://tests/ui_teardown.gd")
 ## Opt-in real settings, real question buttons, and actual committed saves.
 var game: Node
 var main: Control
@@ -114,6 +115,7 @@ func run() -> void:
 	var url := OS.get_environment("MAGIC_LIVE_API_URL")
 	var key := OS.get_environment("MAGIC_LIVE_API_KEY")
 	if key.is_empty() or url.is_empty():
+		await UITeardown.drain(self)
 		quit(2)
 		return
 	main = load("res://scenes/main.tscn").instantiate()
@@ -153,4 +155,5 @@ func run() -> void:
 	report["completed"] = true
 	report["summary"] = {"turns":report.turns.size(),"online":report.turns.filter(func(row: Dictionary) -> bool: return row.success and row.provider.get("mode") == "online").size(),"checks":report.checks.size(),"failures":report.errors.size()}
 	save_report()
+	await UITeardown.drain(self)
 	quit(0 if report.errors.is_empty() else 1)

@@ -11,6 +11,7 @@ const Clues = preload("res://scripts/divination/oracle_clues.gd")
 const Astro = preload("res://scripts/divination/oracle_sky.gd")
 const Pillars = preload("res://scripts/divination/oracle_pillars.gd")
 const Ziwei = preload("res://scripts/divination/oracle_ziwei.gd")
+const EventSchema = preload("res://scripts/divination/event_schema.gd")
 const METHOD_OPTIONS := {
 	"tarot": ["situation", "next_question"], "lenormand": ["letter_birds", "key_house"],
 	"plum": ["clock", "number"], "yijing": ["gradual", "release"],
@@ -70,7 +71,13 @@ static func load_data(base: Dictionary) -> Dictionary:
 				return {}
 		if not _valid_questions(template, clues):
 			return {}
-	if not _event_data(parsed.cases.invitation.get("event")):
+	for template: Dictionary in parsed.cases.values():
+		if template.has("event") and not _event_data(template.event):
+			return {}
+		for option: Dictionary in template.get("event",{}).get("advice_options",[]):
+			if option.has("requires_clue") and not clues.has(option.requires_clue):
+				return {}
+	if EventSchema.load_templates().is_empty():
 		return {}
 	for guest in parsed.guests.values():
 		if not guest is Dictionary or not birth_available("astrology", guest) or not parsed.past_profiles.has(guest.get("profile_id")):
@@ -131,23 +138,7 @@ static func restore_legacy_guests(state: Dictionary, data: Dictionary) -> bool:
 	return true
 
 static func _event_data(value: Variant) -> bool:
-	if not value is Dictionary or not value.get("subject_id") is String or not value.get("target_name") is String or not _integer(value.get("minute_of_day"), 0, 1439) or not _integer(value.get("feedback_delay"), 0, 10080):
-		return false
-	if not value.get("outcomes") is Dictionary or not value.get("advice") is Dictionary:
-		return false
-	var item_effect: Variant = value.get("item_effect")
-	if not item_effect is Dictionary or not item_effect.get("key") is String or not item_effect.get("need") is String:
-		return false
-	for id in ["sent", "arrived", "lost", "private", "note", "waited"]:
-		var outcome: Variant = value.outcomes.get(id)
-		if not outcome is Dictionary or not outcome.get("actual_action") is String or not outcome.get("outcome") in ["met", "missed"] or not outcome.get("evidence") in ["sufficient", "insufficient"] or not outcome.get("feedback") in ["delayed", "never"] or not outcome.get("text") is String:
-			return false
-		if outcome.has("delay") and not _integer(outcome.delay, 0, 10080):
-			return false
-	for id in ["message", "attend", "private", "note", "wait"]:
-		if not value.advice.get(id) is Dictionary or not value.advice[id].get("text") is String:
-			return false
-	return true
+	return EventSchema.event_valid(value)
 
 static func _integer(value: Variant, low: int, high: int) -> bool:
 	return (value is int or value is float) and value == floorf(float(value)) and value >= low and value <= high

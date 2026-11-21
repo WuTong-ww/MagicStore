@@ -1,4 +1,5 @@
 extends SceneTree
+const UITeardown = preload("res://tests/ui_teardown.gd")
 ## Actual save -> next_day -> A queue -> B visit, without any model/network.
 const People = preload("res://scripts/people/people.gd")
 const Bridge = preload("res://scripts/shop/people_bridge.gd")
@@ -78,6 +79,7 @@ func run() -> void:
 	check(seen_people.size() == seen_visits.size() and seen_people.size() >= 1,"every served natural guest has one distinct real reception while quiet days are allowed")
 	await front_wait_ui()
 	print("OPENING GUEST INTEGRATION: %d checks, %d failures; renderer=%s, captures=%d" % [checks,failures,DisplayServer.get_name(),captures])
+	await UITeardown.drain(self)
 	quit(0 if failures == 0 else 1)
 
 func _planned_number_roundtrips() -> void:
@@ -184,6 +186,7 @@ func front_wait_ui() -> void:
 	var closed_snapshot: Dictionary = game.snapshot()
 	await main.screen._wait_for_guest()
 	check(game.snapshot() == closed_snapshot,"stale wait callback at closing cannot mutate the save")
+	await UITeardown.release_audio(main)
 	main.queue_free()
 	await process_frame
 

@@ -1,0 +1,3 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+API SETTINGS UI: 45 checks, 0 failures; renderer=headless captures=0

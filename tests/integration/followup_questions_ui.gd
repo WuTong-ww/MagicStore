@@ -1,4 +1,5 @@
 extends SceneTree
+const UITeardown = preload("res://tests/ui_teardown.gd")
 ## Authored provider fixtures exercise the real saved question contract and UI.
 ## No external model requests, credentials or production saves are used.
 
@@ -172,9 +173,11 @@ func run() -> void:
 	rows = game.conversation_questions()
 	check(rows.size() <= 3 and rows.all(func(row: Dictionary) -> bool: return row.enabled) and screen.questions.get_child_count() == rows.size(),"offline new visitor uses only current available local fallbacks")
 	print("FOLLOWUP QUESTIONS UI: %d checks, %d failures; renderer=%s captures=%d" % [checks,failures,DisplayServer.get_name(),captures])
+	await UITeardown.release_audio(main)
 	main.queue_free()
 	host.queue_free()
 	await settle()
+	await UITeardown.drain(self)
 	quit(0 if failures == 0 else 1)
 
 func inspect_render(name: String) -> void:

@@ -1,0 +1,374 @@
+{
+	"commit": "e27441b51a4415777971cf2d8142ce4c725437e5",
+	"format": "invitation_feedback_consumption_v1",
+	"records": [
+		{
+			"expected": {
+				"can_report": true,
+				"can_review": false,
+				"effects": [
+					{
+						"amount": 1,
+						"duration": 0,
+						"item_id": "",
+						"kind": "referral",
+						"recipient": "A"
+					},
+					{
+						"amount": 2,
+						"duration": 0,
+						"item_id": "",
+						"kind": "trust",
+						"recipient": "A"
+					},
+					{
+						"amount": 1,
+						"duration": 2880,
+						"item_id": "",
+						"kind": "arrival_boost",
+						"recipient": "C"
+					},
+					{
+						"amount": 1,
+						"duration": 0,
+						"item_id": "silver_leaf",
+						"kind": "gift",
+						"recipient": "C"
+					},
+					{
+						"amount": 1,
+						"duration": 0,
+						"item_id": "",
+						"kind": "reputation",
+						"recipient": "C"
+					}
+				],
+				"evaluation": "aligned",
+				"familiarity": 0,
+				"gift_guest": 0,
+				"gift_ledger_count": 1,
+				"gift_player": 1,
+				"referral_targets": [
+					"npc_lin_friend"
+				],
+				"rejected_effects": [],
+				"reputation": 1,
+				"review_growth": 0,
+				"trust": 2
+			},
+			"input": {
+				"advice": "message",
+				"changed_entrance": true,
+				"condition": "always",
+				"expected": "met",
+				"has_prediction": true,
+				"label": "message_aligned"
+			}
+		},
+		{
+			"expected": {
+				"can_report": true,
+				"can_review": true,
+				"effects": [
+					{
+						"amount": -2,
+						"duration": 0,
+						"item_id": "",
+						"kind": "trust",
+						"recipient": "A"
+					},
+					{
+						"amount": 1,
+						"duration": 0,
+						"item_id": "",
+						"kind": "review_growth",
+						"recipient": "C"
+					}
+				],
+				"evaluation": "deviated",
+				"familiarity": 0,
+				"gift_guest": 1,
+				"gift_ledger_count": 0,
+				"gift_player": 0,
+				"referral_targets": [],
+				"rejected_effects": [],
+				"reputation": 0,
+				"review_growth": 1,
+				"trust": -2
+			},
+			"input": {
+				"advice": "message",
+				"changed_entrance": true,
+				"condition": "always",
+				"expected": "missed",
+				"has_prediction": true,
+				"label": "message_deviated"
+			}
+		},
+		{
+			"expected": {
+				"can_report": true,
+				"can_review": false,
+				"effects": [
+					{
+						"amount": 2,
+						"duration": 0,
+						"item_id": "",
+						"kind": "trust",
+						"recipient": "A"
+					},
+					{
+						"amount": 1,
+						"duration": 2880,
+						"item_id": "",
+						"kind": "arrival_boost",
+						"recipient": "C"
+					},
+					{
+						"amount": 1,
+						"duration": 0,
+						"item_id": "",
+						"kind": "reputation",
+						"recipient": "C"
+					}
+				],
+				"evaluation": "aligned",
+				"familiarity": 0,
+				"gift_guest": 1,
+				"gift_ledger_count": 0,
+				"gift_player": 0,
+				"referral_targets": [],
+				"rejected_effects": [],
+				"reputation": 1,
+				"review_growth": 0,
+				"trust": 2
+			},
+			"input": {
+				"advice": "attend",
+				"changed_entrance": false,
+				"condition": "always",
+				"expected": "met",
+				"has_prediction": true,
+				"label": "attend_arrived_aligned"
+			}
+		},
+		{
+			"expected": {
+				"can_report": true,
+				"can_review": true,
+				"effects": [
+					{
+						"amount": -2,
+						"duration": 0,
+						"item_id": "",
+						"kind": "trust",
+						"recipient": "A"
+					},
+					{
+						"amount": 1,
+						"duration": 0,
+						"item_id": "",
+						"kind": "review_growth",
+						"recipient": "C"
+					}
+				],
+				"evaluation": "deviated",
+				"familiarity": 0,
+				"gift_guest": 1,
+				"gift_ledger_count": 0,
+				"gift_player": 0,
+				"referral_targets": [],
+				"rejected_effects": [],
+				"reputation": 0,
+				"review_growth": 1,
+				"trust": -2
+			},
+			"input": {
+				"advice": "attend",
+				"changed_entrance": true,
+				"condition": "always",
+				"expected": "met",
+				"has_prediction": true,
+				"label": "attend_lost_deviated"
+			}
+		},
+		{
+			"expected": {
+				"can_report": true,
+				"can_review": false,
+				"effects": [],
+				"evaluation": "insufficient",
+				"familiarity": 0,
+				"gift_guest": 1,
+				"gift_ledger_count": 0,
+				"gift_player": 0,
+				"referral_targets": [],
+				"rejected_effects": [],
+				"reputation": 0,
+				"review_growth": 0,
+				"trust": 0
+			},
+			"input": {
+				"advice": "note",
+				"changed_entrance": true,
+				"condition": "always",
+				"expected": "met",
+				"has_prediction": true,
+				"label": "note_partial"
+			}
+		},
+		{
+			"expected": {
+				"can_report": true,
+				"can_review": false,
+				"effects": [
+					{
+						"amount": 2,
+						"duration": 0,
+						"item_id": "",
+						"kind": "trust",
+						"recipient": "A"
+					}
+				],
+				"evaluation": "aligned",
+				"familiarity": 0,
+				"gift_guest": 1,
+				"gift_ledger_count": 0,
+				"gift_player": 0,
+				"referral_targets": [],
+				"rejected_effects": [],
+				"reputation": 0,
+				"review_growth": 0,
+				"trust": 2
+			},
+			"input": {
+				"advice": "wait",
+				"changed_entrance": true,
+				"condition": "always",
+				"expected": "missed",
+				"has_prediction": true,
+				"label": "wait_aligned"
+			}
+		},
+		{
+			"expected": {
+				"can_report": true,
+				"can_review": true,
+				"effects": [
+					{
+						"amount": -2,
+						"duration": 0,
+						"item_id": "",
+						"kind": "trust",
+						"recipient": "A"
+					},
+					{
+						"amount": 1,
+						"duration": 0,
+						"item_id": "",
+						"kind": "review_growth",
+						"recipient": "C"
+					}
+				],
+				"evaluation": "deviated",
+				"familiarity": 0,
+				"gift_guest": 1,
+				"gift_ledger_count": 0,
+				"gift_player": 0,
+				"referral_targets": [],
+				"rejected_effects": [],
+				"reputation": 0,
+				"review_growth": 1,
+				"trust": -2
+			},
+			"input": {
+				"advice": "wait",
+				"changed_entrance": true,
+				"condition": "always",
+				"expected": "met",
+				"has_prediction": true,
+				"label": "wait_deviated"
+			}
+		},
+		{
+			"expected": {
+				"can_report": false,
+				"can_review": false,
+				"effects": [],
+				"evaluation": "undisclosed",
+				"familiarity": 0,
+				"gift_guest": 1,
+				"gift_ledger_count": 0,
+				"gift_player": 0,
+				"referral_targets": [],
+				"rejected_effects": [],
+				"reputation": 0,
+				"review_growth": 0,
+				"trust": 0
+			},
+			"input": {
+				"advice": "private",
+				"changed_entrance": true,
+				"condition": "always",
+				"expected": "met",
+				"has_prediction": true,
+				"label": "private_undisclosed"
+			}
+		},
+		{
+			"expected": {
+				"can_report": true,
+				"can_review": false,
+				"effects": [],
+				"evaluation": "condition_not_met",
+				"familiarity": 0,
+				"gift_guest": 1,
+				"gift_ledger_count": 0,
+				"gift_player": 0,
+				"referral_targets": [],
+				"rejected_effects": [],
+				"reputation": 0,
+				"review_growth": 0,
+				"trust": 0
+			},
+			"input": {
+				"advice": "message",
+				"changed_entrance": true,
+				"condition": "if_attend",
+				"expected": "met",
+				"has_prediction": true,
+				"label": "condition_not_met"
+			}
+		},
+		{
+			"expected": {
+				"can_report": true,
+				"can_review": false,
+				"effects": [],
+				"evaluation": "no_prediction",
+				"familiarity": 0,
+				"gift_guest": 1,
+				"gift_ledger_count": 0,
+				"gift_player": 0,
+				"referral_targets": [],
+				"rejected_effects": [],
+				"reputation": 0,
+				"review_growth": 0,
+				"trust": 0
+			},
+			"input": {
+				"advice": "",
+				"changed_entrance": true,
+				"condition": "always",
+				"expected": "met",
+				"has_prediction": false,
+				"label": "no_prediction"
+			}
+		}
+	],
+	"sources": {
+		"data/divination.json": "5494fa9d1873bd50fa76a2033abc989b374f95dc7694d8ad9f9baafad1e909ed",
+		"scripts/divination/event_rules.gd": "b6ad07d355415ae1228c45e3b198934df92116afab597f154ba495f0b673351d",
+		"scripts/people/people.gd": "57a20607940757f92d8e6b70060a42610f3fd07133baae463179e7860eeab111"
+	}
+}

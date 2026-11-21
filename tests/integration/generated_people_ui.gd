@@ -1,4 +1,5 @@
 extends SceneTree
+const UITeardown = preload("res://tests/ui_teardown.gd")
 ## Real UI actions with authored isolated fixtures; never calls an upstream API.
 const Person = preload("res://scripts/people/generated_person.gd")
 const Cases = preload("res://scripts/divination/generated_cases.gd")
@@ -98,8 +99,10 @@ func run() -> void:
 		main.people_window.hide()
 		check((await main.run_action("end_visit")).success,"end isolated reception")
 	print("GENERATED PEOPLE UI: %d checks, %d failures; renderer=%s" % [checks,failures,DisplayServer.get_name()])
+	await UITeardown.release_audio(main)
 	main.queue_free()
 	await settle()
+	await UITeardown.drain(self)
 	quit(1 if failures else 0)
 
 func find_node(node: Node, predicate: Callable) -> Node:

@@ -183,8 +183,8 @@ func _validate(s: Dictionary) -> String:
 	for field in ["schema_version", "save_id", "name", "state_version", "clock_minutes", "player", "npcs", "active_visit_id", "visits", "processed_actions"]:
 		if not s.has(field):
 			return "缺少 " + field
-	if not _integer(s.schema_version, 1, 4):
-		return "不支持的 schema_version（当前支持 1、2、3 和 4）"
+	if not _integer(s.schema_version, 1, 5):
+		return "不支持的 schema_version（当前支持 1、2、3、4 和 5）"
 	var extended := int(s.schema_version) >= 2
 	if not _safe_id(s.save_id) or not _text(s.name, 1, 80):
 		return "存档编号或名称无效"

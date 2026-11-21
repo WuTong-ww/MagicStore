@@ -1,4 +1,5 @@
 extends SceneTree
+const UITeardown = preload("res://tests/ui_teardown.gd")
 ## Focused Viewport input exercises native TextEdit/Button dispatch. Unicode
 ## fixture keys verify committed Chinese text; this does not simulate an IME.
 
@@ -234,9 +235,11 @@ func run() -> void:
 	check(host.calls.size() == call_count+1 and host.results.back().success and game.active_visit().dialogue[-2].text == retry_text and screen.input.text.is_empty(),"real mouse press/release can retry and save the retained Chinese input")
 	check(not game.people_generation_settings().enabled and not has_http(root),"keyboard regression uses only fixture responses and isolated local saves")
 	print("CHAT KEYBOARD UI: %d checks, %d failures; renderer=%s captures=%d" % [checks,failures,DisplayServer.get_name(),captures])
+	await UITeardown.release_audio(main)
 	main.queue_free()
 	host.queue_free()
 	await settle()
+	await UITeardown.drain(self)
 	quit(0 if failures == 0 else 1)
 
 func inspect_render(dimensions: Vector2i) -> void:

@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "top_height": 52,
+  "dock_height": 64,
+  "drawer_width": 420,
+  "drawer_seconds": 0.25,
+  "screen_minimum": [
+    800,
+    600
+  ],
+  "brand": "零点杂货铺",
+  "save_label": "存档",
+  "settings_label": "设置",
+  "drawer_open": "展开手帐",
+  "drawer_close": "收起手帐",
+  "status_format": "金币 %d  口碑 %d  %s  候客 %d",
+  "energy_format": "精力 %d / %d",
+  "no_save_status": "打开存档，开始经营",
+  "notice_default": "每个成功动作都会自动保存。",
+  "provider_online": "在线对话",
+  "provider_offline": "本地对话",
+  "navigation": [
+    {
+      "page": "exterior",
+      "label": "店外",
+      "icon": "⌂"
+    },
+    {
+      "page": "front",
+      "label": "前台",
+      "icon": "◇"
+    },
+    {
+      "page": "consultation",
+      "label": "咨询",
+      "icon": "☏"
+    },
+    {
+      "page": "inventory",
+      "label": "柜子",
+      "icon": "▣"
+    },
+    {
+      "page": "workshop",
+      "label": "工坊",
+      "icon": "⚒"
+    },
+    {
+      "page": "market",
+      "label": "商店",
+      "icon": "▤"
+    },
+    {
+      "page": "gathering",
+      "label": "采集",
+      "icon": "♧"
+    },
+    {
+      "page": "people",
+      "label": "档案",
+      "icon": "▧"
+    }
+  ],
+  "layout": {
+    "margin": 10,
+    "gap": 6,
+    "notice_bottom": 90,
+    "notice_height": 24,
+    "energy_width": 70,
+    "compact_width": 1000,
+    "brand_size": 20,
+    "status_size": 16,
+    "compact_status_size": 14,
+    "drawer_inset_top": 64,
+    "drawer_inset_bottom": 104,
+    "low_energy_ratio": 0.25
+  },
+  "cancel_label": "取消等待回复",
+  "dialogs": {
+    "people": [
+      960,
+      570
+    ],
+    "history": [
+      880,
+      540
+    ]
+  }
+}

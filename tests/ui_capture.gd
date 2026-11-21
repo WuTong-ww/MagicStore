@@ -1,4 +1,5 @@
 extends SceneTree
+const UITeardown = preload("res://tests/ui_teardown.gd")
 ## Deterministic UI smoke in an isolated directory. With a graphical renderer,
 ## also writes 1280x720 and 1920x1080 screenshots to .tools/ui-captures/.
 
@@ -126,12 +127,16 @@ func run() -> void:
 	main.screen.casebook_button.pressed.emit()
 	await settle()
 	await press_in_workbench("听取回访 · 一封没有寄出的邀请")
-	check(main.history_window.visible and not main.workbench.visible and main.history_text.text.contains("预测符合"), "UI opens the disclosed report after hearing the returning guest")
+	check(main.workbench.visible and main.workbench.history_visit_id == original_id and main.workbench.view.event.report.get("evaluation") == "aligned" and not main.workbench.view.active, "UI opens the original disclosed case as a read-only notebook after hearing the returning guest")
 	await capture("divination-feedback-1920")
-	main.history_window.hide()
+	main.workbench.hide()
 	await exercise_methods()
 	await exercise_comparison()
+	await UITeardown.release_audio(main)
+	main.queue_free()
+	await settle()
 	print("UI_SMOKE: %d checks, %d failures; captures: %s" % [checks, failures, ", ".join(captured)])
+	await UITeardown.drain(self)
 	quit(1 if failures else 0)
 
 func exercise_methods() -> void:
@@ -338,11 +343,16 @@ func check(condition: bool, description: String) -> void:
 
 func check_layout(label: String) -> void:
 	check(main.screen.get_combined_minimum_size().y <= main.scene_holder.size.y, label + " scene fits available height")
-	check(main.screen.get_global_rect().end.y <= main.notice.get_global_rect().position.y + 1, label + " scene does not overlap footer")
-	check(main.resources.get_global_rect().end.y < main.scene_holder.get_global_rect().position.y, label + " status stays above scene")
+	check(main.scene_holder.get_global_rect().is_equal_approx(Rect2(Vector2.ZERO,main.size)), label + " scene fills window behind floating chrome")
+	check(Rect2(Vector2.ZERO,main.size).encloses(main.resources.get_global_rect()), label + " status text stays inside floating header")
 	check_buttons(main.screen, label)
 
 func check_buttons(node: Node, label: String, scroll_parent: ScrollContainer = null) -> void:
+	if node is CanvasItem and not node.is_visible_in_tree():
+		return
+	if node.name == "ConsultationDrawer" and not main.screen.drawer_open:
+		check(node.position.x >= main.screen.size.x-1 and main.screen.drawer_toggle.is_visible_in_tree(), label + " collapsed drawer stays offstage with its bookmark accessible")
+		return
 	if node is ScrollContainer:
 		scroll_parent = node
 		check(Rect2(Vector2.ZERO, main.size).grow(1).encloses(node.get_global_rect()), label + " scroll viewport remains inside window")

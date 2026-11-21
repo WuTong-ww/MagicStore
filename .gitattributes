@@ -6,7 +6,20 @@
 *.json text eol=lf
 *.md text eol=lf
 *.ps1 text eol=crlf
+*.py text eol=lf
+# User instruction, 2026-11-21: store assets in ordinary Git, without LFS.
 *.ttf binary -filter
 *.png binary -filter
+*.jpg binary -filter
+*.jpeg binary -filter
 *.ogg binary -filter
+*.avi binary -filter
+*.wav binary -filter
 *.zip binary -filter
+# Preserve upstream license bytes so the recorded SHA256 survives checkout.
+assets/audio/KENNEY-LICENSE.txt -text whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
+assets/fonts/LXGWWenKai-OFL.txt -text whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
+# These generated provenance receipts are hashed as encoded bytes. Preserve
+# their original line endings so checkout cannot invalidate their SHA256.
+assets/_incoming/**/receipt.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/generated_scenes/v3_real/**/receipt.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

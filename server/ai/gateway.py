@@ -795,17 +795,49 @@ def make_handler(config, topics, limits, model=call_model, profile_model=call_pr
         def do_GET(self):
             self.send_json(200, {"ok": True}) if self.path == "/health" else self.send_json(404, {"error": "NOT_FOUND"})
 
+        def read_post_body(self):
+            length = int(self.headers.get("Content-Length", "0"))
+            if not 0 < length <= MAX_BODY:
+                raise ValueError("invalid body length")
+            previous_timeout = self.connection.gettimeout()
+            timeout = float(config.get("request_timeout", config.get("timeout", 12)))
+            if not math.isfinite(timeout) or timeout <= 0:
+                raise ValueError("invalid request timeout")
+            if previous_timeout is not None:
+                timeout = min(timeout, previous_timeout)
+            deadline = time.monotonic() + timeout
+            body = bytearray()
+            try:
+                while len(body) < length:
+                    remaining = deadline - time.monotonic()
+                    if remaining <= 0:
+                        raise TimeoutError("request body deadline exceeded")
+                    self.connection.settimeout(remaining)
+                    chunk = self.rfile.read1(length - len(body))
+                    if not chunk:
+                        raise ValueError("truncated request body")
+                    body.extend(chunk)
+            finally:
+                self.connection.settimeout(previous_timeout)
+            return bytes(body)
+
         def do_POST(self):
+            # Closing a socket with unread POST bytes can reset it before the
+            # client receives an error response on Windows. Consume only the
+            # bounded raw body first; rejected credentials never reach JSON
+            # parsing, request policy, rate limits, or model callbacks.
+            try:
+                raw_body = self.read_post_body()
+            except (ValueError, TypeError, OSError):
+                self.close_connection = True
+                return self.send_json(400, {"error": "INVALID_REQUEST"})
             if self.path not in ("/v1/dialogue", "/v1/profile", "/v1/profile/choices", "/v1/event-proposal", "/v1/person-package"):
                 return self.send_json(404, {"error": "NOT_FOUND"})
             token = self.headers.get("X-Magic-Gateway-Token", "")
             if not token or not hmac.compare_digest(token, config["gateway_token"]):
                 return self.send_json(401, {"error": "UNAUTHORIZED"})
             try:
-                length = int(self.headers.get("Content-Length", "0"))
-                if not 0 < length <= MAX_BODY:
-                    raise ValueError("invalid body length")
-                request = json.loads(self.rfile.read(length))
+                request = json.loads(raw_body)
                 if self.path == "/v1/dialogue":
                     context = prepare_request(request, topics)
                 elif self.path == "/v1/person-package":
@@ -838,18 +870,22 @@ def make_handler(config, topics, limits, model=call_model, profile_model=call_pr
                     result = normalize_event_proposal(event_model(context, config), context)
                 else:
                     result = normalize_profile(profile_model(context, config))
-                return self.send_json(200, result, "online")
+                response = (200, result, "online")
             except (ValueError, KeyError, TypeError, IndexError, OSError, urllib.error.URLError):
                 if self.path == "/v1/dialogue":
-                    return self.send_json(200, offline_dialogue(request, topics,
-                                          verified_intent=selection_state.get("intent", ""), allow_keywords=False), "offline")
-                if self.path == "/v1/profile/choices":
-                    return self.send_json(200, offline_profile_choices(context, profile_options), "offline")
-                if self.path == "/v1/event-proposal":
-                    return self.send_json(200, {"candidate_id": "no_action", "trigger_id": context["trigger_id"]}, "offline")
-                return self.send_json(502, {"error": "UPSTREAM_INVALID_OR_UNAVAILABLE"})
+                    response = (200, offline_dialogue(request, topics,
+                                verified_intent=selection_state.get("intent", ""), allow_keywords=False), "offline")
+                elif self.path == "/v1/profile/choices":
+                    response = (200, offline_profile_choices(context, profile_options), "offline")
+                elif self.path == "/v1/event-proposal":
+                    response = (200, {"candidate_id": "no_action", "trigger_id": context["trigger_id"]}, "offline")
+                else:
+                    response = (502, {"error": "UPSTREAM_INVALID_OR_UNAVAILABLE"})
             finally:
                 limiter.release()
+            # A client can consume the complete body before this worker is
+            # scheduled again. Release model capacity before publishing it.
+            return self.send_json(*response)
     return Handler
 
 

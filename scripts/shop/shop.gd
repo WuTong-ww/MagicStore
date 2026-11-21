@@ -5,6 +5,7 @@ extends RefCounted
 const ACTIONS := ["procure_item", "receive_material_gift", "gather_material", "sell_material", "register_demand", "research_recipe", "craft_item", "sell_product", "use_product", "review_case"]
 const MAX_VALUE := 2147483647
 const ContentLoader = preload("res://scripts/core/content_loader.gd")
+const CaseEconomy = preload("res://scripts/divination/economy.gd")
 
 static func load_config() -> Dictionary:
 	var parser := JSON.new()
@@ -15,12 +16,17 @@ static func load_config() -> Dictionary:
 	if not content.success:
 		return {}
 	data["rules"] = content.content.rules.duplicate(true)
+	var oracle: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://data/divination.json"))
+	if oracle is Dictionary and oracle.get("economy") is Dictionary:
+		data["legacy_gift"] = {"item_id":oracle.economy.get("gift_id",""),"name":oracle.economy.get("gift_name","")}
 	return _normalize(data) if config_valid(data) else {}
 
 static func config_valid(data: Dictionary) -> bool:
 	if data.get("version") != 1 or not data.get("items") is Dictionary or not data.get("recipes") is Dictionary or not data.get("gather_sites") is Dictionary:
 		return false
 	if not data.get("rules") is Dictionary or not _integer(data.rules.get("max_energy"), 1, MAX_VALUE) or not _integer(data.rules.get("closing_minute"), 1, 1439):
+		return false
+	if data.has("legacy_gift") and (not data.legacy_gift is Dictionary or not data.legacy_gift.get("item_id") is String or data.legacy_gift.item_id.is_empty() or not data.legacy_gift.get("name") is String or data.legacy_gift.name.is_empty()):
 		return false
 	for item_id: String in data.items:
 		var item: Variant = data.items[item_id]
@@ -385,22 +391,45 @@ static func sync_effects(state: Dictionary, config: Dictionary = {}) -> void:
 					if not state.shop.feedback_links.any(func(row: Dictionary) -> bool: return row.item_use_id == use.item_use_id):
 						state.shop.feedback_links.append(link)
 	for effect: Dictionary in state.get("divination", {}).get("effects", []):
-		if effect.get("recipient") != "C" or effect.get("effect_id", "") in state.shop.effects_applied or int(effect.get("starts_at", MAX_VALUE)) > int(state.clock_minutes):
+		if effect.get("recipient") != "C" or not effect.get("effect_id") is String or effect.effect_id.is_empty() or effect.effect_id in state.shop.effects_applied or not _integer(effect.get("starts_at"),0,MAX_VALUE) or int(effect.starts_at) > int(state.clock_minutes):
 			continue
-		var amount := int(effect.get("amount", 0))
+		var raw_amount: Variant = effect.get("amount",effect.get("delta",0))
+		if not _integer(raw_amount,-MAX_VALUE,MAX_VALUE):
+			continue
+		var amount := int(raw_amount)
 		match effect.get("kind"):
 			"reputation":
 				state.shop.reputation = clampi(int(state.shop.reputation) + amount, -100, 10000)
 			"review_growth":
-				state.shop.review_growth += maxi(0, amount)
-			"arrival_boost":
-				state.shop.boosts.append(effect.duplicate(true))
+				state.shop.review_growth = mini(MAX_VALUE,int(state.shop.review_growth)+maxi(0,amount))
+			"arrival_boost", "traffic_boost":
+				var boost := effect.duplicate(true)
+				boost.kind = "arrival_boost"
+				if effect.get("kind") == "traffic_boost":
+					if not _integer(effect.get("minutes"),1,MAX_VALUE-int(effect.starts_at)):
+						continue
+					boost.expires_at = int(effect.starts_at)+int(effect.minutes)
+				if not _integer(amount,1,100) or not _integer(boost.get("expires_at"),int(effect.starts_at)+1,MAX_VALUE):
+					continue
+				state.shop.boosts.append(boost)
 			"gift":
 				# B already transfers its legacy gift; new material rewards transfer here.
 				var already_transferred: bool = state.get("divination", {}).get("ledger", []).any(func(entry: Dictionary) -> bool: return entry.get("reference_id") == effect.effect_id and entry.get("category") == "gift")
 				var id: String = effect.get("item_id", "")
-				if not already_transferred and data.items.has(id) and data.items[id].kind == "material" and amount > 0:
-					_add(state, id, amount, "gift", effect.effect_id)
+				var quantity: Variant = effect.get("qty",raw_amount)
+				if not already_transferred and data.items.has(id) and _integer(quantity,1,MAX_VALUE-_count(state,id)):
+					_add(state, id, int(quantity), "gift", effect.effect_id)
+				elif not already_transferred and id == data.get("legacy_gift",{}).get("item_id") and _integer(quantity,1,MAX_VALUE-_count(state,id)):
+					var source_visit := _visit(state)
+					if source_visit.get("npc_id") != effect.get("npc_id"):
+						for visit: Dictionary in state.get("visits",[]):
+							if visit.visit_id == effect.get("visit_id"):
+								source_visit = visit
+					var payment := {"kind":"item","item_id":id,"item_name":data.legacy_gift.name,"amount":int(quantity)}
+					if source_visit.get("npc_id") != effect.get("npc_id") or not state.get("npcs",{}).has(effect.get("npc_id")):
+						continue
+					if CaseEconomy.can_pay(state.npcs[effect.npc_id],payment):
+						CaseEconomy.transfer(state,source_visit,payment,"gift",effect.effect_id,true)
 				elif not already_transferred:
 					continue
 			_:

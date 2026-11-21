@@ -1,5 +1,6 @@
 """Real loopback HTTP tests with synthetic callbacks; no external model calls."""
 import copy
+import io
 import json
 import threading
 import unittest
@@ -8,6 +9,7 @@ import urllib.request
 from contextlib import contextmanager
 from http.server import ThreadingHTTPServer
 from pathlib import Path
+from unittest.mock import Mock, patch
 
 from server.ai import gateway
 from server.ai import person_generation as person_policy
@@ -52,9 +54,11 @@ def selected_reply(context, _config):
 
 
 @contextmanager
-def running_gateway(**callbacks):
+def running_gateway(handler_wrapper=None, **callbacks):
     limits = callbacks.pop("limits", gateway.Limits(per_minute=100))
     handler = gateway.make_handler(CONFIG, gateway.load_topics(), limits, **callbacks)
+    if handler_wrapper is not None:
+        handler = handler_wrapper(handler)
     server = ThreadingHTTPServer(("127.0.0.1", 0), handler)
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
@@ -106,7 +110,12 @@ class GeneratedGatewayTests(unittest.TestCase):
             calls.append(context)
             return self.creator(context, config)
         with running_gateway(person_creator=creator, person_auditor=approve_person) as base:
-            self.assertEqual(post(base, "/v1/person-package", {}, token="wrong")[0], 401)
+            for unauthorized in ({}, {"padding": "x" * (gateway.MAX_BODY - 32)}):
+                with self.subTest(unauthorized_body_bytes=len(json.dumps(unauthorized))):
+                    status, body, mode = post(base, "/v1/person-package", unauthorized, token="wrong")
+                    self.assertEqual(status, 401)
+                    self.assertEqual(body, {"error": "UNAUTHORIZED"})
+                    self.assertIsNone(mode)
             for invalid in ([], {"world_facts": {"secret": "PRIVATE_483"}}, {"api_key": "forged"},
                             {"existing_names": "林照晚"}, {"existing_names": ["名"] * 151}, {"theme_hint": 3}):
                 with self.subTest(invalid=invalid):
@@ -119,6 +128,70 @@ class GeneratedGatewayTests(unittest.TestCase):
             self.assertEqual((status, mode), (200, "online"))
             self.assertEqual(body["bundle"], self.bundle)
             self.assertEqual(body["provenance"]["draft_hash"], FIXTURE["draft_hash"])
+
+    def test_rejected_auth_consumes_bounded_body_without_parsing_or_generation(self):
+        class Connection:
+            def __init__(self):
+                self.timeout = None
+                self.timeouts = []
+            def gettimeout(self):
+                return self.timeout
+            def settimeout(self, value):
+                self.timeout = value
+                self.timeouts.append(value)
+
+        handler_type = gateway.make_handler(CONFIG, self.topics, gateway.Limits(), person_creator=self.creator)
+        handler = object.__new__(handler_type)
+        raw = b'INVALID_JSON_SECRET_SHOULD_NOT_BE_PARSED'
+        handler.path = "/v1/person-package"
+        handler.headers = {"Content-Length": str(len(raw)), "X-Magic-Gateway-Token": "wrong"}
+        handler.rfile = io.BytesIO(raw)
+        handler.connection = Connection()
+        replies = []
+        handler.send_json = lambda *reply: replies.append(reply)
+        with patch.object(gateway.json, "loads", side_effect=AssertionError("unauthorized JSON must not be parsed")), \
+                patch.object(gateway, "person_package_result", side_effect=AssertionError("unauthorized request must not create a person")):
+            handler.do_POST()
+        self.assertEqual(replies, [(401, {"error": "UNAUTHORIZED"})])
+        self.assertEqual(handler.rfile.tell(), len(raw), "bounded POST bytes must be consumed before the connection closes")
+        self.assertTrue(any(value is not None and 0 < value <= 12 for value in handler.connection.timeouts))
+        self.assertIsNone(handler.connection.gettimeout())
+
+    def test_invalid_body_length_is_rejected_without_reading(self):
+        handler_type = gateway.make_handler(CONFIG, self.topics, gateway.Limits())
+        for length in ("0", "-1", "not-a-number", str(gateway.MAX_BODY + 1)):
+            with self.subTest(length=length):
+                handler = object.__new__(handler_type)
+                handler.path = "/v1/person-package"
+                handler.headers = {"Content-Length": length, "X-Magic-Gateway-Token": CONFIG["gateway_token"]}
+                handler.rfile = io.BytesIO(b"untrusted")
+                replies = []
+                handler.send_json = lambda *reply: replies.append(reply)
+                handler.do_POST()
+                self.assertEqual(replies, [(400, {"error": "INVALID_REQUEST"})])
+                self.assertEqual(handler.rfile.tell(), 0)
+
+    def test_incomplete_or_timed_out_body_never_reaches_json_or_models(self):
+        handler_type = gateway.make_handler(CONFIG, self.topics, gateway.Limits())
+        timeout_body = Mock()
+        timeout_body.read1.side_effect = TimeoutError("synthetic slow body")
+        for body in (io.BytesIO(b"{"), timeout_body):
+            with self.subTest(body=body):
+                handler = object.__new__(handler_type)
+                handler.path = "/v1/person-package"
+                handler.headers = {"Content-Length": "20", "X-Magic-Gateway-Token": CONFIG["gateway_token"]}
+                handler.rfile = body
+                handler.connection = Mock()
+                handler.connection.gettimeout.return_value = None
+                replies = []
+                handler.send_json = lambda *reply: replies.append(reply)
+                with patch.object(gateway.json, "loads") as parse, patch.object(gateway, "person_package_result") as create:
+                    handler.do_POST()
+                self.assertEqual(replies, [(400, {"error": "INVALID_REQUEST"})])
+                self.assertTrue(handler.close_connection)
+                parse.assert_not_called()
+                create.assert_not_called()
+                self.assertEqual(handler.connection.settimeout.call_args.args, (None,))
 
     def test_person_http_wrong_hash_rejected_review_and_unavailable_return_502(self):
         def wrong_hash(context, config):
@@ -168,6 +241,51 @@ class GeneratedGatewayTests(unittest.TestCase):
                 self.assertEqual(post(base, "/v1/person-package", {})[0], 200)
             finally:
                 foreground.release()
+
+    def test_completed_http_response_releases_capacity_before_client_can_request_again(self):
+        def unavailable(_context, _config):
+            raise ValueError("synthetic unavailable model")
+
+        for path, model, creator, expected_status, expected_mode in (
+                ("/v1/dialogue", selected_reply, self.creator, 200, "online"),
+                ("/v1/dialogue", unavailable, self.creator, 200, "offline"),
+                ("/v1/person-package", selected_reply, self.creator, 200, "online"),
+                ("/v1/person-package", selected_reply, unavailable, 502, None)):
+            with self.subTest(path=path, mode=expected_mode):
+                foreground = gateway.Limits(concurrent=1, per_minute=100)
+                background = gateway.Limits(concurrent=1, per_minute=100)
+                response_written = threading.Event()
+                allow_handler_return = threading.Event()
+
+                def pause_after_response(handler_type):
+                    class PausedAfterResponse(handler_type):
+                        def send_json(self, *reply):
+                            super().send_json(*reply)
+                            response_written.set()
+                            # Hold the HTTP worker after the actual complete
+                            # body is visible, making the client/worker race
+                            # deterministic without sleeping or retrying.
+                            allow_handler_return.wait(timeout=3)
+                    return PausedAfterResponse
+
+                with running_gateway(limits=foreground, background_limits=background,
+                                     handler_wrapper=pause_after_response, model=model,
+                                     dialogue_reviewer=approve_dialogue, person_creator=creator,
+                                     person_auditor=approve_person) as base:
+                    try:
+                        request = generated_request() if path == "/v1/dialogue" else {}
+                        status, _body, mode = post(base, path, request)
+                        self.assertEqual((status, mode), (expected_status, expected_mode))
+                        self.assertTrue(response_written.wait(timeout=3))
+                        limiter = foreground if path == "/v1/dialogue" else background
+                        acquired = limiter.acquire()
+                        try:
+                            self.assertTrue(acquired, "a completed response must not retain model capacity")
+                        finally:
+                            if acquired:
+                                limiter.release()
+                    finally:
+                        allow_handler_return.set()
 
     def test_dynamic_catalog_checks_npc_topic_clue_and_effect_authority(self):
         request = generated_request()

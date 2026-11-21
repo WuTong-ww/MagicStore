@@ -1,4 +1,5 @@
 extends SceneTree
+const UITeardown = preload("res://tests/ui_teardown.gd")
 
 const ArrivalUI = preload("res://scripts/ui/arrival_ui.gd")
 var checks := 0
@@ -96,7 +97,9 @@ func run() -> void:
 	check(main.people_panel.start_button.disabled and not main.people_panel.book_button.disabled and main.people_panel.detail.text.contains("口碑传开"), "outside card preserves source and offers agreement instead of immediate service")
 	main.people_panel._select(1)
 	check(main.people_panel.start_button.disabled and not main.people_panel.book_button.disabled and main.people_panel.detail.text.contains("尚未约定时间"), "appointment request is explicitly unconfirmed")
+	await UITeardown.release_audio(main)
 	main.queue_free()
 	await process_frame
 	print("ARRIVAL UI RESULT: %d checks, %d failures" % [checks, failures])
+	await UITeardown.drain(self)
 	quit(0 if failures == 0 else 1)

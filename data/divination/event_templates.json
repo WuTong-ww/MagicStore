@@ -1,0 +1,335 @@
+{
+  "version": 1,
+  "templates": {
+    "contact": {
+      "version": 1,
+      "subject_id": "npc_template",
+      "target_name": "这次商量的事情能否得到推进",
+      "minute_of_day": 1080,
+      "feedback_delay": 180,
+      "world_facts": {},
+      "branch_ids": [],
+      "item_effect_ids": [],
+      "item_effect": {},
+      "advice_options": [
+        {
+          "key": "contact",
+          "label": "先联系对方，把这次要说的事核对清楚。"
+        },
+        {
+          "key": "prepare",
+          "label": "先整理顾虑，等核对过信息再行动。"
+        },
+        {
+          "key": "wait",
+          "label": "先缓一缓，等自己准备好。"
+        }
+      ],
+      "advice": {
+        "contact": {
+          "text": "先联系对方，把这次要说的事核对清楚。"
+        },
+        "prepare": {
+          "text": "先整理顾虑，等核对过信息再行动。"
+        },
+        "wait": {
+          "text": "先缓一缓，等自己准备好。"
+        }
+      },
+      "prediction_conditions": {
+        "always": {
+          "label": "无附加条件"
+        }
+      },
+      "prediction_labels": {
+        "met": "事情得到核对与推进",
+        "missed": "事情暂未推进"
+      },
+      "rules": [
+        {
+          "when": {
+            "advice": "contact",
+            "accepted": true
+          },
+          "outcome": "completed"
+        },
+        {
+          "when": {
+            "advice": "prepare",
+            "accepted": true
+          },
+          "outcome": "prepared"
+        },
+        {
+          "when": {},
+          "outcome": "paused"
+        }
+      ],
+      "outcomes": {
+        "completed": {
+          "actual_action": "联系并完成这次约定的沟通",
+          "outcome": "met",
+          "evidence": "sufficient",
+          "feedback": "delayed",
+          "delay_minutes": 180,
+          "text": "我联系上了对方，也核对了这次要谈的事情。",
+          "effects": []
+        },
+        "prepared": {
+          "actual_action": "整理了顾虑，尚未核实事情的结果",
+          "outcome": "missed",
+          "evidence": "partial",
+          "feedback": "delayed",
+          "delay_minutes": 240,
+          "text": "整理过自己的顾虑后，我觉得轻松了一些，事情的结果还没法核对。",
+          "effects": []
+        },
+        "paused": {
+          "actual_action": "暂缓行动，尚未推进这件事",
+          "outcome": "missed",
+          "evidence": "sufficient",
+          "feedback": "delayed",
+          "delay_minutes": 180,
+          "text": "这次我先没有采取行动，事情也还没有新的进展。",
+          "effects": []
+        }
+      },
+      "feedback_effects": [
+        {
+          "kind": "trust",
+          "amount": 1,
+          "when": {
+            "evaluation": "aligned"
+          }
+        },
+        {
+          "kind": "review_growth",
+          "amount": 1,
+          "when": {
+            "evaluation": "deviated"
+          }
+        }
+      ]
+    },
+    "visit": {
+      "version": 1,
+      "subject_id": "npc_template",
+      "target_name": "这次商量的事情能否得到推进",
+      "minute_of_day": 1080,
+      "feedback_delay": 180,
+      "world_facts": {},
+      "branch_ids": [],
+      "item_effect_ids": [],
+      "item_effect": {},
+      "advice_options": [
+        {
+          "key": "visit",
+          "label": "先核对时间地点，再前往处理这件事。"
+        },
+        {
+          "key": "prepare",
+          "label": "先整理顾虑，等核对过信息再行动。"
+        },
+        {
+          "key": "wait",
+          "label": "先缓一缓，等自己准备好。"
+        }
+      ],
+      "advice": {
+        "visit": {
+          "text": "先核对时间地点，再前往处理这件事。"
+        },
+        "prepare": {
+          "text": "先整理顾虑，等核对过信息再行动。"
+        },
+        "wait": {
+          "text": "先缓一缓，等自己准备好。"
+        }
+      },
+      "prediction_conditions": {
+        "always": {
+          "label": "无附加条件"
+        }
+      },
+      "prediction_labels": {
+        "met": "事情得到核对与推进",
+        "missed": "事情暂未推进"
+      },
+      "rules": [
+        {
+          "when": {
+            "advice": "visit",
+            "accepted": true
+          },
+          "outcome": "completed"
+        },
+        {
+          "when": {
+            "advice": "prepare",
+            "accepted": true
+          },
+          "outcome": "prepared"
+        },
+        {
+          "when": {},
+          "outcome": "paused"
+        }
+      ],
+      "outcomes": {
+        "completed": {
+          "actual_action": "前往约定的地点并办完计划中的事情",
+          "outcome": "met",
+          "evidence": "sufficient",
+          "feedback": "delayed",
+          "delay_minutes": 180,
+          "text": "我去了约定的地方，按计划办完了那件事。",
+          "effects": []
+        },
+        "prepared": {
+          "actual_action": "整理了顾虑，尚未核实事情的结果",
+          "outcome": "missed",
+          "evidence": "partial",
+          "feedback": "delayed",
+          "delay_minutes": 240,
+          "text": "整理过自己的顾虑后，我觉得轻松了一些，事情的结果还没法核对。",
+          "effects": []
+        },
+        "paused": {
+          "actual_action": "暂缓行动，尚未推进这件事",
+          "outcome": "missed",
+          "evidence": "sufficient",
+          "feedback": "delayed",
+          "delay_minutes": 180,
+          "text": "这次我先没有采取行动，事情也还没有新的进展。",
+          "effects": []
+        }
+      },
+      "feedback_effects": [
+        {
+          "kind": "trust",
+          "amount": 1,
+          "when": {
+            "evaluation": "aligned"
+          }
+        },
+        {
+          "kind": "review_growth",
+          "amount": 1,
+          "when": {
+            "evaluation": "deviated"
+          }
+        }
+      ]
+    },
+    "decision": {
+      "version": 1,
+      "subject_id": "npc_template",
+      "target_name": "这次商量的事情能否得到推进",
+      "minute_of_day": 1080,
+      "feedback_delay": 180,
+      "world_facts": {},
+      "branch_ids": [],
+      "item_effect_ids": [],
+      "item_effect": {},
+      "advice_options": [
+        {
+          "key": "decide",
+          "label": "先做一项可以回头检查的小决定。"
+        },
+        {
+          "key": "prepare",
+          "label": "先整理顾虑，等核对过信息再行动。"
+        },
+        {
+          "key": "wait",
+          "label": "先缓一缓，等自己准备好。"
+        }
+      ],
+      "advice": {
+        "decide": {
+          "text": "先做一项可以回头检查的小决定。"
+        },
+        "prepare": {
+          "text": "先整理顾虑，等核对过信息再行动。"
+        },
+        "wait": {
+          "text": "先缓一缓，等自己准备好。"
+        }
+      },
+      "prediction_conditions": {
+        "always": {
+          "label": "无附加条件"
+        }
+      },
+      "prediction_labels": {
+        "met": "事情得到核对与推进",
+        "missed": "事情暂未推进"
+      },
+      "rules": [
+        {
+          "when": {
+            "advice": "decide",
+            "accepted": true
+          },
+          "outcome": "completed"
+        },
+        {
+          "when": {
+            "advice": "prepare",
+            "accepted": true
+          },
+          "outcome": "prepared"
+        },
+        {
+          "when": {},
+          "outcome": "paused"
+        }
+      ],
+      "outcomes": {
+        "completed": {
+          "actual_action": "按商量的小步骤做出决定并记录结果",
+          "outcome": "met",
+          "evidence": "sufficient",
+          "feedback": "delayed",
+          "delay_minutes": 180,
+          "text": "我按商量的小步骤作了决定，也记下了之后的变化。",
+          "effects": []
+        },
+        "prepared": {
+          "actual_action": "整理了顾虑，尚未核实事情的结果",
+          "outcome": "missed",
+          "evidence": "partial",
+          "feedback": "delayed",
+          "delay_minutes": 240,
+          "text": "整理过自己的顾虑后，我觉得轻松了一些，事情的结果还没法核对。",
+          "effects": []
+        },
+        "paused": {
+          "actual_action": "暂缓行动，尚未推进这件事",
+          "outcome": "missed",
+          "evidence": "sufficient",
+          "feedback": "delayed",
+          "delay_minutes": 180,
+          "text": "这次我先没有采取行动，事情也还没有新的进展。",
+          "effects": []
+        }
+      },
+      "feedback_effects": [
+        {
+          "kind": "trust",
+          "amount": 1,
+          "when": {
+            "evaluation": "aligned"
+          }
+        },
+        {
+          "kind": "review_growth",
+          "amount": 1,
+          "when": {
+            "evaluation": "deviated"
+          }
+        }
+      ]
+    }
+  }
+}

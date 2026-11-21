@@ -1,4 +1,5 @@
 extends SceneTree
+const UITeardown = preload("res://tests/ui_teardown.gd")
 var checks := 0
 var failures := 0
 var captures := 0
@@ -16,6 +17,7 @@ func run() -> void:
 	check(FileAccess.file_exists("res://scripts/shop/scene_visual.gd"), "shared scene renderer exists")
 	if failures > 0:
 		print("SCENE VISUALS: %d checks, %d failures" % [checks, failures])
+		await UITeardown.drain(self)
 		quit(1)
 		return
 	var visual_script: Script = load("res://scripts/shop/scene_visual.gd")
@@ -42,7 +44,11 @@ func run() -> void:
 	invalid.scenes.S04.layers.door_open.source_region = [-1,0,392,1261]
 	check(not visual_script.config_valid(invalid),"negative source texture crop coordinate is rejected")
 	var fitted: Rect2 = visual_script.fit_rect(Vector2(1000,400), Vector2(2560,1440))
-	check(is_equal_approx(fitted.size.x/fitted.size.y,2560.0/1440.0) and is_equal_approx(fitted.position.x,(1000.0-fitted.size.x)/2.0), "letterboxed canvas retains 16:9 and centers artwork")
+	check(is_equal_approx(fitted.size.x/fitted.size.y,2560.0/1440.0) and is_equal_approx(fitted.position.x,(1000.0-fitted.size.x)/2.0), "contained local material retains 16:9 and centers artwork")
+	for dimensions: Vector2 in [Vector2(1280,720),Vector2(1920,1080),Vector2(2560,1080),Vector2(800,600)]:
+		var covered: Rect2 = visual_script.cover_rect(dimensions,Vector2(2560,1440))
+		check(covered.grow(1).encloses(Rect2(Vector2.ZERO,dimensions)) and is_equal_approx(covered.size.x/covered.size.y,2560.0/1440.0),"cover canvas fills window without stretching / "+str(dimensions))
+		check((covered.position-(dimensions-covered.size)*0.5).length() < 0.1,"cover canvas crops symmetrically / "+str(dimensions))
 	var door: Dictionary = parsed.scenes.S04.layers.door_open
 	var cropped: Texture2D = visual_script.texture_for(door.path,door.source_region)
 	check(cropped is AtlasTexture and cropped.region == Rect2(410,2,392,1261),"door uses configured source PNG region through an AtlasTexture")
@@ -56,6 +62,7 @@ func run() -> void:
 		check(crop_fitted.size.y > uncropped_fitted.size.y and crop_fitted.size.y > region.size.y*0.9,"removing transparent PNG margins lets the door fill the intended tall target rectangle")
 	await check_runtime(parsed)
 	print("SCENE VISUALS: %d checks, %d failures, %d graphical captures" % [checks, failures, captures])
+	await UITeardown.drain(self)
 	quit(1 if failures else 0)
 
 func settle() -> void:
@@ -193,6 +200,7 @@ func check_runtime(config: Dictionary) -> void:
 		main.show_screen("exterior")
 		await settle()
 		check(game.snapshot() == committed and main.screen.scene_visual.current_period == "night","render-only fixture restores committed clock and night artwork")
+	await UITeardown.release_audio(main)
 	main.queue_free()
 	await settle()
 

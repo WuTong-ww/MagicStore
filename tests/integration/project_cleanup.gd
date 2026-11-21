@@ -1,4 +1,5 @@
 extends SceneTree
+const UITeardown = preload("res://tests/ui_teardown.gd")
 ## Production content stays separate from test fixtures and old-save records.
 const Loader = preload("res://scripts/core/content_loader.gd")
 var game: Node
@@ -42,4 +43,5 @@ func run() -> void:
 	check(root.get_node("SaveService").read_save(game.state.save_id).success,"current saved game validates with separate compatibility records")
 	OS.set_environment("MAGIC_DEV_FIXTURES",previous_fixture_flag)
 	print("PROJECT CLEANUP RESULT: %d checks, %d failures" % [checks,failures])
+	await UITeardown.drain(self)
 	quit(0 if failures == 0 else 1)
