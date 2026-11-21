@@ -7,6 +7,7 @@ var energy_bar: ProgressBar
 var shell_header: PanelContainer
 var presentation_audio: Node
 var cancel_button: Button
+var _closing := false
 
 const FRONT := preload("res://scenes/shop_front.tscn")
 const CONSULTATION := preload("res://scenes/consultation.tscn")
@@ -42,9 +43,12 @@ var open_button: Button
 var workbench: DivinationWorkbench
 
 func _process(_delta: float) -> void:
-	GameState.pump_background_people(busy)
+	if not _closing:
+		GameState.pump_background_people(busy)
 
 func _ready() -> void:
+	get_tree().auto_accept_quit = false
+	get_tree().root.close_requested.connect(_request_close)
 	shell_config = Shell.load_config()
 	DisplayServer.window_set_min_size(Vector2i(shell_config.screen_minimum[0],shell_config.screen_minimum[1]))
 	_build_shell()
@@ -63,6 +67,34 @@ func _ready() -> void:
 	_build_people_window()
 	show_screen("exterior")
 	call_deferred("open_saves")
+
+func prepare_close_async() -> bool:
+	if _closing:
+		return false
+	_closing = true
+	GameState.cancel_dialogue()
+	if busy:
+		var close_config: Dictionary = load("res://scripts/audio/shop_audio.gd").load_config()
+		if close_config.is_empty():
+			_closing = false
+			return false
+		var deadline := Time.get_ticks_usec() + int(float(close_config.shutdown_timeout_seconds) * 1000000.0)
+		while busy and Time.get_ticks_usec() < deadline:
+			for frame: int in range(int(close_config.shutdown_poll_frames)):
+				await get_tree().process_frame
+		if busy:
+			_closing = false
+			show_notice(close_config.labels.close_failed)
+			return false
+	if is_instance_valid(presentation_audio) and not await presentation_audio.shutdown_async():
+		_closing = false
+		show_notice(presentation_audio.config.labels.shutdown_failed)
+		return false
+	return true
+
+func _request_close() -> void:
+	if not _closing and await prepare_close_async():
+		get_tree().quit()
 
 func _build_shell() -> void:
 	scene_holder = Control.new()
@@ -193,7 +225,7 @@ func _refresh() -> void:
 		presentation_audio.transition(current_screen,int(snapshot.get("clock_minutes",0)))
 
 func run_action(action_type: String, extra: Dictionary = {}) -> Dictionary:
-	if busy:
+	if busy or _closing:
 		return {"success": false, "error_code": "BUSY", "message": "正在处理，请稍候。"}
 	busy = true
 	cancel_button.visible = action_type == "talk"

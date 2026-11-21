@@ -132,6 +132,7 @@ func run() -> void:
 	main.workbench.hide()
 	await exercise_methods()
 	await exercise_comparison()
+	await UITeardown.release_audio(main)
 	main.queue_free()
 	await settle()
 	print("UI_SMOKE: %d checks, %d failures; captures: %s" % [checks, failures, ", ".join(captured)])

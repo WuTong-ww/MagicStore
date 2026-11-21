@@ -169,6 +169,7 @@ func run() -> void:
 	check(game.snapshot() == without_queue, "empty front cannot bypass A admission")
 	await check_zero_guest_front()
 	print("C UI RESULT: %d checks, %d failures, %d graphical captures; renderer=%s" % [checks, failures, captures, DisplayServer.get_name()])
+	await UITeardown.release_audio(main)
 	main.queue_free()
 	await settle()
 	await UITeardown.drain(self)

@@ -67,14 +67,9 @@ func run() -> void:
 	check(paper.get_font("normal_font", "Dialogue").resource_path.ends_with("LXGWWenKai-Regular.ttf"), "dialogue uses WenKai")
 	var button_font: Font = paper.get_font("font", "Button")
 	check(button_font is FontVariation and button_font.base_font.resource_path.ends_with("NotoSansSC.ttf") and button_font.variation_opentype.get(2003265652) == 400.0, "buttons use Noto Sans at regular weight")
-	audio._stop_music()
-	for player: AudioStreamPlayer in audio.ui_players:
-		player.stop()
-	await create_timer(0.1).timeout
+	check(await audio.shutdown_async(), "audio releases mixer-owned handles before scene teardown")
 	audio.queue_free()
 	await process_frame
-	# Let the audio mixer release stopped playback handles before SceneTree quits.
-	await create_timer(0.1).timeout
 	finish()
 
 func finish() -> void:

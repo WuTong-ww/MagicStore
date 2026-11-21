@@ -417,7 +417,7 @@
           {
             "kind": "referral",
             "amount": 1,
-            "template": "ordinary",
+            "target_npc_id": "npc_lin_friend",
             "when": {
               "evaluation": "aligned",
               "outcome_id": "sent"

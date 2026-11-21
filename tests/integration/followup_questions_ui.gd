@@ -173,6 +173,7 @@ func run() -> void:
 	rows = game.conversation_questions()
 	check(rows.size() <= 3 and rows.all(func(row: Dictionary) -> bool: return row.enabled) and screen.questions.get_child_count() == rows.size(),"offline new visitor uses only current available local fallbacks")
 	print("FOLLOWUP QUESTIONS UI: %d checks, %d failures; renderer=%s captures=%d" % [checks,failures,DisplayServer.get_name(),captures])
+	await UITeardown.release_audio(main)
 	main.queue_free()
 	host.queue_free()
 	await settle()

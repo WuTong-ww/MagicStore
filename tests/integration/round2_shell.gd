@@ -64,6 +64,7 @@ func run() -> void:
 		check(viewport.encloses(main.screen.send_button.get_global_rect()),"consultation send button fits window / "+str(dimensions))
 		await capture("consultation-active-"+str(dimensions.x)+"x"+str(dimensions.y))
 	print("ROUND2 SHELL RESULT: %d checks, %d failures, %d graphical captures; renderer=%s" % [checks,failures,captures,DisplayServer.get_name()])
+	await UITeardown.release_audio(main)
 	main.queue_free()
 	await settle()
 	await UITeardown.drain(self)

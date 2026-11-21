@@ -186,6 +186,7 @@ func front_wait_ui() -> void:
 	var closed_snapshot: Dictionary = game.snapshot()
 	await main.screen._wait_for_guest()
 	check(game.snapshot() == closed_snapshot,"stale wait callback at closing cannot mutate the save")
+	await UITeardown.release_audio(main)
 	main.queue_free()
 	await process_frame
 

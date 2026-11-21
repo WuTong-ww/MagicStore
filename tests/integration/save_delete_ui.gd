@@ -97,6 +97,7 @@ func run() -> void:
 	var fresh: Dictionary = await main.run_action("new_game", {"name": "删除之后的新店铺"})
 	check(fresh.get("success", false) and not game.snapshot().is_empty() and not main.save_window.visible, "new store can be created immediately after deletion")
 	print("SAVE DELETE UI: %d checks, %d failures, %d graphical captures" % [checks,failures,captures])
+	await UITeardown.release_audio(main)
 	main.queue_free()
 	await settle()
 	await UITeardown.drain(self)

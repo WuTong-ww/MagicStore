@@ -80,6 +80,7 @@ func run() -> void:
 	await check_popups()
 	await check_drawer()
 	await check_cancel()
+	await UITeardown.release_audio(main)
 	main.queue_free()
 	await settle()
 	print("ROUND2 SHELL EDGES: %d checks, %d failures" % [checks, failures])

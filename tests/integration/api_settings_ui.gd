@@ -164,6 +164,7 @@ func find_node(node: Node, predicate: Callable) -> Node:
 
 func finish() -> void:
 	print("API SETTINGS UI: %d checks, %d failures; renderer=%s captures=%d" % [checks,failures,DisplayServer.get_name(),captures])
+	await UITeardown.release_audio(main)
 	main.queue_free()
 	await UITeardown.drain(self)
 	quit(0 if failures == 0 else 1)

@@ -56,6 +56,7 @@ func run() -> void:
 	for dimensions: Vector2i in SIZES:
 		await inspect_notebook(origin,dimensions,true)
 	print("EVENT NOTEBOOK UI: %d checks, %d failures, %d graphical captures; renderer=%s" % [checks,failures,captures,DisplayServer.get_name()])
+	await UITeardown.release_audio(main)
 	main.queue_free()
 	await settle()
 	await UITeardown.drain(self)

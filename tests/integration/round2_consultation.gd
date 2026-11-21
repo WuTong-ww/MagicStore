@@ -61,6 +61,7 @@ func run() -> void:
 		var guest_bubble: String = main.screen.history_bbcode([{ "speaker":"npc", "text":"记下一条新线索。" }], {"npc_id":"npc_lin", "name":"林照晚"}, main.screen.load_layout_config(), 0)
 		check(guest_bubble.contains("[left]") and guest_bubble.contains("[img=") and guest_bubble.contains("〔新线索〕"), "guest bubble contains portrait and earned-clue stamp")
 		label.queue_free()
+	await UITeardown.release_audio(main)
 	main.queue_free()
 	await settle()
 	print("ROUND2 CONSULTATION: %d checks, %d failures" % [checks,failures])

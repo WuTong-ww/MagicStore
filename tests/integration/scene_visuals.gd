@@ -200,6 +200,7 @@ func check_runtime(config: Dictionary) -> void:
 		main.show_screen("exterior")
 		await settle()
 		check(game.snapshot() == committed and main.screen.scene_visual.current_period == "night","render-only fixture restores committed clock and night artwork")
+	await UITeardown.release_audio(main)
 	main.queue_free()
 	await settle()
 

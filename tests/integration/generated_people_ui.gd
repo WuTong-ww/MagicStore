@@ -99,6 +99,7 @@ func run() -> void:
 		main.people_window.hide()
 		check((await main.run_action("end_visit")).success,"end isolated reception")
 	print("GENERATED PEOPLE UI: %d checks, %d failures; renderer=%s" % [checks,failures,DisplayServer.get_name()])
+	await UITeardown.release_audio(main)
 	main.queue_free()
 	await settle()
 	await UITeardown.drain(self)

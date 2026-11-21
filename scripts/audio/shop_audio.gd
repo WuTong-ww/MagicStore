@@ -10,15 +10,19 @@ var ui_players: Array[AudioStreamPlayer] = []
 var active_player := -1
 var next_voice := 0
 var fade: Tween
+var _shutting_down := false
+var _playbacks: Array[WeakRef] = []
 
 static func config_valid(data: Dictionary) -> bool:
 	if data.get("version") != 1:
 		return false
-	for key: String in ["day_minute", "night_minute", "minutes_per_day", "crossfade_seconds", "ui_voices"]:
+	for key: String in ["day_minute", "night_minute", "minutes_per_day", "crossfade_seconds", "ui_voices", "shutdown_timeout_seconds", "shutdown_poll_frames"]:
 		var value: Variant = data.get(key)
 		if not (value is int or value is float) or not is_finite(float(value)) or value <= 0:
 			return false
 	if not (data.day_minute < data.night_minute and data.night_minute < data.minutes_per_day) or data.ui_voices != floor(float(data.ui_voices)):
+		return false
+	if data.shutdown_poll_frames != floor(float(data.shutdown_poll_frames)):
 		return false
 	if not data.get("silence_db") is float and not data.get("silence_db") is int:
 		return false
@@ -29,6 +33,9 @@ static func config_valid(data: Dictionary) -> bool:
 			return false
 	for key: String in ["music", "ui"]:
 		if not _valid_volume(data.defaults.get(key)) or not data.labels.get(key) is String or data.labels[key].is_empty():
+			return false
+	for key: String in ["shutdown_failed","close_failed"]:
+		if not data.labels.get(key) is String or data.labels[key].is_empty():
 			return false
 	for key: String in ["day", "night", "consultation"]:
 		var row: Variant = data.tracks.get(key)
@@ -117,7 +124,7 @@ func _apply_volume() -> void:
 			AudioServer.set_bus_volume_db(index, linear_to_db(value) if value > 0 else float(config.silence_db))
 
 func transition(page: String, clock_minutes: int) -> void:
-	if config.is_empty() or music_players.is_empty():
+	if _shutting_down or config.is_empty() or music_players.is_empty():
 		return
 	var key := music_key(config, page, clock_minutes)
 	if key == current_music:
@@ -142,6 +149,7 @@ func transition(page: String, clock_minutes: int) -> void:
 		next.stream.loop = true
 	next.volume_db = float(config.silence_db)
 	next.play()
+	_remember_playback(next)
 	fade.tween_property(next, "volume_db", 0.0, float(config.crossfade_seconds))
 	if previous >= 0:
 		var old: AudioStreamPlayer = music_players[previous]
@@ -153,14 +161,50 @@ func _stop_music() -> void:
 		player.stop()
 
 func _exit_tree() -> void:
+	_stop_players()
+
+func _remember_playback(player: AudioStreamPlayer) -> void:
+	# Also retain weak observations of voices recycled earlier in this scene.
+	# AudioServer can still own those handles after the player drops its Ref.
+	_playbacks = _playbacks.filter(func(handle: WeakRef) -> bool: return handle.get_ref() != null)
+	if player.has_stream_playback():
+		_playbacks.append(weakref(player.get_stream_playback()))
+
+func playback_handles() -> Array[WeakRef]:
+	return _playbacks.duplicate()
+
+func _stop_players() -> void:
+	_shutting_down = true
 	if fade != null and fade.is_running():
 		fade.kill()
 	for player: AudioStreamPlayer in music_players + ui_players:
+		_remember_playback(player)
 		player.stop()
 		player.stream = null
+	active_player = -1
+
+func _pending_playbacks() -> int:
+	# Do not hold a playback Ref in the suspended coroutine's locals. This
+	# synchronous helper releases get_ref() temporaries before the next await.
+	var count := 0
+	for handle: WeakRef in _playbacks:
+		if handle.get_ref() != null:
+			count += 1
+	return count
+
+func shutdown_async() -> bool:
+	_stop_players()
+	if config.is_empty():
+		return _pending_playbacks() == 0
+	var deadline := Time.get_ticks_usec() + int(float(config.shutdown_timeout_seconds) * 1000000.0)
+	while _pending_playbacks() > 0 and Time.get_ticks_usec() < deadline:
+		for frame: int in range(int(config.shutdown_poll_frames)):
+			await get_tree().process_frame
+	# Time is only a failure bound. Success requires observed mixer release.
+	return _pending_playbacks() == 0
 
 func play_ui(key: String = "click") -> void:
-	if config.is_empty() or ui_players.is_empty() or not config.sounds.has(key):
+	if _shutting_down or config.is_empty() or ui_players.is_empty() or not config.sounds.has(key):
 		return
 	var path: String = config.sounds[key]
 	if not ResourceLoader.exists(path):
@@ -169,6 +213,7 @@ func play_ui(key: String = "click") -> void:
 	next_voice = (next_voice + 1) % ui_players.size()
 	player.stream = load(path)
 	player.play()
+	_remember_playback(player)
 
 func add_settings_controls(parent: VBoxContainer) -> void:
 	for channel: String in ["music", "ui"]:
