@@ -1,6 +1,6 @@
 # codex/round2-clean 上传状态
 
-2026-11-21按用户指令从main e27441b重建；已普通Git推送codex/round2-clean（135c26f）。旧远端codex/round2（18da84a）保持不动，本地备份codex/round2-backup-20261121。远端main核验仍为e27441b。
+2026-11-21按用户指令从main e27441b重建；已普通Git推送codex/round2-clean（最新任务提交059baeb，A1R v3）。旧远端codex/round2（18da84a）保持不动，本地备份codex/round2-backup-20261121。远端main核验仍为e27441b。
 
 只取用代码、测试、数据、文字证据、字体音效和正式v2/runtime/v2。被否决的绘本图、incoming、中间物与大批PNG截图不进入新提交。截图只用质量85的JPG，每任务最多6张。Manifest目标<500KB，逐层审计JSONL仅本地。
 
@@ -98,3 +98,5 @@ size-garbage: 15.24 MiB
 ```
 
 本快照先于本段及小型文本报告的暂存，二进制字节不会因这些文本追加变化。不删除旧远端round2，尚未释放其空间。
+
+A1R实际提交059baeb已普通Git推送成功（origin/codex/round2-clean从523692d前进到059baeb）。未使用LFS，未改main或旧round2。
