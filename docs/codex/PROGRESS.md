@@ -1,6 +1,6 @@
 # 第二轮 v3 续跑进度
 
-最新恢复点：2026-11-22，分支 `codex/round2-clean`，A7任务提交 `c2c37eb`。本文件只列当前状态，重建过程旧记录在 `history/clean-rebuild-progress-20261122.md`，不得据旧运行中session重复启动任务。
+最新恢复点：2026-11-22，分支 `codex/round2-clean`，A6任务提交 `fb43344`。本文件只列当前状态，重建过程旧记录在 `history/clean-rebuild-progress-20261122.md`，不得据旧运行中session重复启动任务。
 
 任务ID｜状态｜提交｜一句话说明
 ---｜---｜---｜---
@@ -10,6 +10,7 @@ A3R收尾｜部分完成｜7f7a8c3｜四项程序修复；完整8077/8077；51�
 A1R v3｜部分完成｜059baeb｜17态C与六层实图正式接入，完整8362/8362、62帧审阅；缺失分层和后续物品/头像依赖如实保留。
 A2R v3｜部分完成｜2773499｜九件18图去背及来源验收通过，完整8555/8555，44帧审阅；旧架子/A4跨任务项保留。
 A7｜部分完成｜c2c37eb｜原生层板替代木箱、确定布局/交互/去重信号；完整9154/9154，47帧及12接触诊断已审，旧人物十项留A4。
+A6｜部分完成｜fb43344｜风场/弹簧/正式流水/货架/保存后事件与设置；完整9653/9653，最终508和4pair+8control、53帧已审；前台动层/铃音/严格帧时未完成。
 
 ## A1R v3 已提交并推送
 
@@ -50,12 +51,12 @@ A4 v3 → G2（仅框架/占位家族）→ G4 → G5 → G6。每任务最多3�
 - 下一个未处理任务是A6。预检已写本地.tools/art/a6-preflight.md（24123B），尚未实施A6，也未新建A6计划。可用真实Li仅六张：S03sofa静态遮挡、S04closeddoor静态、S07water flow；S02无动层，不可摇全C冒充风铃/花束/帘幕。A6应安全跳过缺层并列部分完成，继续做风场/弹簧/货架/流水/保存后信号/减少动态/性能与MovieMaker。
 - 当前无full或GPU测试进程。下一步推送c2c37eb及本进度META，然后读A6章节写计划，按原顺序继续，不重复A2R/A7。
 
-## A6 最终验收完成，待登记实际提交
+## A6 最终验收已提交
 
 - 第3轮full9653/9653（Godot9372/gateway94/art187），exit0、0ERROR/WARNING，所有进程已收terminal。不要重跑full或poll17865旧session。
 - Wind100、事务事件277、motion49headless/82GUI、设置31、性能schema24、preview schema7强制入口。旧A1R断言现验声明sway材质，同时保留四尺寸cover/pivot/零rotation；79/79。
 - 正式preview第1轮岸环失败后修近远8邻/双相滚动；第2/3轮508/508及4pair+8control通过。最终34PNG与root已看round2 SHA全相同，另根已看14技术图、六JPG、五录像关键帧、7个shopchanged；53窗口/关键帧通用245/265，其余旧帧严格SHA继承。
 - 录像第3次独立AVI600帧/1920/60/10秒，WinRT MP4 15,308,798B，独立stsz/stts600/10秒；不冒称完整H264解码。首帧文字渐显、旧NPC/人物列表/问号装饰等不通过留后续。
 - 性能两轮IrisXe实测63/1、70/1均false，原1800行CSV/JSON保留，≤2ms与每帧60fps尖峰未达标。缺前台Li/铃音、production粒子区空，故A6部分完成。完整代码与进度不是外部原因卡死，继续第二阶段。
-- 新增二进制16,869,797B只六JPG+一MP4，manifest305473B、56v2 SHA不变。计划/逐项矩阵/results/features/ART_PIPELINE齐；A6任务提交后META写实际hash并普通Git推送clean。
+- 新增二进制16,869,797B只六JPG+一MP4，manifest305473B、56v2 SHA不变。计划/逐项矩阵/results/features/ART_PIPELINE齐；实际A6提交fb43344，普通Git推送clean。
 - 下一未开始任务 **A4 v3**。只读预检.tools/art/a4-preflight.md已写：schema6/身份哈希迁移、五态mood审核全链、139部件+人台、现代小镇居民与左上暖光、regen显式portrait组。先读手册A4和style_v3，写正式计划后实施，再G2→G4→G5→G6。当前未到最终审阅包停止条件。
