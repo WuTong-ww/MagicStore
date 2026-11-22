@@ -20,7 +20,9 @@ const ICONS := {"restorative_draught":0,"clarity_crystal":1,"calming_incense":2,
 const SceneArt = preload("res://scripts/shop/scene_visual.gd")
 const ItemArt = preload("res://scripts/shop/item_visual.gd")
 var scene_visual: Control
-var inventory_grid: GridContainer
+var shelf_view: Control
+var selected_inventory_item := ""
+const ShelfView = preload("res://scripts/shop/shelf_view.gd")
 var side_panel: PanelContainer
 var drawer: Control
 
@@ -33,7 +35,6 @@ func _ready() -> void:
 	scene_visual.setup(page)
 	if page == "inventory":
 		scene_visual.hotspot("cabinet",_toggle_cabinet)
-		scene_visual.resized.connect(_size_inventory_cells)
 	drawer = preload("res://scripts/ui/paper_drawer.gd").new()
 	drawer.name = "SceneControls"
 	add_child(drawer)
@@ -57,14 +58,12 @@ func refresh() -> void:
 	for child: Node in body.get_children():
 		body.remove_child(child)
 		child.queue_free()
-	if is_instance_valid(inventory_grid):
-		scene_visual.remove_child(inventory_grid)
-		inventory_grid.queue_free()
-	inventory_grid = null
 	text(TITLES.get(page, "店铺"), 26)
 	scene_visual.refresh()
 	var view: Dictionary = GameState.shop_view()
 	if view.is_empty():
+		if is_instance_valid(shelf_view):
+			shelf_view.update_inventory({},GameState.player_snapshot(),false)
 		text("请先打开存档簿，新建或继续经营。")
 		return
 	match page:
@@ -91,9 +90,17 @@ func _toggle_cabinet() -> void:
 	refresh()
 
 func _inventory(view: Dictionary) -> void:
+	if not SceneArt.config_valid(visuals):
+		if is_instance_valid(shelf_view):
+			shelf_view.update_inventory({},GameState.player_snapshot(),false)
+		var unavailable := UI.label(str(ItemArt.load_settings().shelf_unavailable),18)
+		unavailable.name = "ShelfUnavailable"
+		body.add_child(unavailable)
+		return
 	text("口碑 %d · 经营经验 %d · 复盘成长 %d · 当前客流加成 %d" % [view.shop.reputation, view.shop.experience, view.shop.review_growth, view.arrival_bonus])
 	scene_visual.cabinet_state = "open" if cabinet_open else "closed"
 	scene_visual.refresh()
+	_build_inventory_shelves(view)
 	button(visuals.scene_settings.cabinet_open_label if cabinet_open else visuals.scene_settings.cabinet_closed_label,_toggle_cabinet)
 	if not cabinet_open:
 		text("柜门已经合上。打开后可查看商品、原料、来源与用途。", 16)
@@ -110,18 +117,28 @@ func _inventory(view: Dictionary) -> void:
 		inventory_filter = str(filter.get_item_metadata(index))
 		refresh())
 	body.add_child(filter)
-	_build_inventory_grid(view)
+	var shelf_labels: Dictionary = visuals.scenes.S04.shelf_layout.labels
+	if not selected_inventory_item.is_empty() and int(view.items.get(selected_inventory_item,0)) <= 0:
+		selected_inventory_item = ""
+	if not selected_inventory_item.is_empty():
+		text(str(shelf_labels.details_heading),20)
+		_inventory_item_actions(view,selected_inventory_item)
+		text(str(shelf_labels.all_items_heading),20)
+	if not shelf_view.layout_result.get("overflow",[]).is_empty():
+		text(str(shelf_labels.overflow_heading),20)
+		for overflow_id: String in shelf_view.layout_result.overflow:
+			if overflow_id != selected_inventory_item:
+				_inventory_item_actions(view,overflow_id)
+		text(str(shelf_labels.all_items_heading),20)
 	for id: String in view.items:
-		var item: Dictionary = view.catalog.items.get(id, {"name": {"bookmark":"纸纹书签","silver_leaf":"银叶书夹"}.get(id, id)})
+		if int(view.items[id]) <= 0:
+			continue
+		var item: Dictionary = view.catalog.items.get(id,{})
 		if inventory_filter != "all" and item.get("kind", "") != inventory_filter:
 			continue
-		var row := _item_row(id, "%s × %d" % [item.name, view.items[id]])
-		if item.get("kind") == "material":
-			row.add_child(UI.button("出售一份", func(): await act("sell_material", {"item_id":id})))
-		elif item.get("kind") == "product":
-			row.add_child(UI.button("出售给当前来客", func(): await act("sell_product", {"item_id":id})))
-			if item.effect.kind != "event":
-				row.add_child(UI.button("店长使用", func(): await act("use_product", {"item_id":id})))
+		if id == selected_inventory_item or id in shelf_view.layout_result.get("overflow",[]):
+			continue
+		_inventory_item_actions(view,id)
 	for entry: Dictionary in view.shop.ledger:
 		if entry.category == "product" and not entry.result.get("used", false):
 			var sale: Dictionary = entry.result
@@ -283,76 +300,36 @@ func _item_row(id: String, label: String) -> HBoxContainer:
 	group.add_child(actions)
 	return actions
 
-func _build_inventory_grid(view: Dictionary) -> void:
-	var settings: Dictionary = visuals.scene_settings
-	inventory_grid = GridContainer.new()
-	inventory_grid.name = "InventoryGrid"
-	inventory_grid.columns = int(settings.inventory_columns)
-	inventory_grid.resized.connect(_size_inventory_cells)
-	inventory_grid.add_theme_constant_override("h_separation",int(settings.inventory_grid_gap))
-	inventory_grid.add_theme_constant_override("v_separation",int(settings.inventory_grid_gap))
-	scene_visual.add_child(inventory_grid)
-	if visuals.scene_settings.version == 3:
-		inventory_grid.z_index = scene_visual.interaction_z_index()
-	scene_visual.place(inventory_grid,settings.inventory_rect)
-	var slot: Dictionary = visuals.scenes[visuals.scene_pages[page]].layers.slot
-	for id: String in view.items:
-		var item: Dictionary = view.catalog.items.get(id,{"name":settings.inventory_names.get(id,id)})
-		if inventory_filter != "all" and item.get("kind", "") != inventory_filter:
-			continue
-		var cell := Control.new()
-		cell.name = "InventoryCell_"+id
-		cell.size_flags_horizontal = Control.SIZE_FILL
-		cell.size_flags_vertical = Control.SIZE_FILL
-		inventory_grid.add_child(cell)
-		var backing := TextureRect.new()
-		backing.texture = SceneArt.texture_for(slot.path,slot.get("source_region",[]))
-		backing.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		backing.stretch_mode = TextureRect.STRETCH_SCALE
-		backing.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		cell.add_child(backing)
-		backing.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-		var icon := TextureRect.new()
-		icon.name = "ItemIcon"
-		icon.texture = _item_texture(id,false)
-		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		cell.add_child(icon)
-		icon.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-		icon.anchor_bottom = float(settings.inventory_icon_end)
-		var details := HBoxContainer.new()
-		details.name = "ItemDetails"
-		details.add_theme_constant_override("separation",int(settings.inventory_detail_gap))
-		cell.add_child(details)
-		details.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-		details.anchor_top = float(settings.inventory_icon_end)
-		var name_label := UI.label(item.name,int(settings.inventory_name_size))
-		name_label.name = "ItemName"
-		name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		name_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		name_label.autowrap_mode = TextServer.AUTOWRAP_OFF
-		name_label.clip_text = true
-		details.add_child(name_label)
-		var quantity := UI.label(str(settings.quantity_format)%int(view.items[id]),int(settings.inventory_quantity_size))
-		quantity.name = "ItemQuantity"
-		quantity.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		quantity.autowrap_mode = TextServer.AUTOWRAP_OFF
-		details.add_child(quantity)
-	_size_inventory_cells()
-
-func _size_inventory_cells() -> void:
-	if not is_instance_valid(inventory_grid) or visuals.is_empty():
+func _inventory_item_actions(view: Dictionary, id: String) -> void:
+	if int(view.items.get(id,0)) <= 0:
 		return
-	var settings: Dictionary = visuals.scene_settings
-	var available: Vector2 = scene_visual.projected_rect(settings.inventory_rect).size
-	var gap := float(settings.inventory_grid_gap)
-	var columns := int(settings.inventory_columns)
-	var rows := int(settings.inventory_rows)
-	var cell_size := Vector2(floorf((available.x-gap*(columns-1))/columns),floorf((available.y-gap*(rows-1))/rows)).max(Vector2.ZERO)
-	for cell: Control in inventory_grid.get_children():
-		cell.custom_minimum_size = cell_size
-	inventory_grid.size = available
+	var item: Dictionary = view.catalog.items.get(id,{})
+	var item_name := ItemArt.name_for(visuals,id,view.catalog.items)
+	var row := _item_row(id,"%s × %d" % [item_name,int(view.items.get(id,0))])
+	if item.get("kind") == "material":
+		row.add_child(UI.button("出售一份",func(): await act("sell_material",{"item_id":id})))
+	elif item.get("kind") == "product":
+		row.add_child(UI.button("出售给当前来客",func(): await act("sell_product",{"item_id":id})))
+		if item.get("effect",{}).get("kind") != "event":
+			row.add_child(UI.button("店长使用",func(): await act("use_product",{"item_id":id})))
+
+func _build_inventory_shelves(view: Dictionary) -> void:
+	if not is_instance_valid(shelf_view):
+		shelf_view = ShelfView.new()
+		shelf_view.name = "InventoryShelves"
+		scene_visual.add_child(shelf_view)
+		shelf_view.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		shelf_view.z_index = scene_visual.interaction_z_index()
+		shelf_view.item_selected.connect(_on_shelf_item_selected)
+		shelf_view.setup(scene_visual,visuals)
+	elif shelf_view.visuals != visuals:
+		shelf_view.setup(scene_visual,visuals)
+	shelf_view.update_inventory(view,GameState.player_snapshot(),cabinet_open)
+
+func _on_shelf_item_selected(item_id: String) -> void:
+	selected_inventory_item = item_id
+	drawer.set_expanded(true)
+	refresh()
 
 func text(value: String, size: int = 18) -> void:
 	body.add_child(UI.label(value,size))

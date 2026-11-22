@@ -1,6 +1,7 @@
 class_name SceneVisual
 extends Control
 ## Presentation only: reads the committed public snapshot, never advances time.
+const ShelfLayout = preload("res://scripts/shop/shelf_layout.gd")
 const CONFIG_PATH := "res://data/shop/visuals.json"
 const HOTSPOT_SETTINGS_PATH := "res://data/ui/hotspots.json"
 const UI = preload("res://scripts/ui/ui_kit.gd")
@@ -215,8 +216,19 @@ static func config_valid(data: Dictionary) -> bool:
 					return false
 		if aligned and id == "S03" and not scene.layers.has("sofa_mask"):
 			return false
+		if scene.has("shelves") or scene.has("shelf_layout"):
+			var shelf_options: Variant = scene.get("shelf_layout")
+			if not shelf_options is Dictionary:
+				return false
+			var shelf_labels: Variant = shelf_options.get("labels")
+			if not shelf_labels is Dictionary or not ["details_heading","all_items_heading","overflow_heading"].all(func(key: String) -> bool: return shelf_labels.get(key) is String and not shelf_labels[key].strip_edges().is_empty()):
+				return false
+			if id != "S04" or not data.get("items") is Dictionary or not ShelfLayout.settings_valid(scene,data.items) or scene.layers.has("slot"):
+				return false
 		if aligned and id == "S04":
-			if not scene.layers.has("slot") or scene.layers.slot.get("legacy") != true or not scene.layers.has("door_open") or not scene.layers.has("door_closed"):
+			if not scene.layers.has("door_open") or not scene.layers.has("door_closed"):
+				return false
+			if not scene.has("shelves") and (not scene.layers.has("slot") or scene.layers.slot.get("legacy") != true):
 				return false
 			if scene.layers.door_open.get("state") != "open" or scene.layers.door_closed.get("state") != "closed":
 				return false
@@ -335,6 +347,16 @@ func projected_rect(rectangle: Array) -> Rect2:
 	var fitted := cover_rect(size,canvas)
 	var factor := fitted.size.x/canvas.x
 	return Rect2(fitted.position+Vector2(rectangle[0],rectangle[1])*factor,Vector2(rectangle[2],rectangle[3])*factor)
+
+## Native scene calibration follows the same crop and cover projection as C.
+func native_point(point: Vector2, native_size: Array, source_crop: Array) -> Vector2:
+	var crop: Array = source_crop if not source_crop.is_empty() else [0.0,0.0,float(native_size[0]),float(native_size[1])]
+	var canvas: Array = config.scene_settings.canvas
+	var logical := Vector2((point.x-float(crop[0]))/float(crop[2]-crop[0])*float(canvas[0]),(point.y-float(crop[1]))/float(crop[3]-crop[1])*float(canvas[1]))
+	return projected_rect([logical.x,logical.y,1.0,1.0]).position
+
+func native_scale(native_size: Array, source_crop: Array) -> float:
+	return native_point(Vector2(1.0,0.0),native_size,source_crop).x-native_point(Vector2.ZERO,native_size,source_crop).x
 
 func _layout() -> void:
 	if config.is_empty():

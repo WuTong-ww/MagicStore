@@ -386,13 +386,22 @@ def build_proposals(workspace, registry, *, registry_path=None):
     review = copy.deepcopy(baseline)
     canvas = review.get("scene_settings", {}).get("canvas")
     require(real_layers.size_valid(canvas), "baseline logical canvas is invalid")
-    slot = copy.deepcopy(review.get("scenes", {}).get("S04", {}).get("layers", {}).get("slot"))
-    require(isinstance(slot, dict) and slot.get("legacy") is True and slot.get("display") == "cell", "baseline must retain explicit legacy S04 slot")
+    cabinet = review.get("scenes", {}).get("S04", {})
+    slot = copy.deepcopy(cabinet.get("layers", {}).get("slot"))
+    legacy_slot = isinstance(slot, dict) and slot.get("legacy") is True and slot.get("display") == "cell"
+    shelves, shelf_layout = cabinet.get("shelves"), cabinet.get("shelf_layout")
+    shelf_geometry = (isinstance(shelves, list) and bool(shelves) and
+                      all(isinstance(shelf, dict) and bool(shelf) for shelf in shelves) and
+                      isinstance(shelf_layout, dict) and bool(shelf_layout) and
+                      _finite_json(shelves) and _finite_json(shelf_layout))
+    require(legacy_slot or shelf_geometry,
+            "baseline must retain explicit legacy S04 slot or nonempty shelves and shelf_layout")
     for scene in SCENES:
         require(scene in review["scenes"], "baseline scene is missing: " + scene)
         review["scenes"][scene]["layers"] = {}
         review["scenes"][scene]["layer_format"] = "aligned_full_canvas"
-    review["scenes"]["S04"]["layers"]["slot"] = slot
+    if legacy_slot:
+        review["scenes"]["S04"]["layers"]["slot"] = slot
     period_order = {"day": 0, "night": 1, "closed": 2}
     selected.sort(key=lambda row: (row["entry"]["scene_id"], period_order[row["entry"]["period"]], row["entry"].get("state", "")))
     seat_transforms = {}

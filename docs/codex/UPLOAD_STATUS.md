@@ -120,3 +120,23 @@ size-garbage: 15.24 MiB
 ```
 
 本段及小型文本证据最后暂存不会改变二进制字节。未删除旧远端round2，尚未释放它占用的空间。
+
+## A7 提交前体积（2026-11-22）
+
+- 最终完整9154/9154，exit0、0错误警告；第三轮shelf940/940及shop710/710。47窗口帧通用225/235（旧人物十项留A4），12组200%接触通过；只提交六张质量85 JPG。
+- 本次新增唯一二进制 **1,452,126B**，全部六JPG，小于100MB；旧slot复制到legacy但SHA与已追踪v2完全相同，Git不新增该图blob。原v2全部56文件SHA未变。
+- clean正式历史累计新增二进制 **206,212,919B**；manifest **304,408B**；禁止追踪路径0。原CLEAN脚本因累计预算与历史A1R大提交仍输出FAIL，未篡改原阈值；初始CLEAN<150MB和后续>100MB检查的区别见上文。A7没有新增候选/中间PNG或视频。
+- 证据：results/A7-size-inspection.json；原完整报告只本地.tools/clean-rebuild/A7-size.json。下列本地对象包含旧备份，不是本次上传流量。
+
+```text
+count: 5181
+size: 278.38 MiB
+in-pack: 4064
+packs: 2
+size-pack: 1.12 GiB
+prune-packable: 2053
+garbage: 3
+size-garbage: 15.24 MiB
+```
+
+普通Git、LFS过滤器停用；main和旧远端round2不改，旧分支空间尚未释放。此快照先于小型文本追加，不影响二进制字节。

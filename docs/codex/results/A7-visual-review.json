@@ -1,0 +1,1583 @@
+{
+  "kind": "root_actual_A7_visual_review",
+  "checks": [
+    "全屏铺满",
+    "文字完整",
+    "古纸长文",
+    "无烘焙字",
+    "同光同笔触"
+  ],
+  "raw_frames": 41,
+  "selected_jpg_frames": 6,
+  "inherited_exact_shop_frames": 20,
+  "inherited_exact_preview_frames": 18,
+  "passed_checks": 225,
+  "total_checks": 235,
+  "frames": [
+    {
+      "path": ".tools/art/previews/A7/v3/cabinet-render-only-0-day-1280x720.png",
+      "sha256": "580328840da2383dbc3e9443eccb18d8490803584d5dd3dd45a6b3ca9a4410f4",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光物品与木柜同向，底边落板，柔接触阴影和8%纸纹统一笔触；F3仅调试线"
+        }
+      ],
+      "reviewer": "root actual round2 opened + final round3 identical SHA verified",
+      "mode": "read_only_inventory_and_lighting_fixture"
+    },
+    {
+      "path": ".tools/art/previews/A7/v3/cabinet-render-only-1-day-1280x720.png",
+      "sha256": "e5357043a1b8141050c18f87adf062df64340870c753e716913b0232578272e5",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光物品与木柜同向，底边落板，柔接触阴影和8%纸纹统一笔触；F3仅调试线"
+        }
+      ],
+      "reviewer": "root actual round2 opened + final round3 identical SHA verified",
+      "mode": "read_only_inventory_and_lighting_fixture"
+    },
+    {
+      "path": ".tools/art/previews/A7/v3/cabinet-render-only-9-day-1280x720.png",
+      "sha256": "67f6fe6e268b8f65586138abe7714dabb5ce656eb1c0e70f0dc1deb9a08e2d60",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光物品与木柜同向，底边落板，柔接触阴影和8%纸纹统一笔触；F3仅调试线"
+        }
+      ],
+      "reviewer": "root actual round2 opened + final round3 identical SHA verified",
+      "mode": "read_only_inventory_and_lighting_fixture"
+    },
+    {
+      "path": ".tools/art/previews/A7/v3/cabinet-render-only-30-day-1280x720.png",
+      "sha256": "d82cf604766b0fdeed1ab0d4ee825f18af1a04cf0a983fec4496d5fc7a9ee05f",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光物品与木柜同向，底边落板，柔接触阴影和8%纸纹统一笔触；F3仅调试线"
+        }
+      ],
+      "reviewer": "root actual round2 opened + final round3 identical SHA verified",
+      "mode": "read_only_inventory_and_lighting_fixture"
+    },
+    {
+      "path": ".tools/art/previews/A7/v3/cabinet-render-only-0-night-1280x720.png",
+      "sha256": "9ff569cfe438cb92e92c94386e05d000b04c5c9c28ea084b6e73f22f48418c6e",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "夜间上层冷暗tint、下层近灯偏暖，物品不自行发亮；底部接触阴影与8%纸纹统一笔触"
+        }
+      ],
+      "reviewer": "root actual round2 opened + final round3 identical SHA verified",
+      "mode": "read_only_inventory_and_lighting_fixture"
+    },
+    {
+      "path": ".tools/art/previews/A7/v3/cabinet-render-only-1-night-1280x720.png",
+      "sha256": "1f366d33566e380023efa111e48b059caac8db0b452dd984cafe98dc58c4ced9",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "夜间上层冷暗tint、下层近灯偏暖，物品不自行发亮；底部接触阴影与8%纸纹统一笔触"
+        }
+      ],
+      "reviewer": "root actual round2 opened + final round3 identical SHA verified",
+      "mode": "read_only_inventory_and_lighting_fixture"
+    },
+    {
+      "path": ".tools/art/previews/A7/v3/cabinet-render-only-9-night-1280x720.png",
+      "sha256": "d73564fd6d6742fa71e5ff85fa6892628f1509c2247ac2a6b532f8bc8bc008b9",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "夜间上层冷暗tint、下层近灯偏暖，物品不自行发亮；底部接触阴影与8%纸纹统一笔触"
+        }
+      ],
+      "reviewer": "root actual round2 opened + final round3 identical SHA verified",
+      "mode": "read_only_inventory_and_lighting_fixture"
+    },
+    {
+      "path": ".tools/art/previews/A7/v3/cabinet-render-only-30-night-1280x720.png",
+      "sha256": "b07e29fdd15f9d8a936da9a3251c98756e25693d32441f0ad5d076a20c5c0e12",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "夜间上层冷暗tint、下层近灯偏暖，物品不自行发亮；底部接触阴影与8%纸纹统一笔触"
+        }
+      ],
+      "reviewer": "root actual round2 opened + final round3 identical SHA verified",
+      "mode": "read_only_inventory_and_lighting_fixture"
+    },
+    {
+      "path": ".tools/art/previews/A7/v3/cabinet-render-only-0-day-1920x1080.png",
+      "sha256": "952b5e94955bf16f45b3838368bc35f5082d24e750fde3f52dc33f3ef6f75599",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光物品与木柜同向，底边落板，柔接触阴影和8%纸纹统一笔触；F3仅调试线"
+        }
+      ],
+      "reviewer": "root actual round2 opened + final round3 identical SHA verified",
+      "mode": "read_only_inventory_and_lighting_fixture"
+    },
+    {
+      "path": ".tools/art/previews/A7/v3/cabinet-render-only-1-day-1920x1080.png",
+      "sha256": "c2906494cf564a85646676a0459860fb9a9d073347ba2b81edbf917f1b1dfe41",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光物品与木柜同向，底边落板，柔接触阴影和8%纸纹统一笔触；F3仅调试线"
+        }
+      ],
+      "reviewer": "root actual round2 opened + final round3 identical SHA verified",
+      "mode": "read_only_inventory_and_lighting_fixture"
+    },
+    {
+      "path": ".tools/art/previews/A7/v3/cabinet-render-only-9-day-1920x1080.png",
+      "sha256": "c3e5909201f36030795f8fcbbd7043db5da78947ce1ca413e244698e4882b43f",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光物品与木柜同向，底边落板，柔接触阴影和8%纸纹统一笔触；F3仅调试线"
+        }
+      ],
+      "reviewer": "root actual round2 opened + final round3 identical SHA verified",
+      "mode": "read_only_inventory_and_lighting_fixture"
+    },
+    {
+      "path": ".tools/art/previews/A7/v3/cabinet-render-only-30-day-1920x1080.png",
+      "sha256": "3737050cd03091d812ef16b548f55dea619a87814ad80837cf7d30eeca16c32f",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光物品与木柜同向，底边落板，柔接触阴影和8%纸纹统一笔触；F3仅调试线"
+        }
+      ],
+      "reviewer": "root actual round2 opened + final round3 identical SHA verified",
+      "mode": "read_only_inventory_and_lighting_fixture"
+    },
+    {
+      "path": ".tools/art/previews/A7/v3/cabinet-render-only-0-night-1920x1080.png",
+      "sha256": "639a640ea0e431989aa44bf2a4ec8f9c3635b4c7c6769cb523cd873f18afdea6",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "夜间上层冷暗tint、下层近灯偏暖，物品不自行发亮；底部接触阴影与8%纸纹统一笔触"
+        }
+      ],
+      "reviewer": "root actual round2 opened + final round3 identical SHA verified",
+      "mode": "read_only_inventory_and_lighting_fixture"
+    },
+    {
+      "path": ".tools/art/previews/A7/v3/cabinet-render-only-1-night-1920x1080.png",
+      "sha256": "e6ee60513116b3c1f735e7e00977d15096eeb9b0eaefdb461828529a099aaac1",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "夜间上层冷暗tint、下层近灯偏暖，物品不自行发亮；底部接触阴影与8%纸纹统一笔触"
+        }
+      ],
+      "reviewer": "root actual round2 opened + final round3 identical SHA verified",
+      "mode": "read_only_inventory_and_lighting_fixture"
+    },
+    {
+      "path": ".tools/art/previews/A7/v3/cabinet-render-only-9-night-1920x1080.png",
+      "sha256": "d7850c6b7e9a9bdc5c1297e3cfc1c13fae9cc5ad8f87e08ef2a24bec86a49298",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "夜间上层冷暗tint、下层近灯偏暖，物品不自行发亮；底部接触阴影与8%纸纹统一笔触"
+        }
+      ],
+      "reviewer": "root actual round2 opened + final round3 identical SHA verified",
+      "mode": "read_only_inventory_and_lighting_fixture"
+    },
+    {
+      "path": ".tools/art/previews/A7/v3/cabinet-render-only-30-night-1920x1080.png",
+      "sha256": "100cb5357f535265f72cd868e5644e35f9d23f2f3c51282155f016d17fcbaf95",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "夜间上层冷暗tint、下层近灯偏暖，物品不自行发亮；底部接触阴影与8%纸纹统一笔触"
+        }
+      ],
+      "reviewer": "root actual round2 opened + final round3 identical SHA verified",
+      "mode": "read_only_inventory_and_lighting_fixture"
+    },
+    {
+      "path": ".tools/art/previews/A7/v3/cabinet-render-only-9-day-F3-1920x1080.png",
+      "sha256": "45621732b0e8bb29f7f2dff3b22e8de082956ca4b1b218f3edbbea91deb2af65",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光物品与木柜同向，底边落板，柔接触阴影和8%纸纹统一笔触；F3仅调试线"
+        }
+      ],
+      "reviewer": "root actual corrected round3 F3 opened",
+      "mode": "read_only_inventory_with_actual_debug_key"
+    },
+    {
+      "path": ".tools/art/previews/A7/v3/cabinet-render-only-9-day-hover-1920x1080.png",
+      "sha256": "006c81bca06b2cb35724089477211c497a3286e23ec6e511a555e028b36d8080",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光物品与木柜同向，底边落板，柔接触阴影和8%纸纹统一笔触；F3仅调试线"
+        }
+      ],
+      "reviewer": "root actual round2 opened + final round3 identical SHA verified",
+      "mode": "read_only_inventory_with_actual_mouse_hover"
+    },
+    {
+      "path": ".tools/art/previews/A7/v3/cabinet-actual-save-selection-1920x1080.png",
+      "sha256": "757e64f4908e763a42911c41ff7befaafd44a158597de2c44bca95434f3f06be",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光物品与木柜同向，底边落板，柔接触阴影和8%纸纹统一笔触；F3仅调试线"
+        }
+      ],
+      "reviewer": "root actual round2 opened + final round3 identical SHA verified",
+      "mode": "genuine_committed_inventory_with_actual_selection"
+    },
+    {
+      "path": ".tools/c-ui-captures/catalog-icons-64px.png",
+      "sha256": "8a801f8478443b03e61358fa15f1ad1dd5c8bebd4250739c4df99ea20f2a374f",
+      "reviewer": "root earlier actually opened in A2R/A1R; final A7 byte-identical SHA reverified",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ],
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/consultation-1280.png",
+      "sha256": "8b9604a91f754a7f068fbb691851f71a3bf878364a99314982ab7607b282bd88",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [
+        "真实无接待状态显示空沙发与还没有来客，未误放肖像。"
+      ],
+      "reviewer": "root earlier actually opened in A2R/A1R; final A7 byte-identical SHA reverified",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/consultation-1920.png",
+      "sha256": "d2093409ff6c65a10ff7886e2bf612e33aa3c02bb43ba5334e845c68190f1711",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [
+        "真实无接待状态显示空沙发与还没有来客，未误放肖像。"
+      ],
+      "reviewer": "root earlier actually opened in A2R/A1R; final A7 byte-identical SHA reverified",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/exterior-1280.png",
+      "sha256": "71f7f0aee249622789d897e22450ccefc17bd59abab91390876e132762388d52",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root earlier actually opened in A2R/A1R; final A7 byte-identical SHA reverified",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/exterior-1920.png",
+      "sha256": "9074f345e1ef3b59cda4c9875622470410392896dddde58f3d962d3f833d79e4",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root earlier actually opened in A2R/A1R; final A7 byte-identical SHA reverified",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/front-1280.png",
+      "sha256": "78e2045998dfb643688d6a4cd0b01e45c71b2d0241314e554e3ec16f8888cb2e",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "手帐内旧头像还未按v3统一，A4处理；场景本体通过"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root earlier actually opened in A2R/A1R; final A7 byte-identical SHA reverified",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/front-1920.png",
+      "sha256": "31300f69ba5e78e961a990c2dcb0d0a77aec15e89db17968fe7692c5d1d08d72",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "手帐内旧头像还未按v3统一，A4处理；场景本体通过"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root earlier actually opened in A2R/A1R; final A7 byte-identical SHA reverified",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/gathering-1280.png",
+      "sha256": "1e46b0f3e5acde8d6ce7a9d7b89e74b1fed7978207db6f42f73122864e66c77f",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root earlier actually opened in A2R/A1R; final A7 byte-identical SHA reverified",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/gathering-1920.png",
+      "sha256": "169f59c9a610ed732c8bdc74b2c6a7190fc31bf6bcfa107f8fa6681e2a163482",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root earlier actually opened in A2R/A1R; final A7 byte-identical SHA reverified",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/inventory-1280.png",
+      "sha256": "e6f3607a18545daa32ccfbee156d9c47c4b0935cbf5e343d82003dc5ebe160ed",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光物品与木柜同向，底边落板，柔接触阴影和8%纸纹统一笔触；F3仅调试线"
+        }
+      ],
+      "reviewer": "root actual final A7 shop screenshot opened"
+    },
+    {
+      "path": ".tools/c-ui-captures/inventory-1920.png",
+      "sha256": "6ae1ef315c9d819fc875b1b50b5f53b529987982603892d9dc2f30526a20f3b7",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光物品与木柜同向，底边落板，柔接触阴影和8%纸纹统一笔触；F3仅调试线"
+        }
+      ],
+      "reviewer": "root actual final A7 shop screenshot opened"
+    },
+    {
+      "path": ".tools/c-ui-captures/market-1280.png",
+      "sha256": "7d609612e3121ba78ae82281e2d1727a357c106505f2bd4245a2a5413d35b9dc",
+      "reviewer": "root earlier actually opened in A2R/A1R; final A7 byte-identical SHA reverified",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "按钮文字完整；数量标签狭窄折为两行但字未丢失，布局债已记录"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ],
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/market-1920.png",
+      "sha256": "9a31fadb1ad26004904649c2fa21d629f0feee7ce8eede19791001959a60acf7",
+      "reviewer": "root earlier actually opened in A2R/A1R; final A7 byte-identical SHA reverified",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "按钮文字完整；数量标签狭窄折为两行但字未丢失，布局债已记录"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ],
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/market-after-trade-1920.png",
+      "sha256": "7417f439b733c629cfd9a5a486a37b8afaf2e5ad5393b5868450f9c7aa684b67",
+      "reviewer": "root earlier actually opened in A2R/A1R; final A7 byte-identical SHA reverified",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "按钮文字完整；数量标签狭窄折为两行但字未丢失，布局债已记录"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ],
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/network-1280.png",
+      "sha256": "542da72b96be287674979e1da25be6411c4322e04838b9cdc9e86096c1676695",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "手帐内旧头像还未按v3统一，A4处理；场景本体通过"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root earlier actually opened in A2R/A1R; final A7 byte-identical SHA reverified",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/network-1920.png",
+      "sha256": "bc21fd507362e5914ca964c31af4cd576afda704e8be2e506690912ef664f961",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "手帐内旧头像还未按v3统一，A4处理；场景本体通过"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root earlier actually opened in A2R/A1R; final A7 byte-identical SHA reverified",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/people-1280.png",
+      "sha256": "902f9345702b72846477363b2620c70100bd6cea99147bd0efa0264b3f2b65e2",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": false,
+          "reason": "滚动区底部露出被裁按钮；窗口标题/关闭钮仍在外侧，A4整理"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": false,
+          "reason": "旧人物卡装饰内烘有问号状态符号，A4换动态控件"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧金纹纸卡与新v3场景尚未统一，A4整理"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root earlier actually opened in A2R/A1R; final A7 byte-identical SHA reverified",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/people-1920.png",
+      "sha256": "38dcfdcc898c4102d73dd4493b0f2c8a605a3608373bfd18e1332b74bbc4ced0",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": false,
+          "reason": "滚动区底部露出被裁按钮；窗口标题/关闭钮仍在外侧，A4整理"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": false,
+          "reason": "旧人物卡装饰内烘有问号状态符号，A4换动态控件"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧金纹纸卡与新v3场景尚未统一，A4整理"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root earlier actually opened in A2R/A1R; final A7 byte-identical SHA reverified",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/workshop-1280.png",
+      "sha256": "7c93b4b0ae4a693c955304f5fe8562d8b380e2dc5737212937785425e439b43e",
+      "reviewer": "root earlier actually opened in A2R/A1R; final A7 byte-identical SHA reverified",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ],
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/workshop-1920.png",
+      "sha256": "75e8bd4fc3662ada487dcc24b3b45dc200cf079f0e4d5099e1440257b1100e97",
+      "reviewer": "root earlier actually opened in A2R/A1R; final A7 byte-identical SHA reverified",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ],
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/zero-guest-front-1280.png",
+      "sha256": "d51254b075d7c2f6e297b75810de3b53cf4f7e47f6db2719af225ee86750a37c",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [
+        "零客日空下拉隐藏，去采集/研习/制作及等候操作均完整可读。"
+      ],
+      "reviewer": "root earlier actually opened in A2R/A1R; final A7 byte-identical SHA reverified",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/zero-guest-front-1920.png",
+      "sha256": "6db72069a50e78a8dd0d4b89d562b49253596276ea46cecd873801e1ff5d17a6",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [
+        "零客日空下拉隐藏，去采集/研习/制作及等候操作均完整可读。"
+      ],
+      "reviewer": "root earlier actually opened in A2R/A1R; final A7 byte-identical SHA reverified",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": "docs/screenshots/round2/A7/actual-save-selection-1920.jpg",
+      "sha256": "c9344b87a291170e2437d8bbd2c2064021d1fcfe2fb5d1deb7cc1b1b3e62e4f4",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光物品与木柜同向，底边落板，柔接触阴影和8%纸纹统一笔触；F3仅调试线"
+        }
+      ],
+      "reviewer": "root actual final quality85 JPG opened; text remains readable"
+    },
+    {
+      "path": "docs/screenshots/round2/A7/empty-night-1280.jpg",
+      "sha256": "3a2a8c58f02ce966b1eb986180d3dfc8e0662c0a447e203492b3b67adeeacddc",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "夜间上层冷暗tint、下层近灯偏暖，物品不自行发亮；底部接触阴影与8%纸纹统一笔触"
+        }
+      ],
+      "reviewer": "root actual final quality85 JPG opened; text remains readable"
+    },
+    {
+      "path": "docs/screenshots/round2/A7/nine-day-1920.jpg",
+      "sha256": "91f369b01ac91e7fe2d101b9556ea31f97f8f212571e70b51c13c6fdab425dfc",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光物品与木柜同向，底边落板，柔接触阴影和8%纸纹统一笔触；F3仅调试线"
+        }
+      ],
+      "reviewer": "root actual final quality85 JPG opened; text remains readable"
+    },
+    {
+      "path": "docs/screenshots/round2/A7/shelf-lines-F3-1920.jpg",
+      "sha256": "cde4b7e6619d9e2a7cac5ef6ca1119b8bb861ae0c6903cd40f84ecdd3e30009b",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光物品与木柜同向，底边落板，柔接触阴影和8%纸纹统一笔触；F3仅调试线"
+        }
+      ],
+      "reviewer": "root actual final quality85 JPG opened; text remains readable"
+    },
+    {
+      "path": "docs/screenshots/round2/A7/single-day-1280.jpg",
+      "sha256": "157a8888bfd83b7c98dff68748b4810069c450bd433d5e6764709255517371d8",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光物品与木柜同向，底边落板，柔接触阴影和8%纸纹统一笔触；F3仅调试线"
+        }
+      ],
+      "reviewer": "root actual final quality85 JPG opened; text remains readable"
+    },
+    {
+      "path": "docs/screenshots/round2/A7/thirty-night-1920.jpg",
+      "sha256": "e62d98685473aa33f0e4aa5be44e3e5a33cfbb10a8b911f8608963d87cc9fdd2",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "夜间上层冷暗tint、下层近灯偏暖，物品不自行发亮；底部接触阴影与8%纸纹统一笔触"
+        }
+      ],
+      "reviewer": "root actual final quality85 JPG opened; text remains readable"
+    }
+  ]
+}

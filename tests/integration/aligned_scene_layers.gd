@@ -27,6 +27,24 @@ func run() -> void:
 	var aligned := Fixture.aligned(raw)
 	check(Visual.config_valid(old),"v2 legacy slice configuration remains supported")
 	check(Visual.config_valid(aligned),"v3 accepts aligned layers without old S02/S05/S06 slice names")
+	check(not old.scenes.S04.has("shelves") and not aligned.scenes.S04.has("shelves"),"historical fixtures explicitly retain their slot contract without inheriting production shelves")
+	check(Visual.config_valid(raw) and raw.scenes.S04.get("shelves",[]) is Array and not raw.scenes.S04.get("shelves",[]).is_empty(),"active A7 source-pixel shelves validate independently of historical slot fixtures")
+	check(not raw.scenes.S04.layers.has("slot"),"active A7 configuration has no storage-box slice alias")
+	for malformed_items: Variant in [[],null,"invalid"]:
+		var bad_items := raw.duplicate(true)
+		bad_items.items = malformed_items
+		check(not Visual.config_valid(bad_items),"invalid item map type returns false before typed shelf validation")
+	for malformed_options: Variant in [[],null,"invalid"]:
+		var bad_options := raw.duplicate(true)
+		bad_options.scenes.S04.shelf_layout = malformed_options
+		check(not Visual.config_valid(bad_options),"invalid shelf options type returns false before label validation")
+	for malformed_labels: Variant in [[],null,{"details_heading":"","all_items_heading":"有效标题","overflow_heading":"有效标题"}]:
+		var bad_labels := raw.duplicate(true)
+		bad_labels.scenes.S04.shelf_layout.labels = malformed_labels
+		check(not Visual.config_valid(bad_labels),"invalid drawer label data is rejected before dynamic UI")
+	var missing_shelf_geometry := raw.duplicate(true)
+	missing_shelf_geometry.scenes.S04.erase("shelves")
+	check(not Visual.config_valid(missing_shelf_geometry),"new cabinet without either valid shelves or a legacy slot is rejected")
 	var seat_config := aligned.duplicate(true)
 	seat_config.scenes.S03["seat_compact_rect"] = [600,150,550,850]
 	seat_config.scenes.S03["seat_narrow_rect"] = [600,150,550,850]
@@ -61,7 +79,7 @@ func run() -> void:
 	check(not Visual.config_valid(invalid),"localized inventory cell must be explicitly marked legacy")
 	invalid = aligned.duplicate(true)
 	invalid.scenes.S04.layers.erase("slot")
-	check(not Visual.config_valid(invalid),"legacy inventory layout retains its slot alias until A7")
+	check(not Visual.config_valid(invalid),"historical aligned inventory without shelf geometry still requires its explicit legacy slot alias")
 	var cropped := aligned.duplicate(true)
 	cropped.scenes.S02.layers.moving_object["source_transform"] = crop_transform()
 	check(Visual.config_valid(cropped),"source cover/crop transform can declare actual variant pixels")

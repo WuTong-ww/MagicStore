@@ -1,0 +1,16 @@
+{
+  "task": "A7",
+  "pending_new_binary_bytes": 1452126,
+  "clean_history_binary_bytes": 206212919,
+  "manifest_bytes": 304408,
+  "forbidden": [],
+  "v2_original_sha_files": 56,
+  "jpg_count": 6,
+  "jpg_quality": 85,
+  "legacy_slot_blob_reused": true,
+  "original_clean_failed_checks": [
+    "new_binary_total",
+    "each_clean_commit_binary"
+  ],
+  "count_objects": "count: 5181\nsize: 278.38 MiB\nin-pack: 4064\npacks: 2\nsize-pack: 1.12 GiB\nprune-packable: 2053\ngarbage: 3\nsize-garbage: 15.24 MiB"
+}

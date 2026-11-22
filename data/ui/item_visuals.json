@@ -1,5 +1,6 @@
 {
   "version": 1,
+  "shelf_unavailable": "货架资料暂不可用，请稍后查看。",
   "large_size": [256, 256],
   "small_size": [64, 64],
   "alpha_threshold": 128,

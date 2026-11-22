@@ -137,8 +137,9 @@ changed shop frames; fourteen other shop frames matched the already-reviewed
 A1R SHA. Round1's numerical pass did not catch badge drift, so the fix has
 actual stretched-layout regression and a second graphical run. Bookmark's
 paper-strip identity and the grey-brown resin's material remain weak at
-small sizes. Old slot/GridContainer shelf placement and contact shadows
-remain A7 work; alpha success does not certify those artistic details.
+small sizes. A7 now consumes the measured support for native shelf placement
+and contact shadows; alpha success alone does not certify that visual fit
+or any A6 motion.
 
 ## Real scene processing and review
 
@@ -170,6 +171,19 @@ outputs a proposed manifest and preview only. C has its own original composite
 prompt; B_all uses cleanplate instructions and C/masks; Li is never redrawn.
 Local layer z stays inside the configured negative art-root budget so trees,
 clouds, water, and seated portraits cannot cover the paper/chrome UI.
+
+`register_real_scenes.py` accepts two baseline S04 presentation contracts:
+an explicitly legacy `layers.slot` with `legacy: true` and `display: cell`,
+or nonempty `shelves` and `shelf_layout`. It restores a slot only when that
+valid legacy slot was actually in the baseline. An A7 baseline keeps its
+native shelf geometry and nested layout parameters without resurrecting
+slot/grid presentation when the generated scene layers are merged. Missing
+both contracts, or a missing/empty half of the shelf contract, fails before
+proposal output. The registry target covers these cases and the original
+legacy-slot path (29/29); this contract check does not replace ShelfLayout's
+full geometry/configuration validation. Registration still requires its
+real local processing evidence; an old registry is not a current production
+approval or a reason to overwrite the production manifest/visuals.
 
 The detailed review and remaining edge/cleanplate defects are recorded in
 `docs/codex/plans/A1R.md`. Do not treat static recomposition success as approval
@@ -347,3 +361,72 @@ The legacy procedural resources can only serve as geometry evidence.
 ```powershell
 python -m unittest discover -s tests/art -p test_art_pipeline.py -v
 ```
+
+## A7 native shelf calibration
+
+Active S04 uses `scenes.S04.shelves` and `shelf_layout`, not the old slot or
+GridContainer. Calibration uses the unchanged 1672×941 A1R scene and crop
+`[0, 0.25, 1672, 940.75]` (edge coordinates). The four source shelf lines span
+x=278–1045 at y=238/375/486/626. The third line was corrected from 521 after
+an actual F3 overlay review showed a 35-source-pixel error. Do not copy
+coordinates from the 1920 runtime or window pixels back into this data.
+Night tints are `#858D88`, `#9A9E8D`, `#C6B99A`, `#DEC496` from top to bottom;
+they follow the displayed scene period and retain the lower warm lamp light.
+
+The 256 item support is `(bottom_left + (bottom_width - 1) / 2, bottom_y)`
+in zero-based texture pixels. Each group rotates around this bottom contact,
+not the PNG center. Its depth-scaled texture is positioned in native scene
+pixels, then mapped through the same source crop, 2560×1440 logical canvas
+and SceneVisual cover projection as the background. Gap 16–24, contact inset
+2, stack offset 10, shadow height 12 and selection lift 6 are native scene
+pixels. Stack offsets sit outside the individual texture scale and rotate
+with the group. Actual rotated alpha bounds for all copies participate in
+packing, with explicit overflow rather than overlapping a full shelf.
+
+ShelfLayout sorts product/material/keepsake, then the first historical batch
+array position (including exhausted batches), then item ID; IDs without a
+batch fall back to ID order. One ID occupies one group. Quantities 1–3 show
+that many copies, while larger quantities show three and a dynamic ×N paper
+tag. Rear copies move left/up and darken. ShelfView takes the canonical 256
+texture directly; purpose badges remain in the drawer, names appear only on
+hover, and clicking opens the existing detail/action flow. Drawer filtering
+does not reposition shelf groups. Unchanged quantities preserve placement.
+
+Contact shadows are built-in soft ellipse gradients, width 1.1×scaled measured
+bottom width, height 12, with 35% multiply opacity. Paper is built-in low-amplitude
+noise at 8% multiply, covering the artwork rather than UI. These are procedural
+rendering textures, not external images or new generated source art. Shadow
+and paper parameters live in JSON. Selection lifts the item and its mouse
+target while its shadow stays at the shelf contact; closing the cabinet hides
+the whole presentation, labels and targets included.
+
+For calibration, inspect open S04 by day and night at both 1280×720 and
+1920×1080, toggle F3, and compare each line with the actual painted contact
+edge. Check 200% contact crops as well as the full scene: a numerical layout
+pass cannot detect a line on the wrong painted board. Resize, hover and click
+must use the same projection. Keep 0/1/9/30-total-quantity fixtures render-only;
+they do not create 30 item IDs or persist fake stock. No schema change is
+needed. Added/removed presentation signals use committed save_id/state_version
+baselines: initial load/save switching is silent, failed saves and repeated
+refresh/action replay do not emit twice. Batch replacement can emit real
+same-total changes. Bottom-pivot nodes/signals are available to A6; no wind or
+spring motion is implemented by A7.
+
+Recorded targets are layout 74/74, renderer 38/38 and scene_visuals 915/915.
+The independent integration review's three P2 findings were fixed and reread
+as closed. GUI round1 failed on the metadata Control.to_global call and is
+not GREEN evidence. Round2 recorded shelf 940 checks/19 frames and shop 710
+checks/23 frames, but its F3 review exposed the third-line calibration error.
+Round3 passed shelf 940/940 (19 frames) and shop 710/710 (23 writes).
+The final post-calibration full run passed 9154/9154 (Godot 8888, gateway 94,
+art 172), exit 0 with no engine errors/warnings. Root's 47-frame review passed
+225/235 general checks and 12/12 enlarged contact checks; unrelated old
+people art/UI remain partial. See `docs/codex/plans/A7.md`. Bookmark/resin identity limits
+remain, and future taller items need a fresh shelf-clearance visual review.
+
+The original `assets/generated_scenes/v2/slices/S04_slot.png` is unchanged.
+`assets/_legacy/a7/S04_slot.png` is a same-SHA archival copy with a local
+`.gdignore`; neither is used by active shelf rendering. Calibration changes
+do not regenerate these images or the eighteen accepted A2R item PNGs.
+
+A7最终复验：第三轮GUI940/940、19帧及shop710/710；标定后完整第2轮9154/9154（Godot8888+gateway94+art172），exit0、0错误警告。47窗口帧通用225/235，12组200%接触通过；A7专项完成，全站旧人物十项未过按部分完成，详见docs/codex/plans/A7.md。

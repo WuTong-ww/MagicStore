@@ -93,6 +93,8 @@ try {
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/people_restart.gd', '--', 'read')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/shop_ui.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/item_visuals.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/shop/shelf_layout.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/shelf_render.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/scene_visuals.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/aligned_scene_layers.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/scene_asset_acceptance.gd')

@@ -250,9 +250,15 @@ func check_real_pages(config: Dictionary, settings: Dictionary) -> void:
 			var picture := wrapper.get_node("ItemIcon") as TextureRect
 			check(picture.texture != null and picture.texture.get_size() == Vector2(settings.small_size[0],settings.small_size[1]),"actual list uses 64px source / "+page+" / "+wrapper.name)
 		if page == "inventory":
-			var cell: Control = main.screen.inventory_grid.get_child(0)
-			var picture := cell.get_node("ItemIcon") as TextureRect
-			check(picture.texture != null and picture.texture.get_size() == Vector2(settings.large_size[0],settings.large_size[1]),"existing cabinet grid uses the 256px source while A7 remains separate")
+			var shelf: Control = main.screen.shelf_view
+			check(shelf != null and not shelf.layout_result.get("entries",[]).is_empty(),"actual cabinet uses the source-pixel shelf renderer")
+			if shelf != null:
+				for placed: Dictionary in shelf.layout_result.get("entries",[]):
+					var item_node: Node2D = shelf.get_item_node(placed.item_id)
+					var expected := Image.load_from_file(config.items[placed.item_id].path)
+					check(item_node != null and contains_item_pixels(item_node,expected,Vector2(settings.large_size[0],settings.large_size[1])),"actual shelf uses the supplied independent 256px pixels rather than the old atlas or production override / "+str(placed.item_id))
+					if item_node != null:
+						check(item_node.find_children("PurposeBadge_*","",true,false).is_empty(),"shelf images contain no usage-color controls / "+str(placed.item_id))
 			check(main.screen.find_children("PurposeBadge_*","",true,false).size() == 2,"product list exposes both declared purposes with UI controls")
 	check(game.snapshot() == committed,"rendering independent art changes no inventory, clock or save data")
 	check(FileAccess.get_sha256("res://data/shop/visuals.json") == production_hash,"rendering fixture items never rewrites the production mapping")
@@ -260,3 +266,24 @@ func check_real_pages(config: Dictionary, settings: Dictionary) -> void:
 	main.queue_free()
 	for frame: int in range(8):
 		await process_frame
+
+func contains_item_pixels(node: Node, expected: Image, dimensions: Vector2) -> bool:
+	if node == null or expected == null:
+		return false
+	var texture: Texture2D
+	if node is Sprite2D:
+		texture = node.texture
+	elif node is TextureRect:
+		texture = node.texture
+	if texture != null and texture.get_size().is_equal_approx(dimensions):
+		var actual := texture.get_image()
+		if actual != null:
+			actual.convert(Image.FORMAT_RGBA8)
+			var reference := expected.duplicate()
+			reference.convert(Image.FORMAT_RGBA8)
+			if actual.get_data() == reference.get_data():
+				return true
+	for child: Node in node.get_children():
+		if contains_item_pixels(child,expected,dimensions):
+			return true
+	return false

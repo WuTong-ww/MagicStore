@@ -1,0 +1,646 @@
+Command: powershell -NoProfile -ExecutionPolicy Bypass -File scripts/dev/run.ps1 -Test
+Final round2 exit=0
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started 项目初始化 (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | 正在扫描文件结构……[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | 正在加载全局类名……[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | 正在校验 GDExtension……[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | 正在创建自动加载脚本……[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | 正在初始化插件……[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | 正在启动文件扫描……[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started 正在加载编辑器 (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | 正在加载编辑器布局……[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | 正在加载停靠面板……[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS: create save
+PASS: initial resources
+PASS: unified clock starts 09:00
+PASS: start reception
+PASS: reenter retains visit
+PASS: scene return cannot multiply visits
+PASS: unfinished reception prevents next day
+PASS: configured question
+PASS: Chinese free input
+PASS: conversation discovers clue
+PASS: repeat topic permitted
+PASS: clue deduplicated
+PASS: unknown input clarifies
+PASS: clarification text stored
+PASS: failed write rejects paid result
+PASS: failed payment leaves all state unchanged and card hidden
+PASS: paid tarot succeeds
+PASS: both wallets settle together
+PASS: energy and clock settle together
+PASS: same action replay precedes stale version
+PASS: same action replay does not mutate
+PASS: new action cannot redraw same reception
+PASS: repeat payment no extra cost
+PASS: load unfinished paid reception
+PASS: reload original visit and card
+PASS: reload dialogue history
+PASS: persisted action replay after reload
+PASS: finish reception
+PASS: same-day repeat visit blocked
+PASS: rest succeeds
+PASS: rest uses unified clock and caps energy
+PASS: advance to next day 09:00
+PASS: same NPC returns next day
+PASS: stable identity new visit id
+PASS: previous record available
+PASS: reject insufficient energy
+PASS: no partial mutation for energy
+PASS: reject insufficient coins
+PASS: no partial mutation for coins
+PASS: reject insufficient time
+PASS: no partial mutation for time
+PASS: stale action rejected
+PASS: new independent save
+PASS: save isolation
+PASS: both saves retained
+PASS: switch restores original progress
+PASS: missing save keeps current state
+PASS: unsafe save id rejected
+PASS: negative wallet rejected
+PASS: invalid visit reference rejected
+PASS: corruption reported with explicit recovery
+PASS: damaged primary not silently overwritten
+PASS: backup restoration succeeds
+PASS: restored primary validates
+PASS: test removes only isolated primary
+PASS: backup-only save discoverable
+PASS: recover missing primary
+SMOKE RESULT: 57 checks, 0 failures. Isolated files: D:/MagicStore/.tools/test-appdata/ZeroHourStore/test-runs/run_7ad8064879000239830c3e9a28900192
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+DELETE SAVE: 52 checks, 0 failures; isolated files: D:/MagicStore/.tools/test-save-delete/run_d66f12aa8edbd5f31d9c5a3ecd34bdb5
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS: create isolated provider test save
+PASS: start provider test reception
+PASS: reject provider response 0
+PASS: invalid provider response 0 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 1
+PASS: invalid provider response 1 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 2
+PASS: invalid provider response 2 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 3
+PASS: invalid provider response 3 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 4
+PASS: invalid provider response 4 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 5
+PASS: invalid provider response 5 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 6
+PASS: invalid provider response 6 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 7
+PASS: invalid provider response 7 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 8
+PASS: invalid provider response 8 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 9
+PASS: invalid provider response 9 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 10
+PASS: invalid provider response 10 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 11
+PASS: invalid provider response 11 cannot mutate resources, clues, dialogue or clock
+PASS: reject provider response 12
+PASS: invalid provider response 12 cannot mutate resources, clues, dialogue or clock
+PASS: invalid provider responses leave persisted snapshot unchanged
+PASS: core deduplicates authorized provider clues
+PASS: provider text cannot change wallets or energy
+PASS: successful dialogue uses configured game time only
+PASS: provider receives structured context
+PASS: provider receives no authority or full save
+PASS: async dialogue remains pending until provider responds
+PASS: pending provider blocks synchronous state mutation
+PASS: pending provider blocks save switching
+PASS: pending provider blocks a second dialogue request
+PASS: waiting for provider consumes no game time
+PASS: async provider completion commits once
+PASS: async completion adds configured time and validated clue
+PASS: reject stale async version
+PASS: stale async response cannot overwrite newer version
+PASS: stale async version does not write to disk
+PASS: reject stale async save
+PASS: stale async response cannot overwrite newer save
+PASS: stale async save does not write to disk
+PASS: mock remains usable after async rejection
+PROVIDER RESULT: 48 checks, 0 failures. Isolated files: D:/MagicStore/.tools/test-appdata/ZeroHourStore/test-runs/provider_defce33904c8fd7d78ef0f326d92373e
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+DIALOGUE GROUNDING: 127 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+FOLLOWUP QUESTIONS: 86 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ORACLE RULES: 29 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+DIVINATION RESULT: 543 checks, 0 failures. Isolated saves: D:/MagicStore/.tools/test-appdata/ZeroHourStore/test-runs/divination_90102adf95513ec4a199c95eadd93b82
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+LEGACY DIVINATION GUESTS: 30 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+GENERATED CASES: 80 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+EVENT GOLDEN: 100 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+INVITATION FEEDBACK GOLDEN: 22 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+EVENT DATA RULES: 72 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+EVENT MIGRATION: 112 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+G3 WORKFLOWS: 128 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+GENERIC EFFECTS: 43 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+EVENT EFFECTS: 29 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+INVITATION REFERRAL: 38 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+EVENT NOTEBOOK UI: 116 checks, 0 failures, 0 graphical captures; renderer=headless
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+UI_SMOKE: 319 checks, 0 failures; captures:
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+RESTART WRITE PASS: committed paid unfinished visit and forecast
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+RESTART READ PASS: identical resources, service and forecast; free replay and later feedback
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SHOP RULES: 87 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SHOP INTEGRATION: 78 checks, 0 failures; isolated files: D:/MagicStore/.tools/test-appdata/ZeroHourStore/test-runs/shop_integration_run_571d908d1c21cba3c38384657ca02262
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PEOPLE INTEGRATION: 52 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+INTEGRATED PEOPLE RESTART WRITE: saved active paid visit, shared memory, appearance, appointment and wallets
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+INTEGRATED PEOPLE RESTART READ: original people, queue, resources and paid encounter restored
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+C UI RESULT: 687 checks, 0 failures, 0 graphical captures; renderer=headless
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SKIP LOCAL ITEM SOURCE: skipped_missing_local_source / assets/_incoming/a2r_v3/ui-source-fixture_1899566/native.png
+ITEM BADGE RECT: 64 / VBox 224 / wrapper=[P: (17.0, 19.0), S: (224.0, 64.0)] / picture=[P: (17.0, 19.0), S: (224.0, 64.0)] / canvas=[P: (97.0, 19.0), S: (64.0, 64.0)] / badge=[P: (149.0, 19.0), S: (12.0, 12.0)]
+ITEM BADGE RECT: 64 / VBox 224 / wrapper=[P: (17.0, 19.0), S: (224.0, 64.0)] / picture=[P: (17.0, 19.0), S: (224.0, 64.0)] / canvas=[P: (97.0, 19.0), S: (64.0, 64.0)] / badge=[P: (134.0, 19.0), S: (12.0, 12.0)]
+ITEM BADGE RECT: 64 / stretched 324 / wrapper=[P: (17.0, 19.0), S: (324.0, 64.0)] / picture=[P: (17.0, 19.0), S: (324.0, 64.0)] / canvas=[P: (147.0, 19.0), S: (64.0, 64.0)] / badge=[P: (199.0, 19.0), S: (12.0, 12.0)]
+ITEM BADGE RECT: 64 / stretched 324 / wrapper=[P: (17.0, 19.0), S: (324.0, 64.0)] / picture=[P: (17.0, 19.0), S: (324.0, 64.0)] / canvas=[P: (147.0, 19.0), S: (64.0, 64.0)] / badge=[P: (184.0, 19.0), S: (12.0, 12.0)]
+ITEM BADGE RECT: 64 / VBox 360 / wrapper=[P: (17.0, 19.0), S: (360.0, 64.0)] / picture=[P: (17.0, 19.0), S: (360.0, 64.0)] / canvas=[P: (165.0, 19.0), S: (64.0, 64.0)] / badge=[P: (217.0, 19.0), S: (12.0, 12.0)]
+ITEM BADGE RECT: 64 / VBox 360 / wrapper=[P: (17.0, 19.0), S: (360.0, 64.0)] / picture=[P: (17.0, 19.0), S: (360.0, 64.0)] / canvas=[P: (165.0, 19.0), S: (64.0, 64.0)] / badge=[P: (202.0, 19.0), S: (12.0, 12.0)]
+ITEM BADGE RECT: 64 / stretched 460 / wrapper=[P: (17.0, 19.0), S: (460.0, 64.0)] / picture=[P: (17.0, 19.0), S: (460.0, 64.0)] / canvas=[P: (215.0, 19.0), S: (64.0, 64.0)] / badge=[P: (267.0, 19.0), S: (12.0, 12.0)]
+ITEM BADGE RECT: 64 / stretched 460 / wrapper=[P: (17.0, 19.0), S: (460.0, 64.0)] / picture=[P: (17.0, 19.0), S: (460.0, 64.0)] / canvas=[P: (215.0, 19.0), S: (64.0, 64.0)] / badge=[P: (252.0, 19.0), S: (12.0, 12.0)]
+ITEM BADGE RECT: 128 / VBox 224 / wrapper=[P: (17.0, 19.0), S: (224.0, 128.0)] / picture=[P: (17.0, 19.0), S: (224.0, 128.0)] / canvas=[P: (65.0, 19.0), S: (128.0, 128.0)] / badge=[P: (181.0, 19.0), S: (12.0, 12.0)]
+ITEM BADGE RECT: 128 / VBox 224 / wrapper=[P: (17.0, 19.0), S: (224.0, 128.0)] / picture=[P: (17.0, 19.0), S: (224.0, 128.0)] / canvas=[P: (65.0, 19.0), S: (128.0, 128.0)] / badge=[P: (166.0, 19.0), S: (12.0, 12.0)]
+ITEM BADGE RECT: 128 / stretched 324 / wrapper=[P: (17.0, 19.0), S: (324.0, 128.0)] / picture=[P: (17.0, 19.0), S: (324.0, 128.0)] / canvas=[P: (115.0, 19.0), S: (128.0, 128.0)] / badge=[P: (231.0, 19.0), S: (12.0, 12.0)]
+ITEM BADGE RECT: 128 / stretched 324 / wrapper=[P: (17.0, 19.0), S: (324.0, 128.0)] / picture=[P: (17.0, 19.0), S: (324.0, 128.0)] / canvas=[P: (115.0, 19.0), S: (128.0, 128.0)] / badge=[P: (216.0, 19.0), S: (12.0, 12.0)]
+ITEM BADGE RECT: 128 / VBox 360 / wrapper=[P: (17.0, 19.0), S: (360.0, 128.0)] / picture=[P: (17.0, 19.0), S: (360.0, 128.0)] / canvas=[P: (133.0, 19.0), S: (128.0, 128.0)] / badge=[P: (249.0, 19.0), S: (12.0, 12.0)]
+ITEM BADGE RECT: 128 / VBox 360 / wrapper=[P: (17.0, 19.0), S: (360.0, 128.0)] / picture=[P: (17.0, 19.0), S: (360.0, 128.0)] / canvas=[P: (133.0, 19.0), S: (128.0, 128.0)] / badge=[P: (234.0, 19.0), S: (12.0, 12.0)]
+ITEM BADGE RECT: 128 / stretched 460 / wrapper=[P: (17.0, 19.0), S: (460.0, 128.0)] / picture=[P: (17.0, 19.0), S: (460.0, 128.0)] / canvas=[P: (183.0, 19.0), S: (128.0, 128.0)] / badge=[P: (299.0, 19.0), S: (12.0, 12.0)]
+ITEM BADGE RECT: 128 / stretched 460 / wrapper=[P: (17.0, 19.0), S: (460.0, 128.0)] / picture=[P: (17.0, 19.0), S: (460.0, 128.0)] / canvas=[P: (183.0, 19.0), S: (128.0, 128.0)] / badge=[P: (284.0, 19.0), S: (12.0, 12.0)]
+ITEM BADGE RECT: 256 / VBox 224 / wrapper=[P: (17.0, 19.0), S: (256.0, 256.0)] / picture=[P: (17.0, 19.0), S: (256.0, 256.0)] / canvas=[P: (17.0, 19.0), S: (256.0, 256.0)] / badge=[P: (261.0, 19.0), S: (12.0, 12.0)]
+ITEM BADGE RECT: 256 / VBox 224 / wrapper=[P: (17.0, 19.0), S: (256.0, 256.0)] / picture=[P: (17.0, 19.0), S: (256.0, 256.0)] / canvas=[P: (17.0, 19.0), S: (256.0, 256.0)] / badge=[P: (246.0, 19.0), S: (12.0, 12.0)]
+ITEM BADGE RECT: 256 / stretched 324 / wrapper=[P: (17.0, 19.0), S: (356.0, 256.0)] / picture=[P: (17.0, 19.0), S: (356.0, 256.0)] / canvas=[P: (67.0, 19.0), S: (256.0, 256.0)] / badge=[P: (311.0, 19.0), S: (12.0, 12.0)]
+ITEM BADGE RECT: 256 / stretched 324 / wrapper=[P: (17.0, 19.0), S: (356.0, 256.0)] / picture=[P: (17.0, 19.0), S: (356.0, 256.0)] / canvas=[P: (67.0, 19.0), S: (256.0, 256.0)] / badge=[P: (296.0, 19.0), S: (12.0, 12.0)]
+ITEM BADGE RECT: 256 / VBox 360 / wrapper=[P: (17.0, 19.0), S: (360.0, 256.0)] / picture=[P: (17.0, 19.0), S: (360.0, 256.0)] / canvas=[P: (69.0, 19.0), S: (256.0, 256.0)] / badge=[P: (313.0, 19.0), S: (12.0, 12.0)]
+ITEM BADGE RECT: 256 / VBox 360 / wrapper=[P: (17.0, 19.0), S: (360.0, 256.0)] / picture=[P: (17.0, 19.0), S: (360.0, 256.0)] / canvas=[P: (69.0, 19.0), S: (256.0, 256.0)] / badge=[P: (298.0, 19.0), S: (12.0, 12.0)]
+ITEM BADGE RECT: 256 / stretched 460 / wrapper=[P: (17.0, 19.0), S: (460.0, 256.0)] / picture=[P: (17.0, 19.0), S: (460.0, 256.0)] / canvas=[P: (119.0, 19.0), S: (256.0, 256.0)] / badge=[P: (363.0, 19.0), S: (12.0, 12.0)]
+ITEM BADGE RECT: 256 / stretched 460 / wrapper=[P: (17.0, 19.0), S: (460.0, 256.0)] / picture=[P: (17.0, 19.0), S: (460.0, 256.0)] / canvas=[P: (119.0, 19.0), S: (256.0, 256.0)] / badge=[P: (348.0, 19.0), S: (12.0, 12.0)]
+ITEM VISUALS: 136 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SHELF LAYOUT: 74 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SHELF RENDER: 38 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SCENE VISUALS: 915 checks, 0 failures, 0 graphical captures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ALIGNED SCENE LAYERS: 79 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SCENE ASSET ACCEPTANCE: 512 checks, 0 failures; native sizes verified from source files, formal art approval remains separate
+SKIP LOCAL ART: data/art/scene_preview.json / LOCAL_AUDIT_RETIRED; no archived image acceptance claimed.
+SKIP LOCAL ART: data/art/scene_review.json / LOCAL_AUDIT_RETIRED; no archived image acceptance claimed.
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ARRIVAL UI RESULT: 33 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+CONSULTATION LAYOUT: 34 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ROUND2 SHELL RESULT: 1366 checks, 0 failures, 0 graphical captures; renderer=headless
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ROUND2 SHELL EDGES: 87 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ROUND2 CONSULTATION: 48 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+A3R AUDIO/THEME: 30 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+AUDIO LIFECYCLE: 43 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ARRIVAL TRANSACTIONS: 42 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+SAVE DELETE UI: 37 checks, 0 failures, 0 graphical captures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+GENERATED PEOPLE INTEGRATION: 146 checks, 0 failures. Saves: D:/MagicStore/.tools/test-generated-people/run_7024221b6f6fb025b6bf91ec9bdb94b4
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+GENERATION ARRIVAL SLOTS: 30 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+GENERATED PEOPLE UI: 49 checks, 0 failures; renderer=headless
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+FOLLOWUP CORE RESULT: 29 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+FOLLOWUP QUESTIONS UI: 39 checks, 0 failures; renderer=headless captures=0
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+CHAT KEYBOARD UI: 49 checks, 0 failures; renderer=headless captures=0
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+OPENING GUEST INTEGRATION: 1211 checks, 0 failures; renderer=headless, captures=0
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PROJECT CLEANUP RESULT: 16 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+API SETTINGS UI: 45 checks, 0 failures; renderer=headless captures=0
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+API ENDPOINT: 187 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+MODEL POLICY RESULT: 38 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+HTTP RESULT: 41 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+HTTP CORE RESULT: 56 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+DIRECT API RESULT: 77 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+HTTP RECOVERY RESULT: 43 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PERSON HTTP RESULT: 64 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PEOPLE RULES: 52 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+GENERATED PERSON: 103 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PRODUCTION PEOPLE CONFIG: 11 checks, 0 failures; 200 shops x 3 days
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ARRIVAL CAPACITY: 27 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+OPENING GUEST RULES: 12 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+MEMORY RULES: 21 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+FAMILY FLOW: 16 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+ARRIVAL EDGES: 28 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+FEEDBACK RULES: 11 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+DAILY DISTRIBUTION: 2000 days, zero=180 (9.00%), over capacity=70 (3.50%), bursts=110
+FAMILY DISTRIBUTION: 200 reproducible shops, ordinary=400, reference=13, family triggers=13
+DISTRIBUTION: 36 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+DIRECTOR RULES: 8 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PEOPLE PANEL: 6 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+A/B HANDOFF: 28 checks, 0 failures
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PEOPLE RESTART WRITE: stable person, relationship and memory saved to isolated fixture
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PEOPLE RESTART READ: original identity, appearance, history and followup restored
+test_call_upstream_normalizes_actual_localhost_request_path_without_mutating_config (test_api_endpoint.ApiEndpointTests) ... ok
+test_call_upstream_rejects_missing_or_bad_url_before_transport (test_api_endpoint.ApiEndpointTests) ... ok
+test_dns_and_2048_character_limits_match_godot (test_api_endpoint.ApiEndpointTests) ... ok
+test_godot_canonical_url_vectors_match_python (test_api_endpoint.ApiEndpointTests) ... ok
+test_godot_invalid_structure_vectors_match_python (test_api_endpoint.ApiEndpointTests) ... ok
+test_main_accepts_http_public_ipv4_and_completes_v1_without_network (test_api_endpoint.ApiEndpointTests) ... ok
+test_main_rejects_invalid_endpoint_before_opening_a_server (test_api_endpoint.ApiEndpointTests) ... ok
+test_non_strings_fail_without_network_or_exceptions (test_api_endpoint.ApiEndpointTests) ... ok
+test_transport_accepts_existing_paths_while_chat_normalization_refuses_to_guess (test_api_endpoint.ApiEndpointTests) ... ok
+test_all_url_schemes_and_uppercase_are_rejected_like_godot (test_followup_questions.FollowupQuestionTests) ... ok
+test_arbitrary_extra_field_remains_invalid (test_followup_questions.FollowupQuestionTests) ... ok
+test_comfort_keeps_legal_questions_but_no_unasked_case_material (test_followup_questions.FollowupQuestionTests) ... ok
+test_deduplication_distinct_topic_cap_and_scan_bound_match_godot (test_followup_questions.FollowupQuestionTests) ... ok
+test_helper_rejects_absent_authority_and_handles_non_array_sources (test_followup_questions.FollowupQuestionTests) ... ok
+test_invalid_optional_suggestions_do_not_discard_valid_npc_prose (test_followup_questions.FollowupQuestionTests) ... ok
+test_label_vocabulary_is_question_only_and_never_becomes_fact_evidence (test_followup_questions.FollowupQuestionTests) ... ok
+test_legacy_three_fields_and_optional_fourth_remain_compatible (test_followup_questions.FollowupQuestionTests) ... ok
+test_loopback_discards_bad_optional_items_and_keeps_online_valid_response (test_followup_questions.FollowupQuestionTests) ... ok
+test_loopback_rejected_question_never_publishes_unreviewed_model_prose_or_suggestions (test_followup_questions.FollowupQuestionTests) ... ok
+test_loopback_serializes_reviewed_questions_without_extra_provider_calls (test_followup_questions.FollowupQuestionTests) ... ok
+test_prompts_require_player_voice_no_answers_and_joint_premise_review (test_followup_questions.FollowupQuestionTests) ... ok
+test_question_semantic_rejection_rejects_the_entire_model_candidate (test_followup_questions.FollowupQuestionTests) ... ok
+test_questions_use_existing_generation_and_review_without_extra_model_request (test_followup_questions.FollowupQuestionTests) ... ok
+test_real_repeated_self_questioning_claim_needs_a_matching_actual_source (test_followup_questions.FollowupQuestionTests) ... ok
+test_review_receives_authorized_label_without_receiving_its_unopened_answer (test_followup_questions.FollowupQuestionTests) ... ok
+test_selected_generator_and_review_receive_only_legal_direction_labels (test_followup_questions.FollowupQuestionTests) ... ok
+test_text_format_controls_markup_and_internal_id_examples_match_godot (test_followup_questions.FollowupQuestionTests) ... ok
+test_actual_core_source_metadata_and_relationship_are_preserved (test_gateway.GatewayTests) ... ok
+test_ambiguous_words_are_not_used_as_a_forced_topic (test_gateway.GatewayTests) ... ok
+test_busy_and_release (test_gateway.GatewayTests) ... ok
+test_busy_free_text_fallback_has_no_unverified_effect (test_gateway.GatewayTests) ... ok
+test_comfort_generation_gets_persona_only_without_unasked_case_details (test_gateway.GatewayTests) ... ok
+test_constrained_profile_choices_and_deterministic_fallback (test_gateway.GatewayTests) ... ok
+test_deepseek_dialogue_stages_disable_thinking_and_use_low_generation_temperature (test_gateway.GatewayTests) ... ok
+test_event_proposal_only_uses_authorized_candidates_and_shared_memory (test_gateway.GatewayTests) ... ok
+test_followup_uses_only_shared_same_topic_memory (test_gateway.GatewayTests) ... ok
+test_forged_generated_evidence_rejected_before_review (test_gateway.GatewayTests) ... ok
+test_free_text_only_receives_selected_topic_fact (test_gateway.GatewayTests) ... ok
+test_generated_profile_cannot_overwrite_identity (test_gateway.GatewayTests) ... ok
+test_generation_budget_evicts_old_sources_and_review_sees_identical_pool (test_gateway.GatewayTests) ... ok
+test_http_503_unverified_negative_or_injection_never_rescans_keywords (test_gateway.GatewayTests) ... ok
+test_http_review_failure_pins_verified_intent_and_never_reuses_other_request (test_gateway.GatewayTests) ... ok
+test_http_success_and_invalid_upstream (test_gateway.GatewayTests) ... ok
+test_internal_and_new_concrete_claims_fail_before_semantic_review (test_gateway.GatewayTests) ... ok
+test_long_history_budget_keeps_latest_shared_material (test_gateway.GatewayTests) ... ok
+test_negative_topic_keeps_successful_work_classification (test_gateway.GatewayTests) ... ok
+test_neutral_clarification_still_requires_independent_review (test_gateway.GatewayTests) ... ok
+test_offline_dialogue_uses_only_allowed_topic_or_clarifies (test_gateway.GatewayTests) ... ok
+test_online_classifier_is_not_overridden_by_keywords (test_gateway.GatewayTests) ... ok
+test_only_mutually_known_memories_reach_model (test_gateway.GatewayTests) ... ok
+test_persona_and_sources_are_explicit_and_player_turns_are_not_evidence (test_gateway.GatewayTests) ... ok
+test_persona_only_natural_reply_does_not_award_topic_effects (test_gateway.GatewayTests) ... ok
+test_persona_prefix_cannot_carry_extra_claims (test_gateway.GatewayTests) ... ok
+test_prediction_is_typed_and_cannot_be_promoted_by_approved_flag (test_gateway.GatewayTests) ... ok
+test_protected_anchors_need_actual_selected_or_shared_evidence (test_gateway.GatewayTests) ... ok
+test_public_projection_and_authorized_effects (test_gateway.GatewayTests) ... ok
+test_rejects_unknown_or_wrong_selected_intent (test_gateway.GatewayTests) ... ok
+test_review_budget_never_silently_hides_generator_sources (test_gateway.GatewayTests) ... ok
+test_review_requires_strict_verdict_matching_evidence_and_no_findings (test_gateway.GatewayTests) ... ok
+test_selected_topic_review_preserves_real_model_wording (test_gateway.GatewayTests) ... ok
+test_topic_citation_without_actual_disclosure_is_rejected_by_review (test_gateway.GatewayTests) ... ok
+test_unasked_authored_fact_is_not_sent_to_generation_or_review (test_gateway.GatewayTests) ... ok
+test_unauthorized_extra_claim_is_not_delivered (test_gateway.GatewayTests) ... ok
+test_unknown_case_information_does_not_authorize_absence_or_exclusive_claims (test_gateway.GatewayTests) ... ok
+test_upstream_truncation_is_rejected (test_gateway.GatewayTests) ... ok
+test_vetted_professional_knowledge_is_preserved_without_new_case_effects (test_gateway.GatewayTests) ... ok
+test_background_capacity_is_independent_of_front_dialogue_capacity (test_generated_gateway.GeneratedGatewayTests) ... ok
+test_completed_http_response_releases_capacity_before_client_can_request_again (test_generated_gateway.GeneratedGatewayTests) ... ok
+test_dynamic_catalog_checks_npc_topic_clue_and_effect_authority (test_generated_gateway.GeneratedGatewayTests) ... ok
+test_dynamic_classification_sees_labels_without_unselected_facts (test_generated_gateway.GeneratedGatewayTests) ... ok
+test_dynamic_generation_only_gets_selected_source_and_needs_independent_review (test_generated_gateway.GeneratedGatewayTests) ... ok
+test_dynamic_http_classifier_failure_clarifies_and_review_failure_pins_current_topic (test_generated_gateway.GeneratedGatewayTests) ... ok
+test_dynamic_offline_merge_repeats_safely_and_never_rescans_unverified_free_text (test_generated_gateway.GeneratedGatewayTests) ... ok
+test_incomplete_or_timed_out_body_never_reaches_json_or_models (test_generated_gateway.GeneratedGatewayTests) ... ok
+test_invalid_body_length_is_rejected_without_reading (test_generated_gateway.GeneratedGatewayTests) ... ok
+test_package_result_preserves_original_creation_and_exact_canonical_review (test_generated_gateway.GeneratedGatewayTests) ... ok
+test_person_http_duplicate_identities_and_existing_character_references_are_rejected (test_generated_gateway.GeneratedGatewayTests) ... ok
+test_person_http_success_authentication_and_illegal_input (test_generated_gateway.GeneratedGatewayTests) ... ok
+test_person_http_wrong_hash_rejected_review_and_unavailable_return_502 (test_generated_gateway.GeneratedGatewayTests) ... ok
+test_rejected_auth_consumes_bounded_body_without_parsing_or_generation (test_generated_gateway.GeneratedGatewayTests) ... ok
+test_all_four_models_use_verified_options_for_every_dialogue_and_person_stage (test_model_request_policy.ModelRequestPolicyTests) ... ok
+test_complete_plain_and_single_fenced_json_content_pass_actual_call_parser (test_model_request_policy.ModelRequestPolicyTests) ... ok
+test_hidden_reasoning_is_never_a_substitute_for_visible_content (test_model_request_policy.ModelRequestPolicyTests) ... ok
+test_legacy_missing_finish_reason_is_distinct_from_an_explicit_null (test_model_request_policy.ModelRequestPolicyTests) ... ok
+test_truncation_incomplete_fences_and_explanations_cannot_reach_stage_validation (test_model_request_policy.ModelRequestPolicyTests) ... ok
+test_unknown_and_older_families_keep_generic_options (test_model_request_policy.ModelRequestPolicyTests) ... ok
+test_context_projection_is_bounded_and_never_forwards_existing_hidden_state (test_person_generation.PersonGenerationTests) ... ok
+test_godot_fixture_canonical_json_and_hash_match_exactly (test_person_generation.PersonGenerationTests) ... ok
+test_independent_review_is_strict_and_bound_to_this_exact_draft (test_person_generation.PersonGenerationTests) ... ok
+test_internal_markers_control_characters_and_existing_case_anchors_rejected (test_person_generation.PersonGenerationTests) ... ok
+test_natural_identity_preferences_and_text_limits_are_enforced (test_person_generation.PersonGenerationTests) ... ok
+test_new_original_fields_are_retained_without_template_choices (test_person_generation.PersonGenerationTests) ... ok
+test_private_material_and_unearned_future_result_do_not_enter_public_parts (test_person_generation.PersonGenerationTests) ... ok
+test_strict_schema_types_and_extra_fields_fail_closed (test_person_generation.PersonGenerationTests) ... ok
+----------------------------------------------------------------------
+Ran 94 tests in 11.916s
+OK
+test_active_style_hash_tampering_is_rejected (test_art_pipeline.ArtPipelineTests) ... ok
+test_all_layers_recompose_sorted_and_reject_duplicate_z (test_art_pipeline.ArtPipelineTests) ... ok
+test_attempt_limits_status_and_source_claims_are_validated (test_art_pipeline.ArtPipelineTests) ... ok
+test_cli_queue_is_executable_and_does_not_mutate_manifest (test_art_pipeline.ArtPipelineTests) ... ok
+test_dependent_import_before_composite_is_rejected_without_writes (test_art_pipeline.ArtPipelineTests) ... ok
+test_derived_composite_import_never_overwrites_old_reference (test_art_pipeline.ArtPipelineTests) ... ok
+test_existing_runtime_or_source_cannot_be_overwritten (test_art_pipeline.ArtPipelineTests) ... ok
+test_extraction_uses_original_pixels_and_actual_mask_without_inpainting (test_art_pipeline.ArtPipelineTests) ... ok
+test_feather_decontamination_does_not_weaken_opaque_core_check (test_art_pipeline.ArtPipelineTests) ... ok
+test_feather_percentile_rejects_local_bad_repaint (test_art_pipeline.ArtPipelineTests) ... ok
+test_generation_failure_is_valid_but_never_complete (test_art_pipeline.ArtPipelineTests) ... ok
+test_import_map_copies_real_builtin_output_and_emits_runtime_copies (test_art_pipeline.ArtPipelineTests) ... ok
+test_import_records_real_dimensions_hash_cover_and_preserves_source (test_art_pipeline.ArtPipelineTests) ... ok
+test_inpaint_queue_accepts_original_without_extraction_trio (test_art_pipeline.ArtPipelineTests) ... ok
+test_layer_queue_extracts_pixels_instead_of_redrawing_detached_object (test_art_pipeline.ArtPipelineTests) ... ok
+test_malformed_import_map_fails_validation_before_any_outputs (test_art_pipeline.ArtPipelineTests) ... ok
+test_manifest_rejects_escape_absolute_windows_paths_and_duplicate_ids (test_art_pipeline.ArtPipelineTests) ... ok
+test_mask_and_extraction_helpers_are_executable_from_queue (test_art_pipeline.ArtPipelineTests) ... ok
+test_mask_size_misalignment_is_rejected (test_art_pipeline.ArtPipelineTests) ... ok
+test_missing_implementation_has_user_actionable_queue (test_art_pipeline.ArtPipelineTests) ... ok
+test_new_config_has_finite_validated_bounds (test_art_pipeline.ArtPipelineTests) ... ok
+test_partial_group_receipt_keeps_other_recipes_and_preview_contract (test_art_pipeline.ArtPipelineTests) ... ok
+test_per_layer_geometry_pass_does_not_claim_art_approval (test_art_pipeline.ArtPipelineTests) ... ok
+test_powershell_versioned_three_stage_import_is_executable (test_art_pipeline.ArtPipelineTests) ... ok
+test_powershell_wrapper_runs_real_queue_without_generation_service (test_art_pipeline.ArtPipelineTests) ... ok
+test_prepare_masks_has_one_pixel_feather_and_six_pixel_target (test_art_pipeline.ArtPipelineTests) ... ok
+test_receipt_validator_rejects_changed_runtime_bytes (test_art_pipeline.ArtPipelineTests) ... ok
+test_runtime_metadata_is_read_from_files_instead_of_trusting_claims (test_art_pipeline.ArtPipelineTests) ... ok
+test_s04_two_composites_share_base_and_lamp_without_old_fallback (test_art_pipeline.ArtPipelineTests) ... ok
+test_single_unchanged_region_pixel_fails_exactness (test_art_pipeline.ArtPipelineTests) ... ok
+test_tiny_missing_layer_cannot_hide_in_global_mean (test_art_pipeline.ArtPipelineTests) ... ok
+test_unknown_group_and_non_image_style_fail_before_writes (test_art_pipeline.ArtPipelineTests) ... ok
+test_unknown_import_id_is_rejected_before_any_valid_output_is_copied (test_art_pipeline.ArtPipelineTests) ... ok
+test_versioned_import_closes_composite_cleanplate_extraction_base_workflow (test_art_pipeline.ArtPipelineTests) ... ok
+test_versioned_queue_separates_old_reference_from_deferred_output (test_art_pipeline.ArtPipelineTests) ... ok
+test_actual_raw_to_256_processing_record_is_not_a_raw_runtime_alias (test_compact_regen.CompactRegenTests) ... ok
+test_actual_source_hash_and_dimensions_are_verified_before_queue (test_compact_regen.CompactRegenTests) ... ok
+test_candidate_and_retired_asset_rows_never_enter_canonical_queue (test_compact_regen.CompactRegenTests) ... ok
+test_canonical_queue_deduplicates_runtime_and_keeps_all_outputs_versioned (test_compact_regen.CompactRegenTests) ... ok
+test_chained_runtime_aliases_keep_one_generation_and_all_runtime_copies (test_compact_regen.CompactRegenTests) ... ok
+test_cli_emits_pending_queue_without_changing_manifest (test_compact_regen.CompactRegenTests) ... ok
+test_default_queue_receipts_are_versioned_and_identical_reruns_are_idempotent (test_compact_regen.CompactRegenTests) ... ok
+test_existing_versioned_target_and_compact_import_cannot_overwrite_resources (test_compact_regen.CompactRegenTests) ... ok
+test_explicit_slice_operation_never_falls_back_to_imagegen (test_compact_regen.CompactRegenTests) ... ok
+test_explicit_style_path_overrides_profile_reference_using_actual_new_sha (test_compact_regen.CompactRegenTests) ... ok
+test_formal_c_night_metadata_pairs_the_same_scene_and_state_day (test_compact_regen.CompactRegenTests) ... ok
+test_formal_closed_missing_template_is_pending_not_day_repaint (test_compact_regen.CompactRegenTests) ... ok
+test_formal_night_never_borrows_day_from_another_state (test_compact_regen.CompactRegenTests) ... ok
+test_formal_processing_references_keep_existing_safe_path_boundary (test_compact_regen.CompactRegenTests) ... ok
+test_formal_processing_rows_are_offline_without_room_templates (test_compact_regen.CompactRegenTests) ... ok
+test_formal_runtime_waits_for_its_processed_layer_not_composite (test_compact_regen.CompactRegenTests) ... ok
+test_formal_s01_closed_uses_closed_template_and_new_night (test_compact_regen.CompactRegenTests) ... ok
+test_item_metadata_and_paths_cannot_fall_back_to_atlas_generation (test_compact_regen.CompactRegenTests) ... ok
+test_item_processing_and_64_derivation_wait_for_new_raw_and_256 (test_compact_regen.CompactRegenTests) ... ok
+test_item_processing_receipt_cannot_select_old_raw_or_another_style (test_compact_regen.CompactRegenTests) ... ok
+test_item_queue_existing_raw_waits_for_receipt_then_runs_existing_processor (test_compact_regen.CompactRegenTests) ... ok
+test_item_raw_metadata_is_verified_and_missing_local_raw_is_explicit (test_compact_regen.CompactRegenTests) ... ok
+test_missing_or_unselected_v3_profile_is_explicit_pending_without_generation (test_compact_regen.CompactRegenTests) ... ok
+test_missing_templates_never_fall_back_to_rejected_old_prompts (test_compact_regen.CompactRegenTests) ... ok
+test_native_c_metadata_validation_uses_asset_path_with_style_inputs (test_compact_regen.CompactRegenTests) ... ok
+test_new_composite_and_old_spec_still_require_manual_mask_review (test_compact_regen.CompactRegenTests) ... ok
+test_new_native_c_requires_scene_and_period_metadata (test_compact_regen.CompactRegenTests) ... ok
+test_night_uses_new_day_edit_target_and_waits_for_it (test_compact_regen.CompactRegenTests) ... ok
+test_nine_items_queue_new_magenta_raws_from_descriptions_and_style_only (test_compact_regen.CompactRegenTests) ... ok
+test_only_groups_and_template_selection_match_formal_resources (test_compact_regen.CompactRegenTests) ... ok
+test_orphan_64_item_is_never_generated_independently (test_compact_regen.CompactRegenTests) ... ok
+test_portraits_require_their_own_template_and_never_use_no_people_room_edit (test_compact_regen.CompactRegenTests) ... ok
+test_powershell_alias_generates_only_local_queue (test_compact_regen.CompactRegenTests) ... ok
+test_processing_runtime_aliases_preserve_additional_copy_destinations (test_compact_regen.CompactRegenTests) ... ok
+test_profile_escape_rejected_reference_and_runtime_cycle_are_rejected (test_compact_regen.CompactRegenTests) ... ok
+test_s04_native_c_requires_explicit_open_or_closed_state (test_compact_regen.CompactRegenTests) ... ok
+test_scene_constraints_reject_non_string_data (test_compact_regen.CompactRegenTests) ... ok
+test_scene_generation_appends_constraints_from_asset_data (test_compact_regen.CompactRegenTests) ... ok
+test_selected_profile_missing_file_is_pending_but_wrong_sha_is_an_error (test_compact_regen.CompactRegenTests) ... ok
+test_cli_accepts_exact_text_and_png_sources (test_formal_manifest_validation.FormalManifestValidationTests) ... ok
+test_cli_checks_svg_sha_without_treating_svg_as_raster (test_formal_manifest_validation.FormalManifestValidationTests) ... ok
+test_cli_rejects_changed_source_bytes_including_line_endings (test_formal_manifest_validation.FormalManifestValidationTests) ... ok
+test_cli_rejects_missing_formal_source (test_formal_manifest_validation.FormalManifestValidationTests) ... ok
+test_cli_rejects_png_dimensions_even_when_sha_matches (test_formal_manifest_validation.FormalManifestValidationTests) ... ok
+test_compact_updates_canonical_paths_and_real_sizes_without_overwriting_inputs (test_import_scene_runtime.RuntimeImportTests) ... ok
+test_conflicting_runtime_bytes_are_refused_before_any_proposal_write (test_import_scene_runtime.RuntimeImportTests) ... ok
+test_forged_source_hash_or_dimensions_are_rejected (test_import_scene_runtime.RuntimeImportTests) ... ok
+test_legacy_keeps_old_manifest_fields_and_scene_map (test_import_scene_runtime.RuntimeImportTests) ... ok
+test_output_path_cannot_escape_or_alias_a_retained_input (test_import_scene_runtime.RuntimeImportTests) ... ok
+test_antialiased_magenta_matte_does_not_reappear_in_either_runtime_size (test_item_alpha.ItemAlphaTests) ... ok
+test_config_rejects_nonfinite_boolean_and_invalid_ranges (test_item_alpha.ItemAlphaTests) ... ok
+test_missing_alpha_empty_and_opaque_images_fail (test_item_alpha.ItemAlphaTests) ... ok
+test_saturated_red_yellow_uses_only_semitransparent_denominator_and_strict_two_percent (test_item_alpha.ItemAlphaTests) ... ok
+test_support_is_zero_based_last_three_rows_union_and_ignores_faint_halo (test_item_alpha.ItemAlphaTests) ... ok
+test_visible_magenta_fails_even_if_it_is_not_a_semitransparent_edge (test_item_alpha.ItemAlphaTests) ... ok
+test_cli_routes_new_style_to_builtin_queue_and_same_style_to_processing (test_item_pipeline.ItemPipelineTests) ... ok
+test_cli_validate_only_does_not_write_and_check_alpha_scans_actual_pngs (test_item_pipeline.ItemPipelineTests) ... ok
+test_completed_attempt_requires_actual_retained_output_metadata (test_item_pipeline.ItemPipelineTests) ... ok
+test_generation_malformed_reference_and_status_fail_as_validation_errors (test_item_pipeline.ItemPipelineTests) ... ok
+test_idempotence_conflicting_output_refused_and_revision_keeps_old_bytes (test_item_pipeline.ItemPipelineTests) ... ok
+test_manifest_fragment_binds_generation_processing_and_both_runtime_sizes (test_item_pipeline.ItemPipelineTests) ... ok
+test_pending_generation_is_explicit_and_never_becomes_a_completed_item (test_item_pipeline.ItemPipelineTests) ... ok
+test_process_measures_real_256_and_64_derivation_without_modifying_source (test_item_pipeline.ItemPipelineTests) ... ok
+test_processing_receipt_cannot_weaken_authoritative_alpha_limits (test_item_pipeline.ItemPipelineTests) ... ok
+test_processing_receipt_rejects_forged_runtime_transform_and_recipe_provenance (test_item_pipeline.ItemPipelineTests) ... ok
+test_processing_receipt_rejects_forged_support_and_pixel_data_even_with_new_sha (test_item_pipeline.ItemPipelineTests) ... ok
+test_production_alpha_cli_checks_every_mapped_large_and_small_png (test_item_pipeline.ItemPipelineTests) ... ok
+test_production_alpha_cli_rejects_legacy_or_incomplete_independent_mapping (test_item_pipeline.ItemPipelineTests) ... ok
+test_real_pillow_paste_records_only_xy_and_keeps_measured_support_aligned (test_item_pipeline.ItemPipelineTests) ... ok
+test_receipt_rejects_forged_source_hash_dimensions_refs_and_duplicate_ids (test_item_pipeline.ItemPipelineTests) ... ok
+test_source_cannot_be_an_output_and_revision_cannot_escape (test_item_pipeline.ItemPipelineTests) ... ok
+test_style_change_queues_new_sources_without_relabeling_old_art (test_item_pipeline.ItemPipelineTests) ... ok
+test_cli_reports_skip_retired_and_errors_without_writing_other_files (test_local_audit.LocalAuditTests) ... ok
+test_descriptor_rejects_unsafe_paths_invalid_sha_and_unknown_schema (test_local_audit.LocalAuditTests) ... ok
+test_duplicate_record_identity_and_unknown_envelope_fields_are_rejected (test_local_audit.LocalAuditTests) ... ok
+test_malformed_json_duplicate_keys_blank_lines_and_nonfinite_values_fail (test_local_audit.LocalAuditTests) ... ok
+test_optional_missing_audit_is_an_explicit_skip_and_writes_nothing (test_local_audit.LocalAuditTests) ... ok
+test_present_archive_with_wrong_sha_fails_instead_of_becoming_a_skip (test_local_audit.LocalAuditTests) ... ok
+test_reader_preserves_original_section_values_and_unicode_reason (test_local_audit.LocalAuditTests) ... ok
+test_rejected_archive_is_retired_even_if_original_value_says_complete (test_local_audit.LocalAuditTests) ... ok
+test_rejection_requires_an_intact_reason_instead_of_garbled_metadata (test_local_audit.LocalAuditTests) ... ok
+test_resolved_directory_link_cannot_read_or_write_outside_workspace (test_local_audit.LocalAuditTests) ... ok
+test_runtime_rows_validate_paths_hashes_dimensions_and_identity_without_opening_pngs (test_local_audit.LocalAuditTests) ... ok
+test_writer_is_idempotent_and_refuses_conflicting_existing_bytes (test_local_audit.LocalAuditTests) ... ok
+test_writer_validates_all_rows_before_creating_any_output_directory (test_local_audit.LocalAuditTests) ... ok
+test_configuration_rejects_escape_and_invalid_geometry (test_placeholder_scenes.PlaceholderScenesTests) ... ok
+test_configuration_rejects_missing_and_invalid_drawing_parameters (test_placeholder_scenes.PlaceholderScenesTests) ... ok
+test_each_extraction_recomposes_against_its_own_cleanplate (test_placeholder_scenes.PlaceholderScenesTests) ... ok
+test_fifteen_backgrounds_and_all_handbook_layers_are_declared (test_placeholder_scenes.PlaceholderScenesTests) ... ok
+test_full_bleed_shape_does_not_draw_a_canvas_border (test_placeholder_scenes.PlaceholderScenesTests) ... ok
+test_nonfinite_and_boolean_geometry_produce_no_outputs (test_placeholder_scenes.PlaceholderScenesTests) ... ok
+test_output_preflight_rejects_existing_junction_escape (test_placeholder_scenes.PlaceholderScenesTests) ... ok
+test_receipt_rejects_invalid_full_frame_descriptor (test_placeholder_scenes.PlaceholderScenesTests) ... ok
+test_receipt_rejects_non_placeholder_claims_and_unknown_paths (test_placeholder_scenes.PlaceholderScenesTests) ... ok
+test_scene_is_deterministic_and_empty_of_guest_geometry (test_placeholder_scenes.PlaceholderScenesTests) ... ok
+test_unknown_existing_output_is_never_overwritten (test_placeholder_scenes.PlaceholderScenesTests) ... ok
+test_actual_mask_reference_notice_can_override_the_default_batch_method (test_real_scene_layers.RealSceneLayersTests) ... ok
+test_final_cleanplate_retains_unmodified_ring_and_other_object (test_real_scene_layers.RealSceneLayersTests) ... ok
+test_flow_overlay_can_retain_its_original_base_pixels (test_real_scene_layers.RealSceneLayersTests) ... ok
+test_generation_receipt_checks_actual_files_prompts_and_attempts (test_real_scene_layers.RealSceneLayersTests) ... ok
+test_invalid_polygons_parameters_and_paths_fail_before_outputs (test_real_scene_layers.RealSceneLayersTests) ... ok
+test_output_collision_never_replaces_prior_art_or_source (test_real_scene_layers.RealSceneLayersTests) ... ok
+test_overlapping_layers_are_reported_and_all_layer_qa_cannot_hide_difference (test_real_scene_layers.RealSceneLayersTests) ... ok
+test_processing_receipt_is_revalidated_from_files_and_strict_qa (test_real_scene_layers.RealSceneLayersTests) ... ok
+test_pure_processing_has_no_implicit_art_generation (test_real_scene_layers.RealSceneLayersTests) ... ok
+test_raw_size_difference_is_normalized_as_cover_and_recorded_truthfully (test_real_scene_layers.RealSceneLayersTests) ... ok
+test_runtime_cannot_replace_cover_pixels_and_forge_an_updated_hash (test_real_scene_layers.RealSceneLayersTests) ... ok
+test_same_position_single_and_all_layers_recompose_without_approving_art (test_real_scene_layers.RealSceneLayersTests) ... ok
+test_a7_baseline_preserves_native_shelf_geometry_without_reviving_slot (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_a7_baseline_rejects_missing_or_empty_half_of_shelf_contract (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_actual_dimensions_and_claimed_geometry_are_verified (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_bad_actual_sha_prevents_all_proposed_writes (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_baseline_requires_legacy_slot_or_complete_shelf_contract (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_checked_in_registry_lists_selected_sources_without_requiring_pending_files (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_compact_matched_alternate_uses_its_actual_prompt_and_mask_references (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_compact_proposal_keeps_detailed_work_outside_the_canonical_manifest (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_compact_registration_writes_independent_immutable_audit_and_never_reads_retired_style (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_completed_real_artifacts_keep_scene_and_layer_regen_queues_complete (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_descriptor_cannot_substitute_an_opaque_verified_background_for_a_layer (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_descriptor_geometry_cannot_override_the_verified_source_annotation (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_escaped_recipe_and_recomposition_fragments_are_rejected (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_generation_style_and_scene_identity_cannot_be_substituted (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_json_overrides_and_source_seat_use_common_cover_transform (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_manifest_replaces_duplicate_paths_and_separates_engineering_groups (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_output_collision_is_preflighted_before_the_other_file_is_written (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_outputs_cannot_overwrite_a_manifest_source (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_recomputed_pixel_qa_rejects_forged_recorded_success (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_registration_is_idempotent_and_never_changes_central_inputs (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_registry_requires_exactly_seventeen_unique_scene_period_states (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_row_descriptor_and_recipe_cannot_jointly_redirect_the_verified_fragment (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_s04_uses_four_state_backgrounds_and_state_specific_lamps (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_scene_regen_keeps_complete_C_prompt_and_schedules_its_all_object_cleanplate (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_source_join_allows_retained_successful_attempt_bytes_at_another_path (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_unrelated_generation_records_cannot_certify_processing_sources (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_unverified_descriptor_crop_cannot_move_the_runtime_pivot (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_validate_only_cli_checks_all_files_without_creating_outputs (test_real_scene_registry.RealSceneRegistryTests) ... ok
+test_variants_merge_nested_transforms_and_preserve_legacy_slot (test_real_scene_registry.RealSceneRegistryTests) ... ok
+----------------------------------------------------------------------
+Ran 172 tests in 221.359s
+OK
+FORMAL ART MANIFEST: valid; 169 formal records; source bytes/dimensions verified; local history excluded
+{"passed": true, "checked": 18, "reports": [{"passed": true, "errors": [], "size": [256, 256], "has_alpha": true, "visible_pixels": 12199, "transparent_pixels": 53337, "edge_pixels": 8079, "red_yellow_pixels": 0, "red_yellow_fraction": 0.0, "magenta_pixels": 0, "edge_denominator": "pixels with 0 < alpha < 255", "limits": {"saturation_threshold": 0.6, "red_yellow_hue_ranges": [[0.0, 0.16666666666666666], [0.95, 1.0]], "maximum_bad_edge_fraction": 0.02, "magenta_hue_ranges": [[0.77, 0.94]], "magenta_minimum_value": 0.2, "maximum_visible_magenta_pixels": 0, "require_transparent_pixels": true}, "path": "D:\\MagicStore\\assets\\items\\v3\\v3r1\\lavender.png"}, {"passed": true, "errors": [], "size": [64, 64], "has_alpha": true, "visible_pixels": 921, "transparent_pixels": 3175, "edge_pixels": 725, "red_yellow_pixels": 0, "red_yellow_fraction": 0.0, "magenta_pixels": 0, "edge_denominator": "pixels with 0 < alpha < 255", "limits": {"saturation_threshold": 0.6, "red_yellow_hue_ranges": [[0.0, 0.16666666666666666], [0.95, 1.0]], "maximum_bad_edge_fraction": 0.02, "magenta_hue_ranges": [[0.77, 0.94]], "magenta_minimum_value": 0.2, "maximum_visible_magenta_pixels": 0, "require_transparent_pixels": true}, "path": "D:\\MagicStore\\assets\\items\\v3\\v3r1\\lavender_64.png"}, {"passed": true, "errors": [], "size": [256, 256], "has_alpha": true, "visible_pixels": 16582, "transparent_pixels": 48954, "edge_pixels": 3251, "red_yellow_pixels": 0, "red_yellow_fraction": 0.0, "magenta_pixels": 0, "edge_denominator": "pixels with 0 < alpha < 255", "limits": {"saturation_threshold": 0.6, "red_yellow_hue_ranges": [[0.0, 0.16666666666666666], [0.95, 1.0]], "maximum_bad_edge_fraction": 0.02, "magenta_hue_ranges": [[0.77, 0.94]], "magenta_minimum_value": 0.2, "maximum_visible_magenta_pixels": 0, "require_transparent_pixels": true}, "path": "D:\\MagicStore\\assets\\items\\v3\\v3r1\\spring_water.png"}, {"passed": true, "errors": [], "size": [64, 64], "has_alpha": true, "visible_pixels": 1140, "transparent_pixels": 2956, "edge_pixels": 410, "red_yellow_pixels": 0, "red_yellow_fraction": 0.0, "magenta_pixels": 0, "edge_denominator": "pixels with 0 < alpha < 255", "limits": {"saturation_threshold": 0.6, "red_yellow_hue_ranges": [[0.0, 0.16666666666666666], [0.95, 1.0]], "maximum_bad_edge_fraction": 0.02, "magenta_hue_ranges": [[0.77, 0.94]], "magenta_minimum_value": 0.2, "maximum_visible_magenta_pixels": 0, "require_transparent_pixels": true}, "path": "D:\\MagicStore\\assets\\items\\v3\\v3r1\\spring_water_64.png"}, {"passed": true, "errors": [], "size": [256, 256], "has_alpha": true, "visible_pixels": 22683, "transparent_pixels": 42853, "edge_pixels": 3781, "red_yellow_pixels": 0, "red_yellow_fraction": 0.0, "magenta_pixels": 0, "edge_denominator": "pixels with 0 < alpha < 255", "limits": {"saturation_threshold": 0.6, "red_yellow_hue_ranges": [[0.0, 0.16666666666666666], [0.95, 1.0]], "maximum_bad_edge_fraction": 0.02, "magenta_hue_ranges": [[0.77, 0.94]], "magenta_minimum_value": 0.2, "maximum_visible_magenta_pixels": 0, "require_transparent_pixels": true}, "path": "D:\\MagicStore\\assets\\items\\v3\\v3r1\\quartz.png"}, {"passed": true, "errors": [], "size": [64, 64], "has_alpha": true, "visible_pixels": 1531, "transparent_pixels": 2565, "edge_pixels": 454, "red_yellow_pixels": 0, "red_yellow_fraction": 0.0, "magenta_pixels": 0, "edge_denominator": "pixels with 0 < alpha < 255", "limits": {"saturation_threshold": 0.6, "red_yellow_hue_ranges": [[0.0, 0.16666666666666666], [0.95, 1.0]], "maximum_bad_edge_fraction": 0.02, "magenta_hue_ranges": [[0.77, 0.94]], "magenta_minimum_value": 0.2, "maximum_visible_magenta_pixels": 0, "require_transparent_pixels": true}, "path": "D:\\MagicStore\\assets\\items\\v3\\v3r1\\quartz_64.png"}, {"passed": true, "errors": [], "size": [256, 256], "has_alpha": true, "visible_pixels": 29524, "transparent_pixels": 36012, "edge_pixels": 4185, "red_yellow_pixels": 0, "red_yellow_fraction": 0.0, "magenta_pixels": 0, "edge_denominator": "pixels with 0 < alpha < 255", "limits": {"saturation_threshold": 0.6, "red_yellow_hue_ranges": [[0.0, 0.16666666666666666], [0.95, 1.0]], "maximum_bad_edge_fraction": 0.02, "magenta_hue_ranges": [[0.77, 0.94]], "magenta_minimum_value": 0.2, "maximum_visible_magenta_pixels": 0, "require_transparent_pixels": true}, "path": "D:\\MagicStore\\assets\\items\\v3\\v3r1\\moon_dust.png"}, {"passed": true, "errors": [], "size": [64, 64], "has_alpha": true, "visible_pixels": 1987, "transparent_pixels": 2109, "edge_pixels": 546, "red_yellow_pixels": 0, "red_yellow_fraction": 0.0, "magenta_pixels": 0, "edge_denominator": "pixels with 0 < alpha < 255", "limits": {"saturation_threshold": 0.6, "red_yellow_hue_ranges": [[0.0, 0.16666666666666666], [0.95, 1.0]], "maximum_bad_edge_fraction": 0.02, "magenta_hue_ranges": [[0.77, 0.94]], "magenta_minimum_value": 0.2, "maximum_visible_magenta_pixels": 0, "require_transparent_pixels": true}, "path": "D:\\MagicStore\\assets\\items\\v3\\v3r1\\moon_dust_64.png"}, {"passed": true, "errors": [], "size": [256, 256], "has_alpha": true, "visible_pixels": 19266, "transparent_pixels": 46270, "edge_pixels": 5696, "red_yellow_pixels": 0, "red_yellow_fraction": 0.0, "magenta_pixels": 0, "edge_denominator": "pixels with 0 < alpha < 255", "limits": {"saturation_threshold": 0.6, "red_yellow_hue_ranges": [[0.0, 0.16666666666666666], [0.95, 1.0]], "maximum_bad_edge_fraction": 0.02, "magenta_hue_ranges": [[0.77, 0.94]], "magenta_minimum_value": 0.2, "maximum_visible_magenta_pixels": 0, "require_transparent_pixels": true}, "path": "D:\\MagicStore\\assets\\items\\v3\\v3r1\\calming_incense.png"}, {"passed": true, "errors": [], "size": [64, 64], "has_alpha": true, "visible_pixels": 1390, "transparent_pixels": 2706, "edge_pixels": 632, "red_yellow_pixels": 0, "red_yellow_fraction": 0.0, "magenta_pixels": 0, "edge_denominator": "pixels with 0 < alpha < 255", "limits": {"saturation_threshold": 0.6, "red_yellow_hue_ranges": [[0.0, 0.16666666666666666], [0.95, 1.0]], "maximum_bad_edge_fraction": 0.02, "magenta_hue_ranges": [[0.77, 0.94]], "magenta_minimum_value": 0.2, "maximum_visible_magenta_pixels": 0, "require_transparent_pixels": true}, "path": "D:\\MagicStore\\assets\\items\\v3\\v3r1\\calming_incense_64.png"}, {"passed": true, "errors": [], "size": [256, 256], "has_alpha": true, "visible_pixels": 21682, "transparent_pixels": 43854, "edge_pixels": 3596, "red_yellow_pixels": 0, "red_yellow_fraction": 0.0, "magenta_pixels": 0, "edge_denominator": "pixels with 0 < alpha < 255", "limits": {"saturation_threshold": 0.6, "red_yellow_hue_ranges": [[0.0, 0.16666666666666666], [0.95, 1.0]], "maximum_bad_edge_fraction": 0.02, "magenta_hue_ranges": [[0.77, 0.94]], "magenta_minimum_value": 0.2, "maximum_visible_magenta_pixels": 0, "require_transparent_pixels": true}, "path": "D:\\MagicStore\\assets\\items\\v3\\v3r1\\restorative_draught.png"}, {"passed": true, "errors": [], "size": [64, 64], "has_alpha": true, "visible_pixels": 1493, "transparent_pixels": 2603, "edge_pixels": 485, "red_yellow_pixels": 0, "red_yellow_fraction": 0.0, "magenta_pixels": 0, "edge_denominator": "pixels with 0 < alpha < 255", "limits": {"saturation_threshold": 0.6, "red_yellow_hue_ranges": [[0.0, 0.16666666666666666], [0.95, 1.0]], "maximum_bad_edge_fraction": 0.02, "magenta_hue_ranges": [[0.77, 0.94]], "magenta_minimum_value": 0.2, "maximum_visible_magenta_pixels": 0, "require_transparent_pixels": true}, "path": "D:\\MagicStore\\assets\\items\\v3\\v3r1\\restorative_draught_64.png"}, {"passed": true, "errors": [], "size": [256, 256], "has_alpha": true, "visible_pixels": 18253, "transparent_pixels": 47283, "edge_pixels": 3938, "red_yellow_pixels": 0, "red_yellow_fraction": 0.0, "magenta_pixels": 0, "edge_denominator": "pixels with 0 < alpha < 255", "limits": {"saturation_threshold": 0.6, "red_yellow_hue_ranges": [[0.0, 0.16666666666666666], [0.95, 1.0]], "maximum_bad_edge_fraction": 0.02, "magenta_hue_ranges": [[0.77, 0.94]], "magenta_minimum_value": 0.2, "maximum_visible_magenta_pixels": 0, "require_transparent_pixels": true}, "path": "D:\\MagicStore\\assets\\items\\v3\\v3r1\\clarity_crystal.png"}, {"passed": true, "errors": [], "size": [64, 64], "has_alpha": true, "visible_pixels": 1277, "transparent_pixels": 2819, "edge_pixels": 509, "red_yellow_pixels": 0, "red_yellow_fraction": 0.0, "magenta_pixels": 0, "edge_denominator": "pixels with 0 < alpha < 255", "limits": {"saturation_threshold": 0.6, "red_yellow_hue_ranges": [[0.0, 0.16666666666666666], [0.95, 1.0]], "maximum_bad_edge_fraction": 0.02, "magenta_hue_ranges": [[0.77, 0.94]], "magenta_minimum_value": 0.2, "maximum_visible_magenta_pixels": 0, "require_transparent_pixels": true}, "path": "D:\\MagicStore\\assets\\items\\v3\\v3r1\\clarity_crystal_64.png"}, {"passed": true, "errors": [], "size": [256, 256], "has_alpha": true, "visible_pixels": 14039, "transparent_pixels": 51497, "edge_pixels": 3172, "red_yellow_pixels": 0, "red_yellow_fraction": 0.0, "magenta_pixels": 0, "edge_denominator": "pixels with 0 < alpha < 255", "limits": {"saturation_threshold": 0.6, "red_yellow_hue_ranges": [[0.0, 0.16666666666666666], [0.95, 1.0]], "maximum_bad_edge_fraction": 0.02, "magenta_hue_ranges": [[0.77, 0.94]], "magenta_minimum_value": 0.2, "maximum_visible_magenta_pixels": 0, "require_transparent_pixels": true}, "path": "D:\\MagicStore\\assets\\items\\v3\\v3r1\\bookmark.png"}, {"passed": true, "errors": [], "size": [64, 64], "has_alpha": true, "visible_pixels": 978, "transparent_pixels": 3118, "edge_pixels": 419, "red_yellow_pixels": 0, "red_yellow_fraction": 0.0, "magenta_pixels": 0, "edge_denominator": "pixels with 0 < alpha < 255", "limits": {"saturation_threshold": 0.6, "red_yellow_hue_ranges": [[0.0, 0.16666666666666666], [0.95, 1.0]], "maximum_bad_edge_fraction": 0.02, "magenta_hue_ranges": [[0.77, 0.94]], "magenta_minimum_value": 0.2, "maximum_visible_magenta_pixels": 0, "require_transparent_pixels": true}, "path": "D:\\MagicStore\\assets\\items\\v3\\v3r1\\bookmark_64.png"}, {"passed": true, "errors": [], "size": [256, 256], "has_alpha": true, "visible_pixels": 19871, "transparent_pixels": 45665, "edge_pixels": 3211, "red_yellow_pixels": 0, "red_yellow_fraction": 0.0, "magenta_pixels": 0, "edge_denominator": "pixels with 0 < alpha < 255", "limits": {"saturation_threshold": 0.6, "red_yellow_hue_ranges": [[0.0, 0.16666666666666666], [0.95, 1.0]], "maximum_bad_edge_fraction": 0.02, "magenta_hue_ranges": [[0.77, 0.94]], "magenta_minimum_value": 0.2, "maximum_visible_magenta_pixels": 0, "require_transparent_pixels": true}, "path": "D:\\MagicStore\\assets\\items\\v3\\v3r1\\silver_leaf.png"}, {"passed": true, "errors": [], "size": [64, 64], "has_alpha": true, "visible_pixels": 1363, "transparent_pixels": 2733, "edge_pixels": 432, "red_yellow_pixels": 0, "red_yellow_fraction": 0.0, "magenta_pixels": 0, "edge_denominator": "pixels with 0 < alpha < 255", "limits": {"saturation_threshold": 0.6, "red_yellow_hue_ranges": [[0.0, 0.16666666666666666], [0.95, 1.0]], "maximum_bad_edge_fraction": 0.02, "magenta_hue_ranges": [[0.77, 0.94]], "magenta_minimum_value": 0.2, "maximum_visible_magenta_pixels": 0, "require_transparent_pixels": true}, "path": "D:\\MagicStore\\assets\\items\\v3\\v3r1\\silver_leaf_64.png"}]}
+SKIP LOCAL ART: data/art/real_scene_registry.json / LOCAL_AUDIT_RETIRED; no archived image acceptance claimed.

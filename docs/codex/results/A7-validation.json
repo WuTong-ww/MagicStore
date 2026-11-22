@@ -1,0 +1,31 @@
+{
+  "task": "A7",
+  "status": "部分完成",
+  "own_acceptance": "通过",
+  "full_round": 2,
+  "exit_code": 0,
+  "godot_passed": 8888,
+  "gateway_passed": 94,
+  "art_passed": 172,
+  "passed": 9154,
+  "total": 9154,
+  "errors": 0,
+  "warnings": 0,
+  "graphics_round": 3,
+  "shelf_preview": {
+    "passed": 940,
+    "total": 940,
+    "captures": 19
+  },
+  "shop_ui": {
+    "passed": 710,
+    "total": 710,
+    "writes": 23,
+    "current_frames": 22
+  },
+  "formal_sources": 169,
+  "alpha_files": 18,
+  "legacy_audits_explicit_skip": 3,
+  "deliberately_missing_local_raw_fixture_skip": 1,
+  "remaining": "A7自己项目全过；全站shop帧沿用的旧NPC/人物卡按钮/烘焙问号仍不通过，留A4/最终审阅，不把通用全站项伪报全部通过。"
+}

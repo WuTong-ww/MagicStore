@@ -96,8 +96,8 @@ func check_fullscreen(page: String,dimensions: Vector2i) -> void:
 	for background: TextureRect in visual.backgrounds.values():
 		check(background.texture != null,"scene background has an imported texture / "+page+" / "+str(dimensions))
 		check(background.get_global_rect().grow(1).encloses(viewport),"cover background has no uncovered edges / "+page+" / "+str(dimensions))
-	if page == "inventory" and main.screen.inventory_grid != null:
-		check(viewport.grow(1).encloses(main.screen.inventory_grid.get_global_rect()),"inventory item region stays inside cropped window / "+str(dimensions))
+	if page == "inventory" and main.screen.shelf_view != null:
+		check(viewport.grow(1).encloses(main.screen.shelf_view.get_global_rect()),"inventory shelf interaction region stays inside cropped window / "+str(dimensions))
 	if page == "front":
 		var drawer: Control = main.screen.get_node("FrontDrawer")
 		for key: String in visual.config.scenes[visual.scene_id].hotspots:

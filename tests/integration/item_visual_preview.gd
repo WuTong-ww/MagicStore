@@ -144,9 +144,9 @@ func check_scene(page: String, dimensions: Vector2i) -> void:
 		if button.is_visible_in_tree() and not button.get_meta("decorative_hotspot",false):
 			check(not button.text.strip_edges().is_empty(),"visible action has dynamic text / "+page)
 	if page == "inventory":
-		check(main.screen.inventory_grid != null,"A2R retains the existing grid until A7")
-		for cell: Control in main.screen.inventory_grid.get_children():
-			check(cell.find_children("PurposeBadge_*","",true,false).is_empty(),"purpose chips are kept off shelf cells")
+		check(main.screen.shelf_view != null,"A7 production cabinet retains the actual shelf renderer")
+		check(main.screen.shelf_view.find_children("PurposeBadge_*","",true,false).is_empty(),"purpose chips are kept off actual shelves")
+		check(main.screen.find_children("InventoryGrid","",true,false).is_empty(),"A2R preview follows the current A7 cabinet without old wooden cells")
 
 func capture(label: String) -> void:
 	await process_frame

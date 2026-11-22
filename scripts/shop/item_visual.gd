@@ -31,6 +31,8 @@ static func _hash(value: Variant) -> bool:
 	return value is String and value.length() == 64 and value.is_valid_hex_number(false)
 
 static func settings_valid(settings: Dictionary) -> bool:
+	if not settings.get("shelf_unavailable") is String or settings.shelf_unavailable.strip_edges().is_empty():
+		return false
 	if settings.get("version") != 1 or not _pair(settings.get("large_size")) or not _pair(settings.get("small_size")):
 		return false
 	for field: String in ["alpha_threshold","contact_band_rows","legacy_grid"]:

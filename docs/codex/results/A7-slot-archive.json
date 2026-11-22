@@ -1,0 +1,9 @@
+{
+  "task": "A7",
+  "protected_v2_source": "assets/generated_scenes/v2/slices/S04_slot.png",
+  "legacy_archive": "assets/_legacy/a7/S04_slot.png",
+  "sha256": "8c3e1555b937a996a03898a276e242fab2c35adbdfb070b0be0b1c1e704436d4",
+  "native_file_unchanged": true,
+  "active_slot_usage": false,
+  "reason": "User requires keeping every original v2 file; archive identical bytes and remove active slot reference instead of moving/deleting protected source. Git deduplicates equal blobs. Legacy .gdignore prevents duplicate UID/import."
+}

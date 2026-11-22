@@ -1,0 +1,1140 @@
+{
+  "kind": "diagnostic_200percent_contact_review",
+  "passed": 12,
+  "total": 12,
+  "scope": "诊断裁切而非新游戏窗口，五项通用检查继承已打开的原source完整窗口；未绘改原PNG",
+  "frames": [
+    {
+      "source": ".tools/art/previews/A7/v3/cabinet-render-only-1-day-1280x720.png",
+      "path": ".tools/art/a7/contact-200/cabinet-render-only-1-day-1280x720.png",
+      "scale": 2,
+      "method": "Lanczos diagnostic enlargement only",
+      "tiles": [
+        {
+          "item_id": "calming_incense",
+          "source_box": [
+            183,
+            168,
+            313,
+            208
+          ],
+          "tile": [
+            0,
+            0
+          ]
+        }
+      ],
+      "sha256": "bdac3ec198cc33418408e28d562173f4d2484beae2d16a4676ed8349b4b07942",
+      "reviewer": "root actual 200% screenshot contact crop opened",
+      "passed": true,
+      "reason": "前方副本底部与层板接触，无亮缝或悬空；后副本左上偏移为规定的堆叠；阴影贴板，不随选中物品上提。全窗口五项见对应source帧。"
+    },
+    {
+      "source": ".tools/art/previews/A7/v3/cabinet-render-only-9-day-1280x720.png",
+      "path": ".tools/art/a7/contact-200/cabinet-render-only-9-day-1280x720.png",
+      "scale": 2,
+      "method": "Lanczos diagnostic enlargement only",
+      "tiles": [
+        {
+          "item_id": "calming_incense",
+          "source_box": [
+            183,
+            168,
+            313,
+            208
+          ],
+          "tile": [
+            0,
+            0
+          ]
+        },
+        {
+          "item_id": "restorative_draught",
+          "source_box": [
+            258,
+            168,
+            388,
+            208
+          ],
+          "tile": [
+            1,
+            0
+          ]
+        },
+        {
+          "item_id": "clarity_crystal",
+          "source_box": [
+            327,
+            168,
+            457,
+            208
+          ],
+          "tile": [
+            2,
+            0
+          ]
+        },
+        {
+          "item_id": "lavender",
+          "source_box": [
+            392,
+            168,
+            522,
+            208
+          ],
+          "tile": [
+            0,
+            1
+          ]
+        },
+        {
+          "item_id": "spring_water",
+          "source_box": [
+            447,
+            168,
+            577,
+            208
+          ],
+          "tile": [
+            1,
+            1
+          ]
+        },
+        {
+          "item_id": "quartz",
+          "source_box": [
+            516,
+            168,
+            646,
+            208
+          ],
+          "tile": [
+            2,
+            1
+          ]
+        },
+        {
+          "item_id": "moon_dust",
+          "source_box": [
+            605,
+            168,
+            735,
+            208
+          ],
+          "tile": [
+            0,
+            2
+          ]
+        },
+        {
+          "item_id": "bookmark",
+          "source_box": [
+            671,
+            168,
+            801,
+            208
+          ],
+          "tile": [
+            1,
+            2
+          ]
+        },
+        {
+          "item_id": "silver_leaf",
+          "source_box": [
+            175,
+            272,
+            305,
+            312
+          ],
+          "tile": [
+            2,
+            2
+          ]
+        }
+      ],
+      "sha256": "1c976e8c3d23553c3cfd485dd60246c963cef1966b1feb512bc694518823c2bc",
+      "reviewer": "root actual 200% screenshot contact crop opened",
+      "passed": true,
+      "reason": "前方副本底部与层板接触，无亮缝或悬空；后副本左上偏移为规定的堆叠；阴影贴板，不随选中物品上提。全窗口五项见对应source帧。"
+    },
+    {
+      "source": ".tools/art/previews/A7/v3/cabinet-render-only-30-day-1280x720.png",
+      "path": ".tools/art/a7/contact-200/cabinet-render-only-30-day-1280x720.png",
+      "scale": 2,
+      "method": "Lanczos diagnostic enlargement only",
+      "tiles": [
+        {
+          "item_id": "calming_incense",
+          "source_box": [
+            198,
+            168,
+            328,
+            208
+          ],
+          "tile": [
+            0,
+            0
+          ]
+        },
+        {
+          "item_id": "restorative_draught",
+          "source_box": [
+            289,
+            168,
+            419,
+            208
+          ],
+          "tile": [
+            1,
+            0
+          ]
+        },
+        {
+          "item_id": "clarity_crystal",
+          "source_box": [
+            374,
+            168,
+            504,
+            208
+          ],
+          "tile": [
+            2,
+            0
+          ]
+        },
+        {
+          "item_id": "lavender",
+          "source_box": [
+            455,
+            168,
+            585,
+            208
+          ],
+          "tile": [
+            0,
+            1
+          ]
+        },
+        {
+          "item_id": "spring_water",
+          "source_box": [
+            525,
+            168,
+            655,
+            208
+          ],
+          "tile": [
+            1,
+            1
+          ]
+        },
+        {
+          "item_id": "quartz",
+          "source_box": [
+            609,
+            168,
+            739,
+            208
+          ],
+          "tile": [
+            2,
+            1
+          ]
+        },
+        {
+          "item_id": "moon_dust",
+          "source_box": [
+            200,
+            272,
+            330,
+            312
+          ],
+          "tile": [
+            0,
+            2
+          ]
+        },
+        {
+          "item_id": "bookmark",
+          "source_box": [
+            284,
+            272,
+            414,
+            312
+          ],
+          "tile": [
+            1,
+            2
+          ]
+        },
+        {
+          "item_id": "silver_leaf",
+          "source_box": [
+            353,
+            272,
+            483,
+            312
+          ],
+          "tile": [
+            2,
+            2
+          ]
+        }
+      ],
+      "sha256": "5b1488e3262c19a50b0b2ab8660971c4c46a31083ffcebc8e414527f0f63c01b",
+      "reviewer": "root actual 200% screenshot contact crop opened",
+      "passed": true,
+      "reason": "前方副本底部与层板接触，无亮缝或悬空；后副本左上偏移为规定的堆叠；阴影贴板，不随选中物品上提。全窗口五项见对应source帧。"
+    },
+    {
+      "source": ".tools/art/previews/A7/v3/cabinet-render-only-1-night-1280x720.png",
+      "path": ".tools/art/a7/contact-200/cabinet-render-only-1-night-1280x720.png",
+      "scale": 2,
+      "method": "Lanczos diagnostic enlargement only",
+      "tiles": [
+        {
+          "item_id": "calming_incense",
+          "source_box": [
+            183,
+            168,
+            313,
+            208
+          ],
+          "tile": [
+            0,
+            0
+          ]
+        }
+      ],
+      "sha256": "1595b0b27d691039a944b688dd7440d6e3c0ab44d5eb227ebbbbb5f9d27613f8",
+      "reviewer": "root actual 200% screenshot contact crop opened",
+      "passed": true,
+      "reason": "前方副本底部与层板接触，无亮缝或悬空；后副本左上偏移为规定的堆叠；阴影贴板，不随选中物品上提。全窗口五项见对应source帧。"
+    },
+    {
+      "source": ".tools/art/previews/A7/v3/cabinet-render-only-9-night-1280x720.png",
+      "path": ".tools/art/a7/contact-200/cabinet-render-only-9-night-1280x720.png",
+      "scale": 2,
+      "method": "Lanczos diagnostic enlargement only",
+      "tiles": [
+        {
+          "item_id": "calming_incense",
+          "source_box": [
+            183,
+            168,
+            313,
+            208
+          ],
+          "tile": [
+            0,
+            0
+          ]
+        },
+        {
+          "item_id": "restorative_draught",
+          "source_box": [
+            258,
+            168,
+            388,
+            208
+          ],
+          "tile": [
+            1,
+            0
+          ]
+        },
+        {
+          "item_id": "clarity_crystal",
+          "source_box": [
+            327,
+            168,
+            457,
+            208
+          ],
+          "tile": [
+            2,
+            0
+          ]
+        },
+        {
+          "item_id": "lavender",
+          "source_box": [
+            392,
+            168,
+            522,
+            208
+          ],
+          "tile": [
+            0,
+            1
+          ]
+        },
+        {
+          "item_id": "spring_water",
+          "source_box": [
+            447,
+            168,
+            577,
+            208
+          ],
+          "tile": [
+            1,
+            1
+          ]
+        },
+        {
+          "item_id": "quartz",
+          "source_box": [
+            516,
+            168,
+            646,
+            208
+          ],
+          "tile": [
+            2,
+            1
+          ]
+        },
+        {
+          "item_id": "moon_dust",
+          "source_box": [
+            605,
+            168,
+            735,
+            208
+          ],
+          "tile": [
+            0,
+            2
+          ]
+        },
+        {
+          "item_id": "bookmark",
+          "source_box": [
+            671,
+            168,
+            801,
+            208
+          ],
+          "tile": [
+            1,
+            2
+          ]
+        },
+        {
+          "item_id": "silver_leaf",
+          "source_box": [
+            175,
+            272,
+            305,
+            312
+          ],
+          "tile": [
+            2,
+            2
+          ]
+        }
+      ],
+      "sha256": "c560f9913750e59f4528a94df34701fab9881812bb2cdee8c64f484cd21cebec",
+      "reviewer": "root actual 200% screenshot contact crop opened",
+      "passed": true,
+      "reason": "前方副本底部与层板接触，无亮缝或悬空；后副本左上偏移为规定的堆叠；阴影贴板，不随选中物品上提。全窗口五项见对应source帧。"
+    },
+    {
+      "source": ".tools/art/previews/A7/v3/cabinet-render-only-30-night-1280x720.png",
+      "path": ".tools/art/a7/contact-200/cabinet-render-only-30-night-1280x720.png",
+      "scale": 2,
+      "method": "Lanczos diagnostic enlargement only",
+      "tiles": [
+        {
+          "item_id": "calming_incense",
+          "source_box": [
+            198,
+            168,
+            328,
+            208
+          ],
+          "tile": [
+            0,
+            0
+          ]
+        },
+        {
+          "item_id": "restorative_draught",
+          "source_box": [
+            289,
+            168,
+            419,
+            208
+          ],
+          "tile": [
+            1,
+            0
+          ]
+        },
+        {
+          "item_id": "clarity_crystal",
+          "source_box": [
+            374,
+            168,
+            504,
+            208
+          ],
+          "tile": [
+            2,
+            0
+          ]
+        },
+        {
+          "item_id": "lavender",
+          "source_box": [
+            455,
+            168,
+            585,
+            208
+          ],
+          "tile": [
+            0,
+            1
+          ]
+        },
+        {
+          "item_id": "spring_water",
+          "source_box": [
+            525,
+            168,
+            655,
+            208
+          ],
+          "tile": [
+            1,
+            1
+          ]
+        },
+        {
+          "item_id": "quartz",
+          "source_box": [
+            609,
+            168,
+            739,
+            208
+          ],
+          "tile": [
+            2,
+            1
+          ]
+        },
+        {
+          "item_id": "moon_dust",
+          "source_box": [
+            200,
+            272,
+            330,
+            312
+          ],
+          "tile": [
+            0,
+            2
+          ]
+        },
+        {
+          "item_id": "bookmark",
+          "source_box": [
+            284,
+            272,
+            414,
+            312
+          ],
+          "tile": [
+            1,
+            2
+          ]
+        },
+        {
+          "item_id": "silver_leaf",
+          "source_box": [
+            353,
+            272,
+            483,
+            312
+          ],
+          "tile": [
+            2,
+            2
+          ]
+        }
+      ],
+      "sha256": "1bfbab9eb3be87375c2612d4924feeb160f2a9e83e0601e0aa668c983083be67",
+      "reviewer": "root actual 200% screenshot contact crop opened",
+      "passed": true,
+      "reason": "前方副本底部与层板接触，无亮缝或悬空；后副本左上偏移为规定的堆叠；阴影贴板，不随选中物品上提。全窗口五项见对应source帧。"
+    },
+    {
+      "source": ".tools/art/previews/A7/v3/cabinet-render-only-1-day-1920x1080.png",
+      "path": ".tools/art/a7/contact-200/cabinet-render-only-1-day-1920x1080.png",
+      "scale": 2,
+      "method": "Lanczos diagnostic enlargement only",
+      "tiles": [
+        {
+          "item_id": "calming_incense",
+          "source_box": [
+            306,
+            259,
+            436,
+            299
+          ],
+          "tile": [
+            0,
+            0
+          ]
+        }
+      ],
+      "sha256": "da0c70845edb649f9d8b9d8bfc4b188dd4210d64c1b15f1b4705fa46e0006d90",
+      "reviewer": "root actual 200% screenshot contact crop opened",
+      "passed": true,
+      "reason": "前方副本底部与层板接触，无亮缝或悬空；后副本左上偏移为规定的堆叠；阴影贴板，不随选中物品上提。全窗口五项见对应source帧。"
+    },
+    {
+      "source": ".tools/art/previews/A7/v3/cabinet-render-only-9-day-1920x1080.png",
+      "path": ".tools/art/a7/contact-200/cabinet-render-only-9-day-1920x1080.png",
+      "scale": 2,
+      "method": "Lanczos diagnostic enlargement only",
+      "tiles": [
+        {
+          "item_id": "calming_incense",
+          "source_box": [
+            306,
+            259,
+            436,
+            299
+          ],
+          "tile": [
+            0,
+            0
+          ]
+        },
+        {
+          "item_id": "restorative_draught",
+          "source_box": [
+            420,
+            259,
+            550,
+            299
+          ],
+          "tile": [
+            1,
+            0
+          ]
+        },
+        {
+          "item_id": "clarity_crystal",
+          "source_box": [
+            523,
+            259,
+            653,
+            299
+          ],
+          "tile": [
+            2,
+            0
+          ]
+        },
+        {
+          "item_id": "lavender",
+          "source_box": [
+            621,
+            259,
+            751,
+            299
+          ],
+          "tile": [
+            0,
+            1
+          ]
+        },
+        {
+          "item_id": "spring_water",
+          "source_box": [
+            703,
+            259,
+            833,
+            299
+          ],
+          "tile": [
+            1,
+            1
+          ]
+        },
+        {
+          "item_id": "quartz",
+          "source_box": [
+            807,
+            259,
+            937,
+            299
+          ],
+          "tile": [
+            2,
+            1
+          ]
+        },
+        {
+          "item_id": "moon_dust",
+          "source_box": [
+            940,
+            259,
+            1070,
+            299
+          ],
+          "tile": [
+            0,
+            2
+          ]
+        },
+        {
+          "item_id": "bookmark",
+          "source_box": [
+            1039,
+            259,
+            1169,
+            299
+          ],
+          "tile": [
+            1,
+            2
+          ]
+        },
+        {
+          "item_id": "silver_leaf",
+          "source_box": [
+            294,
+            417,
+            424,
+            457
+          ],
+          "tile": [
+            2,
+            2
+          ]
+        }
+      ],
+      "sha256": "1b1dec17d1da7da713e016f8fb805c7e2b775fde50361e75e117b543ee43c4fb",
+      "reviewer": "root actual 200% screenshot contact crop opened",
+      "passed": true,
+      "reason": "前方副本底部与层板接触，无亮缝或悬空；后副本左上偏移为规定的堆叠；阴影贴板，不随选中物品上提。全窗口五项见对应source帧。"
+    },
+    {
+      "source": ".tools/art/previews/A7/v3/cabinet-render-only-30-day-1920x1080.png",
+      "path": ".tools/art/a7/contact-200/cabinet-render-only-30-day-1920x1080.png",
+      "scale": 2,
+      "method": "Lanczos diagnostic enlargement only",
+      "tiles": [
+        {
+          "item_id": "calming_incense",
+          "source_box": [
+            330,
+            259,
+            460,
+            299
+          ],
+          "tile": [
+            0,
+            0
+          ]
+        },
+        {
+          "item_id": "restorative_draught",
+          "source_box": [
+            466,
+            259,
+            596,
+            299
+          ],
+          "tile": [
+            1,
+            0
+          ]
+        },
+        {
+          "item_id": "clarity_crystal",
+          "source_box": [
+            593,
+            259,
+            723,
+            299
+          ],
+          "tile": [
+            2,
+            0
+          ]
+        },
+        {
+          "item_id": "lavender",
+          "source_box": [
+            714,
+            259,
+            844,
+            299
+          ],
+          "tile": [
+            0,
+            1
+          ]
+        },
+        {
+          "item_id": "spring_water",
+          "source_box": [
+            820,
+            259,
+            950,
+            299
+          ],
+          "tile": [
+            1,
+            1
+          ]
+        },
+        {
+          "item_id": "quartz",
+          "source_box": [
+            947,
+            259,
+            1077,
+            299
+          ],
+          "tile": [
+            2,
+            1
+          ]
+        },
+        {
+          "item_id": "moon_dust",
+          "source_box": [
+            333,
+            417,
+            463,
+            457
+          ],
+          "tile": [
+            0,
+            2
+          ]
+        },
+        {
+          "item_id": "bookmark",
+          "source_box": [
+            458,
+            417,
+            588,
+            457
+          ],
+          "tile": [
+            1,
+            2
+          ]
+        },
+        {
+          "item_id": "silver_leaf",
+          "source_box": [
+            562,
+            417,
+            692,
+            457
+          ],
+          "tile": [
+            2,
+            2
+          ]
+        }
+      ],
+      "sha256": "a38b16766e9601ff5cc6bf89f448c07801d13c16c7f1bdd4e378e2a24a1e08f9",
+      "reviewer": "root actual 200% screenshot contact crop opened",
+      "passed": true,
+      "reason": "前方副本底部与层板接触，无亮缝或悬空；后副本左上偏移为规定的堆叠；阴影贴板，不随选中物品上提。全窗口五项见对应source帧。"
+    },
+    {
+      "source": ".tools/art/previews/A7/v3/cabinet-render-only-1-night-1920x1080.png",
+      "path": ".tools/art/a7/contact-200/cabinet-render-only-1-night-1920x1080.png",
+      "scale": 2,
+      "method": "Lanczos diagnostic enlargement only",
+      "tiles": [
+        {
+          "item_id": "calming_incense",
+          "source_box": [
+            306,
+            259,
+            436,
+            299
+          ],
+          "tile": [
+            0,
+            0
+          ]
+        }
+      ],
+      "sha256": "ad33f7f813981a71e88bc7c9d25295aadcc0d62de52026f66bd0b45f45c2b3f7",
+      "reviewer": "root actual 200% screenshot contact crop opened",
+      "passed": true,
+      "reason": "前方副本底部与层板接触，无亮缝或悬空；后副本左上偏移为规定的堆叠；阴影贴板，不随选中物品上提。全窗口五项见对应source帧。"
+    },
+    {
+      "source": ".tools/art/previews/A7/v3/cabinet-render-only-9-night-1920x1080.png",
+      "path": ".tools/art/a7/contact-200/cabinet-render-only-9-night-1920x1080.png",
+      "scale": 2,
+      "method": "Lanczos diagnostic enlargement only",
+      "tiles": [
+        {
+          "item_id": "calming_incense",
+          "source_box": [
+            306,
+            259,
+            436,
+            299
+          ],
+          "tile": [
+            0,
+            0
+          ]
+        },
+        {
+          "item_id": "restorative_draught",
+          "source_box": [
+            420,
+            259,
+            550,
+            299
+          ],
+          "tile": [
+            1,
+            0
+          ]
+        },
+        {
+          "item_id": "clarity_crystal",
+          "source_box": [
+            523,
+            259,
+            653,
+            299
+          ],
+          "tile": [
+            2,
+            0
+          ]
+        },
+        {
+          "item_id": "lavender",
+          "source_box": [
+            621,
+            259,
+            751,
+            299
+          ],
+          "tile": [
+            0,
+            1
+          ]
+        },
+        {
+          "item_id": "spring_water",
+          "source_box": [
+            703,
+            259,
+            833,
+            299
+          ],
+          "tile": [
+            1,
+            1
+          ]
+        },
+        {
+          "item_id": "quartz",
+          "source_box": [
+            807,
+            259,
+            937,
+            299
+          ],
+          "tile": [
+            2,
+            1
+          ]
+        },
+        {
+          "item_id": "moon_dust",
+          "source_box": [
+            940,
+            259,
+            1070,
+            299
+          ],
+          "tile": [
+            0,
+            2
+          ]
+        },
+        {
+          "item_id": "bookmark",
+          "source_box": [
+            1039,
+            259,
+            1169,
+            299
+          ],
+          "tile": [
+            1,
+            2
+          ]
+        },
+        {
+          "item_id": "silver_leaf",
+          "source_box": [
+            294,
+            417,
+            424,
+            457
+          ],
+          "tile": [
+            2,
+            2
+          ]
+        }
+      ],
+      "sha256": "561d3d5ae1e5973ae6df5f7aa96464b8ad8fb521b5b837d57a9b3269d9bad098",
+      "reviewer": "root actual 200% screenshot contact crop opened",
+      "passed": true,
+      "reason": "前方副本底部与层板接触，无亮缝或悬空；后副本左上偏移为规定的堆叠；阴影贴板，不随选中物品上提。全窗口五项见对应source帧。"
+    },
+    {
+      "source": ".tools/art/previews/A7/v3/cabinet-render-only-30-night-1920x1080.png",
+      "path": ".tools/art/a7/contact-200/cabinet-render-only-30-night-1920x1080.png",
+      "scale": 2,
+      "method": "Lanczos diagnostic enlargement only",
+      "tiles": [
+        {
+          "item_id": "calming_incense",
+          "source_box": [
+            330,
+            259,
+            460,
+            299
+          ],
+          "tile": [
+            0,
+            0
+          ]
+        },
+        {
+          "item_id": "restorative_draught",
+          "source_box": [
+            466,
+            259,
+            596,
+            299
+          ],
+          "tile": [
+            1,
+            0
+          ]
+        },
+        {
+          "item_id": "clarity_crystal",
+          "source_box": [
+            593,
+            259,
+            723,
+            299
+          ],
+          "tile": [
+            2,
+            0
+          ]
+        },
+        {
+          "item_id": "lavender",
+          "source_box": [
+            714,
+            259,
+            844,
+            299
+          ],
+          "tile": [
+            0,
+            1
+          ]
+        },
+        {
+          "item_id": "spring_water",
+          "source_box": [
+            820,
+            259,
+            950,
+            299
+          ],
+          "tile": [
+            1,
+            1
+          ]
+        },
+        {
+          "item_id": "quartz",
+          "source_box": [
+            947,
+            259,
+            1077,
+            299
+          ],
+          "tile": [
+            2,
+            1
+          ]
+        },
+        {
+          "item_id": "moon_dust",
+          "source_box": [
+            333,
+            417,
+            463,
+            457
+          ],
+          "tile": [
+            0,
+            2
+          ]
+        },
+        {
+          "item_id": "bookmark",
+          "source_box": [
+            458,
+            417,
+            588,
+            457
+          ],
+          "tile": [
+            1,
+            2
+          ]
+        },
+        {
+          "item_id": "silver_leaf",
+          "source_box": [
+            562,
+            417,
+            692,
+            457
+          ],
+          "tile": [
+            2,
+            2
+          ]
+        }
+      ],
+      "sha256": "daf53332297b61f3cd8189dee487f4524f9471aab84759b2c3a34e5ac326cacf",
+      "reviewer": "root actual 200% screenshot contact crop opened",
+      "passed": true,
+      "reason": "前方副本底部与层板接触，无亮缝或悬空；后副本左上偏移为规定的堆叠；阴影贴板，不随选中物品上提。全窗口五项见对应source帧。"
+    }
+  ]
+}

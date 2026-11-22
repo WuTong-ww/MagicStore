@@ -219,6 +219,53 @@ class RealSceneRegistryTests(unittest.TestCase):
         self.assertTrue(scene["preview_only"])
         self.assertFalse(scene["art_passed"])
 
+    def test_a7_baseline_preserves_native_shelf_geometry_without_reviving_slot(self):
+        module = implementation(self)
+        registry, _, baseline = self.fixture()
+        cabinet = baseline["scenes"]["S04"]
+        del cabinet["layers"]["slot"]
+        cabinet["shelves"] = [{"y": 238, "x_start": 278, "x_end": 1045,
+            "depth_scale": 0.45, "light_tint_day": "#F4ECD8", "light_tint_night": "#CCD1C6"}]
+        cabinet["shelf_layout"] = {"native_size": [1672, 941],
+            "source_crop": [0, 0.25, 1672, 940.75], "gap_px": [16, 24],
+            "stack_offset_px": [-10, -10], "max_copies": 3,
+            "labels": {"details_heading": "物品详情", "all_items_heading": "全部物品",
+                       "overflow_heading": "柜外库存"}}
+        dump(self.workspace, registry["baseline"], baseline)
+        original = (self.workspace / registry["baseline"]).read_bytes()
+
+        result = module.build_proposals(self.workspace, registry)["scene_review"]["scenes"]["S04"]
+
+        self.assertEqual(result["shelves"], cabinet["shelves"])
+        self.assertEqual(result["shelf_layout"], cabinet["shelf_layout"])
+        self.assertNotIn("slot", result["layers"])
+        self.assertIn("door_open", result["layers"])
+        self.assertEqual((self.workspace / registry["baseline"]).read_bytes(), original)
+
+    def test_baseline_requires_legacy_slot_or_complete_shelf_contract(self):
+        module = implementation(self)
+        registry, _, baseline = self.fixture()
+        del baseline["scenes"]["S04"]["layers"]["slot"]
+        dump(self.workspace, registry["baseline"], baseline)
+
+        with self.assertRaisesRegex(ValueError, "legacy S04 slot.*shelves.*shelf_layout"):
+            module.build_proposals(self.workspace, registry)
+
+    def test_a7_baseline_rejects_missing_or_empty_half_of_shelf_contract(self):
+        module = implementation(self)
+        registry, _, baseline = self.fixture()
+        del baseline["scenes"]["S04"]["layers"]["slot"]
+        for geometry in ({"shelves": [{"y": 238}]},
+                         {"shelf_layout": {"native_size": [1672, 941]}},
+                         {"shelves": [], "shelf_layout": {"native_size": [1672, 941]}},
+                         {"shelves": [{"y": 238}], "shelf_layout": {}}):
+            with self.subTest(geometry=geometry):
+                invalid = copy.deepcopy(baseline)
+                invalid["scenes"]["S04"].update(geometry)
+                dump(self.workspace, registry["baseline"], invalid)
+                with self.assertRaisesRegex(ValueError, "legacy S04 slot.*shelves.*shelf_layout"):
+                    module.build_proposals(self.workspace, registry)
+
     def test_s04_uses_four_state_backgrounds_and_state_specific_lamps(self):
         module = implementation(self)
         registry, _, _ = self.fixture()

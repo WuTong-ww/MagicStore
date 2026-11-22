@@ -6880,5 +6880,38 @@
       64
     ],
     "limits": "All alpha pass; bookmark/resin material identification may need manual polish; actual UI acceptance pending."
-  }
+  },
+  "a7_runtime_materials": [
+    {
+      "id": "shelf_contact_shadow",
+      "version": 1,
+      "generation_mode": "deterministic_Godot_runtime",
+      "generator": "GradientTexture2D radial + Compatibility canvas_item blend_mul",
+      "implementation": "scripts/shop/shelf_view.gd::_make_shadow",
+      "configuration": "data/shop/visuals.json:scenes.S04.shelf_layout.shadow",
+      "size": [
+        128,
+        32
+      ],
+      "prompt": "Soft elliptical contact shadow; width measured from item support, no baked text.",
+      "runtime_opacity": 0.35,
+      "persisted_bitmap": false
+    },
+    {
+      "id": "shelf_shared_paper",
+      "version": 1,
+      "generation_mode": "deterministic_Godot_runtime",
+      "generator": "FastNoiseLite + NoiseTexture2D seamless + Compatibility canvas_item blend_mul",
+      "implementation": "scripts/shop/shelf_view.gd::_make_paper",
+      "configuration": "data/shop/visuals.json:scenes.S04.shelf_layout.paper",
+      "size": [
+        256,
+        256
+      ],
+      "prompt": "Faint irregular matte paper grain shared by painted background and foreground; no letters or decorative motifs.",
+      "reference_path": "assets/generated_scenes/v3_final/style_reference.png",
+      "runtime_opacity": 0.08,
+      "persisted_bitmap": false
+    }
+  ]
 }

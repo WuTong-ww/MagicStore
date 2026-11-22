@@ -14,6 +14,11 @@ static func legacy(raw: Dictionary) -> Dictionary:
 	for id: String in result.scenes:
 		var scene: Dictionary = result.scenes[id]
 		scene.erase("layer_format")
+		# A7 production uses source-pixel shelf geometry. Historical slice fixtures
+		# must exercise the old required-slot contract, rather than accidentally
+		# inheriting the active shelf branch from the supplied production JSON.
+		scene.erase("shelves")
+		scene.erase("shelf_layout")
 		scene.day = DAY
 		scene.night = NIGHT
 		if id == "S01":

@@ -695,29 +695,6 @@
       "day": "res://assets/generated_scenes/runtime/v3_final/S04/day_open/v3r2/C.png",
       "night": "res://assets/generated_scenes/runtime/v3_final/S04/night_open/v3r2/C.png",
       "layers": {
-        "slot": {
-          "path": "res://assets/generated_scenes/v2/slices/S04_slot.png",
-          "rect": [
-            0,
-            0,
-            380,
-            300
-          ],
-          "hotspot": [
-            0,
-            0,
-            380,
-            300
-          ],
-          "display": "cell",
-          "source_region": [
-            29,
-            105,
-            1478,
-            824
-          ],
-          "legacy": true
-        },
         "door_closed": {
           "path": "res://assets/generated_scenes/runtime/v3_final/S04/day_closed/v3r3_subset/layers/door_closed.png",
           "rect": [
@@ -936,6 +913,129 @@
         "closed": {
           "day": "res://assets/generated_scenes/runtime/v3_final/S04/day_closed/v3r3_subset/B_all.png",
           "night": "res://assets/generated_scenes/runtime/v3_final/S04/night_closed/v3r3_subset/B_all.png"
+        }
+      },
+      "shelves": [
+        {
+          "y": 238,
+          "x_start": 278,
+          "x_end": 1045,
+          "depth_scale": 0.45,
+          "light_tint_day": "#F4ECD8",
+          "light_tint_night": "#858D88"
+        },
+        {
+          "y": 375,
+          "x_start": 278,
+          "x_end": 1045,
+          "depth_scale": 0.47,
+          "light_tint_day": "#EEE6D4",
+          "light_tint_night": "#9A9E8D"
+        },
+        {
+          "y": 486,
+          "x_start": 278,
+          "x_end": 1045,
+          "depth_scale": 0.49,
+          "light_tint_day": "#E8E1D2",
+          "light_tint_night": "#C6B99A"
+        },
+        {
+          "y": 626,
+          "x_start": 278,
+          "x_end": 1045,
+          "depth_scale": 0.51,
+          "light_tint_day": "#E0DDCF",
+          "light_tint_night": "#DEC496"
+        }
+      ],
+      "shelf_layout": {
+        "native_size": [
+          1672,
+          941
+        ],
+        "source_crop": [
+          0,
+          0.25,
+          1672,
+          940.75
+        ],
+        "category_order": [
+          "product",
+          "material",
+          "keepsake"
+        ],
+        "contact_inset_px": 2,
+        "gap_px": [
+          16,
+          24
+        ],
+        "rotation_max_degrees": 1.5,
+        "stack_offset_px": [
+          -10,
+          -10
+        ],
+        "max_copies": 3,
+        "stack_darkening_step": 0.1,
+        "selection_lift_px": 6,
+        "selection_seconds": 0.15,
+        "quantity_format": "×%d",
+        "shadow": {
+          "width_factor": 1.1,
+          "height_px": 12,
+          "opacity": 0.35,
+          "texture_size": [
+            128,
+            32
+          ]
+        },
+        "paper": {
+          "opacity": 0.08,
+          "texture_size": [
+            256,
+            256
+          ],
+          "noise_frequency": 0.04,
+          "seed": 7
+        },
+        "name_tag": {
+          "font_path": "res://assets/fonts/LXGWWenKai-Regular.ttf",
+          "font_size": 18,
+          "text_color": "#382C24",
+          "paper_color": "#F3E9D6",
+          "border_color": "#B6A58C",
+          "border_width_px": 1,
+          "padding_px": [
+            8,
+            4
+          ],
+          "drop_px": 8
+        },
+        "quantity_tag": {
+          "font_path": "res://assets/fonts/LXGWWenKai-Regular.ttf",
+          "font_size": 16,
+          "text_color": "#382C24",
+          "paper_color": "#F3E9D6",
+          "padding_px": [
+            5,
+            2
+          ],
+          "offset_px": [
+            12,
+            -18
+          ]
+        },
+        "debug": {
+          "toggle_key": "F3",
+          "line_width_px": 1,
+          "line_color": "#C64D3E",
+          "point_radius_px": 3,
+          "point_color": "#426A71"
+        },
+        "labels": {
+          "details_heading": "物品详情",
+          "all_items_heading": "柜内物品",
+          "overflow_heading": "抽屉中暂存的物品"
         }
       }
     },

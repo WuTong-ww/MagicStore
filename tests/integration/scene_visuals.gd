@@ -26,6 +26,8 @@ func run() -> void:
 	check_hotspot_settings(visual_script)
 	var legacy := LegacyFixture.legacy(parsed)
 	check(visual_script.config_valid(legacy),"original v2 slice contract remains supported independently of the active art version")
+	check(legacy.scenes.S04.layers.has("slot") and not legacy.scenes.S04.has("shelves"),"old slice compatibility does not silently route through the new shelf contract")
+	check(parsed.scenes.S04.get("shelves",[]) is Array and not parsed.scenes.S04.get("shelves",[]).is_empty() and not parsed.scenes.S04.layers.has("slot"),"production storage uses calibrated shelves without the old box slice")
 	for row: Array in [[539,"closed"],[540,"day"],[1079,"day"],[1080,"night"],[1320,"night"],[1321,"closed"],[1980,"day"]]:
 		check(visual_script.period(parsed,"S01",row[0]) == row[1], "exterior clock boundary " + str(row[0]))
 	check(visual_script.period(parsed,"S02",1321) == "night", "indoor scenes keep night lamps after closing")
@@ -202,52 +204,55 @@ func check_runtime(config: Dictionary) -> void:
 				game.state.player.items[id] = 1
 			main.show_screen("inventory")
 			await settle()
-			check_fixed_cells(main.screen.inventory_grid,config,count,dimensions)
+			check_shelf_items(main.screen.shelf_view,main.screen.scene_visual,config,count,dimensions)
 			if count == 1:
 				await capture("a1-inventory-single-render-only-"+str(dimensions.x))
 		for id: String in config.items:
 			game.state.player.items[id] = 1
 		main.show_screen("inventory")
 		await settle()
-		var grid: GridContainer = main.screen.inventory_grid
-		check_fixed_cells(grid,config,9,dimensions)
+		var shelf: Control = main.screen.shelf_view
+		var stable_layout := shelf_signature(shelf.layout_result)
+		check_shelf_items(shelf,main.screen.scene_visual,config,9,dimensions)
 		var resized_dimensions := Vector2i(1920,1080) if dimensions.x == 1280 else Vector2i(1280,720)
 		root.size = resized_dimensions
 		root.content_scale_size = resized_dimensions
 		await settle()
-		check_fixed_cells(grid,config,9,resized_dimensions)
+		check_shelf_items(shelf,main.screen.scene_visual,config,9,resized_dimensions)
+		check(shelf_signature(shelf.layout_result) == stable_layout,"window resize leaves source-pixel acquisition order, pivots and rotations unchanged")
 		root.size = dimensions
 		root.content_scale_size = dimensions
 		await settle()
-		check_fixed_cells(grid,config,9,dimensions)
+		check_shelf_items(shelf,main.screen.scene_visual,config,9,dimensions)
 		for actions: Node in main.screen.find_children("ItemActions","",true,false):
 			for button: Button in actions.get_children():
 				var width := button.get_theme_font("font").get_string_size(button.text,HORIZONTAL_ALIGNMENT_LEFT,-1,button.get_theme_font_size("font_size")).x
 				check(not button.clip_text and button.size.x >= width,"local inventory action button gives its full label enough width / "+button.text)
-		check(grid != null and grid.columns == config.scene_settings.inventory_columns and grid.get_child_count() == game.shop_view().items.size(),"inventory dynamically creates one cell per item at "+str(dimensions))
-		for cell: Control in grid.get_children():
-			check(cell.get_node("ItemIcon").texture != null and not cell.get_node("ItemDetails/ItemName").text.is_empty() and cell.get_node("ItemDetails/ItemQuantity").text.contains("数量"),"inventory icon, name and quantity use live controls")
-		for cell: Control in grid.get_children():
-			var name_label: Label = cell.get_node("ItemDetails/ItemName")
-			var quantity: Label = cell.get_node("ItemDetails/ItemQuantity")
-			check(not name_label.get_global_rect().intersects(quantity.get_global_rect()),"full nine-item grid name and quantity do not overlap / "+cell.name+" / "+str(dimensions))
-			check(cell.get_global_rect().grow(1).encloses(name_label.get_global_rect()) and cell.get_global_rect().grow(1).encloses(quantity.get_global_rect()),"full nine-item grid text fits inside its cell / "+cell.name)
-			check(name_label.size.y >= name_label.get_minimum_size().y and quantity.size.y >= quantity.get_minimum_size().y,"full nine-item grid gives both labels their font height / "+cell.name)
+		check(shelf.layout_result.entries.size()+shelf.layout_result.overflow.size() == game.shop_view().items.size(),"every inventory ID is on a shelf or explicitly in the overflow drawer at "+str(dimensions))
+		check(main.screen.find_children("InventoryGrid","GridContainer",true,false).is_empty(),"active storage contains no old GridContainer or fixed box cells")
+		for row: Dictionary in shelf.layout_result.entries:
+			var item_node: Node2D = shelf.get_item_node(row.item_id)
+			check(item_node.find_children("PurposeBadge_*","",true,false).is_empty(),"usage badges stay in the paper drawer rather than on shelves / "+str(row.item_id))
+			check(item_node.find_children("ItemName","Label",true,false).is_empty() and item_node.find_children("ItemQuantity","Label",true,false).is_empty(),"shelf item has no permanently printed name or ordinary quantity / "+str(row.item_id))
+			var source: Dictionary = config.items[row.item_id]
+			check(row.support.is_equal_approx(Vector2(float(source.bottom_left)+(float(source.bottom_width)-1.0)/2.0,float(source.bottom_y))),"support is measured from actual opaque bottom pixels, not the texture midpoint / "+str(row.item_id))
 		await capture("a1-inventory-open-"+str(dimensions.x))
 		var original: Dictionary = game.snapshot()
 		var cabinet_button: Button = main.screen.scene_visual.get_node("Hotspot_cabinet")
 		await click_at(cabinet_button.get_global_rect().get_center())
 		check(not main.screen.cabinet_open,"actual click on configured wooden cabinet edge toggles cabinet / "+str(dimensions))
-		check(main.screen.scene_visual.cabinet_state == "closed" and main.screen.inventory_grid == null and game.snapshot() == original,"cabinet presentation toggle does not settle inventory or change a save")
+		check(main.screen.scene_visual.cabinet_state == "closed" and not main.screen.shelf_view.visible and game.snapshot() == original,"cabinet presentation toggle hides shelf art without settling inventory or changing a save")
 		main.screen.cabinet_open = true
 		main.screen.refresh()
 		main.screen.cabinet_open = false
 		main.screen.refresh()
 		main.screen.refresh()
-		check(main.screen.inventory_grid == null,"same-frame open/closed and repeated refreshes keep no detached grid")
+		check(main.screen.shelf_view == shelf and not shelf.visible,"same-frame open/closed and repeated refreshes reuse one hidden shelf renderer")
 		await settle()
 		await capture("a1-inventory-closed-"+str(dimensions.x))
 		game.state = inventory_snapshot
+	await check_shelf_commit_and_reload(main,game,saves)
+	await check_invalid_shelf_ui(main,game,config)
 	# Render/test fixture establishes 17:59; the observed transition itself must
 	# come from a real saved wait action below, including its failed-write attempt.
 	game.state.clock_minutes = 1079
@@ -334,7 +339,158 @@ func click_at(position: Vector2) -> void:
 	root.push_input(release)
 	await settle()
 
-func check_fixed_cells(grid: GridContainer, config: Dictionary, count: int, dimensions: Vector2i) -> void:
-	check(grid.get_child_count() == count,"render-only item count "+str(count)+" / "+str(dimensions))
-	for cell: Control in grid.get_children():
-		check(cell.size.x <= grid.size.x/float(config.scene_settings.inventory_columns)+1.0 and cell.size.y <= grid.size.y/float(config.scene_settings.inventory_rows)+1.0,"sparse and full inventory use fixed grid cell dimensions / "+str(count)+" items / "+str(dimensions))
+func shelf_signature(layout: Dictionary) -> Array:
+	var result: Array = []
+	for row: Dictionary in layout.get("entries",[]):
+		result.append([row.item_id,row.quantity,row.shelf_index,row.pivot,row.scale,row.rotation_degrees,row.support,row.copy_count])
+	result.append(layout.get("overflow",[]).duplicate())
+	return result
+
+func check_shelf_items(shelf: Control, visual: Control, config: Dictionary, count: int, dimensions: Vector2i) -> void:
+	check(shelf != null and shelf.visible,"open cabinet has a live shelf renderer / "+str(dimensions))
+	if shelf == null:
+		return
+	var rows: Array = shelf.layout_result.get("entries",[])
+	var overflow: Array = shelf.layout_result.get("overflow",[])
+	check(rows.size()+overflow.size() == count,"all render-only IDs are accounted for / "+str(count)+" / "+str(dimensions))
+	check(overflow.is_empty(),"the calibrated real cabinet accommodates the existing nine item groups / "+str(count))
+	var scene: Dictionary = config.scenes.S04
+	var crop: Array = scene.shelf_layout.source_crop
+	var canvas: Array = config.scene_settings.canvas
+	var seen: Dictionary = {}
+	for row: Dictionary in rows:
+		var id: String = row.item_id
+		check(not seen.has(id),"no duplicate item group is silently created / "+id)
+		seen[id] = true
+		var item_node: Node2D = shelf.get_item_node(id)
+		check(item_node != null and item_node.is_inside_tree(),"each placed ID has its own live bottom-pivot node / "+id)
+		if item_node == null:
+			continue
+		var line: Dictionary = scene.shelves[int(row.shelf_index)]
+		check(is_equal_approx(row.pivot.y,float(line.y)+2.0),"opaque contact point sits two source pixels into its shelf line / "+id)
+		check(row.visible_rect.position.x >= float(line.x_start)-0.01 and row.visible_rect.end.x <= float(line.x_end)+0.01,"rotated and stacked visible bounds remain within the actual shelf / "+id)
+		check(is_equal_approx(row.scale,float(line.depth_scale)) and absf(row.rotation_degrees) <= 1.5,"per-shelf depth and bounded stable rotation come from layout / "+id)
+		# Hand-written native-to-logical conversion is independent of ShelfView's
+		# mapping code, while the final cover transform belongs to SceneVisual.
+		var logical := Vector2((row.pivot.x-float(crop[0]))/float(crop[2]-crop[0])*float(canvas[0]),(row.pivot.y-float(crop[1]))/float(crop[3]-crop[1])*float(canvas[1]))
+		var expected: Vector2 = visual.get_global_transform()*visual.projected_rect([logical.x,logical.y,1,1]).position
+		check(item_node.global_position.distance_to(expected) < 0.15,"bottom-pivot node shares background source crop and cover projection / "+id+" / "+str(dimensions))
+		check(is_equal_approx(item_node.rotation_degrees,float(row.rotation_degrees)),"micro-rotation occurs on the bottom-pivot node / "+id)
+		check(int(row.copy_count) == mini(3,int(row.quantity)),"visual copy count follows the quantity cap / "+id)
+
+func check_shelf_commit_and_reload(main: Control, game: Node, saves: Node) -> void:
+	# All mutations below use real isolated-save transactions. The earlier
+	# direct state changes were only visual fixtures and have been restored.
+	main.show_screen("inventory")
+	await settle()
+	var shelf: Control = main.screen.shelf_view
+	var before: Dictionary = game.snapshot()
+	var before_layout := shelf_signature(shelf.layout_result)
+	var arrivals: Array = []
+	shelf.item_added.connect(func(id: String, quantity: int, _node: Node2D): arrivals.append([id,quantity]))
+	var action := {"type":"procure_item","action_id":game.make_id("shelf_transaction"),"expected_version":before.state_version,"item_id":"lavender","quantity":1}
+	saves.fail_next_write = true
+	var failed: Dictionary = await game.execute_action_async(action)
+	await settle()
+	check(not failed.success and game.snapshot() == before,"failed shelf procurement keeps the complete saved inventory and clock unchanged")
+	check(shelf_signature(shelf.layout_result) == before_layout and arrivals.is_empty(),"failed save emits no shelf arrival and cannot move displayed items")
+	var success: Dictionary = await game.execute_action_async(action)
+	await settle()
+	check(success.success and int(game.shop_view().items.get("lavender",0)) == int(before.player.items.get("lavender",0))+1,"retry of the same failed action ID commits exactly one actual item")
+	check(arrivals == [["lavender",1]],"one successful committed procurement emits one arrival signal")
+	var after: Dictionary = game.snapshot()
+	var committed_layout := shelf_signature(shelf.layout_result)
+	var replay: Dictionary = await game.execute_action_async(action)
+	main.screen.refresh()
+	main.screen.refresh()
+	await settle()
+	check(replay.success and game.snapshot() == after,"successful action replay neither spends coins nor adds another item")
+	check(arrivals == [["lavender",1]] and shelf_signature(shelf.layout_result) == committed_layout,"action replay and repeated display refresh do not duplicate arrival signals or rearrange shelves")
+	var loaded: Dictionary = await main.run_action("load_game",{"save_id":after.save_id})
+	check(loaded.success,"actual saved shelf inventory reopens through load_game")
+	main.show_screen("inventory")
+	await settle()
+	check(shelf_signature(main.screen.shelf_view.layout_result) == committed_layout,"reopened save preserves source pivots, acquisition order, quantities and stable micro-rotations")
+	check(int(game.snapshot().schema_version) == int(after.schema_version),"derived shelf presentation does not introduce a new persistent save schema")
+	await check_shelf_selection_edges(main,game)
+
+func check_shelf_selection_edges(main: Control, game: Node) -> void:
+	# Select genuine saved stock, then sell all of it through the action API.
+	# The inventory dictionary deliberately may retain an ID whose amount is 0.
+	var shelf: Control = main.screen.shelf_view
+	var lavender_target: Rect2 = shelf.get_hit_rect("lavender")
+	check(lavender_target.has_area(),"newly loaded positive lavender has a real shelf click target")
+	if lavender_target.has_area():
+		await click_at(lavender_target.get_center())
+	check(main.screen.selected_inventory_item == "lavender" and shelf.selected_item == "lavender","actual mouse click selects genuine lavender before its last unit is sold")
+	var lavender_units := int(game.shop_view().items.get("lavender",0))
+	check(lavender_units > 0,"sell-to-zero regression begins with actual positive saved stock")
+	if lavender_units > 0:
+		var sold: Dictionary = await main.run_action("sell_material",{"item_id":"lavender","quantity":lavender_units})
+		await settle()
+		check(sold.success and int(game.shop_view().items.get("lavender",0)) == 0,"real material sale commits the entire selected stock down to zero")
+		check(shelf.selected_item.is_empty() and main.screen.selected_inventory_item.is_empty(),"selling the last selected unit clears renderer and drawer selection together")
+		check(inventory_action_wrappers(main.screen,"lavender").is_empty(),"zero-stock ID leaves no lavender ×0 inventory action row; historical ledger icons remain allowed")
+		check(shelf.get_item_node("lavender") == null and not shelf.get_hit_rect("lavender").has_area(),"sold-out stock leaves neither a shelf image nor an invisible click target")
+	# Force a positive, genuinely owned selection to overflow only by changing
+	# the instance's read-only display calibration. No stock or save is changed.
+	var saved_before_display: Dictionary = game.snapshot()
+	var production_config: Dictionary = main.screen.visuals.duplicate(true)
+	var production_hash := FileAccess.get_sha256("res://data/shop/visuals.json")
+	var incense_target: Rect2 = shelf.get_hit_rect("calming_incense")
+	check(int(game.shop_view().items.get("calming_incense",0)) > 0 and incense_target.has_area(),"overflow regression starts with genuine positive incense on a shelf")
+	if incense_target.has_area():
+		await click_at(incense_target.get_center())
+	check(main.screen.selected_inventory_item == "calming_incense","actual positive item is selected before its display space is narrowed")
+	var narrow := production_config.duplicate(true)
+	for line: Dictionary in narrow.scenes.S04.shelves:
+		line.x_end = float(line.x_start)+1.0
+	main.screen.visuals = narrow
+	main.screen.refresh()
+	await settle()
+	check("calming_incense" in main.screen.shelf_view.layout_result.get("overflow",[]),"a one-source-pixel shelf genuinely overflows the selected positive item")
+	check(inventory_action_wrappers(main.screen,"calming_incense").size() == 1,"positive selected overflow item is represented by exactly one inventory wrapper")
+	check(count_button_text(main.screen.body,"出售给当前来客") == 1,"selected-overflow detail and overflow list do not duplicate the same sale action")
+	check(game.snapshot() == saved_before_display,"narrowing display shelves and deduplicating detail rows change no saved inventory or clock")
+	main.screen.visuals = production_config
+	main.screen.refresh()
+	await settle()
+	check(main.screen.shelf_view.layout_result.get("overflow",[]).is_empty() and game.snapshot() == saved_before_display,"restoring the production display config restores placement without mutating the save")
+	check(FileAccess.get_sha256("res://data/shop/visuals.json") == production_hash,"overflow display fixture never rewrites the production JSON")
+
+func inventory_action_wrappers(screen: Control, item_id: String) -> Array:
+	var result: Array = []
+	for wrapper: Node in screen.find_children("ItemVisual_"+item_id,"Control",true,false):
+		# Both live inventory and historical ledger use ItemVisual wrappers.
+		# Only a group with actual ItemActions buttons is an actionable stock row.
+		var group: Node = wrapper.get_parent().get_parent()
+		var actions: Node = group.get_node_or_null("ItemActions")
+		if actions != null and actions.get_children().any(func(child: Node) -> bool: return child is Button):
+			result.append(wrapper)
+	return result
+
+func count_button_text(node: Node, value: String) -> int:
+	var count := 0
+	for button: Button in node.find_children("*","Button",true,false):
+		if button.text == value:
+			count += 1
+	return count
+
+func check_invalid_shelf_ui(main: Control, game: Node, config: Dictionary) -> void:
+	main.show_screen("inventory")
+	await settle()
+	var before: Dictionary = game.snapshot()
+	var expected: String = preload("res://scripts/shop/item_visual.gd").load_settings().shelf_unavailable
+	for invalid_labels: Variant in [null,[],"invalid",{}, {"details_heading":"","all_items_heading":"柜内","overflow_heading":"抽屉"}]:
+		var bad := config.duplicate(true)
+		bad.scenes.S04.shelf_layout.labels = invalid_labels
+		main.screen.visuals = bad
+		main.screen.refresh()
+		await settle()
+		var error_label: Label = main.screen.body.get_node_or_null("ShelfUnavailable") as Label
+		check(error_label != null and error_label.text == expected,"actual drawer rejects malformed shelf labels before dynamic text or typed access")
+		check(not main.screen.shelf_view.visible and game.snapshot() == before,"invalid shelf data hides interactions without mutating the committed save")
+	main.screen.visuals = config.duplicate(true)
+	main.screen.refresh()
+	await settle()
+	check(main.screen.shelf_view.visible and game.snapshot() == before,"restoring valid data reuses the shelf view without save changes")
