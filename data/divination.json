@@ -102,13 +102,13 @@
     "archive_stub": {"title": "旧物馆的借条", "text": "日期背面写有另一处档案柜编号。"}
   },
   "topics": [
-    {"topic_id": "venue", "label": "核对侧门告示", "keywords": ["侧门", "告示", "入口"],
+    {"topic_id": "venue", "default_mood": "neutral", "label": "核对侧门告示", "keywords": ["侧门", "告示", "入口"],
      "reply_text": "我翻到一张更新的告示。展览要从侧门进，她留的位置没有变。",
      "requires_clue": "invitation_note", "clue_ids": ["venue_notice"], "branch_id": "confirmed_venue"},
-    {"topic_id": "birth", "label": "征求出生资料", "keywords": ["出生", "生辰", "生日"],
+    {"topic_id": "birth", "default_mood": "neutral", "label": "征求出生资料", "keywords": ["出生", "生辰", "生日"],
      "reply_text": "可以用这份出生资料排这一次的盘。还请留在店里的手记上。",
      "clue_ids": ["birth_details"]},
-    {"topic_id": "archive", "label": "看看这件旧物", "keywords": ["旧物", "借条", "档案"],
+    {"topic_id": "archive", "default_mood": "neutral", "label": "看看这件旧物", "keywords": ["旧物", "借条", "档案"],
      "reply_text": "我是在夹层里发现这张借条的。光凭一个印记，我也说不准它原先是谁的。",
      "clue_ids": ["archive_stub"]}
   ],

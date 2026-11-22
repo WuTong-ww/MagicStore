@@ -4,7 +4,9 @@ const UI = preload("res://scripts/ui/ui_kit.gd")
 const LAYOUT_CONFIG := "res://data/ui/consultation.json"
 
 const SceneArt = preload("res://scripts/shop/scene_visual.gd")
-const LIN_EXPRESSIONS := {"neutral":"res://assets/portraits/npc_lin_neutral.png", "hesitant":"res://assets/portraits/npc_lin_hesitant.png", "relieved":"res://assets/portraits/npc_lin_relieved.png"}
+const Appearance = preload("res://scripts/people/appearance.gd")
+const Portrait = preload("res://scripts/people/portrait.gd")
+const AppearanceEditorConfig = preload("res://scripts/people/appearance_editor_config.gd")
 
 const OracleGuide = preload("res://scripts/divination/oracle_guide.gd")
 
@@ -29,7 +31,9 @@ var casebook_button: Button
 var shop_button: Button
 var card_backs: HBoxContainer
 var room_art: Control
-var guest_portrait: TextureRect
+var guest_portrait: Control
+var bubble_avatar_textures: Array[Texture2D] = []
+var _history_signature := ""
 var _question_rows: Array = []
 var _question_visit_id := ""
 var _last_busy := false
@@ -113,7 +117,7 @@ func _ready() -> void:
 	add_child(room_art)
 	room_art.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	room_art.setup("consultation")
-	guest_portrait = UI.image(LIN_EXPRESSIONS.neutral)
+	guest_portrait = Portrait.new()
 	guest_portrait.name = "SeatedGuest"
 	guest_portrait.z_index = int(layout_config.portrait_z)
 	guest_portrait.visible = false
@@ -154,7 +158,8 @@ func _ready() -> void:
 	transcript.bbcode_enabled = true
 	transcript.theme_type_variation = &"Dialogue"
 	transcript.name = "DialogueHistory"
-	transcript.custom_minimum_size.y = float(layout_config.transcript_minimum_height)
+	# Keep the existing text budget plus the new composite-avatar header visible.
+	transcript.custom_minimum_size.y = float(layout_config.transcript_minimum_height) + float(layout_config.bubble_avatar_size[1]) + float(layout_config.bubble_padding[1]) + float(layout_config.bubble_padding[3])
 	transcript.add_theme_font_size_override("normal_font_size", int(layout_config.body_font_size))
 	conversation.add_child(transcript)
 	questions = HFlowContainer.new()
@@ -357,18 +362,9 @@ func refresh() -> void:
 	var guest: Dictionary = view.get("guest", {})
 	room_art.refresh()
 	room_art.visible = true
-	guest_portrait.visible = active and guest.get("npc_id", "") == "npc_lin"
+	guest_portrait.visible = active
 	if guest_portrait.visible:
-		var expression := "neutral"
-		for turn: Dictionary in visit.get("dialogue", []):
-			var line := str(turn.get("text", ""))
-			if line.contains("担心") or line.contains("犹豫") or line.contains("害怕"):
-				expression = "hesitant"
-			elif line.contains("放心") or line.contains("轻松") or line.contains("谢谢"):
-				expression = "relieved"
-		var portrait_path: String = LIN_EXPRESSIONS.get(expression, LIN_EXPRESSIONS.neutral)
-		if ResourceLoader.exists(portrait_path):
-			guest_portrait.texture = load(portrait_path)
+		guest_portrait.configure(guest_appearance(guest),presentation_mood(guest))
 	title.text = layout_config.copy.guest_title % guest.get("name", "") if active else layout_config.copy.empty_title
 	visit_label.text = str(guest.get("case_title", "")) if active else layout_config.copy.empty_visit
 	var visit_id := str(visit.get("visit_id", ""))
@@ -380,9 +376,7 @@ func refresh() -> void:
 	elif clue_count > _rendered_clue_count:
 		_new_clue_turn = visit.get("dialogue", []).size() - 1
 	_rendered_clue_count = clue_count
-	var new_text := history_bbcode(visit.get("dialogue", []), guest, layout_config, _new_clue_turn)
-	if new_text != transcript.text:
-		transcript.text = new_text
+	_render_history(visit.get("dialogue",[]),guest,_new_clue_turn)
 	clue_label.text = layout_config.copy.clues % (view.get("clues", []).size() + view.get("services", []).size())
 	var reading: Dictionary = visit.get("reading", {})
 	var paid := not reading.is_empty()
@@ -494,8 +488,10 @@ static func history_bbcode(dialogue: Array, guest: Dictionary, config: Dictionar
 		var bubble_color: String = config.bubble_player_color if player else config.bubble_guest_color
 		var align_tag := "right" if player else "left"
 		var avatar := ""
-		if not player and guest.get("npc_id") == "npc_lin":
-			avatar = "[img=%dx%d]%s[/img] " % [config.bubble_avatar_size[0],config.bubble_avatar_size[1],LIN_EXPRESSIONS.neutral]
+		if not player:
+			var records := Appearance.layer_records(guest_appearance(guest),presentation_mood(guest))
+			if records.size() == 1 and records[0].layer == "preset" and records[0].available:
+				avatar = "[img=%dx%d]%s[/img] " % [config.bubble_avatar_size[0],config.bubble_avatar_size[1],records[0].path]
 		var bubble := "[cell expand=%d shrink=false bg=%s padding=%s][color=%s][%s]%s[b]%s[/b]\n%s[/%s][/color]" % [int(config.bubble_main_ratio),bubble_color,padding_text,config.bubble_text_color,align_tag,avatar,_escape_bbcode(speaker_name),body,align_tag]
 		if index == stamp_turn and not player:
 			bubble += "\n[color=%s][b]〔%s〕[/b][/color]" % [config.bubble_stamp_color,_escape_bbcode(copy.clue_stamp)]
@@ -503,3 +499,79 @@ static func history_bbcode(dialogue: Array, guest: Dictionary, config: Dictionar
 		var spacer := "[cell expand=%d shrink=false] [/cell]" % int(config.bubble_spacer_ratio)
 		lines.append("[table=2]" + (spacer + bubble if player else bubble + spacer) + "[/table]")
 	return "\n".join(lines)
+
+static func guest_appearance(guest: Dictionary) -> Dictionary:
+	var value: Variant = guest.get("appearance",{})
+	if value is Dictionary and not value.is_empty():
+		return value.duplicate(true)
+	return {"preset":"portrait_lin"} if guest.get("npc_id") == "npc_lin" else {}
+
+static func presentation_mood(guest: Dictionary) -> String:
+	var catalog := Appearance.load_config()
+	var value: Variant = guest.get("mood")
+	return value if value is String and value in catalog.get("moods",[]) else str(catalog.get("default_mood","neutral"))
+
+func _render_history(dialogue: Array, guest: Dictionary, stamp_turn: int) -> void:
+	var signature := JSON.stringify([dialogue,guest,stamp_turn,FileAccess.get_sha256(Appearance.CONFIG_PATH)])
+	if signature == _history_signature:
+		return
+	_history_signature = signature
+	transcript.text = ""
+	bubble_avatar_textures.clear()
+	for index: int in range(dialogue.size()):
+		var turn: Dictionary = dialogue[index]
+		var speaker := str(turn.get("speaker",""))
+		if speaker not in ["npc","player","shopkeeper"]:
+			transcript.push_paragraph(HORIZONTAL_ALIGNMENT_CENTER)
+			transcript.push_italics()
+			transcript.add_text(str(turn.get("text","")))
+			transcript.pop()
+			transcript.pop()
+			continue
+		var player := speaker in ["player","shopkeeper"]
+		transcript.push_table(2)
+		transcript.set_table_column_expand(0,true,int(layout_config.bubble_spacer_ratio if player else layout_config.bubble_main_ratio),false)
+		transcript.set_table_column_expand(1,true,int(layout_config.bubble_main_ratio if player else layout_config.bubble_spacer_ratio),false)
+		if player:
+			_history_spacer()
+		_history_bubble(turn,guest,player,index == stamp_turn)
+		if not player:
+			_history_spacer()
+		transcript.pop()
+		transcript.newline()
+
+func _history_spacer() -> void:
+	transcript.push_cell()
+	transcript.add_text(" ")
+	transcript.pop()
+
+func _history_bubble(turn: Dictionary, guest: Dictionary, player: bool, stamp: bool) -> void:
+	var copy: Dictionary = layout_config.copy
+	transcript.push_cell()
+	var color := Color(layout_config.bubble_player_color if player else layout_config.bubble_guest_color)
+	transcript.set_cell_row_background_color(color,color)
+	var padding: Array = layout_config.bubble_padding
+	transcript.set_cell_padding(Rect2(padding[0],padding[1],padding[2],padding[3]))
+	transcript.push_color(Color(layout_config.bubble_text_color))
+	transcript.push_paragraph(HORIZONTAL_ALIGNMENT_RIGHT if player else HORIZONTAL_ALIGNMENT_LEFT)
+	if not player:
+		var ui := AppearanceEditorConfig.load_config()
+		var dimensions := Vector2i(ui.layout.bubble_composite_size[0],ui.layout.bubble_composite_size[1])
+		var texture := Portrait.composite_texture(guest_appearance(guest),presentation_mood({"mood":turn.get("mood")}),{},dimensions)
+		if texture != null:
+			bubble_avatar_textures.append(texture)
+			transcript.add_image(texture,int(layout_config.bubble_avatar_size[0]),int(layout_config.bubble_avatar_size[1]))
+			transcript.add_text(" ")
+	transcript.push_bold()
+	transcript.add_text(copy.player_name if player else str(guest.get("name",copy.guest_name)))
+	transcript.pop()
+	transcript.add_text("\n"+str(turn.get("text","")))
+	if stamp and not player:
+		transcript.push_color(Color(layout_config.bubble_stamp_color))
+		transcript.push_bold()
+		transcript.add_text("\n〔"+copy.clue_stamp+"〕")
+		transcript.pop()
+		transcript.pop()
+	transcript.pop()
+	transcript.pop()
+	transcript.pop()

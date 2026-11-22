@@ -432,3 +432,57 @@ do not regenerate these images or the eighteen accepted A2R item PNGs.
 A7最终复验：第三轮GUI940/940、19帧及shop710/710；标定后完整第2轮9154/9154（Godot8888+gateway94+art172），exit0、0错误警告。47窗口帧通用225/235，12组200%接触通过；A7专项完成，全站旧人物十项未过按部分完成，详见docs/codex/plans/A7.md。
 
 A6 adds runtime-only WindField/Spring/SceneMotion and shader dispatch for actual aligned layers; no new raster. Static/legacy/hidden backgrounds stay static. Missing production Li/chime/particle regions remain partial. Final shader is inlined for the headless compiler with the same algorithm. Final preview508/508 and strict4-pair/8-control pixel checks pass; all34 PNGs equal root-reviewed round2. Full round3 passed9653/9653; both hardware performance observations remain false. Never use headless SKIP or non-realtime Movie Maker as hardware PASS. tools/capture_motion.ps1 -Mode front-day keeps AVI ignored; tools/transcode_motion.ps1 uses built-in WinRT when FFmpeg is absent. Only15.3MB MP4 and six quality85 JPGs committed. Container probe verifies600 video samples, not full H264 decoding. Exact limits in A6 plan/results.
+
+## A4 portrait production and replacement
+
+`tools/regen_art.ps1 -Style v3 -Only portraits` selects the portrait group.
+Formal rows retain the exact actual prompt SHA, native raw dimensions and SHA,
+mannequin/guide/style input paths, generation mask SHA, processing script and
+historical configuration digest. Shared templates and parameters are storage
+encoding: expand once and require the exact original UTF-8 prompt SHA before
+creating a generation task. A style override changes the style reference,
+not the recorded mannequin or mask revision. Missing local production inputs
+must be reported as pending, never silently replaced by another rig.
+
+The current profile uses mask revision `v3-20261122-r1`. Prepare its data-only
+guides before building the queue (choose unused receipt filenames each run):
+
+```powershell
+python -B tools/art/portrait_pipeline.py masks --workspace D:/MagicStore --config data/art/portrait_pipeline.json --revision v3-20261122-r1 --output assets/_incoming/a4_v3/audit/new-regen-guide-receipt.json
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/regen_art.ps1 -Style v3 -Only portraits -Output .tools/art/a4/new-regen-queue.json
+```
+
+This existing two-step flow was actually exercised:20 ignored guide PNGs,
+140 tasks,0 missing masks and exactly1 ready task (the new mannequin).
+The139 parts then await actual new-mannequin review, including75 provisional
+region reviews. Generating guide bytes is not art approval or image
+generation. The original formal `inputs` describe historical calls; new
+versioned guides do not certify a newly generated outline. Review the new
+base and source-specific mask/fit data before processing replacement parts.
+
+`tools/art/portrait_pipeline.py` creates same-canvas 768x1024 grayscale RGBA
+parts from actual 1086x1448 sources. The built-in image editor received the
+mannequin, region guide and selected S02 style as references; the guide was
+not passed through a dedicated mask API. Keep that limitation explicit.
+Full-canvas Lanczos, color keying, mean-RGB grayscale and source-authorized
+placement are recorded transforms. Do not label the processed size native.
+`tools/check_parts.py --id <asset_id> --path <png>` checks actual alpha,
+canvas, grayscale and anchor regions; it never approves appearance or mood.
+
+Source-specific visibility/perimeter masks preserve recorded core RGBA and
+retained RGB. They cannot become a global relaxed threshold for future art.
+Historical processing receipts keep their own config digest even when a
+later output-only template compresses the exact same prompt. Each source has
+at most four actual generations; rejected attempts remain local. Do not
+infer generation numbers from processing revisions. Raw images, masks,
+candidate previews and detailed receipts remain under ignored incoming or
+`.tools`; approved final PNGs and at most six quality85 review JPGs use
+ordinary Git.
+
+After replacing a formal PNG at its table path, update its actual metadata
+and run the strict 139-source `tests/integration/portrait_preview.gd` gate.
+Actual graphics additionally cover 24 saved public identities at 96px, five
+moods, both editor sizes, failed-save/retry/reload and random-customer
+consultation. Headless schema-only output does not certify artwork. All
+viewport captures require actual review; the selected body still has a
+small neckline seam noted in the A4 plan.

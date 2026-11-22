@@ -25,6 +25,14 @@ def implementation():
 
 
 class CompactRegenTests(unittest.TestCase):
+    def test_a4_only_portraits_does_not_regenerate_legacy_lin_or_past_life(self):
+        module = implementation()
+        past = self.image_record("assets/portraits/past_life_atmosphere.png")
+        self.manifest["assets"].append(past)
+        queue = module.build_queue(self.root, self.manifest, "v3", "portraits")
+        self.assertEqual(queue["tasks"], [], "missing A4 setup cannot fall back to old complete character pictures")
+        self.assertTrue(queue["status"].startswith("pending_"))
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
@@ -484,25 +492,22 @@ class CompactRegenTests(unittest.TestCase):
         self.manifest["style_profiles"]["v3"]["templates"] = {"edit": "USER V3 EDIT"}
         result = module.build_queue(self.root, self.manifest, "v3", "all")
         self.assertEqual(result["status"], "pending_templates")
-        self.assertEqual(set(result["missing_templates"]), {"night", "item", "portrait"})
+        self.assertEqual(set(result["missing_templates"]), {"night", "item"})
         self.assertEqual(result["tasks"], [])
 
-    def test_portraits_require_their_own_template_and_never_use_no_people_room_edit(self):
+    def test_legacy_portrait_template_cannot_replace_missing_a4_pipeline(self):
         module = implementation()
         templates = self.manifest["style_profiles"]["v3"]["templates"]
         templates.pop("portrait", None)
         templates["edit"] = "ROOM TEMPLATE. No people. Draw the counter and shelves."
         pending = module.build_queue(self.root, self.manifest, "v3", "portraits")
-        self.assertEqual(pending["status"], "pending_templates")
-        self.assertEqual(pending["missing_templates"], ["portrait"])
+        self.assertEqual(pending["status"], "pending_portrait_pipeline")
+        self.assertIn("data/art/portrait_pipeline.json", pending["missing_paths"])
         self.assertEqual(pending["tasks"], [])
         self.assertEqual(module.build_queue(self.root, self.manifest, "v3", "slices")["status"], "needs_builtin_generation")
         templates["portrait"] = "PORTRAIT TEMPLATE. Retain the guest and facial features."
         tasks = module.build_queue(self.root, self.manifest, "v3", "portraits")["tasks"]
-        self.assertEqual(len(tasks), 1)
-        self.assertTrue(tasks[0]["arguments"]["prompt"].startswith(templates["portrait"]))
-        self.assertNotIn("ROOM TEMPLATE", tasks[0]["arguments"]["prompt"])
-        self.assertNotIn("No people", tasks[0]["arguments"]["prompt"])
+        self.assertEqual(tasks, [], "even an old portrait template must not re-edit Lin or past-life art")
 
     def test_explicit_style_path_overrides_profile_reference_using_actual_new_sha(self):
         module = implementation()
@@ -521,9 +526,9 @@ class CompactRegenTests(unittest.TestCase):
         before = {p: p.read_bytes() for p in self.root.rglob("*") if p.is_file()}
         result = module.run_pipeline(self.root, self.manifest, "v3", "all")
         tasks = result["queue"]["tasks"]
-        self.assertEqual(len(tasks), 5)
-        self.assertEqual({t["group"] for t in tasks}, {"scenes", "slices", "items", "portraits"})
-        self.assertEqual(len({t["previous_source_path"] for t in tasks}), 5)
+        self.assertEqual(len(tasks), 4)
+        self.assertEqual({t["group"] for t in tasks}, {"scenes", "slices", "items"})
+        self.assertEqual(len({t["previous_source_path"] for t in tasks}), 4)
         for task in tasks:
             self.assertEqual(task["tool"], "image_gen.imagegen")
             self.assertTrue(task["source_destination"].startswith("assets/art_versions/v3/draft1/"))
@@ -559,7 +564,7 @@ class CompactRegenTests(unittest.TestCase):
     def test_only_groups_and_template_selection_match_formal_resources(self):
         module = implementation()
         for group, count, prefix in (("scenes", 2, "USER V3"), ("slices", 1, "USER V3 EDIT"),
-                                     ("items", 1, "USER V3 ITEM"), ("portraits", 1, "USER V3 PORTRAIT")):
+                                     ("items", 1, "USER V3 ITEM"), ("portraits", 0, "USER V3 PORTRAIT")):
             tasks = module.build_queue(self.root, self.manifest, "v3", group)["tasks"]
             self.assertEqual(len(tasks), count)
             self.assertTrue(all(t["group"] == group and t["arguments"]["prompt"].startswith(prefix) for t in tasks))
@@ -574,7 +579,7 @@ class CompactRegenTests(unittest.TestCase):
         candidate["group"] = "scenes"
         self.manifest["assets"].extend([retired, candidate])
         tasks = module.build_queue(self.root, self.manifest, "v3", "all")["tasks"]
-        self.assertEqual(len(tasks), 5)
+        self.assertEqual(len(tasks), 4)
         self.assertFalse(any(t["previous_source_path"] in (retired["path"], candidate["path"]) for t in tasks))
 
     def test_profile_escape_rejected_reference_and_runtime_cycle_are_rejected(self):

@@ -6,12 +6,20 @@ const People = preload("res://scripts/people/people.gd")
 const Memory = preload("res://scripts/people/memory.gd")
 const Events = preload("res://scripts/divination/event_rules.gd")
 const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
+const Appearance = preload("res://scripts/people/appearance.gd")
 
 static func initialize(state: Dictionary, config: Dictionary, divination: Variant = null) -> void:
 	if state.has("people"):
 		return
 	state["people"] = People.create(state.save_id, absi(String(state.save_id).hash()), int(state.clock_minutes))
 	var people: Dictionary = state.people
+	# Enable the full catalog before first-day births. People.create remains a
+	# legacy factory for old isolated callers; existing save namespaces return above.
+	var parts_config := Appearance.load_config()
+	var player_appearance := Appearance.normalize(people.player_appearance,parts_config)
+	if not player_appearance.is_empty():
+		people.appearance_catalog_version = int(parts_config.version)
+		people.player_appearance = player_appearance
 	People.add_fixed(people, "npc_lin", "林照晚", "旧书修复师")
 	# Import only encounters actually present in the save. Compatibility must not
 	# manufacture an unencountered reference family during an old-save migration.
@@ -47,6 +55,8 @@ static func _import_profile(people: Dictionary, npc_id: String, divination: Vari
 	profile.preferences = []
 	profile.background = "沿用旧档已记录的来客身份。"
 	profile.appearance = {"preset": npc_id}
+	if int(people.get("appearance_catalog_version",1)) >= 2:
+		profile.appearance = Appearance.normalize(profile.appearance,{},npc_id)
 
 static func _arrival(id: String, npc_id: String, at: int, source: String, case_id: String) -> Dictionary:
 	return {"arrival_id": id, "npc_id": npc_id, "source": source, "at": at,
@@ -333,6 +343,8 @@ static func validate(state: Dictionary) -> String:
 	if not error.is_empty():
 		return error
 	var people: Dictionary = state.people
+	if int(state.get("schema_version",1)) >= 6 and people.get("appearance_catalog_version") != 2:
+		return "人物经历或外貌无效"
 	if people.save_id != state.save_id or int(people.clock) != int(state.clock_minutes):
 		return "人物命名空间与存档或时钟不一致"
 	var effects := {}

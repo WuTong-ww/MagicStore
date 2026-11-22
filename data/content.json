@@ -44,7 +44,8 @@
       "reply_text": "邀请上有一句手写的附言：“替你留了靠窗的位置。”那是我们以前一起看书的位置。我大概一直在回避这句话。",
       "clue_ids": [
         "invitation_note"
-      ]
+      ],
+      "default_mood": "neutral"
     },
     {
       "topic_id": "letter",
@@ -59,7 +60,8 @@
       "reply_text": "回信其实已经写好了。我担心突然出现会打乱她的生活，所以一直把它夹在修复笔记里。也许先问一句近况会容易些。",
       "clue_ids": [
         "unfinished_letter"
-      ]
+      ],
+      "default_mood": "neutral"
     },
     {
       "topic_id": "work",
@@ -71,7 +73,8 @@
         "书店"
       ],
       "reply_text": "一本被雨淋过的植物图鉴。纸页要一张张晾干，急不得。我很懂得给书时间，却常常忘了也可以给关系一点时间。",
-      "clue_ids": []
+      "clue_ids": [],
+      "default_mood": "neutral"
     }
   ]
 }

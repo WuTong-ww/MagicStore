@@ -55,9 +55,11 @@ func run() -> void:
 	check(comfort.question_topics == ctx.question_topics, "comfort may suggest legal open questions without receiving their answers")
 	var legacy := candidate(null,false)
 	var parsed_legacy := Policy.parse_generation(legacy,ctx)
-	check(parsed_legacy == legacy and not parsed_legacy.has("followup_questions"), "legacy three-field response keeps exactly its original shape")
+	var legacy_with_default := legacy.duplicate(true)
+	legacy_with_default["mood"] = "neutral"
+	check(parsed_legacy == legacy_with_default and not parsed_legacy.has("followup_questions"), "legacy response keeps original content and gains only neutral mood")
 	check(Policy.approve_review(verdict(),ctx,parsed_legacy), "legacy response still passes a matching independent review")
-	check(not Policy.public_reply(parsed_legacy,ctx).has("followup_questions"), "legacy business output does not gain a new field")
+	check(not Policy.public_reply(parsed_legacy,ctx).has("followup_questions"), "legacy business output does not invent optional followup questions")
 	var good := [{"topic_id":"concern","text":"你最放不下的是哪一处？"},{"topic_id":"detail","text":"能从头说说这件事吗？"},{"topic_id":"relationship","text":"你们平常是怎么相处的？"}]
 	var raw := candidate(good)
 	var normalized := Policy.parse_generation(raw,ctx)

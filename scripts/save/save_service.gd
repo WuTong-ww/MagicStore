@@ -12,6 +12,7 @@ const DivinationSave = preload("res://scripts/divination/case_save.gd")
 const DivinationSession = preload("res://scripts/divination/session.gd")
 const Shop = preload("res://scripts/shop/shop.gd")
 const PeopleBridge = preload("res://scripts/shop/people_bridge.gd")
+const Appearance = preload("res://scripts/people/appearance.gd")
 const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
 const SHOP_ACTIONS := ["procure_item", "receive_material_gift", "gather_material", "sell_material", "register_demand", "research_recipe", "craft_item", "sell_product", "use_product", "review_case", "use_unlocked_option", "start_arrival", "book_arrival", "save_appearance", "wait", "admit_generated_person", "invite_contact"]
 var base_dir: String = "user://saves"
@@ -183,8 +184,8 @@ func _validate(s: Dictionary) -> String:
 	for field in ["schema_version", "save_id", "name", "state_version", "clock_minutes", "player", "npcs", "active_visit_id", "visits", "processed_actions"]:
 		if not s.has(field):
 			return "缺少 " + field
-	if not _integer(s.schema_version, 1, 5):
-		return "不支持的 schema_version（当前支持 1、2、3、4 和 5）"
+	if not _integer(s.schema_version, 1, 6):
+		return Appearance.load_config().get("copy",{}).get("unsupported_schema","不支持的 schema_version")
 	var extended := int(s.schema_version) >= 2
 	if not _safe_id(s.save_id) or not _text(s.name, 1, 80):
 		return "存档编号或名称无效"
@@ -266,6 +267,8 @@ func _validate(s: Dictionary) -> String:
 			seen_clues[clue] = true
 		for turn in v.dialogue:
 			if not turn is Dictionary or not turn.get("speaker") in ["player", "npc"] or not _text(turn.get("text"), 1, 10000):
+				return "对话记录无效"
+			if int(s.schema_version) >= 6 and turn.has("mood") and (not turn.mood is String or turn.mood not in Appearance.load_config().get("moods",[])):
 				return "对话记录无效"
 		if v.has("followup_questions") or v.has("followup_action_id"):
 			if not v.get("followup_questions") is Array or v.followup_questions.size() > 3 or not v.get("followup_action_id") is String or not s.processed_actions.has(v.followup_action_id):

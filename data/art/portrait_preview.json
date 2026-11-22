@@ -1,0 +1,23 @@
+{
+  "version":1,
+  "output_root":"res://.tools/art/a4/preview",
+  "manifest_path":"res://assets/ART_ASSET_MANIFEST.json",
+  "sample_count":24,
+  "expected_source_count":139,
+  "sample_wait_minutes":30,
+  "sample_max_steps":1500,
+  "settle_frames":6,
+  "window_sizes":[[1280,720],[1920,1080]],
+  "sheet":{"size":[1280,900],"columns":6,"cell_size":[128,160],"portrait_size":[96,128],"gap":12,"margin":16,"font_size":14},
+  "mood_sheet":{"size":[1000,420],"cell_size":[160,260],"portrait_size":[144,192],"gap":16,"margin":16,"font_size":16},
+  "moods":[
+    {"id":"neutral","label":"平静"},{"id":"smile","label":"微笑"},{"id":"hesitant","label":"犹豫"},
+    {"id":"surprised","label":"吃惊"},{"id":"sad","label":"低落"}
+  ],
+  "copy":{"new_game":"分层头像验收","sample_label":"%d · %s","sheet_title":"真实顾客 · 96 像素分层组合对照","mood_title":"同一身份 · 五种表情","guest":"来客"},
+  "uid_resources":[
+    "res://scripts/people/portrait.gd","res://scripts/people/appearance_editor_config.gd",
+    "res://shaders/gradient_map.gdshader","res://tests/integration/appearance_ui.gd",
+    "res://tests/integration/portrait_preview.gd","res://tests/integration/generated_people_ui.gd"
+  ]
+}

@@ -158,3 +158,21 @@ prune-packable: 2053
 garbage: 3
 size-garbage: 15.24 MiB
 ```
+
+## A4 提交前体积（2026-11-23）
+
+- 完整最后第3轮10278/10278（9940+107+231），exit0、0错误警告；正式portrait393/395保留两页签失败，shop694/694。24真实顾客同档重开24/24，root37最终PNG与六JPG全看，通用175/185；不把headless通过说成图形全绿。
+- 新增唯一二进制 **10,703,272B**：140正式头像PNG（含人台）9,775,102B，六质量85 JPG合计928,170B。小于100MB；候选、原生、中间图和逐源详审0追踪。56个v2 SHA保持，manifest499,605B。
+- clean累计新增二进制 **233,785,988B**；暂存快照新增unique blob共 **243017677B**。原CLEAN helper仍因new_binary_total及历史each_clean_commit_binary两项FAIL，原始阈值／失败未改；初始CLEAN与后续A1R正式资源的区别见前文，A4没有把中间物带入。禁止路径0，A4截图6JPG。见results/A4-size-inspection.json。
+- 本地对象包含旧备份，不等于本次上传量；普通Git无LFS，main／旧round2不改。此快照先于本小型文本证据追加，不影响二进制字节。
+
+```text
+count: 5668
+size: 304.73 MiB
+in-pack: 4064
+packs: 2
+size-pack: 1.12 GiB
+prune-packable: 2053
+garbage: 3
+size-garbage: 15.24 MiB
+```

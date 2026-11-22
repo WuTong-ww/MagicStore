@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "bundle_version": 2,
+  "legacy_bundle_version": 1,
+  "moods": ["neutral", "smile", "hesitant", "surprised", "sad"],
+  "default_mood": "neutral",
+  "person_fields": ["name", "role", "personality", "speech_style", "background", "preferences"],
+  "person_fields_v2": ["name", "role", "personality", "speech_style", "background", "preferences", "appearance_description"],
+  "appearance_description": {
+    "min_length": 8,
+    "max_length": 160,
+    "prompt": "appearance_description仅描述现代居民自然可见的发长、发型、眼镜、年龄阶段和日常衣着，长度{min_length}至{max_length}字；不选部件ID、色板ID、资源路径，不写关系经历、私密材料或规则指令。外观由本地程序映射。"
+  }
+}

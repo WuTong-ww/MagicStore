@@ -21,6 +21,7 @@ const DialoguePolicy = preload("res://scripts/providers/dialogue_policy.gd")
 const PersonProvider = preload("res://scripts/providers/http_person_provider.gd")
 const GeneratedPerson = preload("res://scripts/people/generated_person.gd")
 const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
+const Appearance = preload("res://scripts/people/appearance.gd")
 const SHOP_ACTIONS := ["procure_item", "receive_material_gift", "gather_material", "sell_material", "register_demand", "research_recipe", "craft_item", "sell_product", "use_product", "review_case"]
 const PEOPLE_ACTIONS := ["book_arrival", "save_appearance", "wait", "invite_contact"]
 var shop_config: Dictionary = {}
@@ -365,7 +366,11 @@ func cancel_dialogue() -> void:
 func divination_view(visit_id: String = "") -> Dictionary:
 	for visit: Dictionary in state.get("visits", []):
 		if visit.visit_id == (state.active_visit_id if visit_id.is_empty() else visit_id):
-			return DivinationView.project(_divination, state, visit)
+			var projected := DivinationView.project(_divination, state, visit)
+			if projected.get("guest") is Dictionary:
+				projected.guest["appearance"] = state.get("people",{}).get("profiles",{}).get(visit.npc_id,{}).get("appearance",{}).duplicate(true)
+				projected.guest["mood"] = DialoguePolicy.mood_from_turns(visit.get("dialogue",[]))
+			return projected
 	return {}
 
 ## Player-facing next questions. Model text stays with its successful dialogue
@@ -620,7 +625,8 @@ func _new_game(action: Dictionary) -> Dictionary:
 		"processed_actions": {}
 	}
 	_divination.initialize(candidate)
-	_initialize_integrated(candidate)
+	if not _initialize_integrated(candidate):
+		return _fail("INVALID_APPEARANCE",Appearance.load_config().get("copy",{}).get("migration_failed",content_error))
 	candidate = SaveService._normalize_numbers(candidate)
 	var saved: Dictionary = SaveService.write_save(candidate)
 	if not saved.success:
@@ -639,12 +645,14 @@ func _load_game(action: Dictionary) -> Dictionary:
 		var failure: Dictionary = _fail(loaded.get("error_code", "LOAD_FAILED"), loaded.get("message", "读取失败，当前游戏仍保留。"))
 		failure["backup_available"] = loaded.get("backup_available", false)
 		return failure
-	state = loaded.state.duplicate(true)
-	_divination.sync_generated(state)
-	if int(state.schema_version) == 1:
-		_divination.initialize(state)
-	_initialize_integrated(state)
-	state = SaveService._normalize_numbers(state)
+	var loaded_candidate: Dictionary = loaded.state.duplicate(true)
+	_divination.sync_generated(loaded_candidate)
+	if int(loaded_candidate.schema_version) == 1:
+		_divination.initialize(loaded_candidate)
+	if not _initialize_integrated(loaded_candidate):
+		_sync_generated_catalog()
+		return _fail("INVALID_APPEARANCE",Appearance.load_config().get("copy",{}).get("migration_failed",content_error))
+	state = SaveService._normalize_numbers(loaded_candidate)
 	_sync_generated_catalog()
 	_reset_people_generator()
 	state_changed.emit()
@@ -784,7 +792,7 @@ func _prepare_talk(action: Dictionary) -> Dictionary:
 		for topic: Dictionary in _divination.data.topics:
 			if allowed.has(topic.topic_id):
 				var row := {}
-				for field: String in ["topic_id","label","reply_text","keywords","clue_ids","branch_id"]:
+				for field: String in ["topic_id","label","reply_text","keywords","clue_ids","branch_id","default_mood"]:
 					if topic.has(field):
 						row[field] = topic[field]
 				custom.append(row)
@@ -805,8 +813,11 @@ func _complete_talk(action: Dictionary, input_text: String, response: Variant) -
 	if response.reply_text.is_empty() or response.reply_text.length() > 4000:
 		return _fail("PROVIDER_INVALID", "对话文本长度无效。")
 	for key in response:
-		if not key in ["reply_text", "intent", "clue_ids", "needs_clarification", "error_code", "branch_id", "followup_questions"]:
+		if not key in ["reply_text", "intent", "clue_ids", "needs_clarification", "error_code", "branch_id", "followup_questions", "mood"]:
 			return _fail("PROVIDER_INVALID", "对话返回了案例契约之外的提案。")
+	var mood: Variant = response.get("mood",DialoguePolicy.default_mood())
+	if not DialoguePolicy.mood_valid(mood):
+		return _fail("PROVIDER_INVALID", "对话返回了案例契约之外的提案。")
 	var active := active_visit()
 	var case: Dictionary = state.divination.cases[active.visit_id]
 	var allowed := _divination.talks(active, case, int(state.clock_minutes), state)
@@ -828,7 +839,7 @@ func _complete_talk(action: Dictionary, input_text: String, response: Variant) -
 			visit.clue_ids.append(clue_id)
 			new_clues.append(clue_id)
 	visit.dialogue.append({"speaker": "player", "text": input_text})
-	visit.dialogue.append({"speaker": "npc", "text": response.reply_text})
+	visit.dialogue.append({"speaker": "npc", "text": response.reply_text,"mood":mood})
 	_divination.record_talk(candidate, visit, action, response, new_clues)
 	PeopleBridge.record_talk(candidate, visit, action, response)
 	PeopleBridge.observe(candidate, action, "question", response.intent, allowed.keys())
@@ -839,7 +850,7 @@ func _complete_talk(action: Dictionary, input_text: String, response: Variant) -
 	visit["followup_questions"] = questions
 	visit["followup_action_id"] = action.action_id
 	var message: String = "交谈已保存。" if new_clues.is_empty() else "获得新线索，交谈已保存。"
-	return _commit(candidate, action, message, {"visit_id": visit.visit_id, "reply_text": response.reply_text, "clue_ids": new_clues, "intent": response.intent, "branch_id": branch, "needs_clarification": response.needs_clarification,"followup_questions":questions},presentation_events)
+	return _commit(candidate, action, message, {"visit_id": visit.visit_id, "reply_text": response.reply_text, "clue_ids": new_clues, "intent": response.intent, "branch_id": branch, "needs_clarification": response.needs_clarification,"followup_questions":questions,"mood":mood},presentation_events)
 
 func _divination_action(action: Dictionary) -> Dictionary:
 	var candidate: Dictionary = state.duplicate(true)
@@ -966,11 +977,37 @@ func _presentation_payload(candidate: Dictionary, raw: Variant) -> Array:
 		result[index].sequence = index
 	return result
 
-func _initialize_integrated(candidate: Dictionary) -> void:
+func _initialize_integrated(candidate: Dictionary) -> bool:
 	Shop.initialize(candidate)
 	PeopleBridge.initialize(candidate, people_config, _divination)
 	_migrate_arrival_schema(candidate)
 	_migrate_event_schema(candidate)
+	return _migrate_appearance_schema(candidate)
+
+func _migrate_appearance_schema(candidate: Dictionary) -> bool:
+	if int(candidate.schema_version) >= 6:
+		return true
+	var config := Appearance.load_config()
+	if config.is_empty() or not GeneratedPerson.validate_people(candidate.people).is_empty():
+		return false
+	var people: Dictionary = candidate.people.duplicate(true)
+	var selected := Appearance.normalize(people.player_appearance,config,"player")
+	if selected.is_empty() or selected.has("preset"):
+		return false
+	people.player_appearance = selected
+	var ids: Array = people.profiles.keys()
+	ids.sort()
+	for id: String in ids:
+		var profile: Dictionary = people.profiles[id]
+		var mapped := Appearance.normalize(profile.appearance,config,id)
+		if mapped.is_empty() or not GeneratedPerson.migrate_appearance(profile,mapped):
+			return false
+	people.appearance_catalog_version = int(config.version)
+	if not People.validate(people).is_empty():
+		return false
+	candidate.people = people
+	candidate.schema_version = 6
+	return true
 
 func _migrate_arrival_schema(candidate: Dictionary) -> void:
 	# Add only schema metadata. Persisted day plans and arrivals remain unchanged;

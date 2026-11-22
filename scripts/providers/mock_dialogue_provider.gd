@@ -3,6 +3,7 @@ extends RefCounted
 ## Future HTTP implementation keeps request_reply(request) -> Dictionary and may await.
 
 var topics: Array = []
+const DialoguePolicy = preload("res://scripts/providers/dialogue_policy.gd")
 
 func configure(configured_topics: Array) -> void:
 	topics = configured_topics.duplicate(true)
@@ -18,18 +19,23 @@ func request_reply(request: Dictionary) -> Dictionary:
 			continue
 		var matches: bool = selected == topic.topic_id if not selected.is_empty() else topic.keywords.any(func(word: String) -> bool: return input_text.contains(word.to_lower()))
 		if matches:
+			var mood := DialoguePolicy.topic_mood(topic)
+			if mood.is_empty():
+				return {"reply_text":"","intent":"error","clue_ids":[],"needs_clarification":false,"error_code":"INVALID_TOPIC_MOOD"}
 			return {
 				"reply_text": topic.reply_text,
 				"intent": topic.topic_id,
 				"clue_ids": topic.clue_ids.duplicate(),
 				"branch_id": allowed[topic.topic_id].branch_id,
 				"needs_clarification": false,
-				"error_code": ""
+				"error_code": "",
+				"mood": mood
 			}
 	return {
 		"reply_text": "我还没听明白。可以就眼下这件事再问得具体一点吗？",
 		"intent": "clarify",
 		"clue_ids": [],
 		"needs_clarification": true,
-		"error_code": ""
+		"error_code": "",
+		"mood": DialoguePolicy.default_mood()
 	}

@@ -10,6 +10,7 @@ import argparse
 import copy
 import hashlib
 import io
+import importlib.util
 import json
 import math
 import re
@@ -151,6 +152,13 @@ def validate_compact_manifest(workspace, manifest):
                      "regeneration_constraints must be nonempty text")
         if asset.get("group") == "slices":
             _require(asset.get("operation") in ("extract_layer", "inpaint_cleanplate"), "unsupported formal slice operation")
+        if path.startswith("assets/portraits/v3/") or asset.get("art_pack") == "A4_v3":
+            _require(asset.get("group") == "portraits" and asset.get("art_pack") == "A4_v3" and
+                     asset.get("operation") in ("portrait_part", "portrait_mannequin"), "A4 portrait requires explicit pack/group/operation")
+            _require(asset.get("local_config") == "data/art/portrait_pipeline.json" and
+                     asset.get("processing_script") == "tools/art/portrait_pipeline.py", "A4 portrait processing contract mismatch")
+            _require(isinstance(asset.get("portrait_asset_id"), str) and asset["portrait_asset_id"] and
+                     asset.get("dim") == [768, 1024], "A4 portrait identity/canvas missing")
         if asset.get("group") == "items":
             item_id = asset.get("item_id")
             _require(asset.get("operation") == "item_chromakey", "unsupported formal item operation")
@@ -226,8 +234,9 @@ def _compact_resources(manifest):
                 group = "scenes"
             elif source.startswith("assets/items/") and "reference" not in name.casefold():
                 group = "items"
-            elif source.startswith("assets/portraits/"):
-                group = "portraits"
+            # Complete legacy NPC/past-life images are not modular A4 parts.
+        if group == "portraits" and row.get("art_pack") != "A4_v3":
+            continue
         if group in ("scenes", "slices", "items", "portraits"):
             _require(group != "items" or not name.endswith("_64.png"), "64 item icon requires its canonical 256 alias")
             resources[source] = (group, row)
@@ -241,6 +250,8 @@ def build_compact_queue(workspace, manifest, style, only, config=None):
     _require(only in ("scenes", "slices", "items", "portraits", "all"), "unknown resource group: " + str(only))
     resources, aliases = _compact_resources(manifest)
     selected = {path: value for path, value in resources.items() if only == "all" or value[0] == only}
+    portrait_rows = [row for group, row in selected.values() if group == "portraits"]
+    selected = {path: value for path, value in selected.items() if value[0] != "portraits"}
     profile = manifest.get("style_profiles", {}).get("v3", {})
     queue = {"version": 1, "kind": "compact_builtin_queue", "style_profile": "v3", "requested_style": style,
              "status": "pending_style_reference", "tasks": [], "offline_tasks": [], "pending": [],
@@ -304,6 +315,71 @@ def build_compact_queue(workspace, manifest, style, only, config=None):
     # its human revision label, so changing only -Style cannot reuse outputs.
     if not alias:
         revision += "_" + digest[:12]
+    if only in ("portraits", "all"):
+        portrait_config = "data/art/portrait_pipeline.json"
+        catalog_path = "data/people/appearance_parts.json"
+        missing_portrait = [p for p in (portrait_config, catalog_path) if not safe_path(workspace, p).is_file()]
+        if missing_portrait and only == "portraits":
+            return pending("pending_portrait_pipeline", "A4 configuration/catalog is missing; legacy portraits are excluded", missing_paths=missing_portrait)
+        if not missing_portrait:
+            spec = importlib.util.spec_from_file_location("magic_portrait_pipeline", Path(__file__).parent / "art/portrait_pipeline.py")
+            portrait = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(portrait)
+            values = portrait.load_config(safe_path(workspace, portrait_config), workspace)
+            portrait_catalog = {row["id"]: row for row in portrait._selected(values, None)}
+            previous_missing = set()
+            portrait_prompts = {}
+            for row in portrait_rows:
+                asset_id = row["portrait_asset_id"]
+                _require(asset_id in portrait_catalog, "unknown A4 portrait identity")
+                slot = portrait_catalog[asset_id]
+                _require(row["path"] == slot["formal_path"] and all(row.get(key) == slot[key] for key in ("part_id", "category", "mood")),
+                         "A4 formal portrait identity differs from selected catalog")
+                _require(row["operation"] == ("portrait_mannequin" if asset_id == "mannequin" else "portrait_part"), "A4 operation/identity mismatch")
+                template_key, params = row.get("prompt_template"), row.get("prompt_params")
+                template = profile.get("templates", {}).get(template_key) if isinstance(template_key, str) else None
+                actual_sha = row.get("actual_prompt_sha256")
+                _require(isinstance(template, str) and template.strip() and isinstance(params, dict) and
+                         isinstance(actual_sha, str) and re.fullmatch(r"[a-fA-F0-9]{64}", actual_sha),
+                         "A4 portrait requires its exact formal prompt recipe")
+                try:
+                    actual_prompt = template.format(**params)
+                except (KeyError, IndexError, TypeError, ValueError) as error:
+                    raise ValueError("A4 portrait prompt recipe cannot render its exact parameters") from error
+                _require(hashlib.sha256(actual_prompt.encode("utf-8")).hexdigest() == actual_sha.lower(),
+                         "A4 portrait prompt recipe SHA mismatch")
+                portrait_prompts[asset_id] = (actual_prompt, template_key, params, actual_sha.lower())
+                source_file = safe_path(workspace, row["path"])
+                if not source_file.is_file():
+                    previous_missing.add(asset_id)
+                else:
+                    _require(sha256(source_file) == row["sha256"].lower(), "A4 formal source sha256 mismatch")
+                    _require(list(read_image(source_file).size) == row["dim"], "A4 formal source dimensions mismatch")
+            ids = [row["portrait_asset_id"] for row in portrait_rows] or None
+            portrait_queue = portrait.build_queue(workspace, revision, ids, path, values,
+                                                   mask_revision=profile.get("revision", revision))
+            previous_rows = {row["portrait_asset_id"]: row for row in portrait_rows}
+            for task in portrait_queue["tasks"]:
+                if task["id"] in previous_rows:
+                    task["previous_source_path"] = previous_rows[task["id"]]["path"]
+                    task["previous_source_sha256"] = previous_rows[task["id"]]["sha256"]
+                    prompt, template_key, params, actual_sha = portrait_prompts[task["id"]]
+                    task["arguments"]["prompt"] = prompt
+                    task.update(template_key=template_key, prompt_parameters=copy.deepcopy(params),
+                                prompt_sha256=actual_sha, prompt_origin="formal_manifest_exact_template")
+                if task["id"] in previous_missing:
+                    task["pending_reasons"].append("previous_source")
+                    task.update(can_generate=False, ready=False, status="pending_previous_source")
+            if portrait_queue["tasks"] and not any(task["can_generate"] for task in portrait_queue["tasks"]):
+                portrait_queue["status"] = "pending_portrait_inputs"
+            portrait_queue.update({"active_style":queue["active_style"],"style_profile":"v3","requested_style":style})
+            if only == "portraits":
+                return portrait_queue
+            queue["tasks"].extend(portrait_queue["tasks"])
+            queue["offline_tasks"].extend(portrait_queue["offline_tasks"])
+            queue["portrait_status"] = portrait_queue["status"]
+            queue["portrait_origin_audit"] = portrait_queue.get("origin_audit")
+            queue["canonical_resource_count"] += len(portrait_queue["tasks"])
     processing_root = "assets/generated_scenes/v3_regen/" + revision
 
     def item_config(row):

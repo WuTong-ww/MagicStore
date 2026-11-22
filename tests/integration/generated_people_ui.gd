@@ -71,7 +71,7 @@ func run() -> void:
 		check((await main.run_action("talk",{"text":"你最放不下什么？","topic_id":topic})).success,"new topic button action reaches current case")
 		check((await main.run_action("talk",{"text":"能说说这位熟人吗？","topic_id":Cases.topic_id(fixture.npc_id,"relationship")})).success,"relationship disclosure reaches its own source")
 		await settle()
-		check(not main.screen.transcript.text.contains(game.state.people.profiles[fixture.npc_id].generated_bundle.case.hidden_fact),"transcript does not reveal unearned secret")
+		check(not main.screen.transcript.get_parsed_text().contains(game.state.people.profiles[fixture.npc_id].generated_bundle.case.hidden_fact),"rendered transcript does not reveal unearned secret")
 		check(main.screen.return_button.visible,"generated visitor exposes return agreement after talking")
 		check(main.screen.contact_button.visible,"a disclosed relationship exposes the introduction agreement")
 		check(main.screen.get_combined_minimum_size().y <= main.scene_holder.size.y+1,"new relationship and return choices fit the consultation: min="+str(main.screen.get_combined_minimum_size())+" area="+str(main.scene_holder.size))

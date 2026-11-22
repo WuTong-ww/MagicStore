@@ -1,0 +1,1674 @@
+{
+  "version": 2,
+  "canvas": [
+    768,
+    1024
+  ],
+  "anchors": {
+    "eye_y": 360,
+    "center_x": 384,
+    "shoulder_y": 700
+  },
+  "layer_order": [
+    "hair_back",
+    "body",
+    "outfit",
+    "face_shape",
+    "features",
+    "eyes_expr",
+    "brows_expr",
+    "mouth_expr",
+    "hair_front",
+    "accessory"
+  ],
+  "moods": [
+    "neutral",
+    "smile",
+    "hesitant",
+    "surprised",
+    "sad"
+  ],
+  "default_mood": "neutral",
+  "age_stages": [
+    "teen",
+    "adult",
+    "middle",
+    "elder"
+  ],
+  "expected_counts": {
+    "body": 1,
+    "face_shape": 6,
+    "eyes_expr": 8,
+    "brows_expr": 6,
+    "mouth_expr": 6,
+    "hair_front": 12,
+    "hair_back": 10,
+    "outfit": 16,
+    "accessory": 14,
+    "features": 4
+  },
+  "parts": {
+    "hair_back": [
+      {
+        "id": "hair_back_01",
+        "label": "利落短后发",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/hair_back/hair_back_01.png"
+      },
+      {
+        "id": "hair_back_02",
+        "label": "齐颌短后发",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/hair_back/hair_back_02.png"
+      },
+      {
+        "id": "hair_back_03",
+        "label": "齐肩直后发",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/hair_back/hair_back_03.png"
+      },
+      {
+        "id": "hair_back_04",
+        "label": "齐肩波浪后发",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/hair_back/hair_back_04.png"
+      },
+      {
+        "id": "hair_back_05",
+        "label": "低扎马尾",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/hair_back/hair_back_05.png"
+      },
+      {
+        "id": "hair_back_06",
+        "label": "高扎马尾",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/hair_back/hair_back_06.png"
+      },
+      {
+        "id": "hair_back_07",
+        "label": "低盘发髻",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/hair_back/hair_back_07.png"
+      },
+      {
+        "id": "hair_back_08",
+        "label": "自然短卷后发",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/hair_back/hair_back_08.png"
+      },
+      {
+        "id": "hair_back_09",
+        "label": "松编长辫",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/hair_back/hair_back_09.png"
+      },
+      {
+        "id": "hair_back_10",
+        "label": "长层次后发",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/hair_back/hair_back_10.png"
+      }
+    ],
+    "body": [
+      {
+        "id": "body_01",
+        "label": "自然体态",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "skin",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/body/body_01.png"
+      }
+    ],
+    "outfit": [
+      {
+        "id": "outfit_01",
+        "label": "针织衫",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "outfit",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/outfit/outfit_01.png"
+      },
+      {
+        "id": "outfit_02",
+        "label": "工作围裙",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "outfit",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/outfit/outfit_02.png"
+      },
+      {
+        "id": "outfit_03",
+        "label": "西装外套",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "outfit",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/outfit/outfit_03.png"
+      },
+      {
+        "id": "outfit_04",
+        "label": "学生制服",
+        "ages": [
+          "teen"
+        ],
+        "tint": "outfit",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/outfit/outfit_04.png"
+      },
+      {
+        "id": "outfit_05",
+        "label": "雨衣",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "outfit",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/outfit/outfit_05.png"
+      },
+      {
+        "id": "outfit_06",
+        "label": "卫衣",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "outfit",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/outfit/outfit_06.png"
+      },
+      {
+        "id": "outfit_07",
+        "label": "旧长大衣",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "outfit",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/outfit/outfit_07.png"
+      },
+      {
+        "id": "outfit_08",
+        "label": "棉衬衫",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "outfit",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/outfit/outfit_08.png"
+      },
+      {
+        "id": "outfit_09",
+        "label": "牛仔外套",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "outfit",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/outfit/outfit_09.png"
+      },
+      {
+        "id": "outfit_10",
+        "label": "工作服",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "outfit",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/outfit/outfit_10.png"
+      },
+      {
+        "id": "outfit_11",
+        "label": "高领毛衣",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "outfit",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/outfit/outfit_11.png"
+      },
+      {
+        "id": "outfit_12",
+        "label": "日常长袖衫",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "outfit",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/outfit/outfit_12.png"
+      },
+      {
+        "id": "outfit_13",
+        "label": "条纹上衣",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "outfit",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/outfit/outfit_13.png"
+      },
+      {
+        "id": "outfit_14",
+        "label": "轻便马甲",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "outfit",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/outfit/outfit_14.png"
+      },
+      {
+        "id": "outfit_15",
+        "label": "素色罩衫",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "outfit",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/outfit/outfit_15.png"
+      },
+      {
+        "id": "outfit_16",
+        "label": "便装外套",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "outfit",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/outfit/outfit_16.png"
+      }
+    ],
+    "face_shape": [
+      {
+        "id": "face_01",
+        "label": "柔和椭圆脸",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "skin",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/face_shape/face_01.png"
+      },
+      {
+        "id": "face_02",
+        "label": "圆润脸",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "skin",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/face_shape/face_02.png"
+      },
+      {
+        "id": "face_03",
+        "label": "柔方脸",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "skin",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/face_shape/face_03.png"
+      },
+      {
+        "id": "face_04",
+        "label": "窄长脸",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "skin",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/face_shape/face_04.png"
+      },
+      {
+        "id": "face_05",
+        "label": "心形脸",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "skin",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/face_shape/face_05.png"
+      },
+      {
+        "id": "face_06",
+        "label": "宽阔脸",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "skin",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/face_shape/face_06.png"
+      }
+    ],
+    "features": [
+      {
+        "id": "features_teen",
+        "label": "淡雀斑",
+        "ages": [
+          "teen"
+        ],
+        "tint": "skin",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/features/features_teen.png"
+      },
+      {
+        "id": "features_adult",
+        "label": "淡痣",
+        "ages": [
+          "adult"
+        ],
+        "tint": "skin",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/features/features_adult.png"
+      },
+      {
+        "id": "features_middle",
+        "label": "浅眼角纹",
+        "ages": [
+          "middle"
+        ],
+        "tint": "skin",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/features/features_middle.png"
+      },
+      {
+        "id": "features_elder",
+        "label": "眼角颊纹",
+        "ages": [
+          "elder"
+        ],
+        "tint": "skin",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/features/features_elder.png"
+      }
+    ],
+    "eyes_expr": [
+      {
+        "id": "eyes_01",
+        "label": "柔和杏眼",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "none",
+        "status": "approved",
+        "paths": {
+          "neutral": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_01_neutral.png",
+          "smile": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_01_smile.png",
+          "hesitant": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_01_hesitant.png",
+          "surprised": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_01_surprised.png",
+          "sad": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_01_sad.png"
+        }
+      },
+      {
+        "id": "eyes_02",
+        "label": "圆润眼",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "none",
+        "status": "approved",
+        "paths": {
+          "neutral": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_02_neutral.png",
+          "smile": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_02_smile.png",
+          "hesitant": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_02_hesitant.png",
+          "surprised": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_02_surprised.png",
+          "sad": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_02_sad.png"
+        }
+      },
+      {
+        "id": "eyes_03",
+        "label": "舒展细眼",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "none",
+        "status": "approved",
+        "paths": {
+          "neutral": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_03_neutral.png",
+          "smile": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_03_smile.png",
+          "hesitant": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_03_hesitant.png",
+          "surprised": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_03_surprised.png",
+          "sad": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_03_sad.png"
+        }
+      },
+      {
+        "id": "eyes_04",
+        "label": "宽阔杏眼",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "none",
+        "status": "approved",
+        "paths": {
+          "neutral": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_04_neutral.png",
+          "smile": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_04_smile.png",
+          "hesitant": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_04_hesitant.png",
+          "surprised": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_04_surprised.png",
+          "sad": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_04_sad.png"
+        }
+      },
+      {
+        "id": "eyes_05",
+        "label": "单眼皮",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "none",
+        "status": "approved",
+        "paths": {
+          "neutral": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_05_neutral.png",
+          "smile": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_05_smile.png",
+          "hesitant": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_05_hesitant.png",
+          "surprised": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_05_surprised.png",
+          "sad": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_05_sad.png"
+        }
+      },
+      {
+        "id": "eyes_06",
+        "label": "微挑眼",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "none",
+        "status": "approved",
+        "paths": {
+          "neutral": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_06_neutral.png",
+          "smile": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_06_smile.png",
+          "hesitant": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_06_hesitant.png",
+          "surprised": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_06_surprised.png",
+          "sad": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_06_sad.png"
+        }
+      },
+      {
+        "id": "eyes_07",
+        "label": "柔垂长眼",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "none",
+        "status": "approved",
+        "paths": {
+          "neutral": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_07_neutral.png",
+          "smile": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_07_smile.png",
+          "hesitant": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_07_hesitant.png",
+          "surprised": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_07_surprised.png",
+          "sad": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_07_sad.png"
+        }
+      },
+      {
+        "id": "eyes_08",
+        "label": "小巧眼",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "none",
+        "status": "approved",
+        "paths": {
+          "neutral": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_08_neutral.png",
+          "smile": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_08_smile.png",
+          "hesitant": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_08_hesitant.png",
+          "surprised": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_08_surprised.png",
+          "sad": "res://assets/portraits/v3/v3r1/parts/eyes_expr/eyes_08_sad.png"
+        }
+      }
+    ],
+    "brows_expr": [
+      {
+        "id": "brows_01",
+        "label": "细直眉",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/brows_expr/brows_01.png"
+      },
+      {
+        "id": "brows_02",
+        "label": "柔弧眉",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/brows_expr/brows_02.png"
+      },
+      {
+        "id": "brows_03",
+        "label": "浓直眉",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/brows_expr/brows_03.png"
+      },
+      {
+        "id": "brows_04",
+        "label": "短平眉",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/brows_expr/brows_04.png"
+      },
+      {
+        "id": "brows_05",
+        "label": "轻折眉",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/brows_expr/brows_05.png"
+      },
+      {
+        "id": "brows_06",
+        "label": "浓弯眉",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/brows_expr/brows_06.png"
+      }
+    ],
+    "mouth_expr": [
+      {
+        "id": "mouth_01",
+        "label": "细窄唇",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "skin",
+        "status": "approved",
+        "paths": {
+          "neutral": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_01_neutral.png",
+          "smile": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_01_smile.png",
+          "hesitant": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_01_hesitant.png",
+          "surprised": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_01_surprised.png",
+          "sad": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_01_sad.png"
+        }
+      },
+      {
+        "id": "mouth_02",
+        "label": "小巧丰唇",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "skin",
+        "status": "approved",
+        "paths": {
+          "neutral": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_02_neutral.png",
+          "smile": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_02_smile.png",
+          "hesitant": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_02_hesitant.png",
+          "surprised": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_02_surprised.png",
+          "sad": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_02_sad.png"
+        }
+      },
+      {
+        "id": "mouth_03",
+        "label": "舒展宽唇",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "skin",
+        "status": "approved",
+        "paths": {
+          "neutral": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_03_neutral.png",
+          "smile": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_03_smile.png",
+          "hesitant": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_03_hesitant.png",
+          "surprised": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_03_surprised.png",
+          "sad": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_03_sad.png"
+        }
+      },
+      {
+        "id": "mouth_04",
+        "label": "柔弧唇",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "skin",
+        "status": "approved",
+        "paths": {
+          "neutral": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_04_neutral.png",
+          "smile": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_04_smile.png",
+          "hesitant": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_04_hesitant.png",
+          "surprised": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_04_surprised.png",
+          "sad": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_04_sad.png"
+        }
+      },
+      {
+        "id": "mouth_05",
+        "label": "清晰唇峰",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "skin",
+        "status": "approved",
+        "paths": {
+          "neutral": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_05_neutral.png",
+          "smile": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_05_smile.png",
+          "hesitant": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_05_hesitant.png",
+          "surprised": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_05_surprised.png",
+          "sad": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_05_sad.png"
+        }
+      },
+      {
+        "id": "mouth_06",
+        "label": "柔和唇形",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "skin",
+        "status": "approved",
+        "paths": {
+          "neutral": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_06_neutral.png",
+          "smile": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_06_smile.png",
+          "hesitant": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_06_hesitant.png",
+          "surprised": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_06_surprised.png",
+          "sad": "res://assets/portraits/v3/v3r1/parts/mouth_expr/mouth_06_sad.png"
+        }
+      }
+    ],
+    "hair_front": [
+      {
+        "id": "hair_front_01",
+        "label": "短侧分",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/hair_front/hair_front_01.png"
+      },
+      {
+        "id": "hair_front_02",
+        "label": "柔顺中分",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/hair_front/hair_front_02.png"
+      },
+      {
+        "id": "hair_front_03",
+        "label": "碎短刘海",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/hair_front/hair_front_03.png"
+      },
+      {
+        "id": "hair_front_04",
+        "label": "长侧扫刘海",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/hair_front/hair_front_04.png"
+      },
+      {
+        "id": "hair_front_05",
+        "label": "齐眉直刘海",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/hair_front/hair_front_05.png"
+      },
+      {
+        "id": "hair_front_06",
+        "label": "自然短波",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/hair_front/hair_front_06.png"
+      },
+      {
+        "id": "hair_front_07",
+        "label": "松散侧刘海",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/hair_front/hair_front_07.png"
+      },
+      {
+        "id": "hair_front_08",
+        "label": "利落露额",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/hair_front/hair_front_08.png"
+      },
+      {
+        "id": "hair_front_09",
+        "label": "中长微卷",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/hair_front/hair_front_09.png"
+      },
+      {
+        "id": "hair_front_10",
+        "label": "轻薄斜刘海",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/hair_front/hair_front_10.png"
+      },
+      {
+        "id": "hair_front_11",
+        "label": "细密短卷",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/hair_front/hair_front_11.png"
+      },
+      {
+        "id": "hair_front_12",
+        "label": "长波浪发",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "hair",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/hair_front/hair_front_12.png"
+      }
+    ],
+    "accessory": [
+      {
+        "id": "none",
+        "label": "无配件",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "none",
+        "status": "not_required",
+        "path": "",
+        "optional": true
+      },
+      {
+        "id": "accessory_01",
+        "label": "细框眼镜",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "none",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/accessory/accessory_01.png"
+      },
+      {
+        "id": "accessory_02",
+        "label": "圆框眼镜",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "none",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/accessory/accessory_02.png"
+      },
+      {
+        "id": "accessory_03",
+        "label": "小发夹",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "none",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/accessory/accessory_03.png"
+      },
+      {
+        "id": "accessory_04",
+        "label": "布发箍",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "none",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/accessory/accessory_04.png"
+      },
+      {
+        "id": "accessory_05",
+        "label": "小耳钉",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "none",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/accessory/accessory_05.png"
+      },
+      {
+        "id": "accessory_06",
+        "label": "木耳环",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "none",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/accessory/accessory_06.png"
+      },
+      {
+        "id": "accessory_07",
+        "label": "素色围巾",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "none",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/accessory/accessory_07.png"
+      },
+      {
+        "id": "accessory_08",
+        "label": "简单发绳",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "none",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/accessory/accessory_08.png"
+      },
+      {
+        "id": "accessory_09",
+        "label": "小胸针",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "none",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/accessory/accessory_09.png"
+      },
+      {
+        "id": "accessory_10",
+        "label": "软檐帽",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "none",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/accessory/accessory_10.png"
+      },
+      {
+        "id": "accessory_11",
+        "label": "针织帽",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "none",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/accessory/accessory_11.png"
+      },
+      {
+        "id": "accessory_12",
+        "label": "遮阳帽",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "none",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/accessory/accessory_12.png"
+      },
+      {
+        "id": "accessory_13",
+        "label": "发带",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "none",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/accessory/accessory_13.png"
+      },
+      {
+        "id": "accessory_14",
+        "label": "便携耳机",
+        "ages": [
+          "teen",
+          "adult",
+          "middle",
+          "elder"
+        ],
+        "tint": "none",
+        "status": "approved",
+        "path": "res://assets/portraits/v3/v3r1/parts/accessory/accessory_14.png"
+      }
+    ]
+  },
+  "palettes": {
+    "skin": [
+      {
+        "id": "skin_01",
+        "label": "浅米",
+        "colors": [
+          "#695657",
+          "#C49A82",
+          "#F1D7B9"
+        ]
+      },
+      {
+        "id": "skin_02",
+        "label": "暖杏",
+        "colors": [
+          "#70544C",
+          "#B78569",
+          "#E7BE95"
+        ]
+      },
+      {
+        "id": "skin_03",
+        "label": "麦色",
+        "colors": [
+          "#604F4D",
+          "#9F7357",
+          "#D8AA7D"
+        ]
+      },
+      {
+        "id": "skin_04",
+        "label": "暖棕",
+        "colors": [
+          "#493E40",
+          "#805C47",
+          "#B98B67"
+        ]
+      },
+      {
+        "id": "skin_05",
+        "label": "深棕",
+        "colors": [
+          "#343137",
+          "#604539",
+          "#947056"
+        ]
+      },
+      {
+        "id": "skin_06",
+        "label": "冷米",
+        "colors": [
+          "#60565B",
+          "#AA9385",
+          "#DDC9B5"
+        ]
+      }
+    ],
+    "hair": [
+      {
+        "id": "hair_01",
+        "label": "墨黑",
+        "colors": [
+          "#23282E",
+          "#444343",
+          "#7B7065"
+        ]
+      },
+      {
+        "id": "hair_02",
+        "label": "深棕",
+        "colors": [
+          "#2E2B31",
+          "#625044",
+          "#9C7F61"
+        ]
+      },
+      {
+        "id": "hair_03",
+        "label": "栗棕",
+        "colors": [
+          "#44313B",
+          "#805B47",
+          "#B88D67"
+        ]
+      },
+      {
+        "id": "hair_04",
+        "label": "灰棕",
+        "colors": [
+          "#353D42",
+          "#70716B",
+          "#A5A293"
+        ]
+      },
+      {
+        "id": "hair_05",
+        "label": "浅棕",
+        "colors": [
+          "#514346",
+          "#9D8061",
+          "#D0B68B"
+        ]
+      },
+      {
+        "id": "hair_06",
+        "label": "红棕",
+        "colors": [
+          "#4A3035",
+          "#8E5644",
+          "#BB8565"
+        ]
+      },
+      {
+        "id": "hair_07",
+        "label": "深灰",
+        "colors": [
+          "#3E464D",
+          "#828785",
+          "#BCC0AF"
+        ]
+      },
+      {
+        "id": "hair_08",
+        "label": "银灰",
+        "colors": [
+          "#666C75",
+          "#B2B5B1",
+          "#E3E2CD"
+        ]
+      }
+    ],
+    "outfit": [
+      {
+        "id": "outfit_01",
+        "label": "鼠尾草",
+        "colors": [
+          "#3B4B4C",
+          "#7C8B6A",
+          "#B5BD93"
+        ]
+      },
+      {
+        "id": "outfit_02",
+        "label": "灰蓝",
+        "colors": [
+          "#344656",
+          "#607C92",
+          "#9DB6BE"
+        ]
+      },
+      {
+        "id": "outfit_03",
+        "label": "陶土",
+        "colors": [
+          "#584144",
+          "#9B6C52",
+          "#CA9D75"
+        ]
+      },
+      {
+        "id": "outfit_04",
+        "label": "暖米",
+        "colors": [
+          "#69605A",
+          "#B5A78B",
+          "#E4D8B6"
+        ]
+      },
+      {
+        "id": "outfit_05",
+        "label": "炭灰",
+        "colors": [
+          "#2E343E",
+          "#606570",
+          "#959A9D"
+        ]
+      },
+      {
+        "id": "outfit_06",
+        "label": "靛蓝",
+        "colors": [
+          "#30394E",
+          "#526783",
+          "#91A5B4"
+        ]
+      },
+      {
+        "id": "outfit_07",
+        "label": "藕紫",
+        "colors": [
+          "#544455",
+          "#917782",
+          "#BBA3A4"
+        ]
+      },
+      {
+        "id": "outfit_08",
+        "label": "苔绿",
+        "colors": [
+          "#34483E",
+          "#5E785B",
+          "#9CAF86"
+        ]
+      },
+      {
+        "id": "outfit_09",
+        "label": "暗红",
+        "colors": [
+          "#4E343F",
+          "#8A5158",
+          "#B57B72"
+        ]
+      },
+      {
+        "id": "outfit_10",
+        "label": "旧黄",
+        "colors": [
+          "#655442",
+          "#AA9059",
+          "#D7BE7E"
+        ]
+      }
+    ]
+  },
+  "palette_counts": {
+    "skin": 6,
+    "hair": 8,
+    "outfit": 10
+  },
+  "defaults": {
+    "version": 2,
+    "parts": {
+      "hair_back": "hair_back_01",
+      "body": "body_01",
+      "outfit": "outfit_01",
+      "face_shape": "face_01",
+      "features": "features_adult",
+      "eyes_expr": "eyes_01",
+      "brows_expr": "brows_01",
+      "mouth_expr": "mouth_01",
+      "hair_front": "hair_front_01",
+      "accessory": "none"
+    },
+    "colors": {
+      "skin": "skin_01",
+      "hair": "hair_01",
+      "outfit": "outfit_01"
+    },
+    "age_stage": "adult"
+  },
+  "presets": {
+    "portrait_lin": {
+      "canvas": [
+        720,
+        840
+      ],
+      "paths": {
+        "neutral": "res://assets/portraits/npc_lin_neutral.png",
+        "smile": "res://assets/portraits/npc_lin_relieved.png",
+        "hesitant": "res://assets/portraits/npc_lin_hesitant.png",
+        "surprised": "res://assets/portraits/npc_lin_neutral.png",
+        "sad": "res://assets/portraits/npc_lin_hesitant.png"
+      }
+    },
+    "npc_lin": {
+      "canvas": [
+        720,
+        840
+      ],
+      "paths": {
+        "neutral": "res://assets/portraits/npc_lin_neutral.png",
+        "smile": "res://assets/portraits/npc_lin_relieved.png",
+        "hesitant": "res://assets/portraits/npc_lin_hesitant.png",
+        "surprised": "res://assets/portraits/npc_lin_neutral.png",
+        "sad": "res://assets/portraits/npc_lin_hesitant.png"
+      }
+    }
+  },
+  "generation": {
+    "seed_namespace": "a4_appearance_v2",
+    "maximum_attempts": 20,
+    "minimum_silhouette_score": 3,
+    "silhouette_weights": {
+      "hair_front": 2,
+      "hair_back": 2,
+      "accessory": 2,
+      "hair_color": 2
+    }
+  },
+  "cache": {
+    "max_entries": 16
+  },
+  "mutual_exclusions": [
+    {
+      "hair_front": "hair_front_12",
+      "accessory": "accessory_10"
+    },
+    {
+      "hair_front": "hair_front_12",
+      "accessory": "accessory_11"
+    }
+  ],
+  "legacy": {
+    "face": {
+      "face_01": "face_01",
+      "face_02": "face_02",
+      "face_03": "face_03"
+    },
+    "hair": {
+      "hair_01": {
+        "hair_front": "hair_front_01",
+        "hair_back": "hair_back_01"
+      },
+      "hair_02": {
+        "hair_front": "hair_front_02",
+        "hair_back": "hair_back_02"
+      },
+      "hair_03": {
+        "hair_front": "hair_front_03",
+        "hair_back": "hair_back_03"
+      }
+    },
+    "outfit": {
+      "outfit_01": "outfit_01",
+      "outfit_02": "outfit_02",
+      "outfit_03": "outfit_03"
+    }
+  },
+  "description_rules": [
+    {
+      "keywords": [
+        "青少年",
+        "少年",
+        "学生"
+      ],
+      "age_stage": "teen"
+    },
+    {
+      "keywords": [
+        "中年"
+      ],
+      "age_stage": "middle"
+    },
+    {
+      "keywords": [
+        "老年",
+        "老人",
+        "年长"
+      ],
+      "age_stage": "elder"
+    },
+    {
+      "keywords": [
+        "短发"
+      ],
+      "parts": {
+        "hair_front": "hair_front_02",
+        "hair_back": "hair_back_02"
+      }
+    },
+    {
+      "keywords": [
+        "长发"
+      ],
+      "parts": {
+        "hair_front": "hair_front_05",
+        "hair_back": "hair_back_05"
+      }
+    },
+    {
+      "keywords": [
+        "高马尾"
+      ],
+      "parts": {
+        "hair_back": "hair_back_06"
+      }
+    },
+    {
+      "keywords": [
+        "眼镜"
+      ],
+      "parts": {
+        "accessory": "accessory_01"
+      }
+    },
+    {
+      "keywords": [
+        "围裙"
+      ],
+      "parts": {
+        "outfit": "outfit_02"
+      }
+    },
+    {
+      "keywords": [
+        "雨衣"
+      ],
+      "parts": {
+        "outfit": "outfit_05"
+      }
+    },
+    {
+      "keywords": [
+        "卫衣"
+      ],
+      "parts": {
+        "outfit": "outfit_06"
+      }
+    },
+    {
+      "keywords": [
+        "白发",
+        "银发"
+      ],
+      "colors": {
+        "hair": "hair_08"
+      }
+    }
+  ],
+  "copy": {
+    "pending_art": "头像部件尚待定稿",
+    "missing_art": "头像素材暂不可用",
+    "invalid": "外观部件配置无效。",
+    "migration_failed": "旧外观未能安全迁移，当前存档仍保留。",
+    "unsupported_schema": "不支持的存档版本。"
+  },
+  "selection_exclusions": [
+    {
+      "hair_back": "hair_back_06",
+      "accessory": "accessory_10"
+    },
+    {
+      "hair_back": "hair_back_06",
+      "accessory": "accessory_11"
+    },
+    {
+      "hair_back": "hair_back_06",
+      "accessory": "accessory_12"
+    }
+  ]
+}

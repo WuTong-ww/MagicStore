@@ -9,7 +9,7 @@ const DialoguePolicy = preload("res://scripts/providers/dialogue_policy.gd")
 const ModelRequestPolicy = preload("res://scripts/providers/model_request_policy.gd")
 const ApiEndpoint = preload("res://scripts/providers/api_endpoint.gd")
 const BODY_KEYS := ["npc", "case_id", "visit_id", "input_text", "topic_id", "allowed_effects", "current_dialogue", "visible_history", "allowed_intents", "allowed_clue_ids", "allowed_branch_ids", "known_memories", "safe_persona", "relationship", "dialogue_sources", "custom_topics"]
-const REPLY_KEYS := ["reply_text", "intent", "clue_ids", "needs_clarification", "error_code", "branch_id", "followup_questions"]
+const REPLY_KEYS := ["reply_text", "intent", "clue_ids", "needs_clarification", "error_code", "branch_id", "followup_questions", "mood"]
 const MAX_RETRY_DELAY_SECONDS := 2.0
 
 var timeout_seconds: float = 45.0
@@ -181,6 +181,11 @@ func _on_completed(result: int, response_code: int, headers: PackedStringArray, 
 		return
 	_record_stage_timing()
 	_status.api_http_status = response_code
+	if result == HTTPRequest.RESULT_SUCCESS and response_code == 422:
+		var rejected: Variant = JSON.parse_string(body.get_string_from_utf8())
+		if rejected is Dictionary and rejected.get("error") == "INVALID_MOOD":
+			_finish(generation,_error("PROVIDER_INVALID"))
+			return
 	if result != HTTPRequest.RESULT_SUCCESS or response_code != 200 or Time.get_ticks_msec() >= _deadline_msec:
 		if _try_retry(generation,result,response_code,headers):
 			return
@@ -205,6 +210,9 @@ func _on_completed(result: int, response_code: int, headers: PackedStringArray, 
 				return
 			_stage = "generate"
 		elif _stage == "generate":
+			if generated.has("mood") and not DialoguePolicy.mood_valid(generated.mood):
+				_finish(generation,_error("PROVIDER_INVALID"))
+				return
 			_candidate = DialoguePolicy.parse_generation(generated, _policy_context)
 			if _candidate.is_empty():
 				_finish(generation, _fallback("生成对白未通过规则检查，使用本地对话"))
@@ -225,6 +233,9 @@ func _on_completed(result: int, response_code: int, headers: PackedStringArray, 
 			return
 		if not _start_http(_stage_body(), generation):
 			_finish(generation, _fallback("对白生成或核验超时，使用本地对话"))
+		return
+	if json.data is Dictionary and json.data.has("mood") and not DialoguePolicy.mood_valid(json.data.mood):
+		_finish(generation,_error("PROVIDER_INVALID"))
 		return
 	if not _valid_reply(json.data):
 		_finish(generation, _fallback("网关回复无效，使用本地对话"))
@@ -313,6 +324,9 @@ func _valid_reply(reply: Variant) -> bool:
 	for key: Variant in reply:
 		if not key in REPLY_KEYS:
 			return false
+	var mood: Variant = reply.get("mood",DialoguePolicy.default_mood())
+	if not DialoguePolicy.mood_valid(mood):
+		return false
 	if not reply.get("reply_text") is String or reply.reply_text.is_empty() or reply.reply_text.length() > 4000 or not reply.get("intent") is String or not reply.get("clue_ids") is Array or not reply.get("needs_clarification") is bool or not reply.get("error_code") is String or not reply.error_code.is_empty():
 		return false
 	var allowed: Dictionary = _context.get("allowed_effects", {})
@@ -345,6 +359,7 @@ func _valid_reply(reply: Variant) -> bool:
 				if cleaned.size() == 3:
 					break
 		reply["followup_questions"] = cleaned
+	reply["mood"] = mood
 	return true
 
 func _valid_url() -> bool:
@@ -374,7 +389,7 @@ func _neutral_fallback() -> Dictionary:
 	var text: String = str(_context.get("input_text", ""))
 	var comforting := ["别紧张","慢慢","不着急","放松","别急","没关系","陪你","不用急","缓一缓"].any(func(phrase: String) -> bool: return text.contains(phrase))
 	var reply := "谢谢，我先缓一缓。你愿意听我慢慢说，我就没那么紧张了。" if comforting else "这部分我还不敢随便下结论。你想先和我聊哪一部分？"
-	return {"reply_text":reply,"intent":"clarify","clue_ids":[],"needs_clarification":true,"error_code":""}
+	return {"reply_text":reply,"intent":"clarify","clue_ids":[],"needs_clarification":true,"error_code":"","mood":DialoguePolicy.default_mood()}
 
 func _finish(generation: int, reply: Dictionary) -> void:
 	if not _pending or generation != _generation:

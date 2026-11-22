@@ -3,6 +3,7 @@ extends SceneTree
 
 const People = preload("res://scripts/people/people.gd")
 const Generated = preload("res://scripts/people/generated_person.gd")
+const Appearance = preload("res://scripts/people/appearance.gd")
 
 class FakeBackground extends RefCounted:
 	signal job_ready(job_id: String, token: String, bundle: Dictionary, provenance: Dictionary)
@@ -38,6 +39,11 @@ func command(kind: String, extra: Dictionary = {}) -> Dictionary:
 func fixture(count: int) -> FakeBackground:
 	check(command("new_game", {"name": "生成日计划槽验收"}).success, "create isolated slot save")
 	gs.state.people = People.create(gs.state.save_id, 71, int(gs.state.clock_minutes))
+	# This fixture replaces people inside a current-schema save, so enable the
+	# current catalog before births just as the production Bridge does. Keep the
+	# legacy People.create factory and the sampled traffic assertions unchanged.
+	gs.state.people.appearance_catalog_version = 2
+	gs.state.people.player_appearance = Appearance.normalize(gs.state.people.player_appearance)
 	People.plan_day(gs.state.people, gs.people_config, 0, 0, count)
 	check(command("wait", {"minutes": 1}).success, "persist lawful plan before generation")
 	gs._generation_epoch += 1

@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "tabs": [
+    {"id":"face","label":"脸与年龄","layers":["face_shape","features","eyes_expr","brows_expr","mouth_expr"],"palettes":[]},
+    {"id":"hair","label":"头发","layers":["hair_front","hair_back"],"palettes":[]},
+    {"id":"outfit","label":"服装","layers":["outfit"],"palettes":[]},
+    {"id":"accessory","label":"配件","layers":["accessory"],"palettes":[]},
+    {"id":"colors","label":"颜色","layers":[],"palettes":["skin","hair","outfit"]}
+  ],
+  "part_labels": {
+    "hair_back":"后发","body":"身体","outfit":"服装","face_shape":"脸型","features":"年龄特征",
+    "eyes_expr":"眼型","brows_expr":"眉型","mouth_expr":"嘴型","hair_front":"前发","accessory":"配件"
+  },
+  "palette_labels":{"skin":"肤色","hair":"发色","outfit":"服装主色"},
+  "copy": {
+    "window_title":"候客、预约与人物档案","guests_page":"候客与档案","editor_page":"店长外观",
+    "queue_title":"候客与预约","archive_title":"来客与本局记录","receive":"请入咨询区",
+    "book":"协商明日同一时段","wait":"等待 30 分钟","archive_placeholder":"查看已结识的来客",
+    "evidence_title":"经营记录 · 点击查看来源","evidence_format":"%s记录 · 查看来源",
+    "question":"提问","advice":"建议","service":"服务","action":"行为","guest":"来客",
+    "empty_queue":"现在没有等候的来客。","intent_divination":"希望问卜","intent_shopping":"希望购物",
+    "intent_both":"希望问卜并看看商品","intent_unknown":"来意待确认","introduced":"由%s介绍",
+    "familiarity":"熟悉度 %s · 信任 %s","profile_format":"档案：%s · %s · %s",
+    "birthday_missing":"生日未记录","zodiac_missing":"星座未知","mbti_missing":"MBTI 未知",
+    "personality":"性格：","preferences":"平时喜欢：","latest":"上次：",
+    "birthday_format":"生日：%s · %s · MBTI %s","unknown":"未知","relation":"认识的人",
+    "memories_title":"一起聊过的事","report_format":"本局观察：%d 条有效记录\n%s\n%s",
+    "report_empty":"可在积累记录后查看经营风格。","draft_hint":"这里是本地预览，保存成功后才会替换店长外观。",
+    "randomize":"随机外观","save":"保存外观","saving":"正在保存外观…",
+    "saved":"外观已保存。","save_failed":"外观未保存，草稿仍在。","invalid_choice":"这组搭配暂不能使用。",
+    "pending_art":"头像部件待绘制","partial_art":"部分头像部件待绘制","no_public_appearance":"尚无可显示的外观",
+    "pending_suffix":"（待绘制）"
+  },
+  "layout": {
+    "margin":16,"gap":12,"queue_width":310,"queue_minimum_height":260,"queue_max_lines":8,
+    "queue_text_inset":28,"evidence_height":96,"preview_size":[210,280],"archive_portrait_size":[90,120],
+    "part_picker_width":210,"picker_height":36,"heading_font_size":22,"body_font_size":16,
+    "small_font_size":14,"wait_minutes":30,"booking_minutes":1440,"report_rows":5,"memory_rows":6,
+    "bubble_composite_size":[48,64],"cache_default_size":[192,256]
+  }
+}

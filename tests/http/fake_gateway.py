@@ -57,6 +57,10 @@ class Handler(BaseHTTPRequestHandler):
             valid = valid and self.headers.get("X-Request-ID") == "req_fixture" and self.headers.get("X-Action-ID") == "action_fixture"
         status = 200 if valid else 400
         reply = {"reply_text": "线上回复", "intent": "invitation", "clue_ids": ["invitation_note"], "needs_clarification": False, "error_code": "", "branch_id": ""}
+        if route.startswith("mood_"):
+            reply["mood"] = route.removeprefix("mood_")
+        if route == "mood_rejected":
+            status, reply = 422, {"error":"INVALID_MOOD"}
         if route.startswith("followups"):
             reply["followup_questions"] = [{"topic_id":"letter","text":"那封信后来怎样了？"},{"topic_id":"clarify","text":"继续"},{"topic_id":"forbidden","text":"隐藏资料"},{"topic_id":"invitation","text":"这个问题超过了十六个字必须被安全移除"},{"topic_id":"invitation","text":""},{"topic_id":"letter","text":"重复"},{"topic_id":"invitation","text":"再说说邀请？"},{"topic_id":"letter","text":"额外字段","extra":True}]
             if route == "followups_scalar":
@@ -148,6 +152,8 @@ class Handler(BaseHTTPRequestHandler):
             sources = context.get("sources", [])
             valid = valid and topic in ("invitation", "clarify") and all(source.get("source_id") != "topic:letter" for source in sources)
             selected = {"intent": topic, "reply_text": NATURAL_CHAT if topic == "clarify" else NATURAL_REPLY, "evidence_ids": [] if topic == "clarify" else ["topic:invitation"]}
+            if route.startswith("mood_"):
+                selected["mood"] = route.removeprefix("mood_")
             if route == "invalid":
                 selected["intent"] = "forbidden_fact"
             if route == "extra":
@@ -158,6 +164,8 @@ class Handler(BaseHTTPRequestHandler):
                 selected["reply_text"] = "他昨晚向我求婚了，我已经答应。"
         elif stage == "review":
             candidate = context.get("candidate", {})
+            if route.startswith("mood_"):
+                valid = valid and candidate.get("mood") == route.removeprefix("mood_")
             sources = context.get("sources", [])
             valid = valid and all(source.get("source_id") != "topic:letter" for source in sources)
             selected = {"approved": route not in ("hallucinated", "review_reject", "clarify_review_reject", "recover_rejected"), "evidence_ids": candidate.get("evidence_ids", []), "contradictions": [], "unsupported_claims": ["没有来源的新事件"] if route == "hallucinated" else []}
@@ -203,7 +211,7 @@ def main():
     env.pop("MAGIC_GATEWAY_TOKEN", None)
     env.pop("MAGIC_GATEWAY_TIMEOUT", None)
     try:
-        for script in ("api_endpoint", "model_policy", "provider", "game_state_http", "direct_api", "recovery"):
+        for script in ("api_endpoint", "model_policy", "provider", "game_state_http", "direct_api", "recovery", "mood"):
             try:
                 result = subprocess.run([args.engine, "--headless", "--path", str(repo), "--script", f"res://tests/http/{script}.gd"], env=env, capture_output=True, text=True, encoding="utf-8", timeout=30)
             except subprocess.TimeoutExpired as error:

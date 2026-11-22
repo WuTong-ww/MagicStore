@@ -22,6 +22,7 @@ const DivinationWorkbench := preload("res://scripts/divination/workbench.gd")
 const OracleGuide := preload("res://scripts/divination/oracle_guide.gd")
 const SHOP_SCREEN := preload("res://scripts/shop/shop_screen.gd")
 const PEOPLE_PANEL := preload("res://scenes/people/people_panel.tscn")
+const AppearanceEditorConfig = preload("res://scripts/people/appearance_editor_config.gd")
 const PAGES := {"exterior": "店外", "front": "前台", "consultation": "咨询区", "inventory": "储物柜", "workshop": "工坊", "market": "原料商店", "gathering": "采集"}
 var people_window: Window
 var people_panel: Control
@@ -238,7 +239,7 @@ func _refresh() -> void:
 	var mode: Dictionary = GameState.provider_status()
 	provider_badge.text = "在线对话" if mode.get("mode") == "online" else "离线对话 · 本地话题"
 	if is_instance_valid(people_panel):
-		people_panel.set_view(GameState.people_view())
+		people_panel.set_view(GameState.people_view(),str(snapshot.get("save_id","")))
 	if snapshot.is_empty():
 		resources.text = shell_config.no_save_status
 	else:
@@ -309,7 +310,7 @@ func run_action(action_type: String, extra: Dictionary = {}) -> Dictionary:
 func _build_people_window() -> void:
 	people_window = Window.new()
 	people_window.visible = false
-	people_window.title = "候客、预约与人物档案"
+	people_window.title = AppearanceEditorConfig.load_config().copy.window_title
 	people_window.size = Vector2i(shell_config.dialogs.people[0],shell_config.dialogs.people[1])
 	people_window.transient = true
 	people_window.theme = theme
@@ -324,12 +325,17 @@ func _build_people_window() -> void:
 	people_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	people_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	people_scroll.add_child(people_panel)
-	people_panel.custom_minimum_size = people_panel.get_child(0).get_combined_minimum_size()
 	people_panel.start_requested.connect(func(id: String): await run_action("start_arrival", {"arrival_id": id}))
 	people_panel.wait_requested.connect(func(minutes: int): await run_action("wait", {"minutes": minutes}))
-	people_panel.appearance_requested.connect(func(appearance: Dictionary): await run_action("save_appearance", {"appearance": appearance}))
+	people_panel.appearance_requested.connect(_save_player_appearance)
 	people_panel.book_requested.connect(_confirm_booking)
 	people_panel.evidence_requested.connect(func(_visit: String, _action: String): show_history())
+
+func _save_player_appearance(appearance: Dictionary) -> Dictionary:
+	var result: Dictionary = await run_action("save_appearance",{"appearance":appearance.duplicate(true)})
+	if is_instance_valid(people_panel):
+		people_panel.appearance_save_finished(result)
+	return result
 
 func _confirm_booking(arrival_id: String, minutes: int) -> void:
 	var dialog := ConfirmationDialog.new()
@@ -347,7 +353,7 @@ func open_people() -> void:
 	if GameState.player_snapshot().is_empty():
 		show_notice("请先打开存档。")
 		return
-	people_panel.set_view(GameState.people_view())
+	people_panel.set_view(GameState.people_view(),str(GameState.player_snapshot().get("save_id","")))
 	_fit_window(people_window,Vector2i(shell_config.dialogs.people[0],shell_config.dialogs.people[1]))
 	people_window.popup_centered()
 

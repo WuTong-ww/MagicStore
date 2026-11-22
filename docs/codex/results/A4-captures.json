@@ -1,0 +1,88 @@
+{
+  "task": "A4",
+  "portrait_gui_round": 3,
+  "portrait_checks": 395,
+  "portrait_failures": 2,
+  "retained_screenshots": 6,
+  "screenshot_bytes": 928170,
+  "screenshots": [
+    {
+      "path": "docs/screenshots/round2/A4/people-24-96px.jpg",
+      "size": [
+        1280,
+        900
+      ],
+      "quality": 85,
+      "sha256": "50b5f751ec2c26cb6eaa3803ed048209902514104653b92456d067d9b716db0d",
+      "bytes": 98161,
+      "source_path": ".tools/art/a4/preview/run-1333926/people-24-96px.png",
+      "source_sha256": "19ec9a40bedb0ed19d77ac029e9c5d27745a1aba4109bf0c996e0b6eca31b7e4"
+    },
+    {
+      "path": "docs/screenshots/round2/A4/five-moods.jpg",
+      "size": [
+        1000,
+        420
+      ],
+      "quality": 85,
+      "sha256": "780346e278c2691d423be127ab67b509657d1f04b69eb210450724eb66780b7f",
+      "bytes": 35646,
+      "source_path": ".tools/art/a4/preview/run-1333926/five-moods.png",
+      "source_sha256": "dfbcae2c734c2e5fe8980f732b5c8cee84cbe970f8784fda2cab9f253a286d4a"
+    },
+    {
+      "path": "docs/screenshots/round2/A4/editor-face-1280x720.jpg",
+      "size": [
+        1280,
+        720
+      ],
+      "quality": 85,
+      "sha256": "0d4b3d97fbbb973fb8f5143d9a9696dd41ccd8ee30d6fbf7f60ce5c757e90879",
+      "bytes": 113269,
+      "source_path": ".tools/art/a4/preview/run-1333926/editor-0-1280.0x720.0.png",
+      "source_sha256": "e88257a06a6e10f88fafe3a1b06fc07578aa7f41b3c5bce8596401056a61532d"
+    },
+    {
+      "path": "docs/screenshots/round2/A4/editor-colors-1920x1080.jpg",
+      "size": [
+        1920,
+        1080
+      ],
+      "quality": 85,
+      "sha256": "fdd19ffe88da5a37d2901a065f78891ce02f6fda1cc7b7e4eb9f3a1988f0f935",
+      "bytes": 300449,
+      "source_path": ".tools/art/a4/preview/run-1333926/editor-4-1920.0x1080.0.png",
+      "source_sha256": "4d614bd1b6dfc992791fd33b7c99ed817394edf38f45a81d6e23dcca2d2f8fc6"
+    },
+    {
+      "path": "docs/screenshots/round2/A4/random-consultation-1280x720.jpg",
+      "size": [
+        1280,
+        720
+      ],
+      "quality": 85,
+      "sha256": "410149e1c26bb7464a4399e32a3b4e00defc61bd02c23ac95c20f15068e77308",
+      "bytes": 121497,
+      "source_path": ".tools/art/a4/preview/run-1333926/random-consultation-1280.0x720.0.png",
+      "source_sha256": "e49bfb74c09c4ce229781ed5a9117beb26b48f97740c838fdca7aed9f37b2974"
+    },
+    {
+      "path": "docs/screenshots/round2/A4/random-consultation-1920x1080.jpg",
+      "size": [
+        1920,
+        1080
+      ],
+      "quality": 85,
+      "sha256": "4e0b952d04a0016aa7e55fa4e554421113c97631fb1d1fa8343d2694c929c873",
+      "bytes": 259148,
+      "source_path": ".tools/art/a4/preview/run-1333926/random-consultation-1920.0x1080.0.png",
+      "source_sha256": "92310e65b66e906a3f6b33c9e6ac7161b3e13d3571e829c7f18b87928af73fb0"
+    }
+  ],
+  "known_remaining": [
+    "TabContainer selected tabs still default grey/white",
+    "small body/outfit neckline seams",
+    "720p dialogue leaves only main guest head visible"
+  ],
+  "root_jpeg_review": "all six actual JPG outputs opened; original dimensions preserved and labels readable; known seams/tab styling/720p composition remain partial"
+}

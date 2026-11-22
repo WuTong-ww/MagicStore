@@ -39,6 +39,18 @@ _model_request_policy = None
 _api_endpoint_policy = None
 
 
+class InvalidMoodError(ValueError):
+    """A supplied invalid expression must not become a successful fallback."""
+
+
+def normalize_mood(raw):
+    settings = person_policy().load_character_protocol()
+    value = raw.get("mood", settings["default_mood"])
+    if not isinstance(value, str) or value not in settings["moods"]:
+        raise InvalidMoodError("invalid dialogue mood")
+    return value
+
+
 def person_policy():
     global _person_policy
     if _person_policy is None:
@@ -185,6 +197,7 @@ def load_topics():
     for filename in ("data/content.json", "data/divination.json"):
         data = json.loads((ROOT / filename).read_text(encoding="utf-8"))
         for topic in data["topics"]:
+            normalize_mood({"mood":topic.get("default_mood", person_policy().load_character_protocol()["default_mood"])})
             topics[topic["topic_id"]] = topic
     return topics
 
@@ -212,8 +225,10 @@ def topics_for_request(value, topics):
     merged, seen = dict(topics), set()
     required = {"topic_id", "label", "reply_text", "keywords", "clue_ids"}
     for row in custom:
-        if not isinstance(row, dict) or not required <= set(row) or set(row) - required - {"branch_id"}:
+        if not isinstance(row, dict) or not required <= set(row) or set(row) - required - {"branch_id", "default_mood"}:
             raise ValueError("invalid generated topic")
+        if "default_mood" in row:
+            normalize_mood({"mood":row["default_mood"]})
         topic_id = row["topic_id"]
         if (not isinstance(topic_id, str) or not topic_id.startswith("generated_" + npc_id + "_")
                 or len(topic_id) > 128 or topic_id in seen or topic_id not in effects
@@ -320,7 +335,7 @@ def prepare_request(value, topics):
 
 
 def normalize_output(raw, request):
-    if not isinstance(raw, dict) or set(raw) != {"intent", "reply_text"}:
+    if not isinstance(raw, dict) or set(raw) not in ({"intent", "reply_text"}, {"intent", "reply_text", "mood"}):
         raise ValueError("invalid model response")
     intent, reply = raw["intent"], raw["reply_text"]
     effects = request["allowed_effects"]
@@ -331,7 +346,7 @@ def normalize_output(raw, request):
         raise ValueError("invalid reply")
     effect = effects[intent]
     return {"reply_text": reply.strip(), "intent": intent, "clue_ids": list(effect["clue_ids"]),
-            "branch_id": effect["branch_id"], "needs_clarification": intent == "clarify", "error_code": ""}
+            "branch_id": effect["branch_id"], "needs_clarification": intent == "clarify", "error_code": "", "mood":normalize_mood(raw)}
 
 
 def call_model(context, config):
@@ -359,7 +374,8 @@ def call_model(context, config):
               "question_topics只授权提问方向，不授权其答案；问题不能预设未知关系、经历、结局或未披露证据，也不能暗示秘密。不要写攻略、解锁说明或系统提示。"
               "短问题不复述长前提，可以直接问‘回信寄了吗？’‘邀请让你担心什么？’‘能核对下告示吗？’。合法question_topics标签授权提问方向和用词，不是顾客的答案；‘图鉴现在怎么样？’‘回信现在寄了吗？’只是询问现状，不表示状态已经改变。"
               "候选方向不足时少写或留空，不能编造新话题。问题不能自带答案或规则说明，也不用一个合法话题编号去问另一话题。"
-              "只返回 JSON 对象，包含 intent、reply_text、evidence_ids，以及可选的 followup_questions；"
+              "mood必须是neutral/smile/hesitant/surprised/sad之一，仅表达这句话的当下语气，不推断未披露事实。"
+              "只返回 JSON 对象，包含 intent、reply_text、evidence_ids、mood，以及可选的 followup_questions；"
               "前两项为字符串，evidence_ids 为对白实际依据的 source_id 数组。"
               "回复用一至三句自然中文，不超过 600 字。不要写旁白、动作括号、分析过程、AI自我介绍或客服式总结。"
               "clarify 也可以是自然闲聊、情绪回应或贴近前文的追问，不必机械地重复要求玩家说具体一些，但不猜测案情。")
@@ -368,6 +384,7 @@ def call_model(context, config):
 
 def call_dialogue_review(context, config):
     system = ("你是独立的中文叙事对话审阅器，不扮演角色、不续写、不替换候选文字。"
+              "candidate.mood必须为neutral/smile/hesitant/surprised/sad之一，只表达本句当下语气，不推断未披露事实或未来结果，须与正文一并审核。"
               "低延迟要求：按下列规则完成必要核对后立即给出结论，不反复复述或进行与候选无关的推演。发现不支持或无法确认的断言即拒绝；不要为了加快而省略事实、引用或信息权限核验。拒绝理由简短指出具体问题即可，不输出长篇分析。"
               "检查 candidate.reply_text 的每项具体主张是否有 dialogue_sources 支持，是否与 safe_persona 和已知材料冲突。"
               "如candidate带followup_questions，也逐条审核这些玩家问题：topic_id必须在question_topics内，问法必须符合该编号对应标签的含义，不能借合法编号询问另一话题；问题应自然简短、贴合当前谈话。"
@@ -492,13 +509,15 @@ def normalize_questions(raw, question_topics, sources):
 
 
 def normalize_generated(raw, request, sources, question_topics=None):
+    if isinstance(raw, dict) and "mood" in raw:
+        normalize_mood(raw)
     required = {"intent", "reply_text", "evidence_ids"}
-    if not isinstance(raw, dict) or set(raw) not in (required, required | {"followup_questions"}):
+    if not isinstance(raw, dict) or not required <= set(raw) or set(raw) - required - {"mood", "followup_questions"}:
         raise ValueError("invalid generated dialogue")
     ids = evidence_ids(raw["evidence_ids"], sources)
     if raw["intent"] != "clarify" and not ids:
         raise ValueError("dialogue has no supporting evidence")
-    result = normalize_output({"intent": raw["intent"], "reply_text": raw["reply_text"]}, request)
+    result = normalize_output({"intent": raw["intent"], "reply_text": raw["reply_text"], "mood":normalize_mood(raw)}, request)
     if not text_safe(result["reply_text"], sources):
         raise ValueError("generated dialogue contains an unsupported concrete or internal claim")
     if "followup_questions" in raw:
@@ -586,13 +605,15 @@ def dialogue_result(request, context, topics, config, model=call_model, classifi
     # saw, never pre-budget records that have already been evicted.
     sources = selected_context["dialogue_sources"]
     raw = model(selected_context, config)
+    if isinstance(raw, dict) and "mood" in raw:
+        normalize_mood(raw)
     if not isinstance(raw, dict) or raw.get("intent") != intent:
         raise ValueError("model changed selected intent")
     result, ids = normalize_generated(raw, request, sources,question_topics)
     review_context = {"selected_topic": intent, "safe_persona": context["safe_persona"], "relationship": context["relationship"],
                       "input_as_untrusted_player_text": context["input"],
                       "dialogue_sources": sources,
-                      "candidate": {"intent": intent, "reply_text": result["reply_text"], "evidence_ids": ids}}
+                      "candidate": {"intent": intent, "reply_text": result["reply_text"], "evidence_ids": ids,"mood":result["mood"]}}
     review_context["question_topics"] = question_topics
     if "followup_questions" in result:
         review_context["candidate"]["followup_questions"] = json.loads(json.dumps(result["followup_questions"],ensure_ascii=False))
@@ -631,7 +652,8 @@ def offline_dialogue(request, topics, *, verified_intent="", allow_keywords=Fals
     intent = intent or "clarify"
     fact = CLARIFICATION if intent == "clarify" else topics[intent]["reply_text"]
     safe_context = prepare_request(request, topics)
-    return normalize_output({"intent": intent, "reply_text": append_shared_recall(fact, intent, safe_context)}, request)
+    mood = person_policy().load_character_protocol()["default_mood"] if intent == "clarify" else topics[intent].get("default_mood", person_policy().load_character_protocol()["default_mood"])
+    return normalize_output({"intent": intent, "reply_text": append_shared_recall(fact, intent, safe_context),"mood":mood}, request)
 
 
 def call_upstream(system, context, config, *, stage="general"):
@@ -871,6 +893,8 @@ def make_handler(config, topics, limits, model=call_model, profile_model=call_pr
                 else:
                     result = normalize_profile(profile_model(context, config))
                 response = (200, result, "online")
+            except InvalidMoodError:
+                response = (422, {"error": "INVALID_MOOD"})
             except (ValueError, KeyError, TypeError, IndexError, OSError, urllib.error.URLError):
                 if self.path == "/v1/dialogue":
                     response = (200, offline_dialogue(request, topics,

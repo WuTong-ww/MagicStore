@@ -1,0 +1,605 @@
+{
+  "task": "A4",
+  "root_opened_final_png": 37,
+  "root_opened_retained_jpg": 6,
+  "generic_passed": 175,
+  "generic_total": 185,
+  "portrait_gui_checks": 395,
+  "portrait_gui_failures": 2,
+  "shop_checks": 694,
+  "shop_failures": 0,
+  "frames": [
+    {
+      "path": ".tools/art/a4/preview/run-1333926/people-24-96px.png",
+      "sha256": "19ec9a40bedb0ed19d77ac029e9c5d27745a1aba4109bf0c996e0b6eca31b7e4",
+      "size": [
+        1280,
+        900
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/art/a4/preview/run-1333926/five-moods.png",
+      "sha256": "dfbcae2c734c2e5fe8980f732b5c8cee84cbe970f8784fda2cab9f253a286d4a",
+      "size": [
+        1000,
+        420
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/art/a4/preview/run-1333926/editor-save-failed-1280.0x720.0.png",
+      "sha256": "76d9a1153e723390525cbf6b6152baf6165adbcf3403295133200c37c493e7cc",
+      "size": [
+        1280,
+        720
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：按钮和页签字完整；页签灰白样式的2项专项失败另列",
+        "不通过：窗内失败状态在纸面，底部长错误提示仍在场景上且被弹窗遮挡",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/art/a4/preview/run-1333926/editor-0-1280.0x720.0.png",
+      "sha256": "e88257a06a6e10f88fafe3a1b06fc07578aa7f41b3c5bce8596401056a61532d",
+      "size": [
+        1280,
+        720
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：按钮和页签字完整；页签灰白样式的2项专项失败另列",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/art/a4/preview/run-1333926/editor-1-1280.0x720.0.png",
+      "sha256": "c07c5c2535efa994bdfe9f95c536d4b1decb5cb5d9fce2a88ab0f83a3f2b2d94",
+      "size": [
+        1280,
+        720
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：按钮和页签字完整；页签灰白样式的2项专项失败另列",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/art/a4/preview/run-1333926/editor-2-1280.0x720.0.png",
+      "sha256": "48d3710328d463b356f9307a9cb20728739b197d03260a7103c83db1cef47d3f",
+      "size": [
+        1280,
+        720
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：按钮和页签字完整；页签灰白样式的2项专项失败另列",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/art/a4/preview/run-1333926/editor-3-1280.0x720.0.png",
+      "sha256": "280947f313ef7ab22710336570fc92e2db00d3d08ecb2e7a7ec3aaab80bd2291",
+      "size": [
+        1280,
+        720
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：按钮和页签字完整；页签灰白样式的2项专项失败另列",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/art/a4/preview/run-1333926/editor-4-1280.0x720.0.png",
+      "sha256": "45725e068284ae964628f084a634c29fb18c5ffa131fed8551b82cf70cd87a29",
+      "size": [
+        1280,
+        720
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：按钮和页签字完整；页签灰白样式的2项专项失败另列",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/art/a4/preview/run-1333926/editor-0-1920.0x1080.0.png",
+      "sha256": "22a42dd9c0da765b172d6762c1f631984050afe4eb936d05c02aef8dfca5cbce",
+      "size": [
+        1920,
+        1080
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：按钮和页签字完整；页签灰白样式的2项专项失败另列",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/art/a4/preview/run-1333926/editor-1-1920.0x1080.0.png",
+      "sha256": "6de47931ba5e4c8bb4adb269ce742e3222887aa5ffe9782260511f6f25ee45ae",
+      "size": [
+        1920,
+        1080
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：按钮和页签字完整；页签灰白样式的2项专项失败另列",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/art/a4/preview/run-1333926/editor-2-1920.0x1080.0.png",
+      "sha256": "595209263f9d5a25c222201cbf4ff898652dd806c3443103353512fdc3babee8",
+      "size": [
+        1920,
+        1080
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：按钮和页签字完整；页签灰白样式的2项专项失败另列",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/art/a4/preview/run-1333926/editor-3-1920.0x1080.0.png",
+      "sha256": "5f16243df6c2126f36149456755c94f98386f2ac3c61a5fe2ee9733309dec430",
+      "size": [
+        1920,
+        1080
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：按钮和页签字完整；页签灰白样式的2项专项失败另列",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/art/a4/preview/run-1333926/editor-4-1920.0x1080.0.png",
+      "sha256": "4d614bd1b6dfc992791fd33b7c99ed817394edf38f45a81d6e23dcca2d2f8fc6",
+      "size": [
+        1920,
+        1080
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：按钮和页签字完整；页签灰白样式的2项专项失败另列",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/art/a4/preview/run-1333926/random-consultation-1280.0x720.0.png",
+      "sha256": "e49bfb74c09c4ce229781ed5a9117beb26b48f97740c838fdca7aed9f37b2974",
+      "size": [
+        1280,
+        720
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "不通过：帽眼嘴可见，但身体几乎全被对话纸遮住，构图仍紧"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/art/a4/preview/run-1333926/random-consultation-1920.0x1080.0.png",
+      "sha256": "92310e65b66e906a3f6b33c9e6ac7161b3e13d3571e829c7f18b87928af73fb0",
+      "size": [
+        1920,
+        1080
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/c-ui-captures/exterior-1280.png",
+      "sha256": "71f7f0aee249622789d897e22450ccefc17bd59abab91390876e132762388d52",
+      "size": [
+        1280,
+        720
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/c-ui-captures/front-1280.png",
+      "sha256": "78e2045998dfb643688d6a4cd0b01e45c71b2d0241314e554e3ec16f8888cb2e",
+      "size": [
+        1280,
+        720
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "不通过：按任务保留林的旧预设，笔触仍与v3背景不同；people另有旧金纹装饰"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/c-ui-captures/consultation-1280.png",
+      "sha256": "94dcb5a77cfa0e56a8fb6dbbe70b1de78ca271a299f72139a817894128452c88",
+      "size": [
+        1280,
+        720
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/c-ui-captures/inventory-1280.png",
+      "sha256": "e6f3607a18545daa32ccfbee156d9c47c4b0935cbf5e343d82003dc5ebe160ed",
+      "size": [
+        1280,
+        720
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/c-ui-captures/workshop-1280.png",
+      "sha256": "7c93b4b0ae4a693c955304f5fe8562d8b380e2dc5737212937785425e439b43e",
+      "size": [
+        1280,
+        720
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/c-ui-captures/market-1280.png",
+      "sha256": "7d609612e3121ba78ae82281e2d1727a357c106505f2bd4245a2a5413d35b9dc",
+      "size": [
+        1280,
+        720
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/c-ui-captures/gathering-1280.png",
+      "sha256": "3c2342617019eeed0f1edfa8dc6956436ce24e82d8caa02c9204f0226c154676",
+      "size": [
+        1280,
+        720
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/c-ui-captures/people-1280.png",
+      "sha256": "a805e7d2ecdb350190614e5380e2df9d2dbb94ee966a26359181afa79812b7b8",
+      "size": [
+        1280,
+        720
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "不通过：既有relationship_graph.png内烘焙问号；root已另开原图确认",
+        "不通过：按任务保留林的旧预设，笔触仍与v3背景不同；people另有旧金纹装饰"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/c-ui-captures/network-1280.png",
+      "sha256": "d7b0a3763401272086975966660bc037c3c292a2f2c310a8fe357660e968f53b",
+      "size": [
+        1280,
+        720
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "不通过：按任务保留林的旧预设，笔触仍与v3背景不同；people另有旧金纹装饰"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/c-ui-captures/zero-guest-front-1280.png",
+      "sha256": "d51254b075d7c2f6e297b75810de3b53cf4f7e47f6db2719af225ee86750a37c",
+      "size": [
+        1280,
+        720
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/c-ui-captures/exterior-1920.png",
+      "sha256": "9074f345e1ef3b59cda4c9875622470410392896dddde58f3d962d3f833d79e4",
+      "size": [
+        1920,
+        1080
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/c-ui-captures/front-1920.png",
+      "sha256": "31300f69ba5e78e961a990c2dcb0d0a77aec15e89db17968fe7692c5d1d08d72",
+      "size": [
+        1920,
+        1080
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "不通过：按任务保留林的旧预设，笔触仍与v3背景不同；people另有旧金纹装饰"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/c-ui-captures/consultation-1920.png",
+      "sha256": "d2093409ff6c65a10ff7886e2bf612e33aa3c02bb43ba5334e845c68190f1711",
+      "size": [
+        1920,
+        1080
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/c-ui-captures/inventory-1920.png",
+      "sha256": "6ae1ef315c9d819fc875b1b50b5f53b529987982603892d9dc2f30526a20f3b7",
+      "size": [
+        1920,
+        1080
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/c-ui-captures/workshop-1920.png",
+      "sha256": "75e8bd4fc3662ada487dcc24b3b45dc200cf079f0e4d5099e1440257b1100e97",
+      "size": [
+        1920,
+        1080
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/c-ui-captures/market-1920.png",
+      "sha256": "9a31fadb1ad26004904649c2fa21d629f0feee7ce8eede19791001959a60acf7",
+      "size": [
+        1920,
+        1080
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/c-ui-captures/gathering-1920.png",
+      "sha256": "8fa5fac2ca13c30f9e294bc1a53ca55a93daf51dcc8f5526a7505157e806e308",
+      "size": [
+        1920,
+        1080
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/c-ui-captures/people-1920.png",
+      "sha256": "b854ae90a5b8ade49f6112ff3cec7dbff7cdae476710487567c8ba9c38013f6d",
+      "size": [
+        1920,
+        1080
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "不通过：既有relationship_graph.png内烘焙问号；root已另开原图确认",
+        "不通过：按任务保留林的旧预设，笔触仍与v3背景不同；people另有旧金纹装饰"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/c-ui-captures/network-1920.png",
+      "sha256": "8fa0cae0e9d322d354388cc5fc96d0ca7fa1396ce3f2ef19c4a24daa2a436a9d",
+      "size": [
+        1920,
+        1080
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "不通过：按任务保留林的旧预设，笔触仍与v3背景不同；people另有旧金纹装饰"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/c-ui-captures/zero-guest-front-1920.png",
+      "sha256": "6db72069a50e78a8dd0d4b89d562b49253596276ea46cecd873801e1ff5d17a6",
+      "size": [
+        1920,
+        1080
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/c-ui-captures/market-after-trade-1920.png",
+      "sha256": "7417f439b733c629cfd9a5a486a37b8afaf2e5ad5393b5868450f9c7aa684b67",
+      "size": [
+        1920,
+        1080
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    },
+    {
+      "path": ".tools/c-ui-captures/catalog-icons-64px.png",
+      "sha256": "6b7ff4bade1a313c025cedbb4e22fdfefb713bdddf460ccb1f2cbc87663547fe",
+      "size": [
+        1920,
+        1080
+      ],
+      "checks": [
+        "通过：底图或对照纸面铺满，无黑边",
+        "通过：可见按钮／动态标签完整",
+        "通过：正文在古纸面板",
+        "通过：文字由控件绘制，美术无字",
+        "通过本图：前景与底图或纸面组合协调"
+      ],
+      "root_actually_opened": true
+    }
+  ]
+}

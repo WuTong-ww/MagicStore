@@ -1,0 +1,20 @@
+{
+  "task": "A4",
+  "pending_index_new_binary_bytes": 10703272,
+  "clean_history_new_binary_bytes": 233785988,
+  "staged_snapshot_new_unique_blob_bytes": 243017677,
+  "manifest_bytes": 499605,
+  "forbidden_tracked_paths": [],
+  "original_v2_files_sha_verified": 56,
+  "portrait_PNG_count": 140,
+  "portrait_PNG_bytes": 9775102,
+  "jpg_count": 6,
+  "jpg_quality": 85,
+  "jpg_bytes": 928170,
+  "local_git_count_objects": "count: 5668\nsize: 304.73 MiB\nin-pack: 4064\npacks: 2\nsize-pack: 1.12 GiB\nprune-packable: 2053\ngarbage: 3\nsize-garbage: 15.24 MiB",
+  "original_clean_helper_failed_checks": [
+    "new_binary_total",
+    "each_clean_commit_binary"
+  ],
+  "interpretation": "Initial CLEAN budget passed historically; later A1R formal assets exceeded the initial cumulative/100MB checks and were separately inspected. A4 adds only140 formal portrait PNG and six quality85 JPG, below100MB. Snapshot precedes small final text evidence; binary count is unaffected."
+}

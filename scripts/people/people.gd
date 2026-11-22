@@ -6,6 +6,7 @@ const CONFIG_PATH := "res://data/people/templates.json"
 const MAX_INT := 2147483647
 const Memory = preload("res://scripts/people/memory.gd")
 const GeneratedPerson = preload("res://scripts/people/generated_person.gd")
+const Appearance = preload("res://scripts/people/appearance.gd")
 
 static func load_config() -> Dictionary:
 	var parser := JSON.new()
@@ -165,6 +166,8 @@ static func add_fixed(people: Dictionary, npc_id: String, name: String, role: St
 		"background": "旧书修复师", "appearance": {"preset": "portrait_lin"},
 		"memories": [], "trust_history": [], "met": false
 	}
+	if int(people.get("appearance_catalog_version",1)) >= 2:
+		people.profiles[npc_id].appearance = Appearance.normalize({"preset":"portrait_lin"} if npc_id == "npc_lin" else {"preset":npc_id},{},npc_id)
 	if npc_id == "npc_lin":
 		_add_lin_contact(people)
 
@@ -179,6 +182,8 @@ static func _add_lin_contact(people: Dictionary) -> void:
 			"base_patience": 65, "return_bias": 0, "familiarity": 0, "trust": 0, "birthday": "", "zodiac": "", "mbti": "",
 			"preferences": [], "background": "", "appearance": {}, "memories": [], "trust_history": [], "met": false
 		}
+		if int(people.get("appearance_catalog_version",1)) >= 2:
+			people.profiles[id].appearance = Appearance.normalize({}, {}, id)
 	if not people.relationships.has("rel_lin_friend"):
 		people.relationships["rel_lin_friend"] = {"relationship_id": "rel_lin_friend", "from": "npc_lin", "to": id,
 			"kind": "旧友", "closeness": 50, "changes": [], "provisional": true}
@@ -200,8 +205,13 @@ static func _personality(config: Dictionary, id: String) -> Dictionary:
 			return row
 	return config.personalities[0]
 
-static func _appearance(config: Dictionary, rng: RandomNumberGenerator) -> Dictionary:
-	return {"face": _pick(config.appearance.faces, rng), "hair": _pick(config.appearance.hair, rng), "outfit": _pick(config.appearance.outfits, rng)}
+static func _appearance(config: Dictionary, rng: RandomNumberGenerator, people: Dictionary = {}, npc_id: String = "") -> Dictionary:
+	# Preserve precisely the historical RNG consumption before using a separate
+	# identity domain; new portrait retry attempts cannot move G1's random stream.
+	var legacy := {"face": _pick(config.appearance.faces, rng), "hair": _pick(config.appearance.hair, rng), "outfit": _pick(config.appearance.outfits, rng)}
+	if int(people.get("appearance_catalog_version",1)) < 2:
+		return legacy
+	return Appearance.generate(Appearance.load_config(),str(people.save_id),npc_id,people.profiles.values())
 
 static func _zodiac(month: int, day: int) -> String:
 	var limits := [20, 19, 21, 20, 21, 22, 23, 23, 23, 24, 23, 22]
@@ -236,7 +246,7 @@ static func _ordinary(people: Dictionary, config: Dictionary, rng: RandomNumberG
 		"return_bias": personality.return_bias, "familiarity": 0, "trust": 0,
 		"birthday": "%04d-%02d-%02d" % [rng.randi_range(1988, 2002), month, date], "zodiac": _zodiac(month, date),
 		"mbti": _pick(config.mbti_types, rng), "preferences": [_pick(config.interests, rng)], "background": "在附近生活的" + occupation,
-		"appearance": _appearance(config, rng), "return_schedule": _pick(config.return_schedules, rng).duplicate(true), "memories": [], "trust_history": [], "met": false
+		"appearance": _appearance(config, rng, people, id), "return_schedule": _pick(config.return_schedules, rng).duplicate(true), "memories": [], "trust_history": [], "met": false
 	}
 	# A relationship is established before any case is attached. The other
 	# person persists independently and is not added to the queue automatically.
@@ -251,7 +261,7 @@ static func _ordinary(people: Dictionary, config: Dictionary, rng: RandomNumberG
 		"return_bias": friend_personality.return_bias, "familiarity": 0, "trust": 0,
 		"birthday": "%04d-%02d-%02d" % [rng.randi_range(1988, 2002), friend_month, friend_date], "zodiac": _zodiac(friend_month, friend_date),
 		"mbti": _pick(config.mbti_types, rng), "preferences": [_pick(config.interests, rng)], "background": "与来客相识的人",
-		"appearance": _appearance(config, rng), "return_schedule": _pick(config.return_schedules, rng).duplicate(true), "memories": [], "trust_history": [], "met": false
+		"appearance": _appearance(config, rng, people, friend_id), "return_schedule": _pick(config.return_schedules, rng).duplicate(true), "memories": [], "trust_history": [], "met": false
 	}
 	people.relationships["rel_" + id] = {"relationship_id": "rel_" + id, "from": id, "to": friend_id, "kind": "朋友", "closeness": rng.randi_range(35, 75), "changes": []}
 	people.profiles[id]["goal"] = {"goal_id": "goal_" + id, "kind": "reconnect", "relationship_id": "rel_" + id,
@@ -326,7 +336,7 @@ static func ensure_family(people: Dictionary, config: Dictionary, rng: RandomNum
 			"birthday": member.birthday, "zodiac": _zodiac(int(date_parts[1]), int(date_parts[2])), "mbti": member.mbti,
 			"generation": member.generation, "preferences": member.preferences.duplicate(), "background": member.background,
 			"default_case_id": str(member.get("case_id","")),
-			"appearance": _appearance(config, rng), "memories": [], "trust_history": [], "met": false
+			"appearance": _appearance(config, rng, people, id), "memories": [], "trust_history": [], "met": false
 			}
 		else:
 			people.profiles[id]["family_id"] = family_id
@@ -669,7 +679,7 @@ static func visible_queue(people: Dictionary, status: String = "queued") -> Arra
 			continue
 		var profile: Dictionary = people.profiles[row.npc_id]
 		var referrer: Dictionary = people.profiles.get(row.referrer_npc_id, {})
-		result.append({"arrival_id": row.arrival_id, "npc_id": row.npc_id, "name": profile.name, "role": profile.role,
+		result.append({"arrival_id": row.arrival_id, "npc_id": row.npc_id, "name": profile.name, "role": profile.role,"appearance":profile.appearance.duplicate(true),
 			"case_id": row.case_id, "intent": row.intent, "arrived_at": row.at,
 			"source": row.get("original_source", row.source), "state": row.state, "deadline": row.deadline,
 			"patience_minutes": maxi(0, int(row.deadline) - int(people.clock)),
@@ -997,6 +1007,13 @@ static func visible_relationships(people: Dictionary, npc_id: String) -> Array:
 	return rows
 
 static func set_player_appearance(people: Dictionary, config: Dictionary, appearance: Dictionary) -> bool:
+	if int(people.get("appearance_catalog_version",1)) >= 2:
+		var parts_config := Appearance.load_config()
+		var selected := Appearance.normalize(appearance,parts_config)
+		if selected.is_empty() or selected.has("preset") or not Appearance.selection_valid(selected,parts_config):
+			return false
+		people.player_appearance = selected.duplicate(true)
+		return true
 	if appearance.size() != 3 or appearance.get("face") not in config.appearance.faces or appearance.get("hair") not in config.appearance.hair or appearance.get("outfit") not in config.appearance.outfits:
 		return false
 	people.player_appearance = appearance.duplicate(true)
@@ -1071,6 +1088,12 @@ static func validate(people: Variant) -> String:
 	for key in ["profiles", "relationships", "revealed_relationships", "followups_asked", "families", "days", "arrivals", "feedback_jobs", "referrals", "director_decisions", "player_appearance", "stats"]:
 		if not people.get(key) is Dictionary:
 			return "人物字段无效: " + key
+	if not _integer(people.get("appearance_catalog_version",1),1,2):
+		return "人物经历或外貌无效"
+	var modern_appearance: bool = int(people.get("appearance_catalog_version",1)) >= 2
+	var parts_config: Dictionary = Appearance.load_config() if modern_appearance else {}
+	if modern_appearance and (not Appearance.appearance_valid(people.player_appearance,parts_config) or people.player_appearance.has("preset")):
+		return "人物经历或外貌无效"
 	if not people.get("effect_ids") is Array or not people.get("observations") is Array or not _integer(people.get("clock"), 0, MAX_INT):
 		return "人物时钟或记录无效"
 	if not people.get("unlocked_topics",{}) is Dictionary:
@@ -1093,6 +1116,8 @@ static func validate(people: Variant) -> String:
 		if not id is String or not profile is Dictionary or profile.get("npc_id") != id or not profile.get("name") is String or not profile.get("met") is bool:
 			return "人物身份无效"
 		if not profile.get("memories") is Array or not profile.get("appearance") is Dictionary or not _integer(profile.get("familiarity"), 0, 100) or not _integer(profile.get("trust"), -100, 100):
+			return "人物经历或外貌无效"
+		if modern_appearance and not Appearance.appearance_valid(profile.appearance,parts_config):
 			return "人物经历或外貌无效"
 		if profile.has("return_schedule") and not _valid_return_schedule(profile.return_schedule):
 			return "人物回访行程无效"
