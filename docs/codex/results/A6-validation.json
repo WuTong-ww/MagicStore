@@ -1,0 +1,426 @@
+{
+  "task": "A6",
+  "status": "部分完成",
+  "full_round": 3,
+  "exit_code": 0,
+  "godot_passed": 9372,
+  "gateway_passed": 94,
+  "art_passed": 187,
+  "passed": 9653,
+  "total": 9653,
+  "errors": 0,
+  "warnings": 0,
+  "full_log_sha256": "473ad7dfbee0d9be1641ca7110cb81bfbbc29202cb4dd5a4325793cdc254218f",
+  "godot_check_groups": [
+    {
+      "name": "SMOKE RESULT",
+      "checks": 57,
+      "failures": 0
+    },
+    {
+      "name": "DELETE SAVE",
+      "checks": 52,
+      "failures": 0
+    },
+    {
+      "name": "PROVIDER RESULT",
+      "checks": 48,
+      "failures": 0
+    },
+    {
+      "name": "DIALOGUE GROUNDING",
+      "checks": 127,
+      "failures": 0
+    },
+    {
+      "name": "FOLLOWUP QUESTIONS",
+      "checks": 86,
+      "failures": 0
+    },
+    {
+      "name": "ORACLE RULES",
+      "checks": 29,
+      "failures": 0
+    },
+    {
+      "name": "DIVINATION RESULT",
+      "checks": 543,
+      "failures": 0
+    },
+    {
+      "name": "LEGACY DIVINATION GUESTS",
+      "checks": 30,
+      "failures": 0
+    },
+    {
+      "name": "GENERATED CASES",
+      "checks": 80,
+      "failures": 0
+    },
+    {
+      "name": "EVENT GOLDEN",
+      "checks": 100,
+      "failures": 0
+    },
+    {
+      "name": "INVITATION FEEDBACK GOLDEN",
+      "checks": 22,
+      "failures": 0
+    },
+    {
+      "name": "EVENT DATA RULES",
+      "checks": 72,
+      "failures": 0
+    },
+    {
+      "name": "EVENT MIGRATION",
+      "checks": 112,
+      "failures": 0
+    },
+    {
+      "name": "G3 WORKFLOWS",
+      "checks": 128,
+      "failures": 0
+    },
+    {
+      "name": "GENERIC EFFECTS",
+      "checks": 43,
+      "failures": 0
+    },
+    {
+      "name": "EVENT EFFECTS",
+      "checks": 29,
+      "failures": 0
+    },
+    {
+      "name": "INVITATION REFERRAL",
+      "checks": 38,
+      "failures": 0
+    },
+    {
+      "name": "EVENT NOTEBOOK UI",
+      "checks": 116,
+      "failures": 0
+    },
+    {
+      "name": "UI_SMOKE",
+      "checks": 319,
+      "failures": 0
+    },
+    {
+      "name": "SHOP RULES",
+      "checks": 87,
+      "failures": 0
+    },
+    {
+      "name": "SHOP INTEGRATION",
+      "checks": 78,
+      "failures": 0
+    },
+    {
+      "name": "PEOPLE INTEGRATION",
+      "checks": 52,
+      "failures": 0
+    },
+    {
+      "name": "C UI RESULT",
+      "checks": 687,
+      "failures": 0
+    },
+    {
+      "name": "ITEM VISUALS",
+      "checks": 136,
+      "failures": 0
+    },
+    {
+      "name": "SHELF LAYOUT",
+      "checks": 74,
+      "failures": 0
+    },
+    {
+      "name": "SHELF RENDER",
+      "checks": 38,
+      "failures": 0
+    },
+    {
+      "name": "WIND/SPRING",
+      "checks": 100,
+      "failures": 0
+    },
+    {
+      "name": "COMMITTED PRESENTATION EVENTS",
+      "checks": 277,
+      "failures": 0
+    },
+    {
+      "name": "SCENE MOTION",
+      "checks": 49,
+      "failures": 0
+    },
+    {
+      "name": "MOTION SETTINGS",
+      "checks": 31,
+      "failures": 0
+    },
+    {
+      "name": "MOTION PERFORMANCE",
+      "checks": 24,
+      "failures": 0
+    },
+    {
+      "name": "MOTION PREVIEW",
+      "checks": 7,
+      "failures": 0
+    },
+    {
+      "name": "SCENE VISUALS",
+      "checks": 915,
+      "failures": 0
+    },
+    {
+      "name": "ALIGNED SCENE LAYERS",
+      "checks": 79,
+      "failures": 0
+    },
+    {
+      "name": "SCENE ASSET ACCEPTANCE",
+      "checks": 512,
+      "failures": 0
+    },
+    {
+      "name": "ARRIVAL UI RESULT",
+      "checks": 33,
+      "failures": 0
+    },
+    {
+      "name": "CONSULTATION LAYOUT",
+      "checks": 34,
+      "failures": 0
+    },
+    {
+      "name": "ROUND2 SHELL RESULT",
+      "checks": 1366,
+      "failures": 0
+    },
+    {
+      "name": "ROUND2 SHELL EDGES",
+      "checks": 87,
+      "failures": 0
+    },
+    {
+      "name": "ROUND2 CONSULTATION",
+      "checks": 48,
+      "failures": 0
+    },
+    {
+      "name": "A3R AUDIO/THEME",
+      "checks": 30,
+      "failures": 0
+    },
+    {
+      "name": "AUDIO LIFECYCLE",
+      "checks": 43,
+      "failures": 0
+    },
+    {
+      "name": "ARRIVAL TRANSACTIONS",
+      "checks": 42,
+      "failures": 0
+    },
+    {
+      "name": "SAVE DELETE UI",
+      "checks": 37,
+      "failures": 0
+    },
+    {
+      "name": "GENERATED PEOPLE INTEGRATION",
+      "checks": 146,
+      "failures": 0
+    },
+    {
+      "name": "GENERATION ARRIVAL SLOTS",
+      "checks": 30,
+      "failures": 0
+    },
+    {
+      "name": "GENERATED PEOPLE UI",
+      "checks": 49,
+      "failures": 0
+    },
+    {
+      "name": "FOLLOWUP CORE RESULT",
+      "checks": 29,
+      "failures": 0
+    },
+    {
+      "name": "FOLLOWUP QUESTIONS UI",
+      "checks": 39,
+      "failures": 0
+    },
+    {
+      "name": "CHAT KEYBOARD UI",
+      "checks": 49,
+      "failures": 0
+    },
+    {
+      "name": "OPENING GUEST INTEGRATION",
+      "checks": 1207,
+      "failures": 0
+    },
+    {
+      "name": "PROJECT CLEANUP RESULT",
+      "checks": 16,
+      "failures": 0
+    },
+    {
+      "name": "API SETTINGS UI",
+      "checks": 45,
+      "failures": 0
+    },
+    {
+      "name": "API ENDPOINT",
+      "checks": 187,
+      "failures": 0
+    },
+    {
+      "name": "MODEL POLICY RESULT",
+      "checks": 38,
+      "failures": 0
+    },
+    {
+      "name": "HTTP RESULT",
+      "checks": 41,
+      "failures": 0
+    },
+    {
+      "name": "HTTP CORE RESULT",
+      "checks": 56,
+      "failures": 0
+    },
+    {
+      "name": "DIRECT API RESULT",
+      "checks": 77,
+      "failures": 0
+    },
+    {
+      "name": "HTTP RECOVERY RESULT",
+      "checks": 43,
+      "failures": 0
+    },
+    {
+      "name": "PERSON HTTP RESULT",
+      "checks": 64,
+      "failures": 0
+    },
+    {
+      "name": "PEOPLE RULES",
+      "checks": 52,
+      "failures": 0
+    },
+    {
+      "name": "GENERATED PERSON",
+      "checks": 103,
+      "failures": 0
+    },
+    {
+      "name": "PRODUCTION PEOPLE CONFIG",
+      "checks": 11,
+      "failures": 0
+    },
+    {
+      "name": "ARRIVAL CAPACITY",
+      "checks": 27,
+      "failures": 0
+    },
+    {
+      "name": "OPENING GUEST RULES",
+      "checks": 12,
+      "failures": 0
+    },
+    {
+      "name": "MEMORY RULES",
+      "checks": 21,
+      "failures": 0
+    },
+    {
+      "name": "FAMILY FLOW",
+      "checks": 16,
+      "failures": 0
+    },
+    {
+      "name": "ARRIVAL EDGES",
+      "checks": 28,
+      "failures": 0
+    },
+    {
+      "name": "FEEDBACK RULES",
+      "checks": 11,
+      "failures": 0
+    },
+    {
+      "name": "DISTRIBUTION",
+      "checks": 36,
+      "failures": 0
+    },
+    {
+      "name": "DIRECTOR RULES",
+      "checks": 8,
+      "failures": 0
+    },
+    {
+      "name": "PEOPLE PANEL",
+      "checks": 6,
+      "failures": 0
+    },
+    {
+      "name": "A/B HANDOFF",
+      "checks": 28,
+      "failures": 0
+    }
+  ],
+  "earlier_full_rounds": [
+    {
+      "round": 1,
+      "exit_code": 1,
+      "reason": "dummy shader compiler custom_samplers ERROR; fixed by equivalent fragment inlining"
+    },
+    {
+      "round": 2,
+      "exit_code": 1,
+      "reason": "A1R test still required no future motion; now asserts declared A6 sway shader and unchanged native geometry"
+    }
+  ],
+  "graphics": {
+    "preview_round": 3,
+    "preview_passed": 508,
+    "preview_total": 508,
+    "main_frames": 20,
+    "technical_frames": 14,
+    "identical_to_root_reviewed_round2_pngs": 34,
+    "shop_passed": 710,
+    "shop_total": 710,
+    "shop_writes": 23,
+    "shop_current_frames": 22,
+    "pixel_pairs": 4,
+    "unshaded_controls": 8,
+    "all_pixel_checks_passed": true,
+    "root_visual_passed": 245,
+    "root_visual_total": 265
+  },
+  "performance": {
+    "passed": false,
+    "round1_checks": 63,
+    "round1_failures": 1,
+    "round2_checks": 70,
+    "round2_failures": 1,
+    "not_part_of_headless_green_claim": true
+  },
+  "remaining": [
+    "front independent wind_chime/plants/curtain/tree layers and chime audio missing",
+    "production particle regions uncalibrated and empty",
+    "strict observed frame and CPU maxima missed budgets",
+    "old NPC/people list/baked question-mark decorations and movie startup fade remain"
+  ],
+  "original_v2_sha_files_verified": 56,
+  "manifest_bytes": 305473
+}

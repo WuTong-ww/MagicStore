@@ -140,3 +140,21 @@ size-garbage: 15.24 MiB
 ```
 
 普通Git、LFS过滤器停用；main和旧远端round2不改，旧分支空间尚未释放。此快照先于小型文本追加，不影响二进制字节。
+
+## A6 提交前体积（2026-11-22）
+
+- 完整第3轮9653/9653（9372+94+187），exit0、0错误警告。正式preview第3轮508/508且4pair+8control通过，34PNG与已审round2相等；53窗口/关键帧通用245/265，旧人物与启动渐显等缺口保留，性能两次实测仍false。
+- 新增唯一二进制 **16,869,797B**：六质量85 JPG合计1,560,999B与MP4 15,308,798B。小于100MB；原AVI/候选/.tools审计0追踪。56个v2 SHA不变，manifest305,473B。
+- clean累计新增二进制 **223082716B**。原CLEAN脚本仍因new_binary_total及each_clean_commit_binary FAIL；初始81.1MB和后续A1R119.8MB已单独检查，不谎称累计<150MB。结果见results/A6-size-inspection.json。
+- 本地对象包含旧备份，不是A6上传流量；普通Git，不用LFS；main/旧远端round2不改。最终包仍需请策划手动删除GitHub旧round2释放空间。
+
+```text
+count: 5270
+size: 294.46 MiB
+in-pack: 4064
+packs: 2
+size-pack: 1.12 GiB
+prune-packable: 2053
+garbage: 3
+size-garbage: 15.24 MiB
+```

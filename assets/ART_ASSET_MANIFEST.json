@@ -6913,5 +6913,29 @@
       "runtime_opacity": 0.08,
       "persisted_bitmap": false
     }
-  ]
+  ],
+  "a6_runtime_materials": {
+    "style": "v3",
+    "style_reference": "assets/generated_scenes/v3_final/style_reference.png",
+    "configuration": "data/ui/motion.json",
+    "sway": {
+      "shader": "shaders/scene_sway.gdshader",
+      "prompt": "Small matte painted foliage and curtain motion weighted from a fixed pivot, preserving the approved isolated layer."
+    },
+    "flow": {
+      "shader": "shaders/scene_flow.gdshader",
+      "prompt": "Slow painted water or steam flow with original alpha and shoreline fixed; no glow or sparkle."
+    },
+    "pendulum": {
+      "script": "scripts/presentation/damped_spring.gd",
+      "parameters": "visuals.json motion.parameters and data/ui/motion.json layer_defaults"
+    },
+    "particles": {
+      "generator": "Godot CPUParticles2D radial GradientTexture2D",
+      "configuration": "data/ui/motion.json particles",
+      "production_regions": "empty; awaiting calibration",
+      "prompt": "Sparse matte nonadditive particles only inside calibrated scene regions."
+    },
+    "persisted_new_bitmap": false
+  }
 }

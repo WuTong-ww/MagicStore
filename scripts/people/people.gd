@@ -527,10 +527,20 @@ static func next_available_arrival(people: Dictionary, config: Dictionary, prefe
 			return at
 	return -1
 
-static func advance(people: Dictionary, config: Dictionary, until: int) -> bool:
+## Optional transaction-local presentation sink. It is never stored in people.
+## Initialization and historical callers omit it and remain entirely silent.
+static func _presentation_event(collector: Variant, entry: Dictionary, kind: String, at: int) -> void:
+	if not collector is Array:
+		return
+	for previous: Variant in collector:
+		if previous is Dictionary and previous.get("arrival_id") == entry.arrival_id and previous.get("kind") == kind:
+			return
+	collector.append({"arrival_id":str(entry.arrival_id),"kind":kind,"at":at})
+
+static func advance(people: Dictionary, config: Dictionary, until: int, presentation_events: Variant = null) -> bool:
 	if until < int(people.clock):
 		return false
-	_promote_outside(people, config, int(people.clock))
+	_promote_outside(people, config, int(people.clock),presentation_events)
 	# Process the earliest deadline before a simultaneous new arrival.
 	while true:
 		var next_at := until + 1
@@ -551,12 +561,15 @@ static func advance(people: Dictionary, config: Dictionary, until: int) -> bool:
 			break
 		var entry: Dictionary = people.arrivals[next_id]
 		if next_kind == "deadline":
+			var was_inside: bool = entry.state == "queued"
 			entry.state = "left"
 			entry["left_at"] = next_at
 			entry["reason"] = config.arrival.overflow.reasons.timeout
 			_record_waiting_departure(people, entry, next_at)
 			_record_loss(people, config, entry)
 			_update_referral(people, entry, "left", next_at)
+			if was_inside:
+				_presentation_event(presentation_events,entry,"guest_left",next_at)
 		else:
 			var waiting := 0
 			for other: Dictionary in people.arrivals.values():
@@ -589,7 +602,8 @@ static func advance(people: Dictionary, config: Dictionary, until: int) -> bool:
 				entry.state = "queued"
 				_set_patience(entry, profile, config, next_at)
 				_update_referral(people, entry, "arrived", next_at)
-		_promote_outside(people, config, next_at)
+				_presentation_event(presentation_events,entry,"guest_entered",next_at)
+		_promote_outside(people, config, next_at,presentation_events)
 	people.clock = until
 	return true
 
@@ -597,7 +611,7 @@ static func _set_patience(entry: Dictionary, profile: Dictionary, config: Dictio
 	var limits: Dictionary = config.arrival.patience
 	entry.deadline = mini(at + clampi(int(profile.base_patience) + int(profile.trust) - int(entry.urgency), int(limits.min_minutes), int(limits.max_minutes)), int(entry.get("schedule_end", at + int(limits.max_minutes))))
 
-static func _promote_outside(people: Dictionary, config: Dictionary, at: int) -> void:
+static func _promote_outside(people: Dictionary, config: Dictionary, at: int, presentation_events: Variant = null) -> void:
 	var waiting := 0
 	var outside: Array = []
 	for entry: Dictionary in people.arrivals.values():
@@ -611,6 +625,7 @@ static func _promote_outside(people: Dictionary, config: Dictionary, at: int) ->
 			break
 		entry.state = "queued"
 		_update_referral(people, entry, "arrived", at)
+		_presentation_event(presentation_events,entry,"guest_entered",at)
 		waiting += 1
 
 static func _record_loss(people: Dictionary, config: Dictionary, entry: Dictionary) -> void:
@@ -636,14 +651,14 @@ static func _record_waiting_departure(people: Dictionary, entry: Dictionary, at:
 		"reason": entry.reason, "trust_before": previous_trust, "trust_after": profile.trust,
 		"cooldown_until": profile.cooldown_until})
 
-static func advance_with_schedule(people: Dictionary, config: Dictionary, until: int, reputation: int = 0, experience: int = 0, traffic_bonus: float = 0.0) -> bool:
+static func advance_with_schedule(people: Dictionary, config: Dictionary, until: int, reputation: int = 0, experience: int = 0, traffic_bonus: float = 0.0, presentation_events: Variant = null) -> bool:
 	if until < int(people.clock):
 		return false
 	while int(people.clock) < until:
 		var day := floori(float(people.clock) / 1440.0)
 		plan_day(people, config, day, reputation, -1, experience, traffic_bonus)
 		var end := mini(until, (day + 1) * 1440)
-		if not advance(people, config, end):
+		if not advance(people, config, end,presentation_events):
 			return false
 	return true
 
@@ -750,7 +765,7 @@ static func _profile_case_id(people: Dictionary, npc_id: String) -> String:
 			return str(arrival.case_id)
 	return ""
 
-static func finish(people: Dictionary, arrival_id: String, visit_id: String, summary: String) -> bool:
+static func finish(people: Dictionary, arrival_id: String, visit_id: String, summary: String, presentation_events: Variant = null) -> bool:
 	if not people.arrivals.has(arrival_id):
 		return false
 	var row: Dictionary = people.arrivals[arrival_id]
@@ -758,6 +773,7 @@ static func finish(people: Dictionary, arrival_id: String, visit_id: String, sum
 		return false
 	row.state = "completed"
 	_update_referral(people, row, "completed", int(people.clock))
+	_presentation_event(presentation_events,row,"guest_left",int(people.clock))
 	var profile: Dictionary = people.profiles[row.npc_id]
 	profile.familiarity = mini(100, int(profile.familiarity) + 1)
 	profile.memories.append({"visit_id": visit_id, "at": int(people.clock), "summary": summary.left(500)})

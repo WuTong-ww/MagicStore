@@ -1,0 +1,18 @@
+{
+  "task": "A6",
+  "pending_index_new_binary_bytes": 16869797,
+  "clean_history_new_binary_bytes": 223082716,
+  "manifest_bytes": 305473,
+  "forbidden_tracked_paths": [],
+  "original_v2_files_sha_verified": 56,
+  "jpg_count": 6,
+  "jpg_quality": 85,
+  "mp4_count": 1,
+  "mp4_bytes": 15308798,
+  "local_git_count_objects": "count: 5270\nsize: 294.46 MiB\nin-pack: 4064\npacks: 2\nsize-pack: 1.12 GiB\nprune-packable: 2053\ngarbage: 3\nsize-garbage: 15.24 MiB",
+  "original_clean_helper_failed_checks": [
+    "new_binary_total",
+    "each_clean_commit_binary"
+  ],
+  "interpretation": "Initial CLEAN budget passed historically. Later formal A1R assets exceeded cumulative initial budget and its100MB check was separately inspected; do not rewrite raw helper failures. A6 adds only accepted six JPGs and one compressed MP4, no raw AVI/candidates."
+}

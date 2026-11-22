@@ -3,6 +3,7 @@ extends Node
 
 signal state_changed
 signal action_failed(message: String)
+signal presentation_events_committed(events: Array)
 
 const ContentLoader = preload("res://scripts/core/content_loader.gd")
 const MockProvider = preload("res://scripts/providers/mock_dialogue_provider.gd")
@@ -561,7 +562,7 @@ func execute_action(action: Dictionary) -> Dictionary:
 		var outcome: Dictionary = PeopleBridge.start(candidate, proposal, _divination, people_config)
 		if not outcome.success:
 			return _fail(outcome.error_code, outcome.message)
-		return _commit(candidate, action, outcome.message, outcome.result)
+		return _commit(candidate, action, outcome.message, outcome.result,outcome.get("presentation_events",[]))
 	if action.type in SHOP_ACTIONS or action.type in PEOPLE_ACTIONS:
 		return _shop_action(action)
 	if action.type == "use_unlocked_option":
@@ -689,8 +690,9 @@ func _start_visit(action: Dictionary) -> Dictionary:
 	candidate.active_visit_id = visit.visit_id
 	if not _divination.add_case(candidate, visit, case_id):
 		return _fail("CASE_INVALID", "无法建立这位来客的案例。")
-	PeopleBridge.register_legacy_visit(candidate, visit, _divination)
-	return _commit(candidate, action, "接待已开始并保存。", {"visit_id": visit.visit_id})
+	var presentation_events: Array = []
+	PeopleBridge.register_legacy_visit(candidate, visit, _divination,presentation_events)
+	return _commit(candidate, action, "接待已开始并保存。", {"visit_id": visit.visit_id},presentation_events)
 
 func _prepare_talk(action: Dictionary) -> Dictionary:
 	var visit: Dictionary = active_visit()
@@ -830,12 +832,14 @@ func _complete_talk(action: Dictionary, input_text: String, response: Variant) -
 	_divination.record_talk(candidate, visit, action, response, new_clues)
 	PeopleBridge.record_talk(candidate, visit, action, response)
 	PeopleBridge.observe(candidate, action, "question", response.intent, allowed.keys())
-	_advance(candidate, int(content.rules.talk_minutes))
+	# Async callers arrive here only after the provider await and stale-version
+	# check. Nothing in this transaction's collector survives across that await.
+	var presentation_events: Array = _advance(candidate, int(content.rules.talk_minutes))
 	var questions: Array = DialoguePolicy.parse_questions(response.get("followup_questions",[]),_question_context(candidate,visit))
 	visit["followup_questions"] = questions
 	visit["followup_action_id"] = action.action_id
 	var message: String = "交谈已保存。" if new_clues.is_empty() else "获得新线索，交谈已保存。"
-	return _commit(candidate, action, message, {"visit_id": visit.visit_id, "reply_text": response.reply_text, "clue_ids": new_clues, "intent": response.intent, "branch_id": branch, "needs_clarification": response.needs_clarification,"followup_questions":questions})
+	return _commit(candidate, action, message, {"visit_id": visit.visit_id, "reply_text": response.reply_text, "clue_ids": new_clues, "intent": response.intent, "branch_id": branch, "needs_clarification": response.needs_clarification,"followup_questions":questions},presentation_events)
 
 func _divination_action(action: Dictionary) -> Dictionary:
 	var candidate: Dictionary = state.duplicate(true)
@@ -848,8 +852,8 @@ func _divination_action(action: Dictionary) -> Dictionary:
 	var outcome := _divination.handle(candidate, visit, action)
 	if not outcome.success:
 		return _fail(outcome.error_code, outcome.message)
-	_advance(candidate, outcome.minutes)
-	return _commit(candidate, action, outcome.message, outcome.result)
+	var presentation_events: Array = _advance(candidate, outcome.minutes)
+	return _commit(candidate, action, outcome.message, outcome.result,presentation_events)
 
 func _end_visit(action: Dictionary) -> Dictionary:
 	if active_visit().is_empty():
@@ -861,7 +865,7 @@ func _end_visit(action: Dictionary) -> Dictionary:
 	_divination.cancel_open_service(candidate.divination.cases[visit.visit_id])
 	visit.phase = "ended"
 	visit.ended_at = int(candidate.clock_minutes)
-	PeopleBridge.finish(candidate, visit)
+	var presentation_events: Array = PeopleBridge.finish(candidate, visit)
 	candidate.active_visit_id = ""
 	var output := {"visit_id": visit.visit_id}
 	if action.has("return_at"):
@@ -872,7 +876,7 @@ func _end_visit(action: Dictionary) -> Dictionary:
 		candidate.people.arrivals[arrival_id]["source_visit_id"] = visit.visit_id
 		candidate.people.arrivals[arrival_id]["source_action_id"] = action.action_id
 		output["return_appointment"] = {"arrival_id":arrival_id,"at":int(action.return_at)}
-	return _commit(candidate, action, "接待已结束，回访时间也记下了。" if action.has("return_at") else "接待已结束，经历已保存。", output)
+	return _commit(candidate, action, "接待已结束，回访时间也记下了。" if action.has("return_at") else "接待已结束，经历已保存。", output,presentation_events)
 
 func next_return_time() -> int:
 	var visit := active_visit()
@@ -892,17 +896,17 @@ func _rest(action: Dictionary) -> Dictionary:
 		return _fail("NOT_ENOUGH_TIME", "今天剩余时间不足以休息，请处理接待后进入下一天。")
 	var candidate: Dictionary = state.duplicate(true)
 	candidate.player.energy = mini(int(content.rules.max_energy), int(candidate.player.energy) + int(content.rules.rest_energy))
-	_advance(candidate, int(content.rules.rest_minutes))
-	return _commit(candidate, action, "休息已完成并保存。", {})
+	var presentation_events: Array = _advance(candidate, int(content.rules.rest_minutes))
+	return _commit(candidate, action, "休息已完成并保存。", {},presentation_events)
 
 func _next_day(action: Dictionary) -> Dictionary:
 	if not state.active_visit_id.is_empty():
 		return _fail("ACTIVE_VISIT", "还有未结束的接待，请先返回咨询区处理并结束接待。")
 	var candidate: Dictionary = state.duplicate(true)
 	var next_opening: int = (int(candidate.clock_minutes / 1440) + 1) * 1440 + int(content.rules.opening_minute)
-	_advance(candidate, next_opening - int(candidate.clock_minutes))
+	var presentation_events: Array = _advance(candidate, next_opening - int(candidate.clock_minutes))
 	candidate.player.energy = int(content.rules.max_energy)
-	return _commit(candidate, action, "已进入下一天，已处理到期的案例事项。", {})
+	return _commit(candidate, action, "已进入下一天，已处理到期的案例事项。", {},presentation_events)
 
 func _candidate_visit(candidate: Dictionary) -> Dictionary:
 	for visit: Dictionary in candidate.visits:
@@ -913,11 +917,12 @@ func _candidate_visit(candidate: Dictionary) -> Dictionary:
 func _has_time(minutes: int) -> bool:
 	return int(state.clock_minutes) % 1440 + minutes <= int(content.rules.closing_minute)
 
-func _advance(candidate: Dictionary, minutes: int) -> void:
-	PeopleBridge.advance(candidate, people_config, minutes, _divination)
+func _advance(candidate: Dictionary, minutes: int) -> Array:
+	var presentation_events: Array = PeopleBridge.advance(candidate, people_config, minutes, _divination)
 	Shop.sync_effects(candidate, shop_config)
+	return presentation_events
 
-func _commit(candidate: Dictionary, action: Dictionary, message: String, result: Dictionary) -> Dictionary:
+func _commit(candidate: Dictionary, action: Dictionary, message: String, result: Dictionary, presentation_events: Variant = null) -> Dictionary:
 	Shop.sync_effects(candidate, shop_config)
 	PeopleBridge.sync(candidate, people_config, _divination)
 	candidate = SaveService._normalize_numbers(candidate)
@@ -927,9 +932,39 @@ func _commit(candidate: Dictionary, action: Dictionary, message: String, result:
 	var saved: Dictionary = SaveService.write_save(candidate)
 	if not saved.success:
 		return _fail(saved.get("error_code", "SAVE_FAILED"), "未能保存，本次动作未生效，可重试。" + saved.get("message", ""))
+	# Capture this commit's identity before state_changed: a listener may
+	# synchronously commit another action while this local call is still active.
+	var committed_events := _presentation_payload(candidate,presentation_events)
 	state = candidate
 	state_changed.emit()
+	if not committed_events.is_empty():
+		presentation_events_committed.emit(committed_events)
 	return reply
+
+## Whitelist only actual past transitions, never a private person or future plan.
+## The returned array is local; no collector enters candidate, state or result.
+func _presentation_payload(candidate: Dictionary, raw: Variant) -> Array:
+	var result: Array = []
+	if not raw is Array:
+		return result
+	var arrivals: Dictionary = candidate.get("people",{}).get("arrivals",{})
+	var seen: Dictionary = {}
+	for index: int in range(raw.size()):
+		var event: Variant = raw[index]
+		if not event is Dictionary or not event.get("arrival_id") is String or event.arrival_id.is_empty() or not arrivals.has(event.arrival_id) or not event.get("kind") in ["guest_entered","guest_left"] or not People._integer(event.get("at"),0,int(candidate.clock_minutes)):
+			continue
+		var arrival: Dictionary = arrivals[event.arrival_id]
+		if int(event.at) < int(arrival.at):
+			continue
+		var key: String = str(event.arrival_id)+":"+str(event.kind)
+		if seen.has(key):
+			continue
+		seen[key] = true
+		result.append({"save_id":str(candidate.save_id),"state_version":int(candidate.state_version),"arrival_id":str(event.arrival_id),"kind":str(event.kind),"at":int(event.at),"sequence":index})
+	result.sort_custom(func(left: Dictionary, right: Dictionary) -> bool: return left.at < right.at if left.at != right.at else left.sequence < right.sequence)
+	for index: int in range(result.size()):
+		result[index].sequence = index
+	return result
 
 func _initialize_integrated(candidate: Dictionary) -> void:
 	Shop.initialize(candidate)
@@ -978,8 +1013,8 @@ func _shop_action(action: Dictionary) -> Dictionary:
 		var use: Dictionary = outcome.result.item_use
 		if not str(use.get("event_id", "")).is_empty() and not _divination.link_item_use(candidate, _candidate_visit(candidate), use):
 			return _fail("ITEM_USE_BLOCKED", "商品不能用于当前事件，本次未消耗。")
-	_advance(candidate, int(outcome.get("minutes", 0)))
-	return _commit(candidate, action, outcome.message, outcome.get("result", {}))
+	var presentation_events: Array = _advance(candidate, int(outcome.get("minutes", 0)))
+	return _commit(candidate, action, outcome.message, outcome.get("result", {}),presentation_events)
 
 func _use_unlocked_option(action: Dictionary) -> Dictionary:
 	var visit := active_visit()
@@ -1006,8 +1041,8 @@ func _use_unlocked_option(action: Dictionary) -> Dictionary:
 		option["memory_id"] = source.memory_id
 		option["source_visit_id"] = source.visit_id
 		option["source_kind"] = source.kind
-		_advance(candidate,5)
-		return _commit(candidate,action,"已温和追问，原话与商品来源已保留。",{"item_use_id":option.item_use_id,"visit_id":visit.visit_id,"memory_id":source.memory_id})
+		var presentation_events: Array = _advance(candidate,5)
+		return _commit(candidate,action,"已温和追问，原话与商品来源已保留。",{"item_use_id":option.item_use_id,"visit_id":visit.visit_id,"memory_id":source.memory_id},presentation_events)
 	return _fail("FOLLOWUP_UNAVAILABLE", "当前来客没有可用的澄心晶追问。")
 
 func _ok(message: String, result: Dictionary) -> Dictionary:

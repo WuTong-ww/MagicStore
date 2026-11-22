@@ -1,0 +1,845 @@
+{
+  "schema_version": 1,
+  "kind": "A6_actual_preview_validation_summary",
+  "round": 2,
+  "technical_pixel_passed": true,
+  "visual_review_status": "pending_root_review",
+  "final_visual_passed": null,
+  "scope": "实际生产Main与正式Li的GPU不变式；不代签美术、全域连续性或性能通过。",
+  "environment": {
+    "renderer": "gl_compatibility",
+    "adapter": "Intel(R) Iris(R) Xe Graphics",
+    "display": "Windows"
+  },
+  "gui": {
+    "checks": 508,
+    "failures": 0,
+    "exit_code": 0,
+    "main_png_count": 20,
+    "gpu_rgba_count": 10,
+    "difference_png_count": 4,
+    "receipt_serialized_checks": 507,
+    "log": {
+      "path": ".tools/art/a6/preview-round2-gui.log",
+      "sha256": "16a3d6241e1a0cdf644d8f6358755e911152646191d849c8acd6c4b5e25798db",
+      "bytes": 267
+    }
+  },
+  "receipts": {
+    "gpu": {
+      "path": ".tools/art/a6/preview-round2/receipt.json",
+      "sha256": "faa6bda48a1489824208741dd7a8cc9f9b2bcc8da45425f439933eeb09a30b7b",
+      "bytes": 39271
+    },
+    "pixel": {
+      "path": ".tools/art/a6/preview-round2/pixel-report.json",
+      "sha256": "6a9523785143cde29cfef122afce0d8731ed94bd48bb3bce52b5041abff51006",
+      "bytes": 17992
+    },
+    "round1_pixel": {
+      "path": ".tools/art/a6/preview-round1/pixel-report.json",
+      "sha256": "37d6431be77077d0c97954a26f9ca724f5e3c82bf7718d8ad32c6a0fe36cf33d",
+      "bytes": 18440
+    }
+  },
+  "config_sha256": {
+    "data/ui/motion.json": "3d4d169ce1537e0cff7277ac2c882084ec1d5b92bc15a79713bebadd36b1956d",
+    "data/art/motion_validation.json": "c799b123963d997f8ea19443a5eec6a79beaa87965d29bb178465f5e259eca16",
+    "data/shop/visuals.json": "98479092a1ac041471ca81ac58f2341f8e57297afecf4708680561dab4b76546",
+    "assets/ART_ASSET_MANIFEST.json": "92ba9e033de00b0119d2750e5c010156f8e45f742445ebe3f4ade640fb76e2e8",
+    "data/art/motion_preview.json": "4905fd2a068129702e2164cf67e882f0ea9ea0ef67b5f2f461122a6347abe45b"
+  },
+  "processing_source_sha256": {
+    "tests/integration/motion_preview.gd": "2566a7ccb58d2ffdbc30b6cbea04cb681133ba47be66d00901c7f4de971abe7f",
+    "tools/art/check_motion_frames.py": "6cb3c93cc7075ea548babdb2a2445fbaa60787c6f13a884b9c45855c4d2bb755",
+    "shaders/scene_flow.gdshader": "680db7bbfd1b3444345efe770847eac3caf9e8a921b3dad5b08be3a0954a0c69"
+  },
+  "sources": [
+    {
+      "period": "day",
+      "source_texture": "res://assets/generated_scenes/runtime/v3_final/S07/day/v3r3_selected/layers/water_mask.png",
+      "source_sha256": "cf711778509afa46c259fcc10ae8015cb0fbaf9666a0340403e3fa4b1d252feb",
+      "shader_path": "res://shaders/scene_flow.gdshader",
+      "filter": "linear",
+      "size": [
+        1920.0,
+        1080.0
+      ],
+      "uniform_native_size": [
+        1672.0,
+        940.5
+      ],
+      "speed_px_s": 4.0,
+      "distortion_px": 3.0,
+      "noise_frequency": 0.02,
+      "edge_fade_px": 8.0,
+      "motion_factor": 1.0,
+      "control": {
+        "filter": "linear",
+        "kind": "unshaded_formal_gpu",
+        "path": "res://.tools/art/a6/preview-round2/gpu-water-day-unshaded.png",
+        "sha256": "f869d404d7726d40ab78eba62675789828dc5cbec78c02241a2636b8f6886e37"
+      },
+      "samples": {
+        "loop_after": {
+          "path": "res://.tools/art/a6/preview-round2/gpu-water-day-loop_after.png",
+          "sha256": "292772330c707ad582a707d572afe981806aa01a89370dca12a54843bb105c3b",
+          "time_seconds": 418.5
+        },
+        "loop_before": {
+          "path": "res://.tools/art/a6/preview-round2/gpu-water-day-loop_before.png",
+          "sha256": "7fe3127ea54ebf16ce0698f3ed70dfc182da980d611fa59cb5e38f1574258089",
+          "time_seconds": 417.5
+        },
+        "one_second": {
+          "path": "res://.tools/art/a6/preview-round2/gpu-water-day-one_second.png",
+          "sha256": "bb61942b6738e93efb9d8e640281a95e1b4de47ad7c192f5719abba97e6d2ef3",
+          "time_seconds": 1.0
+        },
+        "start": {
+          "path": "res://.tools/art/a6/preview-round2/gpu-water-day-start.png",
+          "sha256": "8c88c0f3c5203bcccd46563bb7e38841259ce94deceed71ef4723bfa9dee53cd",
+          "time_seconds": 0.0
+        }
+      }
+    },
+    {
+      "period": "night",
+      "source_texture": "res://assets/generated_scenes/runtime/v3_final/S07/night/v3r3_selected/layers/water_mask.png",
+      "source_sha256": "1919898d71828e6170da971afd86d7c938e3037d3d72e4d32821378a4c76c86a",
+      "shader_path": "res://shaders/scene_flow.gdshader",
+      "filter": "linear",
+      "size": [
+        1920.0,
+        1080.0
+      ],
+      "uniform_native_size": [
+        1672.0,
+        940.5
+      ],
+      "speed_px_s": 4.0,
+      "distortion_px": 3.0,
+      "noise_frequency": 0.02,
+      "edge_fade_px": 8.0,
+      "motion_factor": 1.0,
+      "control": {
+        "filter": "linear",
+        "kind": "unshaded_formal_gpu",
+        "path": "res://.tools/art/a6/preview-round2/gpu-water-night-unshaded.png",
+        "sha256": "213b58b46360247fcec0e29c0270281870e470b4a7158d229ba87da0e7e550cc"
+      },
+      "samples": {
+        "loop_after": {
+          "path": "res://.tools/art/a6/preview-round2/gpu-water-night-loop_after.png",
+          "sha256": "327d297f1b5b71a0f3ca5fa5a4ed3c53b366cb4e6d343dacdc846a68cfb64492",
+          "time_seconds": 418.5
+        },
+        "loop_before": {
+          "path": "res://.tools/art/a6/preview-round2/gpu-water-night-loop_before.png",
+          "sha256": "e95ac96877467cde58343f9dbf8886b7bd50b211b410d79522955a7205c246c4",
+          "time_seconds": 417.5
+        },
+        "one_second": {
+          "path": "res://.tools/art/a6/preview-round2/gpu-water-night-one_second.png",
+          "sha256": "bb2af8f08776d643ed615bf9b644ca0384186a84a4377f12fa66edd05e1d20ba",
+          "time_seconds": 1.0
+        },
+        "start": {
+          "path": "res://.tools/art/a6/preview-round2/gpu-water-night-start.png",
+          "sha256": "814e6845c139a30a3126de5f867968af95c797a5df8bcfee4bcf34ec58897cdb",
+          "time_seconds": 0.0
+        }
+      }
+    }
+  ],
+  "time_pairs": [
+    {
+      "period": "day",
+      "comparison": "normal",
+      "passed": true,
+      "errors": [],
+      "alpha_all_bytes_equal": true,
+      "alpha_max_delta": 0,
+      "regions": {
+        "transparent": {
+          "pixels": 1781056,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "feather": {
+          "pixels": 9949,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "shore": {
+          "pixels": 3712,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "interior": {
+          "pixels": 278883,
+          "rgb_changed_pixels": 267482,
+          "rgb_max_delta": 105
+        }
+      },
+      "before": {
+        "path": "res://.tools/art/a6/preview-round2/gpu-water-day-start.png",
+        "sha256": "8c88c0f3c5203bcccd46563bb7e38841259ce94deceed71ef4723bfa9dee53cd",
+        "time_seconds": 0.0
+      },
+      "after": {
+        "path": "res://.tools/art/a6/preview-round2/gpu-water-day-one_second.png",
+        "sha256": "bb61942b6738e93efb9d8e640281a95e1b4de47ad7c192f5719abba97e6d2ef3",
+        "time_seconds": 1.0
+      },
+      "difference_path": ".tools/art/a6/preview-round2/pixel-diff-day-normal.png",
+      "difference_sha256": "f4179ee3e7c0f91b363d552a26128bac3512eb962dbaa8c87b2461f760ec5f75"
+    },
+    {
+      "period": "day",
+      "comparison": "long_wrap",
+      "passed": true,
+      "errors": [],
+      "alpha_all_bytes_equal": true,
+      "alpha_max_delta": 0,
+      "regions": {
+        "transparent": {
+          "pixels": 1781056,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "feather": {
+          "pixels": 9949,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "shore": {
+          "pixels": 3712,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "interior": {
+          "pixels": 278883,
+          "rgb_changed_pixels": 266306,
+          "rgb_max_delta": 63
+        }
+      },
+      "before": {
+        "path": "res://.tools/art/a6/preview-round2/gpu-water-day-loop_before.png",
+        "sha256": "7fe3127ea54ebf16ce0698f3ed70dfc182da980d611fa59cb5e38f1574258089",
+        "time_seconds": 417.5
+      },
+      "after": {
+        "path": "res://.tools/art/a6/preview-round2/gpu-water-day-loop_after.png",
+        "sha256": "292772330c707ad582a707d572afe981806aa01a89370dca12a54843bb105c3b",
+        "time_seconds": 418.5
+      },
+      "difference_path": ".tools/art/a6/preview-round2/pixel-diff-day-long_wrap.png",
+      "difference_sha256": "f48c4bc437780b70d1e205690326518971aba7de9a34a11a5039f634d8859651"
+    },
+    {
+      "period": "night",
+      "comparison": "normal",
+      "passed": true,
+      "errors": [],
+      "alpha_all_bytes_equal": true,
+      "alpha_max_delta": 0,
+      "regions": {
+        "transparent": {
+          "pixels": 1781056,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "feather": {
+          "pixels": 9949,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "shore": {
+          "pixels": 3712,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "interior": {
+          "pixels": 278883,
+          "rgb_changed_pixels": 263396,
+          "rgb_max_delta": 35
+        }
+      },
+      "before": {
+        "path": "res://.tools/art/a6/preview-round2/gpu-water-night-start.png",
+        "sha256": "814e6845c139a30a3126de5f867968af95c797a5df8bcfee4bcf34ec58897cdb",
+        "time_seconds": 0.0
+      },
+      "after": {
+        "path": "res://.tools/art/a6/preview-round2/gpu-water-night-one_second.png",
+        "sha256": "bb2af8f08776d643ed615bf9b644ca0384186a84a4377f12fa66edd05e1d20ba",
+        "time_seconds": 1.0
+      },
+      "difference_path": ".tools/art/a6/preview-round2/pixel-diff-night-normal.png",
+      "difference_sha256": "c1b7a922f7e8e8a3f22748c70ece88336b837f4e5df95d647463e03d79319bcf"
+    },
+    {
+      "period": "night",
+      "comparison": "long_wrap",
+      "passed": true,
+      "errors": [],
+      "alpha_all_bytes_equal": true,
+      "alpha_max_delta": 0,
+      "regions": {
+        "transparent": {
+          "pixels": 1781056,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "feather": {
+          "pixels": 9949,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "shore": {
+          "pixels": 3712,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "interior": {
+          "pixels": 278883,
+          "rgb_changed_pixels": 259461,
+          "rgb_max_delta": 25
+        }
+      },
+      "before": {
+        "path": "res://.tools/art/a6/preview-round2/gpu-water-night-loop_before.png",
+        "sha256": "e95ac96877467cde58343f9dbf8886b7bd50b211b410d79522955a7205c246c4",
+        "time_seconds": 417.5
+      },
+      "after": {
+        "path": "res://.tools/art/a6/preview-round2/gpu-water-night-loop_after.png",
+        "sha256": "327d297f1b5b71a0f3ca5fa5a4ed3c53b366cb4e6d343dacdc846a68cfb64492",
+        "time_seconds": 418.5
+      },
+      "difference_path": ".tools/art/a6/preview-round2/pixel-diff-night-long_wrap.png",
+      "difference_sha256": "eb1e78ab1c3aa6f07960a47985cefde2040f4643f5151cfb4e107ea02aca0482"
+    }
+  ],
+  "unshaded_original_controls": [
+    {
+      "period": "day",
+      "sample": "loop_after",
+      "passed": true,
+      "errors": [],
+      "alpha_all_bytes_equal": true,
+      "alpha_max_delta": 0,
+      "regions": {
+        "transparent": {
+          "pixels": 1781056,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "feather": {
+          "pixels": 9949,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "shore": {
+          "pixels": 3712,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "interior": {
+          "pixels": 278883,
+          "rgb_changed_pixels": 269001,
+          "rgb_max_delta": 112
+        }
+      }
+    },
+    {
+      "period": "day",
+      "sample": "loop_before",
+      "passed": true,
+      "errors": [],
+      "alpha_all_bytes_equal": true,
+      "alpha_max_delta": 0,
+      "regions": {
+        "transparent": {
+          "pixels": 1781056,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "feather": {
+          "pixels": 9949,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "shore": {
+          "pixels": 3712,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "interior": {
+          "pixels": 278883,
+          "rgb_changed_pixels": 268882,
+          "rgb_max_delta": 115
+        }
+      }
+    },
+    {
+      "period": "day",
+      "sample": "one_second",
+      "passed": true,
+      "errors": [],
+      "alpha_all_bytes_equal": true,
+      "alpha_max_delta": 0,
+      "regions": {
+        "transparent": {
+          "pixels": 1781056,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "feather": {
+          "pixels": 9949,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "shore": {
+          "pixels": 3712,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "interior": {
+          "pixels": 278883,
+          "rgb_changed_pixels": 265717,
+          "rgb_max_delta": 96
+        }
+      }
+    },
+    {
+      "period": "day",
+      "sample": "start",
+      "passed": true,
+      "errors": [],
+      "alpha_all_bytes_equal": true,
+      "alpha_max_delta": 0,
+      "regions": {
+        "transparent": {
+          "pixels": 1781056,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "feather": {
+          "pixels": 9949,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "shore": {
+          "pixels": 3712,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "interior": {
+          "pixels": 278883,
+          "rgb_changed_pixels": 230571,
+          "rgb_max_delta": 101
+        }
+      }
+    },
+    {
+      "period": "night",
+      "sample": "loop_after",
+      "passed": true,
+      "errors": [],
+      "alpha_all_bytes_equal": true,
+      "alpha_max_delta": 0,
+      "regions": {
+        "transparent": {
+          "pixels": 1781056,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "feather": {
+          "pixels": 9949,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "shore": {
+          "pixels": 3712,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "interior": {
+          "pixels": 278883,
+          "rgb_changed_pixels": 265986,
+          "rgb_max_delta": 39
+        }
+      }
+    },
+    {
+      "period": "night",
+      "sample": "loop_before",
+      "passed": true,
+      "errors": [],
+      "alpha_all_bytes_equal": true,
+      "alpha_max_delta": 0,
+      "regions": {
+        "transparent": {
+          "pixels": 1781056,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "feather": {
+          "pixels": 9949,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "shore": {
+          "pixels": 3712,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "interior": {
+          "pixels": 278883,
+          "rgb_changed_pixels": 265909,
+          "rgb_max_delta": 45
+        }
+      }
+    },
+    {
+      "period": "night",
+      "sample": "one_second",
+      "passed": true,
+      "errors": [],
+      "alpha_all_bytes_equal": true,
+      "alpha_max_delta": 0,
+      "regions": {
+        "transparent": {
+          "pixels": 1781056,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "feather": {
+          "pixels": 9949,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "shore": {
+          "pixels": 3712,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "interior": {
+          "pixels": 278883,
+          "rgb_changed_pixels": 261159,
+          "rgb_max_delta": 34
+        }
+      }
+    },
+    {
+      "period": "night",
+      "sample": "start",
+      "passed": true,
+      "errors": [],
+      "alpha_all_bytes_equal": true,
+      "alpha_max_delta": 0,
+      "regions": {
+        "transparent": {
+          "pixels": 1781056,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "feather": {
+          "pixels": 9949,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "shore": {
+          "pixels": 3712,
+          "rgb_changed_pixels": 0,
+          "rgb_max_delta": 0
+        },
+        "interior": {
+          "pixels": 278883,
+          "rgb_changed_pixels": 214465,
+          "rgb_max_delta": 38
+        }
+      }
+    }
+  ],
+  "protection": {
+    "protected_path_count": 182,
+    "formal_asset_count": 169,
+    "protected_path_to_sha256_digest": "adf72cd98cde77a24a7743b9d028e93c418ef8faa160e87aa44d3bb41d4a773c",
+    "formal_path_to_sha256_digest": "c93e1339f411815718b35219da86f83589eec40c3b486660532322e7ecfe308f",
+    "all_unchanged_during_round": true,
+    "original_preferences_unchanged": true,
+    "snapshot_policy": "完整snapshot除隔离new_game/procure外逐项保持不变；night为render-only fixture，未改经营时钟。",
+    "changed_from_round1_before_round2": [
+      "shaders/scene_flow.gdshader"
+    ],
+    "before_record": {
+      "path": ".tools/art/a6/preview-round2-before.json",
+      "sha256": "a4dbc27ff74e64602bbbc63e6b9e66b895ea8366d3f74a98cbd6ad5608fcbeab",
+      "bytes": 875
+    }
+  },
+  "red_to_green": {
+    "shore": {
+      "round1_passed": false,
+      "round1_pairs": [
+        {
+          "period": "day",
+          "comparison": "normal",
+          "changed_pixels": 5,
+          "max_rgb_delta": 5
+        },
+        {
+          "period": "day",
+          "comparison": "long_wrap",
+          "changed_pixels": 8,
+          "max_rgb_delta": 8
+        },
+        {
+          "period": "night",
+          "comparison": "normal",
+          "changed_pixels": 4,
+          "max_rgb_delta": 4
+        },
+        {
+          "period": "night",
+          "comparison": "long_wrap",
+          "changed_pixels": 7,
+          "max_rgb_delta": 5
+        }
+      ],
+      "round2_pair_and_control_shore_rgb_changed_pixels": 0,
+      "threshold_or_roi_changed": false
+    },
+    "old_horizon_freeze": {
+      "roi": [
+        1440,
+        800,
+        288,
+        128
+      ],
+      "times_seconds": [
+        417,
+        417.5
+      ],
+      "old_changed_pixels": {
+        "day": 0,
+        "night": 0
+      },
+      "new_changed_pixels": {
+        "day": 36136,
+        "night": 34546
+      },
+      "independent_gpu_png_recount": {
+        "path": ".tools/art/a6/preview-round2-owner-oracle-independent.json",
+        "sha256": "b67d206aea245b3545ec669e3d23a49570a27356f9b8bd087493ba9f17c87d92",
+        "bytes": 2655
+      }
+    },
+    "finite_cycle_diagnostic": {
+      "cycle_seconds": 12.5,
+      "owner_samples": [
+        {
+          "period": "day",
+          "continuity": [
+            {
+              "epsilon_seconds": 0.001,
+              "rgb": {
+                "max_rgb_byte_delta": 1,
+                "mean_rgb_byte_delta": 0.0166829427083333,
+                "p99_rgb_byte_delta": 1,
+                "pixels_changed": 1504
+              }
+            },
+            {
+              "epsilon_seconds": 0.0005,
+              "rgb": {
+                "max_rgb_byte_delta": 1,
+                "mean_rgb_byte_delta": 0.0100640190972222,
+                "p99_rgb_byte_delta": 1,
+                "pixels_changed": 939
+              }
+            }
+          ]
+        },
+        {
+          "period": "night",
+          "continuity": [
+            {
+              "epsilon_seconds": 0.001,
+              "rgb": {
+                "max_rgb_byte_delta": 1,
+                "mean_rgb_byte_delta": 0.0094310619212963,
+                "p99_rgb_byte_delta": 0,
+                "pixels_changed": 723
+              }
+            },
+            {
+              "epsilon_seconds": 0.0005,
+              "rgb": {
+                "max_rgb_byte_delta": 1,
+                "mean_rgb_byte_delta": 0.00562427662037037,
+                "p99_rgb_byte_delta": 0,
+                "pixels_changed": 449
+              }
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "path": ".tools/art/a6/renderer-flow-horizon.json",
+        "sha256": "2835d83bdb1528933aec7c68b2d6928d516c713e119da256430f2f5bdecceed1",
+        "bytes": 1871
+      },
+      "scope": "owner实际GPU ROI量化结果；本helper的417.5/418.5仅为长时抽样，不代替12.5周期边界或全域数学C1证明。"
+    },
+    "owner_regression": {
+      "red_checks": 82,
+      "red_failures": 5,
+      "green_checks": 82,
+      "green_failures": 0,
+      "red_log": {
+        "path": ".tools/art/a6/renderer-flow-regression-red.log",
+        "sha256": "99e0e7da85a4e2af845de047a8aa790548a4ac25e6a29ed5c5950c6343389a60",
+        "bytes": 2338
+      },
+      "green_log": {
+        "path": ".tools/art/a6/renderer-flow-correction-attempt1.log",
+        "sha256": "9628f90af46333302d979b5cfa06fdf528ebdd42dd2c350e88a9495bde0cb98e",
+        "bytes": 1928
+      }
+    }
+  },
+  "reuse": {
+    "raw_count": 30,
+    "same_raw_count": 8,
+    "changed_raw_count": 22,
+    "same_raw_sha256_list": {
+      "path": ".tools/art/a6/preview-round2-reusable-raw.txt",
+      "sha256": "d76d2bd929b7e4379611e49221c3aa6c72bc73aa835b94b43b36c8ff079e3be5",
+      "bytes": 995
+    },
+    "all_png_sha256_list": {
+      "path": ".tools/art/a6/preview-round2-sha-reuse.json",
+      "sha256": "3be3cf48c6ad6c67233d45e726f9c510cd04c469f0da127b94942aa12b775b28",
+      "bytes": 16317
+    }
+  },
+  "screenshots": [
+    {
+      "source": ".tools/art/a6/preview-round2/water-day-t1-1280x720.png",
+      "source_sha256": "3c0a1ea7abf5e855dbc8572337312b8848753b73cafea7d99923ac679b4e9039",
+      "path": "docs/screenshots/round2/A6/water-day1280.jpg",
+      "sha256": "57c4e2b4d495fdcb67d616905e7dcff0c5f56089a6c4e9aefcb359115b65229d",
+      "size": [
+        1280,
+        720
+      ],
+      "bytes": 219280,
+      "encoding": {
+        "format": "JPEG",
+        "quality": 85,
+        "optimize": true,
+        "subsampling": 2
+      },
+      "visual_review_status": "pending_root_review"
+    },
+    {
+      "source": ".tools/art/a6/preview-round2/water-night-t1-1920x1080.png",
+      "source_sha256": "c5b9b02f717199aa056d85697f876ee94166a0d32000666b5055478fa5c2ebbb",
+      "path": "docs/screenshots/round2/A6/water-night1920.jpg",
+      "sha256": "d98612c5025810e38ea6412c445f88d090e03bc1bc9af6d993ade304403aadc2",
+      "size": [
+        1920,
+        1080
+      ],
+      "bytes": 344036,
+      "encoding": {
+        "format": "JPEG",
+        "quality": 85,
+        "optimize": true,
+        "subsampling": 2
+      },
+      "visual_review_status": "pending_root_review"
+    },
+    {
+      "source": ".tools/art/a6/preview-round2/stock-initial-1280x720.png",
+      "source_sha256": "724796ad67a3fac26a913029e701e8fb9e76e6b5fb9872783d52ecbebc429a1d",
+      "path": "docs/screenshots/round2/A6/stock-initial1280.jpg",
+      "sha256": "0cc6b008def7668751cd161004eb9d5a447d8b8361dc8ccbcf6f509d3661de5c",
+      "size": [
+        1280,
+        720
+      ],
+      "bytes": 154057,
+      "encoding": {
+        "format": "JPEG",
+        "quality": 85,
+        "optimize": true,
+        "subsampling": 2
+      },
+      "visual_review_status": "pending_root_review"
+    },
+    {
+      "source": ".tools/art/a6/preview-round2/stock-settled-1920x1080.png",
+      "source_sha256": "cb95bae9bb4788b58015712f42f3a11a725ff314b7398562ad4c4c9391a7fac6",
+      "path": "docs/screenshots/round2/A6/stock-settled1920.jpg",
+      "sha256": "4f8a9c0d0d465c32d45df9c538ab4504dc335e1e9913fd59d285a4d7fb2f7cf8",
+      "size": [
+        1920,
+        1080
+      ],
+      "bytes": 297364,
+      "encoding": {
+        "format": "JPEG",
+        "quality": 85,
+        "optimize": true,
+        "subsampling": 2
+      },
+      "visual_review_status": "pending_root_review"
+    },
+    {
+      "source": ".tools/art/a6/preview-round2/settings-reduced-1280x720.png",
+      "source_sha256": "c14564354fe908ca0f2c17ef7880588ab1af3ce851b6b07fe1bd0eed4e9c428f",
+      "path": "docs/screenshots/round2/A6/settings-reduced1280.jpg",
+      "sha256": "b28fc673224b86e0ac2a5c614a31e168aeb736ee01ad10f7fe5cc491291bfe6b",
+      "size": [
+        1280,
+        720
+      ],
+      "bytes": 148321,
+      "encoding": {
+        "format": "JPEG",
+        "quality": 85,
+        "optimize": true,
+        "subsampling": 2
+      },
+      "visual_review_status": "pending_root_review"
+    },
+    {
+      "source": ".tools/art/a6/preview-round2/front-day-static-1920x1080.png",
+      "source_sha256": "5acdf5d380bc6047ed4f23efc2b692ffae2e9930a5448ca365a56465523abc53",
+      "path": "docs/screenshots/round2/A6/front-day1920.jpg",
+      "sha256": "423e57c477e4aee05807283064445173f9eeccfb17a88baee5f381f7da0fb25e",
+      "size": [
+        1920,
+        1080
+      ],
+      "bytes": 397941,
+      "encoding": {
+        "format": "JPEG",
+        "quality": 85,
+        "optimize": true,
+        "subsampling": 2
+      },
+      "visual_review_status": "pending_root_review"
+    }
+  ],
+  "limitations": [
+    "最终六张JPG等待root亲看，未作视觉通过结论。",
+    "缺少Li的场景与空particles.regions仍为静态或partial。",
+    "性能严格passed=false另见A6-performance.json。"
+  ]
+}

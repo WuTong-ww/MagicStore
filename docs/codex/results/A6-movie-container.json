@@ -1,0 +1,190 @@
+{
+  "kind": "independent_actual_media_container_probe",
+  "no_new_dependency_installed": true,
+  "mp4_container_parser_dependencies": "Python standard library only",
+  "mp4": {
+    "path": "D:\\MagicStore\\docs\\screenshots\\a6\\front-day.mp4",
+    "bytes": 15308798,
+    "sha256": "791e7a44826cfb79a5ab06dcf7284987b21d1396938a913b9ff2fb352f3a7c53",
+    "top_level_boxes": [
+      {
+        "kind": "ftyp",
+        "offset": 0,
+        "bytes": 24
+      },
+      {
+        "kind": "uuid",
+        "offset": 24,
+        "bytes": 40
+      },
+      {
+        "kind": "mdat",
+        "offset": 64,
+        "bytes": 15302839
+      },
+      {
+        "kind": "moov",
+        "offset": 15302903,
+        "bytes": 5895
+      }
+    ],
+    "tracks": [
+      {
+        "handler": "vide",
+        "track_offset": 15303019,
+        "mdhd_version": 0,
+        "media_timescale": 60000,
+        "media_header_duration_ticks": 599999,
+        "media_header_duration_seconds": 9.999983333333333,
+        "stsz_sample_count": 600,
+        "sample_size": 0,
+        "total_sample_bytes": 15062695,
+        "stts_entry_count": 1,
+        "stts_entries": [
+          {
+            "sample_count": 600,
+            "sample_delta": 1000
+          }
+        ],
+        "stts_sample_count": 600,
+        "stts_duration_ticks": 600000,
+        "stts_duration_seconds": 10.0,
+        "stts_duration_fraction": "10",
+        "sample_rate": 60.0
+      },
+      {
+        "handler": "soun",
+        "track_offset": 15306248,
+        "mdhd_version": 0,
+        "media_timescale": 48000,
+        "media_header_duration_ticks": 480351,
+        "media_header_duration_seconds": 10.0073125,
+        "stsz_sample_count": 469,
+        "sample_size": 0,
+        "total_sample_bytes": 240128,
+        "stts_entry_count": 1,
+        "stts_entries": [
+          {
+            "sample_count": 469,
+            "sample_delta": 1024
+          }
+        ],
+        "stts_sample_count": 469,
+        "stts_duration_ticks": 480256,
+        "stts_duration_seconds": 10.005333333333333,
+        "stts_duration_fraction": "3752/375",
+        "sample_rate": 46.875
+      }
+    ],
+    "video_tracks": [
+      {
+        "handler": "vide",
+        "track_offset": 15303019,
+        "mdhd_version": 0,
+        "media_timescale": 60000,
+        "media_header_duration_ticks": 599999,
+        "media_header_duration_seconds": 9.999983333333333,
+        "stsz_sample_count": 600,
+        "sample_size": 0,
+        "total_sample_bytes": 15062695,
+        "stts_entry_count": 1,
+        "stts_entries": [
+          {
+            "sample_count": 600,
+            "sample_delta": 1000
+          }
+        ],
+        "stts_sample_count": 600,
+        "stts_duration_ticks": 600000,
+        "stts_duration_seconds": 10.0,
+        "stts_duration_fraction": "10",
+        "sample_rate": 60.0
+      }
+    ],
+    "measurement": "Actual stsz and stts tables under hdlr=vide; no expected frame count input.",
+    "full_decode_performed": false,
+    "limitation": "Container sample count and decode timeline only; no H264 decoding or visual/playback acceptance; edit-list presentation mapping not evaluated."
+  },
+  "avi": {
+    "path": "D:\\MagicStore\\.tools\\art\\a6\\movies\\front-day.avi",
+    "bytes": 184139666,
+    "sha256": "e22c8a83999abd6263d027664515b9f6e846139419e1ae94443fd84af0957d31",
+    "riff_declared_total_bytes": 184139596,
+    "riff_actual_minus_declared_bytes": 70,
+    "actual_movi_video_jpeg_chunk_count": 600,
+    "movi_chunk_counts": {
+      "00db": 600,
+      "01wb": 600
+    },
+    "selected_original_frames": [
+      {
+        "frame_index_zero_based": 0,
+        "chunk_offset": 332,
+        "chunk_payload_bytes": 95527,
+        "source_jpeg_sha256": "d0c201b54ed94a64d81e2efa2863459c72cf458f373a32ea1ca733346e443356",
+        "decoded_size": [
+          1920,
+          1080
+        ],
+        "png_path": "D:\\MagicStore\\.tools\\art\\a6\\movie-frames\\front-day-frame-000.png",
+        "png_sha256": "97a56533edad721f7c0a905899ff99233a35a651bbbc6664240331f5f1d25f9a"
+      },
+      {
+        "frame_index_zero_based": 119,
+        "chunk_offset": 35411612,
+        "chunk_payload_bytes": 305950,
+        "source_jpeg_sha256": "3545afc1a988417fb2d523f797c989eb7d00f9b4ac968da358764aab32528e38",
+        "decoded_size": [
+          1920,
+          1080
+        ],
+        "png_path": "D:\\MagicStore\\.tools\\art\\a6\\movie-frames\\front-day-frame-119.png",
+        "png_sha256": "ae310fa080fed4f740f7b2b977554dd385fd64326d6433d9fed7f2dacb6906df"
+      },
+      {
+        "frame_index_zero_based": 120,
+        "chunk_offset": 35720778,
+        "chunk_payload_bytes": 305950,
+        "source_jpeg_sha256": "3545afc1a988417fb2d523f797c989eb7d00f9b4ac968da358764aab32528e38",
+        "decoded_size": [
+          1920,
+          1080
+        ],
+        "png_path": "D:\\MagicStore\\.tools\\art\\a6\\movie-frames\\front-day-frame-120.png",
+        "png_sha256": "ae310fa080fed4f740f7b2b977554dd385fd64326d6433d9fed7f2dacb6906df"
+      },
+      {
+        "frame_index_zero_based": 300,
+        "chunk_offset": 91370658,
+        "chunk_payload_bytes": 305950,
+        "source_jpeg_sha256": "3545afc1a988417fb2d523f797c989eb7d00f9b4ac968da358764aab32528e38",
+        "decoded_size": [
+          1920,
+          1080
+        ],
+        "png_path": "D:\\MagicStore\\.tools\\art\\a6\\movie-frames\\front-day-frame-300.png",
+        "png_sha256": "ae310fa080fed4f740f7b2b977554dd385fd64326d6433d9fed7f2dacb6906df"
+      },
+      {
+        "frame_index_zero_based": 599,
+        "chunk_offset": 183811292,
+        "chunk_payload_bytes": 305950,
+        "source_jpeg_sha256": "3545afc1a988417fb2d523f797c989eb7d00f9b4ac968da358764aab32528e38",
+        "decoded_size": [
+          1920,
+          1080
+        ],
+        "png_path": "D:\\MagicStore\\.tools\\art\\a6\\movie-frames\\front-day-frame-599.png",
+        "png_sha256": "ae310fa080fed4f740f7b2b977554dd385fd64326d6433d9fed7f2dacb6906df"
+      }
+    ],
+    "limitation": "Only five selected original MJPEG payloads decoded; no full AVI decode or visual acceptance."
+  },
+  "repository_parser": {
+    "path": "D:\\MagicStore\\tools\\art\\check_motion_video.py",
+    "sha256": "f4db04aef3b3740eaa357e5f0a2b3dff2f461aa147af1f8d77c2a09253e15aa9",
+    "fixture_tests_passed": 15,
+    "fixture_tests_total": 15,
+    "full_project_test_run_by_this_agent": false
+  }
+}

@@ -1,5 +1,10 @@
 extends Control
 
+signal scene_changed(previous: String, next: String)
+const MotionConfig = preload("res://scripts/presentation/wind_field.gd")
+var motion_settings: Dictionary = {}
+var _motion_seen_events: Dictionary = {}
+
 const UI = preload("res://scripts/ui/ui_kit.gd")
 const Shell = preload("res://scripts/ui/shell_config.gd")
 var shell_config: Dictionary = {}
@@ -52,6 +57,7 @@ func _ready() -> void:
 	get_tree().auto_accept_quit = false
 	get_tree().root.close_requested.connect(_request_close)
 	shell_config = Shell.load_config()
+	motion_settings = MotionConfig.load_settings()
 	DisplayServer.window_set_min_size(Vector2i(shell_config.screen_minimum[0],shell_config.screen_minimum[1]))
 	_build_shell()
 	if ResourceLoader.exists("res://scripts/audio/shop_audio.gd"):
@@ -65,6 +71,7 @@ func _ready() -> void:
 	workbench.theme = theme
 	add_child(workbench)
 	GameState.state_changed.connect(_refresh)
+	GameState.presentation_events_committed.connect(_on_presentation_events)
 	GameState.action_failed.connect(show_notice)
 	_build_people_window()
 	show_screen("exterior")
@@ -88,6 +95,13 @@ func prepare_close_async() -> bool:
 			_closing = false
 			show_notice(close_config.labels.close_failed)
 			return false
+	var motion := _current_motion()
+	if is_instance_valid(motion) and not await motion.shutdown_async():
+		_closing = false
+		var motion_audio_config: Dictionary = load("res://scripts/audio/shop_audio.gd").load_config()
+		if not motion_audio_config.is_empty():
+			show_notice(str(motion_audio_config.labels.shutdown_failed))
+		return false
 	if is_instance_valid(presentation_audio) and not await presentation_audio.shutdown_async():
 		_closing = false
 		show_notice(presentation_audio.config.labels.shutdown_failed)
@@ -191,7 +205,8 @@ func _build_shell() -> void:
 	provider_badge.visible = false
 	add_child(provider_badge)
 
-func show_screen(which: String) -> void:
+func show_screen(which: String, silent_motion: bool = false) -> void:
+	var previous := current_screen if is_instance_valid(screen) else ""
 	current_screen = which
 	if is_instance_valid(presentation_audio):
 		presentation_audio.transition(which,int(GameState.player_snapshot().get("clock_minutes",0)))
@@ -208,6 +223,11 @@ func show_screen(which: String) -> void:
 	screen.modulate.a = 0.0
 	create_tween().tween_property(screen, "modulate:a", 1.0, 0.18)
 	_refresh()
+	if not silent_motion and not previous.is_empty() and previous != which:
+		scene_changed.emit(previous,which)
+		var motion := _current_motion()
+		if is_instance_valid(motion):
+			motion.on_scene_changed(previous,which)
 
 func _refresh() -> void:
 	var snapshot: Dictionary = GameState.player_snapshot()
@@ -224,6 +244,9 @@ func _refresh() -> void:
 	else:
 		var player: Dictionary = snapshot.get("player", {})
 		var people: Dictionary = GameState.people_view()
+		var wind := get_node_or_null("/root/WindField")
+		if is_instance_valid(wind):
+			wind.set_weather(str(people.get("day",{}).get("weather","")))
 		var shop: Dictionary = GameState.shop_view().get("shop",{})
 		resources.text = shell_config.status_format % [int(player.get("coins",0)),int(shop.get("reputation",0)),GameState.clock_text(),people.get("queue",[]).size()]
 		energy_bar.max_value = int(GameState.content.rules.max_energy)
@@ -263,7 +286,7 @@ func run_action(action_type: String, extra: Dictionary = {}) -> Dictionary:
 			presentation_audio.play_ui("coin" if action_type in ["procure_item","sell_product","sell_material"] else "confirm")
 		if action_type in ["new_game", "load_game"]:
 			save_window.hide()
-			show_screen("consultation" if not GameState.active_visit().is_empty() else "front")
+			show_screen("consultation" if not GameState.active_visit().is_empty() else "front",true)
 		elif action_type in ["start_visit", "start_arrival"]:
 			show_screen("consultation")
 			people_window.hide()
@@ -373,7 +396,7 @@ func open_network_settings() -> void:
 	var box := VBoxContainer.new()
 	box.custom_minimum_size = Vector2(600,340)
 	dialog.add_child(box)
-	var description := UI.label("填写 AI 接口信息。设置只在本次游戏中有效。",18)
+	var description := UI.label(str(motion_settings.get("labels",{}).get("settings_description","填写 AI 接口信息。设置只在本次游戏中有效。")),18)
 	description.autowrap_mode = TextServer.AUTOWRAP_OFF
 	box.add_child(description)
 	var address_label := UI.label("URL",18)
@@ -417,6 +440,7 @@ func open_network_settings() -> void:
 	box.add_child(token)
 	if is_instance_valid(presentation_audio):
 		presentation_audio.add_settings_controls(box)
+	_add_motion_settings(box)
 	dialog.confirmed.connect(func():
 		if not check_url.call():
 			return
@@ -646,3 +670,45 @@ func _refresh_history(show_details: bool) -> void:
 		lines.append("────────────────────────────\n")
 	history_text.text = "\n".join(lines) if not lines.is_empty() else "手记还是空白的。完成一次接待后，故事会留在这里。"
 	history_text.scroll_to_line(0)
+
+func _current_motion() -> Node:
+	if not is_instance_valid(screen):
+		return null
+	var artwork: Control = screen.get("room_art") if current_screen == "consultation" else screen.get("scene_visual")
+	return artwork.motion_controller if is_instance_valid(artwork) else null
+
+func _on_presentation_events(events: Array) -> void:
+	if motion_settings.is_empty():
+		return
+	var accepted: Array = []
+	var wind := get_node_or_null("/root/WindField")
+	for event: Variant in events:
+		if not event is Dictionary or not event.get("kind") in motion_settings.events.guest_kinds:
+			continue
+		var identity := str([event.get("save_id"),event.get("state_version"),event.get("sequence"),event.get("arrival_id"),event.get("kind")])
+		if _motion_seen_events.has(identity):
+			continue
+		_motion_seen_events[identity] = true
+		while _motion_seen_events.size() > int(motion_settings.wind.gust_cache_size):
+			_motion_seen_events.erase(_motion_seen_events.keys()[0])
+		if is_instance_valid(wind):
+			wind.notify_door_event(identity)
+		accepted.append(event.duplicate(true))
+	var motion := _current_motion()
+	if is_instance_valid(motion) and not accepted.is_empty():
+		motion.on_presentation_events(accepted)
+
+func _add_motion_settings(box: VBoxContainer) -> void:
+	var wind := get_node_or_null("/root/WindField")
+	if not is_instance_valid(wind) or motion_settings.is_empty():
+		return
+	var toggle := CheckButton.new()
+	toggle.name = "ReducedMotionCheck"
+	toggle.text = str(motion_settings.labels.reduced_motion)
+	toggle.button_pressed = bool(wind.reduced_motion)
+	box.add_child(toggle)
+	wind.reduced_motion_changed.connect(toggle.set_pressed_no_signal)
+	toggle.toggled.connect(func(value: bool):
+		if not wind.set_reduced_motion(value):
+			toggle.set_pressed_no_signal(bool(wind.reduced_motion))
+			show_notice(str(motion_settings.labels.save_failed)))

@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "settings_path": "user://presentation.cfg",
+  "defaults": {
+    "reduced_motion": false
+  },
+  "labels": {
+    "reduced_motion": "减少动态",
+    "save_failed": "动态设置未能保存，请稍后重试。",
+    "settings_description": "AI 接口仅本次游戏有效；声音与动态偏好会保留。"
+  },
+  "seed": 20261122,
+  "wind": {
+    "base": 0.35,
+    "noise_amplitude": 0.12,
+    "noise_frequency": 0.035,
+    "gust_mean_seconds": 25,
+    "gust_duration_seconds": [
+      2,
+      4
+    ],
+    "gust_jitter_seconds": 10,
+    "gust_strength": [
+      0.35,
+      0.65
+    ],
+    "propagation_seconds": 1.25,
+    "indoor_factor": 0.15,
+    "door_factor": 0.6,
+    "door_duration_seconds": 2.5,
+    "rain_weather": "rainy",
+    "rain_multiplier": 1.5,
+    "gust_cache_size": 64
+  },
+  "reduced": {
+    "wind_factor": 0.025,
+    "flow_factor": 0.025,
+    "event_factor": 0.5
+  },
+  "spring": {
+    "fixed_step_seconds": 0.008333333333333333,
+    "max_substeps": 240
+  },
+  "limits": {
+    "indoor_max_degrees": 3,
+    "outdoor_tip_width_fraction": 0.015,
+    "settle_degrees": 0.1,
+    "settle_seconds": 5
+  },
+  "layer_defaults": {
+    "sway_shader": {
+      "amplitude_px": 8,
+      "frequency_hz": 0.28
+    },
+    "pendulum": {
+      "k": 4,
+      "c": 2,
+      "mass": 1,
+      "max_angle_degrees": 2,
+      "wind_torque": 0.25,
+      "event_kick_degrees": 1
+    },
+    "flow": {
+      "speed_px_s": 4,
+      "distortion_px": 3,
+      "noise_frequency": 0.02,
+      "edge_fade_px": 8
+    }
+  },
+  "shelf": {
+    "drop_px": 12,
+    "drop": {
+      "k": 140,
+      "c": 14,
+      "mass": 1,
+      "max_angle_degrees": 12
+    },
+    "neighbor_degrees": 0.5,
+    "neighbor_count": 2,
+    "max_total_degrees": 3,
+    "pendulum": {
+      "k": 32,
+      "c": 10,
+      "mass": 1,
+      "max_angle_degrees": 1.5
+    }
+  },
+  "particles": {
+    "max_alive": 60,
+    "regions": {
+      "S01": [],
+      "S02": [],
+      "S03": [],
+      "S04": [],
+      "S05": [],
+      "S06": [],
+      "S07": []
+    }
+  },
+  "events": {
+    "guest_kinds": [
+      "guest_entered",
+      "guest_left"
+    ],
+    "consultation_scene": "consultation",
+    "indoor_scene_ids": [
+      "S02",
+      "S03",
+      "S04",
+      "S05",
+      "S06"
+    ],
+    "outdoor_layer_ids": [
+      "window_tree",
+      "window_vine",
+      "street_leaves",
+      "tree_canopy",
+      "vine",
+      "grass",
+      "cloud"
+    ],
+    "curtain_layers": [
+      "curtain",
+      "curtain_left",
+      "curtain_right",
+      "cloth_curtain"
+    ],
+    "chime_layers": [
+      "wind_chime",
+      "windchime"
+    ],
+    "chime_audio": ""
+  },
+  "expected_layers_note": "此清单仅记录资源需求，不表示图层已经生成、接入或通过动态验收。缺少资源时保留静态画面。",
+  "expected_layers": {
+    "S01": [
+      "cloud",
+      "tree_canopy",
+      "vine",
+      "hanging_sign"
+    ],
+    "S02": [
+      "window_tree",
+      "window_vine",
+      "dried_flower",
+      "wind_chime",
+      "curtain_left",
+      "curtain_right",
+      "incense_body",
+      "incense_smoke"
+    ],
+    "S03": [
+      "lamp",
+      "curtain",
+      "teacup",
+      "tea_steam",
+      "sofa_mask"
+    ],
+    "S04": [
+      "door_closed",
+      "lamp"
+    ],
+    "S05": [
+      "dried_grass",
+      "steam"
+    ],
+    "S06": [
+      "street_leaves",
+      "cloth_curtain"
+    ],
+    "S07": [
+      "water_mask",
+      "tree_canopy",
+      "grass"
+    ]
+  },
+  "diagnostics": {
+    "static": "此图层保持静态。",
+    "waiting_layer": "缺少独立图层，暂时保留静态画面。",
+    "invalid_motion": "动态资料无效，暂时保留静态画面。",
+    "missing_audio": "缺少风铃音效，暂不播放声音。",
+    "missing_region": "没有已确认的粒子区域，暂不显示粒子。"
+  }
+}

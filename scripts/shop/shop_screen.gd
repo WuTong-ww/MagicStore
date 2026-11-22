@@ -324,6 +324,8 @@ func _build_inventory_shelves(view: Dictionary) -> void:
 		shelf_view.setup(scene_visual,visuals)
 	elif shelf_view.visuals != visuals:
 		shelf_view.setup(scene_visual,visuals)
+	if is_instance_valid(scene_visual.motion_controller):
+		scene_visual.motion_controller.bind_shelf(shelf_view)
 	shelf_view.update_inventory(view,GameState.player_snapshot(),cabinet_open)
 
 func _on_shelf_item_selected(item_id: String) -> void:

@@ -121,7 +121,7 @@ func check_runtime(config: Dictionary) -> void:
 	var node: TextureRect = stage.layer_nodes.moving_object
 	var instance := node.get_instance_id()
 	check(node.texture == load(Fixture.DAY),"day variant is selected on initial presentation")
-	check(node.z_index == 4 and node.get_meta("motion") == config.scenes.S02.layers.moving_object.motion,"z and future motion metadata come from configuration")
+	check(node.z_index == 4 and node.get_meta("motion") == config.scenes.S02.layers.moving_object.motion,"z and A6 motion metadata come from configuration")
 	check(stage.z_index+node.z_index < 0,"positive local art z stays below the main paper/chrome canvas")
 	for dimensions: Vector2 in [Vector2(1280,720),Vector2(1920,1080),Vector2(2560,1080),Vector2(800,600)]:
 		stage.size = dimensions
@@ -129,7 +129,7 @@ func check_runtime(config: Dictionary) -> void:
 		var covered := Visual.cover_rect(dimensions,Vector2(2560,1440))
 		check(node.get_rect().is_equal_approx(covered),"whole source layer shares the background cover transform / "+str(dimensions))
 		check(node.pivot_offset.is_equal_approx(node.size*Vector2(0.25,0.25)),"native pixel pivot scales to the actual rendered rectangle / "+str(dimensions))
-		check(node.material == null and is_zero_approx(node.rotation),"A1R does not activate future dynamic motion / "+str(dimensions))
+		check(node.material is ShaderMaterial and node.material.shader == preload("res://shaders/scene_sway.gdshader") and is_zero_approx(node.rotation),"A6 activates only the configured sway material while retaining the A1R native pivot and zero node rotation / "+str(dimensions))
 	game.state.clock_minutes = 1080
 	stage.refresh()
 	check(node.get_instance_id() == instance and node.texture == load(Fixture.NIGHT),"night reuses the same aligned node and selects its matching variant")

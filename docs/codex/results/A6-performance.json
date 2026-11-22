@@ -1,0 +1,844 @@
+{
+  "schema_version": 1,
+  "kind": "A6_actual_hardware_performance_summary",
+  "latest_round": 2,
+  "passed": false,
+  "latest_checks": 70,
+  "latest_failures": 1,
+  "environment": {
+    "adapter": "Intel(R) Iris(R) Xe Graphics",
+    "api": "3.3.0 - Build 31.0.101.4502",
+    "display": "Windows",
+    "driver": "opengl3",
+    "engine": {
+      "build": "official",
+      "hash": "7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+      "hex": 263683,
+      "major": 4,
+      "minor": 6,
+      "patch": 3,
+      "status": "stable",
+      "string": "4.6.3-stable (official)",
+      "timestamp": 0
+    },
+    "max_fps": 0,
+    "os": "Windows",
+    "processor": "12th Gen Intel(R) Core(TM) i5-1240P",
+    "rendering_method": "gl_compatibility",
+    "target_adapter": true,
+    "target_renderer": true,
+    "target_resolution": true,
+    "vendor": "Intel",
+    "viewport_size": [
+      1920.0,
+      1080.0
+    ],
+    "vsync_mode": 0,
+    "window_focused": true,
+    "window_size": [
+      1920,
+      1080
+    ],
+    "window_visible": true
+  },
+  "measurement_scope": {
+    "engine_monitor": "Performance.TIME_PROCESS is auxiliary and may be delayed; never treated as GPU timing",
+    "excluded_motion_cpu": "setup, shelf signal callbacks, A7 relayout, engine dispatch and GPU execution; shelf stimulus wall time reported separately",
+    "fixture": "S07 actual approved flow and S04 nine independent item IDs; quantity changes are read-only display fixtures, not committed game actions",
+    "gpu_time_ms": null,
+    "motion_cpu": "sum of completed SceneMotion.step counters plus timed original WindField._process invoked manually once per visible frame; automatic Wind process disabled",
+    "wall_frame": "Time.get_ticks_usec between actual process-frame boundaries; includes scheduling/render stalls and harness work"
+  },
+  "not_movie_maker_fixed_fps_proof": true,
+  "runs": [
+    {
+      "round": 1,
+      "passed": false,
+      "hardware_evaluated": true,
+      "status": "measured",
+      "checks": 63,
+      "failures": 1,
+      "exit_code": 1,
+      "row_count": 1800,
+      "source_json": {
+        "path": ".tools/art/a6/performance-round1.json",
+        "sha256": "0dc907bfb9688f9796edbe739d363f36f7c9a855a8740871aea0803a55a85fef",
+        "bytes": 14858
+      },
+      "source_csv": {
+        "path": ".tools/art/a6/performance-round1.csv",
+        "sha256": "7b166731df0b05e9262bb71538b44af5a5d2798d4f8356bf5c65ebfb33c6a8a5",
+        "bytes": 96014
+      },
+      "log": {
+        "path": ".tools/art/a6/performance-gui-round1.log",
+        "sha256": "72592395207a06c67686d9ee1f7f090fb16e106347b1182cd92299ef30d43041",
+        "bytes": 8463
+      },
+      "log_warning_count": 6,
+      "criteria": {
+        "fps_target": 60.0,
+        "frame_budget_ms": 16.6666666666667,
+        "frame_gate": "max",
+        "motion_cpu_gate": "max",
+        "motion_cpu_limit_ms": 2.0
+      },
+      "combined_cases": [
+        {
+          "mode": "baseline",
+          "scene_id": "combined",
+          "count": 600,
+          "wall_mean_fps": 321.556332650026,
+          "wall_sample_seconds": 1.865925,
+          "fps_mean_reaches_target": true,
+          "p99_frame_meets_budget": true,
+          "every_frame_meets_budget": false,
+          "motion_cpu_max_meets_budget": true,
+          "passed": false,
+          "particles_max": 0,
+          "active_controllers_max": 0,
+          "wall_frame_ms": {
+            "mean": 3.109875,
+            "p99": 7.40697,
+            "max": 28.376
+          },
+          "motion_cpu_ms": {
+            "mean": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "controller_cpu_ms": {
+            "mean": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "wind_cpu_ms": {
+            "mean": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "stimulus_wall_ms": {
+            "mean": 0.0463016666666667,
+            "p99": 0.0,
+            "max": 11.239
+          }
+        },
+        {
+          "mode": "enabled",
+          "scene_id": "combined",
+          "count": 600,
+          "wall_mean_fps": 318.780981526642,
+          "wall_sample_seconds": 1.88217,
+          "fps_mean_reaches_target": true,
+          "p99_frame_meets_budget": true,
+          "every_frame_meets_budget": false,
+          "motion_cpu_max_meets_budget": false,
+          "passed": false,
+          "particles_max": 0,
+          "active_controllers_max": 1,
+          "wall_frame_ms": {
+            "mean": 3.13695,
+            "p99": 7.44204,
+            "max": 18.427
+          },
+          "motion_cpu_ms": {
+            "mean": 0.324946666666666,
+            "p99": 0.80915,
+            "max": 2.183
+          },
+          "controller_cpu_ms": {
+            "mean": 0.306346666666667,
+            "p99": 0.7702,
+            "max": 2.103
+          },
+          "wind_cpu_ms": {
+            "mean": 0.0186,
+            "p99": 0.0580699999999999,
+            "max": 0.498
+          },
+          "stimulus_wall_ms": {
+            "mean": 0.035125,
+            "p99": 0.0,
+            "max": 7.535
+          }
+        },
+        {
+          "mode": "reduced",
+          "scene_id": "combined",
+          "count": 600,
+          "wall_mean_fps": 349.530987669712,
+          "wall_sample_seconds": 1.716586,
+          "fps_mean_reaches_target": true,
+          "p99_frame_meets_budget": true,
+          "every_frame_meets_budget": false,
+          "motion_cpu_max_meets_budget": true,
+          "passed": false,
+          "particles_max": 0,
+          "active_controllers_max": 1,
+          "wall_frame_ms": {
+            "mean": 2.86097666666667,
+            "p99": 6.44366,
+            "max": 23.72
+          },
+          "motion_cpu_ms": {
+            "mean": 0.264391666666667,
+            "p99": 0.62103,
+            "max": 1.06
+          },
+          "controller_cpu_ms": {
+            "mean": 0.249706666666667,
+            "p99": 0.60308,
+            "max": 1.039
+          },
+          "wind_cpu_ms": {
+            "mean": 0.014685,
+            "p99": 0.04703,
+            "max": 0.115
+          },
+          "stimulus_wall_ms": {
+            "mean": 0.04068,
+            "p99": 0.0,
+            "max": 8.384
+          }
+        }
+      ],
+      "per_scene_cases": [
+        {
+          "mode": "baseline",
+          "scene_id": "S07",
+          "count": 300,
+          "wall_mean_fps": 366.992229551193,
+          "wall_sample_seconds": 0.817456,
+          "fps_mean_reaches_target": true,
+          "p99_frame_meets_budget": true,
+          "every_frame_meets_budget": true,
+          "motion_cpu_max_meets_budget": true,
+          "passed": true,
+          "particles_max": 0,
+          "active_controllers_max": 0,
+          "wall_frame_ms": {
+            "mean": 2.72485333333333,
+            "p99": 6.67167,
+            "max": 8.197
+          },
+          "motion_cpu_ms": {
+            "mean": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "controller_cpu_ms": {
+            "mean": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "wind_cpu_ms": {
+            "mean": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "stimulus_wall_ms": {
+            "mean": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          }
+        },
+        {
+          "mode": "baseline",
+          "scene_id": "S04",
+          "count": 300,
+          "wall_mean_fps": 286.131492681233,
+          "wall_sample_seconds": 1.048469,
+          "fps_mean_reaches_target": true,
+          "p99_frame_meets_budget": true,
+          "every_frame_meets_budget": false,
+          "motion_cpu_max_meets_budget": true,
+          "passed": false,
+          "particles_max": 0,
+          "active_controllers_max": 0,
+          "wall_frame_ms": {
+            "mean": 3.49489666666667,
+            "p99": 10.7104599999999,
+            "max": 28.376
+          },
+          "motion_cpu_ms": {
+            "mean": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "controller_cpu_ms": {
+            "mean": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "wind_cpu_ms": {
+            "mean": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "stimulus_wall_ms": {
+            "mean": 0.0926033333333333,
+            "p99": 0.0674199999999387,
+            "max": 11.239
+          }
+        },
+        {
+          "mode": "enabled",
+          "scene_id": "S07",
+          "count": 300,
+          "wall_mean_fps": 318.032776457942,
+          "wall_sample_seconds": 0.943299,
+          "fps_mean_reaches_target": true,
+          "p99_frame_meets_budget": true,
+          "every_frame_meets_budget": true,
+          "motion_cpu_max_meets_budget": false,
+          "passed": false,
+          "particles_max": 0,
+          "active_controllers_max": 1,
+          "wall_frame_ms": {
+            "mean": 3.14433,
+            "p99": 7.44204,
+            "max": 9.387
+          },
+          "motion_cpu_ms": {
+            "mean": 0.288613333333333,
+            "p99": 0.76145,
+            "max": 2.183
+          },
+          "controller_cpu_ms": {
+            "mean": 0.268656666666667,
+            "p99": 0.70528,
+            "max": 2.103
+          },
+          "wind_cpu_ms": {
+            "mean": 0.0199566666666666,
+            "p99": 0.07505,
+            "max": 0.498
+          },
+          "stimulus_wall_ms": {
+            "mean": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          }
+        },
+        {
+          "mode": "enabled",
+          "scene_id": "S04",
+          "count": 300,
+          "wall_mean_fps": 319.532715357062,
+          "wall_sample_seconds": 0.938871,
+          "fps_mean_reaches_target": true,
+          "p99_frame_meets_budget": true,
+          "every_frame_meets_budget": false,
+          "motion_cpu_max_meets_budget": false,
+          "passed": false,
+          "particles_max": 0,
+          "active_controllers_max": 1,
+          "wall_frame_ms": {
+            "mean": 3.12957,
+            "p99": 7.49054999999991,
+            "max": 18.427
+          },
+          "motion_cpu_ms": {
+            "mean": 0.36128,
+            "p99": 0.824609999999999,
+            "max": 2.02
+          },
+          "controller_cpu_ms": {
+            "mean": 0.344036666666667,
+            "p99": 0.7906,
+            "max": 1.998
+          },
+          "wind_cpu_ms": {
+            "mean": 0.0172433333333333,
+            "p99": 0.052,
+            "max": 0.057
+          },
+          "stimulus_wall_ms": {
+            "mean": 0.07025,
+            "p99": 0.0664899999999395,
+            "max": 7.535
+          }
+        },
+        {
+          "mode": "reduced",
+          "scene_id": "S07",
+          "count": 300,
+          "wall_mean_fps": 340.705441974456,
+          "wall_sample_seconds": 0.880526,
+          "fps_mean_reaches_target": true,
+          "p99_frame_meets_budget": true,
+          "every_frame_meets_budget": true,
+          "motion_cpu_max_meets_budget": true,
+          "passed": true,
+          "particles_max": 0,
+          "active_controllers_max": 1,
+          "wall_frame_ms": {
+            "mean": 2.93508666666667,
+            "p99": 6.44366,
+            "max": 7.98
+          },
+          "motion_cpu_ms": {
+            "mean": 0.230893333333333,
+            "p99": 0.59714,
+            "max": 1.06
+          },
+          "controller_cpu_ms": {
+            "mean": 0.216436666666667,
+            "p99": 0.56511,
+            "max": 1.039
+          },
+          "wind_cpu_ms": {
+            "mean": 0.0144566666666667,
+            "p99": 0.04502,
+            "max": 0.054
+          },
+          "stimulus_wall_ms": {
+            "mean": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          }
+        },
+        {
+          "mode": "reduced",
+          "scene_id": "S04",
+          "count": 300,
+          "wall_mean_fps": 358.825921584576,
+          "wall_sample_seconds": 0.836059999999999,
+          "fps_mean_reaches_target": true,
+          "p99_frame_meets_budget": true,
+          "every_frame_meets_budget": false,
+          "motion_cpu_max_meets_budget": true,
+          "passed": false,
+          "particles_max": 0,
+          "active_controllers_max": 1,
+          "wall_frame_ms": {
+            "mean": 2.78686666666666,
+            "p99": 6.18145999999986,
+            "max": 23.72
+          },
+          "motion_cpu_ms": {
+            "mean": 0.29789,
+            "p99": 0.65617,
+            "max": 0.742
+          },
+          "controller_cpu_ms": {
+            "mean": 0.282976666666667,
+            "p99": 0.63618,
+            "max": 0.718
+          },
+          "wind_cpu_ms": {
+            "mean": 0.0149133333333333,
+            "p99": 0.0531099999999999,
+            "max": 0.115
+          },
+          "stimulus_wall_ms": {
+            "mean": 0.08136,
+            "p99": 0.0778199999999292,
+            "max": 8.384
+          }
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "passed": false,
+      "hardware_evaluated": true,
+      "status": "measured",
+      "checks": 70,
+      "failures": 1,
+      "exit_code": 1,
+      "row_count": 1800,
+      "source_json": {
+        "path": ".tools/art/a6/performance-round2.json",
+        "sha256": "5252344da2263cd4522c6259c3d5b78ddf37a637b17efc65f92a31fb477c45ab",
+        "bytes": 15051
+      },
+      "source_csv": {
+        "path": ".tools/art/a6/performance-round2.csv",
+        "sha256": "fde87a4d9677a93656fceaf4337b9fd0fe5373136a0f6f62a5cf2601e714725d",
+        "bytes": 95939
+      },
+      "log": {
+        "path": ".tools/art/a6/performance-round2.log",
+        "sha256": "ef973acc758b0976c38f0b8ebb4793ddf7952a69eaf321fe640512fc11c60f46",
+        "bytes": 5609
+      },
+      "log_warning_count": 0,
+      "criteria": {
+        "fps_target": 60.0,
+        "frame_budget_ms": 16.6666666666667,
+        "frame_gate": "max",
+        "motion_cpu_gate": "max",
+        "motion_cpu_limit_ms": 2.0
+      },
+      "combined_cases": [
+        {
+          "mode": "baseline",
+          "scene_id": "combined",
+          "count": 600,
+          "wall_mean_fps": 343.660129296396,
+          "wall_sample_seconds": 1.745911,
+          "fps_mean_reaches_target": true,
+          "p99_frame_meets_budget": true,
+          "every_frame_meets_budget": false,
+          "motion_cpu_max_meets_budget": true,
+          "passed": false,
+          "particles_max": 0,
+          "active_controllers_max": 0,
+          "wall_frame_ms": {
+            "mean": 2.90985166666667,
+            "p99": 6.21857,
+            "max": 24.389
+          },
+          "motion_cpu_ms": {
+            "mean": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "controller_cpu_ms": {
+            "mean": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "wind_cpu_ms": {
+            "mean": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "stimulus_wall_ms": {
+            "mean": 0.0430883333333333,
+            "p99": 0.0,
+            "max": 9.833
+          }
+        },
+        {
+          "mode": "enabled",
+          "scene_id": "combined",
+          "count": 600,
+          "wall_mean_fps": 286.813052862036,
+          "wall_sample_seconds": 2.091955,
+          "fps_mean_reaches_target": true,
+          "p99_frame_meets_budget": true,
+          "every_frame_meets_budget": false,
+          "motion_cpu_max_meets_budget": true,
+          "passed": false,
+          "particles_max": 0,
+          "active_controllers_max": 1,
+          "wall_frame_ms": {
+            "mean": 3.48659166666667,
+            "p99": 7.62192,
+            "max": 33.294
+          },
+          "motion_cpu_ms": {
+            "mean": 0.428351666666666,
+            "p99": 1.1862,
+            "max": 1.458
+          },
+          "controller_cpu_ms": {
+            "mean": 0.408478333333334,
+            "p99": 1.16119,
+            "max": 1.426
+          },
+          "wind_cpu_ms": {
+            "mean": 0.0198733333333333,
+            "p99": 0.06503,
+            "max": 0.09
+          },
+          "stimulus_wall_ms": {
+            "mean": 0.0504216666666667,
+            "p99": 0.0,
+            "max": 11.066
+          }
+        },
+        {
+          "mode": "reduced",
+          "scene_id": "combined",
+          "count": 600,
+          "wall_mean_fps": 326.444448676132,
+          "wall_sample_seconds": 1.837985,
+          "fps_mean_reaches_target": true,
+          "p99_frame_meets_budget": true,
+          "every_frame_meets_budget": false,
+          "motion_cpu_max_meets_budget": true,
+          "passed": false,
+          "particles_max": 0,
+          "active_controllers_max": 1,
+          "wall_frame_ms": {
+            "mean": 3.06330833333333,
+            "p99": 6.11743,
+            "max": 35.126
+          },
+          "motion_cpu_ms": {
+            "mean": 0.313555,
+            "p99": 0.91206,
+            "max": 1.224
+          },
+          "controller_cpu_ms": {
+            "mean": 0.297098333333333,
+            "p99": 0.87803,
+            "max": 1.201
+          },
+          "wind_cpu_ms": {
+            "mean": 0.0164566666666666,
+            "p99": 0.042,
+            "max": 0.101
+          },
+          "stimulus_wall_ms": {
+            "mean": 0.042655,
+            "p99": 0.0,
+            "max": 11.096
+          }
+        }
+      ],
+      "per_scene_cases": [
+        {
+          "mode": "baseline",
+          "scene_id": "S07",
+          "count": 300,
+          "wall_mean_fps": 396.014509971645,
+          "wall_sample_seconds": 0.757548,
+          "fps_mean_reaches_target": true,
+          "p99_frame_meets_budget": true,
+          "every_frame_meets_budget": true,
+          "motion_cpu_max_meets_budget": true,
+          "passed": true,
+          "particles_max": 0,
+          "active_controllers_max": 0,
+          "wall_frame_ms": {
+            "mean": 2.52516,
+            "p99": 5.39881,
+            "max": 6.275
+          },
+          "motion_cpu_ms": {
+            "mean": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "controller_cpu_ms": {
+            "mean": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "wind_cpu_ms": {
+            "mean": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "stimulus_wall_ms": {
+            "mean": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          }
+        },
+        {
+          "mode": "baseline",
+          "scene_id": "S04",
+          "count": 300,
+          "wall_mean_fps": 303.532204260985,
+          "wall_sample_seconds": 0.988362999999999,
+          "fps_mean_reaches_target": true,
+          "p99_frame_meets_budget": true,
+          "every_frame_meets_budget": false,
+          "motion_cpu_max_meets_budget": true,
+          "passed": false,
+          "particles_max": 0,
+          "active_controllers_max": 0,
+          "wall_frame_ms": {
+            "mean": 3.29454333333333,
+            "p99": 6.95572999999989,
+            "max": 24.389
+          },
+          "motion_cpu_ms": {
+            "mean": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "controller_cpu_ms": {
+            "mean": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "wind_cpu_ms": {
+            "mean": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "stimulus_wall_ms": {
+            "mean": 0.0861766666666667,
+            "p99": 0.0706299999999358,
+            "max": 9.833
+          }
+        },
+        {
+          "mode": "enabled",
+          "scene_id": "S07",
+          "count": 300,
+          "wall_mean_fps": 356.422374770999,
+          "wall_sample_seconds": 0.841698,
+          "fps_mean_reaches_target": true,
+          "p99_frame_meets_budget": true,
+          "every_frame_meets_budget": true,
+          "motion_cpu_max_meets_budget": true,
+          "passed": true,
+          "particles_max": 0,
+          "active_controllers_max": 1,
+          "wall_frame_ms": {
+            "mean": 2.80566,
+            "p99": 5.54081,
+            "max": 7.621
+          },
+          "motion_cpu_ms": {
+            "mean": 0.28323,
+            "p99": 0.64334,
+            "max": 0.776
+          },
+          "controller_cpu_ms": {
+            "mean": 0.265496666666666,
+            "p99": 0.62332,
+            "max": 0.723
+          },
+          "wind_cpu_ms": {
+            "mean": 0.0177333333333333,
+            "p99": 0.0531199999999999,
+            "max": 0.079
+          },
+          "stimulus_wall_ms": {
+            "mean": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          }
+        },
+        {
+          "mode": "enabled",
+          "scene_id": "S04",
+          "count": 300,
+          "wall_mean_fps": 239.950666143041,
+          "wall_sample_seconds": 1.250257,
+          "fps_mean_reaches_target": true,
+          "p99_frame_meets_budget": true,
+          "every_frame_meets_budget": false,
+          "motion_cpu_max_meets_budget": true,
+          "passed": false,
+          "particles_max": 0,
+          "active_controllers_max": 1,
+          "wall_frame_ms": {
+            "mean": 4.16752333333334,
+            "p99": 9.05261999999986,
+            "max": 33.294
+          },
+          "motion_cpu_ms": {
+            "mean": 0.573473333333333,
+            "p99": 1.33229,
+            "max": 1.458
+          },
+          "controller_cpu_ms": {
+            "mean": 0.55146,
+            "p99": 1.29324,
+            "max": 1.426
+          },
+          "wind_cpu_ms": {
+            "mean": 0.0220133333333333,
+            "p99": 0.06801,
+            "max": 0.09
+          },
+          "stimulus_wall_ms": {
+            "mean": 0.100843333333333,
+            "p99": 0.0825899999999249,
+            "max": 11.066
+          }
+        },
+        {
+          "mode": "reduced",
+          "scene_id": "S07",
+          "count": 300,
+          "wall_mean_fps": 369.903652428664,
+          "wall_sample_seconds": 0.811022,
+          "fps_mean_reaches_target": true,
+          "p99_frame_meets_budget": true,
+          "every_frame_meets_budget": true,
+          "motion_cpu_max_meets_budget": true,
+          "passed": true,
+          "particles_max": 0,
+          "active_controllers_max": 1,
+          "wall_frame_ms": {
+            "mean": 2.70340666666667,
+            "p99": 6.01602,
+            "max": 6.941
+          },
+          "motion_cpu_ms": {
+            "mean": 0.239636666666667,
+            "p99": 0.58133,
+            "max": 0.717
+          },
+          "controller_cpu_ms": {
+            "mean": 0.224133333333333,
+            "p99": 0.55733,
+            "max": 0.685
+          },
+          "wind_cpu_ms": {
+            "mean": 0.0155033333333333,
+            "p99": 0.0420899999999999,
+            "max": 0.101
+          },
+          "stimulus_wall_ms": {
+            "mean": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          }
+        },
+        {
+          "mode": "reduced",
+          "scene_id": "S04",
+          "count": 300,
+          "wall_mean_fps": 292.123474750307,
+          "wall_sample_seconds": 1.026963,
+          "fps_mean_reaches_target": true,
+          "p99_frame_meets_budget": true,
+          "every_frame_meets_budget": false,
+          "motion_cpu_max_meets_budget": true,
+          "passed": false,
+          "particles_max": 0,
+          "active_controllers_max": 1,
+          "wall_frame_ms": {
+            "mean": 3.42321,
+            "p99": 6.34544999999983,
+            "max": 35.126
+          },
+          "motion_cpu_ms": {
+            "mean": 0.387473333333333,
+            "p99": 1.03924,
+            "max": 1.224
+          },
+          "controller_cpu_ms": {
+            "mean": 0.370063333333333,
+            "p99": 1.01437,
+            "max": 1.201
+          },
+          "wind_cpu_ms": {
+            "mean": 0.01741,
+            "p99": 0.04101,
+            "max": 0.069
+          },
+          "stimulus_wall_ms": {
+            "mean": 0.08531,
+            "p99": 0.0701499999999362,
+            "max": 11.096
+          }
+        }
+      ]
+    }
+  ],
+  "conclusion": "两轮严格max门槛均失败。round2三个case平均FPS及p99达标、持续motion CPU max≤2ms，但S04三case均有>16.667ms真实帧尖峰；保留所有max及false。CPU不包含signal callback/A7重排或GPU，stimulus wall另列。",
+  "latest_raw_aliases": {
+    "json": {
+      "path": ".tools/art/a6/performance.json",
+      "sha256": "5252344da2263cd4522c6259c3d5b78ddf37a637b17efc65f92a31fb477c45ab",
+      "bytes": 15051
+    },
+    "csv": {
+      "path": ".tools/art/a6/performance.csv",
+      "sha256": "fde87a4d9677a93656fceaf4337b9fd0fe5373136a0f6f62a5cf2601e714725d",
+      "bytes": 95939
+    }
+  }
+}

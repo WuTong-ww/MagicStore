@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "window": {"width": 1920, "height": 1080, "borderless": true},
+  "performance": {
+    "warmup_frames_per_scene": 120,
+    "sample_frames_per_scene": 300,
+    "settle_frames": 4,
+    "fps_target": 60,
+    "motion_cpu_limit_ms": 2,
+    "cases": ["baseline", "enabled", "reduced"],
+    "scenes": [
+      {"page": "gathering", "scene_id": "S07", "kind": "water"},
+      {"page": "inventory", "scene_id": "S04", "kind": "shelf"}
+    ],
+    "vsync_enabled": false,
+    "required_rendering_method": "gl_compatibility",
+    "required_adapter_contains": "Iris",
+    "required_vendor_contains": "Intel",
+    "fixture_clock_minutes": 600,
+    "fixture_save_id": "a6_performance_display_only",
+    "inventory_quantities": {
+      "restorative_draught": 1, "clarity_crystal": 1, "calming_incense": 1,
+      "lavender": 1, "quartz": 1, "moon_dust": 1,
+      "spring_water": 1, "silver_leaf": 1, "bookmark": 1
+    },
+    "shelf_stimulus_item": "moon_dust",
+    "shelf_stimulus_interval_frames": 90,
+    "shelf_stimulus_quantities": [1, 2],
+    "json_output": "res://.tools/art/a6/performance.json",
+    "csv_output": "res://.tools/art/a6/performance.csv",
+    "status_output": "res://.tools/art/a6/performance-status.json",
+    "statistics_fixture": {
+      "samples": [10, 20, 30, 40],
+      "mean": 25, "p50": 25, "p95": 38.5, "p99": 39.7, "max": 40
+    }
+  },
+  "movie": {
+    "fps": 60,
+    "frame_count": 600,
+    "writer_frame_offset": 1,
+    "duration_seconds": 10,
+    "action_frame": 120,
+    "default_mode": "front",
+    "reduced_motion": false,
+    "capture_directory": ".tools/art/a6/movies",
+    "compressed_directory": "docs/screenshots/a6",
+    "save_directory": ".tools/art/a6/movie-saves",
+    "avi_header_probe_bytes": 65536,
+    "modes": {
+      "front": {"page": "front", "basename": "front-day", "action": "guest_arrival"},
+      "water": {"page": "gathering", "basename": "s07-water", "action": "none"},
+      "stock": {"page": "inventory", "basename": "s04-stock", "action": "procure_item"}
+    },
+    "fixture": {
+      "shop_name": "动态录像验收",
+      "arrival_id": "a6_movie_guest",
+      "npc_id": "npc_lin",
+      "case_id": "invitation",
+      "arrival_after_minutes": 1,
+      "schedule_end_after_minutes": 120,
+      "wait_minutes": 1,
+      "stock_item_id": "lavender",
+      "stock_quantity": 1
+    },
+    "gust": {"slot": 1, "lead_seconds": 2},
+    "compression": {
+      "video_codec": "libx264", "crf": 23, "preset": "medium", "pixel_format": "yuv420p",
+      "audio_codec": "aac", "audio_bitrate": "128k", "max_public_bytes": 20000000,
+      "windows_transcoder": {"enabled": true, "quality": "HD1080p", "timeout_seconds": 120, "bitrate_budget_fraction": 0.75}
+    }
+  }
+}

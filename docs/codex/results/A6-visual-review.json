@@ -1,0 +1,1758 @@
+{
+  "kind": "root_actual_A6_visual_review",
+  "checks": [
+    "全屏铺满",
+    "按钮文字完整",
+    "古纸长文",
+    "无烘焙字",
+    "同光同笔触"
+  ],
+  "main_frames": 20,
+  "shop_frames": 22,
+  "jpg_frames": 6,
+  "movie_keyframes": 5,
+  "raw_final_shader_technical_frames": 14,
+  "technical_frames_review": "root separately opened all ten RGBA and four diff PNGs; isolated masks are technical readbacks, not full-window UI acceptance",
+  "passed_checks": 245,
+  "total_checks": 265,
+  "frames": [
+    {
+      "path": ".tools/art/a6/preview-round3/front-day-static-1280x720.png",
+      "sha256": "78e2045998dfb643688d6a4cd0b01e45c71b2d0241314e554e3ec16f8888cb2e",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧林照晚仍为细线古装，与v3背景笔触/时代不一致，留A4；不能签全站美术通过"
+        }
+      ],
+      "reviewer": "root actual round2 opened; final round3 exact SHA verified"
+    },
+    {
+      "path": ".tools/art/a6/preview-round3/front-day-static-1920x1080.png",
+      "sha256": "5acdf5d380bc6047ed4f23efc2b692ffae2e9930a5448ca365a56465523abc53",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧林照晚仍为细线古装，与v3背景笔触/时代不一致，留A4；不能签全站美术通过"
+        }
+      ],
+      "reviewer": "root actual round2 opened; final round3 exact SHA verified"
+    },
+    {
+      "path": ".tools/art/a6/preview-round3/settings-reduced-1280x720.png",
+      "sha256": "c14564354fe908ca0f2c17ef7880588ab1af3ce851b6b07fe1bd0eed4e9c428f",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "reviewer": "root actual round2 opened; final round3 exact SHA verified"
+    },
+    {
+      "path": ".tools/art/a6/preview-round3/settings-reduced-1920x1080.png",
+      "sha256": "b197b2d640c616ec6c289231d9a05e0a63e74a3303428d761b0032f9abc38cc1",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "reviewer": "root actual round2 opened; final round3 exact SHA verified"
+    },
+    {
+      "path": ".tools/art/a6/preview-round3/stock-initial-1280x720.png",
+      "sha256": "724796ad67a3fac26a913029e701e8fb9e76e6b5fb9872783d52ecbebc429a1d",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "reviewer": "root actual round2 opened; final round3 exact SHA verified"
+    },
+    {
+      "path": ".tools/art/a6/preview-round3/stock-initial-1920x1080.png",
+      "sha256": "b29ce64376c2ee81b7060d3099cc3bf4b3e52ced4644d94f6412aa3c0eb09217",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "reviewer": "root actual round2 opened; final round3 exact SHA verified"
+    },
+    {
+      "path": ".tools/art/a6/preview-round3/stock-settled-1280x720.png",
+      "sha256": "72718c7267dd5e8496650eb843a3437ec08cf2ac9e3ffe733a8e3cc6294d5249",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "reviewer": "root actual round2 opened; final round3 exact SHA verified"
+    },
+    {
+      "path": ".tools/art/a6/preview-round3/stock-settled-1920x1080.png",
+      "sha256": "cb95bae9bb4788b58015712f42f3a11a725ff314b7398562ad4c4c9391a7fac6",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "reviewer": "root actual round2 opened; final round3 exact SHA verified"
+    },
+    {
+      "path": ".tools/art/a6/preview-round3/water-day-reduced-t0-1280x720.png",
+      "sha256": "19223f243d5be73d550a204417933f406c3ac0ac59cb314ecd47d215c1e9b582",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "reviewer": "root actual round2 opened; final round3 exact SHA verified"
+    },
+    {
+      "path": ".tools/art/a6/preview-round3/water-day-reduced-t0-1920x1080.png",
+      "sha256": "f38bd4b9eebb50998e26de8bae00d2f128555869e1e877b8e282d3ac4c3e5f28",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "reviewer": "root actual round2 opened; final round3 exact SHA verified"
+    },
+    {
+      "path": ".tools/art/a6/preview-round3/water-day-reduced-t1-1280x720.png",
+      "sha256": "f2020ec0e08f00eda0093c64db7d9170661d96f9e038a3e2ac5e16093ebf25fe",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "reviewer": "root actual round2 opened; final round3 exact SHA verified"
+    },
+    {
+      "path": ".tools/art/a6/preview-round3/water-day-reduced-t1-1920x1080.png",
+      "sha256": "37bffba4623726318139ae1563aed26eb55dafd2988e3846a3ba9b92f80c2709",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "reviewer": "root actual round2 opened; final round3 exact SHA verified"
+    },
+    {
+      "path": ".tools/art/a6/preview-round3/water-day-t0-1280x720.png",
+      "sha256": "15141ef0eae3d6263986094336d7a0d5f0373fe3440233d9c942b6fbf918bea2",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "reviewer": "root actual round2 opened; final round3 exact SHA verified"
+    },
+    {
+      "path": ".tools/art/a6/preview-round3/water-day-t0-1920x1080.png",
+      "sha256": "2c03c4e6618357eec1ffe96b5b704b6cddaaa460566a70e94556e402e9f70176",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "reviewer": "root actual round2 opened; final round3 exact SHA verified"
+    },
+    {
+      "path": ".tools/art/a6/preview-round3/water-day-t1-1280x720.png",
+      "sha256": "3c0a1ea7abf5e855dbc8572337312b8848753b73cafea7d99923ac679b4e9039",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "reviewer": "root actual round2 opened; final round3 exact SHA verified"
+    },
+    {
+      "path": ".tools/art/a6/preview-round3/water-day-t1-1920x1080.png",
+      "sha256": "8258d0122759839da8d9251bf72c31b6fe85d3dd7654cdf589446c3fd1d00a28",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "reviewer": "root actual round2 opened; final round3 exact SHA verified"
+    },
+    {
+      "path": ".tools/art/a6/preview-round3/water-night-t0-1280x720.png",
+      "sha256": "4646940a62783a946ccd8c75e48801e264f39dc07cec9f9802e7b2bd839765fa",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "reviewer": "root actual round2 opened; final round3 exact SHA verified"
+    },
+    {
+      "path": ".tools/art/a6/preview-round3/water-night-t0-1920x1080.png",
+      "sha256": "9ae6ba357009ab236357e67b4201a2f15500bc9237423b69dcce8b2a0aeb6c49",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "reviewer": "root actual round2 opened; final round3 exact SHA verified"
+    },
+    {
+      "path": ".tools/art/a6/preview-round3/water-night-t1-1280x720.png",
+      "sha256": "22cb61be156faa78771f1479f82f076a3ae5088d784c7d6faa4640aebf85757a",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "reviewer": "root actual round2 opened; final round3 exact SHA verified"
+    },
+    {
+      "path": ".tools/art/a6/preview-round3/water-night-t1-1920x1080.png",
+      "sha256": "c5b9b02f717199aa056d85697f876ee94166a0d32000666b5055478fa5c2ebbb",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "reviewer": "root actual round2 opened; final round3 exact SHA verified"
+    },
+    {
+      "path": ".tools/c-ui-captures/catalog-icons-64px.png",
+      "sha256": "3fe55230a8a6f2cb839dc87bcf564f65d1bbcc54ad02215561a0be68e7cca4e2",
+      "reviewer": "root actual A6 shop GUI changed frame opened",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/consultation-1280.png",
+      "sha256": "8b9604a91f754a7f068fbb691851f71a3bf878364a99314982ab7607b282bd88",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [
+        "真实无接待状态显示空沙发与还没有来客，未误放肖像。"
+      ],
+      "reviewer": "root prior A7 opened; current exact SHA verified",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/consultation-1920.png",
+      "sha256": "d2093409ff6c65a10ff7886e2bf612e33aa3c02bb43ba5334e845c68190f1711",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [
+        "真实无接待状态显示空沙发与还没有来客，未误放肖像。"
+      ],
+      "reviewer": "root prior A7 opened; current exact SHA verified",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/exterior-1280.png",
+      "sha256": "71f7f0aee249622789d897e22450ccefc17bd59abab91390876e132762388d52",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root prior A7 opened; current exact SHA verified",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/exterior-1920.png",
+      "sha256": "9074f345e1ef3b59cda4c9875622470410392896dddde58f3d962d3f833d79e4",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root prior A7 opened; current exact SHA verified",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/front-1280.png",
+      "sha256": "78e2045998dfb643688d6a4cd0b01e45c71b2d0241314e554e3ec16f8888cb2e",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "手帐内旧头像还未按v3统一，A4处理；场景本体通过"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root prior A7 opened; current exact SHA verified",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/front-1920.png",
+      "sha256": "31300f69ba5e78e961a990c2dcb0d0a77aec15e89db17968fe7692c5d1d08d72",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "手帐内旧头像还未按v3统一，A4处理；场景本体通过"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root prior A7 opened; current exact SHA verified",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/gathering-1280.png",
+      "sha256": "a50306f99e15b41c18a35266371154ed7eedda87f72777cfbae14a128a2f502c",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual A6 shop GUI changed frame opened",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/gathering-1920.png",
+      "sha256": "deedc7ed374fcb813e7ee37a13993c059eb4161247219f5dc6c2f867e2acef3f",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual A6 shop GUI changed frame opened",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/inventory-1280.png",
+      "sha256": "e6f3607a18545daa32ccfbee156d9c47c4b0935cbf5e343d82003dc5ebe160ed",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光物品与木柜同向，底边落板，柔接触阴影和8%纸纹统一笔触；F3仅调试线"
+        }
+      ],
+      "reviewer": "root prior A7 opened; current exact SHA verified"
+    },
+    {
+      "path": ".tools/c-ui-captures/inventory-1920.png",
+      "sha256": "6ae1ef315c9d819fc875b1b50b5f53b529987982603892d9dc2f30526a20f3b7",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "S04 cover铺满整个视口，UI直接叠于场景，无黑边或场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航和抽屉/验收按钮文字完整；×N和悬停名签为动态控件，架上无被框截断的常驻名字"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "说明、详情、数量/名签使用古纸底与墨褐字；收起抽屉时仅保留古纸验收说明"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与独立PNG无文字，中文名、库存和数量全部由Godot控件绘制"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光物品与木柜同向，底边落板，柔接触阴影和8%纸纹统一笔触；F3仅调试线"
+        }
+      ],
+      "reviewer": "root prior A7 opened; current exact SHA verified"
+    },
+    {
+      "path": ".tools/c-ui-captures/market-1280.png",
+      "sha256": "7d609612e3121ba78ae82281e2d1727a357c106505f2bd4245a2a5413d35b9dc",
+      "reviewer": "root prior A7 opened; current exact SHA verified",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "按钮文字完整；数量标签狭窄折为两行但字未丢失，布局债已记录"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ],
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/market-1920.png",
+      "sha256": "9a31fadb1ad26004904649c2fa21d629f0feee7ce8eede19791001959a60acf7",
+      "reviewer": "root prior A7 opened; current exact SHA verified",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "按钮文字完整；数量标签狭窄折为两行但字未丢失，布局债已记录"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ],
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/market-after-trade-1920.png",
+      "sha256": "7417f439b733c629cfd9a5a486a37b8afaf2e5ad5393b5868450f9c7aa684b67",
+      "reviewer": "root prior A7 opened; current exact SHA verified",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "按钮文字完整；数量标签狭窄折为两行但字未丢失，布局债已记录"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ],
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/network-1280.png",
+      "sha256": "d7b0a3763401272086975966660bc037c3c292a2f2c310a8fe357660e968f53b",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧林照晚仍为细线古装，与v3背景笔触/时代不一致，留A4；不能签全站美术通过"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual A6 shop GUI changed frame opened",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/network-1920.png",
+      "sha256": "8fa0cae0e9d322d354388cc5fc96d0ca7fa1396ce3f2ef19c4a24daa2a436a9d",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧林照晚仍为细线古装，与v3背景笔触/时代不一致，留A4；不能签全站美术通过"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual A6 shop GUI changed frame opened",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/people-1280.png",
+      "sha256": "b76eed477a440b7828f45dac48b2b2414b900d1ed4eb411c51e505fea76fb8d0",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": false,
+          "reason": "人物列表尾部被省略号截断，留A4界面整合"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": false,
+          "reason": "旧关系占位图含烘焙问号，留G5替换为控件"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧金色关系/报告装饰与v3笔触不同，留G5/G6"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual A6 shop GUI changed frame opened",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/people-1920.png",
+      "sha256": "31ff58727d1c29b37f615251686b2db9f832247e77f77b2f24676a2fc5df7ef8",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": false,
+          "reason": "人物列表尾部被省略号截断，留A4界面整合"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": false,
+          "reason": "旧关系占位图含烘焙问号，留G5替换为控件"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧金色关系/报告装饰与v3笔触不同，留G5/G6"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root actual A6 shop GUI changed frame opened",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/workshop-1280.png",
+      "sha256": "7c93b4b0ae4a693c955304f5fe8562d8b380e2dc5737212937785425e439b43e",
+      "reviewer": "root prior A7 opened; current exact SHA verified",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ],
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/workshop-1920.png",
+      "sha256": "75e8bd4fc3662ada487dcc24b3b45dc200cf079f0e4d5099e1440257b1100e97",
+      "reviewer": "root prior A7 opened; current exact SHA verified",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ],
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/zero-guest-front-1280.png",
+      "sha256": "d51254b075d7c2f6e297b75810de3b53cf4f7e47f6db2719af225ee86750a37c",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [
+        "零客日空下拉隐藏，去采集/研习/制作及等候操作均完整可读。"
+      ],
+      "reviewer": "root prior A7 opened; current exact SHA verified",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/zero-guest-front-1920.png",
+      "sha256": "6db72069a50e78a8dd0d4b89d562b49253596276ea46cecd873801e1ff5d17a6",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [
+        "零客日空下拉隐藏，去采集/研习/制作及等候操作均完整可读。"
+      ],
+      "reviewer": "root prior A7 opened; current exact SHA verified",
+      "identical_source": "docs/codex/results/A2R-v3-visual-review.json"
+    },
+    {
+      "path": "docs/screenshots/round2/A6/front-day1920.jpg",
+      "sha256": "423e57c477e4aee05807283064445173f9eeccfb17a88baee5f381f7da0fb25e",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧林照晚仍为细线古装，与v3背景笔触/时代不一致，留A4；不能签全站美术通过"
+        }
+      ],
+      "reviewer": "root opened actual quality85 JPG"
+    },
+    {
+      "path": "docs/screenshots/round2/A6/settings-reduced1280.jpg",
+      "sha256": "b28fc673224b86e0ac2a5c614a31e168aeb736ee01ad10f7fe5cc491291bfe6b",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "reviewer": "root opened actual quality85 JPG"
+    },
+    {
+      "path": "docs/screenshots/round2/A6/stock-initial1280.jpg",
+      "sha256": "0cc6b008def7668751cd161004eb9d5a447d8b8361dc8ccbcf6f509d3661de5c",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "reviewer": "root opened actual quality85 JPG"
+    },
+    {
+      "path": "docs/screenshots/round2/A6/stock-settled1920.jpg",
+      "sha256": "4f8a9c0d0d465c32d45df9c538ab4504dc335e1e9913fd59d285a4d7fb2f7cf8",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "reviewer": "root opened actual quality85 JPG"
+    },
+    {
+      "path": "docs/screenshots/round2/A6/water-day1280.jpg",
+      "sha256": "57c4e2b4d495fdcb67d616905e7dcff0c5f56089a6c4e9aefcb359115b65229d",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "reviewer": "root opened actual quality85 JPG"
+    },
+    {
+      "path": "docs/screenshots/round2/A6/water-night1920.jpg",
+      "sha256": "d98612c5025810e38ea6412c445f88d090e03bc1bc9af6d993ade304403aadc2",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "左上暖光及纸面颜料笔触一致，物品接触层板，水岸无贴边缝"
+        }
+      ],
+      "reviewer": "root opened actual quality85 JPG"
+    },
+    {
+      "path": ".tools/art/a6/movie-frames/front-day-frame-000.png",
+      "sha256": "97a56533edad721f7c0a905899ff99233a35a651bbbc6664240331f5f1d25f9a",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": false,
+          "reason": "启动首帧渐显尚未结束，多数按钮文字暗到不可读"
+        },
+        {
+          "item": 3,
+          "passed": false,
+          "reason": "首帧古纸颜色未完成渐显，不算长文清晰验收"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧林照晚仍为细线古装，与v3背景笔触/时代不一致，留A4；不能签全站美术通过"
+        }
+      ],
+      "reviewer": "root opened actual AVI JPEG keyframe; not full MP4 decode"
+    },
+    {
+      "path": ".tools/art/a6/movie-frames/front-day-frame-119.png",
+      "sha256": "ae310fa080fed4f740f7b2b977554dd385fd64326d6433d9fed7f2dacb6906df",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧林照晚仍为细线古装，与v3背景笔触/时代不一致，留A4；不能签全站美术通过"
+        }
+      ],
+      "reviewer": "root opened actual AVI JPEG keyframe; not full MP4 decode"
+    },
+    {
+      "path": ".tools/art/a6/movie-frames/front-day-frame-120.png",
+      "sha256": "ae310fa080fed4f740f7b2b977554dd385fd64326d6433d9fed7f2dacb6906df",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧林照晚仍为细线古装，与v3背景笔触/时代不一致，留A4；不能签全站美术通过"
+        }
+      ],
+      "reviewer": "root opened actual AVI JPEG keyframe; not full MP4 decode"
+    },
+    {
+      "path": ".tools/art/a6/movie-frames/front-day-frame-300.png",
+      "sha256": "ae310fa080fed4f740f7b2b977554dd385fd64326d6433d9fed7f2dacb6906df",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧林照晚仍为细线古装，与v3背景笔触/时代不一致，留A4；不能签全站美术通过"
+        }
+      ],
+      "reviewer": "root opened actual AVI JPEG keyframe; not full MP4 decode"
+    },
+    {
+      "path": ".tools/art/a6/movie-frames/front-day-frame-599.png",
+      "sha256": "ae310fa080fed4f740f7b2b977554dd385fd64326d6433d9fed7f2dacb6906df",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满窗口，无黑边或场景卡片"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮标签完整，动态中文控件清晰"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "设置、手帐与长说明均为古纸墨褐字；无长文时同主题"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "场景与物品无烘焙字，名称数量状态来自Godot控件"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧林照晚仍为细线古装，与v3背景笔触/时代不一致，留A4；不能签全站美术通过"
+        }
+      ],
+      "reviewer": "root opened actual AVI JPEG keyframe; not full MP4 decode"
+    }
+  ]
+}

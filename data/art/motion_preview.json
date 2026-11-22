@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "output_prefix": "res://.tools/art/a6/preview-round",
+  "max_rounds": 3,
+  "expected_preview_count_per_size": 10,
+  "borderless": true,
+  "embed_subwindows": true,
+  "dimensions": [[1280, 720], [1920, 1080]],
+  "settle_frames": 3,
+  "navigation_settle_seconds": 0.3,
+  "save_name": "动态画面隔离验收",
+  "save_prefix": "res://.tools/art/a6/preview-saves",
+  "preference_prefix": "res://.tools/art/a6/preview-settings",
+  "capture_times_seconds": [0, 1],
+  "periods": ["day", "night"],
+  "stock": {"item_id": "lavender", "quantity": 1, "settled_seconds": 2, "expected_drop_px": 12, "settle_tolerance_px": 0.1},
+  "pixel": {
+    "viewport_size": [1920, 1080],
+    "layer_id": "water_mask",
+    "scene_id": "S07",
+    "texture_filter": "linear",
+    "unshaded_control": true,
+    "loop_offset_seconds": 0.5,
+    "transparent_alpha": 0,
+    "opaque_alpha": 255,
+    "feather_alpha_range": [1, 254],
+    "shore_radius_px": 1,
+    "minimum_opaque_changed_pixels": 64,
+    "difference_gain": 8
+  },
+  "protected_paths": [
+    "assets/ART_ASSET_MANIFEST.json", "data/shop/visuals.json", "data/ui/motion.json",
+    "scripts/presentation/scene_motion.gd", "scripts/presentation/wind_field.gd",
+    "scripts/shop/scene_visual.gd", "scripts/shop/shelf_view.gd", "scripts/ui/main.gd",
+    "shaders/scene_flow.gdshader", "shaders/scene_sway.gdshader",
+    "tests/integration/motion_preview.gd", "data/art/motion_preview.json", "tools/art/check_motion_frames.py",
+    "assets/fonts/NotoSansSC.ttf", "assets/fonts/LXGWWenKai-Regular.ttf"
+  ],
+  "notes": {
+    "front": "前台白日为正式生产画面；缺少独立动层，保持静态，不冒充完整风铃或帘幕联动。",
+    "period_fixture": "昼夜仅更换生产背景与水层贴图及渲染period；经营时钟和存档不变，夜景为只读渲染夹具。",
+    "water": "关闭抽屉，固定展示时钟采样正式水层；没有重画、替换或修改任何资源像素。",
+    "reduced": "通过生产设置开关启用减少动态；偏好只写隔离文件，经营状态不变。",
+    "stock": "通过真实保存成功的采购触发12原生像素落下，冻结处理取得初态后显式推进弹簧至稳定态。",
+    "pixel": "透明SubViewport复用正式水层Texture与实际ShaderMaterial副本，LINEAR过滤，并保存同过滤无shader对照；该技术读回不是额外美术切片。",
+    "long_wrap": "采样实际native_width/speed周期前后；逐像素不变式通过不能代替长周期视觉连续性审查。",
+    "selection": "全部原始PNG保留供逐张审阅；最多六张最终JPG由root另行选择，不自动假称美术通过。"
+  }
+}

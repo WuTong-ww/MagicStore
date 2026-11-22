@@ -29,6 +29,9 @@ var _items: Dictionary = {}
 var _shadows: Dictionary = {}
 var _targets: Dictionary = {}
 var _selection_tweens: Dictionary = {}
+var _selection_lifts: Dictionary = {}
+var _item_motion: Dictionary = {}
+var _outgoing_placements: Dictionary = {}
 var _hovered_item := ""
 var _force_layout := true
 var _opened := false
@@ -94,6 +97,7 @@ func update_inventory(view: Dictionary, snapshot: Dictionary, opened: bool) -> v
 	var quantities_changed: bool = _display_view.get("items",{}) != display_view.get("items",{})
 	_display_view = display_view.duplicate(true)
 	var previous_items := _items.duplicate()
+	_outgoing_placements = _entries.duplicate(true)
 	if _settings.is_empty():
 		layout_result = {"entries":[],"overflow":[]}
 	elif _force_layout or quantities_changed or changed_save:
@@ -105,6 +109,8 @@ func update_inventory(view: Dictionary, snapshot: Dictionary, opened: bool) -> v
 	visible = opened and not _settings.is_empty()
 	if not opened:
 		_hovered_item = ""
+		for id: String in _item_motion.keys():
+			set_item_motion(id,Vector2.ZERO,0.0)
 	_update_name_tag()
 	if committed:
 		_baseline_save = save_id
@@ -115,12 +121,22 @@ func update_inventory(view: Dictionary, snapshot: Dictionary, opened: bool) -> v
 			item_removed.emit(id,int(deltas.removed[id]),previous_items.get(id,_items.get(id)))
 		for id: String in deltas.added:
 			item_added.emit(id,int(deltas.added[id]),_items.get(id))
+	_outgoing_placements.clear()
 	for id: String in previous_items:
 		if not _items.has(id) and is_instance_valid(previous_items[id]):
 			previous_items[id].queue_free()
 
 func get_item_node(id: String) -> Node2D:
 	return _items.get(id)
+
+func item_placement(id: String) -> Dictionary:
+	return _entries.get(id,_outgoing_placements.get(id,{})).duplicate(true)
+
+func set_item_motion(id: String, offset_native: Vector2, angle_deg: float) -> void:
+	if not _entries.has(id) or not offset_native.is_finite() or not is_finite(angle_deg):
+		return
+	_item_motion[id] = {"offset":offset_native,"angle":angle_deg}
+	_apply_item_pose(id)
 
 func get_hit_rect(id: String) -> Rect2:
 	return _targets[id].get_global_rect() if _targets.has(id) and is_instance_valid(_targets[id]) else Rect2()
@@ -162,8 +178,7 @@ func _render_entries() -> void:
 		retained[id] = pivot
 		pivot.set_meta("item_id",id)
 		pivot.set_meta("quantity",entry.quantity)
-		pivot.rotation_degrees = entry.rotation_degrees
-		pivot.position = entry.pivot-_lift_for(id)
+		_selection_lifts[id] = _lift_for(id).y
 		var offset := Vector2(_settings.stack_offset_px[0],_settings.stack_offset_px[1])
 		for copy_index: int in range(int(entry.copy_count)-1,-1,-1):
 			var sprite := Sprite2D.new()
@@ -199,6 +214,14 @@ func _render_entries() -> void:
 				select_item(id))
 		_targets[id] = target
 	_items = retained
+	for id: String in _item_motion.keys():
+		if not _items.has(id):
+			_item_motion.erase(id)
+	for id: String in _selection_lifts.keys():
+		if not _items.has(id):
+			_selection_lifts.erase(id)
+	for id: String in _items:
+		_apply_item_pose(id)
 	if int(_display_view.get("items",{}).get(selected_item,0)) <= 0:
 		selected_item = ""
 	_debug_overlay.queue_redraw()
@@ -293,15 +316,35 @@ func _move_selection(id: String) -> void:
 		return
 	if _selection_tweens.has(id) and _selection_tweens[id].is_running():
 		_selection_tweens[id].kill()
-	var target: Vector2 = _entries[id].pivot-_lift_for(id)
+	var target := _lift_for(id).y
 	if is_inside_tree() and float(_settings.selection_seconds) > 0:
 		var tween := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-		tween.tween_property(_items[id],"position",target,float(_settings.selection_seconds))
+		tween.tween_method(_set_selection_lift.bind(id),float(_selection_lifts.get(id,0.0)),target,float(_settings.selection_seconds))
 		_selection_tweens[id] = tween
 	else:
-		_items[id].position = target
-	if _targets.has(id):
-		_targets[id].position = _entries[id].visible_rect.position-_lift_for(id)
+		_set_selection_lift(target,id)
+
+func _set_selection_lift(value: float, id: String) -> void:
+	_selection_lifts[id] = value
+	_apply_item_pose(id)
+
+func _apply_item_pose(id: String) -> void:
+	if not _items.has(id) or not is_instance_valid(_items[id]) or not _entries.has(id):
+		return
+	var entry: Dictionary = _entries[id]
+	var motion: Dictionary = _item_motion.get(id,{"offset":Vector2.ZERO,"angle":0.0})
+	var shift: Vector2 = motion.offset-Vector2(0,float(_selection_lifts.get(id,0.0)))
+	_items[id].position = entry.pivot+shift
+	_items[id].rotation_degrees = float(entry.rotation_degrees)+float(motion.angle)
+	if _targets.has(id) and is_instance_valid(_targets[id]):
+		var bounds: Rect2 = entry.visible_rect
+		var corners := [bounds.position,Vector2(bounds.end.x,bounds.position.y),bounds.end,Vector2(bounds.position.x,bounds.end.y)]
+		var first: Vector2 = entry.pivot+(corners[0]-entry.pivot).rotated(deg_to_rad(float(motion.angle)))+shift
+		var hit := Rect2(first,Vector2.ZERO)
+		for corner: Vector2 in corners:
+			hit = hit.expand(entry.pivot+(corner-entry.pivot).rotated(deg_to_rad(float(motion.angle)))+shift)
+		_targets[id].position = hit.position
+		_targets[id].size = hit.size
 
 func _refresh_tints() -> void:
 	if _settings.is_empty():

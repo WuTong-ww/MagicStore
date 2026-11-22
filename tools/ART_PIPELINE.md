@@ -430,3 +430,5 @@ The original `assets/generated_scenes/v2/slices/S04_slot.png` is unchanged.
 do not regenerate these images or the eighteen accepted A2R item PNGs.
 
 A7最终复验：第三轮GUI940/940、19帧及shop710/710；标定后完整第2轮9154/9154（Godot8888+gateway94+art172），exit0、0错误警告。47窗口帧通用225/235，12组200%接触通过；A7专项完成，全站旧人物十项未过按部分完成，详见docs/codex/plans/A7.md。
+
+A6 adds runtime-only WindField/Spring/SceneMotion and shader dispatch for actual aligned layers; no new raster. Static/legacy/hidden backgrounds stay static. Missing production Li/chime/particle regions remain partial. Final shader is inlined for the headless compiler with the same algorithm. Final preview508/508 and strict4-pair/8-control pixel checks pass; all34 PNGs equal root-reviewed round2. Full round3 passed9653/9653; both hardware performance observations remain false. Never use headless SKIP or non-realtime Movie Maker as hardware PASS. tools/capture_motion.ps1 -Mode front-day keeps AVI ignored; tools/transcode_motion.ps1 uses built-in WinRT when FFmpeg is absent. Only15.3MB MP4 and six quality85 JPGs committed. Container probe verifies600 video samples, not full H264 decoding. Exact limits in A6 plan/results.

@@ -1,6 +1,9 @@
 class_name SceneVisual
 extends Control
 ## Presentation only: reads the committed public snapshot, never advances time.
+const Motion = preload("res://scripts/presentation/scene_motion.gd")
+const MotionConfig = preload("res://scripts/presentation/wind_field.gd")
+var motion_controller: Node
 const ShelfLayout = preload("res://scripts/shop/shelf_layout.gd")
 const CONFIG_PATH := "res://data/shop/visuals.json"
 const HOTSPOT_SETTINGS_PATH := "res://data/ui/hotspots.json"
@@ -311,6 +314,11 @@ func setup(page: String, supplied_config: Dictionary = {}) -> void:
 		place(art,layer.rect)
 	if not resized.is_connected(_layout):
 		resized.connect(_layout)
+	if not is_instance_valid(motion_controller):
+		motion_controller = Motion.new()
+		motion_controller.name = "SceneMotion"
+		add_child(motion_controller)
+	motion_controller.bind(self,scene,MotionConfig.load_settings())
 	refresh()
 
 static func texture_for(path: String, source_region: Array = []) -> Texture2D:
@@ -383,6 +391,8 @@ func _layout() -> void:
 		var margin: float = row.get("viewport_margin",0)
 		label.position = Vector2(clampf(point.x-label.size.x/2.0,margin,maxf(margin,size.x-label.size.x-margin)),clampf(point.y,margin,maxf(margin,size.y-label.size.y-margin)))
 		label.visible = not label_occluders.any(func(occluder: Control) -> bool: return is_instance_valid(occluder) and occluder.is_visible_in_tree() and occluder.get_global_rect().intersects(label.get_global_rect()))
+	if is_instance_valid(motion_controller):
+		motion_controller.sync_layers()
 
 func interaction_z_index() -> int:
 	var foreground_z := 0

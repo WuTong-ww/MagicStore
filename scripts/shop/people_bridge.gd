@@ -54,7 +54,7 @@ static func _arrival(id: String, npc_id: String, at: int, source: String, case_i
 		"schedule_end": mini(at + 120, floori(float(at) / 1440.0) * 1440 + 1320),
 		"referrer_npc_id": "", "case_id": case_id, "visit_id": ""}
 
-static func register_legacy_visit(state: Dictionary, visit: Dictionary, divination: Variant = null) -> void:
+static func register_legacy_visit(state: Dictionary, visit: Dictionary, divination: Variant = null, presentation_events: Variant = null) -> void:
 	if not state.has("people"):
 		return
 	var people: Dictionary = state.people
@@ -62,11 +62,16 @@ static func register_legacy_visit(state: Dictionary, visit: Dictionary, divinati
 	for row: Dictionary in people.arrivals.values():
 		if row.visit_id == visit.visit_id:
 			return
+	# A legacy service handoff can refer to a person already in the room.
+	# Retiring an opening alias is not that person's physical departure.
+	var already_inside: bool = people.arrivals.values().any(func(arrival: Dictionary) -> bool: return arrival.npc_id == visit.npc_id and arrival.state in ["queued","in_service"])
 	var arrival_id := "arrival_legacy_" + String(visit.visit_id)
 	var row := _arrival(arrival_id, visit.npc_id, int(visit.started_at), "legacy", "")
 	row.visit_id = visit.visit_id
 	row.state = "completed" if visit.phase == "ended" else "in_service"
 	people.arrivals[arrival_id] = row
+	if row.state == "in_service" and not already_inside:
+		People._presentation_event(presentation_events,row,"guest_entered",int(visit.started_at))
 	var profile: Dictionary = people.profiles[visit.npc_id]
 	profile.met = true
 	if not str(profile.family_id).is_empty() and people.families.has(profile.family_id):
@@ -76,15 +81,21 @@ static func register_legacy_visit(state: Dictionary, visit: Dictionary, divinati
 	if visit.phase == "ended":
 		profile.familiarity = mini(100, int(profile.familiarity) + 1)
 		profile.memories.append({"visit_id": visit.visit_id, "at": int(visit.ended_at), "summary": "保留的往次接待。"})
-	# Retire only a pending opening appointment for the same fixed visitor.
-	if visit.npc_id == "npc_lin" and people.arrivals.has("arrival_opening_lin"):
-		var opening: Dictionary = people.arrivals.arrival_opening_lin
-		if opening.state in ["planned", "queued"]:
-			opening.state = "left"
-			opening["reason"] = "已由原接待继续"
-			opening["left_at"] = int(state.clock_minutes)
+	# A legacy service handoff replaces queued aliases of this same physical
+	# person. Retire them without a door event, just like the original opening
+	# alias, so their later deadlines cannot fabricate another departure.
+	for pending: Dictionary in people.arrivals.values():
+		if pending.npc_id != visit.npc_id:
+			continue
+		var queued_handoff: bool = visit.phase != "ended" and pending.state == "queued"
+		var opening_alias: bool = visit.npc_id == "npc_lin" and pending.arrival_id == "arrival_opening_lin" and pending.state in ["planned","queued"]
+		if queued_handoff or opening_alias:
+			pending.state = "left"
+			pending["reason"] = "已由原接待继续"
+			pending["left_at"] = int(state.clock_minutes)
 
-static func advance(state: Dictionary, config: Dictionary, minutes: int, divination: Variant) -> void:
+static func advance(state: Dictionary, config: Dictionary, minutes: int, divination: Variant) -> Array:
+	var presentation_events: Array = []
 	var target := int(state.clock_minutes) + maxi(0, minutes)
 	# B event/evaluation times and day boundaries are checkpoints. A processes its own
 	# arrivals/deadlines in stable order before scheduling feedback at each checkpoint.
@@ -112,13 +123,15 @@ static func advance(state: Dictionary, config: Dictionary, minutes: int, divinat
 		state.clock_minutes = at
 		Events.advance(state, divination.data)
 		var previous_day := floori(float(state.people.clock) / 1440.0)
-		People.advance_with_schedule(state.people, config, at, _reputation(state), _experience(state), _traffic_bonus(state, config, previous_day))
+		People.advance_with_schedule(state.people, config, at, _reputation(state), _experience(state), _traffic_bonus(state, config, previous_day),presentation_events)
 		# advance_with_schedule does not plan the newly entered day when at is exactly midnight.
 		var day := floori(float(at) / 1440.0)
 		People.plan_day(state.people, config, day, _reputation(state), -1, _experience(state), _traffic_bonus(state, config, day))
 		sync(state, config, divination)
+	return presentation_events
 
 static func start(state: Dictionary, action: Dictionary, divination: Variant, config: Dictionary = {}) -> Dictionary:
+	var presentation_events: Array = []
 	if not state.get("active_visit_id", "").is_empty():
 		return _fail("ACTIVE_VISIT", "请先结束当前接待。")
 	var arrival_id: Variant = action.get("arrival_id")
@@ -165,16 +178,22 @@ static func start(state: Dictionary, action: Dictionary, divination: Variant, co
 	# The newly freed indoor seat goes to the earliest outside guest, preserving
 	# their original deadline. This remains inside the caller's save transaction.
 	if not config.is_empty():
-		People.advance(state.people, config, int(state.clock_minutes))
-	return _ok("接待已开始。", {"visit_id": visit_id, "npc_id": npc_id, "arrival_id": arrival_id})
+		People.advance(state.people, config, int(state.clock_minutes),presentation_events)
+	var outcome := _ok("接待已开始。", {"visit_id": visit_id, "npc_id": npc_id, "arrival_id": arrival_id})
+	# This return-only context is outside result, so it never reaches a save or
+	# processed-action reply. GameState publishes it only after a successful write.
+	outcome["presentation_events"] = presentation_events
+	return outcome
 
-static func finish(state: Dictionary, visit: Dictionary) -> void:
+static func finish(state: Dictionary, visit: Dictionary) -> Array:
+	var presentation_events: Array = []
 	if not state.has("people"):
-		return
+		return presentation_events
 	for row: Dictionary in state.people.arrivals.values():
 		if row.visit_id == visit.visit_id and row.state == "in_service":
-			People.finish(state.people, row.arrival_id, visit.visit_id, "完成接待，保留本次对话、服务与商品记录。")
-			return
+			People.finish(state.people, row.arrival_id, visit.visit_id, "完成接待，保留本次对话、服务与商品记录。",presentation_events)
+			return presentation_events
+	return presentation_events
 
 static func sync(state: Dictionary, _config: Dictionary, divination: Variant) -> void:
 	if not state.has("people"):
