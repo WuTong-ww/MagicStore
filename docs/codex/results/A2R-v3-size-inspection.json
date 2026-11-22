@@ -1,0 +1,18 @@
+{
+  "task": "A2R v3",
+  "pending_index_new_binary_bytes": 1623228,
+  "clean_history_new_binary_bytes": 204760793,
+  "manifest_bytes": 303113,
+  "forbidden_tracked_paths": [],
+  "original_v2_files_sha_verified": 56,
+  "formal_item_png_count": 18,
+  "item_png_bytes": 437003,
+  "jpg_count": 6,
+  "jpg_quality": 85,
+  "local_git_count_objects": "count: 5104\nsize: 276.78 MiB\nin-pack: 4064\npacks: 2\nsize-pack: 1.12 GiB\nprune-packable: 2053\ngarbage: 3\nsize-garbage: 15.24 MiB",
+  "original_clean_helper_failed_checks": [
+    "new_binary_total",
+    "each_clean_commit_binary"
+  ],
+  "interpretation": "Initial CLEAN<150MB already passed; cumulative formal A1R+later assets exceed that initial budget. A1R >100MB commit explicitly inspected previously. Current A2R 1.623MB <100MB. Do not rewrite original helper failures."
+}

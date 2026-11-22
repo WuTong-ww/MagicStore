@@ -24,3 +24,6 @@ assets/fonts/LXGWWenKai-OFL.txt -text whitespace=-blank-at-eol,-blank-at-eof,-sp
 # their original line endings so checkout cannot invalidate their SHA256.
 assets/_incoming/**/receipt.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 assets/generated_scenes/v3_real/**/receipt.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Retained SVG source has a recorded byte hash.
+assets/_legacy/a2/inventory-reference.svg text eol=lf

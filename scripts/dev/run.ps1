@@ -92,6 +92,7 @@ try {
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/people_restart.gd', '--', 'write')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/people_restart.gd', '--', 'read')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/shop_ui.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/item_visuals.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/scene_visuals.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/aligned_scene_layers.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/scene_asset_acceptance.gd')
@@ -136,6 +137,8 @@ try {
         if ($artTestCode -ne 0) { throw 'Art pipeline regression tests failed.' }
         & python -B (Join-Path $repo 'tools/art/validate_formal_manifest.py') --workspace $repo
         if ($LASTEXITCODE -ne 0) { throw 'Formal art manifest validation failed.' }
+        & python -B (Join-Path $repo 'tools/check_alpha.py') --workspace $repo --visuals 'data/shop/visuals.json'
+        if ($LASTEXITCODE -ne 0) { throw 'Production item alpha validation failed.' }
         if (Test-OptionalLocalArt 'data/art/real_scene_registry.json') {
             & python -B (Join-Path $repo 'tools/art/register_real_scenes.py') --validate-only
             if ($LASTEXITCODE -ne 0) { throw 'Retained real scene data validation failed.' }

@@ -100,3 +100,23 @@ size-garbage: 15.24 MiB
 本快照先于本段及小型文本报告的暂存，二进制字节不会因这些文本追加变化。不删除旧远端round2，尚未释放其空间。
 
 A1R实际提交059baeb已普通Git推送成功（origin/codex/round2-clean从523692d前进到059baeb）。未使用LFS，未改main或旧round2。
+
+## A2R v3 提交前体积（2026-11-22）
+
+- 完整8555/8555，exit0、0ERROR/WARNING；GUI255/255与718/718。18正式PNG（437003B）及六张质量85 JPG已root打开，原始候选与审计仅本地。
+- 本次新增唯一二进制 **1623228B**，小于100MB检查线；从main以来正式clean历史累计 **204760793B**，不谎称小于初始150MB。原CLEAN脚本仍因累计new_binary_total和历史A1R each_clean_commit_binary输出FAIL，保留原结果；初始CLEAN81.1MB及A1R119.8MB逐图检查已在上文说明。
+- Manifest **303113B**；禁止追踪路径0，A2R截图6；旧atlas三原生文件仅移legacy，未新增重复图；原v2全部56文件SHA一致。二进制普通Git，无LFS。
+- 实际169资源SHA/尺寸与18alpha强制验证全过。体积快照results/A2R-v3-size-inspection.json；.tools/clean-rebuild/A2R-v3-size.json保留原CLEAN检查报告。下面本地对象含旧备份，不能当本次上传量。
+
+```text
+count: 5104
+size: 276.78 MiB
+in-pack: 4064
+packs: 2
+size-pack: 1.12 GiB
+prune-packable: 2053
+garbage: 3
+size-garbage: 15.24 MiB
+```
+
+本段及小型文本证据最后暂存不会改变二进制字节。未删除旧远端round2，尚未释放它占用的空间。

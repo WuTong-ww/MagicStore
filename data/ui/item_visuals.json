@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "large_size": [256, 256],
+  "small_size": [64, 64],
+  "alpha_threshold": 128,
+  "contact_band_rows": 3,
+  "legacy_grid": 3,
+  "legacy_atlas_paths": ["res://assets/_legacy/a2/inventory-atlas-v2.png", "res://assets/_legacy/inventory-atlas-v2.png", "res://assets/items/inventory-atlas-v2.png"],
+  "legacy_reference_paths": ["res://assets/_legacy/a2/inventory-reference.png", "res://assets/_legacy/inventory-reference.png", "res://assets/items/inventory-reference.png"],
+  "required_items": ["bookmark", "silver_leaf", "restorative_draught", "clarity_crystal", "calming_incense", "lavender", "quartz", "moon_dust", "spring_water"],
+  "legacy_names": {"bookmark": "纸纹书签", "silver_leaf": "银叶书夹"},
+  "purposes": {
+    "physical": {"label": "物理", "color": "#B5654D"},
+    "psychological": {"label": "心理", "color": "#9C86B8"},
+    "environment": {"label": "环境", "color": "#6E7F4F"}
+  },
+  "badge": {"size": [12, 12], "gap": 3, "border_width": 1, "border_color": "#F3E9D6", "tooltip": "用途：%s"},
+  "gallery": {"title": "商品与原料 · 64 像素素材验收", "comparison_title": "物品轮廓对照 · %d px", "comparison_hint": "名称、尺寸和用途角标均由控件绘制。", "comparison_page_title": "第 %d 页，共 %d 页", "size": [760, 310], "padding": 16, "columns": 3, "column_gap": 20, "row_gap": 12, "cell_width": 224, "comparison_sizes": [64, 128, 256], "comparison_page_items": {"64": 9, "128": 9, "256": 3}, "comparison_label_size": 18},
+  "preview": {"receipt_path": "res://assets/_incoming/a2r_v3/processing_receipt.json", "capture_dir": "res://.tools/art/previews/A2R/v3", "window_sizes": [[1280, 720], [1920, 1080]], "pages": ["inventory", "workshop", "market"]}
+}

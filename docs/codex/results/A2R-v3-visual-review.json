@@ -1,0 +1,1467 @@
+{
+  "kind": "root_A2R_final_round2_visual_review",
+  "raw_frames": 38,
+  "selected_jpg_frames": 6,
+  "checks": [
+    "全屏铺满",
+    "文字完整",
+    "古纸长文",
+    "无烘焙文字",
+    "光线笔触统一"
+  ],
+  "scope": "16 production-mapped previews and22 shop current frames;14 earlier root-opened exact byte-identical A1R frames explicitly inherited;6 final quality85 JPG actually opened",
+  "passed_checks": 203,
+  "total_checks": 220,
+  "frames": [
+    {
+      "path": ".tools/art/previews/A2R/v3/inventory-1280x720.png",
+      "sha256": "a0681d0d00897d7f99c5272fbfc28e4e06a5b47f9ffc287c2f3528966cb2c401",
+      "reviewer": "root actual final GUI round2 image opened",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧立体S04_slot透视/光线与底图不同且物品悬浮，明确留A7替换"
+        }
+      ]
+    },
+    {
+      "path": ".tools/art/previews/A2R/v3/inventory-1920x1080.png",
+      "sha256": "2fa0d2eb723d00900c69742fabb6c129057e947c89c888d3d159a5dbb9bf0922",
+      "reviewer": "root actual final GUI round2 image opened",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": false,
+          "reason": "按钮完整但旧架上名称/数量压木箱边框，仍不满足全部文字完整可读；留A7"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧立体S04_slot透视/光线与底图不同且物品悬浮，明确留A7替换"
+        }
+      ]
+    },
+    {
+      "path": ".tools/art/previews/A2R/v3/items-128-page1-1280x720.png",
+      "sha256": "9ba729a0b1b97b17b5a5a45f3fa3a66c0c11d96ddacbb2392a96a825f3eca749",
+      "reviewer": "root actual final GUI round2 image opened",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ]
+    },
+    {
+      "path": ".tools/art/previews/A2R/v3/items-128-page1-1920x1080.png",
+      "sha256": "12bea4c227635d41cebc5acdae2f09307659e0553d5dd1b962fc8e7cf5262857",
+      "reviewer": "root actual final GUI round2 image opened",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ]
+    },
+    {
+      "path": ".tools/art/previews/A2R/v3/items-256-page1-1280x720.png",
+      "sha256": "35f20642f954629129121ed362ac79d12f7ce468e6456575d03d47a13c933c53",
+      "reviewer": "root actual final GUI round2 image opened",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ]
+    },
+    {
+      "path": ".tools/art/previews/A2R/v3/items-256-page1-1920x1080.png",
+      "sha256": "2092ea9189a6cdfce36d6bbe554a4e667d5c64f928801af399bee5d979a80c4c",
+      "reviewer": "root actual final GUI round2 image opened",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ]
+    },
+    {
+      "path": ".tools/art/previews/A2R/v3/items-256-page2-1280x720.png",
+      "sha256": "210529f01c492cf23230f2137d2e6b033b59c0e05e992823279eacfc867223f2",
+      "reviewer": "root actual final GUI round2 image opened",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ]
+    },
+    {
+      "path": ".tools/art/previews/A2R/v3/items-256-page2-1920x1080.png",
+      "sha256": "bcecaaaf125070f3c89a906cf2a14340438df87aa864c9655ab796349966c7cf",
+      "reviewer": "root actual final GUI round2 image opened",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ]
+    },
+    {
+      "path": ".tools/art/previews/A2R/v3/items-256-page3-1280x720.png",
+      "sha256": "012e7c17c90163dabf59eea9f7ea0fae4a2b12dfd7cf7d9c0b5405683b4e245c",
+      "reviewer": "root actual final GUI round2 image opened",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ]
+    },
+    {
+      "path": ".tools/art/previews/A2R/v3/items-256-page3-1920x1080.png",
+      "sha256": "75084a3bc227f9742f00acf9c26a3512936dfaa260fe6ec0d484f150617e9773",
+      "reviewer": "root actual final GUI round2 image opened",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ]
+    },
+    {
+      "path": ".tools/art/previews/A2R/v3/items-64-page1-1280x720.png",
+      "sha256": "4ab49913173563025a1306faeaab63876b65b7c2837fd397e5a4749d8d26ae87",
+      "reviewer": "root actual final GUI round2 image opened",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ]
+    },
+    {
+      "path": ".tools/art/previews/A2R/v3/items-64-page1-1920x1080.png",
+      "sha256": "3a01eb942437fc294f68c6ed588cc4441605f99734d9a68d823407fd390841dc",
+      "reviewer": "root actual final GUI round2 image opened",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ]
+    },
+    {
+      "path": ".tools/art/previews/A2R/v3/market-1280x720.png",
+      "sha256": "ffbf9aea2dd3e541acecd92ac4c2e0803168a1d7e3be17cb21a86a60838b56f1",
+      "reviewer": "root actual final GUI round2 image opened",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "按钮文字完整；数量标签狭窄折为两行但字未丢失，布局债已记录"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ]
+    },
+    {
+      "path": ".tools/art/previews/A2R/v3/market-1920x1080.png",
+      "sha256": "8e31a3c8b3ea7007763624db5e5d7498be380c181d736b9cdd81d2640f4ebb4a",
+      "reviewer": "root actual final GUI round2 image opened",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "按钮文字完整；数量标签狭窄折为两行但字未丢失，布局债已记录"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ]
+    },
+    {
+      "path": ".tools/art/previews/A2R/v3/workshop-1280x720.png",
+      "sha256": "d36668d2cb3dd1be214163ff569ac359999d8c968864f08a0a931020514b11d7",
+      "reviewer": "root actual final GUI round2 image opened",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ]
+    },
+    {
+      "path": ".tools/art/previews/A2R/v3/workshop-1920x1080.png",
+      "sha256": "d4007b00bdba055475c628dae13d308939143504cd3e4d008efe146619dc5e20",
+      "reviewer": "root actual final GUI round2 image opened",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/catalog-icons-64px.png",
+      "sha256": "8a801f8478443b03e61358fa15f1ad1dd5c8bebd4250739c4df99ea20f2a374f",
+      "reviewer": "root actual final GUI round2 image opened",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/consultation-1280.png",
+      "sha256": "8b9604a91f754a7f068fbb691851f71a3bf878364a99314982ab7607b282bd88",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [
+        "真实无接待状态显示空沙发与还没有来客，未误放肖像。"
+      ],
+      "reviewer": "root earlier actual image opened in A1R; current final round2 bytes reverified identical",
+      "identical_source": "docs/codex/results/A1R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/consultation-1920.png",
+      "sha256": "d2093409ff6c65a10ff7886e2bf612e33aa3c02bb43ba5334e845c68190f1711",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [
+        "真实无接待状态显示空沙发与还没有来客，未误放肖像。"
+      ],
+      "reviewer": "root earlier actual image opened in A1R; current final round2 bytes reverified identical",
+      "identical_source": "docs/codex/results/A1R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/exterior-1280.png",
+      "sha256": "71f7f0aee249622789d897e22450ccefc17bd59abab91390876e132762388d52",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root earlier actual image opened in A1R; current final round2 bytes reverified identical",
+      "identical_source": "docs/codex/results/A1R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/exterior-1920.png",
+      "sha256": "9074f345e1ef3b59cda4c9875622470410392896dddde58f3d962d3f833d79e4",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root earlier actual image opened in A1R; current final round2 bytes reverified identical",
+      "identical_source": "docs/codex/results/A1R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/front-1280.png",
+      "sha256": "78e2045998dfb643688d6a4cd0b01e45c71b2d0241314e554e3ec16f8888cb2e",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "手帐内旧头像还未按v3统一，A4处理；场景本体通过"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root earlier actual image opened in A1R; current final round2 bytes reverified identical",
+      "identical_source": "docs/codex/results/A1R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/front-1920.png",
+      "sha256": "31300f69ba5e78e961a990c2dcb0d0a77aec15e89db17968fe7692c5d1d08d72",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "手帐内旧头像还未按v3统一，A4处理；场景本体通过"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root earlier actual image opened in A1R; current final round2 bytes reverified identical",
+      "identical_source": "docs/codex/results/A1R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/gathering-1280.png",
+      "sha256": "1e46b0f3e5acde8d6ce7a9d7b89e74b1fed7978207db6f42f73122864e66c77f",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root earlier actual image opened in A1R; current final round2 bytes reverified identical",
+      "identical_source": "docs/codex/results/A1R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/gathering-1920.png",
+      "sha256": "169f59c9a610ed732c8bdc74b2c6a7190fc31bf6bcfa107f8fa6681e2a163482",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root earlier actual image opened in A1R; current final round2 bytes reverified identical",
+      "identical_source": "docs/codex/results/A1R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/inventory-1280.png",
+      "sha256": "ffd98ff398be7b6507684fd97fc43e8a74148166ec7cb959aabc03193095d42f",
+      "reviewer": "root actual final GUI round2 image opened",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧立体S04_slot透视/光线与底图不同且物品悬浮，明确留A7替换"
+        }
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/inventory-1920.png",
+      "sha256": "9baf9808550d4158daf76024068d3464c87d67f5a8e16eb6a89a9cbbdd063e75",
+      "reviewer": "root actual final GUI round2 image opened",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": false,
+          "reason": "按钮完整但旧架上名称/数量压木箱边框，仍不满足全部文字完整可读；留A7"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧立体S04_slot透视/光线与底图不同且物品悬浮，明确留A7替换"
+        }
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/market-1280.png",
+      "sha256": "7d609612e3121ba78ae82281e2d1727a357c106505f2bd4245a2a5413d35b9dc",
+      "reviewer": "root actual final GUI round2 image opened",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "按钮文字完整；数量标签狭窄折为两行但字未丢失，布局债已记录"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/market-1920.png",
+      "sha256": "9a31fadb1ad26004904649c2fa21d629f0feee7ce8eede19791001959a60acf7",
+      "reviewer": "root actual final GUI round2 image opened",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "按钮文字完整；数量标签狭窄折为两行但字未丢失，布局债已记录"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/market-after-trade-1920.png",
+      "sha256": "7417f439b733c629cfd9a5a486a37b8afaf2e5ad5393b5868450f9c7aa684b67",
+      "reviewer": "root actual final GUI round2 image opened",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "按钮文字完整；数量标签狭窄折为两行但字未丢失，布局债已记录"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/network-1280.png",
+      "sha256": "542da72b96be287674979e1da25be6411c4322e04838b9cdc9e86096c1676695",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "手帐内旧头像还未按v3统一，A4处理；场景本体通过"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root earlier actual image opened in A1R; current final round2 bytes reverified identical",
+      "identical_source": "docs/codex/results/A1R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/network-1920.png",
+      "sha256": "bc21fd507362e5914ca964c31af4cd576afda704e8be2e506690912ef664f961",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "手帐内旧头像还未按v3统一，A4处理；场景本体通过"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root earlier actual image opened in A1R; current final round2 bytes reverified identical",
+      "identical_source": "docs/codex/results/A1R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/people-1280.png",
+      "sha256": "902f9345702b72846477363b2620c70100bd6cea99147bd0efa0264b3f2b65e2",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": false,
+          "reason": "滚动区底部露出被裁按钮；窗口标题/关闭钮仍在外侧，A4整理"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": false,
+          "reason": "旧人物卡装饰内烘有问号状态符号，A4换动态控件"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧金纹纸卡与新v3场景尚未统一，A4整理"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root earlier actual image opened in A1R; current final round2 bytes reverified identical",
+      "identical_source": "docs/codex/results/A1R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/people-1920.png",
+      "sha256": "38dcfdcc898c4102d73dd4493b0f2c8a605a3608373bfd18e1332b74bbc4ced0",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": false,
+          "reason": "滚动区底部露出被裁按钮；窗口标题/关闭钮仍在外侧，A4整理"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": false,
+          "reason": "旧人物卡装饰内烘有问号状态符号，A4换动态控件"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧金纹纸卡与新v3场景尚未统一，A4整理"
+        }
+      ],
+      "notes": [],
+      "reviewer": "root earlier actual image opened in A1R; current final round2 bytes reverified identical",
+      "identical_source": "docs/codex/results/A1R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/workshop-1280.png",
+      "sha256": "7c93b4b0ae4a693c955304f5fe8562d8b380e2dc5737212937785425e439b43e",
+      "reviewer": "root actual final GUI round2 image opened",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/workshop-1920.png",
+      "sha256": "75e8bd4fc3662ada487dcc24b3b45dc200cf079f0e4d5099e1440257b1100e97",
+      "reviewer": "root actual final GUI round2 image opened",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/zero-guest-front-1280.png",
+      "sha256": "d51254b075d7c2f6e297b75810de3b53cf4f7e47f6db2719af225ee86750a37c",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [
+        "零客日空下拉隐藏，去采集/研习/制作及等候操作均完整可读。"
+      ],
+      "reviewer": "root earlier actual image opened in A1R; current final round2 bytes reverified identical",
+      "identical_source": "docs/codex/results/A1R-v3-visual-review.json"
+    },
+    {
+      "path": ".tools/c-ui-captures/zero-guest-front-1920.png",
+      "sha256": "6db72069a50e78a8dd0d4b89d562b49253596276ea46cecd873801e1ff5d17a6",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "场景cover铺满四边，UI浮于其上，没有场景外框或黑边"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "顶栏、导航及可见操作文字完整；纯图形输入箭头不当空白文字按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "手帐、对白与说明采用古纸底，墨褐字可读"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "画面内名称/状态/文字由控件绘制，场景标签保持空白"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "场景与所选同位层光照/笔触一致，未见叠回位移或补底接缝"
+        }
+      ],
+      "notes": [
+        "零客日空下拉隐藏，去采集/研习/制作及等候操作均完整可读。"
+      ],
+      "reviewer": "root earlier actual image opened in A1R; current final round2 bytes reverified identical",
+      "identical_source": "docs/codex/results/A1R-v3-visual-review.json"
+    },
+    {
+      "path": "docs/screenshots/round2/A2R/items-64-1280.jpg",
+      "source": ".tools/art/previews/A2R/v3/items-64-page1-1280x720.png",
+      "sha256": "bc8a9c16cd469d4117ac422ef0a9ab541f8e1539e5fb12dffd966d29db3cb03b",
+      "reviewer": "root actual final quality85 JPG opened; no additional compression defects observed",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ]
+    },
+    {
+      "path": "docs/screenshots/round2/A2R/items-128-1920.jpg",
+      "source": ".tools/art/previews/A2R/v3/items-128-page1-1920x1080.png",
+      "sha256": "ec0a1b3e91fe778697861b1d4030da99feeb1dea5469fbc7359f4302196b8df9",
+      "reviewer": "root actual final quality85 JPG opened; no additional compression defects observed",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ]
+    },
+    {
+      "path": "docs/screenshots/round2/A2R/items-256-1920.jpg",
+      "source": ".tools/art/previews/A2R/v3/items-256-page2-1920x1080.png",
+      "sha256": "8662311e027e4ec1a9f9af81325bd871d05ce9d6f91e872def3067aacd9fdf5e",
+      "reviewer": "root actual final quality85 JPG opened; no additional compression defects observed",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ]
+    },
+    {
+      "path": "docs/screenshots/round2/A2R/market-v3-1920.jpg",
+      "source": ".tools/art/previews/A2R/v3/market-1920x1080.png",
+      "sha256": "f2463d7f70f44e078942f3c5b29713b64342095e707e5f5ed09a998b39dffeda",
+      "reviewer": "root actual final quality85 JPG opened; no additional compression defects observed",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "按钮文字完整；数量标签狭窄折为两行但字未丢失，布局债已记录"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ]
+    },
+    {
+      "path": "docs/screenshots/round2/A2R/inventory-v3-1280-before-A7.jpg",
+      "source": ".tools/art/previews/A2R/v3/inventory-1280x720.png",
+      "sha256": "605761a101da4a6a48e6af43abca86891e5ea29ed1c0a4e6c75a41140bb9e066",
+      "reviewer": "root actual final quality85 JPG opened; no additional compression defects observed",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": false,
+          "reason": "旧立体S04_slot透视/光线与底图不同且物品悬浮，明确留A7替换"
+        }
+      ]
+    },
+    {
+      "path": "docs/screenshots/round2/A2R/workshop-v3-1920.jpg",
+      "source": ".tools/art/previews/A2R/v3/workshop-1920x1080.png",
+      "sha256": "5044e479808fa1d8b82c1fe07260249996dedbdbda3180b618b9e68ebd2a1520",
+      "reviewer": "root actual final quality85 JPG opened; no additional compression defects observed",
+      "checks": [
+        {
+          "item": 1,
+          "passed": true,
+          "reason": "古纸对照画布或场景cover铺满窗口，无黑边或框内场景卡"
+        },
+        {
+          "item": 2,
+          "passed": true,
+          "reason": "可见按钮文字完整；用途色点是控件角标，不是空白按钮"
+        },
+        {
+          "item": 3,
+          "passed": true,
+          "reason": "长文与物品说明在浅古纸面板，墨褐文字清楚"
+        },
+        {
+          "item": 4,
+          "passed": true,
+          "reason": "名称、数量、用途均由控件绘制，物品原图无文字"
+        },
+        {
+          "item": 5,
+          "passed": true,
+          "reason": "新物品为左上暖光和哑光颜料笔触；列表及对照纸面没有异光木箱"
+        }
+      ]
+    }
+  ]
+}

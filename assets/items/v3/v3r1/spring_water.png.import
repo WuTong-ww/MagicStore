@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dh35fy766mce5"
-path="res://.godot/imported/inventory-reference.svg-7e25032ce822a854706daaff4ff45a1d.ctex"
+uid="uid://n7qoan2sqmpt"
+path="res://.godot/imported/spring_water.png-dd4e8f664471f9af8a9cc52d6f549aa4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/items/inventory-reference.svg"
-dest_files=["res://.godot/imported/inventory-reference.svg-7e25032ce822a854706daaff4ff45a1d.ctex"]
+source_file="res://assets/items/v3/v3r1/spring_water.png"
+dest_files=["res://.godot/imported/spring_water.png-dd4e8f664471f9af8a9cc52d6f549aa4.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

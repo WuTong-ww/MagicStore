@@ -8,77 +8,77 @@
       "version": 2,
       "cell": 8,
       "source": "builtin-imagegen",
-      "asset": "res://assets/items/inventory-atlas-v2.png",
+      "asset": "res://assets/_legacy/a2/inventory-atlas-v2.png",
       "item_id": "bookmark",
-      "reference": "res://assets/items/inventory-reference.png"
+      "reference": "res://assets/_legacy/a2/inventory-reference.png"
     },
     "silver_leaf": {
       "version": 2,
       "cell": 7,
       "source": "builtin-imagegen",
-      "asset": "res://assets/items/inventory-atlas-v2.png",
+      "asset": "res://assets/_legacy/a2/inventory-atlas-v2.png",
       "item_id": "silver_leaf",
-      "reference": "res://assets/items/inventory-reference.png"
+      "reference": "res://assets/_legacy/a2/inventory-reference.png"
     },
     "restorative_draught": {
       "version": 2,
       "cell": 0,
       "source": "builtin-imagegen",
-      "asset": "res://assets/items/inventory-atlas-v2.png",
+      "asset": "res://assets/_legacy/a2/inventory-atlas-v2.png",
       "item_id": "restorative_draught",
-      "reference": "res://assets/items/inventory-reference.png"
+      "reference": "res://assets/_legacy/a2/inventory-reference.png"
     },
     "clarity_crystal": {
       "version": 2,
       "cell": 1,
       "source": "builtin-imagegen",
-      "asset": "res://assets/items/inventory-atlas-v2.png",
+      "asset": "res://assets/_legacy/a2/inventory-atlas-v2.png",
       "item_id": "clarity_crystal",
-      "reference": "res://assets/items/inventory-reference.png"
+      "reference": "res://assets/_legacy/a2/inventory-reference.png"
     },
     "spring_water": {
       "version": 2,
       "cell": 6,
       "source": "builtin-imagegen",
-      "asset": "res://assets/items/inventory-atlas-v2.png",
+      "asset": "res://assets/_legacy/a2/inventory-atlas-v2.png",
       "item_id": "spring_water",
-      "reference": "res://assets/items/inventory-reference.png"
+      "reference": "res://assets/_legacy/a2/inventory-reference.png"
     },
     "moon_dust": {
       "version": 2,
       "cell": 5,
       "source": "builtin-imagegen",
-      "asset": "res://assets/items/inventory-atlas-v2.png",
+      "asset": "res://assets/_legacy/a2/inventory-atlas-v2.png",
       "item_id": "moon_dust",
-      "reference": "res://assets/items/inventory-reference.png"
+      "reference": "res://assets/_legacy/a2/inventory-reference.png"
     },
     "quartz": {
       "version": 2,
       "cell": 4,
       "source": "builtin-imagegen",
-      "asset": "res://assets/items/inventory-atlas-v2.png",
+      "asset": "res://assets/_legacy/a2/inventory-atlas-v2.png",
       "item_id": "quartz",
-      "reference": "res://assets/items/inventory-reference.png"
+      "reference": "res://assets/_legacy/a2/inventory-reference.png"
     },
     "calming_incense": {
       "version": 2,
       "cell": 2,
       "source": "builtin-imagegen",
-      "asset": "res://assets/items/inventory-atlas-v2.png",
+      "asset": "res://assets/_legacy/a2/inventory-atlas-v2.png",
       "item_id": "calming_incense",
-      "reference": "res://assets/items/inventory-reference.png"
+      "reference": "res://assets/_legacy/a2/inventory-reference.png"
     },
     "lavender": {
       "version": 2,
       "cell": 3,
       "source": "builtin-imagegen",
-      "asset": "res://assets/items/inventory-atlas-v2.png",
+      "asset": "res://assets/_legacy/a2/inventory-atlas-v2.png",
       "item_id": "lavender",
-      "reference": "res://assets/items/inventory-reference.png"
+      "reference": "res://assets/_legacy/a2/inventory-reference.png"
     }
   },
   "original_sources": [
-    "res://assets/items/inventory-reference.svg"
+    "res://assets/_legacy/a2/inventory-reference.svg"
   ],
   "sha256": "E897D3B34F080B22F600DC181F14AA3CC081206EA1696CDFCD0FB2B8E4BCF345",
   "original_authorship": "Project-authored SVG samples, replaceable by final art-team assets.",

@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "kind": "magenta_keyed_item_art",
+  "source_root": "assets/_incoming/a2r_v3",
+  "output_root": "assets/items/v3",
+  "required_ids": ["lavender", "spring_water", "quartz", "moon_dust", "calming_incense", "restorative_draught", "clarity_crystal", "bookmark", "silver_leaf"],
+  "maximum_generation_attempts": 4,
+  "generation": {
+    "tool": "image_gen.imagegen",
+    "target_size_prompt": "Produce the actual maximum native square image on flat #FF00FF, not a fake native 256 export. Native dimensions and original byte hash are measured on receipt import.",
+    "not_callable_message": "Offline PowerShell/Python cannot invoke the session builtin imagegen. Codex must execute this queue with image_gen.imagegen, inspect each image, retain native output bytes, and supply a new versioned generation receipt. No API or paid CLI is used."
+  },
+  "runtime_size": [256, 256],
+  "icon_size": [64, 64],
+  "layout": {"maximum_width_fraction": 0.86, "maximum_height_fraction": 0.80, "bottom_margin_pixels": 3},
+  "color_key": {"hue_ranges": [[0.77, 0.94]], "minimum_saturation": 0.45, "minimum_value": 0.20},
+  "mask": {"erode_pixels": 1, "feather_pixels": 1, "color_bleed_pixels": 4, "color_seed_alpha": 128},
+  "icon": {"outline_radius_pixels": 1, "outline_darkening_fraction": 0.18, "color_bleed_pixels": 3, "color_seed_alpha": 128},
+  "alpha_qa": {
+    "saturation_threshold": 0.6,
+    "red_yellow_hue_ranges": [[0.0, 0.16666666666666666], [0.95, 1.0]],
+    "maximum_bad_edge_fraction": 0.02,
+    "magenta_hue_ranges": [[0.77, 0.94]],
+    "magenta_minimum_value": 0.20,
+    "maximum_visible_magenta_pixels": 0,
+    "require_transparent_pixels": true
+  },
+  "support": {
+    "alpha_threshold": 128,
+    "contact_band_rows": 3,
+    "maximum_bottom_gap_pixels": 6,
+    "minimum_bottom_width_pixels": 2,
+    "semantics": "All coordinates are zero based. bbox=[left,top,right_exclusive,bottom_exclusive] for alpha>=alpha_threshold; bottom_y=bbox.bottom-1. bottom_left/width are min(x) and max(x)-min(x)+1 across the last contact_band_rows up to bottom_y, not a count of occupied pixels. alpha_bbox uses alpha>0."
+  },
+  "processing_prompt": "Retain the native generated PNG bytes. Remove the magenta color key, contain the actual foreground on the runtime canvas with Lanczos, erode alpha inward and feather by the configured pixels, align its measured support near the bottom, then derive and strengthen the small icon outline from that processed runtime image. Never generate a separate icon or bake any text, purpose marks or shadow into it."
+}

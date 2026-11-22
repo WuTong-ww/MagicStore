@@ -1,0 +1,32 @@
+{
+  "task": "A2R v3",
+  "status": "部分完成",
+  "full_test_round": 1,
+  "exit_code": 0,
+  "exit_evidence": ".tools/art/a2r_v3/full-tests-round1-observed-exit.txt",
+  "godot_checks": 8292,
+  "gateway_tests": 94,
+  "art_tests": 169,
+  "total_passed": 8555,
+  "total": 8555,
+  "errors": 0,
+  "warnings": 0,
+  "graphical": {
+    "item_preview": {
+      "passed": 255,
+      "total": 255,
+      "captures": 16
+    },
+    "shop_ui": {
+      "passed": 718,
+      "total": 718,
+      "writes": 23,
+      "current_frames": 22
+    }
+  },
+  "formal_sources_verified": 169,
+  "item_alpha_verified": 18,
+  "optional_local_history_skips": 3,
+  "intentional_missing_raw_fixture_skip": 1,
+  "remaining": "旧架上摆放/A4旧人物造成跨任务画面通用项失败，保留部分完成；九件均过8分线"
+}

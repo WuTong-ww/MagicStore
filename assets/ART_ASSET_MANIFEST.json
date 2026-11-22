@@ -665,7 +665,7 @@
       "group": "legacy_sources"
     },
     {
-      "path": "assets/items/inventory-atlas-v2.png",
+      "path": "assets/_legacy/a2/inventory-atlas-v2.png",
       "sha256": "e897d3b34f080b22f600dc181f14aa3cc081206ea1696cdfcd0fb2b8e4bcf345",
       "dim": [
         1254,
@@ -673,25 +673,28 @@
       ],
       "prompt": "Extend the attached original SVG sample strip into a transparent square 3x3 inventory atlas. Match bold silhouettes, matte midnight teal fills, pale brass outlines, turquoise potion and lavender crystal. Row1 potion, crystal, incense. Row2 evening primrose herb, quartz grains, amber resin. Row3 spring water vial, silver leaf clasp, paper bookmark. Equal cells, generous margins, no text, no grid lines, readable at 64px.",
       "references": [
-        "assets/items/inventory-reference.png",
-        "assets/items/inventory-reference.svg"
-      ]
+        "assets/_legacy/a2/inventory-reference.png",
+        "assets/_legacy/a2/inventory-reference.svg"
+      ],
+      "group": "legacy_sources"
     },
     {
-      "path": "assets/items/inventory-reference.png",
+      "path": "assets/_legacy/a2/inventory-reference.png",
       "sha256": "3143be8e5f1d9c1a8138543aac0ae4bc880e0629525839e448bd8d9c78f5bfbb",
       "dim": [
         768,
         256
-      ]
+      ],
+      "group": "legacy_sources"
     },
     {
-      "path": "assets/items/inventory-reference.svg",
+      "path": "assets/_legacy/a2/inventory-reference.svg",
       "sha256": "521b79669d31098b142f5aaa00da4a8ca3fa9e31ce634a827e8ecdc2d6305c20",
       "dim": [
         768,
         256
-      ]
+      ],
+      "group": "legacy_sources"
     },
     {
       "path": "assets/portraits/npc_character_reference_sheet.png",
@@ -3616,6 +3619,1236 @@
         }
       },
       "preserve_base": true
+    },
+    {
+      "path": "assets/items/v3/v3r1/lavender.png",
+      "sha256": "c1a117ddb537813c0dcd2219174f91b178d529a7f73bf7849a5fc13cd10b6cd2",
+      "dim": [
+        256,
+        256
+      ],
+      "status": "processed",
+      "version": 3,
+      "group": "items",
+      "operation": "item_chromakey",
+      "item_id": "lavender",
+      "object_description": "small tied sprig of evening primrose, three clearly open flowers each with exactly four extremely pale creamy ivory-yellow petals and muted gray-green stamens, slender low-saturation cool sage-gray leaves and stems bound with one short plain gray-green thread, the stems cut together at an even straight flat lower edge; no closed buds or colored bud tips; this is Oenothera evening primrose, not lavender",
+      "prompt": "A single small tied sprig of evening primrose, three clearly open flowers each with exactly four extremely pale creamy ivory-yellow petals and muted gray-green stamens, slender low-saturation cool sage-gray leaves and stems bound with one short plain gray-green thread, the stems cut together at an even straight flat lower edge; no closed buds or colored bud tips; this is Oenothera evening primrose, not lavender painted in the same opaque poster-color style as the reference image, lit from the upper left by warm afternoon light with a soft, slightly cool core shadow on its right side, standing upright on its flat base, three-quarter front view seen slightly from above, plain flat #FF00FF background, no cast shadow, no text, no halo, no sparkles.\nInput image role: STYLE REFERENCE ONLY. Create one new isolated inventory object; do not repaint or include the room, shelves, furniture, floor or any background from the reference. Show the matte opaque poster-color brushwork and simple recognizable material shapes. Square image at the largest native square size available, complete object centered and occupying about 78% of image height with generous clear margin on every side. Every pixel outside the object is uniform solid #FF00FF; no floor line, no vignette, no contact or cast shadow. No lettering, labels, numbers, symbols, purpose marks, gilding, decorative border, glitter, glow or halo. Keep every outermost object contour low-saturation neutral gray-brown or muted gray-green, including paper/metal/petal edges: the perimeter must not be saturated red, orange, or golden yellow. Warm light remains subtle and stays within the opaque interior; the right-facing core shadow is gently cool gray-green. No harsh yellow rim light, no saturated red-yellow outlines, no purple or pink color in the object. Preserve a clear level lower support edge.\nTargeted palette correction: the complete petals are very pale cream, not strong yellow. Their outer 15% band is cool ivory-gray with very low saturation, transitioning naturally into a little subtle butter-yellow in the opaque central interior. All leaves, leaf tips, stems, thread and stamens are muted cool gray-green; no ochre yellow-green contour, orange buds or reddish tips. Keep the familiar four broad petals on each flower and the flat clipped stem base.",
+      "references": [
+        "assets/generated_scenes/v3_final/style_reference.png"
+      ],
+      "inputs": [
+        "assets/_incoming/a2r_v3/lavender_source_attempt2.png",
+        "assets/generated_scenes/v3_final/style_reference.png"
+      ],
+      "style_reference": "assets/generated_scenes/v3_final/style_reference.png",
+      "style_sha256": "0e6a45af456b9453896629c04bec45ea5b3631f64cd752be2b3194b2d60f1097",
+      "source_raw": "assets/_incoming/a2r_v3/lavender_source_attempt2.png",
+      "source_raw_sha256": "c149cc68d7f86368bf652e1e1d7af59eca800fe6f00a846a9f41614bfb6f2bca",
+      "source_raw_native_size": [
+        1254,
+        1254
+      ],
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_size": [
+        256,
+        256
+      ],
+      "source_transform": {
+        "method": "magenta_key_contain_erode_feather",
+        "filter": "Lanczos",
+        "source_crop": [
+          267,
+          88,
+          969,
+          1166
+        ],
+        "object_resized_size": [
+          133,
+          205
+        ],
+        "nominal_scale": 0.1899814471243043,
+        "paste_xy": [
+          61,
+          49
+        ],
+        "runtime_size": [
+          256,
+          256
+        ],
+        "mask": {
+          "erode_pixels": 1,
+          "feather_pixels": 1,
+          "color_bleed_pixels": 4,
+          "color_seed_alpha": 128
+        },
+        "color_key": {
+          "hue_ranges": [
+            [
+              0.77,
+              0.94
+            ]
+          ],
+          "minimum_saturation": 0.45,
+          "minimum_value": 0.2
+        },
+        "support_alignment": {
+          "maximum_width_fraction": 0.86,
+          "maximum_height_fraction": 0.8,
+          "bottom_margin_pixels": 3
+        }
+      },
+      "processing_script": "tools/art/item_pipeline.py",
+      "processing_script_sha256": "bc7d8f6ef78af958ad2e9c36e2e1debef98a2c68c7f2d62d08e6b76ff63523e8",
+      "local_config": "data/art/item_pipeline.json",
+      "processing_config_path": "data/art/item_pipeline.json",
+      "processing_config_sha256": "5d412dea99e4858f8870b3d5d24937cb48d1777e6bba78c9c2af748e08051057",
+      "art_review_status": "root_reviewed_18_transparent_outputs",
+      "source": {
+        "generator": "builtin_imagegen",
+        "version": "v3r1"
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/lavender_64.png",
+      "sha256": "e2109b4df035d12d73d7618a0f511f8996c1e33e5d3d9be4d0e92809aac63238",
+      "dim": [
+        64,
+        64
+      ],
+      "status": "processed",
+      "version": 3,
+      "group": "runtime",
+      "operation": "item_icon_derivation",
+      "item_id": "lavender",
+      "prompt": "Offline derivation from the corresponding processed 256px item; Lanczos_with_contour_darkening.",
+      "inputs": [
+        "assets/items/v3/v3r1/lavender.png"
+      ],
+      "references": [],
+      "source_path": "assets/items/v3/v3r1/lavender.png",
+      "source_sha256": "c1a117ddb537813c0dcd2219174f91b178d529a7f73bf7849a5fc13cd10b6cd2",
+      "native_size": [
+        256,
+        256
+      ],
+      "runtime_size": [
+        64,
+        64
+      ],
+      "source_transform": {
+        "outline_radius_pixels": 1,
+        "outline_darkening_fraction": 0.18,
+        "color_bleed_pixels": 3,
+        "color_seed_alpha": 128
+      },
+      "processing_script": "tools/art/item_pipeline.py",
+      "processing_script_sha256": "bc7d8f6ef78af958ad2e9c36e2e1debef98a2c68c7f2d62d08e6b76ff63523e8",
+      "local_config": "data/art/item_pipeline.json",
+      "processing_config_path": "data/art/item_pipeline.json",
+      "processing_config_sha256": "5d412dea99e4858f8870b3d5d24937cb48d1777e6bba78c9c2af748e08051057",
+      "art_review_status": "root_reviewed_18_transparent_outputs",
+      "source": {
+        "generator": "offline_icon_derivation",
+        "version": "v3r1"
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/spring_water.png",
+      "sha256": "0a7196af892d82b1a1b3e8d77520c7f58a4d0ddebf8d8718ca969158b3be45fc",
+      "dim": [
+        256,
+        256
+      ],
+      "status": "processed",
+      "version": 3,
+      "group": "items",
+      "operation": "item_chromakey",
+      "item_id": "spring_water",
+      "object_description": "small clear dusty-teal spring-water bottle with a plain gray-tan cork and a broad flat circular bottom",
+      "prompt": "A single small clear dusty-teal spring-water bottle with a plain gray-tan cork and a broad flat circular bottom painted in the same opaque poster-color style as the reference image, lit from the upper left by warm afternoon light with a soft, slightly cool core shadow on its right side, standing upright on its flat base, three-quarter front view seen slightly from above, plain flat #FF00FF background, no cast shadow, no text, no halo, no sparkles.\nImage 1 is the EDIT TARGET: the earlier generated inventory object. Image 2 is STYLE REFERENCE ONLY: the formal scene painting. Create a corrected new painting, preserving the object identity and broad silhouette. Keep this recognizable cylindrical water bottle and its flat base, natural upper-left illumination, water line and glass body. Repaint the cork in muted gray-tan rather than yellow ochre. Use low-chroma gray-teal or gray-brown paint along the outer silhouette, especially the entire cork edge and left glass edge. Keep cream warm reflections within the opaque body, away from the outermost silhouette. No saturated yellow, orange or red outline, no plastic shine.\nSquare native canvas at the largest available size. Visible matte brush strokes, no decorative gold lines or symbols. Keep the whole object with clear margins on all four sides. Background stays flat solid #FF00FF, no floor, table, cast shadow, vignette, text, labels, UI or extra objects.",
+      "references": [
+        "assets/_incoming/a2r_v3/spring_water_source_attempt1.png",
+        "assets/generated_scenes/v3_final/style_reference.png"
+      ],
+      "inputs": [
+        "assets/_incoming/a2r_v3/spring_water_source_attempt2.png",
+        "assets/_incoming/a2r_v3/spring_water_source_attempt1.png",
+        "assets/generated_scenes/v3_final/style_reference.png"
+      ],
+      "style_reference": "assets/generated_scenes/v3_final/style_reference.png",
+      "style_sha256": "0e6a45af456b9453896629c04bec45ea5b3631f64cd752be2b3194b2d60f1097",
+      "source_raw": "assets/_incoming/a2r_v3/spring_water_source_attempt2.png",
+      "source_raw_sha256": "281a1df668e6e4fca346365dd3aa427e54da3d28c958673c6bebfc4660956259",
+      "source_raw_native_size": [
+        1254,
+        1254
+      ],
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_size": [
+        256,
+        256
+      ],
+      "source_transform": {
+        "method": "magenta_key_contain_erode_feather",
+        "filter": "Lanczos",
+        "source_crop": [
+          369,
+          67,
+          884,
+          1187
+        ],
+        "object_resized_size": [
+          94,
+          205
+        ],
+        "nominal_scale": 0.18285714285714286,
+        "paste_xy": [
+          81,
+          49
+        ],
+        "runtime_size": [
+          256,
+          256
+        ],
+        "mask": {
+          "erode_pixels": 1,
+          "feather_pixels": 1,
+          "color_bleed_pixels": 4,
+          "color_seed_alpha": 128
+        },
+        "color_key": {
+          "hue_ranges": [
+            [
+              0.77,
+              0.94
+            ]
+          ],
+          "minimum_saturation": 0.45,
+          "minimum_value": 0.2
+        },
+        "support_alignment": {
+          "maximum_width_fraction": 0.86,
+          "maximum_height_fraction": 0.8,
+          "bottom_margin_pixels": 3
+        }
+      },
+      "processing_script": "tools/art/item_pipeline.py",
+      "processing_script_sha256": "bc7d8f6ef78af958ad2e9c36e2e1debef98a2c68c7f2d62d08e6b76ff63523e8",
+      "local_config": "data/art/item_pipeline.json",
+      "processing_config_path": "data/art/item_pipeline.json",
+      "processing_config_sha256": "5d412dea99e4858f8870b3d5d24937cb48d1777e6bba78c9c2af748e08051057",
+      "art_review_status": "root_reviewed_18_transparent_outputs",
+      "source": {
+        "generator": "builtin_imagegen",
+        "version": "v3r1"
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/spring_water_64.png",
+      "sha256": "e5e8bc009b0de59b2e24845262a1c65cc4451fbf26a9c275ab653878914776ca",
+      "dim": [
+        64,
+        64
+      ],
+      "status": "processed",
+      "version": 3,
+      "group": "runtime",
+      "operation": "item_icon_derivation",
+      "item_id": "spring_water",
+      "prompt": "Offline derivation from the corresponding processed 256px item; Lanczos_with_contour_darkening.",
+      "inputs": [
+        "assets/items/v3/v3r1/spring_water.png"
+      ],
+      "references": [],
+      "source_path": "assets/items/v3/v3r1/spring_water.png",
+      "source_sha256": "0a7196af892d82b1a1b3e8d77520c7f58a4d0ddebf8d8718ca969158b3be45fc",
+      "native_size": [
+        256,
+        256
+      ],
+      "runtime_size": [
+        64,
+        64
+      ],
+      "source_transform": {
+        "outline_radius_pixels": 1,
+        "outline_darkening_fraction": 0.18,
+        "color_bleed_pixels": 3,
+        "color_seed_alpha": 128
+      },
+      "processing_script": "tools/art/item_pipeline.py",
+      "processing_script_sha256": "bc7d8f6ef78af958ad2e9c36e2e1debef98a2c68c7f2d62d08e6b76ff63523e8",
+      "local_config": "data/art/item_pipeline.json",
+      "processing_config_path": "data/art/item_pipeline.json",
+      "processing_config_sha256": "5d412dea99e4858f8870b3d5d24937cb48d1777e6bba78c9c2af748e08051057",
+      "art_review_status": "root_reviewed_18_transparent_outputs",
+      "source": {
+        "generator": "offline_icon_derivation",
+        "version": "v3r1"
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/quartz.png",
+      "sha256": "83dbea9fd7c595482a08aa08c4eec57a251dc77f485d66e91591fbbf5916a610",
+      "dim": [
+        256,
+        256
+      ],
+      "status": "processed",
+      "version": 3,
+      "group": "items",
+      "operation": "item_chromakey",
+      "item_id": "quartz",
+      "object_description": "compact small mound of off-white quartz granules with three small unpolished milky-white quartz pebbles, subtle cool-gray facet planes, broad flat bottom, no bowl or pedestal",
+      "prompt": "A single compact small mound of off-white quartz granules with three small unpolished milky-white quartz pebbles, subtle cool-gray facet planes, broad flat bottom, no bowl or pedestal painted in the same opaque poster-color style as the reference image, lit from the upper left by warm afternoon light with a soft, slightly cool core shadow on its right side, standing upright on its flat base, three-quarter front view seen slightly from above, plain flat #FF00FF background, no cast shadow, no text, no halo, no sparkles.\nInput image role: STYLE REFERENCE ONLY. Create a new isolated inventory object; do not repaint or include the room, shelves, furniture or background from the reference. Visible matte paint brush strokes, moderate muted colors, clear recognizable silhouette, no ornamental gold lines, no symbols or purpose marks. A square image, object centered and occupying about 80% of height, complete object with clear margin on all sides. Uniform solid #FF00FF everywhere outside the object, no floor line, no drop shadow, no vignette. Generate at the largest native square size available; keep the original native output.",
+      "references": [
+        "assets/generated_scenes/v3_final/style_reference.png"
+      ],
+      "inputs": [
+        "assets/_incoming/a2r_v3/quartz_source_attempt1.png",
+        "assets/generated_scenes/v3_final/style_reference.png"
+      ],
+      "style_reference": "assets/generated_scenes/v3_final/style_reference.png",
+      "style_sha256": "0e6a45af456b9453896629c04bec45ea5b3631f64cd752be2b3194b2d60f1097",
+      "source_raw": "assets/_incoming/a2r_v3/quartz_source_attempt1.png",
+      "source_raw_sha256": "f874a5214ef4ed2b8f8deed14f87838f1d028735118616437eff86f7ec2d8646",
+      "source_raw_native_size": [
+        1254,
+        1254
+      ],
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_size": [
+        256,
+        256
+      ],
+      "source_transform": {
+        "method": "magenta_key_contain_erode_feather",
+        "filter": "Lanczos",
+        "source_crop": [
+          60,
+          198,
+          1194,
+          1031
+        ],
+        "object_resized_size": [
+          220,
+          162
+        ],
+        "nominal_scale": 0.19414462081128747,
+        "paste_xy": [
+          18,
+          92
+        ],
+        "runtime_size": [
+          256,
+          256
+        ],
+        "mask": {
+          "erode_pixels": 1,
+          "feather_pixels": 1,
+          "color_bleed_pixels": 4,
+          "color_seed_alpha": 128
+        },
+        "color_key": {
+          "hue_ranges": [
+            [
+              0.77,
+              0.94
+            ]
+          ],
+          "minimum_saturation": 0.45,
+          "minimum_value": 0.2
+        },
+        "support_alignment": {
+          "maximum_width_fraction": 0.86,
+          "maximum_height_fraction": 0.8,
+          "bottom_margin_pixels": 3
+        }
+      },
+      "processing_script": "tools/art/item_pipeline.py",
+      "processing_script_sha256": "bc7d8f6ef78af958ad2e9c36e2e1debef98a2c68c7f2d62d08e6b76ff63523e8",
+      "local_config": "data/art/item_pipeline.json",
+      "processing_config_path": "data/art/item_pipeline.json",
+      "processing_config_sha256": "5d412dea99e4858f8870b3d5d24937cb48d1777e6bba78c9c2af748e08051057",
+      "art_review_status": "root_reviewed_18_transparent_outputs",
+      "source": {
+        "generator": "builtin_imagegen",
+        "version": "v3r1"
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/quartz_64.png",
+      "sha256": "540c1bedfbc93ed01b2650adf00c0dacffc605ae2498485799f33fad2392e4d5",
+      "dim": [
+        64,
+        64
+      ],
+      "status": "processed",
+      "version": 3,
+      "group": "runtime",
+      "operation": "item_icon_derivation",
+      "item_id": "quartz",
+      "prompt": "Offline derivation from the corresponding processed 256px item; Lanczos_with_contour_darkening.",
+      "inputs": [
+        "assets/items/v3/v3r1/quartz.png"
+      ],
+      "references": [],
+      "source_path": "assets/items/v3/v3r1/quartz.png",
+      "source_sha256": "83dbea9fd7c595482a08aa08c4eec57a251dc77f485d66e91591fbbf5916a610",
+      "native_size": [
+        256,
+        256
+      ],
+      "runtime_size": [
+        64,
+        64
+      ],
+      "source_transform": {
+        "outline_radius_pixels": 1,
+        "outline_darkening_fraction": 0.18,
+        "color_bleed_pixels": 3,
+        "color_seed_alpha": 128
+      },
+      "processing_script": "tools/art/item_pipeline.py",
+      "processing_script_sha256": "bc7d8f6ef78af958ad2e9c36e2e1debef98a2c68c7f2d62d08e6b76ff63523e8",
+      "local_config": "data/art/item_pipeline.json",
+      "processing_config_path": "data/art/item_pipeline.json",
+      "processing_config_sha256": "5d412dea99e4858f8870b3d5d24937cb48d1777e6bba78c9c2af748e08051057",
+      "art_review_status": "root_reviewed_18_transparent_outputs",
+      "source": {
+        "generator": "offline_icon_derivation",
+        "version": "v3r1"
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/moon_dust.png",
+      "sha256": "adc97d4b774c7afb0965df41192ce5df38b488066ca08c3bf0207e20d78928f8",
+      "dim": [
+        256,
+        256
+      ],
+      "status": "processed",
+      "version": 3,
+      "group": "items",
+      "operation": "item_chromakey",
+      "item_id": "moon_dust",
+      "object_description": "compact cluster of three ordinary smoked tree-resin nuggets in muted gray-ochre and gray-brown",
+      "prompt": "A single compact cluster of three ordinary smoked tree-resin nuggets painted in the same opaque poster-color style as the reference image, lit from the upper left by warm afternoon light with a soft, slightly cool core shadow on its right side, standing upright on its flat base, three-quarter front view seen slightly from above, plain flat #FF00FF background, no cast shadow, no text, no halo, no sparkles.\nImage 1 is the EDIT TARGET: the resin inventory painting from the last attempt. Image 2 is STYLE REFERENCE ONLY. Keep the three recognizable irregular gum-resin lumps and stable flat lower surfaces. Repaint the entire resin palette in quiet desaturated gray-ochre and smoked brown, not orange. Use muted gray-brown approximately #9A876F and #6F756E for main planes and outer edges, pale gray-beige approximately #C1B5A0 for warm upper-left highlights, and only restrained amber-brown approximately #B29875 on the inward faces. These are matte natural resin pieces, not gold, glowing gems or plastic. There must be no bright orange or saturated yellow anywhere, including the upper-left perimeter. Model volume through brush-stroke value changes and a cool gray-brown right-side shadow rather than bright color. Keep every outer silhouette edge subdued gray-brown, with no halo or bright rim. No bowl, plate, pedestal, floor, labels, symbols, letters or extra objects. Preserve visible opaque paint strokes. Full object centered on a native square canvas at maximum available size, clear magenta margins on every side, perfectly flat #FF00FF backdrop without shadow.",
+      "references": [
+        "assets/_incoming/a2r_v3/moon_dust_source_attempt2.png",
+        "assets/generated_scenes/v3_final/style_reference.png"
+      ],
+      "inputs": [
+        "assets/_incoming/a2r_v3/moon_dust_source_attempt3.png",
+        "assets/_incoming/a2r_v3/moon_dust_source_attempt2.png",
+        "assets/generated_scenes/v3_final/style_reference.png"
+      ],
+      "style_reference": "assets/generated_scenes/v3_final/style_reference.png",
+      "style_sha256": "0e6a45af456b9453896629c04bec45ea5b3631f64cd752be2b3194b2d60f1097",
+      "source_raw": "assets/_incoming/a2r_v3/moon_dust_source_attempt3.png",
+      "source_raw_sha256": "a454e0bdb24735afaf5e0f23160c8bf1b782f19b06a2bca70159f668f63a5e1d",
+      "source_raw_native_size": [
+        1254,
+        1254
+      ],
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_size": [
+        256,
+        256
+      ],
+      "source_transform": {
+        "method": "magenta_key_contain_erode_feather",
+        "filter": "Lanczos",
+        "source_crop": [
+          139,
+          139,
+          1100,
+          1069
+        ],
+        "object_resized_size": [
+          212,
+          205
+        ],
+        "nominal_scale": 0.22021505376344086,
+        "paste_xy": [
+          22,
+          49
+        ],
+        "runtime_size": [
+          256,
+          256
+        ],
+        "mask": {
+          "erode_pixels": 1,
+          "feather_pixels": 1,
+          "color_bleed_pixels": 4,
+          "color_seed_alpha": 128
+        },
+        "color_key": {
+          "hue_ranges": [
+            [
+              0.77,
+              0.94
+            ]
+          ],
+          "minimum_saturation": 0.45,
+          "minimum_value": 0.2
+        },
+        "support_alignment": {
+          "maximum_width_fraction": 0.86,
+          "maximum_height_fraction": 0.8,
+          "bottom_margin_pixels": 3
+        }
+      },
+      "processing_script": "tools/art/item_pipeline.py",
+      "processing_script_sha256": "bc7d8f6ef78af958ad2e9c36e2e1debef98a2c68c7f2d62d08e6b76ff63523e8",
+      "local_config": "data/art/item_pipeline.json",
+      "processing_config_path": "data/art/item_pipeline.json",
+      "processing_config_sha256": "5d412dea99e4858f8870b3d5d24937cb48d1777e6bba78c9c2af748e08051057",
+      "art_review_status": "root_reviewed_18_transparent_outputs",
+      "source": {
+        "generator": "builtin_imagegen",
+        "version": "v3r1"
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/moon_dust_64.png",
+      "sha256": "12a211b02af96b5a81c20a705002bae691da9e9ed54d7c9be32d760208e17ada",
+      "dim": [
+        64,
+        64
+      ],
+      "status": "processed",
+      "version": 3,
+      "group": "runtime",
+      "operation": "item_icon_derivation",
+      "item_id": "moon_dust",
+      "prompt": "Offline derivation from the corresponding processed 256px item; Lanczos_with_contour_darkening.",
+      "inputs": [
+        "assets/items/v3/v3r1/moon_dust.png"
+      ],
+      "references": [],
+      "source_path": "assets/items/v3/v3r1/moon_dust.png",
+      "source_sha256": "adc97d4b774c7afb0965df41192ce5df38b488066ca08c3bf0207e20d78928f8",
+      "native_size": [
+        256,
+        256
+      ],
+      "runtime_size": [
+        64,
+        64
+      ],
+      "source_transform": {
+        "outline_radius_pixels": 1,
+        "outline_darkening_fraction": 0.18,
+        "color_bleed_pixels": 3,
+        "color_seed_alpha": 128
+      },
+      "processing_script": "tools/art/item_pipeline.py",
+      "processing_script_sha256": "bc7d8f6ef78af958ad2e9c36e2e1debef98a2c68c7f2d62d08e6b76ff63523e8",
+      "local_config": "data/art/item_pipeline.json",
+      "processing_config_path": "data/art/item_pipeline.json",
+      "processing_config_sha256": "5d412dea99e4858f8870b3d5d24937cb48d1777e6bba78c9c2af748e08051057",
+      "art_review_status": "root_reviewed_18_transparent_outputs",
+      "source": {
+        "generator": "offline_icon_derivation",
+        "version": "v3r1"
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/calming_incense.png",
+      "sha256": "6ed60f5c1d6ca1a7947384b61d7ddf68ba6d4a24b692e296334608b9ea96e1ba",
+      "dim": [
+        256,
+        256
+      ],
+      "status": "processed",
+      "version": 3,
+      "group": "items",
+      "operation": "item_chromakey",
+      "item_id": "calming_incense",
+      "object_description": "low wide matte sage-gray ceramic incense holder with three short sturdy cool-gray incense sticks and a simple opaque pale gray smoke ribbon from one stick",
+      "prompt": "A single low wide matte sage-gray ceramic incense holder with three short sturdy cool-gray incense sticks and a simple opaque pale gray smoke ribbon from one stick painted in the same opaque poster-color style as the reference image, lit from the upper left by warm afternoon light with a soft, slightly cool core shadow on its right side, standing upright on its flat base, three-quarter front view seen slightly from above, plain flat #FF00FF background, no cast shadow, no text, no halo, no sparkles.\nImage 1 is the EDIT TARGET: the earlier generated inventory object. Image 2 is STYLE REFERENCE ONLY: the formal scene painting. Create a corrected new painting, preserving the object identity and broad silhouette. Retain the simple flat-base ceramic holder. Make the three incense sticks somewhat shorter, thicker and distinctly cool gray, with about two final-icon pixels of solid width when reduced to a 64-pixel image, so their shape remains legible. Paint one short opaque pale cool-gray curled smoke ribbon above a stick, not transparent pink smoke mixed into the magenta background; opacity can be created later from this flat background. Smoke must touch its stick, no red ember, glow or sparkles. All silhouette edges use subdued cool gray/sage paint, no yellow or orange edge stroke.\nSquare native canvas at the largest available size. Visible matte brush strokes, no decorative gold lines or symbols. Keep the whole object with clear margins on all four sides. Background stays flat solid #FF00FF, no floor, table, cast shadow, vignette, text, labels, UI or extra objects.",
+      "references": [
+        "assets/_incoming/a2r_v3/calming_incense_source_attempt1.png",
+        "assets/generated_scenes/v3_final/style_reference.png"
+      ],
+      "inputs": [
+        "assets/_incoming/a2r_v3/calming_incense_source_attempt2.png",
+        "assets/_incoming/a2r_v3/calming_incense_source_attempt1.png",
+        "assets/generated_scenes/v3_final/style_reference.png"
+      ],
+      "style_reference": "assets/generated_scenes/v3_final/style_reference.png",
+      "style_sha256": "0e6a45af456b9453896629c04bec45ea5b3631f64cd752be2b3194b2d60f1097",
+      "source_raw": "assets/_incoming/a2r_v3/calming_incense_source_attempt2.png",
+      "source_raw_sha256": "aa3561c0593ae3a047fb23c37da7b08ae61bdee816f8b14c1a9cf32d1f171a5b",
+      "source_raw_native_size": [
+        1254,
+        1254
+      ],
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_size": [
+        256,
+        256
+      ],
+      "source_transform": {
+        "method": "magenta_key_contain_erode_feather",
+        "filter": "Lanczos",
+        "source_crop": [
+          192,
+          212,
+          1057,
+          1108
+        ],
+        "object_resized_size": [
+          198,
+          205
+        ],
+        "nominal_scale": 0.2285714285714286,
+        "paste_xy": [
+          29,
+          49
+        ],
+        "runtime_size": [
+          256,
+          256
+        ],
+        "mask": {
+          "erode_pixels": 1,
+          "feather_pixels": 1,
+          "color_bleed_pixels": 4,
+          "color_seed_alpha": 128
+        },
+        "color_key": {
+          "hue_ranges": [
+            [
+              0.77,
+              0.94
+            ]
+          ],
+          "minimum_saturation": 0.45,
+          "minimum_value": 0.2
+        },
+        "support_alignment": {
+          "maximum_width_fraction": 0.86,
+          "maximum_height_fraction": 0.8,
+          "bottom_margin_pixels": 3
+        }
+      },
+      "processing_script": "tools/art/item_pipeline.py",
+      "processing_script_sha256": "bc7d8f6ef78af958ad2e9c36e2e1debef98a2c68c7f2d62d08e6b76ff63523e8",
+      "local_config": "data/art/item_pipeline.json",
+      "processing_config_path": "data/art/item_pipeline.json",
+      "processing_config_sha256": "5d412dea99e4858f8870b3d5d24937cb48d1777e6bba78c9c2af748e08051057",
+      "art_review_status": "root_reviewed_18_transparent_outputs",
+      "source": {
+        "generator": "builtin_imagegen",
+        "version": "v3r1"
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/calming_incense_64.png",
+      "sha256": "aa50c518eb33a029540ef0f3175c7f27871f6661fc5b98491358e13b3b1125f6",
+      "dim": [
+        64,
+        64
+      ],
+      "status": "processed",
+      "version": 3,
+      "group": "runtime",
+      "operation": "item_icon_derivation",
+      "item_id": "calming_incense",
+      "prompt": "Offline derivation from the corresponding processed 256px item; Lanczos_with_contour_darkening.",
+      "inputs": [
+        "assets/items/v3/v3r1/calming_incense.png"
+      ],
+      "references": [],
+      "source_path": "assets/items/v3/v3r1/calming_incense.png",
+      "source_sha256": "6ed60f5c1d6ca1a7947384b61d7ddf68ba6d4a24b692e296334608b9ea96e1ba",
+      "native_size": [
+        256,
+        256
+      ],
+      "runtime_size": [
+        64,
+        64
+      ],
+      "source_transform": {
+        "outline_radius_pixels": 1,
+        "outline_darkening_fraction": 0.18,
+        "color_bleed_pixels": 3,
+        "color_seed_alpha": 128
+      },
+      "processing_script": "tools/art/item_pipeline.py",
+      "processing_script_sha256": "bc7d8f6ef78af958ad2e9c36e2e1debef98a2c68c7f2d62d08e6b76ff63523e8",
+      "local_config": "data/art/item_pipeline.json",
+      "processing_config_path": "data/art/item_pipeline.json",
+      "processing_config_sha256": "5d412dea99e4858f8870b3d5d24937cb48d1777e6bba78c9c2af748e08051057",
+      "art_review_status": "root_reviewed_18_transparent_outputs",
+      "source": {
+        "generator": "offline_icon_derivation",
+        "version": "v3r1"
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/restorative_draught.png",
+      "sha256": "f9393a3c7b56d8a51adf0df5fdb6bab2e600c7b03ed08b4d249317429a92498a",
+      "dim": [
+        256,
+        256
+      ],
+      "status": "processed",
+      "version": 3,
+      "group": "items",
+      "operation": "item_chromakey",
+      "item_id": "restorative_draught",
+      "object_description": "squat round-bellied apothecary flask filled with opaque muted sage-green herbal liquid, a short neck with a plain gray-tan cork and a broad flat bottom, no label or decoration",
+      "prompt": "A single squat round-bellied apothecary flask filled with opaque muted sage-green herbal liquid, a short neck with a plain gray-tan cork and a broad flat bottom, no label or decoration painted in the same opaque poster-color style as the reference image, lit from the upper left by warm afternoon light with a soft, slightly cool core shadow on its right side, standing upright on its flat base, three-quarter front view seen slightly from above, plain flat #FF00FF background, no cast shadow, no text, no halo, no sparkles.\nInput role: STYLE REFERENCE ONLY. This is a new isolated inventory object, not an edit of the room. Do not include furniture, floors, walls, labels, symbols or purpose marks. Natural matte paint strokes rather than clean vector outlines. Keep the outer silhouette in low-chroma dusty teal, cool gray or gray-brown paint; warm yellow highlights stay inside the fully opaque body rather than tracing the outside edge. No saturated orange, red or yellow edge pixels. Clear silhouette and physically stable flat contact base. Native square canvas at maximum available size, entire object centered with clear margins on all four sides, about 80% canvas height; perfectly uniform solid #FF00FF outside it. No cast shadow or ground line.",
+      "references": [
+        "assets/generated_scenes/v3_final/style_reference.png"
+      ],
+      "inputs": [
+        "assets/_incoming/a2r_v3/restorative_draught_source_attempt1.png",
+        "assets/generated_scenes/v3_final/style_reference.png"
+      ],
+      "style_reference": "assets/generated_scenes/v3_final/style_reference.png",
+      "style_sha256": "0e6a45af456b9453896629c04bec45ea5b3631f64cd752be2b3194b2d60f1097",
+      "source_raw": "assets/_incoming/a2r_v3/restorative_draught_source_attempt1.png",
+      "source_raw_sha256": "fd83e15f1f74107d3eda6337676bffc7a0f2d39472430f6656916d777a83021c",
+      "source_raw_native_size": [
+        1254,
+        1254
+      ],
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_size": [
+        256,
+        256
+      ],
+      "source_transform": {
+        "method": "magenta_key_contain_erode_feather",
+        "filter": "Lanczos",
+        "source_crop": [
+          231,
+          91,
+          1017,
+          1168
+        ],
+        "object_resized_size": [
+          149,
+          205
+        ],
+        "nominal_scale": 0.1901578458681523,
+        "paste_xy": [
+          53,
+          49
+        ],
+        "runtime_size": [
+          256,
+          256
+        ],
+        "mask": {
+          "erode_pixels": 1,
+          "feather_pixels": 1,
+          "color_bleed_pixels": 4,
+          "color_seed_alpha": 128
+        },
+        "color_key": {
+          "hue_ranges": [
+            [
+              0.77,
+              0.94
+            ]
+          ],
+          "minimum_saturation": 0.45,
+          "minimum_value": 0.2
+        },
+        "support_alignment": {
+          "maximum_width_fraction": 0.86,
+          "maximum_height_fraction": 0.8,
+          "bottom_margin_pixels": 3
+        }
+      },
+      "processing_script": "tools/art/item_pipeline.py",
+      "processing_script_sha256": "bc7d8f6ef78af958ad2e9c36e2e1debef98a2c68c7f2d62d08e6b76ff63523e8",
+      "local_config": "data/art/item_pipeline.json",
+      "processing_config_path": "data/art/item_pipeline.json",
+      "processing_config_sha256": "5d412dea99e4858f8870b3d5d24937cb48d1777e6bba78c9c2af748e08051057",
+      "art_review_status": "root_reviewed_18_transparent_outputs",
+      "source": {
+        "generator": "builtin_imagegen",
+        "version": "v3r1"
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/restorative_draught_64.png",
+      "sha256": "abe6c4c408891df23683a7cfa3e561ba3705b052c4a34fff616acf77e7125978",
+      "dim": [
+        64,
+        64
+      ],
+      "status": "processed",
+      "version": 3,
+      "group": "runtime",
+      "operation": "item_icon_derivation",
+      "item_id": "restorative_draught",
+      "prompt": "Offline derivation from the corresponding processed 256px item; Lanczos_with_contour_darkening.",
+      "inputs": [
+        "assets/items/v3/v3r1/restorative_draught.png"
+      ],
+      "references": [],
+      "source_path": "assets/items/v3/v3r1/restorative_draught.png",
+      "source_sha256": "f9393a3c7b56d8a51adf0df5fdb6bab2e600c7b03ed08b4d249317429a92498a",
+      "native_size": [
+        256,
+        256
+      ],
+      "runtime_size": [
+        64,
+        64
+      ],
+      "source_transform": {
+        "outline_radius_pixels": 1,
+        "outline_darkening_fraction": 0.18,
+        "color_bleed_pixels": 3,
+        "color_seed_alpha": 128
+      },
+      "processing_script": "tools/art/item_pipeline.py",
+      "processing_script_sha256": "bc7d8f6ef78af958ad2e9c36e2e1debef98a2c68c7f2d62d08e6b76ff63523e8",
+      "local_config": "data/art/item_pipeline.json",
+      "processing_config_path": "data/art/item_pipeline.json",
+      "processing_config_sha256": "5d412dea99e4858f8870b3d5d24937cb48d1777e6bba78c9c2af748e08051057",
+      "art_review_status": "root_reviewed_18_transparent_outputs",
+      "source": {
+        "generator": "offline_icon_derivation",
+        "version": "v3r1"
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/clarity_crystal.png",
+      "sha256": "55749ba640bdba60dc571e26e126f312df3b651bed9eafc46087abd5b75214e5",
+      "dim": [
+        256,
+        256
+      ],
+      "status": "processed",
+      "version": 3,
+      "group": "items",
+      "operation": "item_chromakey",
+      "item_id": "clarity_crystal",
+      "object_description": "small pointed cluster of three matte pale gray-lavender crystals growing from one low flat stone base, with readable ordinary mineral facet planes and no internal light",
+      "prompt": "A single small pointed cluster of three matte pale gray-lavender crystals growing from one low flat stone base, with readable ordinary mineral facet planes and no internal light painted in the same opaque poster-color style as the reference image, lit from the upper left by warm afternoon light with a soft, slightly cool core shadow on its right side, standing upright on its flat base, three-quarter front view seen slightly from above, plain flat #FF00FF background, no cast shadow, no text, no halo, no sparkles.\nInput role: STYLE REFERENCE ONLY. This is a new isolated inventory object, not an edit of the room. Do not include furniture, floors, walls, labels, symbols or purpose marks. Natural matte paint strokes rather than clean vector outlines. Keep the outer silhouette in low-chroma dusty teal, cool gray or gray-brown paint; warm yellow highlights stay inside the fully opaque body rather than tracing the outside edge. No saturated orange, red or yellow edge pixels. Clear silhouette and physically stable flat contact base. Native square canvas at maximum available size, entire object centered with clear margins on all four sides, about 80% canvas height; perfectly uniform solid #FF00FF outside it. No cast shadow or ground line.",
+      "references": [
+        "assets/generated_scenes/v3_final/style_reference.png"
+      ],
+      "inputs": [
+        "assets/_incoming/a2r_v3/clarity_crystal_source_attempt1.png",
+        "assets/generated_scenes/v3_final/style_reference.png"
+      ],
+      "style_reference": "assets/generated_scenes/v3_final/style_reference.png",
+      "style_sha256": "0e6a45af456b9453896629c04bec45ea5b3631f64cd752be2b3194b2d60f1097",
+      "source_raw": "assets/_incoming/a2r_v3/clarity_crystal_source_attempt1.png",
+      "source_raw_sha256": "a99a7e3ae089723745e6c2433c8b166d5a1cc91afc892eae98807febbe5199c8",
+      "source_raw_native_size": [
+        1254,
+        1254
+      ],
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_size": [
+        256,
+        256
+      ],
+      "source_transform": {
+        "method": "magenta_key_contain_erode_feather",
+        "filter": "Lanczos",
+        "source_crop": [
+          276,
+          134,
+          955,
+          1113
+        ],
+        "object_resized_size": [
+          142,
+          205
+        ],
+        "nominal_scale": 0.20919305413687436,
+        "paste_xy": [
+          57,
+          49
+        ],
+        "runtime_size": [
+          256,
+          256
+        ],
+        "mask": {
+          "erode_pixels": 1,
+          "feather_pixels": 1,
+          "color_bleed_pixels": 4,
+          "color_seed_alpha": 128
+        },
+        "color_key": {
+          "hue_ranges": [
+            [
+              0.77,
+              0.94
+            ]
+          ],
+          "minimum_saturation": 0.45,
+          "minimum_value": 0.2
+        },
+        "support_alignment": {
+          "maximum_width_fraction": 0.86,
+          "maximum_height_fraction": 0.8,
+          "bottom_margin_pixels": 3
+        }
+      },
+      "processing_script": "tools/art/item_pipeline.py",
+      "processing_script_sha256": "bc7d8f6ef78af958ad2e9c36e2e1debef98a2c68c7f2d62d08e6b76ff63523e8",
+      "local_config": "data/art/item_pipeline.json",
+      "processing_config_path": "data/art/item_pipeline.json",
+      "processing_config_sha256": "5d412dea99e4858f8870b3d5d24937cb48d1777e6bba78c9c2af748e08051057",
+      "art_review_status": "root_reviewed_18_transparent_outputs",
+      "source": {
+        "generator": "builtin_imagegen",
+        "version": "v3r1"
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/clarity_crystal_64.png",
+      "sha256": "56904b3d0aee1518e8e92199205d8028ff3fc705e75f416e2150b4839e0dd6e2",
+      "dim": [
+        64,
+        64
+      ],
+      "status": "processed",
+      "version": 3,
+      "group": "runtime",
+      "operation": "item_icon_derivation",
+      "item_id": "clarity_crystal",
+      "prompt": "Offline derivation from the corresponding processed 256px item; Lanczos_with_contour_darkening.",
+      "inputs": [
+        "assets/items/v3/v3r1/clarity_crystal.png"
+      ],
+      "references": [],
+      "source_path": "assets/items/v3/v3r1/clarity_crystal.png",
+      "source_sha256": "55749ba640bdba60dc571e26e126f312df3b651bed9eafc46087abd5b75214e5",
+      "native_size": [
+        256,
+        256
+      ],
+      "runtime_size": [
+        64,
+        64
+      ],
+      "source_transform": {
+        "outline_radius_pixels": 1,
+        "outline_darkening_fraction": 0.18,
+        "color_bleed_pixels": 3,
+        "color_seed_alpha": 128
+      },
+      "processing_script": "tools/art/item_pipeline.py",
+      "processing_script_sha256": "bc7d8f6ef78af958ad2e9c36e2e1debef98a2c68c7f2d62d08e6b76ff63523e8",
+      "local_config": "data/art/item_pipeline.json",
+      "processing_config_path": "data/art/item_pipeline.json",
+      "processing_config_sha256": "5d412dea99e4858f8870b3d5d24937cb48d1777e6bba78c9c2af748e08051057",
+      "art_review_status": "root_reviewed_18_transparent_outputs",
+      "source": {
+        "generator": "offline_icon_derivation",
+        "version": "v3r1"
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/bookmark.png",
+      "sha256": "caf09bbd358ac776bff16fa8230f80f0256da1da80af8f1fed859a1b524a2d8f",
+      "dim": [
+        256,
+        256
+      ],
+      "status": "processed",
+      "version": 3,
+      "group": "items",
+      "operation": "item_chromakey",
+      "item_id": "bookmark",
+      "object_description": "plain thick off-white paper bookmark, a single upright narrow rectangular piece of subtly fibrous paper with softly rounded upper corners, a neat straight flat lower edge, unprinted blank front and back, no string or tassel",
+      "prompt": "A single plain thick off-white paper bookmark, a single upright narrow rectangular piece of subtly fibrous paper with softly rounded upper corners, a neat straight flat lower edge, unprinted blank front and back, no string or tassel painted in the same opaque poster-color style as the reference image, lit from the upper left by warm afternoon light with a soft, slightly cool core shadow on its right side, standing upright on its flat base, three-quarter front view seen slightly from above, plain flat #FF00FF background, no cast shadow, no text, no halo, no sparkles.\nInput image role: STYLE REFERENCE ONLY. Create one new isolated inventory object; do not repaint or include the room, shelves, furniture, floor or any background from the reference. Show the matte opaque poster-color brushwork and simple recognizable material shapes. Square image at the largest native square size available, complete object centered and occupying about 78% of image height with generous clear margin on every side. Every pixel outside the object is uniform solid #FF00FF; no floor line, no vignette, no contact or cast shadow. No lettering, labels, numbers, symbols, purpose marks, gilding, decorative border, glitter, glow or halo. Keep every outermost object contour low-saturation neutral gray-brown or muted gray-green, including paper/metal/petal edges: the perimeter must not be saturated red, orange, or golden yellow. Warm light remains subtle and stays within the opaque interior; the right-facing core shadow is gently cool gray-green. No harsh yellow rim light, no saturated red-yellow outlines, no purple or pink color in the object. Preserve a clear level lower support edge.",
+      "references": [
+        "assets/generated_scenes/v3_final/style_reference.png"
+      ],
+      "inputs": [
+        "assets/_incoming/a2r_v3/bookmark_source_attempt1.png",
+        "assets/generated_scenes/v3_final/style_reference.png"
+      ],
+      "style_reference": "assets/generated_scenes/v3_final/style_reference.png",
+      "style_sha256": "0e6a45af456b9453896629c04bec45ea5b3631f64cd752be2b3194b2d60f1097",
+      "source_raw": "assets/_incoming/a2r_v3/bookmark_source_attempt1.png",
+      "source_raw_sha256": "56cacb77d5e33d31f1bb692b137f6ee5b4bf5bb1a96bd8b9239af55cd46d5d9f",
+      "source_raw_native_size": [
+        1254,
+        1254
+      ],
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_size": [
+        256,
+        256
+      ],
+      "source_transform": {
+        "method": "magenta_key_contain_erode_feather",
+        "filter": "Lanczos",
+        "source_crop": [
+          456,
+          102,
+          790,
+          1158
+        ],
+        "object_resized_size": [
+          65,
+          205
+        ],
+        "nominal_scale": 0.19393939393939394,
+        "paste_xy": [
+          95,
+          49
+        ],
+        "runtime_size": [
+          256,
+          256
+        ],
+        "mask": {
+          "erode_pixels": 1,
+          "feather_pixels": 1,
+          "color_bleed_pixels": 4,
+          "color_seed_alpha": 128
+        },
+        "color_key": {
+          "hue_ranges": [
+            [
+              0.77,
+              0.94
+            ]
+          ],
+          "minimum_saturation": 0.45,
+          "minimum_value": 0.2
+        },
+        "support_alignment": {
+          "maximum_width_fraction": 0.86,
+          "maximum_height_fraction": 0.8,
+          "bottom_margin_pixels": 3
+        }
+      },
+      "processing_script": "tools/art/item_pipeline.py",
+      "processing_script_sha256": "bc7d8f6ef78af958ad2e9c36e2e1debef98a2c68c7f2d62d08e6b76ff63523e8",
+      "local_config": "data/art/item_pipeline.json",
+      "processing_config_path": "data/art/item_pipeline.json",
+      "processing_config_sha256": "5d412dea99e4858f8870b3d5d24937cb48d1777e6bba78c9c2af748e08051057",
+      "art_review_status": "root_reviewed_18_transparent_outputs",
+      "source": {
+        "generator": "builtin_imagegen",
+        "version": "v3r1"
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/bookmark_64.png",
+      "sha256": "aef563f7f9287f0f6f2c6073b3ba4e44b2f0900c22fc51836f7dd1a7c61c9c59",
+      "dim": [
+        64,
+        64
+      ],
+      "status": "processed",
+      "version": 3,
+      "group": "runtime",
+      "operation": "item_icon_derivation",
+      "item_id": "bookmark",
+      "prompt": "Offline derivation from the corresponding processed 256px item; Lanczos_with_contour_darkening.",
+      "inputs": [
+        "assets/items/v3/v3r1/bookmark.png"
+      ],
+      "references": [],
+      "source_path": "assets/items/v3/v3r1/bookmark.png",
+      "source_sha256": "caf09bbd358ac776bff16fa8230f80f0256da1da80af8f1fed859a1b524a2d8f",
+      "native_size": [
+        256,
+        256
+      ],
+      "runtime_size": [
+        64,
+        64
+      ],
+      "source_transform": {
+        "outline_radius_pixels": 1,
+        "outline_darkening_fraction": 0.18,
+        "color_bleed_pixels": 3,
+        "color_seed_alpha": 128
+      },
+      "processing_script": "tools/art/item_pipeline.py",
+      "processing_script_sha256": "bc7d8f6ef78af958ad2e9c36e2e1debef98a2c68c7f2d62d08e6b76ff63523e8",
+      "local_config": "data/art/item_pipeline.json",
+      "processing_config_path": "data/art/item_pipeline.json",
+      "processing_config_sha256": "5d412dea99e4858f8870b3d5d24937cb48d1777e6bba78c9c2af748e08051057",
+      "art_review_status": "root_reviewed_18_transparent_outputs",
+      "source": {
+        "generator": "offline_icon_derivation",
+        "version": "v3r1"
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/silver_leaf.png",
+      "sha256": "c8a93c23cce9c1bb878eb41b2534fbffbf2902c3b69bceb34eb3230914d1c8fd",
+      "dim": [
+        256,
+        256
+      ],
+      "status": "processed",
+      "version": 3,
+      "group": "items",
+      "operation": "item_chromakey",
+      "item_id": "silver_leaf",
+      "object_description": "plain matte silver leaf-shaped folded bookmark clip, one compact pressed-metal leaf with a short visible folded clasp at its broad flat lower base, subtly simplified embossed central vein only, ordinary practical stationary",
+      "prompt": "A single plain matte silver leaf-shaped folded bookmark clip, one compact pressed-metal leaf with a short visible folded clasp at its broad flat lower base, subtly simplified embossed central vein only, ordinary practical stationary painted in the same opaque poster-color style as the reference image, lit from the upper left by warm afternoon light with a soft, slightly cool core shadow on its right side, standing upright on its flat base, three-quarter front view seen slightly from above, plain flat #FF00FF background, no cast shadow, no text, no halo, no sparkles.\nInput image role: STYLE REFERENCE ONLY. Create one new isolated inventory object; do not repaint or include the room, shelves, furniture, floor or any background from the reference. Show the matte opaque poster-color brushwork and simple recognizable material shapes. Square image at the largest native square size available, complete object centered and occupying about 78% of image height with generous clear margin on every side. Every pixel outside the object is uniform solid #FF00FF; no floor line, no vignette, no contact or cast shadow. No lettering, labels, numbers, symbols, purpose marks, gilding, decorative border, glitter, glow or halo. Keep every outermost object contour low-saturation neutral gray-brown or muted gray-green, including paper/metal/petal edges: the perimeter must not be saturated red, orange, or golden yellow. Warm light remains subtle and stays within the opaque interior; the right-facing core shadow is gently cool gray-green. No harsh yellow rim light, no saturated red-yellow outlines, no purple or pink color in the object. Preserve a clear level lower support edge.",
+      "references": [
+        "assets/generated_scenes/v3_final/style_reference.png"
+      ],
+      "inputs": [
+        "assets/_incoming/a2r_v3/silver_leaf_source_attempt1.png",
+        "assets/generated_scenes/v3_final/style_reference.png"
+      ],
+      "style_reference": "assets/generated_scenes/v3_final/style_reference.png",
+      "style_sha256": "0e6a45af456b9453896629c04bec45ea5b3631f64cd752be2b3194b2d60f1097",
+      "source_raw": "assets/_incoming/a2r_v3/silver_leaf_source_attempt1.png",
+      "source_raw_sha256": "ae9a3c154e1eb127db5d05b6ad920a4e2a952ef05fa7a7167057fc96bb4f41fc",
+      "source_raw_native_size": [
+        1254,
+        1254
+      ],
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_size": [
+        256,
+        256
+      ],
+      "source_transform": {
+        "method": "magenta_key_contain_erode_feather",
+        "filter": "Lanczos",
+        "source_crop": [
+          292,
+          126,
+          958,
+          1130
+        ],
+        "object_resized_size": [
+          136,
+          205
+        ],
+        "nominal_scale": 0.20398406374501993,
+        "paste_xy": [
+          60,
+          49
+        ],
+        "runtime_size": [
+          256,
+          256
+        ],
+        "mask": {
+          "erode_pixels": 1,
+          "feather_pixels": 1,
+          "color_bleed_pixels": 4,
+          "color_seed_alpha": 128
+        },
+        "color_key": {
+          "hue_ranges": [
+            [
+              0.77,
+              0.94
+            ]
+          ],
+          "minimum_saturation": 0.45,
+          "minimum_value": 0.2
+        },
+        "support_alignment": {
+          "maximum_width_fraction": 0.86,
+          "maximum_height_fraction": 0.8,
+          "bottom_margin_pixels": 3
+        }
+      },
+      "processing_script": "tools/art/item_pipeline.py",
+      "processing_script_sha256": "bc7d8f6ef78af958ad2e9c36e2e1debef98a2c68c7f2d62d08e6b76ff63523e8",
+      "local_config": "data/art/item_pipeline.json",
+      "processing_config_path": "data/art/item_pipeline.json",
+      "processing_config_sha256": "5d412dea99e4858f8870b3d5d24937cb48d1777e6bba78c9c2af748e08051057",
+      "art_review_status": "root_reviewed_18_transparent_outputs",
+      "source": {
+        "generator": "builtin_imagegen",
+        "version": "v3r1"
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/silver_leaf_64.png",
+      "sha256": "915c5225a67fa2703a27c917145aabe5aef36713107749bef63ac6b57ec864a2",
+      "dim": [
+        64,
+        64
+      ],
+      "status": "processed",
+      "version": 3,
+      "group": "runtime",
+      "operation": "item_icon_derivation",
+      "item_id": "silver_leaf",
+      "prompt": "Offline derivation from the corresponding processed 256px item; Lanczos_with_contour_darkening.",
+      "inputs": [
+        "assets/items/v3/v3r1/silver_leaf.png"
+      ],
+      "references": [],
+      "source_path": "assets/items/v3/v3r1/silver_leaf.png",
+      "source_sha256": "c8a93c23cce9c1bb878eb41b2534fbffbf2902c3b69bceb34eb3230914d1c8fd",
+      "native_size": [
+        256,
+        256
+      ],
+      "runtime_size": [
+        64,
+        64
+      ],
+      "source_transform": {
+        "outline_radius_pixels": 1,
+        "outline_darkening_fraction": 0.18,
+        "color_bleed_pixels": 3,
+        "color_seed_alpha": 128
+      },
+      "processing_script": "tools/art/item_pipeline.py",
+      "processing_script_sha256": "bc7d8f6ef78af958ad2e9c36e2e1debef98a2c68c7f2d62d08e6b76ff63523e8",
+      "local_config": "data/art/item_pipeline.json",
+      "processing_config_path": "data/art/item_pipeline.json",
+      "processing_config_sha256": "5d412dea99e4858f8870b3d5d24937cb48d1777e6bba78c9c2af748e08051057",
+      "art_review_status": "root_reviewed_18_transparent_outputs",
+      "source": {
+        "generator": "offline_icon_derivation",
+        "version": "v3r1"
+      }
     }
   ],
   "runtime_copies": [
@@ -4889,6 +6122,726 @@
       "sha256": "1919898d71828e6170da971afd86d7c938e3037d3d72e4d32821378a4c76c86a",
       "native_resolution_met": false,
       "origin": "real_C_pixel_extraction"
+    },
+    {
+      "path": "assets/items/v3/v3r1/lavender.png",
+      "source_path": "assets/_incoming/a2r_v3/lavender_source_attempt2.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_size": [
+        256,
+        256
+      ],
+      "sha256": "c1a117ddb537813c0dcd2219174f91b178d529a7f73bf7849a5fc13cd10b6cd2",
+      "source_sha256": "c149cc68d7f86368bf652e1e1d7af59eca800fe6f00a846a9f41614bfb6f2bca",
+      "method": "magenta_key_contain_erode_feather",
+      "transform": {
+        "method": "magenta_key_contain_erode_feather",
+        "filter": "Lanczos",
+        "source_crop": [
+          267,
+          88,
+          969,
+          1166
+        ],
+        "object_resized_size": [
+          133,
+          205
+        ],
+        "nominal_scale": 0.1899814471243043,
+        "paste_xy": [
+          61,
+          49
+        ],
+        "runtime_size": [
+          256,
+          256
+        ],
+        "mask": {
+          "erode_pixels": 1,
+          "feather_pixels": 1,
+          "color_bleed_pixels": 4,
+          "color_seed_alpha": 128
+        },
+        "color_key": {
+          "hue_ranges": [
+            [
+              0.77,
+              0.94
+            ]
+          ],
+          "minimum_saturation": 0.45,
+          "minimum_value": 0.2
+        },
+        "support_alignment": {
+          "maximum_width_fraction": 0.86,
+          "maximum_height_fraction": 0.8,
+          "bottom_margin_pixels": 3
+        }
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/lavender_64.png",
+      "source_path": "assets/items/v3/v3r1/lavender.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "runtime_size": [
+        64,
+        64
+      ],
+      "sha256": "e2109b4df035d12d73d7618a0f511f8996c1e33e5d3d9be4d0e92809aac63238",
+      "source_sha256": "c1a117ddb537813c0dcd2219174f91b178d529a7f73bf7849a5fc13cd10b6cd2",
+      "method": "Lanczos_with_contour_darkening",
+      "transform": {
+        "outline_radius_pixels": 1,
+        "outline_darkening_fraction": 0.18,
+        "color_bleed_pixels": 3,
+        "color_seed_alpha": 128
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/spring_water.png",
+      "source_path": "assets/_incoming/a2r_v3/spring_water_source_attempt2.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_size": [
+        256,
+        256
+      ],
+      "sha256": "0a7196af892d82b1a1b3e8d77520c7f58a4d0ddebf8d8718ca969158b3be45fc",
+      "source_sha256": "281a1df668e6e4fca346365dd3aa427e54da3d28c958673c6bebfc4660956259",
+      "method": "magenta_key_contain_erode_feather",
+      "transform": {
+        "method": "magenta_key_contain_erode_feather",
+        "filter": "Lanczos",
+        "source_crop": [
+          369,
+          67,
+          884,
+          1187
+        ],
+        "object_resized_size": [
+          94,
+          205
+        ],
+        "nominal_scale": 0.18285714285714286,
+        "paste_xy": [
+          81,
+          49
+        ],
+        "runtime_size": [
+          256,
+          256
+        ],
+        "mask": {
+          "erode_pixels": 1,
+          "feather_pixels": 1,
+          "color_bleed_pixels": 4,
+          "color_seed_alpha": 128
+        },
+        "color_key": {
+          "hue_ranges": [
+            [
+              0.77,
+              0.94
+            ]
+          ],
+          "minimum_saturation": 0.45,
+          "minimum_value": 0.2
+        },
+        "support_alignment": {
+          "maximum_width_fraction": 0.86,
+          "maximum_height_fraction": 0.8,
+          "bottom_margin_pixels": 3
+        }
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/spring_water_64.png",
+      "source_path": "assets/items/v3/v3r1/spring_water.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "runtime_size": [
+        64,
+        64
+      ],
+      "sha256": "e5e8bc009b0de59b2e24845262a1c65cc4451fbf26a9c275ab653878914776ca",
+      "source_sha256": "0a7196af892d82b1a1b3e8d77520c7f58a4d0ddebf8d8718ca969158b3be45fc",
+      "method": "Lanczos_with_contour_darkening",
+      "transform": {
+        "outline_radius_pixels": 1,
+        "outline_darkening_fraction": 0.18,
+        "color_bleed_pixels": 3,
+        "color_seed_alpha": 128
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/quartz.png",
+      "source_path": "assets/_incoming/a2r_v3/quartz_source_attempt1.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_size": [
+        256,
+        256
+      ],
+      "sha256": "83dbea9fd7c595482a08aa08c4eec57a251dc77f485d66e91591fbbf5916a610",
+      "source_sha256": "f874a5214ef4ed2b8f8deed14f87838f1d028735118616437eff86f7ec2d8646",
+      "method": "magenta_key_contain_erode_feather",
+      "transform": {
+        "method": "magenta_key_contain_erode_feather",
+        "filter": "Lanczos",
+        "source_crop": [
+          60,
+          198,
+          1194,
+          1031
+        ],
+        "object_resized_size": [
+          220,
+          162
+        ],
+        "nominal_scale": 0.19414462081128747,
+        "paste_xy": [
+          18,
+          92
+        ],
+        "runtime_size": [
+          256,
+          256
+        ],
+        "mask": {
+          "erode_pixels": 1,
+          "feather_pixels": 1,
+          "color_bleed_pixels": 4,
+          "color_seed_alpha": 128
+        },
+        "color_key": {
+          "hue_ranges": [
+            [
+              0.77,
+              0.94
+            ]
+          ],
+          "minimum_saturation": 0.45,
+          "minimum_value": 0.2
+        },
+        "support_alignment": {
+          "maximum_width_fraction": 0.86,
+          "maximum_height_fraction": 0.8,
+          "bottom_margin_pixels": 3
+        }
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/quartz_64.png",
+      "source_path": "assets/items/v3/v3r1/quartz.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "runtime_size": [
+        64,
+        64
+      ],
+      "sha256": "540c1bedfbc93ed01b2650adf00c0dacffc605ae2498485799f33fad2392e4d5",
+      "source_sha256": "83dbea9fd7c595482a08aa08c4eec57a251dc77f485d66e91591fbbf5916a610",
+      "method": "Lanczos_with_contour_darkening",
+      "transform": {
+        "outline_radius_pixels": 1,
+        "outline_darkening_fraction": 0.18,
+        "color_bleed_pixels": 3,
+        "color_seed_alpha": 128
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/moon_dust.png",
+      "source_path": "assets/_incoming/a2r_v3/moon_dust_source_attempt3.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_size": [
+        256,
+        256
+      ],
+      "sha256": "adc97d4b774c7afb0965df41192ce5df38b488066ca08c3bf0207e20d78928f8",
+      "source_sha256": "a454e0bdb24735afaf5e0f23160c8bf1b782f19b06a2bca70159f668f63a5e1d",
+      "method": "magenta_key_contain_erode_feather",
+      "transform": {
+        "method": "magenta_key_contain_erode_feather",
+        "filter": "Lanczos",
+        "source_crop": [
+          139,
+          139,
+          1100,
+          1069
+        ],
+        "object_resized_size": [
+          212,
+          205
+        ],
+        "nominal_scale": 0.22021505376344086,
+        "paste_xy": [
+          22,
+          49
+        ],
+        "runtime_size": [
+          256,
+          256
+        ],
+        "mask": {
+          "erode_pixels": 1,
+          "feather_pixels": 1,
+          "color_bleed_pixels": 4,
+          "color_seed_alpha": 128
+        },
+        "color_key": {
+          "hue_ranges": [
+            [
+              0.77,
+              0.94
+            ]
+          ],
+          "minimum_saturation": 0.45,
+          "minimum_value": 0.2
+        },
+        "support_alignment": {
+          "maximum_width_fraction": 0.86,
+          "maximum_height_fraction": 0.8,
+          "bottom_margin_pixels": 3
+        }
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/moon_dust_64.png",
+      "source_path": "assets/items/v3/v3r1/moon_dust.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "runtime_size": [
+        64,
+        64
+      ],
+      "sha256": "12a211b02af96b5a81c20a705002bae691da9e9ed54d7c9be32d760208e17ada",
+      "source_sha256": "adc97d4b774c7afb0965df41192ce5df38b488066ca08c3bf0207e20d78928f8",
+      "method": "Lanczos_with_contour_darkening",
+      "transform": {
+        "outline_radius_pixels": 1,
+        "outline_darkening_fraction": 0.18,
+        "color_bleed_pixels": 3,
+        "color_seed_alpha": 128
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/calming_incense.png",
+      "source_path": "assets/_incoming/a2r_v3/calming_incense_source_attempt2.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_size": [
+        256,
+        256
+      ],
+      "sha256": "6ed60f5c1d6ca1a7947384b61d7ddf68ba6d4a24b692e296334608b9ea96e1ba",
+      "source_sha256": "aa3561c0593ae3a047fb23c37da7b08ae61bdee816f8b14c1a9cf32d1f171a5b",
+      "method": "magenta_key_contain_erode_feather",
+      "transform": {
+        "method": "magenta_key_contain_erode_feather",
+        "filter": "Lanczos",
+        "source_crop": [
+          192,
+          212,
+          1057,
+          1108
+        ],
+        "object_resized_size": [
+          198,
+          205
+        ],
+        "nominal_scale": 0.2285714285714286,
+        "paste_xy": [
+          29,
+          49
+        ],
+        "runtime_size": [
+          256,
+          256
+        ],
+        "mask": {
+          "erode_pixels": 1,
+          "feather_pixels": 1,
+          "color_bleed_pixels": 4,
+          "color_seed_alpha": 128
+        },
+        "color_key": {
+          "hue_ranges": [
+            [
+              0.77,
+              0.94
+            ]
+          ],
+          "minimum_saturation": 0.45,
+          "minimum_value": 0.2
+        },
+        "support_alignment": {
+          "maximum_width_fraction": 0.86,
+          "maximum_height_fraction": 0.8,
+          "bottom_margin_pixels": 3
+        }
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/calming_incense_64.png",
+      "source_path": "assets/items/v3/v3r1/calming_incense.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "runtime_size": [
+        64,
+        64
+      ],
+      "sha256": "aa50c518eb33a029540ef0f3175c7f27871f6661fc5b98491358e13b3b1125f6",
+      "source_sha256": "6ed60f5c1d6ca1a7947384b61d7ddf68ba6d4a24b692e296334608b9ea96e1ba",
+      "method": "Lanczos_with_contour_darkening",
+      "transform": {
+        "outline_radius_pixels": 1,
+        "outline_darkening_fraction": 0.18,
+        "color_bleed_pixels": 3,
+        "color_seed_alpha": 128
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/restorative_draught.png",
+      "source_path": "assets/_incoming/a2r_v3/restorative_draught_source_attempt1.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_size": [
+        256,
+        256
+      ],
+      "sha256": "f9393a3c7b56d8a51adf0df5fdb6bab2e600c7b03ed08b4d249317429a92498a",
+      "source_sha256": "fd83e15f1f74107d3eda6337676bffc7a0f2d39472430f6656916d777a83021c",
+      "method": "magenta_key_contain_erode_feather",
+      "transform": {
+        "method": "magenta_key_contain_erode_feather",
+        "filter": "Lanczos",
+        "source_crop": [
+          231,
+          91,
+          1017,
+          1168
+        ],
+        "object_resized_size": [
+          149,
+          205
+        ],
+        "nominal_scale": 0.1901578458681523,
+        "paste_xy": [
+          53,
+          49
+        ],
+        "runtime_size": [
+          256,
+          256
+        ],
+        "mask": {
+          "erode_pixels": 1,
+          "feather_pixels": 1,
+          "color_bleed_pixels": 4,
+          "color_seed_alpha": 128
+        },
+        "color_key": {
+          "hue_ranges": [
+            [
+              0.77,
+              0.94
+            ]
+          ],
+          "minimum_saturation": 0.45,
+          "minimum_value": 0.2
+        },
+        "support_alignment": {
+          "maximum_width_fraction": 0.86,
+          "maximum_height_fraction": 0.8,
+          "bottom_margin_pixels": 3
+        }
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/restorative_draught_64.png",
+      "source_path": "assets/items/v3/v3r1/restorative_draught.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "runtime_size": [
+        64,
+        64
+      ],
+      "sha256": "abe6c4c408891df23683a7cfa3e561ba3705b052c4a34fff616acf77e7125978",
+      "source_sha256": "f9393a3c7b56d8a51adf0df5fdb6bab2e600c7b03ed08b4d249317429a92498a",
+      "method": "Lanczos_with_contour_darkening",
+      "transform": {
+        "outline_radius_pixels": 1,
+        "outline_darkening_fraction": 0.18,
+        "color_bleed_pixels": 3,
+        "color_seed_alpha": 128
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/clarity_crystal.png",
+      "source_path": "assets/_incoming/a2r_v3/clarity_crystal_source_attempt1.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_size": [
+        256,
+        256
+      ],
+      "sha256": "55749ba640bdba60dc571e26e126f312df3b651bed9eafc46087abd5b75214e5",
+      "source_sha256": "a99a7e3ae089723745e6c2433c8b166d5a1cc91afc892eae98807febbe5199c8",
+      "method": "magenta_key_contain_erode_feather",
+      "transform": {
+        "method": "magenta_key_contain_erode_feather",
+        "filter": "Lanczos",
+        "source_crop": [
+          276,
+          134,
+          955,
+          1113
+        ],
+        "object_resized_size": [
+          142,
+          205
+        ],
+        "nominal_scale": 0.20919305413687436,
+        "paste_xy": [
+          57,
+          49
+        ],
+        "runtime_size": [
+          256,
+          256
+        ],
+        "mask": {
+          "erode_pixels": 1,
+          "feather_pixels": 1,
+          "color_bleed_pixels": 4,
+          "color_seed_alpha": 128
+        },
+        "color_key": {
+          "hue_ranges": [
+            [
+              0.77,
+              0.94
+            ]
+          ],
+          "minimum_saturation": 0.45,
+          "minimum_value": 0.2
+        },
+        "support_alignment": {
+          "maximum_width_fraction": 0.86,
+          "maximum_height_fraction": 0.8,
+          "bottom_margin_pixels": 3
+        }
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/clarity_crystal_64.png",
+      "source_path": "assets/items/v3/v3r1/clarity_crystal.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "runtime_size": [
+        64,
+        64
+      ],
+      "sha256": "56904b3d0aee1518e8e92199205d8028ff3fc705e75f416e2150b4839e0dd6e2",
+      "source_sha256": "55749ba640bdba60dc571e26e126f312df3b651bed9eafc46087abd5b75214e5",
+      "method": "Lanczos_with_contour_darkening",
+      "transform": {
+        "outline_radius_pixels": 1,
+        "outline_darkening_fraction": 0.18,
+        "color_bleed_pixels": 3,
+        "color_seed_alpha": 128
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/bookmark.png",
+      "source_path": "assets/_incoming/a2r_v3/bookmark_source_attempt1.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_size": [
+        256,
+        256
+      ],
+      "sha256": "caf09bbd358ac776bff16fa8230f80f0256da1da80af8f1fed859a1b524a2d8f",
+      "source_sha256": "56cacb77d5e33d31f1bb692b137f6ee5b4bf5bb1a96bd8b9239af55cd46d5d9f",
+      "method": "magenta_key_contain_erode_feather",
+      "transform": {
+        "method": "magenta_key_contain_erode_feather",
+        "filter": "Lanczos",
+        "source_crop": [
+          456,
+          102,
+          790,
+          1158
+        ],
+        "object_resized_size": [
+          65,
+          205
+        ],
+        "nominal_scale": 0.19393939393939394,
+        "paste_xy": [
+          95,
+          49
+        ],
+        "runtime_size": [
+          256,
+          256
+        ],
+        "mask": {
+          "erode_pixels": 1,
+          "feather_pixels": 1,
+          "color_bleed_pixels": 4,
+          "color_seed_alpha": 128
+        },
+        "color_key": {
+          "hue_ranges": [
+            [
+              0.77,
+              0.94
+            ]
+          ],
+          "minimum_saturation": 0.45,
+          "minimum_value": 0.2
+        },
+        "support_alignment": {
+          "maximum_width_fraction": 0.86,
+          "maximum_height_fraction": 0.8,
+          "bottom_margin_pixels": 3
+        }
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/bookmark_64.png",
+      "source_path": "assets/items/v3/v3r1/bookmark.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "runtime_size": [
+        64,
+        64
+      ],
+      "sha256": "aef563f7f9287f0f6f2c6073b3ba4e44b2f0900c22fc51836f7dd1a7c61c9c59",
+      "source_sha256": "caf09bbd358ac776bff16fa8230f80f0256da1da80af8f1fed859a1b524a2d8f",
+      "method": "Lanczos_with_contour_darkening",
+      "transform": {
+        "outline_radius_pixels": 1,
+        "outline_darkening_fraction": 0.18,
+        "color_bleed_pixels": 3,
+        "color_seed_alpha": 128
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/silver_leaf.png",
+      "source_path": "assets/_incoming/a2r_v3/silver_leaf_source_attempt1.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_size": [
+        256,
+        256
+      ],
+      "sha256": "c8a93c23cce9c1bb878eb41b2534fbffbf2902c3b69bceb34eb3230914d1c8fd",
+      "source_sha256": "ae9a3c154e1eb127db5d05b6ad920a4e2a952ef05fa7a7167057fc96bb4f41fc",
+      "method": "magenta_key_contain_erode_feather",
+      "transform": {
+        "method": "magenta_key_contain_erode_feather",
+        "filter": "Lanczos",
+        "source_crop": [
+          292,
+          126,
+          958,
+          1130
+        ],
+        "object_resized_size": [
+          136,
+          205
+        ],
+        "nominal_scale": 0.20398406374501993,
+        "paste_xy": [
+          60,
+          49
+        ],
+        "runtime_size": [
+          256,
+          256
+        ],
+        "mask": {
+          "erode_pixels": 1,
+          "feather_pixels": 1,
+          "color_bleed_pixels": 4,
+          "color_seed_alpha": 128
+        },
+        "color_key": {
+          "hue_ranges": [
+            [
+              0.77,
+              0.94
+            ]
+          ],
+          "minimum_saturation": 0.45,
+          "minimum_value": 0.2
+        },
+        "support_alignment": {
+          "maximum_width_fraction": 0.86,
+          "maximum_height_fraction": 0.8,
+          "bottom_margin_pixels": 3
+        }
+      }
+    },
+    {
+      "path": "assets/items/v3/v3r1/silver_leaf_64.png",
+      "source_path": "assets/items/v3/v3r1/silver_leaf.png",
+      "native_size": [
+        256,
+        256
+      ],
+      "runtime_size": [
+        64,
+        64
+      ],
+      "sha256": "915c5225a67fa2703a27c917145aabe5aef36713107749bef63ac6b57ec864a2",
+      "source_sha256": "c8a93c23cce9c1bb878eb41b2534fbffbf2902c3b69bceb34eb3230914d1c8fd",
+      "method": "Lanczos_with_contour_darkening",
+      "transform": {
+        "outline_radius_pixels": 1,
+        "outline_darkening_fraction": 0.18,
+        "color_bleed_pixels": 3,
+        "color_seed_alpha": 128
+      }
     }
   ],
   "third_party_document": {
@@ -4910,5 +6863,22 @@
         "closed": "Use the attached night storefront painting as EDIT TARGET. Same exact opaque poster-color painting style, camera, framing and pixel layout. Change only the shop to visibly CLOSED for the night, without any written notice: close simple plain wooden shutters across the large display window, and close the entrance with a solid plain wooden door panel in its existing frame. The door is shut, with its existing handle; no open doorway. Turn off the interior table lamp and all interior lights. Keep the single existing small pendant beside the entrance softly lit as a security lamp, with a small physically sourced warm pool on the doorstep and surrounding stones; cool blue dusk elsewhere, dim but readable. Do not invent other lamps. Keep roof, upper windows, facade, planters, left tree canopy, main doorway vine, two small clouds and blank wooden hanging sign in exactly the same positions. Keep the sign blank and hanging; no letters, symbols, closed placard, people or UI. Natural matte poster-color brushwork, no gold filigree, glow halo, sparkles, self-luminous objects, light rays, lens flare or depth-of-field blur. Right 30% and bottom 12% low detail. Fill to every edge without pale paper border. Landscape 16:9; preserve composition and actual native canvas."
       }
     }
+  },
+  "item_art_review": {
+    "status": "root_reviewed_18_transparent_outputs",
+    "source_count": 9,
+    "native_generation_size": [
+      1254,
+      1254
+    ],
+    "large_size": [
+      256,
+      256
+    ],
+    "icon_size": [
+      64,
+      64
+    ],
+    "limits": "All alpha pass; bookmark/resin material identification may need manual polish; actual UI acceptance pending."
   }
 }

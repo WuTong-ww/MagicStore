@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cyrjstnwv2f1"
-path="res://.godot/imported/inventory-atlas-v2.png-520250bdff5e75dfddd51c3c484a4b31.ctex"
+uid="uid://ja0lwsn3xfdl"
+path="res://.godot/imported/clarity_crystal_64.png-cf13f54c9078976dbd9266e0708670d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/items/inventory-atlas-v2.png"
-dest_files=["res://.godot/imported/inventory-atlas-v2.png-520250bdff5e75dfddd51c3c484a4b31.ctex"]
+source_file="res://assets/items/v3/v3r1/clarity_crystal_64.png"
+dest_files=["res://.godot/imported/clarity_crystal_64.png-cf13f54c9078976dbd9266e0708670d7.ctex"]
 
 [params]
 

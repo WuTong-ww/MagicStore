@@ -18,13 +18,14 @@ const TITLES := {"exterior":"灯下的杂货铺", "inventory":"储物柜与经�
 const SOURCES := {"purchase":"采购", "gather":"采集", "gift":"顾客赠料", "craft":"制作", "legacy_or_case":"开局或案例", "legacy":"开局或旧档", "case_payment":"问卜报酬"}
 const ICONS := {"restorative_draught":0,"clarity_crystal":1,"calming_incense":2,"lavender":3,"quartz":4,"moon_dust":5,"spring_water":6,"silver_leaf":7,"bookmark":8}
 const SceneArt = preload("res://scripts/shop/scene_visual.gd")
+const ItemArt = preload("res://scripts/shop/item_visual.gd")
 var scene_visual: Control
 var inventory_grid: GridContainer
 var side_panel: PanelContainer
 var drawer: Control
 
 func _ready() -> void:
-	visuals = SceneArt.load_config()
+	visuals = ItemArt.load_config()
 	scene_visual = SceneArt.new()
 	scene_visual.name = "SceneArtwork"
 	add_child(scene_visual)
@@ -144,9 +145,14 @@ func _inventory(view: Dictionary) -> void:
 	for entry: Dictionary in GameState.ledger_view().slice(-40):
 		var labels := {"divination":"问卜报酬","product":"商品交易","gift":"额外赠礼","procurement":"采购原料","material_sale":"出售原料","gather":"外出采集","research":"研究配方","craft":"制作商品","demand":"记下需求","use":"使用商品","review":"复盘","experience":"接待经验"}
 		var record: Dictionary = entry.get("payment",entry.get("result",{}))
-		var item_name: String = view.catalog.items.get(record.get("item_id",""),{}).get("name", "")
+		var item_id: String = str(record.get("item_id",""))
+		var item_name: String = ItemArt.name_for(visuals,item_id,view.catalog.items)
 		var amount: String = " · %d 金币" % int(record.amount) if record.get("kind") == "coins" else (" · " + item_name if not item_name.is_empty() else "")
-		text("%s%s%s" % [labels.get(entry.category,"经营记录"),amount," · " + JSON.stringify(record) if show_details else ""],16)
+		var ledger_text: String = "%s%s%s" % [labels.get(entry.category,"经营记录"),amount," · " + JSON.stringify(record) if show_details else ""]
+		if visuals.get("items",{}).has(item_id):
+			_item_row(item_id,ledger_text)
+		else:
+			text(ledger_text,16)
 
 func _workshop(view: Dictionary) -> void:
 	text("顾客提出尚未满足的需求后，在接待结束后研究配方，再用储物柜里的原料制作。")
@@ -253,27 +259,16 @@ func _gathering(view: Dictionary) -> void:
 		column.add_child(UI.label("耗时 %d 分钟 · 精力 %d · 每日最多 %d 次 · 开放 %02d:%02d–%02d:%02d" % [int(site.minutes), int(site.energy), int(site.daily_limit), int(int(site.opening) / 60), int(site.opening) % 60, int(int(site.closing) / 60), int(site.closing) % 60], 14, UI.MUTED))
 		column.add_child(UI.button("前往采集 · " + site.name, func(): await act("gather_material", {"site_id":id})))
 
-func _item_texture(id: String) -> Texture2D:
-	var visual: Dictionary = visuals.get("items", {}).get(id, {})
-	if visual.is_empty() or not ResourceLoader.exists(visual.asset):
-		return null
-	var atlas := AtlasTexture.new()
-	atlas.atlas = load(visual.asset)
-	var cell: Vector2 = atlas.atlas.get_size()/float(visuals.grid)
-	var index := int(visual.cell)
-	atlas.region = Rect2(Vector2(index%int(visuals.grid),index/int(visuals.grid))*cell,cell)
-	return atlas
+func _item_texture(id: String, small: bool = true) -> Texture2D:
+	return ItemArt.texture_for(visuals,id,small)
 
 func _item_row(id: String, label: String) -> HBoxContainer:
 	var group := VBoxContainer.new()
 	body.add_child(group)
 	var information := HBoxContainer.new()
 	group.add_child(information)
-	var icon := TextureRect.new()
-	icon.texture = _item_texture(id)
-	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	icon.custom_minimum_size = Vector2(64,64)
+	var item: Dictionary = GameState.shop_view().get("catalog",{}).get("items",{}).get(id,{})
+	var icon := ItemArt.icon_control(visuals,id,item.get("purposes",[]))
 	information.add_child(icon)
 	var line := UI.label(label,20)
 	line.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -319,7 +314,7 @@ func _build_inventory_grid(view: Dictionary) -> void:
 		backing.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		var icon := TextureRect.new()
 		icon.name = "ItemIcon"
-		icon.texture = _item_texture(id)
+		icon.texture = _item_texture(id,false)
 		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		icon.mouse_filter = Control.MOUSE_FILTER_IGNORE

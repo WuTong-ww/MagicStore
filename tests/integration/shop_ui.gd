@@ -1,5 +1,6 @@
 extends SceneTree
 const UITeardown = preload("res://tests/ui_teardown.gd")
+const ItemArt = preload("res://scripts/shop/item_visual.gd")
 ## Seven destinations and the integrated A panel. Real rendering is optional;
 ## headless layout results are never described as visual acceptance.
 
@@ -270,7 +271,12 @@ func check_visual_manifest() -> Dictionary:
 	if not parser.data is Dictionary:
 		return {}
 	var manifest: Dictionary = parser.data
-	check(manifest.get("grid") == 3 and manifest.get("selected_version") == 2, "C7 selected artwork uses versioned 3x3 atlas")
+	var valid := ItemArt.config_valid(manifest,true)
+	check(valid,"C7 selected item configuration validates actual files, alpha support and provenance")
+	if not valid:
+		return {}
+	var independent: bool = manifest.selected_version == 3
+	check(independent or manifest.get("grid") == 3 and manifest.get("selected_version") == 2,"C7 artwork uses supported independent PNG or legacy 3x3 format")
 	var view: Dictionary = game.shop_view()
 	var cells := {}
 	for item_id: String in view.catalog.items:
@@ -283,8 +289,18 @@ func check_visual_manifest() -> Dictionary:
 	check(manifest.get("items", {}).size() == 9, "C7 seven catalog and two legacy items all mapped")
 	for item_id: String in manifest.get("items", {}):
 		var visual: Dictionary = manifest.items[item_id]
-		check(visual.get("item_id") == item_id and visual.get("version") == 2 and not str(visual.get("source", "")).is_empty(), "C7 image records item identity, source and version")
+		check(visual.get("item_id") == item_id and visual.get("version") == manifest.selected_version and not str(visual.get("source", "")).is_empty(), "C7 image records item identity, source and version")
 		check(FileAccess.file_exists(visual.get("reference", "")), "C7 original reference is retained")
+		if independent:
+			var icon_path: String = visual.get("icon_path",visual.get("icon_64",""))
+			check(ResourceLoader.exists(visual.path) and ResourceLoader.exists(icon_path),"C7 independent large and small PNGs are imported resources / "+item_id)
+			var large: Texture2D = ItemArt.texture_for(manifest,item_id,false)
+			var small: Texture2D = ItemArt.texture_for(manifest,item_id,true)
+			var settings := ItemArt.load_settings()
+			check(large != null and not large is AtlasTexture and large.get_size() == Vector2(settings.large_size[0],settings.large_size[1]),"C7 cabinet uses a complete independent 256px file / "+item_id)
+			check(small != null and not small is AtlasTexture and small.get_size() == Vector2(settings.small_size[0],settings.small_size[1]),"C7 lists use the derived independent 64px file / "+item_id)
+			check(FileAccess.get_sha256(visual.path).to_lower() == visual.sha256.to_lower() and FileAccess.get_sha256(icon_path).to_lower() == visual.icon_sha256.to_lower(),"C7 both independent images match recorded SHA256 / "+item_id)
+			continue
 		check(ResourceLoader.exists(visual.get("asset", "")), "C7 atlas loads as imported resource")
 		if not ResourceLoader.exists(visual.get("asset", "")):
 			continue
@@ -297,7 +313,7 @@ func check_visual_manifest() -> Dictionary:
 			var cell_size := texture.get_size() / 3.0
 			var region := Rect2(Vector2(index % 3, index / 3) * cell_size, cell_size)
 			check(Rect2(Vector2.ZERO, texture.get_size()).encloses(region), "C7 texture region stays inside atlas")
-	if manifest.items.size() > 0:
+	if not independent and manifest.items.size() > 0:
 		var first: Dictionary = manifest.items.values()[0]
 		check(FileAccess.get_sha256(first.asset).to_upper() == str(manifest.get("sha256", "")).to_upper(), "C7 selected atlas matches recorded SHA256")
 	return manifest
@@ -306,37 +322,30 @@ func capture_icon_gallery(manifest: Dictionary) -> void:
 	if manifest.is_empty():
 		return
 	var window := Window.new()
+	var presentation := ItemArt.load_settings()
+	var gallery: Dictionary = presentation.gallery
 	window.visible = false
-	window.title = "商品与原料 · 64 像素素材验收"
-	window.size = Vector2i(760, 310)
-	window.theme = main.theme
+	window.title = gallery.title
+	window.size = Vector2i(gallery.size[0],gallery.size[1])
+	window.theme = load("res://themes/paper.tres")
 	main.add_child(window)
-	var margin := MidnightUI.margin(16)
+	MidnightUI.paper_window(window)
+	var margin := MidnightUI.margin(int(gallery.padding))
 	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	window.add_child(margin)
 	var grid := GridContainer.new()
-	grid.columns = 3
-	grid.add_theme_constant_override("h_separation", 20)
-	grid.add_theme_constant_override("v_separation", 12)
+	grid.columns = int(gallery.columns)
+	grid.add_theme_constant_override("h_separation",int(gallery.column_gap))
+	grid.add_theme_constant_override("v_separation",int(gallery.row_gap))
 	margin.add_child(grid)
 	var catalog: Dictionary = game.shop_view().catalog.items
 	for item_id: String in manifest.items:
-		var visual: Dictionary = manifest.items[item_id]
 		var row := HBoxContainer.new()
-		row.custom_minimum_size.x = 224
+		row.custom_minimum_size.x = gallery.cell_width
 		grid.add_child(row)
-		var icon := TextureRect.new()
-		var atlas := AtlasTexture.new()
-		atlas.atlas = load(visual.asset)
-		var cell := atlas.atlas.get_size() / 3.0
-		var index := int(visual.cell)
-		atlas.region = Rect2(Vector2(index % 3, index / 3) * cell, cell)
-		icon.texture = atlas
-		icon.custom_minimum_size = Vector2(64, 64)
-		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		var icon := ItemArt.icon_control(manifest,item_id,catalog.get(item_id,{}).get("purposes",[]))
 		row.add_child(icon)
-		var label := MidnightUI.label(catalog.get(item_id, {}).get("name", {"bookmark":"纸纹书签", "silver_leaf":"银叶书夹"}.get(item_id, "素材")))
+		var label := MidnightUI.label(ItemArt.name_for(manifest,item_id,catalog))
 		label.autowrap_mode = TextServer.AUTOWRAP_OFF
 		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
@@ -349,14 +358,14 @@ func capture_icon_gallery(manifest: Dictionary) -> void:
 		# The headless native display reports every popup as 1x1. Measure the same
 		# content in an explicit viewport-sized fixture instead of that OS sentinel.
 		fixture = Control.new()
-		fixture.size = Vector2(760, 310)
+		fixture.size = Vector2(gallery.size[0],gallery.size[1])
 		main.add_child(fixture)
 		window.remove_child(margin)
 		fixture.add_child(margin)
 		margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		available_size = fixture.size
 		await settle()
-	check(grid.get_combined_minimum_size().y <= available_size.y - 32 and grid.get_combined_minimum_size().x <= available_size.x - 32, "C7 gallery shows all nine 64px icons without cropping")
+	check(grid.get_combined_minimum_size().y <= available_size.y - float(gallery.padding)*2 and grid.get_combined_minimum_size().x <= available_size.x - float(gallery.padding)*2, "C7 gallery shows all nine 64px icons without cropping")
 	await capture("catalog-icons-64px")
 	window.queue_free()
 	if fixture != null:

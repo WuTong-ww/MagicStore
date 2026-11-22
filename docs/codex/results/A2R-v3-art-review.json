@@ -1,0 +1,648 @@
+{
+  "kind": "A2R_v3_root_final_art_review",
+  "rules": "docs/art/style_v3.md; single-item adaptations explicitly stated per criterion",
+  "total_score": 88,
+  "maximum": 90,
+  "records": [
+    {
+      "item_id": "lavender",
+      "name": "月见草",
+      "score": 10,
+      "maximum": 10,
+      "source_path": "assets/_incoming/a2r_v3/lavender_source_attempt2.png",
+      "source_sha256": "c149cc68d7f86368bf652e1e1d7af59eca800fe6f00a846a9f41614bfb6f2bca",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "reviewer": "root; opened actual selected raw, 256 and 64 outputs",
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "花瓣和叶片有不透明颜料层次，轮廓略松"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "花瓣左上淡暖、右叶灰绿，方向一致"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "叶背和扎束内侧为灰绿，不发黑"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "浅黄花瓣是受光表面，没有花芯自发光"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "无金色纹样或镶边"
+        },
+        {
+          "item": 6,
+          "score": 1,
+          "reason": "仅月见草枝，无紫藤"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "单束花为独立物件，四周充分留空"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "四瓣浅黄花与绿叶可辨为月见草，64px仍为花枝"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "枝干连接连贯，束尾落在共同支持线"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "透明余量无杂物，不占满整张"
+        }
+      ],
+      "bottom_y": 252,
+      "bottom_width": 12
+    },
+    {
+      "item_id": "spring_water",
+      "name": "山泉水",
+      "score": 10,
+      "maximum": 10,
+      "source_path": "assets/_incoming/a2r_v3/spring_water_source_attempt2.png",
+      "source_sha256": "281a1df668e6e4fca346365dd3aa427e54da3d28c958673c6bebfc4660956259",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "reviewer": "root; opened actual selected raw, 256 and 64 outputs",
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "玻璃和瓶塞用色块笔触呈现"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "左上瓶肩偏暖、右侧灰蓝绿，明暗方向清楚"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "瓶右和瓶底为蓝绿阴影，不黑"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "玻璃小亮面来自左上，瓶内水不自行发光"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "无金色花纹"
+        },
+        {
+          "item": 6,
+          "score": 1,
+          "reason": "无植物装饰或紫藤"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "单瓶留空，未堆额外道具"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "瓶颈、塞子、水线可辨，64px仍为水瓶"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "瓶口、肩与底连续，平底无悬空"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "透明边界干净，四边无额外背景"
+        }
+      ],
+      "bottom_y": 252,
+      "bottom_width": 44
+    },
+    {
+      "item_id": "quartz",
+      "name": "白水晶砂",
+      "score": 10,
+      "maximum": 10,
+      "source_path": "assets/_incoming/a2r_v3/quartz_source_attempt1.png",
+      "source_sha256": "f874a5214ef4ed2b8f8deed14f87838f1d028735118616437eff86f7ec2d8646",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "reviewer": "root; opened actual selected raw, 256 and 64 outputs",
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "砂粒以短小不透明色块表现"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "砂堆左上米白、右坡灰褐，主光明确"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "堆右侧是灰褐冷影，非死黑"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "少量浅色粒面为反射，未画星点或发光"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "无金色雕花"
+        },
+        {
+          "item": 6,
+          "score": 1,
+          "reason": "无紫藤"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "单个砂堆，无散乱附加摆件"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "细粒砂堆明确，64px仍可辨颗粒堆轮廓"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "堆底平宽，粒子未融成瓶状"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "透明画布留空，视觉中心稳定"
+        }
+      ],
+      "bottom_y": 252,
+      "bottom_width": 62
+    },
+    {
+      "item_id": "moon_dust",
+      "name": "月光树脂",
+      "score": 9,
+      "maximum": 10,
+      "source_path": "assets/_incoming/a2r_v3/moon_dust_source_attempt3.png",
+      "source_sha256": "a454e0bdb24735afaf5e0f23160c8bf1b782f19b06a2bca70159f668f63a5e1d",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "reviewer": "root; opened actual selected raw, 256 and 64 outputs",
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "树脂块为粗短颜料笔触，边缘松硬交替"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "块面左上灰赭亮、右下灰绿影，方向一致"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "块隙为冷灰，未发黑"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "无琥珀自发光、光晕或金边"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "无装饰花纹"
+        },
+        {
+          "item": 6,
+          "score": 1,
+          "reason": "无紫藤"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "几块树脂聚为一堆，组外留空"
+        },
+        {
+          "item": 8,
+          "score": 0,
+          "reason": "灰褐树脂与普通石块较难区分，单图不足以明确材质"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "块面和底部支撑合理，无熔化边"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "透明空区足够，未带背景道具"
+        }
+      ],
+      "bottom_y": 252,
+      "bottom_width": 124
+    },
+    {
+      "item_id": "calming_incense",
+      "name": "定心香",
+      "score": 10,
+      "maximum": 10,
+      "source_path": "assets/_incoming/a2r_v3/calming_incense_source_attempt2.png",
+      "source_sha256": "aa3561c0593ae3a047fb23c37da7b08ae61bdee816f8b14c1a9cf32d1f171a5b",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "reviewer": "root; opened actual selected raw, 256 and 64 outputs",
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "香碗和灰色香支有哑光颜料痕迹"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "碗左上淡暖、右下灰绿，受光统一"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "碗内和右侧灰绿，非黑洞"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "香烟为不透明灰白小卷，无发光火星"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "无金色花纹"
+        },
+        {
+          "item": 6,
+          "score": 1,
+          "reason": "无紫藤"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "一只香碗及三支香构成单组，留白充分"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "碗、直立香支和烟可辨，64px仍读作香炉"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "香支落入碗内，碗底为平支持面"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "轮廓周围无品红和额外背景"
+        }
+      ],
+      "bottom_y": 252,
+      "bottom_width": 76
+    },
+    {
+      "item_id": "restorative_draught",
+      "name": "醒神药水",
+      "score": 10,
+      "maximum": 10,
+      "source_path": "assets/_incoming/a2r_v3/restorative_draught_source_attempt1.png",
+      "source_sha256": "fd83e15f1f74107d3eda6337676bffc7a0f2d39472430f6656916d777a83021c",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "reviewer": "root; opened actual selected raw, 256 and 64 outputs",
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "瓶身黄绿颜料有层叠笔触，无塑料镜面"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "瓶左上偏暖，右下为灰绿核心影"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "暗部灰绿且保留形体"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "浅黄亮面为左上反光，瓶体不自发光"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "无金色纹样"
+        },
+        {
+          "item": 6,
+          "score": 1,
+          "reason": "无紫藤"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "单个平底药水瓶，周围留空"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "圆腹短颈和瓶塞明确，64px可与水瓶区分"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "瓶颈、瓶腹和底座连贯，无融合"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "透明余量充分，无投影底座"
+        }
+      ],
+      "bottom_y": 252,
+      "bottom_width": 55
+    },
+    {
+      "item_id": "clarity_crystal",
+      "name": "澄心晶",
+      "score": 10,
+      "maximum": 10,
+      "source_path": "assets/_incoming/a2r_v3/clarity_crystal_source_attempt1.png",
+      "source_sha256": "a99a7e3ae089723745e6c2433c8b166d5a1cc91afc892eae98807febbe5199c8",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "reviewer": "root; opened actual selected raw, 256 and 64 outputs",
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "晶面是粗边色块，不是光滑塑料"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "晶体左上米白淡暖，右侧灰紫，主光一致"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "晶簇间灰紫阴影可读，不发黑"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "晶面亮部有限，无星点、光晕或自发光"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "无金色雕花"
+        },
+        {
+          "item": 6,
+          "score": 1,
+          "reason": "无紫藤"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "一小簇晶体，未堆额外装饰"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "紫色柱晶与底部碎晶可辨，64px轮廓完整"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "柱晶各有明确面和共用底部，无融化"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "透明周边留空，底部无自带投影"
+        }
+      ],
+      "bottom_y": 252,
+      "bottom_width": 64
+    },
+    {
+      "item_id": "bookmark",
+      "name": "纸纹书签",
+      "score": 9,
+      "maximum": 10,
+      "source_path": "assets/_incoming/a2r_v3/bookmark_source_attempt1.png",
+      "source_sha256": "56cacb77d5e33d31f1bb692b137f6ee5b4bf5bb1a96bd8b9239af55cd46d5d9f",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "reviewer": "root; opened actual selected raw, 256 and 64 outputs",
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "纸面有哑光纤维与细小颜料斑驳"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "左上纸面略暖，右缘微冷，明暗克制"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "右缘灰米色非黑边"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "纸面亮度均匀，未自发光"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "无金色花纹"
+        },
+        {
+          "item": 6,
+          "score": 1,
+          "reason": "无紫藤"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "单条纸物件，四周留空"
+        },
+        {
+          "item": 8,
+          "score": 0,
+          "reason": "无穗、孔或夹扣，64px容易读作普通纸条，书签身份偏弱"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "矩形四边和圆角完整，不扭曲"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "透明周边充足，无文字或背景"
+        }
+      ],
+      "bottom_y": 252,
+      "bottom_width": 61
+    },
+    {
+      "item_id": "silver_leaf",
+      "name": "银叶书夹",
+      "score": 10,
+      "maximum": 10,
+      "source_path": "assets/_incoming/a2r_v3/silver_leaf_source_attempt1.png",
+      "source_sha256": "ae9a3c154e1eb127db5d05b6ad920a4e2a952ef05fa7a7167057fc96bb4f41fc",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "reviewer": "root; opened actual selected raw, 256 and 64 outputs",
+      "checks": [
+        {
+          "item": 1,
+          "score": 1,
+          "reason": "叶脉与金属面为柔和颜料笔触，无镜面塑料感"
+        },
+        {
+          "item": 2,
+          "score": 1,
+          "reason": "叶片左上米灰亮、右下蓝灰，光向一致"
+        },
+        {
+          "item": 3,
+          "score": 1,
+          "reason": "叶背冷灰渐变，不黑"
+        },
+        {
+          "item": 4,
+          "score": 1,
+          "reason": "银色亮面为受光表面，没有亮边环绕"
+        },
+        {
+          "item": 5,
+          "score": 1,
+          "reason": "无金色雕花，只有叶脉"
+        },
+        {
+          "item": 6,
+          "score": 1,
+          "reason": "无紫藤"
+        },
+        {
+          "item": 7,
+          "score": 1,
+          "reason": "单片叶夹与底部夹脚构成单组"
+        },
+        {
+          "item": 8,
+          "score": 1,
+          "reason": "叶形和夹脚可辨，64px仍有叶片轮廓"
+        },
+        {
+          "item": 9,
+          "score": 1,
+          "reason": "叶脉连贯，夹脚与叶底接合合理"
+        },
+        {
+          "item": 10,
+          "score": 1,
+          "reason": "透明留空充分，未附带纸张或底台"
+        }
+      ],
+      "bottom_y": 252,
+      "bottom_width": 33
+    }
+  ],
+  "attempts_viewed": 14,
+  "selected_outputs_viewed": 18,
+  "attempt_limit_exceeded": [],
+  "attempt_selection": {
+    "lavender": 2,
+    "spring_water": 2,
+    "quartz": 1,
+    "moon_dust": 3,
+    "calming_incense": 2,
+    "restorative_draught": 1,
+    "clarity_crystal": 1,
+    "bookmark": 1,
+    "silver_leaf": 1
+  },
+  "rejected_attempts": {
+    "spring_water_1": "红黄半透明边9.8195%/9.8280%超2%",
+    "moon_dust_1": "红黄边约95%超2%",
+    "moon_dust_2": "红黄边35.4455%/55.268%超2%",
+    "calming_incense_1": "64px红黄边7.1097%，淡粉烟被键色误去除",
+    "lavender_1": "红黄边2.84%/4.54%超2%"
+  },
+  "native_receipts": {
+    "assets/_incoming/a2r_v3/generation_final.json": "97416534306f06d2961d2d6c3c43d51a71ed6b0f2346c6ca1a4303f04ef0c295",
+    "assets/_incoming/a2r_v3/processing_receipt.json": "e1d481840fbf5181285b0ab3ad906acf0fe1ddc0fa142cb1a28d4db2861a4c3e"
+  },
+  "alpha_summary": {
+    "checked": 18,
+    "passed": 18,
+    "red_yellow_edge_fraction": 0,
+    "visible_magenta_pixels": 0
+  },
+  "limitations": [
+    "书签形状像普通纸条，树脂材质可能被认成石块，建议美术精修；均9/10通过8分线",
+    "旧S04_slot和悬浮不属于本图像任务，留A7；人物旧图留A4",
+    "生成品红背景视觉纯色但像素存在轻微变化；原生字节保留，HSV键色清除完毕",
+    "去背不添加投影，A7才加接触阴影"
+  ]
+}

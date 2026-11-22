@@ -70,6 +70,183 @@ class CompactRegenTests(unittest.TestCase):
                    processing_script="tools/art/real_scene_layers.py", local_spec=".tools/day_layers.json")
         return row
 
+    def formal_item(self, item_id, description):
+        raw = self.image_record(f"assets/_incoming/a2r_v3/previous/{item_id}_source.png")
+        row = self.image_record(f"assets/items/v3/previous/{item_id}.png")
+        Image.new("RGBA", (256, 256), (0, 0, 0, 0)).save(self.root / row["path"])
+        row.update(sha256=hashlib.sha256((self.root / row["path"]).read_bytes()).hexdigest(), dim=[256, 256],
+                   group="items", operation="item_chromakey", item_id=item_id, object_description=description,
+                   source_raw=raw["path"], source_raw_sha256=raw["sha256"], source_raw_native_size=raw["dim"],
+                   processing_script="tools/art/item_pipeline.py", local_config="data/art/item_pipeline.json",
+                   inputs=[raw["path"], self.style["path"]])
+        icon = self.image_record(f"assets/items/v3/previous/{item_id}_64.png")
+        Image.new("RGBA", (64, 64), (0, 0, 0, 0)).save(self.root / icon["path"])
+        icon.update(sha256=hashlib.sha256((self.root / icon["path"]).read_bytes()).hexdigest(), dim=[64, 64],
+                    group="runtime", inputs=[row["path"]])
+        for relative in (row["local_config"], row["processing_script"]):
+            target = self.root / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes((ROOT / relative).read_bytes())
+        return row, icon
+
+    def test_nine_items_queue_new_magenta_raws_from_descriptions_and_style_only(self):
+        module = implementation()
+        descriptions = {
+            "lavender": "a pale-yellow four-petal evening primrose sprig",
+            "spring_water": "a clear water bottle", "quartz": "an ordinary quartz stone",
+            "moon_dust": "a small plain tin of grey powder", "calming_incense": "an incense bundle",
+            "restorative_draught": "a corked draught bottle", "clarity_crystal": "a clear mineral crystal",
+            "bookmark": "a plain paper bookmark", "silver_leaf": "a silver leaf-shaped bookmark clip"}
+        pairs = [self.formal_item(item_id, text) for item_id, text in descriptions.items()]
+        self.use_formal_rows(*(row for pair in pairs for row in pair))
+        self.manifest["runtime_copies"] = [{"path": icon["path"], "source_path": row["path"]} for row, icon in pairs]
+        self.manifest["style_profiles"]["v3"]["templates"]["item"] = "USER V3 ITEM: A single {object}, plain flat #FF00FF, no text."
+        queue = module.build_queue(self.root, self.manifest, "v3", "items")
+        self.assertEqual(len(queue["tasks"]), 9)
+        for task in queue["tasks"]:
+            self.assertIn(task.get("item_id"), descriptions)
+            item_id = task["item_id"]
+            self.assertEqual(task["source_destination"], f"assets/_incoming/a2r_v3/draft1/{item_id}_source.png")
+            self.assertIn(descriptions[item_id], task["arguments"]["prompt"])
+            self.assertNotIn("{object}", task["arguments"]["prompt"])
+            self.assertNotIn("edit target", task["arguments"]["prompt"].lower())
+            self.assertEqual(task["arguments"]["referenced_image_paths"], [str((self.root / self.style["path"]).resolve())])
+            self.assertFalse(task["arguments"]["transparent_background"])
+
+    def test_item_processing_and_64_derivation_wait_for_new_raw_and_256(self):
+        module = implementation()
+        row, icon = self.formal_item("lavender", "a pale-yellow primrose sprig")
+        self.use_formal_rows(row, icon)
+        self.manifest["runtime_copies"] = [{"path": icon["path"], "source_path": row["path"]}]
+        queue = module.build_queue(self.root, self.manifest, "v3", "items")
+        processing = [t for t in queue["offline_tasks"] if t["operation"] == "item_chromakey"]
+        self.assertEqual(len(processing), 1)
+        task = processing[0]
+        self.assertEqual(task["depends_on"], ["assets/_incoming/a2r_v3/draft1/lavender_source.png"])
+        self.assertEqual(task["source_destination"], "assets/items/v3/draft1/lavender.png")
+        self.assertEqual(task["icon_destination"], "assets/items/v3/draft1/lavender_64.png")
+        self.assertEqual(task["phase"], "awaiting_raw_generation")
+        self.assertFalse(task["can_process"])
+        self.assertNotIn("--config", task["command_after_generation"])
+        self.assertIn("--receipt", task["command_after_generation"])
+        derived = [t for t in queue["offline_tasks"] if t["operation"] == "item_icon_derivation"]
+        self.assertEqual(len(derived), 1)
+        self.assertEqual(derived[0]["source_path"], task["source_destination"])
+        self.assertEqual(derived[0]["runtime_path"], task["icon_destination"])
+        self.assertEqual(derived[0]["depends_on"], [task["source_destination"]])
+        self.assertEqual(derived[0]["method"], "Lanczos_with_contour_darkening")
+
+    def test_actual_raw_to_256_processing_record_is_not_a_raw_runtime_alias(self):
+        module = implementation()
+        row, icon = self.formal_item("lavender", "a primrose sprig")
+        self.use_formal_rows(row, icon)
+        self.manifest["runtime_copies"] = [{"path": row["path"], "source_path": row["source_raw"]},
+                                           {"path": icon["path"], "source_path": row["path"]}]
+        try:
+            queue = module.build_queue(self.root, self.manifest, "v3", "items")
+        except ValueError as error:
+            self.fail("processing provenance must retain the canonical 256 item: " + str(error))
+        self.assertEqual(len(queue["tasks"]), 1)
+        self.assertEqual(queue["tasks"][0].get("item_id"), "lavender")
+
+    def test_item_raw_metadata_is_verified_and_missing_local_raw_is_explicit(self):
+        module = implementation()
+        row, icon = self.formal_item("lavender", "a primrose sprig")
+        self.use_formal_rows(row, icon)
+        row["source_raw_sha256"] = "0" * 64
+        with self.assertRaisesRegex(ValueError, "raw.*sha256"):
+            module.build_queue(self.root, self.manifest, "v3", "items")
+        row["source_raw_sha256"] = hashlib.sha256((self.root / row["source_raw"]).read_bytes()).hexdigest()
+        (self.root / row["source_raw"]).unlink()
+        queue = module.build_queue(self.root, self.manifest, "v3", "items")
+        self.assertEqual(queue["tasks"][0]["missing_previous_inputs"], [row["source_raw"]])
+        self.assertTrue(queue["tasks"][0]["can_generate"])
+
+    def test_item_metadata_and_paths_cannot_fall_back_to_atlas_generation(self):
+        module = implementation()
+        for field, bad in (("item_id", ""), ("object_description", ""), ("source_raw", "../escape.png"),
+                           ("source_raw_native_size", [256, 0]), ("operation", "item_chromakey_typo")):
+            row, icon = self.formal_item("lavender", "a primrose sprig")
+            row[field] = bad
+            self.use_formal_rows(row, icon)
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                module.build_queue(self.root, self.manifest, "v3", "items")
+
+    def test_orphan_64_item_is_never_generated_independently(self):
+        module = implementation()
+        icon = self.image_record("assets/items/v3/previous/lavender_64.png")
+        self.use_formal_rows(icon)
+        with self.assertRaisesRegex(ValueError, "64|icon|alias"):
+            module.build_queue(self.root, self.manifest, "v3", "items")
+
+    def test_item_queue_existing_raw_waits_for_receipt_then_runs_existing_processor(self):
+        module = implementation()
+        row, icon = self.formal_item("lavender", "a pale-yellow primrose sprig")
+        self.use_formal_rows(row, icon)
+        self.manifest["runtime_copies"] = [{"path": icon["path"], "source_path": row["path"]}]
+        raw = "assets/_incoming/a2r_v3/draft1/lavender_source.png"
+        raw_file = self.root / raw
+        raw_file.parent.mkdir(parents=True, exist_ok=True)
+        image = Image.new("RGB", (16, 12), (255, 0, 255))
+        image.paste((95, 130, 100), (4, 2, 12, 10))
+        image.save(raw_file)
+        before = raw_file.read_bytes()
+        queue = module.build_queue(self.root, self.manifest, "v3", "items")
+        task = next(t for t in queue["offline_tasks"] if t["operation"] == "item_chromakey")
+        self.assertFalse(queue["tasks"][0]["can_generate"])
+        self.assertEqual(task["phase"], "awaiting_generation_receipt")
+        self.assertFalse(task["can_process"])
+        generation = {"version": 1, "style_reference": self.style["path"], "style_sha256": self.style["sha256"],
+            "records": [{"id": "lavender", "source_path": raw, "prompt": queue["tasks"][0]["arguments"]["prompt"],
+                "ref_paths": [self.style["path"]], "status": "complete", "sha256": hashlib.sha256(before).hexdigest(),
+                "native_size": [16, 12], "attempts": [{"attempt": 1, "status": "complete", "output_path": raw,
+                    "sha256": hashlib.sha256(before).hexdigest(), "native_size": [16, 12]}]}]}
+        (self.root / task["generation_receipt"]).write_text(json.dumps(generation), encoding="utf-8")
+        (self.root / "tools/art_pipeline.py").write_bytes(SCRIPT.read_bytes())
+        queue = module.build_queue(self.root, self.manifest, "v3", "items")
+        task = next(t for t in queue["offline_tasks"] if t["operation"] == "item_chromakey")
+        self.assertTrue(task["can_process"])
+        result = subprocess.run([sys.executable, *task["command_after_generation"][1:]], cwd=self.root,
+                                capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(raw_file.read_bytes(), before)
+        with Image.open(self.root / task["source_destination"]) as main:
+            self.assertEqual(main.size, (256, 256))
+        with Image.open(self.root / task["icon_destination"]) as small:
+            self.assertEqual(small.size, (64, 64))
+
+    def test_item_processing_receipt_cannot_select_old_raw_or_another_style(self):
+        module = implementation()
+        row, icon = self.formal_item("lavender", "a pale-yellow primrose sprig")
+        self.use_formal_rows(row, icon)
+        self.manifest["runtime_copies"] = [{"path": icon["path"], "source_path": row["path"]}]
+        raw = "assets/_incoming/a2r_v3/draft1/lavender_source.png"
+        raw_file = self.root / raw
+        raw_file.parent.mkdir(parents=True, exist_ok=True)
+        raw_file.write_bytes((self.root / row["source_raw"]).read_bytes())
+        generation = {"version": 1, "style_reference": self.style["path"], "style_sha256": self.style["sha256"],
+            "records": [{"id": "lavender", "source_path": raw, "prompt": "fixture current raw",
+                "ref_paths": [self.style["path"]], "status": "complete", "sha256": row["source_raw_sha256"],
+                "native_size": row["source_raw_native_size"], "attempts": [{"attempt": 1, "status": "complete",
+                    "output_path": raw, "sha256": row["source_raw_sha256"], "native_size": row["source_raw_native_size"]}]}]}
+        wrong_raw = copy.deepcopy(generation)
+        wrong_raw["records"][0]["source_path"] = row["source_raw"]
+        wrong_style_path = copy.deepcopy(generation)
+        wrong_style_path["style_reference"] = row["source_raw"]
+        wrong_style_sha = copy.deepcopy(generation)
+        wrong_style_sha["style_sha256"] = "0" * 64
+        missing_item = copy.deepcopy(generation)
+        missing_item["records"][0]["id"] = "quartz"
+        duplicate_item = copy.deepcopy(generation)
+        duplicate_item["records"].append(copy.deepcopy(generation["records"][0]))
+        receipt = raw_file.parent / "generation_receipt.json"
+        for name, payload in (("old raw", wrong_raw), ("other style path", wrong_style_path),
+                              ("other style sha", wrong_style_sha), ("missing item", missing_item),
+                              ("duplicate item", duplicate_item)):
+            receipt.write_text(json.dumps(payload), encoding="utf-8")
+            with self.subTest(case=name), self.assertRaisesRegex(ValueError, "receipt"):
+                module.build_queue(self.root, self.manifest, "v3", "items")
+
     def use_formal_rows(self, *rows):
         self.manifest["assets"] = list(rows)
         self.manifest["runtime_copies"] = []

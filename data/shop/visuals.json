@@ -1,84 +1,390 @@
 {
-  "selected_version": 2,
+  "selected_version": 3,
   "schema_version": 1,
   "grid": 3,
   "review": "2026-11-15: selected simplified atlas for readable 64px silhouettes; detailed candidate archived under .tools",
   "items": {
-    "bookmark": {
-      "version": 2,
-      "cell": 8,
-      "source": "builtin-imagegen",
-      "asset": "res://assets/items/inventory-atlas-v2.png",
-      "item_id": "bookmark",
-      "reference": "res://assets/items/inventory-reference.png"
-    },
-    "silver_leaf": {
-      "version": 2,
-      "cell": 7,
-      "source": "builtin-imagegen",
-      "asset": "res://assets/items/inventory-atlas-v2.png",
-      "item_id": "silver_leaf",
-      "reference": "res://assets/items/inventory-reference.png"
-    },
-    "restorative_draught": {
-      "version": 2,
-      "cell": 0,
-      "source": "builtin-imagegen",
-      "asset": "res://assets/items/inventory-atlas-v2.png",
-      "item_id": "restorative_draught",
-      "reference": "res://assets/items/inventory-reference.png"
-    },
-    "clarity_crystal": {
-      "version": 2,
-      "cell": 1,
-      "source": "builtin-imagegen",
-      "asset": "res://assets/items/inventory-atlas-v2.png",
-      "item_id": "clarity_crystal",
-      "reference": "res://assets/items/inventory-reference.png"
+    "lavender": {
+      "item_id": "lavender",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/style_reference.png",
+      "path": "res://assets/items/v3/v3r1/lavender.png",
+      "icon_path": "res://assets/items/v3/v3r1/lavender_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        62,
+        50,
+        193,
+        253
+      ],
+      "alpha_bbox": [
+        59,
+        47,
+        196,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 120,
+      "bottom_width": 12,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "c1a117ddb537813c0dcd2219174f91b178d529a7f73bf7849a5fc13cd10b6cd2",
+      "icon_sha256": "e2109b4df035d12d73d7618a0f511f8996c1e33e5d3d9be4d0e92809aac63238",
+      "source_runtime_sha256": "c1a117ddb537813c0dcd2219174f91b178d529a7f73bf7849a5fc13cd10b6cd2",
+      "source_path": "assets/_incoming/a2r_v3/lavender_source_attempt2.png",
+      "source_sha256": "c149cc68d7f86368bf652e1e1d7af59eca800fe6f00a846a9f41614bfb6f2bca",
+      "source_native_size": [
+        1254,
+        1254
+      ]
     },
     "spring_water": {
-      "version": 2,
-      "cell": 6,
-      "source": "builtin-imagegen",
-      "asset": "res://assets/items/inventory-atlas-v2.png",
       "item_id": "spring_water",
-      "reference": "res://assets/items/inventory-reference.png"
-    },
-    "moon_dust": {
-      "version": 2,
-      "cell": 5,
-      "source": "builtin-imagegen",
-      "asset": "res://assets/items/inventory-atlas-v2.png",
-      "item_id": "moon_dust",
-      "reference": "res://assets/items/inventory-reference.png"
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/style_reference.png",
+      "path": "res://assets/items/v3/v3r1/spring_water.png",
+      "icon_path": "res://assets/items/v3/v3r1/spring_water_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        82,
+        50,
+        174,
+        253
+      ],
+      "alpha_bbox": [
+        79,
+        47,
+        177,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 106,
+      "bottom_width": 44,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "0a7196af892d82b1a1b3e8d77520c7f58a4d0ddebf8d8718ca969158b3be45fc",
+      "icon_sha256": "e5e8bc009b0de59b2e24845262a1c65cc4451fbf26a9c275ab653878914776ca",
+      "source_runtime_sha256": "0a7196af892d82b1a1b3e8d77520c7f58a4d0ddebf8d8718ca969158b3be45fc",
+      "source_path": "assets/_incoming/a2r_v3/spring_water_source_attempt2.png",
+      "source_sha256": "281a1df668e6e4fca346365dd3aa427e54da3d28c958673c6bebfc4660956259",
+      "source_native_size": [
+        1254,
+        1254
+      ]
     },
     "quartz": {
-      "version": 2,
-      "cell": 4,
-      "source": "builtin-imagegen",
-      "asset": "res://assets/items/inventory-atlas-v2.png",
       "item_id": "quartz",
-      "reference": "res://assets/items/inventory-reference.png"
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/style_reference.png",
+      "path": "res://assets/items/v3/v3r1/quartz.png",
+      "icon_path": "res://assets/items/v3/v3r1/quartz_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        20,
+        93,
+        236,
+        253
+      ],
+      "alpha_bbox": [
+        16,
+        90,
+        240,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 94,
+      "bottom_width": 62,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "83dbea9fd7c595482a08aa08c4eec57a251dc77f485d66e91591fbbf5916a610",
+      "icon_sha256": "540c1bedfbc93ed01b2650adf00c0dacffc605ae2498485799f33fad2392e4d5",
+      "source_runtime_sha256": "83dbea9fd7c595482a08aa08c4eec57a251dc77f485d66e91591fbbf5916a610",
+      "source_path": "assets/_incoming/a2r_v3/quartz_source_attempt1.png",
+      "source_sha256": "f874a5214ef4ed2b8f8deed14f87838f1d028735118616437eff86f7ec2d8646",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "moon_dust": {
+      "item_id": "moon_dust",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/style_reference.png",
+      "path": "res://assets/items/v3/v3r1/moon_dust.png",
+      "icon_path": "res://assets/items/v3/v3r1/moon_dust_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        23,
+        50,
+        233,
+        253
+      ],
+      "alpha_bbox": [
+        20,
+        47,
+        236,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 63,
+      "bottom_width": 124,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "adc97d4b774c7afb0965df41192ce5df38b488066ca08c3bf0207e20d78928f8",
+      "icon_sha256": "12a211b02af96b5a81c20a705002bae691da9e9ed54d7c9be32d760208e17ada",
+      "source_runtime_sha256": "adc97d4b774c7afb0965df41192ce5df38b488066ca08c3bf0207e20d78928f8",
+      "source_path": "assets/_incoming/a2r_v3/moon_dust_source_attempt3.png",
+      "source_sha256": "a454e0bdb24735afaf5e0f23160c8bf1b782f19b06a2bca70159f668f63a5e1d",
+      "source_native_size": [
+        1254,
+        1254
+      ]
     },
     "calming_incense": {
-      "version": 2,
-      "cell": 2,
-      "source": "builtin-imagegen",
-      "asset": "res://assets/items/inventory-atlas-v2.png",
       "item_id": "calming_incense",
-      "reference": "res://assets/items/inventory-reference.png"
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/style_reference.png",
+      "path": "res://assets/items/v3/v3r1/calming_incense.png",
+      "icon_path": "res://assets/items/v3/v3r1/calming_incense_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        30,
+        57,
+        226,
+        253
+      ],
+      "alpha_bbox": [
+        27,
+        50,
+        229,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 89,
+      "bottom_width": 76,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "6ed60f5c1d6ca1a7947384b61d7ddf68ba6d4a24b692e296334608b9ea96e1ba",
+      "icon_sha256": "aa50c518eb33a029540ef0f3175c7f27871f6661fc5b98491358e13b3b1125f6",
+      "source_runtime_sha256": "6ed60f5c1d6ca1a7947384b61d7ddf68ba6d4a24b692e296334608b9ea96e1ba",
+      "source_path": "assets/_incoming/a2r_v3/calming_incense_source_attempt2.png",
+      "source_sha256": "aa3561c0593ae3a047fb23c37da7b08ae61bdee816f8b14c1a9cf32d1f171a5b",
+      "source_native_size": [
+        1254,
+        1254
+      ]
     },
-    "lavender": {
-      "version": 2,
-      "cell": 3,
-      "source": "builtin-imagegen",
-      "asset": "res://assets/items/inventory-atlas-v2.png",
-      "item_id": "lavender",
-      "reference": "res://assets/items/inventory-reference.png"
+    "restorative_draught": {
+      "item_id": "restorative_draught",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/style_reference.png",
+      "path": "res://assets/items/v3/v3r1/restorative_draught.png",
+      "icon_path": "res://assets/items/v3/v3r1/restorative_draught_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        54,
+        50,
+        201,
+        253
+      ],
+      "alpha_bbox": [
+        51,
+        47,
+        204,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 100,
+      "bottom_width": 55,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "f9393a3c7b56d8a51adf0df5fdb6bab2e600c7b03ed08b4d249317429a92498a",
+      "icon_sha256": "abe6c4c408891df23683a7cfa3e561ba3705b052c4a34fff616acf77e7125978",
+      "source_runtime_sha256": "f9393a3c7b56d8a51adf0df5fdb6bab2e600c7b03ed08b4d249317429a92498a",
+      "source_path": "assets/_incoming/a2r_v3/restorative_draught_source_attempt1.png",
+      "source_sha256": "fd83e15f1f74107d3eda6337676bffc7a0f2d39472430f6656916d777a83021c",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "clarity_crystal": {
+      "item_id": "clarity_crystal",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/style_reference.png",
+      "path": "res://assets/items/v3/v3r1/clarity_crystal.png",
+      "icon_path": "res://assets/items/v3/v3r1/clarity_crystal_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        58,
+        51,
+        198,
+        253
+      ],
+      "alpha_bbox": [
+        55,
+        48,
+        201,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 97,
+      "bottom_width": 64,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "55749ba640bdba60dc571e26e126f312df3b651bed9eafc46087abd5b75214e5",
+      "icon_sha256": "56904b3d0aee1518e8e92199205d8028ff3fc705e75f416e2150b4839e0dd6e2",
+      "source_runtime_sha256": "55749ba640bdba60dc571e26e126f312df3b651bed9eafc46087abd5b75214e5",
+      "source_path": "assets/_incoming/a2r_v3/clarity_crystal_source_attempt1.png",
+      "source_sha256": "a99a7e3ae089723745e6c2433c8b166d5a1cc91afc892eae98807febbe5199c8",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "bookmark": {
+      "item_id": "bookmark",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/style_reference.png",
+      "path": "res://assets/items/v3/v3r1/bookmark.png",
+      "icon_path": "res://assets/items/v3/v3r1/bookmark_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        96,
+        50,
+        159,
+        253
+      ],
+      "alpha_bbox": [
+        93,
+        47,
+        162,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 97,
+      "bottom_width": 61,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "caf09bbd358ac776bff16fa8230f80f0256da1da80af8f1fed859a1b524a2d8f",
+      "icon_sha256": "aef563f7f9287f0f6f2c6073b3ba4e44b2f0900c22fc51836f7dd1a7c61c9c59",
+      "source_runtime_sha256": "caf09bbd358ac776bff16fa8230f80f0256da1da80af8f1fed859a1b524a2d8f",
+      "source_path": "assets/_incoming/a2r_v3/bookmark_source_attempt1.png",
+      "source_sha256": "56cacb77d5e33d31f1bb692b137f6ee5b4bf5bb1a96bd8b9239af55cd46d5d9f",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "silver_leaf": {
+      "item_id": "silver_leaf",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/style_reference.png",
+      "path": "res://assets/items/v3/v3r1/silver_leaf.png",
+      "icon_path": "res://assets/items/v3/v3r1/silver_leaf_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        61,
+        51,
+        195,
+        253
+      ],
+      "alpha_bbox": [
+        58,
+        48,
+        198,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 112,
+      "bottom_width": 33,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "c8a93c23cce9c1bb878eb41b2534fbffbf2902c3b69bceb34eb3230914d1c8fd",
+      "icon_sha256": "915c5225a67fa2703a27c917145aabe5aef36713107749bef63ac6b57ec864a2",
+      "source_runtime_sha256": "c8a93c23cce9c1bb878eb41b2534fbffbf2902c3b69bceb34eb3230914d1c8fd",
+      "source_path": "assets/_incoming/a2r_v3/silver_leaf_source_attempt1.png",
+      "source_sha256": "ae9a3c154e1eb127db5d05b6ad920a4e2a952ef05fa7a7167057fc96bb4f41fc",
+      "source_native_size": [
+        1254,
+        1254
+      ]
     }
   },
   "original_sources": [
-    "res://assets/items/inventory-reference.svg"
+    "res://assets/_legacy/a2/inventory-reference.svg"
   ],
   "sha256": "E897D3B34F080B22F600DC181F14AA3CC081206EA1696CDFCD0FB2B8E4BCF345",
   "original_authorship": "Project-authored SVG samples, replaceable by final art-team assets.",
@@ -768,5 +1074,6 @@
       ],
       "layer_format": "aligned_full_canvas"
     }
-  }
+  },
+  "item_art_review_status": "root_reviewed_alpha_passed_gui_round2"
 }

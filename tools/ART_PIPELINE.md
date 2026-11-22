@@ -36,6 +36,110 @@ frames per task. Keep candidates and intermediates under ignored
 `assets/_incoming/`, with a local `.gdignore` so archived scripts/import files
 cannot create duplicate Godot resource UIDs.
 
+## A2R v3 square items
+
+Production uses nine independent items under `assets/items/v3/v3r1/`: a
+canonical 256×256 PNG and its derived 64×64 icon for each ID. The selected
+native images in this batch are actually 1254×1254; neither runtime size is
+described as native generation. The seven catalog items plus bookmark and
+silver_leaf retain their existing IDs and gameplay. V3_ITEM from
+`docs/art/style_v3.md` uses the selected S02 v3 style reference. The rejected
+picture-book item images are local history and are not reused as final art.
+
+`tools/art/item_pipeline.py` uses only stdlib and the existing Pillow.
+`data/art/item_pipeline.json` validates all roots, IDs and processing
+parameters. Native bytes are retained under `assets/_incoming/a2r_v3/`.
+The processor removes the magenta key, contains the foreground with Lanczos
+on a 256 canvas, erodes/feathers alpha by one pixel, aligns measured support
+near the bottom, and derives the 64 icon with Lanczos and contour darkening.
+The icon is never generated separately and contains no text, purpose badge
+or cast shadow. New revisions and receipt outputs must have distinct paths;
+different existing output bytes are rejected.
+
+Each successful generation attempt must retain its actual output path,
+SHA256 and native dimensions, together with the actual prompt/references.
+The final nine sources retain all fourteen attempts, including unselected
+outputs. Processing receipts bind the immutable generation snapshot, raw
+and runtime bytes, actual crop/scale, support and both derivation stages.
+New `paste_xy` recipes contain exactly two coordinates; the earlier batch1
+four-coordinate audit is retained unchanged as history. Do not rewrite a
+receipt after changing its inputs or relabel rejected art with a new style.
+
+After the built-in queue's new raw files and matching generation receipt
+exist, use its `command_after_generation`, which calls this processor with
+`--receipt`, `--revision`, `--only` and a new `--output-receipt` path.
+The registered local config is `data/art/item_pipeline.json`; there is no
+item CLI `--config` flag. Current retained receipt validation and forced
+production checks are:
+
+```powershell
+python -B tools/art/item_pipeline.py --workspace . --receipt assets/_incoming/a2r_v3/processing_receipt.json --validate-only
+python -B tools/check_alpha.py --workspace . --visuals data/shop/visuals.json
+python -B tools/art/validate_formal_manifest.py --workspace .
+tools/regen_art.ps1 -Style v3 -Only items -Output .tools/art/new-items-queue.json
+```
+
+The first command requires the retained local audit inputs. It is not a
+fresh-clone prerequisite when those ignored inputs are absent. The other
+production checks still require every formal file. `run.ps1 -Test` always
+runs item_visuals, formal SHA/dimension validation and the 18-file alpha
+check; optional retired audit skips cannot disable them.
+
+Alpha QA uses only `0 < alpha < 255` as its denominator. Saturation >0.6 in
+the configured red/yellow hue ranges fails above 2%; exactly 2% may pass.
+Visible magenta must be zero. Missing alpha, empty or fully opaque output
+fails. Both 256 and 64 are checked, without discarding alpha-1/2 pixels,
+desaturating edges or weakening the limits. Support uses alpha≥128 and
+zero-based coordinates: bbox right/bottom are exclusive, bottom_y is
+bbox.bottom−1, and bottom_left/width span the last three contact rows rather
+than count occupied pixels. Actual flat-base recognition remains a visual
+check even when these numbers pass.
+
+Canonical formal rows use `group: items`, `operation: item_chromakey`,
+`item_id`, `object_description`, actual `source_raw`/SHA/native size,
+`processing_script` and `local_config`. The 64 row aliases its own 256.
+Raw→256 records are processing provenance, not aliases that would turn a
+canonical formal image into an ignored raw. `-Only items` queues nine new
+native-magenta jobs, nine dependent chromakey tasks and nine icon derivation
+markers. Each chromakey invocation already creates its icon; the marker
+does not generate a tenth-to-eighteenth image. The queue expands the actual
+object description, references only the selected style and never submits
+`{object}` or the old atlas. Missing new raw/receipt/script dependencies
+remain explicit; the wrapper performs no image generation or central write.
+
+`ItemVisual.source_status()` distinguishes verified raw from
+`skipped_missing_local_source`. Only a safe missing PNG strictly below
+`assets/_incoming/a2r_v3/` can be skipped; its recorded raw path, SHA and
+native size remain required. An existing raw must match SHA, decode and
+match native dimensions. Directories, similar prefixes and missing sources
+elsewhere fail. Tests print each skipped source explicitly; UI refreshes do
+not print repeatedly. Formal 256/64 and the style reference must still
+exist; formal SHA/dimensions and actual item alpha/support remain mandatory.
+Missing local history never means that its source bytes were verified.
+
+`tests/integration/item_visual_preview.gd` reads the local processing receipt
+and writes `.tools/art/previews/A2R/v3/` using an instance-only override.
+1280×720 and 1920×1080 produce sixteen frames: three real pages per size,
+64/128 nine-item comparisons, and 256 comparisons paginated three per page.
+The comparison paper and 64 gallery use paper colors and dynamic labels.
+Purpose badges follow the actual centered rendered square on ready/resize,
+including stretched 224/360-wide cells, rather than the wrapper's far edge.
+The old atlas/reference PNG/SVG and their import sidecars now live under
+`assets/_legacy/a2/` for compatibility; current regeneration does not select
+them. Detailed receipts, candidates, raw images and audit JSONL stay local;
+the compact formal table remains below 500000 bytes.
+
+A2R full round1 exited 0: Godot 8292 + gateway 94 + art 169 = **8555/8555**,
+with zero ERROR/WARNING. Final Windows Compatibility GUI round2 recorded
+255 checks and sixteen item frames; the main shop run recorded 718 checks
+and twenty-three frames. Visual review covered six production pages and eight
+changed shop frames; fourteen other shop frames matched the already-reviewed
+A1R SHA. Round1's numerical pass did not catch badge drift, so the fix has
+actual stretched-layout regression and a second graphical run. Bookmark's
+paper-strip identity and the grey-brown resin's material remain weak at
+small sizes. Old slot/GridContainer shelf placement and contact shadows
+remain A7 work; alpha success does not certify those artistic details.
+
 ## Real scene processing and review
 
 The current production configuration is `data/shop/visuals.json`, with 17 v3
@@ -94,14 +198,20 @@ not call a generator, require an API key, install packages, or change the live
 manifest. `needs_builtin_generation` is a successful handoff status, not a
 claim that images were generated.
 
+### Legacy scene work-manifest contract
+
+The commands and `round2_art` fragment below describe retained legacy work
+manifests. Current compact schema-3 queues accept `scenes`, `slices`, `items`,
+`portraits` and `all`; use the A2R item receipt flow above for square items.
+
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools/regen_art.ps1 `
   -Style assets/_incoming/a1r_pilot/engineering_2.png -Only all `
   -Output .tools/art/receipt-v1.json -Python D:/Downlode/anaconda/python.exe
 ```
 
-`-Only` accepts `all` or a group actually declared in `round2_art.recipes`
-(currently `scenes`, `layers`, and `pilot`). `-Manifest` selects a versioned
+For these legacy manifests, `-Only` accepts `all` or a group actually declared
+in `round2_art.recipes` (`scenes`, `layers`, and `pilot`). `-Manifest` selects a versioned
 manifest copy for an independent import. All manifest/output/import-map paths
 are workspace-relative POSIX paths. An absolute `-Style` is accepted only
 inside the workspace. Symlink or junction escapes are rejected.
@@ -232,7 +342,7 @@ recorded and the receipt is validated again against actual files.
 `geometry_passed` is independent from `art_passed`. The offline pipeline always
 leaves `art_passed:false` and `visual_review:not_evaluated`; a human/Codex visual
 review of every image, style requirements, and AI artifacts remains necessary.
-The current procedural resources can only serve as geometry evidence.
+The legacy procedural resources can only serve as geometry evidence.
 
 ```powershell
 python -m unittest discover -s tests/art -p test_art_pipeline.py -v

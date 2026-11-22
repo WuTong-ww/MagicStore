@@ -125,7 +125,7 @@ def validate_compact_manifest(workspace, manifest):
     _require("round2_art" not in manifest, "compact manifest cannot inline retired round2_art")
     assets = manifest.get("assets")
     _require(isinstance(assets, list), "compact assets must be an array")
-    paths = set()
+    paths, item_ids = set(), set()
     for asset in assets:
         _require(isinstance(asset, dict), "invalid compact asset")
         path = asset.get("path")
@@ -151,6 +151,18 @@ def validate_compact_manifest(workspace, manifest):
                      "regeneration_constraints must be nonempty text")
         if asset.get("group") == "slices":
             _require(asset.get("operation") in ("extract_layer", "inpaint_cleanplate"), "unsupported formal slice operation")
+        if asset.get("group") == "items":
+            item_id = asset.get("item_id")
+            _require(asset.get("operation") == "item_chromakey", "unsupported formal item operation")
+            _require(isinstance(item_id, str) and re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]*", item_id) and
+                     item_id not in item_ids, "invalid or duplicate item_id")
+            item_ids.add(item_id)
+            _require(isinstance(asset.get("object_description"), str) and asset["object_description"].strip(), "missing object_description")
+            for field in ("source_raw", "processing_script", "local_config"):
+                safe_path(workspace, asset.get(field))
+            _require(isinstance(asset.get("source_raw_sha256"), str) and re.fullmatch(r"[a-fA-F0-9]{64}", asset["source_raw_sha256"]), "invalid item raw sha256")
+            size = asset.get("source_raw_native_size")
+            _require(isinstance(size, list) and len(size) == 2 and all(_integer(n, 1) for n in size), "invalid item raw native size")
         if asset.get("group") == "slices" and asset.get("operation") in ("extract_layer", "inpaint_cleanplate"):
             for field in ("composite_source", "processing_script", "local_spec", "local_config", "mask_path",
                           "inpaint_mask_path", "source_receipt"):
@@ -171,6 +183,10 @@ def _compact_resources(manifest):
     assets = {row["path"]: row for row in manifest["assets"]}
     aliases = {}
     for row in manifest.get("runtime_copies", []):
+        target = assets.get(row["path"], {})
+        if target.get("operation") == "item_chromakey":
+            _require(row["source_path"] == target["source_raw"], "item processing raw source mismatch")
+            continue  # Chromakey raw->256 is processing provenance, not an alias.
         _require(row["path"] not in aliases or aliases[row["path"]] == row["source_path"], "conflicting runtime source")
         aliases[row["path"]] = row["source_path"]
     for row in assets.values():
@@ -213,6 +229,7 @@ def _compact_resources(manifest):
             elif source.startswith("assets/portraits/"):
                 group = "portraits"
         if group in ("scenes", "slices", "items", "portraits"):
+            _require(group != "items" or not name.endswith("_64.png"), "64 item icon requires its canonical 256 alias")
             resources[source] = (group, row)
     return resources, {path: original(path) for path in aliases}
 
@@ -289,8 +306,19 @@ def build_compact_queue(workspace, manifest, style, only, config=None):
         revision += "_" + digest[:12]
     processing_root = "assets/generated_scenes/v3_regen/" + revision
 
+    def item_config(row):
+        _require(row["local_config"] == "data/art/item_pipeline.json", "item CLI requires its registered local_config")
+        values = read_json(safe_path(workspace, row["local_config"], must_exist=True))
+        for field in ("source_root", "output_root"):
+            safe_path(workspace, values.get(field))
+        _require(values["source_root"].startswith("assets/_incoming/") and values["output_root"].startswith("assets/items/"), "invalid item output roots")
+        _require(row["item_id"] in values["required_ids"], "unknown configured item_id")
+        return values
+
     def destination(source):
         group, row = resources.get(source, (None, {}))
+        if row.get("operation") == "item_chromakey":
+            return item_config(row)["output_root"] + "/" + revision + "/" + row["item_id"] + ".png"
         if processing(group, row):
             composite = row.get("composite_source")
             _require(composite in resources and resources[composite][0] == "scenes",
@@ -312,6 +340,58 @@ def build_compact_queue(workspace, manifest, style, only, config=None):
             raise FileExistsError("versioned output already exists; select a new revision: " + target)
         edit_target = source
         dependencies = []
+        if group == "items" and row.get("operation") == "item_chromakey":
+            values = item_config(row)
+            _require(row["dim"] == values["runtime_size"], "canonical item dimensions differ from processing config")
+            old_raw = safe_path(workspace, row["source_raw"])
+            missing_previous = [] if old_raw.is_file() else [row["source_raw"]]
+            if old_raw.is_file():
+                _require(sha256(old_raw) == row["source_raw_sha256"].lower(), "item raw sha256 mismatch")
+                _require(list(read_image(old_raw).size) == row["source_raw_native_size"], "item raw native size mismatch")
+            item_id = row["item_id"]
+            raw = values["source_root"] + "/" + revision + "/" + item_id + "_source.png"
+            icon = values["output_root"] + "/" + revision + "/" + item_id + "_64.png"
+            generation_receipt = values["source_root"] + "/" + revision + "/generation_receipt.json"
+            raw_exists = safe_path(workspace, raw).is_file()
+            receipt_exists = safe_path(workspace, generation_receipt).is_file()
+            script_exists = safe_path(workspace, row["processing_script"]).is_file()
+            if raw_exists and receipt_exists:
+                generation = read_json(safe_path(workspace, generation_receipt))
+                _require(isinstance(generation, dict) and generation.get("style_reference") == path and
+                         isinstance(generation.get("style_sha256"), str) and generation["style_sha256"].lower() == digest,
+                         "item generation receipt must use the selected style")
+                records = generation.get("records")
+                _require(isinstance(records, list), "item generation receipt requires records")
+                matches = [record for record in records if isinstance(record, dict) and record.get("id") == item_id]
+                _require(len(matches) == 1 and matches[0].get("source_path") == raw,
+                         "item generation receipt must select this item's new raw")
+            prompt = templates["item"].replace("{object}", row["object_description"])
+            if "{object}" not in templates["item"]:
+                prompt += "\nObject: " + row["object_description"]
+            prompt += "\n" + values["generation"]["target_size_prompt"]
+            prompt += "\nThe input image is a style reference only. Generate the single described object; do not edit or reproduce the reference scene."
+            queue["tasks"].append({"recipe_id": "A2R_" + item_id, "item_id": item_id, "group": "items", "version": revision,
+                "status": "needs_builtin_generation", "operation": "generate", "tool": config["generation"]["tool"],
+                "previous_source_path": source, "previous_source_sha256": row["sha256"], "previous_source_raw": row["source_raw"],
+                "source_destination": raw, "processed_destination": target, "style_reference": path, "style_sha256": digest,
+                "missing_previous_inputs": missing_previous, "depends_on": [], "missing_dependencies": [],
+                "ready": not raw_exists, "can_generate": not raw_exists, "attempts_used": 0,
+                "generation_receipt_destination": generation_receipt,
+                "arguments": {"prompt": prompt, "referenced_image_paths": [str(file)], "transparent_background": False}})
+            can_process = raw_exists and receipt_exists and script_exists
+            command = ["python", row["processing_script"], "--workspace", str(Path(workspace).resolve()),
+                       "--receipt", generation_receipt, "--revision", revision, "--only", item_id,
+                       "--output-receipt", ".tools/art/a2r_v3/" + revision + "/" + item_id + "_processing.json"]
+            queue["offline_tasks"].append({"operation": "item_chromakey", "item_id": item_id, "source_path": raw,
+                "source_destination": target, "icon_destination": icon, "depends_on": [raw],
+                "status": "needs_item_processing", "phase": "awaiting_raw_generation" if not raw_exists else
+                    "awaiting_generation_receipt" if not receipt_exists else "ready_for_processing",
+                "ready": can_process, "can_process": can_process, "processing_script": row["processing_script"],
+                "local_config": row["local_config"], "generation_receipt": generation_receipt,
+                "missing_paths": [p for p in (raw, generation_receipt, row["processing_script"]) if not safe_path(workspace, p).is_file()],
+                "processing_validation": "CLI must verify the new receipt, raw bytes, dimensions, alpha and support; art approval remains separate.",
+                "command_after_generation": command})
+            continue
         if processing(group, row):
             composite = row["composite_source"]
             edit_target = destination(composite)
@@ -357,6 +437,18 @@ def build_compact_queue(workspace, manifest, style, only, config=None):
         if source not in selected:
             continue
         native = destination(source)
+        if resources[source][1].get("operation") == "item_chromakey":
+            row = resources[source][1]
+            values = item_config(row)
+            target = values["output_root"] + "/" + revision + "/" + row["item_id"] + "_64.png"
+            _require(manifest["assets"] and next(a for a in manifest["assets"] if a["path"] == runtime)["dim"] == values["icon_size"], "item alias must be the configured icon size")
+            if safe_path(workspace, target).exists():
+                raise FileExistsError("versioned item icon already exists; select a new revision: " + target)
+            queue["offline_tasks"].append({"operation": "item_icon_derivation", "item_id": row["item_id"],
+                "source_path": native, "runtime_path": target, "depends_on": [native],
+                "runtime_size": values["icon_size"], "method": "Lanczos_with_contour_darkening",
+                "processing_script": row["processing_script"], "performed_with": "item_chromakey", "can_process": False})
+            continue
         target = destination(runtime)
         if processing(*resources[source]) and runtime == source.replace("assets/generated_scenes/", "assets/generated_scenes/runtime/", 1):
             target = native.replace("assets/generated_scenes/", "assets/generated_scenes/runtime/", 1)
