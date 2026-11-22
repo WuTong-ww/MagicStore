@@ -1,6 +1,6 @@
 # 第二轮 v3 续跑进度
 
-最新恢复点：2026-11-23，分支 `codex/round2-clean`，HEAD `37b0137`，A6任务提交 `fb43344`。**A4已验收为部分完成，正在提交；完整第3轮session93596已terminal exit0，10278/10278，勿再poll或复跑**。详情见末尾；下一生产任务G2，尚未开始。重建过程旧记录在 `history/clean-rebuild-progress-20261122.md`。
+最新恢复点：2026-11-23，分支 `codex/round2-clean`，A4任务提交 `f2e0d13`。**A4已处理为部分完成；完整第3轮session93596已terminal exit0，10278/10278，勿再poll或复跑**。本META与任务提交随后一并普通Git推送；恢复时可直接核对远端。下一生产任务G2，尚未开始，之后G4→G5→G6；未到最终审阅包结束条件。重建过程旧记录在 `history/clean-rebuild-progress-20261122.md`。
 
 任务ID｜状态｜提交｜一句话说明
 ---｜---｜---｜---
@@ -11,7 +11,7 @@ A1R v3｜部分完成｜059baeb｜17态C与六层实图正式接入，完整8362
 A2R v3｜部分完成｜2773499｜九件18图去背及来源验收通过，完整8555/8555，44帧审阅；旧架子/A4跨任务项保留。
 A7｜部分完成｜c2c37eb｜原生层板替代木箱、确定布局/交互/去重信号；完整9154/9154，47帧及12接触诊断已审，旧人物十项留A4。
 A6｜部分完成｜fb43344｜风场/弹簧/正式流水/货架/保存后事件与设置；完整9653/9653，最终508和4pair+8control、53帧已审；前台动层/铃音/严格帧时未完成。
-A4｜部分完成｜待记录｜139部件/十层/五态/捏脸/schema6；完整10278/10278、24/24重开一致；页签2fail及接缝/旧装饰等保留，六JPG已审。
+A4｜部分完成｜f2e0d13｜139部件/十层/五态/捏脸/schema6；完整10278/10278、24/24重开一致；页签2fail及接缝/旧装饰等保留，六JPG已审。
 
 ## A1R v3 已提交并推送
 
@@ -114,3 +114,5 @@ A4 v3 → G2（仅框架/占位家族）→ G4 → G5 → G6。每任务最多3�
 - CLI再生既有前置已实际跑：20guides忽略目录，真正PowerShell regen -Style v3 -Only portraits exit0，140 tasks仅新mannequin1ready，139parts待新基准审核／75 provisional maskreview，0缺mask；不冒称自动全生。两个命令与边界在ART_PIPELINE.md。
 - 完整第2轮session11617已terminal exit1，不要poll：transcript154使800600旧shell遮脸。只改visuals.S03.seat_narrow_rect为[1229.4736842105262,136,235.7894736842105,348.3253588516746]，等比.7/横center不变，真实probe11/1→11/11、shell1366/1→1366/1366、consult48/48；800 midpoint129.2344<paper135、top56.6667>header52。1280/1920真实全部几何exact不变，a7独审17/17；所有139源/样式/manifest冻结。新visuals SHA9f5e26cdc9301c4013d968f166a51cee5e76c526582f9c44a4027f9494637b39。
 - **Root最终full3 session93596已terminal exit0**：10278/10278（Godot9940+gateway/protocol107+art231），0SCRIPT ERROR/ERROR/WARNING，56v2 SHA全部不变，309正式源/18物品alpha通过，明细results/A4-validation.json。所有源已显式暂存358paths，图片仅140PNG+六JPG，pending index新增二进制10,703,272B；clean累计233,785,988B。原CLEAN helper仍因累计150MB及历史A1R>100MB两检查FAIL，不改阈值、不谎称A4超预算；A4本次远低100MB且禁止路径0，manifest499605B。准备补最终文本/UPLOAD_STATUS再[A4] commit→PROGRESS hash小META→普通push clean。main与旧round2不动；之后严格G2→G4→G5→G6，最后才REVIEW_PACKET。
+
+- A4实际任务提交已完成：`f2e0d13`（361文件）；源与验收文本已收口，工作区没有未提交生产改动。本条META记录实际hash后随任务普通推送origin/codex/round2-clean；不推本地backup、不动main或旧round2。无活动引擎或测试session。后续从G2正式计划开始，三份只读预检在.tools/art/g2-preflight.md、g2-file-split.md与g4-preflight.md；不要重做A4。
