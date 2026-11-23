@@ -1,6 +1,6 @@
 # 第二轮 v3 续跑进度
 
-最新恢复点：2026-11-23，分支 `codex/round2-clean`，A4任务提交 `f2e0d13`。**A4已处理为部分完成；完整第3轮session93596已terminal exit0，10278/10278，勿再poll或复跑**。本META与任务提交随后一并普通Git推送；恢复时可直接核对远端。下一生产任务G2，尚未开始，之后G4→G5→G6；未到最终审阅包结束条件。重建过程旧记录在 `history/clean-rebuild-progress-20261122.md`。
+最新恢复点：2026-11-23，分支 `codex/round2-clean`，A4任务`f2e0d13`及META`7f932d9`已普通Git推送。**G2已验收收口，准备本地提交／推送；A4勿重做**。标准full第2轮session26883已terminal0，11252/11252＝10648+117+231+256，无错误警告，所有旧session不poll。GUI3仍114/115、2PNG部分完成，不GUI4；shop694/694、30最终图＋4历史图矩阵／六JPG齐。最终结果／plan／features／UPLOAD已写；下一显式restage（含两旧夹具修及最后文档）→[G2]任务提交→PROGRESS实际hash META→普通push clean。仅六JPG1,531,178B、manifest499605B、56v2保持；原累计两体积检查FAIL已如实记。后续G4→G5→G6尚未正式实施，未到最终REVIEW_PACKET停止条件。
 
 任务ID｜状态｜提交｜一句话说明
 ---｜---｜---｜---
@@ -116,3 +116,61 @@ A4 v3 → G2（仅框架/占位家族）→ G4 → G5 → G6。每任务最多3�
 - **Root最终full3 session93596已terminal exit0**：10278/10278（Godot9940+gateway/protocol107+art231），0SCRIPT ERROR/ERROR/WARNING，56v2 SHA全部不变，309正式源/18物品alpha通过，明细results/A4-validation.json。所有源已显式暂存358paths，图片仅140PNG+六JPG，pending index新增二进制10,703,272B；clean累计233,785,988B。原CLEAN helper仍因累计150MB及历史A1R>100MB两检查FAIL，不改阈值、不谎称A4超预算；A4本次远低100MB且禁止路径0，manifest499605B。准备补最终文本/UPLOAD_STATUS再[A4] commit→PROGRESS hash小META→普通push clean。main与旧round2不动；之后严格G2→G4→G5→G6，最后才REVIEW_PACKET。
 
 - A4实际任务提交已完成：`f2e0d13`（361文件）；源与验收文本已收口，工作区没有未提交生产改动。本条META记录实际hash后随任务普通推送origin/codex/round2-clean；不推本地backup、不动main或旧round2。无活动引擎或测试session。后续从G2正式计划开始，三份只读预检在.tools/art/g2-preflight.md、g2-file-split.md与g4-preflight.md；不要重做A4。
+
+## G2实施恢复点（2026-11-23）
+
+- A4 push实际exit0：37b0137..7f932d9→origin/codex/round2-clean；未动main/旧round2。G2新plans/G2.md先于代码已写；root指南docs/families.md已按真实纯库合同写，最终功能尚在接线，不能当全验收。
+- outdoors唯一纯库owner已完成并冻结FamilyLibrary、registry、3人原创占位及unit+真实UID共6文件；生产enabledfalse/trigger0、cap0.12。真实RED53/41→82/82→补RED106/4→最终106/106，0E/W，无full/Git/GUI。完整合同.tools/art/g2/family-library-contract.md与SHA交付清单。API load_config/config_valid/template_valid/eligible_templates/instance_proposal，严格JSON/完整rig新选择/稳定fullSHA命名/全图纯提案，暂无该线阻塞。
+- a7唯一core owner People/Bridge/GameState/SaveService及对应tests，schema7内存迁移1–6，旧二人demo/ID/生日/关系/计划/A4/生成hash保持。真实migration RED96/20（首96/25有5测试codec误差已修另存）、budget RED51/27、flow解析失败另存后真正1/1语义RED。当前implementation2 limited GREEN：migration96/96、budget51/51、三人flow28/28，均0E/W；真实GameState/G3三边事务、预约action、长期实际比例、旧target/schema终态适配尚待完成。core有限engine lane，Python独立不占；下一target前须通告sourcefreeze，root不另开引擎。
+- Root修正并记录预约设计：不能已确认约定到门才静默left。新特殊计划/预约预留R不入actual S/T，(S+R+1)/(T+R+1)<=cap才新承诺；没余量原动作明确拒绝不改盘，自发special不抢R。物理episode按[arrival_id,at]去重，原arrival_id复用预约第二次到门仍计数；旧已确认ID/at/同意来源保留，legacy窗口/例外如实记录，不伪造历史。A policy已改arrival_id_and_at与copy.ratio_unavailable。
+- workshop唯一对白owner Godot providers/policy+Python gateway、新family_dialogue_policy JSON/tests，先Python真实RED；不写core4文件/生成v1v2协议。合同safe_persona原4字段＋可选非空catchphrase/information_boundaries；本地_family_guard词表绝不进入任何模型HTTP上下文，gateway自读本地显式registry（disabled也用于拒绝），测试禁词只合成标记。Godot目标须等a7释放，不并engine。尚未移交PeoplePanel UI；待policy接线后仅移除关系装饰烘焙问号，资产文件保留，A4灰白tabs2fail不顺手修。
+- Root负责docs/run.ps1/完整full与必要双尺寸实际UI/≤6JPG/PROGRESS/体积/Git。G2尚无完整或图形最终验收，不提前提交/标完成；所有A4图源与manifest499605B冻结。下一仍G4→G5→G6，最后REVIEW_PACKET。
+
+### G2恢复追加：最终接线前（未full／未提交）
+
+- 30日家族真实比例先97/1 RED（271实际／31特殊，但只2人相识），调整新成员先占预算后96/96 GREEN、3人齐，不改12%或删断言。三边G3事务首轮夹具unknown rel触发正确整档拒绝却残留fail_next_write造成等待挂，原9MB日志保留ignored；只修夹具及有限wait后真正62/4 RED、零E/W。四失败仅legacy runtime cap透传1＋outside同趟到店重复计数／未退休alias3，最小修已落待GREEN。
+- modern goal progress缺失/null/坏source真实flow33/5 RED后validator已补；新增现代profile不能通过同步删goal index逃过每人goal要求。另root查纯Library允许空／缺成员goal而core不允许，交纯库owner加全覆盖负例与validator，非模糊内容扩张。
+- Root判断personality可能技术ID显示是片段误读，新构造原本personality自然文／personality_id分类正确，已明确撤回内部字段重构要求，仅加公开／G3分别验证，不伪报生产RED。
+- 真正欠缺的是通用家族关系披露入口：只在保存成功的真实start开场按新增JSON copy.family_opening_relation说明本人与自己问题对象的关系；每位仅一条、绑定动作／visit／开场顾客陈述来源，其他图仍隐藏。A7补真RED与core，outdoors补JSON／validator、独立family_ui四帧测试，禁止直接造revealed。纯库最新预期115/4（覆盖及copy）尚待真实运行。
+- Python对白8/8已真RED→GREEN；Godot语义RED23/13零E/W，workshop正原子落GDS／真实HTTP，尚未GREEN。root已加7个G2headless入口至run.ps1，family_ui与HTTP目标待作者交付后加。Root已仅撤PeoplePanel烘焙问号装饰4行，保资产／manifest；A4选中tabs2fail不修。无G2full／GUI最终结果，不提前入G4production。
+
+- 更新：C三GDS已原子落并由a7确认可parse；a7新批真RED为Library115/4（覆盖/copy，outdoors最小修已落待GREEN）、flow43/1（旧progress5全过，只现代目标及index同步删仍被接纳）、transactions70/3（旧legacy两P2全过，只新opening/顾客陈述/1of3对照未实现）。开场/core最小实现已落待最终有限GREEN；旧schema迁移追加真实旧已确认预约来源保全目标。
+- Outdoors新tests/integration/family_ui.gd完整静态交付，尚未engine/UID：单save、真调度3人分日、真实G3wait三边各一次后0revealed，再3个真实start逐条statement披露；生产Main/PeoplePanel/public_view，partial/complete两尺寸共4PNG，90秒watchdog+有限wait。root已加第8G2 headless入口；exact命令.tools/g2/family-ui-command.md。Root后续独占先headless再GUI+shop，等待a7有限lane释放，不并engine。
+- Root再次片段读HTTP._valid_reply误判主reply漏guard；C核完整_on_completed已有scoped Policy._text_safe，root已撤回重复修要求，要求真实HTTPlocal-only旧来源负例证明整链，不能记为生产修复。计划已记两次审查假阳性，不以内部helper造RED。C仍在真实direct/gateway分类/生成/审阅/重试/fallback捕获，未交最终HTTP入口。
+- Root静态请求a7验证新opening后的实际case.subject/target：context目前先于新揭示计算，若真实仍指archive默认而非goal对象，需在guard通过后对本次已陈述对象绑定context再add_case；先测不凭片段强改。a7独占core，outdoors只读复核原P2/new来源，C收policy/HTTP后独审核心模型边界。Rootfeatures/指南/plan草稿已更新且明确待最终验证。.tools/g2/verify_full.py仅待最终full0后生成结果，尚未运行。56v2 hash及manifest499605B/dbb6…fb0b root重新实证保持。
+- G2“前置家族成员信任”不应要求策划预写含save域的实际npc_id。Root定最小稳定本地别名family:<template_id>:<member_key>，沿用trust_requirements.npc_id字段，只对已met成员投影known_trust别名，未见／低信任／满足门槛需真实负正例；已交唯一core owner处理。无新存档字段／model数据／作品内容。指南／plan已记该可逆选择。Root结果草稿results/G2-implementation.md已写但明确未最终验收，勿当完成。
+
+### G2最新恢复点：核心已绿、图形按三轮收口，待HTTP与full（未提交）
+
+- a7已明确release/所有engine terminal，新7目标526/526：Library115、Flow47、Transactions71、Migration109（含真实旧确认预约到门legacy例外）、Budget51、Distribution96（271/31/known3）、Policy37；0E/W。最后稳定信任alias flow47/1、新case.subject txn71/1均先真实RED再两字段最小修GREEN。四源SHA People3913ddc7…1171e／Bridge1f354222…57656／GSde3e796b…40099／Saveb1c9fc25…f8a3c冻结，exact .tools/g2/core-frozen-files.json、final-core-targets.json、core-handoff.md。a7新独审policy-independent-review.md无P1，仅C的Python限流/模型异常offline禁句ValueError逃handler、0HTTP响应P2已真实内存dispatch确认，C负责真实HTTP负例/结构化拒绝最小修。
+- Root family_ui首constMAIN preload早于autoload失败，90s watchdog实际exit1，session85810已terminal，不再poll。CIM访问失败后GetProcess无匹配，不曾实际kill root该run。Root已接管测试仅动态load修；第二headless48/1后探针确认Window1×1/detail220×0；真实GPU1原断言144/144、4PNG .tools/g2/ui-captures/run_1a7627b8bd48ae23fd9df067ff3e1f80/，root四张全开，发现正文两行藏关系与旧goldbook。headless仅native几何明确SKIP，公开消费最终132/132/0PNG；GPU断言保持。
+- Root补实际get_character_line/get_line_offset边界断言（已用该Godot反射验证API），GUI2真RED49/1/0PNG；最小生产UI改PeoplePanel头像/正文HBox、正文minimum220入appearance_editor.json及validator、撤report_notebook节点（原资产/manifest保留）。关系art也已撤，灰白tabs不碰。GUI3 session11492已terminal115/1、2PNG run_2144c01b2a3ada183b07e4c0b50facd4：首位成员双尺寸关系可直接读，完整档案第二条仍需滚动，严格首屏断言失败早退。**三轮已满，G2按部分完成，不跑GUI4／不改断言去凑绿**；核心三人/三边/reload仍由full headless与已绿事务验。Root两张新帧全开。
+- Root shop GUI初session27284和最终48118均terminal0 694/694、23writes/22unique。初freeze glob33含11旧帧，**不能计33新图**；最终仅按测试22确切name冻结.tools/g2/shop-gui-final/＋shop-final-captures.json。Root全部22最终PNG实开（tool因输出限制省略的exterior1920/zero1920均另单开），加两新family与六quality85 JPG全部实开。首轮family4另看。最终30图通用141/150（旧Lin6PNG+3JPG笔触不通过）；历史4图另16/20旧goldbook。根矩阵写plan G2末尾，results/G2-visual-review.json与G2-captures.json齐，六JPG合1,531,178B。零客1920重复咨询牌／数量label过窄如实留债，不新修。
+- 当前引擎lane已明确交C（workshop）实际HTTP有限验收；root只写文档/图审，不并engine。C需交真实Godot direct/gateway分类/生成/审阅/重试/fallback捕获与Python handlerP2修，精确CLI再由root接standard -Test（现run.ps1已有8G2 headless含family_ui，Pythontestpeople自动发现8）。C source三GD在a7测完后冻结未动，尚无actualHTTP最终交接。Outdoors尚在原coreP2/new披露只读复核，root已通知勿再改family_ui。
+- **尚未G2 full／stage／commit／push**。Root下一等C release+HTTP入口，跑mandatoryfull（最多3final轮）、生成G2-validation（.tools/g2/verify_full.py已备只在exit0后）、补implementation/features/plan最终计数及体积/56v2SHA/manifest499605B、显式stage（仅6JPG无incoming/audit），[G2]提交+META实际hash→普通push。然后G4→G5→G6，未到REVIEW_PACKET最终停止条件。所有前任务已推，A4勿重做。
+
+### G2最新：HTTP闭环，完整第1轮在跑（恢复先核session1210）
+
+- 原C未落HTTP夹具，root已interrupt（返回previous_status=pending_init）并明确接管，不再等其engine release／不要恢复其写入；新spawn尝试thread limit失败。root现在唯一protocol/runner owner，a7只新增tests/http/family_policy.gd（已交付，不碰生产/不开engine）；root写tests/http/family_policy.py并接scripts/dev/test-http.ps1，因此标准full实际覆盖新wire。
+- root新增Python2个真实handler测试：受限环境WinError10013/3errors不作语义RED；require_escalated允许127后真实10tests/2errors RemoteDisconnected RED。最小gateway.Handler.offline_dialogue_response两分支统一422 INVALID_BOUNDARY，GREEN10/10。具体SHA/logSHA results/G2-http-validation.json，gateway现01b41a8a…af48f；原a7独审旧SHA原文保留并追加Root非独立closure，没有篡改旧反例。
+- 实际新wire第1次exit0：Godot48/48 + Python256 assertions +16请求，完整direct分类/生成/审核、generate重试、local-only旧来源拒绝且不送review、持续503safe fallback、gateway/旧来源/重试/建议问题、两污染不dispatch、noURL坏作者句拒绝与safe clarify。逐请求actual body禁词/字段检查及retry rawSHA相同；.tools/g2/family-wire-captures.json存实际body（ignored），family-wire-attempt1.log已terminal。不是只transport对象单测，不调用真实付费模型。
+- **G2完整第1轮root session1210已启动，当前确认仍live**；命令run.ps1 -Test require_escalated127，日志.tools/g2/full-attempt1.log，退出后full-attempt1-exit.txt。最近已通过A6全部旧事件277、新Family Library115/Budget51/Flow47，仍推进中，不能称完整绿。不重启／不并engine；poll同session至terminal。root .tools/g2/verify_full.py已加familyUI/http及wire256统计、Python最低117（107旧＋10新）/art231，仅在exit0后用来生成official G2-validation。
+- 已显式暂存50路径，.tools/g2/stage-paths.z只当前G2合法代码／数据／文档／6JPG，无incoming/audit；full过后仍须暂存最后文档、新validation/size/UPLOAD（当前有index后追加未暂存文本）。size工具root session75708已terminal **exit1为历史两检查**，不要poll／误称新外阻：pending binary1,531,178B，clean累计235,317,166B，snapshot unique blobs245,373,769B，manifest499605B，禁止路径0，56v2保持；原150MB累计及历史A1R>100MB FAIL不改。official results/G2-size-inspection.json及UPLOAD_STATUS已写，少量最终文本不会改binary bytes。
+- Root已完成最终30图（24PNG+6JPG）141/150与历史4图16/20逐帧矩阵，schema/scene/native来源不变。G2GUI第三轮115/1保持partial，**不要GUI4或改断言**。source新min220/HBox两旧decor撤下、JSONvalidator已绑定；4core仍a7冻结SHA逐项核等。A4部分完成不重做。G2仍未commit/push，下一等full真实terminal→按必要失败修（full最多3轮）→最终文档/显式restage→[G2]＋METAhash→普通push。后续G4/G5/G6全部未正式实施，不提前REVIEW_PACKET。
+- a7已只读完成G4 schema7后预检.tools/art/g4-core-preflight-update.md和刷新g4-counts.json（只ignored文档）：旧effect校验在SaveService迁移前，直接改旧3商品会坏旧档；7kind/需求tag/accepted/30日真实经济及buy0防护分工已写。它不是G4实施；G4正式计划要等G2推送后写。a7目前无engine/生产待写，outdoors原postfix审查仍未交，不将其当现行独立签绿。
+
+### G2完整第1轮已失败并定位旧夹具，正在补未到达尾段
+
+- full1 session1210已terminal exit1，**不要再poll或重启它**；无残留Godot GetProcess已核。已通过新家族全部headless、A4/A6旧目标、round2 shell1366/edges87/consult48/audio43，止于旧arrival_transactions.gd最初writesave断言。根派生原fixture前缀实际probe：INVALID_SNAPSHOT 家族状态无效，metrics.actual_total1/physical_arrivals仍引用arrival_opening_lin，但该fixture已经arrivals.clear；这不是生产validator应放松的故障。
+- root只修tests/integration/arrival_transactions.gd：替换夹具时去两future meta并经People.initialize_family_library重建真实空baseline；其_traffic_fixture重建current namespace显式freshtrue；首seed-save失败早退防挂。真实限定GREEN42/42，0E/W，arrival-transactions-green.log。4core冻SHA与GUI产物未改。Full2尚未启动。
+- 为避免每个老夹具浪费一整轮full，root只跑full1未到达的10个integration尾段（不是重跑已过目标／不是full通过声明）。.tools/g2/run_unreached.py 1，**session14669当前确认live**，每目标60s timeout、日志tail-1-<target>.log，先save_delete_ui37/37；等同handle收terminal，不并engine。a7只读扫尾唯一高置信点为generation_arrival_slots.gd:41在schema7new_game后直接People.create替换且只补catalog2，缺新family metadata；需tail真实RED后补constructor初始化，勿改legacy纯People factory测试。generated_people plan_slots暂只有未到门／未来planned删除，未证实问题，不泛改。
+- size session75708 terminalexit1仅历史两项，officialsize已写：本任务binary1,531,178B、累计235,317,166B、snapshot245,373,769B，56v2／499605manifest／禁止路径0；仍未commit/push。50初次index后又有未暂存最终文档、size/UPLOAD、arrival fixture修，最终restage要兼容已暂存M / A状态（旧only M??脚本不能原样重跑）。下一收tail，必要最小fixture修与未到达HTTP/people/art段，之后mandatoryfull2/最多3；真绿才最终文档/G2 commit＋META／push→G4/G5/G6。
+
+- 尾段1 session14669已terminal1：save_delete_ui37及generated_people146过，generation_arrival_slots13/5真失败；root只加fixture新namespace的People.initialize_family_library，保留旧catalog2/RNG断言。尾段2 session57827已terminal0：generation slots30/30及其后7目标均过（opening1206），不是再跑已过两个目标，也不是full通过。a7只读扫其余未发现同类实际风险，不泛改独立legacy People factory域。
+- 首轮未到达的协议尾段root session68029也已terminal0：test-http（含新48/256/16）、person_http64、test-people13旧目标＋restart及Python117/117均过。原4coreSHA、manifest、GUI源码没有变化。Root随即启动**标准full2 session26883，当前确认live**；log最近Python117/117已过，等art231及最终资源检查后收terminal。不并engine、不因观测超时重启。.tools/g2/verify_full.py 2只在exit0后生成G2-validation。G2已补占位复用archive容器／专属内容与局部rel绑定未完成边界，不把测试运行时三边配置冒称正式家族剧情。GUI3 partial仍不修／不第四轮。
+
+## G2最终收口，准备提交
+
+- 标准完整第2轮session26883已实际terminal exit0：11252/11252（Godot10648、Python协议117、素材231、实际wire256），0SCRIPT ERROR/ERROR/WARNING；原logSHA d72ff47a5eedad0f601a1dc871f83c914b5fa73a0c6e1a0e7fda40da59b88a38。不要poll任何旧full/tail/size session。
+- 正式309资源、18alpha图、56v2输入SHA验证通过；manifest499605B。G2无新图源，仅6quality85 JPG合1,531,178B，root均实开。GUI3 strict114/115及家族专属事件内容接线如实partial，不GUI4；最终30图通用141/150、历史4图16/20，完整矩阵和SHA已写。
+- 只修两个被新版strict验证正确拒绝的current fixture，不改生产validator/legacy factory；两限定42/42、30/30，尾段10integration和三protocol wrapper均过，再完整复验。最终plan/results/features/UPLOAD齐；待显式restage、G2任务提交、META实际hash与普通push。没有用户待答或真正外部阻挡，推送后按G4→G5→G6继续，最后才REVIEW_PACKET。

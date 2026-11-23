@@ -1,0 +1,19 @@
+{
+  "task": "G2",
+  "pending_index_new_binary_bytes": 1531178,
+  "clean_history_new_binary_bytes": 235317166,
+  "staged_snapshot_new_unique_blob_bytes": 245373769,
+  "manifest_bytes": 499605,
+  "forbidden_tracked_paths": [],
+  "original_v2_files_sha_verified": 56,
+  "new_art_resources": 0,
+  "jpg_count": 6,
+  "jpg_quality": 85,
+  "jpg_bytes": 1531178,
+  "original_clean_helper_failed_checks": [
+    "new_binary_total",
+    "each_clean_commit_binary"
+  ],
+  "local_git_count_objects": "count: 5812\nsize: 306.53 MiB\nin-pack: 4064\npacks: 2\nsize-pack: 1.12 GiB\nprune-packable: 2053\ngarbage: 3\nsize-garbage: 15.24 MiB",
+  "scope": "G2 adds six reviewed JPG only, below100MB; historical cumulative150MB/A1R commit checks remain FAIL unchanged. Snapshot precedes small final text updates; binary bytes unaffected."
+}

@@ -382,13 +382,13 @@ func _v1_migration() -> void:
 	check(saves.write_save(legacy).success, "B1 original schema fixture writes")
 	require_action("load_game", {"save_id": legacy.save_id})
 	# This asserts the latest destination after preserving the genuine B1 legacy visit.
-	check(gs.state.schema_version == 6 and gs.state.visits == legacy.visits and gs.state.clock_minutes == legacy.clock_minutes and gs.state.active_visit_id == legacy.active_visit_id and gs.state.player.coins == legacy.player.coins and gs.state.player.energy == legacy.player.energy, "B1 migration preserves paid unfinished visit, history, clocks and balances")
+	check(gs.state.schema_version == 7 and gs.state.visits == legacy.visits and gs.state.clock_minutes == legacy.clock_minutes and gs.state.active_visit_id == legacy.active_visit_id and gs.state.player.coins == legacy.player.coins and gs.state.player.energy == legacy.player.energy, "B1 migration preserves paid unfinished visit, history, clocks and balances")
 	check(gs.divination_view().event.is_empty() and saves.read_save(legacy.save_id).state.schema_version == 1, "B1 load creates no retrospective event or file write")
 	var before: Dictionary = gs.snapshot()
 	require_action("reading")
 	check(gs.snapshot() == before, "B1 migrated paid reading is still replayable for free")
 	require_action("rest")
-	check(saves.read_save(legacy.save_id).state.schema_version == 6, "B1 next transaction persists current integrated v6")
+	check(saves.read_save(legacy.save_id).state.schema_version == 7, "B1 next transaction persists current integrated v7")
 	require_action("load_game", {"save_id": legacy.save_id, "recover_backup": true})
 	check(gs.state.visits == legacy.visits and gs.state.clock_minutes == legacy.clock_minutes, "B1 v1 backup restoration remains available")
 

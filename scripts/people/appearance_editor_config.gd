@@ -10,7 +10,7 @@ static func valid(data: Dictionary) -> bool:
 	for key: String in ["window_title","guests_page","editor_page","queue_title","archive_title","receive","book","wait","archive_placeholder","evidence_title","evidence_format","question","advice","service","action","guest","empty_queue","intent_divination","intent_shopping","intent_both","intent_unknown","introduced","familiarity","profile_format","birthday_missing","zodiac_missing","mbti_missing","personality","preferences","latest","birthday_format","unknown","relation","memories_title","report_format","report_empty","draft_hint","randomize","save","saving","saved","save_failed","invalid_choice","pending_art","partial_art","no_public_appearance","pending_suffix"]:
 		if not data.copy.get(key) is String or data.copy[key].strip_edges().is_empty():
 			return false
-	for key: String in ["margin","gap","queue_width","queue_minimum_height","queue_max_lines","queue_text_inset","evidence_height","part_picker_width","picker_height","heading_font_size","body_font_size","small_font_size","wait_minutes","booking_minutes","report_rows","memory_rows"]:
+	for key: String in ["margin","gap","queue_width","queue_minimum_height","queue_max_lines","queue_text_inset","evidence_height","archive_detail_minimum_height","part_picker_width","picker_height","heading_font_size","body_font_size","small_font_size","wait_minutes","booking_minutes","report_rows","memory_rows"]:
 		var value: Variant = data.layout.get(key)
 		if not (value is int or value is float) or not is_finite(float(value)) or value <= 0 or value != floor(float(value)):
 			return false

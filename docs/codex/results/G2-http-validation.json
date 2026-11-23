@@ -1,0 +1,33 @@
+{
+  "four_core_frozen_sha_verified": true,
+  "gateway_sha256": "01b41a8a917adf52d244edc24e822f11d56147a19b0962040e4c7699d60af48f",
+  "family_http_python_sha256": "191d4057f19d07e641abcb4989a7a8da88fab3526daa73a625bd3aa713c78e32",
+  "family_http_godot_sha256": "5cada14ea8c6d558a506b65fdcd0e647e4e3a1d7bb90abe16e5f30332c28337b",
+  "new_handler_unittest_count": 10,
+  "godot_http_checks": 48,
+  "wire_assertions": 256,
+  "captured_requests": 16,
+  "status": "pass",
+  "handler_regression": {
+    "environment_attempt": "WinError10013; not counted as behavioral RED",
+    "real_RED": {
+      "tests": 10,
+      "errors": 2,
+      "symptom": "RemoteDisconnected; no JSON response",
+      "log_sha256": "1b5c9aa89e31da98196edb84007a689636bf1e31217c1e097ad1e44d3b724cfa"
+    },
+    "GREEN": {
+      "passed": 10,
+      "total": 10,
+      "log_sha256": "69e031b5422fbcc87c8d9731f08a5a8447ef048e167d95130cd2760605fab662"
+    },
+    "rejection": {
+      "status": 422,
+      "body": {
+        "error": "INVALID_BOUNDARY"
+      }
+    }
+  },
+  "wire_log_sha256": "defc84952d56af696f13a72a6a2f21be1737c805d46567bc362a911741c13995",
+  "scope": "Synthetic loopback services only. Actual Godot direct/gateway/retry/fallback bodies captured; no live model vendor claim. Full standard suite tracked separately."
+}

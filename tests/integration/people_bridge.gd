@@ -30,8 +30,8 @@ func run() -> void:
 	saves = root.get_node("SaveService")
 	saves.base_dir = "user://test-runs/" + gs.make_id("people_integration")
 	act("new_game", {"name": "人物与公共事务整合"})
-	# A4 increments the current destination only; all A/B/C boundary assertions remain.
-	check(gs.state.schema_version == 6 and Bridge.validate(gs.state).is_empty(), "new integrated save validates")
+	# G2 increments only the current schema destination; existing A/B/C boundaries remain.
+	check(gs.state.schema_version == 7 and Bridge.validate(gs.state).is_empty(), "new integrated save validates")
 	check(not gs.player_snapshot().has("people"), "public snapshot hides future arrivals and relationships")
 	var queue: Array = Bridge.public_view(gs.state).queue
 	check(queue.any(func(row: Dictionary) -> bool: return row.npc_id == "npc_lin"), "handwritten opening enters actual queue")

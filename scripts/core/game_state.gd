@@ -625,7 +625,7 @@ func _new_game(action: Dictionary) -> Dictionary:
 		"processed_actions": {}
 	}
 	_divination.initialize(candidate)
-	if not _initialize_integrated(candidate):
+	if not _initialize_integrated(candidate,true):
 		return _fail("INVALID_APPEARANCE",Appearance.load_config().get("copy",{}).get("migration_failed",content_error))
 	candidate = SaveService._normalize_numbers(candidate)
 	var saved: Dictionary = SaveService.write_save(candidate)
@@ -699,7 +699,8 @@ func _start_visit(action: Dictionary) -> Dictionary:
 	if not _divination.add_case(candidate, visit, case_id):
 		return _fail("CASE_INVALID", "无法建立这位来客的案例。")
 	var presentation_events: Array = []
-	PeopleBridge.register_legacy_visit(candidate, visit, _divination,presentation_events)
+	if not PeopleBridge.register_legacy_visit(candidate, visit, _divination,presentation_events,people_config):
+		return _fail("FAMILY_QUOTA_UNAVAILABLE",People._family_policy(people_config).copy.ratio_unavailable)
 	return _commit(candidate, action, "接待已开始并保存。", {"visit_id": visit.visit_id},presentation_events)
 
 func _prepare_talk(action: Dictionary) -> Dictionary:
@@ -742,6 +743,12 @@ func _prepare_talk(action: Dictionary) -> Dictionary:
 		request["known_memories"] = Memory.dialogue_context(state.people, visit.npc_id, 16)
 		var persona := People.model_persona(state.people, visit.npc_id)
 		request.npc.merge({"personality": persona.get("personality", ""), "speech_style": persona.get("speech_style", "")})
+		for field: String in ["catchphrase","information_boundaries"]:
+			if persona.has(field):
+				request.npc[field] = persona[field].duplicate(true) if persona[field] is Array else persona[field]
+		var family_guard := People.model_family_guard(state.people,visit.npc_id)
+		if not family_guard.is_empty():
+			request["_family_guard"] = family_guard
 		var profile: Dictionary = state.people.profiles[visit.npc_id]
 		request["relationship"] = {"familiarity":int(profile.familiarity),"trust":int(profile.trust)}
 	if visit.npc_id == "npc_lin" and str(request.npc.get("speech_style", "")).is_empty():
@@ -749,6 +756,9 @@ func _prepare_talk(action: Dictionary) -> Dictionary:
 	request["safe_persona"] = {}
 	for field: String in ["name","role","personality","speech_style"]:
 		request.safe_persona[field] = str(request.npc.get(field,""))
+	for field: String in ["catchphrase","information_boundaries"]:
+		if request.npc.has(field):
+			request.safe_persona[field] = request.npc[field].duplicate(true) if request.npc[field] is Array else request.npc[field]
 	# UI labels may include developer annotations; they are not the NPC's job title.
 	request.safe_persona.role = str(request.safe_persona.role).split(" · ")[0]
 	var sources: Array = []
@@ -977,12 +987,17 @@ func _presentation_payload(candidate: Dictionary, raw: Variant) -> Array:
 		result[index].sequence = index
 	return result
 
-func _initialize_integrated(candidate: Dictionary) -> bool:
+func _initialize_integrated(candidate: Dictionary, fresh: bool = false) -> bool:
 	Shop.initialize(candidate)
-	PeopleBridge.initialize(candidate, people_config, _divination)
+	PeopleBridge.initialize(candidate, people_config, _divination,fresh)
 	_migrate_arrival_schema(candidate)
 	_migrate_event_schema(candidate)
-	return _migrate_appearance_schema(candidate)
+	if not _migrate_appearance_schema(candidate):
+		return false
+	if int(candidate.schema_version) < 7:
+		People.initialize_family_library(candidate.people,people_config.get("family_library",{}),"since_migration")
+		candidate.schema_version = 7
+	return People.validate(candidate.people).is_empty()
 
 func _migrate_appearance_schema(candidate: Dictionary) -> bool:
 	if int(candidate.schema_version) >= 6:

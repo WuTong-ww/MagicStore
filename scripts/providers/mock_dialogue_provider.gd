@@ -22,7 +22,7 @@ func request_reply(request: Dictionary) -> Dictionary:
 			var mood := DialoguePolicy.topic_mood(topic)
 			if mood.is_empty():
 				return {"reply_text":"","intent":"error","clue_ids":[],"needs_clarification":false,"error_code":"INVALID_TOPIC_MOOD"}
-			return {
+			return _guard_reply({
 				"reply_text": topic.reply_text,
 				"intent": topic.topic_id,
 				"clue_ids": topic.clue_ids.duplicate(),
@@ -30,12 +30,18 @@ func request_reply(request: Dictionary) -> Dictionary:
 				"needs_clarification": false,
 				"error_code": "",
 				"mood": mood
-			}
-	return {
+			},request)
+	return _guard_reply({
 		"reply_text": "我还没听明白。可以就眼下这件事再问得具体一点吗？",
 		"intent": "clarify",
 		"clue_ids": [],
 		"needs_clarification": true,
 		"error_code": "",
 		"mood": DialoguePolicy.default_mood()
-	}
+	},request)
+
+func _guard_reply(reply: Dictionary, request: Dictionary) -> Dictionary:
+	var context := DialoguePolicy.build_context(request,topics)
+	if context.is_empty() or not DialoguePolicy.family_text_safe(str(reply.get("reply_text","")),context.get("_family_guard",{})):
+		return {"reply_text":"","intent":"error","clue_ids":[],"needs_clarification":false,"error_code":"PROVIDER_INVALID"}
+	return reply

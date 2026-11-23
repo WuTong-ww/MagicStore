@@ -1,0 +1,205 @@
+{
+  "version": 1,
+  "template_id": "family_placeholder",
+  "enabled": false,
+  "placeholder": true,
+  "source_work": "",
+  "reference_note": "原创三人关系网占位，仅供框架测试；不含作品角色或台词。",
+  "rarity": "rare",
+  "background": "用于验证完整关系网与分批登场的原创占位。",
+  "members": [
+    {
+      "key": "first",
+      "reference_character": "",
+      "name": "陆平",
+      "role": "附近居民",
+      "birthday": "1985-03-12",
+      "mbti": "ISFJ",
+      "personality": "patient",
+      "personality_text": "平实友善，愿意说明自己的近况。",
+      "generation": "同辈",
+      "background": "住在附近的原创占位居民。",
+      "preferences": [
+        "散步"
+      ],
+      "speech_style": "用简短平实的话说明已知的事情。",
+      "catchphrase": "",
+      "information_boundaries": [
+        "只说明自己知道的近况，不推测他人的心事。"
+      ],
+      "appearance": {
+        "version": 2,
+        "parts": {
+          "hair_back": "hair_back_01",
+          "body": "body_01",
+          "outfit": "outfit_01",
+          "face_shape": "face_01",
+          "features": "features_adult",
+          "eyes_expr": "eyes_01",
+          "brows_expr": "brows_01",
+          "mouth_expr": "mouth_01",
+          "hair_front": "hair_front_01",
+          "accessory": "none"
+        },
+        "colors": {
+          "skin": "skin_01",
+          "hair": "hair_01",
+          "outfit": "outfit_01"
+        },
+        "age_stage": "adult"
+      },
+      "easter_egg_items": []
+    },
+    {
+      "key": "second",
+      "reference_character": "",
+      "name": "陆宁",
+      "role": "附近居民",
+      "birthday": "1988-06-18",
+      "mbti": "INFJ",
+      "personality": "reflective",
+      "personality_text": "平实友善，愿意说明自己的近况。",
+      "generation": "同辈",
+      "background": "住在附近的原创占位居民。",
+      "preferences": [
+        "散步"
+      ],
+      "speech_style": "用简短平实的话说明已知的事情。",
+      "catchphrase": "",
+      "information_boundaries": [
+        "只说明自己知道的近况，不推测他人的心事。"
+      ],
+      "appearance": {
+        "version": 2,
+        "parts": {
+          "hair_back": "hair_back_01",
+          "body": "body_01",
+          "outfit": "outfit_01",
+          "face_shape": "face_01",
+          "features": "features_adult",
+          "eyes_expr": "eyes_01",
+          "brows_expr": "brows_01",
+          "mouth_expr": "mouth_01",
+          "hair_front": "hair_front_01",
+          "accessory": "none"
+        },
+        "colors": {
+          "skin": "skin_01",
+          "hair": "hair_01",
+          "outfit": "outfit_01"
+        },
+        "age_stage": "adult"
+      },
+      "easter_egg_items": []
+    },
+    {
+      "key": "third",
+      "reference_character": "",
+      "name": "陆安",
+      "role": "附近居民",
+      "birthday": "1992-10-22",
+      "mbti": "ENFP",
+      "personality": "outgoing",
+      "personality_text": "平实友善，愿意说明自己的近况。",
+      "generation": "同辈",
+      "background": "住在附近的原创占位居民。",
+      "preferences": [
+        "散步"
+      ],
+      "speech_style": "用简短平实的话说明已知的事情。",
+      "catchphrase": "",
+      "information_boundaries": [
+        "只说明自己知道的近况，不推测他人的心事。"
+      ],
+      "appearance": {
+        "version": 2,
+        "parts": {
+          "hair_back": "hair_back_01",
+          "body": "body_01",
+          "outfit": "outfit_01",
+          "face_shape": "face_01",
+          "features": "features_adult",
+          "eyes_expr": "eyes_01",
+          "brows_expr": "brows_01",
+          "mouth_expr": "mouth_01",
+          "hair_front": "hair_front_01",
+          "accessory": "none"
+        },
+        "colors": {
+          "skin": "skin_01",
+          "hair": "hair_01",
+          "outfit": "outfit_01"
+        },
+        "age_stage": "adult"
+      },
+      "easter_egg_items": []
+    }
+  ],
+  "relationships": [
+    {
+      "key": "first_second",
+      "from_key": "first",
+      "to_key": "second",
+      "kind": "家人",
+      "closeness": 50,
+      "tension": 0
+    },
+    {
+      "key": "second_third",
+      "from_key": "second",
+      "to_key": "third",
+      "kind": "家人",
+      "closeness": 50,
+      "tension": 0
+    },
+    {
+      "key": "first_third",
+      "from_key": "first",
+      "to_key": "third",
+      "kind": "家人",
+      "closeness": 50,
+      "tension": 0
+    }
+  ],
+  "member_goals": [
+    {
+      "key": "first_question",
+      "owner_key": "first",
+      "subject_key": "second",
+      "relationship_key": "first_second",
+      "kind": "reconnect",
+      "question": "我该怎样和家人沟通？",
+      "source": {
+        "kind": "authored_initial"
+      }
+    },
+    {
+      "key": "second_question",
+      "owner_key": "second",
+      "subject_key": "third",
+      "relationship_key": "second_third",
+      "kind": "reconnect",
+      "question": "我该怎样和家人沟通？",
+      "source": {
+        "kind": "authored_initial"
+      }
+    },
+    {
+      "key": "third_question",
+      "owner_key": "third",
+      "subject_key": "first",
+      "relationship_key": "first_third",
+      "kind": "reconnect",
+      "question": "我该怎样和家人沟通？",
+      "source": {
+        "kind": "authored_initial"
+      }
+    }
+  ],
+  "entry_conditions": {
+    "min_day": 0,
+    "min_reputation": 0,
+    "required_spells": [],
+    "trust_requirements": []
+  }
+}

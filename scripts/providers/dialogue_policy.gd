@@ -5,6 +5,121 @@ const PERSONA_FIELDS := ["name", "role", "personality", "speech_style"]
 const SOURCE_KINDS := ["persona", "statement", "clue", "prediction", "feedback", "event", "relationship", "history", "topic"]
 const PUBLIC_FIELDS := ["npc", "safe_persona", "relationship", "input", "selected_topic", "allowed_topics", "question_topics", "current_dialogue", "visible_history", "known_memories", "sources"]
 const SETTINGS_PATH := "res://data/people/character_protocol.json"
+const FAMILY_SETTINGS_PATH := "res://data/people/family_dialogue_policy.json"
+
+static func family_settings_valid(data: Variant) -> bool:
+	if not data is Dictionary or data.size() != 7 or data.get("version") is bool or data.get("version") != 1 or data.get("persona_fields") != ["name","role","personality","speech_style","catchphrase","information_boundaries"]:
+		return false
+	if not data.get("normalization") is Dictionary or data.normalization.size() != 3:
+		return false
+	for key: String in ["lowercase","fullwidth_ascii","alphanumeric_only"]:
+		if not data.normalization.get(key) is bool or not data.normalization[key]:
+			return false
+	var limits: Variant = data.get("limits")
+	if not limits is Dictionary or limits.size() != 5:
+		return false
+	for key: String in ["persona_text","boundaries","boundary_text","guard_entries","guard_text"]:
+		var value: Variant = limits.get(key)
+		if not (value is int or value is float) or not is_finite(float(value)) or value <= 0 or value != floor(float(value)):
+			return false
+	if data.get("registry_path") != "res://data/people/family_library.json":
+		return false
+	for key: String in ["blocked_terms","blocked_passages"]:
+		if not data.get(key) is Array or data[key].size() > int(limits.guard_entries):
+			return false
+		for value: Variant in data[key]:
+			if not value is String or value.is_empty() or value.length() > int(limits.guard_text) or family_normalize(value).is_empty():
+				return false
+	return true
+
+static func load_family_settings() -> Dictionary:
+	var data: Variant = JSON.parse_string(FileAccess.get_file_as_string(FAMILY_SETTINGS_PATH))
+	return data if family_settings_valid(data) else {}
+
+static func family_normalize(text: String) -> String:
+	var folded := ""
+	for index: int in range(text.length()):
+		var code := text.unicode_at(index)
+		folded += String.chr(code - 0xfee0 if code >= 0xff01 and code <= 0xff5e else code)
+	var non_alphanumeric := RegEx.new()
+	non_alphanumeric.compile("[^\\p{L}\\p{N}]")
+	return non_alphanumeric.sub(folded.to_lower(),"",true)
+
+static func family_guard(request: Dictionary = {}) -> Dictionary:
+	var settings := load_family_settings()
+	if settings.is_empty():
+		return {}
+	var guard := {"blocked_terms":settings.blocked_terms.duplicate(),"blocked_passages":settings.blocked_passages.duplicate()}
+	var registry: Variant = JSON.parse_string(FileAccess.get_file_as_string(settings.registry_path))
+	if not registry is Dictionary or not registry.get("template_paths") is Array:
+		return {}
+	var path_pattern := RegEx.new()
+	path_pattern.compile("^res://data/people/families/[a-z][a-z0-9_]*\\.json$")
+	for path: Variant in registry.template_paths:
+		if not path is String or path_pattern.search(path) == null:
+			return {}
+		var template: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
+		if not template is Dictionary or not template.get("members") is Array:
+			return {}
+		for key: String in ["source_work","reference_work"]:
+			if template.has(key) and template[key] != "":
+				guard.blocked_terms.append(template[key])
+		if template.get("reference_note","") != "":
+			guard.blocked_passages.append(template.reference_note)
+		for member: Variant in template.members:
+			if not member is Dictionary:
+				return {}
+			if member.get("reference_character","") != "":
+				guard.blocked_terms.append(member.reference_character)
+	if request.has("_family_guard"):
+		var extra: Variant = request._family_guard
+		if not extra is Dictionary or extra.size() != 2:
+			return {}
+		for key: String in guard:
+			if not extra.get(key) is Array:
+				return {}
+			guard[key].append_array(extra[key])
+	for key: String in guard:
+		var normalized: Array = []
+		for text: Variant in guard[key]:
+			if not text is String or text.is_empty() or text.length() > int(settings.limits.guard_text):
+				return {}
+			var token := family_normalize(text)
+			if token.is_empty():
+				return {}
+			if token not in normalized:
+				normalized.append(token)
+		if normalized.size() > int(settings.limits.guard_entries):
+			return {}
+		guard[key] = normalized
+	return guard
+
+static func family_text_safe(text: String, guard: Dictionary = {}) -> bool:
+	if guard.is_empty():
+		guard = family_guard()
+	if guard.size() != 2:
+		return false
+	var normalized := family_normalize(text)
+	for key: String in ["blocked_terms","blocked_passages"]:
+		if not guard.get(key) is Array:
+			return false
+		for term: Variant in guard[key]:
+			if not term is String or family_normalize(term).is_empty() or normalized.contains(family_normalize(term)):
+				return false
+	return true
+
+static func _family_public_safe(value: Variant, guard: Dictionary) -> bool:
+	if value is String:
+		return family_text_safe(value,guard)
+	if value is Dictionary:
+		for child: Variant in value.values():
+			if not _family_public_safe(child,guard):
+				return false
+	elif value is Array:
+		for child: Variant in value:
+			if not _family_public_safe(child,guard):
+				return false
+	return true
 
 static func settings_valid(data: Variant) -> bool:
 	if not data is Dictionary or data.size() != 8:
@@ -97,15 +212,32 @@ candidate.mood必须为neutral/smile/hesitant/surprised/sad之一，只表达当
 只输出 JSON，恰好四个字段：approved（布尔），evidence_ids（candidate 引用的原ID数组），contradictions（矛盾简述数组），unsupported_claims（无来源断言数组）。只有两数组均为空且全部内容有依据或不构成事实断言时才批准。"""
 
 static func build_context(request: Dictionary, topics: Array) -> Dictionary:
+	var family_settings := load_family_settings()
+	var local_guard := family_guard(request)
+	if family_settings.is_empty() or local_guard.is_empty():
+		return {}
 	var persona := {}
 	var supplied: Dictionary = request.get("safe_persona", request.get("npc", {}))
 	for field: String in PERSONA_FIELDS:
 		if supplied.get(field) is String:
-			persona[field] = String(supplied[field]).left(200)
+			persona[field] = String(supplied[field]).left(int(family_settings.limits.persona_text))
+	if supplied.has("catchphrase"):
+		if not supplied.catchphrase is String or supplied.catchphrase.length() > int(family_settings.limits.persona_text):
+			return {}
+		if not supplied.catchphrase.is_empty():
+			persona.catchphrase = supplied.catchphrase
+	if supplied.has("information_boundaries"):
+		if not supplied.information_boundaries is Array or supplied.information_boundaries.size() > int(family_settings.limits.boundaries):
+			return {}
+		for boundary: Variant in supplied.information_boundaries:
+			if not boundary is String or boundary.strip_edges().is_empty() or boundary.length() > int(family_settings.limits.boundary_text):
+				return {}
+		if not supplied.information_boundaries.is_empty():
+			persona.information_boundaries = supplied.information_boundaries.duplicate()
 	var ctx := {"npc":persona.duplicate(true), "safe_persona":persona, "relationship":{}, "input":str(request.get("input_text", "")).left(500),
 		"selected_topic":str(request.get("topic_id", "")), "allowed_topics":[], "question_topics":[], "current_dialogue":_turns(request.get("current_dialogue", []),20),
 		"visible_history":[], "known_memories":[], "sources":[], "_topic_facts":{}, "_effects":request.get("allowed_effects", {}).duplicate(true),
-		"_guardrails":request.get("private_guardrails", []).duplicate(true)}
+		"_guardrails":request.get("private_guardrails", []).duplicate(true),"_family_guard":local_guard}
 	var relationship: Variant = request.get("relationship", {})
 	if relationship is Dictionary:
 		for field: String in ["familiarity", "trust"]:
@@ -113,7 +245,7 @@ static func build_context(request: Dictionary, topics: Array) -> Dictionary:
 				ctx.relationship[field] = int(relationship[field])
 	for field: String in persona:
 		if not str(persona[field]).is_empty():
-			ctx.sources.append({"source_id":"persona:" + field,"kind":"persona","text":persona[field],"certainty":"identity_or_style","audience":"both"})
+			ctx.sources.append({"source_id":"persona:" + field,"kind":"persona","text":"\n".join(persona[field]) if persona[field] is Array else persona[field],"certainty":"identity_or_style","audience":"both"})
 	var incoming: Variant = request.get("dialogue_sources", [])
 	if incoming is Array:
 		for source: Variant in incoming.slice(0,80):
@@ -143,7 +275,45 @@ static func build_context(request: Dictionary, topics: Array) -> Dictionary:
 			if memory is Dictionary and memory.get("audience") == "both" and memory.get("kind") in SOURCE_KINDS and memory.get("text") is String:
 				ctx.known_memories.append({"memory_id":str(memory.get("memory_id","")),"kind":memory.kind,"text":str(memory.text).left(500),"certainty":"reported" if memory.kind in ["event","feedback","clue"] else "statement_or_prediction"})
 	_bound_context(ctx)
-	return ctx
+	return ctx if not generation_context(ctx).is_empty() else {}
+
+static func transport_request(request: Dictionary, topics: Array) -> Dictionary:
+	var ctx := build_context(request,topics)
+	if ctx.is_empty():
+		return {}
+	var body := {"npc":ctx.npc.duplicate(true),"safe_persona":ctx.safe_persona.duplicate(true),"input_text":ctx.input,"topic_id":ctx.selected_topic,"allowed_effects":{},"current_dialogue":ctx.current_dialogue.duplicate(true),"visible_history":ctx.visible_history.duplicate(true),"relationship":ctx.relationship.duplicate(true),"known_memories":[],"dialogue_sources":ctx.sources.duplicate(true)}
+	if request.get("npc") is Dictionary and request.npc.get("npc_id") is String:
+		body.npc.npc_id = request.npc.npc_id
+	for key: String in ["case_id","visit_id"]:
+		if request.get(key) is String:
+			body[key] = request[key]
+	for key: String in ["allowed_intents","allowed_clue_ids","allowed_branch_ids"]:
+		if request.get(key) is Array:
+			if not request[key].all(func(value: Variant) -> bool: return value is String):
+				return {}
+			body[key] = request[key].duplicate()
+	for intent: String in ctx._effects:
+		var effect: Variant = ctx._effects[intent]
+		if not effect is Dictionary or not effect.get("clue_ids") is Array or not effect.get("branch_id") is String:
+			return {}
+		body.allowed_effects[intent] = {"clue_ids":effect.clue_ids.duplicate(),"branch_id":effect.branch_id}
+	for memory: Dictionary in ctx.known_memories:
+		var row := memory.duplicate(true)
+		row.audience = "both"
+		body.known_memories.append(row)
+	if request.has("custom_topics"):
+		if not request.custom_topics is Array:
+			return {}
+		body.custom_topics = []
+		for topic: Variant in request.custom_topics:
+			if not topic is Dictionary:
+				return {}
+			var row := {}
+			for key: String in ["topic_id","label","keywords","reply_text","clue_ids","branch_id","default_mood"]:
+				if topic.has(key):
+					row[key] = topic[key]
+			body.custom_topics.append(row)
+	return body if _family_public_safe(body,ctx._family_guard) else {}
 
 static func _bound_context(ctx: Dictionary) -> void:
 	# Bound complete records, rather than cutting a sentence in the transmitted JSON.
@@ -185,7 +355,7 @@ static func generation_context(ctx: Dictionary) -> Dictionary:
 	for key: String in PUBLIC_FIELDS:
 		if ctx.has(key):
 			result[key] = ctx[key]
-	return result.duplicate(true)
+	return result.duplicate(true) if _family_public_safe(result,ctx.get("_family_guard",{})) else {}
 
 static func select_context(ctx: Dictionary, intent: String) -> Dictionary:
 	if not ctx.get("_effects",{}).has(intent) or (not str(ctx.get("selected_topic","")).is_empty() and ctx.selected_topic != intent):
@@ -205,7 +375,7 @@ static func select_context(ctx: Dictionary, intent: String) -> Dictionary:
 		if not chosen._topic_facts.has(intent):
 			return {}
 		chosen.sources.append({"source_id":"topic:" + intent,"kind":"topic","text":chosen._topic_facts[intent],"topic_id":intent,"certainty":"character_statement","audience":"both"})
-	return chosen
+	return chosen if not generation_context(chosen).is_empty() else {}
 
 static func _is_comfort(input: String) -> bool:
 	for question: String in ["为什么", "什么", "怎么", "后来", "到底", "还记得"]:
@@ -329,6 +499,8 @@ static func _ids_valid(ids: Array, ctx: Dictionary) -> bool:
 	return true
 
 static func _text_safe(reply: String, ctx: Dictionary) -> bool:
+	if not family_text_safe(reply,ctx.get("_family_guard",{})):
+		return false
 	for internal: String in ["world_facts", "processed_actions", "event_id", "API Key", "api_key", "private_guardrails", "allowed_effects", "safe_persona", "evidence_ids", "系统提示", "<think>", "</think>"]:
 		if reply.to_lower().contains(internal.to_lower()):
 			return false

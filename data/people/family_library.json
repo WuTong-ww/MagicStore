@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "enabled": false,
+  "template_paths": [
+    "res://data/people/families/family_placeholder.json"
+  ],
+  "policy": {
+    "trigger_percent": 0,
+    "max_active_families": 1,
+    "new_members_per_day": 1,
+    "new_members_per_slot": 1,
+    "slot_minutes": 120,
+    "first_member_minute": 720,
+    "special_return_percent": 20,
+    "special_actual_ratio_cap": 0.12,
+    "active_definition": "unmet_or_first_pending",
+    "statistics": {
+      "version": 1,
+      "scope": "since_baseline",
+      "count_at": "physical_arrival",
+      "special_if": "family_id_nonempty",
+      "baseline_kind": "since_migration",
+      "deduplicate_by": "arrival_id_and_at",
+      "include_sources": [
+        "first",
+        "return",
+        "appointment",
+        "recommendation"
+      ]
+    },
+    "copy": {
+      "ratio_not_admitted": "特殊来客额度不足，本次暂不准入。",
+      "ratio_unavailable": "特殊来客预约额度不足，暂时无法确认新的预约。",
+      "family_opening_relation": "我和{subject_name}是{relationship_kind}。",
+      "invalid_state": "家族状态无效。"
+    }
+  }
+}

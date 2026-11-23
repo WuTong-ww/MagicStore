@@ -24,6 +24,12 @@ try {
     $ErrorActionPreference = 'Stop'
     $testOutput | ForEach-Object { Write-Host $_ }
     if ($testExit -ne 0) { throw "HTTP tests failed (exit $testExit)." }
+    $ErrorActionPreference = 'Continue'
+    $familyOutput = & python -B (Join-Path $repo 'tests/http/family_policy.py') --engine $engine 2>&1
+    $familyExit = $LASTEXITCODE
+    $ErrorActionPreference = 'Stop'
+    $familyOutput | ForEach-Object { Write-Host $_ }
+    if ($familyExit -ne 0) { throw "Family HTTP privacy tests failed (exit $familyExit)." }
 } finally {
     foreach ($key in $previous.Keys) { [Environment]::SetEnvironmentVariable($key, $previous[$key], 'Process') }
 }

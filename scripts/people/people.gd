@@ -7,15 +7,19 @@ const MAX_INT := 2147483647
 const Memory = preload("res://scripts/people/memory.gd")
 const GeneratedPerson = preload("res://scripts/people/generated_person.gd")
 const Appearance = preload("res://scripts/people/appearance.gd")
+const FamilyLibrary = preload("res://scripts/people/family_library.gd")
 
 static func load_config() -> Dictionary:
 	var parser := JSON.new()
 	if parser.parse(FileAccess.get_file_as_string(CONFIG_PATH)) != OK or not parser.data is Dictionary:
 		return {}
 	var data: Dictionary = parser.data
+	data["family_library"] = FamilyLibrary.load_config()
 	return data if config_valid(data) else {}
 
 static func config_valid(data: Dictionary) -> bool:
+	if data.has("family_library") and not FamilyLibrary.config_valid(data.family_library):
+		return false
 	for field in ["ordinary_surnames", "ordinary_names", "occupations", "interests", "mbti_types", "personalities"]:
 		if not data.get(field) is Array or data[field].is_empty():
 			return false
@@ -152,6 +156,226 @@ static func create(save_id: String, seed_value: int, clock: int) -> Dictionary:
 		"observations": [], "appearance_catalog_version": 1,
 		"player_appearance": {"face": "face_01", "hair": "hair_01", "outfit": "outfit_01"}
 	}
+
+static func initialize_family_library(people: Dictionary, library: Dictionary, baseline_kind: String) -> void:
+	if people.get("family_library_version") == 1 or not FamilyLibrary.config_valid(library):
+		return
+	people["family_library_version"] = 1
+	people["family_metrics"] = {"version":1,"baseline_at":int(people.clock),"baseline_kind":baseline_kind,
+		"trigger_count":0,"actual_total":0,"actual_special":0,"physical_arrivals":[],"reservations":{}}
+	# Index only the graph already in the old save. Never rerun a current template.
+	for family: Dictionary in people.families.values():
+		family["version"] = 1
+		family["legacy"] = true
+		family["member_ids"] = {}
+		family["edge_ids"] = {}
+		family["goal_ids"] = {}
+		family["relationship_ids"] = []
+		for id: String in family.members:
+			family.member_ids[id] = id
+			var goal: Dictionary = people.profiles[id].get("goal",{})
+			if not goal.is_empty():
+				family.goal_ids[goal.goal_id] = goal.goal_id
+		for id: String in people.relationships:
+			var edge: Dictionary = people.relationships[id]
+			if edge.from in family.members and edge.to in family.members:
+				family.edge_ids[id] = id
+				family.relationship_ids.append(id)
+		family.relationship_ids.sort()
+	if baseline_kind != "new_game":
+		# Grandfather existing promises/plans, including missing historical budgets.
+		# Their original arrival IDs, agreed times and consent records remain exact.
+		for arrival: Dictionary in people.arrivals.values():
+			if arrival.state == "planned" and _special_profile(people,arrival.npc_id):
+				_reserve_special(people,{"family_library":library},arrival.arrival_id,int(arrival.at),arrival.npc_id,true)
+
+static func _family_policy(config: Dictionary = {}) -> Dictionary:
+	var library: Dictionary = config.get("family_library",{})
+	if library.is_empty():
+		library = FamilyLibrary.load_config()
+	return library.get("policy",{})
+
+static func _special_profile(people: Dictionary, npc_id: String) -> bool:
+	return not str(people.profiles.get(npc_id,{}).get("family_id","")).is_empty()
+
+static func _physical_episode(arrival_id: String, at: int) -> String:
+	return JSON.stringify([arrival_id,at])
+
+static func special_budget_available(people: Dictionary, config: Dictionary, arrival_id: String, at: int, npc_id: String) -> bool:
+	if people.get("family_library_version") != 1 or not _special_profile(people,npc_id):
+		return true
+	var metrics: Dictionary = people.family_metrics
+	var key := _physical_episode(arrival_id,at)
+	if metrics.reservations.has(key):
+		return true
+	var reserved := 0
+	for reservation: Dictionary in metrics.reservations.values():
+		# A reschedule transfers the same pending promise; it cannot occupy two slots.
+		if reservation.arrival_id != arrival_id:
+			reserved += 1
+	var cap := float(_family_policy(config).special_actual_ratio_cap)
+	return float(int(metrics.actual_special)+reserved+1) <= float(int(metrics.actual_total)+reserved+1)*cap
+
+static func _reserve_special(people: Dictionary, config: Dictionary, arrival_id: String, at: int, npc_id: String, legacy: bool = false) -> bool:
+	if people.get("family_library_version") != 1 or not _special_profile(people,npc_id):
+		return true
+	if not legacy and not special_budget_available(people,config,arrival_id,at,npc_id):
+		return false
+	var reservations: Dictionary = people.family_metrics.reservations
+	for old_key: String in reservations.keys():
+		if reservations[old_key].arrival_id == arrival_id:
+			reservations.erase(old_key)
+	reservations[_physical_episode(arrival_id,at)] = {"arrival_id":arrival_id,"npc_id":npc_id,"at":at,"reserved_at":int(people.clock),"legacy":legacy}
+	return true
+
+static func _release_special(people: Dictionary, arrival_id: String, at: int) -> void:
+	if people.get("family_library_version") == 1:
+		people.family_metrics.reservations.erase(_physical_episode(arrival_id,at))
+
+static func _physical_arrival(people: Dictionary, config: Dictionary, entry: Dictionary, at: int) -> bool:
+	if people.get("family_library_version") != 1:
+		return true
+	var metrics: Dictionary = people.family_metrics
+	if metrics.physical_arrivals.any(func(value: Dictionary) -> bool: return value.arrival_id == entry.arrival_id and int(value.at) == at):
+		return true
+	var special := _special_profile(people,entry.npc_id)
+	var key := _physical_episode(entry.arrival_id,at)
+	var reservation: Dictionary = metrics.reservations.get(key,{})
+	if special and reservation.is_empty() and not _reserve_special(people,config,entry.arrival_id,at,entry.npc_id):
+		return false
+	reservation = metrics.reservations.get(key,{})
+	_release_special(people,entry.arrival_id,at)
+	if at < int(metrics.baseline_at):
+		return true
+	var episode := {"arrival_id":entry.arrival_id,"at":at,"special":special}
+	if reservation.get("legacy",false):
+		episode["legacy_exception"] = true
+	metrics.physical_arrivals.append(episode)
+	metrics.actual_total += 1
+	metrics.actual_special += int(special)
+	return true
+
+static func _modern_goal_valid(people: Dictionary, profile: Dictionary, goal: Variant) -> bool:
+	if not goal is Dictionary or goal.get("owner_id") != profile.npc_id or not goal.get("question") is String or goal.question.is_empty() or goal.get("status") != "open" or not goal.get("progress") is Array or not goal.get("source") is Dictionary:
+		return false
+	var family_value: Variant = people.families.get(profile.get("family_id",""),{})
+	if not family_value is Dictionary:
+		return false
+	var family: Dictionary = family_value
+	for field: String in ["member_ids","edge_ids","goal_ids"]:
+		if not family.get(field) is Dictionary:
+			return false
+	var source: Dictionary = goal.source
+	if source.get("kind") != "authored_initial" or source.get("template_id") != family.get("template_id") or not source.get("goal_key") is String or family.get("goal_ids",{}).get(source.goal_key) != goal.get("goal_id"):
+		return false
+	var snapshot: Variant = family.get("template_snapshot",{})
+	if not snapshot is Dictionary or not snapshot.get("member_goals") is Array:
+		return false
+	var definitions: Array = []
+	for value: Variant in snapshot.member_goals:
+		if not value is Dictionary:
+			return false
+		if value.get("key") == source.goal_key:
+			definitions.append(value)
+	if definitions.size() != 1:
+		return false
+	var definition: Dictionary = definitions[0]
+	for field: String in ["kind","question","owner_key","subject_key","relationship_key"]:
+		if not definition.get(field) is String or definition[field].is_empty():
+			return false
+	if goal.get("kind") != definition.kind or goal.question != definition.question or family.get("member_ids",{}).get(definition.owner_key) != profile.npc_id or family.member_ids.get(definition.subject_key) != goal.get("subject_id") or family.get("edge_ids",{}).get(definition.relationship_key) != goal.get("relationship_id"):
+		return false
+	var seen := {}
+	for progress: Variant in goal.progress:
+		if not progress is Dictionary or progress.get("kind") not in ["visit_started","relationship_effect"] or not _integer(progress.get("at"),0,int(people.clock)):
+			return false
+		var source_id: Variant = progress.get("visit_id") if progress.kind == "visit_started" else progress.get("effect_id")
+		if not source_id is String or source_id.is_empty():
+			return false
+		var key := JSON.stringify([progress.kind,source_id])
+		if seen.has(key):
+			return false
+		seen[key] = true
+		if progress.kind == "relationship_effect":
+			var edge: Dictionary = people.relationships.get(goal.relationship_id,{})
+			if source_id not in people.effect_ids or not progress.get("event_id") is String or not edge.get("changes") is Array:
+				return false
+			var matched := false
+			for change: Variant in edge.changes:
+				if not change is Dictionary:
+					return false
+				if change.get("effect_id") == source_id and change.get("event_id") == progress.event_id and _integer(change.get("at"),0,int(people.clock)) and int(change.at) == int(progress.at):
+					matched = true
+			if not matched:
+				return false
+	return true
+
+static func _family_state_valid(people: Dictionary) -> bool:
+	if not people.has("family_library_version"):
+		return not people.has("family_metrics")
+	if people.family_library_version != 1 or not people.get("family_metrics") is Dictionary:
+		return false
+	var metrics: Dictionary = people.family_metrics
+	if metrics.get("version") != 1 or not _integer(metrics.get("baseline_at"),0,int(people.clock)) or metrics.get("baseline_kind") not in ["new_game","since_migration"]:
+		return false
+	for field: String in ["trigger_count","actual_total","actual_special"]:
+		if not _integer(metrics.get(field),0,MAX_INT):
+			return false
+	if not metrics.get("physical_arrivals") is Array or not metrics.get("reservations") is Dictionary:
+		return false
+	var episodes := {}
+	var special_total := 0
+	for value: Variant in metrics.physical_arrivals:
+		if not value is Dictionary or not value.get("arrival_id") is String or not people.arrivals.has(value.arrival_id) or not _integer(value.get("at"),int(metrics.baseline_at),int(people.clock)) or not value.get("special") is bool:
+			return false
+		if value.has("legacy_exception") and not value.legacy_exception is bool:
+			return false
+		var key := _physical_episode(value.arrival_id,int(value.at))
+		if episodes.has(key) or value.special != _special_profile(people,people.arrivals[value.arrival_id].npc_id):
+			return false
+		episodes[key] = true
+		special_total += int(value.special)
+	if int(metrics.actual_total) != episodes.size() or int(metrics.actual_special) != special_total:
+		return false
+	for key: Variant in metrics.reservations:
+		var value: Variant = metrics.reservations[key]
+		if not key is String or not value is Dictionary or not value.get("arrival_id") is String or not people.arrivals.has(value.arrival_id) or not _integer(value.get("at"),0,MAX_INT) or not _integer(value.get("reserved_at"),0,int(people.clock)) or not value.get("legacy") is bool:
+			return false
+		var arrival: Dictionary = people.arrivals[value.arrival_id]
+		if key != _physical_episode(value.arrival_id,int(value.at)) or episodes.has(key) or arrival.npc_id != value.get("npc_id") or arrival.state != "planned" or int(arrival.at) != int(value.at) or not _special_profile(people,arrival.npc_id):
+			return false
+	for family: Dictionary in people.families.values():
+		if family.get("version") != 1:
+			return false
+		for key: String in ["member_ids","edge_ids","goal_ids"]:
+			if not family.get(key) is Dictionary:
+				return false
+		if not family.get("relationship_ids") is Array:
+			return false
+		var member_values: Array = family.member_ids.values()
+		member_values.sort()
+		var members: Array = family.members.duplicate()
+		members.sort()
+		if members != member_values:
+			return false
+		var edges := {}
+		for id: Variant in family.relationship_ids:
+			if not id is String or edges.has(id) or not people.relationships.has(id):
+				return false
+			var edge: Dictionary = people.relationships[id]
+			if edge.from not in members or edge.to not in members:
+				return false
+			edges[id] = true
+		var indexed_edges: Array = family.edge_ids.values()
+		indexed_edges.sort()
+		var actual_edges: Array = edges.keys()
+		actual_edges.sort()
+		if actual_edges != indexed_edges:
+			return false
+		for id: Variant in family.goal_ids.values():
+			if not id is String or not family.members.any(func(npc: String) -> bool: return people.profiles[npc].get("goal",{}).get("goal_id") == id):
+				return false
+	return true
 
 static func add_fixed(people: Dictionary, npc_id: String, name: String, role: String) -> void:
 	if people.profiles.has(npc_id):
@@ -359,6 +583,144 @@ static func ensure_family(people: Dictionary, config: Dictionary, rng: RandomNum
 				"subject_id": members[1 - index], "question": "我该怎样和家人好好说出心事？", "status": "open"}
 	return family_id
 
+static func ensure_library_family(people: Dictionary, config: Dictionary, template: Dictionary) -> String:
+	if people.get("family_library_version") != 1 or not config_valid(config) or not FamilyLibrary.template_valid(template):
+		return ""
+	if not validate(people).is_empty():
+		return ""
+	for id: String in people.families:
+		if people.families[id].get("template_id") == template.template_id:
+			return id
+	var active := 0
+	for family: Dictionary in people.families.values():
+		if family.members.any(func(id: String) -> bool: return not people.profiles[id].met):
+			active += 1
+	if active >= int(_family_policy(config).max_active_families):
+		return ""
+	var occupied: Array = people.profiles.keys()+people.relationships.keys()+people.families.keys()
+	for profile: Dictionary in people.profiles.values():
+		if profile.get("goal") is Dictionary:
+			occupied.append(profile.goal.goal_id)
+	var proposal := FamilyLibrary.instance_proposal(template,people.save_id,occupied)
+	if not proposal.ok:
+		return ""
+	var candidate := people.duplicate(true)
+	for id: String in proposal.members:
+		var member: Dictionary = proposal.members[id]
+		var personality := _personality(config,member.personality)
+		var date: PackedStringArray = member.birthday.split("-")
+		var profile := {"npc_id":id,"name":member.name,"role":member.role,"source":"reference","origin":"random_first",
+			"template_id":template.template_id+"_"+member.member_key,"family_id":proposal.family.family_id,"member_key":member.member_key,"family_library_member":true,
+			"reference_work":template.source_work,"reference_character":member.reference_character,"rarity":template.rarity,
+			"personality_id":personality.id,"personality":member.personality_text,"base_patience":personality.patience,"return_bias":personality.return_bias,
+			"familiarity":0,"trust":0,"birthday":member.birthday,"zodiac":_zodiac(int(date[1]),int(date[2])),"mbti":member.mbti,
+			"generation":member.generation,"preferences":member.preferences.duplicate(true),"background":member.background,
+			"speech_style":member.speech_style,"catchphrase":member.catchphrase,"information_boundaries":member.information_boundaries.duplicate(true),
+			"easter_egg_items":member.easter_egg_items.duplicate(true),"default_case_id":"","appearance":member.appearance.duplicate(true),
+			"memories":[],"trust_history":[],"met":false}
+		for goal: Dictionary in proposal.goals.values():
+			if goal.owner_id == id:
+				profile["goal"] = goal.duplicate(true)
+				profile.goal["progress"] = []
+		candidate.profiles[id] = profile
+	var family: Dictionary = proposal.family.duplicate(true)
+	family.merge({"version":1,"legacy":false,"template_version":template.version,"template_snapshot":template.duplicate(true),
+		"member_ids":proposal.member_ids.duplicate(true),"edge_ids":proposal.edge_ids.duplicate(true),"goal_ids":proposal.goal_ids.duplicate(true),
+		"relationship_ids":proposal.relationships.keys()},true)
+	family.relationship_ids.sort()
+	candidate.families[family.family_id] = family
+	candidate.relationships.merge(proposal.relationships.duplicate(true))
+	candidate.family_metrics.trigger_count += 1
+	if not validate(candidate).is_empty():
+		return ""
+	people.clear()
+	people.merge(candidate,true)
+	return family.family_id
+
+static func _family_rng(people: Dictionary, domain: Array) -> RandomNumberGenerator:
+	return _random(absi(JSON.stringify([people.save_id,people.seed,"family_library",domain]).hash()))
+
+static func _plan_library_families(people: Dictionary, config: Dictionary, day: int, reputation: int, context: Dictionary) -> void:
+	if people.get("family_library_version") != 1:
+		return
+	var library: Dictionary = config.get("family_library",{})
+	if not FamilyLibrary.config_valid(library):
+		return
+	var policy: Dictionary = library.policy
+	var active := 0
+	for family: Dictionary in people.families.values():
+		if family.members.any(func(id: String) -> bool: return not people.profiles[id].met):
+			active += 1
+	if library.enabled and active < int(policy.max_active_families) and int(people.days[str(day)].natural_count) > 0:
+		var known_trust := {}
+		for id: String in people.profiles:
+			if people.profiles[id].met and int(people.profiles[id].trust) >= 0:
+				known_trust[id] = int(people.profiles[id].trust)
+				var profile: Dictionary = people.profiles[id]
+				if profile.get("family_library_member",false):
+					var family: Dictionary = people.families[profile.family_id]
+					known_trust["family:"+family.template_id+":"+profile.member_key] = int(profile.trust)
+		var world := {"day":day,"reputation":reputation,"learned_spell_ids":context.get("learned_spell_ids",[]).duplicate(),"known_trust":known_trust}
+		var eligible: Array = FamilyLibrary.eligible_templates(world,library).filter(func(template: Dictionary) -> bool:
+			return not people.families.values().any(func(family: Dictionary) -> bool: return family.template_id == template.template_id)
+		)
+		var random := _family_rng(people,[day,"trigger"])
+		if not eligible.is_empty() and random.randi_range(1,100) <= int(policy.trigger_percent):
+			ensure_library_family(people,config,eligible[random.randi_range(0,eligible.size()-1)])
+	var family_ids: Array = people.families.keys()
+	family_ids.sort()
+	for family_id: String in family_ids:
+		var family: Dictionary = people.families[family_id]
+		var daily := 0
+		var slots := {}
+		for row: Dictionary in people.arrivals.values():
+			if row.source == "family_first" and _special_profile(people,row.npc_id) and people.profiles[row.npc_id].family_id == family_id and floori(float(row.at)/1440.0) == day:
+				daily += 1
+				var slot := floori(float(int(row.at)%1440-int(policy.first_member_minute))/float(policy.slot_minutes))
+				slots[slot] = int(slots.get(slot,0))+1
+		for npc_id: String in family.members:
+			if daily >= int(policy.new_members_per_day) or arrival_count_on_day(people,day) >= _daily_limit(people,config):
+				break
+			if people.profiles[npc_id].met or people.arrivals.values().any(func(row: Dictionary) -> bool: return row.npc_id == npc_id and row.state in ["planned","queued","outside","appointment_requested","in_service"]):
+				continue
+			var at := maxi(maxi(day*1440+int(policy.first_member_minute),int(people.clock)),int(people.profiles[npc_id].get("cooldown_until",0)))
+			var slot := floori(float(at-day*1440-int(policy.first_member_minute))/float(policy.slot_minutes))
+			while int(slots.get(slot,0)) >= int(policy.new_members_per_slot):
+				at += int(policy.slot_minutes)
+				slot += 1
+			if at > day*1440+int(config.arrival.last_minute):
+				continue
+			var id := "arrival_"+family_id+"_"+str(day)+"_"+npc_id
+			if people.arrivals.has(id) or not _reserve_special(people,config,id,at,npc_id):
+				continue
+			people.arrivals[id] = {"arrival_id":id,"npc_id":npc_id,"source":"family_first","family_id":family_id,"at":at,
+				"deadline":-1,"state":"planned","intent":"divination","urgency":0,"schedule_end":day*1440+int(config.arrival.last_minute),
+				"referrer_npc_id":"","case_id":_profile_case_id(people,npc_id),"visit_id":""}
+			people.days[str(day)].arrival_ids.append(id)
+			daily += 1
+			slots[slot] = int(slots.get(slot,0))+1
+
+static func _plan_library_returns(people: Dictionary, config: Dictionary, day: int) -> void:
+	if people.get("family_library_version") != 1:
+		return
+	# Introductions reserve first. Frequent repeats cannot starve an unseen sibling.
+	var known: Array = people.profiles.keys()
+	known.sort()
+	for npc_id: String in known:
+		if arrival_count_on_day(people,day) >= _daily_limit(people,config):
+			break
+		var profile: Dictionary = people.profiles[npc_id]
+		if not profile.get("family_library_member",false) or not profile.met or int(profile.get("cooldown_until",0)) > day*1440+int(config.arrival.last_minute):
+			continue
+		var random := _family_rng(people,[day,npc_id,"return"])
+		var chance := clampi(int(_family_policy(config).special_return_percent)+int(profile.return_bias),0,100)
+		if random.randi_range(1,100) > chance:
+			continue
+		var id := "arrival_return_%d_%s" % [day,npc_id]
+		var at := _next_return_slot(profile,maxi(day*1440+_arrival_minute(config.arrival,random),int(people.clock)+1))
+		if at >= 0 and floori(float(at)/1440.0) == day and schedule_return(people,npc_id,id,at,config):
+			people.days[str(day)].arrival_ids.append(id)
+
 static func _weighted(rows: Array, rng: RandomNumberGenerator) -> Dictionary:
 	var total := 0.0
 	for row: Dictionary in rows:
@@ -402,7 +764,7 @@ static func _natural_arrival(people: Dictionary, config: Dictionary, rng: Random
 		"referrer_npc_id": "", "case_id": "", "visit_id": ""}
 	return id
 
-static func plan_day(people: Dictionary, config: Dictionary, day: int, reputation: int = 0, forced_count: int = -1, experience: int = 0, traffic_bonus: float = 0.0) -> void:
+static func plan_day(people: Dictionary, config: Dictionary, day: int, reputation: int = 0, forced_count: int = -1, experience: int = 0, traffic_bonus: float = 0.0, context: Dictionary = {}) -> void:
 	var key := str(day)
 	if people.days.has(key) or day < floori(float(people.clock) / 1440.0):
 		return
@@ -480,6 +842,8 @@ static func plan_day(people: Dictionary, config: Dictionary, day: int, reputatio
 		var profile: Dictionary = people.profiles[npc_id]
 		if not profile.met or int(profile.get("cooldown_until", 0)) > day * 1440 + int(rules.last_minute):
 			continue
+		if profile.get("family_library_member",false):
+			continue
 		var chance := clampi((int(rules.special_return_percent) if profile.source == "reference" else int(rules.ordinary_return_percent)) + int(profile.return_bias), 0, 100)
 		if rng.randi_range(1, 100) <= chance:
 			var id := "arrival_return_%d_%s" % [day, npc_id]
@@ -490,6 +854,8 @@ static func plan_day(people: Dictionary, config: Dictionary, day: int, reputatio
 				break
 	people.days[key] = {"day": day, "natural_count": count, "arrival_ids": ids, "expected": expected,
 		"weather": weather.id, "weather_label": weather.label, "burst": burst}
+	_plan_library_families(people,config,day,reputation,context)
+	_plan_library_returns(people,config,day)
 
 static func _stable_expected(value: float) -> float:
 	# Godot's decimal JSON parser can move a full-precision double by one ULP.
@@ -586,10 +952,19 @@ static func advance(people: Dictionary, config: Dictionary, until: int, presenta
 				if other.state == "queued":
 					waiting += 1
 			if int(entry.get("schedule_end", next_at + 1)) <= next_at:
+				_release_special(people,entry.arrival_id,int(entry.at))
 				entry.state = "left"
 				entry["left_at"] = next_at
 				entry["reason"] = config.arrival.overflow.reasons.schedule_end
 				_update_referral(people, entry, "left", next_at)
+			elif not _physical_arrival(people,config,entry,next_at):
+				# New automatic, unreserved traffic cannot consume a promised share.
+				# Confirmed promises have an explicit reservation before commitment.
+				entry.state = "left"
+				entry["left_at"] = next_at
+				entry["not_admitted"] = true
+				entry["reason"] = _family_policy(config).copy.ratio_not_admitted
+				_update_referral(people,entry,"left",next_at)
 			elif waiting >= int(config.arrival.queue_capacity):
 				var profile: Dictionary = people.profiles[entry.npc_id]
 				var score := int(profile.base_patience) + int(profile.trust) - int(entry.urgency)
@@ -661,12 +1036,12 @@ static func _record_waiting_departure(people: Dictionary, entry: Dictionary, at:
 		"reason": entry.reason, "trust_before": previous_trust, "trust_after": profile.trust,
 		"cooldown_until": profile.cooldown_until})
 
-static func advance_with_schedule(people: Dictionary, config: Dictionary, until: int, reputation: int = 0, experience: int = 0, traffic_bonus: float = 0.0, presentation_events: Variant = null) -> bool:
+static func advance_with_schedule(people: Dictionary, config: Dictionary, until: int, reputation: int = 0, experience: int = 0, traffic_bonus: float = 0.0, presentation_events: Variant = null, context: Dictionary = {}) -> bool:
 	if until < int(people.clock):
 		return false
 	while int(people.clock) < until:
 		var day := floori(float(people.clock) / 1440.0)
-		plan_day(people, config, day, reputation, -1, experience, traffic_bonus)
+		plan_day(people, config, day, reputation, -1, experience, traffic_bonus,context)
 		var end := mini(until, (day + 1) * 1440)
 		if not advance(people, config, end,presentation_events):
 			return false
@@ -695,19 +1070,23 @@ static func begin(people: Dictionary, arrival_id: String, visit_id: String) -> b
 	var row: Dictionary = people.arrivals[arrival_id]
 	if row.state != "queued" or int(people.clock) >= int(row.deadline):
 		return false
+	var profile: Dictionary = people.profiles[row.npc_id]
+	if profile.get("family_library_member",false) and not _modern_goal_valid(people,profile,profile.get("goal")):
+		return false
 	for other: Dictionary in people.arrivals.values():
 		if other.state == "in_service" or (not other.visit_id.is_empty() and other.visit_id == visit_id):
 			return false
 	row.state = "in_service"
 	row.visit_id = visit_id
 	_update_referral(people, row, "in_service", int(people.clock))
-	var profile: Dictionary = people.profiles[row.npc_id]
 	if not profile.met:
 		if profile.source == "reference":
 			people.stats.first_reference += 1
 		elif profile.origin != "fixed_story":
 			people.stats.first_original += 1
 	profile.met = true
+	if profile.get("family_library_member",false) and profile.get("goal") is Dictionary:
+		profile.goal.progress.append({"kind":"visit_started","visit_id":visit_id,"at":int(people.clock)})
 	if not str(profile.family_id).is_empty() and people.families.has(profile.family_id):
 		var family: Dictionary = people.families[profile.family_id]
 		if row.npc_id not in family.introduced:
@@ -727,6 +1106,8 @@ static func book(people: Dictionary, arrival_id: String, at: int, guest_agreed: 
 	for other: Dictionary in people.arrivals.values():
 		if other.arrival_id != arrival_id and other.state == "planned" and other.source == "appointment" and absi(int(other.at) - at) < 30:
 			return false
+	if not _reserve_special(people,config,arrival_id,at,row.npc_id):
+		return false
 	var counted: Array = row.get("counted_days",[]).duplicate()
 	for day: int in [floori(float(row.at)/1440.0),target_day]:
 		if day not in counted:
@@ -757,6 +1138,8 @@ static func schedule_return(people: Dictionary, npc_id: String, arrival_id: Stri
 	for existing: Dictionary in people.arrivals.values():
 		if existing.npc_id == npc_id and existing.state in ["planned", "queued", "outside", "appointment_requested", "in_service"]:
 			return false
+	if not _reserve_special(people,config,arrival_id,at,npc_id):
+		return false
 	people.arrivals[arrival_id] = {"arrival_id": arrival_id, "npc_id": npc_id, "source": "return", "at": at,
 		"deadline": -1, "state": "planned", "intent": "divination", "urgency": 0, "schedule_end": mini(at + 90, floori(float(at) / 1440.0) * 1440 + 1320), "referrer_npc_id": "",
 		"case_id": _profile_case_id(people,npc_id), "visit_id": ""}
@@ -811,8 +1194,14 @@ static func apply_effect(people: Dictionary, effect: Dictionary, config: Diction
 			"prediction_id": effect.get("prediction_id", ""), "at": int(people.clock), "from": previous, "to": profile[attribute]})
 	elif effect.get("kind") == "npc_relationship":
 		var delta: Variant = effect.get("delta",effect.get("amount"))
+		for profile: Dictionary in people.profiles.values():
+			if profile.get("family_library_member",false) and profile.get("goal",{}).get("relationship_id") == effect.get("rel_id") and not _modern_goal_valid(people,profile,profile.get("goal")):
+				return false
 		if not effect.get("rel_id") is String or not _integer(delta,-100,100) or not change_relationship(people,effect.rel_id,effect.event_id,int(delta),effect.effect_id):
 			return false
+		for profile: Dictionary in people.profiles.values():
+			if profile.get("family_library_member",false) and profile.get("goal",{}).get("relationship_id") == effect.rel_id:
+				profile.goal.progress.append({"kind":"relationship_effect","effect_id":effect.effect_id,"event_id":effect.event_id,"at":int(people.clock)})
 	elif effect.get("kind") == "referral":
 		if people.referrals.has(effect.effect_id):
 			return false
@@ -876,6 +1265,8 @@ static func schedule_referral(people: Dictionary, referral_id: String, at: int, 
 		if existing.npc_id == referral.target_npc_id and existing.state in ["planned", "queued", "outside", "appointment_requested", "in_service"]:
 			return false
 	var id := "arrival_" + referral_id
+	if not _reserve_special(people,config,id,at,referral.target_npc_id):
+		return false
 	people.arrivals[id] = {"arrival_id": id, "npc_id": referral.target_npc_id, "source": "referral", "at": at,
 		"deadline": -1, "state": "planned", "intent": "divination", "urgency": 5, "schedule_end": mini(at + 90, floori(float(at) / 1440.0) * 1440 + 1320),
 		"referrer_npc_id": referral.referrer_npc_id, "referral_id": referral_id, "case_id": "", "visit_id": ""}
@@ -914,6 +1305,8 @@ static func schedule_feedback(people: Dictionary, job: Dictionary, config: Dicti
 	if at < 0:
 		return false
 	var id: String = "arrival_feedback_" + str(event_id)
+	if not _reserve_special(people,config,id,at,npc_id):
+		return false
 	people.arrivals[id] = {"arrival_id": id, "npc_id": npc_id, "source": "feedback", "at": at,
 		"deadline": -1, "state": "planned", "intent": "divination", "urgency": 0, "schedule_end": mini(at + 90, floori(float(at) / 1440.0) * 1440 + 1320), "referrer_npc_id": "",
 		"case_id": str(job.get("case_id", "invitation")), "event_id": event_id, "visit_id": ""}
@@ -1037,6 +1430,9 @@ static func public_profile(people: Dictionary, npc_id: String) -> Dictionary:
 	elif profile.get("generation_member") == "contact" and people.profiles.has(profile.get("generated_owner_id")):
 		var owner: Dictionary = people.profiles[profile.generated_owner_id]
 		view.merge({"background":profile.background,"preferences":profile.preferences.duplicate(),"speech_style":profile.speech_style,"generation_source":owner.get("generation",{}).get("source", "offline")})
+	if profile.get("family_library_member",false) and profile.get("goal") is Dictionary:
+		view["initial_question"] = profile.goal.question
+		view["goal_status"] = profile.goal.status
 	return view
 
 static func model_persona(people: Dictionary, npc_id: String) -> Dictionary:
@@ -1044,8 +1440,33 @@ static func model_persona(people: Dictionary, npc_id: String) -> Dictionary:
 	var profile: Dictionary = people.profiles.get(npc_id, {})
 	if profile.is_empty() or not profile.met:
 		return {}
-	return {"npc_id": npc_id, "name": profile.name, "role": profile.role,
+	var persona := {"npc_id": npc_id, "name": profile.name, "role": profile.role,
 		"personality": profile.personality, "speech_style": profile.get("speech_style", "")}
+	if profile.get("family_library_member",false):
+		if not str(profile.get("catchphrase","")).is_empty():
+			persona["catchphrase"] = profile.catchphrase
+		if profile.get("information_boundaries") is Array and not profile.information_boundaries.is_empty():
+			persona["information_boundaries"] = profile.information_boundaries.duplicate(true)
+	return persona
+
+static func model_family_guard(people: Dictionary, npc_id: String) -> Dictionary:
+	# Local rejection input only. It must never enter any model wire projection.
+	var profile: Dictionary = people.profiles.get(npc_id,{})
+	if not profile.get("met",false) or str(profile.get("family_id","")).is_empty():
+		return {}
+	var family: Dictionary = people.families.get(profile.family_id,{})
+	var terms: Array = []
+	for value: Variant in [family.get("source_work",""),profile.get("reference_work",""),profile.get("reference_character","")]:
+		if value is String and not value.is_empty() and value not in terms:
+			terms.append(value)
+	for id: String in family.get("members",[]):
+		var original_name: String = people.profiles[id].get("reference_character","")
+		if not original_name.is_empty() and original_name not in terms:
+			terms.append(original_name)
+	var passages: Array = []
+	if not str(family.get("reference_note","")).is_empty():
+		passages.append(family.reference_note)
+	return {"blocked_terms":terms,"blocked_passages":passages}
 
 static func case_context(people: Dictionary, npc_id: String) -> Dictionary:
 	var profile: Dictionary = people.profiles.get(npc_id, {})
@@ -1131,8 +1552,12 @@ static func validate(people: Variant) -> String:
 			return "亲密度无效"
 	for id in people.profiles:
 		var profile: Dictionary = people.profiles[id]
+		if profile.get("family_library_member",false) and not profile.has("goal"):
+			return _family_policy().copy.invalid_state
 		if profile.has("goal"):
 			var goal: Variant = profile.goal
+			if profile.get("family_library_member",false) and not _modern_goal_valid(people,profile,goal):
+				return _family_policy().copy.invalid_state
 			if not goal is Dictionary or not goal.get("goal_id") is String or not people.relationships.has(goal.get("relationship_id")) or not people.profiles.has(goal.get("subject_id")) or goal.get("status") not in ["open", "resolved", "cancelled"]:
 				return "人物目标引用无效"
 			var relation: Dictionary = people.relationships[goal.relationship_id]
@@ -1254,6 +1679,8 @@ static func validate(people: Variant) -> String:
 			return "重复的经营行为情境"
 		observation_topics[topic_identity] = true
 		observation_ids[observation.action_id] = true
+	if not _family_state_valid(people):
+		return _family_policy().copy.invalid_state
 	return GeneratedPerson.validate_people(people)
 
 static func _observation_context_valid(context: Dictionary, alternatives: int) -> bool:

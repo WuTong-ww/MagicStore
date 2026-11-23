@@ -1,0 +1,1292 @@
+{
+  "task": "G2",
+  "status": "部分完成",
+  "root_final_images_opened": 30,
+  "final_PNG": 24,
+  "retained_JPG": 6,
+  "final_common_checks_passed": 141,
+  "final_common_checks_total": 150,
+  "history_images_opened": 4,
+  "history_common_checks_passed": 16,
+  "history_common_checks_total": 20,
+  "family_gui_round3": {
+    "checks": 115,
+    "passed": 114,
+    "failures": 1,
+    "PNG": 2,
+    "scope": "第三轮完整档案仍有一条关系需滚动，严格首屏可读断言失败后早退；不伪称最终完整档案双尺寸截图通过，不跑第四轮。"
+  },
+  "shop_gui_final": {
+    "checks": 694,
+    "failures": 0,
+    "capture_calls": 23,
+    "unique_PNG": 22
+  },
+  "rows": [
+    {
+      "path": ".tools/g2/shop-gui-final/exterior-1280.png",
+      "stage": "final_shop",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "71f7f0aee249622789d897e22450ccefc17bd59abab91390876e132762388d52",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "通过",
+          "reason": "前景／原场景采用左侧暖光与手绘色块；没有新贴片边或不同光向。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/shop-gui-final/front-1280.png",
+      "stage": "final_shop",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "78e2045998dfb643688d6a4cd0b01e45c71b2d0241314e554e3ec16f8888cb2e",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "不通过",
+          "reason": "旧林照晚头像仍用旧笔触和浅色轮廓，与v3不透明颜料背景有差异；本任务保留该跨任务缺口。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/shop-gui-final/consultation-1280.png",
+      "stage": "final_shop",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "94dcb5a77cfa0e56a8fb6dbbe70b1de78ca271a299f72139a817894128452c88",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "通过",
+          "reason": "前景／原场景采用左侧暖光与手绘色块；没有新贴片边或不同光向。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/shop-gui-final/inventory-1280.png",
+      "stage": "final_shop",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "e6f3607a18545daa32ccfbee156d9c47c4b0935cbf5e343d82003dc5ebe160ed",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "通过",
+          "reason": "前景／原场景采用左侧暖光与手绘色块；没有新贴片边或不同光向。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/shop-gui-final/workshop-1280.png",
+      "stage": "final_shop",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "7c93b4b0ae4a693c955304f5fe8562d8b380e2dc5737212937785425e439b43e",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "通过",
+          "reason": "前景／原场景采用左侧暖光与手绘色块；没有新贴片边或不同光向。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/shop-gui-final/market-1280.png",
+      "stage": "final_shop",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "7d609612e3121ba78ae82281e2d1727a357c106505f2bd4245a2a5413d35b9dc",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "通过",
+          "reason": "前景／原场景采用左侧暖光与手绘色块；没有新贴片边或不同光向。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/shop-gui-final/gathering-1280.png",
+      "stage": "final_shop",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "3aea643b0dff754929a41631d9ad47e8f486056b4755070a4ce655c05d394e4a",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "通过",
+          "reason": "前景／原场景采用左侧暖光与手绘色块；没有新贴片边或不同光向。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/shop-gui-final/exterior-1920.png",
+      "stage": "final_shop",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "9074f345e1ef3b59cda4c9875622470410392896dddde58f3d962d3f833d79e4",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "通过",
+          "reason": "前景／原场景采用左侧暖光与手绘色块；没有新贴片边或不同光向。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/shop-gui-final/front-1920.png",
+      "stage": "final_shop",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "31300f69ba5e78e961a990c2dcb0d0a77aec15e89db17968fe7692c5d1d08d72",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "不通过",
+          "reason": "旧林照晚头像仍用旧笔触和浅色轮廓，与v3不透明颜料背景有差异；本任务保留该跨任务缺口。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/shop-gui-final/consultation-1920.png",
+      "stage": "final_shop",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "d2093409ff6c65a10ff7886e2bf612e33aa3c02bb43ba5334e845c68190f1711",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "通过",
+          "reason": "前景／原场景采用左侧暖光与手绘色块；没有新贴片边或不同光向。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/shop-gui-final/inventory-1920.png",
+      "stage": "final_shop",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "6ae1ef315c9d819fc875b1b50b5f53b529987982603892d9dc2f30526a20f3b7",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "通过",
+          "reason": "前景／原场景采用左侧暖光与手绘色块；没有新贴片边或不同光向。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/shop-gui-final/workshop-1920.png",
+      "stage": "final_shop",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "75e8bd4fc3662ada487dcc24b3b45dc200cf079f0e4d5099e1440257b1100e97",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "通过",
+          "reason": "前景／原场景采用左侧暖光与手绘色块；没有新贴片边或不同光向。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/shop-gui-final/market-1920.png",
+      "stage": "final_shop",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "9a31fadb1ad26004904649c2fa21d629f0feee7ce8eede19791001959a60acf7",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "通过",
+          "reason": "前景／原场景采用左侧暖光与手绘色块；没有新贴片边或不同光向。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/shop-gui-final/gathering-1920.png",
+      "stage": "final_shop",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "1bb19ab6ba55ea0013dc7173acffa148d07081485237eedfa80731ecb78dd822",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "通过",
+          "reason": "前景／原场景采用左侧暖光与手绘色块；没有新贴片边或不同光向。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/shop-gui-final/people-1280.png",
+      "stage": "final_shop",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "b00dea7446dc6b7bfda567088a4c569538fa99d27032091ad3d7561df6cf0cb3",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "不通过",
+          "reason": "旧林照晚头像仍用旧笔触和浅色轮廓，与v3不透明颜料背景有差异；本任务保留该跨任务缺口。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/shop-gui-final/network-1280.png",
+      "stage": "final_shop",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "d7b0a3763401272086975966660bc037c3c292a2f2c310a8fe357660e968f53b",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "不通过",
+          "reason": "旧林照晚头像仍用旧笔触和浅色轮廓，与v3不透明颜料背景有差异；本任务保留该跨任务缺口。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/shop-gui-final/people-1920.png",
+      "stage": "final_shop",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "292bab1e1d2da3fd5ad2effbace867c597bb2fdbfd1d0d3bbbe5f8b93526702d",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "不通过",
+          "reason": "旧林照晚头像仍用旧笔触和浅色轮廓，与v3不透明颜料背景有差异；本任务保留该跨任务缺口。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/shop-gui-final/network-1920.png",
+      "stage": "final_shop",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "8fa0cae0e9d322d354388cc5fc96d0ca7fa1396ce3f2ef19c4a24daa2a436a9d",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "不通过",
+          "reason": "旧林照晚头像仍用旧笔触和浅色轮廓，与v3不透明颜料背景有差异；本任务保留该跨任务缺口。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/shop-gui-final/market-after-trade-1920.png",
+      "stage": "final_shop",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "7417f439b733c629cfd9a5a486a37b8afaf2e5ad5393b5868450f9c7aa684b67",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "通过",
+          "reason": "前景／原场景采用左侧暖光与手绘色块；没有新贴片边或不同光向。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/shop-gui-final/catalog-icons-64px.png",
+      "stage": "final_shop",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "dd5cc22af1b30459c4f9e48485a3c190887e66919fd5fee76c33548b7c6d6c63",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "通过",
+          "reason": "前景／原场景采用左侧暖光与手绘色块；没有新贴片边或不同光向。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/shop-gui-final/zero-guest-front-1280.png",
+      "stage": "final_shop",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "d51254b075d7c2f6e297b75810de3b53cf4f7e47f6db2719af225ee86750a37c",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "通过",
+          "reason": "前景／原场景采用左侧暖光与手绘色块；没有新贴片边或不同光向。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/shop-gui-final/zero-guest-front-1920.png",
+      "stage": "final_shop",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "f0f02cc21560f6bc513abbae20b47b75e5d834dd9d7fba017e4032ca77c35708",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "通过",
+          "reason": "前景／原场景采用左侧暖光与手绘色块；没有新贴片边或不同光向。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/ui-captures/run_2144c01b2a3ada183b07e4c0b50facd4/family-partial-1280.png",
+      "stage": "final_family",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "e8cc2caa1b95e712da70a59868927a7feea8aecb9133f665cc70e704687e059e",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "通过",
+          "reason": "前景／原场景采用左侧暖光与手绘色块；没有新贴片边或不同光向。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/ui-captures/run_2144c01b2a3ada183b07e4c0b50facd4/family-partial-1920.png",
+      "stage": "final_family",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "482cc480d2fb9d0dfa87b5035fddf1a7d851c7c0bffca582b059c6ab7c55c4b6",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "通过",
+          "reason": "前景／原场景采用左侧暖光与手绘色块；没有新贴片边或不同光向。"
+        }
+      ]
+    },
+    {
+      "path": "docs/screenshots/round2/G2/family-partial-1280x720.jpg",
+      "stage": "retained_JPG",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "8c4a5ee94299ad56716a6c0326d611353af17939193419387a92e96dcbb648c7",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "通过",
+          "reason": "前景／原场景采用左侧暖光与手绘色块；没有新贴片边或不同光向。"
+        }
+      ]
+    },
+    {
+      "path": "docs/screenshots/round2/G2/family-partial-1920x1080.jpg",
+      "stage": "retained_JPG",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "d5f56d44f37d076bd4d3cd91b3b87b36957d353cda031c75605099813b7bb8d3",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "通过",
+          "reason": "前景／原场景采用左侧暖光与手绘色块；没有新贴片边或不同光向。"
+        }
+      ]
+    },
+    {
+      "path": "docs/screenshots/round2/G2/people-1280x720.jpg",
+      "stage": "retained_JPG",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "11062f2054eea334c22afd9eb5cd63c23bc6f64a5f0ec52eac2fe7910c22ef7a",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "不通过",
+          "reason": "旧林照晚头像仍用旧笔触和浅色轮廓，与v3不透明颜料背景有差异；本任务保留该跨任务缺口。"
+        }
+      ]
+    },
+    {
+      "path": "docs/screenshots/round2/G2/people-1920x1080.jpg",
+      "stage": "retained_JPG",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "96d176748e8fa974319930e905c76e2e78a3ab1db08f391e4e5176668c5ec834",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "不通过",
+          "reason": "旧林照晚头像仍用旧笔触和浅色轮廓，与v3不透明颜料背景有差异；本任务保留该跨任务缺口。"
+        }
+      ]
+    },
+    {
+      "path": "docs/screenshots/round2/G2/front-1280x720.jpg",
+      "stage": "retained_JPG",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "c0312d626de5c45e649dfacded4705eab4ba975d7ae2370ab9960eb79c882042",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "不通过",
+          "reason": "旧林照晚头像仍用旧笔触和浅色轮廓，与v3不透明颜料背景有差异；本任务保留该跨任务缺口。"
+        }
+      ]
+    },
+    {
+      "path": "docs/screenshots/round2/G2/consultation-1920x1080.jpg",
+      "stage": "retained_JPG",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "c37e22186423314ffc2440ac65181145701493b91b3889fc055fa419742f3658",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "通过",
+          "reason": "前景／原场景采用左侧暖光与手绘色块；没有新贴片边或不同光向。"
+        }
+      ]
+    }
+  ],
+  "history_rows": [
+    {
+      "path": ".tools/g2/ui-captures/run_1a7627b8bd48ae23fd9df067ff3e1f80/family-complete-1280.png",
+      "stage": "family_GUI_round1",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "f16c137952ce77cc7825c4d5ebbd7bc15a2096c0b7e46fd623685e18f4165376",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "不通过",
+          "reason": "首轮档案的旧金色手帐装饰显得贴上去；最终版已撤下节点，原资产与来源记录保留。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/ui-captures/run_1a7627b8bd48ae23fd9df067ff3e1f80/family-complete-1920.png",
+      "stage": "family_GUI_round1",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "2fb9121c5eeb7f763840f80224450ca31a63e7e8ac30ed88146e5d350a8e45d2",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "不通过",
+          "reason": "首轮档案的旧金色手帐装饰显得贴上去；最终版已撤下节点，原资产与来源记录保留。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/ui-captures/run_1a7627b8bd48ae23fd9df067ff3e1f80/family-partial-1280.png",
+      "stage": "family_GUI_round1",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "033e4eb8c12687157f9fcc23108fabaf2aa5a7351cbc1644dcf41b0b6b84e503",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "不通过",
+          "reason": "首轮档案的旧金色手帐装饰显得贴上去；最终版已撤下节点，原资产与来源记录保留。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g2/ui-captures/run_1a7627b8bd48ae23fd9df067ff3e1f80/family-partial-1920.png",
+      "stage": "family_GUI_round1",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "fe99e853e27f8079f15004fa903dad9014d83bfb8f09f551d16da4b28c67f621",
+      "root_opened": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "status": "通过",
+          "reason": "底图铺满窗口，弹窗叠在全屏场景上，无场景卡片或窗口黑边。"
+        },
+        {
+          "criterion": 2,
+          "status": "通过",
+          "reason": "顶栏、底栏及本页按钮文字完整；禁用按钮仍有完整标签，无空白按钮。"
+        },
+        {
+          "criterion": 3,
+          "status": "通过",
+          "reason": "说明、档案或对话正文使用浅色古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "status": "通过",
+          "reason": "姓名、数字与状态由动态控件绘制，底图、头像与物品图未见烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "status": "不通过",
+          "reason": "首轮档案的旧金色手帐装饰显得贴上去；最终版已撤下节点，原资产与来源记录保留。"
+        }
+      ]
+    }
+  ],
+  "other_visual_debt": [
+    "旧灰白选中页签保持A4既有部分完成状态。",
+    "零客1920帧可见重复咨询区热区牌；不是烘焙文字，后续统一处理。",
+    "商店数量标签横向过窄，后续经营界面任务处理。"
+  ]
+}

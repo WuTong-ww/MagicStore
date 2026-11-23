@@ -39,6 +39,9 @@ func command(kind: String, extra: Dictionary = {}) -> Dictionary:
 func fixture(count: int) -> FakeBackground:
 	check(command("new_game", {"name": "生成日计划槽验收"}).success, "create isolated slot save")
 	gs.state.people = People.create(gs.state.save_id, 71, int(gs.state.clock_minutes))
+	# A replacement current-schema namespace starts with its own empty arrival
+	# baseline; the legacy factory remains useful for historical unit fixtures.
+	People.initialize_family_library(gs.state.people,gs.people_config.family_library,"new_game")
 	# This fixture replaces people inside a current-schema save, so enable the
 	# current catalog before births just as the production Bridge does. Keep the
 	# legacy People.create factory and the sampled traffic assertions unchanged.

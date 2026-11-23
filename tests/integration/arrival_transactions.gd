@@ -38,6 +38,12 @@ func run() -> void:
 	# Isolated setup preserves an already planned legacy-style quiet day. Four
 	# later arrivals deliberately do not rewrite its persisted arrival_ids.
 	game.state.people.arrivals.clear()
+	# The replacement fixture has no physical trips from the opening day.
+	# Rebuild its current-schema baseline instead of retaining a ledger whose
+	# arrival IDs the fixture deliberately removed.
+	game.state.people.erase("family_library_version")
+	game.state.people.erase("family_metrics")
+	People.initialize_family_library(game.state.people,game.people_config.family_library,"new_game")
 	game.state.people.days["0"] = {"day": 0, "natural_count": 0, "arrival_ids": []}
 	var now := int(game.state.clock_minutes)
 	var rng := People._random(2107)
@@ -53,7 +59,12 @@ func run() -> void:
 		row.urgency = 0
 		game.state.people.arrivals[id] = row
 		ids.append(id)
-	check(saves.write_save(game.snapshot()).success, "the isolated planned-arrival fixture is a valid real save")
+	var seeded: Dictionary = saves.write_save(game.snapshot())
+	check(seeded.success, "the isolated planned-arrival fixture is a valid real save")
+	if not seeded.success:
+		printerr("ARRIVAL FIXTURE DIAGNOSTIC: "+str(seeded.get("message","")))
+		quit(1)
+		return
 	var old_day: Dictionary = game.state.people.days["0"].duplicate(true)
 	var view: Dictionary = game.people_view()
 	check(view.day.arrival_count == 4 and game.state.people.days["0"] == old_day and not old_day.has("arrival_count"), "public day count includes later arrivals without mutating the persisted old plan")
@@ -115,7 +126,8 @@ func _traffic_fixture(config: Dictionary, clock: int, boosts: Array) -> Dictiona
 	fixture.shop.boosts = boosts.duplicate(true)
 	fixture.shop.reputation = 0
 	fixture.shop.experience = 0
-	Bridge.initialize(fixture,config,game._divination)
+	# This is a new current-schema people namespace, not a historical migration.
+	Bridge.initialize(fixture,config,game._divination,true)
 	return fixture
 
 func _traffic_boost_windows() -> void:

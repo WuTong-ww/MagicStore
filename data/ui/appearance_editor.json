@@ -33,7 +33,7 @@
   },
   "layout": {
     "margin":16,"gap":12,"queue_width":310,"queue_minimum_height":260,"queue_max_lines":8,
-    "queue_text_inset":28,"evidence_height":96,"preview_size":[210,280],"archive_portrait_size":[90,120],
+    "queue_text_inset":28,"evidence_height":96,"preview_size":[210,280],"archive_portrait_size":[90,120],"archive_detail_minimum_height":220,
     "part_picker_width":210,"picker_height":36,"heading_font_size":22,"body_font_size":16,
     "small_font_size":14,"wait_minutes":30,"booking_minutes":1440,"report_rows":5,"memory_rows":6,
     "bubble_composite_size":[48,64],"cache_default_size":[192,256]

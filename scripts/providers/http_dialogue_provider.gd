@@ -105,6 +105,10 @@ func request_reply(request: Dictionary) -> Dictionary:
 	_status = {"mode": "offline", "reason": "", "pending": false, "request_id": request_id, "action_id": action_id}
 	_reset_timing()
 	_pipeline_started_msec = Time.get_ticks_msec()
+	_policy_context = DialoguePolicy.build_context(request,_mock.topics)
+	if _policy_context.is_empty():
+		_complete_timing()
+		return _error("PROVIDER_INVALID")
 	if _url.is_empty():
 		return _fallback("未配置在线网关，使用本地对话")
 	if _direct_mode and _model_name.is_empty():
@@ -113,10 +117,10 @@ func request_reply(request: Dictionary) -> Dictionary:
 		return _fallback("网关配置无效，使用本地对话")
 	if not is_instance_valid(_host) or not _host.is_inside_tree():
 		return _fallback("对话宿主不可用，使用本地对话")
-	var body: Dictionary = {}
-	for key: String in BODY_KEYS:
-		if request.has(key):
-			body[key] = request[key]
+	var body := DialoguePolicy.transport_request(request,_mock.topics)
+	if body.is_empty():
+		_complete_timing()
+		return _error("PROVIDER_INVALID")
 	_deadline_msec = Time.get_ticks_msec() + int(maxf(0.1, timeout_seconds) * 1000.0)
 	_candidate = {}
 	if _direct_mode:
@@ -355,6 +359,8 @@ func _valid_reply(reply: Variant) -> bool:
 				var text: String = question.text.strip_edges()
 				if id == "clarify" or not allowed.has(id) or text.is_empty() or text.length() > 16 or cleaned.any(func(row: Dictionary) -> bool: return row.topic_id == id):
 					continue
+				if not DialoguePolicy.family_text_safe(text,_policy_context.get("_family_guard",{})):
+					continue
 				cleaned.append({"topic_id":id,"text":text})
 				if cleaned.size() == 3:
 					break
@@ -389,6 +395,8 @@ func _neutral_fallback() -> Dictionary:
 	var text: String = str(_context.get("input_text", ""))
 	var comforting := ["别紧张","慢慢","不着急","放松","别急","没关系","陪你","不用急","缓一缓"].any(func(phrase: String) -> bool: return text.contains(phrase))
 	var reply := "谢谢，我先缓一缓。你愿意听我慢慢说，我就没那么紧张了。" if comforting else "这部分我还不敢随便下结论。你想先和我聊哪一部分？"
+	if not DialoguePolicy.family_text_safe(reply,_policy_context.get("_family_guard",{})):
+		return _error("PROVIDER_INVALID")
 	return {"reply_text":reply,"intent":"clarify","clue_ids":[],"needs_clarification":true,"error_code":"","mood":DialoguePolicy.default_mood()}
 
 func _finish(generation: int, reply: Dictionary) -> void:

@@ -86,29 +86,29 @@ func _ready() -> void:
 	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	columns.add_child(right)
 	right.add_child(_label(copy.archive_title, int(layout.heading_font_size)))
-	var relationship_art := UI.image("res://assets/ui/relationship_graph.png")
-	relationship_art.custom_minimum_size = Vector2(250, 100)
-	relationship_art.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	right.add_child(relationship_art)
 	archive = OptionButton.new()
 	archive.name = "KnownPeople"
 	archive.fit_to_longest_item = false
 	archive.item_selected.connect(_select_archive)
 	right.add_child(archive)
+	var archive_content := HBoxContainer.new()
+	archive_content.add_theme_constant_override("separation",int(layout.gap))
+	archive_content.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	right.add_child(archive_content)
 	archive_portrait = Portrait.new()
 	archive_portrait.name = "KnownPersonPortrait"
 	archive_portrait.custom_minimum_size = Vector2(layout.archive_portrait_size[0],layout.archive_portrait_size[1])
+	archive_portrait.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 	archive_portrait.visible = false
-	right.add_child(archive_portrait)
+	archive_content.add_child(archive_portrait)
 	detail = RichTextLabel.new()
 	detail.bbcode_enabled = false
 	detail.fit_content = false
+	detail.custom_minimum_size.y = float(layout.archive_detail_minimum_height)
+	detail.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	detail.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	right.add_child(detail)
+	archive_content.add_child(detail)
 	right.add_child(_label(copy.evidence_title, int(layout.body_font_size)))
-	var report_art := UI.image("res://assets/ui/report_notebook.png")
-	report_art.custom_minimum_size = Vector2(220, 84)
-	right.add_child(report_art)
 	evidence = ItemList.new()
 	evidence.custom_minimum_size.y = float(layout.evidence_height)
 	evidence.item_selected.connect(_evidence_activated)

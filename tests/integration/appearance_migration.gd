@@ -29,7 +29,7 @@ func run() -> void:
 	game.configure_api("","","")
 	game.set_people_generation_options(false)
 	var started: Dictionary = await act("new_game",{"name":"外观迁移入口验收"})
-	check(started.success and game.state.get("schema_version") == 6,"production new game uses appearance schema6")
+	check(started.success and game.state.get("schema_version") == 7,"production new game uses current family schema7 with appearance catalog2")
 	if failures:
 		print("APPEARANCE MIGRATION: %d checks, %d failures"%[checks,failures])
 		quit(1)
@@ -46,6 +46,8 @@ func run() -> void:
 func old_copy(schema: int) -> Dictionary:
 	var legacy: Dictionary = game.snapshot()
 	legacy.schema_version = schema
+	legacy.people.erase("family_library_version")
+	legacy.people.erase("family_metrics")
 	legacy.people.appearance_catalog_version = 1
 	legacy.people.player_appearance = {"face":"face_02","hair":"hair_03","outfit":"outfit_01"}
 	for profile: Dictionary in legacy.people.profiles.values():
@@ -73,7 +75,7 @@ func old_schema(schema: int) -> void:
 	var path: String = saves._path(legacy.save_id)
 	var before_hash := FileAccess.get_sha256(path)
 	check((await act("load_game",{"save_id":legacy.save_id})).success,"load real old save / v"+str(schema))
-	check(game.state.schema_version == 6 and game.state.people.appearance_catalog_version == 2,"old save migrates to explicit schema6/catalog2 / v"+str(schema))
+	check(game.state.schema_version == 7 and game.state.people.appearance_catalog_version == 2,"old save migrates to current schema7 without changing appearance catalog2 / v"+str(schema))
 	check(Appearance.appearance_valid(game.state.people.player_appearance),"player rig validates after migration / v"+str(schema))
 	if schema >= 3:
 		check(game.state.people.days == legacy.people.days and game.state.people.arrivals == legacy.people.arrivals,"old traffic plans and arrivals are not rerolled / v"+str(schema))
@@ -89,7 +91,7 @@ func old_schema(schema: int) -> void:
 	var failed: Dictionary = await act("save_appearance",{"action_id":action_id,"appearance":selection})
 	check(not failed.success and game.snapshot() == before and FileAccess.get_sha256(path) == before_hash,"failed appearance save changes no state/file / v"+str(schema))
 	check((await act("save_appearance",{"action_id":action_id,"appearance":selection})).success,"same action retry succeeds / v"+str(schema))
-	check(game.state.people.player_appearance == selection and saves.read_save(legacy.save_id).state.schema_version == 6,"first successful action persists canonical selection and schema6 / v"+str(schema))
+	check(game.state.people.player_appearance == selection and saves.read_save(legacy.save_id).state.schema_version == 7,"first successful action persists canonical selection and current schema7 / v"+str(schema))
 	var committed: Dictionary = game.snapshot()
 	check((await act("save_appearance",{"action_id":action_id,"appearance":selection})).success and game.snapshot() == committed,"replay never regenerates or recommits appearance / v"+str(schema))
 	check((await act("load_game",{"save_id":legacy.save_id})).success and game.state.people.player_appearance == selection,"reopen exact saved appearance / v"+str(schema))
@@ -123,6 +125,10 @@ func generated_identity() -> void:
 func historical_selection_boundary(hat: String = "accessory_10") -> void:
 	check((await act("new_game",{"name":"外观组合兼容验收"})).success,"create isolated current-schema selection fixture")
 	var old_snapshot: Dictionary = game.snapshot()
+	# Keep the historical A4 input at schema6, predating G2's separate metadata.
+	old_snapshot.schema_version = 6
+	old_snapshot.people.erase("family_library_version")
+	old_snapshot.people.erase("family_metrics")
 	var parts_config := Appearance.load_config()
 	var historical: Dictionary = Appearance.normalize(parts_config.defaults,parts_config)
 	historical.parts.hair_back = "hair_back_06"

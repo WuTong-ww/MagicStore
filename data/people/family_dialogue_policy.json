@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "persona_fields": ["name", "role", "personality", "speech_style", "catchphrase", "information_boundaries"],
+  "limits": {"persona_text": 200, "boundaries": 8, "boundary_text": 200, "guard_entries": 128, "guard_text": 1000},
+  "normalization": {"lowercase": true, "fullwidth_ascii": true, "alphanumeric_only": true},
+  "blocked_terms": [],
+  "blocked_passages": [],
+  "registry_path": "res://data/people/family_library.json"
+}

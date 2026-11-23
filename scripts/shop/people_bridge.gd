@@ -7,12 +7,15 @@ const Memory = preload("res://scripts/people/memory.gd")
 const Events = preload("res://scripts/divination/event_rules.gd")
 const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
 const Appearance = preload("res://scripts/people/appearance.gd")
+const DialoguePolicy = preload("res://scripts/providers/dialogue_policy.gd")
 
-static func initialize(state: Dictionary, config: Dictionary, divination: Variant = null) -> void:
+static func initialize(state: Dictionary, config: Dictionary, divination: Variant = null, fresh: bool = false) -> void:
 	if state.has("people"):
 		return
 	state["people"] = People.create(state.save_id, absi(String(state.save_id).hash()), int(state.clock_minutes))
 	var people: Dictionary = state.people
+	if fresh:
+		People.initialize_family_library(people,config.get("family_library",{}),"new_game")
 	# Enable the full catalog before first-day births. People.create remains a
 	# legacy factory for old isolated callers; existing save namespaces return above.
 	var parts_config := Appearance.load_config()
@@ -26,16 +29,19 @@ static func initialize(state: Dictionary, config: Dictionary, divination: Varian
 	for npc_id: String in state.get("npcs", {}):
 		_import_profile(people, npc_id, divination)
 	for visit: Dictionary in state.get("visits", []):
-		register_legacy_visit(state, visit, divination)
+		register_legacy_visit(state, visit, divination,null,config)
 	# The handwritten opening customer is a real queue entry, not a debug selection.
 	if int(state.clock_minutes) < 1440 and config.arrival.opening_guest and state.visits.is_empty() and not people.arrivals.has("arrival_opening_lin"):
 		var at := int(state.clock_minutes)
 		people.arrivals["arrival_opening_lin"] = _arrival("arrival_opening_lin", "npc_lin", at, "fixed_story", "invitation")
 	var day := floori(float(state.clock_minutes) / 1440.0)
-	People.plan_day(people, config, day, _reputation(state), -1, _experience(state), _traffic_bonus(state, config, day))
+	People.plan_day(people, config, day, _reputation(state), -1, _experience(state), _traffic_bonus(state, config, day),_family_context(state))
 	People.advance(people, config, int(state.clock_minutes))
 	if divination != null:
 		sync(state, config, divination)
+
+static func _family_context(state: Dictionary) -> Dictionary:
+	return {"learned_spell_ids":state.get("divination",{}).get("skills",[]).duplicate()}
 
 static func _import_profile(people: Dictionary, npc_id: String, divination: Variant) -> void:
 	if people.profiles.has(npc_id):
@@ -64,21 +70,27 @@ static func _arrival(id: String, npc_id: String, at: int, source: String, case_i
 		"schedule_end": mini(at + 120, floori(float(at) / 1440.0) * 1440 + 1320),
 		"referrer_npc_id": "", "case_id": case_id, "visit_id": ""}
 
-static func register_legacy_visit(state: Dictionary, visit: Dictionary, divination: Variant = null, presentation_events: Variant = null) -> void:
+static func register_legacy_visit(state: Dictionary, visit: Dictionary, divination: Variant = null, presentation_events: Variant = null, config: Dictionary = {}) -> bool:
 	if not state.has("people"):
-		return
+		return true
 	var people: Dictionary = state.people
 	_import_profile(people, visit.npc_id, divination)
 	for row: Dictionary in people.arrivals.values():
 		if row.visit_id == visit.visit_id:
-			return
+			return true
 	# A legacy service handoff can refer to a person already in the room.
 	# Retiring an opening alias is not that person's physical departure.
 	var already_inside: bool = people.arrivals.values().any(func(arrival: Dictionary) -> bool: return arrival.npc_id == visit.npc_id and arrival.state in ["queued","in_service"])
+	var already_present: bool = people.arrivals.values().any(func(arrival: Dictionary) -> bool:
+		return arrival.npc_id == visit.npc_id and (arrival.state in ["queued","outside","in_service"] or (arrival.state == "appointment_requested" and int(arrival.at) <= int(state.clock_minutes) and int(arrival.get("schedule_end",arrival.at)) > int(state.clock_minutes)))
+	)
 	var arrival_id := "arrival_legacy_" + String(visit.visit_id)
 	var row := _arrival(arrival_id, visit.npc_id, int(visit.started_at), "legacy", "")
 	row.visit_id = visit.visit_id
 	row.state = "completed" if visit.phase == "ended" else "in_service"
+	if row.state == "in_service" and not already_present:
+		if not People._physical_arrival(people,config,row,int(visit.started_at)):
+			return false
 	people.arrivals[arrival_id] = row
 	if row.state == "in_service" and not already_inside:
 		People._presentation_event(presentation_events,row,"guest_entered",int(visit.started_at))
@@ -97,12 +109,13 @@ static func register_legacy_visit(state: Dictionary, visit: Dictionary, divinati
 	for pending: Dictionary in people.arrivals.values():
 		if pending.npc_id != visit.npc_id:
 			continue
-		var queued_handoff: bool = visit.phase != "ended" and pending.state == "queued"
+		var queued_handoff: bool = visit.phase != "ended" and (pending.state in ["queued","outside"] or (pending.state == "appointment_requested" and int(pending.at) <= int(state.clock_minutes) and int(pending.get("schedule_end",pending.at)) > int(state.clock_minutes)))
 		var opening_alias: bool = visit.npc_id == "npc_lin" and pending.arrival_id == "arrival_opening_lin" and pending.state in ["planned","queued"]
 		if queued_handoff or opening_alias:
 			pending.state = "left"
 			pending["reason"] = "已由原接待继续"
 			pending["left_at"] = int(state.clock_minutes)
+	return true
 
 static func advance(state: Dictionary, config: Dictionary, minutes: int, divination: Variant) -> Array:
 	var presentation_events: Array = []
@@ -133,10 +146,10 @@ static func advance(state: Dictionary, config: Dictionary, minutes: int, divinat
 		state.clock_minutes = at
 		Events.advance(state, divination.data)
 		var previous_day := floori(float(state.people.clock) / 1440.0)
-		People.advance_with_schedule(state.people, config, at, _reputation(state), _experience(state), _traffic_bonus(state, config, previous_day),presentation_events)
+		People.advance_with_schedule(state.people, config, at, _reputation(state), _experience(state), _traffic_bonus(state, config, previous_day),presentation_events,_family_context(state))
 		# advance_with_schedule does not plan the newly entered day when at is exactly midnight.
 		var day := floori(float(at) / 1440.0)
-		People.plan_day(state.people, config, day, _reputation(state), -1, _experience(state), _traffic_bonus(state, config, day))
+		People.plan_day(state.people, config, day, _reputation(state), -1, _experience(state), _traffic_bonus(state, config, day),_family_context(state))
 		sync(state, config, divination)
 	return presentation_events
 
@@ -173,7 +186,21 @@ static func start(state: Dictionary, action: Dictionary, divination: Variant, co
 	var opening: String = "我带来一件旧物，想弄清它留下的故事。"
 	if divination.data.cases.get(case_id,{}).get("generated",false) or npc_id == "npc_lin" or divination.data.guests.has(npc_id):
 		opening = divination.opening(npc_id, case_id, prior)
-	if row.intent == "shopping":
+	var family_statement := false
+	if profile.get("family_library_member",false) and profile.get("goal") is Dictionary:
+		var goal: Dictionary = profile.goal
+		var relation: Dictionary = state.people.relationships[goal.relationship_id]
+		var subject: Dictionary = state.people.profiles[goal.subject_id]
+		var copy: Dictionary = People._family_policy(config).copy
+		opening = goal.question + String(copy.family_opening_relation).format({"subject_name":subject.name,"relationship_kind":relation.kind})
+		var guard := DialoguePolicy.family_guard({"_family_guard":People.model_family_guard(state.people,npc_id)})
+		if guard.is_empty() or not DialoguePolicy.family_text_safe(opening,guard):
+			return _fail("FAMILY_CONTENT_BLOCKED",copy.invalid_state)
+		# Exactly the subject this committed opening states, never another hidden edge.
+		context["subject_id"] = goal.subject_id
+		context["target_name"] = subject.name
+		family_statement = true
+	elif row.intent == "shopping":
 		opening = "我今天想看看店里的商品。"
 	var visit := {"visit_id": visit_id, "npc_id": npc_id, "day": floori(float(state.clock_minutes) / 1440.0),
 		"phase": "talking", "clue_ids": [], "dialogue": [{"speaker": "npc", "text": opening}],
@@ -185,6 +212,10 @@ static func start(state: Dictionary, action: Dictionary, divination: Variant, co
 	if prior and divination.data.cases.get(case_id,{}).get("generated",false):
 		visit.dialogue[0].text = divination.opening(npc_id,case_id,true,visit.clue_ids)
 	row.case_id = case_id
+	if family_statement and People.reveal_relationship(state.people,profile.goal.relationship_id,visit_id,action.action_id):
+		var statement: Dictionary = state.people.revealed_relationships[profile.goal.relationship_id]
+		statement.merge({"source_kind":"family_opening_statement","kind":"statement","action_id":action.action_id,
+			"statement_index":0,"statement_text":visit.dialogue[0].text},true)
 	# The newly freed indoor seat goes to the earliest outside guest, preserving
 	# their original deadline. This remains inside the caller's save transaction.
 	if not config.is_empty():
@@ -318,12 +349,17 @@ static func handle(state: Dictionary, action: Dictionary, config: Dictionary) ->
 			row["source_visit_id"] = state.active_visit_id
 			row["source_action_id"] = action.action_id
 			row["relationship_id"] = invitation.relationship_id
+			if not People._reserve_special(state.people,config,id,invitation.at,invitation.npc_id):
+				return _fail("FAMILY_QUOTA_UNAVAILABLE",People._family_policy(config).copy.ratio_unavailable)
 			state.people.arrivals[id] = row
 			return _ok("介绍的事记下了，合适的时候对方会来店里。",{"arrival_id":id,"npc_id":invitation.npc_id,"at":invitation.at})
 		"book_arrival":
 			var at: Variant = action.get("at")
 			if not People._integer(at, 0, People.MAX_INT) or not action.get("guest_agreed", false) is bool or not action.get("arrival_id") is String:
 				return _fail("INVALID_ACTION", "请确认预约时间及顾客同意。")
+			var booking: Dictionary = state.people.arrivals.get(action.arrival_id,{})
+			if not booking.is_empty() and action.get("guest_agreed",false) and not People.special_budget_available(state.people,config,action.arrival_id,int(at),booking.npc_id):
+				return _fail("FAMILY_QUOTA_UNAVAILABLE",People._family_policy(config).copy.ratio_unavailable)
 			if not People.book(state.people, action.arrival_id, int(at), action.get("guest_agreed", false),config):
 				return _fail("BOOKING_DECLINED", "预约未达成，请检查来客、同意状态和营业时段。")
 			state.people.arrivals[action.arrival_id]["booking_action_id"] = action.action_id
@@ -345,6 +381,8 @@ static func validate(state: Dictionary) -> String:
 	var people: Dictionary = state.people
 	if int(state.get("schema_version",1)) >= 6 and people.get("appearance_catalog_version") != 2:
 		return "人物经历或外貌无效"
+	if int(state.get("schema_version",1)) >= 7 and people.get("family_library_version") != 1:
+		return People._family_policy().copy.invalid_state
 	if people.save_id != state.save_id or int(people.clock) != int(state.clock_minutes):
 		return "人物命名空间与存档或时钟不一致"
 	var effects := {}
@@ -369,6 +407,39 @@ static func validate(state: Dictionary) -> String:
 	var visits := {}
 	for visit: Dictionary in state.visits:
 		visits[visit.visit_id] = visit
+	for profile: Dictionary in people.profiles.values():
+		if not profile.get("family_library_member",false):
+			continue
+		for progress: Dictionary in profile.goal.progress:
+			if progress.kind == "visit_started":
+				var source: Dictionary = visits.get(progress.visit_id,{})
+				if source.get("npc_id") != profile.npc_id or source.get("started_at") != progress.at:
+					return People._family_policy().copy.invalid_state
+			else:
+				var source: Dictionary = effects.get(progress.effect_id,{})
+				if source.get("kind") != "npc_relationship" or source.get("rel_id") != profile.goal.relationship_id or source.get("event_id") != progress.event_id or int(source.get("starts_at",People.MAX_INT)) > int(progress.at):
+					return People._family_policy().copy.invalid_state
+	for id: String in people.revealed_relationships:
+		var reveal: Dictionary = people.revealed_relationships[id]
+		var modern: bool = people.families.values().any(func(family: Dictionary) -> bool:
+			return id in family.get("relationship_ids",[]) and family.members.any(func(npc: String) -> bool: return people.profiles[npc].get("family_library_member",false))
+		)
+		if not modern and reveal.get("source_kind") != "family_opening_statement":
+			continue
+		var source: Dictionary = visits.get(reveal.visit_id,{})
+		var actor: Dictionary = people.profiles.get(source.get("npc_id",""),{})
+		var goal: Dictionary = actor.get("goal",{})
+		var committed: Dictionary = state.processed_actions.get(reveal.get("action_id",""),{})
+		if reveal.get("source_kind") != "family_opening_statement" or reveal.get("kind") != "statement" or not actor.get("family_library_member",false) or goal.get("relationship_id") != id or reveal.get("statement_index") != 0 or reveal.get("source_id") != reveal.get("action_id") or committed.get("action_type") != "start_arrival":
+			return People._family_policy().copy.invalid_state
+		var result: Dictionary = committed.get("result",{})
+		if result.get("visit_id") != source.get("visit_id") or result.get("npc_id") != source.get("npc_id") or result.get("arrival_id") != source.get("arrival_id") or reveal.get("at") != source.get("started_at") or source.get("dialogue",[]).is_empty():
+			return People._family_policy().copy.invalid_state
+		var opening: Dictionary = source.dialogue[0]
+		var text: Variant = reveal.get("statement_text")
+		var edge: Dictionary = people.relationships[id]
+		if opening.get("speaker") != "npc" or not text is String or opening.get("text") != text or not text.begins_with(goal.question) or not text.contains(people.profiles[goal.subject_id].name) or not text.contains(edge.kind):
+			return People._family_policy().copy.invalid_state
 	for row: Dictionary in people.arrivals.values():
 		var booking: Dictionary = state.processed_actions.get(row.get("booking_action_id",""),{})
 		var valid_booking: bool = booking.get("action_type") == "book_arrival" and booking.get("result",{}).get("arrival_id") == row.arrival_id and booking.get("result",{}).get("at") == row.at and booking.get("result",{}).get("guest_agreed") == true

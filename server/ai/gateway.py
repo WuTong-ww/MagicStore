@@ -32,6 +32,7 @@ ALLOWED_KEYS = {"npc", "case_id", "visit_id", "input_text", "topic_id", "allowed
                 "allowed_intents", "allowed_clue_ids", "allowed_branch_ids", "known_memories",
                 "dialogue_sources", "safe_persona", "grounded_history", "relationship", "custom_topics"}
 PERSONA_FIELDS = {"name", "role", "personality", "speech_style"}
+FAMILY_POLICY_PATH = ROOT / "data/people/family_dialogue_policy.json"
 SOURCE_KINDS = {"persona", "statement", "clue", "prediction", "feedback", "event", "relationship", "history", "topic"}
 PROTECTED_ANCHORS = ("替你留了靠窗的位置", "侧门", "临时入口告示", "另一处档案柜编号")
 _person_policy = None
@@ -109,6 +110,92 @@ def person_package_result(context, config, creator=None, auditor=None):
     return {"bundle": bundle, "provenance": {"source": "model", "model": config["model"], "draft_hash": digest, "review": review}}
 
 
+def family_settings_valid(data):
+    if not isinstance(data, dict) or set(data) != {"version", "persona_fields", "limits", "normalization", "blocked_terms", "blocked_passages", "registry_path"}:
+        return False
+    if type(data["version"]) not in (int, float) or data["version"] != 1:
+        return False
+    if data["persona_fields"] != ["name", "role", "personality", "speech_style", "catchphrase", "information_boundaries"]:
+        return False
+    if data["normalization"] != {"lowercase": True, "fullwidth_ascii": True, "alphanumeric_only": True} or any(type(value) is not bool for value in data["normalization"].values()):
+        return False
+    limits = data["limits"]
+    if not isinstance(limits, dict) or set(limits) != {"persona_text", "boundaries", "boundary_text", "guard_entries", "guard_text"}:
+        return False
+    if any(type(value) not in (int, float) or not math.isfinite(value) or value != int(value) or value <= 0 for value in limits.values()):
+        return False
+    if data["registry_path"] != "res://data/people/family_library.json":
+        return False
+    return all(isinstance(data[key], list) and len(data[key]) <= limits["guard_entries"] and all(isinstance(text, str) and 0 < len(text) <= limits["guard_text"] and family_normalize(text) for text in data[key]) for key in ("blocked_terms", "blocked_passages"))
+
+
+def load_family_settings():
+    data = json.loads(FAMILY_POLICY_PATH.read_text(encoding="utf-8"))
+    if not family_settings_valid(data):
+        raise ValueError("invalid local family dialogue policy")
+    return data
+
+
+def family_normalize(text):
+    width_folded = "".join(chr(ord(char) - 0xfee0) if 0xff01 <= ord(char) <= 0xff5e else char for char in text)
+    return "".join(char for char in width_folded.lower() if char.isalnum())
+
+
+def family_guard(extra=None):
+    settings = load_family_settings()
+    if not family_settings_valid(settings):
+        raise ValueError("invalid local family dialogue policy")
+    guard = {key:list(settings[key]) for key in ("blocked_terms", "blocked_passages")}
+    registry = json.loads((ROOT/settings["registry_path"].removeprefix("res://")).read_text(encoding="utf-8"))
+    paths = registry.get("template_paths") if isinstance(registry, dict) else None
+    if not isinstance(paths, list) or any(not isinstance(path, str) or not re.fullmatch(r"res://data/people/families/[a-z][a-z0-9_]*\.json", path) for path in paths):
+        raise ValueError("invalid local family registry")
+    for path in paths:
+        template = json.loads((ROOT/path.removeprefix("res://")).read_text(encoding="utf-8"))
+        for key in ("source_work", "reference_work"):
+            if template.get(key):
+                guard["blocked_terms"].append(template[key])
+        if template.get("reference_note"):
+            guard["blocked_passages"].append(template["reference_note"])
+        for member in template.get("members", []):
+            if member.get("reference_character"):
+                guard["blocked_terms"].append(member["reference_character"])
+    if extra is not None:
+        if not isinstance(extra, dict) or set(extra) != set(guard):
+            raise ValueError("invalid local family guard")
+        for key in guard:
+            if not isinstance(extra[key], list):
+                raise ValueError("invalid local family guard")
+            guard[key].extend(extra[key])
+    for key in guard:
+        if any(not isinstance(text, str) or not 0 < len(text) <= settings["limits"]["guard_text"] or not family_normalize(text) for text in guard[key]):
+            raise ValueError("invalid local family deny text")
+        guard[key] = list(dict.fromkeys(family_normalize(text) for text in guard[key]))
+        if len(guard[key]) > settings["limits"]["guard_entries"]:
+            raise ValueError("local family guard too large")
+    return guard
+
+
+def family_text_safe(text, guard=None):
+    guard = family_guard() if guard is None else guard
+    normalized = family_normalize(text)
+    return not any(term in normalized for terms in guard.values() for term in terms)
+
+
+def assert_family_public(value):
+    guard = family_guard()
+    def visit(item):
+        if isinstance(item, str) and not family_text_safe(item, guard):
+            raise ValueError("source material is not public dialogue context")
+        if isinstance(item, dict):
+            for child in item.values():
+                visit(child)
+        elif isinstance(item, list):
+            for child in item:
+                visit(child)
+    visit(value)
+
+
 def safe_persona(value):
     if not isinstance(value, dict):
         raise ValueError("invalid public persona")
@@ -119,6 +206,19 @@ def safe_persona(value):
             public[key] = [text[:100] for text in item[:6]]
         elif isinstance(item, str):
             public[key] = item[:500 if key == "background" else 200]
+    settings = load_family_settings()
+    if "catchphrase" in value:
+        if not isinstance(value["catchphrase"], str) or len(value["catchphrase"]) > settings["limits"]["persona_text"]:
+            raise ValueError("invalid public catchphrase")
+        if value["catchphrase"]:
+            public["catchphrase"] = value["catchphrase"]
+    if "information_boundaries" in value:
+        boundaries = value["information_boundaries"]
+        if not isinstance(boundaries, list) or len(boundaries) > settings["limits"]["boundaries"] or any(not isinstance(text, str) or not 0 < len(text) <= settings["limits"]["boundary_text"] for text in boundaries):
+            raise ValueError("invalid public information boundaries")
+        if boundaries:
+            public["information_boundaries"] = list(boundaries)
+    assert_family_public(public)
     return public
 
 
@@ -331,6 +431,7 @@ def prepare_request(value, topics):
                "allowed_topics": options, "current_dialogue": turns, "visible_history": history, "known_memories": memories,
                "safe_persona": persona, "dialogue_sources": prepare_sources(value.get("dialogue_sources", [])),
                "grounded_history": budget_records(grounded_history, 2000), "relationship": relationship}
+    assert_family_public(context)
     return bound_context(context)
 
 
@@ -526,6 +627,8 @@ def normalize_generated(raw, request, sources, question_topics=None):
 
 
 def text_safe(reply, sources):
+    if not family_text_safe(reply):
+        return False
     internal = ("world_facts", "processed_actions", "event_id", "API Key", "api_key", "private_guardrails",
                 "allowed_effects", "safe_persona", "evidence_ids", "系统提示", "<think>", "</think>")
     if any(value.casefold() in reply.casefold() for value in internal):
@@ -604,6 +707,7 @@ def dialogue_result(request, context, topics, config, model=call_model, classifi
     # Citation validation and review use exactly the final pool the generator
     # saw, never pre-budget records that have already been evicted.
     sources = selected_context["dialogue_sources"]
+    assert_family_public(selected_context)
     raw = model(selected_context, config)
     if isinstance(raw, dict) and "mood" in raw:
         normalize_mood(raw)
@@ -618,7 +722,14 @@ def dialogue_result(request, context, topics, config, model=call_model, classifi
     if "followup_questions" in result:
         review_context["candidate"]["followup_questions"] = json.loads(json.dumps(result["followup_questions"],ensure_ascii=False))
     review_context = bound_context(review_context)
-    validate_dialogue_review(reviewer(review_context, config), ids, sources)
+    assert_family_public(review_context)
+    reviewed_fingerprint = hashlib.sha256(json.dumps(review_context, ensure_ascii=False, sort_keys=True).encode("utf-8")).hexdigest()
+    verdict = reviewer(review_context, config)
+    if hashlib.sha256(json.dumps(review_context, ensure_ascii=False, sort_keys=True).encode("utf-8")).hexdigest() != reviewed_fingerprint:
+        raise ValueError("dialogue review candidate or evidence changed")
+    validate_dialogue_review(verdict, ids, sources)
+    if not family_text_safe(result["reply_text"]):
+        raise ValueError("reviewed dialogue violates the local family boundary")
     if "topic:" + intent not in ids:
         result["clue_ids"] = []
         result["branch_id"] = ""
@@ -653,7 +764,10 @@ def offline_dialogue(request, topics, *, verified_intent="", allow_keywords=Fals
     fact = CLARIFICATION if intent == "clarify" else topics[intent]["reply_text"]
     safe_context = prepare_request(request, topics)
     mood = person_policy().load_character_protocol()["default_mood"] if intent == "clarify" else topics[intent].get("default_mood", person_policy().load_character_protocol()["default_mood"])
-    return normalize_output({"intent": intent, "reply_text": append_shared_recall(fact, intent, safe_context),"mood":mood}, request)
+    result = normalize_output({"intent": intent, "reply_text": append_shared_recall(fact, intent, safe_context),"mood":mood}, request)
+    if not family_text_safe(result["reply_text"]):
+        raise ValueError("offline dialogue violates the local family boundary")
+    return result
 
 
 def call_upstream(system, context, config, *, stage="general"):
@@ -843,6 +957,15 @@ def make_handler(config, topics, limits, model=call_model, profile_model=call_pr
                 self.connection.settimeout(previous_timeout)
             return bytes(body)
 
+        def offline_dialogue_response(self, request, verified_intent=""):
+            try:
+                return (200, offline_dialogue(request, topics,
+                            verified_intent=verified_intent, allow_keywords=False), "offline")
+            except (ValueError, KeyError, TypeError, IndexError, OSError):
+                # A rejected authored fallback must still complete the HTTP
+                # protocol. Never publish its text or an exception diagnostic.
+                return (422, {"error": "INVALID_BOUNDARY"})
+
         def do_POST(self):
             # Closing a socket with unread POST bytes can reset it before the
             # client receives an error response on Windows. Consume only the
@@ -873,7 +996,7 @@ def make_handler(config, topics, limits, model=call_model, profile_model=call_pr
             limiter = background_limits if self.path == "/v1/person-package" else limits
             if not limiter.acquire():
                 if self.path == "/v1/dialogue":
-                    return self.send_json(200, offline_dialogue(request, topics, allow_keywords=False), "offline")
+                    return self.send_json(*self.offline_dialogue_response(request))
                 if self.path == "/v1/profile/choices":
                     return self.send_json(200, offline_profile_choices(context, profile_options), "offline")
                 if self.path == "/v1/event-proposal":
@@ -897,8 +1020,7 @@ def make_handler(config, topics, limits, model=call_model, profile_model=call_pr
                 response = (422, {"error": "INVALID_MOOD"})
             except (ValueError, KeyError, TypeError, IndexError, OSError, urllib.error.URLError):
                 if self.path == "/v1/dialogue":
-                    response = (200, offline_dialogue(request, topics,
-                                verified_intent=selection_state.get("intent", ""), allow_keywords=False), "offline")
+                    response = self.offline_dialogue_response(request, selection_state.get("intent", ""))
                 elif self.path == "/v1/profile/choices":
                     response = (200, offline_profile_choices(context, profile_options), "offline")
                 elif self.path == "/v1/event-proposal":

@@ -176,3 +176,22 @@ prune-packable: 2053
 garbage: 3
 size-garbage: 15.24 MiB
 ```
+
+## G2 提交前体积（2026-11-23）
+
+- 标准完整第2轮11252/11252、exit0、零错误警告；shop694/694、家族GUI第三轮114/115如实保留。
+- 本任务新增唯一二进制 **1,531,178B**，只有六张quality85 JPG；没有新增图源、候选、PNG、中间物或详审进入Git。单任务远低100MB，禁止路径0，全部截图任务各≤6张。
+- manifest **499,605B**，56个v2原输入SHA逐项保持；G2普通Git上传，LFS过滤器保持停用，main／旧round2不动。
+- clean累计新增二进制 **235,317,166B**，本次暂存快照新增unique blobs共 **245373769B**。原CLEAN helper仍因累计new_binary_total与历史A1R的each_clean_commit_binary FAIL；原始阈值与结果没有修改，不把历史累计误报为G2新增过量。见results/G2-size-inspection.json。
+- 本地对象包括旧backup，下面不是本次上传流量。快照先于少量最终文本追加，二进制计数不受影响；完整测试与最终提交状态另见PROGRESS。
+
+```text
+count: 5812
+size: 306.53 MiB
+in-pack: 4064
+packs: 2
+size-pack: 1.12 GiB
+prune-packable: 2053
+garbage: 3
+size-garbage: 15.24 MiB
+```

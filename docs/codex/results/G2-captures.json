@@ -1,0 +1,79 @@
+{
+  "task": "G2",
+  "quality": 85,
+  "total_bytes": 1531178,
+  "captures": [
+    {
+      "path": "docs/screenshots/round2/G2/family-partial-1280x720.jpg",
+      "source_path": ".tools/g2/ui-captures/run_2144c01b2a3ada183b07e4c0b50facd4/family-partial-1280.png",
+      "source_sha256": "e8cc2caa1b95e712da70a59868927a7feea8aecb9133f665cc70e704687e059e",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "quality": 85,
+      "bytes": 144941,
+      "sha256": "8c4a5ee94299ad56716a6c0326d611353af17939193419387a92e96dcbb648c7"
+    },
+    {
+      "path": "docs/screenshots/round2/G2/family-partial-1920x1080.jpg",
+      "source_path": ".tools/g2/ui-captures/run_2144c01b2a3ada183b07e4c0b50facd4/family-partial-1920.png",
+      "source_sha256": "482cc480d2fb9d0dfa87b5035fddf1a7d851c7c0bffca582b059c6ab7c55c4b6",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "quality": 85,
+      "bytes": 345349,
+      "sha256": "d5f56d44f37d076bd4d3cd91b3b87b36957d353cda031c75605099813b7bb8d3"
+    },
+    {
+      "path": "docs/screenshots/round2/G2/people-1280x720.jpg",
+      "source_path": ".tools/g2/shop-gui-final/people-1280.png",
+      "source_sha256": "b00dea7446dc6b7bfda567088a4c569538fa99d27032091ad3d7561df6cf0cb3",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "quality": 85,
+      "bytes": 140085,
+      "sha256": "11062f2054eea334c22afd9eb5cd63c23bc6f64a5f0ec52eac2fe7910c22ef7a"
+    },
+    {
+      "path": "docs/screenshots/round2/G2/people-1920x1080.jpg",
+      "source_path": ".tools/g2/shop-gui-final/people-1920.png",
+      "source_sha256": "292bab1e1d2da3fd5ad2effbace867c597bb2fdbfd1d0d3bbbe5f8b93526702d",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "quality": 85,
+      "bytes": 356265,
+      "sha256": "96d176748e8fa974319930e905c76e2e78a3ab1db08f391e4e5176668c5ec834"
+    },
+    {
+      "path": "docs/screenshots/round2/G2/front-1280x720.jpg",
+      "source_path": ".tools/g2/shop-gui-final/front-1280.png",
+      "source_sha256": "78e2045998dfb643688d6a4cd0b01e45c71b2d0241314e554e3ec16f8888cb2e",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "quality": 85,
+      "bytes": 212247,
+      "sha256": "c0312d626de5c45e649dfacded4705eab4ba975d7ae2370ab9960eb79c882042"
+    },
+    {
+      "path": "docs/screenshots/round2/G2/consultation-1920x1080.jpg",
+      "source_path": ".tools/g2/shop-gui-final/consultation-1920.png",
+      "source_sha256": "d2093409ff6c65a10ff7886e2bf612e33aa3c02bb43ba5334e845c68190f1711",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "quality": 85,
+      "bytes": 332291,
+      "sha256": "c37e22186423314ffc2440ac65181145701493b91b3889fc055fa419742f3658"
+    }
+  ]
+}
