@@ -5,6 +5,7 @@ const Catalog = preload("res://scripts/divination/catalog.gd")
 const Events = preload("res://scripts/divination/event_rules.gd")
 const OracleClues = preload("res://scripts/divination/oracle_clues.gd")
 const Almanac = preload("res://scripts/divination/almanac.gd")
+const PastLines = preload("res://scripts/divination/past_lines.gd")
 
 static func project(session, state: Dictionary, visit: Dictionary) -> Dictionary:
 	var case: Dictionary = state.divination.cases[visit.visit_id]
@@ -13,6 +14,11 @@ static func project(session, state: Dictionary, visit: Dictionary) -> Dictionary
 	var template: Dictionary = data.cases[case.case_id]
 	var guest: Dictionary = session.guest_view(visit.npc_id, case.case_id, case.get("public_npc", {}))
 	var active: bool = visit.visit_id == state.active_visit_id
+	var known_names := {}
+	for id: String in state.get("people",{}).get("profiles",{}):
+		var profile: Dictionary = state.people.profiles[id]
+		if profile.get("met",false):
+			known_names[id] = profile.name
 	var public_advice: Array = []
 	for advice: Dictionary in case.advice:
 		var display := advice.duplicate(true)
@@ -24,6 +30,7 @@ static func project(session, state: Dictionary, visit: Dictionary) -> Dictionary
 		"topics": [], "clues": [], "facts": [], "statements": [], "methods": [], "services": [], "quote": {},
 		"hypotheses": case.hypotheses, "prediction": case.prediction, "advice": public_advice,
 		"event": _event(case, clock, data), "past": _past(state, case, data),
+		"past_line": PastLines.public_view(state.divination.get("past_lines",{}),visit.npc_id,known_names,PastLines.load_config()),
 		"purchase": case.purchase, "item_use": case.item_use, "demand": case.get("demand", {}), "feedback_options": [], "ledger": []
 	}
 	for clue_id: String in visit.clue_ids:
@@ -48,7 +55,9 @@ static func project(session, state: Dictionary, visit: Dictionary) -> Dictionary
 	for service: Dictionary in case.services.values():
 		if not service.status in ["paid", "quoted"]:
 			continue
-		var display := service.duplicate()
+		var display := service.duplicate(true)
+		display.erase("past_line")
+		display.result.erase("past_line")
 		display.option_label = data.methods[service.method_id].options[service.option_id].label
 		display["question_id"] = service.get("question_id", template.default_question)
 		display["question"] = service.result.get("inquiry", {}).get("question", template.questions[display.question_id].label)
@@ -123,8 +132,8 @@ static func _active_details(session, state: Dictionary, visit: Dictionary, case:
 		var method: Dictionary = data.methods[id]
 		var options: Array = []
 		for key: String in method.options:
-			var blocked: Dictionary = session._method_block(state, visit, case, id, key)
-			options.append({"option_id": key, "label": method.options[key].label, "blocked": blocked.get("message", "")})
+			var preview: Dictionary = session.quote_preview(state,visit,id,key)
+			options.append({"option_id": key, "label": method.options[key].label, "blocked": preview.blocked,"cost":preview.cost,"payment_kinds":preview.payment_kinds})
 		view.methods.append({
 			"method_id": id, "title": method.title, "prompt": method.prompt, "learned": id in state.divination.skills,
 			"options": options, "cost": Catalog.service_cost(id, method, session.base.rules)

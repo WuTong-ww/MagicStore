@@ -528,3 +528,71 @@ metadata proposal, not generation or art approval. Review its actual sources
 and images before promoting it; PNGs and the central manifest are not changed
 by this command. Shared fields remain in the tracked candidate itself and
 do not depend on optional local audit files.
+
+### G5 capacity and three past-memory illustrations
+
+`compact_formal_metadata` retains the existing A4 packing contract and adds
+only two typed G4 profiles: the common native item processing fields, and
+the common64px icon explanation/reference fields. The complete shared values
+remain in the tracked manifest. Each row still retains its path, dimensions,
+SHA, raw/source identity and exact prompt recipe. Missing profiles, unknown
+fields/types and explicit/shared overlaps fail rather than choose a winner.
+The previous361-row central table packs from499845 to489759 bytes without
+changing its expanded values, old309 stored rows, A4 table or88 aliases.
+This leaves10241 bytes before adding the actual G5 image records/templates.
+Both compact and partial/full portrait proposals use the same formal packer
+and byte-budget encoding. The tools never update the central file.
+
+The separate `data/art/past_fragment_pipeline.json` validator configures three
+fresh ancient places, the selected S02-v3 style, generation cap and runtime
+size. Queue them before any images exist:
+
+```powershell
+python -B tools/art/past_fragment_pipeline.py queue --revision g5r1 --output .tools/g5/past-fragments-initial-queue.json
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/regen_art.ps1 -Style v3 -Only past_fragments -Output .tools/g5/past-fragments-regen.json
+```
+
+Both paths produce three builtin imagegen tasks with only the independent
+style reference, not old scene images as edit targets. Once formal native
+rows exist, regeneration recovers their exact stored actual prompt and
+parameters/SHA instead of silently using a newer generic description.
+Literal braces in actual prompts are escaped only in the template encoding;
+formatting reconstructs the original text/SHA and the actual audit is unchanged.
+Missing previous native art is explicit `missing_previous_inputs`; it is
+not a fake completed generation. Existing previous art must match SHA/size.
+The standard `-Only all` queue includes the group when its config exists.
+No Python/PowerShell generator, paid API or new dependency is used.
+
+The actual version1 `past_fragment_generation` receipt contains three unique
+`records` with `id`, `selected_attempt` and all contiguous `attempts` (max4).
+Each attempt retains `attempt_number`, `tool=image_gen.imagegen`, full
+`actual_prompt`, empty `inputs`, and exactly one `references` object with
+the actual style `path/sha256`. A generated attempt additionally retains
+`source_path`, `source_sha256` and measured `source_native_size`; a failed
+call retains `status=failed` and its actual `error`. Rejected generated art
+stays in history as generated and unselected, with its original raw bytes.
+Nothing in a proposed queue proves the tool was actually called.
+
+```powershell
+python -B tools/art/past_fragment_pipeline.py process --receipt assets/_incoming/g5_v3/g5r1/generation_receipt.json --revision g5r1 --output .tools/g5/g5r1-processing.json
+```
+
+Processing verifies every recorded generated source, prompt/reference and
+history before writing candidates. Native candidate bytes are copied without
+resizing; runtime candidates use Pillow Lanczos and a recorded equal-aspect
+source crop/scale to1920x1080. The original actual dimensions are never
+relabeled2560x1440. Candidates stay in versioned incoming `processed/` and
+are immutable; no formal PNG is replaced or approved automatically.
+
+`manifest_fragment` proposes three native `group=past_fragments` rows and
+three `runtime_copies`. Native paths are `assets/past_lives/v3/eraN_native.png`;
+runtime paths are `eraN.png`. Every native row retains actual prompt recipe,
+raw/reference SHA and processing script/config/version. Runtime aliases
+retain actual native/runtime dimensions, SHA, scale and source crop. There
+is one generation per era, not one per resolution or evidence/echo fragment.
+The formal validator also checks files represented only by runtime aliases,
+so omitting duplicate asset rows cannot bypass retained-file SHA/dimension
+checks. Root reviews/copies approved candidates and merges the tracked
+fragment/templates, then checks the actual complete candidate byte budget.
+Detailed receipt history remains local; formal reproduction does not rely
+on it. Processing and metadata validation always report `art_passed=false`.

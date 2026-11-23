@@ -10,6 +10,9 @@ const KINDS := {
 }
 
 static func valid(result: Dictionary, service: Dictionary, data: Dictionary) -> bool:
+	if result.has("past_line") or service.has("past_line"):
+		if service.get("method_id") != "past" or not service.get("past_line") is Dictionary or not result.get("past_line") is Dictionary or result.past_line != service.past_line:
+			return false
 	if not result.has("version"):
 		return not result.has("medium") and not result.has("signals")
 	var method: String = service.method_id

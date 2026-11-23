@@ -1,0 +1,1957 @@
+{
+  "task": "G5",
+  "status": "部分完成",
+  "root_opened_frames": 47,
+  "raw_frames": 41,
+  "published_jpg": 6,
+  "jpg_quality": 85,
+  "common_passed": 204,
+  "common_total": 235,
+  "frames": [
+    {
+      "path": ".tools/g5/gpu/run_3773748/past-first-vision-1280x720.png",
+      "sha256": "f84a7faef1b0f58ebb1252970bc43929ba0a515e6391e9fbea58755554ddcb17",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu/run_3773748/past-refuted-1280x720.png",
+      "sha256": "7dc7d470e96364e39755580c2365201f4305345fdab2d8f004859c094b04d577",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu/run_3773748/past-unknown-1280x720.png",
+      "sha256": "e2f18204e424d1c26ef3d2a2650dc0574fa32d4770a0cbd351d72b4ec092e4ed",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu/run_3251716/past-first-vision-1280x720.png",
+      "sha256": "f84a7faef1b0f58ebb1252970bc43929ba0a515e6391e9fbea58755554ddcb17",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu/run_3251716/past-first-vision-1920x1080.png",
+      "sha256": "03b85a9c88d3e6c71dbf3866bcbd7107654b9526b3f7f0a8ad67c430a3067159",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu/run_3251716/past-refuted-1280x720.png",
+      "sha256": "7dc7d470e96364e39755580c2365201f4305345fdab2d8f004859c094b04d577",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu/run_3251716/past-refuted-1920x1080.png",
+      "sha256": "f7dbe0506f4b122f7f24855856cf49fe2f04356e4837e3874c64a019a754172d",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu/run_3251716/past-three-eras-verified-1280x720.png",
+      "sha256": "6046947663fdb3bc275ae237f480666542b6be62c51695bb59285f21ee91228f",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu/run_3251716/past-three-eras-verified-1920x1080.png",
+      "sha256": "fee2385ba3d96b5d21f822c5808b30a81ac51f0a646f2ad3afecf24a220ae2fd",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu/run_3251716/past-unknown-1280x720.png",
+      "sha256": "e2f18204e424d1c26ef3d2a2650dc0574fa32d4770a0cbd351d72b4ec092e4ed",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu/run_3251716/past-unknown-1920x1080.png",
+      "sha256": "723a51f63c8b50f2fb03c5e31814997cef6e11456ce71f32fad300ddbed6e980",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/catalog-icons-64px-page-1-1280.png",
+      "sha256": "9c087b9f34c37703ac999a42133bb5dd30f94e3561375f5b6fce84e7f719a2fa",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/catalog-icons-64px-page-1-1920.png",
+      "sha256": "45fd007ad391701fb76b9f0a09b03497a57df6a1fc08e21f9d50dead92204668",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/catalog-icons-64px-page-2-1280.png",
+      "sha256": "82cc3cdc791e759cf6c7747f55250f6ff3699aee4b2a991b55c7f5a8c14fb84d",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/catalog-icons-64px-page-2-1920.png",
+      "sha256": "6cdb9ad5669b5dacb99498abffb3cdbd53bacc2e4872e55ff1f5849fb5d4949f",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/catalog-icons-64px-page-3-1280.png",
+      "sha256": "891f8e250d854a3f43188dd377bc2e323aa15be90d7ab24102a2e42788461055",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/catalog-icons-64px-page-3-1920.png",
+      "sha256": "790918ab87cf9926f6cae93e219bd392969fce69d68338e8cb1cd6244e595b27",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/catalog-icons-64px-page-4-1280.png",
+      "sha256": "518093ce1cb7a2552c68c966088db9e8a1739236c4f0a2ddfbbd3b6384a64f93",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/catalog-icons-64px-page-4-1920.png",
+      "sha256": "ff7916c95449b6ab88b9092faace5e0eb373d6ca41a72729b797944170f195c2",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/consultation-1280.png",
+      "sha256": "94dcb5a77cfa0e56a8fb6dbbe70b1de78ca271a299f72139a817894128452c88",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "当帧物件与v3背景暖光／颜料笔触相容。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/consultation-1920.png",
+      "sha256": "d2093409ff6c65a10ff7886e2bf612e33aa3c02bb43ba5334e845c68190f1711",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "当帧物件与v3背景暖光／颜料笔触相容。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/exterior-1280.png",
+      "sha256": "71f7f0aee249622789d897e22450ccefc17bd59abab91390876e132762388d52",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "当帧物件与v3背景暖光／颜料笔触相容。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/exterior-1920.png",
+      "sha256": "9074f345e1ef3b59cda4c9875622470410392896dddde58f3d962d3f833d79e4",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "当帧物件与v3背景暖光／颜料笔触相容。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/front-1280.png",
+      "sha256": "78e2045998dfb643688d6a4cd0b01e45c71b2d0241314e554e3ec16f8888cb2e",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/front-1920.png",
+      "sha256": "31300f69ba5e78e961a990c2dcb0d0a77aec15e89db17968fe7692c5d1d08d72",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/gathering-1280.png",
+      "sha256": "955df9d437f61971ec9e1c42e1073b189e6aa4442fce4d0d302a994b919c1a2a",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "当帧物件与v3背景暖光／颜料笔触相容。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/gathering-1920.png",
+      "sha256": "287b44a2565c718a387997a19754aebad4fde9820d827124bf35ad716035c6b2",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "当帧物件与v3背景暖光／颜料笔触相容。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/gathering-after-trade-1920.png",
+      "sha256": "77c19f6f1ba914a4edeae40ab326044f2bbc7000bd29c49c39ae17840022e2d3",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "当帧物件与v3背景暖光／颜料笔触相容。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/inventory-1280.png",
+      "sha256": "d001e19e3de722c824796c4e310d6a7683b89ff3f88a9e0832fcc4831c2a789c",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "当帧物件与v3背景暖光／颜料笔触相容。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/inventory-1920.png",
+      "sha256": "d26214d8dfa28684dd7ffb1526280050b032a832ca6002bdf144577983fe4618",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "当帧物件与v3背景暖光／颜料笔触相容。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/market-1280.png",
+      "sha256": "ae1933272aaa3e65b9eace9a8398b635a2db5fd62acf880b6aa18d0aaa26820a",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "当帧物件与v3背景暖光／颜料笔触相容。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/market-1920.png",
+      "sha256": "24bb80ca2b91b64814b5bbafdad6ae2e37217a2c7c52fa1e904128558a6c5599",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "当帧物件与v3背景暖光／颜料笔触相容。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/market-after-trade-1920.png",
+      "sha256": "ad80e6112ed3ccecd870cb971e3d4cfe7a0f13fa40f0345b1b37f31431d6cec7",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "当帧物件与v3背景暖光／颜料笔触相容。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/network-1280.png",
+      "sha256": "d7b0a3763401272086975966660bc037c3c292a2f2c310a8fe357660e968f53b",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/network-1920.png",
+      "sha256": "8fa0cae0e9d322d354388cc5fc96d0ca7fa1396ce3f2ef19c4a24daa2a436a9d",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/people-1280.png",
+      "sha256": "79526c9a7174059678a8b2a717c76b09ea10e57061d1edc859058a962944027e",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/people-1920.png",
+      "sha256": "94bacd829f90dc960abee88377db000e80c7eb0d18933c9ff942efa7929497bc",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/workshop-1280.png",
+      "sha256": "8f1a8fa5d5a68217633b6279fc07655c2a395d0430f9e3da1be72da9f3a38abc",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "当帧物件与v3背景暖光／颜料笔触相容。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/workshop-1920.png",
+      "sha256": "bdcd5fb736606c84a6ab77b952bf525a6e2bb108e75cb85c45c27792dcf28723",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "当帧物件与v3背景暖光／颜料笔触相容。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/zero-guest-front-1280.png",
+      "sha256": "d51254b075d7c2f6e297b75810de3b53cf4f7e47f6db2719af225ee86750a37c",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "当帧物件与v3背景暖光／颜料笔触相容。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g5/gpu-shop-attempt1-frames/zero-guest-front-1920.png",
+      "sha256": "6db72069a50e78a8dd0d4b89d562b49253596276ea46cecd873801e1ff5d17a6",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "当帧物件与v3背景暖光／颜料笔触相容。"
+        }
+      ]
+    },
+    {
+      "path": "docs/screenshots/round2/G5/past-first-vision-1920x1080.jpg",
+      "sha256": "a5b8e3d9f04eea9e5458915261afdb6f5d4c449ea49c3cb43f4e99edbf9a44c2",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": "docs/screenshots/round2/G5/past-refuted-1280x720.jpg",
+      "sha256": "db13f0d554087ae72707bf0ec1989114694688e139c0f6af32d5ac94b9c5daf8",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": "docs/screenshots/round2/G5/past-refuted-1920x1080.jpg",
+      "sha256": "0c9e643c8723cec1df6f0c336c8228940b849e56fd8a643a2876c192410b5236",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": "docs/screenshots/round2/G5/past-three-eras-verified-1280x720.jpg",
+      "sha256": "2e3b7ce853250d51ef039febbee541e174a860c3dee0dbd585abf7dc8f4556df",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": "docs/screenshots/round2/G5/past-three-eras-verified-1920x1080.jpg",
+      "sha256": "12a7ced77cdd30111574b2f8580f91b4c96c2328b617803282a18320438fd4f0",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": "docs/screenshots/round2/G5/past-unknown-1280x720.jpg",
+      "sha256": "8049027863c6903f5444003db93c0927b14862c3eff62a722b466d78e0a418ef",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满窗口，无黑边或场景卡片。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮文字完整；正常滚动边缘与弹窗遮挡不算按钮截字。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "正文位于古纸，未用深色长文卡。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、数字、状态与按钮由控件绘制，图中无烘焙文字。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚水彩头像或遮罩下灰暗缩略头像仍与v3底图笔触不一。"
+        }
+      ]
+    }
+  ],
+  "gpu": {
+    "checks": 441,
+    "failures": 0,
+    "actual_frames": 8,
+    "receipt_sha256": "27ca13e0a04122fa38cee6ccda0bd988729d305b50045f582a6ab8adbfaea345",
+    "source_receipt_sha256": "a6c78aa85a8d22e18bbf0245e39afbc47a44e95da3baee3ee1bc1ddf442fbce7",
+    "all_sources_and_storage_unchanged": true
+  },
+  "shop": {
+    "checks": 1544,
+    "failures": 0,
+    "actual_frames": 30
+  },
+  "remaining": [
+    "未知世代仅半透明占位，未完成烟雾遮罩美术。",
+    "世代图为可滚动纵向分组，未提供三世同屏总览与独立连线画布。",
+    "旧林肖像与缩略头像笔触不一；旧人物页灰页签、设置／图集窗外标题及市场数量竖排仍待统一。"
+  ]
+}

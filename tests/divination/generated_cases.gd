@@ -24,6 +24,9 @@ func fixture() -> Dictionary:
 	}
 	var bundle := {"version":1,"person":{"name":"许灯禾"},"contact":{"name":"江岑"},"case":request,"relationship":{"kind":"搭档","shared_history":"我们曾一起修过旧灯。"}}
 	return {
+		# Explicit pre-G3 B fixture; this target keeps its eventless contract.
+		# Modern generated events are covered separately by event_workflows.gd.
+		"schema_version":2,
 		"clock_minutes":540,"player":{"coins":40,"energy":100,"items":{}},
 		"npcs":{"npc_generated_test":{"coins":60,"items":{}},"npc_generated_contact_test":{"coins":60,"items":{}}},
 		"people":{"profiles":{

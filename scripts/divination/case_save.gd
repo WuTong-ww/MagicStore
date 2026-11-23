@@ -8,12 +8,18 @@ const ProductRules = preload("res://scripts/divination/event_schema.gd")
 const OracleSaved = preload("res://scripts/divination/oracle_saved.gd")
 const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
 const Shop = preload("res://scripts/shop/shop.gd")
+const PastLines = preload("res://scripts/divination/past_lines.gd")
 const MAX_INT := 2147483647
 
 static func validate(state: Dictionary, data: Dictionary, visits: Dictionary) -> String:
 	var work: Variant = state.get("divination")
 	if not work is Dictionary or not work.get("skills") is Array or not work.get("cases") is Dictionary or not work.get("past") is Dictionary or not work.get("ledger") is Array or not work.get("effects") is Array:
 		return "问卜存档字段不完整"
+	var past_library := PastLines.load_config()
+	if past_library.is_empty():
+		return "问卜存档字段不完整"
+	if not PastLines.progress_valid(state,past_library):
+		return past_library.copy.invalid_source
 	if not "tarot" in work.skills or work.cases.size() != visits.size():
 		return "基础术式或接待案例缺失"
 	var eventless: Array = []
@@ -101,6 +107,8 @@ static func wallet(value: Variant) -> bool:
 	return true
 
 static func _case_records(case: Dictionary, visit: Dictionary, data: Dictionary, clock: int, schema: int = 0, eventless: Array = [], prior_event: bool = false, unlocked: Array = [], state: Dictionary = {}) -> bool:
+	if (schema >= 9 or case.has("cause")) and case.get("cause") != Catalog.case_cause(case.case_id):
+		return false
 	for key in ["world_facts", "services", "event", "prediction", "purchase", "item_use"]:
 		if not case.get(key) is Dictionary:
 			return false
@@ -156,6 +164,8 @@ static func _case_records(case: Dictionary, visit: Dictionary, data: Dictionary,
 	var questions: Dictionary = data.cases[case.case_id].questions
 	for id: String in case.services:
 		var service: Variant = case.services[id]
+		if service is Dictionary and service.has("past_line") and case.get("cause") not in ["past","both"]:
+			return false
 		if not _service(service, visit, id, data, clock, questions):
 			return false
 		if service.status == "quoted":
@@ -292,6 +302,21 @@ static func _service(service: Variant, visit: Dictionary, id: String, data: Dict
 		return false
 	if not _payment(service.get("payment")) or not service.get("status") in ["quoted", "paid", "cancelled"] or not service.get("result") is Dictionary or not _text(service.get("method_title")) or not _text(service.get("option_label")):
 		return false
+	if service.has("past_line"):
+		var descriptor: Variant = service.past_line
+		if service.method_id != "past" or not descriptor is Dictionary:
+			return false
+		var library := PastLines.load_config()
+		var definition: Dictionary = library.get("definitions",{}).get(str(descriptor.get("line_id",""))+"@"+str(int(descriptor.get("content_version",0))),{})
+		var costs: Dictionary = definition.get("costs",{}).get(descriptor.get("cost_key",""),{})
+		if costs.is_empty() or service.payment != {"kind":"coins","amount":int(costs.coins)} or service.get("energy") != costs.energy or service.get("minutes") != costs.minutes:
+			return false
+	elif service.method_id == "past":
+		# The preserved legacy tariff is a separate saved-service shape. Merely
+		# deleting modern descriptors must not reclassify a cheaper paid service.
+		var legacy_cost: Dictionary = method.cost
+		if service.get("energy") != legacy_cost.energy or service.get("minutes") != legacy_cost.minutes or (service.payment.kind == "coins" and service.payment.amount != legacy_cost.coins):
+			return false
 	if not Catalog._integer(service.get("quoted_at"), int(visit.started_at), clock) or not Catalog._integer(service.get("energy"), 0, MAX_INT) or not Catalog._integer(service.get("minutes"), 0, 1439):
 		return false
 	if service.status != "paid":

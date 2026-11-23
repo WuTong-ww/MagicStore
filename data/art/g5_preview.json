@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "capture_root": "res://.tools/g5/gpu",
+  "sizes": [[1280,720],[1920,1080]],
+  "timing": {"settle_frames":12,"capture_delay_seconds":0.25,"watchdog_seconds":180},
+  "layout": {"embed_subwindows":true,"borderless":true,"bounds_tolerance_px":1,"scroll_tolerance_px":2,"blank_grid":20,"minimum_unique_colors":16},
+  "flow": {"screen":"consultation","workbench":"casebook","tab":"past","graph_script":"res://scripts/divination/past_life_graph.gd","library_script":"res://scripts/divination/past_lines.gd","close_control":"NotebookClose","paper_control":"PaperWindowBackground","paper_theme":"res://themes/paper.tres","era_control_format":"PastEraRow%d"},
+  "states": [
+    {"tag":"unknown","filename":"past-unknown","title":"未得片段","fragments":0,"known_rows":[],"refuted":0,"verified":0,"copy_keys":["empty"],"scroll":"start"},
+    {"tag":"first_vision","filename":"past-first-vision","title":"已见首段","fragments":1,"known_rows":[true,false,false],"refuted":0,"verified":0,"copy_keys":["observed"],"scroll":"start"},
+    {"tag":"refuted","filename":"past-refuted","title":"误读被证物推翻","fragments":2,"known_rows":[true,false,false],"refuted":1,"verified":0,"copy_keys":["refuted"],"scroll":"end"},
+    {"tag":"fully_verified","filename":"past-three-eras-verified","title":"三世已核实","fragments":7,"known_rows":[true,true,true],"refuted":1,"verified":3,"copy_keys":["verified","refuted"],"scroll":"end"}
+  ],
+  "protected_paths": ["tests/integration/past_lives_capture.gd","scripts/ui/main.gd","scripts/divination/workbench.gd","scripts/divination/past_life_graph.gd","scripts/divination/past_lines.gd","scripts/core/game_state.gd","scripts/save/save_service.gd","data/past_lives/registry.json","data/past_lives/demo_three_eras.v1.json","data/ui/workbench.json","data/art/g5_preview.json","assets/past_lives/v3/era1.png","assets/past_lives/v3/era2.png","assets/past_lives/v3/era3.png","assets/ART_ASSET_MANIFEST.json"],
+  "forbidden_visible": ["definition_sha256","requires_evidence","disclose_links","world_facts","demo_three_eras","npc_o_","npc_lin","past_line_"],
+  "uid_resources": ["res://tests/integration/past_lives_capture.gd"]
+}

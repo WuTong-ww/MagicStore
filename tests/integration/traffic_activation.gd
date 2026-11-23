@@ -171,7 +171,17 @@ func check_legacy_applied() -> void:
 	output.store_buffer(FileAccess.get_file_as_bytes(source))
 	output.close()
 	check((await game.execute_action_async(action("load_game",{"save_id":old.save_id}))).success,"actual applied snapshot remains loadable after strategy upgrade")
-	check(game.snapshot() == saves._normalize_numbers(old) and FileAccess.get_sha256(path) == meta.source_sha256,"old applied status/timing/effect/source/reply remain exact and load does not rewrite")
+	var migrated: Dictionary = game.snapshot()
+	check(migrated.schema_version == 9 and migrated.divination.get("past_lines") == {"version":1,"instances":{}},"historical applied snapshot gains only the explicit empty schema9 progress namespace")
+	check(migrated.divination.cases.values().all(func(case: Dictionary) -> bool: return case.get("cause") == ("both" if case.case_id == "archive" else "present")),"each historical case gains its trusted cause without acquiring new content")
+	# Compare every historical field after validating/removing only G5's additive
+	# fields from a copy. The genuine source envelope remains byte-for-byte old.
+	var historical: Dictionary = migrated.duplicate(true)
+	historical.schema_version = int(old.schema_version)
+	historical.divination.erase("past_lines")
+	for case: Dictionary in historical.divination.cases.values():
+		case.erase("cause")
+	check(historical == saves._normalize_numbers(old) and FileAccess.get_sha256(path) == meta.source_sha256 and FileAccess.get_sha256(source) == meta.source_sha256,"all old applied status/timing/effect/source/reply fields remain exact and neither load nor comparison rewrites the source")
 
 func finish() -> void:
 	print("TRAFFIC ACTIVATION: %d checks, %d failures" % [checks,failures])

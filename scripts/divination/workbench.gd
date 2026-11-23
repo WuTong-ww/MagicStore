@@ -4,6 +4,7 @@ const UI = preload("res://scripts/ui/ui_kit.gd")
 const ArrivalUI = preload("res://scripts/ui/arrival_ui.gd")
 const EventCopy = preload("res://scripts/divination/event_copy.gd")
 const SessionRules = preload("res://scripts/divination/session.gd")
+const PastLifeGraph = preload("res://scripts/divination/past_life_graph.gd")
 const FRAME_PATH := "res://data/ui/workbench.json"
 ## Shared window for the B screens. It consumes only player projections.
 
@@ -318,11 +319,25 @@ func _readings() -> void:
 	if not option.blocked.is_empty():
 		_info(option.blocked)
 		return
-	var cost: Dictionary = method.cost
+	# The public selected-option preview is authoritative for versioned services.
+	# Old projections without a preview retain their original method quotation.
+	var cost: Dictionary = option.get("cost",method.cost)
+	if cost.is_empty():
+		return
 	var shop: Dictionary = view.shop
 	var item_amount := 2 if int(cost.coins) >= 22 else 1
-	var payment := _pick(["%d 金币（顾客有 %d）" % [int(cost.coins), int(shop.coins)],
-		"%s ×%d（顾客有 %d）" % [shop.payment_item_name, item_amount, int(shop.payment_items)]])
+	var payment_kinds: Array = option.get("payment_kinds",["coins","item"])
+	var payment_labels: Array = []
+	for kind: String in payment_kinds:
+		if kind == "coins":
+			payment_labels.append("%d 金币（顾客有 %d）" % [int(cost.coins),int(shop.coins)])
+		elif kind == "item":
+			payment_labels.append("%s ×%d（顾客有 %d）" % [shop.payment_item_name,item_amount,int(shop.payment_items)])
+	if payment_labels.is_empty():
+		return
+	var payment := _pick(payment_labels)
+	for payment_index: int in range(payment_kinds.size()):
+		payment.set_item_metadata(payment_index,payment_kinds[payment_index])
 	_info("预计用时 %d 分钟  ·  消耗 %d 精力" % [int(cost.minutes), int(cost.energy)])
 	body.add_child(UI.button("与来客确认报价", func():
 		var number := 0
@@ -332,7 +347,7 @@ func _readings() -> void:
 			number = parameter.selected + (1 if method.method_id == "yijing" else 0)
 		await _run("quote_service", {
 			"method_id": method.method_id, "option_id": option.option_id,
-			"parameter": number, "payment": "coins" if payment.selected == 0 else "item",
+			"parameter": number, "payment": payment.get_item_metadata(payment.selected),
 			"question_id": question_id
 		})
 	))
@@ -501,6 +516,8 @@ func _historical_case() -> void:
 			_info(str(record.get("text","")))
 	for service: Dictionary in view.services:
 		_info(OracleGuide.summary(service))
+	if view.get("case_id") == "archive" or view.get("past_line",{}).get("available",false):
+		_past_notes()
 
 func _show_tab(tab: String) -> void:
 	notebook_tab = tab
@@ -614,14 +631,24 @@ func _forecast() -> void:
 			await _run("give_advice",proposal)))
 
 func _past_notes() -> void:
-	var past_art := UI.image("res://assets/portraits/past_life_scene.png")
-	past_art.custom_minimum_size = Vector2(360, 220)
-	past_art.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	body.add_child(past_art)
-	var past: Dictionary = view.past
+	var past: Dictionary = view.get("past",{})
 	if past.is_empty():
-		_info("先询问旧物来源，再通过前世技法取得初见片段。")
+		var graph := PastLifeGraph.new()
+		graph.name = "PastLifeGraph"
+		body.add_child(graph)
+		graph.interpret_requested.connect(_interpret_past_line)
+		graph.verify_requested.connect(_verify_past_line)
+		graph.render(view.get("past_line",{}),bool(view.get("active",false)))
 		return
+	# A retained legacy memory keeps its old notebook; no old illustration is
+	# displayed before either modern or legacy fragments have actually been seen.
+	var past_art_path := "res://assets/portraits/past_life_scene.png"
+	if ResourceLoader.exists(past_art_path):
+		var past_art := UI.image(past_art_path)
+		past_art.custom_minimum_size = Vector2(360,220)
+		past_art.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		body.add_child(past_art)
+	var can_act: bool = view.get("active",false)
 	_section("已见片段")
 	for key in ["vision", "evidence"]:
 		if past.fragments.has(key):
@@ -630,21 +657,38 @@ func _past_notes() -> void:
 	for record: Dictionary in past.interpretations:
 		_info("%s  ·  %s\n%s" % [record.label, PAST_STATUS[record.status], record.text])
 		if record.status == "unverified" and past.fragments.has("evidence"):
-			body.add_child(UI.button("以补充证物核实此条", func(): await _run("verify_past", {"interpretation_id": record.interpretation_id})))
+			var verify := UI.button("以补充证物核实此条", func():
+				if can_act:
+					await _run("verify_past", {"interpretation_id":record.interpretation_id}))
+			verify.disabled = not can_act
+			body.add_child(verify)
 	var guess := _pick(["选择你自己的解释"] + _labels(past.options))
 	guess.set_item_disabled(0, true)
 	var text := _entry("可以记下你这样解读的理由")
 	var save_guess := UI.button("保存待验证解释", func():
-		await _run("interpret_past", {"link_id": past.options[guess.selected - 1].link_id, "text": text.text})
+		if can_act:
+			await _run("interpret_past", {"link_id":past.options[guess.selected-1].link_id,"text":text.text})
 	)
 	save_guess.disabled = true
-	guess.item_selected.connect(func(selected: int): save_guess.disabled = selected <= 0)
+	guess.disabled = not can_act
+	text.editable = can_act
+	guess.item_selected.connect(func(selected: int): save_guess.disabled = not can_act or selected <= 0)
 	body.add_child(save_guess)
 	for link: Dictionary in past.confirmed_links:
 		_section("已确认关联")
 		_info("%s  /  %s" % [link.label, link.relation])
 	for story: Dictionary in past.stories:
 		_info("后续故事  /  " + story.text)
+
+func _interpret_past_line(instance_id: String,group_id: String,selected_option_id: String,text: String) -> void:
+	if not view.get("active",false):
+		return
+	await _run("interpret_past_line",{"instance_id":instance_id,"group_id":group_id,"option_id":selected_option_id,"text":text})
+
+func _verify_past_line(interpretation_id: String) -> void:
+	if not view.get("active",false):
+		return
+	await _run("verify_past_line",{"interpretation_id":interpretation_id})
 
 func _shop() -> void:
 	if view.is_empty():

@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "line_paths": [
+    "res://data/past_lives/demo_three_eras.v1.json"
+  ],
+  "active_versions": {
+    "demo_three_eras": 1
+  },
+  "binding_policy": {
+    "domain": "g5.slot.v1",
+    "chance_bps": 500,
+    "probability_scale": 10000,
+    "minimum_npc_coins": 42,
+    "max_lines_per_npc": 1,
+    "requires_artifact_clue": "archive_stub"
+  },
+  "cause_policy": {
+    "case_causes": {
+      "archive": "both"
+    },
+    "default_cause": "present"
+  },
+  "costs": {
+    "vision": {
+      "coins": 6,
+      "energy": 6,
+      "minutes": 15
+    },
+    "evidence": {
+      "coins": 6,
+      "energy": 6,
+      "minutes": 15
+    },
+    "echo": {
+      "coins": 6,
+      "energy": 6,
+      "minutes": 15
+    },
+    "interpret": {
+      "coins": 0,
+      "energy": 0,
+      "minutes": 0
+    },
+    "verify": {
+      "coins": 0,
+      "energy": 0,
+      "minutes": 0
+    }
+  },
+  "limits": {
+    "era_count": 3,
+    "identities_per_era": 2,
+    "max_lines": 8,
+    "max_slots": 8,
+    "max_fragments": 32,
+    "max_options": 8,
+    "max_text_chars": 2000,
+    "max_player_text_chars": 500,
+    "max_source_id_chars": 128,
+    "max_instances": 16,
+    "max_records": 128,
+    "max_line_minutes": 105,
+    "max_line_energy": 42
+  },
+  "copy": {
+    "title": "三世手记",
+    "empty": "还没有取得可记录的前世片段。",
+    "unknown_era": "未知一世",
+    "unknown_identity": "未知身份",
+    "observed": "已见片段",
+    "interpretation_heading": "留下的解读",
+    "options_heading": "提出一种解读",
+    "evidence_heading": "独立证物",
+    "verified": "证物支持",
+    "refuted": "证物推翻",
+    "unverified": "待验证",
+    "invalid_config": "前世线资料无效，暂不能继续。",
+    "invalid_context": "当前接待资料不足，不能处理这条前世线。",
+    "present": "看不到与此有关的前世。",
+    "missing_artifact": "请先取得来客旧物的可查证线索。",
+    "ineligible": "当前来客尚不符合这条前世线的条件。",
+    "insufficient_wallet": "来客现有报酬不足以开始这条线，请保留已有记录。",
+    "legacy_memory": "这位来客已有旧前世手记，保留原有记录。",
+    "probability_missed": "这件旧物暂未显出新的跨世片段。",
+    "no_slot": "参与者尚未齐备，暂不绑定这条线。",
+    "not_bound": "当前来客没有可继续的前世线。",
+    "no_fragment": "目前没有可取得的新片段。",
+    "needs_interpretation": "请先对已见片段留下待验证的解读。",
+    "needs_evidence": "尚缺独立证物，不能据片段或共鸣确认。",
+    "duplicate_interpretation": "这个解读已经记录，请保留原文。",
+    "invalid_interpretation": "请选择已见片段的一种解读，并填写合适长度的备注。",
+    "already_verified": "这条解读已有核实记录，不重复核实。",
+    "invalid_source": "片段或解读的实际来源无法核对。",
+    "paid_lead": "片段只是线索，仍需留下解读并用独立证物核对。",
+    "echo_lead": "共鸣不是证物，不能单独用来核实解读。",
+    "signal_source": "已保存的旧物片段",
+    "signal_meaning": "将看到的线索与自己的解读分开记录。",
+    "signal_topic_label": "凭据",
+    "signal_tone_label": "先观察",
+    "signal_prompt": "核实前请先寻找独立证物。"
+  },
+  "layout": {
+    "row_gap": 24,
+    "node_gap": 18,
+    "image_height": 210,
+    "unknown_min_height": 88,
+    "node_min_width": 160,
+    "font_size": 18,
+    "title_size": 22,
+    "fog_opacity": 0.68,
+    "panel_margin": 16
+  },
+  "images": {
+    "era1": "res://assets/past_lives/v3/era1.png",
+    "era2": "res://assets/past_lives/v3/era2.png",
+    "era3": "res://assets/past_lives/v3/era3.png"
+  }
+}

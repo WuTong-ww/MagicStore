@@ -21,3 +21,5 @@ if ($LASTEXITCODE -ne 0) { throw "Art pipeline failed (exit $LASTEXITCODE)." }
 # Missing reference/templates produces an explicit pending queue. With no
 # -Output the Python adapter chooses a versioned local queue receipt; legacy
 # manifests retain their original default receipt path.
+# -Only past_fragments creates three fresh style-only native tasks and their
+# runtime cover dependencies; it never edits the modern scene reference.

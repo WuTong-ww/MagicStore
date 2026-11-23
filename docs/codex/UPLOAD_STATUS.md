@@ -246,3 +246,22 @@ prune-packable: 2053
 garbage: 3
 size-garbage: 15.24 MiB
 `
+
+## G5 发布检查（2026-11-24）
+
+G5按三轮上限部分完成，完整第3轮14533/14533／exit0；GPU441、shop1544通过，47帧人工204/235，未知烟雾与旧头像等未通过项如实保留。待本次任务提交后补实际hash及push结果。
+
+相对已推送0d9c0bb，本次新增二进制19,862,857B＝六定稿PNG18,983,166B＋六质量85 JPG879,691B，低于100MB；无候选／incoming／详审／原PNG截图入Git。中央497438B、364记录／91运行副本；v2全部56SHA不变。该预发布暂存快照77路径／新增唯一blob21,462,975B；随后仅文本元数据另记，不把旧累计美术历史说成<150MB。检查报告results/G5-size-inspection.json。
+
+本地git count-objects（包含旧备份／大图对象，不是上传量）：
+
+```text
+count: 6227
+size: 329.69 MiB
+in-pack: 4064
+packs: 2
+size-pack: 1.12 GiB
+prune-packable: 2053
+garbage: 3
+size-garbage: 15.24 MiB
+```

@@ -7,6 +7,7 @@ const Memory = preload("res://scripts/people/memory.gd")
 const Events = preload("res://scripts/divination/event_rules.gd")
 const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
 const Appearance = preload("res://scripts/people/appearance.gd")
+const Catalog = preload("res://scripts/divination/catalog.gd")
 const DialoguePolicy = preload("res://scripts/providers/dialogue_policy.gd")
 
 static func initialize(state: Dictionary, config: Dictionary, divination: Variant = null, fresh: bool = false) -> void:
@@ -176,7 +177,9 @@ static func start(state: Dictionary, action: Dictionary, divination: Variant, co
 		case_id = "invitation" if npc_id == "npc_lin" else "archive"
 	var context := People.case_context(state.people, npc_id)
 	if case_id == "archive":
-		var profile_id: String = state.divination.past.get(npc_id, {}).get("profile_id", divination.data.guests.get(npc_id, {}).get("profile_id", ""))
+		var profile_id: String = Catalog.bound_past_profile(state,npc_id,divination.data)
+		if profile_id.is_empty():
+			profile_id = divination.data.guests.get(npc_id, {}).get("profile_id", "")
 		if profile_id.is_empty():
 			var keys: Array = divination.data.past_profiles.keys()
 			keys.sort()

@@ -1,0 +1,313 @@
+{
+  "version": 1,
+  "reviewer": "root",
+  "actual_opened_native": true,
+  "actual_opened_runtime": true,
+  "style": "v3",
+  "records": [
+    {
+      "id": "era1",
+      "selected_attempt": 1,
+      "actual_attempts": 1,
+      "score": 9,
+      "checks": [
+        {
+          "criterion": 1,
+          "points": 1,
+          "result": "通过",
+          "reason": "天空、墙面与水岸保留宽笔触，角落较松。"
+        },
+        {
+          "criterion": 2,
+          "points": 1,
+          "result": "通过",
+          "reason": "左上日光与叶影方向一致，阶面和船沿受光有来源。"
+        },
+        {
+          "criterion": 3,
+          "points": 1,
+          "result": "通过",
+          "reason": "河面、山体与屋檐下是可辨认的蓝绿色阴影。"
+        },
+        {
+          "criterion": 4,
+          "points": 1,
+          "result": "通过",
+          "reason": "亮部对应日照或水反光，无光晕、闪点、自发光。"
+        },
+        {
+          "criterion": 5,
+          "points": 1,
+          "result": "通过",
+          "reason": "屋梁、船沿和瓦面无金色雕花。"
+        },
+        {
+          "criterion": 6,
+          "points": 1,
+          "result": "通过",
+          "reason": "没有紫藤，未超过一处。"
+        },
+        {
+          "criterion": 7,
+          "points": 0,
+          "result": "不通过",
+          "reason": "篮罐草席虽成组留空，但全景仅约10–15件独立物件，未达到通用25–40件密度目标。"
+        },
+        {
+          "criterion": 8,
+          "points": 1,
+          "result": "通过",
+          "reason": "船、绳、篮、罐、草席与台阶均可辨识。"
+        },
+        {
+          "criterion": 9,
+          "points": 1,
+          "result": "通过",
+          "reason": "船柱、屋架、石阶和门洞连续合理；旅人为远处背侧影。"
+        },
+        {
+          "criterion": 10,
+          "points": 1,
+          "result": "通过",
+          "reason": "右侧以水面天空为主，底部12%是低细节土路。"
+        }
+      ],
+      "native": {
+        "attempt_number": 1,
+        "status": "generated",
+        "tool": "image_gen.imagegen",
+        "actual_prompt": "A hand-painted ancient memory scene, made with opaque poster colors on paper in the style of the reference. An old river ferry landing: worn wooden steps, a simple tied ferry boat, reeds and a small group of plain baskets, with one distant traveler seen from behind. Use visible, restrained brushwork, one natural upper-left warm light source, muted brown ochre balanced by sage green and cool blue-green shadows. Readable everyday objects and plausible architecture; calm right third and lower edge for dynamic UI. Any people are small back-view or side-view figures in plain ancient clothing. No readable text, letters, numbers, symbols, UI, frames, ornate gold patterns, halos, sparkles, self-luminous objects, lens flare, bokeh or depth-of-field blur. The reference supplies brushwork, color and lighting only: create a new ancient place, never reproduce the modern shop.\nLandscape16:9. Produce the actual maximum native landscape resolution available, preferably2560x1440; retain the real output dimensions. Do not label an upscaled file as native.",
+        "inputs": [],
+        "references": [
+          {
+            "path": "assets/generated_scenes/v3_final/style_reference.png",
+            "sha256": "0e6a45af456b9453896629c04bec45ea5b3631f64cd752be2b3194b2d60f1097"
+          }
+        ],
+        "source_path": "assets/_incoming/g5_v3/g5r1/era1_source_attempt1.png",
+        "source_sha256": "c8cdf873cfa13c053e871255a5e1724aae1c9a90ba06cef9d6ae34f326ffcbc2",
+        "source_native_size": [
+          1672,
+          941
+        ]
+      },
+      "formal_path": "assets/past_lives/v3/era1_native.png",
+      "runtime_path": "assets/past_lives/v3/era1.png",
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "native_size": [
+        1672,
+        941
+      ],
+      "upscale": 1.1483253588516746,
+      "runtime_review": "放大后笔触、结构与原图一致，无新黑边或文字；不是原生1920。"
+    },
+    {
+      "id": "era2",
+      "selected_attempt": 1,
+      "actual_attempts": 1,
+      "score": 10,
+      "checks": [
+        {
+          "criterion": 1,
+          "points": 1,
+          "result": "通过",
+          "reason": "天空、树叶与右侧阴影有可见颜料笔触，边缘有虚实。"
+        },
+        {
+          "criterion": 2,
+          "points": 1,
+          "result": "通过",
+          "reason": "左上来光照桥面和左岸，树影背向主光。"
+        },
+        {
+          "criterion": 3,
+          "points": 1,
+          "result": "通过",
+          "reason": "桥洞、山体与右岸呈蓝绿色且不死黑。"
+        },
+        {
+          "criterion": 4,
+          "points": 1,
+          "result": "通过",
+          "reason": "桥石、工具、叶片亮面均来自日照，水光为反射，无光晕乱射或自发光。"
+        },
+        {
+          "criterion": 5,
+          "points": 1,
+          "result": "通过",
+          "reason": "桥栏与屋顶无金纹雕花堆叠。"
+        },
+        {
+          "criterion": 6,
+          "points": 1,
+          "result": "通过",
+          "reason": "无紫藤，左侧紫花为普通花丛。"
+        },
+        {
+          "criterion": 7,
+          "points": 1,
+          "result": "通过",
+          "reason": "绳索、木料、三件手工具与篮桶分别成组，桥面工作区和水面有空隙。"
+        },
+        {
+          "criterion": 8,
+          "points": 1,
+          "result": "通过",
+          "reason": "木锤、凿、框锯、绳、梯与石木支撑均可辨识。"
+        },
+        {
+          "criterion": 9,
+          "points": 1,
+          "result": "通过",
+          "reason": "石拱、桥墩、木脚手架与梯横档结构可读；两工人为小侧影。"
+        },
+        {
+          "criterion": 10,
+          "points": 1,
+          "result": "通过",
+          "reason": "右侧为冷色水岸阴影，底部以平缓土路留白。"
+        }
+      ],
+      "native": {
+        "attempt_number": 1,
+        "status": "generated",
+        "tool": "image_gen.imagegen",
+        "actual_prompt": "A hand-painted ancient memory scene, made with opaque poster colors on paper in the style of the reference. A village bridge being repaired: believable stone supports, timber planks, a few grouped ropes and hand tools, with two distant workers seen from the side. Use visible, restrained brushwork, one natural upper-left warm light source, muted brown ochre balanced by sage green and cool blue-green shadows. Readable everyday objects and plausible architecture; calm right third and lower edge for dynamic UI. Any people are small back-view or side-view figures in plain ancient clothing. No readable text, letters, numbers, symbols, UI, frames, ornate gold patterns, halos, sparkles, self-luminous objects, lens flare, bokeh or depth-of-field blur. The reference supplies brushwork, color and lighting only: create a new ancient place, never reproduce the modern shop.\nLandscape16:9. Produce the actual maximum native landscape resolution available, preferably2560x1440; retain the real output dimensions. Do not label an upscaled file as native.",
+        "inputs": [],
+        "references": [
+          {
+            "path": "assets/generated_scenes/v3_final/style_reference.png",
+            "sha256": "0e6a45af456b9453896629c04bec45ea5b3631f64cd752be2b3194b2d60f1097"
+          }
+        ],
+        "source_path": "assets/_incoming/g5_v3/g5r1/era2_source_attempt1.png",
+        "source_sha256": "239ce19e0f6027446899d88f47510b4dba09ac1df12f84c894f9ecbfe22c7ca0",
+        "source_native_size": [
+          1672,
+          941
+        ]
+      },
+      "formal_path": "assets/past_lives/v3/era2_native.png",
+      "runtime_path": "assets/past_lives/v3/era2.png",
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "native_size": [
+        1672,
+        941
+      ],
+      "upscale": 1.1483253588516746,
+      "runtime_review": "放大后笔触、结构与原图一致，无新黑边或文字；不是原生1920。"
+    },
+    {
+      "id": "era3",
+      "selected_attempt": 1,
+      "actual_attempts": 1,
+      "score": 10,
+      "checks": [
+        {
+          "criterion": 1,
+          "points": 1,
+          "result": "通过",
+          "reason": "墙、瓦、土路保留不透明颜料笔触，右墙较松。"
+        },
+        {
+          "criterion": 2,
+          "points": 1,
+          "result": "通过",
+          "reason": "左上日光投下合理叶影，瓦檐与陶罐受光一致。"
+        },
+        {
+          "criterion": 3,
+          "points": 1,
+          "result": "通过",
+          "reason": "棚内与右墙为灰蓝绿阴影，物体仍可读。"
+        },
+        {
+          "criterion": 4,
+          "points": 1,
+          "result": "通过",
+          "reason": "亮处均对应太阳，棚内靠反光可见，无光晕星点或自发光。"
+        },
+        {
+          "criterion": 5,
+          "points": 1,
+          "result": "通过",
+          "reason": "木架、陶罐、瓦檐无金色雕花。"
+        },
+        {
+          "criterion": 6,
+          "points": 1,
+          "result": "通过",
+          "reason": "无紫藤，仅普通绿藤及药花。"
+        },
+        {
+          "criterion": 7,
+          "points": 1,
+          "result": "通过",
+          "reason": "罐四件成组，架上陶罐与药束分组，架层有空位。"
+        },
+        {
+          "criterion": 8,
+          "points": 1,
+          "result": "通过",
+          "reason": "陶罐、篮、药杵钵、药束、矮凳、药圃皆可辨识。"
+        },
+        {
+          "criterion": 9,
+          "points": 1,
+          "result": "通过",
+          "reason": "木柱、窗格、棚架及屋瓦衔接合理，园丁仅远处背影。"
+        },
+        {
+          "criterion": 10,
+          "points": 1,
+          "result": "通过",
+          "reason": "右侧30%大面积低细节墙面，底部12%为土路。"
+        }
+      ],
+      "native": {
+        "attempt_number": 1,
+        "status": "generated",
+        "tool": "image_gen.imagegen",
+        "actual_prompt": "A hand-painted ancient memory scene, made with opaque poster colors on paper in the style of the reference. An ancient medicinal garden beside a modest herb shed: grouped clay pots, low herb beds, a plain drying rack and one distant gardener seen from behind. Use visible, restrained brushwork, one natural upper-left warm light source, muted brown ochre balanced by sage green and cool blue-green shadows. Readable everyday objects and plausible architecture; calm right third and lower edge for dynamic UI. Any people are small back-view or side-view figures in plain ancient clothing. No readable text, letters, numbers, symbols, UI, frames, ornate gold patterns, halos, sparkles, self-luminous objects, lens flare, bokeh or depth-of-field blur. The reference supplies brushwork, color and lighting only: create a new ancient place, never reproduce the modern shop.\nLandscape16:9. Produce the actual maximum native landscape resolution available, preferably2560x1440; retain the real output dimensions. Do not label an upscaled file as native.",
+        "inputs": [],
+        "references": [
+          {
+            "path": "assets/generated_scenes/v3_final/style_reference.png",
+            "sha256": "0e6a45af456b9453896629c04bec45ea5b3631f64cd752be2b3194b2d60f1097"
+          }
+        ],
+        "source_path": "assets/_incoming/g5_v3/g5r1/era3_source_attempt1.png",
+        "source_sha256": "c99da643edc264c7d6a7158315441981a72af7f91ec74e321964bc81844c8a34",
+        "source_native_size": [
+          1672,
+          941
+        ]
+      },
+      "formal_path": "assets/past_lives/v3/era3_native.png",
+      "runtime_path": "assets/past_lives/v3/era3.png",
+      "runtime_size": [
+        1920,
+        1080
+      ],
+      "native_size": [
+        1672,
+        941
+      ],
+      "upscale": 1.1483253588516746,
+      "runtime_review": "放大后笔触、结构与原图一致，无新黑边或文字；不是原生1920。"
+    }
+  ],
+  "manifest": {
+    "bytes": 497438,
+    "sha256": "769cdd9a4fc4eddeaeb4654d8102f2a98aa41ba47e9c43167948ea4e0c2c3703",
+    "assets": 364,
+    "runtime_copies": 91,
+    "old_expanded_unchanged": true
+  }
+}

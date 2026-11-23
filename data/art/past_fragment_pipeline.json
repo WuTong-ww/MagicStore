@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "source_root": "assets/_incoming/g5_v3",
+  "formal_root": "assets/past_lives/v3",
+  "runtime_size": [1920, 1080],
+  "maximum_generation_attempts": 4,
+  "processing_version": 1,
+  "style_reference": {
+    "path": "assets/generated_scenes/v3_final/style_reference.png",
+    "sha256": "0e6a45af456b9453896629c04bec45ea5b3631f64cd752be2b3194b2d60f1097"
+  },
+  "generation": {
+    "tool": "image_gen.imagegen",
+    "template": "A hand-painted ancient memory scene, made with opaque poster colors on paper in the style of the reference. {setting} Use visible, restrained brushwork, one natural upper-left warm light source, muted brown ochre balanced by sage green and cool blue-green shadows. Readable everyday objects and plausible architecture; calm right third and lower edge for dynamic UI. Any people are small back-view or side-view figures in plain ancient clothing. No readable text, letters, numbers, symbols, UI, frames, ornate gold patterns, halos, sparkles, self-luminous objects, lens flare, bokeh or depth-of-field blur. The reference supplies brushwork, color and lighting only: create a new ancient place, never reproduce the modern shop.",
+    "target_size_prompt": "Landscape16:9. Produce the actual maximum native landscape resolution available, preferably2560x1440; retain the real output dimensions. Do not label an upscaled file as native."
+  },
+  "eras": [
+    {"id": "era1", "setting": "An old river ferry landing: worn wooden steps, a simple tied ferry boat, reeds and a small group of plain baskets, with one distant traveler seen from behind."},
+    {"id": "era2", "setting": "A village bridge being repaired: believable stone supports, timber planks, a few grouped ropes and hand tools, with two distant workers seen from the side."},
+    {"id": "era3", "setting": "An ancient medicinal garden beside a modest herb shed: grouped clay pots, low herb beds, a plain drying rack and one distant gardener seen from behind."}
+  ]
+}

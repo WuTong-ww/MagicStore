@@ -814,7 +814,7 @@ def proposed_manifest(workspace, fragment):
     merged["assets"] = list(by_path.values())
     merged.setdefault("style_profiles",{}).setdefault("v3",{}).setdefault("templates",{}).update(copy.deepcopy(fragment["templates"]))
     expected = common.expand_compact_metadata(merged)
-    packed = common.compact_portrait_metadata(merged)
+    packed = common.compact_formal_metadata(merged)
     require(common.expand_compact_metadata(packed) == expected, "portrait packing changed formal provenance")
     return packed
 

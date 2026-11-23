@@ -75,6 +75,23 @@ class FormalManifestValidationTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertEqual(result.stderr, "")
 
+    def test_alias_only_runtime_is_a_real_formal_file_not_optional_metadata(self):
+        self.manifest["runtime_copies"] = [{"path":"assets/runtime-only.png","source_path":"assets/scene.png",
+            "sha256":"a"*64,"runtime_size":[16,9]}]
+        result = self.run_cli()
+        self.assertEqual(result.returncode,1,result.stdout+result.stderr)
+        self.assertIn("assets/runtime-only.png",result.stderr)
+
+    def test_alias_only_runtime_checks_exact_sha_and_dimensions(self):
+        target=self.workspace/"assets/runtime-only.png";Image.new("RGB",(16,9)).save(target)
+        alias={"path":"assets/runtime-only.png","source_path":"assets/scene.png",
+               "sha256":hashlib.sha256(target.read_bytes()).hexdigest(),"runtime_size":[16,9]}
+        self.manifest["runtime_copies"]=[alias]
+        good=self.run_cli();self.assertEqual(good.returncode,0,good.stdout+good.stderr)
+        alias["runtime_size"]=[16,10]
+        bad=self.run_cli();self.assertEqual(bad.returncode,1,bad.stdout+bad.stderr)
+        self.assertIn("dimensions",bad.stderr)
+
 
 if __name__ == "__main__":
     unittest.main()

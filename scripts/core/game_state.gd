@@ -1002,6 +1002,12 @@ func _initialize_integrated(candidate: Dictionary, fresh: bool = false) -> bool:
 		Shop.migrate_content(candidate)
 		People.initialize_ordinary_content(candidate.people,people_config)
 		candidate.schema_version = 8
+	if int(candidate.schema_version) < 9:
+		candidate.divination["past_lines"] = {"version":1,"instances":{}}
+		for case: Dictionary in candidate.divination.cases.values():
+			if not case.has("cause"):
+				case["cause"] = DivinationCatalog.case_cause(case.case_id)
+		candidate.schema_version = 9
 	return People.validate(candidate.people).is_empty()
 
 func _migrate_appearance_schema(candidate: Dictionary) -> bool:

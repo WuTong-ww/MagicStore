@@ -29,3 +29,7 @@ assets/generated_scenes/v3_real/
 assets/generated_scenes/runtime/v3_real/
 assets/generated_scenes/runtime/v3/
 docs/codex/results/art_audit/
+# Godot-generated imports of textual evidence are local cache, not deliverables.
+docs/codex/results/*.translation
+docs/codex/results/*.csv.import
+docs/codex/results/*.svg.import

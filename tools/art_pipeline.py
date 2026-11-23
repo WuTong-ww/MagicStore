@@ -123,6 +123,25 @@ PORTRAIT_SHARED_FIELDS = frozenset({
     "group", "art_pack", "operation", "category", "processing_script", "local_config",
     "processing_config_digest", "inputs", "mask_path", "mask_sha256",
 })
+G4_ITEM_SHARED_FIELDS = frozenset({"group", "version", "operation", "references", "source_raw_native_size", "processing_script", "local_config"})
+G4_ICON_SHARED_FIELDS = frozenset({"group", "version", "prompt", "references"})
+
+
+def _g4_shared_valid(value):
+    if not isinstance(value, dict) or type(value.get("version")) is not int or value["version"] != 3:
+        return False
+    refs = value.get("references")
+    if not isinstance(refs, list) or not refs or not all(isinstance(p, str) and p and
+            "\\" not in p and ":" not in p and not p.startswith("/") and
+            all(part not in ("", ".", "..") for part in p.split("/")) for p in refs):
+        return False
+    if set(value) == G4_ICON_SHARED_FIELDS:
+        return value["group"] == "runtime" and isinstance(value["prompt"], str) and bool(value["prompt"].strip())
+    size = value.get("source_raw_native_size")
+    return (set(value) == G4_ITEM_SHARED_FIELDS and value["group"] == "items" and
+            value["operation"] == "item_chromakey" and value["processing_script"] == "tools/art/item_pipeline.py" and
+            value["local_config"] == "data/art/item_pipeline.json" and isinstance(size, list) and
+            len(size) == 2 and all(_integer(n, 1) for n in size))
 
 
 def expand_compact_metadata(manifest):
@@ -135,10 +154,11 @@ def expand_compact_metadata(manifest):
     profiles = result.pop("asset_metadata_profiles", {})
     _require(isinstance(profiles, dict), "asset metadata profiles must be an object")
     for key, value in profiles.items():
-        _require(isinstance(key, str) and re.fullmatch(r"A4_[a-f0-9]{12}", key) and
+        portrait = isinstance(key, str) and re.fullmatch(r"A4_[a-f0-9]{12}", key) and (
                  isinstance(value, dict) and bool(value) and set(value) <= PORTRAIT_SHARED_FIELDS and
-                 value.get("group") == "portraits" and value.get("art_pack") == "A4_v3",
-                 "invalid shared portrait metadata profile")
+                 value.get("group") == "portraits" and value.get("art_pack") == "A4_v3")
+        g4 = isinstance(key, str) and re.fullmatch(r"G4_[a-f0-9]{12}", key) and _g4_shared_valid(value)
+        _require(portrait or g4, "invalid typed shared metadata profile")
     for row in result.get("assets", []):
         _require(isinstance(row, dict), "invalid compact asset")
         if "metadata_profile" not in row:
@@ -147,6 +167,11 @@ def expand_compact_metadata(manifest):
         _require(isinstance(key, str) and key in profiles, "missing asset metadata profile")
         shared = profiles[key]
         _require(not set(row).intersection(shared), "asset metadata profile overlaps explicit provenance")
+        if key.startswith("G4_"):
+            icon = shared["group"] == "runtime"
+            _require(isinstance(row.get("path"), str) and row["path"].startswith("assets/items/v3/g4r1/") and
+                     row["path"].endswith("_64.png") == icon and row.get("dim") == ([64, 64] if icon else [256, 256]),
+                     "G4 shared profile applied outside its exact native/icon type")
         row.update(copy.deepcopy(shared))
     return result
 
@@ -175,6 +200,33 @@ def compact_portrait_metadata(manifest):
             row["metadata_profile"] = key
     if profiles:
         result["asset_metadata_profiles"] = profiles
+    return result
+
+
+def compact_formal_metadata(manifest):
+    """Keep A4 packing, then share only identical fields of the two G4 types."""
+    result = compact_portrait_metadata(manifest)
+    groups = {}
+    for row in result.get("assets", []):
+        if not row.get("path", "").startswith("assets/items/v3/g4r1/"):
+            continue
+        fields = G4_ICON_SHARED_FIELDS if row["path"].endswith("_64.png") else G4_ITEM_SHARED_FIELDS
+        shared = {key: row[key] for key in sorted(fields) if key in row}
+        _require(_g4_shared_valid(shared), "invalid G4 fields for lossless packing")
+        encoded = json.dumps(shared, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        groups.setdefault(encoded, []).append(row)
+    profiles = result.setdefault("asset_metadata_profiles", {}) if groups else result.get("asset_metadata_profiles", {})
+    for encoded, rows in groups.items():
+        if len(rows) < 2:
+            continue
+        key = "G4_" + hashlib.sha256(encoded.encode("utf-8")).hexdigest()[:12]
+        shared = json.loads(encoded)
+        _require(key not in profiles or profiles[key] == shared, "shared metadata profile hash collision")
+        profiles[key] = shared
+        for row in rows:
+            for field in shared: del row[field]
+            row["metadata_profile"] = key
+    _require(expand_compact_metadata(result) == expand_compact_metadata(manifest), "formal packing changed provenance")
     return result
 
 
@@ -252,6 +304,24 @@ def validate_compact_manifest(workspace, manifest):
             _require(isinstance(size, list) and len(size) == 2 and all(_integer(n, 1) for n in size), "invalid item raw native size")
             if "prompt_template" in asset:
                 exact_item_prompt(asset, profiles.get("v3", {}))
+        if asset.get("group") == "past_fragments":
+            _require(asset.get("era_id") in ("era1", "era2", "era3") and
+                     path == "assets/past_lives/v3/" + asset["era_id"] + "_native.png" and
+                     asset.get("operation") == "past_fragment_native", "invalid canonical past fragment identity")
+            _require(asset.get("processing_script") == "tools/art/past_fragment_pipeline.py" and
+                     asset.get("local_config") == "data/art/past_fragment_pipeline.json", "invalid past processing contract")
+            safe_path(workspace,asset.get("source_raw"))
+            _require(asset["source_raw"].startswith("assets/_incoming/") and asset.get("source_raw_sha256") == asset["sha256"] and
+                     asset.get("source_raw_native_size") == asset.get("dim") and
+                     isinstance(asset.get("source_raw_native_size"),list) and all(_integer(n,1)for n in asset["source_raw_native_size"]) and
+                     _integer(asset.get("processing_version"),1), "past native differs from original raw provenance")
+            _require(asset.get("inputs") == [] and isinstance(asset.get("references"), list) and len(asset["references"]) == 1,
+                     "past fragments require one independent style reference, no old edit target")
+            safe_path(workspace, asset["references"][0])
+            _require(isinstance(asset.get("reference_sha256"),str) and re.fullmatch(r"[a-f0-9]{64}",asset["reference_sha256"]), "missing past style SHA")
+            try: actual = profiles["v3"]["templates"][asset["prompt_template"]].format(**asset["prompt_params"])
+            except (KeyError, TypeError, ValueError, IndexError) as error: raise ValueError("missing exact past prompt recipe") from error
+            _require(hashlib.sha256(actual.encode()).hexdigest() == asset.get("actual_prompt_sha256"), "past prompt SHA mismatch")
         if asset.get("group") == "slices" and asset.get("operation") in ("extract_layer", "inpaint_cleanplate"):
             for field in ("composite_source", "processing_script", "local_spec", "local_config", "mask_path",
                           "inpaint_mask_path", "source_receipt"):
@@ -263,6 +333,11 @@ def validate_compact_manifest(workspace, manifest):
         _require(isinstance(row, dict), "invalid compact runtime copy")
         safe_path(workspace, row.get("path"))
         safe_path(workspace, row.get("source_path"))
+        if row["path"].casefold() not in paths:
+            _require(row["source_path"].casefold() in paths, "alias-only runtime requires a formal native source")
+            _require(isinstance(row.get("sha256"),str) and re.fullmatch(r"[a-fA-F0-9]{64}",row["sha256"]), "alias-only runtime requires SHA256")
+            size=row.get("runtime_size")
+            _require(isinstance(size,list) and len(size)==2 and all(_integer(n,1)for n in size), "alias-only runtime requires dimensions")
     return manifest
 
 
@@ -316,7 +391,7 @@ def _compact_resources(manifest):
             # Complete legacy NPC/past-life images are not modular A4 parts.
         if group == "portraits" and row.get("art_pack") != "A4_v3":
             continue
-        if group in ("scenes", "slices", "items", "portraits"):
+        if group in ("scenes", "slices", "items", "portraits", "past_fragments"):
             _require(group != "items" or not name.endswith("_64.png"), "64 item icon requires its canonical 256 alias")
             resources[source] = (group, row)
     return resources, {path: original(path) for path in aliases}
@@ -326,11 +401,12 @@ def build_compact_queue(workspace, manifest, style, only, config=None):
     """Queue explicit v3 templates against canonical formal sources only."""
     config = config or load_config()
     validate_compact_manifest(workspace, manifest)
-    _require(only in ("scenes", "slices", "items", "portraits", "all"), "unknown resource group: " + str(only))
+    _require(only in ("scenes", "slices", "items", "portraits", "past_fragments", "all"), "unknown resource group: " + str(only))
     resources, aliases = _compact_resources(manifest)
     selected = {path: value for path, value in resources.items() if only == "all" or value[0] == only}
     portrait_rows = [row for group, row in selected.values() if group == "portraits"]
-    selected = {path: value for path, value in selected.items() if value[0] != "portraits"}
+    past_rows = [row for group, row in selected.values() if group == "past_fragments"]
+    selected = {path: value for path, value in selected.items() if value[0] not in ("portraits", "past_fragments")}
     profile = manifest.get("style_profiles", {}).get("v3", {})
     queue = {"version": 1, "kind": "compact_builtin_queue", "style_profile": "v3", "requested_style": style,
              "status": "pending_style_reference", "tasks": [], "offline_tasks": [], "pending": [],
@@ -394,6 +470,20 @@ def build_compact_queue(workspace, manifest, style, only, config=None):
     # its human revision label, so changing only -Style cannot reuse outputs.
     if not alias:
         revision += "_" + digest[:12]
+    if only in ("past_fragments", "all"):
+        past_config = "data/art/past_fragment_pipeline.json"
+        if not safe_path(workspace,past_config).is_file():
+            if only == "past_fragments": return pending("pending_past_pipeline", "past art config is missing", missing_paths=[past_config])
+        else:
+            spec = importlib.util.spec_from_file_location("magic_past_fragment_pipeline", Path(__file__).parent / "art/past_fragment_pipeline.py")
+            past = importlib.util.module_from_spec(spec); spec.loader.exec_module(past)
+            values = past.load_config(workspace)
+            past_queue = past.build_queue(workspace,revision,values,{"path":path,"sha256":digest},
+                                         records=past_rows or None,templates=templates)
+            past_queue.update(style_profile="v3",requested_style=style)
+            if only == "past_fragments": return past_queue
+            queue["tasks"].extend(past_queue["tasks"]); queue["offline_tasks"].extend(past_queue["offline_tasks"])
+            queue["canonical_resource_count"] += len(past_queue["tasks"])
     if only in ("portraits", "all"):
         portrait_config = "data/art/portrait_pipeline.json"
         catalog_path = "data/people/appearance_parts.json"

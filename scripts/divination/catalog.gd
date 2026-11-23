@@ -2,8 +2,32 @@ extends RefCounted
 ## Content validation and routing for the individual oracle rules.
 
 const DATA_PATH := "res://data/divination.json"
+const PastLines = preload("res://scripts/divination/past_lines.gd")
 const LEGACY_GUESTS_PATH := "res://data/compatibility/divination_guests.json"
 const LEGACY_GUEST_IDS := ["npc_demo_xu", "npc_demo_he", "npc_demo_ji"]
+
+static func case_cause(case_id: String) -> String:
+	var library := PastLines.load_config()
+	if library.is_empty():
+		return ""
+	return str(library.cause_policy.case_causes.get(case_id,library.cause_policy.default_cause))
+
+static func bound_past_profile(state: Dictionary, npc_id: String, data: Dictionary) -> String:
+	var work: Dictionary = state.get("divination",{})
+	var memory: Dictionary = work.get("past",{}).get(npc_id,{})
+	var stored: String = memory.get("profile_id","")
+	if data.past_profiles.has(stored):
+		return stored
+	# The oldest existing reception is a stable binding even before its first
+	# paid fragment. An expanded current catalog must never reroll that choice.
+	for visit: Dictionary in state.get("visits",[]):
+		if visit.get("npc_id") != npc_id:
+			continue
+		var prior: Dictionary = work.get("cases",{}).get(visit.get("visit_id",""),{})
+		stored = prior.get("profile_id","")
+		if data.past_profiles.has(stored):
+			return stored
+	return ""
 const Almanac = preload("res://scripts/divination/almanac.gd")
 const Cards = preload("res://scripts/divination/oracle_cards.gd")
 const Casting = preload("res://scripts/divination/oracle_casting.gd")

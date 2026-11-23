@@ -4,7 +4,7 @@
 
 当前内容、数值配置和已验证范围见[功能清单](docs/features.md)。
 
-第二轮续跑使用 `codex/round2-clean`，素材使用普通 Git 文件。已否决的绘本图及中间产物仅保留本地，当前正式场景仍为v2回退资源。重建范围与体积检查见[上传状态](docs/codex/UPLOAD_STATUS.md)；`main` 保持不变。
+第二轮续跑使用 `codex/round2-clean`，素材使用普通 Git 文件。已否决的绘本图及中间产物仅保留本地，当前正式场景为v3；原v2保留作输入和回退。重建范围与体积检查见[上传状态](docs/codex/UPLOAD_STATUS.md)；`main` 保持不变。
 
 此前针对林照晚的 84 次真实交谈，以及最终 14 次平均等待 3.14 秒的测量范围，见[早期对白实测](docs/live-dialogue-evaluation.md)。原创新人物与四模型切换另行验证，结果见[新来客流程](docs/people-generation.md)及[接口切换验证](docs/api-model-switch.md)，不能将林照晚的旧数据视为所有模型与人物的表现。
 
@@ -15,6 +15,8 @@
 ## 环境与启动
 
 双击根目录 `start-game.cmd` 运行游戏，或 `start-editor.cmd` 打开编辑器。路径由脚本所在目录解析，可在 `E:\MagicStore` 或其他目录运行；存档、日志、缓存和临时文件均留在当前工程目录。
+
+源码更新后请使用上述启动器；`build/windows` 的 EXE 与 ZIP 只有重新导出才会更新。普通来客无需联网，但每日客流允许为零，游戏时间只随成功动作推进；零客日可打烊进入下一天，再用「等一会儿」等候。联网原创来客还需有效接口、独立审核通过和未来到店名额，配置接口不会额外增加当日客流。
 
 协作成员统一使用 **Godot 4.6.3 stable 标准版**，实际引擎输出 `4.6.3.stable.official.7d41c59c4`。GDScript，Compatibility/OpenGL，Windows x86_64。版本、官方下载地址和 SHA256 锁在 `scripts/dev/toolchain.json`。无需 .NET 或额外运行库。
 

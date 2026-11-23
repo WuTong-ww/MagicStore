@@ -1,0 +1,969 @@
+{
+  "version": 2,
+  "task": "G5",
+  "scope": "Final finite evidence consolidation only; excludes standard-full results and graphical/art acceptance.",
+  "compiled_utc": "2026-11-23T15:00:36.753383+00:00",
+  "count_policy": {
+    "non_additive": true,
+    "overlapping_targets_are_not_summed": true,
+    "no_aggregate_pass_count": true,
+    "author_logs_read_not_rerun_by_compiler": true
+  },
+  "standard_full_validation_included": false,
+  "graphical_validation_included": false,
+  "finite_target_png_count": 0,
+  "evidence_packages": {
+    "original_core_freeze": {
+      "path": ".tools/g5/core-final-files.json",
+      "sha256": "6c579bdb1e362d3ba0ac9a8b3974978d73a227852c90606dbd9a05afd30c0427",
+      "bytes": 8601
+    },
+    "core_handoff": {
+      "path": ".tools/g5/core-handoff.md",
+      "sha256": "cc5af3f8e0d7c36f7b87ccf2431d753410495b34ad49f5b297a300dc96420bf0",
+      "bytes": 7158
+    },
+    "historical_ui_legacy": {
+      "path": ".tools/g5/finite-ui-legacy-results.json",
+      "sha256": "aea65e933bf06b9454baa832676f2a7e01e0f72ede243fb8319a07bec5dbc27f",
+      "bytes": 14011
+    },
+    "generated_fixture": {
+      "path": ".tools/g5/generated-unit-fixture-result.json",
+      "sha256": "6d13823d4304e214b6b67a3b5e4bab2b3b79f2a38077dea2d233268ce79c1ac9",
+      "bytes": 2191
+    },
+    "traffic_historical_fixture": {
+      "path": ".tools/g5/traffic-historical-source-result.json",
+      "sha256": "9980cb65f5b981cdf6fb7e89dfef8ddd4bc3d5f0b483a358a91134ef5785a1ac",
+      "bytes": 6828
+    },
+    "public_order_fix": {
+      "path": ".tools/g5/public-order-fix-result.json",
+      "sha256": "781783ee813b2eb32245c84bb1620494d06091bc7f303309cad6fa53285cc876",
+      "bytes": 10649
+    },
+    "current_public_order_freeze": {
+      "path": ".tools/g5/core-public-order-freeze.json",
+      "sha256": "7bff537f5258ba98d3db36eff036fc3869c8c9796f22c8da77fa74546aaadc5b",
+      "bytes": 5744
+    }
+  },
+  "core_and_latest_library_targets": [
+    {
+      "target": "migration",
+      "result": {
+        "checks": 191,
+        "failures": 0,
+        "exit_code": 0,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/migration-source-final.log",
+          "sha256": "80ea3d3dc2e587ff9964d5d6fa2194d608516049f63ed785c77826f17570fb8e",
+          "bytes": 115
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/migration-source-final-exit.json",
+          "sha256": "4499d9b839cfcf4a69bbe450e73fb9157694f0f332a96a65c059d9afa69a0772",
+          "bytes": 134
+        }
+      },
+      "scope": "Finite author-run evidence at original core freeze; not a full-suite total."
+    },
+    {
+      "target": "legacy_guests",
+      "result": {
+        "checks": 30,
+        "failures": 0,
+        "exit_code": 0,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/legacy-guests-source-final.log",
+          "sha256": "3589f0cd2ad67cdaaeeb763c3400bd4548df92872ec85eef49b1a8324ecca03c",
+          "bytes": 124
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/legacy-guests-source-final-exit.json",
+          "sha256": "9be7544b3a2584bee4a330a54b77ce0076269e365728ea11d84e61216b9ab240",
+          "bytes": 126
+        }
+      },
+      "scope": "Finite author-run evidence at original core freeze; not a full-suite total."
+    },
+    {
+      "target": "appearance_migration",
+      "result": {
+        "checks": 124,
+        "failures": 0,
+        "exit_code": 0,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/appearance-schema9-identity-green.log",
+          "sha256": "b2e2a05c3070ae3eb58cef3538cfa2a53bd4353dc77bfb07e9885198a7973566",
+          "bytes": 121
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/appearance-schema9-identity-green-exit.json",
+          "sha256": "db185a478a353fc6c319dc78cf1130261b930ecffc26514099d4efa8571f5f72",
+          "bytes": 134
+        }
+      },
+      "scope": "Finite author-run evidence at original core freeze; not a full-suite total."
+    },
+    {
+      "target": "library_final",
+      "result": {
+        "checks": 134,
+        "failures": 0,
+        "exit_code": 0,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/library-public-order-green.log",
+          "sha256": "a11008627fc6e27eb67618eba34540db73657af5df90fdd729b1c351f8e4b1e4",
+          "bytes": 113
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/library-public-order-green-exit.json",
+          "sha256": "f5feecf966057c1c6b1404f7a36d6109c8dd79398e414a3e1564680fe884f69d",
+          "bytes": 120
+        }
+      },
+      "scope": "Latest pure target after output-only deterministic order fix; replaces the earlier131 count."
+    },
+    {
+      "target": "transactions_final",
+      "result": {
+        "checks": 128,
+        "failures": 0,
+        "exit_code": 0,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/transactions-public-order-green.log",
+          "sha256": "ef0462f4ee099d8f352e41e4e418e1a44c75e5208aa7ff5245d83b5481d2382a",
+          "bytes": 293
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/transactions-public-order-green-exit.json",
+          "sha256": "afe531e6dec50d730eb44b23a0a72e03f99e351c078aa561886b057172e9098f",
+          "bytes": 137
+        }
+      },
+      "scope": "Actual quote/settle/save/retry/replay chain regenerating the four explicit a6c sources."
+    },
+    {
+      "target": "four_new_sources_actual_load",
+      "result": {
+        "checks": 21,
+        "failures": 0,
+        "exit_code": 0,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/public-order-four-source-load-green.log",
+          "sha256": "9837543251ee8a900bcf064eb17309c6a961d6435049b08184314c7f89a3c8ba",
+          "bytes": 532
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/public-order-four-source-load-green-exit.json",
+          "sha256": "6814ecc2e66998ecbfdd4a60cb0c14cf1d863be9d97c0678781f4e09a560219b",
+          "bytes": 131
+        }
+      },
+      "scope": "Real load_game, exact normalized snapshots and full public hashes for each new source; no capture/GPU claim."
+    }
+  ],
+  "historical_ui_and_capture_headless": [
+    {
+      "target": "ui-parser-fixed-green",
+      "checks": 74,
+      "failures": 0,
+      "exit_code": 0,
+      "script_error_count": 0,
+      "error_count": 0,
+      "warning_count": 0,
+      "actual_PNG": 0,
+      "log": {
+        "path": ".tools/g5/ui-parser-fixed-green.log",
+        "sha256": "70126dc21bce11f10456262fbdbe71ce463c4a2e23999c147e20cb8fc092b927",
+        "bytes": 157
+      },
+      "exit_receipt": {
+        "path": ".tools/g5/ui-parser-fixed-green-exit.json",
+        "sha256": "6f93dbf19487916eab22747774ec9b354347c7ebf9249f9a716466f54c640e63",
+        "bytes": 127
+      },
+      "source_context": "Historical UI/headless package before public-order fix; original explicit source receipt122b. Schema-only15 reads no source envelope.",
+      "superseded_for_current_source_acceptance": true,
+      "superseded_by": "four_new_sources_actual_load21 for receipt a6c; not a rerun of UI74 or capture schema15/source34"
+    },
+    {
+      "target": "capture-schema-only-green",
+      "checks": 15,
+      "failures": 0,
+      "exit_code": 0,
+      "script_error_count": 0,
+      "error_count": 0,
+      "warning_count": 0,
+      "actual_PNG": 0,
+      "log": {
+        "path": ".tools/g5/capture-schema-only-green.log",
+        "sha256": "b89738de11e56616dd0b38cae50363dab8720b15d5a506b168ce97f4024e23da",
+        "bytes": 187
+      },
+      "exit_receipt": {
+        "path": ".tools/g5/capture-schema-only-green-exit.json",
+        "sha256": "429f3e855dd4f787a60778359de0f7a3dfd6041d38e3bb09bef6ac7922122793",
+        "bytes": 132
+      },
+      "source_context": "Historical UI/headless package before public-order fix; original explicit source receipt122b. Schema-only15 reads no source envelope.",
+      "superseded_for_current_source_acceptance": true,
+      "superseded_by": "four_new_sources_actual_load21 for receipt a6c; not a rerun of UI74 or capture schema15/source34"
+    },
+    {
+      "target": "capture-source-final-headless",
+      "checks": 34,
+      "failures": 0,
+      "exit_code": 0,
+      "script_error_count": 0,
+      "error_count": 0,
+      "warning_count": 0,
+      "actual_PNG": 0,
+      "log": {
+        "path": ".tools/g5/capture-source-final-headless.log",
+        "sha256": "735164b6c98c849f3029b80516c39b09af7412acbc90b0584350e3bf39e02a00",
+        "bytes": 170
+      },
+      "exit_receipt": {
+        "path": ".tools/g5/capture-source-final-headless-exit.json",
+        "sha256": "9aa7e882f61bf205cc9ce4822079ceb8360c1995d6d5a528166c49b4e04f6ca7",
+        "bytes": 132
+      },
+      "source_context": "Historical UI/headless package before public-order fix; original explicit source receipt122b. Schema-only15 reads no source envelope.",
+      "superseded_for_current_source_acceptance": true,
+      "superseded_by": "four_new_sources_actual_load21 for receipt a6c; not a rerun of UI74 or capture schema15/source34"
+    }
+  ],
+  "legacy_six": [
+    {
+      "target": "shop-integration",
+      "red": {
+        "checks": 72,
+        "failures": 6,
+        "exit_code": 1,
+        "script_errors": 0,
+        "errors": 6,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/legacy-scope-red-shop-integration.log",
+          "sha256": "2e8d705813ba7963b664349322b2a44c33ee9cbd58c393b43cfda35f06b23c57",
+          "bytes": 2558
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/legacy-scope-red-shop-integration-exit.json",
+          "sha256": "6721491b1388a90330de070f8758681df285fcb5b658dba68099b45d6d2050da",
+          "bytes": 118
+        }
+      },
+      "green": {
+        "checks": 78,
+        "failures": 0,
+        "exit_code": 0,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/legacy-scope-green-shop-integration.log",
+          "sha256": "36a117a0582ddfecf9728b9bbda5ff7438a0992fbfc00d7fcef0ec5befd23dbb",
+          "bytes": 252
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/legacy-scope-green-shop-integration-exit.json",
+          "sha256": "fd281bf4b47785a86bbe4c83630bc886c4c6991b87dce3c554bfa790804618bf",
+          "bytes": 118
+        }
+      },
+      "scope": "Root-authorized test-only schema-terminal/old-contract projection adaptation; original old inputs/source remain historical."
+    },
+    {
+      "target": "event-migration",
+      "red": {
+        "checks": 105,
+        "failures": 21,
+        "exit_code": 1,
+        "script_errors": 1,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/legacy-scope-red-event-migration.log",
+          "sha256": "42e03376111e96026df50ed762bfe14f2cdbcb77e8d32be691da54797de1dd8d",
+          "bytes": 1939
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/legacy-scope-red-event-migration-exit.json",
+          "sha256": "bea963731587979fe33fc988f2c381ef30c50e350d626b389d2687100298b289",
+          "bytes": 128
+        }
+      },
+      "green": {
+        "checks": 112,
+        "failures": 0,
+        "exit_code": 0,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/legacy-scope-green-event-migration.log",
+          "sha256": "2d278125d21ce51f928cd943493ac067449383fb4bbef66883de1574c31a4b24",
+          "bytes": 116
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/legacy-scope-green-event-migration-exit.json",
+          "sha256": "c4e16c13f7cd885482469698fab4746ecba6554d0e92d3a40c8fe311758ef03b",
+          "bytes": 128
+        }
+      },
+      "scope": "Root-authorized test-only schema-terminal/old-contract projection adaptation; original old inputs/source remain historical."
+    },
+    {
+      "target": "family-migration",
+      "red": {
+        "checks": 82,
+        "failures": 42,
+        "exit_code": 1,
+        "script_errors": 4,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/legacy-scope-red-family-migration.log",
+          "sha256": "435344cdc29056212357ab30b80ab3042214b3478146b13eed9efb9798a6277f",
+          "bytes": 4331
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/legacy-scope-red-family-migration-exit.json",
+          "sha256": "09c1393472ec949100c89f3a1123f7e737ba9cbb2b145a0543c9cc7102608887",
+          "bytes": 130
+        }
+      },
+      "green": {
+        "checks": 109,
+        "failures": 0,
+        "exit_code": 0,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/legacy-scope-green-family-migration.log",
+          "sha256": "0d6f85d718dc72e8f5773d54e68fe71235350de4fcd5f5c626242024ba5f36eb",
+          "bytes": 117
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/legacy-scope-green-family-migration-exit.json",
+          "sha256": "ca9d5b553b2ac7a2cec8de5264387d94b5c94f82f915521652941ee87e110a16",
+          "bytes": 130
+        }
+      },
+      "scope": "Root-authorized test-only schema-terminal/old-contract projection adaptation; original old inputs/source remain historical."
+    },
+    {
+      "target": "divination-acceptance",
+      "red": {
+        "checks": 543,
+        "failures": 2,
+        "exit_code": 1,
+        "script_errors": 0,
+        "errors": 2,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/legacy-scope-red-divination-acceptance.log",
+          "sha256": "affd45fd1af89ee23b2da014e9bc0009199c2e7549e3ad3fc3bb671d57e8a10b",
+          "bytes": 1014
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/legacy-scope-red-divination-acceptance-exit.json",
+          "sha256": "73c07e2abf9896b39078f6446228a8a6f3516edd74f4553a12b06cf1e8638674",
+          "bytes": 123
+        }
+      },
+      "green": {
+        "checks": 543,
+        "failures": 0,
+        "exit_code": 0,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/legacy-scope-green-divination-acceptance.log",
+          "sha256": "a73c7f609827650abe110fe7f06372219d37fbc6e499c8b041c916e62eaa2370",
+          "bytes": 244
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/legacy-scope-green-divination-acceptance-exit.json",
+          "sha256": "04f2375ec7a2377cefcee576701bb2a81a695e12f2001748f3c5fda6af962f51",
+          "bytes": 123
+        }
+      },
+      "scope": "Root-authorized test-only schema-terminal/old-contract projection adaptation; original old inputs/source remain historical."
+    },
+    {
+      "target": "people-bridge",
+      "red": {
+        "checks": 52,
+        "failures": 1,
+        "exit_code": 1,
+        "script_errors": 0,
+        "errors": 1,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/legacy-scope-red-people-bridge.log",
+          "sha256": "cf42e8e2ac625e4d5b70cc79d37b526b4b520d01d588a2786c77faa96ded2c82",
+          "bytes": 410
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/legacy-scope-red-people-bridge-exit.json",
+          "sha256": "02647dcf57d312d84fa319707473a3cb47a7999900f8331102ef035765647a21",
+          "bytes": 127
+        }
+      },
+      "green": {
+        "checks": 52,
+        "failures": 0,
+        "exit_code": 0,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/legacy-scope-green-people-bridge.log",
+          "sha256": "89d69b6c308f7aff1746e5b59a2fb0d5c6df3609669369ce5e41984c6831fffb",
+          "bytes": 118
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/legacy-scope-green-people-bridge-exit.json",
+          "sha256": "2998c345cebfbfbff0d3e1315be054704ac42b5428ab0531cbd008b116ac06e6",
+          "bytes": 127
+        }
+      },
+      "scope": "Root-authorized test-only schema-terminal/old-contract projection adaptation; original old inputs/source remain historical."
+    },
+    {
+      "target": "shop-content-migration",
+      "red": {
+        "checks": 57,
+        "failures": 11,
+        "exit_code": 1,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/legacy-scope-red-shop-content-migration.log",
+          "sha256": "4f161cb9816630a956d35d4605fc977f06da1d926f405e8383bb9d824788fcf9",
+          "bytes": 1471
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/legacy-scope-red-shop-content-migration-exit.json",
+          "sha256": "d01a747de9c381dd52398732929a7433bbeb798da36fa559623a5cfc69f9b2cd",
+          "bytes": 136
+        }
+      },
+      "green": {
+        "checks": 105,
+        "failures": 0,
+        "exit_code": 0,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/legacy-scope-green-shop-content-migration.log",
+          "sha256": "7b2b3b3a18aa7a4885efacc0de46c6b06d791ac5a2a92cd4414410c990f687a3",
+          "bytes": 123
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/legacy-scope-green-shop-content-migration-exit.json",
+          "sha256": "8411a6b9da80a55cef845cb9ce0f17c066afca57aa574606319af0f18e8c765e",
+          "bytes": 136
+        }
+      },
+      "scope": "Root-authorized test-only schema-terminal/old-contract projection adaptation; original old inputs/source remain historical."
+    }
+  ],
+  "additional_test_only_fixture_repairs": [
+    {
+      "target": "generated_cases",
+      "source_result": {
+        "path": ".tools/g5/generated-unit-fixture-result.json",
+        "sha256": "6d13823d4304e214b6b67a3b5e4bab2b3b79f2a38077dea2d233268ce79c1ac9",
+        "bytes": 2191
+      },
+      "red": {
+        "checks": 80,
+        "failures": 3,
+        "exit_code": 1,
+        "script_errors": 0,
+        "errors": 3,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/generated-cases-fixture-red.log",
+          "sha256": "6f79f7c64c47ba1a2895ab8ca926385f44ff774b78d2750c1fc0ca821d74aa1d",
+          "bytes": 1108
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/generated-cases-fixture-red-exit.json",
+          "sha256": "682fd873b28a67f6e39f65642f4380cf7731477da0eaa1d7943bf766f992cc0e",
+          "bytes": 128
+        }
+      },
+      "green": {
+        "checks": 80,
+        "failures": 0,
+        "exit_code": 0,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/generated-cases-fixture-green.log",
+          "sha256": "6eb6fc10be5e13f1306dd150ab0ab3030c60a4f7105147f08c87953de141c124",
+          "bytes": 115
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/generated-cases-fixture-green-exit.json",
+          "sha256": "4d9409778c3b1910d75a6125f0b9a03eed443813f26bb0188a301f6391634b60",
+          "bytes": 128
+        }
+      },
+      "change": "three added lines: explicit schema_version2 plus eventless/pre-G3 contract comment; every original assertion retained",
+      "reason": "Version0 is invalid. Version2 preserves the original no-event oracle; version8 activates modern generated events and also requires the modern eventless namespace. Do not widen production validation or change the original eventless assertion.",
+      "production_changed": false
+    },
+    {
+      "target": "traffic_activation",
+      "source_result": {
+        "path": ".tools/g5/traffic-historical-source-result.json",
+        "sha256": "9980cb65f5b981cdf6fb7e89dfef8ddd4bc3d5f0b483a358a91134ef5785a1ac",
+        "bytes": 6828
+      },
+      "red": {
+        "checks": 99,
+        "failures": 1,
+        "exit_code": 1,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/traffic-historical-source-red.log",
+          "sha256": "4116fa37eb14fb053d8436492b9d5fcc044cdeb3c8d5f956356288082c46e3d8",
+          "bytes": 293
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/traffic-historical-source-red-exit.json",
+          "sha256": "95f725335b748354e596df265ab8e660f7ca5fb4067216ad9198bcd64a6c0703",
+          "bytes": 132
+        }
+      },
+      "intermediate": {
+        "checks": 101,
+        "failures": 1,
+        "exit_code": 1,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/traffic-historical-source-green.log",
+          "sha256": "e3ada65bae30f1bf3d7a9f03e8665c58c5a2c0f745b257659c82dd911d13cf46",
+          "bytes": 331
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/traffic-historical-source-green-exit.json",
+          "sha256": "46c456bcb8cae0bd1b145f45409ee4855e592538307bbb8dcb8cf0fecbe7217c",
+          "bytes": 132
+        }
+      },
+      "green": {
+        "checks": 101,
+        "failures": 0,
+        "exit_code": 0,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/traffic-historical-source-final-green.log",
+          "sha256": "f10aa023f5ac461ad51d82aa25891f4440a691213a6c5b6674cd06583e1c0b6d",
+          "bytes": 183
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/traffic-historical-source-final-green-exit.json",
+          "sha256": "4267cb0dee0420360a80b30438e7cd273b7c9475fa5df7b01d151501d63280d4",
+          "bytes": 132
+        }
+      },
+      "intermediate_reason": "Restoring raw JSON Float schema marker into normalized integer state caused strict dictionary equality failure; final projection uses int(old.schema_version).",
+      "fixture": {
+        "path": "tests/shop/fixtures/traffic_applied_v2.json",
+        "sha256": "f68c0db29f18bcae1e60c734ca127f35ae14f846eb48799a778165d22c7f7c2b",
+        "expected_sha256": "f68c0db29f18bcae1e60c734ca127f35ae14f846eb48799a778165d22c7f7c2b",
+        "unchanged": true,
+        "schema": 8,
+        "case_count": 0
+      },
+      "scope": "Only tests/integration/traffic_activation.gd historical snapshot expectation changed; no production or historical fixture writes.",
+      "production_changed": false
+    }
+  ],
+  "key_red_and_fix_history": [
+    {
+      "issue": "library missing component",
+      "red": {
+        "checks": 1,
+        "failures": 1,
+        "exit_code": 1,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/library-initial-red.log",
+          "sha256": "62bed361fcbb609d0e8fd3470218a51eaa3dbcf3e809e1838e38f1bd5c2c0def",
+          "bytes": 163
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/library-initial-red-exit.json",
+          "sha256": "e974616f852cfe4ea32bbca6c5f09902881c2ff92331c481cdb14d476163a09f",
+          "bytes": 120
+        }
+      },
+      "fix": "Implemented eight pure APIs and strict production JSON contracts."
+    },
+    {
+      "issue": "version authority and pre9 namespace",
+      "red": {
+        "checks": 129,
+        "failures": 2,
+        "exit_code": 1,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/library-version-copy-red.log",
+          "sha256": "3e2256a4c9a7bec520b095fc6e6ad62a533001d611ff60ab86b8ca8a9f3e2bdb",
+          "bytes": 279
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/library-version-copy-red-exit.json",
+          "sha256": "b9e465150e6ee6afbd29e9f5bdf6001d77a4d17be14c490691c3da14585c7cf1",
+          "bytes": 120
+        }
+      },
+      "fix": "Immutable definition costs/result copy and schema namespace boundary."
+    },
+    {
+      "issue": "delayed payment source clock",
+      "red": {
+        "checks": 131,
+        "failures": 1,
+        "exit_code": 1,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/library-delayed-settle-red.log",
+          "sha256": "423b8c9e443e96cbec5027a2377eaf110099067b969f6eb7b2f46e2e358f63dc",
+          "bytes": 193
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/library-delayed-settle-red-exit.json",
+          "sha256": "f8351de04231c7762dfb842563494886374a01b1856fdc7c265391c4d04a89a9",
+          "bytes": 120
+        }
+      },
+      "fix": "Real settlement ledger clock replaces the invalid quote-time assumption."
+    },
+    {
+      "issue": "foreign instance interpretation",
+      "red": {
+        "checks": 33,
+        "failures": 1,
+        "exit_code": 1,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/transactions-foreign-scope-red.log",
+          "sha256": "e6ca72a857eca564dd06c01b43107a0adbc813d6885f461a60fd21697680ecff",
+          "bytes": 413
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/transactions-foreign-scope-red-exit.json",
+          "sha256": "ff39d2c195cee5ee85b50eb149d6c26fce0ec5995c5d5b16308d124df0460bca",
+          "bytes": 137
+        }
+      },
+      "fix": "An explicit foreign scope cannot authorize the current actor on another line."
+    },
+    {
+      "issue": "foreign quote scope",
+      "red": {
+        "checks": 26,
+        "failures": 1,
+        "exit_code": 1,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/transactions-foreign-quote-red.log",
+          "sha256": "a6b971a5b959d572e6457da4d5dbcfb6767cb4b0fbac02d304e169da39495eae",
+          "bytes": 229
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/transactions-foreign-quote-red-exit.json",
+          "sha256": "400612600efe1e22b70e1dc23e0467cb60d994585c37c9ec26a74fead6e7e7e6",
+          "bytes": 137
+        }
+      },
+      "fix": "Quote scope must equal the actual bound descriptor."
+    },
+    {
+      "issue": "modern marker erasure",
+      "red": {
+        "checks": 121,
+        "failures": 1,
+        "exit_code": 1,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/transactions-resources-and-downgrade-red.log",
+          "sha256": "26dcb6aa8de64e80bf76a9415c6e34e3fedc35e3f54f8358ced4ae17fb9686a1",
+          "bytes": 427
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/transactions-resources-and-downgrade-red-exit.json",
+          "sha256": "5c7cf0ddc93f8368569b98a00c7587532e6d628048920e0a8fdad44dcdb25131",
+          "bytes": 137
+        }
+      },
+      "fix": "Legacy tariff/source validation prevents descriptor erasure from reclassifying modern sources."
+    },
+    {
+      "issue": "cross-schema source downgrade",
+      "red": {
+        "checks": 128,
+        "failures": 1,
+        "exit_code": 1,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/transactions-cross-schema-source-red.log",
+          "sha256": "aad97a899723e4e7eb06ab5295ce89057e318f1c7f7d35004f1eb0e1fa1f0d6c",
+          "bytes": 438
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/transactions-cross-schema-source-red-exit.json",
+          "sha256": "44aee9a79b8f056c78008415d519c0341f8431475d0564f97f8c5feefbe8d5b7",
+          "bytes": 137
+        }
+      },
+      "fix": "Relabeling stripped modern records schema8 remains invalid."
+    },
+    {
+      "issue": "graph missing component",
+      "red": {
+        "checks": 1,
+        "failures": 1,
+        "exit_code": 1,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/ui-missing-graph-red.log",
+          "sha256": "a0578a4ad6ced2c5abc43d63702f6f160bdbeda76cf2f6f29dc66d2350939512",
+          "bytes": 215
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/ui-missing-graph-red-exit.json",
+          "sha256": "58b817e6e8e58840553e5abfa606c30c9195d984e0c6a66f71d39a69013d43b4",
+          "bytes": 127
+        }
+      },
+      "fix": "Production public-model Graph added after real guard RED."
+    },
+    {
+      "issue": "public array order after saved JSON",
+      "red": {
+        "checks": 134,
+        "failures": 3,
+        "exit_code": 1,
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0,
+        "log": {
+          "path": ".tools/g5/library-public-order-red.log",
+          "sha256": "7455022dcb3cd5068161ac2ba0ad25bb769c4805e1eb3b430136ad0722cdaae9",
+          "bytes": 380
+        },
+        "exit_receipt": {
+          "path": ".tools/g5/library-public-order-red-exit.json",
+          "sha256": "cc3dc12b668adaafdbf60422f8f29147b3c7a74e8d01680f4a287b7cc639965f",
+          "bytes": 120
+        }
+      },
+      "fix": "Pure-library public_view sorts a copy of interpretation IDs by recorded at, then stable ID; links follow the same order. No state/schema/definition/cost/Graph/Workbench/transaction-target changes."
+    }
+  ],
+  "workbench_consumer_parser_history": {
+    "original_capture_exit0_had_parse_errors": true,
+    "original_log": {
+      "path": ".tools/g5/capture-headless-attempt1.log",
+      "sha256": "b6cf24e9a03a21bfb566ba9b5201bf645de548b15f554570f386971b4a7c75be",
+      "bytes": 1529
+    },
+    "exact_old_workbench_error": "duplicate index at line339",
+    "old_workbench": {
+      "path": ".tools/g5/workbench-parse-failed-45c603a3.gd",
+      "sha256": "45c603a3735e5bc8c0d39cfde949de20cd3ba701c84d52653e1f2ee77a3725cb",
+      "bytes": 34381
+    },
+    "deferred_probe": {
+      "path": ".tools/g5/workbench-deferred-probe.log",
+      "sha256": "4e066f2ecf21f8cf1a52f2f703b623f2ea0619a7417fbea446fe9626898828e3",
+      "bytes": 1123
+    },
+    "check_only_bootstrap_not_rootcause": {
+      "path": ".tools/g5/workbench-parser-diagnostic.log",
+      "sha256": "39a0aed213a3d85c28f91dcc4aeca652f64ee9b4a7f6014929fcfbcdd34e03f0",
+      "bytes": 359
+    }
+  },
+  "workbench_consumer_resolution": "Original load!=null exit0 with parser errors was not a pass. Deferred probe proved old duplicate index339; payment_index rename and can_instantiate consumer guard closed it before the finite clean runs.",
+  "source_chain": {
+    "old_receipt": {
+      "path": ".tools/g5/transaction-saves/run_1035674/ui-states/capture-states.json",
+      "sha256": "122b2f9351ae1d645a5daf2bb18ca30dbc7a03c382c0e0cc3f55fbe8373fdc4d",
+      "bytes": 2088
+    },
+    "old_status": "preserved, superseded for GPU input/public hash expectation",
+    "current_receipt": {
+      "path": ".tools/g5/transaction-saves/run_1011798/ui-states/capture-states.json",
+      "sha256": "a6c78aa85a8d22e18bbf0245e39afbc47a44e95da3baee3ee1bc1ddf442fbce7",
+      "bytes": 2088
+    },
+    "current_complete": true,
+    "current_status": "explicit source for next root capture; actual load/snapshot/public-hash21 passed",
+    "all_old_five_files_unchanged": true,
+    "sources": [
+      {
+        "tag": "unknown",
+        "old_file": {
+          "path": ".tools/g5/transaction-saves/run_1035674/ui-states/unknown.json",
+          "sha256": "d3ce40a23cf8ade8d54382b02a7d3b2e3c59beb635caee9b13a589fd3b35f107",
+          "bytes": 34875
+        },
+        "new_file": {
+          "path": ".tools/g5/transaction-saves/run_1011798/ui-states/unknown.json",
+          "sha256": "d3ce40a23cf8ade8d54382b02a7d3b2e3c59beb635caee9b13a589fd3b35f107",
+          "bytes": 34875
+        },
+        "old_source_bytes_preserved": true,
+        "new_source_matches_recorded_sha": true,
+        "same_saved_envelope_bytes": true,
+        "old_public_hash": "7bb2d4d7c891713bb983831244985ef2f3045088958cf5ab538a42b2cd6cd942",
+        "new_public_hash": "7bb2d4d7c891713bb983831244985ef2f3045088958cf5ab538a42b2cd6cd942"
+      },
+      {
+        "tag": "first_vision",
+        "old_file": {
+          "path": ".tools/g5/transaction-saves/run_1035674/ui-states/first_vision.json",
+          "sha256": "54a14509f4a1613f7c113dd734fb9eaae6b5baa10fff699667d8d24459f4f453",
+          "bytes": 38001
+        },
+        "new_file": {
+          "path": ".tools/g5/transaction-saves/run_1011798/ui-states/first_vision.json",
+          "sha256": "54a14509f4a1613f7c113dd734fb9eaae6b5baa10fff699667d8d24459f4f453",
+          "bytes": 38001
+        },
+        "old_source_bytes_preserved": true,
+        "new_source_matches_recorded_sha": true,
+        "same_saved_envelope_bytes": true,
+        "old_public_hash": "893a94d5fe2d175ecf97a29fd923b6f5140e69f55105ffe5b6c793f5bd3cdbdf",
+        "new_public_hash": "893a94d5fe2d175ecf97a29fd923b6f5140e69f55105ffe5b6c793f5bd3cdbdf"
+      },
+      {
+        "tag": "refuted",
+        "old_file": {
+          "path": ".tools/g5/transaction-saves/run_1035674/ui-states/refuted.json",
+          "sha256": "044241806864dba249f581699f3e1c5f8ff45bf47ad01eed575eb7d58b198c5c",
+          "bytes": 43242
+        },
+        "new_file": {
+          "path": ".tools/g5/transaction-saves/run_1011798/ui-states/refuted.json",
+          "sha256": "044241806864dba249f581699f3e1c5f8ff45bf47ad01eed575eb7d58b198c5c",
+          "bytes": 43242
+        },
+        "old_source_bytes_preserved": true,
+        "new_source_matches_recorded_sha": true,
+        "same_saved_envelope_bytes": true,
+        "old_public_hash": "8e93f8adbedc7463f3fb14130a80cd586bd7b1576c0f9355c1d441efcff6e0f0",
+        "new_public_hash": "8e93f8adbedc7463f3fb14130a80cd586bd7b1576c0f9355c1d441efcff6e0f0"
+      },
+      {
+        "tag": "fully_verified",
+        "old_file": {
+          "path": ".tools/g5/transaction-saves/run_1035674/ui-states/fully_verified.json",
+          "sha256": "a2482857145fb746e5ca11b168ffa4419615c98ad7ad5b9c34b4871ba4375042",
+          "bytes": 66938
+        },
+        "new_file": {
+          "path": ".tools/g5/transaction-saves/run_1011798/ui-states/fully_verified.json",
+          "sha256": "a2482857145fb746e5ca11b168ffa4419615c98ad7ad5b9c34b4871ba4375042",
+          "bytes": 66938
+        },
+        "old_source_bytes_preserved": true,
+        "new_source_matches_recorded_sha": true,
+        "same_saved_envelope_bytes": true,
+        "old_public_hash": "494cea7c57c7be39838f0a3f7b9b4f988ae7b6980c78742b35355e3b70f5cb0f",
+        "new_public_hash": "494cea7c57c7be39838f0a3f7b9b4f988ae7b6980c78742b35355e3b70f5cb0f"
+      }
+    ],
+    "source_receipts_or_envelopes_rewritten_by_compiler": false
+  },
+  "source_freeze": {
+    "core_owned15_unchanged": true,
+    "authorized_changed_paths": [
+      {
+        "path": "scripts/divination/past_lines.gd",
+        "sha256": "7b9216dd0608c207c0845edcb8684b5e57f42697f9e11e684caec3de09ea5539",
+        "bytes": 43311,
+        "matches_previous_freeze": false,
+        "authorized_change": true
+      },
+      {
+        "path": "tests/past_lives/library.gd",
+        "sha256": "5b7ff7d4752e394cca8a440815cac5d41b3bc7c60c034b48fb90bc37ad326d58",
+        "bytes": 23864,
+        "matches_previous_freeze": false,
+        "authorized_change": true
+      }
+    ],
+    "unexpected_changed_paths": [],
+    "definition_registry_cost_and_core_unchanged_by_public_order_fix": true
+  },
+  "actual_uids": {
+    "graph": "uid://c7i7lsg4hy6rj",
+    "capture": "uid://d3oku2gjml7qi",
+    "ui_test": "uid://gs35ergurr7t"
+  },
+  "boundaries": [
+    "No full-suite or GPU result is certified by this finite report. Root records those separately.",
+    "Finite success is not artistic approval; no screenshot was produced by these headless targets.",
+    "Old logs, failed attempts and receipt122b remain preserved. New source a6c changes the fully-verified public ordering expectation without editing saved envelopes.",
+    "G4 historical partial/full failures are not reclassified by G5 test-only compatibility repairs."
+  ]
+}

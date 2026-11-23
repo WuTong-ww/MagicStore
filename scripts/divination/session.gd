@@ -8,10 +8,11 @@ const Events = preload("res://scripts/divination/event_rules.gd")
 const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
 const EventCopy = preload("res://scripts/divination/event_copy.gd")
 const ProductRules = preload("res://scripts/divination/event_schema.gd")
+const PastLines = preload("res://scripts/divination/past_lines.gd")
 const ACTIONS := [
 	"quote_service", "settle_service", "cancel_service", "learn_method", "note_hypothesis",
 	"record_prediction", "give_advice", "buy_case_item", "use_case_item", "receive_feedback",
-	"interpret_past", "verify_past"
+	"interpret_past", "verify_past", "interpret_past_line", "verify_past_line"
 ]
 
 var data: Dictionary
@@ -56,8 +57,12 @@ func add_case(state: Dictionary, visit: Dictionary, case_id: String, schedule_ev
 	if context.has("chart") and not Catalog.valid_chart(context.chart):
 		return false
 	var profile_id: String = context.get("profile_id", "")
-	if profile_id.is_empty() and case_id == "archive":
-		profile_id = state.divination.past.get(visit.npc_id, {}).get("profile_id", data.guests.get(visit.npc_id, {}).get("profile_id", ""))
+	if case_id == "archive":
+		var bound_profile := Catalog.bound_past_profile(state,visit.npc_id,data)
+		if not bound_profile.is_empty():
+			profile_id = bound_profile
+		elif profile_id.is_empty():
+			profile_id = data.guests.get(visit.npc_id, {}).get("profile_id", "")
 	var memory: Dictionary = state.divination.past.get(visit.npc_id, {})
 	if not profile_id.is_empty() and (not data.past_profiles.has(profile_id) or memory.get("profile_id", profile_id) != profile_id):
 		return false
@@ -74,6 +79,7 @@ func add_case(state: Dictionary, visit: Dictionary, case_id: String, schedule_ev
 			event.target_name = context.get("target_name", event.target_name)
 	var record: Dictionary = {
 		"case_id": case_id, "visit_id": visit.visit_id, "npc_id": visit.npc_id, "profile_id": profile_id,
+		"cause": Catalog.case_cause(case_id),
 		"world_facts": template.world_facts.duplicate(true), "event": event, "prediction": {},
 		"services": {}, "open_service_id": "", "conversation": [], "branches": [],
 		"hypotheses": [], "advice": [], "purchase": {}, "item_use": {}
@@ -191,6 +197,8 @@ func handle(state: Dictionary, visit: Dictionary, action: Dictionary) -> Diction
 			return _interpret(state, visit, case, action)
 		"verify_past":
 			return _verify(state, visit, action)
+		"interpret_past_line", "verify_past_line":
+			return _past_line_action(state,visit,case,action)
 	return _fail("UNKNOWN_ACTION", "不支持此问卜动作。")
 
 func cancel_open_service(case: Dictionary) -> void:
@@ -204,6 +212,96 @@ func paid_service(state: Dictionary, visit: Dictionary, service_id: Variant) -> 
 		return {}
 	var service: Dictionary = state.divination.cases[visit.visit_id].services.get(service_id, {})
 	return service if service.get("status") == "paid" else {}
+
+func _past_context(state: Dictionary, visit: Dictionary, case: Dictionary, action_id: String) -> Dictionary:
+	var profile: Dictionary = state.get("people",{}).get("profiles",{}).get(visit.npc_id,{})
+	var library := PastLines.load_config()
+	var candidates := {}
+	for definition: Dictionary in library.get("definitions",{}).values():
+		for slot: Dictionary in definition.slots:
+			if not candidates.has(slot.slot_id):
+				candidates[slot.slot_id] = []
+			for id: String in state.get("people",{}).get("profiles",{}):
+				var person: Dictionary = state.people.profiles[id]
+				if not person.get("met",false) or not state.npcs.has(id):
+					continue
+				if slot.kind == "family" and person.get("family_library_member",false):
+					var family: Dictionary = state.people.families.get(person.get("family_id",""),{})
+					candidates[slot.slot_id].append({"npc_id":id,"kind":"family","template_id":family.get("template_id",""),"member_key":person.get("member_key","")})
+				elif slot.kind == "ordinary" and person.get("template_id") == "ordinary_v1" and not person.has("generation_id"):
+					candidates[slot.slot_id].append({"npc_id":id,"kind":"ordinary"})
+	return {"save_id":state.save_id,"npc_id":visit.npc_id,"visit_id":visit.visit_id,"action_id":action_id,"at":int(state.clock_minutes),"case_id":case.case_id,"cause":case.get("cause",Catalog.case_cause(case.case_id)),"is_ordinary":profile.get("template_id") == "ordinary_v1" and not profile.has("generation_id"),"npc_known":profile.get("met",false),"known_clue_ids":visit.clue_ids.duplicate(),"npc_coins":int(state.npcs[visit.npc_id].coins),"has_legacy_memory":state.divination.past.has(visit.npc_id),"slot_candidates":candidates}
+
+func _modern_past(state: Dictionary, visit: Dictionary) -> bool:
+	for instance: Dictionary in state.divination.get("past_lines",{}).get("instances",{}).values():
+		if instance.bindings.values().any(func(binding: Dictionary) -> bool: return binding.npc_id == visit.npc_id):
+			return true
+	var profile: Dictionary = state.get("people",{}).get("profiles",{}).get(visit.npc_id,{})
+	if int(state.get("schema_version",0)) < 9 or profile.get("template_id") != "ordinary_v1" or profile.has("generation_id") or state.divination.past.has(visit.npc_id):
+		return false
+	var library := PastLines.load_config()
+	if library.is_empty() or not PastLines.progress_valid(state,library):
+		return true # Route invalid sources to the strict modern failure, never fallback.
+	var case: Dictionary = state.divination.cases[visit.visit_id]
+	var context := _past_context(state,visit,case,"past_routing")
+	return PastLines.binding_proposal(context,state.divination.past_lines,library).ok
+
+func _past_service_plan(state: Dictionary, visit: Dictionary, case: Dictionary, option: String, action_id: String) -> Dictionary:
+	var library := PastLines.load_config()
+	if library.is_empty() or not PastLines.progress_valid(state,library):
+		return _fail("PAST_LINE_UNAVAILABLE",library.get("copy",{}).get("invalid_source",data.methods.past.title))
+	var progress: Dictionary = state.divination.get("past_lines",{}).duplicate(true)
+	var context := _past_context(state,visit,case,action_id)
+	var binding := PastLines.binding_proposal(context,progress,library)
+	if not binding.ok:
+		return _fail("PAST_LINE_UNAVAILABLE",binding.reason)
+	if not binding.binding_patch.is_empty():
+		progress.instances[binding.binding_patch.instance_id] = binding.binding_patch.instance.duplicate(true)
+	var proposal := PastLines.service_proposal(context,progress,option,library)
+	if not proposal.ok:
+		return _fail("PAST_LINE_UNAVAILABLE",proposal.reason)
+	return {"success":true,"binding_patch":binding.binding_patch,"descriptor":proposal.descriptor,"cost":proposal.cost,"result":proposal.result,"library":library}
+
+func quote_preview(state: Dictionary, visit: Dictionary, method_id: String, option_id: String) -> Dictionary:
+	var empty := {"available":false,"blocked":"","cost":{},"payment_kinds":[]}
+	if visit.is_empty() or not state.divination.cases.has(visit.get("visit_id")) or not data.methods.has(method_id) or not data.methods[method_id].options.has(option_id):
+		return empty
+	var case: Dictionary = state.divination.cases[visit.visit_id]
+	var blocked := _method_block(state,visit,case,method_id,option_id)
+	var costs := Catalog.service_cost(method_id,data.methods[method_id],base.rules)
+	var payments: Array = ["coins","item"]
+	if method_id == "past" and _modern_past(state,visit):
+		payments = ["coins"]
+		var plan := _past_service_plan(state,visit,case,option_id,"past_preview")
+		costs = plan.get("cost",{})
+	return {"available":blocked.is_empty(),"blocked":blocked.get("message",""),"cost":costs.duplicate(true),"payment_kinds":payments}
+
+func _past_line_action(state: Dictionary, visit: Dictionary, case: Dictionary, action: Dictionary) -> Dictionary:
+	var library := PastLines.load_config()
+	var context := _past_context(state,visit,case,action.action_id)
+	if action.has("instance_id"):
+		if not action.instance_id is String:
+			return _fail("INVALID_ACTION",library.copy.invalid_context)
+		context["instance_id"] = action.instance_id
+	var progress: Dictionary = state.divination.get("past_lines",{})
+	var proposal: Dictionary
+	if action.type == "interpret_past_line":
+		proposal = PastLines.interpretation_proposal(context,progress,{"group_id":action.get("group_id"),"option_id":action.get("option_id"),"text":action.get("text")},library)
+	else:
+		if not action.get("interpretation_id") is String:
+			return _fail("INVALID_ACTION",library.copy.invalid_interpretation)
+		proposal = PastLines.verification_proposal(context,progress,action.interpretation_id,library)
+	if not proposal.ok:
+		return _fail("PAST_LINE_UNAVAILABLE",proposal.reason)
+	var binding := PastLines.binding_proposal(context,progress,library)
+	if not binding.ok:
+		return _fail("PAST_LINE_UNAVAILABLE",binding.reason)
+	var instance: Dictionary = progress.instances[binding.instance_id]
+	if action.type == "interpret_past_line":
+		instance.interpretations[proposal.record.interpretation_id] = proposal.record.duplicate(true)
+		return _ok(library.copy.unverified,{"interpretation_id":proposal.record.interpretation_id,"visit_id":visit.visit_id,"status":proposal.record.status})
+	instance.interpretations[proposal.interpretation_id].merge(proposal.patch.duplicate(true),true)
+	return _ok(library.copy[proposal.patch.status],{"interpretation_id":proposal.interpretation_id,"visit_id":visit.visit_id,"status":proposal.patch.status})
 
 func _quote(state: Dictionary, visit: Dictionary, case: Dictionary, action: Dictionary) -> Dictionary:
 	var method_id: Variant = action.get("method_id")
@@ -226,6 +324,20 @@ func _quote(state: Dictionary, visit: Dictionary, case: Dictionary, action: Dict
 	if not question_id is String or not template.questions.has(question_id):
 		return _fail("INVALID_ACTION", "请选择当前案例可以问的问题。")
 	var costs := Catalog.service_cost(method_id, data.methods[method_id], base.rules)
+	var past_plan := {}
+	if method_id == "past" and _modern_past(state,visit):
+		past_plan = _past_service_plan(state,visit,case,option_id,action.action_id)
+		if not past_plan.success:
+			return past_plan
+		if kind != "coins":
+			return _fail("INVALID_ACTION",past_plan.library.copy.invalid_context)
+		costs = past_plan.cost
+		var resource_block := _resource_block(state,costs)
+		if not resource_block.is_empty():
+			return resource_block
+	if method_id == "past" and action.has("instance_id"):
+		if not action.instance_id is String or past_plan.is_empty() or action.instance_id != past_plan.descriptor.instance_id:
+			return _fail("INVALID_ACTION",PastLines.load_config().copy.invalid_context)
 	var payment: Dictionary = {"kind": kind, "amount": int(costs.coins)}
 	if kind == "item":
 		payment.merge({"item_id": data.economy.payment_item_id, "item_name": data.economy.payment_item_name, "amount": 2 if int(costs.coins) >= 22 else 1}, true)
@@ -237,6 +349,10 @@ func _quote(state: Dictionary, visit: Dictionary, case: Dictionary, action: Dict
 		"payment": payment, "energy": int(costs.energy), "minutes": int(costs.minutes),
 		"quoted_at": int(state.clock_minutes), "paid_at": -1, "status": "quoted", "result": {}
 	}
+	if not past_plan.is_empty():
+		service["past_line"] = past_plan.descriptor.duplicate(true)
+		if not past_plan.binding_patch.is_empty():
+			state.divination.past_lines.instances[past_plan.binding_patch.instance_id] = past_plan.binding_patch.instance.duplicate(true)
 	case.services[id] = service
 	case.open_service_id = id
 	return _ok("报价已确认，收取报酬后可揭示结果。", {"service_id": id, "visit_id": visit.visit_id})
@@ -245,7 +361,7 @@ func _settle(state: Dictionary, visit: Dictionary, case: Dictionary, id: Variant
 	if not id is String or id.is_empty() or id != case.open_service_id:
 		return _fail("NO_QUOTE", "请先确认本次服务的报价。")
 	var service: Dictionary = case.services[id]
-	var blocked := _method_block(state, visit, case, service.method_id, service.option_id, int(service.quoted_at))
+	var blocked := _method_block(state, visit, case, service.method_id, service.option_id, int(service.quoted_at),not service.has("past_line"))
 	if not blocked.is_empty():
 		return blocked
 	if not Economy.can_pay(state.npcs[visit.npc_id], service.payment):
@@ -256,7 +372,12 @@ func _settle(state: Dictionary, visit: Dictionary, case: Dictionary, id: Variant
 		return blocked
 	if not service.has("question_id"):
 		service["question_id"] = data.cases[case.case_id].default_question
-	var result := Catalog.read_result(service, case, data, visit.clue_ids)
+	var past_plan := {}
+	if service.has("past_line"):
+		past_plan = _past_service_plan(state,visit,case,service.option_id,"past_settle")
+		if not past_plan.success or past_plan.descriptor != service.past_line or service.payment != {"kind":"coins","amount":past_plan.cost.coins} or service.energy != past_plan.cost.energy or service.minutes != past_plan.cost.minutes:
+			return _fail("PAST_LINE_UNAVAILABLE",PastLines.load_config().copy.invalid_source)
+	var result: Dictionary = past_plan.result.duplicate(true) if not past_plan.is_empty() else Catalog.read_result(service, case, data, visit.clue_ids)
 	if result.is_empty():
 		return _fail("ORACLE_INPUT_UNAVAILABLE", "当前资料无法生成结果。报价仍可撤回，未收取报酬。")
 	Economy.transfer(state, visit, service.payment, "divination", id, true)
@@ -277,11 +398,16 @@ func _settle(state: Dictionary, visit: Dictionary, case: Dictionary, id: Variant
 		}
 		visit.phase = "reading_done"
 		output["reading"] = visit.reading.duplicate(true)
-	if service.method_id == "past":
+	if not past_plan.is_empty():
+		var descriptor: Dictionary = service.past_line
+		var definition: Dictionary = past_plan.library.definitions[descriptor.line_id+"@"+str(int(descriptor.content_version))]
+		var fragment: Dictionary = definition.fragments.filter(func(row: Dictionary) -> bool: return row.fragment_id == descriptor.fragment_id)[0]
+		state.divination.past_lines.instances[descriptor.instance_id].fragments[descriptor.fragment_id] = {"fragment_record_id":"past_fragment_"+service.service_id,"fragment_id":descriptor.fragment_id,"era_id":descriptor.era_id,"kind":descriptor.kind,"service_id":service.service_id,"visit_id":visit.visit_id,"at":int(service.paid_at),"title":result.title,"text":result.text,"art_key":fragment.art_key}
+	elif service.method_id == "past":
 		_reveal_past(state, visit, case, service)
 	return _ok("报酬与术式结果已保存。", output, int(service.minutes))
 
-func _method_block(state: Dictionary, visit: Dictionary, case: Dictionary, method_id: String, option_id: String, quoted_at: int = -1) -> Dictionary:
+func _method_block(state: Dictionary, visit: Dictionary, case: Dictionary, method_id: String, option_id: String, quoted_at: int = -1, legacy_quote: bool = false) -> Dictionary:
 	if not method_id in data.cases[case.case_id].method_ids or not data.methods[method_id].options.has(option_id):
 		return _fail("METHOD_NOT_APPLICABLE", "这项操作不适用于当前案例。")
 	if not method_id in state.divination.skills:
@@ -296,6 +422,11 @@ func _method_block(state: Dictionary, visit: Dictionary, case: Dictionary, metho
 	if not Catalog.calendar_available(method_id, option_id, clock, case.event):
 		return _fail("ORACLE_CALENDAR_RANGE", "所选日期超出本店的历表范围。")
 	if method_id == "past":
+		if case.get("cause",Catalog.case_cause(case.case_id)) == "present":
+			return _fail("PAST_NOT_APPLICABLE",PastLines.load_config().copy.present)
+		if not legacy_quote and _modern_past(state,visit):
+			var plan := _past_service_plan(state,visit,case,option_id,"past_preview")
+			return {} if plan.success else plan
 		var memory: Dictionary = state.divination.past.get(visit.npc_id, {})
 		var fragments: Dictionary = memory.get("fragments", {})
 		if not data.past_profiles.has(case.profile_id) or memory.get("profile_id", case.profile_id) != case.profile_id or not "archive_stub" in visit.clue_ids:

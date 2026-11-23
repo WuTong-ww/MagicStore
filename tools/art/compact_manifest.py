@@ -12,7 +12,7 @@ import art_pipeline
 
 def propose(workspace, manifest):
     art_pipeline.validate_compact_manifest(workspace, manifest)
-    packed = art_pipeline.compact_portrait_metadata(manifest)
+    packed = art_pipeline.compact_formal_metadata(manifest)
     art_pipeline._require(art_pipeline.expand_compact_metadata(packed) ==
                           art_pipeline.expand_compact_metadata(manifest), "compaction changed formal provenance")
     art_pipeline.validate_compact_manifest(workspace, packed)
