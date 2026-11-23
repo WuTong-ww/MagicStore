@@ -195,3 +195,5 @@ prune-packable: 2053
 garbage: 3
 size-garbage: 15.24 MiB
 ```
+
+G2实际提交／推送补记：5297418已普通Git推送，55个相对父提交新增unique blobs共 **2,363,202B**，其中六JPG二进制 **1,531,178B**。这是任务提交本体的精确值，后续记录hash的META文本不计入该值。原始预提交snapshot／历史累计FAIL原样保留。

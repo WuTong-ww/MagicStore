@@ -15,5 +15,9 @@
     "each_clean_commit_binary"
   ],
   "local_git_count_objects": "count: 5812\nsize: 306.53 MiB\nin-pack: 4064\npacks: 2\nsize-pack: 1.12 GiB\nprune-packable: 2053\ngarbage: 3\nsize-garbage: 15.24 MiB",
-  "scope": "G2 adds six reviewed JPG only, below100MB; historical cumulative150MB/A1R commit checks remain FAIL unchanged. Snapshot precedes small final text updates; binary bytes unaffected."
+  "scope": "Exact G2 task commit relative to its parent; metadata bookkeeping commit excluded.",
+  "task_commit": "5297418d0703a26aa0faa9b5a5595386e87ebd57",
+  "task_new_unique_blob_count": 55,
+  "task_new_unique_blob_bytes": 2363202,
+  "task_new_binary_bytes": 1531178
 }

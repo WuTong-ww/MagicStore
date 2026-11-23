@@ -1,6 +1,6 @@
 # 第二轮 v3 续跑进度
 
-最新恢复点：2026-11-23，分支 `codex/round2-clean`，A4任务`f2e0d13`及META`7f932d9`已普通Git推送。**G2已验收收口，准备本地提交／推送；A4勿重做**。标准full第2轮session26883已terminal0，11252/11252＝10648+117+231+256，无错误警告，所有旧session不poll。GUI3仍114/115、2PNG部分完成，不GUI4；shop694/694、30最终图＋4历史图矩阵／六JPG齐。最终结果／plan／features／UPLOAD已写；下一显式restage（含两旧夹具修及最后文档）→[G2]任务提交→PROGRESS实际hash META→普通push clean。仅六JPG1,531,178B、manifest499605B、56v2保持；原累计两体积检查FAIL已如实记。后续G4→G5→G6尚未正式实施，未到最终REVIEW_PACKET停止条件。
+最新恢复点：2026-11-23，codex/round2-clean。**G2任务5297418已实际普通Git推送**（7f932d9..5297418），标准完整第2轮11252/11252、exit0、0E/W；GUI3仍114/115，按三轮上限partial，不GUI4。所有旧full/tail/size/GUI session均terminal不poll。当前META只记录实际hash/体积，推送后从G4正式计划开始，继而G5→G6，最后才REVIEW_PACKET。G2六JPG/逐帧矩阵齐，无候选/audit/LFS；main与旧round2不动。
 
 任务ID｜状态｜提交｜一句话说明
 ---｜---｜---｜---
@@ -12,6 +12,7 @@ A2R v3｜部分完成｜2773499｜九件18图去背及来源验收通过，完�
 A7｜部分完成｜c2c37eb｜原生层板替代木箱、确定布局/交互/去重信号；完整9154/9154，47帧及12接触诊断已审，旧人物十项留A4。
 A6｜部分完成｜fb43344｜风场/弹簧/正式流水/货架/保存后事件与设置；完整9653/9653，最终508和4pair+8control、53帧已审；前台动层/铃音/严格帧时未完成。
 A4｜部分完成｜f2e0d13｜139部件/十层/五态/捏脸/schema6；完整10278/10278、24/24重开一致；页签2fail及接缝/旧装饰等保留，六JPG已审。
+G2｜部分完成｜5297418｜家族库/schema7/三边事务/配额/对白保护，完整11252/11252；GUI首屏1fail和专属内容接线保留，六JPG。
 
 ## A1R v3 已提交并推送
 
@@ -174,3 +175,9 @@ A4 v3 → G2（仅框架/占位家族）→ G4 → G5 → G6。每任务最多3�
 - 标准完整第2轮session26883已实际terminal exit0：11252/11252（Godot10648、Python协议117、素材231、实际wire256），0SCRIPT ERROR/ERROR/WARNING；原logSHA d72ff47a5eedad0f601a1dc871f83c914b5fa73a0c6e1a0e7fda40da59b88a38。不要poll任何旧full/tail/size session。
 - 正式309资源、18alpha图、56v2输入SHA验证通过；manifest499605B。G2无新图源，仅6quality85 JPG合1,531,178B，root均实开。GUI3 strict114/115及家族专属事件内容接线如实partial，不GUI4；最终30图通用141/150、历史4图16/20，完整矩阵和SHA已写。
 - 只修两个被新版strict验证正确拒绝的current fixture，不改生产validator/legacy factory；两限定42/42、30/30，尾段10integration和三protocol wrapper均过，再完整复验。最终plan/results/features/UPLOAD齐；待显式restage、G2任务提交、META实际hash与普通push。没有用户待答或真正外部阻挡，推送后按G4→G5→G6继续，最后才REVIEW_PACKET。
+
+## G2已实际提交／普通推送
+
+- 任务提交5297418d0703a26aa0faa9b5a5595386e87ebd57（55文件）已普通push实际exit0，远端codex/round2-clean从7f932d9前进到5297418；main／旧round2／本地backup不动。
+- 该任务相对父提交真实新增55个unique blobs，共2,363,202B，其中二进制1,531,178B仅六JPG；metadata bookkeeping另计，已补UPLOAD与size report。完整标准11252/11252和图形partial已封存，不重跑A4/G2或GUI4。
+- 下一未处理任务G4。只读预检tools/art/g4-core-preflight-update.md（实际位于.tools/art）和g4-counts.json已齐，但正式计划／生产／生图尚未开始。先读G4并写plans/G4.md，按旧effect不可破坏、7kind组合及真实来源、15商品18原料15基础配方＋变体、总3采集点、40姓120名40职业16原型5人口段、26新视觉ID／52图与manifest<500KB执行；仍schema7基线，必要新增持久字段升8并迁移。之后G5/G6，不提前审阅包结束。
