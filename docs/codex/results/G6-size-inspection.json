@@ -1,0 +1,256 @@
+{
+  "version": 1,
+  "passed": true,
+  "repository": "D:\\MagicStore",
+  "baseline": {
+    "requested": "df7381f",
+    "oid": "df7381f139a9d573ddd121355b60072edb78043c",
+    "reachable_object_count": 2551,
+    "explicit_oid_set_sha256": "3680d43856dd10f31b650368059d045f56038989e79108fb7607e8a7367b634a"
+  },
+  "head": "df7381f139a9d573ddd121355b60072edb78043c",
+  "index_listing_sha256": "35071fa811fad540aa9dd0364b9e54584ef449458a76fb240566bfb04f6da311",
+  "method": "(all objects reachable from HEAD union stage-0 index blob OIDs) minus explicit all objects reachable from base; then unique blob OIDs only",
+  "binary_definition": "Git default binary heuristic: NUL byte in first 8000 blob bytes, independent of filename",
+  "scope_note": "G6 pre-publication staged snapshot against pushed df7381f. New binaries are six reviewed quality-85 JPGs only; later publication text metadata is separate. Initial CLEAN and historical cumulative budgets are not relabelled.",
+  "maximum_new_blob": {
+    "oid": "83a23d8bf56e882257e657158d0de07efd0095a7",
+    "bytes": 370470,
+    "binary": true,
+    "paths": [
+      "docs/screenshots/round2/G6/report-commerce-1920x1080.jpg"
+    ]
+  },
+  "current_head_commit": {
+    "oid": "df7381f139a9d573ddd121355b60072edb78043c",
+    "is_base_history": true,
+    "new_binary_bytes": 0
+  },
+  "pending_index_commit": {
+    "new_blob_count": 34,
+    "new_binary_bytes": 1611390
+  },
+  "forbidden_prefixes": [
+    "assets/_incoming/",
+    "assets/generated_scenes/v3_real/",
+    "assets/generated_scenes/runtime/v3_real/",
+    "assets/generated_scenes/runtime/v3/",
+    "docs/codex/results/art_audit/",
+    ".tools/",
+    ".godot/"
+  ],
+  "forbidden_index_paths": [],
+  "forbidden_history": [],
+  "unmerged_index_entries": [],
+  "screenshots": {
+    "tasks": {
+      "A1R": {
+        "count": 6,
+        "paths": [
+          "docs/screenshots/round2/A1R/s02-before-v2-1280.jpg",
+          "docs/screenshots/round2/A1R/s02-v3-day-1280.jpg",
+          "docs/screenshots/round2/A1R/s02-v3-day-1920.jpg",
+          "docs/screenshots/round2/A1R/s03-v3-night-1920.jpg",
+          "docs/screenshots/round2/A1R/s04-v3-closed-night-1280.jpg",
+          "docs/screenshots/round2/A1R/s04-v3-open-day-1920-legacy-slot.jpg"
+        ]
+      },
+      "A2R": {
+        "count": 6,
+        "paths": [
+          "docs/screenshots/round2/A2R/inventory-v3-1280-before-A7.jpg",
+          "docs/screenshots/round2/A2R/items-128-1920.jpg",
+          "docs/screenshots/round2/A2R/items-256-1920.jpg",
+          "docs/screenshots/round2/A2R/items-64-1280.jpg",
+          "docs/screenshots/round2/A2R/market-v3-1920.jpg",
+          "docs/screenshots/round2/A2R/workshop-v3-1920.jpg"
+        ]
+      },
+      "A3R": {
+        "count": 6,
+        "paths": [
+          "docs/screenshots/round2/A3R/consultation-active-1920x1080.jpg",
+          "docs/screenshots/round2/A3R/consultation-active-800x600.jpg",
+          "docs/screenshots/round2/A3R/front-1280x720.jpg",
+          "docs/screenshots/round2/A3R/front-2560x1080.jpg",
+          "docs/screenshots/round2/A3R/notebook-closed-800x600.jpg",
+          "docs/screenshots/round2/A3R/notebook-open-1280x720.jpg"
+        ]
+      },
+      "A4": {
+        "count": 6,
+        "paths": [
+          "docs/screenshots/round2/A4/editor-colors-1920x1080.jpg",
+          "docs/screenshots/round2/A4/editor-face-1280x720.jpg",
+          "docs/screenshots/round2/A4/five-moods.jpg",
+          "docs/screenshots/round2/A4/people-24-96px.jpg",
+          "docs/screenshots/round2/A4/random-consultation-1280x720.jpg",
+          "docs/screenshots/round2/A4/random-consultation-1920x1080.jpg"
+        ]
+      },
+      "A6": {
+        "count": 6,
+        "paths": [
+          "docs/screenshots/round2/A6/front-day1920.jpg",
+          "docs/screenshots/round2/A6/settings-reduced1280.jpg",
+          "docs/screenshots/round2/A6/stock-initial1280.jpg",
+          "docs/screenshots/round2/A6/stock-settled1920.jpg",
+          "docs/screenshots/round2/A6/water-day1280.jpg",
+          "docs/screenshots/round2/A6/water-night1920.jpg"
+        ]
+      },
+      "A7": {
+        "count": 6,
+        "paths": [
+          "docs/screenshots/round2/A7/actual-save-selection-1920.jpg",
+          "docs/screenshots/round2/A7/empty-night-1280.jpg",
+          "docs/screenshots/round2/A7/nine-day-1920.jpg",
+          "docs/screenshots/round2/A7/shelf-lines-F3-1920.jpg",
+          "docs/screenshots/round2/A7/single-day-1280.jpg",
+          "docs/screenshots/round2/A7/thirty-night-1920.jpg"
+        ]
+      },
+      "G2": {
+        "count": 6,
+        "paths": [
+          "docs/screenshots/round2/G2/consultation-1920x1080.jpg",
+          "docs/screenshots/round2/G2/family-partial-1280x720.jpg",
+          "docs/screenshots/round2/G2/family-partial-1920x1080.jpg",
+          "docs/screenshots/round2/G2/front-1280x720.jpg",
+          "docs/screenshots/round2/G2/people-1280x720.jpg",
+          "docs/screenshots/round2/G2/people-1920x1080.jpg"
+        ]
+      },
+      "G3": {
+        "count": 4,
+        "paths": [
+          "docs/screenshots/round2/G3/pending-1280x720.jpg",
+          "docs/screenshots/round2/G3/pending-1920x1080.jpg",
+          "docs/screenshots/round2/G3/verified-1280x720.jpg",
+          "docs/screenshots/round2/G3/verified-1920x1080.jpg"
+        ]
+      },
+      "G4": {
+        "count": 6,
+        "paths": [
+          "docs/screenshots/round2/G4/forecast-advice-styles-1280.jpg",
+          "docs/screenshots/round2/G4/market-source-quantity-1920.jpg",
+          "docs/screenshots/round2/G4/night-committed-weather-1920.jpg",
+          "docs/screenshots/round2/G4/use-result-source-1280.jpg",
+          "docs/screenshots/round2/G4/workshop-mint-quality-1920.jpg",
+          "docs/screenshots/round2/G4/workshop-no-inspiration-1280.jpg"
+        ]
+      },
+      "G5": {
+        "count": 6,
+        "paths": [
+          "docs/screenshots/round2/G5/past-first-vision-1920x1080.jpg",
+          "docs/screenshots/round2/G5/past-refuted-1280x720.jpg",
+          "docs/screenshots/round2/G5/past-refuted-1920x1080.jpg",
+          "docs/screenshots/round2/G5/past-three-eras-verified-1280x720.jpg",
+          "docs/screenshots/round2/G5/past-three-eras-verified-1920x1080.jpg",
+          "docs/screenshots/round2/G5/past-unknown-1280x720.jpg"
+        ]
+      },
+      "G6": {
+        "count": 6,
+        "paths": [
+          "docs/screenshots/round2/G6/report-balanced-1280x720.jpg",
+          "docs/screenshots/round2/G6/report-balanced-1920x1080.jpg",
+          "docs/screenshots/round2/G6/report-commerce-1280x720.jpg",
+          "docs/screenshots/round2/G6/report-commerce-1920x1080.jpg",
+          "docs/screenshots/round2/G6/report-inquiry-1280x720.jpg",
+          "docs/screenshots/round2/G6/report-inquiry-1920x1080.jpg"
+        ]
+      }
+    },
+    "bad_format_paths": [],
+    "over_limit_tasks": []
+  },
+  "screenshot_history_violations": [],
+  "manifest": {
+    "path": "assets/ART_ASSET_MANIFEST.json",
+    "oid": "27b2b1ba3e892d37a1993ee1194e2788390b86f5",
+    "bytes": 497438
+  },
+  "git_count_objects_vH": "count: 6290\nsize: 331.29 MiB\nin-pack: 4064\npacks: 2\nsize-pack: 1.12 GiB\nprune-packable: 2053\ngarbage: 3\nsize-garbage: 15.24 MiB",
+  "storage_note": "count-objects includes all local object storage, old backup refs, packs and unreachable/loose objects. It is not this branch's upload estimate.",
+  "checks": [
+    {
+      "id": "snapshot_stable",
+      "passed": true
+    },
+    {
+      "id": "base_is_ancestor",
+      "passed": true
+    },
+    {
+      "id": "index_has_no_unmerged_entries",
+      "passed": true
+    },
+    {
+      "id": "new_binary_total",
+      "passed": true,
+      "actual": 1611390,
+      "limit": "<150000000"
+    },
+    {
+      "id": "current_commit_binary",
+      "passed": true,
+      "actual": 0,
+      "limit": "<=100000000"
+    },
+    {
+      "id": "pending_commit_binary",
+      "passed": true,
+      "actual": 1611390,
+      "limit": "<=100000000"
+    },
+    {
+      "id": "each_clean_commit_binary",
+      "passed": true
+    },
+    {
+      "id": "forbidden_tracked_paths",
+      "passed": true,
+      "actual": 0,
+      "limit": 0
+    },
+    {
+      "id": "forbidden_history_paths",
+      "passed": true,
+      "actual": 0,
+      "limit": 0
+    },
+    {
+      "id": "screenshot_format",
+      "passed": true,
+      "limit": "real JPG only"
+    },
+    {
+      "id": "screenshot_count",
+      "passed": true,
+      "limit": "<=6 per task"
+    },
+    {
+      "id": "screenshot_history",
+      "passed": true
+    },
+    {
+      "id": "manifest_size",
+      "passed": true,
+      "actual": 497438,
+      "limit": "<500000"
+    }
+  ],
+  "new_unique_blobs": {
+    "count": 34,
+    "bytes": 2055866,
+    "binary_count": 6,
+    "binary_bytes": 1611390
+  },
+  "original_v2": {
+    "checked": 56,
+    "changed": []
+  }
+}

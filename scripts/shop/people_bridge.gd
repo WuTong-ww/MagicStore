@@ -9,6 +9,7 @@ const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
 const Appearance = preload("res://scripts/people/appearance.gd")
 const Catalog = preload("res://scripts/divination/catalog.gd")
 const DialoguePolicy = preload("res://scripts/providers/dialogue_policy.gd")
+const StyleReportSources = preload("res://scripts/people/style_report_sources.gd")
 
 static func initialize(state: Dictionary, config: Dictionary, divination: Variant = null, fresh: bool = false) -> void:
 	if state.has("people"):
@@ -339,7 +340,7 @@ static func public_view(state: Dictionary) -> Dictionary:
 	return {"queue": People.visible_queue(people), "in_service": People.visible_queue(people, "in_service"), "outside_queue": People.visible_queue(people, "outside"),
 		"appointment_requests": People.visible_queue(people, "appointment_requested"), "day": day_view,
 		"lost_customers": int(people.stats.get("lost_customers", 0)), "profiles": profiles,
-		"report": People.style_report(people), "appearance": people.player_appearance.duplicate(true)}
+		"report": People.style_report(people), "style_report": StyleReportSources.public_report(state), "appearance": people.player_appearance.duplicate(true)}
 
 static func handle(state: Dictionary, action: Dictionary, config: Dictionary) -> Dictionary:
 	match action.type:

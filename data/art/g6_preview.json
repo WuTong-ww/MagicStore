@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "capture_root": "res://.tools/g6/gpu",
+  "sizes": [[1280,720],[1920,1080]],
+  "timing": {"settle_frames":12,"capture_delay_seconds":0.25,"watchdog_seconds":180},
+  "layout": {"embed_subwindows":true,"borderless":true,"bounds_tolerance_px":1,"blank_grid":20,"minimum_unique_colors":16},
+  "flow": {
+    "main_scene":"res://scenes/main.tscn",
+    "main_script":"res://scripts/ui/main.gd",
+    "report_script":"res://scripts/people/style_report_panel.gd",
+    "rules_script":"res://scripts/people/style_report.gd",
+    "fixture_script":"res://tests/people/fixtures/style_report_facts.gd",
+    "paper_theme":"res://themes/paper.tres",
+    "run_name":"经营手帐画面验收"
+  },
+  "fixtures": [
+    {"id":"inquiry","label":"重追问的编写记录","filename":"report-inquiry"},
+    {"id":"commerce","label":"重商业的编写记录","filename":"report-commerce"},
+    {"id":"balanced","label":"均衡的编写记录","filename":"report-balanced"}
+  ],
+  "protected_paths": [
+    "scripts/people/style_report_panel.gd","scripts/people/people_panel.gd","scripts/ui/main.gd",
+    "scripts/people/style_report.gd","scripts/people/style_report_sources.gd","scripts/shop/people_bridge.gd",
+    "data/people/style_report.json","data/art/g6_preview.json","tests/people/fixtures/style_report_facts.gd",
+    "tests/integration/style_report_capture.gd","assets/ART_ASSET_MANIFEST.json"
+  ],
+  "forbidden_visible": ["world_facts","source_work","reference_character","personality_text","basis_","visit_","action_"],
+  "uid_resources": ["res://scripts/people/style_report_panel.gd","res://tests/integration/style_report_ui.gd","res://tests/integration/style_report_capture.gd"]
+}

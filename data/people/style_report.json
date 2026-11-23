@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "policy_version": 1,
+  "score_maximum": 100,
+  "window": {"latest_ended_visits": 20},
+  "limits": {"max_rows":4096,"max_evidence":16384,"max_id_chars":256,"max_text_chars":2000,"max_clock":2147483647},
+  "title_gate": {"minimum_ended_visits":6,"minimum_scored_dimensions":4},
+  "dimension_order": ["inquiry","caution","commerce","relations","rhythm","reflection"],
+  "dimensions": {
+    "inquiry":{"label":"追问与自主表达","op":"questions_and_channel","minimum_visits":5,"minimum_samples":10,"full_questions_per_visit":4,"weights":[60,40],"limitation":"按有效交谈次数与输入渠道描述记录，不评价问题深刻与否。"},
+    "caution":{"label":"预测前参考","op":"mean_distinct_prior_paid","minimum_visits":0,"minimum_samples":3,"full_methods":3,"limitation":"只计正式预测之前已付款的不同术式，同一分钟还须核对提交顺序。"},
+    "commerce":{"label":"成交覆盖","op":"trade_visit_fraction","minimum_visits":5,"minimum_samples":0,"limitation":"以实际成交作为商品推介的有限代理；未记录未成交推介，不代表推销成功率。"},
+    "relations":{"label":"主动联系","op":"positive_contact_coverage","minimum_visits":5,"minimum_samples":2,"full_contacts_per_visit":0.5,"limitation":"只描述已保存的主动回访或介绍，不代表联系机会利用率；自动转介绍不计。"},
+    "rhythm":{"label":"接待与候客节奏","op":"duration_and_confirmed_waiting_loss","minimum_visits":5,"minimum_samples":10,"duration_scale_minutes":90,"weights":[0.5,0.5],"limitation":"游戏接待时长包含期间的等待、休息与工坊耗时；较短不等于服务更好。缺候客基线时只展示时长。"},
+    "reflection":{"label":"披露失误后的复盘","op":"disclosed_review_fraction","minimum_visits":0,"minimum_samples":2,"limitation":"只计已披露且确实可复盘的失误；未披露结果与没有失误都不是零分。"}
+  },
+  "mapping":{"high":70,"combined":65,"balanced_spread":20,"free_text_high":0.65,"slow_minutes":60,"slow_inquiry_min":55,"quiet_inquiry_max":45,"quiet_caution_min":50},
+  "titles": [
+    {"id":"steady_pages","label":"四角摆稳型","priority":100,"rule":"balanced","reason":"这批有依据的维度较接近，记录尚未集中在单一方向。","dimension_ids":["inquiry","caution","commerce","relations","rhythm","reflection"]},
+    {"id":"return_and_trade","label":"相约再逛型","priority":90,"rule":"trade_contact","reason":"这批接待中，成交代理与主动联系记录都较集中。","dimension_ids":["commerce","relations"]},
+    {"id":"slow_soup","label":"慢火炖汤型","priority":85,"rule":"slow","reason":"这批接待用了较长的游戏时间，也留下了较多交谈；其中可包含等待、休息和工坊耗时。","dimension_ids":["inquiry","rhythm"]},
+    {"id":"open_chat","label":"开门细聊型","priority":80,"rule":"free_inquiry","reason":"这批已保存的交谈较多，自主输入的比例也较高。","dimension_ids":["inquiry"]},
+    {"id":"deep_questions","label":"翻遍牌堆型","priority":70,"rule":"dominant_inquiry","reason":"在这批可核对的记录里，交谈次数较集中。","dimension_ids":["inquiry"]},
+    {"id":"several_views","label":"多看一页型","priority":70,"rule":"dominant_caution","reason":"这批正式预测之前，记录了较多不同的已付费术式。","dimension_ids":["caution"]},
+    {"id":"busy_counter","label":"柜台热络型","priority":70,"rule":"dominant_commerce","reason":"这批接待中的实际成交覆盖较集中；它只是商品推介的有限代理。","dimension_ids":["commerce"]},
+    {"id":"open_door","label":"留一扇门型","priority":70,"rule":"dominant_relations","reason":"这批记录里，主动约回访或请介绍较集中。","dimension_ids":["relations"]},
+    {"id":"steady_queue","label":"从容排班型","priority":70,"rule":"dominant_rhythm","reason":"这批有基线的记录呈现较短接待与较少等待流失，不代表服务质量保证。","dimension_ids":["rhythm"]},
+    {"id":"check_back","label":"回头校对型","priority":70,"rule":"dominant_reflection","reason":"这批已披露且可复盘的失误中，留下了较多实际复盘记录。","dimension_ids":["reflection"]},
+    {"id":"quiet_cards","label":"静看几张型","priority":60,"rule":"quiet","reason":"这批交谈较克制，而正式预测前仍有可核对的术式参考。","dimension_ids":["inquiry","caution"]},
+    {"id":"one_more_page","label":"一页一页型","priority":0,"rule":"fallback","reason":"已有一些可核对的记录，目前没有集中于单一记录方向。","dimension_ids":["inquiry","caution","commerce","relations","rhythm","reflection"]}
+  ],
+  "copy": {
+    "description":"只从本局已保存、可追溯的记录观察经营方式。",
+    "observing_description":"记录或来源覆盖尚不足，先保留已知依据，继续观察。",
+    "invalid_description":"来源暂时无法核对，不据此计分或判断称号。",
+    "coverage_incomplete":"部分旧记录的来源不完整，暂不合成分数。",
+    "coverage_unknown":"这些旧记录尚无可核对的来源覆盖。",
+    "evidence_labels":{"visit":"已结束接待","talk":"已保存交谈","prediction":"已保存预测","service":"术式记录","trade":"实际商品成交","contact":"主动联系","arrival":"实际候客记录","feedback":"已披露反馈","review":"已完成复盘"},
+    "evidence_text":{"visit":"已保存并核对来源的接待起止记录。","talk":"已保存并核对来源的交谈及输入渠道记录。","prediction":"已保存并核对来源的对外预测记录。","service":"已核对报价、付款状态和提交顺序的术式记录。","trade":"已核对商品成交与关联接待的账目。","contact":"已核对原接待与主动承诺来源的联系记录。","arrival":"已核对实际到门时刻及候客结果的记录。","feedback":"已披露并核对原预测来源的反馈记录。","review":"已核对可复盘机会及实际提交来源的复盘记录。"}
+  },
+  "notice":"只描述本局可追溯的经营行为，不是 MBTI 或人格测验。",
+  "ui": {
+    "copy": {
+      "page_title":"店长手帐","observing":"观察中","invalid_sources":"来源待核对",
+      "score_format":"%d / 100","sample_format":"样本 %d · 适用 %d · 缺失 %d","window_format":"最近 %d 次已结束接待",
+      "basis_heading":"依据","basis_button":"查看依据","detail_heading":"记录详情","close_detail":"收起详情","open_history":"打开对应接待","empty_basis":"暂无可定位的记录。","more_basis":"展开其余依据",
+      "metric_format":"%s：%s","unknown_value":"尚无来源","authored_notice":"本页使用明确编写的测试记录，不代表实际经营存档。",
+      "metrics": {
+        "inquiry":{"talk_count":"有效交谈","visit_count":"已结束接待","mean_talks":"平均每次交谈","free_text_count":"自主输入","free_text_ratio":"自主输入比例"},
+        "caution":{"prediction_count":"正式预测","prior_method_count":"事先不同术式合计","mean_prior_methods":"每预测事先术式均值"},
+        "commerce":{"trade_visit_count":"有成交的接待","visit_count":"已结束接待","transaction_count":"独立商品成交"},
+        "relations":{"contact_count":"独立主动联系","visit_count":"已结束接待"},
+        "rhythm":{"mean_minutes":"平均游戏接待分钟","resolved_arrivals":"来源完整的已解决候客","lost_arrivals":"已核对等待流失","loss_rate":"已记录等待流失率"},
+        "reflection":{"reviewed_effects":"已完成合法复盘","opportunity_count":"已披露可复盘失误"}
+      }
+    },
+    "layout":{"margin":8,"gap":6,"section_gap":8,"heading_font_size":22,"title_font_size":18,"body_font_size":16,"small_font_size":14,"button_height":32,"score_bar_height":6,"minimum_height":180,"basis_page_size":5,"columns":3,"score_maximum":100}
+  }
+}

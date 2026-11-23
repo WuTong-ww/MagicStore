@@ -1,0 +1,771 @@
+{
+  "version": 1,
+  "task": "G6",
+  "compiled_utc": "2026-11-23T19:55:36.580749+00:00",
+  "scope": "Final finite evidence consolidation only. Standard full results, GPU2, manual visual acceptance and publication belong to root and are excluded.",
+  "engine": "Godot4.6.3 stable official7d41c59c4; finite runs executed by the sole engine-lane owner a7, not rerun by this compiler.",
+  "count_policy": {
+    "non_additive": true,
+    "overlapping_revisions_are_not_summed": true,
+    "no_aggregate_pass_count": true,
+    "log_filename_green_does_not_override_recorded_failures": true
+  },
+  "standard_full_validation_included": false,
+  "graphical_acceptance_included": false,
+  "gpu2_result_included": false,
+  "finite_target_png_count": 0,
+  "latest_actual_finite_results": [
+    {
+      "area": "pure_library",
+      "run_id": "pure_68",
+      "checks": 68,
+      "failures": 0,
+      "tested_revision_note": "Original rules7b9182; helper/test/fixture remain unchanged. Later rules6131 is only layout.columns2to3, independently byte-checked, not claimed as a rerun of pure68."
+    },
+    {
+      "area": "committed_source_transactions",
+      "run_id": "source_66",
+      "checks": 66,
+      "failures": 0,
+      "tested_revision_note": "Baseline/arrival resolution counterexample included; no report persistence or schema change."
+    },
+    {
+      "area": "report_ui_behavior_history_and_virtual_geometry",
+      "run_id": "ui_843",
+      "checks": 843,
+      "failures": 0,
+      "tested_revision_note": "Final header layout; headless measured-window restoration only. Does not certify native geometry or screenshots."
+    },
+    {
+      "area": "capture_schema_and_real_consumer",
+      "run_id": "capture_schema_18",
+      "checks": 18,
+      "failures": 0,
+      "tested_revision_note": "Original rules/panel before GPU1 layout fixes; capture code/config remained exact. ZeroPNG."
+    }
+  ],
+  "runs": {
+    "pure_missing": {
+      "classification": "missing_component_semantic_red",
+      "checks": 1,
+      "failures": 1,
+      "exit_code": 1,
+      "ended_utc": "2026-11-23T18:51:04.6795624Z",
+      "target": "res://tests/people/style_report.gd",
+      "log": {
+        "path": ".tools/g6/style-library-initial-red.log",
+        "sha256": "19583e1f51860ba47faba862188a94d2c942241b22a1652e9b6bb29a30a40fa8",
+        "bytes": 166
+      },
+      "exit_receipt": {
+        "path": ".tools/g6/style-library-initial-red-exit.json",
+        "sha256": "4d83703032c38c404c48761c62b4c832e585915413f9b0ed9bd8ae86925f6b29",
+        "bytes": 121
+      },
+      "diagnostics": {
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0
+      },
+      "note": "Before the pure helper existed; one real missing-component assertion failed."
+    },
+    "source_missing": {
+      "classification": "missing_component_semantic_red",
+      "checks": 1,
+      "failures": 1,
+      "exit_code": 1,
+      "ended_utc": "2026-11-23T18:48:34.9128567Z",
+      "target": "res://tests/integration/style_report_transactions.gd",
+      "log": {
+        "path": ".tools/g6/style-transactions-initial-red.log",
+        "sha256": "829dca1f40a99257f6f83f925c829edae7a088b7ecbad94510048b8c4646e92c",
+        "bytes": 193
+      },
+      "exit_receipt": {
+        "path": ".tools/g6/style-transactions-initial-red-exit.json",
+        "sha256": "ab1fc4966807fd96d081e00644056851b7a425c86e8c484f80d44b73d8facca9",
+        "bytes": 139
+      },
+      "diagnostics": {
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0
+      },
+      "note": "Before the committed-source adapter existed; one real missing-component assertion failed."
+    },
+    "ui_missing": {
+      "classification": "missing_component_semantic_red",
+      "checks": 1,
+      "failures": 1,
+      "exit_code": 1,
+      "ended_utc": "2026-11-23T18:53:35.5357010Z",
+      "target": "res://tests/integration/style_report_ui.gd",
+      "log": {
+        "path": ".tools/g6/style-ui-initial-red.log",
+        "sha256": "c54257feb6a71cb8e19e2bbc591e8ec130b865e1f5976ba477cfb156dcc592c0",
+        "bytes": 231
+      },
+      "exit_receipt": {
+        "path": ".tools/g6/style-ui-initial-red-exit.json",
+        "sha256": "0d928857de58ac651c4db31f5121e3581a4d1d01424d131545721b46d2ee28c0",
+        "bytes": 129
+      },
+      "diagnostics": {
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0
+      },
+      "note": "Before the modern report panel existed; one real missing-component assertion failed."
+    },
+    "pure_fixture_parse": {
+      "classification": "test_setup_parse_failure_not_semantic_red",
+      "checks": null,
+      "failures": null,
+      "exit_code": -1,
+      "ended_utc": "2026-11-23T19:03:20.9348818Z",
+      "target": "res://tests/people/style_report.gd",
+      "log": {
+        "path": ".tools/g6/style-library-green-attempt1.log",
+        "sha256": "18efdea1db59a72ca5cdcc54f48c664a4da8152def01defcf09ca37cb8386c57",
+        "bytes": 847
+      },
+      "exit_receipt": {
+        "path": ".tools/g6/style-library-green-attempt1-exit.json",
+        "sha256": "36abc1bce7798ecfdf240f5e65caae9c9f1199a8775d702a1baa7c9be3281128",
+        "bytes": 122
+      },
+      "diagnostics": {
+        "script_errors": 2,
+        "errors": 1,
+        "warnings": 0
+      },
+      "note": "Authored fixture line66 used reserved parameter namespace; it failed to parse, then make_case was unavailable. The sole lane owner stopped only the hung test; exit -1 is not a business RED or GREEN. Parameter became ledger_scope while the fact JSON namespace key stayed unchanged; loader guard/watchdog added."
+    },
+    "pure_68": {
+      "classification": "finite_green",
+      "checks": 68,
+      "failures": 0,
+      "exit_code": 0,
+      "ended_utc": "2026-11-23T19:04:14.3527437Z",
+      "target": "res://tests/people/style_report.gd",
+      "log": {
+        "path": ".tools/g6/style-library-green-attempt2.log",
+        "sha256": "7739836be33a5aec215e6dc1065ccf5effbf1e94b150322275b3e7ca3903265f",
+        "bytes": 112
+      },
+      "exit_receipt": {
+        "path": ".tools/g6/style-library-green-attempt2-exit.json",
+        "sha256": "79804b881777b463c023846b654d40e75d54b9e251a761f246b55e2f639b12bf",
+        "bytes": 121
+      },
+      "diagnostics": {
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0
+      },
+      "note": "Actual 68/68 over pure facts/rules and shared authored fixtures. This run used the original two-column JSON revision; later one-byte layout change was not a rerun of this target.",
+      "revision": {
+        "helper_sha256": "ca29769e4ae5aa196ec4de237600adcbfee1934a6a64d486a22bafd42b4834f9",
+        "rules_sha256": "7b9182fa64bf8a76d3fd635127f4323c21383928ebf40be6ddcccc8ccb2f41fa",
+        "test_sha256": "b4e7d2ba700f587e0a98ec87f3c4959b75c8f62ca57e4cf106a6ab37ef7ec01a",
+        "fixture_sha256": "ad218f8e9ef301e680d68dae4fdd358487b0e5e2975d3fef58de6c19fbb56879"
+      }
+    },
+    "source_fixture_parse": {
+      "classification": "test_setup_parse_failure_not_semantic_red",
+      "checks": null,
+      "failures": null,
+      "exit_code": 1,
+      "ended_utc": "2026-11-23T19:04:36.1477509Z",
+      "target": "res://tests/integration/style_report_transactions.gd",
+      "log": {
+        "path": ".tools/g6/style-transactions-green-attempt1.log",
+        "sha256": "1163f1274ab74edf5fd5dde35e16b5617885c099c79fcc30b8a96a7a23339f44",
+        "bytes": 1022
+      },
+      "exit_receipt": {
+        "path": ".tools/g6/style-transactions-green-attempt1-exit.json",
+        "sha256": "f4d605c0218e52f17b0af1fbd469a308e460e7752538b1a1cbb47c27267c442a",
+        "bytes": 139
+      },
+      "diagnostics": {
+        "script_errors": 4,
+        "errors": 1,
+        "warnings": 0
+      },
+      "note": "Four test Dictionary-inference errors (now/before/invited/bad), fixed with explicit types; no completed semantic assertion count."
+    },
+    "source_65": {
+      "classification": "historical_finite_green_superseded",
+      "checks": 65,
+      "failures": 0,
+      "exit_code": 0,
+      "ended_utc": "2026-11-23T19:04:56.8829499Z",
+      "target": "res://tests/integration/style_report_transactions.gd",
+      "log": {
+        "path": ".tools/g6/style-transactions-green-attempt2.log",
+        "sha256": "6b5e4bcb3fce34192a65f3a2a5a9e5c1ce2085660fa16b11111bdb27b765ed1f",
+        "bytes": 118
+      },
+      "exit_receipt": {
+        "path": ".tools/g6/style-transactions-green-attempt2-exit.json",
+        "sha256": "43d959d797900a99e62c35e0d2645d087ae53ef675291d39e06fb26f42010fd2",
+        "bytes": 139
+      },
+      "diagnostics": {
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0
+      },
+      "note": "Actual65/65 before the genuine early-arrival counterexample; does not cover that later boundary.",
+      "revision": {
+        "adapter_sha256": "63720623a0596f883333c2153105d808f4cf4858221eb8fe3efdb17bc5615209",
+        "bridge_sha256": "220143592f54d9b472713e0bf9e9336585a8acea6597bd50f70847de4cba1b86",
+        "test_sha256": "6d1006b7b21d8bf6874173952ff66f65a498bab630f69f1c958a1da7bcd2ee17",
+        "rules_sha256": "7b9182fa64bf8a76d3fd635127f4323c21383928ebf40be6ddcccc8ccb2f41fa"
+      }
+    },
+    "arrival_red": {
+      "classification": "source_boundary_semantic_red",
+      "checks": 66,
+      "failures": 1,
+      "exit_code": 1,
+      "ended_utc": "2026-11-23T19:09:55.9007366Z",
+      "target": "res://tests/integration/style_report_transactions.gd",
+      "log": {
+        "path": ".tools/g6/style-arrival-window-red.log",
+        "sha256": "20db8eb3a45c01fa583abd11b0589797aa65a27ad1b70bfd88cc1463d48dbeec",
+        "bytes": 266
+      },
+      "exit_receipt": {
+        "path": ".tools/g6/style-arrival-window-red-exit.json",
+        "sha256": "49b5895b1f61e1b1afcdead5fa2563fbf65a06207d43bdf28813289c6e4d7b2e",
+        "bytes": 139
+      },
+      "diagnostics": {
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0
+      },
+      "note": "Actual wait5 before starting reception proves a physically earlier arrival was omitted despite its served resolution being inside the selected report window."
+    },
+    "source_66": {
+      "classification": "finite_green",
+      "checks": 66,
+      "failures": 0,
+      "exit_code": 0,
+      "ended_utc": "2026-11-23T19:10:31.1504090Z",
+      "target": "res://tests/integration/style_report_transactions.gd",
+      "log": {
+        "path": ".tools/g6/style-arrival-window-green.log",
+        "sha256": "662244d603b7c98fc7e1d7ca02f1af6fc718444505af811cb68e90f54f8ba8a5",
+        "bytes": 118
+      },
+      "exit_receipt": {
+        "path": ".tools/g6/style-arrival-window-green-exit.json",
+        "sha256": "fea9144341dd182f9fc4e7ddde4736725b074c526a7417ab2b8e71cfeeb9fd65",
+        "bytes": 139
+      },
+      "diagnostics": {
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0
+      },
+      "note": "Actual66/66 after baseline-first episode checking and resolved_at window selection; unresolved episodes still require arrival at inside window.",
+      "revision": {
+        "adapter_sha256": "e67946fcf37ddbce0feefca4181374f0e6ddeead7af41c84caa6f2965acc3ed6",
+        "bridge_sha256": "220143592f54d9b472713e0bf9e9336585a8acea6597bd50f70847de4cba1b86",
+        "test_sha256": "62d8ae8eb537c758e8dc491396fee248613610e28a75b08e9ab1e3451ee587fb",
+        "rules_sha256": "7b9182fa64bf8a76d3fd635127f4323c21383928ebf40be6ddcccc8ccb2f41fa"
+      }
+    },
+    "ui_invalid_modal_red": {
+      "classification": "semantic_failure_with_test_modal_error",
+      "checks": 801,
+      "failures": 1,
+      "exit_code": 1,
+      "ended_utc": "2026-11-23T19:06:04.3346499Z",
+      "target": "res://tests/integration/style_report_ui.gd",
+      "log": {
+        "path": ".tools/g6/style-ui-invalid-sources-red.log",
+        "sha256": "eb14d793e515976b226f06e9bdc785bb81bdffe96071abb3c3cc6dcd5580827c",
+        "bytes": 1125
+      },
+      "exit_receipt": {
+        "path": ".tools/g6/style-ui-invalid-sources-red-exit.json",
+        "sha256": "da4acff701b52f7c1cf22129f7c2d0c58cc7aaf14dfab87bf50c4eeff0c7f0b9",
+        "bytes": 129
+      },
+      "diagnostics": {
+        "script_errors": 0,
+        "errors": 1,
+        "warnings": 0
+      },
+      "note": "801 checks/1 failed assertion: invalid_sources.window={} hid the report. Also an exclusive-child-window ERROR: test opened history behind Main initial save chooser; this is explicitly not a clean semantic-only RED."
+    },
+    "ui_802": {
+      "classification": "historical_finite_green_superseded",
+      "checks": 802,
+      "failures": 0,
+      "exit_code": 0,
+      "ended_utc": "2026-11-23T19:10:54.1288650Z",
+      "target": "res://tests/integration/style_report_ui.gd",
+      "log": {
+        "path": ".tools/g6/style-ui-green.log",
+        "sha256": "05db258b399c97067399fcbb71f440aec50f8b489fb429093457a6f8d8bca26e",
+        "bytes": 177
+      },
+      "exit_receipt": {
+        "path": ".tools/g6/style-ui-green-exit.json",
+        "sha256": "93c0a951004d579463f1f0041ad2c3f39b83d264794c536f4bcc7c0d76261cb9",
+        "bytes": 129
+      },
+      "diagnostics": {
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0
+      },
+      "note": "802/802 after invalid_sources unknown-window rendering and true Main.run_action(load_game,same save) before history navigation. Zero screenshots; predates layout fix.",
+      "revision": {
+        "panel_sha256": "e970cb1f4d401f17d71802a3d378e4d3aa105838c4ea193c608cdd227cf73bc4",
+        "test_sha256": "df89999fca0006f766e7cc03ac66b226694eb3bb08ffb53ff2d38fa4bf5c05d1",
+        "rules_sha256": "7b9182fa64bf8a76d3fd635127f4323c21383928ebf40be6ddcccc8ccb2f41fa"
+      }
+    },
+    "capture_schema_18": {
+      "classification": "schema_consumer_green_not_graphics",
+      "checks": 18,
+      "failures": 0,
+      "exit_code": 0,
+      "ended_utc": "2026-11-23T19:11:18.1308068Z",
+      "target": "res://tests/integration/style_report_capture.gd",
+      "log": {
+        "path": ".tools/g6/style-capture-schema-green.log",
+        "sha256": "f4453695ce575a0ac17c3edbb79a20460a3b97cbdc655ac168677a3fa8fbf485",
+        "bytes": 200
+      },
+      "exit_receipt": {
+        "path": ".tools/g6/style-capture-schema-green-exit.json",
+        "sha256": "2e570f1dc9d40ec63c9ce009062ea47f49ecfb2221f60da7d6c7bfc6f8f3dbc5",
+        "bytes": 134
+      },
+      "diagnostics": {
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0
+      },
+      "note": "18/18 schema/real Main and panel consumer/UID gate, explicitly0PNG and no graphics acceptance. Original rules revision and UI802-era panel; unchanged capture script does not turn this into a final GPU claim.",
+      "revision": {
+        "capture_sha256": "814783125f0f4d122a9963b71ed2f0707921da77ec69e62e14aef09b028e6d50",
+        "config_sha256": "ce957a5a7451d23e37c4a667f08384bfdc714968056f602c364d6f6182ee1d9e",
+        "panel_sha256": "e970cb1f4d401f17d71802a3d378e4d3aa105838c4ea193c608cdd227cf73bc4",
+        "rules_sha256": "7b9182fa64bf8a76d3fd635127f4323c21383928ebf40be6ddcccc8ccb2f41fa"
+      }
+    },
+    "layout_841_14": {
+      "classification": "headless_environment_geometry_failure",
+      "checks": 841,
+      "failures": 14,
+      "exit_code": 1,
+      "ended_utc": "2026-11-23T19:32:11.6307450Z",
+      "target": "res://tests/integration/style_report_ui.gd",
+      "log": {
+        "path": ".tools/g6/style-ui-layout-green.log",
+        "sha256": "89b5d7205a3f5021c5274a9a494411f2656ddd1369bcd101d619450b6f69d4c4",
+        "bytes": 1509
+      },
+      "exit_receipt": {
+        "path": ".tools/g6/style-ui-layout-green-exit.json",
+        "sha256": "75da05e56a8356ce6a254a56531f28ede9fcb9067025a85cb4e9c34e5a91e5d7",
+        "bytes": 129
+      },
+      "diagnostics": {
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0
+      },
+      "note": "841/14 despite filename green: every card and notice at both sizes failed because headless popup clamped the already fitted960x570 window to1x1. Not fourteen demonstrated native-user-window failures.",
+      "revision": {
+        "panel_sha256": "fe19e5838d5974105598de928c6724d750b18518b058faec18d0816a77f24a01",
+        "test_sha256": "0bdc7ba6b66b35e57d976e910202d5d3084fab5c2d06bfac7bbc969c85d4d5d2",
+        "rules_sha256": "6131c939e7c86f3ac5441ffe75932958689311abf33e7ec580f500dea28e9a25",
+        "evidence": ".tools/g6/ui-layout-finite-receipt.json"
+      }
+    },
+    "layout_diagnostic_841_14": {
+      "classification": "headless_environment_geometry_diagnostic",
+      "checks": 841,
+      "failures": 14,
+      "exit_code": 1,
+      "ended_utc": "2026-11-23T19:36:37.1106813Z",
+      "target": "res://tests/integration/style_report_ui.gd",
+      "log": {
+        "path": ".tools/g6/style-ui-layout-diagnostic.log",
+        "sha256": "5393a7e990369afd413c965e9040ed5eeee5e90b2ec041dc436888c909d849bc",
+        "bytes": 3579
+      },
+      "exit_receipt": {
+        "path": ".tools/g6/style-ui-layout-diagnostic-exit.json",
+        "sha256": "65b6e9e59679dc49699a131ceee0b77b5a4f0f3731d5c4ae7af8c4b4feb47b4b",
+        "bytes": 129
+      },
+      "diagnostics": {
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0
+      },
+      "note": "841/14 retained diagnostic: Main/root size and measured fit confirmed; headless popup still1x1.",
+      "revision": {
+        "panel_sha256": "fe19e5838d5974105598de928c6724d750b18518b058faec18d0816a77f24a01",
+        "rules_sha256": "6131c939e7c86f3ac5441ffe75932958689311abf33e7ec580f500dea28e9a25",
+        "test_sha256": null,
+        "test_revision_note": "Intermediate test-only diagnostic SHA was not frozen in the available per-run receipt; do not retroactively assign the final test SHA."
+      }
+    },
+    "viewport_alignment_841_14": {
+      "classification": "headless_environment_geometry_diagnostic",
+      "checks": 841,
+      "failures": 14,
+      "exit_code": 1,
+      "ended_utc": "2026-11-23T19:38:59.5200583Z",
+      "target": "res://tests/integration/style_report_ui.gd",
+      "log": {
+        "path": ".tools/g6/style-ui-viewport-alignment.log",
+        "sha256": "3a345e829e7d2e8c1ad2b04ee2888792461f0c3d4ef008eb0dc71a879643fb34",
+        "bytes": 3824
+      },
+      "exit_receipt": {
+        "path": ".tools/g6/style-ui-viewport-alignment-exit.json",
+        "sha256": "66732ed193953e03246e12f7c3e355a01eadb07bad6457c711abef77f1625e6d",
+        "bytes": 129
+      },
+      "diagnostics": {
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0
+      },
+      "note": "841/14 retained after root viewport alignment; no error/warning, still headless popup1x1.",
+      "revision": {
+        "panel_sha256": "fe19e5838d5974105598de928c6724d750b18518b058faec18d0816a77f24a01",
+        "rules_sha256": "6131c939e7c86f3ac5441ffe75932958689311abf33e7ec580f500dea28e9a25",
+        "test_sha256": null,
+        "test_revision_note": "Intermediate test-only diagnostic SHA was not frozen in the available per-run receipt; do not retroactively assign the final test SHA."
+      }
+    },
+    "virtual_843_8": {
+      "classification": "virtual_window_real_overflow_red",
+      "checks": 843,
+      "failures": 8,
+      "exit_code": 1,
+      "ended_utc": "2026-11-23T19:40:52.9262327Z",
+      "target": "res://tests/integration/style_report_ui.gd",
+      "log": {
+        "path": ".tools/g6/style-ui-virtual-window-green.log",
+        "sha256": "c6e4ed8238b463681389d689cfac8b2469cc9e7379df4f92255e2c1981157053",
+        "bytes": 3569
+      },
+      "exit_receipt": {
+        "path": ".tools/g6/style-ui-virtual-window-green-exit.json",
+        "sha256": "46e6e94820e35abd384f9d01a6fa7ea5295de5f5d79094d85f87aeddede60b9b",
+        "bytes": 129
+      },
+      "diagnostics": {
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0
+      },
+      "note": "843/8 after test-only restoring measured headless window fit: the second row really ended at590 and notice at620 against570. These8 finite failures are separate from the1x1 environment artifact.",
+      "revision": {
+        "panel_sha256": "fe19e5838d5974105598de928c6724d750b18518b058faec18d0816a77f24a01",
+        "rules_sha256": "6131c939e7c86f3ac5441ffe75932958689311abf33e7ec580f500dea28e9a25",
+        "test_sha256": null,
+        "test_revision_note": "Intermediate test-only diagnostic SHA was not frozen in the available per-run receipt; do not retroactively assign the final test SHA."
+      }
+    },
+    "ui_843": {
+      "classification": "finite_green_virtual_geometry_only",
+      "checks": 843,
+      "failures": 0,
+      "exit_code": 0,
+      "ended_utc": "2026-11-23T19:42:57.1305450Z",
+      "target": "res://tests/integration/style_report_ui.gd",
+      "log": {
+        "path": ".tools/g6/style-ui-header-layout-green.log",
+        "sha256": "4766ceb48b3afdd6e3ef5282e4d2ef63c0b050651f8d413278f1d3a567198176",
+        "bytes": 2813
+      },
+      "exit_receipt": {
+        "path": ".tools/g6/style-ui-header-layout-green-exit.json",
+        "sha256": "4131c7dda8d50bdab3111730fa46aac52133f43b624ebd0cf5cdedf358e2de33",
+        "bytes": 129
+      },
+      "diagnostics": {
+        "script_errors": 0,
+        "errors": 0,
+        "warnings": 0
+      },
+      "note": "843/843: original source-navigation/behavior checks plus virtual window geometry. Header basis button EXPAND_FILL recovers81px; second-row bottom509 and notice bottom539 fit570. Zero screenshots; explicitly no GPU acceptance.",
+      "revision": {
+        "panel_sha256": "613104b851741f886708c8405ffdcb2d72708eb56d6505f489b09e874cdc7bbe",
+        "test_sha256": "9a8ab25e0969be142b1c803b2d364ea1db6ffacededf3e1e5951e18645ef45d0",
+        "rules_sha256": "6131c939e7c86f3ac5441ffe75932958689311abf33e7ec580f500dea28e9a25",
+        "capture_sha256": "814783125f0f4d122a9963b71ed2f0707921da77ec69e62e14aef09b028e6d50",
+        "evidence": ".tools/g6/ui-layout-closure-receipt.json"
+      }
+    }
+  },
+  "source_and_ui_changes": {
+    "schema_version": 9,
+    "schema_changed": false,
+    "report_persisted": false,
+    "legacy_report_abi_preserved": true,
+    "arrival_fix": {
+      "before_adapter_sha256": "63720623a0596f883333c2153105d808f4cf4858221eb8fe3efdb17bc5615209",
+      "after_adapter_sha256": "e67946fcf37ddbce0feefca4181374f0e6ddeead7af41c84caa6f2965acc3ed6",
+      "actual_red": "arrival_red",
+      "actual_green": "source_66",
+      "behavior": "Validate actual arrival against trusted physical baseline; select served/lost by resolution time in selected ended-visit window, unresolved by actual arrival time. No fabricated opportunity or future plan denominator."
+    },
+    "rules_layout_only": {
+      "path": "data/people/style_report.json",
+      "before_sha256": "7b9182fa64bf8a76d3fd635127f4323c21383928ebf40be6ddcccc8ccb2f41fa",
+      "after_sha256": "6131c939e7c86f3ac5441ffe75932958689311abf33e7ec580f500dea28e9a25",
+      "changed_bytes": 1,
+      "exact_change": "ui.layout.columns:2 ->3",
+      "all_other_bytes_equal": true,
+      "formula_threshold_copy_fonts_sample_values_unchanged": true
+    },
+    "compact_panel": {
+      "before_sha256": "e970cb1f4d401f17d71802a3d378e4d3aa105838c4ea193c608cdd227cf73bc4",
+      "after_sha256": "fe19e5838d5974105598de928c6724d750b18518b058faec18d0816a77f24a01",
+      "scope": "Three-column/two-row overview, title/basis same header, optional bars removed. Score/sample fonts retained; limited-proxy first clause remains visible, full limitation and every public metric remain through actual details controls and assertions."
+    },
+    "header_postfix": {
+      "before_sha256": "fe19e5838d5974105598de928c6724d750b18518b058faec18d0816a77f24a01",
+      "after_sha256": "613104b851741f886708c8405ffdcb2d72708eb56d6505f489b09e874cdc7bbe",
+      "semantic_change": "Only header title_basis button size_flags_horizontal=Control.SIZE_EXPAND_FILL; named variable binds the same existing button.",
+      "previous_reviewed_bytes_reconstructed_in_memory": true,
+      "public_authorization_main_people_unchanged": true,
+      "actual_red": "virtual_843_8",
+      "actual_green": "ui_843",
+      "measured_virtual_geometry": {
+        "fitted_window": [
+          960,
+          570
+        ],
+        "before_second_row_bottom": 590,
+        "before_notice_bottom": 620,
+        "after_second_row_bottom": 509,
+        "after_notice_bottom": 539,
+        "requested_sizes": [
+          [
+            1280,
+            720
+          ],
+          [
+            1920,
+            1080
+          ]
+        ]
+      }
+    },
+    "headless_test_only": {
+      "reason": "popup_centered clamped headless Window to1x1 after a correctly measured fit",
+      "correction": "Restore only the measured virtual headless Window size after asserting Main fit and matching embedded viewport; preserve true native capture bounds and source guards.",
+      "formal_capture_unchanged": true,
+      "capture_sha256": "814783125f0f4d122a9963b71ed2f0707921da77ec69e62e14aef09b028e6d50"
+    }
+  },
+  "historical_formal_gpu1_failure_only": {
+    "scope": "Historical failure only, not graphics acceptance; no GPU2 log/receipt is read or summarized here.",
+    "checks": 27,
+    "failures": 1,
+    "exit_code": 1,
+    "fresh_png": 0,
+    "failed_assertion": "six dimension cards are fully within the real window / commerce",
+    "source_unchanged": true,
+    "log": {
+      "path": ".tools/g6/gpu-past-attempt1.log",
+      "sha256": "a8dea27f08b09da67aa0f2d51a50e679e3cbcf7b1ba93503d456b06ab94acb14",
+      "bytes": 314
+    },
+    "stderr": {
+      "path": ".tools/g6/gpu-past-attempt1-stderr.log",
+      "sha256": "abda9597558fb683b9c97d83d1ba1fcb3a0eb1c357910386c6be5dc8a6f9bf9f",
+      "bytes": 82
+    },
+    "exit_receipt": {
+      "path": ".tools/g6/gpu-past-attempt1-exit.txt",
+      "sha256": "07846b783c23904a75834c1932bc2fad41e388e18bc32ffd73ed87bfa3844d87",
+      "bytes": 6
+    },
+    "capture_receipt": {
+      "path": ".tools/g6/gpu/run_3728797/capture-receipt.json",
+      "sha256": "d430c4521b64b74e1ef37b5b304cbe7c91f9a6cc6f7e6f3a9a83c9ae653e01fd",
+      "bytes": 1560
+    },
+    "tested_revision": {
+      "rules_sha256": "7b9182fa64bf8a76d3fd635127f4323c21383928ebf40be6ddcccc8ccb2f41fa",
+      "panel_sha256": "e970cb1f4d401f17d71802a3d378e4d3aa105838c4ea193c608cdd227cf73bc4",
+      "capture_sha256": "814783125f0f4d122a9963b71ed2f0707921da77ec69e62e14aef09b028e6d50"
+    },
+    "authored_not_actual_economy": true
+  },
+  "current_frozen_files": [
+    {
+      "path": "scripts/people/style_report.gd",
+      "sha256": "ca29769e4ae5aa196ec4de237600adcbfee1934a6a64d486a22bafd42b4834f9",
+      "bytes": 23746
+    },
+    {
+      "path": "data/people/style_report.json",
+      "sha256": "6131c939e7c86f3ac5441ffe75932958689311abf33e7ec580f500dea28e9a25",
+      "bytes": 8013
+    },
+    {
+      "path": "tests/people/style_report.gd",
+      "sha256": "b4e7d2ba700f587e0a98ec87f3c4959b75c8f62ca57e4cf106a6ab37ef7ec01a",
+      "bytes": 7440
+    },
+    {
+      "path": "tests/people/fixtures/style_report_facts.gd",
+      "sha256": "ad218f8e9ef301e680d68dae4fdd358487b0e5e2975d3fef58de6c19fbb56879",
+      "bytes": 5680
+    },
+    {
+      "path": "scripts/people/style_report_sources.gd",
+      "sha256": "e67946fcf37ddbce0feefca4181374f0e6ddeead7af41c84caa6f2965acc3ed6",
+      "bytes": 18512
+    },
+    {
+      "path": "scripts/shop/people_bridge.gd",
+      "sha256": "220143592f54d9b472713e0bf9e9336585a8acea6597bd50f70847de4cba1b86",
+      "bytes": 32106
+    },
+    {
+      "path": "tests/integration/style_report_transactions.gd",
+      "sha256": "62d8ae8eb537c758e8dc491396fee248613610e28a75b08e9ab1e3451ee587fb",
+      "bytes": 14417
+    },
+    {
+      "path": "scripts/people/style_report_panel.gd",
+      "sha256": "613104b851741f886708c8405ffdcb2d72708eb56d6505f489b09e874cdc7bbe",
+      "bytes": 10278
+    },
+    {
+      "path": "scripts/people/people_panel.gd",
+      "sha256": "54c52d70e46bb96529de7ab14f784c9ddb85e6eb4a86f367737e7cb97157b969",
+      "bytes": 21129
+    },
+    {
+      "path": "scripts/ui/main.gd",
+      "sha256": "6a1b76dab3680f92f2f57eb6ea7241957ae3d5aa1f9cfda7652b8b89902811b5",
+      "bytes": 33920
+    },
+    {
+      "path": "tests/integration/style_report_ui.gd",
+      "sha256": "9a8ab25e0969be142b1c803b2d364ea1db6ffacededf3e1e5951e18645ef45d0",
+      "bytes": 17813
+    },
+    {
+      "path": "tests/integration/style_report_capture.gd",
+      "sha256": "814783125f0f4d122a9963b71ed2f0707921da77ec69e62e14aef09b028e6d50",
+      "bytes": 14391
+    },
+    {
+      "path": "data/art/g6_preview.json",
+      "sha256": "ce957a5a7451d23e37c4a667f08384bfdc714968056f602c364d6f6182ee1d9e",
+      "bytes": 1688
+    }
+  ],
+  "evidence_packages": [
+    {
+      "path": ".tools/g6/report-contract.md",
+      "sha256": "e69f9a64ab90b583c4da4dc75e7eed9ced4c0b51428ea26d5a94e0b6498372e0",
+      "bytes": 8896
+    },
+    {
+      "path": ".tools/g6/report-result.md",
+      "sha256": "511a2c26b245d4728d300e875ae2dfdf0a5db580ab1faf70c9f9d557d7e2721e",
+      "bytes": 3493
+    },
+    {
+      "path": ".tools/g6/source-delivery-files.json",
+      "sha256": "09c0a17c4d99724f6d09024ed3c3bf4cce35b9d7d0567b079a5e70e3bd933508",
+      "bytes": 3583
+    },
+    {
+      "path": ".tools/g6/ui-result.md",
+      "sha256": "c64796ca093f8a576bfcf5b67d9e5d5071fd3434330a0eca33a7d1d4f187bba7",
+      "bytes": 7215
+    },
+    {
+      "path": ".tools/g6/ui-layout-finite-receipt.json",
+      "sha256": "8b708e5334a441f9e20be41b9c4a21e7eeebf650dae5284c4bca71aa329eec37",
+      "bytes": 2090
+    },
+    {
+      "path": ".tools/g6/ui-layout-closure-receipt.json",
+      "sha256": "aca423c491bc6405af8a5fe79a109ed4e46b30a638bfe58fbb16afc3a4909686",
+      "bytes": 2961
+    },
+    {
+      "path": ".tools/g6/sources-independent-review.md",
+      "sha256": "c32af7c1fa106a3cd24ff4c1c15cd6b0ebd520fe78b42825574e934a5430058f",
+      "bytes": 6058
+    },
+    {
+      "path": ".tools/g6/pure-independent-review.md",
+      "sha256": "5433200a55faf6020eccd689ab8a24b9ca8b52439d273eb0ffc45949340dd728",
+      "bytes": 5572
+    }
+  ],
+  "actual_uid_generation": {
+    "log": {
+      "path": ".tools/g6/actual-uids.log",
+      "sha256": "bcff9d711cbf9d4ca453113a8b5d9261e766c2a9589a87be981e742780affa80",
+      "bytes": 685
+    },
+    "exit_receipt": {
+      "path": ".tools/g6/actual-uids-exit.json",
+      "sha256": "fca457309afd3a550dc361cb10f0a1f97f1ebe6fd9a7b2411eb812e9edc95291",
+      "bytes": 123
+    },
+    "exit_code": 0,
+    "scripts": {
+      "pure_helper": "uid://cqveesyhyd1qb",
+      "pure_target": "uid://cn8x85c0d6s3v",
+      "authored_fixture": "uid://ceocawcy2ev1h",
+      "source_adapter": "uid://drvma72etyo0e",
+      "source_target": "uid://chevpeouvt61x",
+      "report_panel": "uid://bopag38au3q13",
+      "ui_target": "uid://cbdrqvqi4kty2",
+      "capture_target": "uid://b7p2oey7lfps3"
+    }
+  },
+  "peer_review_boundaries": {
+    "source_review": {
+      "file": ".tools/g6/sources-independent-review.md",
+      "finding": "Early-arrival P2 found before fix and closed after actual66/1 ->66/66; original65/65/open history retained. No other definiteP1/P2 in that source/Bridge scope.",
+      "independent_engine_rerun": false
+    },
+    "pure_review": {
+      "file": ".tools/g6/pure-independent-review.md",
+      "finding": "Different owner reviewed formulas/missing-data/source visibility and exact one-byte rules layout boundary. Authored facts are not actual economy.",
+      "independent_engine_rerun": false
+    },
+    "ui_postfix_review": {
+      "finding": "Independent read-only peer matched exact finalSHA; in-memory reverting only header binding/EXPAND assignment recreated prior reviewed panelSHA. No definiteP1/P2; no graphical certification.",
+      "final_panel_sha256": "613104b851741f886708c8405ffdcb2d72708eb56d6505f489b09e874cdc7bbe",
+      "receipt": ".tools/g6/ui-layout-closure-receipt.json"
+    }
+  },
+  "coverage_limits": [
+    "Three authored source-row fixtures genuinely derive different scores/titles but are not actual long-run gameplay/economy.",
+    "Actual source transactions cover saved action/order/ledger joins, save failure/retry/replay/reload, privacy and early physical arrival; their count is not added to the pure/UI counts.",
+    "Commerce is a completed-product-trade proxy; manual relations are positive recorded commitments, without invented contact opportunity denominators.",
+    "Unknown older channels/baselines/source gaps remain observing/null; undisclosed event mistakes and personality do not become scores or basis.",
+    "Schema18 is not screenshot evidence; virtual UI843 restores only headless measured fit and is not native GPU acceptance.",
+    "Root owns mandatory standard-full outcomes, GPU2/final visual judgment, features/progress/final report and Git. This file does not declare those complete."
+  ]
+}

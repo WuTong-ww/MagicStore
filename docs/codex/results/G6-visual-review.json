@@ -1,0 +1,1753 @@
+{
+  "task": "G6",
+  "status": "部分完成",
+  "root_opened_frames": 42,
+  "raw_frames": 36,
+  "published_jpg": 6,
+  "jpg_quality": 85,
+  "jpg_bytes": 1611390,
+  "common_passed": 190,
+  "common_total": 210,
+  "frames": [
+    {
+      "path": ".tools/g6/gpu/run_3274427/report-balanced-1280x720.png",
+      "sha256": "a27f16e75264f93b9c59dbe038bfb7030c1e8bb099f31f8775a84a6d908ace46",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见物件暖光／颜料笔触相容；本帧未露出旧头像。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu/run_3274427/report-balanced-1920x1080.png",
+      "sha256": "938c0dbc29fce3f3406764bbf11eca36f0632e8f9189a313840fcf377c734cb5",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu/run_3274427/report-commerce-1280x720.png",
+      "sha256": "e5ac946537f095c8f0349c6b70c2e3fddf05d9fa53007de0aef1212492d72d9d",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见物件暖光／颜料笔触相容；本帧未露出旧头像。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu/run_3274427/report-commerce-1920x1080.png",
+      "sha256": "2b1b3c58e69326454d0f2dc0c655b39f97701fe11ab1805b65d61d4188714e49",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu/run_3274427/report-inquiry-1280x720.png",
+      "sha256": "4de3a68746e37b67b63a41993d0291204cf59a45340a5213cf87e8aad451c374",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见物件暖光／颜料笔触相容；本帧未露出旧头像。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu/run_3274427/report-inquiry-1920x1080.png",
+      "sha256": "4f502e1e835a99274e9b2834789926fc92bd3024febc269ea302bbefcdfea75b",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/catalog-icons-64px-page-1-1280.png",
+      "sha256": "9c087b9f34c37703ac999a42133bb5dd30f94e3561375f5b6fce84e7f719a2fa",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/catalog-icons-64px-page-1-1920.png",
+      "sha256": "45fd007ad391701fb76b9f0a09b03497a57df6a1fc08e21f9d50dead92204668",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/catalog-icons-64px-page-2-1280.png",
+      "sha256": "82cc3cdc791e759cf6c7747f55250f6ff3699aee4b2a991b55c7f5a8c14fb84d",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/catalog-icons-64px-page-2-1920.png",
+      "sha256": "6cdb9ad5669b5dacb99498abffb3cdbd53bacc2e4872e55ff1f5849fb5d4949f",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/catalog-icons-64px-page-3-1280.png",
+      "sha256": "891f8e250d854a3f43188dd377bc2e323aa15be90d7ab24102a2e42788461055",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/catalog-icons-64px-page-3-1920.png",
+      "sha256": "790918ab87cf9926f6cae93e219bd392969fce69d68338e8cb1cd6244e595b27",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/catalog-icons-64px-page-4-1280.png",
+      "sha256": "518093ce1cb7a2552c68c966088db9e8a1739236c4f0a2ddfbbd3b6384a64f93",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/catalog-icons-64px-page-4-1920.png",
+      "sha256": "ff7916c95449b6ab88b9092faace5e0eb373d6ca41a72729b797944170f195c2",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/consultation-1280.png",
+      "sha256": "94dcb5a77cfa0e56a8fb6dbbe70b1de78ca271a299f72139a817894128452c88",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见物件暖光／颜料笔触相容；本帧未露出旧头像。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/consultation-1920.png",
+      "sha256": "d2093409ff6c65a10ff7886e2bf612e33aa3c02bb43ba5334e845c68190f1711",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见物件暖光／颜料笔触相容；本帧未露出旧头像。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/exterior-1280.png",
+      "sha256": "71f7f0aee249622789d897e22450ccefc17bd59abab91390876e132762388d52",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见物件暖光／颜料笔触相容；本帧未露出旧头像。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/exterior-1920.png",
+      "sha256": "9074f345e1ef3b59cda4c9875622470410392896dddde58f3d962d3f833d79e4",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见物件暖光／颜料笔触相容；本帧未露出旧头像。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/front-1280.png",
+      "sha256": "78e2045998dfb643688d6a4cd0b01e45c71b2d0241314e554e3ec16f8888cb2e",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/front-1920.png",
+      "sha256": "31300f69ba5e78e961a990c2dcb0d0a77aec15e89db17968fe7692c5d1d08d72",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/gathering-1280.png",
+      "sha256": "748eb77e62aef13ee2fe98a9501c80e4791dc7c2210caf924229b14dc23976d9",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见物件暖光／颜料笔触相容；本帧未露出旧头像。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/gathering-1920.png",
+      "sha256": "63674dcbf6e3142566aa63ce78b91f62f886f0ae2aae78a5e6f7d54cca166714",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见物件暖光／颜料笔触相容；本帧未露出旧头像。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/gathering-after-trade-1920.png",
+      "sha256": "8e37ab3576c6bc69208f3feb88a5f61d89679119fdaae2e770bd8f576ae6b2c2",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见物件暖光／颜料笔触相容；本帧未露出旧头像。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/inventory-1280.png",
+      "sha256": "d001e19e3de722c824796c4e310d6a7683b89ff3f88a9e0832fcc4831c2a789c",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见物件暖光／颜料笔触相容；本帧未露出旧头像。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/inventory-1920.png",
+      "sha256": "d26214d8dfa28684dd7ffb1526280050b032a832ca6002bdf144577983fe4618",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见物件暖光／颜料笔触相容；本帧未露出旧头像。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/market-1280.png",
+      "sha256": "ae1933272aaa3e65b9eace9a8398b635a2db5fd62acf880b6aa18d0aaa26820a",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见物件暖光／颜料笔触相容；本帧未露出旧头像。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/market-1920.png",
+      "sha256": "24bb80ca2b91b64814b5bbafdad6ae2e37217a2c7c52fa1e904128558a6c5599",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见物件暖光／颜料笔触相容；本帧未露出旧头像。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/market-after-trade-1920.png",
+      "sha256": "ad80e6112ed3ccecd870cb971e3d4cfe7a0f13fa40f0345b1b37f31431d6cec7",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见物件暖光／颜料笔触相容；本帧未露出旧头像。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/network-1280.png",
+      "sha256": "d7b0a3763401272086975966660bc037c3c292a2f2c310a8fe357660e968f53b",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/network-1920.png",
+      "sha256": "8fa0cae0e9d322d354388cc5fc96d0ca7fa1396ce3f2ef19c4a24daa2a436a9d",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/people-1280.png",
+      "sha256": "01fd89242e1f2d39bd10fc0e133846b903f77ea434bcbcc6c069be58d0481554",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/people-1920.png",
+      "sha256": "abb285ce287348acaa9543b4a2a7c2f7aa653b5f85509b19220ced4a05624dd5",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/workshop-1280.png",
+      "sha256": "8f1a8fa5d5a68217633b6279fc07655c2a395d0430f9e3da1be72da9f3a38abc",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见物件暖光／颜料笔触相容；本帧未露出旧头像。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/workshop-1920.png",
+      "sha256": "bdcd5fb736606c84a6ab77b952bf525a6e2bb108e75cb85c45c27792dcf28723",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见物件暖光／颜料笔触相容；本帧未露出旧头像。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/zero-guest-front-1280.png",
+      "sha256": "d51254b075d7c2f6e297b75810de3b53cf4f7e47f6db2719af225ee86750a37c",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见物件暖光／颜料笔触相容；本帧未露出旧头像。"
+        }
+      ]
+    },
+    {
+      "path": ".tools/g6/gpu-shop-attempt1-frames/zero-guest-front-1920.png",
+      "sha256": "3e2856877f9ea74c6249397bcf1df6cb929ae9d299c0c5d00da7cb885a9464a7",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见物件暖光／颜料笔触相容；本帧未露出旧头像。"
+        }
+      ]
+    },
+    {
+      "path": "docs/screenshots/round2/G6/report-balanced-1280x720.jpg",
+      "sha256": "30aa237bb84cfce7e19c2fd8341ea19487f9acc9ae7bd17e75a3beb3b7144020",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见物件暖光／颜料笔触相容；本帧未露出旧头像。"
+        }
+      ]
+    },
+    {
+      "path": "docs/screenshots/round2/G6/report-balanced-1920x1080.jpg",
+      "sha256": "467b79d7013f48a45c1d499276fe85b00e9f49054373b74627a0201a5443db7d",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": "docs/screenshots/round2/G6/report-commerce-1280x720.jpg",
+      "sha256": "6a38622175d55cecb154ff440b0e1fca2332be24cb59cf18489c14a75f201e2d",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见物件暖光／颜料笔触相容；本帧未露出旧头像。"
+        }
+      ]
+    },
+    {
+      "path": "docs/screenshots/round2/G6/report-commerce-1920x1080.jpg",
+      "sha256": "bd31dda54cf0c2e1a8c251669f7c7362f5a846ec27a0d8a7151e2b450f082273",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚头像仍与v3底图笔触不一。"
+        }
+      ]
+    },
+    {
+      "path": "docs/screenshots/round2/G6/report-inquiry-1280x720.jpg",
+      "sha256": "89c1c81576ed78f56d68eac6a58743a7bbfdf36ef83f1e55b59380f3fd716621",
+      "size": [
+        1280,
+        720
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见物件暖光／颜料笔触相容；本帧未露出旧头像。"
+        }
+      ]
+    },
+    {
+      "path": "docs/screenshots/round2/G6/report-inquiry-1920x1080.jpg",
+      "sha256": "6eee10deb961dff835b09604b0a00e324c091531305d9f5a77497675becd9529",
+      "size": [
+        1920,
+        1080
+      ],
+      "actually_opened_by_root": true,
+      "checks": [
+        {
+          "criterion": 1,
+          "passed": true,
+          "result": "通过",
+          "reason": "场景铺满整个窗口，无黑边或框中场景卡。"
+        },
+        {
+          "criterion": 2,
+          "passed": true,
+          "result": "通过",
+          "reason": "可见按钮完整；滚动离屏或弹窗遮挡不冒称按钮截断。"
+        },
+        {
+          "criterion": 3,
+          "passed": true,
+          "result": "通过",
+          "reason": "报告、详情及其他正文均在古纸面板。"
+        },
+        {
+          "criterion": 4,
+          "passed": true,
+          "result": "通过",
+          "reason": "名字、分数、样本、标题与声明均为控件，未烘焙入图。"
+        },
+        {
+          "criterion": 5,
+          "passed": false,
+          "result": "不通过",
+          "reason": "旧林照晚头像仍与v3底图笔触不一。"
+        }
+      ]
+    }
+  ],
+  "gpu": {
+    "checks": 121,
+    "failures": 0,
+    "actual_frames": 6,
+    "authored_fixtures": true,
+    "receipt_sha256": "8aeaae442456f89279dd0c530b595b44391c3c2fd9621c9a4bdee4c5d3590e6c",
+    "actual_history_click_scope": "tests/integration/style_report_ui.gd"
+  },
+  "shop": {
+    "checks": 1544,
+    "failures": 0,
+    "actual_frames": 30
+  },
+  "remaining": [
+    "商业维度用实际成交作有限代理，未记录未成交的推介次数；精确推介指标须另定日志口径。",
+    "没有联系机会／候客完整基线的旧记录保持观察中，不能补造历史。",
+    "旧灰白页签、窗外标题／测试标题对比与旧林头像仍待统一。"
+  ]
+}

@@ -5,6 +5,7 @@ const ArrivalUI = preload("res://scripts/ui/arrival_ui.gd")
 const Appearance = preload("res://scripts/people/appearance.gd")
 const Portrait = preload("res://scripts/people/portrait.gd")
 const EditorConfig = preload("res://scripts/people/appearance_editor_config.gd")
+const StyleReportPanel = preload("res://scripts/people/style_report_panel.gd")
 ## A-owned presentation; the host supplies a filtered view and owns actions.
 ## This panel never touches GameState, the clock, wallets or a save directly.
 
@@ -41,6 +42,9 @@ var _draft_dirty := false
 var _updating_pickers := false
 var _draft_revision := 0
 var _view_identity := ""
+var style_report_panel: Control
+var _style_report_page: ScrollContainer
+var _people_pages: TabContainer
 
 func _ready() -> void:
 	editor_config = EditorConfig.load_config()
@@ -56,6 +60,7 @@ func _ready() -> void:
 	add_child(margin)
 	margin.minimum_size_changed.connect(func(): custom_minimum_size = margin.get_combined_minimum_size())
 	var pages := TabContainer.new()
+	_people_pages = pages
 	pages.name = "PeoplePages"
 	_paper_tabs(pages)
 	margin.add_child(pages)
@@ -114,6 +119,15 @@ func _ready() -> void:
 	evidence.item_selected.connect(_evidence_activated)
 	right.add_child(evidence)
 	_build_editor(pages)
+	_style_report_page = ScrollContainer.new()
+	_style_report_page.name = "StyleReport"
+	_style_report_page.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	pages.add_child(_style_report_page)
+	style_report_panel = StyleReportPanel.new()
+	style_report_panel.name = "StyleReportPanel"
+	style_report_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_style_report_page.add_child(style_report_panel)
+	style_report_panel.evidence_requested.connect(func(visit_id: String,action_id: String): evidence_requested.emit(visit_id,action_id))
 	refresh()
 	_layout_queue()
 	custom_minimum_size = margin.get_combined_minimum_size()
@@ -214,6 +228,12 @@ func refresh() -> void:
 	if not is_instance_valid(queue):
 		return
 	_sync_committed_appearance()
+	var modern: Dictionary = view.get("style_report",{})
+	style_report_panel.set_report(modern)
+	var report_index: int = _style_report_page.get_index()
+	_people_pages.set_tab_hidden(report_index,not style_report_panel.visible)
+	if style_report_panel.visible:
+		_people_pages.set_tab_title(report_index,modern.ui.copy.page_title)
 	var copy: Dictionary = editor_config.copy
 	queue.clear()
 	archive.clear()
@@ -348,6 +368,13 @@ func _select_archive(index: int) -> void:
 func _report_text() -> String:
 	var report: Dictionary = view.get("report", {})
 	return editor_config.copy.report_format % [int(report.get("sample_count",0)),report.get("description",editor_config.copy.report_empty),report.get("notice","")]
+
+func open_style_report() -> bool:
+	if not is_instance_valid(style_report_panel) or not style_report_panel.visible:
+		return false
+	_people_pages.current_tab = _style_report_page.get_index()
+	_style_report_page.scroll_vertical = 0
+	return true
 
 func _evidence_activated(index: int) -> void:
 	var record: Dictionary = evidence.get_item_metadata(index)

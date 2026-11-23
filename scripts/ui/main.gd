@@ -47,6 +47,9 @@ var _delete_target := ""
 var history_window: Window
 var history_text: RichTextLabel
 var history_details: CheckButton
+var _history_visit_id: String = ""
+var _history_action_id: String = ""
+var _history_save_id: String = ""
 var open_button: Button
 var workbench: DivinationWorkbench
 
@@ -240,6 +243,8 @@ func _refresh() -> void:
 	provider_badge.text = "在线对话" if mode.get("mode") == "online" else "离线对话 · 本地话题"
 	if is_instance_valid(people_panel):
 		people_panel.set_view(GameState.people_view(),str(snapshot.get("save_id","")))
+	if is_instance_valid(history_window) and history_window.visible and _history_save_id != str(snapshot.get("save_id","")):
+		show_history()
 	if snapshot.is_empty():
 		resources.text = shell_config.no_save_status
 	else:
@@ -329,7 +334,7 @@ func _build_people_window() -> void:
 	people_panel.wait_requested.connect(func(minutes: int): await run_action("wait", {"minutes": minutes}))
 	people_panel.appearance_requested.connect(_save_player_appearance)
 	people_panel.book_requested.connect(_confirm_booking)
-	people_panel.evidence_requested.connect(func(_visit: String, _action: String): show_history())
+	people_panel.evidence_requested.connect(func(visit_id: String, action_id: String): show_history(visit_id,action_id))
 
 func _save_player_appearance(appearance: Dictionary) -> Dictionary:
 	var result: Dictionary = await run_action("save_appearance",{"appearance":appearance.duplicate(true)})
@@ -628,15 +633,47 @@ func _build_history_window() -> void:
 	box.add_child(history_details)
 	box.add_child(UI.button("合上手记", func(): history_window.hide()))
 
-func show_history() -> void:
+func show_history(visit_id: String = "", action_id: String = "") -> bool:
+	if (not visit_id.is_empty() or not action_id.is_empty()) and _history_basis(visit_id,action_id).is_empty():
+		return false
+	_history_visit_id = visit_id
+	_history_action_id = action_id
+	_history_save_id = str(GameState.player_snapshot().get("save_id",""))
 	history_details.set_pressed_no_signal(false)
 	_refresh_history(false)
 	_fit_window(history_window,Vector2i(shell_config.dialogs.history[0],shell_config.dialogs.history[1]))
 	history_window.popup_centered()
+	return true
+
+func _history_basis(visit_id: String, action_id: String) -> Dictionary:
+	if visit_id.is_empty() or action_id.is_empty():
+		return {}
+	var visits: Array = GameState.player_snapshot().get("visits",[])
+	if not visits.any(func(visit: Dictionary) -> bool: return visit.get("visit_id") == visit_id):
+		return {}
+	var public: Dictionary = GameState.people_view()
+	for row: Dictionary in public.get("style_report",{}).get("evidence",{}).values():
+		if row.get("action_id") == action_id and (row.get("visit_id") == visit_id or visit_id in row.get("related_visit_ids",[])):
+			return row.duplicate(true)
+	for row: Dictionary in public.get("report",{}).get("evidence",[]):
+		if row.get("visit_id") == visit_id and row.get("action_id") == action_id:
+			return row.duplicate(true)
+	return {}
 
 func _refresh_history(show_details: bool) -> void:
 	var lines: PackedStringArray = []
 	var visits: Array = GameState.player_snapshot().get("visits", [])
+	if not _history_visit_id.is_empty():
+		var basis: Dictionary = _history_basis(_history_visit_id,_history_action_id)
+		if basis.is_empty():
+			_history_visit_id = ""
+			_history_action_id = ""
+		else:
+			visits = visits.filter(func(visit: Dictionary) -> bool: return visit.get("visit_id") == _history_visit_id)
+			if basis.get("label") is String:
+				lines.append(basis.label)
+			if basis.get("text") is String:
+				lines.append(basis.text)
 	for visit: Dictionary in visits:
 		var view: Dictionary = GameState.divination_view(visit.visit_id)
 		var guest: Dictionary = view.get("guest", {})

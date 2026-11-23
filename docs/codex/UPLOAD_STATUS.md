@@ -265,3 +265,22 @@ prune-packable: 2053
 garbage: 3
 size-garbage: 15.24 MiB
 ```
+
+## G6 发布检查（2026-11-24）
+
+G6部分完成；完整第1轮15504/15504、GPU121/121、shop1544/1544，全部exit0。42帧实开通用检查190/210，成交代理与旧头像等残项保留。任务提交hash及普通push结果在最终收口补记。
+
+相对已推送df7381f，本次暂存34路径／34新增unique blobs共2,055,866B；二进制1,611,390B，仅六张quality85 JPG，低于100MB。后补size报告及上传文本不改变二进制量。禁止追踪路径0；中央清单497438B，原v2全部56SHA不变；原始PNG、候选与本地详审未入Git。精简报告results/G6-size-inspection.json。历史累计量不改写为小于150MB。
+
+本地Git对象（包含旧备份，不是本次上传量）：
+
+```text
+count: 6290
+size: 331.29 MiB
+in-pack: 4064
+packs: 2
+size-pack: 1.12 GiB
+prune-packable: 2053
+garbage: 3
+size-garbage: 15.24 MiB
+```

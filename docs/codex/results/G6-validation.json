@@ -1,0 +1,573 @@
+{
+  "task": "G6",
+  "full_round": 1,
+  "full_exit_code": 0,
+  "full_log_sha256": "f22f7d5603480be39f5faa53157ed9e30475fc6f27db7b162d0fb83d84931e83",
+  "godot_checks": 14877,
+  "gateway_and_protocol_python_tests": 117,
+  "art_python_tests": 254,
+  "family_HTTP_wire_assertions": 256,
+  "family_HTTP_captured_requests": 16,
+  "full_passed": 15504,
+  "full_total": 15504,
+  "full_failures": 0,
+  "engine_errors_or_warnings": 0,
+  "original_v2_files_sha_verified": 56,
+  "source_manifest_records_validated": 364,
+  "item_alpha_files_passed": 70,
+  "manifest_bytes": 497438,
+  "manifest_sha256": "769cdd9a4fc4eddeaeb4654d8102f2a98aa41ba47e9c43167948ea4e0c2c3703",
+  "scope": "Standard headless source/transaction/protocol checks; GUI and artistic evidence are recorded separately.",
+  "godot_target_summaries": [
+    {
+      "target": "SMOKE RESULT",
+      "checks": 57,
+      "failures": 0
+    },
+    {
+      "target": "DELETE SAVE",
+      "checks": 52,
+      "failures": 0
+    },
+    {
+      "target": "PROVIDER RESULT",
+      "checks": 48,
+      "failures": 0
+    },
+    {
+      "target": "DIALOGUE GROUNDING",
+      "checks": 127,
+      "failures": 0
+    },
+    {
+      "target": "FOLLOWUP QUESTIONS",
+      "checks": 86,
+      "failures": 0
+    },
+    {
+      "target": "ORACLE RULES",
+      "checks": 29,
+      "failures": 0
+    },
+    {
+      "target": "DIVINATION RESULT",
+      "checks": 543,
+      "failures": 0
+    },
+    {
+      "target": "LEGACY DIVINATION GUESTS",
+      "checks": 30,
+      "failures": 0
+    },
+    {
+      "target": "GENERATED CASES",
+      "checks": 80,
+      "failures": 0
+    },
+    {
+      "target": "EVENT GOLDEN",
+      "checks": 100,
+      "failures": 0
+    },
+    {
+      "target": "INVITATION FEEDBACK GOLDEN",
+      "checks": 22,
+      "failures": 0
+    },
+    {
+      "target": "EVENT DATA RULES",
+      "checks": 72,
+      "failures": 0
+    },
+    {
+      "target": "EVENT MIGRATION",
+      "checks": 112,
+      "failures": 0
+    },
+    {
+      "target": "G3 WORKFLOWS",
+      "checks": 128,
+      "failures": 0
+    },
+    {
+      "target": "G4 COMPONENTS",
+      "checks": 62,
+      "failures": 0
+    },
+    {
+      "target": "GENERIC EFFECTS",
+      "checks": 43,
+      "failures": 0
+    },
+    {
+      "target": "EVENT EFFECTS",
+      "checks": 29,
+      "failures": 0
+    },
+    {
+      "target": "INVITATION REFERRAL",
+      "checks": 38,
+      "failures": 0
+    },
+    {
+      "target": "EVENT NOTEBOOK UI",
+      "checks": 116,
+      "failures": 0
+    },
+    {
+      "target": "UI_SMOKE",
+      "checks": 319,
+      "failures": 0
+    },
+    {
+      "target": "SHOP RULES",
+      "checks": 89,
+      "failures": 0
+    },
+    {
+      "target": "SHOP INTEGRATION",
+      "checks": 78,
+      "failures": 0
+    },
+    {
+      "target": "SHOP CONTENT",
+      "checks": 31,
+      "failures": 0
+    },
+    {
+      "target": "ECONOMIC VALIDATION",
+      "checks": 14,
+      "failures": 0
+    },
+    {
+      "target": "ORDINARY CONTENT",
+      "checks": 36,
+      "failures": 0
+    },
+    {
+      "target": "ORDINARY POPULATION",
+      "checks": 41,
+      "failures": 0
+    },
+    {
+      "target": "SHOP CONTENT MIGRATION",
+      "checks": 105,
+      "failures": 0
+    },
+    {
+      "target": "SHOP CONTENT TRANSACTIONS",
+      "checks": 136,
+      "failures": 0
+    },
+    {
+      "target": "TRAFFIC ACTIVATION",
+      "checks": 101,
+      "failures": 0
+    },
+    {
+      "target": "COMPONENT FEEDBACK",
+      "checks": 162,
+      "failures": 0
+    },
+    {
+      "target": "SHOP CONTENT UI",
+      "checks": 57,
+      "failures": 0
+    },
+    {
+      "target": "G4 CAPTURE",
+      "checks": 10,
+      "failures": 0
+    },
+    {
+      "target": "PEOPLE INTEGRATION",
+      "checks": 52,
+      "failures": 0
+    },
+    {
+      "target": "C UI RESULT",
+      "checks": 1514,
+      "failures": 0
+    },
+    {
+      "target": "ITEM VISUALS",
+      "checks": 214,
+      "failures": 0
+    },
+    {
+      "target": "SHELF LAYOUT",
+      "checks": 74,
+      "failures": 0
+    },
+    {
+      "target": "SHELF RENDER",
+      "checks": 38,
+      "failures": 0
+    },
+    {
+      "target": "WIND/SPRING",
+      "checks": 100,
+      "failures": 0
+    },
+    {
+      "target": "COMMITTED PRESENTATION EVENTS",
+      "checks": 277,
+      "failures": 0
+    },
+    {
+      "target": "SCENE MOTION",
+      "checks": 49,
+      "failures": 0
+    },
+    {
+      "target": "MOTION SETTINGS",
+      "checks": 31,
+      "failures": 0
+    },
+    {
+      "target": "MOTION PERFORMANCE",
+      "checks": 24,
+      "failures": 0
+    },
+    {
+      "target": "MOTION PREVIEW",
+      "checks": 7,
+      "failures": 0
+    },
+    {
+      "target": "APPEARANCE",
+      "checks": 264,
+      "failures": 0
+    },
+    {
+      "target": "APPEARANCE BIRTH",
+      "checks": 33,
+      "failures": 0
+    },
+    {
+      "target": "APPEARANCE DESCRIPTION",
+      "checks": 20,
+      "failures": 0
+    },
+    {
+      "target": "APPEARANCE MIGRATION",
+      "checks": 110,
+      "failures": 0
+    },
+    {
+      "target": "APPEARANCE UI",
+      "checks": 70,
+      "failures": 0
+    },
+    {
+      "target": "PORTRAIT PREVIEW SCHEMA ONLY",
+      "checks": 8,
+      "failures": 0
+    },
+    {
+      "target": "A4 MOOD",
+      "checks": 45,
+      "failures": 0
+    },
+    {
+      "target": "FAMILY LIBRARY",
+      "checks": 115,
+      "failures": 0
+    },
+    {
+      "target": "FAMILY ARRIVAL BUDGET",
+      "checks": 51,
+      "failures": 0
+    },
+    {
+      "target": "FAMILY LIBRARY FLOW",
+      "checks": 47,
+      "failures": 0
+    },
+    {
+      "target": "FAMILY LIBRARY DISTRIBUTION",
+      "checks": 96,
+      "failures": 0
+    },
+    {
+      "target": "FAMILY MIGRATION",
+      "checks": 109,
+      "failures": 0
+    },
+    {
+      "target": "FAMILY TRANSACTIONS",
+      "checks": 71,
+      "failures": 0
+    },
+    {
+      "target": "FAMILY UI",
+      "checks": 133,
+      "failures": 0
+    },
+    {
+      "target": "PAST LIBRARY",
+      "checks": 134,
+      "failures": 0
+    },
+    {
+      "target": "PAST MIGRATION",
+      "checks": 179,
+      "failures": 0
+    },
+    {
+      "target": "PAST TRANSACTIONS",
+      "checks": 128,
+      "failures": 0
+    },
+    {
+      "target": "PAST UI",
+      "checks": 74,
+      "failures": 0
+    },
+    {
+      "target": "G5 CAPTURE",
+      "checks": 15,
+      "failures": 0
+    },
+    {
+      "target": "STYLE REPORT",
+      "checks": 68,
+      "failures": 0
+    },
+    {
+      "target": "STYLE TRANSACTIONS",
+      "checks": 66,
+      "failures": 0
+    },
+    {
+      "target": "STYLE REPORT UI",
+      "checks": 843,
+      "failures": 0
+    },
+    {
+      "target": "G6 CAPTURE",
+      "checks": 15,
+      "failures": 0
+    },
+    {
+      "target": "FAMILY POLICY",
+      "checks": 37,
+      "failures": 0
+    },
+    {
+      "target": "SCENE VISUALS",
+      "checks": 1644,
+      "failures": 0
+    },
+    {
+      "target": "ALIGNED SCENE LAYERS",
+      "checks": 79,
+      "failures": 0
+    },
+    {
+      "target": "SCENE ASSET ACCEPTANCE",
+      "checks": 570,
+      "failures": 0
+    },
+    {
+      "target": "ARRIVAL UI RESULT",
+      "checks": 45,
+      "failures": 0
+    },
+    {
+      "target": "CONSULTATION LAYOUT",
+      "checks": 34,
+      "failures": 0
+    },
+    {
+      "target": "ROUND2 SHELL RESULT",
+      "checks": 1606,
+      "failures": 0
+    },
+    {
+      "target": "ROUND2 SHELL EDGES",
+      "checks": 87,
+      "failures": 0
+    },
+    {
+      "target": "ROUND2 CONSULTATION",
+      "checks": 48,
+      "failures": 0
+    },
+    {
+      "target": "A3R AUDIO/THEME",
+      "checks": 30,
+      "failures": 0
+    },
+    {
+      "target": "AUDIO LIFECYCLE",
+      "checks": 43,
+      "failures": 0
+    },
+    {
+      "target": "ARRIVAL TRANSACTIONS",
+      "checks": 42,
+      "failures": 0
+    },
+    {
+      "target": "SAVE DELETE UI",
+      "checks": 37,
+      "failures": 0
+    },
+    {
+      "target": "GENERATED PEOPLE INTEGRATION",
+      "checks": 143,
+      "failures": 0
+    },
+    {
+      "target": "GENERATION ARRIVAL SLOTS",
+      "checks": 30,
+      "failures": 0
+    },
+    {
+      "target": "GENERATED PEOPLE UI",
+      "checks": 49,
+      "failures": 0
+    },
+    {
+      "target": "FOLLOWUP CORE RESULT",
+      "checks": 29,
+      "failures": 0
+    },
+    {
+      "target": "FOLLOWUP QUESTIONS UI",
+      "checks": 39,
+      "failures": 0
+    },
+    {
+      "target": "CHAT KEYBOARD UI",
+      "checks": 49,
+      "failures": 0
+    },
+    {
+      "target": "OPENING GUEST INTEGRATION",
+      "checks": 1212,
+      "failures": 0
+    },
+    {
+      "target": "PROJECT CLEANUP RESULT",
+      "checks": 16,
+      "failures": 0
+    },
+    {
+      "target": "API SETTINGS UI",
+      "checks": 45,
+      "failures": 0
+    },
+    {
+      "target": "API ENDPOINT",
+      "checks": 187,
+      "failures": 0
+    },
+    {
+      "target": "MODEL POLICY RESULT",
+      "checks": 38,
+      "failures": 0
+    },
+    {
+      "target": "HTTP RESULT",
+      "checks": 41,
+      "failures": 0
+    },
+    {
+      "target": "HTTP CORE RESULT",
+      "checks": 56,
+      "failures": 0
+    },
+    {
+      "target": "DIRECT API RESULT",
+      "checks": 77,
+      "failures": 0
+    },
+    {
+      "target": "HTTP RECOVERY RESULT",
+      "checks": 43,
+      "failures": 0
+    },
+    {
+      "target": "A4 HTTP MOOD",
+      "checks": 23,
+      "failures": 0
+    },
+    {
+      "target": "FAMILY HTTP",
+      "checks": 48,
+      "failures": 0
+    },
+    {
+      "target": "PERSON HTTP RESULT",
+      "checks": 64,
+      "failures": 0
+    },
+    {
+      "target": "PEOPLE RULES",
+      "checks": 52,
+      "failures": 0
+    },
+    {
+      "target": "GENERATED PERSON",
+      "checks": 103,
+      "failures": 0
+    },
+    {
+      "target": "PRODUCTION PEOPLE CONFIG",
+      "checks": 11,
+      "failures": 0
+    },
+    {
+      "target": "ARRIVAL CAPACITY",
+      "checks": 27,
+      "failures": 0
+    },
+    {
+      "target": "OPENING GUEST RULES",
+      "checks": 12,
+      "failures": 0
+    },
+    {
+      "target": "MEMORY RULES",
+      "checks": 21,
+      "failures": 0
+    },
+    {
+      "target": "FAMILY FLOW",
+      "checks": 16,
+      "failures": 0
+    },
+    {
+      "target": "ARRIVAL EDGES",
+      "checks": 28,
+      "failures": 0
+    },
+    {
+      "target": "FEEDBACK RULES",
+      "checks": 11,
+      "failures": 0
+    },
+    {
+      "target": "DISTRIBUTION",
+      "checks": 36,
+      "failures": 0
+    },
+    {
+      "target": "DIRECTOR RULES",
+      "checks": 8,
+      "failures": 0
+    },
+    {
+      "target": "PEOPLE PANEL",
+      "checks": 6,
+      "failures": 0
+    },
+    {
+      "target": "A/B HANDOFF",
+      "checks": 28,
+      "failures": 0
+    }
+  ]
+}
