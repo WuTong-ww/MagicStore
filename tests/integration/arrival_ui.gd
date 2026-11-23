@@ -2,6 +2,7 @@ extends SceneTree
 const UITeardown = preload("res://tests/ui_teardown.gd")
 
 const ArrivalUI = preload("res://scripts/ui/arrival_ui.gd")
+const Shop = preload("res://scripts/shop/shop.gd")
 var checks := 0
 var failures := 0
 
@@ -17,6 +18,41 @@ func check(ok: bool, label: String) -> void:
 	if not ok:
 		failures += 1
 		printerr("ARRIVAL UI FAIL: " + label)
+
+func check_craft_source_costs(game: Node) -> void:
+	var catalog: Dictionary = game.shop_view().catalog
+	var base := {"recipe_id":"restorative_draught"}
+	var variant := {"recipe_id":"restorative_draught","variant_id":"restorative_draught_mint"}
+	var base_probe := craft_probe(game,catalog,base,"arrival_base_cost")
+	var variant_probe := craft_probe(game,catalog,variant,"arrival_variant_cost")
+	check(base_probe.outcome.get("success",false) and variant_probe.outcome.get("success",false),"both cost sources execute the real base and variant craft rules")
+	if not base_probe.outcome.get("success",false) or not variant_probe.outcome.get("success",false):
+		return
+	check(ArrivalUI.action_minutes("craft_item",base) == int(base_probe.outcome.minutes),"base confirmation cost equals the real successful craft cost")
+	check(variant_probe.outcome.result.get("variant_id") == variant.variant_id and variant_probe.outcome.result.get("quality_id") == "fine" and variant_probe.outcome.minutes != base_probe.outcome.minutes,"variant probe actually selects the distinct variant recipe and cost")
+	check(ArrivalUI.action_minutes("craft_item",variant) == int(variant_probe.outcome.minutes),"variant confirmation cost equals the real successful variant craft cost")
+	var untrusted := variant.duplicate(true)
+	untrusted.minutes = 999999
+	check(ArrivalUI.action_minutes("craft_item",untrusted) == int(variant_probe.outcome.minutes),"preview takes the selected catalog cost rather than arbitrary action minutes")
+	for invalid_variant: Variant in ["clarity_crystal_resin","not_a_recipe_variant",42]:
+		var invalid := {"recipe_id":"restorative_draught","variant_id":invalid_variant,"minutes":999999}
+		var rejected := craft_probe(game,catalog,invalid,"arrival_invalid_"+str(invalid_variant))
+		check(not rejected.outcome.get("success",false) and rejected.outcome.get("error_code") == "INVALID_VARIANT" and rejected.after == rejected.before,"real craft refuses a mismatched, unknown or malformed variant atomically / "+str(invalid_variant))
+		check(ArrivalUI.action_minutes("craft_item",invalid) == 0,"invalid variant supplies no fabricated duration before the real action rejects it / "+str(invalid_variant))
+
+func craft_probe(game: Node, catalog: Dictionary, extra: Dictionary, action_id: String) -> Dictionary:
+	# Fixture copies exercise the real Shop rule without changing the live save.
+	var candidate: Dictionary = game.snapshot().duplicate(true)
+	candidate.active_visit_id = ""
+	candidate.player.energy = int(catalog.rules.max_energy)
+	candidate.shop.recipes.append("restorative_draught")
+	for id: String in ["lavender","spring_water","dried_mint","glass_vial"]:
+		Shop._add(candidate,id,2,"purchase","arrival_cost_fixture_"+id)
+	var before := candidate.duplicate(true)
+	var action := extra.duplicate(true)
+	action.merge({"type":"craft_item","action_id":action_id},true)
+	var outcome := Shop.handle(candidate,action,catalog)
+	return {"outcome":outcome,"before":before,"after":candidate}
 
 func run() -> void:
 	var config := ArrivalUI.load_config()
@@ -44,6 +80,9 @@ func run() -> void:
 		await process_frame
 	var created: Dictionary = await main.run_action("new_game", {"name": "客流前台验收"})
 	check(created.get("success", false), "create isolated UI save")
+	var before_cost_checks: Dictionary = game.snapshot()
+	check_craft_source_costs(game)
+	check(game.snapshot() == before_cost_checks,"craft source-cost probes leave the live saved state unchanged")
 	check(main.screen.find_child("ArrivalPatienceList", true, false) != null, "front desk shows a patience row for every queued guest")
 	main.show_screen("workshop")
 	await settle()

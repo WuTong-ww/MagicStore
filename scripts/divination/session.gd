@@ -7,6 +7,7 @@ const Economy = preload("res://scripts/divination/economy.gd")
 const Events = preload("res://scripts/divination/event_rules.gd")
 const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
 const EventCopy = preload("res://scripts/divination/event_copy.gd")
+const ProductRules = preload("res://scripts/divination/event_schema.gd")
 const ACTIONS := [
 	"quote_service", "settle_service", "cancel_service", "learn_method", "note_hypothesis",
 	"record_prediction", "give_advice", "buy_case_item", "use_case_item", "receive_feedback",
@@ -16,6 +17,12 @@ const ACTIONS := [
 var data: Dictionary
 var base: Dictionary
 var _base_catalog: Dictionary
+
+static func advice_style_options() -> Dictionary:
+	var rules := ProductRules.load_product_rules()
+	if rules.is_empty():
+		return {}
+	return {"styles":rules.styles.duplicate(true),"default_style":rules.default_style,"heading":rules.copy.advice_style_heading}
 
 func _init(catalog: Dictionary, content: Dictionary) -> void:
 	data = catalog
@@ -375,7 +382,20 @@ func _advice(state: Dictionary, visit: Dictionary, case: Dictionary, action: Dic
 	if not key is String or not choices.has(key):
 		return _fail("INVALID_ADVICE", "请选择此案支持的建议。")
 	var choice: Dictionary = choices[key]
+	var rules := ProductRules.load_product_rules()
+	if rules.is_empty():
+		return _fail("INVALID_ADVICE_RULES",EventCopy.load_config().item_not_applicable)
+	var style: Variant = action.get("advice_style",rules.advice_styles.get(key,rules.default_style))
+	if not style is String or not rules.styles.has(style):
+		return _fail("INVALID_ADVICE_STYLE",rules.copy.invalid_style)
 	var accepted: bool = not choice.has("requires_clue") or choice.requires_clue in visit.clue_ids
+	var profile: Dictionary = state.get("people",{}).get("profiles",{}).get(visit.npc_id,{})
+	var snapshot := {}
+	if profile.has("advice_preference") or profile.has("advice_preference_version"):
+		snapshot = ProductRules.acceptance_snapshot(state,case,key,style,accepted,str(choice.get("requires_clue","")),profile)
+		if snapshot.is_empty():
+			return _fail("INVALID_ADVICE_PREFERENCE",rules.copy.invalid_preference)
+		accepted = accepted and int(snapshot.roll) < int(snapshot.probability)
 	var copy := EventCopy.load_config()
 	var id := _id("advice", action)
 	case.advice.append({
@@ -383,6 +403,8 @@ func _advice(state: Dictionary, visit: Dictionary, case: Dictionary, action: Dic
 		"text": choice.text, "accepted": accepted, "at": int(state.clock_minutes),
 		"reply": copy.advice_accepted if accepted else copy.advice_refused
 	})
+	if not snapshot.is_empty():
+		case.advice.back()["acceptance"] = snapshot
 	var effect: Dictionary = data.cases[case.case_id].event.get("item_effect",{})
 	if accepted and key in effect.get("advice_keys",[]) and not case.has("demand"):
 		case["demand"] = {
@@ -391,6 +413,8 @@ func _advice(state: Dictionary, visit: Dictionary, case: Dictionary, action: Dic
 			"npc_id": visit.npc_id, "advice_id": id, "effect_key": effect.key, "text": effect.need,
 			"deadline": case.event.due_at
 		}
+		case.demand["need_tags"] = rules.need_tags_by_effect.get(effect.key,[]).duplicate()
+		case.demand["source"] = {"kind":"advice_need","advice_id":id,"event_id":case.event.event_id,"visit_id":visit.visit_id}
 	return _ok(case.advice.back().reply, {"advice_id": id, "visit_id": visit.visit_id, "accepted": accepted})
 
 func _purchase(state: Dictionary, visit: Dictionary, case: Dictionary, action: Dictionary) -> Dictionary:
@@ -428,6 +452,108 @@ func _use_item(state: Dictionary, visit: Dictionary, case: Dictionary, action: D
 		return _fail("ITEM_USE_BLOCKED", "须在事件发生前使用本次购得的商品。")
 	guest.items[item_id] -= 1
 	return _ok(EventCopy.load_config().item_recorded, {"item_use_id": id, "visit_id": visit.visit_id})
+
+## G4 preview stays read-only; apply is called only on the shared candidate.
+func preview_product_components(state: Dictionary, visit: Dictionary, components: Array, use_context: Dictionary) -> Dictionary:
+	var rules := ProductRules.load_product_rules()
+	var blocked := {"success":false,"error_code":"ITEM_USE_BLOCKED","message":rules.get("copy",{}).get("component_blocked",EventCopy.load_config().item_not_applicable),"components":[]}
+	if rules.is_empty() or components.is_empty() or components.size() > int(rules.maximum_components):
+		return blocked
+	for key: Variant in use_context:
+		if key not in ["item_use_id","transaction_id","item_id","at"]:
+			return blocked
+	for key: String in ["item_use_id","item_id"]:
+		if not use_context.get(key) is String or use_context[key].is_empty():
+			return blocked
+	if not use_context.get("transaction_id") is String or (use_context.has("at") and use_context.at != state.clock_minutes):
+		return blocked
+	var ids := {}
+	var clues := {}
+	var event_count := 0
+	var output: Array = []
+	for component: Variant in components:
+		if not component is Dictionary or component.size() != 2 or not component.get("component_id") is String or component.component_id.is_empty() or ids.has(component.component_id) or not component.get("effect") is Dictionary:
+			return blocked
+		ids[component.component_id] = true
+		var effect: Dictionary = component.effect
+		var kind: Variant = effect.get("kind")
+		if kind not in ["event","attribute","option","patience","clue","relationship","traffic"]:
+			return blocked
+		if kind not in ["event","clue","relationship"]:
+			continue
+		if visit.is_empty() or state.get("active_visit_id","") != visit.get("visit_id"):
+			return blocked
+		var case: Dictionary = state.get("divination",{}).get("cases",{}).get(visit.visit_id,{})
+		if case.is_empty() or not data.cases.has(case.case_id):
+			return blocked
+		var source_id: String = use_context.item_use_id+":"+component.component_id
+		var prior: Dictionary = {}
+		for row: Dictionary in case.get("product_components",[]):
+			if row.item_use_id == use_context.item_use_id and row.component_id == component.component_id:
+				prior = row
+				break
+		if not prior.is_empty():
+			if prior.effect != effect or prior.item_id != use_context.item_id or prior.transaction_id != use_context.transaction_id:
+				return blocked
+			output.append({"component_id":prior.component_id,"kind":prior.kind,"result":prior.result.duplicate(true),"feedback_refs":prior.feedback_refs.duplicate(true)})
+			continue
+		var result := {"source_id":source_id}
+		var refs: Array = []
+		if kind == "clue":
+			var rule: Dictionary = rules.tool_clues.get(effect.get("clue_id"),{})
+			if effect.size() != 3 or rule.is_empty() or effect.get("method_id") != rule.method_id or not data.clues.has(effect.clue_id) or effect.method_id not in state.divination.skills or effect.method_id not in data.cases[case.case_id].method_ids or effect.clue_id in visit.clue_ids or clues.has(effect.clue_id):
+				return blocked
+			for required: String in rule.requires_clues:
+				if required not in visit.clue_ids:
+					return blocked
+			clues[effect.clue_id] = true
+			result.merge({"status":"revealed","clue_id":effect.clue_id,"method_id":effect.method_id,"source_kind":"tool"})
+			refs.append({"kind":"tool_clue","source_id":source_id})
+		else:
+			if use_context.transaction_id.is_empty() or not _event_open(case,int(state.clock_minutes)):
+				return blocked
+			result.merge({"status":"pending","event_id":case.event.event_id,"effect_key":effect.get("effect_key","")})
+			if kind == "event":
+				event_count += 1
+				var required: Dictionary = data.cases[case.case_id].event.get("item_effect",{})
+				if effect.size() != 2 or event_count > 1 or required.is_empty() or effect.get("effect_key") != required.key or not case.item_use.is_empty():
+					return blocked
+			else:
+				var rule: Dictionary = rules.relationship_effects.get(effect.get("effect_key"),{})
+				var target := Events.product_relation_target(state,case)
+				if effect.size() != 3 or rule.is_empty() or effect.get("delta") != rule.delta or target.is_empty():
+					return blocked
+				result.merge({"selector":"current_goal","rel_id":target.relationship_id,"goal_id":target.goal_id,"subject_id":target.subject_id,"delta":int(effect.delta)})
+			refs.append({"kind":"event_pending","source_id":case.event.event_id})
+		output.append({"component_id":component.component_id,"kind":kind,"result":result,"feedback_refs":refs})
+	return {"success":true,"error_code":"","message":"","components":output}
+
+func apply_product_components(state: Dictionary, visit: Dictionary, components: Array, use_context: Dictionary) -> Dictionary:
+	var outcome := preview_product_components(state,visit,components,use_context)
+	if not outcome.success or outcome.components.is_empty():
+		return outcome
+	var case: Dictionary = state.divination.cases[visit.visit_id]
+	if not case.has("product_components"):
+		case["product_components"] = []
+	for component: Dictionary in outcome.components:
+		if case.product_components.any(func(row: Dictionary) -> bool: return row.item_use_id == use_context.item_use_id and row.component_id == component.component_id):
+			continue
+		var effect := {}
+		for wrapper: Dictionary in components:
+			if wrapper.component_id == component.component_id:
+				effect = wrapper.effect.duplicate(true)
+				break
+		if component.kind == "event":
+			var linked := use_context.duplicate(true)
+			linked.event_id = component.result.event_id
+			linked.effect_key = component.result.effect_key
+			if not link_item_use(state,visit,linked):
+				return {"success":false,"error_code":"ITEM_USE_BLOCKED","message":EventCopy.load_config().item_not_applicable,"components":[]}
+			case.item_use["component_id"] = component.component_id
+		elif component.kind == "clue":
+			visit.clue_ids.append(component.result.clue_id)
+		case.product_components.append({"component_id":component.component_id,"kind":component.kind,"effect":effect,"result":component.result.duplicate(true),"feedback_refs":component.feedback_refs.duplicate(true),"item_use_id":use_context.item_use_id,"transaction_id":use_context.transaction_id,"item_id":use_context.item_id,"at":int(state.clock_minutes)})
+	return outcome
 
 ## C calls this on the candidate in the same transaction as its inventory action.
 func link_item_use(state: Dictionary, visit: Dictionary, item_use: Dictionary) -> bool:

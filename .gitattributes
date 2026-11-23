@@ -27,3 +27,9 @@ assets/generated_scenes/v3_real/**/receipt.json -text whitespace=blank-at-eol,bl
 
 # Retained SVG source has a recorded byte hash.
 assets/_legacy/a2/inventory-reference.svg text eol=lf
+
+# Preserve byte-hashed G4 evidence, including generated SVG path spacing.
+docs/codex/results/G4-economy-first30.csv -text
+docs/codex/results/G4-economy-first30.svg -text whitespace=-blank-at-eol
+docs/codex/results/G4-economy-stop.json -text whitespace=cr-at-eol
+docs/codex/results/G4-source-freeze.json -text whitespace=cr-at-eol

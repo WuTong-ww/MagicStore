@@ -45,10 +45,13 @@ func run() -> void:
 	var legacy := active.duplicate(true)
 	legacy.selected_version = 2
 	legacy.grid = 3
+	# The retained 3x3 atlas has the nine original identities; G4 additions have
+	# independent files and must not invent atlas cells beyond those nine.
+	legacy.items = {}
 	var atlas_path: String = renderer.legacy_path(settings,"legacy_atlas_paths")
 	var reference_path: String = renderer.legacy_path(settings,"legacy_reference_paths")
 	var index := 0
-	for id: String in legacy.items:
+	for id: String in settings.required_items:
 		legacy.items[id] = {"item_id":id,"version":2,"source":"builtin-imagegen","asset":atlas_path,"cell":index,"reference":reference_path}
 		index += 1
 	legacy.sha256 = FileAccess.get_sha256(atlas_path)

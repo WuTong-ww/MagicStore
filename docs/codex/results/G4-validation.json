@@ -1,0 +1,2109 @@
+{
+  "kind": "G4_bounded_validation",
+  "as_of": "2026-11-23T15:11:13.800252+08:00",
+  "task_status": "partial",
+  "standard_full_passed": false,
+  "bounded_standard_rounds_used": 3,
+  "no_full4": true,
+  "collector_scope": "Read existing bytes/JSON/logs and hash maps; no engine, no tests, no source writes. Only these two ignored fact files are written.",
+  "standard_rounds": [
+    {
+      "round": 1,
+      "status": "failed",
+      "exit_code": 1,
+      "log": {
+        "path": ".tools/g4/full-attempt1.log",
+        "sha256": "347aa106070e676d686f3e6e2caa058f99a8240aa0f4e36622d9e7780544b4ba",
+        "bytes": 40654
+      },
+      "reported_completed_godot_groups": [
+        {
+          "target": "SMOKE RESULT",
+          "passed": 57,
+          "failed": 0,
+          "total": 57
+        },
+        {
+          "target": "DELETE SAVE",
+          "passed": 52,
+          "failed": 0,
+          "total": 52
+        },
+        {
+          "target": "PROVIDER RESULT",
+          "passed": 48,
+          "failed": 0,
+          "total": 48
+        },
+        {
+          "target": "DIALOGUE GROUNDING",
+          "passed": 127,
+          "failed": 0,
+          "total": 127
+        },
+        {
+          "target": "FOLLOWUP QUESTIONS",
+          "passed": 86,
+          "failed": 0,
+          "total": 86
+        },
+        {
+          "target": "ORACLE RULES",
+          "passed": 29,
+          "failed": 0,
+          "total": 29
+        },
+        {
+          "target": "DIVINATION RESULT",
+          "passed": 543,
+          "failed": 0,
+          "total": 543
+        },
+        {
+          "target": "LEGACY DIVINATION GUESTS",
+          "passed": 30,
+          "failed": 0,
+          "total": 30
+        },
+        {
+          "target": "GENERATED CASES",
+          "passed": 80,
+          "failed": 0,
+          "total": 80
+        },
+        {
+          "target": "EVENT GOLDEN",
+          "passed": 100,
+          "failed": 0,
+          "total": 100
+        },
+        {
+          "target": "INVITATION FEEDBACK GOLDEN",
+          "passed": 22,
+          "failed": 0,
+          "total": 22
+        },
+        {
+          "target": "EVENT DATA RULES",
+          "passed": 72,
+          "failed": 0,
+          "total": 72
+        },
+        {
+          "target": "EVENT MIGRATION",
+          "passed": 112,
+          "failed": 0,
+          "total": 112
+        },
+        {
+          "target": "G3 WORKFLOWS",
+          "passed": 128,
+          "failed": 0,
+          "total": 128
+        },
+        {
+          "target": "G4 COMPONENTS",
+          "passed": 62,
+          "failed": 0,
+          "total": 62
+        },
+        {
+          "target": "GENERIC EFFECTS",
+          "passed": 43,
+          "failed": 0,
+          "total": 43
+        },
+        {
+          "target": "EVENT EFFECTS",
+          "passed": 29,
+          "failed": 0,
+          "total": 29
+        },
+        {
+          "target": "INVITATION REFERRAL",
+          "passed": 38,
+          "failed": 0,
+          "total": 38
+        },
+        {
+          "target": "EVENT NOTEBOOK UI",
+          "passed": 116,
+          "failed": 0,
+          "total": 116
+        },
+        {
+          "target": "UI_SMOKE",
+          "passed": 319,
+          "failed": 0,
+          "total": 319
+        }
+      ],
+      "reported_godot_group_count": 20,
+      "reported_godot_checks": {
+        "passed": 2093,
+        "failed": 0,
+        "total": 2093
+      },
+      "python_suites": [],
+      "standard_full_passed": false,
+      "exit_basis": {
+        "path": ".tools/g4/full-attempt1-runner.json",
+        "sha256": "46bf6e9f01d52c9be0cb76e9a3bfcbcd76e71c0b4c0e3969e725deaaf9efef62",
+        "bytes": 1117
+      },
+      "last_completed": "RESTART READ (unnumbered PASS)",
+      "stopped_target": "tests/shop/rules.gd",
+      "unsummarized_failure": {
+        "kind": "runtime_script_error",
+        "text": "Invalid access to property or key processed_actions",
+        "actual_assertion_count": null,
+        "note": "Original UTF16 stdout excludes the driver failure stack; observed terminal exit/error is recorded separately in runner JSON. Do not substitute isolated diagnostic counts."
+      },
+      "not_reached": [
+        "All standard targets from tests/shop/rules.gd onward",
+        "HTTP/person/people protocol wrappers",
+        "Python art suite",
+        "post-art formal manifest/alpha/optional registry"
+      ],
+      "counts_scope": "Only final numeric check summaries present in this one raw log. Unnumbered restart PASS lines and incomplete failing target are not fabricated into this subtotal. No cross-round grand total."
+    },
+    {
+      "round": 2,
+      "status": "failed",
+      "exit_code": 1,
+      "log": {
+        "path": ".tools/g4/full-attempt2.log",
+        "sha256": "57077f3c8972a45660a695f9865c883523a4c0b815471af8adac5198463e3a3e",
+        "bytes": 69133
+      },
+      "reported_completed_godot_groups": [
+        {
+          "target": "SMOKE RESULT",
+          "passed": 57,
+          "failed": 0,
+          "total": 57
+        },
+        {
+          "target": "DELETE SAVE",
+          "passed": 52,
+          "failed": 0,
+          "total": 52
+        },
+        {
+          "target": "PROVIDER RESULT",
+          "passed": 48,
+          "failed": 0,
+          "total": 48
+        },
+        {
+          "target": "DIALOGUE GROUNDING",
+          "passed": 127,
+          "failed": 0,
+          "total": 127
+        },
+        {
+          "target": "FOLLOWUP QUESTIONS",
+          "passed": 86,
+          "failed": 0,
+          "total": 86
+        },
+        {
+          "target": "ORACLE RULES",
+          "passed": 29,
+          "failed": 0,
+          "total": 29
+        },
+        {
+          "target": "DIVINATION RESULT",
+          "passed": 543,
+          "failed": 0,
+          "total": 543
+        },
+        {
+          "target": "LEGACY DIVINATION GUESTS",
+          "passed": 30,
+          "failed": 0,
+          "total": 30
+        },
+        {
+          "target": "GENERATED CASES",
+          "passed": 80,
+          "failed": 0,
+          "total": 80
+        },
+        {
+          "target": "EVENT GOLDEN",
+          "passed": 100,
+          "failed": 0,
+          "total": 100
+        },
+        {
+          "target": "INVITATION FEEDBACK GOLDEN",
+          "passed": 22,
+          "failed": 0,
+          "total": 22
+        },
+        {
+          "target": "EVENT DATA RULES",
+          "passed": 72,
+          "failed": 0,
+          "total": 72
+        },
+        {
+          "target": "EVENT MIGRATION",
+          "passed": 112,
+          "failed": 0,
+          "total": 112
+        },
+        {
+          "target": "G3 WORKFLOWS",
+          "passed": 128,
+          "failed": 0,
+          "total": 128
+        },
+        {
+          "target": "G4 COMPONENTS",
+          "passed": 62,
+          "failed": 0,
+          "total": 62
+        },
+        {
+          "target": "GENERIC EFFECTS",
+          "passed": 43,
+          "failed": 0,
+          "total": 43
+        },
+        {
+          "target": "EVENT EFFECTS",
+          "passed": 29,
+          "failed": 0,
+          "total": 29
+        },
+        {
+          "target": "INVITATION REFERRAL",
+          "passed": 38,
+          "failed": 0,
+          "total": 38
+        },
+        {
+          "target": "EVENT NOTEBOOK UI",
+          "passed": 116,
+          "failed": 0,
+          "total": 116
+        },
+        {
+          "target": "UI_SMOKE",
+          "passed": 319,
+          "failed": 0,
+          "total": 319
+        },
+        {
+          "target": "SHOP RULES",
+          "passed": 89,
+          "failed": 0,
+          "total": 89
+        },
+        {
+          "target": "SHOP INTEGRATION",
+          "passed": 78,
+          "failed": 0,
+          "total": 78
+        },
+        {
+          "target": "SHOP CONTENT",
+          "passed": 31,
+          "failed": 0,
+          "total": 31
+        },
+        {
+          "target": "ECONOMIC VALIDATION",
+          "passed": 14,
+          "failed": 0,
+          "total": 14
+        },
+        {
+          "target": "ORDINARY CONTENT",
+          "passed": 36,
+          "failed": 0,
+          "total": 36
+        },
+        {
+          "target": "ORDINARY POPULATION",
+          "passed": 41,
+          "failed": 0,
+          "total": 41
+        },
+        {
+          "target": "SHOP CONTENT MIGRATION",
+          "passed": 102,
+          "failed": 0,
+          "total": 102
+        },
+        {
+          "target": "SHOP CONTENT TRANSACTIONS",
+          "passed": 136,
+          "failed": 0,
+          "total": 136
+        },
+        {
+          "target": "TRAFFIC ACTIVATION",
+          "passed": 99,
+          "failed": 0,
+          "total": 99
+        },
+        {
+          "target": "COMPONENT FEEDBACK",
+          "passed": 160,
+          "failed": 0,
+          "total": 160
+        },
+        {
+          "target": "SHOP CONTENT UI",
+          "passed": 57,
+          "failed": 0,
+          "total": 57
+        },
+        {
+          "target": "G4 CAPTURE",
+          "passed": 10,
+          "failed": 0,
+          "total": 10
+        },
+        {
+          "target": "PEOPLE INTEGRATION",
+          "passed": 52,
+          "failed": 0,
+          "total": 52
+        },
+        {
+          "target": "C UI RESULT",
+          "passed": 1514,
+          "failed": 0,
+          "total": 1514
+        },
+        {
+          "target": "ITEM VISUALS",
+          "passed": 214,
+          "failed": 0,
+          "total": 214
+        },
+        {
+          "target": "SHELF LAYOUT",
+          "passed": 74,
+          "failed": 0,
+          "total": 74
+        },
+        {
+          "target": "SHELF RENDER",
+          "passed": 38,
+          "failed": 0,
+          "total": 38
+        },
+        {
+          "target": "WIND/SPRING",
+          "passed": 100,
+          "failed": 0,
+          "total": 100
+        },
+        {
+          "target": "COMMITTED PRESENTATION EVENTS",
+          "passed": 277,
+          "failed": 0,
+          "total": 277
+        },
+        {
+          "target": "SCENE MOTION",
+          "passed": 49,
+          "failed": 0,
+          "total": 49
+        },
+        {
+          "target": "MOTION SETTINGS",
+          "passed": 31,
+          "failed": 0,
+          "total": 31
+        },
+        {
+          "target": "MOTION PERFORMANCE",
+          "passed": 24,
+          "failed": 0,
+          "total": 24
+        },
+        {
+          "target": "MOTION PREVIEW",
+          "passed": 7,
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "target": "APPEARANCE",
+          "passed": 264,
+          "failed": 0,
+          "total": 264
+        },
+        {
+          "target": "APPEARANCE BIRTH",
+          "passed": 33,
+          "failed": 0,
+          "total": 33
+        },
+        {
+          "target": "APPEARANCE DESCRIPTION",
+          "passed": 20,
+          "failed": 0,
+          "total": 20
+        },
+        {
+          "target": "APPEARANCE MIGRATION",
+          "passed": 123,
+          "failed": 0,
+          "total": 123
+        },
+        {
+          "target": "APPEARANCE UI",
+          "passed": 70,
+          "failed": 0,
+          "total": 70
+        },
+        {
+          "target": "PORTRAIT PREVIEW SCHEMA ONLY",
+          "passed": 8,
+          "failed": 0,
+          "total": 8
+        },
+        {
+          "target": "A4 MOOD",
+          "passed": 45,
+          "failed": 0,
+          "total": 45
+        },
+        {
+          "target": "FAMILY LIBRARY",
+          "passed": 115,
+          "failed": 0,
+          "total": 115
+        },
+        {
+          "target": "FAMILY ARRIVAL BUDGET",
+          "passed": 51,
+          "failed": 0,
+          "total": 51
+        },
+        {
+          "target": "FAMILY LIBRARY FLOW",
+          "passed": 47,
+          "failed": 0,
+          "total": 47
+        },
+        {
+          "target": "FAMILY LIBRARY DISTRIBUTION",
+          "passed": 96,
+          "failed": 0,
+          "total": 96
+        },
+        {
+          "target": "FAMILY MIGRATION",
+          "passed": 109,
+          "failed": 0,
+          "total": 109
+        },
+        {
+          "target": "FAMILY TRANSACTIONS",
+          "passed": 71,
+          "failed": 0,
+          "total": 71
+        },
+        {
+          "target": "FAMILY UI",
+          "passed": 133,
+          "failed": 0,
+          "total": 133
+        },
+        {
+          "target": "FAMILY POLICY",
+          "passed": 37,
+          "failed": 0,
+          "total": 37
+        },
+        {
+          "target": "SCENE VISUALS",
+          "passed": 1644,
+          "failed": 0,
+          "total": 1644
+        },
+        {
+          "target": "ALIGNED SCENE LAYERS",
+          "passed": 79,
+          "failed": 0,
+          "total": 79
+        },
+        {
+          "target": "SCENE ASSET ACCEPTANCE",
+          "passed": 564,
+          "failed": 0,
+          "total": 564
+        },
+        {
+          "target": "ARRIVAL UI RESULT",
+          "passed": 45,
+          "failed": 0,
+          "total": 45
+        },
+        {
+          "target": "CONSULTATION LAYOUT",
+          "passed": 34,
+          "failed": 0,
+          "total": 34
+        },
+        {
+          "target": "ROUND2 SHELL RESULT",
+          "passed": 1606,
+          "failed": 0,
+          "total": 1606
+        },
+        {
+          "target": "ROUND2 SHELL EDGES",
+          "passed": 87,
+          "failed": 0,
+          "total": 87
+        },
+        {
+          "target": "ROUND2 CONSULTATION",
+          "passed": 48,
+          "failed": 0,
+          "total": 48
+        },
+        {
+          "target": "A3R AUDIO/THEME",
+          "passed": 30,
+          "failed": 0,
+          "total": 30
+        },
+        {
+          "target": "AUDIO LIFECYCLE",
+          "passed": 43,
+          "failed": 0,
+          "total": 43
+        },
+        {
+          "target": "ARRIVAL TRANSACTIONS",
+          "passed": 42,
+          "failed": 0,
+          "total": 42
+        },
+        {
+          "target": "SAVE DELETE UI",
+          "passed": 37,
+          "failed": 0,
+          "total": 37
+        },
+        {
+          "target": "GENERATED PEOPLE INTEGRATION",
+          "passed": 143,
+          "failed": 0,
+          "total": 143
+        },
+        {
+          "target": "GENERATION ARRIVAL SLOTS",
+          "passed": 30,
+          "failed": 0,
+          "total": 30
+        },
+        {
+          "target": "GENERATED PEOPLE UI",
+          "passed": 49,
+          "failed": 0,
+          "total": 49
+        },
+        {
+          "target": "FOLLOWUP CORE RESULT",
+          "passed": 29,
+          "failed": 0,
+          "total": 29
+        },
+        {
+          "target": "FOLLOWUP QUESTIONS UI",
+          "passed": 39,
+          "failed": 0,
+          "total": 39
+        },
+        {
+          "target": "CHAT KEYBOARD UI",
+          "passed": 49,
+          "failed": 0,
+          "total": 49
+        },
+        {
+          "target": "OPENING GUEST INTEGRATION",
+          "passed": 1213,
+          "failed": 0,
+          "total": 1213
+        },
+        {
+          "target": "PROJECT CLEANUP RESULT",
+          "passed": 16,
+          "failed": 0,
+          "total": 16
+        },
+        {
+          "target": "API SETTINGS UI",
+          "passed": 45,
+          "failed": 0,
+          "total": 45
+        },
+        {
+          "target": "API ENDPOINT",
+          "passed": 187,
+          "failed": 0,
+          "total": 187
+        },
+        {
+          "target": "MODEL POLICY RESULT",
+          "passed": 38,
+          "failed": 0,
+          "total": 38
+        },
+        {
+          "target": "HTTP RESULT",
+          "passed": 41,
+          "failed": 0,
+          "total": 41
+        },
+        {
+          "target": "HTTP CORE RESULT",
+          "passed": 56,
+          "failed": 0,
+          "total": 56
+        },
+        {
+          "target": "DIRECT API RESULT",
+          "passed": 77,
+          "failed": 0,
+          "total": 77
+        },
+        {
+          "target": "HTTP RECOVERY RESULT",
+          "passed": 43,
+          "failed": 0,
+          "total": 43
+        },
+        {
+          "target": "A4 HTTP MOOD",
+          "passed": 23,
+          "failed": 0,
+          "total": 23
+        },
+        {
+          "target": "FAMILY HTTP",
+          "passed": 48,
+          "failed": 0,
+          "total": 48
+        },
+        {
+          "target": "PERSON HTTP RESULT",
+          "passed": 64,
+          "failed": 0,
+          "total": 64
+        },
+        {
+          "target": "PEOPLE RULES",
+          "passed": 52,
+          "failed": 0,
+          "total": 52
+        },
+        {
+          "target": "GENERATED PERSON",
+          "passed": 103,
+          "failed": 0,
+          "total": 103
+        },
+        {
+          "target": "PRODUCTION PEOPLE CONFIG",
+          "passed": 11,
+          "failed": 0,
+          "total": 11
+        },
+        {
+          "target": "ARRIVAL CAPACITY",
+          "passed": 27,
+          "failed": 0,
+          "total": 27
+        },
+        {
+          "target": "OPENING GUEST RULES",
+          "passed": 12,
+          "failed": 0,
+          "total": 12
+        },
+        {
+          "target": "MEMORY RULES",
+          "passed": 21,
+          "failed": 0,
+          "total": 21
+        },
+        {
+          "target": "FAMILY FLOW",
+          "passed": 16,
+          "failed": 0,
+          "total": 16
+        },
+        {
+          "target": "ARRIVAL EDGES",
+          "passed": 28,
+          "failed": 0,
+          "total": 28
+        },
+        {
+          "target": "FEEDBACK RULES",
+          "passed": 11,
+          "failed": 0,
+          "total": 11
+        },
+        {
+          "target": "DISTRIBUTION",
+          "passed": 36,
+          "failed": 0,
+          "total": 36
+        },
+        {
+          "target": "DIRECTOR RULES",
+          "passed": 8,
+          "failed": 0,
+          "total": 8
+        },
+        {
+          "target": "PEOPLE PANEL",
+          "passed": 6,
+          "failed": 0,
+          "total": 6
+        },
+        {
+          "target": "A/B HANDOFF",
+          "passed": 28,
+          "failed": 0,
+          "total": 28
+        }
+      ],
+      "reported_godot_group_count": 101,
+      "reported_godot_checks": {
+        "passed": 13356,
+        "failed": 0,
+        "total": 13356
+      },
+      "python_suites": [
+        {
+          "scope": "gateway/protocol Python",
+          "passed": 117,
+          "failed": 0,
+          "skipped": 0,
+          "total": 117,
+          "status": "passed"
+        },
+        {
+          "scope": "art Python",
+          "passed": 236,
+          "failed": 2,
+          "skipped": 0,
+          "total": 238,
+          "status": "failed",
+          "failures": [
+            "test_production_alpha_cli_checks_every_mapped_large_and_small_png: 70 != 18",
+            "test_shared_prompt_roundtrip_keeps_full_catalog_manifest_under_budget: 539065 > 500000"
+          ]
+        }
+      ],
+      "standard_full_passed": false,
+      "exit_basis": {
+        "path": ".tools/g4/full-attempt2-exit.txt",
+        "sha256": "07846b783c23904a75834c1932bc2fad41e388e18bc32ffd73ed87bfa3844d87",
+        "bytes": 6
+      },
+      "last_completed": "Python art suite (failed)",
+      "stopped_target": "tests/art discover test_*.py",
+      "http_wire": {
+        "assertions": 256,
+        "failures": 0,
+        "captured_requests": 16,
+        "scope": "Detailed assertions in the real HTTP wrapper; kept separate, not summed again with Python test count."
+      },
+      "not_reached": [
+        "Production post-art formal manifest validation",
+        "Production post-art alpha CLI",
+        "Post-art optional real scene registry audit"
+      ],
+      "counts_scope": "Only final numeric check summaries present in this one raw log. Unnumbered restart PASS lines and incomplete failing target are not fabricated into this subtotal. No cross-round grand total."
+    },
+    {
+      "round": 3,
+      "status": "failed",
+      "exit_code": 1,
+      "log": {
+        "path": ".tools/g4/full-attempt3.log",
+        "sha256": "ebac51b568771e04577875c7535d4bc5ba680ca1eb145762a8838dbae2d23506",
+        "bytes": 18888
+      },
+      "reported_completed_godot_groups": [
+        {
+          "target": "SMOKE RESULT",
+          "passed": 57,
+          "failed": 0,
+          "total": 57
+        },
+        {
+          "target": "DELETE SAVE",
+          "passed": 52,
+          "failed": 0,
+          "total": 52
+        },
+        {
+          "target": "PROVIDER RESULT",
+          "passed": 48,
+          "failed": 0,
+          "total": 48
+        },
+        {
+          "target": "DIALOGUE GROUNDING",
+          "passed": 127,
+          "failed": 0,
+          "total": 127
+        },
+        {
+          "target": "FOLLOWUP QUESTIONS",
+          "passed": 86,
+          "failed": 0,
+          "total": 86
+        },
+        {
+          "target": "ORACLE RULES",
+          "passed": 29,
+          "failed": 0,
+          "total": 29
+        },
+        {
+          "target": "DIVINATION RESULT",
+          "passed": 543,
+          "failed": 0,
+          "total": 543
+        },
+        {
+          "target": "LEGACY DIVINATION GUESTS",
+          "passed": 30,
+          "failed": 0,
+          "total": 30
+        },
+        {
+          "target": "GENERATED CASES",
+          "passed": 80,
+          "failed": 0,
+          "total": 80
+        },
+        {
+          "target": "EVENT GOLDEN",
+          "passed": 100,
+          "failed": 0,
+          "total": 100
+        },
+        {
+          "target": "INVITATION FEEDBACK GOLDEN",
+          "passed": 22,
+          "failed": 0,
+          "total": 22
+        },
+        {
+          "target": "EVENT DATA RULES",
+          "passed": 72,
+          "failed": 0,
+          "total": 72
+        },
+        {
+          "target": "EVENT MIGRATION",
+          "passed": 112,
+          "failed": 0,
+          "total": 112
+        },
+        {
+          "target": "G3 WORKFLOWS",
+          "passed": 128,
+          "failed": 0,
+          "total": 128
+        },
+        {
+          "target": "G4 COMPONENTS",
+          "passed": 62,
+          "failed": 0,
+          "total": 62
+        },
+        {
+          "target": "GENERIC EFFECTS",
+          "passed": 43,
+          "failed": 0,
+          "total": 43
+        },
+        {
+          "target": "EVENT EFFECTS",
+          "passed": 29,
+          "failed": 0,
+          "total": 29
+        },
+        {
+          "target": "INVITATION REFERRAL",
+          "passed": 38,
+          "failed": 0,
+          "total": 38
+        },
+        {
+          "target": "EVENT NOTEBOOK UI",
+          "passed": 116,
+          "failed": 0,
+          "total": 116
+        },
+        {
+          "target": "UI_SMOKE",
+          "passed": 319,
+          "failed": 0,
+          "total": 319
+        },
+        {
+          "target": "SHOP RULES",
+          "passed": 89,
+          "failed": 0,
+          "total": 89
+        },
+        {
+          "target": "SHOP INTEGRATION",
+          "passed": 78,
+          "failed": 0,
+          "total": 78
+        },
+        {
+          "target": "SHOP CONTENT",
+          "passed": 31,
+          "failed": 0,
+          "total": 31
+        },
+        {
+          "target": "ECONOMIC VALIDATION",
+          "passed": 14,
+          "failed": 0,
+          "total": 14
+        },
+        {
+          "target": "ORDINARY CONTENT",
+          "passed": 36,
+          "failed": 0,
+          "total": 36
+        },
+        {
+          "target": "ORDINARY POPULATION",
+          "passed": 41,
+          "failed": 0,
+          "total": 41
+        },
+        {
+          "target": "SHOP CONTENT MIGRATION",
+          "passed": 102,
+          "failed": 0,
+          "total": 102
+        },
+        {
+          "target": "SHOP CONTENT TRANSACTIONS",
+          "passed": 136,
+          "failed": 0,
+          "total": 136
+        },
+        {
+          "target": "TRAFFIC ACTIVATION",
+          "passed": 99,
+          "failed": 0,
+          "total": 99
+        },
+        {
+          "target": "COMPONENT FEEDBACK",
+          "passed": 159,
+          "failed": 0,
+          "total": 159
+        },
+        {
+          "target": "SHOP CONTENT UI",
+          "passed": 57,
+          "failed": 0,
+          "total": 57
+        },
+        {
+          "target": "G4 CAPTURE",
+          "passed": 10,
+          "failed": 0,
+          "total": 10
+        },
+        {
+          "target": "PEOPLE INTEGRATION",
+          "passed": 52,
+          "failed": 0,
+          "total": 52
+        },
+        {
+          "target": "C UI RESULT",
+          "passed": 1514,
+          "failed": 0,
+          "total": 1514
+        },
+        {
+          "target": "ITEM VISUALS",
+          "passed": 214,
+          "failed": 0,
+          "total": 214
+        },
+        {
+          "target": "SHELF LAYOUT",
+          "passed": 74,
+          "failed": 0,
+          "total": 74
+        },
+        {
+          "target": "SHELF RENDER",
+          "passed": 38,
+          "failed": 0,
+          "total": 38
+        },
+        {
+          "target": "WIND/SPRING",
+          "passed": 100,
+          "failed": 0,
+          "total": 100
+        },
+        {
+          "target": "COMMITTED PRESENTATION EVENTS",
+          "passed": 277,
+          "failed": 0,
+          "total": 277
+        },
+        {
+          "target": "SCENE MOTION",
+          "passed": 49,
+          "failed": 0,
+          "total": 49
+        },
+        {
+          "target": "MOTION SETTINGS",
+          "passed": 31,
+          "failed": 0,
+          "total": 31
+        },
+        {
+          "target": "MOTION PERFORMANCE",
+          "passed": 24,
+          "failed": 0,
+          "total": 24
+        },
+        {
+          "target": "MOTION PREVIEW",
+          "passed": 7,
+          "failed": 0,
+          "total": 7
+        },
+        {
+          "target": "APPEARANCE",
+          "passed": 264,
+          "failed": 0,
+          "total": 264
+        },
+        {
+          "target": "APPEARANCE BIRTH",
+          "passed": 33,
+          "failed": 0,
+          "total": 33
+        },
+        {
+          "target": "APPEARANCE DESCRIPTION",
+          "passed": 20,
+          "failed": 0,
+          "total": 20
+        }
+      ],
+      "reported_godot_group_count": 46,
+      "reported_godot_checks": {
+        "passed": 5642,
+        "failed": 0,
+        "total": 5642
+      },
+      "python_suites": [],
+      "standard_full_passed": false,
+      "exit_basis": {
+        "path": ".tools/g4/full-attempt3-exit.txt",
+        "sha256": "07846b783c23904a75834c1932bc2fad41e388e18bc32ffd73ed87bfa3844d87",
+        "bytes": 6
+      },
+      "last_completed": "APPEARANCE DESCRIPTION 20/20",
+      "stopped_target": "tests/integration/appearance_migration.gd / v5",
+      "unsummarized_failure": {
+        "kind": "order_sensitive_fixture_assertion",
+        "text": "migration does not add invented people / v5",
+        "observed_failed_assertions": 1,
+        "actual_target_total": null,
+        "note": "No APPEARANCE MIGRATION final summary was emitted; do not infer its completed count from full2 or a later target."
+      },
+      "not_reached": [
+        "Remainder of appearance_migration target and every later standard Godot target",
+        "HTTP/person/people protocol wrappers",
+        "Python art suite",
+        "post-art formal manifest/alpha/optional registry"
+      ],
+      "counts_scope": "Only final numeric check summaries present in this one raw log. Unnumbered restart PASS lines and incomplete failing target are not fabricated into this subtotal. No cross-round grand total."
+    }
+  ],
+  "source_pre_post_full3": {
+    "pre": {
+      "path": ".tools/g4/source-pre-full3.json",
+      "sha256": "02ead61192fcae0acc431fa3ae21be5dfb2f7633bd8d4eb9b2894c39c1a255a4",
+      "bytes": 205805
+    },
+    "post": {
+      "path": ".tools/g4/source-post-full3.json",
+      "sha256": "89d567cace314beb9c78f07fc11c5b7eb89d3d3c949cbf9b98e6392a3ab1222f",
+      "bytes": 205806
+    },
+    "scope": "Tracked and nonignored source, data, tests, tools and formal assets; excludes docs and generated local outputs.",
+    "head": "d6a0847d4308dfa8f0830e83ce733dad7e63e702",
+    "same_head": true,
+    "pre_count": 1201,
+    "post_count": 1201,
+    "exact_maps_equal": true,
+    "added": [],
+    "removed": [],
+    "changed": [],
+    "current_files_rehashed": 1201,
+    "current_files_different_from_post_map": [],
+    "note": "Map labels differ; the per-path SHA/byte maps are exactly equal. Docs and ignored evidence are outside this source map."
+  },
+  "appearance_v5_failure": {
+    "classification": "actual fixture/source evidence supports a false positive from ordered keys arrays, not invented/lost identity",
+    "not_rerun": true,
+    "does_not_change_full3_exit": true,
+    "fixture": {
+      "path": ".tools/art/a4/migration-saves/run_eca6b33ac86ef7cd46038f3153483119/save_07a37817d3cebf318185597dfc156681.json",
+      "sha256": "04baeb891ca7ecd6725780058ea9e52fa79b87268d17e943b97449fefddd1c1a",
+      "bytes": 36687
+    },
+    "pre_legacy_newgame_backup": {
+      "path": ".tools/art/a4/migration-saves/run_eca6b33ac86ef7cd46038f3153483119/save_07a37817d3cebf318185597dfc156681.json.bak",
+      "sha256": "2c120ab34c7fc4f83188cd316461b8b235021d61f7e9d3fdb997f7a3b9d41285",
+      "bytes": 45220
+    },
+    "fixture_checksums_valid": true,
+    "profile_count": 24,
+    "sets_equal": true,
+    "creation_order_reconstructed_from_actual_arrival_ids_and_source_insertion": [
+      "npc_lin",
+      "npc_lin_friend",
+      "npc_o_0_0",
+      "npc_o_0_0_friend",
+      "npc_o_0_1",
+      "npc_o_0_1_friend",
+      "npc_o_0_2",
+      "npc_o_0_2_friend",
+      "npc_o_0_3",
+      "npc_o_0_3_friend",
+      "npc_o_0_4",
+      "npc_o_0_4_friend",
+      "npc_o_0_5",
+      "npc_o_0_5_friend",
+      "npc_o_0_6",
+      "npc_o_0_6_friend",
+      "npc_o_0_7",
+      "npc_o_0_7_friend",
+      "npc_o_0_8",
+      "npc_o_0_8_friend",
+      "npc_o_0_9",
+      "npc_o_0_9_friend",
+      "npc_o_0_10",
+      "npc_o_0_10_friend"
+    ],
+    "actual_json_key_order": [
+      "npc_lin",
+      "npc_lin_friend",
+      "npc_o_0_0",
+      "npc_o_0_0_friend",
+      "npc_o_0_1",
+      "npc_o_0_10",
+      "npc_o_0_10_friend",
+      "npc_o_0_1_friend",
+      "npc_o_0_2",
+      "npc_o_0_2_friend",
+      "npc_o_0_3",
+      "npc_o_0_3_friend",
+      "npc_o_0_4",
+      "npc_o_0_4_friend",
+      "npc_o_0_5",
+      "npc_o_0_5_friend",
+      "npc_o_0_6",
+      "npc_o_0_6_friend",
+      "npc_o_0_7",
+      "npc_o_0_7_friend",
+      "npc_o_0_8",
+      "npc_o_0_8_friend",
+      "npc_o_0_9",
+      "npc_o_0_9_friend"
+    ],
+    "first_mismatch": {
+      "index": 5,
+      "creation": "npc_o_0_1_friend",
+      "json": "npc_o_0_10"
+    },
+    "day": {
+      "arrival_ids": [
+        "arrival_0_0",
+        "arrival_0_1",
+        "arrival_0_2",
+        "arrival_0_3",
+        "arrival_0_4",
+        "arrival_0_5",
+        "arrival_0_6",
+        "arrival_0_7",
+        "arrival_0_8",
+        "arrival_0_9",
+        "arrival_0_10"
+      ],
+      "burst": {
+        "at": 1085,
+        "size": 5,
+        "source": "burst_group_referral"
+      },
+      "day": 0,
+      "expected": 2.4,
+      "natural_count": 6,
+      "weather": "cloudy",
+      "weather_label": "阴"
+    },
+    "source_seed_same": true,
+    "days_same": true,
+    "arrivals_same": true,
+    "birthday_all_equal": true,
+    "profile_field_differences": {
+      "npc_lin": [],
+      "npc_lin_friend": [
+        "appearance"
+      ],
+      "npc_o_0_0": [
+        "appearance"
+      ],
+      "npc_o_0_0_friend": [
+        "appearance"
+      ],
+      "npc_o_0_1": [
+        "appearance"
+      ],
+      "npc_o_0_10": [
+        "appearance"
+      ],
+      "npc_o_0_10_friend": [
+        "appearance"
+      ],
+      "npc_o_0_1_friend": [
+        "appearance"
+      ],
+      "npc_o_0_2": [
+        "appearance"
+      ],
+      "npc_o_0_2_friend": [
+        "appearance"
+      ],
+      "npc_o_0_3": [
+        "appearance"
+      ],
+      "npc_o_0_3_friend": [
+        "appearance"
+      ],
+      "npc_o_0_4": [
+        "appearance"
+      ],
+      "npc_o_0_4_friend": [
+        "appearance"
+      ],
+      "npc_o_0_5": [
+        "appearance"
+      ],
+      "npc_o_0_5_friend": [
+        "appearance"
+      ],
+      "npc_o_0_6": [
+        "appearance"
+      ],
+      "npc_o_0_6_friend": [
+        "appearance"
+      ],
+      "npc_o_0_7": [
+        "appearance"
+      ],
+      "npc_o_0_7_friend": [
+        "appearance"
+      ],
+      "npc_o_0_8": [
+        "appearance"
+      ],
+      "npc_o_0_8_friend": [
+        "appearance"
+      ],
+      "npc_o_0_9": [
+        "appearance"
+      ],
+      "npc_o_0_9_friend": [
+        "appearance"
+      ]
+    },
+    "mechanism": [
+      "appearance_migration.gd:82 compares profiles.keys() Array order, not ID set.",
+      "New game candidate creates fixed IDs then ordinary index0..10, each owner then friend.",
+      "SaveService._write_checked JSON.stringify(snapshot,\"\",true,true) serializes dictionary keys sorted.",
+      "PeopleBridge.initialize returns immediately when people already exists; appearance migration updates values on existing keys; later family/ordinary initialization adds metadata only."
+    ],
+    "limits": "Actual post-load in-memory state was not exported or reexecuted independently; source chain plus actual serialized fixture explains the failed order comparison. No new migration GREEN is claimed.",
+    "source_shas": {
+      "tests/integration/appearance_migration.gd": "e0f20d3f76ff0ce30025d43be5527c0bc15e08e5a1746df073b9377d06cb548f",
+      "scripts/save/save_service.gd": "a91f83deca81c82d46b4f04889157bb460c71b407d08774df54ef6fdcbb1a24b",
+      "scripts/core/game_state.gd": "9b6f25dc156a441634f1e1a49aa220bad12105a0a4c4220ec2dbb886a1fcadd0",
+      "scripts/people/people.gd": "8385688446d592964412b8f3f4570c48c70f1f8077b1da4bed2442f209905b17"
+    }
+  },
+  "standalone_narrow_targets": [
+    {
+      "target": "ordinary_content",
+      "log": {
+        "path": ".tools/art/g4/ordinary-content-final-green.log",
+        "sha256": "3dc9ee0739921e920bede93514fc13aac4c5d50e62de20bffc3fcb59a176ab85",
+        "bytes": 116
+      },
+      "reported_check_groups": [
+        {
+          "target": "ORDINARY CONTENT",
+          "passed": 36,
+          "failed": 0,
+          "total": 36
+        }
+      ],
+      "python_test_count": null,
+      "python_final_status": null,
+      "explicit_exit_code": null,
+      "exit_limit": "If no marker, numeric summary/owner handoff is evidence; this collector does not invent a new process exit.",
+      "not_additive_with_standard_full": true
+    },
+    {
+      "target": "ordinary_population",
+      "log": {
+        "path": ".tools/g4/people-ordinary_population-metadata-green.log",
+        "sha256": "50063961b9a58093ff5fd8d8be61f65f5f30bcb0021b7012f8474fb3821f1b88",
+        "bytes": 119
+      },
+      "reported_check_groups": [
+        {
+          "target": "ORDINARY POPULATION",
+          "passed": 41,
+          "failed": 0,
+          "total": 41
+        }
+      ],
+      "python_test_count": null,
+      "python_final_status": null,
+      "explicit_exit_code": null,
+      "exit_limit": "If no marker, numeric summary/owner handoff is evidence; this collector does not invent a new process exit.",
+      "not_additive_with_standard_full": true
+    },
+    {
+      "target": "content_rules",
+      "log": {
+        "path": ".tools/g4/shop-content_rules-scheduled-and-source-green2.log",
+        "sha256": "0760183b902cc110d1c2345e961e05aa6825986c88a646167c19d1ea118faaa6",
+        "bytes": 112
+      },
+      "reported_check_groups": [
+        {
+          "target": "SHOP CONTENT",
+          "passed": 31,
+          "failed": 0,
+          "total": 31
+        }
+      ],
+      "python_test_count": null,
+      "python_final_status": null,
+      "explicit_exit_code": null,
+      "exit_limit": "If no marker, numeric summary/owner handoff is evidence; this collector does not invent a new process exit.",
+      "not_additive_with_standard_full": true
+    },
+    {
+      "target": "economic_validation",
+      "log": {
+        "path": ".tools/g4/shop-economic_validation-scheduled-and-source-green2.log",
+        "sha256": "723d932da5fe4d1bdd5e33805c77d1598f6e78c0dda547919dc8f8904f62f5fd",
+        "bytes": 119
+      },
+      "reported_check_groups": [
+        {
+          "target": "ECONOMIC VALIDATION",
+          "passed": 14,
+          "failed": 0,
+          "total": 14
+        }
+      ],
+      "python_test_count": null,
+      "python_final_status": null,
+      "explicit_exit_code": null,
+      "exit_limit": "If no marker, numeric summary/owner handoff is evidence; this collector does not invent a new process exit.",
+      "not_additive_with_standard_full": true
+    },
+    {
+      "target": "quality",
+      "log": {
+        "path": ".tools/g4/content-quality-green1.log",
+        "sha256": "7d2d861c9aa295480a08bc860e44037c302035a05fcd597c95c03f62f6f367cd",
+        "bytes": 112
+      },
+      "reported_check_groups": [
+        {
+          "target": "SHOP CONTENT",
+          "passed": 16,
+          "failed": 0,
+          "total": 16
+        }
+      ],
+      "python_test_count": null,
+      "python_final_status": null,
+      "explicit_exit_code": null,
+      "exit_limit": "If no marker, numeric summary/owner handoff is evidence; this collector does not invent a new process exit.",
+      "not_additive_with_standard_full": true
+    },
+    {
+      "target": "codec",
+      "log": {
+        "path": ".tools/g4/content-codec-green.log",
+        "sha256": "8a29f814a44959e6b5cfe4ca1ecc15720b5554f9ead9e2de3d70bd3cb68a8369",
+        "bytes": 122
+      },
+      "reported_check_groups": [
+        {
+          "target": "SHOP CONTENT MIGRATION",
+          "passed": 15,
+          "failed": 0,
+          "total": 15
+        }
+      ],
+      "python_test_count": null,
+      "python_final_status": null,
+      "explicit_exit_code": null,
+      "exit_limit": "If no marker, numeric summary/owner handoff is evidence; this collector does not invent a new process exit.",
+      "not_additive_with_standard_full": true
+    },
+    {
+      "target": "content_transactions",
+      "log": {
+        "path": ".tools/g4/integration-shop_content_transactions-scheduled-and-source-green2.log",
+        "sha256": "c78a92ed54a11096a93fee47a5c60bde264e48b27fb90625997d788bf59cf6a5",
+        "bytes": 126
+      },
+      "reported_check_groups": [
+        {
+          "target": "SHOP CONTENT TRANSACTIONS",
+          "passed": 136,
+          "failed": 0,
+          "total": 136
+        }
+      ],
+      "python_test_count": null,
+      "python_final_status": null,
+      "explicit_exit_code": null,
+      "exit_limit": "If no marker, numeric summary/owner handoff is evidence; this collector does not invent a new process exit.",
+      "not_additive_with_standard_full": true
+    },
+    {
+      "target": "content_migration",
+      "log": {
+        "path": ".tools/g4/integration-shop_content_migration-scheduled-and-source-green2.log",
+        "sha256": "1e688b76ae70a96ecdbb875f9ef2e6a3c7ae29281b4b2c55f59d3c942cc25ad2",
+        "bytes": 123
+      },
+      "reported_check_groups": [
+        {
+          "target": "SHOP CONTENT MIGRATION",
+          "passed": 102,
+          "failed": 0,
+          "total": 102
+        }
+      ],
+      "python_test_count": null,
+      "python_final_status": null,
+      "explicit_exit_code": null,
+      "exit_limit": "If no marker, numeric summary/owner handoff is evidence; this collector does not invent a new process exit.",
+      "not_additive_with_standard_full": true
+    },
+    {
+      "target": "traffic",
+      "log": {
+        "path": ".tools/g4/traffic-boost-set-green.log",
+        "sha256": "8fe2e06530df99d2522fb73f247b10723e15d4ad696852ebf01f1db9dd75a9e2",
+        "bytes": 182
+      },
+      "reported_check_groups": [
+        {
+          "target": "TRAFFIC ACTIVATION",
+          "passed": 99,
+          "failed": 0,
+          "total": 99
+        }
+      ],
+      "python_test_count": null,
+      "python_final_status": null,
+      "explicit_exit_code": null,
+      "exit_limit": "If no marker, numeric summary/owner handoff is evidence; this collector does not invent a new process exit.",
+      "not_additive_with_standard_full": true
+    },
+    {
+      "target": "G3_components",
+      "log": {
+        "path": ".tools/art/g4-g3-public-advice-green.log",
+        "sha256": "055a6e1d5c597394ba2c3759ce3713078cc0c0dd6242d9b9645a9b97fc5f1bf3",
+        "bytes": 113
+      },
+      "reported_check_groups": [
+        {
+          "target": "G4 COMPONENTS",
+          "passed": 62,
+          "failed": 0,
+          "total": 62
+        }
+      ],
+      "python_test_count": null,
+      "python_final_status": null,
+      "explicit_exit_code": 0,
+      "exit_limit": "Actual matching exit marker read; no new execution.",
+      "not_additive_with_standard_full": true,
+      "final_standard_source": {
+        "path": ".tools/g4/full-attempt2.log",
+        "line": 166,
+        "target": "G4 COMPONENTS",
+        "passed": 62,
+        "failed": 0,
+        "total": 62,
+        "not_additive_with_standalone": true
+      },
+      "superseded_history": {
+        "path": ".tools/g4/g3-components-shared-green.log",
+        "passed": 56,
+        "total": 56,
+        "scope": "Older helper-only result, not current final coverage; not added to62."
+      }
+    },
+    {
+      "target": "component_feedback",
+      "log": {
+        "path": ".tools/g4/tests-integration-shop_component_feedback-final.log",
+        "sha256": "f2c9e9969b8e3d7085f0259834b180b98c765a23f8bd59ffd810735b63f0a556",
+        "bytes": 119
+      },
+      "reported_check_groups": [
+        {
+          "target": "COMPONENT FEEDBACK",
+          "passed": 161,
+          "failed": 0,
+          "total": 161
+        }
+      ],
+      "python_test_count": null,
+      "python_final_status": null,
+      "explicit_exit_code": null,
+      "exit_limit": "If no marker, numeric summary/owner handoff is evidence; this collector does not invent a new process exit.",
+      "not_additive_with_standard_full": true,
+      "standard_full2_scope": {
+        "target": "COMPONENT FEEDBACK",
+        "passed": 160,
+        "failed": 0,
+        "total": 160,
+        "source": ".tools/g4/full-attempt2.log",
+        "not_additive": true,
+        "count_explanation": "Actual wait/new-day branches vary; full2 reports160, separate final narrow reports161."
+      }
+    },
+    {
+      "target": "content_UI",
+      "log": {
+        "path": ".tools/art/g4/shop-content-scheduled-traffic-green.log",
+        "sha256": "ff952ae1e93b728b2c5f5866eb6ad88e413c1331c9c20133d21b3a29a42c52a6",
+        "bytes": 672
+      },
+      "reported_check_groups": [
+        {
+          "target": "SHOP CONTENT UI",
+          "passed": 57,
+          "failed": 0,
+          "total": 57
+        }
+      ],
+      "python_test_count": null,
+      "python_final_status": null,
+      "explicit_exit_code": 0,
+      "exit_limit": "If no marker, numeric summary/owner handoff is evidence; this collector does not invent a new process exit.",
+      "not_additive_with_standard_full": true
+    },
+    {
+      "target": "ArrivalUI",
+      "log": {
+        "path": ".tools/art/g4-arrival-ui-cost-green.log",
+        "sha256": "cf15dc3139f632574d9b975251d9a629e683203f5b166b427af2d502d3fc4600",
+        "bytes": 117
+      },
+      "reported_check_groups": [
+        {
+          "target": "ARRIVAL UI RESULT",
+          "passed": 45,
+          "failed": 0,
+          "total": 45
+        }
+      ],
+      "python_test_count": null,
+      "python_final_status": null,
+      "explicit_exit_code": null,
+      "exit_limit": "If no marker, numeric summary/owner handoff is evidence; this collector does not invent a new process exit.",
+      "not_additive_with_standard_full": true
+    },
+    {
+      "target": "legacy_rules",
+      "log": {
+        "path": ".tools/g4/legacy-shop-rules-compatible-attempt1.log",
+        "sha256": "318667e9ead0f50f1000d7fb179f5d4ec7e8a1ede050dfe280cad7f6e004b0f9",
+        "bytes": 110
+      },
+      "reported_check_groups": [
+        {
+          "target": "SHOP RULES",
+          "passed": 89,
+          "failed": 0,
+          "total": 89
+        }
+      ],
+      "python_test_count": null,
+      "python_final_status": null,
+      "explicit_exit_code": null,
+      "exit_limit": "If no marker, numeric summary/owner handoff is evidence; this collector does not invent a new process exit.",
+      "not_additive_with_standard_full": true
+    },
+    {
+      "target": "synthetic_v2_integration",
+      "log": {
+        "path": ".tools/g4/shop-integration-after-v2-projection.log",
+        "sha256": "fc3018e7ee303b49ca92458b7d12362ccbd337a1630ca4c58d36d9778740fe32",
+        "bytes": 243
+      },
+      "reported_check_groups": [
+        {
+          "target": "SHOP INTEGRATION",
+          "passed": 78,
+          "failed": 0,
+          "total": 78
+        }
+      ],
+      "python_test_count": null,
+      "python_final_status": null,
+      "explicit_exit_code": null,
+      "exit_limit": "If no marker, numeric summary/owner handoff is evidence; this collector does not invent a new process exit.",
+      "not_additive_with_standard_full": true
+    },
+    {
+      "target": "family_UI_fixture",
+      "log": {
+        "path": ".tools/g4/family-ui-g4-fixture-green.log",
+        "sha256": "bf4b2ab242fd761d3bd1f0d1b6cc20cb1a9771ab4bbbc7cc23925903d70d94c6",
+        "bytes": 526
+      },
+      "reported_check_groups": [
+        {
+          "target": "FAMILY UI",
+          "passed": 133,
+          "failed": 0,
+          "total": 133
+        }
+      ],
+      "python_test_count": null,
+      "python_final_status": null,
+      "explicit_exit_code": 0,
+      "exit_limit": "If no marker, numeric summary/owner handoff is evidence; this collector does not invent a new process exit.",
+      "not_additive_with_standard_full": true
+    },
+    {
+      "target": "scene_visuals_fixture",
+      "log": {
+        "path": ".tools/g4/scene-visuals-g4-catalog-fixture-green.log",
+        "sha256": "42e2c5d47950bdaaa4b390be96e56a6a941fba60c25621ad6ef8524f80c98c4a",
+        "bytes": 333
+      },
+      "reported_check_groups": [
+        {
+          "target": "SCENE VISUALS",
+          "passed": 1644,
+          "failed": 0,
+          "total": 1644
+        }
+      ],
+      "python_test_count": null,
+      "python_final_status": null,
+      "explicit_exit_code": 0,
+      "exit_limit": "If no marker, numeric summary/owner handoff is evidence; this collector does not invent a new process exit.",
+      "not_additive_with_standard_full": true
+    },
+    {
+      "target": "capture_schema",
+      "log": {
+        "path": ".tools/g4/tail-2-shop_content_capture.log",
+        "sha256": "9421472dcc735e446f36af5587a6c4d46e79129740277127e8500c16c689824c",
+        "bytes": 176
+      },
+      "reported_check_groups": [
+        {
+          "target": "G4 CAPTURE",
+          "passed": 10,
+          "failed": 0,
+          "total": 10
+        }
+      ],
+      "python_test_count": null,
+      "python_final_status": null,
+      "explicit_exit_code": null,
+      "exit_limit": "If no marker, numeric summary/owner handoff is evidence; this collector does not invent a new process exit.",
+      "not_additive_with_standard_full": true
+    },
+    {
+      "target": "economic_12day_smoke",
+      "log": {
+        "path": ".tools/g4/economic-scheduled-checkpoint-probe-attempt1.log",
+        "sha256": "3f86763f14502b1ec686118e227e2c6b59ae2752ee2cf4bb439e46296f501ce4",
+        "bytes": 990
+      },
+      "reported_check_groups": [
+        {
+          "target": "ECONOMIC SIMULATION",
+          "passed": 170,
+          "failed": 0,
+          "total": 170
+        }
+      ],
+      "python_test_count": null,
+      "python_final_status": null,
+      "explicit_exit_code": null,
+      "exit_limit": "If no marker, numeric summary/owner handoff is evidence; this collector does not invent a new process exit.",
+      "not_additive_with_standard_full": true
+    },
+    {
+      "target": "probe_files_validator",
+      "log": {
+        "path": ".tools/g4/economic-probe-final-validator-green.log",
+        "sha256": "4baf441fe7c56e981d144ce83c6a649a74b51d831dc8178d3b2f0c65eb0eda03",
+        "bytes": 120
+      },
+      "reported_check_groups": [
+        {
+          "target": "ECONOMIC FINAL FILES",
+          "passed": 40,
+          "failed": 0,
+          "total": 40
+        }
+      ],
+      "python_test_count": null,
+      "python_final_status": null,
+      "explicit_exit_code": null,
+      "exit_limit": "If no marker, numeric summary/owner handoff is evidence; this collector does not invent a new process exit.",
+      "not_additive_with_standard_full": true
+    },
+    {
+      "target": "item_prompt_recipe",
+      "log": {
+        "path": ".tools/g4/item-prompt-recipe-green.log",
+        "sha256": "282f95f6f99bc43d60db6b7d3883a152de9c2f0bee1f0d30d2842c731f150ff3",
+        "bytes": 428
+      },
+      "reported_check_groups": [],
+      "python_test_count": 3,
+      "python_final_status": "OK",
+      "explicit_exit_code": null,
+      "exit_limit": "If no marker, numeric summary/owner handoff is evidence; this collector does not invent a new process exit.",
+      "not_additive_with_standard_full": true
+    },
+    {
+      "target": "alpha_mapping_oracle",
+      "log": {
+        "path": ".tools/g4/item-alpha-mapping-oracle-green.log",
+        "sha256": "b120b0a6623bb6b35a6c3962fca6368f2999738b8b2e9747ec9a9c6b86aa4a3c",
+        "bytes": 215
+      },
+      "reported_check_groups": [],
+      "python_test_count": 1,
+      "python_final_status": "OK",
+      "explicit_exit_code": null,
+      "exit_limit": "If no marker, numeric summary/owner handoff is evidence; this collector does not invent a new process exit.",
+      "not_additive_with_standard_full": true
+    },
+    {
+      "target": "proposal_regressions",
+      "log": {
+        "path": ".tools/g4/portrait-proposal-new-regressions-green.log",
+        "sha256": "2f0714a9e3ac61426b23717754b3c0827dca2f64ad40390da59c48b35fa4a2ff",
+        "bytes": 371
+      },
+      "reported_check_groups": [],
+      "python_test_count": 2,
+      "python_final_status": "OK",
+      "explicit_exit_code": null,
+      "exit_limit": "If no marker, numeric summary/owner handoff is evidence; this collector does not invent a new process exit.",
+      "not_additive_with_standard_full": true
+    },
+    {
+      "target": "original_budget_regression",
+      "log": {
+        "path": ".tools/g4/portrait-original-budget-single-green.log",
+        "sha256": "8708e66434963ad60eec511000bd913a86b4f37c7dad74362839ec5c7ab3a931",
+        "bytes": 227
+      },
+      "reported_check_groups": [],
+      "python_test_count": 1,
+      "python_final_status": "OK",
+      "explicit_exit_code": null,
+      "exit_limit": "If no marker, numeric summary/owner handoff is evidence; this collector does not invent a new process exit.",
+      "not_additive_with_standard_full": true
+    }
+  ],
+  "narrow_aggregation_policy": "Repeated full rounds, standalone target runs, HTTP nested wire assertions, GUI, source validations and economic checks are separate scopes. Never sum these rows to claim a full pass.",
+  "GUI": [
+    {
+      "target": "shop",
+      "receipt": {
+        "path": ".tools/g4/gpu-shop-attempt1.json",
+        "sha256": "02c013b1ba869dada10830ab7fb605827d0eeb0a0a2b71216045e39578f0c42a",
+        "bytes": 11848
+      },
+      "log": {
+        "path": ".tools/g4/gpu-shop-attempt1.log",
+        "sha256": "2e95743fe27d7984e1d05df4047664913208e5cdb7aac2ea32d0cfa070a99889",
+        "bytes": 263
+      },
+      "exit_code": 0,
+      "passed": 1544,
+      "failed": 0,
+      "total": 1544,
+      "frames": 30,
+      "renderer": "Windows Compatibility / Intel Iris Xe",
+      "visual_acceptance": "Pending root opening every fresh frame; mechanical pass is not visual approval.",
+      "scope": "Real GUI mechanical assertions and captures, separate from root image/art scores."
+    },
+    {
+      "target": "content",
+      "receipt": {
+        "path": ".tools/g4/gpu-content-attempt1.json",
+        "sha256": "1ded4c518769d7394dfba03cba91f63fc2e150be8f9cced2648b7bd514885ba0",
+        "bytes": 5321
+      },
+      "log": {
+        "path": ".tools/g4/gpu-content-attempt1.log",
+        "sha256": "3eb78de051c871b4177999b2e7d5c1230ac9bc0367fb1a211dc81d7bd70a07cd",
+        "bytes": 271
+      },
+      "exit_code": 0,
+      "passed": 138,
+      "failed": 0,
+      "total": 138,
+      "frames": 12,
+      "renderer": "Windows Compatibility / Intel Iris Xe",
+      "visual_acceptance": "Pending root opening every fresh frame; mechanical pass is not visual approval.",
+      "scope": "Real GUI mechanical assertions and captures, separate from root image/art scores."
+    }
+  ],
+  "remaining_art": {
+    "status": "terminal_after_dispatch",
+    "receipt": {
+      "path": ".tools/g4/remaining-art-checks.json",
+      "sha256": "f0923290f8152430396ae8270f1add7e7083004831be8c3286f07c16c5c0269d",
+      "bytes": 994
+    },
+    "standard_full_passed": false,
+    "unit": {
+      "passed": 238,
+      "failed": 1,
+      "skipped": 1,
+      "total": 240,
+      "exit_code": 1,
+      "log": {
+        "path": ".tools/g4/remaining-art-unit.log",
+        "sha256": "6cd1c09e837719d3ce424453a0872d73a0e0dcac8ac3f4049738fecfaee6cd46",
+        "bytes": 28512
+      },
+      "failure": "test_local_audit.LocalAuditTests.test_resolved_directory_link_cannot_read_or_write_outside_workspace: cmd mklink /J returned Access is denied",
+      "skip": "test_placeholder_scenes.PlaceholderScenesTests.test_output_preflight_rejects_existing_junction_escape: Windows denied temporary junction creation"
+    },
+    "formal": {
+      "passed": 361,
+      "total": 361,
+      "exit_code": 0,
+      "log": {
+        "path": ".tools/g4/remaining-art-formal.log",
+        "sha256": "a2391fd960da6e2bd2c0dc5cf9a331aa9c82ca342e8c0b16b9eecfb9dc1b4d96",
+        "bytes": 106
+      }
+    },
+    "alpha": {
+      "passed": 70,
+      "total": 70,
+      "exit_code": 0,
+      "log": {
+        "path": ".tools/g4/remaining-art-alpha.log",
+        "sha256": "bdab93761e4d6db1220c5e979b83f6781557827846b81576d00ff2e932b0b5e8",
+        "bytes": 43719
+      }
+    },
+    "environment_single_retry": {
+      "scope": "Single environment-only rerun after remaining-art unit failure; not a fourth standard full suite",
+      "command": "python -m unittest discover -s tests/art -p test_local_audit.py -k test_resolved_directory_link_cannot_read_or_write_outside_workspace -v",
+      "working_directory": "D:/MagicStore",
+      "sandbox_permissions": "require_escalated",
+      "tool_chunk_id": "41f265",
+      "exit_code": 0,
+      "passed": 1,
+      "total": 1,
+      "test_seconds": 0.056,
+      "source_changed": false,
+      "original_failure_retained": ".tools/g4/remaining-art-unit.log",
+      "standard_full_passed": false,
+      "receipt": {
+        "path": ".tools/g4/junction-environment-single.json",
+        "sha256": "1cf2da3f607c149ba0b3a33f377e524966b926ecacae33882a3115ec438e1023",
+        "bytes": 582
+      },
+      "original_batch_unchanged": true,
+      "original_skip_not_rerun": true,
+      "aggregation_note": "This one-test success is separate. It does not turn the original 238pass/1fail/1skip batch into a 240/240 result or change any standard full exit."
+    },
+    "not_additive_with_full2_art": true
+  },
+  "economic_formal": {
+    "status": "running_owner_reported",
+    "owned_session_id": 72701,
+    "required_actual_days": 180,
+    "completed_actual_days": null,
+    "terminal_exit_code": null,
+    "scope": "4 continuous30day plus4 continuation15day; 12day smoke above is separate. Collector did not poll or control the live session."
+  },
+  "manifest": {
+    "path": "assets/ART_ASSET_MANIFEST.json",
+    "sha256": "b7ca9f61797f2fece5fc8c320e7d16ef1ea37a0f546c6575f991501a491152f1",
+    "bytes": 499845,
+    "asset_count": 361,
+    "runtime_copies": 88,
+    "regeneration_projection_candidate_bytes": 461506,
+    "candidate_is_central": false
+  },
+  "final_independent_reviews": [
+    ".tools/g4/traffic-independent-review.md",
+    ".tools/g4/legacy-shop-fixture-independent-review.md",
+    ".tools/g4/scene-visuals-fixture-independent-review.md",
+    ".tools/g4/full2-art-failures-independent-review.md"
+  ],
+  "root_visual_review": {
+    "receipt": {
+      "path": "docs/codex/results/G4-visual-review.json",
+      "sha256": "b5a1e371e563eefb3464c3cd74939f3efcb4b6a1c265b9b5119a466dc9c22e2d",
+      "bytes": 45253
+    },
+    "captures_receipt": {
+      "path": "docs/codex/results/G4-captures.json",
+      "sha256": "a83b327ed8e06a226bb117ee9c9ff50334d56ef4345ef0ff7ad4781b0555cd5c",
+      "bytes": 3592
+    },
+    "passed": 223,
+    "failed": 17,
+    "total": 240,
+    "raw_frames": 42,
+    "retained_JPG": 6,
+    "retained_JPG_bytes": 1718088,
+    "status": "partial",
+    "scope": "Root individually opened all 42 fresh raw GPU frames and all six retained quality85 JPGs; code frozen after three full self-check rounds. Automatic assertions do not certify visual quality.",
+    "not_additive_with_GUI_assertions": true
+  },
+  "publication_note": "Final bounded task report: three standard full rounds failed; independent narrow, visual and one continuous30-day evidence remain separate scopes.",
+  "manual_visual": {
+    "raw_frames": 42,
+    "retained_frames": 6,
+    "passed": 223,
+    "total": 240,
+    "status": "部分完成",
+    "remaining_failures": [
+      "旧林照晚水彩披风头像与v3笔触不同（继承A4）",
+      "商店数量标签断为两行、输入框过高",
+      "部分弹窗标题缺古纸衬底、档案页签和下拉选中项灰底对比不足"
+    ],
+    "report": "docs/codex/results/G4-visual-review.json"
+  },
+  "junction_environment_rerun": {
+    "scope": "Single environment-only rerun after remaining-art unit failure; not a fourth standard full suite",
+    "command": "python -m unittest discover -s tests/art -p test_local_audit.py -k test_resolved_directory_link_cannot_read_or_write_outside_workspace -v",
+    "working_directory": "D:/MagicStore",
+    "sandbox_permissions": "require_escalated",
+    "tool_chunk_id": "41f265",
+    "exit_code": 0,
+    "passed": 1,
+    "total": 1,
+    "test_seconds": 0.056,
+    "source_changed": false,
+    "original_failure_retained": ".tools/g4/remaining-art-unit.log",
+    "standard_full_passed": false
+  },
+  "formal_economic_run": {
+    "status": "stopped_after_first_continuous_30_days",
+    "original_expected_days": 180,
+    "completed_continuous_days": 30,
+    "completed_checkpoint_days": 1,
+    "additional_checkpoint_partial_day": 17,
+    "native_exit_code": -1,
+    "terminal_reason": "Root chose original handbook30-day acceptance after the three-round bound; only the verified owned test engine was stopped after closed continuous files and checkpoint_load.",
+    "stop_receipt": "docs/codex/results/G4-economy-stop.json",
+    "stop_receipt_sha256": "4a911c7e40bb481564159fd3d98d31bf99395bfdb79b40da931213b72355afa9",
+    "first30_report": "docs/codex/results/G4-economy-validation.json",
+    "formal_180_complete": false,
+    "checkpoint_continuation_verified": false,
+    "standard_full_passed": false
+  },
+  "economic_export": {
+    "exit_code": 0,
+    "tool_chunk_id": "eec96c",
+    "command": "python -B .tools/g4/export_first30.py --workspace D:/MagicStore --stop-receipt .tools/g4/stop-first30-receipt.json --confirm-stopped",
+    "helper_sha256": "16b3541905c394dec24c3c450b85e75e46d3e4336471504bdc2373a3ba6792df",
+    "actual_export_log_sha256": "81e6b8f9eb4910c531cd173924dc75db3eaf773202fd26712c13d0f533150c1f",
+    "authored_regression_passed": 8,
+    "authored_regression_total": 8,
+    "authored_green_log_sha256": "9e6daa204a81a676498381e25a69f06413e1029650e747ebe553045c427e6587",
+    "authored_red_log_sha256": "a6e5aa36886afb4f3ffbcd4654efe988399c970c4fad0a78419cfd32deb24261",
+    "peer_review_sha256": "7a7c26288bf19228ed583e6fd0ca9cad250e94819d719205832283294d3d6b83",
+    "root_real_checkpoint_probe_chunk": "0e6b1f",
+    "source_scope": "Actual sealed day15 quote+settle source uniquely maps to paid entry, equal payment and actual before/after clocks; separate from authored regression and standard full tests."
+  },
+  "economic_plot_review": {
+    "root_opened": true,
+    "preview": ".tools/g4/first30-preview.png",
+    "preview_sha256": "4f45dafc7bf380a4c7cca7f1ba8c24ae470c6523517e2f8f46ae4f2e9b41fddb",
+    "result": "Passed plot presentation: one continuous blue curve, initial point and30 daily closes, x0..30, readable Chinese units and explicit single-seed/balanced title; actual40→37→2562, no clipped cash.",
+    "balance_result": "Partial: no rapid zero in this trace; last15 days accumulated1538 coins, sustained accumulation remains a design risk. No infinite-horizon stability claim."
+  },
+  "remaining_failures": [
+    "Three standard full rounds failed; final old appearance-migration key-order assertion retained without a fourth round.",
+    "Manual five-criterion visual review223/240: old portrait brush mismatch plus extra quantity/title/selection theme defects.",
+    "Single30-day curve does not establish an upper bound or multi-strategy balance; extra180-day protocol not completed.",
+    "Ordinary first-visit generic relationship disclosure action is still missing; relationship product tests begin with legally disclosed historical context."
+  ],
+  "final_source_freeze": {
+    "report": "docs/codex/results/G4-source-freeze.json",
+    "sha256": "d4331d42a48f45060f73250c639a0a0645e63bf17cd2ac240c83a598ce4a3a71",
+    "source_paths": 1201,
+    "source_differences": 0,
+    "v2_files": 56,
+    "v2_differences": 0
+  },
+  "publication_metadata": {
+    "report": "docs/codex/results/G4-publication-integrity.json",
+    "sha256": "21ee5a6f35b481bf429ffd0bad2feac8d4cb29085e74b6a884bdc8a9b05f2a75",
+    "game_source_differences": 0,
+    "git_attribute_changes": 1,
+    "note": "The1201-file freeze was exact until final publication; afterward only four evidence-specific Git attributes changed. All other1200 paths are still exact."
+  }
+}

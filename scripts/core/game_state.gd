@@ -947,6 +947,7 @@ func _commit(candidate: Dictionary, action: Dictionary, message: String, result:
 	Shop.sync_effects(candidate, shop_config)
 	PeopleBridge.sync(candidate, people_config, _divination)
 	candidate = SaveService._normalize_numbers(candidate)
+	result = SaveService._normalize_numbers(result)
 	candidate.state_version = int(state.state_version) + 1
 	var reply: Dictionary = {"success": true, "error_code": "", "message": message, "state_version": candidate.state_version, "result": result, "action_type": action.type}
 	candidate.processed_actions[action.action_id] = reply.duplicate(true)
@@ -997,6 +998,10 @@ func _initialize_integrated(candidate: Dictionary, fresh: bool = false) -> bool:
 	if int(candidate.schema_version) < 7:
 		People.initialize_family_library(candidate.people,people_config.get("family_library",{}),"since_migration")
 		candidate.schema_version = 7
+	if int(candidate.schema_version) < 8:
+		Shop.migrate_content(candidate)
+		People.initialize_ordinary_content(candidate.people,people_config)
+		candidate.schema_version = 8
 	return People.validate(candidate.people).is_empty()
 
 func _migrate_appearance_schema(candidate: Dictionary) -> bool:
@@ -1055,15 +1060,31 @@ func _migrate_event_schema(candidate: Dictionary) -> void:
 func _shop_action(action: Dictionary) -> Dictionary:
 	var candidate := state.duplicate(true)
 	var outcome: Dictionary
+	var components: Array = []
+	var use_context := {}
+	if action.type == "use_product" and shop_config.get("items",{}).has(action.get("item_id")):
+		components = Shop.product_components(shop_config.items[action.item_id],shop_config)
+		use_context = {"item_use_id":"use_"+action.action_id,"transaction_id":str(action.get("transaction_id","")),"item_id":action.item_id,"at":int(candidate.clock_minutes)}
+		var preview: Dictionary = _divination.preview_product_components(candidate,_candidate_visit(candidate),components,use_context)
+		if not preview.success:
+			return _fail(preview.error_code,preview.message)
 	if action.type in PEOPLE_ACTIONS:
 		outcome = PeopleBridge.handle(candidate, action, people_config)
 	else:
-		outcome = Shop.handle(candidate, action, shop_config)
+		outcome = Shop.handle(candidate, action, shop_config,people_config)
 	if not outcome.success:
 		return _fail(outcome.error_code, outcome.message)
 	if outcome.get("result", {}).has("item_use"):
 		var use: Dictionary = outcome.result.item_use
-		if not str(use.get("event_id", "")).is_empty() and not _divination.link_item_use(candidate, _candidate_visit(candidate), use):
+		if use.get("version") == 2:
+			var applied: Dictionary = _divination.apply_product_components(candidate,_candidate_visit(candidate),components,use_context)
+			if not applied.success:
+				return _fail(applied.error_code,applied.message)
+			var final_use: Dictionary = Shop.attach_case_components(candidate,use,applied.components)
+			if final_use.is_empty():
+				return _fail("ITEM_USE_BLOCKED",Shop._content_copy(shop_config,"component_blocked"))
+			outcome.result.item_use = final_use
+		elif not str(use.get("event_id", "")).is_empty() and not _divination.link_item_use(candidate, _candidate_visit(candidate), use):
 			return _fail("ITEM_USE_BLOCKED", "商品不能用于当前事件，本次未消耗。")
 	var presentation_events: Array = _advance(candidate, int(outcome.get("minutes", 0)))
 	return _commit(candidate, action, outcome.message, outcome.get("result", {}),presentation_events)

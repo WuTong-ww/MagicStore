@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "kind": "actual_pre_scheduled_traffic_save",
+  "source": ".tools/g4/transaction-saves/run_3fb89ac29d68d3b8ddcbfa50504b6925/save_06ec82d1de82d7b77dfa44b3ef367bf0.json",
+  "source_sha256": "f68c0db29f18bcae1e60c734ca127f35ae14f846eb48799a778165d22c7f7c2b",
+  "fixture": "tests/shop/fixtures/traffic_applied_v2.json",
+  "schema_version": 8,
+  "item_use_id": "use_g4_transaction_961a6af0f135103aba4e833c0f3eff51",
+  "status": "applied",
+  "note": "Byte-for-byte authored-stock transaction test save, not economic income evidence; retained for old applied source compatibility."
+}

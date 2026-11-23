@@ -3,6 +3,7 @@ extends Window
 const UI = preload("res://scripts/ui/ui_kit.gd")
 const ArrivalUI = preload("res://scripts/ui/arrival_ui.gd")
 const EventCopy = preload("res://scripts/divination/event_copy.gd")
+const SessionRules = preload("res://scripts/divination/session.gd")
 const FRAME_PATH := "res://data/ui/workbench.json"
 ## Shared window for the B screens. It consumes only player projections.
 
@@ -597,7 +598,20 @@ func _forecast() -> void:
 	if event.status == "pending":
 		var choices: Array = event.advice_options
 		var advice := _pick(_labels(choices, func(row: Dictionary) -> String: return row.text))
-		body.add_child(UI.button(copy.advice_submit, func(): await _run("give_advice", {"advice_key": choices[advice.selected].advice_key})))
+		var style_options: Dictionary = SessionRules.advice_style_options()
+		var style_keys: Array = style_options.get("styles",{}).keys()
+		var style_choice: OptionButton
+		if not style_keys.is_empty():
+			_info(style_options.heading)
+			style_choice = _pick(style_keys.map(func(key: String) -> String: return style_options.styles[key]),maxi(0,style_keys.find(style_options.default_style)))
+			style_choice.name = "G4AdviceStyle"
+			for index: int in range(style_keys.size()):
+				style_choice.set_item_metadata(index,style_keys[index])
+		body.add_child(UI.button(copy.advice_submit, func():
+			var proposal := {"advice_key":choices[advice.selected].advice_key}
+			if is_instance_valid(style_choice):
+				proposal["advice_style"] = style_choice.get_item_metadata(style_choice.selected)
+			await _run("give_advice",proposal)))
 
 func _past_notes() -> void:
 	var past_art := UI.image("res://assets/portraits/past_life_scene.png")

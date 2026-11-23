@@ -1,0 +1,1422 @@
+{
+  "version": 1,
+  "enabled": true,
+  "seed_namespace": "ordinary_content_v1",
+  "reference_date": {
+    "year": 2026,
+    "month": 11,
+    "day": 10
+  },
+  "zodiac": {
+    "limits": [
+      20,
+      19,
+      21,
+      20,
+      21,
+      22,
+      23,
+      23,
+      23,
+      24,
+      23,
+      22
+    ],
+    "signs": [
+      "摩羯座",
+      "水瓶座",
+      "双鱼座",
+      "白羊座",
+      "金牛座",
+      "双子座",
+      "巨蟹座",
+      "狮子座",
+      "处女座",
+      "天秤座",
+      "天蝎座",
+      "射手座",
+      "摩羯座"
+    ]
+  },
+  "legacy_sampler_digest": "8e17c6807cc7b44b3464ce15e97d2eb28163a3e1f7c93665d84f8998ab7f4b52",
+  "name_groups": {
+    "male": [
+      "景行",
+      "明远",
+      "承安",
+      "修文",
+      "宇川",
+      "博言",
+      "子衡",
+      "文岳",
+      "嘉树",
+      "浩然",
+      "允诚",
+      "逸舟",
+      "清越",
+      "瑞林",
+      "景泽",
+      "书航",
+      "星辰",
+      "怀瑾",
+      "云帆",
+      "知行",
+      "守礼",
+      "维新",
+      "谨言",
+      "启明",
+      "敬之",
+      "成蹊",
+      "立诚",
+      "修远",
+      "观澜",
+      "晨风",
+      "安澈",
+      "绍宁",
+      "霁川",
+      "泽谦",
+      "庭轩",
+      "和光",
+      "亦鸣",
+      "牧云",
+      "晏平",
+      "乔松"
+    ],
+    "female": [
+      "清妍",
+      "婉宁",
+      "静姝",
+      "雨晴",
+      "书瑶",
+      "兰心",
+      "映雪",
+      "采薇",
+      "语棠",
+      "晓岚",
+      "如宁",
+      "芷兰",
+      "听荷",
+      "晚晴",
+      "以晴",
+      "望舒",
+      "月白",
+      "若溪",
+      "嘉禾",
+      "晴岚",
+      "澄心",
+      "沐瑶",
+      "溪月",
+      "青禾",
+      "玉笙",
+      "南絮",
+      "芸初",
+      "柳青",
+      "檐雨",
+      "霁月",
+      "舒桐",
+      "语禾",
+      "素心",
+      "明玥",
+      "菀青",
+      "秋澜",
+      "韶宁",
+      "依云",
+      "菡清",
+      "桐音"
+    ],
+    "neutral": [
+      "知夏",
+      "远舟",
+      "栖迟",
+      "清和",
+      "予安",
+      "念秋",
+      "星遥",
+      "书宁",
+      "安然",
+      "时雨",
+      "南山",
+      "北辰",
+      "清川",
+      "云舒",
+      "知微",
+      "听澜",
+      "初霁",
+      "未央",
+      "景初",
+      "令仪",
+      "乐知",
+      "归一",
+      "平芜",
+      "木棉",
+      "望野",
+      "余闲",
+      "星野",
+      "拾光",
+      "森然",
+      "秋实",
+      "冬青",
+      "夏木",
+      "春生",
+      "沐川",
+      "见山",
+      "临溪",
+      "清尘",
+      "有恒",
+      "一诺",
+      "久安"
+    ]
+  },
+  "occupation_profiles": [
+    {
+      "id": "lamp_repairer",
+      "name": "灯具修理师",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 540,
+        "end": 1020
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 1080,
+        "end": 1290
+      }
+    },
+    {
+      "id": "flower_clerk",
+      "name": "花店店员",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 1080,
+        "end": 1320
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 600,
+        "end": 900
+      }
+    },
+    {
+      "id": "bookshop_clerk",
+      "name": "旧书店店员",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 360,
+        "end": 720
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 780,
+        "end": 1140
+      }
+    },
+    {
+      "id": "clock_apprentice",
+      "name": "钟表学徒",
+      "minimum_age": 15,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 540,
+        "end": 1020
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 1080,
+        "end": 1290
+      }
+    },
+    {
+      "id": "illustrator",
+      "name": "插画师",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 1080,
+        "end": 1320
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 600,
+        "end": 900
+      }
+    },
+    {
+      "id": "gardener",
+      "name": "园艺师",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 360,
+        "end": 720
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 780,
+        "end": 1140
+      }
+    },
+    {
+      "id": "baker",
+      "name": "面包师",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 540,
+        "end": 1020
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 1080,
+        "end": 1290
+      }
+    },
+    {
+      "id": "tailor",
+      "name": "裁缝",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 1080,
+        "end": 1320
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 600,
+        "end": 900
+      }
+    },
+    {
+      "id": "potter",
+      "name": "陶艺师",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 360,
+        "end": 720
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 780,
+        "end": 1140
+      }
+    },
+    {
+      "id": "carpenter",
+      "name": "木工",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 540,
+        "end": 1020
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 1080,
+        "end": 1290
+      }
+    },
+    {
+      "id": "nurse",
+      "name": "护理员",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 1080,
+        "end": 1320
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 600,
+        "end": 900
+      }
+    },
+    {
+      "id": "librarian",
+      "name": "图书管理员",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 360,
+        "end": 720
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 780,
+        "end": 1140
+      }
+    },
+    {
+      "id": "teacher",
+      "name": "教师",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 540,
+        "end": 1020
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 1080,
+        "end": 1290
+      }
+    },
+    {
+      "id": "bus_driver",
+      "name": "公交司机",
+      "minimum_age": 18,
+      "maximum_age": 60,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 1080,
+        "end": 1320
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 600,
+        "end": 900
+      }
+    },
+    {
+      "id": "bicycle_repairer",
+      "name": "自行车修理师",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 360,
+        "end": 720
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 780,
+        "end": 1140
+      }
+    },
+    {
+      "id": "cook",
+      "name": "厨师",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 540,
+        "end": 1020
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 1080,
+        "end": 1290
+      }
+    },
+    {
+      "id": "postal_worker",
+      "name": "邮政职员",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 1080,
+        "end": 1320
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 600,
+        "end": 900
+      }
+    },
+    {
+      "id": "courier",
+      "name": "快递员",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 360,
+        "end": 720
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 780,
+        "end": 1140
+      }
+    },
+    {
+      "id": "museum_guide",
+      "name": "展馆讲解员",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 540,
+        "end": 1020
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 1080,
+        "end": 1290
+      }
+    },
+    {
+      "id": "theatre_assistant",
+      "name": "剧场场务",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 1080,
+        "end": 1320
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 600,
+        "end": 900
+      }
+    },
+    {
+      "id": "music_teacher",
+      "name": "音乐教师",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 360,
+        "end": 720
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 780,
+        "end": 1140
+      }
+    },
+    {
+      "id": "translator",
+      "name": "译者",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 540,
+        "end": 1020
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 1080,
+        "end": 1290
+      }
+    },
+    {
+      "id": "accountant",
+      "name": "会计",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 1080,
+        "end": 1320
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 600,
+        "end": 900
+      }
+    },
+    {
+      "id": "shop_clerk",
+      "name": "杂货店员",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 360,
+        "end": 720
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 780,
+        "end": 1140
+      }
+    },
+    {
+      "id": "cleaner",
+      "name": "保洁员",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 540,
+        "end": 1020
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 1080,
+        "end": 1290
+      }
+    },
+    {
+      "id": "security_guard",
+      "name": "值班员",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 1080,
+        "end": 1320
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 600,
+        "end": 900
+      }
+    },
+    {
+      "id": "barista",
+      "name": "咖啡师",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 360,
+        "end": 720
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 780,
+        "end": 1140
+      }
+    },
+    {
+      "id": "tea_clerk",
+      "name": "茶铺店员",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 540,
+        "end": 1020
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 1080,
+        "end": 1290
+      }
+    },
+    {
+      "id": "ceramic_restorer",
+      "name": "陶瓷修补师",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 1080,
+        "end": 1320
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 600,
+        "end": 900
+      }
+    },
+    {
+      "id": "photographer",
+      "name": "摄影师",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 360,
+        "end": 720
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 780,
+        "end": 1140
+      }
+    },
+    {
+      "id": "weaver",
+      "name": "织工",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 540,
+        "end": 1020
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 1080,
+        "end": 1290
+      }
+    },
+    {
+      "id": "leatherworker",
+      "name": "皮具修补师",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 1080,
+        "end": 1320
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 600,
+        "end": 900
+      }
+    },
+    {
+      "id": "kitchen_manager",
+      "name": "社区厨房主理人",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 360,
+        "end": 720
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 780,
+        "end": 1140
+      }
+    },
+    {
+      "id": "night_school_tutor",
+      "name": "夜校助教",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 540,
+        "end": 1020
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 1080,
+        "end": 1290
+      }
+    },
+    {
+      "id": "ferry_worker",
+      "name": "渡口工作人员",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 1080,
+        "end": 1320
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 600,
+        "end": 900
+      }
+    },
+    {
+      "id": "warehouse_clerk",
+      "name": "仓库管理员",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 360,
+        "end": 720
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 780,
+        "end": 1140
+      }
+    },
+    {
+      "id": "student",
+      "name": "在读学生",
+      "minimum_age": 15,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 540,
+        "end": 1020
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 1080,
+        "end": 1290
+      }
+    },
+    {
+      "id": "volunteer",
+      "name": "社区志愿者",
+      "minimum_age": 15,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 1080,
+        "end": 1320
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 600,
+        "end": 900
+      }
+    },
+    {
+      "id": "craft_apprentice",
+      "name": "手工学徒",
+      "minimum_age": 15,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 360,
+        "end": 720
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 780,
+        "end": 1140
+      }
+    },
+    {
+      "id": "print_worker",
+      "name": "印刷工",
+      "minimum_age": 18,
+      "maximum_age": 90,
+      "work_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 540,
+        "end": 1020
+      },
+      "return_schedule": {
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "start": 1080,
+        "end": 1290
+      }
+    }
+  ],
+  "advice_preferences": {
+    "concrete_steps": "喜欢具体步骤",
+    "listening": "喜欢被倾听",
+    "direct": "喜欢直说"
+  },
+  "age_groups": [
+    {
+      "id": "teen",
+      "minimum_age": 15,
+      "maximum_age": 19,
+      "visual_age_stage": "teen",
+      "features_id": "features_teen"
+    },
+    {
+      "id": "young_adult",
+      "minimum_age": 20,
+      "maximum_age": 29,
+      "visual_age_stage": "adult",
+      "features_id": "features_adult"
+    },
+    {
+      "id": "adult",
+      "minimum_age": 30,
+      "maximum_age": 44,
+      "visual_age_stage": "adult",
+      "features_id": "features_adult"
+    },
+    {
+      "id": "middle",
+      "minimum_age": 45,
+      "maximum_age": 59,
+      "visual_age_stage": "middle",
+      "features_id": "features_middle"
+    },
+    {
+      "id": "elder",
+      "minimum_age": 60,
+      "maximum_age": 78,
+      "visual_age_stage": "elder",
+      "features_id": "features_elder"
+    }
+  ],
+  "copy": {
+    "background": "在附近生活，从事{role}相关的工作。",
+    "speech_styles": {
+      "concrete_steps": "愿意先听清可以实行的小步骤。",
+      "listening": "愿意慢慢说明自己的感受。",
+      "direct": "说话简洁，希望先谈眼前的问题。"
+    }
+  }
+}

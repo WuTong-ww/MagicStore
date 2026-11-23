@@ -6,21 +6,36 @@
       "kind": "material",
       "buy": 3,
       "sell": 1,
-      "visual_key": "lavender"
+      "visual_key": "lavender",
+      "primary_source": "gather",
+      "purchase_allowed": true,
+      "secondary_sources": [
+        "purchase"
+      ]
     },
     "spring_water": {
       "name": "山泉水",
       "kind": "material",
       "buy": 2,
       "sell": 1,
-      "visual_key": "spring_water"
+      "visual_key": "spring_water",
+      "primary_source": "purchase",
+      "purchase_allowed": true,
+      "secondary_sources": [
+        "gather"
+      ]
     },
     "quartz": {
       "name": "白水晶砂",
       "kind": "material",
       "buy": 5,
       "sell": 2,
-      "visual_key": "quartz"
+      "visual_key": "quartz",
+      "primary_source": "purchase",
+      "purchase_allowed": true,
+      "secondary_sources": [
+        "gather"
+      ]
     },
     "moon_dust": {
       "name": "月光树脂",
@@ -28,7 +43,12 @@
       "buy": 12,
       "sell": 5,
       "requires_reputation": 2,
-      "visual_key": "moon_dust"
+      "visual_key": "moon_dust",
+      "primary_source": "purchase",
+      "purchase_allowed": true,
+      "secondary_sources": [
+        "gather"
+      ]
     },
     "calming_incense": {
       "name": "定心香",
@@ -73,6 +93,367 @@
         "option_id": "gentle_followup"
       },
       "visual_key": "clarity_crystal"
+    },
+    "beeswax": {
+      "name": "蜂蜡块",
+      "kind": "material",
+      "buy": 4,
+      "sell": 1,
+      "visual_key": "beeswax",
+      "primary_source": "purchase",
+      "purchase_allowed": true,
+      "secondary_sources": []
+    },
+    "cotton_thread": {
+      "name": "棉线团",
+      "kind": "material",
+      "buy": 3,
+      "sell": 1,
+      "visual_key": "cotton_thread",
+      "primary_source": "purchase",
+      "purchase_allowed": true,
+      "secondary_sources": []
+    },
+    "dried_mint": {
+      "name": "干薄荷",
+      "kind": "material",
+      "buy": 3,
+      "sell": 1,
+      "visual_key": "dried_mint",
+      "primary_source": "purchase",
+      "purchase_allowed": true,
+      "secondary_sources": []
+    },
+    "sea_salt": {
+      "name": "海盐",
+      "kind": "material",
+      "buy": 2,
+      "sell": 1,
+      "visual_key": "sea_salt",
+      "primary_source": "purchase",
+      "purchase_allowed": true,
+      "secondary_sources": []
+    },
+    "glass_vial": {
+      "name": "磨砂小瓶",
+      "kind": "material",
+      "buy": 2,
+      "sell": 1,
+      "visual_key": "glass_vial",
+      "primary_source": "purchase",
+      "purchase_allowed": true,
+      "secondary_sources": []
+    },
+    "pine_needle": {
+      "name": "松针束",
+      "kind": "material",
+      "buy": 0,
+      "sell": 1,
+      "visual_key": "pine_needle",
+      "primary_source": "gather",
+      "purchase_allowed": false,
+      "secondary_sources": []
+    },
+    "mugwort": {
+      "name": "艾叶",
+      "kind": "material",
+      "buy": 0,
+      "sell": 1,
+      "visual_key": "mugwort",
+      "primary_source": "gather",
+      "purchase_allowed": false,
+      "secondary_sources": []
+    },
+    "reed_stem": {
+      "name": "芦苇茎",
+      "kind": "material",
+      "buy": 0,
+      "sell": 1,
+      "visual_key": "reed_stem",
+      "primary_source": "gather",
+      "purchase_allowed": false,
+      "secondary_sources": []
+    },
+    "river_clay": {
+      "name": "河泥陶团",
+      "kind": "material",
+      "buy": 0,
+      "sell": 2,
+      "visual_key": "river_clay",
+      "primary_source": "gather",
+      "purchase_allowed": false,
+      "secondary_sources": []
+    },
+    "iron_flake": {
+      "name": "旧铁片",
+      "kind": "material",
+      "buy": 0,
+      "sell": 2,
+      "visual_key": "iron_flake",
+      "primary_source": "gather",
+      "purchase_allowed": false,
+      "secondary_sources": []
+    },
+    "honey_drop": {
+      "name": "蜂蜜小瓶",
+      "kind": "material",
+      "buy": 0,
+      "sell": 3,
+      "visual_key": "honey_drop",
+      "primary_source": "gift_hidden",
+      "purchase_allowed": false,
+      "secondary_sources": []
+    },
+    "old_key": {
+      "name": "旧铜钥匙",
+      "kind": "material",
+      "buy": 0,
+      "sell": 3,
+      "visual_key": "old_key",
+      "primary_source": "gift_hidden",
+      "purchase_allowed": false,
+      "secondary_sources": []
+    },
+    "blue_glass": {
+      "name": "蓝玻璃片",
+      "kind": "material",
+      "buy": 0,
+      "sell": 3,
+      "visual_key": "blue_glass",
+      "primary_source": "gift_hidden",
+      "purchase_allowed": false,
+      "secondary_sources": []
+    },
+    "red_thread": {
+      "name": "暗红线结",
+      "kind": "material",
+      "buy": 0,
+      "sell": 2,
+      "visual_key": "red_thread",
+      "primary_source": "gift_hidden",
+      "purchase_allowed": false,
+      "secondary_sources": []
+    },
+    "focus_candle": {
+      "name": "专注蜡烛",
+      "kind": "product",
+      "shape": "candle",
+      "purposes": [
+        "psychological"
+      ],
+      "sell": 11,
+      "effect": {
+        "kind": "option",
+        "option_id": "gentle_followup"
+      },
+      "visual_key": "focus_candle"
+    },
+    "welcome_sachet": {
+      "name": "迎客香囊",
+      "kind": "product",
+      "shape": "amulet",
+      "purposes": [
+        "environment"
+      ],
+      "sell": 9,
+      "effect": {
+        "kind": "traffic",
+        "amount": 0.5,
+        "duration_minutes": 180,
+        "max_bonus": 1.5
+      },
+      "visual_key": "welcome_sachet"
+    },
+    "patience_charm": {
+      "name": "缓心护符",
+      "kind": "product",
+      "shape": "amulet",
+      "purposes": [
+        "psychological"
+      ],
+      "sell": 12,
+      "effect": {
+        "kind": "patience",
+        "minutes": 20,
+        "max_extension_minutes": 60
+      },
+      "visual_key": "patience_charm"
+    },
+    "memory_lens": {
+      "name": "细察晶片",
+      "kind": "product",
+      "shape": "crystal",
+      "purposes": [
+        "psychological"
+      ],
+      "sell": 14,
+      "effect": {
+        "kind": "clue",
+        "clue_id": "g4_tool_observation",
+        "method_id": "tarot"
+      },
+      "visual_key": "memory_lens"
+    },
+    "friendship_knot": {
+      "name": "和谈绳结",
+      "kind": "product",
+      "shape": "amulet",
+      "purposes": [
+        "psychological"
+      ],
+      "sell": 11,
+      "effect": {
+        "kind": "relationship",
+        "effect_key": "family_reconnect_support",
+        "delta": 3
+      },
+      "visual_key": "friendship_knot"
+    },
+    "fresh_air_incense": {
+      "name": "清风线香",
+      "kind": "product",
+      "shape": "incense",
+      "purposes": [
+        "environment"
+      ],
+      "sell": 8,
+      "effect": {
+        "kind": "traffic",
+        "amount": 0.5,
+        "duration_minutes": 180,
+        "max_bonus": 1.5
+      },
+      "visual_key": "fresh_air_incense"
+    },
+    "night_tea": {
+      "name": "晚间茶包",
+      "kind": "product",
+      "shape": "tea_bag",
+      "purposes": [
+        "physical",
+        "psychological"
+      ],
+      "sell": 8,
+      "effect": {
+        "kind": "attribute",
+        "attribute": "energy",
+        "amount": 10
+      },
+      "visual_key": "night_tea",
+      "additional_effects": [
+        {
+          "component_id": "followup",
+          "kind": "option",
+          "option_id": "gentle_followup"
+        }
+      ]
+    },
+    "grounding_stone": {
+      "name": "安稳石",
+      "kind": "product",
+      "shape": "crystal",
+      "purposes": [
+        "physical",
+        "psychological"
+      ],
+      "sell": 12,
+      "effect": {
+        "kind": "attribute",
+        "attribute": "energy",
+        "amount": 8
+      },
+      "visual_key": "grounding_stone",
+      "additional_effects": [
+        {
+          "component_id": "followup",
+          "kind": "option",
+          "option_id": "gentle_followup"
+        }
+      ]
+    },
+    "soothing_candle": {
+      "name": "舒缓蜡烛",
+      "kind": "product",
+      "shape": "candle",
+      "purposes": [
+        "psychological",
+        "environment"
+      ],
+      "sell": 12,
+      "effect": {
+        "kind": "patience",
+        "minutes": 15,
+        "max_extension_minutes": 60
+      },
+      "visual_key": "soothing_candle",
+      "additional_effects": [
+        {
+          "component_id": "room_air",
+          "kind": "traffic",
+          "amount": 0.5,
+          "duration_minutes": 180,
+          "max_bonus": 1.5
+        }
+      ]
+    },
+    "bright_draught": {
+      "name": "清醒药水",
+      "kind": "product",
+      "shape": "potion",
+      "purposes": [
+        "physical"
+      ],
+      "sell": 14,
+      "effect": {
+        "kind": "attribute",
+        "attribute": "energy",
+        "amount": 20
+      },
+      "visual_key": "bright_draught"
+    },
+    "clear_thought_tea": {
+      "name": "理绪茶包",
+      "kind": "product",
+      "shape": "tea_bag",
+      "purposes": [
+        "psychological"
+      ],
+      "sell": 10,
+      "effect": {
+        "kind": "clue",
+        "clue_id": "g4_tool_observation",
+        "method_id": "tarot"
+      },
+      "visual_key": "clear_thought_tea",
+      "additional_effects": [
+        {
+          "component_id": "followup",
+          "kind": "option",
+          "option_id": "gentle_followup"
+        }
+      ]
+    },
+    "together_sachet": {
+      "name": "相伴香包",
+      "kind": "product",
+      "shape": "amulet",
+      "purposes": [
+        "psychological"
+      ],
+      "sell": 14,
+      "effect": {
+        "kind": "relationship",
+        "effect_key": "family_reconnect_support",
+        "delta": 3
+      },
+      "visual_key": "together_sachet",
+      "additional_effects": [
+        {
+          "component_id": "followup",
+          "kind": "option",
+          "option_id": "gentle_followup"
+        }
+      ]
     }
   },
   "recipes": {
@@ -87,7 +468,11 @@
       "research_minutes": 25,
       "research_energy": 8,
       "minutes": 20,
-      "energy": 6
+      "energy": 6,
+      "need_tags": [
+        "communication"
+      ],
+      "quality": "standard"
     },
     "restorative_draught": {
       "name": "醒神药水配方",
@@ -100,7 +485,11 @@
       "research_minutes": 30,
       "research_energy": 10,
       "minutes": 25,
-      "energy": 8
+      "energy": 8,
+      "need_tags": [
+        "rest"
+      ],
+      "quality": "standard"
     },
     "clarity_crystal": {
       "name": "澄心晶配方",
@@ -113,7 +502,227 @@
       "research_minutes": 35,
       "research_energy": 12,
       "minutes": 30,
-      "energy": 10
+      "energy": 10,
+      "need_tags": [
+        "focus"
+      ],
+      "quality": "standard"
+    },
+    "focus_candle": {
+      "name": "专注蜡烛配方",
+      "output": "focus_candle",
+      "ingredients": {
+        "beeswax": 1,
+        "cotton_thread": 1
+      },
+      "coins": 5,
+      "research_minutes": 30,
+      "research_energy": 10,
+      "minutes": 25,
+      "energy": 8,
+      "need_tags": [
+        "focus"
+      ],
+      "quality": "standard"
+    },
+    "welcome_sachet": {
+      "name": "迎客香囊配方",
+      "output": "welcome_sachet",
+      "ingredients": {
+        "mugwort": 1,
+        "cotton_thread": 1
+      },
+      "coins": 5,
+      "research_minutes": 30,
+      "research_energy": 10,
+      "minutes": 25,
+      "energy": 8,
+      "need_tags": [
+        "air"
+      ],
+      "quality": "standard"
+    },
+    "patience_charm": {
+      "name": "缓心护符配方",
+      "output": "patience_charm",
+      "ingredients": {
+        "red_thread": 1,
+        "cotton_thread": 1
+      },
+      "coins": 5,
+      "research_minutes": 30,
+      "research_energy": 10,
+      "minutes": 25,
+      "energy": 8,
+      "need_tags": [
+        "waiting",
+        "comfort"
+      ],
+      "quality": "standard"
+    },
+    "memory_lens": {
+      "name": "细察晶片配方",
+      "output": "memory_lens",
+      "ingredients": {
+        "quartz": 1,
+        "blue_glass": 1
+      },
+      "coins": 5,
+      "research_minutes": 30,
+      "research_energy": 10,
+      "minutes": 30,
+      "energy": 10,
+      "need_tags": [
+        "verification"
+      ],
+      "quality": "standard"
+    },
+    "friendship_knot": {
+      "name": "和谈绳结配方",
+      "output": "friendship_knot",
+      "ingredients": {
+        "cotton_thread": 1,
+        "old_key": 1
+      },
+      "coins": 5,
+      "research_minutes": 30,
+      "research_energy": 10,
+      "minutes": 25,
+      "energy": 8,
+      "need_tags": [
+        "connection",
+        "communication"
+      ],
+      "quality": "standard"
+    },
+    "fresh_air_incense": {
+      "name": "清风线香配方",
+      "output": "fresh_air_incense",
+      "ingredients": {
+        "pine_needle": 1,
+        "reed_stem": 1
+      },
+      "coins": 5,
+      "research_minutes": 30,
+      "research_energy": 10,
+      "minutes": 20,
+      "energy": 6,
+      "need_tags": [
+        "air"
+      ],
+      "quality": "standard"
+    },
+    "night_tea": {
+      "name": "晚间茶包配方",
+      "output": "night_tea",
+      "ingredients": {
+        "dried_mint": 1,
+        "spring_water": 1
+      },
+      "coins": 5,
+      "research_minutes": 30,
+      "research_energy": 10,
+      "minutes": 20,
+      "energy": 6,
+      "need_tags": [
+        "rest",
+        "comfort"
+      ],
+      "quality": "standard"
+    },
+    "grounding_stone": {
+      "name": "安稳石配方",
+      "output": "grounding_stone",
+      "ingredients": {
+        "quartz": 1,
+        "river_clay": 1,
+        "iron_flake": 1
+      },
+      "coins": 5,
+      "research_minutes": 30,
+      "research_energy": 10,
+      "minutes": 30,
+      "energy": 10,
+      "need_tags": [
+        "focus",
+        "comfort"
+      ],
+      "quality": "standard"
+    },
+    "soothing_candle": {
+      "name": "舒缓蜡烛配方",
+      "output": "soothing_candle",
+      "ingredients": {
+        "beeswax": 1,
+        "mugwort": 1,
+        "cotton_thread": 1
+      },
+      "coins": 5,
+      "research_minutes": 30,
+      "research_energy": 10,
+      "minutes": 25,
+      "energy": 8,
+      "need_tags": [
+        "waiting",
+        "air"
+      ],
+      "quality": "standard"
+    },
+    "bright_draught": {
+      "name": "清醒药水配方",
+      "output": "bright_draught",
+      "ingredients": {
+        "spring_water": 1,
+        "dried_mint": 1,
+        "glass_vial": 1,
+        "honey_drop": 1
+      },
+      "coins": 5,
+      "research_minutes": 30,
+      "research_energy": 10,
+      "minutes": 25,
+      "energy": 8,
+      "need_tags": [
+        "rest"
+      ],
+      "quality": "standard"
+    },
+    "clear_thought_tea": {
+      "name": "理绪茶包配方",
+      "output": "clear_thought_tea",
+      "ingredients": {
+        "dried_mint": 1,
+        "reed_stem": 1
+      },
+      "coins": 5,
+      "research_minutes": 30,
+      "research_energy": 10,
+      "minutes": 25,
+      "energy": 8,
+      "need_tags": [
+        "verification",
+        "focus"
+      ],
+      "quality": "standard"
+    },
+    "together_sachet": {
+      "name": "相伴香包配方",
+      "output": "together_sachet",
+      "ingredients": {
+        "cotton_thread": 1,
+        "red_thread": 1,
+        "lavender": 1
+      },
+      "coins": 5,
+      "research_minutes": 30,
+      "research_energy": 10,
+      "minutes": 30,
+      "energy": 10,
+      "need_tags": [
+        "connection",
+        "communication"
+      ],
+      "quality": "standard"
     }
   },
   "service_material_gift": {
@@ -130,7 +739,9 @@
       "daily_limit": 3,
       "drops": {
         "spring_water": 1,
-        "lavender": 1
+        "lavender": 1,
+        "reed_stem": 1,
+        "river_clay": 1
       },
       "rare_item": "moon_dust",
       "rare_reputation": 2
@@ -144,10 +755,144 @@
       "daily_limit": 2,
       "drops": {
         "lavender": 2,
-        "quartz": 1
+        "quartz": 1,
+        "pine_needle": 1,
+        "mugwort": 1
       },
       "rare_item": "moon_dust",
       "rare_reputation": 3
+    },
+    "railway_depot": {
+      "name": "铁道旧库房",
+      "minutes": 40,
+      "energy": 16,
+      "opening": 1080,
+      "closing": 1320,
+      "daily_limit": 1,
+      "allowed_weather": [
+        "sunny",
+        "cloudy"
+      ],
+      "drops": {
+        "iron_flake": 1,
+        "river_clay": 1
+      }
     }
+  },
+  "need_tags": {
+    "rest": "恢复精神",
+    "focus": "整理思绪",
+    "communication": "愿意开口",
+    "waiting": "愿意稍等",
+    "verification": "核对凭证",
+    "connection": "改善相处",
+    "air": "整理环境",
+    "comfort": "舒适感受"
+  },
+  "quality_levels": {
+    "standard": {
+      "label": "普通",
+      "sell_multiplier": 1.0
+    },
+    "fine": {
+      "label": "精制",
+      "sell_multiplier": 1.2
+    }
+  },
+  "recipe_variants": {
+    "restorative_draught_mint": {
+      "recipe_id": "restorative_draught",
+      "name": "薄荷醒神药水",
+      "output": "restorative_draught",
+      "ingredients": {
+        "dried_mint": 1,
+        "spring_water": 1,
+        "glass_vial": 1
+      },
+      "minutes": 30,
+      "energy": 10,
+      "quality": "fine"
+    },
+    "clarity_crystal_resin": {
+      "recipe_id": "clarity_crystal",
+      "name": "树脂澄心晶",
+      "output": "clarity_crystal",
+      "ingredients": {
+        "quartz": 1,
+        "moon_dust": 1
+      },
+      "minutes": 35,
+      "energy": 12,
+      "quality": "fine"
+    },
+    "focus_candle_mint": {
+      "recipe_id": "focus_candle",
+      "name": "薄荷专注蜡烛",
+      "output": "focus_candle",
+      "ingredients": {
+        "beeswax": 1,
+        "cotton_thread": 1,
+        "dried_mint": 1
+      },
+      "minutes": 30,
+      "energy": 10,
+      "quality": "fine"
+    },
+    "fresh_air_incense_salt": {
+      "recipe_id": "fresh_air_incense",
+      "name": "盐香清风线香",
+      "output": "fresh_air_incense",
+      "ingredients": {
+        "pine_needle": 1,
+        "reed_stem": 1,
+        "sea_salt": 1
+      },
+      "minutes": 25,
+      "energy": 8,
+      "quality": "fine"
+    }
+  },
+  "effect_rules": {
+    "primary_component_id": "primary",
+    "maximum_components": 4,
+    "patience": {
+      "maximum_extension_minutes": 60
+    },
+    "traffic": {
+      "maximum_bonus": 1.5,
+      "maximum_duration_minutes": 360,
+      "activation_version": 1,
+      "activation_versions": {
+        "1": {
+          "mode": "next_unplanned_day",
+          "status": "scheduled",
+          "first_minute": 570
+        }
+      }
+    },
+    "default_quality": "standard",
+    "attributes": [
+      "energy"
+    ],
+    "options": [
+      "gentle_followup"
+    ],
+    "copy": {
+      "not_purchasable": "这种原料不能采购，请从标明的来源取得。",
+      "component_blocked": "商品的效果条件尚未全部满足，本次未使用。",
+      "weather_blocked": "当前天气或已记录天气不符合采集条件。",
+      "inspiration_missing": "还没有灵感。请先完成有相关需求的接待。",
+      "invalid_variant": "这个配方变体尚不可用。",
+      "invalid_quality": "批次品质无效。",
+      "invalid_target": "当前目标不符合商品使用条件。"
+    }
+  },
+  "feedback_copy": {
+    "self_result": "已记录自身的实际变化。",
+    "waiting_window": "已记录这次等候安排的变化。",
+    "environment_result": "已记录店内环境的有效时段。",
+    "tool_clue": "已记录本案工具线索及其来源。",
+    "event_pending": "已记录商品用途，等待本案真实结果。",
+    "npc_feedback": "已关联来客实际反馈及原商品批次。"
   }
 }

@@ -67,6 +67,9 @@ func run() -> void:
 		await finish()
 		return
 	configure_isolated_fixture()
+	if not check(People.config_valid(game.people_config), "isolated runtime family fixture validates before creating any save"):
+		await finish()
+		return
 	var run_id: String = game.make_id("run")
 	capture_dir = CAPTURE_BASE + "/" + run_id
 	saves.base_dir = "res://.tools/g2/family-ui-saves/" + run_id
@@ -162,6 +165,7 @@ func configure_isolated_fixture() -> void:
 	config.arrival.expectation.max = 12
 	for personality: Dictionary in config.personalities:
 		personality.return_bias = 0
+	config.ordinary_content.personalities = config.personalities.duplicate(true)
 	game.people_config = config
 
 func obtain_scheduled_graph() -> bool:

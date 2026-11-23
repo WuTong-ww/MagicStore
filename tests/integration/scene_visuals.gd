@@ -1,6 +1,7 @@
 extends SceneTree
 const UITeardown = preload("res://tests/ui_teardown.gd")
 const LegacyFixture = preload("res://tests/fixtures/scene_visual_config.gd")
+const ItemArt = preload("res://scripts/shop/item_visual.gd")
 var checks := 0
 var failures := 0
 var captures := 0
@@ -184,6 +185,8 @@ func check_runtime(config: Dictionary) -> void:
 	await settle()
 	var created: Dictionary = await main.run_action("new_game",{"name":"昼夜场景验收"})
 	check(created.success,"create isolated scene visual save")
+	var legacy_ids: Array = ItemArt.load_settings().required_items.duplicate()
+	check(legacy_ids.size() == 9 and legacy_ids.all(func(id: String) -> bool: return config.items.has(id)),"the original nine calibrated identities come from validated required_items, independently of catalog expansion")
 	for dimensions: Vector2i in [Vector2i(1280,720),Vector2i(1920,1080)]:
 		root.size = dimensions
 		root.content_scale_size = dimensions
@@ -200,14 +203,15 @@ func check_runtime(config: Dictionary) -> void:
 		var inventory_snapshot: Dictionary = game.snapshot()
 		for count: int in [1,3]:
 			game.state.player.items.clear()
-			for id: String in config.items.keys().slice(0,count):
+			for id: String in legacy_ids.slice(0,count):
 				game.state.player.items[id] = 1
 			main.show_screen("inventory")
 			await settle()
 			check_shelf_items(main.screen.shelf_view,main.screen.scene_visual,config,count,dimensions)
 			if count == 1:
 				await capture("a1-inventory-single-render-only-"+str(dimensions.x))
-		for id: String in config.items:
+		game.state.player.items.clear()
+		for id: String in legacy_ids:
 			game.state.player.items[id] = 1
 		main.show_screen("inventory")
 		await settle()
@@ -250,7 +254,9 @@ func check_runtime(config: Dictionary) -> void:
 		check(main.screen.shelf_view == shelf and not shelf.visible,"same-frame open/closed and repeated refreshes reuse one hidden shelf renderer")
 		await settle()
 		await capture("a1-inventory-closed-"+str(dimensions.x))
+		await check_current_catalog_fixture(main,game,config,dimensions)
 		game.state = inventory_snapshot
+		check(game.snapshot() == inventory_snapshot,"all render-only inventory identities are restored before any real transaction / "+str(dimensions))
 	await check_shelf_commit_and_reload(main,game,saves)
 	await check_invalid_shelf_ui(main,game,config)
 	# Render/test fixture establishes 17:59; the observed transition itself must
@@ -346,14 +352,15 @@ func shelf_signature(layout: Dictionary) -> Array:
 	result.append(layout.get("overflow",[]).duplicate())
 	return result
 
-func check_shelf_items(shelf: Control, visual: Control, config: Dictionary, count: int, dimensions: Vector2i) -> void:
+func check_shelf_items(shelf: Control, visual: Control, config: Dictionary, count: int, dimensions: Vector2i, allow_overflow: bool = false) -> void:
 	check(shelf != null and shelf.visible,"open cabinet has a live shelf renderer / "+str(dimensions))
 	if shelf == null:
 		return
 	var rows: Array = shelf.layout_result.get("entries",[])
 	var overflow: Array = shelf.layout_result.get("overflow",[])
 	check(rows.size()+overflow.size() == count,"all render-only IDs are accounted for / "+str(count)+" / "+str(dimensions))
-	check(overflow.is_empty(),"the calibrated real cabinet accommodates the existing nine item groups / "+str(count))
+	if not allow_overflow:
+		check(overflow.is_empty(),"the calibrated real cabinet accommodates the existing nine item groups / "+str(count))
 	var scene: Dictionary = config.scenes.S04
 	var crop: Array = scene.shelf_layout.source_crop
 	var canvas: Array = config.scene_settings.canvas
@@ -377,6 +384,53 @@ func check_shelf_items(shelf: Control, visual: Control, config: Dictionary, coun
 		check(item_node.global_position.distance_to(expected) < 0.15,"bottom-pivot node shares background source crop and cover projection / "+id+" / "+str(dimensions))
 		check(is_equal_approx(item_node.rotation_degrees,float(row.rotation_degrees)),"micro-rotation occurs on the bottom-pivot node / "+id)
 		check(int(row.copy_count) == mini(3,int(row.quantity)),"visual copy count follows the quantity cap / "+id)
+
+func check_current_catalog_fixture(main: Control, game: Node, config: Dictionary, dimensions: Vector2i) -> void:
+	# All current identities are an explicitly render-only inventory. The nine
+	# legacy capacity checks above stay unchanged; expanded content may overflow.
+	var before: Dictionary = game.snapshot()
+	var saves := root.get_node("SaveService")
+	var path: String = saves._path(str(before.save_id))
+	var saved_sha := FileAccess.get_sha256(path)
+	game.state.player.items.clear()
+	var ids: Array = config.items.keys()
+	for id: String in ids:
+		game.state.player.items[id] = 1
+	main.show_screen("inventory")
+	await settle()
+	var screen: Control = main.screen
+	var shelf: Control = screen.shelf_view
+	check_shelf_items(shelf,screen.scene_visual,config,ids.size(),dimensions,true)
+	var appearances := {}
+	for row: Dictionary in shelf.layout_result.entries:
+		appearances[row.item_id] = int(appearances.get(row.item_id,0))+1
+		var source: Dictionary = config.items[row.item_id]
+		check(row.support.is_equal_approx(Vector2(float(source.bottom_left)+(float(source.bottom_width)-1.0)/2.0,float(source.bottom_y))),"expanded catalog support still comes from actual opaque source pixels / "+str(row.item_id))
+	for id: String in shelf.layout_result.overflow:
+		appearances[id] = int(appearances.get(id,0))+1
+	check(appearances.size() == ids.size() and appearances.keys().all(func(id: String) -> bool: return id in ids),"expanded placement creates no unexpected or missing identity / "+str(dimensions))
+	for id: String in ids:
+		check(appearances.get(id,0) == 1,"each current identity is placed exactly once on a shelf or in explicit overflow / "+id)
+		var wrappers: Array = screen.body.find_children("ItemVisual_"+id,"Control",true,false)
+		check(wrappers.size() == 1,"each current identity has exactly one public inventory drawer row / "+id)
+	var overflow: Array = shelf.layout_result.overflow
+	var labels: Dictionary = config.scenes.S04.shelf_layout.labels
+	var headings: Array = screen.body.get_children().filter(func(node: Node) -> bool: return node is Label and node.text == labels.overflow_heading)
+	check(headings.size() == (0 if overflow.is_empty() else 1),"expanded overflow has its explicit configured drawer heading / "+str(dimensions))
+	if not overflow.is_empty() and headings.size() == 1:
+		var following: Array = screen.body.get_children().filter(func(node: Node) -> bool: return node is Label and node.text == labels.all_items_heading)
+		check(following.size() == 1,"overflow drawer is separated from ordinary on-shelf item rows")
+		for id: String in overflow:
+			check(shelf.get_item_node(id) == null and not shelf.get_hit_rect(id).has_area(),"overflow identity has no hidden shelf sprite or click target / "+id)
+			var wrappers: Array = screen.body.find_children("ItemVisual_"+id,"Control",true,false)
+			if wrappers.size() == 1 and following.size() == 1:
+				var group: Node = wrappers[0].get_parent().get_parent()
+				check(group.get_parent() == screen.body and group.get_index() > headings[0].get_index() and group.get_index() < following[0].get_index(),"overflow identity is actually listed between the overflow and all-items headings / "+id)
+	print("SCENE CURRENT CATALOG / %s: %d identities, %d shelf entries, %d explicit overflow" % [str(dimensions),ids.size(),shelf.layout_result.entries.size(),overflow.size()])
+	game.state = before
+	main.show_screen("inventory")
+	await settle()
+	check(game.snapshot() == before and FileAccess.get_sha256(path) == saved_sha,"expanded render-only catalog restores the snapshot and leaves actual save bytes unchanged / "+str(dimensions))
 
 func check_shelf_commit_and_reload(main: Control, game: Node, saves: Node) -> void:
 	# All mutations below use real isolated-save transactions. The earlier

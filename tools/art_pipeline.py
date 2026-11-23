@@ -119,12 +119,91 @@ def _retired_compact_path(path):
                              "assets/generated_scenes/runtime/v3/", "assets/generated_scenes/runtime/v3_real/"))
 
 
+PORTRAIT_SHARED_FIELDS = frozenset({
+    "group", "art_pack", "operation", "category", "processing_script", "local_config",
+    "processing_config_digest", "inputs", "mask_path", "mask_sha256",
+})
+
+
+def expand_compact_metadata(manifest):
+    """Resolve lossless shared provenance; identities and prompts stay on each row.
+
+    This table is in the tracked manifest, never in optional local audit files.
+    Reject overlapping keys rather than choosing between two provenance claims.
+    """
+    result = copy.deepcopy(manifest)
+    profiles = result.pop("asset_metadata_profiles", {})
+    _require(isinstance(profiles, dict), "asset metadata profiles must be an object")
+    for key, value in profiles.items():
+        _require(isinstance(key, str) and re.fullmatch(r"A4_[a-f0-9]{12}", key) and
+                 isinstance(value, dict) and bool(value) and set(value) <= PORTRAIT_SHARED_FIELDS and
+                 value.get("group") == "portraits" and value.get("art_pack") == "A4_v3",
+                 "invalid shared portrait metadata profile")
+    for row in result.get("assets", []):
+        _require(isinstance(row, dict), "invalid compact asset")
+        if "metadata_profile" not in row:
+            continue
+        key = row.pop("metadata_profile")
+        _require(isinstance(key, str) and key in profiles, "missing asset metadata profile")
+        shared = profiles[key]
+        _require(not set(row).intersection(shared), "asset metadata profile overlaps explicit provenance")
+        row.update(copy.deepcopy(shared))
+    return result
+
+
+def compact_portrait_metadata(manifest):
+    """Deduplicate only identical A4 provenance, preserving every other old row."""
+    result = expand_compact_metadata(manifest)
+    groups = {}
+    for row in result.get("assets", []):
+        if row.get("group") != "portraits" or row.get("art_pack") != "A4_v3":
+            continue
+        shared = {key: row[key] for key in sorted(PORTRAIT_SHARED_FIELDS) if key in row}
+        encoded = json.dumps(shared, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        groups.setdefault(encoded, []).append(row)
+    profiles = {}
+    for encoded, rows in groups.items():
+        if len(rows) < 2:
+            continue
+        key = "A4_" + hashlib.sha256(encoded.encode("utf-8")).hexdigest()[:12]
+        shared = json.loads(encoded)
+        _require(key not in profiles or profiles[key] == shared, "shared metadata profile hash collision")
+        profiles[key] = shared
+        for row in rows:
+            for field in shared:
+                row.pop(field)
+            row["metadata_profile"] = key
+    if profiles:
+        result["asset_metadata_profiles"] = profiles
+    return result
+
+
+def exact_item_prompt(row, profile):
+    """Recover the actual reviewed item prompt, including later corrections."""
+    key, params = row.get("prompt_template"), row.get("prompt_params")
+    templates = profile.get("templates", {})
+    template = templates.get(key) if isinstance(templates, dict) and isinstance(key, str) else None
+    _require(isinstance(template, str) and "{object}" in template and isinstance(params, dict) and
+             all(isinstance(k, str) and isinstance(v, str) for k, v in params.items()) and "object" not in params,
+             "item requires its exact formal prompt recipe")
+    expected = row.get("actual_prompt_sha256")
+    _require(isinstance(expected, str) and re.fullmatch(r"[a-fA-F0-9]{64}", expected), "missing item prompt SHA256")
+    try:
+        prompt = template.format(object=row["object_description"], **params)
+    except (KeyError, IndexError, TypeError, ValueError) as error:
+        raise ValueError("item prompt recipe cannot render its exact parameters") from error
+    _require(hashlib.sha256(prompt.encode("utf-8")).hexdigest() == expected.lower(), "item prompt recipe SHA mismatch")
+    return prompt
+
+
 def validate_compact_manifest(workspace, manifest):
     """Validate metadata, not the optional retired audit or absent style draft."""
     _require(type(manifest.get("schema_version")) is int and manifest["schema_version"] == 3,
              "compact manifest schema_version must be 3")
     _require("round2_art" not in manifest, "compact manifest cannot inline retired round2_art")
-    assets = manifest.get("assets")
+    profiles = manifest.get("style_profiles", {})
+    _require(isinstance(profiles, dict) and isinstance(profiles.get("v3", {}), dict), "invalid v3 style profile")
+    assets = expand_compact_metadata(manifest).get("assets")
     _require(isinstance(assets, list), "compact assets must be an array")
     paths, item_ids = set(), set()
     for asset in assets:
@@ -171,6 +250,8 @@ def validate_compact_manifest(workspace, manifest):
             _require(isinstance(asset.get("source_raw_sha256"), str) and re.fullmatch(r"[a-fA-F0-9]{64}", asset["source_raw_sha256"]), "invalid item raw sha256")
             size = asset.get("source_raw_native_size")
             _require(isinstance(size, list) and len(size) == 2 and all(_integer(n, 1) for n in size), "invalid item raw native size")
+            if "prompt_template" in asset:
+                exact_item_prompt(asset, profiles.get("v3", {}))
         if asset.get("group") == "slices" and asset.get("operation") in ("extract_layer", "inpaint_cleanplate"):
             for field in ("composite_source", "processing_script", "local_spec", "local_config", "mask_path",
                           "inpaint_mask_path", "source_receipt"):
@@ -182,13 +263,11 @@ def validate_compact_manifest(workspace, manifest):
         _require(isinstance(row, dict), "invalid compact runtime copy")
         safe_path(workspace, row.get("path"))
         safe_path(workspace, row.get("source_path"))
-    profiles = manifest.get("style_profiles", {})
-    _require(isinstance(profiles, dict) and isinstance(profiles.get("v3", {}), dict), "invalid v3 style profile")
     return manifest
 
 
 def _compact_resources(manifest):
-    assets = {row["path"]: row for row in manifest["assets"]}
+    assets = {row["path"]: row for row in expand_compact_metadata(manifest)["assets"]}
     aliases = {}
     for row in manifest.get("runtime_copies", []):
         target = assets.get(row["path"], {})
@@ -441,8 +520,8 @@ def build_compact_queue(workspace, manifest, style, only, config=None):
                 matches = [record for record in records if isinstance(record, dict) and record.get("id") == item_id]
                 _require(len(matches) == 1 and matches[0].get("source_path") == raw,
                          "item generation receipt must select this item's new raw")
-            prompt = templates["item"].replace("{object}", row["object_description"])
-            if "{object}" not in templates["item"]:
+            prompt = exact_item_prompt(row, profile) if "prompt_template" in row else templates["item"].replace("{object}", row["object_description"])
+            if "prompt_template" not in row and "{object}" not in templates["item"]:
                 prompt += "\nObject: " + row["object_description"]
             prompt += "\n" + values["generation"]["target_size_prompt"]
             prompt += "\nThe input image is a style reference only. Generate the single described object; do not edit or reproduce the reference scene."

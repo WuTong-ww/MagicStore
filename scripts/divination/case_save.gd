@@ -4,6 +4,7 @@ extends RefCounted
 const Catalog = preload("res://scripts/divination/catalog.gd")
 const Cards = preload("res://scripts/divination/oracle_cards.gd")
 const Events = preload("res://scripts/divination/event_rules.gd")
+const ProductRules = preload("res://scripts/divination/event_schema.gd")
 const OracleSaved = preload("res://scripts/divination/oracle_saved.gd")
 const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
 const Shop = preload("res://scripts/shop/shop.gd")
@@ -46,7 +47,7 @@ static func validate(state: Dictionary, data: Dictionary, visits: Dictionary) ->
 					return "生成案例遗漏了已经共同获知的事实"
 		var prior_event := _prior_event_exists(case, visit, work.cases, visits)
 		var unlocked: Array = state.get("people",{}).get("unlocked_topics",{}).get(case.npc_id,[])
-		if not _case_records(case, visit, data, int(state.clock_minutes), int(state.get("schema_version", 0)), eventless, prior_event,unlocked):
+		if not _case_records(case, visit, data, int(state.clock_minutes), int(state.get("schema_version", 0)), eventless, prior_event,unlocked,state):
 			return "案例事实、对话、术式或预测记录无效"
 		if not case.event.is_empty():
 			if events.has(case.event.event_id):
@@ -99,7 +100,7 @@ static func wallet(value: Variant) -> bool:
 			return false
 	return true
 
-static func _case_records(case: Dictionary, visit: Dictionary, data: Dictionary, clock: int, schema: int = 0, eventless: Array = [], prior_event: bool = false, unlocked: Array = []) -> bool:
+static func _case_records(case: Dictionary, visit: Dictionary, data: Dictionary, clock: int, schema: int = 0, eventless: Array = [], prior_event: bool = false, unlocked: Array = [], state: Dictionary = {}) -> bool:
 	for key in ["world_facts", "services", "event", "prediction", "purchase", "item_use"]:
 		if not case.get(key) is Dictionary:
 			return false
@@ -136,7 +137,7 @@ static func _case_records(case: Dictionary, visit: Dictionary, data: Dictionary,
 		if public_npc.get("name") != expected.name or public_npc.get("role") != expected.role or public_npc.get("npc_id") != visit.npc_id or public_npc.get("case_title") != template.title:
 			return false
 		for clue: String in visit.clue_ids:
-			if not template.world_facts.values().any(func(fact: Dictionary) -> bool: return fact.requires_clue == clue):
+			if not template.world_facts.values().any(func(fact: Dictionary) -> bool: return fact.requires_clue == clue) and not _has_product_clue(case,clue):
 				return false
 		for topic_id: String in template.topic_ids:
 			var topic: Dictionary = data.topic_index[topic_id]
@@ -176,6 +177,12 @@ static func _case_records(case: Dictionary, visit: Dictionary, data: Dictionary,
 	for advice: Dictionary in case.advice:
 		if case.event.is_empty() or advice.get("event_id") != case.event.event_id or not advice.get("advice_key") in _advice_keys(definition) or not advice.get("accepted") is bool or not _text(advice.get("text")) or not _text(advice.get("reply")) or not _text(advice.get("advice_id")):
 			return false
+		var profile: Dictionary = state.get("people",{}).get("profiles",{}).get(case.npc_id,{})
+		if advice.has("acceptance"):
+			if not ProductRules.acceptance_valid(advice.acceptance,advice,state,case,definition.advice[advice.advice_key],profile,visit.clue_ids):
+				return false
+		elif schema >= 8 and (profile.has("advice_preference") or profile.has("advice_preference_version")):
+			return false
 	if not case.purchase.is_empty() and (not _text(case.purchase.get("transaction_id")) or not _text(case.purchase.get("item_id"))):
 		return false
 	if not case.item_use.is_empty() and (case.event.is_empty() or case.item_use.get("event_id") != case.event.event_id or not _text(case.item_use.get("transaction_id")) or not _text(case.item_use.get("item_id")) or not _text(case.item_use.get("item_use_id")) or not Catalog._integer(case.item_use.get("at"), int(visit.started_at), int(case.event.due_at) - 1)):
@@ -184,6 +191,67 @@ static func _case_records(case: Dictionary, visit: Dictionary, data: Dictionary,
 		var demand: Variant = case.demand
 		if case.event.is_empty() or not demand is Dictionary or demand.get("event_id") != case.event.event_id or demand.get("visit_id") != visit.visit_id or demand.get("effect_key") != definition.get("item_effect", {}).get("key") or not _text(demand.get("demand_id")) or not _text(demand.get("text")):
 			return false
+		if demand.has("need_tags") or demand.has("source"):
+			var rules := ProductRules.load_product_rules()
+			if rules.is_empty() or demand.get("need_tags") != rules.need_tags_by_effect.get(demand.effect_key,[]) or demand.get("source") != {"kind":"advice_need","advice_id":demand.get("advice_id"),"event_id":case.event.event_id,"visit_id":visit.visit_id}:
+				return false
+	return _product_records(case,visit,state,data,clock)
+
+static func _has_product_clue(case: Dictionary, clue: String) -> bool:
+	for row: Variant in case.get("product_components",[]):
+		if row is Dictionary and row.get("kind") == "clue" and row.get("effect",{}).get("clue_id") == clue:
+			return true
+	return false
+
+static func _product_records(case: Dictionary, visit: Dictionary, state: Dictionary, data: Dictionary, clock: int) -> bool:
+	var records: Variant = case.get("product_components",[])
+	if not records is Array:
+		return false
+	var rules := ProductRules.load_product_rules()
+	if not records.is_empty() and rules.is_empty():
+		return false
+	var seen := {}
+	for row: Variant in records:
+		if not row is Dictionary or row.size() != 9 or not _text(row.get("component_id")) or not _text(row.get("item_use_id")) or not _text(row.get("item_id")) or not row.get("transaction_id") is String or not row.get("kind") in ["event","clue","relationship"] or not row.get("effect") is Dictionary or not row.get("result") is Dictionary or not row.get("feedback_refs") is Array or not Catalog._integer(row.get("at"),int(visit.started_at),clock):
+			return false
+		var source_id: String = row.item_use_id+":"+row.component_id
+		if seen.has(source_id) or row.effect.get("kind") != row.kind or row.result.get("source_id") != source_id:
+			return false
+		seen[source_id] = true
+		var use: Dictionary = {}
+		for entry: Variant in state.get("shop",{}).get("uses",[]):
+			if entry is Dictionary and entry.get("item_use_id") == row.item_use_id:
+				use = entry
+				break
+		if use.get("version") != 2 or use.get("visit_id") != visit.visit_id or use.get("item_id") != row.item_id or use.get("transaction_id") != row.transaction_id or use.get("at") != row.at:
+			return false
+		var matching := false
+		for component: Variant in use.get("component_results",[]):
+			if component is Dictionary and component.get("component_id") == row.component_id and component.get("kind") == row.kind and component.get("effect") == row.effect and component.get("result") == row.result:
+				matching = true
+		if not matching:
+			return false
+		if row.kind == "clue":
+			var rule: Dictionary = rules.tool_clues.get(row.effect.get("clue_id"),{})
+			if row.effect.size() != 3 or rule.is_empty() or row.effect.get("method_id") != rule.method_id or row.effect.method_id not in data.cases[case.case_id].method_ids or row.effect.method_id not in state.divination.skills or row.effect.clue_id not in visit.clue_ids or row.result != {"source_id":source_id,"status":"revealed","clue_id":row.effect.clue_id,"method_id":row.effect.method_id,"source_kind":"tool"} or row.feedback_refs != [{"kind":"tool_clue","source_id":source_id}]:
+				return false
+			for required: String in rule.requires_clues:
+				if required not in visit.clue_ids:
+					return false
+		else:
+			if row.transaction_id.is_empty() or case.event.is_empty() or row.at >= case.event.due_at or row.result.get("status") != "pending" or row.result.get("event_id") != case.event.event_id or row.result.get("effect_key") != row.effect.get("effect_key") or row.feedback_refs != [{"kind":"event_pending","source_id":case.event.event_id}]:
+				return false
+			if row.kind == "event":
+				if row.effect.size() != 2 or row.effect.get("effect_key") != data.cases[case.case_id].event.get("item_effect",{}).get("key") or case.item_use.get("item_use_id") != row.item_use_id or case.item_use.get("component_id") != row.component_id:
+					return false
+			else:
+				var rule: Dictionary = rules.relationship_effects.get(row.effect.get("effect_key"),{})
+				var target := Events.product_relation_target(state,case)
+				if row.effect.size() != 3 or rule.is_empty() or target.is_empty() or row.effect.get("delta") != rule.delta or row.result != {"source_id":source_id,"status":"pending","event_id":case.event.event_id,"effect_key":row.effect.effect_key,"selector":"current_goal","rel_id":target.relationship_id,"goal_id":target.goal_id,"subject_id":target.subject_id,"delta":int(rule.delta)}:
+					return false
+	var report: Dictionary = case.event.get("feedback",{}).get("report",{})
+	if report.has("item_component_refs") and report.item_component_refs != Events.product_feedback_refs(state,case):
+		return false
 	return true
 
 static func _topic_unlocked_before(topic_id: String, topic: Dictionary, case: Dictionary, visit: Dictionary, unlocked: Array) -> bool:
@@ -351,6 +419,8 @@ static func _effect(effect: Dictionary, case: Dictionary, state: Dictionary, dat
 	# prediction linkage after migration; no historical effect is reissued.
 	if not effect.has("stage"):
 		return effect.effect_id == "%s_%s" % [case.event.event_id,effect.kind] and not case.prediction.is_empty() and not case.event.feedback.report.is_empty()
+	if effect.get("effect_source") in ["product_component","g4_reward"]:
+		return _product_effect(effect,case,state)
 	if not effect.stage in ["resolve","feedback"] or effect.get("outcome_id") != case.event.get("outcome_id") or not effect.get("effect_source") in ["outcome","feedback"] or not Catalog._integer(effect.get("effect_index"), 0, MAX_INT) or not Catalog._integer(effect.get("rule_index"), 0, MAX_INT) or effect.rule_index != case.event.get("rule_index"):
 		return false
 	if effect.stage == "feedback" and case.event.feedback.report.is_empty():
@@ -375,6 +445,24 @@ static func _effect(effect: Dictionary, case: Dictionary, state: Dictionary, dat
 	# invalidate those already-consumed values.
 	var expected := "%s_%s_%s_%s_%d_%s" % [case.event.event_id,effect.stage,effect.outcome_id,effect.effect_source,int(effect.effect_index),effect.kind]
 	return effect.effect_id == expected
+
+static func _product_effect(effect: Dictionary, case: Dictionary, state: Dictionary) -> bool:
+	var rules := ProductRules.load_product_rules()
+	if rules.is_empty() or effect.get("rule_version") != 1 or effect.get("rule_index") != case.event.get("rule_index") or effect.get("outcome_id") != case.event.outcome_id or effect.get("effect_index") != 0 or effect.get("expires_at") != -1:
+		return false
+	if effect.effect_source == "g4_reward":
+		var profile: Dictionary = state.get("people",{}).get("profiles",{}).get(case.npc_id,{})
+		var rule: Dictionary = rules.gift_rewards.get(effect.get("rule_key"),{})
+		return not rule.is_empty() and profile.get("advice_preference_version") == 1 and not case.event.feedback.report.is_empty() and effect.stage == "feedback" and effect.starts_at == case.event.feedback.report.at and effect.kind == "gift" and effect.get("item_id") == rule.item_id and effect.amount == rule.qty and case.event.outcome_id in rule.outcome_ids and effect.effect_id == "%s_feedback_g4_reward_%s_gift" % [case.event.event_id,effect.rule_key]
+	var target := Events.product_relation_target(state,case)
+	var rule: Dictionary = rules.relationship_effects.get(effect.get("rule_key"),{})
+	var advice := Events._selected_advice(case)
+	if target.is_empty() or rule.is_empty() or effect.stage != "resolve" or effect.starts_at != case.event.due_at or effect.kind != "npc_relationship" or effect.get("rel_id") != target.relationship_id or effect.get("goal_id") != target.goal_id or effect.get("subject_id") != target.subject_id or effect.amount != rule.delta or effect.get("delta") != rule.delta or not advice.get("accepted",false) or advice.get("advice_key") not in rule.advice_keys or case.event.outcome not in rule.outcomes or case.event.evidence not in rule.evidence:
+		return false
+	for row: Dictionary in case.get("product_components",[]):
+		if row.kind == "relationship" and row.item_use_id == effect.get("item_use_id") and row.component_id == effect.get("component_id") and row.transaction_id == effect.get("transaction_id") and row.result.source_id == effect.get("source_id") and row.effect.effect_key == effect.rule_key and row.result.rel_id == effect.rel_id:
+			return effect.effect_id == "%s_resolve_product_%s_%s_npc_relationship" % [case.event.event_id,row.item_use_id,row.component_id]
+	return false
 
 static func _past(memory: Variant, npc_id: String, data: Dictionary, services: Dictionary) -> bool:
 	if not memory is Dictionary or not data.past_profiles.has(memory.get("profile_id")) or not _text(memory.get("identity_id")) or not _text(memory.get("other_identity_id")) or not _text(memory.get("relation")) or not memory.get("fragments") is Dictionary:

@@ -42,6 +42,7 @@ func fixture(count: int) -> FakeBackground:
 	# A replacement current-schema namespace starts with its own empty arrival
 	# baseline; the legacy factory remains useful for historical unit fixtures.
 	People.initialize_family_library(gs.state.people,gs.people_config.family_library,"new_game")
+	People.initialize_ordinary_content(gs.state.people,gs.people_config)
 	# This fixture replaces people inside a current-schema save, so enable the
 	# current catalog before births just as the production Bridge does. Keep the
 	# legacy People.create factory and the sampled traffic assertions unchanged.

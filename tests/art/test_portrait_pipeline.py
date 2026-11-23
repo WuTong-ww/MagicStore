@@ -437,6 +437,87 @@ class PortraitPipelineTests(unittest.TestCase):
         self.assertEqual(entry['mask_sha256'],row['mask_sha256'])
         self.assertEqual(row['actual_prompt_sha256'],hashlib.sha256(generation['records'][0]['prompt'].encode('utf-8')).hexdigest())
 
+    def proposal_fixture(self, pipeline):
+        # Metadata-only overlay of the full tracked catalog; the synthetic refs
+        # validate the local CLI config, not approval of newly generated parts.
+        self.references(pipeline)
+        config_path=self.root/'data/art/portrait_pipeline.json'
+        config_path.parent.mkdir(parents=True,exist_ok=True)
+        config_path.write_text(json.dumps(self.config),encoding='utf-8')
+        source=self.root/'assets/ART_ASSET_MANIFEST.json'
+        source.parent.mkdir(parents=True,exist_ok=True)
+        source.write_bytes((ROOT/'assets/ART_ASSET_MANIFEST.json').read_bytes())
+        base=json.loads(source.read_text(encoding='utf-8'))
+        profile_counts={key:sum(row.get('metadata_profile')==key for row in base['assets'])
+                        for key in base.get('asset_metadata_profiles',{})}
+        original=next(row for row in base['assets']
+                      if profile_counts.get(row.get('metadata_profile'),0)>1)
+        expanded=pipeline.common.expand_compact_metadata(base)
+        replacement=copy.deepcopy(next(row for row in expanded['assets'] if row['path']==original['path']))
+        fragment={'version':1,'kind':'portrait_manifest_fragment','assets':[replacement],
+                  'templates':{},'pending':[],'manifest_modified':False,'art_passed':False}
+        return source,base,fragment,config_path
+
+    def test_proposed_manifest_partial_replacement_preserves_full_expansion_and_inputs(self):
+        pipeline=self.module('tools/art/portrait_pipeline.py','portrait_partial_proposal_test')
+        source,base,fragment,_=self.proposal_fixture(pipeline)
+        source_bytes=source.read_bytes()
+        replacement=fragment['assets'][0]
+        replacement['processing_config_digest']=hashlib.sha256(b'synthetic changed processing field').hexdigest()
+        original=pipeline.common.expand_compact_metadata(base)
+        self.assertNotEqual(replacement['processing_config_digest'],next(
+            row['processing_config_digest'] for row in original['assets'] if row['path']==replacement['path']))
+        before=copy.deepcopy(fragment)
+        propose=getattr(pipeline,'proposed_manifest',None)
+        self.assertTrue(callable(propose),'production proposed_manifest API must preserve partial shared metadata')
+        candidate=propose(self.root,fragment)
+        expected=copy.deepcopy(original)
+        expected['assets']=[copy.deepcopy(replacement) if row['path']==replacement['path'] else row
+                            for row in expected['assets']]
+        self.assertEqual(pipeline.common.expand_compact_metadata(candidate),expected)
+        self.assertEqual(len(candidate['assets']),len(base['assets']))
+        self.assertEqual(candidate['runtime_copies'],base['runtime_copies'])
+        used={row['metadata_profile'] for row in candidate['assets'] if 'metadata_profile' in row}
+        self.assertEqual(used,set(candidate.get('asset_metadata_profiles',{})))
+        self.assertEqual(fragment,before)
+        self.assertEqual(source.read_bytes(),source_bytes)
+
+    def test_proposal_cli_writes_exact_budget_and_rejects_unsafe_or_overbudget_outputs(self):
+        pipeline=self.module('tools/art/portrait_pipeline.py','portrait_proposal_cli_test')
+        source,base,fragment,config_path=self.proposal_fixture(pipeline)
+        source_bytes=source.read_bytes()
+        receipt=self.root/'.tools/proposal-fragment.json'
+        receipt.parent.mkdir(parents=True,exist_ok=True)
+        receipt.write_text(json.dumps(fragment),encoding='utf-8')
+        receipt_bytes=receipt.read_bytes()
+        output=self.root/'.tools/portrait-proposal.json'
+        command=[sys.executable,str(ROOT/'tools/art/portrait_pipeline.py'),'proposal',
+                 '--workspace',str(self.root),'--config',config_path.relative_to(self.root).as_posix(),
+                 '--receipt',receipt.relative_to(self.root).as_posix()]
+        result=subprocess.run(command+['--output',output.relative_to(self.root).as_posix()],capture_output=True,text=True)
+        self.assertEqual(result.returncode,0,result.stdout+result.stderr)
+        encoded=output.read_bytes()
+        candidate=json.loads(encoded)
+        self.assertEqual(encoded,(json.dumps(candidate,ensure_ascii=False,separators=(',',':'),allow_nan=False)+'\n').encode('utf-8'))
+        budget=pipeline.manifest_budget(self.root,fragment,self.config)
+        self.assertEqual(len(encoded),budget['proposed_bytes'])
+        self.assertLessEqual(len(encoded),self.config['maximum_manifest_bytes'])
+        self.assertEqual(pipeline.common.expand_compact_metadata(candidate),pipeline.common.expand_compact_metadata(base))
+        for target in (output,source,receipt,self.root/'assets/portraits/unsafe-proposal.json'):
+            with self.subTest(target=target):
+                prior=target.read_bytes() if target.exists() else None
+                refused=subprocess.run(command+['--output',target.relative_to(self.root).as_posix()],capture_output=True,text=True)
+                self.assertNotEqual(refused.returncode,0,refused.stdout+refused.stderr)
+                self.assertEqual(target.read_bytes() if target.exists() else None,prior)
+        low_config=copy.deepcopy(self.config);low_config['maximum_manifest_bytes']=10
+        config_path.write_text(json.dumps(low_config),encoding='utf-8')
+        denied=self.root/'.tools/overbudget-proposal.json'
+        refused=subprocess.run(command+['--output',denied.relative_to(self.root).as_posix()],capture_output=True,text=True)
+        self.assertNotEqual(refused.returncode,0,refused.stdout+refused.stderr)
+        self.assertFalse(denied.exists())
+        self.assertEqual(source.read_bytes(),source_bytes)
+        self.assertEqual(receipt.read_bytes(),receipt_bytes)
+
     def test_actual_prefix_suffix_share_base_without_reformatting_literal_braces(self):
         pipeline=self.module('tools/art/portrait_pipeline.py','portrait_actual_wrapped_prompt_test')
         generation=self.receipt(pipeline)

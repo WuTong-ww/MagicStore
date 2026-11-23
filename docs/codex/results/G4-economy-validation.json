@@ -1,0 +1,84 @@
+{
+  "scope": "one_continuous_30day_run",
+  "configured_seed": 104729,
+  "strategy": "balanced",
+  "observed_days": 30,
+  "formal_180_complete": false,
+  "standard_full_passed": false,
+  "checkpoint_continuation_verified": false,
+  "recovery_injection_in_this_trajectory": false,
+  "final_coins": 2562,
+  "final_clock": 43080,
+  "final_state_version": 1932,
+  "final_payload_sha256": "1390d47258b3a5c8af5c81bd33687d15ecb8c1b22a2c508b055c73a282cfef8e",
+  "checkpoint_payload_sha256": "600be6023c8a639f2df8634fa3aceb1b7ffd644d5478c1bd01d2e78b6cff9b97",
+  "source_files": [
+    {
+      "path": ".tools/g4/economy-scheduled-r1/104729_balanced/continuous/daily.csv",
+      "sha256": "415d4f4485c1718a92522aca322cd098e1f8e434631e4b3ac6a2de0f30cbd61f",
+      "bytes": 1833
+    },
+    {
+      "path": ".tools/g4/economy-scheduled-r1/104729_balanced/continuous/actions.jsonl",
+      "sha256": "33627365a9bb29bfeb4941ae6d61db8893702d98a4f05020dc8d89fae11e62c5",
+      "bytes": 1054786
+    },
+    {
+      "path": ".tools/g4/economy-scheduled-r1/104729_balanced/continuous/saves/save_43da379cb18c8cc7c9586a0f3deb7ca2.json",
+      "sha256": "a3c24299ad2d662d8c941512166d7795171a4229d9b760e902e8f0eb8d6ff930",
+      "bytes": 4169592
+    },
+    {
+      "path": ".tools/g4/economy-scheduled-r1/104729_balanced/continuous/saves/save_43da379cb18c8cc7c9586a0f3deb7ca2.json.bak",
+      "sha256": "26b06ac066547280fe17e0784037fa32449a82446d97d3e8ef6edac5b423d3df",
+      "bytes": 4169413
+    },
+    {
+      "path": ".tools/g4/economy-scheduled-r1/104729_balanced/continuous/checkpoint.json",
+      "sha256": "1d8cc8260e2f56ef63256b95d6786b1c5f3927d445bfe05b7579e7c43c8087c0",
+      "bytes": 1639167
+    },
+    {
+      "path": ".tools/g4/economy-scheduled-r1/104729_balanced/continuous/checkpoint-receipt.json",
+      "sha256": "37cb7f33ae9a347f9cd8378fd1a449559396da75c418e34fd56260d805539414",
+      "bytes": 335
+    }
+  ],
+  "stop_receipt_sha256": "4a911c7e40bb481564159fd3d98d31bf99395bfdb79b40da931213b72355afa9",
+  "content_rules_sha256": "c9265d723d8cdce9546468546b905241575bb6fbb4b1e3d3953d3ac56a97f81f",
+  "economic_rules_sha256": "d294d247d81bcdb019269ac923d9e85faf268499f42fdab6ef5d2e26762d400f",
+  "actual_attempts": 2063,
+  "phase_counts": {
+    "action": 2063
+  },
+  "boundary_actions": 30,
+  "daily_logical_actions": 2033,
+  "observed_minimum_cash": 37,
+  "empty_customer_days": [],
+  "alarm_results": {
+    "daily_cash_gain": true,
+    "observed_inventory_value": true,
+    "final_cash": true
+  },
+  "passed_single_trajectory_alarms": true,
+  "verified": "CSV shape/arithmetic, JSONL per-day wallet/versions/actions and four actual B/C cash columns; original checkpoint SHA",
+  "limitations": "Other CSV counters/inventory values are runner observations, not independently reconstructed; no runner total/checks, no15day recovery or multi-strategy proof, no G3 feedback income proof.",
+  "outputs": [
+    {
+      "path": "docs/codex/results/G4-economy-first30.csv",
+      "sha256": "415d4f4485c1718a92522aca322cd098e1f8e434631e4b3ac6a2de0f30cbd61f"
+    },
+    {
+      "path": "docs/codex/results/G4-economy-first30.svg",
+      "sha256": "3bc1eb75f8afa556e516d186dc49f01d726ec318b8923cfcdf3dda6dbb06d2b7"
+    },
+    {
+      "path": ".tools/g4/first30-preview.png",
+      "sha256": "4f45dafc7bf380a4c7cca7f1ba8c24ae470c6523517e2f8f46ae4f2e9b41fddb"
+    }
+  ],
+  "actual_population_seed": 332056489,
+  "final_save_id": "save_43da379cb18c8cc7c9586a0f3deb7ca2",
+  "root_plot_opened": true,
+  "plot_review": "Single actual curve; readable Chinese labels; x0..30 with initial40 and terminal2562; no balance proof beyond observed trace."
+}

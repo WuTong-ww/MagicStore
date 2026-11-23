@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "ordinary_surnames": [
+    "许",
+    "何",
+    "江",
+    "方",
+    "陶",
+    "沈",
+    "周",
+    "顾"
+  ],
+  "ordinary_names": [
+    "知夏",
+    "远舟",
+    "栖迟",
+    "清和",
+    "予安",
+    "念秋",
+    "星遥",
+    "书宁"
+  ],
+  "occupations": [
+    "灯具修理师",
+    "花店店员",
+    "旧书店店员",
+    "钟表学徒",
+    "插画师",
+    "园艺师"
+  ],
+  "interests": [
+    "植物",
+    "旧物",
+    "散步",
+    "绘画",
+    "写信",
+    "音乐"
+  ],
+  "mbti_types": [
+    "ISTJ",
+    "ISFJ",
+    "INFJ",
+    "INTJ",
+    "ISTP",
+    "ISFP",
+    "INFP",
+    "INTP",
+    "ESTP",
+    "ESFP",
+    "ENFP",
+    "ENTP",
+    "ESTJ",
+    "ESFJ",
+    "ENFJ",
+    "ENTJ"
+  ],
+  "return_schedules": [
+    {
+      "id": "afternoons",
+      "weekdays": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "start": 1020,
+      "end": 1290
+    },
+    {
+      "id": "daytime",
+      "weekdays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "start": 600,
+      "end": 1080
+    },
+    {
+      "id": "weekend",
+      "weekdays": [
+        5,
+        6
+      ],
+      "start": 600,
+      "end": 1200
+    }
+  ],
+  "personalities": [
+    {
+      "id": "patient",
+      "label": "温和耐心",
+      "patience": 85,
+      "return_bias": 20,
+      "mbti": "ISFJ"
+    },
+    {
+      "id": "busy",
+      "label": "直率忙碌",
+      "patience": 45,
+      "return_bias": 0,
+      "mbti": "ESTJ"
+    },
+    {
+      "id": "reflective",
+      "label": "细心内敛",
+      "patience": 65,
+      "return_bias": 10,
+      "mbti": "INFJ"
+    },
+    {
+      "id": "outgoing",
+      "label": "热情健谈",
+      "patience": 60,
+      "return_bias": 15,
+      "mbti": "ENFP"
+    }
+  ],
+  "appearance": {
+    "faces": [
+      "face_01",
+      "face_02",
+      "face_03"
+    ],
+    "hair": [
+      "hair_01",
+      "hair_02",
+      "hair_03"
+    ],
+    "outfits": [
+      "outfit_01",
+      "outfit_02",
+      "outfit_03"
+    ]
+  }
+}

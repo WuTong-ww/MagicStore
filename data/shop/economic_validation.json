@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "days": 30,
+  "seeds": [104729, 130363],
+  "strategies": [
+    {
+      "id": "balanced",
+      "target_recipe_ids": ["calming_incense", "restorative_draught", "night_tea"],
+      "maximum_services_per_visit": 1,
+      "maximum_sales_per_visit": 1,
+      "procurement_batch": 2
+    },
+    {
+      "id": "crafting",
+      "target_recipe_ids": ["calming_incense", "focus_candle", "fresh_air_incense"],
+      "maximum_services_per_visit": 1,
+      "maximum_sales_per_visit": 2,
+      "procurement_batch": 3
+    }
+  ],
+  "limits": {
+    "maximum_actions_per_day": 200,
+    "maximum_failures_per_day": 40,
+    "minimum_final_coins": 10,
+    "maximum_daily_cash_gain": 250,
+    "maximum_inventory_value": 200
+  },
+  "wait_step_minutes": 15,
+  "checkpoint_day": 15,
+  "interpretation": {
+    "scope": "真实三十日有限策略验证，不能证明无限期平衡。阈值仅作验收断言，不改变钱包、库存或行动规则。",
+    "initial_state": "沿真实新档四十金币、一百精力与开局库存，不注入配方或收入。",
+    "cash_bound": "每日净现金二百五十为宽松报警线；实际仍受营业时间、精力、客流与顾客钱包限制，不以硬截断制造曲线。",
+    "inventory_bound": "二百为按实际批次品质出售价值计的库存报警线，避免囤货掩盖亏损。",
+    "solvency_bound": "第三十日现金至少十金币；逐日最低现金、失败、空客日和长期线性增长须在结果中明示。"
+  }
+}

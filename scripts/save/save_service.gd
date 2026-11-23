@@ -6,6 +6,7 @@ extends Node
 const ENVELOPE_FORMAT := "midnight-grocery-save-v1"
 const MAX_BYTES := 16 * 1024 * 1024
 const MAX_INTEGER := 2147483647
+const MAX_EXACT_JSON_INTEGER := 9007199254740991
 const ContentLoader = preload("res://scripts/core/content_loader.gd")
 const DivinationCatalog = preload("res://scripts/divination/catalog.gd")
 const DivinationSave = preload("res://scripts/divination/case_save.gd")
@@ -181,10 +182,14 @@ func validate_snapshot(snapshot: Dictionary) -> Dictionary:
 func _validate(s: Dictionary) -> String:
 	if not _is_plain_json(s, 0):
 		return "包含不可保存的数据或嵌套过深"
+	# JSON numbers are parsed as Float by Godot. Compare component snapshots in
+	# the same exact numeric domain as committed candidates, without mutating
+	# the caller or changing bytes. Nonfinite and non-JSON values were rejected.
+	s = _normalize_numbers(s)
 	for field in ["schema_version", "save_id", "name", "state_version", "clock_minutes", "player", "npcs", "active_visit_id", "visits", "processed_actions"]:
 		if not s.has(field):
 			return "缺少 " + field
-	if not _integer(s.schema_version, 1, 7):
+	if not _integer(s.schema_version, 1, 8):
 		return Appearance.load_config().get("copy",{}).get("unsupported_schema","不支持的 schema_version")
 	var extended := int(s.schema_version) >= 2
 	if not _safe_id(s.save_id) or not _text(s.name, 1, 80):
@@ -473,7 +478,7 @@ func _is_plain_json(value: Variant, depth: int) -> bool:
 
 
 func _normalize_numbers(value: Variant) -> Variant:
-	if value is float and value == floor(value):
+	if value is float and is_finite(value) and absf(value) <= MAX_EXACT_JSON_INTEGER and value == floor(value):
 		return int(value)
 	if value is Array:
 		var array: Array = []

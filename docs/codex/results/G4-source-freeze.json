@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "scope": "read-only final source and sealed evidence freeze audit; excludes docs, no engine/tests/Git/source/config writes",
+  "created_utc": "2026-11-23T08:44:22.598606+00:00",
+  "facts": {
+    "path": ".tools/g4/final-validation-facts.json",
+    "sha256": "1e8bb56629c79d9385b439a65150d650e8fb263694806ae2a60bcc6093907c73",
+    "bytes": 59095
+  },
+  "source_maps": [
+    {
+      "path": ".tools/g4/source-pre-full3.json",
+      "sha256": "02ead61192fcae0acc431fa3ae21be5dfb2f7633bd8d4eb9b2894c39c1a255a4",
+      "bytes": 205805
+    },
+    {
+      "path": ".tools/g4/source-post-full3.json",
+      "sha256": "89d567cace314beb9c78f07fc11c5b7eb89d3d3c949cbf9b98e6392a3ab1222f",
+      "bytes": 205806
+    }
+  ],
+  "pre_count": 1201,
+  "post_count": 1201,
+  "pre_post_maps_exact_equal": true,
+  "current_paths_rehashed": 1201,
+  "current_source_differences": [],
+  "v2_original_file_count": 56,
+  "v2_original_current_file_count": 56,
+  "v2_original_path_set_equal": true,
+  "v2_original_differences": [],
+  "manifest": {
+    "path": "assets/ART_ASSET_MANIFEST.json",
+    "sha256": "b7ca9f61797f2fece5fc8c320e7d16ef1ea37a0f546c6575f991501a491152f1",
+    "bytes": 499845
+  },
+  "manifest_asset_count": 361,
+  "manifest_matches_facts": true,
+  "stop_receipt": {
+    "path": ".tools/g4/stop-first30-receipt.json",
+    "sha256": "4a911c7e40bb481564159fd3d98d31bf99395bfdb79b40da931213b72355afa9",
+    "bytes": 5442
+  },
+  "sealed_continuous_file_count": 6,
+  "sealed_continuous_file_differences": [],
+  "original_180_exporter": {
+    "path": ".tools/g4/export_economy.py",
+    "sha256": "e5b3c2a17578e49c77b2442233773c1f32367406b85d071e12d2f4491df4337f",
+    "bytes": 9755
+  },
+  "original_180_exporter_unchanged": true,
+  "all_requested_checks_passed": true
+}

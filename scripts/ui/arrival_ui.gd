@@ -82,7 +82,16 @@ static func action_minutes(kind: String, extra: Dictionary) -> int:
 		"gather_material":
 			return int(catalog.get("gather_sites", {}).get(extra.get("site_id", ""), {}).get("minutes", 0))
 		"craft_item":
-			return int(catalog.get("recipes", {}).get(extra.get("recipe_id", ""), {}).get("minutes", 0))
+			var recipe: Dictionary = catalog.get("recipes", {}).get(extra.get("recipe_id", ""), {})
+			var variant_id: Variant = extra.get("variant_id", "")
+			if recipe.is_empty() or not variant_id is String:
+				return 0
+			if not variant_id.is_empty():
+				var variant: Dictionary = catalog.get("recipe_variants", {}).get(variant_id, {})
+				if variant.is_empty() or variant.get("recipe_id") != extra.get("recipe_id"):
+					return 0
+				return int(variant.get("minutes", 0))
+			return int(recipe.get("minutes", 0))
 		"research_recipe":
 			return int(catalog.get("recipes", {}).get(extra.get("recipe_id", ""), {}).get("research_minutes", 0))
 		"learn_method":

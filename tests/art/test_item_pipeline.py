@@ -272,8 +272,10 @@ class ItemPipelineTests(unittest.TestCase):
         module = implementation(self)
         receipt = module.process_items(self.workspace, self.generation)
         original = receipt["item_entries"]["lavender"]
+        production_items = json.loads((ROOT / "data/shop/visuals.json").read_text(encoding="utf-8"))["items"]
+        self.assertEqual(set(production_items), set(module.load_config()["required_ids"]))
         items = {}
-        for item_id in module.load_config()["required_ids"]:
+        for item_id in production_items:
             row = {"item_id": item_id}
             for field, template in (("path", original["path"]), ("icon_path", original["icon_path"])):
                 suffix = "_64" if field == "icon_path" else ""
@@ -283,6 +285,9 @@ class ItemPipelineTests(unittest.TestCase):
             items[item_id] = row
         mapping = self.workspace / "visuals.json"
         mapping.write_text(json.dumps({"selected_version": 3, "items": items}), encoding="utf-8")
+        expected_paths = {str((self.workspace / row[field][6:]).resolve())
+                          for row in items.values() for field in ("path", "icon_path")}
+        self.assertEqual(len(expected_paths), 2 * len(production_items))
         spec = importlib.util.spec_from_file_location("item_alpha_production_cli", ROOT / "tools/check_alpha.py")
         checker = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(checker)
@@ -291,15 +296,21 @@ class ItemPipelineTests(unittest.TestCase):
         with redirect_stdout(output):
             self.assertEqual(checker.main(arguments), 0)
         report = json.loads(output.getvalue())
-        self.assertEqual(report["checked"], 18)
-        self.assertEqual(len({row["path"] for row in report["reports"]}), 18)
+        self.assertTrue(report["passed"])
+        self.assertEqual(report["checked"], len(expected_paths))
+        self.assertEqual(len(report["reports"]), len(expected_paths))
+        self.assertEqual({row["path"] for row in report["reports"]}, expected_paths)
+        self.assertTrue(all(row["passed"] for row in report["reports"]))
         last_icon = self.workspace / items["silver_leaf"]["icon_path"][6:]
         Image.new("RGB", (64, 64), "grey").save(last_icon)
         output = io.StringIO()
         with redirect_stdout(output):
             self.assertEqual(checker.main(arguments), 1)
         report = json.loads(output.getvalue())
-        self.assertEqual(report["checked"], 18)
+        self.assertFalse(report["passed"])
+        self.assertEqual(report["checked"], len(expected_paths))
+        self.assertEqual(len(report["reports"]), len(expected_paths))
+        self.assertEqual({row["path"] for row in report["reports"]}, expected_paths)
         self.assertIn("missing_alpha_channel", next(row for row in report["reports"]
                                                     if Path(row["path"]) == last_icon.resolve())["errors"])
 

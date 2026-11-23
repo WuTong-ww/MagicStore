@@ -121,6 +121,40 @@ class CompactRegenTests(unittest.TestCase):
             self.assertEqual(task["arguments"]["referenced_image_paths"], [str((self.root / self.style["path"]).resolve())])
             self.assertFalse(task["arguments"]["transparent_background"])
 
+    def exact_item_recipe(self):
+        row, icon = self.formal_item("lavender", "an exact pale herb")
+        template = "Actual reviewed paint prompt: {object}. No text. {extra}"
+        params = {"extra": "The tips remain cool grey, not yellow."}
+        actual = template.format(object=row["object_description"], **params)
+        row.update(prompt_template="G4_item_v3", prompt_params=params,
+                   actual_prompt_sha256=hashlib.sha256(actual.encode()).hexdigest())
+        self.use_formal_rows(row, icon)
+        self.manifest["runtime_copies"] = [{"path": icon["path"], "source_path": row["path"]}]
+        self.manifest["style_profiles"]["v3"]["templates"]["G4_item_v3"] = template
+        return row, actual
+
+    def test_reviewed_item_prompt_recipe_keeps_its_actual_palette_correction(self):
+        row, actual = self.exact_item_recipe()
+        queue = implementation().build_queue(self.root, self.manifest, "v3", "items")
+        self.assertTrue(queue["tasks"][0]["arguments"]["prompt"].startswith(actual))
+        self.assertNotIn("USER V3 ITEM", queue["tasks"][0]["arguments"]["prompt"])
+
+    def test_item_recipe_rejects_changed_prompt_metadata(self):
+        row, actual = self.exact_item_recipe()
+        row["prompt_params"]["extra"] = "Changed palette"
+        with self.assertRaises(ValueError):
+            implementation().build_queue(self.root, self.manifest, "v3", "items")
+
+    def test_item_recipe_cannot_override_object_identity_or_lose_template(self):
+        row, actual = self.exact_item_recipe()
+        row["prompt_params"]["object"] = "a different object"
+        with self.assertRaises(ValueError):
+            implementation().build_queue(self.root, self.manifest, "v3", "items")
+        row["prompt_params"].pop("object")
+        row["prompt_template"] = "missing"
+        with self.assertRaises(ValueError):
+            implementation().build_queue(self.root, self.manifest, "v3", "items")
+
     def test_item_processing_and_64_derivation_wait_for_new_raw_and_256(self):
         module = implementation()
         row, icon = self.formal_item("lavender", "a pale-yellow primrose sprig")

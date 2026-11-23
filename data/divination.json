@@ -99,7 +99,8 @@
   "clues": {
     "venue_notice": {"title": "临时入口告示", "text": "展览改从侧门进入，原来约见的窗边位置仍保留。"},
     "birth_details": {"title": "获准使用出生资料", "text": "来客同意将出生资料用于本次盘面。"},
-    "archive_stub": {"title": "旧物馆的借条", "text": "日期背面写有另一处档案柜编号。"}
+    "archive_stub": {"title": "旧物馆的借条", "text": "日期背面写有另一处档案柜编号。"},
+    "g4_tool_observation": {"title": "工具提示：核对已有材料", "text": "工具提示先找出已有凭证与当事人陈述之间的一处差异。这是待核对的方向，不证明隐藏事实或事件结果。"}
   },
   "topics": [
     {"topic_id": "venue", "default_mood": "neutral", "label": "核对侧门告示", "keywords": ["侧门", "告示", "入口"],

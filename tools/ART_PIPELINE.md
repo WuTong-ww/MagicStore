@@ -16,6 +16,26 @@ version is independent of the rendering format and the art direction version.
 `validate_formal_manifest.py` validates the current formal table. The legacy
 work-manifest format remains supported for isolated processing fixtures.
 
+G4 adds `asset_metadata_profiles` for identical A4 provenance only. Each asset
+still carries its literal path, dimensions, byte SHA, source image identity and
+exact prompt recipe. `art_pipeline.expand_compact_metadata()` restores the
+original complete rows without consulting local files; missing profiles or
+overlapping provenance fail. `compact_portrait_metadata()` and
+`tools/art/compact_manifest.py --output .tools/<proposal>.json` produce a
+lossless, immutable proposal. The old 169 nonportrait rows remain literal.
+This shared table is tracked metadata, distinct from optional ignored audit.
+
+New G4 item rows additionally record an exact `prompt_template` and
+`prompt_params`, plus `actual_prompt_sha256`. The object comes from that row's
+`object_description`; parameters cannot override it. The queue verifies the
+expanded prompt before retaining the reviewed palette correction for a new
+style reference. The v3 profile records the built-in generator and regeneration
+entrypoint. All 35 items have 35 native-generation tasks and 35 processing tasks;
+the 35 icon aliases declare `performed_with: item_chromakey`, not extra image
+generation. The nine archived atlas identities remain the compatibility minimum
+in `item_visuals.json`; current catalog coverage is checked separately against
+all 33 current IDs plus the two retained payment/gift IDs.
+
 `regen_art.ps1 -Style v3 -Only scenes` resolves `style_profiles.v3`. A profile
 contains `status`, `reference: {path, sha256}`, optional `revision`, and
 `templates: {edit, night, closed, item}` (portrait is required separately for A4).
@@ -486,3 +506,25 @@ moods, both editor sizes, failed-save/retry/reload and random-customer
 consultation. Headless schema-only output does not certify artwork. All
 viewport captures require actual review; the selected body still has a
 small neckline seam noted in the A4 plan.
+
+### Compact portrait manifest proposals
+
+After producing a `portrait_manifest_fragment`, export a complete review
+candidate with the same lossless encoding used by its budget calculation:
+
+```powershell
+python -B tools/art/portrait_pipeline.py proposal --workspace D:/MagicStore --config data/art/portrait_pipeline.json --receipt assets/_incoming/a4_v3/audit/new-fragment.json --output assets/_incoming/a4_v3/audit/new-manifest-proposal.json
+```
+
+`proposed_manifest` merges into a copy of the current manifest, expands the
+old shared profiles before rebuilding them, and requires exact equality of
+the expanded provenance. This preserves profiles still used by other parts
+when replacing only one row. Both the budget and CLI use compact UTF-8 JSON
+plus one LF; the CLI enforces the configured byte limit before writing.
+
+The output must be a new ignored incoming/local path. It cannot overwrite
+an input, an existing proposal or the central manifest. This is a concrete
+metadata proposal, not generation or art approval. Review its actual sources
+and images before promoting it; PNGs and the central manifest are not changed
+by this command. Shared fields remain in the tracked candidate itself and
+do not depend on optional local audit files.

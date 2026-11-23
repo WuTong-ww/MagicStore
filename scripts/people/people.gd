@@ -8,6 +8,7 @@ const Memory = preload("res://scripts/people/memory.gd")
 const GeneratedPerson = preload("res://scripts/people/generated_person.gd")
 const Appearance = preload("res://scripts/people/appearance.gd")
 const FamilyLibrary = preload("res://scripts/people/family_library.gd")
+const OrdinaryContent = preload("res://scripts/people/ordinary_content.gd")
 
 static func load_config() -> Dictionary:
 	var parser := JSON.new()
@@ -15,11 +16,21 @@ static func load_config() -> Dictionary:
 		return {}
 	var data: Dictionary = parser.data
 	data["family_library"] = FamilyLibrary.load_config()
+	if data.has("ordinary_content_path"):
+		data["ordinary_content"] = OrdinaryContent.load_config(data)
 	return data if config_valid(data) else {}
 
 static func config_valid(data: Dictionary) -> bool:
 	if data.has("family_library") and not FamilyLibrary.config_valid(data.family_library):
 		return false
+	if data.has("ordinary_content_path"):
+		if data.ordinary_content_path != OrdinaryContent.CONFIG_PATH:
+			return false
+		var population: Dictionary = data.get("ordinary_content",{})
+		if population.is_empty():
+			population = OrdinaryContent.load_config(data)
+		if not OrdinaryContent.config_valid(population,data):
+			return false
 	for field in ["ordinary_surnames", "ordinary_names", "occupations", "interests", "mbti_types", "personalities"]:
 		if not data.get(field) is Array or data[field].is_empty():
 			return false
@@ -455,7 +466,32 @@ static func _valid_birthday(value: String) -> bool:
 	var days := [31, 29 if leap else 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 	return day >= 1 and day <= days[month - 1]
 
+static func initialize_ordinary_content(people: Dictionary, config: Dictionary) -> void:
+	if config.has("ordinary_content_path") and config.ordinary_content_path == OrdinaryContent.CONFIG_PATH:
+		people["ordinary_content_version"] = 1
+
 static func _ordinary(people: Dictionary, config: Dictionary, rng: RandomNumberGenerator, day: int, index: int) -> String:
+	var id := "npc_o_%d_%d" % [day,index]
+	if people.profiles.has(id):
+		return id
+	# Bounds, array order, and the entire old body matter, not just draw count.
+	var sampler: Dictionary = config.duplicate(true)
+	for key: String in config.get("legacy_sampler",{}):
+		if key != "version":
+			sampler[key] = config.legacy_sampler[key].duplicate(true)
+	var created := _ordinary_legacy(people,sampler,rng,day,index)
+	if people.get("ordinary_content_version") == 1:
+		var population: Dictionary = config.get("ordinary_content",{})
+		if population.is_empty():
+			population = OrdinaryContent.load_config(config)
+		if population.get("enabled",false):
+			for npc_id: String in [created,created+"_friend"]:
+				var overlay := OrdinaryContent.propose({"save_id":str(people.save_id),"seed":int(people.seed),"npc_id":npc_id},population)
+				if not overlay.is_empty():
+					people.profiles[npc_id].merge(overlay,true)
+	return created
+
+static func _ordinary_legacy(people: Dictionary, config: Dictionary, rng: RandomNumberGenerator, day: int, index: int) -> String:
 	var id := "npc_o_%d_%d" % [day, index]
 	if people.profiles.has(id):
 		return id
@@ -1473,6 +1509,13 @@ static func case_context(people: Dictionary, npc_id: String) -> Dictionary:
 	if profile.is_empty() or not profile.met:
 		return {}
 	var context := {"public_npc": {"name": profile.name, "role": profile.role}}
+	var goal: Dictionary = profile.get("goal",{})
+	var goal_edge: Dictionary = people.relationships.get(goal.get("relationship_id",""),{})
+	var subject: String = str(goal.get("subject_id",""))
+	if not goal_edge.is_empty() and people.revealed_relationships.has(goal_edge.relationship_id) and people.profiles.has(subject) and subject != npc_id and npc_id in [goal_edge.from,goal_edge.to] and subject in [goal_edge.from,goal_edge.to]:
+		context["subject_id"] = subject
+		context["target_name"] = people.profiles[subject].name
+		return context
 	for relation: Dictionary in people.relationships.values():
 		if not people.revealed_relationships.has(relation.relationship_id):
 			continue
@@ -1503,6 +1546,19 @@ static func case_seed(people: Dictionary, npc_id: String) -> Dictionary:
 static func _integer(value: Variant, low: int, high: int) -> bool:
 	return (value is int or value is float) and is_finite(float(value)) and float(value) == floor(float(value)) and value >= low and value <= high
 
+static func _ordinary_metadata_valid(profile: Dictionary, config: Dictionary) -> bool:
+	if config.is_empty() or profile.get("ordinary_content_version") != 1 or profile.get("advice_preference_version") != 1:
+		return false
+	if not profile.get("gender_group") is String or not config.name_groups.has(profile.gender_group) or not profile.get("advice_preference") is String or not config.advice_preferences.has(profile.advice_preference):
+		return false
+	if not profile.get("occupation_id") is String or not config.occupation_profiles.any(func(job: Dictionary) -> bool: return job.id == profile.occupation_id):
+		return false
+	if not profile.get("age_group") is String or not config.age_groups.any(func(group: Dictionary) -> bool: return group.id == profile.age_group):
+		return false
+	if not OrdinaryContent._schedule(profile.get("work_schedule")) or not _valid_return_schedule(profile.get("return_schedule")) or OrdinaryContent._overlap(profile.work_schedule,profile.return_schedule):
+		return false
+	return config.personalities.any(func(personality: Dictionary) -> bool: return personality.id == profile.get("personality_id") and personality.mbti == profile.get("mbti"))
+
 static func validate(people: Variant) -> String:
 	if not people is Dictionary or people.get("version") != 1 or not people.get("save_id") is String:
 		return "人物数据头无效"
@@ -1532,6 +1588,8 @@ static func validate(people: Variant) -> String:
 		return "每日来访上限无效"
 	if not _integer(people.stats.get("lost_customers", 0), 0, MAX_INT):
 		return "来客流失统计无效"
+	var ordinary_config := {}
+	var ordinary_fields := ["ordinary_content_version","occupation_id","age_group","gender_group","work_schedule","advice_preference_version","advice_preference"]
 	for id in people.profiles:
 		var profile: Variant = people.profiles[id]
 		if not id is String or not profile is Dictionary or profile.get("npc_id") != id or not profile.get("name") is String or not profile.get("met") is bool:
@@ -1542,6 +1600,11 @@ static func validate(people: Variant) -> String:
 			return "人物经历或外貌无效"
 		if profile.has("return_schedule") and not _valid_return_schedule(profile.return_schedule):
 			return "人物回访行程无效"
+		if ordinary_fields.any(func(field: String) -> bool: return profile.has(field)):
+			if ordinary_config.is_empty():
+				ordinary_config = OrdinaryContent.load_config()
+			if not _ordinary_metadata_valid(profile,ordinary_config):
+				return "人物身份无效"
 	if not Memory.valid(people):
 		return "人物记忆无效"
 	for id in people.relationships:

@@ -1,0 +1,4246 @@
+{
+  "version": 1,
+  "task_id": "G4",
+  "status": "art_self_review_promoted_game_ui_partial",
+  "rubric": "docs/art/style_v3.md十项；场景密度与留白项按独立单物件的外部空间判断，逐项说明而非默认给分",
+  "source_count": 26,
+  "derived_images_opened": 52,
+  "attempt_count": 35,
+  "failed_network_attempts": 2,
+  "score_sum": 254,
+  "score_maximum": 260,
+  "items": [
+    {
+      "item_id": "beeswax",
+      "name": "蜂蜡块",
+      "selected_attempt": 2,
+      "score": 9,
+      "raw": "assets/_incoming/g4_v3/beeswax_source_attempt2.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/beeswax_attempt2_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/beeswax_attempt2_64.png",
+      "source_sha256": "d4a83a6edf0ade649c13d0380cb831e5c68465fd03c72aeb8360bc044e9ae5d8",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 38108,
+          "transparent_pixels": 27428,
+          "edge_pixels": 4507,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 2532,
+          "transparent_pixels": 1564,
+          "edge_pixels": 574,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "蜡面宽短色块与浅切痕保留颜料笔触"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "左上顶面浅暖、右侧灰绿，受光方向单一"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "右侧灰绿而非黑面"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "浅色是蜡面反光，无发光边或光晕"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "平切蜡块无金纹"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "只有蜡块，无藤蔓装饰"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "单块独立，边外留空"
+        },
+        {
+          "criterion": 8,
+          "score": 0,
+          "status": "不通过",
+          "reason": "浅奶白块在64px也可能被认成皂块，需名称辅助"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "上下切面和支撑底完整"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "四周透明余量清楚，无附加道具"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/beeswax.png",
+      "formal_icon": "assets/items/v3/g4r1/beeswax_64.png"
+    },
+    {
+      "item_id": "cotton_thread",
+      "name": "棉线团",
+      "selected_attempt": 2,
+      "score": 10,
+      "raw": "assets/_incoming/g4_v3/cotton_thread_source_attempt2.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/cotton_thread_attempt2_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/cotton_thread_attempt2_64.png",
+      "source_sha256": "2c3547bb4d4754ecc2ee66d23343296b14fc9c2ec65e3fe3a625c56d7a067df7",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 24844,
+          "transparent_pixels": 40692,
+          "edge_pixels": 3889,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 1699,
+          "transparent_pixels": 2397,
+          "edge_pixels": 529,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "线圈与木芯都有短刷痕"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "左上线圈暖白、右侧灰绿"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "芯孔可辨，右侧不压黑"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "亮线来自左侧受光面，无自发光"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "木芯无雕花或烫金"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "单线团无藤蔓"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "一轴棉线，四边留空"
+        },
+        {
+          "criterion": 8,
+          "score": 1,
+          "status": "通过",
+          "reason": "中孔、木轴和交错线圈在64px仍可辨"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "轴顶椭圆与底盘连续，线不穿模"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "底盘完整，外圈透明边完整"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/cotton_thread.png",
+      "formal_icon": "assets/items/v3/g4r1/cotton_thread_64.png"
+    },
+    {
+      "item_id": "dried_mint",
+      "name": "干薄荷",
+      "selected_attempt": 1,
+      "score": 10,
+      "raw": "assets/_incoming/g4_v3/dried_mint_source_attempt1.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/dried_mint_attempt1_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/dried_mint_attempt1_64.png",
+      "source_sha256": "79b4d4a30f5676a0e66c402d7402f71a5817358b9e3e9be9d934f4ba1be8f232",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 13876,
+          "transparent_pixels": 51660,
+          "edge_pixels": 4772,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 1002,
+          "transparent_pixels": 3094,
+          "edge_pixels": 534,
+          "red_yellow_pixels": 1,
+          "red_yellow_fraction": 0.0018726591760299626,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "叶面以不透明色块画出叶脉"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "左叶浅暖、右叶灰绿"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "叶间阴影仍保留绿灰层次"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "亮叶为受光面，无叶片发光"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "普通灰线绑束无花纹"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "薄荷束无紫藤"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "只有一束，叶尖间有空间"
+        },
+        {
+          "criterion": 8,
+          "score": 1,
+          "status": "通过",
+          "reason": "锯齿宽叶和扎束在64px为可辨香草束"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "叶与茎连接连贯，束尾完整"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "叶尖、绑线与底边都保留余量"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/dried_mint.png",
+      "formal_icon": "assets/items/v3/g4r1/dried_mint_64.png"
+    },
+    {
+      "item_id": "sea_salt",
+      "name": "海盐",
+      "selected_attempt": 1,
+      "score": 10,
+      "raw": "assets/_incoming/g4_v3/sea_salt_source_attempt1.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/sea_salt_attempt1_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/sea_salt_attempt1_64.png",
+      "source_sha256": "9b454f40b63e6315a0878b6548f62b18090f62e8ea6902b43d405f9ec2391c85",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 29172,
+          "transparent_pixels": 36364,
+          "edge_pixels": 3837,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 1955,
+          "transparent_pixels": 2141,
+          "edge_pixels": 499,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "陶罐和盐粒有粗细色块笔触"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "罐左与左沿受暖光，右侧冷"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "罐内灰绿，不是黑洞"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "盐粒是浅色实体，没有闪点"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "素面陶罐无金色描花"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "罐内只有盐，无藤蔓"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "单罐留空，无额外盐堆"
+        },
+        {
+          "criterion": 8,
+          "score": 1,
+          "status": "通过",
+          "reason": "开口、颗粒盐与陶罐在小图仍可辨"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "口沿椭圆、罐腹和底脚一致"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "罐缘和底脚未裁断，外缘透明"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/sea_salt.png",
+      "formal_icon": "assets/items/v3/g4r1/sea_salt_64.png"
+    },
+    {
+      "item_id": "glass_vial",
+      "name": "磨砂小瓶",
+      "selected_attempt": 1,
+      "score": 10,
+      "raw": "assets/_incoming/g4_v3/glass_vial_source_attempt1.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/glass_vial_attempt1_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/glass_vial_attempt1_64.png",
+      "source_sha256": "0c4361fcb4a21fd9ddf4ad9403f3c5f3be4b87fab0c49045a31a91ede37ba1f5",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 19346,
+          "transparent_pixels": 46190,
+          "edge_pixels": 3581,
+          "red_yellow_pixels": 50,
+          "red_yellow_fraction": 0.013962580284836637,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 1327,
+          "transparent_pixels": 2769,
+          "edge_pixels": 455,
+          "red_yellow_pixels": 9,
+          "red_yellow_fraction": 0.01978021978021978,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "磨砂瓶与软木塞保留宽刷痕"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "瓶肩左上浅暖、瓶右灰蓝"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "右侧与瓶底均为浅灰蓝"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "瓶身亮块可追到左光，无光晕"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "无标签、镀金或雕花"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "独立空瓶无枝蔓"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "单瓶，无托盘或场景碎片"
+        },
+        {
+          "criterion": 8,
+          "score": 1,
+          "status": "通过",
+          "reason": "塞子、空瓶肩与厚底明确；磨砂质感较厚重"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "塞、颈、腹、厚底结构连续"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "瓶身和瓶塞完整，四边留空"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/glass_vial.png",
+      "formal_icon": "assets/items/v3/g4r1/glass_vial_64.png"
+    },
+    {
+      "item_id": "pine_needle",
+      "name": "松针束",
+      "selected_attempt": 3,
+      "score": 9,
+      "raw": "assets/_incoming/g4_v3/pine_needle_source_attempt3.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/pine_needle_attempt3_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/pine_needle_attempt3_64.png",
+      "source_sha256": "c6cbfd33f22d07afd2e7726008f5eeeb1acf0091325bb6f69593d81abab31727",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 9423,
+          "transparent_pixels": 56113,
+          "edge_pixels": 5932,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 687,
+          "transparent_pixels": 3409,
+          "edge_pixels": 534,
+          "red_yellow_pixels": 1,
+          "red_yellow_fraction": 0.0018726591760299626,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "细针以条状颜料笔触分开"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "上左针束较浅、右束偏冷"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "扎束内部灰绿可辨"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "针尖无亮点或发光光带"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "普通灰绳无花纹"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "只有针束，无藤蔓或松果"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "束外留空，细针间有间隙"
+        },
+        {
+          "criterion": 8,
+          "score": 0,
+          "status": "不通过",
+          "reason": "比首稿更细，但64px仍可能与草束混淆，针叶对生细节不足"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "束尾齐切，针与扎线未断裂"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "针尖和底部均完整，透明外圈清楚"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/pine_needle.png",
+      "formal_icon": "assets/items/v3/g4r1/pine_needle_64.png"
+    },
+    {
+      "item_id": "mugwort",
+      "name": "艾叶",
+      "selected_attempt": 1,
+      "score": 10,
+      "raw": "assets/_incoming/g4_v3/mugwort_source_attempt1.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/mugwort_attempt1_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/mugwort_attempt1_64.png",
+      "source_sha256": "010488919a5434d24ac87598ff6eda3e557c7a3a761e9096ee8219b0b49a6b39",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 13487,
+          "transparent_pixels": 52049,
+          "edge_pixels": 6065,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 966,
+          "transparent_pixels": 3130,
+          "edge_pixels": 576,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "裂叶的宽色块与细茎笔触明显"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "左侧叶片浅暖、右叶灰绿"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "叶间灰绿阴影不发黑"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "浅叶是单侧受光，无光晕"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "仅灰棉线扎束，无纹样"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "裂叶艾草，无紫藤"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "单束，叶间仍有空隙"
+        },
+        {
+          "criterion": 8,
+          "score": 1,
+          "status": "通过",
+          "reason": "裂叶与薄荷锯齿轮廓有明显区别"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "叶茎连贯、束底可见多个齐切茎"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "叶尖、结绳、底部均未被截断"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/mugwort.png",
+      "formal_icon": "assets/items/v3/g4r1/mugwort_64.png"
+    },
+    {
+      "item_id": "reed_stem",
+      "name": "芦苇茎",
+      "selected_attempt": 1,
+      "score": 10,
+      "raw": "assets/_incoming/g4_v3/reed_stem_source_attempt1.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/reed_stem_attempt1_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/reed_stem_attempt1_64.png",
+      "source_sha256": "44d87958d2d69159995084ceae8bcf0a6081a53a663d6156fad070c15609c311",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 13716,
+          "transparent_pixels": 51820,
+          "edge_pixels": 3180,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 965,
+          "transparent_pixels": 3131,
+          "edge_pixels": 414,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "芦苇茎与绳圈保留竖向刷痕"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "左前管暖灰、右后管冷灰"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "管孔暗灰可辨，不是黑洞"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "受光都在管壁和左沿，无自发光"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "无雕花、标签或金边"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "三根芦苇，无枝蔓"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "三根作为一束，束外留空"
+        },
+        {
+          "criterion": 8,
+          "score": 1,
+          "status": "通过",
+          "reason": "空心管口、茎和绳结在64px可辨"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "三个管口厚度一致，底端齐切"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "整束轮廓和透明外圈完整"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/reed_stem.png",
+      "formal_icon": "assets/items/v3/g4r1/reed_stem_64.png"
+    },
+    {
+      "item_id": "river_clay",
+      "name": "河泥陶团",
+      "selected_attempt": 2,
+      "score": 9,
+      "raw": "assets/_incoming/g4_v3/river_clay_source_attempt2.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/river_clay_attempt2_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/river_clay_attempt2_64.png",
+      "source_sha256": "aef9031aff146deb7762d5c352d15b0c40992b6220685140029141da3fc780ac",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 36327,
+          "transparent_pixels": 29209,
+          "edge_pixels": 4099,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 2419,
+          "transparent_pixels": 1677,
+          "edge_pixels": 549,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "泥团有松散推抹颜料层次"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "左上浅暖、右侧灰绿"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "阴影保留灰绿，没有黑块"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "亮面来自左上，无湿亮塑料光"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "无纹样、符号或金色"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "单泥团无植被"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "孤立团块，无底座或场景"
+        },
+        {
+          "criterion": 8,
+          "score": 0,
+          "status": "不通过",
+          "reason": "灰泥团与普通石块在64px仍难完全区分"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "底部压平，轮廓柔软而非融化"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "完整透明留边，无落地阴影"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/river_clay.png",
+      "formal_icon": "assets/items/v3/g4r1/river_clay_64.png"
+    },
+    {
+      "item_id": "iron_flake",
+      "name": "旧铁片",
+      "selected_attempt": 2,
+      "score": 9,
+      "raw": "assets/_incoming/g4_v3/iron_flake_source_attempt2.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/iron_flake_attempt2_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/iron_flake_attempt2_64.png",
+      "source_sha256": "dbd03746cd13881950e2901908dd10123b6b5575ba0027a50f8a26f9d869ce74",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 19231,
+          "transparent_pixels": 46305,
+          "edge_pixels": 3505,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 1319,
+          "transparent_pixels": 2777,
+          "edge_pixels": 438,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "薄片面有平刷和少量划痕"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "薄片左面暖灰，右侧冷灰"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "片间灰暗仍可读，不黑"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "薄边浅光有左侧来源，无发光"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "无金纹、铭文或闪点"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "三薄片无藤蔓"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "三片一组，周围留空"
+        },
+        {
+          "criterion": 8,
+          "score": 0,
+          "status": "不通过",
+          "reason": "折角和薄度已修，64px金属与纸片的质感仍较接近"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "三片边界分开、折角连续，不再像厚石板"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "低宽叠片完整，无裁边"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/iron_flake.png",
+      "formal_icon": "assets/items/v3/g4r1/iron_flake_64.png"
+    },
+    {
+      "item_id": "honey_drop",
+      "name": "蜂蜜小瓶",
+      "selected_attempt": 2,
+      "score": 10,
+      "raw": "assets/_incoming/g4_v3/honey_drop_source_attempt2.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/honey_drop_attempt2_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/honey_drop_attempt2_64.png",
+      "source_sha256": "eca3dad8bc4a76fe607df69d3695f7a592de9a86240cec11406d68bca94ccd61",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 21095,
+          "transparent_pixels": 44441,
+          "edge_pixels": 3649,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 1433,
+          "transparent_pixels": 2663,
+          "edge_pixels": 460,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "蜜液、磨砂瓶与塞子均为颜料色块"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "左上瓶肩暖、右侧灰褐"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "右侧阴影灰褐可辨，没有黑面"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "蜜液不是自发光，瓶肩亮块方向一致"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "无标签、烫金或装饰"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "单蜜瓶无藤蔓"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "一瓶独立，四周留空"
+        },
+        {
+          "criterion": 8,
+          "score": 1,
+          "status": "通过",
+          "reason": "蜜色液面、短塞和厚底在64px可辨"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "瓶口、塞、肩和蜜液面连续"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "瓶身完整，底部透明外圈无投影"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/honey_drop.png",
+      "formal_icon": "assets/items/v3/g4r1/honey_drop_64.png"
+    },
+    {
+      "item_id": "old_key",
+      "name": "旧铜钥匙",
+      "selected_attempt": 1,
+      "score": 10,
+      "raw": "assets/_incoming/g4_v3/old_key_source_attempt1.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/old_key_attempt1_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/old_key_attempt1_64.png",
+      "source_sha256": "fc4ae7fb36b8d0f69ff99fb0ae3ba18df40453ba9118f7ee06ff83e1f286d968",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 8833,
+          "transparent_pixels": 56703,
+          "edge_pixels": 4459,
+          "red_yellow_pixels": 3,
+          "red_yellow_fraction": 0.0006727965911639381,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 699,
+          "transparent_pixels": 3397,
+          "edge_pixels": 522,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "钥匙表面有朴素短刷痕"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "环左上暖灰、右侧灰绿"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "环孔与轴侧灰暗清晰"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "金属高光只在左上，无周身金光"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "旧铜是材料颜色，无雕花金纹"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "单钥匙无藤蔓"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "只有一把，环孔和外部留空"
+        },
+        {
+          "criterion": 8,
+          "score": 1,
+          "status": "通过",
+          "reason": "环头、轴和两个齿在64px仍像钥匙"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "环、轴、齿相连，底端完整"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "钥匙环及底部未被裁断"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/old_key.png",
+      "formal_icon": "assets/items/v3/g4r1/old_key_64.png"
+    },
+    {
+      "item_id": "blue_glass",
+      "name": "蓝玻璃片",
+      "selected_attempt": 2,
+      "score": 9,
+      "raw": "assets/_incoming/g4_v3/blue_glass_source_attempt2.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/blue_glass_attempt2_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/blue_glass_attempt2_64.png",
+      "source_sha256": "fb7d9e7ea73eccf478209822f2baa33a059b7ec58e31298ddc982321b0b39e0f",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 26506,
+          "transparent_pixels": 39030,
+          "edge_pixels": 3732,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 1786,
+          "transparent_pixels": 2310,
+          "edge_pixels": 505,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "玻璃以云雾般宽笔触画出"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "左上浅暖、右边冷蓝"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "右侧灰蓝而非黑色"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "两小气泡是玻璃内实体亮面，无发光点"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "无雕花、镶金或宝石装饰"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "玻璃片无枝蔓"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "单碎片，无晶簇或额外碎屑"
+        },
+        {
+          "criterion": 8,
+          "score": 0,
+          "status": "不通过",
+          "reason": "修订有薄边和气泡，64px仍需名称区分于蓝石"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "五边碎片与厚边相连，底边完整"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "外轮廓留空，气泡与身体无透明破洞"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/blue_glass.png",
+      "formal_icon": "assets/items/v3/g4r1/blue_glass_64.png"
+    },
+    {
+      "item_id": "red_thread",
+      "name": "暗红线结",
+      "selected_attempt": 1,
+      "score": 10,
+      "raw": "assets/_incoming/g4_v3/red_thread_source_attempt1.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/red_thread_attempt1_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/red_thread_attempt1_64.png",
+      "source_sha256": "7c3f3c72e5f98c7c9cbd23bf4933c163fe0d6623d829f270d3eb33a97ba18ef7",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 29139,
+          "transparent_pixels": 36397,
+          "edge_pixels": 4603,
+          "red_yellow_pixels": 1,
+          "red_yellow_fraction": 0.00021724961981316532,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 1994,
+          "transparent_pixels": 2102,
+          "edge_pixels": 615,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "绳股和棉纤维用短笔触区分"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "左上绳股暖、右下偏冷褐"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "结内灰褐可辨，不是黑洞"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "暖红为棉线本色与受光，无发光"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "无珠饰、金纹或符号"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "一结棉线无藤蔓"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "单结加两个短尾，外侧留空"
+        },
+        {
+          "criterion": 8,
+          "score": 1,
+          "status": "通过",
+          "reason": "红绳结和两端在64px可辨"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "穿结与两尾连贯，没有孤立碎线"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "双尾完整，透明边无烘焙投影"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/red_thread.png",
+      "formal_icon": "assets/items/v3/g4r1/red_thread_64.png"
+    },
+    {
+      "item_id": "focus_candle",
+      "name": "专注蜡烛",
+      "selected_attempt": 1,
+      "score": 10,
+      "raw": "assets/_incoming/g4_v3/focus_candle_source_attempt1.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/focus_candle_attempt1_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/focus_candle_attempt1_64.png",
+      "source_sha256": "34eb6eee257c9e4e63dd0011d97abd343368ae53331f20266a624b5e01e25595",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 31092,
+          "transparent_pixels": 34444,
+          "edge_pixels": 3953,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 2077,
+          "transparent_pixels": 2019,
+          "edge_pixels": 507,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "杯壁与蜡面有清楚广告颜料刷痕"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "杯左与蜡面左侧较暖，右壁蓝灰"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "杯内右影灰蓝可辨"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "灯芯未点燃，蜡面亮度来自左光"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "素杯无铭文或金色描边"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "单蜡烛无枝蔓"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "单杯，无托盘或额外蜡堆"
+        },
+        {
+          "criterion": 8,
+          "score": 1,
+          "status": "通过",
+          "reason": "杯中平蜡面和未燃灯芯在64px可辨"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "杯口椭圆、蜡面和灯芯位置合理"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "完整杯底和透明留边，无地面影"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/focus_candle.png",
+      "formal_icon": "assets/items/v3/g4r1/focus_candle_64.png"
+    },
+    {
+      "item_id": "welcome_sachet",
+      "name": "迎客香囊",
+      "selected_attempt": 1,
+      "score": 10,
+      "raw": "assets/_incoming/g4_v3/welcome_sachet_source_attempt1.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/welcome_sachet_attempt1_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/welcome_sachet_attempt1_64.png",
+      "source_sha256": "f767e3ac8b73b1177cae52615ebfeacf96e94f61a1736d192a70864b3ccc334f",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 25856,
+          "transparent_pixels": 39680,
+          "edge_pixels": 4105,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 1755,
+          "transparent_pixels": 2341,
+          "edge_pixels": 542,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "布纹与折痕保留粗细刷痕"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "左褶暖灰、右褶灰绿"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "袋口内影灰绿可读"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "受光仅在布褶，无发光纹样"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "无刺绣、金边或图标"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "单香囊无藤蔓"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "一袋两绳尾，无额外道具"
+        },
+        {
+          "criterion": 8,
+          "score": 1,
+          "status": "通过",
+          "reason": "束口、亚麻布纹和袋形在小图可辨"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "袋口、结绳和宽底连接自然"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "绳尾和布边完整，外圈透明"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/welcome_sachet.png",
+      "formal_icon": "assets/items/v3/g4r1/welcome_sachet_64.png"
+    },
+    {
+      "item_id": "patience_charm",
+      "name": "缓心护符",
+      "selected_attempt": 1,
+      "score": 10,
+      "raw": "assets/_incoming/g4_v3/patience_charm_source_attempt1.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/patience_charm_attempt1_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/patience_charm_attempt1_64.png",
+      "source_sha256": "5305dc747e598913f43cf88819845f432c60fab2d49e923476a2d25a311a6f8f",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 25459,
+          "transparent_pixels": 40077,
+          "edge_pixels": 3997,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 1724,
+          "transparent_pixels": 2372,
+          "edge_pixels": 512,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "折布与灰色包边有明显笔触"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "左面浅暖、右侧灰绿"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "翻盖下影灰绿，不压黑"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "亮面只在受光布面，无护符自发光"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "素布袋无符字、金纹或徽记"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "单布护符无藤蔓"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "一个长方袋，周围充分留空"
+        },
+        {
+          "criterion": 8,
+          "score": 1,
+          "status": "通过",
+          "reason": "翻盖布袋清楚，用途由控件说明"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "翻盖、缝边与底折连贯"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "袋底与翻盖完整，透明边无投影"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/patience_charm.png",
+      "formal_icon": "assets/items/v3/g4r1/patience_charm_64.png"
+    },
+    {
+      "item_id": "memory_lens",
+      "name": "细察晶片",
+      "selected_attempt": 1,
+      "score": 9,
+      "raw": "assets/_incoming/g4_v3/memory_lens_source_attempt1.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/memory_lens_attempt1_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/memory_lens_attempt1_64.png",
+      "source_sha256": "1046e3a746b327a1ad776ca830299c11362617770f0e6ed5d7439403f9039a58",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 25938,
+          "transparent_pixels": 39598,
+          "edge_pixels": 3470,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 1752,
+          "transparent_pixels": 2344,
+          "edge_pixels": 477,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "浑浊晶面由宽浅色笔触组成"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "左上浅暖、右边灰蓝"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "阴影为灰蓝，不发黑"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "亮面是受光晶面，无光晕或晶体自发光"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "无刻字、镶金或符文"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "晶片无藤蔓"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "单椭圆片，无水晶簇或底座"
+        },
+        {
+          "criterion": 8,
+          "score": 0,
+          "status": "不通过",
+          "reason": "浑浊晶片在64px也像普通卵石，工具材质辨识可加强"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "椭圆厚边与短平底完整，没有融化"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "上沿、侧边和底部都有透明余量"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/memory_lens.png",
+      "formal_icon": "assets/items/v3/g4r1/memory_lens_64.png"
+    },
+    {
+      "item_id": "friendship_knot",
+      "name": "和谈绳结",
+      "selected_attempt": 1,
+      "score": 10,
+      "raw": "assets/_incoming/g4_v3/friendship_knot_source_attempt1.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/friendship_knot_attempt1_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/friendship_knot_attempt1_64.png",
+      "source_sha256": "2e1e9e1021d73b0f2d1f84161bd1b62f0548d330fb3e60fe78943d9539539bf9",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 14997,
+          "transparent_pixels": 50539,
+          "edge_pixels": 4623,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 1100,
+          "transparent_pixels": 2996,
+          "edge_pixels": 607,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "棉绳股有细短刷痕"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "左上绳段暖灰、右结冷蓝"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "结间阴影冷灰可读"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "亮股均指向左光，无光点"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "无珠饰、心形或金饰"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "一个绳结无枝蔓"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "单结两尾，透明区域充分"
+        },
+        {
+          "criterion": 8,
+          "score": 1,
+          "status": "通过",
+          "reason": "蓝灰绳结与两尾在64px可辨"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "结的交叉与双尾连接合理"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "双尾和结环完整，无烘焙地影"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/friendship_knot.png",
+      "formal_icon": "assets/items/v3/g4r1/friendship_knot_64.png"
+    },
+    {
+      "item_id": "fresh_air_incense",
+      "name": "清风线香",
+      "selected_attempt": 1,
+      "score": 10,
+      "raw": "assets/_incoming/g4_v3/fresh_air_incense_source_attempt1.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/fresh_air_incense_attempt1_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/fresh_air_incense_attempt1_64.png",
+      "source_sha256": "b94e4e6299e679600f4f3c926676b3c43ce9087d064ffe1d86d90b6ee3d7f71f",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 7724,
+          "transparent_pixels": 57812,
+          "edge_pixels": 2884,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 599,
+          "transparent_pixels": 3497,
+          "edge_pixels": 409,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "三根香条有细竖刷痕"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "左条浅暖、右条灰绿"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "条间阴影可辨，不黑"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "未燃香条无火点、烟或自发光"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "纸环空白，无字或金纹"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "三香条无藤蔓"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "三根成一小束，外侧留空"
+        },
+        {
+          "criterion": 8,
+          "score": 1,
+          "status": "通过",
+          "reason": "香条和纸束带在64px可辨"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "三根直杆及共同底边连续"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "顶端和底端完整，外圈透明"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/fresh_air_incense.png",
+      "formal_icon": "assets/items/v3/g4r1/fresh_air_incense_64.png"
+    },
+    {
+      "item_id": "night_tea",
+      "name": "晚间茶包",
+      "selected_attempt": 1,
+      "score": 10,
+      "raw": "assets/_incoming/g4_v3/night_tea_source_attempt1.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/night_tea_attempt1_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/night_tea_attempt1_64.png",
+      "source_sha256": "046c8a6644ab599b2a0b20775c11076754ba838ec12d98e7af8b9a152bfe79e9",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 27636,
+          "transparent_pixels": 37900,
+          "edge_pixels": 3958,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 1867,
+          "transparent_pixels": 2229,
+          "edge_pixels": 517,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "纸面与折边有柔和广告颜料笔触"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "左上纸面较暖、右折冷灰"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "右侧折面灰绿可读"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "受光纸面无亮点或发光标签"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "素纸无字、标志或花纹"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "单茶包无植物装饰"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "单立式袋与短绳，周围留空"
+        },
+        {
+          "criterion": 8,
+          "score": 1,
+          "status": "通过",
+          "reason": "折顶茶包和侧绳可辨，与方茶袋不同"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "顶折、侧褶和底折闭合合理"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "纸角和短绳完整，透明留边清楚"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/night_tea.png",
+      "formal_icon": "assets/items/v3/g4r1/night_tea_64.png"
+    },
+    {
+      "item_id": "grounding_stone",
+      "name": "安稳石",
+      "selected_attempt": 1,
+      "score": 10,
+      "raw": "assets/_incoming/g4_v3/grounding_stone_source_attempt1.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/grounding_stone_attempt1_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/grounding_stone_attempt1_64.png",
+      "source_sha256": "6cecf4a5c2d5d554964f267aa004fa3802df3c5b47cba9996c6c8e865a96f9d6",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 28057,
+          "transparent_pixels": 37479,
+          "edge_pixels": 3651,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 1871,
+          "transparent_pixels": 2225,
+          "edge_pixels": 472,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "石面是松散宽色块，不是塑料渐变"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "上左暖灰、右下冷灰"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "深灰绿阴影仍可读，不发黑"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "石面没有镜面亮点、自发光或金光"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "普通石头无刻纹"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "单石无藤蔓"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "一块低宽石头，四周留空"
+        },
+        {
+          "criterion": 8,
+          "score": 1,
+          "status": "通过",
+          "reason": "圆钝河石形态在64px仍明确"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "自然不对称外形及平底连续"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "完整石缘，外圈透明无地影"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/grounding_stone.png",
+      "formal_icon": "assets/items/v3/g4r1/grounding_stone_64.png"
+    },
+    {
+      "item_id": "soothing_candle",
+      "name": "舒缓蜡烛",
+      "selected_attempt": 1,
+      "score": 10,
+      "raw": "assets/_incoming/g4_v3/soothing_candle_source_attempt1.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/soothing_candle_attempt1_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/soothing_candle_attempt1_64.png",
+      "source_sha256": "cc665346bd1981083dcc1bb32819c1d792dec640237a1d63beb3cc06553bacba",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 28111,
+          "transparent_pixels": 37425,
+          "edge_pixels": 3773,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 1878,
+          "transparent_pixels": 2218,
+          "edge_pixels": 475,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "蜡面与薄铁盒有宽刷笔触"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "左沿暖灰、右壁灰蓝"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "盒内右影灰绿可读"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "未燃灯芯无火点，无灯光光池"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "素铁盒无标签或金色花纹"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "单蜡烛无藤蔓"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "一只低宽铁盒，无盖或托盘"
+        },
+        {
+          "criterion": 8,
+          "score": 1,
+          "status": "通过",
+          "reason": "浅盒、灰绿蜡和未燃灯芯清楚"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "薄盒沿、蜡面与底部合理"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "整只低盒留空，边缘透明"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/soothing_candle.png",
+      "formal_icon": "assets/items/v3/g4r1/soothing_candle_64.png"
+    },
+    {
+      "item_id": "bright_draught",
+      "name": "清醒药水",
+      "selected_attempt": 1,
+      "score": 10,
+      "raw": "assets/_incoming/g4_v3/bright_draught_source_attempt1.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/bright_draught_attempt1_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/bright_draught_attempt1_64.png",
+      "source_sha256": "33c7693818c59657d7c299d6cc7445fbdcfe63366b6df0f8b0380c5bdbcfd9c7",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 17534,
+          "transparent_pixels": 48002,
+          "edge_pixels": 3499,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 1227,
+          "transparent_pixels": 2869,
+          "edge_pixels": 460,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "瓶身与液体的色块笔触一致"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "左肩浅暖、右壁灰绿"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "药液右侧灰绿，不压黑"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "瓶肩反光来自左上，药液不自发光"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "无标签、字样或金纹"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "独立药瓶无枝蔓"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "单瓶，没有额外药草道具"
+        },
+        {
+          "criterion": 8,
+          "score": 1,
+          "status": "通过",
+          "reason": "窄肩药瓶和草绿色液面在64px可辨"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "塞、颈、肩和液面结构连续"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "完整瓶塞和厚底，透明留边"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/bright_draught.png",
+      "formal_icon": "assets/items/v3/g4r1/bright_draught_64.png"
+    },
+    {
+      "item_id": "clear_thought_tea",
+      "name": "理绪茶包",
+      "selected_attempt": 1,
+      "score": 10,
+      "raw": "assets/_incoming/g4_v3/clear_thought_tea_source_attempt1.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/clear_thought_tea_attempt1_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/clear_thought_tea_attempt1_64.png",
+      "source_sha256": "b718041b26a04252746f8c4fbc5894d95e8cc0fa995b11cd6bad6cd6d9d77ec3",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 33902,
+          "transparent_pixels": 31634,
+          "edge_pixels": 5545,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 2322,
+          "transparent_pixels": 1774,
+          "edge_pixels": 686,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "方纸袋的粗细色块与压边可见"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "左上袋面暖灰、右边冷灰"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "浅灰绿阴影不发黑"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "纸袋反光有左侧来源，无闪点"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "压封边是结构，不是装饰金纹"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "单茶袋无枝蔓"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "一个方袋与短绳，无杯或散茶"
+        },
+        {
+          "criterion": 8,
+          "score": 1,
+          "status": "通过",
+          "reason": "方形茶袋、封边和角绳在64px可辨"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "四边压缝和绳接点连贯"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "右绳尾和纸角均完整，四边透明"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/clear_thought_tea.png",
+      "formal_icon": "assets/items/v3/g4r1/clear_thought_tea_64.png"
+    },
+    {
+      "item_id": "together_sachet",
+      "name": "相伴香包",
+      "selected_attempt": 2,
+      "score": 10,
+      "raw": "assets/_incoming/g4_v3/together_sachet_source_attempt2.png",
+      "native_size": [
+        1254,
+        1254
+      ],
+      "runtime_candidate": "assets/_incoming/g4_v3/together_sachet_attempt2_256.png",
+      "icon_candidate": "assets/_incoming/g4_v3/together_sachet_attempt2_64.png",
+      "source_sha256": "ddead95e4bc754e7815ab3da4b5dc1d1d7b59953f1495baa76437ec7f24969a4",
+      "native_review": "实际查看builtin输出原图",
+      "derived_review": "root逐张打开256与64文件，未使用缩略接触表代替",
+      "alpha": {
+        "runtime": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            256,
+            256
+          ],
+          "has_alpha": true,
+          "visible_pixels": 31603,
+          "transparent_pixels": 33933,
+          "edge_pixels": 4713,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        },
+        "icon": {
+          "passed": true,
+          "errors": [],
+          "size": [
+            64,
+            64
+          ],
+          "has_alpha": true,
+          "visible_pixels": 2132,
+          "transparent_pixels": 1964,
+          "edge_pixels": 616,
+          "red_yellow_pixels": 0,
+          "red_yellow_fraction": 0.0,
+          "magenta_pixels": 0,
+          "edge_denominator": "pixels with 0 < alpha < 255",
+          "limits": {
+            "saturation_threshold": 0.6,
+            "red_yellow_hue_ranges": [
+              [
+                0.0,
+                0.16666666666666666
+              ],
+              [
+                0.95,
+                1.0
+              ]
+            ],
+            "maximum_bad_edge_fraction": 0.02,
+            "magenta_hue_ranges": [
+              [
+                0.77,
+                0.94
+              ]
+            ],
+            "magenta_minimum_value": 0.2,
+            "maximum_visible_magenta_pixels": 0,
+            "require_transparent_pixels": true
+          }
+        }
+      },
+      "bottom_y": 252,
+      "criteria": [
+        {
+          "criterion": 1,
+          "score": 1,
+          "status": "通过",
+          "reason": "蓝灰布面与折痕有宽刷痕"
+        },
+        {
+          "criterion": 2,
+          "score": 1,
+          "status": "通过",
+          "reason": "左侧褶面暖灰、右侧冷蓝"
+        },
+        {
+          "criterion": 3,
+          "score": 1,
+          "status": "通过",
+          "reason": "袋口内影冷灰可读"
+        },
+        {
+          "criterion": 4,
+          "score": 1,
+          "status": "通过",
+          "reason": "布褶有单侧受光，无亮纹或光晕"
+        },
+        {
+          "criterion": 5,
+          "score": 1,
+          "status": "通过",
+          "reason": "素棉袋无刺绣、心形或金饰"
+        },
+        {
+          "criterion": 6,
+          "score": 1,
+          "status": "通过",
+          "reason": "单香包无藤蔓"
+        },
+        {
+          "criterion": 7,
+          "score": 1,
+          "status": "通过",
+          "reason": "宽矮袋独立，周围留空"
+        },
+        {
+          "criterion": 8,
+          "score": 1,
+          "status": "通过",
+          "reason": "蓝灰宽袋与迎客长袋轮廓有区别"
+        },
+        {
+          "criterion": 9,
+          "score": 1,
+          "status": "通过",
+          "reason": "束口、结绳与宽底连接自然"
+        },
+        {
+          "criterion": 10,
+          "score": 1,
+          "status": "通过",
+          "reason": "绳尾和布袋完整，透明边无投影"
+        }
+      ],
+      "formal_runtime": "assets/items/v3/g4r1/together_sachet.png",
+      "formal_icon": "assets/items/v3/g4r1/together_sachet_64.png"
+    }
+  ],
+  "remaining_polish": [
+    {
+      "item_id": "beeswax",
+      "reason": "浅奶白块在64px也可能被认成皂块，需名称辅助"
+    },
+    {
+      "item_id": "pine_needle",
+      "reason": "比首稿更细，但64px仍可能与草束混淆，针叶对生细节不足"
+    },
+    {
+      "item_id": "river_clay",
+      "reason": "灰泥团与普通石块在64px仍难完全区分"
+    },
+    {
+      "item_id": "iron_flake",
+      "reason": "折角和薄度已修，64px金属与纸片的质感仍较接近"
+    },
+    {
+      "item_id": "blue_glass",
+      "reason": "修订有薄边和气泡，64px仍需名称区分于蓝石"
+    },
+    {
+      "item_id": "memory_lens",
+      "reason": "浑浊晶片在64px也像普通卵石，工具材质辨识可加强"
+    }
+  ],
+  "failed_candidate_reasons": {
+    "beeswax:1": "黄色透明边比例超限",
+    "cotton_thread:1": "木芯暖黄透明边超限",
+    "pine_needle:1": "形似宽叶草",
+    "pine_needle:2": "64px黄边超限",
+    "iron_flake:1": "厚度像石板",
+    "honey_drop:1": "蜜瓶暖黄透明边超限",
+    "blue_glass:1": "更像蓝色卵石"
+  },
+  "over_four_attempts": [],
+  "below_eight_after_cap": [],
+  "formal_promotion": true,
+  "game_ui_review": {
+    "report": "docs/codex/results/G4-visual-review.json",
+    "raw_frames": 42,
+    "retained_jpeg_frames": 6,
+    "passed": 223,
+    "total": 240,
+    "status": "partial"
+  }
+}

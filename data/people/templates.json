@@ -1,52 +1,691 @@
 {
   "version": 1,
-  "ordinary_surnames": ["许", "何", "江", "方", "陶", "沈", "周", "顾"],
-  "ordinary_names": ["知夏", "远舟", "栖迟", "清和", "予安", "念秋", "星遥", "书宁"],
-  "occupations": ["灯具修理师", "花店店员", "旧书店店员", "钟表学徒", "插画师", "园艺师"],
-  "interests": ["植物", "旧物", "散步", "绘画", "写信", "音乐"],
-  "mbti_types": ["ISTJ", "ISFJ", "INFJ", "INTJ", "ISTP", "ISFP", "INFP", "INTP", "ESTP", "ESFP", "ENFP", "ENTP", "ESTJ", "ESFJ", "ENFJ", "ENTJ"],
+  "ordinary_surnames": [
+    "许",
+    "何",
+    "江",
+    "方",
+    "陶",
+    "沈",
+    "周",
+    "顾",
+    "林",
+    "陈",
+    "李",
+    "王",
+    "张",
+    "赵",
+    "刘",
+    "杨",
+    "黄",
+    "吴",
+    "徐",
+    "孙",
+    "胡",
+    "朱",
+    "高",
+    "罗",
+    "郑",
+    "梁",
+    "谢",
+    "宋",
+    "唐",
+    "冯",
+    "韩",
+    "曹",
+    "邓",
+    "叶",
+    "程",
+    "苏",
+    "潘",
+    "杜",
+    "陆",
+    "夏"
+  ],
+  "ordinary_names": [
+    "景行",
+    "明远",
+    "承安",
+    "修文",
+    "宇川",
+    "博言",
+    "子衡",
+    "文岳",
+    "嘉树",
+    "浩然",
+    "允诚",
+    "逸舟",
+    "清越",
+    "瑞林",
+    "景泽",
+    "书航",
+    "星辰",
+    "怀瑾",
+    "云帆",
+    "知行",
+    "守礼",
+    "维新",
+    "谨言",
+    "启明",
+    "敬之",
+    "成蹊",
+    "立诚",
+    "修远",
+    "观澜",
+    "晨风",
+    "安澈",
+    "绍宁",
+    "霁川",
+    "泽谦",
+    "庭轩",
+    "和光",
+    "亦鸣",
+    "牧云",
+    "晏平",
+    "乔松",
+    "清妍",
+    "婉宁",
+    "静姝",
+    "雨晴",
+    "书瑶",
+    "兰心",
+    "映雪",
+    "采薇",
+    "语棠",
+    "晓岚",
+    "如宁",
+    "芷兰",
+    "听荷",
+    "晚晴",
+    "以晴",
+    "望舒",
+    "月白",
+    "若溪",
+    "嘉禾",
+    "晴岚",
+    "澄心",
+    "沐瑶",
+    "溪月",
+    "青禾",
+    "玉笙",
+    "南絮",
+    "芸初",
+    "柳青",
+    "檐雨",
+    "霁月",
+    "舒桐",
+    "语禾",
+    "素心",
+    "明玥",
+    "菀青",
+    "秋澜",
+    "韶宁",
+    "依云",
+    "菡清",
+    "桐音",
+    "知夏",
+    "远舟",
+    "栖迟",
+    "清和",
+    "予安",
+    "念秋",
+    "星遥",
+    "书宁",
+    "安然",
+    "时雨",
+    "南山",
+    "北辰",
+    "清川",
+    "云舒",
+    "知微",
+    "听澜",
+    "初霁",
+    "未央",
+    "景初",
+    "令仪",
+    "乐知",
+    "归一",
+    "平芜",
+    "木棉",
+    "望野",
+    "余闲",
+    "星野",
+    "拾光",
+    "森然",
+    "秋实",
+    "冬青",
+    "夏木",
+    "春生",
+    "沐川",
+    "见山",
+    "临溪",
+    "清尘",
+    "有恒",
+    "一诺",
+    "久安"
+  ],
+  "occupations": [
+    "灯具修理师",
+    "花店店员",
+    "旧书店店员",
+    "钟表学徒",
+    "插画师",
+    "园艺师",
+    "面包师",
+    "裁缝",
+    "陶艺师",
+    "木工",
+    "护理员",
+    "图书管理员",
+    "教师",
+    "公交司机",
+    "自行车修理师",
+    "厨师",
+    "邮政职员",
+    "快递员",
+    "展馆讲解员",
+    "剧场场务",
+    "音乐教师",
+    "译者",
+    "会计",
+    "杂货店员",
+    "保洁员",
+    "值班员",
+    "咖啡师",
+    "茶铺店员",
+    "陶瓷修补师",
+    "摄影师",
+    "织工",
+    "皮具修补师",
+    "社区厨房主理人",
+    "夜校助教",
+    "渡口工作人员",
+    "仓库管理员",
+    "在读学生",
+    "社区志愿者",
+    "手工学徒",
+    "印刷工"
+  ],
+  "interests": [
+    "植物",
+    "旧物",
+    "散步",
+    "绘画",
+    "写信",
+    "音乐"
+  ],
+  "mbti_types": [
+    "ISTJ",
+    "ISFJ",
+    "INFJ",
+    "INTJ",
+    "ISTP",
+    "ISFP",
+    "INFP",
+    "INTP",
+    "ESTP",
+    "ESFP",
+    "ENFP",
+    "ENTP",
+    "ESTJ",
+    "ESFJ",
+    "ENFJ",
+    "ENTJ"
+  ],
   "return_schedules": [
-    {"id": "afternoons", "weekdays": [0, 1, 2, 3, 4], "start": 1020, "end": 1290},
-    {"id": "daytime", "weekdays": [0, 1, 2, 3, 4, 5], "start": 600, "end": 1080},
-    {"id": "weekend", "weekdays": [5, 6], "start": 600, "end": 1200}
+    {
+      "id": "afternoons",
+      "weekdays": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "start": 1020,
+      "end": 1290
+    },
+    {
+      "id": "daytime",
+      "weekdays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "start": 600,
+      "end": 1080
+    },
+    {
+      "id": "weekend",
+      "weekdays": [
+        5,
+        6
+      ],
+      "start": 600,
+      "end": 1200
+    }
   ],
   "personalities": [
-    {"id": "patient", "label": "温和耐心", "patience": 85, "return_bias": 20, "mbti": "ISFJ"},
-    {"id": "busy", "label": "直率忙碌", "patience": 45, "return_bias": 0, "mbti": "ESTJ"},
-    {"id": "reflective", "label": "细心内敛", "patience": 65, "return_bias": 10, "mbti": "INFJ"},
-    {"id": "outgoing", "label": "热情健谈", "patience": 60, "return_bias": 15, "mbti": "ENFP"}
+    {
+      "id": "patient",
+      "label": "温和耐心",
+      "patience": 85,
+      "return_bias": 20,
+      "mbti": "ISFJ",
+      "advice_preference": "listening"
+    },
+    {
+      "id": "busy",
+      "label": "直率忙碌",
+      "patience": 45,
+      "return_bias": 0,
+      "mbti": "ESTJ",
+      "advice_preference": "direct"
+    },
+    {
+      "id": "reflective",
+      "label": "细心内敛",
+      "patience": 65,
+      "return_bias": 10,
+      "mbti": "INFJ",
+      "advice_preference": "listening"
+    },
+    {
+      "id": "outgoing",
+      "label": "热情健谈",
+      "patience": 60,
+      "return_bias": 15,
+      "mbti": "ENFP",
+      "advice_preference": "concrete_steps"
+    },
+    {
+      "id": "meticulous",
+      "label": "细致守序",
+      "mbti": "ISTJ",
+      "patience": 75,
+      "return_bias": 5,
+      "advice_preference": "concrete_steps"
+    },
+    {
+      "id": "strategic",
+      "label": "谨慎筹划",
+      "mbti": "INTJ",
+      "patience": 60,
+      "return_bias": 5,
+      "advice_preference": "concrete_steps"
+    },
+    {
+      "id": "practical",
+      "label": "务实灵活",
+      "mbti": "ISTP",
+      "patience": 55,
+      "return_bias": 0,
+      "advice_preference": "direct"
+    },
+    {
+      "id": "artistic",
+      "label": "安静感性",
+      "mbti": "ISFP",
+      "patience": 75,
+      "return_bias": 10,
+      "advice_preference": "listening"
+    },
+    {
+      "id": "idealistic",
+      "label": "重视感受",
+      "mbti": "INFP",
+      "patience": 80,
+      "return_bias": 10,
+      "advice_preference": "listening"
+    },
+    {
+      "id": "analytical",
+      "label": "喜欢分析",
+      "mbti": "INTP",
+      "patience": 60,
+      "return_bias": 5,
+      "advice_preference": "concrete_steps"
+    },
+    {
+      "id": "energetic",
+      "label": "行动利落",
+      "mbti": "ESTP",
+      "patience": 40,
+      "return_bias": 0,
+      "advice_preference": "direct"
+    },
+    {
+      "id": "sociable",
+      "label": "乐于交流",
+      "mbti": "ESFP",
+      "patience": 65,
+      "return_bias": 15,
+      "advice_preference": "listening"
+    },
+    {
+      "id": "inventive",
+      "label": "好奇求新",
+      "mbti": "ENTP",
+      "patience": 50,
+      "return_bias": 5,
+      "advice_preference": "direct"
+    },
+    {
+      "id": "supportive",
+      "label": "体贴周到",
+      "mbti": "ESFJ",
+      "patience": 80,
+      "return_bias": 15,
+      "advice_preference": "listening"
+    },
+    {
+      "id": "encouraging",
+      "label": "温和鼓励",
+      "mbti": "ENFJ",
+      "patience": 75,
+      "return_bias": 15,
+      "advice_preference": "concrete_steps"
+    },
+    {
+      "id": "decisive",
+      "label": "果断清晰",
+      "mbti": "ENTJ",
+      "patience": 45,
+      "return_bias": 0,
+      "advice_preference": "direct"
+    }
   ],
-  "appearance": {"faces": ["face_01", "face_02", "face_03"], "hair": ["hair_01", "hair_02", "hair_03"], "outfits": ["outfit_01", "outfit_02", "outfit_03"]},
+  "appearance": {
+    "faces": [
+      "face_01",
+      "face_02",
+      "face_03"
+    ],
+    "hair": [
+      "hair_01",
+      "hair_02",
+      "hair_03"
+    ],
+    "outfits": [
+      "outfit_01",
+      "outfit_02",
+      "outfit_03"
+    ]
+  },
   "profile_choices": {
-    "background": {"neighborhood": "在附近生活，从事{role}的工作。", "daily_craft": "做{role}时习惯先整理好手边的东西。", "local_work": "在这一带工作，职业是{role}。"},
-    "preference": {"plants": "喜欢植物。", "old_things": "喜欢留意旧物。", "music": "闲暇时喜欢听音乐。", "walks": "喜欢散步。"},
-    "speech_style": {"reflective": "回答前习惯先想一想。", "gentle": "语气温和，愿意慢慢解释。", "direct": "说话简洁，偏向先讲眼前的事。"}
+    "background": {
+      "neighborhood": "在附近生活，从事{role}的工作。",
+      "daily_craft": "做{role}时习惯先整理好手边的东西。",
+      "local_work": "在这一带工作，职业是{role}。"
+    },
+    "preference": {
+      "plants": "喜欢植物。",
+      "old_things": "喜欢留意旧物。",
+      "music": "闲暇时喜欢听音乐。",
+      "walks": "喜欢散步。"
+    },
+    "speech_style": {
+      "reflective": "回答前习惯先想一想。",
+      "gentle": "语气温和，愿意慢慢解释。",
+      "direct": "说话简洁，偏向先讲眼前的事。"
+    }
   },
   "family": {},
   "arrival": {
-    "natural_min": 0, "natural_max": 8, "opening_guest": true,
-    "max_total_per_day": 20, "family_percent": 0, "ordinary_return_percent": 20, "special_return_percent": 20,
-    "family_new_limit_per_day": 1, "family_new_limit_per_slot": 1, "family_slot_minutes": 120,
-    "queue_capacity": 6, "first_minute": 570, "last_minute": 1200,
-    "expectation": {"base": 2.4, "reputation_coefficient": 0.015, "reputation_min": -1, "reputation_max": 2.5, "experience_coefficient": 0.025, "experience_max": 1.5, "traffic_bonus_coefficient": 1, "min": 0, "max": 12},
-    "weekday": {"weekend_days": [5, 6], "workday": 0, "weekend": 0.4},
+    "natural_min": 0,
+    "natural_max": 8,
+    "opening_guest": true,
+    "max_total_per_day": 20,
+    "family_percent": 0,
+    "ordinary_return_percent": 20,
+    "special_return_percent": 20,
+    "family_new_limit_per_day": 1,
+    "family_new_limit_per_slot": 1,
+    "family_slot_minutes": 120,
+    "queue_capacity": 6,
+    "first_minute": 570,
+    "last_minute": 1200,
+    "expectation": {
+      "base": 2.4,
+      "reputation_coefficient": 0.015,
+      "reputation_min": -1,
+      "reputation_max": 2.5,
+      "experience_coefficient": 0.025,
+      "experience_max": 1.5,
+      "traffic_bonus_coefficient": 1,
+      "min": 0,
+      "max": 12
+    },
+    "weekday": {
+      "weekend_days": [
+        5,
+        6
+      ],
+      "workday": 0,
+      "weekend": 0.4
+    },
     "weather": [
-      {"id": "sunny", "label": "晴", "weight": 45, "modifier": 0.2},
-      {"id": "cloudy", "label": "阴", "weight": 35, "modifier": 0},
-      {"id": "rainy", "label": "雨", "weight": 20, "modifier": -0.5}
+      {
+        "id": "sunny",
+        "label": "晴",
+        "weight": 45,
+        "modifier": 0.2
+      },
+      {
+        "id": "cloudy",
+        "label": "阴",
+        "weight": 35,
+        "modifier": 0
+      },
+      {
+        "id": "rainy",
+        "label": "雨",
+        "weight": 20,
+        "modifier": -0.5
+      }
     ],
-    "timing": {"noise_weight": 20, "peaks": [
-      {"id": "noon", "weight": 38, "mean": 750, "deviation": 60},
-      {"id": "evening", "weight": 42, "mean": 1050, "deviation": 75}
-    ]},
-    "burst": {"probability": 0.06, "min_size": 3, "max_size": 5, "window_minutes": 30, "sources": [
-      {"id": "burst_word_of_mouth", "weight": 45},
-      {"id": "burst_group_referral", "weight": 35},
-      {"id": "burst_festival", "weight": 20}
-    ]},
-    "overflow": {"outside_min_score": 60, "appointment_min_score": 35, "return_bias_penalty": 5, "return_bias_min": -50,
-      "reasons": {"full": "候客区已满，先告辞了", "timeout": "等待超时", "schedule_end": "行程已结束"}},
-    "patience": {"min_minutes": 15, "max_minutes": 180},
-    "distribution_targets": {"samples": 2000, "zero_day_min": 0.05, "zero_day_max": 0.12, "overflow_day_min": 0.03, "overflow_day_max": 0.08}
-  }
+    "timing": {
+      "noise_weight": 20,
+      "peaks": [
+        {
+          "id": "noon",
+          "weight": 38,
+          "mean": 750,
+          "deviation": 60
+        },
+        {
+          "id": "evening",
+          "weight": 42,
+          "mean": 1050,
+          "deviation": 75
+        }
+      ]
+    },
+    "burst": {
+      "probability": 0.06,
+      "min_size": 3,
+      "max_size": 5,
+      "window_minutes": 30,
+      "sources": [
+        {
+          "id": "burst_word_of_mouth",
+          "weight": 45
+        },
+        {
+          "id": "burst_group_referral",
+          "weight": 35
+        },
+        {
+          "id": "burst_festival",
+          "weight": 20
+        }
+      ]
+    },
+    "overflow": {
+      "outside_min_score": 60,
+      "appointment_min_score": 35,
+      "return_bias_penalty": 5,
+      "return_bias_min": -50,
+      "reasons": {
+        "full": "候客区已满，先告辞了",
+        "timeout": "等待超时",
+        "schedule_end": "行程已结束"
+      }
+    },
+    "patience": {
+      "min_minutes": 15,
+      "max_minutes": 180
+    },
+    "distribution_targets": {
+      "samples": 2000,
+      "zero_day_min": 0.05,
+      "zero_day_max": 0.12,
+      "overflow_day_min": 0.03,
+      "overflow_day_max": 0.08
+    }
+  },
+  "legacy_sampler": {
+    "version": 1,
+    "ordinary_surnames": [
+      "许",
+      "何",
+      "江",
+      "方",
+      "陶",
+      "沈",
+      "周",
+      "顾"
+    ],
+    "ordinary_names": [
+      "知夏",
+      "远舟",
+      "栖迟",
+      "清和",
+      "予安",
+      "念秋",
+      "星遥",
+      "书宁"
+    ],
+    "occupations": [
+      "灯具修理师",
+      "花店店员",
+      "旧书店店员",
+      "钟表学徒",
+      "插画师",
+      "园艺师"
+    ],
+    "interests": [
+      "植物",
+      "旧物",
+      "散步",
+      "绘画",
+      "写信",
+      "音乐"
+    ],
+    "mbti_types": [
+      "ISTJ",
+      "ISFJ",
+      "INFJ",
+      "INTJ",
+      "ISTP",
+      "ISFP",
+      "INFP",
+      "INTP",
+      "ESTP",
+      "ESFP",
+      "ENFP",
+      "ENTP",
+      "ESTJ",
+      "ESFJ",
+      "ENFJ",
+      "ENTJ"
+    ],
+    "return_schedules": [
+      {
+        "id": "afternoons",
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "start": 1020,
+        "end": 1290
+      },
+      {
+        "id": "daytime",
+        "weekdays": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "start": 600,
+        "end": 1080
+      },
+      {
+        "id": "weekend",
+        "weekdays": [
+          5,
+          6
+        ],
+        "start": 600,
+        "end": 1200
+      }
+    ],
+    "personalities": [
+      {
+        "id": "patient",
+        "label": "温和耐心",
+        "patience": 85,
+        "return_bias": 20,
+        "mbti": "ISFJ"
+      },
+      {
+        "id": "busy",
+        "label": "直率忙碌",
+        "patience": 45,
+        "return_bias": 0,
+        "mbti": "ESTJ"
+      },
+      {
+        "id": "reflective",
+        "label": "细心内敛",
+        "patience": 65,
+        "return_bias": 10,
+        "mbti": "INFJ"
+      },
+      {
+        "id": "outgoing",
+        "label": "热情健谈",
+        "patience": 60,
+        "return_bias": 15,
+        "mbti": "ENFP"
+      }
+    ],
+    "appearance": {
+      "faces": [
+        "face_01",
+        "face_02",
+        "face_03"
+      ],
+      "hair": [
+        "hair_01",
+        "hair_02",
+        "hair_03"
+      ],
+      "outfits": [
+        "outfit_01",
+        "outfit_02",
+        "outfit_03"
+      ]
+    }
+  },
+  "ordinary_content_path": "res://data/people/ordinary_content.json"
 }

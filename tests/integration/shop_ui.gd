@@ -100,6 +100,7 @@ func run() -> void:
 			else:
 				settings.canceled.emit()
 			await settle()
+		await capture_icon_gallery(visuals)
 	check(int(game.state.clock_minutes) == clock_before, "navigation, information and rendering never advance game time")
 	# Actual A signal -> shared command -> consultation -> return navigation.
 	main.open_people()
@@ -114,9 +115,7 @@ func run() -> void:
 		check(game.people_view().profiles.has(npc_id), "received NPC enters permitted public profile")
 		main.show_screen("workshop")
 		await settle()
-		var demand_buttons: Array = find_controls(main.screen, func(node: Node) -> bool: return node is Button and node.text == "接待中登记需求")
-		# The first recipe is incense, which the opening shop already stocks.
-		var register: Button = demand_buttons[1] if demand_buttons.size() > 1 else null
+		var register := find_control(main.screen, func(node: Node) -> bool: return node is Button and node.name == "RegisterDemand_restorative_draught") as Button
 		check(register != null and not register.disabled, "workshop exposes customer-demand action")
 		if register != null and not register.disabled:
 			register.pressed.emit()
@@ -152,8 +151,7 @@ func run() -> void:
 	await settle()
 	check(find_control(main.screen, func(node: Node) -> bool: return node is Button and node.text == "前往采集 · 河畔小径") != null, "gathering page exposes riverside point")
 	check(find_control(main.screen, func(node: Node) -> bool: return node is Button and node.text == "前往采集 · 林缘草地") != null, "gathering page exposes woodland point")
-	await capture("gathering-1920")
-	await capture_icon_gallery(visuals)
+	await capture("gathering-after-trade-1920")
 	# The production front desk also enters the real A queue, never a fixture picker.
 	await main.run_action("new_game", {"name": "前台真实候客入口"})
 	await settle()
@@ -286,7 +284,7 @@ func check_visual_manifest() -> Dictionary:
 		check(manifest.get("items", {}).has(recipe.output), "C7 recipe output maps inventory image")
 	for item_id: String in ["bookmark", "silver_leaf"]:
 		check(manifest.get("items", {}).has(item_id), "C7 existing payment and gift keep images / " + item_id)
-	check(manifest.get("items", {}).size() == 9, "C7 seven catalog and two legacy items all mapped")
+	check(manifest.get("items", {}).size() == view.catalog.items.size() + ItemArt.load_settings().legacy_names.size(), "C7 all current catalog and retained legacy IDs mapped exactly once")
 	for item_id: String in manifest.get("items", {}):
 		var visual: Dictionary = manifest.items[item_id]
 		check(visual.get("item_id") == item_id and visual.get("version") == manifest.selected_version and not str(visual.get("source", "")).is_empty(), "C7 image records item identity, source and version")
@@ -321,11 +319,23 @@ func check_visual_manifest() -> Dictionary:
 func capture_icon_gallery(manifest: Dictionary) -> void:
 	if manifest.is_empty():
 		return
+	var gallery: Dictionary = ItemArt.load_settings().gallery
+	var ids: Array = manifest.items.keys()
+	var page_size := int(gallery.comparison_page_items["64"])
+	var pages := ceili(float(ids.size())/float(page_size))
+	var covered: Array = []
+	for index: int in range(pages):
+		var selected: Array = ids.slice(index*page_size,(index+1)*page_size)
+		covered.append_array(selected)
+		await capture_icon_gallery_page(manifest,selected,index+1,pages)
+	check(covered == ids,"C7 every inventory image is shown exactly once across gallery pages")
+
+func capture_icon_gallery_page(manifest: Dictionary, ids: Array, page_number: int, pages: int) -> void:
 	var window := Window.new()
 	var presentation := ItemArt.load_settings()
 	var gallery: Dictionary = presentation.gallery
 	window.visible = false
-	window.title = gallery.title
+	window.title = gallery.title + " · " + (gallery.comparison_page_title % [page_number,pages])
 	window.size = Vector2i(gallery.size[0],gallery.size[1])
 	window.theme = load("res://themes/paper.tres")
 	main.add_child(window)
@@ -339,7 +349,7 @@ func capture_icon_gallery(manifest: Dictionary) -> void:
 	grid.add_theme_constant_override("v_separation",int(gallery.row_gap))
 	margin.add_child(grid)
 	var catalog: Dictionary = game.shop_view().catalog.items
-	for item_id: String in manifest.items:
+	for item_id: String in ids:
 		var row := HBoxContainer.new()
 		row.custom_minimum_size.x = gallery.cell_width
 		grid.add_child(row)
@@ -365,8 +375,8 @@ func capture_icon_gallery(manifest: Dictionary) -> void:
 		margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		available_size = fixture.size
 		await settle()
-	check(grid.get_combined_minimum_size().y <= available_size.y - float(gallery.padding)*2 and grid.get_combined_minimum_size().x <= available_size.x - float(gallery.padding)*2, "C7 gallery shows all nine 64px icons without cropping")
-	await capture("catalog-icons-64px")
+	check(grid.get_combined_minimum_size().y <= available_size.y - float(gallery.padding)*2 and grid.get_combined_minimum_size().x <= available_size.x - float(gallery.padding)*2, "C7 each gallery page shows every 64px icon without cropping")
+	await capture("catalog-icons-64px-page-%d-%d" % [page_number,root.size.x])
 	window.queue_free()
 	if fixture != null:
 		fixture.queue_free()

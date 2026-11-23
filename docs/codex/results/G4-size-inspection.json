@@ -1,0 +1,309 @@
+{
+  "version": 1,
+  "passed": false,
+  "repository": "D:\\MagicStore",
+  "baseline": {
+    "requested": "e27441b",
+    "oid": "e27441b51a4415777971cf2d8142ce4c725437e5",
+    "reachable_object_count": 745,
+    "explicit_oid_set_sha256": "f100463b40331194633f11b4878a8b2c994125d95f27860a32ec3bafd9cb9ade"
+  },
+  "head": "d6a0847d4308dfa8f0830e83ce733dad7e63e702",
+  "index_listing_sha256": "6f0f9d4ca9c3bb48252e661af57c36add3218ad613b1e342f94f7ef4f2b06cb8",
+  "method": "(all objects reachable from HEAD union stage-0 index blob OIDs) minus explicit all objects reachable from base; then unique blob OIDs only",
+  "binary_definition": "Git default binary heuristic: NUL byte in first 8000 blob bytes, independent of filename",
+  "scope_note": "Committed clean history and staged tree only; unstaged and untracked working files are excluded. No index/tree/ref writes were performed.",
+  "maximum_new_blob": {
+    "oid": "7f8f031dc5c6c5ba1913d93c36d4667c1e311cea",
+    "bytes": 25928940,
+    "binary": true,
+    "paths": [
+      "assets/fonts/LXGWWenKai-Regular.ttf"
+    ]
+  },
+  "current_head_commit": {
+    "oid": "d6a0847d4308dfa8f0830e83ce733dad7e63e702",
+    "subject": "[META] 记录G2验收提交与实际上传体积",
+    "new_blob_count": 3,
+    "new_blob_bytes": 59308,
+    "new_binary_bytes": 0
+  },
+  "pending_index_commit": {
+    "new_blob_count": 201,
+    "new_binary_bytes": 3128672,
+    "new_blob_bytes": 5530038
+  },
+  "forbidden_prefixes": [
+    "assets/_incoming/",
+    "assets/generated_scenes/v3_real/",
+    "assets/generated_scenes/runtime/v3_real/",
+    "assets/generated_scenes/runtime/v3/",
+    "docs/codex/results/art_audit/",
+    ".tools/",
+    ".godot/"
+  ],
+  "forbidden_index_paths": [],
+  "forbidden_history": [],
+  "unmerged_index_entries": [],
+  "screenshots": {
+    "tasks": {
+      "A1R": {
+        "count": 6,
+        "paths": [
+          "docs/screenshots/round2/A1R/s02-before-v2-1280.jpg",
+          "docs/screenshots/round2/A1R/s02-v3-day-1280.jpg",
+          "docs/screenshots/round2/A1R/s02-v3-day-1920.jpg",
+          "docs/screenshots/round2/A1R/s03-v3-night-1920.jpg",
+          "docs/screenshots/round2/A1R/s04-v3-closed-night-1280.jpg",
+          "docs/screenshots/round2/A1R/s04-v3-open-day-1920-legacy-slot.jpg"
+        ]
+      },
+      "A2R": {
+        "count": 6,
+        "paths": [
+          "docs/screenshots/round2/A2R/inventory-v3-1280-before-A7.jpg",
+          "docs/screenshots/round2/A2R/items-128-1920.jpg",
+          "docs/screenshots/round2/A2R/items-256-1920.jpg",
+          "docs/screenshots/round2/A2R/items-64-1280.jpg",
+          "docs/screenshots/round2/A2R/market-v3-1920.jpg",
+          "docs/screenshots/round2/A2R/workshop-v3-1920.jpg"
+        ]
+      },
+      "A3R": {
+        "count": 6,
+        "paths": [
+          "docs/screenshots/round2/A3R/consultation-active-1920x1080.jpg",
+          "docs/screenshots/round2/A3R/consultation-active-800x600.jpg",
+          "docs/screenshots/round2/A3R/front-1280x720.jpg",
+          "docs/screenshots/round2/A3R/front-2560x1080.jpg",
+          "docs/screenshots/round2/A3R/notebook-closed-800x600.jpg",
+          "docs/screenshots/round2/A3R/notebook-open-1280x720.jpg"
+        ]
+      },
+      "A4": {
+        "count": 6,
+        "paths": [
+          "docs/screenshots/round2/A4/editor-colors-1920x1080.jpg",
+          "docs/screenshots/round2/A4/editor-face-1280x720.jpg",
+          "docs/screenshots/round2/A4/five-moods.jpg",
+          "docs/screenshots/round2/A4/people-24-96px.jpg",
+          "docs/screenshots/round2/A4/random-consultation-1280x720.jpg",
+          "docs/screenshots/round2/A4/random-consultation-1920x1080.jpg"
+        ]
+      },
+      "A6": {
+        "count": 6,
+        "paths": [
+          "docs/screenshots/round2/A6/front-day1920.jpg",
+          "docs/screenshots/round2/A6/settings-reduced1280.jpg",
+          "docs/screenshots/round2/A6/stock-initial1280.jpg",
+          "docs/screenshots/round2/A6/stock-settled1920.jpg",
+          "docs/screenshots/round2/A6/water-day1280.jpg",
+          "docs/screenshots/round2/A6/water-night1920.jpg"
+        ]
+      },
+      "A7": {
+        "count": 6,
+        "paths": [
+          "docs/screenshots/round2/A7/actual-save-selection-1920.jpg",
+          "docs/screenshots/round2/A7/empty-night-1280.jpg",
+          "docs/screenshots/round2/A7/nine-day-1920.jpg",
+          "docs/screenshots/round2/A7/shelf-lines-F3-1920.jpg",
+          "docs/screenshots/round2/A7/single-day-1280.jpg",
+          "docs/screenshots/round2/A7/thirty-night-1920.jpg"
+        ]
+      },
+      "G2": {
+        "count": 6,
+        "paths": [
+          "docs/screenshots/round2/G2/consultation-1920x1080.jpg",
+          "docs/screenshots/round2/G2/family-partial-1280x720.jpg",
+          "docs/screenshots/round2/G2/family-partial-1920x1080.jpg",
+          "docs/screenshots/round2/G2/front-1280x720.jpg",
+          "docs/screenshots/round2/G2/people-1280x720.jpg",
+          "docs/screenshots/round2/G2/people-1920x1080.jpg"
+        ]
+      },
+      "G3": {
+        "count": 4,
+        "paths": [
+          "docs/screenshots/round2/G3/pending-1280x720.jpg",
+          "docs/screenshots/round2/G3/pending-1920x1080.jpg",
+          "docs/screenshots/round2/G3/verified-1280x720.jpg",
+          "docs/screenshots/round2/G3/verified-1920x1080.jpg"
+        ]
+      },
+      "G4": {
+        "count": 6,
+        "paths": [
+          "docs/screenshots/round2/G4/forecast-advice-styles-1280.jpg",
+          "docs/screenshots/round2/G4/market-source-quantity-1920.jpg",
+          "docs/screenshots/round2/G4/night-committed-weather-1920.jpg",
+          "docs/screenshots/round2/G4/use-result-source-1280.jpg",
+          "docs/screenshots/round2/G4/workshop-mint-quality-1920.jpg",
+          "docs/screenshots/round2/G4/workshop-no-inspiration-1280.jpg"
+        ]
+      }
+    },
+    "bad_format_paths": [],
+    "over_limit_tasks": []
+  },
+  "screenshot_history_violations": [],
+  "manifest": {
+    "path": "assets/ART_ASSET_MANIFEST.json",
+    "oid": "2ba9766fa1eb6b5357e195f1518cc25edf5715ef",
+    "bytes": 499845
+  },
+  "git_count_objects_vH": "count: 6051\nsize: 310.23 MiB\nin-pack: 4064\npacks: 2\nsize-pack: 1.12 GiB\nprune-packable: 2053\ngarbage: 3\nsize-garbage: 15.24 MiB",
+  "storage_note": "count-objects includes all local object storage, old backup refs, packs and unreachable/loose objects. It is not this branch's upload estimate.",
+  "checks": [
+    {
+      "id": "snapshot_stable",
+      "passed": true
+    },
+    {
+      "id": "base_is_ancestor",
+      "passed": true
+    },
+    {
+      "id": "index_has_no_unmerged_entries",
+      "passed": true
+    },
+    {
+      "id": "new_binary_total",
+      "passed": false,
+      "actual": 238445838,
+      "limit": "<150000000"
+    },
+    {
+      "id": "current_commit_binary",
+      "passed": true,
+      "actual": 0,
+      "limit": "<=100000000"
+    },
+    {
+      "id": "pending_commit_binary",
+      "passed": true,
+      "actual": 3128672,
+      "limit": "<=100000000"
+    },
+    {
+      "id": "each_clean_commit_binary",
+      "passed": false
+    },
+    {
+      "id": "forbidden_tracked_paths",
+      "passed": true,
+      "actual": 0,
+      "limit": 0
+    },
+    {
+      "id": "forbidden_history_paths",
+      "passed": true,
+      "actual": 0,
+      "limit": 0
+    },
+    {
+      "id": "screenshot_format",
+      "passed": true,
+      "limit": "real JPG only"
+    },
+    {
+      "id": "screenshot_count",
+      "passed": true,
+      "limit": "<=6 per task"
+    },
+    {
+      "id": "screenshot_history",
+      "passed": true
+    },
+    {
+      "id": "manifest_size",
+      "passed": true,
+      "actual": 499845,
+      "limit": "<500000"
+    }
+  ],
+  "new_unique_blobs": {
+    "count": 1246,
+    "bytes": 251019958,
+    "binary_count": 348,
+    "binary_bytes": 238445838
+  },
+  "clean_commit_limits": [
+    {
+      "commit": "d6a0847d4308dfa8f0830e83ce733dad7e63e702",
+      "new_binary_bytes": 0
+    },
+    {
+      "commit": "5297418d0703a26aa0faa9b5a5595386e87ebd57",
+      "new_binary_bytes": 1531178
+    },
+    {
+      "commit": "7f932d98385f10618966b09186b64a0cd2bc7d3d",
+      "new_binary_bytes": 0
+    },
+    {
+      "commit": "f2e0d13231ba04f0ac77c79dcacf3e1298244f38",
+      "new_binary_bytes": 10703272
+    },
+    {
+      "commit": "37b01376aab9db02d0ee7e8bcc64fb270764c27b",
+      "new_binary_bytes": 0
+    },
+    {
+      "commit": "fb4334416c6604a7f1589cad226e08ebfeaf368c",
+      "new_binary_bytes": 16869797
+    },
+    {
+      "commit": "e139571daf91febdd29e46aac4a6ed3e71fa0e5b",
+      "new_binary_bytes": 0
+    },
+    {
+      "commit": "c2c37eb7107cfa5ac186bc89ae62443133d5ca16",
+      "new_binary_bytes": 1452126
+    },
+    {
+      "commit": "a4cb6dd3a094a6e110b08a0a1ec219cc4b94acfe",
+      "new_binary_bytes": 0
+    },
+    {
+      "commit": "27734999a022e1e1cd717a4a414dfd07048be874",
+      "new_binary_bytes": 1623228
+    },
+    {
+      "commit": "414c6c22e69a9ab73a29a549c9e18a07e7a5cd12",
+      "new_binary_bytes": 0
+    },
+    {
+      "commit": "059baeb199232c5c430b9dde42eccdae7dbadcd0",
+      "new_binary_bytes": 119811515
+    },
+    {
+      "commit": "523692d5cbf3959f0b01a945ee47eb182c5847c2",
+      "new_binary_bytes": 0
+    },
+    {
+      "commit": "7f7a8c3be2da942e31ea4e2e0eb892820deef13d",
+      "new_binary_bytes": 2227634
+    },
+    {
+      "commit": "135c26fa647555c4f151bffc433d28a15eca3463",
+      "new_binary_bytes": 0
+    },
+    {
+      "commit": "1878b6c508f37905a744169c197409e8072b5fa6",
+      "new_binary_bytes": 81098416
+    }
+  ],
+  "original_v2": {
+    "checked": 56,
+    "changed": []
+  },
+  "snapshot_note": "Pre-economic-final-text snapshot; all source/art staged, six reviewed JPEGs. Later text/CSV/SVG evidence excluded. Historical cumulative failures retained; pending G4 binary is 3128672 B.",
+  "full_local_object_report": {
+    "path": ".tools/clean-rebuild/G4-size-report.json",
+    "sha256": "fe0da3016ec73369477368c80ff8ef5013941d8edc089af52b3efd4d7d2a3c2c",
+    "bytes": 285258
+  }
+}

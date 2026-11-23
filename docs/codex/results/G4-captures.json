@@ -1,0 +1,91 @@
+{
+  "task": "G4",
+  "quality": 85,
+  "frames": [
+    {
+      "path": "docs/screenshots/round2/G4/workshop-no-inspiration-1280.jpg",
+      "source": ".tools/g4/gpu/run-4580445/workshop-no-inspiration-1280.png",
+      "source_sha256": "dc8b0a7f05d2af14272954ecb7322a1ce4899728239980ee5fe67aa07f0d9160",
+      "sha256": "70ca7a2c0964ffc836ce1b34c1981ddf04cad3f6c0aea725863a590c8dd3d34c",
+      "bytes": 208727,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "JPEG",
+      "quality": 85,
+      "root_visual_review": "opened individually; see G4-visual-review.json; inherited failures retained"
+    },
+    {
+      "path": "docs/screenshots/round2/G4/forecast-advice-styles-1280.jpg",
+      "source": ".tools/g4/gpu/run-4580445/forecast-advice-styles-1280.png",
+      "source_sha256": "92e0c4772aba76c2b3719bb1537b7f118d23bc5ac2476efc5b57ee6899344816",
+      "sha256": "d7d8b87acc73435ea1be3407d42aa8dc9f3e22f26a87a99435c6957ed957ebe0",
+      "bytes": 116299,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "JPEG",
+      "quality": 85,
+      "root_visual_review": "opened individually; see G4-visual-review.json; inherited failures retained"
+    },
+    {
+      "path": "docs/screenshots/round2/G4/workshop-mint-quality-1920.jpg",
+      "source": ".tools/g4/gpu/run-4580445/workshop-mint-quality-1920.png",
+      "source_sha256": "7692db6ca89bec56a611da493b8cec4cda855dc6af229d23a95c9a2f6ebd9978",
+      "sha256": "3d9aa100eb8a5ac5d7aa3afdfed73ed7560530c46ff288c85cad6a1d50f4706c",
+      "bytes": 418553,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "JPEG",
+      "quality": 85,
+      "root_visual_review": "opened individually; see G4-visual-review.json; inherited failures retained"
+    },
+    {
+      "path": "docs/screenshots/round2/G4/market-source-quantity-1920.jpg",
+      "source": ".tools/g4/gpu/run-4580445/market-source-quantity-1920.png",
+      "source_sha256": "16fea705f91060473847c1dd5a5d443d550ee0bffdfc0510fb5076221e7de333",
+      "sha256": "35f3782dd19adfc98884d6f01377bebb57d29263376e36bdfe3f37b12b25c181",
+      "bytes": 430302,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "JPEG",
+      "quality": 85,
+      "root_visual_review": "opened individually; see G4-visual-review.json; inherited failures retained"
+    },
+    {
+      "path": "docs/screenshots/round2/G4/use-result-source-1280.jpg",
+      "source": ".tools/g4/gpu/run-4580445/use-result-source-1280.png",
+      "source_sha256": "bc47acc4c46e8aa510a149d079449af6e18a440936f30e54da3200aab07dc2a3",
+      "sha256": "c11f4acc3f5ab8f49629db66cc441a5926b71c5191941bfd340ccf2468509aad",
+      "bytes": 163501,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "JPEG",
+      "quality": 85,
+      "root_visual_review": "opened individually; see G4-visual-review.json; inherited failures retained"
+    },
+    {
+      "path": "docs/screenshots/round2/G4/night-committed-weather-1920.jpg",
+      "source": ".tools/g4/gpu/run-4580445/night-committed-weather-1920.png",
+      "source_sha256": "ef1e812b24cf2c421148088cffc378c6a3f197fc37dbdf6d7e24fbea6a023482",
+      "sha256": "d312977b27b77e2bd8065c510d8948a0ff11d157bb0c5c3e4e533381b23522b6",
+      "bytes": 380706,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "JPEG",
+      "quality": 85,
+      "root_visual_review": "opened individually; see G4-visual-review.json; inherited failures retained"
+    }
+  ],
+  "bytes": 1718088
+}

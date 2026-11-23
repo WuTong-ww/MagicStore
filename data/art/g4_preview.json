@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "capture_root": "res://.tools/g4/gpu",
+  "sizes": [[1280,720],[1920,1080]],
+  "timing": {"settle_frames":12,"capture_delay_seconds":0.25,"watchdog_seconds":180,"maximum_wait_minutes":180,"maximum_wait_actions":8},
+  "layout": {"embed_subwindows":true,"advice_popup":true,"quantity_preview":12,"bounds_tolerance_px":1,"blank_grid":20,"minimum_unique_colors":16},
+  "flow": {"save_name":"经营新内容图形验收","recipe_id":"restorative_draught","variant_id":"restorative_draught_mint","need_tags":["rest"],"demand_text":"店长记录：考虑制作醒神药水，回应恢复精神的需求。","night_site_id":"railway_depot","night_minute":1080,"expected_energy_gain":15,"forecast_page":"prediction","style_control":"G4AdviceStyle"},
+  "states": {"uninspired":"workshop-no-inspiration","researched":"workshop-mint-quality","market":"market-source-quantity","night":"night-committed-weather","use":"use-result-source","forecast":"forecast-advice-styles"},
+  "expected": {"no_inspiration":"还没有灵感","quality":"精制","materials":"原料：","source":"来源：","weather":"已记录天气","result":"精力由","source_details":"消耗","style_labels":["具体步骤","先听对方说","直接说明"],"style_ids":["concrete_steps","listening","direct"]},
+  "protected_paths": ["scripts/shop/shop_screen.gd","scripts/shop/content_ui.gd","data/ui/shop_content.json","scripts/divination/workbench.gd","data/shop/catalog.json","data/shop/visuals.json","assets/ART_ASSET_MANIFEST.json"],
+  "forbidden_visible": ["transaction_id","world_facts","rel_id","source_kind","npc_lin","restorative_draught","railway_depot"]
+}

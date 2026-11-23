@@ -2,9 +2,89 @@ class_name EventSchema
 extends RefCounted
 ## Immutable content contracts, including first-match reachability.
 const TEMPLATES_PATH := "res://data/divination/event_templates.json"
+const PRODUCT_RULES_PATH := "res://data/divination/g4_product_rules.json"
 const MAX_INT := 2147483647
 const EFFECT_KINDS := ["trust","familiarity","npc_relationship","reputation","gift","referral","traffic_boost","arrival_boost","review_growth","unlock_topic"]
 const EVALUATIONS := ["pending","aligned","deviated","insufficient","condition_not_met","no_prediction"]
+
+static func load_product_rules() -> Dictionary:
+	var value: Variant = JSON.parse_string(FileAccess.get_file_as_string(PRODUCT_RULES_PATH))
+	return value if product_rules_valid(value) else {}
+
+static func product_rules_valid(value: Variant) -> bool:
+	if not value is Dictionary or value.get("version") != 1 or not _integer(value.get("maximum_components"),1,MAX_INT) or not _integer(value.get("current_acceptance_version"),1,MAX_INT):
+		return false
+	var styles := ["concrete_steps","listening","direct"]
+	if not value.get("styles") is Dictionary or value.styles.size() != styles.size() or not value.get("default_style") in styles:
+		return false
+	for style: String in styles:
+		if not _text(value.styles.get(style)):
+			return false
+	if not value.get("advice_styles") is Dictionary or not value.get("acceptance_versions") is Dictionary or not value.acceptance_versions.has(str(int(value.current_acceptance_version))):
+		return false
+	for key: Variant in value.advice_styles:
+		if not _text(key) or not value.advice_styles[key] in styles:
+			return false
+	for key: Variant in value.acceptance_versions:
+		var rule: Variant = value.acceptance_versions[key]
+		if not _text(key) or not String(key).is_valid_int() or not rule is Dictionary or not _text(rule.get("seed_namespace")) or not _integer(rule.get("roll_scale"),1,MAX_INT) or not rule.get("probabilities") is Dictionary or rule.probabilities.size() != styles.size():
+			return false
+		for preference: String in styles:
+			var matrix: Variant = rule.probabilities.get(preference)
+			if not matrix is Dictionary or matrix.size() != styles.size():
+				return false
+			for style: String in styles:
+				if not _integer(matrix.get(style),0,int(rule.roll_scale)):
+					return false
+	for key: String in ["tool_clues","relationship_effects","gift_rewards","need_tags_by_effect","copy"]:
+		if not value.get(key) is Dictionary:
+			return false
+	for key: Variant in value.tool_clues:
+		var rule: Variant = value.tool_clues[key]
+		if not _text(key) or not rule is Dictionary or not _text(rule.get("method_id")) or not _strings(rule.get("requires_clues"),true):
+			return false
+	for key: Variant in value.relationship_effects:
+		var rule: Variant = value.relationship_effects[key]
+		if not _text(key) or not rule is Dictionary or rule.get("selector") != "current_goal" or not _integer(rule.get("delta"),-100,100) or rule.delta == 0 or not _strings(rule.get("advice_keys")) or not _one_or_many(rule.get("outcomes"),["met","missed"]) or not _one_or_many(rule.get("evidence"),["sufficient","partial"]):
+			return false
+	for key: Variant in value.gift_rewards:
+		var rule: Variant = value.gift_rewards[key]
+		if not _text(key) or not rule is Dictionary or not _text(rule.get("item_id")) or not _integer(rule.get("qty"),1,MAX_INT) or not _strings(rule.get("outcome_ids")):
+			return false
+	for key: Variant in value.need_tags_by_effect:
+		if not _text(key) or not _strings(value.need_tags_by_effect[key]):
+			return false
+	for key: String in ["advice_style_heading","invalid_style","invalid_preference","component_blocked","tool_recorded"]:
+		if not _text(value.copy.get(key)):
+			return false
+	return true
+
+static func advice_roll(save_id: String, npc_id: String, event_id: String, advice_key: String, style: String, namespace_id: String, scale: int) -> int:
+	var seed_text := JSON.stringify([namespace_id,save_id,npc_id,event_id,advice_key,style])
+	return seed_text.sha256_text().substr(0,12).hex_to_int() % scale
+
+static func acceptance_snapshot(state: Dictionary, case: Dictionary, advice_key: String, style: String, clue_gate: bool, required_clue: String, profile: Dictionary, saved_version: int = -1) -> Dictionary:
+	var rules := load_product_rules()
+	if rules.is_empty() or not rules.styles.has(style) or profile.get("advice_preference_version") != 1:
+		return {}
+	var version := int(rules.current_acceptance_version) if saved_version < 0 else saved_version
+	if not rules.acceptance_versions.has(str(version)):
+		return {}
+	var rule: Dictionary = rules.acceptance_versions[str(version)]
+	var preference: Variant = profile.get("advice_preference")
+	if not preference is String or not rule.probabilities.has(preference):
+		return {}
+	return {"rules_version":version,"preference_version":1,"preference":preference,"style":style,"probability":int(rule.probabilities[preference][style]),"roll":advice_roll(str(state.get("save_id","")),case.npc_id,case.event.event_id,advice_key,style,rule.seed_namespace,int(rule.roll_scale)),"roll_scale":int(rule.roll_scale),"seed_namespace":rule.seed_namespace,"clue_gate":clue_gate,"required_clue":required_clue,"source_kind":"ordinary_preference","source_id":case.npc_id}
+
+static func acceptance_valid(snapshot: Variant, advice: Dictionary, state: Dictionary, case: Dictionary, choice: Dictionary, profile: Dictionary, clue_ids: Array) -> bool:
+	if not snapshot is Dictionary or snapshot.size() != 12 or not snapshot.get("clue_gate") is bool or not snapshot.get("required_clue") is String or snapshot.required_clue != choice.get("requires_clue",""):
+		return false
+	if not _integer(snapshot.get("rules_version"),1,MAX_INT):
+		return false
+	var expected := acceptance_snapshot(state,case,advice.advice_key,str(snapshot.get("style","")),snapshot.clue_gate,snapshot.required_clue,profile,int(snapshot.rules_version))
+	if expected.is_empty() or expected != snapshot or (snapshot.clue_gate and not snapshot.required_clue.is_empty() and snapshot.required_clue not in clue_ids):
+		return false
+	return advice.accepted == (snapshot.clue_gate and int(snapshot.roll) < int(snapshot.probability))
 
 static func _text(value: Variant) -> bool:
 	return value is String and not value.is_empty()

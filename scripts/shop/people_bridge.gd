@@ -16,6 +16,7 @@ static func initialize(state: Dictionary, config: Dictionary, divination: Varian
 	var people: Dictionary = state.people
 	if fresh:
 		People.initialize_family_library(people,config.get("family_library",{}),"new_game")
+		People.initialize_ordinary_content(people,config)
 	# Enable the full catalog before first-day births. People.create remains a
 	# legacy factory for old isolated callers; existing save namespaces return above.
 	var parts_config := Appearance.load_config()
@@ -383,6 +384,8 @@ static func validate(state: Dictionary) -> String:
 		return "人物经历或外貌无效"
 	if int(state.get("schema_version",1)) >= 7 and people.get("family_library_version") != 1:
 		return People._family_policy().copy.invalid_state
+	if int(state.get("schema_version",1)) >= 8 and people.get("ordinary_content_version") != 1:
+		return "人物身份无效"
 	if people.save_id != state.save_id or int(people.clock) != int(state.clock_minutes):
 		return "人物命名空间与存档或时钟不一致"
 	var effects := {}

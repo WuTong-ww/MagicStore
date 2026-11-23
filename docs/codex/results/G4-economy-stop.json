@@ -1,0 +1,168 @@
+{
+  "version": 1,
+  "scope": "bounded_g4_after_first_30_days",
+  "stopped": true,
+  "safe_boundary_observed": true,
+  "boundary_phase": "checkpoint_load",
+  "trajectory_folder": ".tools/g4/economy-scheduled-r1/104729_balanced/continuous",
+  "files": [
+    {
+      "path": ".tools/g4/economy-scheduled-r1/104729_balanced/continuous/daily.csv",
+      "sha256": "415d4f4485c1718a92522aca322cd098e1f8e434631e4b3ac6a2de0f30cbd61f",
+      "bytes": 1833
+    },
+    {
+      "path": ".tools/g4/economy-scheduled-r1/104729_balanced/continuous/actions.jsonl",
+      "sha256": "33627365a9bb29bfeb4941ae6d61db8893702d98a4f05020dc8d89fae11e62c5",
+      "bytes": 1054786
+    },
+    {
+      "path": ".tools/g4/economy-scheduled-r1/104729_balanced/continuous/saves/save_43da379cb18c8cc7c9586a0f3deb7ca2.json",
+      "sha256": "a3c24299ad2d662d8c941512166d7795171a4229d9b760e902e8f0eb8d6ff930",
+      "bytes": 4169592
+    },
+    {
+      "path": ".tools/g4/economy-scheduled-r1/104729_balanced/continuous/saves/save_43da379cb18c8cc7c9586a0f3deb7ca2.json.bak",
+      "sha256": "26b06ac066547280fe17e0784037fa32449a82446d97d3e8ef6edac5b423d3df",
+      "bytes": 4169413
+    },
+    {
+      "path": ".tools/g4/economy-scheduled-r1/104729_balanced/continuous/checkpoint.json",
+      "sha256": "1d8cc8260e2f56ef63256b95d6786b1c5f3927d445bfe05b7579e7c43c8087c0",
+      "bytes": 1639167
+    },
+    {
+      "path": ".tools/g4/economy-scheduled-r1/104729_balanced/continuous/checkpoint-receipt.json",
+      "sha256": "37cb7f33ae9a347f9cd8378fd1a449559396da75c418e34fd56260d805539414",
+      "bytes": 335
+    }
+  ],
+  "all_sealed_file_hashes_unchanged": true,
+  "continuous_days": 30,
+  "continuous_csv_days": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30
+  ],
+  "continuous_final_clock": 43080,
+  "continuous_final_state_version": 1932,
+  "continuous_final_payload_sha256": "1390d47258b3a5c8af5c81bd33687d15ecb8c1b22a2c508b055c73a282cfef8e",
+  "final_coins": 2562,
+  "minimum_cash": 37,
+  "maximum_daily_cash_gain": 160,
+  "maximum_inventory_sale_value": 25,
+  "empty_customer_days": [],
+  "checkpoint_continuation_verified": false,
+  "checkpoint_partial_complete_days": [
+    16
+  ],
+  "checkpoint_partial_executed_days": 1,
+  "actual_completed_days_observed": 31,
+  "planned_extended_days": 180,
+  "extended_180_complete": false,
+  "summary_json_written": false,
+  "native_session_id": 72701,
+  "actual_terminal_exit_code": -1,
+  "wrapper_exit_receipt": {
+    "started_utc": "2026-11-23T06:53:25.9570720Z",
+    "ended_utc": "2026-11-23T08:32:41.6370593Z",
+    "exit_code": -1,
+    "log": ".tools/g4/economic-scheduled-180day-formal-attempt1.log",
+    "summary": ".tools/g4/economy-scheduled-r1/summary.json",
+    "launch_receipt": ".tools/g4/economy-launch-ready.md"
+  },
+  "stopped_engine_pid": 24508,
+  "console_stopped_explicitly": false,
+  "owner_processes_absent": true,
+  "process_observation": {
+    "path": ".tools/g4/stop-first30-process-observation.json",
+    "sha256": "46b683db5a26b2bf5eb93dac006f5d093592b0ee515133ec2249ed3b42a5af82",
+    "bytes": 3472
+  },
+  "process_before": [
+    {
+      "ProcessId": 24508,
+      "ParentProcessId": 24704,
+      "Name": "Godot_v4.6.3-stable_win64.exe",
+      "CreationDate": "2026-11-23T14:53:26.059046+08:00"
+    },
+    {
+      "ProcessId": 24704,
+      "ParentProcessId": 26560,
+      "Name": "Godot_v4.6.3-stable_win64_console.exe",
+      "CreationDate": "2026-11-23T14:53:25.979248+08:00"
+    },
+    {
+      "ProcessId": 26560,
+      "ParentProcessId": 5004,
+      "Name": "pwsh.exe",
+      "CreationDate": "2026-11-23T14:53:24.466027+08:00"
+    }
+  ],
+  "safe_boundary_checkpoint_load": {
+    "action": {
+      "action_id": "economic_checkpoint_load",
+      "save_id": "save_43da379cb18c8cc7c9586a0f3deb7ca2",
+      "type": "load_game"
+    },
+    "clock_after": 22140,
+    "clock_before": 0,
+    "coins_after": 1024,
+    "coins_before": 0,
+    "energy_after": 100,
+    "energy_before": 0,
+    "error_code": "",
+    "phase": "checkpoint_load",
+    "replayed": false,
+    "reply_state_version": 927,
+    "save_id_after": "save_43da379cb18c8cc7c9586a0f3deb7ca2",
+    "save_id_before": "",
+    "state_version": 927,
+    "state_version_before": 0,
+    "success": true
+  },
+  "checkpoint_observed_phase_counts": {
+    "action": 92,
+    "checkpoint_load": 1,
+    "injected_failure": 1,
+    "reload_after_retry": 1,
+    "replay": 1,
+    "retry": 1
+  },
+  "source_freeze_unchanged": true,
+  "source_freeze_changed_paths": [],
+  "source_freeze_receipt": {
+    "path": ".tools/g4/core-frozen-delivery-files.json",
+    "sha256": "28b8afde279389ddb153470ce0973bf0eaa90264f33dfead49f0ae154b075cb0",
+    "bytes": 2903
+  },
+  "created_utc": "2026-11-23T08:33:57.477769+00:00",
+  "interpretation": "Operator stopped the one authorized test engine after the first continuous 30-day trajectory closed its files and the separate checkpoint run loaded successfully. Native exit -1 is an intentional stop, not a passing 180-day test. Partial checkpoint injection/retry/replay/reload observations do not verify the full 15-day continuation or cross-strategy/cross-seed extension."
+}

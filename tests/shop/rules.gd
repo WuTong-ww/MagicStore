@@ -9,13 +9,20 @@ var state: Dictionary
 var data: Dictionary
 
 func _initialize() -> void:
-	data = Shop.load_config()
-	check(not data.is_empty(), "configuration loads")
+	var production := Shop.load_config()
+	check(not production.is_empty(), "configuration loads")
+	# This historical pure-rule target tests the original single-effect C-to-B
+	# handoff, before Session finalization or GameState's durable commit. The v2
+	# committed component contract has its own real async integration targets.
+	data = JSON.parse_string(FileAccess.get_file_as_string("res://tests/shop/fixtures/catalog_v1.json"))
+	data["rules"] = production.get("rules",{}).duplicate(true)
+	data["legacy_gift"] = production.get("legacy_gift",{}).duplicate(true)
+	check(Shop.config_valid(data), "historical rule input still uses the actual shared clock and energy configuration")
 	check(data.gather_sites.has("riverside") and data.gather_sites.has("woodland_glade"), "two independent gathering locations are configured")
 	if data.is_empty():
 		quit(1)
 		return
-	state = {"save_id":"save_shop_rules","clock_minutes":540,"player":{"coins":200,"energy":100,"items":{"calming_incense":2}},"npcs":{"npc_lin":{"coins":200,"items":{}}},"active_visit_id":"visit_shop","visits":[{"visit_id":"visit_shop","npc_id":"npc_lin","phase":"talking"}],"divination":{"cases":{"visit_shop":{"services":{},"event":{}}},"effects":[],"ledger":[]}}
+	state = {"save_id":"save_shop_rules","clock_minutes":540,"player":{"coins":200,"energy":100,"items":{"calming_incense":2}},"npcs":{"npc_lin":{"coins":200,"items":{}}},"active_visit_id":"visit_shop","visits":[{"visit_id":"visit_shop","npc_id":"npc_lin","phase":"talking","started_at":540,"ended_at":-1}],"divination":{"cases":{"visit_shop":{"services":{},"event":{}}},"effects":[],"ledger":[]},"processed_actions":{}}
 	Shop.initialize(state)
 	check(Shop.validate(state).is_empty(), "initial shared inventory has migration provenance")
 	var old := state.duplicate(true)
@@ -23,11 +30,15 @@ func _initialize() -> void:
 	check(state == old, "initialization does not reset inventory or grants")
 	check(not act("research_recipe", {"recipe_id":"clarity_crystal"}).success, "cannot research during active reception")
 	check(act("register_demand", {"recipe_id":"clarity_crystal","text":"想找到更从容的追问方式。"}).success, "unmet need records source reception")
+	var uncommitted := state.duplicate(true)
+	uncommitted.erase("processed_actions")
+	check(not Shop.validate(uncommitted).is_empty(), "typed demand without a committed action source is rejected cleanly")
 	check(not act("register_demand", {"recipe_id":"calming_incense"}).success, "available stock does not become unmet demand")
 	check(not act("register_demand", {"recipe_id":"clarity_crystal"}).success, "same reception need deduplicates")
 	check(not act("receive_material_gift", {"visit_id":"visit_shop"}).success, "ongoing visit cannot mint material gift")
 	state.active_visit_id = ""
 	state.visits[0].phase = "ended"
+	state.visits[0].ended_at = int(state.clock_minutes)
 	Shop.sync_effects(state, data)
 	check(state.shop.experience == 1, "completed reception awards operating experience")
 	Shop.sync_effects(state, data)
@@ -111,7 +122,7 @@ func _use_tests() -> void:
 	state.player.energy = 100
 	state.player.coins = 100
 	state.active_visit_id = "visit_second"
-	state.visits.append({"visit_id":"visit_second","npc_id":"npc_lin","phase":"talking"})
+	state.visits.append({"visit_id":"visit_second","npc_id":"npc_lin","phase":"talking","started_at":int(state.clock_minutes),"ended_at":-1})
 	state.divination.cases["visit_second"] = {"services":{},"event":{"event_id":"event_second","due_at":state.clock_minutes + 500},"item_use":{}}
 	var sale := act("sell_product", {"item_id":"calming_incense"})
 	check(sale.success and int(state.npcs.npc_lin.items.calming_incense) == 1, "shopping-only transaction moves actual product ownership")
@@ -121,6 +132,7 @@ func _use_tests() -> void:
 	# Research and craft a potion from a genuine unmet need, then use it.
 	check(act("register_demand", {"recipe_id":"restorative_draught"}).success, "second product demand records independently")
 	state.visits.back().phase = "ended"
+	state.visits.back().ended_at = int(state.clock_minutes)
 	state.active_visit_id = ""
 	Shop.sync_effects(state, data)
 	check(act("research_recipe", {"recipe_id":"restorative_draught"}).success, "potion research uses demand rather than free unlock")
@@ -131,7 +143,8 @@ func _use_tests() -> void:
 	var energy: int = state.player.energy
 	var potion_use := act("use_product", {"item_id":"restorative_draught"})
 	check(potion_use.success and state.player.energy > energy, "physical-purpose potion actually increases energy attribute")
-	check(potion_use.result.item_use.source_batches == [{"batch_id":potion_batch.batch_id,"quantity":1}] and potion_batch.reference_id == potion.result.transaction_id, "self-use preserves exact consumed lot and its crafting transaction")
+	var sources: Array = potion_use.result.item_use.source_batches
+	check(sources.size() == 1 and sources[0].batch_id == potion_batch.batch_id and sources[0].quantity == 1 and sources[0].get("quality_id") == potion_batch.quality_id and sources[0].get("sell_multiplier") == potion_batch.sell_multiplier and sources[0].get("recipe_id") == potion_batch.recipe_id and sources[0].get("variant_id") == potion_batch.variant_id and potion_batch.reference_id == potion.result.transaction_id, "self-use preserves exact consumed lot, additive quality metadata and its crafting transaction")
 	var invalid := state.duplicate(true)
 	invalid.shop.uses.back().source_batches[0].batch_id = "missing_batch"
 	check(not Shop.validate(invalid).is_empty(), "save rejects a use referring to a nonexistent lot")
@@ -161,6 +174,9 @@ func act(kind: String, fields: Dictionary = {}) -> Dictionary:
 	if result.success:
 		candidate.clock_minutes += int(result.minutes)
 		Shop.sync_effects(candidate, data)
+		# Isolated rule adapter only: record the original successful result just
+		# as _commit does. This target does not claim a persisted GameState save.
+		candidate.processed_actions[action.action_id] = {"action_type":kind,"result":result.result.duplicate(true)}
 		var error := Shop.validate(candidate)
 		check(error.is_empty(), "candidate validates: " + kind + " " + error)
 		state = candidate

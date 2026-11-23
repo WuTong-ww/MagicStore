@@ -13,11 +13,16 @@ static func project(session, state: Dictionary, visit: Dictionary) -> Dictionary
 	var template: Dictionary = data.cases[case.case_id]
 	var guest: Dictionary = session.guest_view(visit.npc_id, case.case_id, case.get("public_npc", {}))
 	var active: bool = visit.visit_id == state.active_visit_id
+	var public_advice: Array = []
+	for advice: Dictionary in case.advice:
+		var display := advice.duplicate(true)
+		display.erase("acceptance")
+		public_advice.append(display)
 	var view: Dictionary = {
 		"case_id": case.case_id, "visit_id": visit.visit_id, "guest": guest, "active": active,
 		"opening_statement": visit.dialogue.front().text if not visit.dialogue.is_empty() else "",
 		"topics": [], "clues": [], "facts": [], "statements": [], "methods": [], "services": [], "quote": {},
-		"hypotheses": case.hypotheses, "prediction": case.prediction, "advice": case.advice,
+		"hypotheses": case.hypotheses, "prediction": case.prediction, "advice": public_advice,
 		"event": _event(case, clock, data), "past": _past(state, case, data),
 		"purchase": case.purchase, "item_use": case.item_use, "demand": case.get("demand", {}), "feedback_options": [], "ledger": []
 	}

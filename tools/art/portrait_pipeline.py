@@ -800,17 +800,35 @@ def build_manifest_fragment(workspace, receipt, config=None, *, encoding_templat
     return fragment
 
 
-def manifest_budget(workspace, fragment, config):
+def proposed_manifest(workspace, fragment):
+    """Merge and losslessly pack a review candidate without changing inputs.
+
+    Existing shared profiles must be expanded before they are rebuilt: a partial
+    replacement can leave other formal rows referring to the same profile.
+    """
     file = common.safe_path(workspace, "assets/ART_ASSET_MANIFEST.json")
     base = common.read_json(file) if file.is_file() else {"schema_version":3,"assets":[],"style_profiles":{"v3":{}}}
     merged = copy.deepcopy(base)
     by_path = {row["path"]: row for row in merged["assets"]}
-    by_path.update({row["path"]: row for row in fragment["assets"]})
+    by_path.update({row["path"]: copy.deepcopy(row) for row in fragment["assets"]})
     merged["assets"] = list(by_path.values())
-    merged.setdefault("style_profiles",{}).setdefault("v3",{}).setdefault("templates",{}).update(fragment["templates"])
-    compact = lambda value: json.dumps(value,ensure_ascii=False,separators=(",",":"))
-    size = len((compact(merged)+"\n").encode("utf-8"))
-    pretty_size = len((json.dumps(merged,ensure_ascii=False,indent=2)+"\n").encode("utf-8"))
+    merged.setdefault("style_profiles",{}).setdefault("v3",{}).setdefault("templates",{}).update(copy.deepcopy(fragment["templates"]))
+    expected = common.expand_compact_metadata(merged)
+    packed = common.compact_portrait_metadata(merged)
+    require(common.expand_compact_metadata(packed) == expected, "portrait packing changed formal provenance")
+    return packed
+
+
+def _manifest_bytes(manifest):
+    return (json.dumps(manifest,ensure_ascii=False,separators=(",",":"),allow_nan=False)+"\n").encode("utf-8")
+
+
+def manifest_budget(workspace, fragment, config):
+    file = common.safe_path(workspace, "assets/ART_ASSET_MANIFEST.json")
+    merged = proposed_manifest(workspace,fragment)
+    compact = lambda value: json.dumps(value,ensure_ascii=False,separators=(",",":"),allow_nan=False)
+    size = len(_manifest_bytes(merged))
+    pretty_size = len((json.dumps(merged,ensure_ascii=False,indent=2,allow_nan=False)+"\n").encode("utf-8"))
     asset_lines = "{\n" + ",\n".join(compact(key)+":"+("[\n"+",\n".join(compact(row) for row in value)+"\n]" if key=="assets" else compact(value)) for key,value in merged.items()) + "\n}\n"
     return {"proposed_bytes":size,"encoding":"utf8_compact_separators_comma_colon_final_lf","pretty_bytes":pretty_size,
             "asset_per_line_bytes":len(asset_lines.encode("utf-8")),"limit_bytes":config["maximum_manifest_bytes"],"within_limit":size<=config["maximum_manifest_bytes"],
@@ -848,7 +866,7 @@ def selected_mannequin_fragment(workspace, config=None):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("operation", choices=("masks", "queue", "process", "fragment", "selected-mannequin"))
+    parser.add_argument("operation", choices=("masks", "queue", "process", "fragment", "selected-mannequin", "proposal"))
     parser.add_argument("--workspace", default=str(ROOT))
     parser.add_argument("--config", default="data/art/portrait_pipeline.json")
     parser.add_argument("--revision", default="v3r1")
@@ -870,11 +888,21 @@ def main(argv=None):
         if args.operation == "masks": result = prepare_masks(args.workspace, args.revision, selected, config)
         elif args.operation == "queue": result = build_queue(args.workspace, args.revision, selected, args.style, config,mask_revision=args.mask_revision,attempt=args.attempt,pilot=args.pilot)
         elif args.operation == "selected-mannequin": result = selected_mannequin_fragment(args.workspace,config)
+        elif args.operation == "proposal":
+            fragment = common.read_json(common.safe_path(args.workspace,args.receipt,must_exist=True))
+            require(isinstance(fragment,dict) and fragment.get("version") == 1 and fragment.get("kind") == "portrait_manifest_fragment", "expected a portrait manifest fragment")
+            result = proposed_manifest(args.workspace,fragment)
         else:
             receipt = common.read_json(common.safe_path(args.workspace, args.receipt, must_exist=True))
             result = process_parts(args.workspace, receipt, args.revision, selected, config) if args.operation == "process" else build_manifest_fragment(args.workspace, receipt, config)
-        common._write_new(output, (json.dumps(result, ensure_ascii=False, indent=2) + "\n").encode("utf-8"))
-        print(json.dumps({"output": args.output, "status": result.get("status"), "entries": len(result.get("entries", [])), "tasks": len(result.get("tasks", [])), "art_passed": False}))
+        encoded = _manifest_bytes(result) if args.operation == "proposal" else (json.dumps(result, ensure_ascii=False, indent=2,allow_nan=False) + "\n").encode("utf-8")
+        if args.operation == "proposal":
+            require(len(encoded) <= config["maximum_manifest_bytes"], "proposed compact manifest exceeds configured byte budget")
+        common._write_new(output,encoded)
+        summary = {"output": args.output, "status": result.get("status"), "entries": len(result.get("entries", [])), "tasks": len(result.get("tasks", [])), "art_passed": False}
+        if args.operation == "proposal":
+            summary.update(status="proposal",assets=len(result["assets"]),proposed_bytes=len(encoded),manifest_modified=False)
+        print(json.dumps(summary))
         return 0
     except (ValueError, OSError) as error:
         print(json.dumps({"error": str(error), "generation_performed": False}, ensure_ascii=False))

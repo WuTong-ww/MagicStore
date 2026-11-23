@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "kind": "real_pre_G4_schema7_save_envelope",
+  "source": ".tools/test-appdata/ZeroHourStore/test-runs/shop_integration_run_915e408fc5ce54c424f5c0bed91fa701/save_15714404ae694c3e8987812c7bc2292c.json",
+  "source_sha256": "b95dd861d3718136f141390fed22ed6bbd5e2444b64c98be55b5dbf8bc36c027",
+  "fixture": "tests/shop/fixtures/schema7_history.json",
+  "fixture_bytes_unchanged": true,
+  "historical_use_count": 3,
+  "historical_effect_kinds": ["event", "attribute", "option"],
+  "historical_batch_count": 8,
+  "note": "Copied byte-for-byte from the pre-G4 real shop integration save. No effects, balances, IDs or action history were reconstructed from the new catalog."
+}

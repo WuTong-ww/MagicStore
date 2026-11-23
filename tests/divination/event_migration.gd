@@ -71,7 +71,7 @@ func check_schema(schema: int) -> void:
 	check(saves.read_save(legacy.save_id).success,"raw old save validates before migration / v"+str(schema))
 	check((await act("load_game",{"save_id":legacy.save_id})).success,"load old schema / v"+str(schema))
 	# Historical v1-v4 inputs/event invariants stay; only the current destination is G2 v7.
-	check(game.state.schema_version == 7,"migrate to current v7 in memory / v"+str(schema))
+	check(game.state.schema_version == 8,"migrate to current v8 in memory / v"+str(schema))
 	check(game.state.divination.get("legacy_eventless_visits") is Array,"initialize eventless migration ledger / v"+str(schema))
 	check(game.state.people.get("unlocked_topics") is Dictionary,"initialize topic effects namespace / v"+str(schema))
 	check(FileAccess.get_sha256(path) == hash_before and saves.read_save(legacy.save_id).state.schema_version == schema,"loading leaves old bytes unchanged / v"+str(schema))
@@ -81,7 +81,7 @@ func check_schema(schema: int) -> void:
 	var failed: Dictionary = await act("wait",{"minutes":1,"action_id":retry_id})
 	check(not failed.success and failed.get("error_code") == "SAVE_WRITE_FAILED" and game.snapshot() == before and FileAccess.get_sha256(path) == hash_before,"failed first action preserves old file and migrated memory / v"+str(schema))
 	check((await act("wait",{"minutes":1,"action_id":retry_id})).success,"retry first successful action / v"+str(schema))
-	check(saves.read_save(legacy.save_id).state.schema_version == 7,"next successful action persists current v7 / v"+str(schema))
+	check(saves.read_save(legacy.save_id).state.schema_version == 8,"next successful action persists current v8 / v"+str(schema))
 	var committed: Dictionary = game.snapshot()
 	check((await act("wait",{"minutes":1,"action_id":retry_id})).success and game.snapshot() == committed,"same action replay cannot repeat migration settlement / v"+str(schema))
 
@@ -144,7 +144,7 @@ func check_generated_eventless() -> void:
 	var invalid_marker: Dictionary = game.snapshot()
 	invalid_marker.divination["legacy_eventless_visits"] = ["unknown_visit"]
 	check(not saves.validate_snapshot(invalid_marker).success,"eventless compatibility marker cannot refer to an unknown visit")
-	check((await act("wait",{"minutes":1})).success and saves.read_save(legacy.save_id).state.schema_version == 7,"migrated generated case persists current schema without adding an event")
+	check((await act("wait",{"minutes":1})).success and saves.read_save(legacy.save_id).state.schema_version == 8,"migrated generated case persists current schema without adding an event")
 
 func check_legacy_unreported_feedback() -> void:
 	check((await act("new_game",{"name":"旧事件首次反馈兼容"})).success,"create unreported legacy source")

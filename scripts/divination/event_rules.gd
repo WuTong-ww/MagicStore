@@ -1,6 +1,20 @@
 extends RefCounted
 ## Hidden resolution, player prediction and actual disclosure are distinct records.
 const CONDITIONS := {"always": "无附加条件", "if_message": "若先发消息确认", "if_attend": "若直接去展览"}
+const ProductRules = preload("res://scripts/divination/event_schema.gd")
+
+static func product_relation_target(state: Dictionary, case: Dictionary) -> Dictionary:
+	var people: Dictionary = state.get("people",{})
+	var profile: Dictionary = people.get("profiles",{}).get(case.get("npc_id",""),{})
+	var goal: Dictionary = profile.get("goal",{})
+	var id: String = str(goal.get("relationship_id",""))
+	var relation: Dictionary = people.get("relationships",{}).get(id,{})
+	var subject: String = str(goal.get("subject_id",""))
+	if id.is_empty() or relation.is_empty() or not people.get("revealed_relationships",{}).has(id) or subject.is_empty() or subject == case.get("npc_id") or subject != case.get("event",{}).get("subject_id") or not people.get("profiles",{}).has(subject):
+		return {}
+	if case.npc_id not in [relation.get("from"),relation.get("to")] or subject not in [relation.get("from"),relation.get("to")] or not goal.get("goal_id") is String or goal.goal_id.is_empty():
+		return {}
+	return {"relationship_id":id,"goal_id":goal.goal_id,"subject_id":subject}
 
 static func conditions(definition: Dictionary) -> Dictionary:
 	var result := {}
@@ -121,6 +135,7 @@ static func _resolve(case: Dictionary, definition: Dictionary, state: Dictionary
 		event.feedback.available_at = -1
 	if not state.is_empty():
 		_emit_effects(state,case,definition,"resolve")
+		_emit_product_relationships(state,case)
 
 static func _evaluate(case: Dictionary, at: int, definition: Dictionary = {}) -> void:
 	var event: Dictionary = case.event
@@ -168,10 +183,56 @@ static func disclose(state: Dictionary, case: Dictionary, current: Dictionary, _
 	report.merge({"feedback_id":"feedback_"+String(event.event_id).trim_prefix("event_"),"event_id":event.event_id,"visit_id":current.visit_id,"at":int(state.clock_minutes),"evaluation":"no_prediction" if case.prediction.is_empty() else event.evaluation})
 	event.feedback.report = report
 	_emit_effects(state,case,definition,"feedback")
+	_emit_product_rewards(state,case)
+	var component_refs := product_feedback_refs(state,case)
+	if not component_refs.is_empty():
+		report["item_component_refs"] = component_refs
 	for entry: Dictionary in state.divination.effects:
 		if entry.event_id == event.event_id and entry.kind == "review_growth":
 			report["can_review"] = true
 	return report
+
+static func _emit_product_relationships(state: Dictionary, case: Dictionary) -> void:
+	var rules := ProductRules.load_product_rules()
+	if rules.is_empty():
+		return
+	var advice := _selected_advice(case)
+	var target := product_relation_target(state,case)
+	if target.is_empty() or not advice.get("accepted",false):
+		return
+	for row: Dictionary in case.get("product_components",[]):
+		if row.kind != "relationship":
+			continue
+		var rule: Dictionary = rules.relationship_effects.get(row.effect.get("effect_key"),{})
+		if rule.is_empty() or row.result.rel_id != target.relationship_id or row.result.goal_id != target.goal_id or row.result.subject_id != target.subject_id or row.effect.delta != rule.delta or advice.get("advice_key") not in rule.advice_keys or case.event.outcome not in rule.outcomes or case.event.evidence not in rule.evidence:
+			continue
+		_effect(state,case,"A","npc_relationship",int(row.effect.delta),0,"",{"stage":"resolve","outcome_id":case.event.outcome_id,"rule_index":case.event.rule_index,"effect_index":0,"effect_source":"product_component","item_use_id":row.item_use_id,"component_id":row.component_id,"source_id":row.result.source_id,"transaction_id":row.transaction_id,"rel_id":target.relationship_id,"delta":int(row.effect.delta),"goal_id":target.goal_id,"rule_key":row.effect.effect_key,"rule_version":1})
+
+static func _emit_product_rewards(state: Dictionary, case: Dictionary) -> void:
+	var profile: Dictionary = state.get("people",{}).get("profiles",{}).get(case.npc_id,{})
+	var rules := ProductRules.load_product_rules()
+	if rules.is_empty() or profile.get("advice_preference_version") != 1 or case.event.feedback.report.is_empty():
+		return
+	for key: String in rules.gift_rewards:
+		var rule: Dictionary = rules.gift_rewards[key]
+		if case.event.outcome_id in rule.outcome_ids:
+			_effect(state,case,"C","gift",int(rule.qty),0,rule.item_id,{"stage":"feedback","outcome_id":case.event.outcome_id,"rule_index":case.event.rule_index,"effect_index":0,"effect_source":"g4_reward","rule_key":key,"rule_version":1})
+
+static func product_feedback_refs(state: Dictionary, case: Dictionary) -> Array:
+	var refs: Array = []
+	for row: Dictionary in case.get("product_components",[]):
+		if row.kind == "event" and case.event.get("item_use_id","") == row.item_use_id:
+			refs.append({"item_use_id":row.item_use_id,"component_id":row.component_id,"source_id":row.result.source_id,"event_id":case.event.event_id})
+		elif row.kind == "relationship":
+			for effect: Dictionary in state.divination.effects:
+				if effect.get("effect_source") != "product_component" or effect.get("item_use_id") != row.item_use_id or effect.get("component_id") != row.component_id or effect.event_id != case.event.event_id:
+					continue
+				var ref := {"item_use_id":row.item_use_id,"component_id":row.component_id,"source_id":row.result.source_id,"event_id":case.event.event_id,"effect_id":effect.effect_id,"rel_id":effect.rel_id}
+				for change: Dictionary in state.get("people",{}).get("relationships",{}).get(effect.rel_id,{}).get("changes",[]):
+					if change.get("effect_id") == effect.effect_id:
+						ref.merge({"before":change.from,"after":change.to,"actual_delta":int(change.to)-int(change.from)})
+				refs.append(ref)
+	return refs
 
 static func _emit_effects(state: Dictionary, case: Dictionary, definition: Dictionary, stage: String) -> void:
 	var selected: Dictionary = definition.get("outcomes",{}).get(case.event.outcome_id,{})
@@ -205,6 +266,10 @@ static func _effect(state: Dictionary, case: Dictionary, recipient: String, kind
 	var id := "%s_%s" % [event.event_id,kind]
 	if not metadata.is_empty():
 		id = "%s_%s_%s_%s_%d_%s" % [event.event_id,metadata.stage,metadata.outcome_id,metadata.effect_source,int(metadata.effect_index),kind]
+		if metadata.effect_source == "product_component":
+			id = "%s_resolve_product_%s_%s_%s" % [event.event_id,metadata.item_use_id,metadata.component_id,kind]
+		elif metadata.effect_source == "g4_reward":
+			id = "%s_feedback_g4_reward_%s_%s" % [event.event_id,metadata.rule_key,kind]
 	for old: Dictionary in state.divination.effects:
 		if old.effect_id == id:
 			return old

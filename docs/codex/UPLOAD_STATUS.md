@@ -1,5 +1,9 @@
 # codex/round2-clean 上传状态
 
+最新状态（2026-11-23）：G2任务5297418及META d6a0847已普通推送；G4已按三轮上限及单条30日证据收口为部分完成，当前正创建任务提交／META，实际hash与上传结果随后记录。首段2026-11-21为历史建分支记录。
+
+G4发布字节核查：为四个已记录SHA的CSV／SVG／JSON回执设置精确路径-text属性；生成SVG的路径行尾空格和回执CRLF按原字节保留。四文件暂存对象和checkout过滤结果均与原文件相等，diff检查exit0；游戏源码／测试／数据冻结不变，1201路径仅.gitattributes这一项发布元数据变化。二进制依旧3,128,672B，无LFS，见results/G4-publication-integrity.json。
+
 2026-11-21按用户指令从main e27441b重建；已普通Git推送codex/round2-clean（最新任务提交059baeb，A1R v3）。旧远端codex/round2（18da84a）保持不动，本地备份codex/round2-backup-20261121。远端main核验仍为e27441b。
 
 只取用代码、测试、数据、文字证据、字体音效和正式v2/runtime/v2。被否决的绘本图、incoming、中间物与大批PNG截图不进入新提交。截图只用质量85的JPG，每任务最多6张。Manifest目标<500KB，逐层审计JSONL仅本地。
@@ -43,6 +47,14 @@ prune-packable: 2053
 garbage: 3
 size-garbage: 15.24 MiB
 ```
+
+## G4 最终收口补记（单30日证据已完成，待任务提交）
+
+标准完整三轮均exit1，按三轮上限提交部分完成；限定图形1544/1544与138/138、人工223/240、素材环境单例1/1分别保留，不拼成全绿。手册所需的一条真实30日已封存并独立导出：40→2562、最低37，四现金列与JSONL／实际B+C账簿闭合；root已实开SVG对应预览。停止回执见`results/G4-economy-stop.json`，原会话72701主动停止−1，原自拟180日未完成；恢复仅第16日完成及第17日局部，不签完整续段等价。
+
+最终1201源码路径逐SHA／bytes仍0差异，56个原v2保持，中央361记录／499845B，六封存经营输入SHA保持，见`results/G4-source-freeze.json`。最终追加物仅文本JSON／CSV／SVG，二进制仍3,128,672B。现金后15天增加1538，长期积累／其他策略覆盖仍列风险，不能把单条报警线通过当完整经济平衡。
+
+提交本体的精确unique blob数／字节和实际hash将在任务提交后的META补记；本段不提前宣称已推送。main／旧round2／本地backup仍保持。
 
 This is the pre-commit staged snapshot; the small text report files themselves are added afterwards. Binary totals are exact and unchanged by those text-only additions.
 
@@ -197,3 +209,23 @@ size-garbage: 15.24 MiB
 ```
 
 G2实际提交／推送补记：5297418已普通Git推送，55个相对父提交新增unique blobs共 **2,363,202B**，其中六JPG二进制 **1,531,178B**。这是任务提交本体的精确值，后续记录hash的META文本不计入该值。原始预提交snapshot／历史累计FAIL原样保留。
+
+## G4 暂存体积（2026-11-23，经济专项仍运行）
+
+- 当前202条暂存路径相对HEAD产生201个新增unique blob，共 **5,530,038B**；二进制 **3,128,672B**，仅52张通过自评的物品PNG（1,410,584B）和六张quality85 JPG（1,718,088B）。小于100MB，没有候选／中间图／本地详审进入Git。后续验证文本、CSV和SVG尚未计入此快照，最终任务提交后再补精确值。
+- 中央清单 **499,845B**／361记录；全部56个原v2路径的SHA保持。禁止追踪路径为0，截图均为真JPG且各任务≤6张；普通Git，LFS过滤器仍停用。
+- clean累计二进制 **238,445,838B**，暂存快照新增unique blobs累计 **251,019,958B**。原CLEAN报告仍保留累计150MB与历史A1R单提交检查两项FAIL，不能把历史累计量说成G4本次超标，也不改阈值抹去失败。原始对象详单只留本地，精简报告见`results/G4-size-inspection.json`。
+- G4三轮标准完整均exit1，最后v5外观迁移次序断言未通过，按三轮上限保留部分完成。实际GPU 1544/1544与138/138、人工48图223/240另列，不替代完整绿。此处暂存供体积审查，**尚未提交／推送G4**，仍等待真实正式经济专项结束；main、旧round2及本地backup不动。
+
+本地Git对象含旧备份，并非本次上传流量：
+
+```text
+count: 6051
+size: 310.23 MiB
+in-pack: 4064
+packs: 2
+size-pack: 1.12 GiB
+prune-packable: 2053
+garbage: 3
+size-garbage: 15.24 MiB
+```

@@ -381,6 +381,1098 @@
         1254,
         1254
       ]
+    },
+    "beeswax": {
+      "item_id": "beeswax",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/beeswax.png",
+      "icon_path": "res://assets/items/v3/g4r1/beeswax_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        30,
+        50,
+        225,
+        253
+      ],
+      "alpha_bbox": [
+        27,
+        47,
+        228,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 70,
+      "bottom_width": 112,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "d57eb11916c5d05f133c3cd912100fbc378c2cafce6492643f12000cfcb99cba",
+      "icon_sha256": "be0af2975623ee177c4461a0e08512cbff5dddf30655e4cf90f1fe632294fb5f",
+      "source_runtime_sha256": "d57eb11916c5d05f133c3cd912100fbc378c2cafce6492643f12000cfcb99cba",
+      "source_path": "assets/_incoming/g4_v3/beeswax_source_attempt2.png",
+      "source_sha256": "d4a83a6edf0ade649c13d0380cb831e5c68465fd03c72aeb8360bc044e9ae5d8",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "cotton_thread": {
+      "item_id": "cotton_thread",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/cotton_thread.png",
+      "icon_path": "res://assets/items/v3/g4r1/cotton_thread_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        63,
+        50,
+        192,
+        253
+      ],
+      "alpha_bbox": [
+        60,
+        47,
+        195,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 100,
+      "bottom_width": 56,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "e51e38c5a652bc21f4b334a60fe9f24cd0e1d1a0bbca9b8f3917eebcf97ac741",
+      "icon_sha256": "157acf4c6d0afec0321d264f2916cc58fe9b5bd8924e92554cabc50f6805d8a5",
+      "source_runtime_sha256": "e51e38c5a652bc21f4b334a60fe9f24cd0e1d1a0bbca9b8f3917eebcf97ac741",
+      "source_path": "assets/_incoming/g4_v3/cotton_thread_source_attempt2.png",
+      "source_sha256": "2c3547bb4d4754ecc2ee66d23343296b14fc9c2ec65e3fe3a625c56d7a067df7",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "dried_mint": {
+      "item_id": "dried_mint",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/dried_mint.png",
+      "icon_path": "res://assets/items/v3/g4r1/dried_mint_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        67,
+        52,
+        189,
+        253
+      ],
+      "alpha_bbox": [
+        63,
+        48,
+        193,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 115,
+      "bottom_width": 27,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "dc78f05b1d75e5c244bd5aebe801262b41b3ad58225668eb97be0d031900e5f6",
+      "icon_sha256": "8e274e7651673e2eed905cd111bbf2f98e0aa7d947b636ca3b07461699a30037",
+      "source_runtime_sha256": "dc78f05b1d75e5c244bd5aebe801262b41b3ad58225668eb97be0d031900e5f6",
+      "source_path": "assets/_incoming/g4_v3/dried_mint_source_attempt1.png",
+      "source_sha256": "79b4d4a30f5676a0e66c402d7402f71a5817358b9e3e9be9d934f4ba1be8f232",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "sea_salt": {
+      "item_id": "sea_salt",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/sea_salt.png",
+      "icon_path": "res://assets/items/v3/g4r1/sea_salt_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        45,
+        50,
+        211,
+        253
+      ],
+      "alpha_bbox": [
+        42,
+        47,
+        214,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 99,
+      "bottom_width": 58,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "44e372f6506de39191665bc5e16e55455ffd3c8240c4a4a97843f5e3326a2e1f",
+      "icon_sha256": "477acd8dfb23195462d0898718ac6e341cc8d1217aeb7b6a7b75e57a6c506287",
+      "source_runtime_sha256": "44e372f6506de39191665bc5e16e55455ffd3c8240c4a4a97843f5e3326a2e1f",
+      "source_path": "assets/_incoming/g4_v3/sea_salt_source_attempt1.png",
+      "source_sha256": "9b454f40b63e6315a0878b6548f62b18090f62e8ea6902b43d405f9ec2391c85",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "glass_vial": {
+      "item_id": "glass_vial",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/glass_vial.png",
+      "icon_path": "res://assets/items/v3/g4r1/glass_vial_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        76,
+        50,
+        179,
+        253
+      ],
+      "alpha_bbox": [
+        73,
+        47,
+        182,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 104,
+      "bottom_width": 48,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "afb3d0816aa868a47aaf99e15430e5cf9f6375abde3fd97568d442999a9dca87",
+      "icon_sha256": "d31cef42a1213218ba26449b213b9c3a81a3788e1d2b2ed20c46cc6ba957603c",
+      "source_runtime_sha256": "afb3d0816aa868a47aaf99e15430e5cf9f6375abde3fd97568d442999a9dca87",
+      "source_path": "assets/_incoming/g4_v3/glass_vial_source_attempt1.png",
+      "source_sha256": "0c4361fcb4a21fd9ddf4ad9403f3c5f3be4b87fab0c49045a31a91ede37ba1f5",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "pine_needle": {
+      "item_id": "pine_needle",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/pine_needle.png",
+      "icon_path": "res://assets/items/v3/g4r1/pine_needle_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        88,
+        76,
+        167,
+        253
+      ],
+      "alpha_bbox": [
+        80,
+        55,
+        177,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 115,
+      "bottom_width": 24,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "5cfe897f5afd331d3ef75bbbccc6e28252ad825e5bbac3fede160511a04b4969",
+      "icon_sha256": "a0c724c1cd2d2b9afa81e61e220a419a96981a0a05c0ef94cfda79ccb9088206",
+      "source_runtime_sha256": "5cfe897f5afd331d3ef75bbbccc6e28252ad825e5bbac3fede160511a04b4969",
+      "source_path": "assets/_incoming/g4_v3/pine_needle_source_attempt3.png",
+      "source_sha256": "c6cbfd33f22d07afd2e7726008f5eeeb1acf0091325bb6f69593d81abab31727",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "mugwort": {
+      "item_id": "mugwort",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/mugwort.png",
+      "icon_path": "res://assets/items/v3/g4r1/mugwort_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        66,
+        52,
+        191,
+        253
+      ],
+      "alpha_bbox": [
+        60,
+        48,
+        196,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 116,
+      "bottom_width": 23,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "3ca5e34df652b78f42b85346fdf5b8cb283b693ee5680dc46ebaf72714e4c360",
+      "icon_sha256": "2966e0826a6eba347d8115394af23cba1e76afd3853f67e1e0fc46be487e6830",
+      "source_runtime_sha256": "3ca5e34df652b78f42b85346fdf5b8cb283b693ee5680dc46ebaf72714e4c360",
+      "source_path": "assets/_incoming/g4_v3/mugwort_source_attempt1.png",
+      "source_sha256": "010488919a5434d24ac87598ff6eda3e557c7a3a761e9096ee8219b0b49a6b39",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "reed_stem": {
+      "item_id": "reed_stem",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/reed_stem.png",
+      "icon_path": "res://assets/items/v3/g4r1/reed_stem_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        91,
+        50,
+        165,
+        253
+      ],
+      "alpha_bbox": [
+        88,
+        47,
+        168,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 106,
+      "bottom_width": 46,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "1580aba2538f38efb45028d05a82e5227e153b6277bd31e18c1df92ce0c24945",
+      "icon_sha256": "78a8e25e81737969faca92497a805bfce81a9e4fdc76a3c643283fad2a371a56",
+      "source_runtime_sha256": "1580aba2538f38efb45028d05a82e5227e153b6277bd31e18c1df92ce0c24945",
+      "source_path": "assets/_incoming/g4_v3/reed_stem_source_attempt1.png",
+      "source_sha256": "44d87958d2d69159995084ceae8bcf0a6081a53a663d6156fad070c15609c311",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "river_clay": {
+      "item_id": "river_clay",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/river_clay.png",
+      "icon_path": "res://assets/items/v3/g4r1/river_clay_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        19,
+        51,
+        237,
+        253
+      ],
+      "alpha_bbox": [
+        16,
+        48,
+        240,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 86,
+      "bottom_width": 87,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "1709041296a51b73082c07475621cb67efaae6ed9866dacd722f93bd59e19d9c",
+      "icon_sha256": "c8638a9347d422d205ed9f23308de5e575c64dbf5b8d92e1751324ac003b8f90",
+      "source_runtime_sha256": "1709041296a51b73082c07475621cb67efaae6ed9866dacd722f93bd59e19d9c",
+      "source_path": "assets/_incoming/g4_v3/river_clay_source_attempt2.png",
+      "source_sha256": "aef9031aff146deb7762d5c352d15b0c40992b6220685140029141da3fc780ac",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "iron_flake": {
+      "item_id": "iron_flake",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/iron_flake.png",
+      "icon_path": "res://assets/items/v3/g4r1/iron_flake_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        20,
+        132,
+        237,
+        253
+      ],
+      "alpha_bbox": [
+        16,
+        129,
+        240,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 83,
+      "bottom_width": 20,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "affa801dff97de7c83ef4df47c69e11bfa15e8e9599dcd8da37cdcf80fbb647b",
+      "icon_sha256": "b6e6812709c4dc65d78f81c9fe4dff978b85fa0c540082555721ed988ed0b711",
+      "source_runtime_sha256": "affa801dff97de7c83ef4df47c69e11bfa15e8e9599dcd8da37cdcf80fbb647b",
+      "source_path": "assets/_incoming/g4_v3/iron_flake_source_attempt2.png",
+      "source_sha256": "dbd03746cd13881950e2901908dd10123b6b5575ba0027a50f8a26f9d869ce74",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "honey_drop": {
+      "item_id": "honey_drop",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/honey_drop.png",
+      "icon_path": "res://assets/items/v3/g4r1/honey_drop_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        68,
+        50,
+        187,
+        253
+      ],
+      "alpha_bbox": [
+        65,
+        47,
+        190,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 99,
+      "bottom_width": 57,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "f32c7f41b5d770f817f094eae9aa6ae944a837b4c27314bfddb20e51674da707",
+      "icon_sha256": "0a435e0bf453a1f3a0d1ec7bc3021775ddae0bcacf5940d50d33c0eefc95ff02",
+      "source_runtime_sha256": "f32c7f41b5d770f817f094eae9aa6ae944a837b4c27314bfddb20e51674da707",
+      "source_path": "assets/_incoming/g4_v3/honey_drop_source_attempt2.png",
+      "source_sha256": "eca3dad8bc4a76fe607df69d3695f7a592de9a86240cec11406d68bca94ccd61",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "old_key": {
+      "item_id": "old_key",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/old_key.png",
+      "icon_path": "res://assets/items/v3/g4r1/old_key_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        87,
+        50,
+        169,
+        253
+      ],
+      "alpha_bbox": [
+        84,
+        47,
+        172,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 111,
+      "bottom_width": 33,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "73b00d6235e169720210e9b3b00745f375d8599fa6b0ccff6b95d05312fefcad",
+      "icon_sha256": "3b4e42fa3deacd911316a6e3a0b89d4effc8489354ee90965175bd5f2a011b7e",
+      "source_runtime_sha256": "73b00d6235e169720210e9b3b00745f375d8599fa6b0ccff6b95d05312fefcad",
+      "source_path": "assets/_incoming/g4_v3/old_key_source_attempt1.png",
+      "source_sha256": "fc4ae7fb36b8d0f69ff99fb0ae3ba18df40453ba9118f7ee06ff83e1f286d968",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "blue_glass": {
+      "item_id": "blue_glass",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/blue_glass.png",
+      "icon_path": "res://assets/items/v3/g4r1/blue_glass_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        37,
+        50,
+        218,
+        253
+      ],
+      "alpha_bbox": [
+        34,
+        47,
+        221,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 73,
+      "bottom_width": 108,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "9066c2e2a40c604da9a5c5fe9773805013bcf5cd055c5b1a645fa4d890e9fd12",
+      "icon_sha256": "ac121375fe43d8de7fac9b8c6f8b68b97fdfeda5346cb752ff01704ac087b30f",
+      "source_runtime_sha256": "9066c2e2a40c604da9a5c5fe9773805013bcf5cd055c5b1a645fa4d890e9fd12",
+      "source_path": "assets/_incoming/g4_v3/blue_glass_source_attempt2.png",
+      "source_sha256": "fb7d9e7ea73eccf478209822f2baa33a059b7ec58e31298ddc982321b0b39e0f",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "red_thread": {
+      "item_id": "red_thread",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/red_thread.png",
+      "icon_path": "res://assets/items/v3/g4r1/red_thread_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        34,
+        50,
+        222,
+        253
+      ],
+      "alpha_bbox": [
+        31,
+        47,
+        225,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 46,
+      "bottom_width": 156,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "413bc64654ee25f82ebb73b35fa23d92e765e8b72a43e5583fc0c1aa1da1a74a",
+      "icon_sha256": "ff16285a9c9fcc134863b740efae0f624ce555bdd6d24d59fa763e673519de6a",
+      "source_runtime_sha256": "413bc64654ee25f82ebb73b35fa23d92e765e8b72a43e5583fc0c1aa1da1a74a",
+      "source_path": "assets/_incoming/g4_v3/red_thread_source_attempt1.png",
+      "source_sha256": "7c3f3c72e5f98c7c9cbd23bf4933c163fe0d6623d829f270d3eb33a97ba18ef7",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "focus_candle": {
+      "item_id": "focus_candle",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/focus_candle.png",
+      "icon_path": "res://assets/items/v3/g4r1/focus_candle_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        44,
+        50,
+        211,
+        253
+      ],
+      "alpha_bbox": [
+        41,
+        47,
+        214,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 99,
+      "bottom_width": 57,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "11384f45125c5f468d2bf92b79d9bea188d1671c4a8d010734e91f265620a12f",
+      "icon_sha256": "daf87b79624ffa4d14fe08afd6a5816f545d7186f1212005a46d12d425bdb511",
+      "source_runtime_sha256": "11384f45125c5f468d2bf92b79d9bea188d1671c4a8d010734e91f265620a12f",
+      "source_path": "assets/_incoming/g4_v3/focus_candle_source_attempt1.png",
+      "source_sha256": "34eb6eee257c9e4e63dd0011d97abd343368ae53331f20266a624b5e01e25595",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "welcome_sachet": {
+      "item_id": "welcome_sachet",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/welcome_sachet.png",
+      "icon_path": "res://assets/items/v3/g4r1/welcome_sachet_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        44,
+        50,
+        211,
+        253
+      ],
+      "alpha_bbox": [
+        41,
+        47,
+        214,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 80,
+      "bottom_width": 101,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "2c210de55acd33df96f1a8477aa5152654ea02797f9dae48e9d4f37e78e95c8e",
+      "icon_sha256": "bba08f8ee6ea6d06875a4e52f5931c86256d3f4c7493faefb554d768bc14cfa3",
+      "source_runtime_sha256": "2c210de55acd33df96f1a8477aa5152654ea02797f9dae48e9d4f37e78e95c8e",
+      "source_path": "assets/_incoming/g4_v3/welcome_sachet_source_attempt1.png",
+      "source_sha256": "f767e3ac8b73b1177cae52615ebfeacf96e94f61a1736d192a70864b3ccc334f",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "patience_charm": {
+      "item_id": "patience_charm",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/patience_charm.png",
+      "icon_path": "res://assets/items/v3/g4r1/patience_charm_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        62,
+        50,
+        194,
+        253
+      ],
+      "alpha_bbox": [
+        59,
+        47,
+        197,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 136,
+      "bottom_width": 37,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "9be3e9c19f11e4401f874701a26c4ac8e66976289f3f9be88dfee9bf85c7f65a",
+      "icon_sha256": "0d780d3ca71900f1b6fbaa29c27826d496f05b1b3c4b567fb018deaeae3a03c1",
+      "source_runtime_sha256": "9be3e9c19f11e4401f874701a26c4ac8e66976289f3f9be88dfee9bf85c7f65a",
+      "source_path": "assets/_incoming/g4_v3/patience_charm_source_attempt1.png",
+      "source_sha256": "5305dc747e598913f43cf88819845f432c60fab2d49e923476a2d25a311a6f8f",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "memory_lens": {
+      "item_id": "memory_lens",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/memory_lens.png",
+      "icon_path": "res://assets/items/v3/g4r1/memory_lens_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        53,
+        50,
+        202,
+        253
+      ],
+      "alpha_bbox": [
+        50,
+        47,
+        205,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 94,
+      "bottom_width": 71,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "c666ebb12580b14d677d31b219748f173a90fea71b344b6bef10f036686ce5fc",
+      "icon_sha256": "bb6a4dac3c55165bcad73b5a99c7fbf3b8db14e1e77b996ff7ce27cb06a100f4",
+      "source_runtime_sha256": "c666ebb12580b14d677d31b219748f173a90fea71b344b6bef10f036686ce5fc",
+      "source_path": "assets/_incoming/g4_v3/memory_lens_source_attempt1.png",
+      "source_sha256": "1046e3a746b327a1ad776ca830299c11362617770f0e6ed5d7439403f9039a58",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "friendship_knot": {
+      "item_id": "friendship_knot",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/friendship_knot.png",
+      "icon_path": "res://assets/items/v3/g4r1/friendship_knot_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        74,
+        50,
+        182,
+        253
+      ],
+      "alpha_bbox": [
+        70,
+        47,
+        185,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 82,
+      "bottom_width": 93,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "0180c82ea86aa217ac0eab54dd4df1f102654f9a7e30d399a30013c8b44e9366",
+      "icon_sha256": "2e33bf13b3ebf785b33be9ca6596c7957c9f6b936407479b944e491dd6f477b8",
+      "source_runtime_sha256": "0180c82ea86aa217ac0eab54dd4df1f102654f9a7e30d399a30013c8b44e9366",
+      "source_path": "assets/_incoming/g4_v3/friendship_knot_source_attempt1.png",
+      "source_sha256": "2e1e9e1021d73b0f2d1f84161bd1b62f0548d330fb3e60fe78943d9539539bf9",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "fresh_air_incense": {
+      "item_id": "fresh_air_incense",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/fresh_air_incense.png",
+      "icon_path": "res://assets/items/v3/g4r1/fresh_air_incense_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        111,
+        50,
+        144,
+        253
+      ],
+      "alpha_bbox": [
+        108,
+        47,
+        147,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 112,
+      "bottom_width": 31,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "1295094a165a90a1276b929d2c943f789c4b19922f20445d6099947cea6b0657",
+      "icon_sha256": "5b951d581cc26a016215342231fc1f8924e674c125a5bbb2260fc9f2ed8a033c",
+      "source_runtime_sha256": "1295094a165a90a1276b929d2c943f789c4b19922f20445d6099947cea6b0657",
+      "source_path": "assets/_incoming/g4_v3/fresh_air_incense_source_attempt1.png",
+      "source_sha256": "b94e4e6299e679600f4f3c926676b3c43ce9087d064ffe1d86d90b6ee3d7f71f",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "night_tea": {
+      "item_id": "night_tea",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/night_tea.png",
+      "icon_path": "res://assets/items/v3/g4r1/night_tea_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        53,
+        50,
+        202,
+        253
+      ],
+      "alpha_bbox": [
+        50,
+        47,
+        205,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 147,
+      "bottom_width": 29,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "1dc95a0f5835a10a167bbaa33507eb31f5c0fac41e72780111621dddcc4403ac",
+      "icon_sha256": "1e2d2b703cb18fa8b6e89c3fe15815fc9847a276dd5c1bfdd5f7141b9d6656dd",
+      "source_runtime_sha256": "1dc95a0f5835a10a167bbaa33507eb31f5c0fac41e72780111621dddcc4403ac",
+      "source_path": "assets/_incoming/g4_v3/night_tea_source_attempt1.png",
+      "source_sha256": "046c8a6644ab599b2a0b20775c11076754ba838ec12d98e7af8b9a152bfe79e9",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "grounding_stone": {
+      "item_id": "grounding_stone",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/grounding_stone.png",
+      "icon_path": "res://assets/items/v3/g4r1/grounding_stone_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        19,
+        100,
+        237,
+        253
+      ],
+      "alpha_bbox": [
+        16,
+        97,
+        240,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 62,
+      "bottom_width": 131,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "25461853123f0313994027667cdae56eed7e600c80518bbed82f25a39668497d",
+      "icon_sha256": "201c50d70533f62ba2a34835080bdd2df45abdc0057caae2eb541525f0a2071e",
+      "source_runtime_sha256": "25461853123f0313994027667cdae56eed7e600c80518bbed82f25a39668497d",
+      "source_path": "assets/_incoming/g4_v3/grounding_stone_source_attempt1.png",
+      "source_sha256": "6cecf4a5c2d5d554964f267aa004fa3802df3c5b47cba9996c6c8e865a96f9d6",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "soothing_candle": {
+      "item_id": "soothing_candle",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/soothing_candle.png",
+      "icon_path": "res://assets/items/v3/g4r1/soothing_candle_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        19,
+        111,
+        237,
+        253
+      ],
+      "alpha_bbox": [
+        16,
+        108,
+        240,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 92,
+      "bottom_width": 72,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "f34fcfd7102ad53a78edd4513a6f6c77c6af129f2cf54a5bdaa24a68a896861b",
+      "icon_sha256": "028ef13e268f38bc53552ca391797ab4263844d5aeed5a7804101b82ff16f6bb",
+      "source_runtime_sha256": "f34fcfd7102ad53a78edd4513a6f6c77c6af129f2cf54a5bdaa24a68a896861b",
+      "source_path": "assets/_incoming/g4_v3/soothing_candle_source_attempt1.png",
+      "source_sha256": "cc665346bd1981083dcc1bb32819c1d792dec640237a1d63beb3cc06553bacba",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "bright_draught": {
+      "item_id": "bright_draught",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/bright_draught.png",
+      "icon_path": "res://assets/items/v3/g4r1/bright_draught_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        79,
+        50,
+        176,
+        253
+      ],
+      "alpha_bbox": [
+        76,
+        47,
+        179,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 99,
+      "bottom_width": 57,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "e42c4a3632dbd8200b8e623c472770908cfa44d9c7a4cb08b639a429ac97d5f7",
+      "icon_sha256": "c7b7018e5be23efdfb955ef1b60eb9e7ec709127f18f3f877045020c59a957ee",
+      "source_runtime_sha256": "e42c4a3632dbd8200b8e623c472770908cfa44d9c7a4cb08b639a429ac97d5f7",
+      "source_path": "assets/_incoming/g4_v3/bright_draught_source_attempt1.png",
+      "source_sha256": "33c7693818c59657d7c299d6cc7445fbdcfe63366b6df0f8b0380c5bdbcfd9c7",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "clear_thought_tea": {
+      "item_id": "clear_thought_tea",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/clear_thought_tea.png",
+      "icon_path": "res://assets/items/v3/g4r1/clear_thought_tea_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        24,
+        50,
+        231,
+        253
+      ],
+      "alpha_bbox": [
+        21,
+        47,
+        234,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 170,
+      "bottom_width": 21,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "3514fb8dc61466ee495c34acf5aff8252f53a5085cb2ff204f9885284ef9d715",
+      "icon_sha256": "c8b8450f181af97134d65735fba41cb98a4c772d808283b255adc852d4e25b1f",
+      "source_runtime_sha256": "3514fb8dc61466ee495c34acf5aff8252f53a5085cb2ff204f9885284ef9d715",
+      "source_path": "assets/_incoming/g4_v3/clear_thought_tea_source_attempt1.png",
+      "source_sha256": "b718041b26a04252746f8c4fbc5894d95e8cc0fa995b11cd6bad6cd6d9d77ec3",
+      "source_native_size": [
+        1254,
+        1254
+      ]
+    },
+    "together_sachet": {
+      "item_id": "together_sachet",
+      "version": 3,
+      "source": "builtin_imagegen",
+      "reference": "res://assets/generated_scenes/v3_final/S02/day/v3r3/C.png",
+      "path": "res://assets/items/v3/g4r1/together_sachet.png",
+      "icon_path": "res://assets/items/v3/g4r1/together_sachet_64.png",
+      "size": [
+        256,
+        256
+      ],
+      "icon_size": [
+        64,
+        64
+      ],
+      "bbox": [
+        19,
+        52,
+        237,
+        253
+      ],
+      "alpha_bbox": [
+        16,
+        49,
+        240,
+        256
+      ],
+      "bottom_y": 252,
+      "bottom_left": 69,
+      "bottom_width": 121,
+      "alpha_threshold": 128,
+      "contact_band_rows": 3,
+      "sha256": "72b0d9b8d15406c2f3b8426d391d5c2e38f84095e40dbe215ab1028e02de7974",
+      "icon_sha256": "e928b5d416f7c23898a861f5689226964c887ef91128a193f12e8fbee42bdae4",
+      "source_runtime_sha256": "72b0d9b8d15406c2f3b8426d391d5c2e38f84095e40dbe215ab1028e02de7974",
+      "source_path": "assets/_incoming/g4_v3/together_sachet_source_attempt2.png",
+      "source_sha256": "ddead95e4bc754e7815ab3da4b5dc1d1d7b59953f1495baa76437ec7f24969a4",
+      "source_native_size": [
+        1254,
+        1254
+      ]
     }
   },
   "original_sources": [

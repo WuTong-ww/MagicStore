@@ -1,0 +1,1121 @@
+{
+  "task": "G4",
+  "scope": "Root individually opened all 42 fresh raw GPU frames and all six retained quality85 JPGs; code frozen after three full self-check rounds. Automatic assertions do not certify visual quality.",
+  "criteria": [
+    "全屏无黑边",
+    "按钮文字完整",
+    "长文古纸面板",
+    "无图片烘焙文字",
+    "前景与背景光线笔触一致"
+  ],
+  "raw_frames": 42,
+  "retained_frames": 6,
+  "passed": 223,
+  "total": 240,
+  "status": "部分完成",
+  "remaining_failures": [
+    "旧林照晚水彩披风头像与v3笔触不同（继承A4）",
+    "商店数量标签断为两行、输入框过高",
+    "部分弹窗标题缺古纸衬底、档案页签和下拉选中项灰底对比不足"
+  ],
+  "frames": [
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/exterior-1280.png",
+      "sha256": "71f7f0aee249622789d897e22450ccefc17bd59abab91390876e132762388d52",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "PNG",
+      "file": "exterior-1280.png",
+      "checks": [
+        "通过：店外背景覆盖整窗，无黑边或场景卡框",
+        "通过：顶栏、纸面三按钮及底栏文字均完整",
+        "通过：说明位于浅色古纸面板",
+        "通过：招牌与瓶签无烘焙文字，界面字由控件绘制",
+        "通过：门窗、花盆与底景笔触和左侧暖光一致"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/front-1280.png",
+      "sha256": "78e2045998dfb643688d6a4cd0b01e45c71b2d0241314e554e3ec16f8888cb2e",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "PNG",
+      "file": "front-1280.png",
+      "checks": [
+        "通过：前台底图铺满1280窗口，无黑边",
+        "通过：热区小牌、顶栏与右侧按钮均完整可读",
+        "通过：来客说明与长文位于古纸抽屉",
+        "通过：瓶签与场景无烘焙文字，名称数量为控件",
+        "不通过：林照晚仍用旧整幅披风头像，细线水彩感与v3背景及现代小镇方向不一致（A4遗留）"
+      ],
+      "root_opened": true,
+      "criteria_passed": 4,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/consultation-1280.png",
+      "sha256": "94dcb5a77cfa0e56a8fb6dbbe70b1de78ca271a299f72139a817894128452c88",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "PNG",
+      "file": "consultation-1280.png",
+      "checks": [
+        "通过：咨询室底图覆盖整窗，居中面板无外框黑边",
+        "通过：工具、发送及导航标签完整，无空按钮",
+        "通过：对话与输入均在浅古纸面板",
+        "通过：场景与瓶签无烘焙文字，标题线索数为控件",
+        "通过：家具、帘幕与窗光笔触一致；此帧无来客立绘拼接"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/inventory-1280.png",
+      "sha256": "d001e19e3de722c824796c4e310d6a7683b89ff3f88a9e0832fcc4831c2a789c",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "PNG",
+      "file": "inventory-1280.png",
+      "checks": [
+        "通过：储物柜和地面覆盖整窗，无旧木箱卡框",
+        "通过：合柜、筛选、出售及来源开关文字完整",
+        "通过：经营摘要、物品说明与来源位于古纸抽屉",
+        "通过：名称、数量、账簿均为控件，木柜及物品无烘焙字",
+        "通过：香碗左侧暖光与木柜协调，底部贴合层板，未见品红边"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/workshop-1280.png",
+      "sha256": "8f1a8fa5d5a68217633b6279fc07655c2a395d0430f9e3da1be72da9f3a38abc",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "PNG",
+      "file": "workshop-1280.png",
+      "checks": [
+        "通过：工坊背景与台面覆盖整窗，无黑边或卡框",
+        "通过：可见登记与研究按钮完整，后续配方通过滚动浏览",
+        "通过：长说明、材料、费用与品质均在古纸抽屉",
+        "通过：配方、库存和费用为动态文字，场景瓶签空白",
+        "通过：香碗和药瓶小图的颜料质感、左上暖光与工坊一致，无抠图亮边"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/market-1280.png",
+      "sha256": "ae1933272aaa3e65b9eace9a8398b635a2db5fd62acf880b6aa18d0aaa26820a",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "PNG",
+      "file": "market-1280.png",
+      "checks": [
+        "通过：市场背景覆盖整窗，无黑边",
+        "通过：买入、卖出、购买按钮文字完整，未见空按钮",
+        "通过：采购说明、数量和来源均在古纸抽屉",
+        "通过：物品名、金额、库存为动态控件，篮筐瓶签无烘焙字",
+        "通过：草药、瓶图与底景均为左上暖光的颜料笔触"
+      ],
+      "extra": [
+        "不通过：数量标签被挤成两行，数字输入框偏高；三轮上限后列为界面待修，不改源"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/gathering-1280.png",
+      "sha256": "cefeea6d77cf5684d5a142011cab42d1f504b43308f22e2550abdbf77e5f04cb",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "PNG",
+      "file": "gathering-1280.png",
+      "checks": [
+        "通过：河岸场景铺满整窗，无黑边",
+        "通过：夜间站点采集按钮与导航完整，禁用原因可读",
+        "通过：开放时段、天气、掉落与次数位于古纸面板",
+        "通过：采集名称和数值均为控件，场景无烘焙字",
+        "通过：河岸、草丛和店铺同一暖光与笔触，无新增贴片"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/people-1280.png",
+      "sha256": "b9c58228d2184df3404993ce07b7ec5fbe3053bd81d4558f0eacc226799f61bd",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "PNG",
+      "file": "people-1280.png",
+      "checks": [
+        "通过：档案窗后场景仍铺满整窗，无黑边或场景卡框",
+        "通过：接待、预约、等待与页签文字完整，关闭图标可见",
+        "通过：来客资料与本局观察说明在古纸面板",
+        "通过：姓名、等待时间、记录数均为控件，头像无文字",
+        "不通过：林照晚旧披风整幅头像与v3背景画法不统一（A4遗留）"
+      ],
+      "extra": [
+        "不通过：灰底白字页签与古纸风格不一致（已列A4遗留）",
+        "不通过：窗口顶部标题直接压在背景/下层文字上，标题区遮挡和对比不足"
+      ],
+      "root_opened": true,
+      "criteria_passed": 4,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/network-1280.png",
+      "sha256": "d7b0a3763401272086975966660bc037c3c292a2f2c310a8fe357660e968f53b",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "PNG",
+      "file": "network-1280.png",
+      "checks": [
+        "通过：设置窗后仍是整窗前台，无黑边",
+        "通过：应用、取消、本地对话与减少动态标签完整",
+        "通过：接口说明与输入项目位于古纸面板",
+        "通过：设置标签由控件绘制，场景无烘焙字",
+        "不通过：设置窗右后仍露出旧林照晚立绘，与v3背景画法不一致"
+      ],
+      "extra": [
+        "不通过：设置标题与关闭区没有独立纸面标题栏，压在下层背景与来客信息上"
+      ],
+      "root_opened": true,
+      "criteria_passed": 4,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/catalog-icons-64px-page-1-1280.png",
+      "sha256": "9c087b9f34c37703ac999a42133bb5dd30f94e3561375f5b6fce84e7f719a2fa",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "PNG",
+      "file": "catalog-icons-64px-page-1-1280.png",
+      "checks": [
+        "通过：校准窗后前台仍整窗铺底，无黑边或缩框场景",
+        "通过：物品名称与可见导航按钮完整，九格未重叠",
+        "通过：物品标签位于浅古纸面板",
+        "通过：图标本身无字，九个名称由独立控件绘制",
+        "不通过：窗后仍露出旧林照晚头像；九件图标自身笔触与左上暖光协调"
+      ],
+      "extra": [
+        "不通过：校准窗标题落在背景上，对比不足；底部接口提示来自测试故意输入无效设置"
+      ],
+      "root_opened": true,
+      "criteria_passed": 4,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/catalog-icons-64px-page-2-1280.png",
+      "sha256": "82cc3cdc791e759cf6c7747f55250f6ff3699aee4b2a991b55c7f5a8c14fb84d",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "PNG",
+      "file": "catalog-icons-64px-page-2-1280.png",
+      "checks": [
+        "通过：整窗前台铺底，纸窗不形成场景缩框",
+        "通过：蜂蜡至陶团九个名称完整，导航按钮无截断",
+        "通过：物品名称均在古纸校准面板",
+        "通过：物品无文字标签烘焙，名称独立绘制",
+        "不通过：窗后旧头像画风遗留；新九件材质色、左上暖光和透明边自身协调"
+      ],
+      "extra": [
+        "不通过：校准窗标题仍无纸面标题栏；松针和陶团小图材质辨识弱点沿用9分记录"
+      ],
+      "root_opened": true,
+      "criteria_passed": 4,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/catalog-icons-64px-page-3-1280.png",
+      "sha256": "891f8e250d854a3f43188dd377bc2e323aa15be90d7ab24102a2e42788461055",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "PNG",
+      "file": "catalog-icons-64px-page-3-1280.png",
+      "checks": [
+        "通过：前台铺满窗口，无黑边",
+        "通过：旧铁片至细察晶片九个名称完整，无空按钮",
+        "通过：九个名称在古纸校准面板",
+        "通过：香囊和护符没有烘焙字，名称均为控件",
+        "不通过：窗后旧林照晚头像遗留；新九件自身无光晕/品红边且与参考光线一致"
+      ],
+      "extra": [
+        "不通过：校准标题在背景上对比不足；旧铁片、蓝玻璃与细察晶片保留材质辨识扣分"
+      ],
+      "root_opened": true,
+      "criteria_passed": 4,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/catalog-icons-64px-page-4-1280.png",
+      "sha256": "518093ce1cb7a2552c68c966088db9e8a1739236c4f0a2ddfbbd3b6384a64f93",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "PNG",
+      "file": "catalog-icons-64px-page-4-1280.png",
+      "checks": [
+        "通过：背景仍整窗覆盖，无黑边",
+        "通过：最后八个名称完整，第九空位不是空按钮",
+        "通过：物品名在古纸面板，文字无深卡背景",
+        "通过：纸包、香囊和蜡烛无烘焙字，名称为控件",
+        "不通过：窗后旧头像仍在；八件图标自身光线、笔触和抠图边缘协调"
+      ],
+      "extra": [
+        "不通过：校准窗标题在背景上对比不足"
+      ],
+      "root_opened": true,
+      "criteria_passed": 4,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/exterior-1920.png",
+      "sha256": "9074f345e1ef3b59cda4c9875622470410392896dddde58f3d962d3f833d79e4",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "PNG",
+      "file": "exterior-1920.png",
+      "checks": [
+        "通过：1920店外背景满窗，右侧没有黑边或场景卡框",
+        "通过：顶栏、纸面三按钮与导航文字全部完整",
+        "通过：长说明在右侧古纸面板正常换行",
+        "通过：木招牌与瓶签空白，名称及时间由控件绘制",
+        "通过：花盆、石阶、木门与底景光线和笔触一致"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/front-1920.png",
+      "sha256": "31300f69ba5e78e961a990c2dcb0d0a77aec15e89db17968fe7692c5d1d08d72",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "PNG",
+      "file": "front-1920.png",
+      "checks": [
+        "通过：1920前台完整铺窗，无黑边",
+        "通过：热区纸牌、资源栏及右侧全部按钮文字完整",
+        "通过：来客说明及熟客提示均在古纸面板",
+        "通过：瓶签空白，姓名、日期、数量均由控件绘制",
+        "不通过：仍为旧披风林照晚头像，细线画法与v3场景不一致"
+      ],
+      "root_opened": true,
+      "criteria_passed": 4,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/consultation-1920.png",
+      "sha256": "d2093409ff6c65a10ff7886e2bf612e33aa3c02bb43ba5334e845c68190f1711",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "PNG",
+      "file": "consultation-1920.png",
+      "checks": [
+        "通过：背景铺满1920×1080，无黑边。",
+        "通过：底栏、工具、发送与存档设置文字完整。",
+        "通过：咨询正文与输入区均为古纸底。",
+        "通过：图中背景无烘焙文字，状态由控件显示。",
+        "通过：当前无来客前景，沙发与帘子笔触及左侧暖光一致。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/inventory-1920.png",
+      "sha256": "d26214d8dfa28684dd7ffb1526280050b032a832ca6002bdf144577983fe4618",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "PNG",
+      "file": "inventory-1920.png",
+      "checks": [
+        "通过：空层板背景铺满整个窗口，无黑边。",
+        "通过：储物柜按钮与底栏文字完整，禁用出售仍有文字。",
+        "通过：库存来源与账簿正文均在古纸面板。",
+        "通过：数量2和物品名由控件显示，图中无字。",
+        "通过：架上定心香接触层板，左上暖光与背景笔触相近，无白边。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/workshop-1920.png",
+      "sha256": "bdcd5fb736606c84a6ab77b952bf525a6e2bb108e75cb85c45c27792dcf28723",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "PNG",
+      "file": "workshop-1920.png",
+      "checks": [
+        "通过：工坊背景铺满，无场景外框。",
+        "通过：研究与登记按钮文字完整，列表可滚动。",
+        "通过：配方说明、成本与状态均在古纸手账。",
+        "通过：名称、成本、库存为控件文字，底图瓶签空白。",
+        "通过：配方小图左上暖光和颜料质感与桌面背景协调。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/market-1920.png",
+      "sha256": "24bb80ca2b91b64814b5bbafdad6ae2e37217a2c7c52fa1e904128558a6c5599",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "PNG",
+      "file": "market-1920.png",
+      "checks": [
+        "通过：商店背景铺满窗口无黑边。",
+        "通过：买入卖出与购买按钮文字完整。",
+        "通过：采购说明与原料来源均为古纸手账。",
+        "通过：价格、库存、来源均由控件显示，底图标签无字。",
+        "通过：原料图暖光方向和绘画质感与背景协调。"
+      ],
+      "extra": [
+        "不通过：数量标签被压成竖向两行，输入框过高；与1280同样的旧布局问题，三轮后留债。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/gathering-1920.png",
+      "sha256": "10f866a2cec85cd25a61ea84e1610b89ee095b422bb0a28c36405a3aefb1ca54",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "PNG",
+      "file": "gathering-1920.png",
+      "checks": [
+        "通过：河岸场景铺满窗口无黑边。",
+        "通过：采集按钮有完整文字，第三地点可滚动查看。",
+        "通过：天气、次数、开放时间等长文位于古纸面板。",
+        "通过：地点名称和天气由控件绘制，背景无字。",
+        "通过：当前无独立前景贴图，河岸物件笔触与光线统一。"
+      ],
+      "extra": [
+        "观察：记录天气为雨，背景仍为固定晴天版本；未实现逐天气场景变化。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/people-1920.png",
+      "sha256": "e57d69a9787d083265bfb178917d24b05d454d6dfc24e2dc0dc7992ffa4dd64d",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "PNG",
+      "file": "people-1920.png",
+      "checks": [
+        "通过：底层河岸背景铺满窗口，档案为正常弹窗。",
+        "通过：预约、等待与页签按钮文字完整。",
+        "通过：人物记录长文在古纸正文中。",
+        "通过：姓名、耐心与职业为动态文字。",
+        "不通过：林照晚仍为旧水彩披风头像，与v3颜料背景不一致。"
+      ],
+      "extra": [
+        "不通过：档案标题和关闭按钮在弹窗古纸外，直接压住背景，顶部缺实色标题衬底。",
+        "不通过：外观页签仍灰白样式，与古纸主题不一致，继承A4债。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 4,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/network-1920.png",
+      "sha256": "8fa0cae0e9d322d354388cc5fc96d0ca7fa1396ce3f2ef19c4a24daa2a436a9d",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "PNG",
+      "file": "network-1920.png",
+      "checks": [
+        "通过：前台背景铺满窗口。",
+        "通过：设置按钮、滑杆标签、底栏文字完整。",
+        "通过：设置说明和输入框位于古纸面板。",
+        "通过：API与姓名状态是控件文字，背景无文字。",
+        "不通过：后方林照晚旧披风头像与v3背景笔触不同。"
+      ],
+      "extra": [
+        "不通过：设置标题在古纸外，直接叠在背景上且对比弱。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 4,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/catalog-icons-64px-page-1-1920.png",
+      "sha256": "45fd007ad391701fb76b9f0a09b03497a57df6a1fc08e21f9d50dead92204668",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "PNG",
+      "file": "catalog-icons-64px-page-1-1920.png",
+      "checks": [
+        "通过：底层前台铺满窗口，图集是独立校准弹窗。",
+        "通过：关闭与底层按钮文字完整，九格都有名称。",
+        "通过：图集名称在古纸面板上。",
+        "通过：图标本身无名字，图集标签为控件。",
+        "不通过：底层林照晚仍为旧水彩披风；九个图标自身左上暖光、透明边缘协调。"
+      ],
+      "extra": [
+        "不通过：校准弹窗标题直接压在复杂背景上，对比弱。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 4,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/catalog-icons-64px-page-2-1920.png",
+      "sha256": "6cdb9ad5669b5dacb99498abffb3cdbd53bacc2e4872e55ff1f5849fb5d4949f",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "PNG",
+      "file": "catalog-icons-64px-page-2-1920.png",
+      "checks": [
+        "通过：前台铺满窗口，古纸校准图集无场景卡片边框。",
+        "通过：关闭按钮及九个名称完整。",
+        "通过：九个物品标签位于古纸面板。",
+        "通过：图标无烘焙名字，瓶子无文字。",
+        "不通过：底层旧林照晚头像笔触不一致；本页九图无白边、光向协调。"
+      ],
+      "extra": [
+        "不通过：图集标题缺纸底、对比弱。",
+        "观察：松针束、河泥陶团的材质辨识比其他物品弱，已在9/10评分理由中保留。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 4,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/catalog-icons-64px-page-3-1920.png",
+      "sha256": "790918ab87cf9926f6cae93e219bd392969fce69d68338e8cb1cd6244e595b27",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "PNG",
+      "file": "catalog-icons-64px-page-3-1920.png",
+      "checks": [
+        "通过：底层前台铺满，无黑边。",
+        "通过：关闭按钮及九个物品标签完整可读。",
+        "通过：名称在古纸面板。",
+        "通过：图标本身没有烘焙文字。",
+        "不通过：旧林照晚头像笔触不同；本页新物品左上暖光无明显白边。"
+      ],
+      "extra": [
+        "不通过：校准标题直接压背景，对比弱。",
+        "观察：旧铁片、蓝玻璃片与细察晶片材质辨识较弱，既有9/10理由保留。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 4,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/catalog-icons-64px-page-4-1920.png",
+      "sha256": "ff7916c95449b6ab88b9092faace5e0eb373d6ca41a72729b797944170f195c2",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "PNG",
+      "file": "catalog-icons-64px-page-4-1920.png",
+      "checks": [
+        "通过：前台场景铺满窗口。",
+        "通过：关闭按钮和八个名称完整；第九格为空布局格而非空白按钮。",
+        "通过：图标名称在古纸面板。",
+        "通过：包装和瓶身无烘焙文字。",
+        "不通过：底层旧人物笔触与v3不同；本页八图自身边缘与暖光协调。"
+      ],
+      "extra": [
+        "不通过：校准标题缺古纸底，对比弱。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 4,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/market-after-trade-1920.png",
+      "sha256": "ad80e6112ed3ccecd870cb971e3d4cfe7a0f13fa40f0345b1b37f31431d6cec7",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "PNG",
+      "file": "market-after-trade-1920.png",
+      "checks": [
+        "通过：商店背景铺满窗口无黑边。",
+        "通过：买入卖出及出售按钮文字完整，空库存按钮明确禁用。",
+        "通过：交易说明与库存价格均在古纸面板。",
+        "通过：金币38与库存0来自已保存动作显示，图中无烘焙文字。",
+        "通过：原料小图暖光与背景协调，无白边。"
+      ],
+      "extra": [
+        "不通过：数量标签仍分成两行、输入框过高。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/gathering-after-trade-1920.png",
+      "sha256": "8b9872f46866c88fd6284c3e0fdc2fac87b8cd2cc3e9a60395963b0adfb99260",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "PNG",
+      "file": "gathering-after-trade-1920.png",
+      "checks": [
+        "通过：交易后河岸仍铺满窗口，无黑边。",
+        "通过：采集按钮名称完整，滚动可查看第三点。",
+        "通过：地点条件、天气、次数均在古纸面板。",
+        "通过：金币与精力显示已保存结果，背景无字。",
+        "通过：河岸物件和植物为统一画面，无额外贴图。"
+      ],
+      "extra": [
+        "观察：已记录雨天而场景为固定晴天，天气未驱动背景变体。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/zero-guest-front-1280.png",
+      "sha256": "d51254b075d7c2f6e297b75810de3b53cf4f7e47f6db2719af225ee86750a37c",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "PNG",
+      "file": "zero-guest-front-1280.png",
+      "checks": [
+        "通过：零客日前台铺满1280×720。",
+        "通过：三个快捷入口、等待、休息、打烊等按钮完整。",
+        "通过：零客日说明和操作位于古纸面板。",
+        "通过：日期、零客日标题和提示均由控件显示。",
+        "通过：无来客头像，前景器皿与背景笔触光向一致。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu-shop-attempt1-frames/zero-guest-front-1920.png",
+      "sha256": "6db72069a50e78a8dd0d4b89d562b49253596276ea46cecd873801e1ff5d17a6",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "PNG",
+      "file": "zero-guest-front-1920.png",
+      "checks": [
+        "通过：零客日前台铺满1920×1080。",
+        "通过：快捷入口、等待、休息、打烊等文字完整。",
+        "通过：零客日说明位于古纸面板。",
+        "通过：日期及状态均由控件显示，底图无字。",
+        "通过：无来客头像，前景器皿笔触光向一致。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu/run-4580445/workshop-no-inspiration-1280.png",
+      "sha256": "dc8b0a7f05d2af14272954ecb7322a1ce4899728239980ee5fe67aa07f0d9160",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "PNG",
+      "file": "workshop-no-inspiration-1280.png",
+      "checks": [
+        "通过：工坊铺满1280×720，无黑边。",
+        "通过：两条登记需求与研究按钮文字完整。",
+        "通过：原料、成本及尚无灵感说明位于古纸。",
+        "通过：库存与成本为控件显示，背景瓶签无字。",
+        "通过：醒神药水小图左上暖光和背景一致，无白边。"
+      ],
+      "extra": [
+        "通过：尚无灵感时研究与登记需求均禁用，没有直接越过需求解锁。",
+        "观察：画面已滚动，首条配方标题在上方可滚回，不是标题控件丢失。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu/run-4580445/forecast-advice-styles-1280.png",
+      "sha256": "92e0c4772aba76c2b3719bb1537b7f118d23bc5ac2476efc5b57ee6899344816",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "PNG",
+      "file": "forecast-advice-styles-1280.png",
+      "checks": [
+        "通过：咨询背景铺满窗口，弹窗遮罩覆盖顶栏。",
+        "通过：正式预测、建议选项与关闭按钮文字完整。",
+        "通过：预测表单和建议正文在古纸弹窗上。",
+        "通过：案例标题与选择内容均由控件绘制。",
+        "不通过：弹窗后方林照晚头像仍旧水彩，与v3背景笔触不同。"
+      ],
+      "extra": [
+        "通过：具体步骤、先听对方说、直接说明三种建议方式均可见。",
+        "不通过：下拉当前选项仍为深灰底深字，对比和古纸主题不足。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 4,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu/run-4580445/workshop-mint-quality-1280.png",
+      "sha256": "c26fc0648a7b536793b58af823373b2f8e2371138cb568c1ceaee7e739ad7328",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "PNG",
+      "file": "workshop-mint-quality-1280.png",
+      "checks": [
+        "通过：工坊铺满窗口无黑边。",
+        "通过：变体下拉和制作按钮文字完整。",
+        "通过：原料、品质与状态正文在古纸手账。",
+        "通过：已掌握、精制和实际成本是控件文字，图中无字。",
+        "通过：药水小图左上暖光和颜料笔触与工坊协调。"
+      ],
+      "extra": [
+        "通过：已掌握醒神配方可显示薄荷醒神药水变体，品质为精制；制作后库存原料为0，按钮禁用有说明。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu/run-4580445/market-source-quantity-1280.png",
+      "sha256": "1a35ced08f002c3ac32e54a9b62e3136bea090d50c73301bd217da6c29df7436",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "PNG",
+      "file": "market-source-quantity-1280.png",
+      "checks": [
+        "通过：商店铺满窗口，无黑边。",
+        "通过：买入卖出和购买×12按钮文字完整。",
+        "通过：原料来源与交易说明位于古纸面板。",
+        "通过：数量12、金币29与价格库存均由控件显示。",
+        "通过：原料小图与背景左上暖光和绘画笔触协调。"
+      ],
+      "extra": [
+        "通过：采购数量12同步显示在购买按钮，原料主来源为采集。",
+        "不通过：数量标签竖向断行，输入框过高。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu/run-4580445/use-result-source-1280.png",
+      "sha256": "bc47acc4c46e8aa510a149d079449af6e18a440936f30e54da3200aab07dc2a3",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "PNG",
+      "file": "use-result-source-1280.png",
+      "checks": [
+        "通过：储物柜背景铺满窗口无黑边。",
+        "通过：查看这次使用的来源按钮完整可见。",
+        "通过：实际使用结果与批次说明均在古纸手账。",
+        "通过：时间、精力74→89和批次记录由控件绘制。",
+        "通过：架上定心香与药水图标的笔触、左上暖光和背景协调。"
+      ],
+      "extra": [
+        "通过：明确标为自身变化，显示店长精力实际增15，不冒称顾客反馈；关联1份实际批次、精制。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu/run-4580445/night-committed-weather-1280.png",
+      "sha256": "c10e38bd05ba8dba5c16e496eda9829aa2138552bdae00a498f0818a2f9e409d",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "PNG",
+      "file": "night-committed-weather-1280.png",
+      "checks": [
+        "通过：夜间河岸铺满窗口无黑边。",
+        "通过：夜间地点采集按钮文字完整。",
+        "通过：开放时间、天气、次数和耗费位于古纸面板。",
+        "通过：地点名、晴天和18:00由控件显示。",
+        "通过：夜间冷暖光在整张背景一致，无额外不协调前景。"
+      ],
+      "extra": [
+        "通过：晴天18:00时铁路旧库房显示当前可前往、剩余1次，夜间变体与时间一致。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu/run-4580445/workshop-no-inspiration-1920.png",
+      "sha256": "21654eff602dae3bfa0758961b0b3872cbad9c865d0e962d6fe17aaaf70dcff7",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "PNG",
+      "file": "workshop-no-inspiration-1920.png",
+      "checks": [
+        "通过：工坊铺满1920×1080，无黑边。",
+        "通过：研究及登记需求按钮文字完整。",
+        "通过：需求流程说明、原料成本与状态均为古纸底。",
+        "通过：配方名、库存、成本由控件显示。",
+        "通过：药水、香与晶体图标和背景颜料质感及左上光一致。"
+      ],
+      "extra": [
+        "通过：无灵感时三个已见配方不允许直接研究，流程说明明确先接待登记。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu/run-4580445/forecast-advice-styles-1920.png",
+      "sha256": "9b47698342a7d130f347ddba95821b1e895e48c921831c93a9a3fa62dd97d951",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "PNG",
+      "file": "forecast-advice-styles-1920.png",
+      "checks": [
+        "通过：咨询背景铺满窗口，弹窗遮罩覆盖顶栏。",
+        "通过：预测按钮、三种建议选项与关闭按钮完整。",
+        "通过：预测与建议长文位于古纸面板。",
+        "通过：案例名、时间与验证状态由控件绘制。",
+        "不通过：后方林照晚小头像仍为旧水彩笔触。"
+      ],
+      "extra": [
+        "通过：三种建议方式可见，未收到反馈明确显示尚未验证。",
+        "不通过：下拉选中项深灰底深字，对比不足。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 4,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu/run-4580445/workshop-mint-quality-1920.png",
+      "sha256": "7692db6ca89bec56a611da493b8cec4cda855dc6af229d23a95c9a2f6ebd9978",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "PNG",
+      "file": "workshop-mint-quality-1920.png",
+      "checks": [
+        "通过：工坊铺满窗口，无黑边。",
+        "通过：变体选择与制作按钮文字完整。",
+        "通过：原料、精制品质和成本正文在古纸手账。",
+        "通过：配方名与状态是控件文字，底图标签空白。",
+        "通过：药水小图与背景左上光向、绘画笔触一致。"
+      ],
+      "extra": [
+        "通过：醒神药水已掌握，薄荷变体与精制状态清楚，材料0时制作禁用。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu/run-4580445/market-source-quantity-1920.png",
+      "sha256": "16fea705f91060473847c1dd5a5d443d550ee0bffdfc0510fb5076221e7de333",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "PNG",
+      "file": "market-source-quantity-1920.png",
+      "checks": [
+        "通过：商店铺满1920×1080。",
+        "通过：买入卖出与购买×12按钮完整可读。",
+        "通过：采购说明、来源与价格在古纸面板。",
+        "通过：数量12和所有状态由控件绘制。",
+        "通过：原料小图暖光和背景笔触协调无白边。"
+      ],
+      "extra": [
+        "通过：数量12同步更新多种原料购买按钮，来源采集与采购分别显示。",
+        "不通过：数量标签挤成竖向两行，输入框过高。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu/run-4580445/use-result-source-1920.png",
+      "sha256": "16673f1530c83a45b4bb10eef3b4568a6438c14e10c8e568e2b616fe051093d5",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "PNG",
+      "file": "use-result-source-1920.png",
+      "checks": [
+        "通过：储物柜铺满1920×1080，无黑边。",
+        "通过：显示来源详情和查看使用来源按钮完整。",
+        "通过：账簿、使用结果与批次说明位于古纸。",
+        "通过：来源、时间、精力74→89由控件绘制，图中无字。",
+        "通过：香与药水图标暖光、笔触和背景协调。"
+      ],
+      "extra": [
+        "通过：采购→制作→使用完整账簿可见；明确自身变化并关联1份精制批次，不混成顾客反馈。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": ".tools/g4/gpu/run-4580445/night-committed-weather-1920.png",
+      "sha256": "ef1e812b24cf2c421148088cffc378c6a3f197fc37dbdf6d7e24fbea6a023482",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "PNG",
+      "file": "night-committed-weather-1920.png",
+      "checks": [
+        "通过：夜间河岸铺满1920×1080，无黑边。",
+        "通过：铁路采集与禁用河岸按钮文字完整。",
+        "通过：天气、次数、时间与不可前往说明均在古纸。",
+        "通过：晴天、18:00和开放状态由控件显示。",
+        "通过：夜间背景冷暗处可辨，店门暖光与场景笔触统一。"
+      ],
+      "extra": [
+        "通过：铁路旧库房在晴天18:00开放，河岸18:00已关闭且禁用，状态区分明确。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": "docs/screenshots/round2/G4/workshop-no-inspiration-1280.jpg",
+      "source": ".tools/g4/gpu/run-4580445/workshop-no-inspiration-1280.png",
+      "source_sha256": "dc8b0a7f05d2af14272954ecb7322a1ce4899728239980ee5fe67aa07f0d9160",
+      "sha256": "70ca7a2c0964ffc836ce1b34c1981ddf04cad3f6c0aea725863a590c8dd3d34c",
+      "bytes": 208727,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "JPEG",
+      "quality": 85,
+      "file": "workshop-no-inspiration-1280.jpg",
+      "checks": [
+        "通过：JPG仍铺满1280×720。",
+        "通过：研究、登记和底栏文字压缩后完整可读。",
+        "通过：配方长文仍在古纸面板。",
+        "通过：底图瓶签空白，名称与数值为控件。",
+        "通过：压缩后药水光向和工坊笔触仍协调，无明显边缘伪影。"
+      ],
+      "extra": [
+        "通过：质量85未掩盖无灵感时的禁用状态。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": "docs/screenshots/round2/G4/forecast-advice-styles-1280.jpg",
+      "source": ".tools/g4/gpu/run-4580445/forecast-advice-styles-1280.png",
+      "source_sha256": "92e0c4772aba76c2b3719bb1537b7f118d23bc5ac2476efc5b57ee6899344816",
+      "sha256": "d7d8b87acc73435ea1be3407d42aa8dc9f3e22f26a87a99435c6957ed957ebe0",
+      "bytes": 116299,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "JPEG",
+      "quality": 85,
+      "file": "forecast-advice-styles-1280.jpg",
+      "checks": [
+        "通过：咨询背景及遮罩覆盖整个1280×720。",
+        "通过：预测、三种建议和关闭按钮压缩后完整。",
+        "通过：预测和建议长文在古纸弹窗。",
+        "通过：标题及选项为控件文字，图中无烘焙字。",
+        "不通过：后方林照晚小头像仍为旧画风，压缩未消除差异。"
+      ],
+      "extra": [
+        "不通过：选中项仍深灰底深字，质量85保持真实问题。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 4,
+      "criteria_total": 5
+    },
+    {
+      "path": "docs/screenshots/round2/G4/workshop-mint-quality-1920.jpg",
+      "source": ".tools/g4/gpu/run-4580445/workshop-mint-quality-1920.png",
+      "source_sha256": "7692db6ca89bec56a611da493b8cec4cda855dc6af229d23a95c9a2f6ebd9978",
+      "sha256": "3d9aa100eb8a5ac5d7aa3afdfed73ed7560530c46ff288c85cad6a1d50f4706c",
+      "bytes": 418553,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "JPEG",
+      "quality": 85,
+      "file": "workshop-mint-quality-1920.jpg",
+      "checks": [
+        "通过：JPG铺满1920×1080，无黑边。",
+        "通过：变体及制作按钮压缩后文字完整。",
+        "通过：成本、原料和精制品质仍在古纸面板。",
+        "通过：图中瓶签无字，配方信息为控件。",
+        "通过：药水小图与背景笔触暖光协调，压缩无明显白边。"
+      ],
+      "extra": [
+        "通过：已掌握、薄荷变体与精制状态压缩后仍清楚。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": "docs/screenshots/round2/G4/market-source-quantity-1920.jpg",
+      "source": ".tools/g4/gpu/run-4580445/market-source-quantity-1920.png",
+      "source_sha256": "16fea705f91060473847c1dd5a5d443d550ee0bffdfc0510fb5076221e7de333",
+      "sha256": "35f3782dd19adfc98884d6f01377bebb57d29263376e36bdfe3f37b12b25c181",
+      "bytes": 430302,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "JPEG",
+      "quality": 85,
+      "file": "market-source-quantity-1920.jpg",
+      "checks": [
+        "通过：JPG商店背景铺满窗口。",
+        "通过：买入卖出、购买×12压缩后文字完整。",
+        "通过：采购说明与价格来源仍在古纸。",
+        "通过：图标和底图无烘焙文字。",
+        "通过：原料图暖光协调，压缩无明显白边。"
+      ],
+      "extra": [
+        "不通过：数量标签仍竖排断行，输入框过高；该图特意保留问题供审阅。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": "docs/screenshots/round2/G4/use-result-source-1280.jpg",
+      "source": ".tools/g4/gpu/run-4580445/use-result-source-1280.png",
+      "source_sha256": "bc47acc4c46e8aa510a149d079449af6e18a440936f30e54da3200aab07dc2a3",
+      "sha256": "c11f4acc3f5ab8f49629db66cc441a5926b71c5191941bfd340ccf2468509aad",
+      "bytes": 163501,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "format": "JPEG",
+      "quality": 85,
+      "file": "use-result-source-1280.jpg",
+      "checks": [
+        "通过：JPG储物柜铺满1280×720。",
+        "通过：查看来源按钮和底栏压缩后完整可读。",
+        "通过：使用结果与批次正文仍在古纸面板。",
+        "通过：名称、精力和批次为控件，图中无烘焙文字。",
+        "通过：药水和香暖光、笔触与背景协调。"
+      ],
+      "extra": [
+        "通过：质量85仍能读出自身变化74到89与1份精制批次，未将其写为顾客反馈。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    },
+    {
+      "path": "docs/screenshots/round2/G4/night-committed-weather-1920.jpg",
+      "source": ".tools/g4/gpu/run-4580445/night-committed-weather-1920.png",
+      "source_sha256": "ef1e812b24cf2c421148088cffc378c6a3f197fc37dbdf6d7e24fbea6a023482",
+      "sha256": "d312977b27b77e2bd8065c510d8948a0ff11d157bb0c5c3e4e533381b23522b6",
+      "bytes": 380706,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "JPEG",
+      "quality": 85,
+      "file": "night-committed-weather-1920.jpg",
+      "checks": [
+        "通过：JPG夜间河岸铺满窗口。",
+        "通过：采集和底栏按钮压缩后完整可读。",
+        "通过：天气、开放时段与限制说明仍在古纸面板。",
+        "通过：地点、天气与时间为控件文字。",
+        "通过：夜间冷暖光和笔触协调，暗部压缩后仍能辨认。"
+      ],
+      "extra": [
+        "通过：质量85仍可读晴天18:00铁路开放、河岸关闭的条件差异。"
+      ],
+      "root_opened": true,
+      "criteria_passed": 5,
+      "criteria_total": 5
+    }
+  ]
+}

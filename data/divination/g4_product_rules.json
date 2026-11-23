@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "maximum_components": 4,
+  "current_acceptance_version": 1,
+  "acceptance_versions": {
+    "1": {
+      "seed_namespace": "g4-advice-preference-v1",
+      "roll_scale": 10000,
+      "probabilities": {
+        "concrete_steps": {"concrete_steps": 8500, "listening": 4500, "direct": 6000},
+        "listening": {"concrete_steps": 5000, "listening": 8500, "direct": 3500},
+        "direct": {"concrete_steps": 6500, "listening": 4000, "direct": 8500}
+      }
+    }
+  },
+  "styles": {"concrete_steps": "具体步骤", "listening": "先听对方说", "direct": "直接说明"},
+  "default_style": "concrete_steps",
+  "advice_styles": {"message": "concrete_steps", "attend": "concrete_steps", "private": "direct", "note": "listening", "verify": "concrete_steps", "ask": "direct", "wait": "listening", "act": "direct", "check": "concrete_steps", "pause": "listening"},
+  "tool_clues": {
+    "g4_tool_observation": {"method_id": "tarot", "requires_clues": []}
+  },
+  "relationship_effects": {
+    "family_reconnect_support": {"selector": "current_goal", "delta": 3, "advice_keys": ["message", "attend", "verify", "ask", "act", "check"], "outcomes": ["met"], "evidence": ["sufficient"]}
+  },
+  "gift_rewards": {
+    "g4_honey": {"item_id": "honey_drop", "qty": 1, "outcome_ids": ["sent", "verified"]},
+    "g4_key": {"item_id": "old_key", "qty": 1, "outcome_ids": ["arrived", "heard"]},
+    "g4_glass": {"item_id": "blue_glass", "qty": 1, "outcome_ids": ["note", "uncertain"]},
+    "g4_thread": {"item_id": "red_thread", "qty": 1, "outcome_ids": ["private", "paused", "waited", "lost"]}
+  },
+  "need_tags_by_effect": {"stay_and_ask": ["communication"], "archive_double_check": ["verification"], "family_reconnect_support": ["connection", "communication"]},
+  "copy": {
+    "advice_style_heading": "建议方式",
+    "invalid_style": "请选择这种建议支持的表达方式。",
+    "invalid_preference": "来客的建议偏好记录无效，本次未提交。",
+    "component_blocked": "商品的案情效果条件尚未全部满足，本次未使用。",
+    "tool_recorded": "工具给出了核对方向，已与顾客陈述分别记录。"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "scope": "Publication metadata only after the frozen G4 game checks; no additional gameplay/test/config changes or fourth full run.",
+  "source_map_paths": 1201,
+  "unchanged_paths": 1200,
+  "changes": [
+    {
+      "path": ".gitattributes",
+      "before_sha256": "ed45085a6149fbe7e3f2aba25b4a9ddbd0c874adaa7aafe444d673a7a186183b",
+      "after_sha256": "c2a680c70676aabfdf8c22c4821150eac54d5f9e52f23fd8057f5766e166fd68",
+      "before_bytes": 1213,
+      "after_bytes": 1544
+    }
+  ],
+  "reason": "Four exact evidence paths preserve original bytes across Git checkout; generated SVG path whitespace is intentional and receipt CRLF is retained.",
+  "artifact_byte_checks": [
+    {
+      "path": "docs/codex/results/G4-economy-first30.csv",
+      "bytes": 1833,
+      "sha256": "415d4f4485c1718a92522aca322cd098e1f8e434631e4b3ac6a2de0f30cbd61f",
+      "index_and_checkout_equal_original": true
+    },
+    {
+      "path": "docs/codex/results/G4-economy-first30.svg",
+      "bytes": 46709,
+      "sha256": "3bc1eb75f8afa556e516d186dc49f01d726ec318b8923cfcdf3dda6dbb06d2b7",
+      "index_and_checkout_equal_original": true
+    },
+    {
+      "path": "docs/codex/results/G4-economy-stop.json",
+      "bytes": 5442,
+      "sha256": "4a911c7e40bb481564159fd3d98d31bf99395bfdb79b40da931213b72355afa9",
+      "index_and_checkout_equal_original": true
+    },
+    {
+      "path": "docs/codex/results/G4-source-freeze.json",
+      "bytes": 1826,
+      "sha256": "d4331d42a48f45060f73250c639a0a0645e63bf17cd2ac240c83a598ce4a3a71",
+      "index_and_checkout_equal_original": true
+    }
+  ],
+  "new_binary_bytes": 3128672,
+  "png_count": 52,
+  "jpeg_count": 6,
+  "lfs_filters_unset": true,
+  "standard_full_passed": false,
+  "diff_check": "git diff --cached --check exit0; raw generated paths have explicit whitespace rules."
+}
