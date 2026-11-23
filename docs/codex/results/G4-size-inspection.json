@@ -305,5 +305,16 @@
     "path": ".tools/clean-rebuild/G4-size-report.json",
     "sha256": "fe0da3016ec73369477368c80ff8ef5013941d8edc089af52b3efd4d7d2a3c2c",
     "bytes": 285258
+  },
+  "actual_task_commit": {
+    "task_commit": "ea6a4f8f0ade6589fa5605e301cd18a66612ac01",
+    "parent": "d6a0847d4308dfa8f0830e83ce733dad7e63e702",
+    "changed_files": 212,
+    "new_unique_blobs": 211,
+    "new_blob_bytes": 5693761,
+    "new_binary_blobs": 58,
+    "new_binary_bytes": 3128672,
+    "method": "All reachable OID set(task) minus all reachable OID set(parent), unique blobs; binary means NUL in first8000 bytes.",
+    "git_count_objects_vH": "count: 6110\nsize: 310.44 MiB\nin-pack: 4064\npacks: 2\nsize-pack: 1.12 GiB\nprune-packable: 2053\ngarbage: 3\nsize-garbage: 15.24 MiB\n"
   }
 }

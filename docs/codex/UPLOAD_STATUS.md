@@ -1,6 +1,6 @@
 # codex/round2-clean 上传状态
 
-最新状态（2026-11-23）：G2任务5297418及META d6a0847已普通推送；G4已按三轮上限及单条30日证据收口为部分完成，当前正创建任务提交／META，实际hash与上传结果随后记录。首段2026-11-21为历史建分支记录。
+最新状态（2026-11-23）：G4任务ea6a4f8已普通Git推送到codex/round2-clean；三轮上限部分完成，当前META仅补实际hash与体积。首段2026-11-21为历史建分支记录。
 
 G4发布字节核查：为四个已记录SHA的CSV／SVG／JSON回执设置精确路径-text属性；生成SVG的路径行尾空格和回执CRLF按原字节保留。四文件暂存对象和checkout过滤结果均与原文件相等，diff检查exit0；游戏源码／测试／数据冻结不变，1201路径仅.gitattributes这一项发布元数据变化。二进制依旧3,128,672B，无LFS，见results/G4-publication-integrity.json。
 
@@ -229,3 +229,20 @@ prune-packable: 2053
 garbage: 3
 size-garbage: 15.24 MiB
 ```
+
+## G4实际任务提交／上传
+
+- ea6a4f8f0ade6589fa5605e301cd18a66612ac01已普通push，实际exit0；远端d6a0847→ea6a4f8。212文件，相对父提交211个新增unique blobs共5,693,761B；58个二进制3,128,672B。后续META文本不计入任务本体。
+- 普通OpenSSL首试SSL_ERROR_SYSCALL；单命令http.sslBackend=schannel复试成功，未关证书验证、未改持久配置、无force/main/旧round2改动。
+- 实际提交对象计数（含旧备份，不是网络上传量）：
+
+`	ext
+count: 6110
+size: 310.44 MiB
+in-pack: 4064
+packs: 2
+size-pack: 1.12 GiB
+prune-packable: 2053
+garbage: 3
+size-garbage: 15.24 MiB
+`
