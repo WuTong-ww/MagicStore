@@ -23,6 +23,7 @@ var _model_name := ""
 var _mock := MockProvider.new()
 var _http: HTTPRequest
 var _retry_timer: Timer
+var _deadline_tree: SceneTree
 var _retry_count := 0
 var _current_body: Dictionary = {}
 var _pending := false
@@ -139,6 +140,7 @@ func request_reply(request: Dictionary) -> Dictionary:
 		_stage = "gateway"
 	_pending = true
 	_status.pending = true
+	_start_deadline_watch()
 	if not _start_http(body, generation):
 		_cleanup()
 		return _fallback("网关无法连接，使用本地对话")
@@ -153,7 +155,9 @@ func _start_http(body: Dictionary, generation: int) -> bool:
 	_release_http()
 	_current_body = body.duplicate(true)
 	_http = HTTPRequest.new()
-	_http.timeout = maxf(0.001, remaining)
+	# Its internal Timer can charge a raw startup frame to a fresh request.
+	# Keep the existing absolute pipeline deadline as the sole timeout clock.
+	_http.timeout = 0.0
 	_http.body_size_limit = 128 * 1024
 	_http.max_redirects = 0 # Do not forward gateway credentials to another origin.
 	_host.add_child(_http)
@@ -179,6 +183,30 @@ func cancel() -> void:
 	_status.reason = "本次对话已取消，未提交"
 	_status.failure_stage = _stage
 	_finish(generation, _error("CANCELLED"))
+
+func dispose() -> void:
+	var disposing_generation := _generation
+	cancel()
+	# reply_ready may synchronously start another generation in its old waiter.
+	if _generation == disposing_generation:
+		_cleanup()
+
+func _start_deadline_watch() -> void:
+	_deadline_tree = _host.get_tree()
+	if not _deadline_tree.process_frame.is_connected(_check_deadline):
+		_deadline_tree.process_frame.connect(_check_deadline)
+
+func _check_deadline() -> void:
+	if not _pending:
+		_stop_deadline_watch()
+		return
+	if Time.get_ticks_msec() >= _deadline_msec:
+		_on_completed(HTTPRequest.RESULT_TIMEOUT, 0, PackedStringArray(), PackedByteArray(), _generation, _http_serial)
+
+func _stop_deadline_watch() -> void:
+	if is_instance_valid(_deadline_tree) and _deadline_tree.process_frame.is_connected(_check_deadline):
+		_deadline_tree.process_frame.disconnect(_check_deadline)
+	_deadline_tree = null
 
 func _on_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray, generation: int, serial: int) -> void:
 	if not _pending or generation != _generation or serial != _http_serial:
@@ -467,6 +495,7 @@ func _complete_timing() -> void:
 		_pipeline_started_msec = -1
 
 func _cleanup() -> void:
+	_stop_deadline_watch()
 	_pending = false
 	_status.pending = false
 	if is_instance_valid(_retry_timer):

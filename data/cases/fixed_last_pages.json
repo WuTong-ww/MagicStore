@@ -1,0 +1,503 @@
+{
+  "id": "fixed_last_pages",
+  "version": 1,
+  "title": "撕掉的最后两页",
+  "legacy_case_id": "",
+  "question": "温月现在在哪里，为什么分开保存信，又该怎样让姐弟见面？",
+  "truth": {
+    "where": {
+      "value": "baisha",
+      "text": "温月仍在世，住在白沙海边的疗养院。",
+      "requires_clue": "fixed_last_pages_truth_where"
+    },
+    "reason": {
+      "value": "help",
+      "text": "她把信分开放在会被保存的地方，希望弟弟一路被人帮助找到自己。",
+      "requires_clue": "fixed_last_pages_truth_reason"
+    },
+    "address": {
+      "value": "third_house",
+      "text": "白沙海边那排白房子的第三间，就是后半封信留下的地址。",
+      "requires_clue": "fixed_last_pages_truth_address"
+    }
+  },
+  "deduction_slots": [
+    {
+      "id": "where",
+      "title": "温月现在在哪里",
+      "answers": [
+        {
+          "id": "dead",
+          "text": "已经过世"
+        },
+        {
+          "id": "abroad",
+          "text": "出国了"
+        },
+        {
+          "id": "seaside",
+          "text": "海边的疗养院"
+        },
+        {
+          "id": "town",
+          "text": "仍在镇上"
+        }
+      ],
+      "correct_answer": "seaside",
+      "unlock_evidence": [
+        "first_half",
+        "second_half",
+        "town_rumour"
+      ]
+    },
+    {
+      "id": "reason",
+      "title": "为什么把信分成两半",
+      "answers": [
+        {
+          "id": "secret",
+          "text": "怕被外人看见"
+        },
+        {
+          "id": "lost",
+          "text": "怕信落到别人手里"
+        },
+        {
+          "id": "help",
+          "text": "让他一路被人帮着找到"
+        },
+        {
+          "id": "random",
+          "text": "随手分开的"
+        }
+      ],
+      "correct_answer": "help",
+      "unlock_evidence": [
+        "first_half",
+        "deliberate_cut",
+        "husband_letter"
+      ]
+    },
+    {
+      "id": "reunion",
+      "title": "怎样让姐弟见面",
+      "answers": [
+        {
+          "id": "letter",
+          "text": "只写信过去"
+        },
+        {
+          "id": "travel",
+          "text": "直接带他过去"
+        },
+        {
+          "id": "phone",
+          "text": "先打电话确认"
+        },
+        {
+          "id": "nothing",
+          "text": "什么都不做"
+        }
+      ],
+      "correct_answer": "phone",
+      "unlock_evidence": [
+        "second_half",
+        "husband_letter",
+        "bag_words"
+      ]
+    }
+  ],
+  "questions": [
+    [
+      {
+        "id": "address",
+        "text": "两半信接起来，地址写在哪里？",
+        "answer": "白沙，海边那排白房子，第三间。信的前半句是“晴川，如果你回来找我”。这不是一句告别。",
+        "evidence_ids": [
+          "first_half",
+          "second_half"
+        ],
+        "requires_familiarity": 0
+      },
+      {
+        "id": "rumour",
+        "text": "“走了”的传言，有人核对过吗？",
+        "answer": "没有人告诉我确切的经过。可接好的信里留下了白沙的地址：“海边那排白房子，第三间。”我想先把这件事问清楚。",
+        "evidence_ids": [
+          "town_rumour",
+          "first_half",
+          "second_half"
+        ],
+        "requires_familiarity": 0
+      },
+      {
+        "id": "letters_now",
+        "text": "现在手里的信，比传言多告诉了我们什么？",
+        "answer": "信里留了一个可以去找人的地址。前面写着等我回来，后面指向白沙海边的白房子。",
+        "evidence_ids": [
+          "first_half",
+          "second_half"
+        ],
+        "requires_familiarity": 0
+      }
+    ],
+    [
+      {
+        "id": "separate",
+        "text": "两页是随手撕散的吗？",
+        "answer": "裁口和纸纹都能对上。沈家那封旧信里还写着：“月说，要让晴川一路被人帮着找到她。”",
+        "evidence_ids": [
+          "deliberate_cut",
+          "husband_letter"
+        ],
+        "requires_familiarity": 0
+      },
+      {
+        "id": "saved_places",
+        "text": "为什么一半在盒子里，一半在沈家？",
+        "answer": "都是会被好好保存的地方。沈家的旧信写着，她想让我一路被人帮着找到她，而不是一个人猜到底。",
+        "evidence_ids": [
+          "husband_letter",
+          "deliberate_cut"
+        ],
+        "requires_familiarity": 0
+      },
+      {
+        "id": "husband_words",
+        "text": "沈念秋丈夫，替她记下了什么？",
+        "answer": "他写的是：“月说，要让晴川一路被人帮着找到她。”两半信的裁口也很整齐，不像是慌忙撕开的。",
+        "evidence_ids": [
+          "husband_letter",
+          "deliberate_cut"
+        ],
+        "requires_familiarity": 0
+      }
+    ],
+    [
+      {
+        "id": "first_contact",
+        "text": "知道地址以后，先做哪一件事更稳妥？",
+        "answer": "我想先听见她的声音。纸袋上写了那么多次“姐”和“回家”，真要出发了，也该先问她方不方便。",
+        "evidence_ids": [
+          "bag_words",
+          "second_half"
+        ],
+        "requires_familiarity": 0
+      },
+      {
+        "id": "her_health",
+        "text": "她在疗养院，见面前还该核对什么？",
+        "answer": "先打电话，问她的身体和那边的安排。她愿意等我找到她，我也想让这次见面来得安稳一点。",
+        "evidence_ids": [
+          "second_half",
+          "husband_letter"
+        ],
+        "requires_familiarity": 0
+      },
+      {
+        "id": "companions",
+        "text": "这条路，真的还要自己一个人走吗？",
+        "answer": "不用了。信里说会有人帮我，纸袋上的“回家”也终于有了地址。我想请你陪我先打一个电话。",
+        "evidence_ids": [
+          "bag_words",
+          "husband_letter",
+          "second_half"
+        ],
+        "requires_familiarity": 0
+      }
+    ]
+  ],
+  "evidence": [
+    {
+      "id": "first_half",
+      "text": "前半页写着：“晴川，如果你回来找我……”",
+      "type": "fact",
+      "source": "八音盒里的半封信",
+      "slot_ids": [
+        "where",
+        "reason"
+      ],
+      "legacy_clue_ids": [
+        "fixed_last_pages_first_half"
+      ]
+    },
+    {
+      "id": "second_half",
+      "text": "后半页写着：“……白沙，海边那排白房子，第三间。”",
+      "type": "fact",
+      "source": "沈家暗格里的半封信",
+      "slot_ids": [
+        "where",
+        "reunion"
+      ],
+      "legacy_clue_ids": [
+        "fixed_last_pages_second_half"
+      ]
+    },
+    {
+      "id": "deliberate_cut",
+      "text": "照晚说：裁口整齐，是故意分开保存的。",
+      "type": "testimony",
+      "source": "照晚的装订判断",
+      "slot_ids": [
+        "reason"
+      ]
+    },
+    {
+      "id": "husband_letter",
+      "text": "沈念秋丈夫的信写着：“月说，要让晴川一路被人帮着找到她。”",
+      "type": "fact",
+      "source": "沈家暗格的旧信",
+      "slot_ids": [
+        "reason",
+        "reunion"
+      ],
+      "legacy_clue_ids": [
+        "fixed_last_pages_husband_letter"
+      ]
+    },
+    {
+      "id": "town_rumour",
+      "text": "镇上传言：“温婆婆早就走了。”",
+      "type": "misleading",
+      "source": "镇上未经核对的传言",
+      "slot_ids": [
+        "where"
+      ]
+    },
+    {
+      "id": "bag_words",
+      "text": "皮特的纸袋上，晴川每晚写下一个字：月、姐、回、家。",
+      "type": "fact",
+      "source": "晴川留下的纸袋",
+      "slot_ids": [
+        "reunion"
+      ],
+      "legacy_clue_ids": [
+        "fixed_last_pages_bag_words"
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "deck_id": "star",
+      "text": "还有希望。",
+      "slot_id": "where"
+    },
+    {
+      "deck_id": "death",
+      "text": "这不是终结，而是迁移。",
+      "slot_id": "where"
+    },
+    {
+      "deck_id": "cups_8",
+      "text": "离开，也是为了等。",
+      "slot_id": "reason"
+    },
+    {
+      "deck_id": "sun",
+      "text": "重逢可以先从一句确认开始。",
+      "slot_id": "reunion"
+    },
+    {
+      "deck_id": "world",
+      "text": "一圈绕回原点，有人替你留着灯。",
+      "slot_id": "reunion"
+    }
+  ],
+  "advice": [
+    {
+      "id": "phone",
+      "text": "先打电话确认，再陪他去白沙。",
+      "requires_deductions": [
+        "where",
+        "reason",
+        "reunion"
+      ],
+      "legacy_advice_key": "phone",
+      "reaction": "那就先打一个电话吧。我想，听见她应一声，再出发。",
+      "mood": "smile",
+      "prediction": {
+        "text": "若先打电话确认，再陪他去白沙，事情会有进展。",
+        "condition": "if_phone",
+        "expected": "met",
+        "window_after_due_minutes": 30
+      }
+    },
+    {
+      "id": "travel",
+      "text": "直接陪他去信里的地址。",
+      "requires_deductions": [
+        "where",
+        "reason",
+        "reunion"
+      ],
+      "legacy_advice_key": "travel",
+      "reaction": "我想现在就走。到了门口，我会轻一点敲门。",
+      "mood": "hesitant",
+      "prediction": {
+        "text": "若直接陪他去信里的地址，事情会有进展。",
+        "condition": "if_travel",
+        "expected": "met",
+        "window_after_due_minutes": 30
+      }
+    },
+    {
+      "id": "letter",
+      "text": "先写信过去，等她回音。",
+      "requires_deductions": [
+        "where",
+        "reason",
+        "reunion"
+      ],
+      "legacy_advice_key": "letter",
+      "reaction": "我先把名字写清楚。这一次，信要寄出去。",
+      "mood": "neutral",
+      "prediction": {
+        "text": "若先写信过去，等她回音，事情会有进展。",
+        "condition": "if_letter",
+        "expected": "met",
+        "window_after_due_minutes": 30
+      }
+    }
+  ],
+  "outcomes": {
+    "version": 1,
+    "subject_id": "npc_wen_qingchuan",
+    "target_name": "温月现在在哪里，为什么分开保存信，又该怎样让姐弟见面？",
+    "minute_of_day": 1290,
+    "feedback_delay": 180,
+    "world_facts": {
+      "where": {
+        "values": [
+          "baisha"
+        ],
+        "default": "baisha"
+      },
+      "reason": {
+        "values": [
+          "help"
+        ],
+        "default": "help"
+      },
+      "address": {
+        "values": [
+          "third_house"
+        ],
+        "default": "third_house"
+      }
+    },
+    "branch_ids": [],
+    "item_effect_ids": [],
+    "prediction_conditions": {
+      "always": {
+        "label": "无附加条件"
+      },
+      "if_phone": {
+        "label": "若先打电话确认，再陪他去白沙",
+        "outcomes": [
+          "phone"
+        ]
+      },
+      "if_travel": {
+        "label": "若直接陪他去信里的地址",
+        "outcomes": [
+          "travel"
+        ]
+      },
+      "if_letter": {
+        "label": "若先写信过去，等她回音",
+        "outcomes": [
+          "letter"
+        ]
+      }
+    },
+    "prediction_labels": {
+      "met": "事情有了进展",
+      "missed": "事情走了一点弯路"
+    },
+    "advice": {
+      "phone": {
+        "text": "先打电话确认，再陪他去白沙。"
+      },
+      "travel": {
+        "text": "直接陪他去信里的地址。"
+      },
+      "letter": {
+        "text": "先写信过去，等她回音。"
+      }
+    },
+    "advice_options": [
+      {
+        "key": "phone",
+        "label": "先打电话确认，再陪他去白沙。"
+      },
+      {
+        "key": "travel",
+        "label": "直接陪他去信里的地址。"
+      },
+      {
+        "key": "letter",
+        "label": "先写信过去，等她回音。"
+      }
+    ],
+    "item_effect": {},
+    "outcomes": {
+      "phone": {
+        "actual_action": "先打电话确认身体和行程，再陪晴川去白沙见姐姐",
+        "outcome": "met",
+        "evidence": "sufficient",
+        "feedback": "delayed",
+        "text": "电话那头，她只说：“回来就好。”我们后来坐在海边的窗前。她托我带回一张照片，背面写着：“店交给你了。”",
+        "delay_minutes": 180,
+        "effects": []
+      },
+      "travel": {
+        "actual_action": "直接陪晴川到白沙，姐弟重逢但温月受了些惊",
+        "outcome": "met",
+        "evidence": "sufficient",
+        "feedback": "delayed",
+        "text": "我们见到她了。她受了点惊，还是握住了我的手。后来寄来的信很温和：“下次先来个电话，好让我有个准备。”",
+        "delay_minutes": 180,
+        "effects": []
+      },
+      "letter": {
+        "actual_action": "寄出给白沙的信，等待回音",
+        "outcome": "met",
+        "evidence": "sufficient",
+        "feedback": "delayed",
+        "text": "信已经寄出。晴川暂时仍在公交站等待回音，姐弟还没有见面。",
+        "delay_minutes": 180,
+        "effects": []
+      }
+    },
+    "rules": [
+      {
+        "when": {
+          "advice": "phone",
+          "accepted": true
+        },
+        "outcome": "phone"
+      },
+      {
+        "when": {
+          "advice": "travel",
+          "accepted": true
+        },
+        "outcome": "travel"
+      },
+      {
+        "when": {
+          "advice": "letter",
+          "accepted": true
+        },
+        "outcome": "letter"
+      },
+      {
+        "when": {},
+        "outcome": "letter"
+      }
+    ],
+    "feedback_effects": []
+  }
+}

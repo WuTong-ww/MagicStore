@@ -44,7 +44,12 @@ func run() -> void:
 	var isolated: String = ProjectSettings.globalize_path("res://.tools/case-save-config/"+game.make_id("run"))
 	check(_copy_tree(ProjectSettings.globalize_path("res://scripts"),isolated.path_join("scripts")) and _copy_tree(ProjectSettings.globalize_path("res://data"),isolated.path_join("data")),"isolated scripts and data copy")
 	check(_write(isolated.path_join("project.godot"),'config_version=5\n[application]\nconfig/name="Case validation guard"\n[rendering]\nrenderer/rendering_method="gl_compatibility"\n'),"isolated project has no gameplay autoloads")
-	check(_write(isolated.path_join("fixture.json"),JSON.stringify(game.snapshot())),"real schema11 fixture copied")
+	check(_write(isolated.path_join("fixture.json"),JSON.stringify(game.snapshot())),"real saved source fixture copied")
+	# STORY catalog installation now validates case rules. Capture the genuine
+	# valid catalog before corrupting only the isolated rules under test.
+	var source_catalog: Dictionary = load("res://scripts/divination/catalog.gd").load_data(load("res://scripts/core/content_loader.gd").load_content().content)
+	var source_catalog_json := JSON.stringify(source_catalog)
+	check(not source_catalog.is_empty() and _write(isolated.path_join("catalog.json"),source_catalog_json),"valid catalog snapshot copied before isolated rule corruption")
 	check(DirAccess.copy_absolute(ProjectSettings.globalize_path("res://tests/integration/case_save_bad_rules.gd"),isolated.path_join("case_save_bad_rules.gd"))==OK,"isolated assertion script copied")
 	if failures:
 		finish()
@@ -52,7 +57,7 @@ func run() -> void:
 	for corrupt: String in ["{}",'{"copy":{"invalid_action":""}}']:
 		check(_write(isolated.path_join("data/cases/rules.json"),corrupt),"corrupt only isolated rules")
 		var output: Array = []
-		var code := OS.execute(OS.get_executable_path(),["--headless","--path",isolated,"--script","res://case_save_bad_rules.gd","--","--isolated-case-guard"],output,true,false)
+		var code := OS.execute(OS.get_executable_path(),["--headless","--path",isolated,"--script","res://case_save_bad_rules.gd","--","--isolated-case-guard","--catalog-sha="+source_catalog_json.sha256_text()],output,true,false)
 		for line: Variant in output:
 			print(str(line).strip_edges())
 		check(code==0 and not str(output).contains("SCRIPT ERROR:") and not str(output).contains("ERROR:"),"corrupt rules cannot turn invalid settings or board into successful validation")
@@ -60,9 +65,16 @@ func run() -> void:
 func isolated_run() -> void:
 	var schema = load("res://scripts/divination/case_schema.gd")
 	var case_save = load("res://scripts/divination/case_save.gd")
-	var loader = load("res://scripts/core/content_loader.gd")
-	var catalog_script = load("res://scripts/divination/catalog.gd")
-	var catalog: Dictionary = catalog_script.load_data(loader.load_content().content)
+	var expected_catalog_sha := ""
+	for argument: String in OS.get_cmdline_user_args():
+		if argument.begins_with("--catalog-sha="):
+			expected_catalog_sha = argument.trim_prefix("--catalog-sha=")
+	check(expected_catalog_sha.length()==64 and FileAccess.get_sha256("res://catalog.json")==expected_catalog_sha,"catalog bytes match the real parent loader snapshot SHA")
+	var catalog: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://catalog.json"))
+	check(not catalog.is_empty(),"genuine catalog captured before rule corruption is available")
+	if catalog.is_empty():
+		finish()
+		return
 	var source: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://fixture.json"))
 	var visits := {}
 	for visit: Dictionary in source.visits:

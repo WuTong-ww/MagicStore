@@ -174,6 +174,7 @@ func check_legacy_applied() -> void:
 	output.close()
 	check((await game.execute_action_async(action("load_game",{"save_id":old.save_id}))).success,"actual applied snapshot remains loadable after strategy upgrade")
 	var migrated: Dictionary = game.snapshot()
+	check(migrated.get("story",{}).get("completions",{}) == {} and migrated.get("story",{}).get("notes",{}).keys() == ["note_1"],"historical traffic gains initial notebook metadata without fabricating story completions")
 	check(migrated.divination.get("settings") == {"free_question":false} and migrated.divination.cases.values().all(func(case: Dictionary) -> bool: return case.get("board") == {}),"the historical traffic source gains only disabled free questions and empty boards")
 	check(migrated.schema_version == SaveService.CURRENT_SCHEMA and migrated.divination.get("past_lines") == {"version":1,"instances":{}},"historical applied snapshot reaches current schema with the explicit empty progress namespace")
 	check(migrated.divination.cases.values().all(func(case: Dictionary) -> bool: return case.get("cause") == ("both" if case.case_id == "archive" else "present")),"each historical case gains its trusted cause without acquiring new content")
@@ -184,6 +185,7 @@ func check_legacy_applied() -> void:
 	# New daily progress is additive; every original field and raw byte must
 	# still compare exactly after excluding this explicitly tested namespace.
 	historical.erase("daily_loop")
+	historical.erase("story")
 	historical.divination.erase("past_lines")
 	historical.divination.erase("settings")
 	for case: Dictionary in historical.divination.cases.values():

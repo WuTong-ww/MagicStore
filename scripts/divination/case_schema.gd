@@ -214,6 +214,10 @@ static func _advice_valid(values: Array, slots: Dictionary, event: Dictionary) -
 		mapped[key] = true
 	return true
 
+static func g3_case_id(definition: Dictionary) -> String:
+	var legacy: String = definition.get("legacy_case_id", "")
+	return legacy if not legacy.is_empty() else str(definition.get("id", ""))
+
 static func to_g3_template(definition: Dictionary, catalog: Dictionary) -> Dictionary:
 	if not validate_definition(definition,catalog):
 		return {}

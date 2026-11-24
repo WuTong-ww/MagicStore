@@ -1,0 +1,487 @@
+{
+  "id": "fixed_key",
+  "version": 1,
+  "title": "老屋的第三把钥匙",
+  "legacy_case_id": "",
+  "question": "买家是谁，为什么出高价，第三把钥匙藏在哪里？",
+  "truth": {
+    "buyer": {
+      "value": "tao_shuning",
+      "text": "买家是沈念秋三十年前的学生陶书宁。",
+      "requires_clue": "fixed_key_truth_buyer"
+    },
+    "purpose": {
+      "value": "library",
+      "text": "她想把老屋改成社区小图书室。",
+      "requires_clue": "fixed_key_truth_purpose"
+    },
+    "key": {
+      "value": "book",
+      "text": "钢琴凳暗格的钥匙夹在《唐诗三百首》中，暗格里有温月与沈念秋丈夫的往来信。",
+      "requires_clue": "fixed_key_truth_key"
+    }
+  },
+  "deduction_slots": [
+    {
+      "id": "buyer",
+      "title": "买家是谁",
+      "answers": [
+        {
+          "id": "developer",
+          "text": "开发商"
+        },
+        {
+          "id": "relative",
+          "text": "远房亲戚"
+        },
+        {
+          "id": "student",
+          "text": "以前的学生"
+        },
+        {
+          "id": "neighbour",
+          "text": "邻居"
+        }
+      ],
+      "correct_answer": "student",
+      "unlock_evidence": [
+        "books_stay",
+        "initials",
+        "drawing_student",
+        "developer_rumour"
+      ]
+    },
+    {
+      "id": "purpose",
+      "title": "为什么愿意出高价",
+      "answers": [
+        {
+          "id": "resell",
+          "text": "想转手赚钱"
+        },
+        {
+          "id": "location",
+          "text": "只看中地段"
+        },
+        {
+          "id": "preserve",
+          "text": "想留住这间屋子"
+        }
+      ],
+      "correct_answer": "preserve",
+      "unlock_evidence": [
+        "books_stay",
+        "stool_lock"
+      ]
+    },
+    {
+      "id": "key_place",
+      "title": "第三把钥匙在哪",
+      "answers": [
+        {
+          "id": "flowerpot",
+          "text": "花盆底下"
+        },
+        {
+          "id": "stool",
+          "text": "钢琴凳里"
+        },
+        {
+          "id": "book",
+          "text": "《唐诗三百首》里"
+        },
+        {
+          "id": "grave",
+          "text": "丈夫的墓前"
+        }
+      ],
+      "correct_answer": "book",
+      "unlock_evidence": [
+        "poetry_book",
+        "stool_lock"
+      ]
+    }
+  ],
+  "questions": [
+    [
+      {
+        "id": "buyer_signature",
+        "text": "买家的出价单还在吗？",
+        "answer": "在，落款是 T.S.N.。我忽然想起，以前有个学生叫陶书宁，总在课本边上画画。",
+        "evidence_ids": [
+          "initials",
+          "drawing_student"
+        ],
+        "requires_familiarity": 0
+      },
+      {
+        "id": "old_student",
+        "text": "有哪些旧学生，会珍惜这里？",
+        "answer": "有个叫陶书宁的女学生，喜欢在课本边画画。出价单上的 T.S.N.，让我想起她来。",
+        "evidence_ids": [
+          "drawing_student",
+          "initials"
+        ],
+        "requires_familiarity": 0
+      },
+      {
+        "id": "nearby_rumour",
+        "text": "邻居说的收楼，和这位买家有联系吗？",
+        "answer": "邻居只说附近有开发商，没有见过这位买家。倒是出价单上的 T.S.N.，像极了我一个爱画画的旧学生的名字。",
+        "evidence_ids": [
+          "developer_rumour",
+          "initials",
+          "drawing_student"
+        ],
+        "requires_familiarity": 0
+      }
+    ],
+    [
+      {
+        "id": "keep_books",
+        "text": "买家对屋里的书和家具怎么说？",
+        "answer": "中介说，买家不要求腾空家具，书更是一本都别动。听起来，不像是只想买一块地。",
+        "evidence_ids": [
+          "books_stay"
+        ],
+        "requires_familiarity": 0
+      },
+      {
+        "id": "buying_terms",
+        "text": "出价以外，还有什么条件？",
+        "answer": "“书一本都别动。”中介特地又说了一遍。家具也不用搬走，这让我觉得，对方是在替屋子留住什么。",
+        "evidence_ids": [
+          "books_stay"
+        ],
+        "requires_familiarity": 0
+      },
+      {
+        "id": "house_memory",
+        "text": "屋里哪些东西，让你舍不得？",
+        "answer": "书、琴，还有学生们坐过的地方。奇怪的是，买家也说家具不必腾空，书一本都别动。",
+        "evidence_ids": [
+          "books_stay"
+        ],
+        "requires_familiarity": 0
+      }
+    ],
+    [
+      {
+        "id": "husband_habit",
+        "text": "他提到钥匙前后，有什么习惯？",
+        "answer": "他每晚弹完琴，总要翻一会儿那本《唐诗三百首》。钢琴凳下面有个小锁孔，可我没有找到钥匙。",
+        "evidence_ids": [
+          "poetry_book",
+          "stool_lock"
+        ],
+        "requires_familiarity": 0
+      },
+      {
+        "id": "locked_compartment",
+        "text": "钢琴附近有没有上锁的地方？",
+        "answer": "凳子坐垫下面有个小锁孔。至于钥匙，他生前总在弹完琴后翻那本《唐诗三百首》，我想再看看书页。",
+        "evidence_ids": [
+          "stool_lock",
+          "poetry_book"
+        ],
+        "requires_familiarity": 0
+      },
+      {
+        "id": "third_key",
+        "text": "你试着找过哪些地方？",
+        "answer": "花盆底下没有。琴凳有锁，他每晚却总去翻唐诗。也许我们该把钥匙和它能打开的地方，分开想一想。",
+        "evidence_ids": [
+          "poetry_book",
+          "stool_lock"
+        ],
+        "requires_familiarity": 0
+      }
+    ]
+  ],
+  "evidence": [
+    {
+      "id": "books_stay",
+      "text": "中介转达：买家不要求腾空家具，书一本都别动。",
+      "type": "testimony",
+      "source": "中介转达的话",
+      "slot_ids": [
+        "buyer",
+        "purpose"
+      ]
+    },
+    {
+      "id": "initials",
+      "text": "出价单上的签名缩写是 T.S.N.。",
+      "type": "fact",
+      "source": "出价单",
+      "slot_ids": [
+        "buyer"
+      ],
+      "legacy_clue_ids": [
+        "fixed_key_initials"
+      ]
+    },
+    {
+      "id": "drawing_student",
+      "text": "沈念秋记得，一位女学生总在课本边上画画。",
+      "type": "testimony",
+      "source": "沈念秋的回忆",
+      "slot_ids": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "developer_rumour",
+      "text": "邻居说，最近有开发商在附近收楼。",
+      "type": "misleading",
+      "source": "邻居的陈述",
+      "slot_ids": [
+        "buyer"
+      ]
+    },
+    {
+      "id": "poetry_book",
+      "text": "丈夫每晚弹完琴，总要翻一会儿《唐诗三百首》。",
+      "type": "testimony",
+      "source": "沈念秋的回忆",
+      "slot_ids": [
+        "key_place"
+      ]
+    },
+    {
+      "id": "stool_lock",
+      "text": "钢琴凳坐垫下面有一个小锁孔。",
+      "type": "fact",
+      "source": "钢琴凳暗格",
+      "slot_ids": [
+        "key_place",
+        "purpose"
+      ],
+      "legacy_clue_ids": [
+        "fixed_key_stool_lock"
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "deck_id": "wands_4",
+      "text": "一个让人聚在一起的家。",
+      "slot_id": "purpose"
+    },
+    {
+      "deck_id": "hierophant",
+      "text": "师生之间的旧缘。",
+      "slot_id": "buyer"
+    },
+    {
+      "deck_id": "pentacles_4",
+      "text": "守住，而不只是卖掉。",
+      "slot_id": "purpose"
+    },
+    {
+      "deck_id": "high_priestess",
+      "text": "书页之间藏着东西。",
+      "slot_id": "key_place"
+    },
+    {
+      "deck_id": "cups_10",
+      "text": "屋子会继续住着笑声。",
+      "slot_id": "purpose"
+    }
+  ],
+  "advice": [
+    {
+      "id": "sell",
+      "text": "直接卖掉老屋，先把手续办好。",
+      "requires_deductions": [
+        "buyer",
+        "purpose",
+        "key_place"
+      ],
+      "legacy_advice_key": "sell",
+      "reaction": "钱能让我安心一些。我会把该留下的东西先收好。",
+      "mood": "neutral",
+      "prediction": {
+        "text": "若直接卖掉老屋，先把手续办好，事情可能会走一点弯路。",
+        "condition": "if_sell",
+        "expected": "missed",
+        "window_after_due_minutes": 30
+      }
+    },
+    {
+      "id": "meet_buyer",
+      "text": "请买家当面来谈，再决定老屋的未来。",
+      "requires_deductions": [
+        "buyer",
+        "purpose",
+        "key_place"
+      ],
+      "legacy_advice_key": "meet_buyer",
+      "reaction": "那就请她来坐一坐吧。旧屋的事，总该把话当面说清。",
+      "mood": "smile",
+      "prediction": {
+        "text": "若请买家当面来谈，再决定老屋的未来，事情会有进展。",
+        "condition": "if_meet_buyer",
+        "expected": "met",
+        "window_after_due_minutes": 30
+      }
+    },
+    {
+      "id": "find_key",
+      "text": "先找齐第三把钥匙，再谈买卖。",
+      "requires_deductions": [
+        "buyer",
+        "purpose",
+        "key_place"
+      ],
+      "legacy_advice_key": "find_key",
+      "reaction": "我想先把他留下的话接着读完。买卖的事，可以晚一点再谈。",
+      "mood": "hesitant",
+      "prediction": {
+        "text": "若先找齐第三把钥匙，再谈买卖，事情会有进展。",
+        "condition": "if_find_key",
+        "expected": "met",
+        "window_after_due_minutes": 30
+      }
+    }
+  ],
+  "outcomes": {
+    "version": 1,
+    "subject_id": "npc_shen_nianqiu",
+    "target_name": "买家是谁，为什么出高价，第三把钥匙藏在哪里？",
+    "minute_of_day": 1080,
+    "feedback_delay": 180,
+    "world_facts": {
+      "buyer": {
+        "values": [
+          "tao_shuning"
+        ],
+        "default": "tao_shuning"
+      },
+      "purpose": {
+        "values": [
+          "library"
+        ],
+        "default": "library"
+      },
+      "key": {
+        "values": [
+          "book"
+        ],
+        "default": "book"
+      }
+    },
+    "branch_ids": [],
+    "item_effect_ids": [],
+    "prediction_conditions": {
+      "always": {
+        "label": "无附加条件"
+      },
+      "if_sell": {
+        "label": "若直接卖掉老屋，先把手续办好",
+        "outcomes": [
+          "sell"
+        ]
+      },
+      "if_meet_buyer": {
+        "label": "若请买家当面来谈，再决定老屋的未来",
+        "outcomes": [
+          "meet_buyer"
+        ]
+      },
+      "if_find_key": {
+        "label": "若先找齐第三把钥匙，再谈买卖",
+        "outcomes": [
+          "find_key"
+        ]
+      }
+    },
+    "prediction_labels": {
+      "met": "事情有了进展",
+      "missed": "事情走了一点弯路"
+    },
+    "advice": {
+      "sell": {
+        "text": "直接卖掉老屋，先把手续办好。"
+      },
+      "meet_buyer": {
+        "text": "请买家当面来谈，再决定老屋的未来。"
+      },
+      "find_key": {
+        "text": "先找齐第三把钥匙，再谈买卖。"
+      }
+    },
+    "advice_options": [
+      {
+        "key": "sell",
+        "label": "直接卖掉老屋，先把手续办好。"
+      },
+      {
+        "key": "meet_buyer",
+        "label": "请买家当面来谈，再决定老屋的未来。"
+      },
+      {
+        "key": "find_key",
+        "label": "先找齐第三把钥匙，再谈买卖。"
+      }
+    ],
+    "item_effect": {},
+    "outcomes": {
+      "sell": {
+        "actual_action": "直接卖房，较晚才知道学生的图书室计划",
+        "outcome": "missed",
+        "evidence": "sufficient",
+        "feedback": "delayed",
+        "text": "房子卖出去了。后来才知道，是书宁想把它改成小图书室。如果早点当面谈，我想我会少一些遗憾。",
+        "delay_minutes": 180,
+        "effects": []
+      },
+      "meet_buyer": {
+        "actual_action": "与陶书宁当面相认，一起筹备社区图书室并保留住处",
+        "outcome": "met",
+        "evidence": "sufficient",
+        "feedback": "delayed",
+        "text": "来的是书宁。我们商量把老屋改成小图书室，也给我留一间房。第三把钥匙夹在唐诗里，打开了琴凳暗格，里面有温月的旧信。",
+        "delay_minutes": 180,
+        "effects": []
+      },
+      "find_key": {
+        "actual_action": "找到钥匙和旧信，晚些再与买家商谈",
+        "outcome": "met",
+        "evidence": "sufficient",
+        "feedback": "delayed",
+        "text": "钥匙就在《唐诗三百首》里。找到旧信花了些时间，书宁暂时没有等到我；不过中介说，之后仍可以再谈。",
+        "delay_minutes": 180,
+        "effects": []
+      }
+    },
+    "rules": [
+      {
+        "when": {
+          "advice": "sell",
+          "accepted": true
+        },
+        "outcome": "sell"
+      },
+      {
+        "when": {
+          "advice": "meet_buyer",
+          "accepted": true
+        },
+        "outcome": "meet_buyer"
+      },
+      {
+        "when": {
+          "advice": "find_key",
+          "accepted": true
+        },
+        "outcome": "find_key"
+      },
+      {
+        "when": {},
+        "outcome": "find_key"
+      }
+    ],
+    "feedback_effects": []
+  }
+}

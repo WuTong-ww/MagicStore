@@ -6,6 +6,7 @@ const Generated = preload("res://scripts/divination/generated_cases.gd")
 const Economy = preload("res://scripts/divination/economy.gd")
 const Loader = preload("res://scripts/core/content_loader.gd")
 const Fixture = preload("res://tests/fixtures/legacy_divination_guests.gd")
+const StoryContent = preload("res://scripts/story/story_content.gd")
 var checks := 0
 var failures := 0
 var game: Node
@@ -35,7 +36,14 @@ func run() -> void:
 	if data.is_empty():
 		finish()
 		return
-	check(data.guests.keys() == ["npc_lin"], "formal guest data contains no prototype cast")
+	var authored_guests := StoryContent.load_npcs()
+	check(not authored_guests.is_empty() and authored_guests.has("npc_lin"), "validated authored Story guest registry includes Lin")
+	var expected_ids: Array = authored_guests.keys()
+	var actual_ids: Array = data.guests.keys()
+	expected_ids.sort()
+	actual_ids.sort()
+	check(actual_ids == expected_ids and Catalog.LEGACY_GUEST_IDS.all(func(id: String) -> bool: return not data.guests.has(id)), "formal guest data contains exactly the authored Story cast and no prototype cast")
+	var base_guests: Dictionary = data.guests.duplicate(true)
 	var state := {"save_id":"clean_economy","player":{"coins":40,"items":{}},"npcs":{"npc_lin":{"coins":60}},"people":{"profiles":{}}}
 	Economy.initialize(state,data,"npc_lin")
 	check(state.npcs.keys() == ["npc_lin"], "economy initialization never seeds any encounter fixture")
@@ -46,7 +54,7 @@ func run() -> void:
 	var restored := Generated.catalog(state,data)
 	check(restored.guests.has("npc_demo_he") and not restored.guests.has("npc_demo_xu") and not restored.guests.has("npc_demo_ji"), "compatibility restores only the identity actually owned by this old save")
 	check(restored.guests.npc_demo_he.name == "何沿" and restored.guests.npc_demo_he.profile_id == "ferryman" and Catalog.valid_chart(restored.guests.npc_demo_he), "old identity, past profile and full birth chart remain unchanged")
-	check(JSON.stringify(state) == encoded and data.guests.keys() == ["npc_lin"], "compatibility projection never mutates a save or the base catalog")
+	check(JSON.stringify(state) == encoded and data.guests == base_guests, "compatibility projection never mutates a save or any base guest field")
 	var clean := Generated.catalog({"npcs":{"npc_lin":{}},"people":{"profiles":{}}},restored)
 	check(not clean.guests.has("npc_demo_he"), "changing to a clean save drops earlier compatibility guests")
 	check(data.past_profiles.has("ferryman") and data.past_profiles.has("gardener"), "shared live past-life rules are retained rather than removed as fixtures")

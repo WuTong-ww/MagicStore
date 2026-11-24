@@ -484,7 +484,7 @@ static func progress_valid(state: Dictionary, library: Dictionary) -> bool:
 	var progress: Variant = state.divination.get("past_lines")
 	if progress == null:
 		return _integer(state.get("schema_version"),1,8)
-	if not _integer(state.get("schema_version"),9,11):
+	if not _integer(state.get("schema_version"),9,12):
 		return false
 	if not _keys(progress,["version","instances"]) or not _integer(progress.version,1,1) or not progress.instances is Dictionary or progress.instances.size() > int(library.limits.max_instances) or not _text(state.get("save_id")) or not _integer(state.get("clock_minutes")) or not state.get("npcs") is Dictionary or not state.get("visits") is Array or not state.get("processed_actions") is Dictionary or not state.divination.get("cases") is Dictionary or not state.divination.get("ledger") is Array:
 		return false

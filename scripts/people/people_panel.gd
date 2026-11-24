@@ -6,6 +6,7 @@ const Appearance = preload("res://scripts/people/appearance.gd")
 const Portrait = preload("res://scripts/people/portrait.gd")
 const EditorConfig = preload("res://scripts/people/appearance_editor_config.gd")
 const StyleReportPanel = preload("res://scripts/people/style_report_panel.gd")
+const StoryNotes = preload("res://scripts/ui/story_notes.gd")
 ## A-owned presentation; the host supplies a filtered view and owns actions.
 ## This panel never touches GameState, the clock, wallets or a save directly.
 
@@ -14,6 +15,7 @@ signal book_requested(arrival_id: String, minutes_from_now: int)
 signal wait_requested(minutes: int)
 signal appearance_requested(appearance: Dictionary)
 signal evidence_requested(visit_id: String, action_id: String)
+signal story_notes_closed
 
 var view: Dictionary = {}
 var queue: ItemList
@@ -45,6 +47,9 @@ var _view_identity := ""
 var style_report_panel: Control
 var _style_report_page: ScrollContainer
 var _people_pages: TabContainer
+var story_notes: Control
+var _story_view: Dictionary = {"enabled":false}
+var _story_identity := ""
 
 func _ready() -> void:
 	editor_config = EditorConfig.load_config()
@@ -224,9 +229,39 @@ func set_view(value: Dictionary, identity: String = "") -> void:
 	if is_node_ready():
 		refresh()
 
+func set_story_view(value: Dictionary, identity: String = "") -> void:
+	_story_view = value.duplicate(true)
+	_story_identity = identity
+	if is_node_ready():
+		_sync_story_notes()
+
+func _sync_story_notes() -> void:
+	if not is_instance_valid(_people_pages):
+		return
+	# CASE without a story getter retains its original tab structure.
+	if not is_instance_valid(story_notes) and not _story_view.get("enabled",false):
+		return
+	if not is_instance_valid(story_notes):
+		story_notes = StoryNotes.new()
+		story_notes.name = "StoryNotes"
+		_people_pages.add_child(story_notes)
+		story_notes.close_requested.connect(func(): story_notes_closed.emit())
+	story_notes.set_view(_story_view,_story_identity)
+	_people_pages.set_tab_hidden(story_notes.get_index(),not story_notes.visible)
+	if not story_notes.config.is_empty():
+		_people_pages.set_tab_title(story_notes.get_index(),str(story_notes.config.copy.tab_title))
+
+func open_story_notes() -> bool:
+	_sync_story_notes()
+	if not is_instance_valid(story_notes) or not story_notes.visible:
+		return false
+	_people_pages.current_tab = story_notes.get_index()
+	return true
+
 func refresh() -> void:
 	if not is_instance_valid(queue):
 		return
+	_sync_story_notes()
 	_sync_committed_appearance()
 	var modern: Dictionary = view.get("style_report",{})
 	style_report_panel.set_report(modern)

@@ -7,8 +7,15 @@
 任务ID｜状态｜提交｜一句话
 ---｜---｜---｜---
 R3-0｜完成（随 LOOP 提交）｜89b7334｜Cozy Tunes/、assets/audio/music/ 已忽略且零追踪；剧情附录原文封存 docs/story/fixed_cases.md。
-R3-LOOP｜部分完成｜89b7334｜顺序日程及专项全绿；第三轮标准全测停在旧 traffic 快照比较漏排除新增 daily_loop 字段，未跑第四轮。
-R3-CASE｜部分完成｜ab7a220｜推理板/三建议/迁移/双尺寸/31.87秒录像专项通过；标准第3轮在HTTP core两断言失败，按上限不跑full4。
+R3-LOOP｜完成（STORY整合复核）｜89b7334｜原三轮失败记录保留；后续夹具修正在STORY标准full3整体全绿复核，无LOOP第四轮。
+R3-CASE｜完成（STORY整合复核）｜ab7a220｜原三轮失败记录保留；HTTP原断言/预算未变，STORY修首帧deadline后标准full3整体全绿。
+R3-STORY｜完成，待提交｜待填｜标准full3退出0：17878检查+371 Python测试零失败，360源SHA保持；UI244/244、shop1548/1548、35.267秒录像81/81。
+
+最新恢复点（覆盖下面历史过程）：STORY完整第3轮root session63829已terminal exit0，2835.688秒、134报告组17878检查/0失败，Python117+254全过，360源逐SHA未变、0SCRIPT ERROR；formal364记录/367文件及alpha70另通过。full1/2失败和两项test-only兼容修正原样保留，不跑full4。最终实际GPU244/0六图、shop1548/0三十图、原生1920×1080影片81/0、1058帧/35.2667秒，六JPG含三实际关键帧共1192972B全部root实开。results/R3-STORY-validation.json与commit-paths已生成65路径，当前准备普通提交/push；未来R3-LIN/NAMES计划与所有.tools草稿不随本任务提交。所有engine均终态；接下来提交后才应用LIN。新工作恢复请先读.tools/r3-story/root-live-recovery.md，勿再跑已过GPU/HTTP/完整测试。
+
+STORY当前恢复点（优先于下面历史过程）：CASE已以ab7a220＋META cd78da50c65e82dd4b85694c2d30bed2d96ed442普通push成功。root先只拷新story_playthrough做真实生产RED1/1，然后`.tools/r3-story/apply_drafts.py`按data/core/UI三清单SHA＋root九路径实际应用40文件，收据applied-drafts.json；**不要再次覆盖这些生产文件**。生产schema12，首次import session16463已terminal0（401资源重导、无ERROR），生产story_ui reader18/18已terminal0。root已接run.ps1八个STORY目标，core将新增迁移/freefollowup两个target与真实CASE11 fixture（38768B/phasecards）。UI owner正在正式修首帧HTTPRequest Timer：已有tools-only cold RED→monotonic224/224，原预算/断言保留，生产HTTP补丁尚未验证；先core两短目标，终态后单引擎交UI做正式HTTP RED/GREEN。root在HTTP时序目标结束前不跑playthrough/GPU。STORY标准full轮数仍0，截图/录像/实际全三路尚未生产复验。原fixed_invitation实际字节未改；talk旧visit引用已在root生产_advance后重取，待freefollowup真实验证。用户WEB追加见WEB_ADDENDUM_R3.md，1–3待POLISH按原序做，当前不提前改短视窗。
+
+STORY最新恢复点：真实CASE11迁移39/39、freefollowup25/25已生产通过并terminal；fixture已锁-text。HTTP最终标准wrapper786/786、0ERROR，provider SHA f6877233423cb033f52e6b0185695b2dc2908364d30c11596706d3e577fe54ec，独审无遗留Critical/Important、原预算/四测试SHA保持，58055已terminal0。生产三路26919已terminal0、550/550，source保持，六份实际存档receipt交UI，不再poll或重复三路。UI修复前奏后恢复自由框、建议区叠工具条、结局称号显示；reader20/20、headless212/212，实际鼠标专项66/66。最终完整GPU103/13仍有第一次点击/后续前奏状态问题，owner case_ui正基于首失败遥测定位，不能视为最终GUI通过；影片未录。root当前无engine，GPU由UI独占；STORY标准full仍0轮。LIN仅在.tools/r3-lin/drafts准备、NAMES仅在.tools/r3-names准备，生产未应用，不随STORY提交。
 
 R3-CASE 恢复点：实际工作区 D:/MagicStore/.tools/round3，schema11；full1 session71394 已 terminal exit1，不再poll，日志 .tools/r3-case/full1.log。新CASE八组和前序已过，旧 event_effects 的 wait 返回 CONTENT_INVALID。case_core仅定位最小兼容修正并检查后续未到达夹具，禁止放松生产校验。CASE独审Critical/Important/Minor均0；真实deadline25/25、坏配置10/10、host17/17、迁移40/40、transactions218/218、board456/456、schema149/149、UI GPU241/241六帧、旧shop GPU1546/1546三十帧。GPU session44965 已terminal0，不再poll。最终本地录像 .tools/case-board-movie/r3-case.avi，956帧/30fps/31.8667秒/227989708B；不提交视频。完整上限三轮，下一为第2轮。产品源尚未提交，不得标完成；root补文档/JPG后跑全套。
 

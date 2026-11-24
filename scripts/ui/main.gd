@@ -244,6 +244,7 @@ func _refresh() -> void:
 	provider_badge.text = "在线对话" if mode.get("mode") == "online" else "离线对话 · 本地话题"
 	if is_instance_valid(people_panel):
 		people_panel.set_view(GameState.people_view(),str(snapshot.get("save_id","")))
+		_sync_story_archive()
 	if is_instance_valid(history_window) and history_window.visible and _history_save_id != str(snapshot.get("save_id","")):
 		show_history()
 	if snapshot.is_empty():
@@ -293,7 +294,7 @@ func run_action(action_type: String, extra: Dictionary = {}) -> Dictionary:
 	open_button.disabled = false
 	show_notice(str(result.get("message", "操作完成")))
 	if result.get("success", false):
-		if is_instance_valid(presentation_audio) and not action_type.begins_with("case_"):
+		if is_instance_valid(presentation_audio) and not action_type.begins_with("case_") and action_type != "story_choice":
 			presentation_audio.play_ui("coin" if action_type in ["procure_item","sell_product","sell_material"] else "confirm")
 		if action_type in ["new_game", "load_game"]:
 			save_window.hide()
@@ -340,6 +341,8 @@ func _build_people_window() -> void:
 	people_panel.appearance_requested.connect(_save_player_appearance)
 	people_panel.book_requested.connect(_confirm_booking)
 	people_panel.evidence_requested.connect(func(visit_id: String, action_id: String): show_history(visit_id,action_id))
+	if people_panel.has_signal("story_notes_closed"):
+		people_panel.connect("story_notes_closed",people_window.hide)
 
 func _save_player_appearance(appearance: Dictionary) -> Dictionary:
 	var result: Dictionary = await run_action("save_appearance",{"appearance":appearance.duplicate(true)})
@@ -364,8 +367,20 @@ func open_people() -> void:
 		show_notice("请先打开存档。")
 		return
 	people_panel.set_view(GameState.people_view(),str(GameState.player_snapshot().get("save_id","")))
+	_sync_story_archive()
 	_fit_window(people_window,Vector2i(shell_config.dialogs.people[0],shell_config.dialogs.people[1]))
 	people_window.popup_centered()
+
+func _sync_story_archive() -> void:
+	if not is_instance_valid(people_panel) or not people_panel.has_method("set_story_view"):
+		return
+	var public: Variant = GameState.call("story_view") if GameState.has_method("story_view") else {"enabled":false}
+	people_panel.call("set_story_view",public if public is Dictionary else {"enabled":false},str(GameState.player_snapshot().get("save_id","")))
+
+func open_story_notes() -> bool:
+	# Reusable read-only entry. The formal TITLE entry can call this later.
+	open_people()
+	return bool(people_panel.call("open_story_notes")) if is_instance_valid(people_panel) and people_panel.has_method("open_story_notes") else false
 
 func _fit_window(window: Window, desired: Vector2i) -> void:
 	var inset := int(shell_config.layout.margin)*2

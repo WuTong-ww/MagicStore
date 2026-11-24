@@ -26,7 +26,7 @@ func run() -> void:
 	var base: Dictionary = read_json("res://data/content.json")
 	var catalog := Catalog.load_data(base)
 	var definitions: Dictionary = Schema.load_all(catalog)
-	check(definitions.keys() == ["fixed_invitation"], "only the authorized invitation case is registered")
+	check(definitions.keys() == ["fixed_invitation","fixed_bread","fixed_key","fixed_music_box","fixed_last_pages"], "all five authored story cases are registered")
 	if not definitions.has("fixed_invitation"):
 		finish()
 		return

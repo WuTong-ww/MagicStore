@@ -406,6 +406,33 @@ static func add_fixed(people: Dictionary, npc_id: String, name: String, role: St
 	if npc_id == "npc_lin":
 		_add_lin_contact(people)
 
+## Called only inside a new planning/admission candidate, never on save loading.
+static func ensure_story_npc(state: Dictionary, npc_id: String, catalog: Dictionary, story_config: Dictionary, _people_config: Dictionary = {}) -> bool:
+	var descriptor: Dictionary = story_config.get("npcs",{}).get(npc_id,{})
+	if descriptor.is_empty() or not catalog.get("guests",{}).has(npc_id):
+		return false
+	if not state.people.profiles.has(npc_id):
+		var appearance := Appearance.normalize(descriptor.get("appearance",{}),{},npc_id)
+		if appearance.is_empty():
+			return false
+		add_fixed(state.people,npc_id,descriptor.name,descriptor.role)
+		var profile: Dictionary = state.people.profiles[npc_id]
+		profile.template_id = "ordinary_v1" if descriptor.get("ordinary_followup",false) else "story_"+npc_id
+		profile.origin = "story_followup" if descriptor.get("ordinary_followup",false) else "fixed_story"
+		profile.birthday = ""
+		profile.zodiac = ""
+		profile.mbti = descriptor.get("mbti","")
+		profile.personality = descriptor.get("personality","")
+		profile.background = descriptor.get("opening","")
+		profile.preferences = []
+		profile["age"] = descriptor.age
+		profile["cultural_origin"] = descriptor.cultural_origin
+		profile["speech_style"] = descriptor.speech_style
+		profile.appearance = appearance
+	if not state.npcs.has(npc_id):
+		state.npcs[npc_id] = {"coins":int(descriptor.get("coins",story_config.rules.get("npc_coins",0))),"items":{}}
+	return true
+
 static func _add_lin_contact(people: Dictionary) -> void:
 	## B's invitation case refers to an unnamed old friend. Keep that identity
 	## stable without inventing a canonical name, birthday or backstory.
@@ -923,7 +950,8 @@ static func sequential_arrival(row: Dictionary) -> bool:
 		return false
 	var day: int = row.daily_loop_day
 	var index: int = row.daily_loop_index
-	return row.get("arrival_id") == "arrival_daily_%d_%d" % [day,index] and floori(float(row.get("at",-1))/1440.0) == day and row.get("source") in ["fixed_story","daily_loop"] and row.get("daily_kind") == ("case" if index == 0 else "commission") and row.get("intent") == ("divination" if index == 0 else "shopping") and row.get("counted_days",[]).is_empty()
+	var kind_valid: bool = row.get("daily_kind") == "case" if index == 0 else row.get("daily_kind") in ["commission","epilogue"]
+	return row.get("arrival_id") == "arrival_daily_%d_%d" % [day,index] and floori(float(row.get("at",-1))/1440.0) == day and row.get("source") in ["fixed_story","daily_loop"] and kind_valid and row.get("intent") == ("divination" if index == 0 else "shopping") and row.get("counted_days",[]).is_empty()
 
 static func _daily_limit(people: Dictionary, config: Dictionary = {}) -> int:
 	return int(config.arrival.get("max_total_per_day",20)) if config.has("arrival") else int(people.get("arrival_limit_per_day",20))

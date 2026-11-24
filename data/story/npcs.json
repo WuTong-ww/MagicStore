@@ -1,0 +1,330 @@
+{
+  "version": 1,
+  "npcs": {
+    "npc_lin": {
+      "npc_id": "npc_lin",
+      "name": "林照晚",
+      "role": "旧书修复师",
+      "age": 26,
+      "mbti": "INFP",
+      "cultural_origin": "local",
+      "personality": "说话温和，有些迟疑；谈到旧书时更自在。",
+      "speech_style": "说话温和，有些迟疑；谈到旧书时更自在。",
+      "opening": "修书时，我总能慢下来。轮到自己的事，却有点不知从哪一句说起。",
+      "followup": "上次聊过的事，我还想再说几句。",
+      "case_id": "fixed_invitation",
+      "appearance": {
+        "version": 2,
+        "parts": {
+          "hair_back": "hair_back_02",
+          "body": "body_01",
+          "outfit": "outfit_06",
+          "face_shape": "face_01",
+          "features": "features_adult",
+          "eyes_expr": "eyes_01",
+          "brows_expr": "brows_01",
+          "mouth_expr": "mouth_01",
+          "hair_front": "hair_front_02",
+          "accessory": "none"
+        },
+        "colors": {
+          "skin": "skin_02",
+          "hair": "hair_02",
+          "outfit": "outfit_03"
+        },
+        "age_stage": "adult"
+      },
+      "coins": 60,
+      "ordinary_followup": false,
+      "preserve_existing_appearance": true
+    },
+    "npc_pieter": {
+      "npc_id": "npc_pieter",
+      "name": "皮特·莫里斯",
+      "role": "面包师",
+      "age": 34,
+      "mbti": "ESFJ",
+      "cultural_origin": "europe",
+      "personality": "热心直率，中文流利，偶尔说“说真的”；不夸张模仿口音。",
+      "speech_style": "热心直率，中文流利，偶尔说“说真的”；不夸张模仿口音。",
+      "opening": "说真的，锁好的面包店，每天早上都少一条白面包。已经两个星期了，我该不该报警？",
+      "followup": "上次聊过的事，我还想再说几句。",
+      "case_id": "fixed_bread",
+      "appearance": {
+        "version": 2,
+        "parts": {
+          "hair_back": "hair_back_03",
+          "body": "body_01",
+          "outfit": "outfit_08",
+          "face_shape": "face_01",
+          "features": "features_adult",
+          "eyes_expr": "eyes_01",
+          "brows_expr": "brows_01",
+          "mouth_expr": "mouth_01",
+          "hair_front": "hair_front_03",
+          "accessory": "none"
+        },
+        "colors": {
+          "skin": "skin_01",
+          "hair": "hair_04",
+          "outfit": "outfit_02"
+        },
+        "age_stage": "adult"
+      },
+      "coins": 60,
+      "ordinary_followup": false
+    },
+    "npc_shen_nianqiu": {
+      "npc_id": "npc_shen_nianqiu",
+      "name": "沈念秋",
+      "role": "退休语文老师",
+      "age": 67,
+      "mbti": "ISFJ",
+      "cultural_origin": "local",
+      "personality": "礼数周全，语气从容，偶尔借一句熟悉的诗说心事。",
+      "speech_style": "礼数周全，语气从容，偶尔借一句熟悉的诗说心事。",
+      "opening": "有人愿意多出两成买我家的老房子。可我先生留下的话里，还有一把没找到的钥匙。",
+      "followup": "上次聊过的事，我还想再说几句。",
+      "case_id": "fixed_key",
+      "appearance": {
+        "version": 2,
+        "parts": {
+          "hair_back": "hair_back_07",
+          "body": "body_01",
+          "outfit": "outfit_10",
+          "face_shape": "face_01",
+          "features": "features_elder",
+          "eyes_expr": "eyes_01",
+          "brows_expr": "brows_01",
+          "mouth_expr": "mouth_01",
+          "hair_front": "hair_front_07",
+          "accessory": "none"
+        },
+        "colors": {
+          "skin": "skin_02",
+          "hair": "hair_06",
+          "outfit": "outfit_04"
+        },
+        "age_stage": "elder"
+      },
+      "coins": 60,
+      "ordinary_followup": false
+    },
+    "npc_marianne": {
+      "npc_id": "npc_marianne",
+      "name": "玛丽安·劳伦",
+      "role": "调香师",
+      "age": 41,
+      "mbti": "INTJ",
+      "cultural_origin": "europe",
+      "personality": "说话直接，讨厌模糊答案；偶尔说一句“d’accord”，不堆外语。",
+      "speech_style": "说话直接，讨厌模糊答案；偶尔说一句“d’accord”，不堆外语。",
+      "opening": "外婆的八音盒修过以后，曲子变了。我想弄清楚，是谁换了里面的东西。",
+      "followup": "上次聊过的事，我还想再说几句。",
+      "case_id": "fixed_music_box",
+      "appearance": {
+        "version": 2,
+        "parts": {
+          "hair_back": "hair_back_09",
+          "body": "body_01",
+          "outfit": "outfit_12",
+          "face_shape": "face_01",
+          "features": "features_middle",
+          "eyes_expr": "eyes_01",
+          "brows_expr": "brows_01",
+          "mouth_expr": "mouth_01",
+          "hair_front": "hair_front_09",
+          "accessory": "none"
+        },
+        "colors": {
+          "skin": "skin_01",
+          "hair": "hair_03",
+          "outfit": "outfit_05"
+        },
+        "age_stage": "middle"
+      },
+      "coins": 60,
+      "ordinary_followup": false
+    },
+    "npc_wen_qingchuan": {
+      "npc_id": "npc_wen_qingchuan",
+      "name": "温晴川",
+      "role": "归乡的老人",
+      "age": 72,
+      "mbti": "ISTP",
+      "cultural_origin": "local",
+      "personality": "寡言，句子简短，手上有旧伤，问起姐姐时会停顿。",
+      "speech_style": "寡言，句子简短，手上有旧伤，问起姐姐时会停顿。",
+      "opening": "这家店……以前是我姐姐的。她还在吗？",
+      "followup": "上次聊过的事，我还想再说几句。",
+      "case_id": "fixed_last_pages",
+      "appearance": {
+        "version": 2,
+        "parts": {
+          "hair_back": "hair_back_05",
+          "body": "body_01",
+          "outfit": "outfit_14",
+          "face_shape": "face_01",
+          "features": "features_elder",
+          "eyes_expr": "eyes_01",
+          "brows_expr": "brows_01",
+          "mouth_expr": "mouth_01",
+          "hair_front": "hair_front_05",
+          "accessory": "none"
+        },
+        "colors": {
+          "skin": "skin_03",
+          "hair": "hair_06",
+          "outfit": "outfit_06"
+        },
+        "age_stage": "elder"
+      },
+      "coins": 60,
+      "ordinary_followup": false
+    },
+    "npc_gu_nian": {
+      "npc_id": "npc_gu_nian",
+      "name": "顾念",
+      "role": "高中生",
+      "age": 16,
+      "mbti": "ISFP",
+      "cultural_origin": "local",
+      "personality": "说话轻而认真，不把送食物的善意说成恶作剧。",
+      "speech_style": "说话轻而认真，不把送食物的善意说成恶作剧。",
+      "opening": "我带了一只折好的纸袋。想谢谢愿意等我把话说完的人。",
+      "followup": "上次聊过的事，我还想再说几句。",
+      "case_id": "",
+      "appearance": {
+        "version": 2,
+        "parts": {
+          "hair_back": "hair_back_06",
+          "body": "body_01",
+          "outfit": "outfit_04",
+          "face_shape": "face_01",
+          "features": "features_teen",
+          "eyes_expr": "eyes_01",
+          "brows_expr": "brows_01",
+          "mouth_expr": "mouth_01",
+          "hair_front": "hair_front_06",
+          "accessory": "none"
+        },
+        "colors": {
+          "skin": "skin_02",
+          "hair": "hair_02",
+          "outfit": "outfit_03"
+        },
+        "age_stage": "teen"
+      },
+      "coins": 60,
+      "ordinary_followup": false
+    },
+    "npc_gu_yuanan": {
+      "npc_id": "npc_gu_yuanan",
+      "name": "顾予安",
+      "role": "夜班出租车司机",
+      "age": 43,
+      "mbti": "ISTJ",
+      "cultural_origin": "local",
+      "personality": "务实，关心女儿，愿意听具体经过。",
+      "speech_style": "务实，关心女儿，愿意听具体经过。",
+      "opening": "夜里开车，有时会想起女儿最近也总在晚些时候出门。",
+      "followup": "上次聊过的事，我还想再说几句。",
+      "case_id": "",
+      "appearance": {
+        "version": 2,
+        "parts": {
+          "hair_back": "hair_back_03",
+          "body": "body_01",
+          "outfit": "outfit_11",
+          "face_shape": "face_01",
+          "features": "features_middle",
+          "eyes_expr": "eyes_01",
+          "brows_expr": "brows_01",
+          "mouth_expr": "mouth_01",
+          "hair_front": "hair_front_03",
+          "accessory": "none"
+        },
+        "colors": {
+          "skin": "skin_03",
+          "hair": "hair_02",
+          "outfit": "outfit_02"
+        },
+        "age_stage": "middle"
+      },
+      "coins": 60,
+      "ordinary_followup": false
+    },
+    "npc_tao_shuning": {
+      "npc_id": "npc_tao_shuning",
+      "name": "陶书宁",
+      "role": "自由插画师",
+      "age": 46,
+      "mbti": "INFP",
+      "cultural_origin": "local",
+      "personality": "谈画画和书时很细致，见到旧老师会有些拘谨。",
+      "speech_style": "谈画画和书时很细致，见到旧老师会有些拘谨。",
+      "opening": "我想把那间老屋留作大家都能来看书的地方，一直没好意思当面说。",
+      "followup": "上次聊过的事，我还想再说几句。",
+      "case_id": "",
+      "appearance": {
+        "version": 2,
+        "parts": {
+          "hair_back": "hair_back_10",
+          "body": "body_01",
+          "outfit": "outfit_09",
+          "face_shape": "face_01",
+          "features": "features_middle",
+          "eyes_expr": "eyes_01",
+          "brows_expr": "brows_01",
+          "mouth_expr": "mouth_01",
+          "hair_front": "hair_front_10",
+          "accessory": "none"
+        },
+        "colors": {
+          "skin": "skin_02",
+          "hair": "hair_03",
+          "outfit": "outfit_04"
+        },
+        "age_stage": "middle"
+      },
+      "coins": 60,
+      "ordinary_followup": true
+    },
+    "npc_jiang_yuanzhou": {
+      "npc_id": "npc_jiang_yuanzhou",
+      "name": "江远舟",
+      "role": "灯具修理师",
+      "age": 38,
+      "mbti": "ISTP",
+      "cultural_origin": "local",
+      "personality": "重实物和工艺，只陈述亲眼检查过的细节。",
+      "speech_style": "重实物和工艺，只陈述亲眼检查过的细节。",
+      "opening": "手工锉过的音梳，齿边会留下很细的痕迹。我可以把看到的说清楚。",
+      "followup": "上次聊过的事，我还想再说几句。",
+      "case_id": "",
+      "appearance": {
+        "version": 2,
+        "parts": {
+          "hair_back": "hair_back_04",
+          "body": "body_01",
+          "outfit": "outfit_08",
+          "face_shape": "face_01",
+          "features": "features_adult",
+          "eyes_expr": "eyes_01",
+          "brows_expr": "brows_01",
+          "mouth_expr": "mouth_01",
+          "hair_front": "hair_front_04",
+          "accessory": "none"
+        },
+        "colors": {
+          "skin": "skin_03",
+          "hair": "hair_02",
+          "outfit": "outfit_06"
+        },
+        "age_stage": "adult"
+      },
+      "coins": 60,
+      "ordinary_followup": false
+    }
+  }
+}

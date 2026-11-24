@@ -1,0 +1,288 @@
+{
+  "version": 1,
+  "enabled": true,
+  "case_order": [
+    "fixed_invitation",
+    "fixed_bread",
+    "fixed_key",
+    "fixed_music_box",
+    "fixed_last_pages"
+  ],
+  "cases": {
+    "fixed_invitation": {
+      "npc_id": "npc_lin",
+      "min_day": 1,
+      "preferred_until": 1,
+      "requires_closed": [],
+      "minute": 540,
+      "weather": "",
+      "note_id": "note_1",
+      "best_advice_id": "message",
+      "worst_advice_id": "attend"
+    },
+    "fixed_bread": {
+      "npc_id": "npc_pieter",
+      "min_day": 2,
+      "preferred_until": 3,
+      "requires_closed": [],
+      "minute": 540,
+      "weather": "",
+      "note_id": "",
+      "best_advice_id": "leave_bread",
+      "worst_advice_id": "police",
+      "fragment": {
+        "id": "bread_paper_bag",
+        "text": "公交站那只纸袋上，用铅笔写着一个“温”字。有人见过那位老人，常望着车站对面的零点杂货铺。"
+      }
+    },
+    "fixed_key": {
+      "npc_id": "npc_shen_nianqiu",
+      "min_day": 3,
+      "preferred_until": 4,
+      "requires_closed": [
+        "fixed_bread"
+      ],
+      "minute": 540,
+      "weather": "",
+      "note_id": "note_2",
+      "best_advice_id": "meet_buyer",
+      "worst_advice_id": "sell",
+      "fragment": {
+        "id": "key_old_letter",
+        "text": "钥匙打开暗格后，我们读到我先生留下的旧信：“月说，等晴川回来，她就把店交给更合适的人。”温月曾在这间老屋借住过一年。"
+      },
+      "followup_npc_ids": [
+        "npc_tao_shuning"
+      ]
+    },
+    "fixed_music_box": {
+      "npc_id": "npc_marianne",
+      "min_day": 4,
+      "preferred_until": 5,
+      "requires_closed": [],
+      "minute": 540,
+      "weather": "",
+      "note_id": "note_3",
+      "best_advice_id": "keep_both",
+      "worst_advice_id": "accuse",
+      "fragment": {
+        "id": "music_box_half_letter",
+        "text": "盒中那张被小心包好的旧纸，是温月笔记里裁下的半页。开头写着：“晴川，如果你回来找我……”"
+      },
+      "defer_disclosure_advice_ids": [
+        "accuse"
+      ]
+    },
+    "fixed_last_pages": {
+      "npc_id": "npc_wen_qingchuan",
+      "min_day": 6,
+      "preferred_until": 0,
+      "requires_closed": [
+        "fixed_bread",
+        "fixed_music_box"
+      ],
+      "minute": 1200,
+      "weather": "rainy",
+      "note_id": "note_4",
+      "best_advice_id": "phone",
+      "worst_advice_id": "letter"
+    }
+  },
+  "initial_note_id": "note_1",
+  "minutes_per_day": 1440,
+  "invitation_fragment": {
+    "id": "invitation_binding",
+    "case_id": "fixed_invitation",
+    "text": "店里那本前任店主的笔记，装订线是我以前修过的。最后两页是被人小心裁掉的，不是撕的。"
+  },
+  "final_prelude": {
+    "retrieve": {
+      "id": "retrieve_letter",
+      "text": "笔记的后半页还在沈家的钢琴凳暗格里。先去取信，把地址接完整。",
+      "choice_id": "retrieve_letter",
+      "choice_text": "去沈家取回后半封信",
+      "disclosure": "沈念秋把暗格里的信交给了你。后半页写着：“……白沙，海边那排白房子，第三间。”旧信中还夹着温月当年借住时留下的笔记。",
+      "note_id": "note_2"
+    },
+    "repair": {
+      "id": "repair_pages",
+      "npc_id": "npc_lin",
+      "min_trust": 2,
+      "text": "两页信终于放在一起。可以请熟悉装订的照晚帮忙，也可以自己慢慢拼。",
+      "lin_choice_id": "repair_lin",
+      "lin_choice_text": "请照晚按原装订线修复",
+      "self_choice_id": "repair_self",
+      "self_choice_text": "自己对照纸纹和句子拼合",
+      "lin_disclosure": "照晚沿着旧装订线把两页接回：“裁口很整齐，是故意分开保存的。她希望晴川一路被人帮着找到她。”",
+      "self_disclosure": "你把纸纹与句子一点点对齐，发现两页的裁口能接上。它们是被小心分开保存的。"
+    },
+    "assembly": {
+      "id": "assemble_pages",
+      "text": "前半页先留下称呼，后半页接着给出地址。试着把她还没说完的话接起来。",
+      "correct_choice_id": "assemble_greeting_address",
+      "choices": [
+        {
+          "id": "assemble_greeting_address",
+          "text": "“晴川，如果你回来找我……”接“……白沙，海边那排白房子，第三间”"
+        },
+        {
+          "id": "assemble_address_greeting",
+          "text": "把地址放在称呼前，再接回第一句话"
+        },
+        {
+          "id": "assemble_leave_gap",
+          "text": "先空着地址，只拼好纸页边缘"
+        }
+      ],
+      "retry_text": "句子还没有接顺。照着称呼与地址再试一次，纸页和精力都不会少。",
+      "complete_text": "称呼、叮嘱和地址接在了一起。她没有消失，只是把一条能走到她身边的路留下了。",
+      "energy": 0,
+      "minutes": 0
+    },
+    "self_evidence_id": "deliberate_cut",
+    "self_evidence_text": "你对齐了裁口与纸纹：两页是被小心分开保存的，接起来能读出完整的信。",
+    "self_evidence_source": "纸纹与裁口的拼合观察",
+    "arrival_line": "雨落在店门前。夜灯亮起，一位老人站在门边，手里握着写过字的面包纸袋。"
+  },
+  "consequences": {
+    "fixed_bread": {
+      "police": {
+        "elder_lead_delay_days": 1,
+        "trust_targets": [
+          "npc_gu_nian",
+          "npc_gu_yuanan"
+        ],
+        "trust_delta": -1
+      },
+      "leave_bread": {
+        "elder_lead_delay_days": 0,
+        "trust_targets": [],
+        "trust_delta": 0
+      },
+      "watch": {
+        "elder_lead_delay_days": 0,
+        "trust_targets": [],
+        "trust_delta": 0
+      }
+    }
+  },
+  "ending": {
+    "case_id": "fixed_last_pages",
+    "note_id": "note_4",
+    "title": "真正的店主",
+    "route_by_outcome": {
+      "phone": "phone",
+      "travel": "travel",
+      "letter": "letter"
+    },
+    "delay_by_advice": {
+      "phone": 0,
+      "travel": 0,
+      "letter": 4320
+    },
+    "routes": {
+      "phone": {
+        "title": "真正的店主",
+        "text": "电话那头，温月只说了一句：“回来就好。”你陪晴川走到白沙的海边，姐弟终于又坐在同一扇窗前。后来寄来的照片背面写着：“店交给你了。”",
+        "waiting_text": ""
+      },
+      "travel": {
+        "title": "",
+        "text": "你陪晴川直接去了白沙。温月见到他时受了些惊，还是握住了他的手。后来一封信温和地提醒：下次先来个电话，让人有个准备。",
+        "waiting_text": ""
+      },
+      "letter": {
+        "title": "",
+        "text": "三天后，回信到了。晴川终于沿着信里的地址走到姐姐身边。路绕了一点，他们仍然坐到了一起。",
+        "waiting_text": "信已经寄出，回音还要三天。晴川暂时仍睡在公交站。店里的灯会为他留着，日子也继续往前。"
+      }
+    }
+  },
+  "epilogues": [
+    {
+      "id": "epilogue_pieter",
+      "npc_id": "npc_pieter",
+      "text": "说真的，听说晴川和姐姐见面了，我很替他们高兴。那只面包纸袋，也算陪他走过一段路。"
+    },
+    {
+      "id": "epilogue_shen",
+      "npc_id": "npc_shen_nianqiu",
+      "text": "那封信总算到了该来的人手里。想到有人把没说完的话接了下去，我也安心些了。"
+    },
+    {
+      "id": "epilogue_marianne",
+      "npc_id": "npc_marianne",
+      "text": "最近又听见有人哼《月光光》。想到盒子里的半封信终于到了收信人手里，我也很高兴。"
+    },
+    {
+      "id": "epilogue_lin",
+      "npc_id": "npc_lin",
+      "text": "笔记翻到最后一页了，装订却还好好的。也许以后还可以慢慢添上新的纸。"
+    },
+    {
+      "id": "epilogue_gu_nian",
+      "npc_id": "npc_gu_nian",
+      "text": "公交站那位爷爷有地方去了。我把最后一只纸袋折好，想留给他带路上吃。"
+    }
+  ],
+  "g3_copy": {
+    "missing": "先听来客把眼前的材料说清楚，未核对的部分仍要留白。",
+    "boundary": "牌示用于整理思路，不证明隐情，也不能代替来客作出决定。",
+    "angles": {
+      "contact": [
+        "先分清已经看到的材料和仍待核对的想法。",
+        "听完来客的话，再决定下一步要确认什么。"
+      ],
+      "relation": [
+        "先分清已经看到的材料和仍待核对的想法。",
+        "听完来客的话，再决定下一步要确认什么。"
+      ],
+      "timing": [
+        "先分清已经看到的材料和仍待核对的想法。",
+        "听完来客的话，再决定下一步要确认什么。"
+      ],
+      "place": [
+        "先分清已经看到的材料和仍待核对的想法。",
+        "听完来客的话，再决定下一步要确认什么。"
+      ],
+      "evidence": [
+        "先分清已经看到的材料和仍待核对的想法。",
+        "听完来客的话，再决定下一步要确认什么。"
+      ],
+      "choice": [
+        "先分清已经看到的材料和仍待核对的想法。",
+        "听完来客的话，再决定下一步要确认什么。"
+      ],
+      "action": [
+        "先分清已经看到的材料和仍待核对的想法。",
+        "听完来客的话，再决定下一步要确认什么。"
+      ],
+      "boundary": [
+        "先分清已经看到的材料和仍待核对的想法。",
+        "听完来客的话，再决定下一步要确认什么。"
+      ],
+      "obstacle": [
+        "先分清已经看到的材料和仍待核对的想法。",
+        "听完来客的话，再决定下一步要确认什么。"
+      ]
+    }
+  },
+  "copy": {
+    "invalid_config": "固定剧情配置不可用。",
+    "invalid_state": "剧情进度记录无效。",
+    "choice_unavailable": "这一步还不能这样选择。",
+    "prelude_required": "先把这段来意听完，再开始推理。",
+    "choice_saved": "这一步已经记下。",
+    "assembly_retry": "纸页还没接顺，可以再试一次。",
+    "notes_title": "前任店主的笔记",
+    "note_locked": "这页笔记还没有找到。",
+    "ending_pending": "回音还在路上，店里的日子继续。",
+    "ending_complete": "未说完的话，终于有人接着说了。",
+    "story_started": "来客带来了新的故事。",
+    "rainy": "雨天",
+    "rainy_arrival": "雨夜的来客",
+    "ending_title": "故事的这一页",
+    "waiting_status": "等待回音",
+    "complete_status": "已经重逢"
+  }
+}

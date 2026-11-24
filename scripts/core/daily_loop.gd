@@ -5,6 +5,9 @@ const People = preload("res://scripts/people/people.gd")
 const Events = preload("res://scripts/divination/event_rules.gd")
 const Memory = preload("res://scripts/people/memory.gd")
 const Content = preload("res://scripts/core/content_loader.gd")
+const StoryContent = preload("res://scripts/story/story_content.gd")
+const StoryProgress = preload("res://scripts/story/story_progress.gd")
+const CaseSchema = preload("res://scripts/divination/case_schema.gd")
 const ACTIONS := ["read_morning_letters", "next_customer", "close_shop"]
 
 static func load_config() -> Dictionary:
@@ -62,18 +65,34 @@ static func initialize(state: Dictionary, sequential: bool = true) -> void:
 		"arrival_ids":ids,"cursor":0,"active_arrival_id":active_id,"letters":[],"summary":{},
 		"baseline":{"coins":int(state.player.coins),"reputation":int(state.shop.reputation)},"history":{}}
 
-static func plan(state: Dictionary, config: Dictionary, people_config: Dictionary) -> void:
+static func plan(state: Dictionary, config: Dictionary, people_config: Dictionary, story_mode: bool = false, catalog: Dictionary = {}) -> void:
 	var loop: Dictionary = state.daily_loop
 	if loop.planned:
 		return
 	var day: int = loop.day
 	var rng := People._random(int(state.people.seed)+day*104729)
 	var total := rng.randi_range(int(config.guests_min),int(config.guests_max))
+	var story_config := StoryContent.load_config() if story_mode else {}
 	while loop.arrival_ids.size() < total:
 		var index: int = loop.arrival_ids.size()
 		var first: bool = day == 0 and index == 0 and state.visits.is_empty()
-		var npc: String = str(config.first_npc_id) if first else People._ordinary(state.people,people_config,rng,day,int(config.ordinary_index_offset)+index)
-		var case_id: String = str(config.first_case_id) if first else str(config.ordinary_case_id)
+		var story_proposal: Dictionary = {}
+		if story_mode:
+			story_proposal = StoryProgress.select_case(state,day,story_config) if index == 0 else StoryProgress.select_epilogue(state,day,index,story_config)
+			var prior_weather: String = str(state.people.days.get(str(day),{}).get("weather",""))
+			if not story_proposal.is_empty() and not str(story_proposal.get("weather_id","")).is_empty() and not prior_weather.is_empty() and prior_weather != story_proposal.weather_id:
+				story_proposal = {}
+		var npc: String
+		var case_id: String
+		if not story_proposal.is_empty():
+			npc = story_proposal.npc_id
+			if not StoryProgress.ensure_npc(state,npc,catalog,story_config,people_config):
+				return
+			var definition: Dictionary = CaseSchema.load_all(catalog).get(story_proposal.get("definition_id",""),{})
+			case_id = CaseSchema.g3_case_id(definition) if story_proposal.kind == "case" else str(config.ordinary_case_id)
+		else:
+			npc = str(config.first_npc_id) if first else People._ordinary(state.people,people_config,rng,day,int(config.ordinary_index_offset)+index)
+			case_id = str(config.first_case_id) if first else str(config.ordinary_case_id)
 		var arrival_id := "arrival_daily_%d_%d" % [day,index]
 		var intent := "divination" if index == 0 else "shopping"
 		state.people.arrivals[arrival_id] = {"arrival_id":arrival_id,"npc_id":npc,"source":"fixed_story" if first else "daily_loop",
@@ -81,6 +100,23 @@ static func plan(state: Dictionary, config: Dictionary, people_config: Dictionar
 			"schedule_end":People.MAX_INT,"referrer_npc_id":"","case_id":case_id,"visit_id":"","daily_kind":"case" if index == 0 else "commission",
 			"daily_loop_day":day,"daily_loop_index":index,
 			"daily_opening":"" if first else config.ordinary_case_opening if index == 0 else config.shopping_opening}
+		if not story_proposal.is_empty():
+			var row: Dictionary = state.people.arrivals[arrival_id]
+			row.source = "fixed_story"
+			row.at = maxi(int(state.clock_minutes),day*1440+int(story_proposal.minute))
+			row.daily_kind = story_proposal.kind
+			row["story_rule_id"] = story_proposal.rule_id
+			row["story_definition_id"] = story_proposal.get("definition_id","")
+			if not first:
+				row.daily_opening = story_config.npcs[npc].opening
+			if not str(story_proposal.get("text","")).is_empty():
+				row.daily_opening = story_proposal.text
+			if story_proposal.kind == "epilogue":
+				for epilogue: Dictionary in story_config.rules.epilogues:
+					if epilogue.id == story_proposal.rule_id:
+						row.daily_opening = epilogue.text
+			if not str(story_proposal.get("weather_id","")).is_empty():
+				state.story.days[str(day)] = {"weather_id":story_proposal.weather_id,"source_rule_id":story_proposal.rule_id}
 		loop.arrival_ids.append(arrival_id)
 	loop.planned = true
 
@@ -125,11 +161,17 @@ static func read_letters(state: Dictionary, data: Dictionary, config: Dictionary
 static func close(state: Dictionary, config: Dictionary) -> void:
 	var loop: Dictionary = state.daily_loop
 	var stars := 0
+	var notes: Array = []
+	var story_config := StoryContent.load_config()
+	for id: String in state.get("story",{}).get("notes",{}):
+		var unlocked: Dictionary = state.story.notes[id]
+		if floori(float(unlocked.get("unlocked_at",-1440))/1440.0) == int(loop.day) and story_config.get("notes",{}).has(id):
+			notes.append(story_config.notes[id].title)
 	for id: String in loop.arrival_ids:
 		var visit_id: String = state.people.arrivals[id].visit_id
 		stars += int(state.divination.cases.get(visit_id,{}).get("stars",0))
 	loop.summary = {"stars":stars,"coins":int(state.player.coins)-int(loop.baseline.coins),
-		"reputation":int(state.shop.reputation)-int(loop.baseline.reputation),"notes":[],
+		"reputation":int(state.shop.reputation)-int(loop.baseline.reputation),"notes":notes,
 		"monologue":config.monologues[posmod(int(loop.day),config.monologues.size())]}
 	loop.phase = "closing"
 	loop.history[str(loop.day)] = _day_record(loop,"completed")
@@ -242,7 +284,10 @@ static func validate(state: Dictionary) -> String:
 		var ids: Array = loop.arrival_ids if day == int(loop.day) else loop.history.get(str(day),{}).get("arrival_ids",[])
 		if index >= ids.size() or ids[index] != row.arrival_id:
 			return error
-		if row.source == "fixed_story":
+		if row.has("story_rule_id") or row.has("story_definition_id"):
+			if int(state.schema_version) < 12 or not StoryProgress.reservation_valid(state,row,StoryContent.load_config()):
+				return error
+		elif row.source == "fixed_story":
 			if day != 0 or index != 0 or row.npc_id != config.first_npc_id or row.case_id != config.first_case_id:
 				return error
 		elif row.case_id != config.ordinary_case_id:

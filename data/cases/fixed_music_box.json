@@ -1,0 +1,487 @@
+{
+  "id": "fixed_music_box",
+  "version": 1,
+  "title": "变了调的八音盒",
+  "legacy_case_id": "",
+  "question": "曲子为什么变了，这是什么小调，外婆的原音梳在哪里？",
+  "truth": {
+    "repair": {
+      "value": "comb",
+      "text": "温月十年前修理过这只八音盒，换上了自己刻的音梳。",
+      "requires_clue": "fixed_music_box_truth_repair"
+    },
+    "song": {
+      "value": "moonlight",
+      "text": "新曲子是本地童谣《月光光》。",
+      "requires_clue": "fixed_music_box_truth_song"
+    },
+    "original": {
+      "value": "inside",
+      "text": "原音梳和笔记倒数第二页都被仔细包好，藏在八音盒夹层中。",
+      "requires_clue": "fixed_music_box_truth_original"
+    }
+  },
+  "deduction_slots": [
+    {
+      "id": "changed",
+      "title": "曲子为什么变了",
+      "answers": [
+        {
+          "id": "swapped",
+          "text": "被人掉包"
+        },
+        {
+          "id": "detuned",
+          "text": "自然走调"
+        },
+        {
+          "id": "comb",
+          "text": "修理时换了音梳"
+        },
+        {
+          "id": "curse",
+          "text": "被诅咒"
+        }
+      ],
+      "correct_answer": "comb",
+      "unlock_evidence": [
+        "repair_mark",
+        "hand_filed",
+        "landlord_claim"
+      ]
+    },
+    {
+      "id": "song",
+      "title": "这段曲子是什么",
+      "answers": [
+        {
+          "id": "foreign",
+          "text": "外国民谣"
+        },
+        {
+          "id": "local",
+          "text": "本地童谣"
+        },
+        {
+          "id": "film",
+          "text": "电影配乐"
+        },
+        {
+          "id": "new_song",
+          "text": "新创作的曲子"
+        }
+      ],
+      "correct_answer": "local",
+      "unlock_evidence": [
+        "elders_hum"
+      ]
+    },
+    {
+      "id": "original",
+      "title": "外婆的原音梳在哪",
+      "answers": [
+        {
+          "id": "discarded",
+          "text": "已经被丢弃"
+        },
+        {
+          "id": "repairer",
+          "text": "在修理人手里"
+        },
+        {
+          "id": "inside",
+          "text": "仍在八音盒夹层里"
+        },
+        {
+          "id": "sold",
+          "text": "已经被卖掉"
+        }
+      ],
+      "correct_answer": "inside",
+      "unlock_evidence": [
+        "extra_weight",
+        "bottom_seam"
+      ]
+    }
+  ],
+  "questions": [
+    [
+      {
+        "id": "repair_trace",
+        "text": "盒子上有没有留下修理者的记号？",
+        "answer": "底座内侧刻着“温·修”。江远舟看过，说现在这副音梳的齿，是一根根手工锉出来的。",
+        "evidence_ids": [
+          "repair_mark",
+          "hand_filed"
+        ],
+        "requires_familiarity": 0
+      },
+      {
+        "id": "mechanic_opinion",
+        "text": "江远舟检查后，怎么解释曲子变化？",
+        "answer": "他说这副音梳是手工锉的，不像原厂件。我又在底座看见“温·修”，这比掉包的猜测更能核对。",
+        "evidence_ids": [
+          "hand_filed",
+          "repair_mark"
+        ],
+        "requires_familiarity": 0
+      },
+      {
+        "id": "landlord",
+        "text": "前房东亲眼见过里面的零件吗？",
+        "answer": "没有。他只说“本来有毛病”。江远舟倒是打开检查过，音梳是手工锉的，底座也留着“温·修”。",
+        "evidence_ids": [
+          "landlord_claim",
+          "hand_filed",
+          "repair_mark"
+        ],
+        "requires_familiarity": 0
+      }
+    ],
+    [
+      {
+        "id": "heard_song",
+        "text": "镇上有人认得这段小调吗？",
+        "answer": "有。几位老人刚听见，就跟着哼了起来。他们说，这是小时候唱的《月光光》。",
+        "evidence_ids": [
+          "elders_hum"
+        ],
+        "requires_familiarity": 0
+      },
+      {
+        "id": "song_words",
+        "text": "有人能接出这首歌的词吗？",
+        "answer": "老人们能接着唱，连停在哪里都一样。他们叫它《月光光》，说镇上孩子从前都会唱。",
+        "evidence_ids": [
+          "elders_hum"
+        ],
+        "requires_familiarity": 0
+      },
+      {
+        "id": "local_memory",
+        "text": "这段小调有没有在当地留下记忆？",
+        "answer": "我拿去问过，镇上老人一听就会跟着哼，还说小时候就是听这首《月光光》长大的。",
+        "evidence_ids": [
+          "elders_hum"
+        ],
+        "requires_familiarity": 0
+      }
+    ],
+    [
+      {
+        "id": "weight",
+        "text": "除了曲子，盒子本身还有什么不同？",
+        "answer": "好像重了一点。江远舟还在底板找到一道不是出厂的细缝，也许里面有个夹层。",
+        "evidence_ids": [
+          "extra_weight",
+          "bottom_seam"
+        ],
+        "requires_familiarity": 0
+      },
+      {
+        "id": "bottom",
+        "text": "底板能不能继续检查？",
+        "answer": "底板上有一道细缝，不像出厂就有的。盒子又比我记忆中重一些，我想请他小心打开。",
+        "evidence_ids": [
+          "bottom_seam",
+          "extra_weight"
+        ],
+        "requires_familiarity": 0
+      },
+      {
+        "id": "old_parts",
+        "text": "先别认定旧零件被扔了，哪里还没看？",
+        "answer": "我们还没看底板的那道细缝。盒子比以前重一点，也许被拿下来的东西，就在里面好好包着。",
+        "evidence_ids": [
+          "bottom_seam",
+          "extra_weight"
+        ],
+        "requires_familiarity": 0
+      }
+    ]
+  ],
+  "evidence": [
+    {
+      "id": "repair_mark",
+      "text": "底座内侧刻着很小的“温·修”。",
+      "type": "fact",
+      "source": "八音盒底座",
+      "slot_ids": [
+        "changed"
+      ],
+      "legacy_clue_ids": [
+        "fixed_music_box_repair_mark"
+      ]
+    },
+    {
+      "id": "hand_filed",
+      "text": "江远舟检查后说，音梳的齿是手工一根根锉的。",
+      "type": "testimony",
+      "source": "江远舟的检查陈述",
+      "slot_ids": [
+        "changed"
+      ]
+    },
+    {
+      "id": "elders_hum",
+      "text": "镇上老人听到小调，就会跟着哼唱。",
+      "type": "testimony",
+      "source": "镇上老人的反应",
+      "slot_ids": [
+        "song"
+      ]
+    },
+    {
+      "id": "landlord_claim",
+      "text": "前房东说，八音盒本来就有点毛病。",
+      "type": "misleading",
+      "source": "前房东的陈述",
+      "slot_ids": [
+        "changed"
+      ]
+    },
+    {
+      "id": "extra_weight",
+      "text": "八音盒拿在手里，比玛丽安记忆中重一点。",
+      "type": "testimony",
+      "source": "玛丽安的感受",
+      "slot_ids": [
+        "original"
+      ]
+    },
+    {
+      "id": "bottom_seam",
+      "text": "底板有一道并非出厂留下的细缝。",
+      "type": "fact",
+      "source": "八音盒底板",
+      "slot_ids": [
+        "original"
+      ],
+      "legacy_clue_ids": [
+        "fixed_music_box_bottom_seam"
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "deck_id": "wheel",
+      "text": "被转动过的旋律。",
+      "slot_id": "changed"
+    },
+    {
+      "deck_id": "cups_6",
+      "text": "一首童年的歌。",
+      "slot_id": "song"
+    },
+    {
+      "deck_id": "swords_11",
+      "text": "一位仔细的修理人。",
+      "slot_id": "changed"
+    },
+    {
+      "deck_id": "pentacles_11",
+      "text": "被好好保存的东西。",
+      "slot_id": "original"
+    },
+    {
+      "deck_id": "moon",
+      "text": "以为的不对劲，也许是一份心意。",
+      "slot_id": "original"
+    }
+  ],
+  "advice": [
+    {
+      "id": "restore",
+      "text": "换回外婆原来的音梳。",
+      "requires_deductions": [
+        "changed",
+        "song",
+        "original"
+      ],
+      "legacy_advice_key": "restore",
+      "reaction": "我想先听一遍外婆的曲子。换下的这一副，我也会好好留下。",
+      "mood": "sad",
+      "prediction": {
+        "text": "若换回外婆原来的音梳，事情会有进展。",
+        "condition": "if_restore",
+        "expected": "met",
+        "window_after_due_minutes": 30
+      }
+    },
+    {
+      "id": "keep_both",
+      "text": "两副音梳都留下，做成可以更换的。",
+      "requires_deductions": [
+        "changed",
+        "song",
+        "original"
+      ],
+      "legacy_advice_key": "keep_both",
+      "reaction": "这样，两段记忆都能留下。d’accord，就这么试。",
+      "mood": "smile",
+      "prediction": {
+        "text": "若两副音梳都留下，做成可以更换的，事情会有进展。",
+        "condition": "if_keep_both",
+        "expected": "met",
+        "window_after_due_minutes": 30
+      }
+    },
+    {
+      "id": "accuse",
+      "text": "认定被掉包，先去找修理人的麻烦。",
+      "requires_deductions": [
+        "changed",
+        "song",
+        "original"
+      ],
+      "legacy_advice_key": "accuse",
+      "reaction": "我还是想要个说法。希望这次能问到具体的答案。",
+      "mood": "hesitant",
+      "prediction": {
+        "text": "若认定被掉包，先去找修理人的麻烦，事情可能会走一点弯路。",
+        "condition": "if_accuse",
+        "expected": "missed",
+        "window_after_due_minutes": 30
+      }
+    }
+  ],
+  "outcomes": {
+    "version": 1,
+    "subject_id": "npc_marianne",
+    "target_name": "曲子为什么变了，这是什么小调，外婆的原音梳在哪里？",
+    "minute_of_day": 1080,
+    "feedback_delay": 180,
+    "world_facts": {
+      "repair": {
+        "values": [
+          "comb"
+        ],
+        "default": "comb"
+      },
+      "song": {
+        "values": [
+          "moonlight"
+        ],
+        "default": "moonlight"
+      },
+      "original": {
+        "values": [
+          "inside"
+        ],
+        "default": "inside"
+      }
+    },
+    "branch_ids": [],
+    "item_effect_ids": [],
+    "prediction_conditions": {
+      "always": {
+        "label": "无附加条件"
+      },
+      "if_restore": {
+        "label": "若换回外婆原来的音梳",
+        "outcomes": [
+          "restore"
+        ]
+      },
+      "if_keep_both": {
+        "label": "若两副音梳都留下，做成可以更换的",
+        "outcomes": [
+          "keep_both"
+        ]
+      },
+      "if_accuse": {
+        "label": "若认定被掉包，先去找修理人的麻烦",
+        "outcomes": [
+          "accuse"
+        ]
+      }
+    },
+    "prediction_labels": {
+      "met": "事情有了进展",
+      "missed": "事情走了一点弯路"
+    },
+    "advice": {
+      "restore": {
+        "text": "换回外婆原来的音梳。"
+      },
+      "keep_both": {
+        "text": "两副音梳都留下，做成可以更换的。"
+      },
+      "accuse": {
+        "text": "认定被掉包，先去找修理人的麻烦。"
+      }
+    },
+    "advice_options": [
+      {
+        "key": "restore",
+        "label": "换回外婆原来的音梳。"
+      },
+      {
+        "key": "keep_both",
+        "label": "两副音梳都留下，做成可以更换的。"
+      },
+      {
+        "key": "accuse",
+        "label": "认定被掉包，先去找修理人的麻烦。"
+      }
+    ],
+    "item_effect": {},
+    "outcomes": {
+      "restore": {
+        "actual_action": "换回外婆的原音梳，把温月的音梳送给杂货铺留念",
+        "outcome": "met",
+        "evidence": "sufficient",
+        "feedback": "delayed",
+        "text": "原音梳果然包在夹层里。听到外婆的曲子，我哭了。温月那副手刻音梳，我想送给你的店；包着它的那半封信，也该交给你。",
+        "delay_minutes": 180,
+        "effects": []
+      },
+      "keep_both": {
+        "actual_action": "保留两副音梳并做成可更换结构，开始制作童谣香氛",
+        "outcome": "met",
+        "evidence": "sufficient",
+        "feedback": "delayed",
+        "text": "两副音梳都留住了。我在店里调了一支叫“月光光”的香。夹层里还包着半封给晴川的信，开头是：“晴川，如果你回来找我……”",
+        "delay_minutes": 180,
+        "effects": []
+      },
+      "accuse": {
+        "actual_action": "追查掉包的方向，后来由江远舟补上真正的修理线索",
+        "outcome": "missed",
+        "evidence": "sufficient",
+        "feedback": "delayed",
+        "text": "我先走错了方向。江远舟后来拆开夹层，找到了原音梳和半封信。不是掉包，旧东西一直被小心收着；温月写的那半封信，我已经托他带给你。",
+        "delay_minutes": 180,
+        "effects": []
+      }
+    },
+    "rules": [
+      {
+        "when": {
+          "advice": "restore",
+          "accepted": true
+        },
+        "outcome": "restore"
+      },
+      {
+        "when": {
+          "advice": "keep_both",
+          "accepted": true
+        },
+        "outcome": "keep_both"
+      },
+      {
+        "when": {
+          "advice": "accuse",
+          "accepted": true
+        },
+        "outcome": "accuse"
+      },
+      {
+        "when": {},
+        "outcome": "accuse"
+      }
+    ],
+    "feedback_effects": []
+  }
+}

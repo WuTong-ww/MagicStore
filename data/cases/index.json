@@ -4,6 +4,22 @@
     {
       "id": "fixed_invitation",
       "path": "res://data/cases/fixed_invitation.json"
+    },
+    {
+      "id": "fixed_bread",
+      "path": "res://data/cases/fixed_bread.json"
+    },
+    {
+      "id": "fixed_key",
+      "path": "res://data/cases/fixed_key.json"
+    },
+    {
+      "id": "fixed_music_box",
+      "path": "res://data/cases/fixed_music_box.json"
+    },
+    {
+      "id": "fixed_last_pages",
+      "path": "res://data/cases/fixed_last_pages.json"
     }
   ]
 }

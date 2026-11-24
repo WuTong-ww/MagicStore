@@ -242,6 +242,7 @@ func _ready() -> void:
 	case_board = CaseBoard.new()
 	case_board.name = "CaseBoard"
 	case_board.host = host
+	case_board.story_choice_saved.connect(_refresh_case_board)
 	add_child(case_board)
 	case_board.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	resized.connect(_queue_layout)
@@ -447,6 +448,8 @@ func _refresh_case_board() -> void:
 	case_board.refresh()
 	var board_enabled := _case_board_enabled()
 	var free_questions: bool = board_enabled and GameState.free_question_enabled()
+	if board_enabled and not case_board._blocking_prelude().is_empty():
+		free_questions = false
 	dialogue_panel.visible = not board_enabled or free_questions
 	drawer_panel.visible = not board_enabled
 	drawer_toggle.visible = not board_enabled

@@ -55,6 +55,11 @@ class Handler(BaseHTTPRequestHandler):
                  and bool(self.headers.get("X-Request-ID")) and bool(self.headers.get("X-Action-ID")))
         if not core_test:
             valid = valid and self.headers.get("X-Request-ID") == "req_fixture" and self.headers.get("X-Action-ID") == "action_fixture"
+        if route == "no_response" and valid:
+            # Keep the socket open without replying beyond the client's budget.
+            time.sleep(2.0)
+            self.close_connection = True
+            return
         status = 200 if valid else 400
         reply = {"reply_text": "线上回复", "intent": "invitation", "clue_ids": ["invitation_note"], "needs_clarification": False, "error_code": "", "branch_id": ""}
         if route.startswith("mood_"):
@@ -211,7 +216,7 @@ def main():
     env.pop("MAGIC_GATEWAY_TOKEN", None)
     env.pop("MAGIC_GATEWAY_TIMEOUT", None)
     try:
-        for script in ("api_endpoint", "model_policy", "provider", "game_state_http", "direct_api", "recovery", "mood"):
+        for script in ("api_endpoint", "model_policy", "deadline", "provider", "game_state_http", "direct_api", "recovery", "mood"):
             try:
                 result = subprocess.run([args.engine, "--headless", "--path", str(repo), "--script", f"res://tests/http/{script}.gd"], env=env, capture_output=True, text=True, encoding="utf-8", timeout=30)
             except subprocess.TimeoutExpired as error:

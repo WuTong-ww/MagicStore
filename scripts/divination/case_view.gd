@@ -34,9 +34,10 @@ static func project(session, state: Dictionary, visit: Dictionary) -> Dictionary
 		"purchase": case.purchase, "item_use": case.item_use, "demand": case.get("demand", {}), "feedback_options": [], "ledger": []
 	}
 	view["board"] = session.case_board_view(state,visit)
+	var clue_overrides: Dictionary = session.case_clue_overrides(state,visit)
 	for clue_id: String in visit.clue_ids:
 		var clue: Dictionary = data.clues[clue_id]
-		view.clues.append({"clue_id": clue_id, "title": clue.title, "text": clue.text})
+		view.clues.append({"clue_id": clue_id, "title": clue.title, "text": clue_overrides.get(clue_id,{}).get("text",clue.text)})
 	for fact_id: String in case.world_facts:
 		var fact: Dictionary = case.world_facts[fact_id]
 		if fact.requires_clue in visit.clue_ids:

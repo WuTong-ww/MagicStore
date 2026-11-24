@@ -5,8 +5,11 @@ const UI = preload("res://scripts/ui/ui_kit.gd")
 const Config = preload("res://scripts/ui/case_board_config.gd")
 const EvidenceToken = preload("res://scripts/ui/case_evidence_token.gd")
 const DeductionSlot = preload("res://scripts/ui/case_deduction_slot.gd")
+const StoryUI = preload("res://scripts/ui/story_ui_config.gd")
+signal story_choice_saved
 var host
 var config: Dictionary = {}
+var story_config: Dictionary = {}
 var canvas: Control
 var paper: Panel
 var heading: Label
@@ -41,6 +44,7 @@ var _slot_signatures: Dictionary = {}
 
 func _ready() -> void:
 	config = Config.load_config()
+	story_config = StoryUI.load_config()
 	if config.is_empty():
 		return
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -249,9 +253,10 @@ func refresh() -> void:
 		return
 	var closed := bool(public_view.get("closed",false))
 	var phase := str(public_view.get("phase","questions"))
+	var prelude: Dictionary = _blocking_prelude()
 	# Free conversation can change energy while the optional choices are open.
 	# Keep the basic card path accessible when that saved eligibility changes.
-	if not public_view.get("can_extra_question",false):
+	if not public_view.get("can_extra_question",false) or not prelude.is_empty():
 		_extra_open = false
 	heading.text = str(public_view.get("title",config.copy.heading))
 	instruction.text = config.copy.closed_instruction if closed else (config.copy.question_round.format({"round":int(public_view.get("round",0))+1}) if phase == "questions" else (config.copy.cards_instruction if phase == "cards" else config.copy.deduction_instruction))
@@ -259,8 +264,18 @@ func refresh() -> void:
 		instruction.text = config.copy.extra_instruction
 	elif closed:
 		instruction.text += " "+str(config.copy.star).repeat(int(public_view.get("stars",1)))
+	if not prelude.is_empty() and not story_config.is_empty():
+		instruction.text = str(story_config.copy.prelude_instruction)
 	var reply := str(public_view.get("last_answer",""))
 	speech_label.text = reply if not reply.is_empty() else str(public_view.get("question",config.copy.empty_speech))
+	var story_lines: Array[String] = StoryUI.public_lines(public_view.get("story_lines",[]))
+	var separator := str(story_config.get("copy",{}).get("separator","\n\n"))
+	if not prelude.is_empty():
+		var text := str(prelude.get("text",""))
+		if not text.is_empty() and text not in story_lines:
+			story_lines.append(text)
+	if not story_lines.is_empty() and (reply.is_empty() or not prelude.is_empty()):
+		speech_label.text = separator.join(story_lines)
 	cards_row.visible = not _extra_open
 	_refresh_cards()
 	_refresh_slots()
@@ -269,14 +284,20 @@ func refresh() -> void:
 	_refresh_advice()
 	extra_button.visible = bool(public_view.get("can_extra_question",false)) and not closed
 	eliminate_button.visible = bool(public_view.get("can_eliminate",false)) and not closed
-	utility_buttons.visible = not closed and phase != "questions"
+	utility_buttons.visible = not closed and phase != "questions" and prelude.is_empty()
 	end_button.visible = closed
 	reaction_panel.visible = closed
 	speech_panel.visible = not closed
 	if closed:
 		reaction_title.text = config.copy.close_title.format({"stars":str(config.copy.star).repeat(int(public_view.get("stars",1)))})
 		reaction_label.text = str(public_view.get("reaction",config.copy.reaction_empty))
+		if not story_lines.is_empty():
+			reaction_label.text += separator+separator.join(story_lines)
 	_set_busy(bool(host.busy) if is_instance_valid(host) else false)
+
+func _blocking_prelude() -> Dictionary:
+	var value: Variant = public_view.get("prelude",{})
+	return value if value is Dictionary and value.get("blocks_progress",false) else {}
 
 func _refresh_cards() -> void:
 	var cards: Array = public_view.get("cards",[])
@@ -285,7 +306,7 @@ func _refresh_cards() -> void:
 		var row: Dictionary = cards[index] if index < cards.size() else {"index":index,"revealed":false}
 		var revealed := bool(row.get("revealed",false))
 		button.set_meta("revealed",revealed)
-		button.set_meta("available",bool(row.get("enabled",false)) and not public_view.get("closed",false))
+		button.set_meta("available",bool(row.get("enabled",false)) and not public_view.get("closed",false) and _blocking_prelude().is_empty())
 		var art: TextureRect = button.get_node("CardArt")
 		var path: String = str(row.get("image","")) if revealed else str(config.assets.card_back)
 		if revealed and path.is_empty():
@@ -297,19 +318,24 @@ func _refresh_cards() -> void:
 		button.add_theme_stylebox_override("normal",_style("selected" if revealed else "paper_soft"))
 
 func _refresh_questions() -> void:
-	var rows: Array = public_view.get("extra_questions",[]) if _extra_open else public_view.get("questions",[])
-	question_buttons.visible = (public_view.get("phase") == "questions" or _extra_open) and not public_view.get("closed",false)
+	var prelude := _blocking_prelude()
+	var blocked := not prelude.is_empty()
+	var rows: Array = prelude.get("options",[]) if blocked else (public_view.get("extra_questions",[]) if _extra_open else public_view.get("questions",[]))
+	question_buttons.visible = (blocked or public_view.get("phase") == "questions" or _extra_open) and not public_view.get("closed",false)
 	question_buttons.offset_top = -float(config.layout.card_height)-float(config.layout.question_gap) if _extra_open else 0.0
 	question_buttons.offset_bottom = -float(config.layout.question_gap) if _extra_open else float(config.layout.question_height)
-	var signature := JSON.stringify([rows,_extra_open])
+	var signature := JSON.stringify([rows,_extra_open,prelude.get("id","")])
 	if signature == _question_signature:
 		return
 	_question_signature = signature
 	_clear(question_buttons)
 	for row: Dictionary in rows:
-		var action := "case_extra_question" if _extra_open else "case_question"
-		var button := _button(str(row.get("text","")),func(): await _submit(action,{"question_id":row.id}))
-		button.name = "CaseQuestion_"+str(question_buttons.get_child_count())
+		var action := "story_choice" if blocked else ("case_extra_question" if _extra_open else "case_question")
+		var payload := {"choice_id":row.id} if blocked else {"question_id":row.id}
+		var button := _button(str(row.get("text","")),func(): await _submit(action,payload))
+		button.name = ("StoryChoice_" if blocked else "CaseQuestion_")+str(question_buttons.get_child_count())
+		if blocked:
+			button.set_meta("choice_id",str(row.id))
 		button.set_meta("available",bool(row.get("enabled",true)))
 		button.custom_minimum_size.y = float(config.layout.question_height)
 		button.tooltip_text = str(row.get("reason",""))
@@ -317,7 +343,7 @@ func _refresh_questions() -> void:
 
 func _refresh_advice() -> void:
 	var rows: Array = public_view.get("advice",[])
-	advice_buttons.visible = public_view.get("phase") == "deduction" and not _extra_open and not public_view.get("closed",false)
+	advice_buttons.visible = public_view.get("phase") == "deduction" and not _extra_open and not public_view.get("closed",false) and _blocking_prelude().is_empty()
 	var signature := JSON.stringify(rows)
 	if signature == _advice_signature:
 		return
@@ -338,7 +364,7 @@ func _refresh_slots() -> void:
 			continue
 		slot.slot_id = row.id
 		slot_nodes[row.id] = slot
-		var signature := JSON.stringify(row)+str(public_view.get("closed",false))
+		var signature := JSON.stringify(row)+str(public_view.get("closed",false))+str(_blocking_prelude().is_empty())
 		if _slot_signatures.get(row.id) == signature:
 			continue
 		_slot_signatures[row.id] = signature
@@ -392,7 +418,7 @@ func _refresh_slots() -> void:
 			button.name = "CaseAnswer_"+str(answers.get_child_count())
 			button.add_theme_font_size_override("font_size",int(config.layout.answer_font))
 			button.mouse_filter = Control.MOUSE_FILTER_PASS
-			button.set_meta("available",bool(answer.get("enabled",true)) and not public_view.get("closed",false))
+			button.set_meta("available",bool(answer.get("enabled",true)) and not public_view.get("closed",false) and _blocking_prelude().is_empty())
 			if str(row.get("selected","")) == str(answer.id):
 				button.add_theme_stylebox_override("normal",_style("selected"))
 				button.add_theme_stylebox_override("disabled",_style("selected"))
@@ -443,7 +469,7 @@ func _set_busy(value: bool) -> void:
 		button.disabled = value or not bool(button.get_meta("available",true))
 
 func can_drop_material(slot_id: String, payload: Variant) -> bool:
-	return not _pending and not bool(host.busy) and public_view.get("phase") == "deduction" and not public_view.get("closed",false) and payload is Dictionary and payload.get("kind") == "case_evidence" and payload.get("evidence_id") is String and slot_nodes.has(slot_id) and public_view.get("evidence",[]).any(func(row: Dictionary) -> bool: return row.id == payload.evidence_id)
+	return not _pending and not bool(host.busy) and _blocking_prelude().is_empty() and public_view.get("phase") == "deduction" and not public_view.get("closed",false) and payload is Dictionary and payload.get("kind") == "case_evidence" and payload.get("evidence_id") is String and slot_nodes.has(slot_id) and public_view.get("evidence",[]).any(func(row: Dictionary) -> bool: return row.id == payload.evidence_id)
 
 func activate_slot(slot_id: String) -> void:
 	if _elimination_open:
@@ -495,6 +521,8 @@ func _submit(action: String, values: Dictionary) -> void:
 		if action == "case_attach_evidence":
 			_selected_evidence = ""
 		refresh()
+		if action == "story_choice":
+			story_choice_saved.emit()
 		if action == "case_attach_evidence":
 			_fly_material(source_position,target,flying_text)
 		elif action in ["case_question","case_extra_question"]:

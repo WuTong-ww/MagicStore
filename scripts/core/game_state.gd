@@ -24,11 +24,14 @@ const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
 const Appearance = preload("res://scripts/people/appearance.gd")
 const DailyLoop = preload("res://scripts/core/daily_loop.gd")
 const CaseSchema = preload("res://scripts/divination/case_schema.gd")
+const StoryContent = preload("res://scripts/story/story_content.gd")
+const StoryProgress = preload("res://scripts/story/story_progress.gd")
 const SHOP_ACTIONS := ["procure_item", "receive_material_gift", "gather_material", "sell_material", "register_demand", "research_recipe", "craft_item", "sell_product", "use_product", "review_case"]
 const PEOPLE_ACTIONS := ["book_arrival", "save_appearance", "wait", "invite_contact"]
 var shop_config: Dictionary = {}
 var people_config: Dictionary = {}
 var daily_loop_config: Dictionary = {}
+var story_config: Dictionary = {}
 var _api_url := ""
 var _api_model := ""
 var _api_key := ""
@@ -64,6 +67,10 @@ func _ready() -> void:
 		return
 	content = loaded.content
 	daily_loop_config = DailyLoop.load_config()
+	story_config = StoryContent.load_config()
+	if story_config.is_empty():
+		content_error = "STORY_CONFIG_INVALID"
+		return
 	if daily_loop_config.is_empty():
 		content_error = "DAILY_LOOP_CONFIG_INVALID"
 		return
@@ -118,10 +125,14 @@ func player_snapshot() -> Dictionary:
 	visible.erase("processed_actions")
 	visible.erase("people")
 	visible.erase("daily_loop")
+	visible.erase("story")
 	return visible.duplicate(true)
 
 func daily_loop_view() -> Dictionary:
 	return DailyLoop.public_view(state,daily_loop_config)
+
+func story_view() -> Dictionary:
+	return StoryProgress.public_view(state,story_config)
 
 func case_board_view() -> Dictionary:
 	if state.is_empty() or _divination == null:
@@ -132,13 +143,21 @@ func free_question_enabled() -> bool:
 	return bool(state.get("divination",{}).get("settings",{}).get("free_question",false))
 
 func _case_configuration_valid() -> bool:
-	return _divination != null and not CaseSchema.load_rules().is_empty() and not CaseSchema.load_all(_divination.data).is_empty()
+	return _divination != null and not StoryContent.load_config().is_empty() and not CaseSchema.load_rules().is_empty() and not CaseSchema.load_all(_divination.data).is_empty()
+
+func _story_enabled() -> bool:
+	return _sequential() and bool(_divination.board_config.get("enabled",false)) and bool(story_config.get("rules",{}).get("enabled",false))
 
 func _sequential() -> bool:
 	return DailyLoop.enabled(daily_loop_config)
 
 func people_view() -> Dictionary:
-	return PeopleBridge.public_view(state) if not state.is_empty() else {}
+	var view := PeopleBridge.public_view(state) if not state.is_empty() else {}
+	var weather: Dictionary = state.get("story",{}).get("days",{}).get(str(floori(float(state.get("clock_minutes",0))/1440.0)),{})
+	if not view.is_empty() and not weather.is_empty():
+		view["day"] = view.get("day",{}).duplicate(true)
+		view.day["weather"] = weather.get("weather_id","")
+	return view
 
 func departure_risk(minutes: int) -> int:
 	if _sequential():
@@ -477,7 +496,9 @@ func _question_context(snapshot_state: Dictionary, visit: Dictionary) -> Diction
 				sources.append({"source_id":"known_statement_"+str(sources.size()),"text":str(turn.text),"kind":"statement"})
 		for clue: String in previous.clue_ids:
 			if _divination.data.clues.has(clue):
-				sources.append({"source_id":"known_clue_"+clue,"text":str(_divination.data.clues[clue].text),"kind":"clue"})
+				var disclosed: Dictionary = _divination.data.clues[clue].duplicate(true)
+				disclosed.merge(_divination.case_clue_overrides(state,previous).get(clue,{}),true)
+				sources.append({"source_id":"known_clue_"+clue,"text":str(disclosed.text),"kind":"clue"})
 	var guardrails: Array = ["替你留了靠窗的位置","侧门","临时入口告示","另一处档案柜编号"]
 	guardrails.append_array(GeneratedCases.private_anchors(case))
 	return {"question_topics":choices,"sources":sources,"_guardrails":guardrails}
@@ -583,6 +604,8 @@ func execute_action(action: Dictionary) -> Dictionary:
 		return _daily_action(action)
 	if action.type == "set_free_question":
 		return _set_free_question(action)
+	if action.type == "story_choice":
+		return _story_choice(action)
 	match action.type:
 		"start_visit":
 			return _start_visit(action)
@@ -672,7 +695,7 @@ func _new_game(action: Dictionary) -> Dictionary:
 		return _fail("INVALID_APPEARANCE",Appearance.load_config().get("copy",{}).get("migration_failed",content_error))
 	if _sequential():
 		candidate.player.energy = int(daily_loop_config.daily_energy)
-		DailyLoop.plan(candidate,daily_loop_config,people_config)
+		DailyLoop.plan(candidate,daily_loop_config,people_config,_story_enabled(),_divination.data)
 	candidate = SaveService._normalize_numbers(candidate)
 	var saved: Dictionary = SaveService.write_save(candidate)
 	if not saved.success:
@@ -699,6 +722,10 @@ func _load_game(action: Dictionary) -> Dictionary:
 		_sync_generated_catalog()
 		return _fail("INVALID_APPEARANCE",Appearance.load_config().get("copy",{}).get("migration_failed",content_error))
 	DailyLoop.sync_mode(loaded_candidate,_sequential())
+	var story_error := StoryProgress.validate(loaded_candidate,_divination.data,story_config)
+	if not story_error.is_empty():
+		_sync_generated_catalog()
+		return _fail("INVALID_STORY",story_error)
 	state = SaveService._normalize_numbers(loaded_candidate)
 	_sync_generated_catalog()
 	_reset_people_generator()
@@ -751,6 +778,8 @@ func _start_visit(action: Dictionary) -> Dictionary:
 	return _commit(candidate, action, "接待已开始并保存。", {"visit_id": visit.visit_id},presentation_events)
 
 func _prepare_talk(action: Dictionary) -> Dictionary:
+	if case_board_view().get("prelude",{}).get("blocks_progress",false):
+		return _fail("STORY_PRELUDE_REQUIRED",story_config.rules.copy.prelude_required)
 	if case_board_view().get("enabled",false) and not free_question_enabled():
 		return _fail("FREE_QUESTION_DISABLED",CaseSchema.load_rules().copy.free_question_disabled)
 	var visit: Dictionary = active_visit()
@@ -829,7 +858,8 @@ func _prepare_talk(action: Dictionary) -> Dictionary:
 		for id: String in previous.clue_ids:
 			shared_clues[id] = true
 	for id: String in shared_clues:
-		var clue: Dictionary = _divination.data.clues.get(id,{})
+		var clue: Dictionary = _divination.data.clues.get(id,{}).duplicate(true)
+		clue.merge(_divination.case_clue_overrides(state,visit).get(id,{}),true)
 		if not clue.is_empty():
 			sources.append({"source_id":"clue:" + id,"kind":"clue","text":str(clue.text),"certainty":"disclosed_clue","audience":"both"})
 	for previous: Dictionary in history:
@@ -910,6 +940,7 @@ func _complete_talk(action: Dictionary, input_text: String, response: Variant) -
 	if _sequential():
 		talk_minutes = mini(talk_minutes,maxi(0,int(content.rules.closing_minute)-int(candidate.clock_minutes)%1440))
 	var presentation_events: Array = _advance(candidate,talk_minutes)
+	visit = _candidate_visit(candidate)
 	var questions: Array = DialoguePolicy.parse_questions(response.get("followup_questions",[]),_question_context(candidate,visit))
 	visit["followup_questions"] = questions
 	visit["followup_action_id"] = action.action_id
@@ -951,7 +982,7 @@ func _end_visit(action: Dictionary) -> Dictionary:
 	var ordered: bool = not str(candidate.daily_loop.active_arrival_id).is_empty()
 	if ordered:
 		DailyLoop.finish(candidate,visit)
-		DailyLoop.plan(candidate,daily_loop_config,people_config)
+		DailyLoop.plan(candidate,daily_loop_config,people_config,_story_enabled(),_divination.data)
 	if _sequential():
 		presentation_events.append_array(_advance(candidate,mini(int(daily_loop_config.close_minutes),maxi(0,int(content.rules.closing_minute)-int(candidate.clock_minutes)%1440))))
 	var output := {"visit_id": visit.visit_id}
@@ -998,7 +1029,10 @@ func _next_day(action: Dictionary) -> Dictionary:
 	if _sequential():
 		candidate.player.energy = int(daily_loop_config.daily_energy)
 		DailyLoop.new_day(candidate)
-		DailyLoop.plan(candidate,daily_loop_config,people_config)
+		var story_result := StoryProgress.sync(candidate,_divination.data,story_config,people_config)
+		if not story_result.get("success",false):
+			return _fail(story_result.get("error_code","STORY_INVALID"),story_result.get("message",""))
+		DailyLoop.plan(candidate,daily_loop_config,people_config,_story_enabled(),_divination.data)
 	return _commit(candidate, action, "已进入下一天，已处理到期的案例事项。", {},presentation_events)
 
 func _candidate_visit(candidate: Dictionary) -> Dictionary:
@@ -1021,12 +1055,18 @@ func _advance(candidate: Dictionary, minutes: int) -> Array:
 		# Closing the board releases the unchanged original G3 deadline.
 		minutes = mini(minutes,maxi(0,int(event.due_at)-int(candidate.clock_minutes)-1))
 	var presentation_events: Array = PeopleBridge.advance(candidate, people_config, minutes, _divination,_sequential())
+	# The commit repeats validation and refuses a failed sync; this sweep makes
+	# disclosures reached during the clock advance available to closing summaries.
+	StoryProgress.sync(candidate,_divination.data,story_config,people_config)
 	Shop.sync_effects(candidate, shop_config)
 	return presentation_events
 
 func _commit(candidate: Dictionary, action: Dictionary, message: String, result: Dictionary, presentation_events: Variant = null) -> Dictionary:
 	Shop.sync_effects(candidate, shop_config)
 	PeopleBridge.sync(candidate, people_config, _divination,_sequential())
+	var story_result := StoryProgress.sync(candidate,_divination.data,story_config,people_config)
+	if not story_result.get("success",false):
+		return _fail(story_result.get("error_code","STORY_INVALID"),story_result.get("message",""))
 	DailyLoop.sync_mode(candidate,_sequential())
 	candidate = SaveService._normalize_numbers(candidate)
 	result = SaveService._normalize_numbers(result)
@@ -1097,7 +1137,10 @@ func _initialize_integrated(candidate: Dictionary, fresh: bool = false) -> bool:
 		candidate.divination["settings"] = {"free_question":false}
 		for case: Dictionary in candidate.divination.cases.values():
 			case["board"] = {}
-		candidate.schema_version = SaveService.CURRENT_SCHEMA
+		candidate.schema_version = 11
+	if int(candidate.schema_version) < 12:
+		StoryProgress.initialize(candidate,story_config)
+		candidate.schema_version = 12
 	return People.validate(candidate.people).is_empty()
 
 func _set_free_question(action: Dictionary) -> Dictionary:
@@ -1107,6 +1150,14 @@ func _set_free_question(action: Dictionary) -> Dictionary:
 	var candidate: Dictionary = state.duplicate(true)
 	candidate.divination.settings.free_question = action.enabled
 	return _commit(candidate,action,copy.free_question_saved,{"enabled":action.enabled})
+
+func _story_choice(action: Dictionary) -> Dictionary:
+	var candidate := state.duplicate(true)
+	var outcome := StoryProgress.choice(candidate,_candidate_visit(candidate),action.get("choice_id",""),story_config,people_config)
+	if not outcome.get("success",false):
+		return _fail(outcome.get("error_code","INVALID_STORY_CHOICE"),outcome.get("message",""))
+	var events := _advance(candidate,int(outcome.get("minutes",0)))
+	return _commit(candidate,action,outcome.get("message",""),outcome.get("result",{}),events)
 
 func _daily_action(action: Dictionary) -> Dictionary:
 	if not _sequential():
@@ -1119,7 +1170,7 @@ func _daily_action(action: Dictionary) -> Dictionary:
 		"read_morning_letters":
 			if loop.phase != "morning":
 				return _fail("MORNING_ALREADY_READ",copy.already_read)
-			DailyLoop.plan(candidate,daily_loop_config,people_config)
+			DailyLoop.plan(candidate,daily_loop_config,people_config,_story_enabled(),_divination.data)
 			DailyLoop.read_letters(candidate,_divination.data,daily_loop_config)
 			loop.phase = "reception"
 			return _commit(candidate,action,copy.letters_read,{},events)
@@ -1128,11 +1179,13 @@ func _daily_action(action: Dictionary) -> Dictionary:
 				return _fail("ACTIVE_VISIT",copy.active_visit)
 			if loop.phase != "reception":
 				return _fail("MORNING_REQUIRED",copy.morning_required)
-			DailyLoop.plan(candidate,daily_loop_config,people_config)
+			DailyLoop.plan(candidate,daily_loop_config,people_config,_story_enabled(),_divination.data)
 			var id := DailyLoop.next_arrival(candidate)
 			if id.is_empty():
 				return _fail("DAY_COMPLETE",copy.all_done)
 			var row: Dictionary = candidate.people.arrivals[id]
+			events.append_array(_advance(candidate,maxi(0,int(row.at)-int(candidate.clock_minutes))))
+			row = candidate.people.arrivals[id]
 			row.state = "queued"
 			row.deadline = People.MAX_INT
 			if not People._physical_arrival(candidate.people,people_config,row,int(candidate.clock_minutes)):

@@ -11,6 +11,8 @@ const ProductRules = preload("res://scripts/divination/event_schema.gd")
 const PastLines = preload("res://scripts/divination/past_lines.gd")
 const CaseSchema = preload("res://scripts/divination/case_schema.gd")
 const DeductionBoard = preload("res://scripts/divination/deduction_board.gd")
+const StoryContent = preload("res://scripts/story/story_content.gd")
+const StoryProgress = preload("res://scripts/story/story_progress.gd")
 const ACTIONS := [
 	"quote_service", "settle_service", "cancel_service", "learn_method", "note_hypothesis",
 	"record_prediction", "give_advice", "buy_case_item", "use_case_item", "receive_feedback",
@@ -105,15 +107,45 @@ func add_case(state: Dictionary, visit: Dictionary, case_id: String, schedule_ev
 		record["board"] = {}
 		if board_config.get("enabled",true) and state.get("daily_loop",{}).get("mode") == "sequential" and visit.get("intent","") != "shopping":
 			for definition: Dictionary in CaseSchema.load_all(data).values():
-				if definition.legacy_case_id == case_id:
+				if CaseSchema.g3_case_id(definition) == case_id:
 					record.board = DeductionBoard.create(state,visit,definition)
+					if int(state.get("schema_version",0)) >= 12:
+						var started := StoryProgress.start(state,visit,definition.id,StoryContent.load_config())
+						if not started.success:
+							return false
 					break
 	return true
 
 func case_board_view(state: Dictionary, visit: Dictionary) -> Dictionary:
 	if visit.is_empty() or not state.get("divination",{}).get("cases",{}).has(visit.get("visit_id")):
 		return {"enabled":false}
-	return DeductionBoard.public_view(state,visit,state.divination.cases[visit.visit_id],CaseSchema.load_all(data))
+	var view := DeductionBoard.public_view(state,visit,state.divination.cases[visit.visit_id],CaseSchema.load_all(data))
+	if view.get("enabled",false) and state.has("story"):
+		var config := StoryContent.load_config()
+		view.merge(StoryProgress.board_view(state,visit,config),true)
+		var replacements := StoryProgress.evidence_overrides(state,visit,config)
+		for evidence: Dictionary in view.evidence:
+			if replacements.has(evidence.id):
+				evidence.merge(replacements[evidence.id],true)
+	return view
+
+func case_clue_overrides(state: Dictionary, visit: Dictionary) -> Dictionary:
+	var replacements := {}
+	var config := StoryContent.load_config()
+	if config.is_empty():
+		return replacements
+	var definitions := CaseSchema.load_all(data)
+	for prior: Dictionary in state.get("visits",[]):
+		if prior.npc_id!=visit.get("npc_id"):
+			continue
+		var overrides := StoryProgress.evidence_overrides(state,prior,config)
+		var case: Dictionary = state.divination.cases.get(prior.visit_id,{})
+		var definition: Dictionary = definitions.get(case.get("board",{}).get("definition_id"),{})
+		for material: Dictionary in definition.get("evidence",[]):
+			if overrides.has(material.id):
+				for clue_id: String in material.get("legacy_clue_ids",[]):
+					replacements[clue_id] = overrides[material.id].duplicate(true)
+	return replacements
 
 func guest_options(state: Dictionary) -> Array:
 	var guests: Array = [
@@ -133,6 +165,9 @@ func guest_view(npc_id: String, case_id: String, supplied: Dictionary = {}) -> D
 	return {"npc_id": npc_id, "name": guest.get("name", "来客"), "role": guest.get("role", ""), "case_title": data.cases[case_id].title}
 
 func opening(npc_id: String, case_id: String, has_visited: bool, known_clues: Array = []) -> String:
+	var authored_guest: Dictionary = data.guests.get(npc_id,{})
+	if authored_guest.get("story_guest",false):
+		return authored_guest.get("followup",authored_guest.opening) if has_visited else authored_guest.opening
 	var generated: Dictionary = data.cases.get(case_id, {})
 	if generated.get("generated", false) and generated.get("npc_id") == npc_id:
 		if not has_visited:
@@ -181,6 +216,9 @@ func handle(state: Dictionary, visit: Dictionary, action: Dictionary) -> Diction
 	if visit.is_empty():
 		return _fail("NO_VISIT", "请先接待顾客。")
 	var case: Dictionary = state.divination.cases[visit.visit_id]
+	var story_config := StoryContent.load_config()
+	if StoryProgress.prelude(state,visit,story_config).blocks_progress and action.type!="receive_feedback":
+		return _fail("STORY_PRELUDE_REQUIRED",story_config.rules.copy.prelude_required)
 	if action.type in DeductionBoard.ACTIONS:
 		return _board_action(state,visit,case,action)
 	match action.type:
@@ -240,6 +278,10 @@ func _board_action(state: Dictionary, visit: Dictionary, case: Dictionary, actio
 		return advised
 	case.board.closure["prediction_id"] = case.prediction.prediction_id
 	case.board.closure["advice_record_id"] = case.advice.back().advice_id
+	if state.has("story"):
+		var progress := StoryProgress.on_closed(state,visit,StoryContent.load_config())
+		if not progress.success:
+			return progress
 	visit.dialogue.append({"speaker":"player","text":chosen.text})
 	visit.dialogue.append({"speaker":"npc","text":chosen.reaction,"mood":chosen.mood})
 	outcome.result.merge({"prediction_id":case.prediction.prediction_id,"advice_record_id":case.advice.back().advice_id,"accepted":advised.result.accepted,"reply_text":chosen.reaction})

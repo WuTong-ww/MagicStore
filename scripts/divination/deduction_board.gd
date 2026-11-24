@@ -253,7 +253,7 @@ static func valid(state: Dictionary, visit: Dictionary, case: Dictionary, defini
 		return true
 	var definition: Dictionary = definitions.get(board.get("definition_id"),{})
 	var rules := Schema.load_rules()
-	if definition.is_empty() or rules.is_empty() or definition.legacy_case_id != case.case_id or board.get("version") != definition.version or board.get("hash") != Schema.definition_hash(definition) or board.get("phase") not in ["questions","cards","deduction","closed"]:
+	if definition.is_empty() or rules.is_empty() or Schema.g3_case_id(definition) != case.case_id or board.get("version") != definition.version or board.get("hash") != Schema.definition_hash(definition) or board.get("phase") not in ["questions","cards","deduction","closed"]:
 		return false
 	for key: String in ["questions_asked","evidence_ids","tool_clues","card_order","flipped_indices"]:
 		if not board.get(key) is Array:

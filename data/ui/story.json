@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "note_count": 4,
+  "layout": {"heading_font": 22, "body_font": 18, "small_font": 16, "gap": 8, "button_height": 42, "body_minimum_height": 160, "ending_minimum_height": 48, "page_number_minimum_width": 110},
+  "copy": {
+    "tab_title": "店主笔记",
+    "heading": "前任店主留下的笔记",
+    "page_number": "第 {number} 页",
+    "progress": "已找到 {count} / {total} 页",
+    "locked": "这一页还没有找回来。先把眼前的故事听完。",
+    "empty": "笔记暂时还没有翻开。",
+    "close": "合上笔记，继续经营",
+    "prelude_instruction": "先听完这段话，再继续推理",
+    "prelude_saved": "这段话已经记下。",
+    "separator": "\n\n",
+    "line_separator": "\n",
+    "movie_segment": "已载入实际到期后的进度，继续阅读笔记。",
+    "movie_reload": "打开实际后续进度，核对已经发生的结局。"
+  },
+  "movie": {"fps": 30, "duration_seconds": 34, "pause_seconds": 0.7, "drag_frames": 12, "ending_hold_seconds": 2.0, "width": 1920, "height": 1080, "card_indices": [0, 2, 4], "answer_indices": [2, 2, 2]}
+}

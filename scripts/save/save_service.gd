@@ -4,7 +4,7 @@ extends Node
 ## belongs in a snapshot. Tests must replace base_dir with an isolated directory.
 
 const ENVELOPE_FORMAT := "midnight-grocery-save-v1"
-const CURRENT_SCHEMA := 11
+const CURRENT_SCHEMA := 12
 const MAX_BYTES := 16 * 1024 * 1024
 const MAX_INTEGER := 2147483647
 const MAX_EXACT_JSON_INTEGER := 9007199254740991
@@ -17,6 +17,8 @@ const PeopleBridge = preload("res://scripts/shop/people_bridge.gd")
 const Appearance = preload("res://scripts/people/appearance.gd")
 const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
 const DailyLoop = preload("res://scripts/core/daily_loop.gd")
+const StoryContent = preload("res://scripts/story/story_content.gd")
+const StoryProgress = preload("res://scripts/story/story_progress.gd")
 const SHOP_ACTIONS := ["procure_item", "receive_material_gift", "gather_material", "sell_material", "register_demand", "research_recipe", "craft_item", "sell_product", "use_product", "review_case", "use_unlocked_option", "start_arrival", "book_arrival", "save_appearance", "wait", "admit_generated_person", "invite_contact"]
 var base_dir: String = "user://saves"
 var _divination_data: Dictionary = {}
@@ -334,7 +336,7 @@ func _validate(s: Dictionary) -> String:
 			return "动作编号或结果无效"
 		if not result.get("success") is bool or not result.get("error_code") is String or not result.get("message") is String or not result.get("result") is Dictionary or not _integer(result.get("state_version"), 0, int(s.state_version)):
 			return "已处理动作结果字段无效"
-		if result.has("action_type") and not result.action_type in ["start_visit", "talk", "reading", "end_visit", "rest", "next_day"] and (not extended or not result.action_type in DivinationSession.ACTIONS) and (int(s.schema_version) < 3 or not result.action_type in SHOP_ACTIONS) and (int(s.schema_version) < 10 or not result.action_type in DailyLoop.ACTIONS) and (int(s.schema_version) < 11 or result.action_type != "set_free_question"):
+		if result.has("action_type") and not result.action_type in ["start_visit", "talk", "reading", "end_visit", "rest", "next_day"] and (not extended or not result.action_type in DivinationSession.ACTIONS) and (int(s.schema_version) < 3 or not result.action_type in SHOP_ACTIONS) and (int(s.schema_version) < 10 or not result.action_type in DailyLoop.ACTIONS) and (int(s.schema_version) < 11 or result.action_type != "set_free_question") and (int(s.schema_version) < 12 or result.action_type != "story_choice"):
 			return "已处理动作类型无效"
 		var output: Dictionary = result.result
 		if output.has("visit_id") and (not output.visit_id is String or not visit_ids.has(output.visit_id)):
@@ -363,7 +365,10 @@ func _validate(s: Dictionary) -> String:
 		var daily_error := DailyLoop.validate(s)
 		if not daily_error.is_empty():
 			return daily_error
-	return DivinationSave.validate(s, current_data, visit_ids) if extended else ""
+	var case_error: String = DivinationSave.validate(s,current_data,visit_ids) if extended else ""
+	if not case_error.is_empty():
+		return case_error
+	return StoryProgress.validate(s,current_data,StoryContent.load_config()) if int(s.schema_version) >= 12 else ""
 
 
 func _read_file(path: String, expected_id: String) -> Dictionary:

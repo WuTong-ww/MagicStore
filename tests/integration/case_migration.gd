@@ -46,6 +46,7 @@ func run() -> void:
 	await act("receive_feedback",{"event_id":event.event_id})
 	var old: Dictionary = game.snapshot()
 	old.schema_version = 10
+	old.erase("story")
 	old.divination = historical_divination(old.divination)
 	check(not old.divination.cases[source_visit].event.feedback.report.is_empty(),"historic source has genuinely settled feedback and rewards")
 	check(saves.write_save(old).success,"genuine schema10 history saves without new namespace")

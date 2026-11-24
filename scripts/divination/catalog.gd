@@ -36,6 +36,7 @@ const Astro = preload("res://scripts/divination/oracle_sky.gd")
 const Pillars = preload("res://scripts/divination/oracle_pillars.gd")
 const Ziwei = preload("res://scripts/divination/oracle_ziwei.gd")
 const EventSchema = preload("res://scripts/divination/event_schema.gd")
+const StoryContent = preload("res://scripts/story/story_content.gd")
 const METHOD_OPTIONS := {
 	"tarot": ["situation", "next_question"], "lenormand": ["letter_birds", "key_house"],
 	"plum": ["clock", "number"], "yijing": ["gradual", "release"],
@@ -131,7 +132,7 @@ static func load_data(base: Dictionary) -> Dictionary:
 	parsed["hexagrams"] = Casting.load_hexagrams()
 	if parsed.decks.is_empty() or parsed.hexagrams.is_empty() or not Almanac.load_months():
 		return {}
-	return parsed
+	return StoryContent.install(parsed)
 
 static func _cost(value: Variant) -> bool:
 	return value is Dictionary and _integer(value.get("coins"), 1, 10000) and _integer(value.get("energy"), 1, 10000) and _integer(value.get("minutes"), 1, 1439)
