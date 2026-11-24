@@ -49,6 +49,8 @@ func old_copy(schema: int) -> Dictionary:
 	var legacy: Dictionary = game.snapshot()
 	legacy.schema_version = schema
 	if legacy.has("divination"):
+		check(not legacy.divination.has("emergent_cases") or legacy.divination.get("emergent_cases")=={"version":1,"instances":{}},"historical projection retains no populated schema14 ordinary-case namespace")
+		legacy.divination.erase("emergent_cases")
 		legacy.divination.erase("past_lines")
 		for case: Dictionary in legacy.divination.cases.values():
 			case.erase("cause")

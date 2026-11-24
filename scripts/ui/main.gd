@@ -57,6 +57,7 @@ var workbench: DivinationWorkbench
 func _process(_delta: float) -> void:
 	if not _closing:
 		GameState.pump_background_people(busy)
+		GameState.pump_background_cases(busy)
 
 func _ready() -> void:
 	get_tree().auto_accept_quit = false

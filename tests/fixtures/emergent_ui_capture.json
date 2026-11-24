@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "sizes": [[1280, 720], [1920, 1080]],
+  "phases": ["questions", "cards", "closed"],
+  "settle_frames": 14,
+  "capture_delay_seconds": 0.25,
+  "watchdog_seconds": 180,
+  "max_captures": 6,
+  "partial_cards": 1,
+  "rect_tolerance": 1,
+  "pixel_probe_divisions": 4,
+  "receipt_path": "res://.tools/r3-aicase/transaction-receipt.json",
+  "envelope_path": "res://.tools/r3-aicase/opened-fallback-envelope.json",
+  "output_dir": "res://.tools/r3-aicase/ui-captures",
+  "working_dir": "res://.tools/r3-aicase/ui-saves"
+}

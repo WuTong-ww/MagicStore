@@ -1,0 +1,528 @@
+{
+  "protocol_version": 1,
+  "template_id": "fallback_moving",
+  "kind": "moving",
+  "definition": {
+    "id": "fallback_moving",
+    "version": 1,
+    "title": "先住一周的打算",
+    "question": "搬家的顾虑在哪，哪些条件已确认，又能先做哪一步？",
+    "truth": {
+      "concern": {
+        "value": "commute",
+        "text": "出行记录显示，主要困扰是每天往返时间太久。",
+        "requires_clue": "clue_concern"
+      },
+      "condition": {
+        "value": "trial",
+        "text": "书面回复允许先短住一周，再决定是否继续。",
+        "requires_clue": "clue_condition"
+      },
+      "step": {
+        "value": "try",
+        "text": "试住安排是按平日时段短住，记录实际往返感受。",
+        "requires_clue": "clue_step"
+      }
+    },
+    "deduction_slots": [
+      {
+        "id": "concern",
+        "title": "最需要解决什么顾虑",
+        "answers": [
+          {
+            "id": "boxes",
+            "text": "书箱不好整理"
+          },
+          {
+            "id": "commute",
+            "text": "每天往返时间太久"
+          },
+          {
+            "id": "window",
+            "text": "窗边摆不下花盆"
+          }
+        ],
+        "correct_answer": "commute",
+        "unlock_evidence": [
+          "fact_concern",
+          "statement_0"
+        ]
+      },
+      {
+        "id": "condition",
+        "title": "新住处确认了什么条件",
+        "answers": [
+          {
+            "id": "year",
+            "text": "只能一次住满一年"
+          },
+          {
+            "id": "unknown",
+            "text": "尚未得到任何回复"
+          },
+          {
+            "id": "trial",
+            "text": "可以先短住一周"
+          }
+        ],
+        "correct_answer": "trial",
+        "unlock_evidence": [
+          "fact_condition",
+          "statement_2"
+        ]
+      },
+      {
+        "id": "step",
+        "title": "哪一步最容易撤回",
+        "answers": [
+          {
+            "id": "all",
+            "text": "马上搬走全部物品"
+          },
+          {
+            "id": "try",
+            "text": "按平日时段短住并记录"
+          },
+          {
+            "id": "cancel",
+            "text": "不看回复，立刻取消"
+          }
+        ],
+        "correct_answer": "try",
+        "unlock_evidence": [
+          "fact_step",
+          "statement_1"
+        ]
+      }
+    ],
+    "questions": [
+      [
+        {
+          "id": "question_0_0",
+          "text": "一周里哪件事最让你匆忙？",
+          "answer": "来客补充：出行记录显示，主要困扰是每天往返时间太久。",
+          "evidence_ids": [
+            "fact_concern"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_0_0"
+        },
+        {
+          "id": "question_0_1",
+          "text": "现在有哪些让你留恋的事？",
+          "answer": "来客补充：出行记录显示，主要困扰是每天往返时间太久。 我喜欢原来的街坊，只是每天赶路总觉得匆忙。",
+          "evidence_ids": [
+            "fact_concern",
+            "statement_0"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_0_1"
+        },
+        {
+          "id": "question_0_2",
+          "text": "记录能帮你分清顾虑吗？",
+          "answer": "来客补充：出行记录显示，主要困扰是每天往返时间太久。 我愿意先带一只小箱子试试，不想一次搬完。",
+          "evidence_ids": [
+            "fact_concern",
+            "statement_1"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_0_2"
+        }
+      ],
+      [
+        {
+          "id": "question_1_0",
+          "text": "新住处究竟怎样回复的？",
+          "answer": "来客补充：书面回复允许先短住一周，再决定是否继续。",
+          "evidence_ids": [
+            "fact_condition"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_1_0"
+        },
+        {
+          "id": "question_1_1",
+          "text": "熟人说法与回复一致吗？",
+          "answer": "来客补充：书面回复允许先短住一周，再决定是否继续。 我愿意先带一只小箱子试试，不想一次搬完。",
+          "evidence_ids": [
+            "fact_condition",
+            "statement_1"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_1_1"
+        },
+        {
+          "id": "question_1_2",
+          "text": "哪些条件已经确认？",
+          "answer": "来客补充：书面回复允许先短住一周，再决定是否继续。 熟人说一住就不能回头，但没有看过我收到的书面回复。",
+          "evidence_ids": [
+            "fact_condition",
+            "statement_2"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_1_2"
+        }
+      ],
+      [
+        {
+          "id": "question_2_0",
+          "text": "可以先试哪一步再决定？",
+          "answer": "来客补充：试住安排是按平日时段短住，记录实际往返感受。",
+          "evidence_ids": [
+            "fact_step"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_2_0"
+        },
+        {
+          "id": "question_2_1",
+          "text": "短住时想记录哪些感受？",
+          "answer": "来客补充：试住安排是按平日时段短住，记录实际往返感受。 熟人说一住就不能回头，但没有看过我收到的书面回复。",
+          "evidence_ids": [
+            "fact_step",
+            "statement_2"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_2_1"
+        },
+        {
+          "id": "question_2_2",
+          "text": "怎样保留回来的余地？",
+          "answer": "来客补充：试住安排是按平日时段短住，记录实际往返感受。 我喜欢原来的街坊，只是每天赶路总觉得匆忙。",
+          "evidence_ids": [
+            "fact_step",
+            "statement_0"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_2_2"
+        }
+      ]
+    ],
+    "evidence": [
+      {
+        "id": "fact_concern",
+        "text": "出行记录显示，主要困扰是每天往返时间太久。",
+        "type": "fact",
+        "source": "来客一周出行记录",
+        "slot_ids": [
+          "concern"
+        ],
+        "legacy_clue_ids": [
+          "clue_concern"
+        ]
+      },
+      {
+        "id": "fact_condition",
+        "text": "书面回复允许先短住一周，再决定是否继续。",
+        "type": "fact",
+        "source": "新住处的书面回复",
+        "slot_ids": [
+          "condition"
+        ],
+        "legacy_clue_ids": [
+          "clue_condition"
+        ]
+      },
+      {
+        "id": "fact_step",
+        "text": "试住安排是按平日时段短住，记录实际往返感受。",
+        "type": "fact",
+        "source": "来客写下的试住安排",
+        "slot_ids": [
+          "step"
+        ],
+        "legacy_clue_ids": [
+          "clue_step"
+        ]
+      },
+      {
+        "id": "statement_0",
+        "text": "我喜欢原来的街坊，只是每天赶路总觉得匆忙。",
+        "type": "testimony",
+        "source": "来客对细节的陈述",
+        "slot_ids": [
+          "concern"
+        ]
+      },
+      {
+        "id": "statement_1",
+        "text": "我愿意先带一只小箱子试试，不想一次搬完。",
+        "type": "testimony",
+        "source": "来客对细节的陈述",
+        "slot_ids": [
+          "step"
+        ]
+      },
+      {
+        "id": "statement_2",
+        "text": "熟人说一住就不能回头，但没有看过我收到的书面回复。",
+        "type": "misleading",
+        "source": "尚未核对的转述或猜测",
+        "slot_ids": [
+          "condition"
+        ]
+      }
+    ],
+    "cards": [
+      {
+        "deck_id": "hermit",
+        "text": "先找到能独立核对的痕迹，让一处细节照亮方向。",
+        "slot_id": "concern"
+      },
+      {
+        "deck_id": "swords_2",
+        "text": "把已发生的事情与尚未核实的猜测分开。",
+        "slot_id": "condition"
+      },
+      {
+        "deck_id": "star",
+        "text": "把愿望落在一个可完成、也容许回应的小步骤上。",
+        "slot_id": "step"
+      },
+      {
+        "deck_id": "cups_6",
+        "text": "旧日熟悉感能提供方向，仍需眼前材料印证。",
+        "slot_id": "concern"
+      },
+      {
+        "deck_id": "world",
+        "text": "把来源、经过和下一步接起来，检查还缺哪一环。",
+        "slot_id": "step"
+      }
+    ],
+    "advice": [
+      {
+        "id": "verify",
+        "text": "先按平日时段短住一周，记录实际往返再决定。",
+        "requires_deductions": [
+          "concern",
+          "condition",
+          "step"
+        ],
+        "legacy_advice_key": "verify",
+        "reaction": "我先核对清楚，再照这个步骤试试。",
+        "mood": "smile",
+        "prediction": {
+          "text": "按所选步骤核对后，这件事会得到相应推进。",
+          "condition": "if_verify",
+          "expected": "met",
+          "window_after_due_minutes": 30
+        }
+      },
+      {
+        "id": "ask",
+        "text": "核对短住安排与路线，再选尝试日期。",
+        "requires_deductions": [
+          "concern",
+          "condition",
+          "step"
+        ],
+        "legacy_advice_key": "ask",
+        "reaction": "我会把看到的与猜到的分开，慢慢问明白。",
+        "mood": "neutral",
+        "prediction": {
+          "text": "按所选步骤核对后，这件事会得到相应推进。",
+          "condition": "if_ask",
+          "expected": "met",
+          "window_after_due_minutes": 30
+        }
+      },
+      {
+        "id": "wait",
+        "text": "这周先不搬，继续记录最需改善的地方。",
+        "requires_deductions": [
+          "concern",
+          "condition",
+          "step"
+        ],
+        "legacy_advice_key": "wait",
+        "reaction": "我先留住材料，准备好以后再继续。",
+        "mood": "hesitant",
+        "prediction": {
+          "text": "这次先暂缓，事情暂时不会有新的推进。",
+          "condition": "always",
+          "expected": "missed",
+          "window_after_due_minutes": 30
+        }
+      }
+    ],
+    "outcomes": {
+      "version": 1,
+      "subject_id": "case_owner",
+      "target_name": "搬家的顾虑在哪，哪些条件已确认，又能先做哪一步？",
+      "minute_of_day": 1080,
+      "feedback_delay": 180,
+      "world_facts": {
+        "concern": {
+          "values": [
+            "boxes",
+            "commute",
+            "window"
+          ],
+          "default": "commute"
+        },
+        "condition": {
+          "values": [
+            "year",
+            "unknown",
+            "trial"
+          ],
+          "default": "trial"
+        },
+        "step": {
+          "values": [
+            "all",
+            "try",
+            "cancel"
+          ],
+          "default": "try"
+        }
+      },
+      "branch_ids": [],
+      "item_effect_ids": [],
+      "item_effect": {},
+      "advice_options": [
+        {
+          "key": "verify",
+          "label": "先按平日时段短住一周，记录实际往返再决定。"
+        },
+        {
+          "key": "ask",
+          "label": "核对短住安排与路线，再选尝试日期。"
+        },
+        {
+          "key": "wait",
+          "label": "这周先不搬，继续记录最需改善的地方。"
+        }
+      ],
+      "advice": {
+        "verify": {
+          "text": "先按平日时段短住一周，记录实际往返再决定。"
+        },
+        "ask": {
+          "text": "核对短住安排与路线，再选尝试日期。"
+        },
+        "wait": {
+          "text": "这周先不搬，继续记录最需改善的地方。"
+        }
+      },
+      "prediction_conditions": {
+        "always": {
+          "label": "无附加条件"
+        },
+        "if_verify": {
+          "label": "若先核对材料再行动",
+          "outcomes": [
+            "verified"
+          ]
+        },
+        "if_ask": {
+          "label": "若先询问相关照看人或保管人",
+          "outcomes": [
+            "checked"
+          ]
+        }
+      },
+      "prediction_labels": {
+        "met": "事情得到核对与推进",
+        "missed": "事情暂未推进"
+      },
+      "rules": [
+        {
+          "when": {
+            "advice": "verify",
+            "accepted": true
+          },
+          "outcome": "verified"
+        },
+        {
+          "when": {
+            "advice": "ask",
+            "accepted": true
+          },
+          "outcome": "checked"
+        },
+        {
+          "when": {},
+          "outcome": "deferred"
+        }
+      ],
+      "outcomes": {
+        "verified": {
+          "actual_action": "先按平日时段短住一周，记录实际往返再决定。",
+          "outcome": "met",
+          "evidence": "sufficient",
+          "feedback": "delayed",
+          "delay_minutes": 180,
+          "text": "我带小箱子住过去，按平日时间走了一趟，现在有了能比较的记录。",
+          "effects": []
+        },
+        "checked": {
+          "actual_action": "核对短住安排与路线，再选尝试日期。",
+          "outcome": "met",
+          "evidence": "sufficient",
+          "feedback": "delayed",
+          "delay_minutes": 180,
+          "text": "书面回复与路线都核对好了，我选了方便的一周准备尝试。",
+          "effects": []
+        },
+        "deferred": {
+          "actual_action": "这周先不搬，继续记录最需改善的地方。",
+          "outcome": "missed",
+          "evidence": "sufficient",
+          "feedback": "delayed",
+          "delay_minutes": 180,
+          "text": "我先留在原处，记下每天匆忙的时段，还没有作最终决定。",
+          "effects": []
+        }
+      },
+      "feedback_effects": []
+    }
+  },
+  "support": {
+    "facts": [
+      {
+        "fact_key": "concern",
+        "evidence_id": "fact_concern",
+        "value": "commute"
+      },
+      {
+        "fact_key": "condition",
+        "evidence_id": "fact_condition",
+        "value": "trial"
+      },
+      {
+        "fact_key": "step",
+        "evidence_id": "fact_step",
+        "value": "try"
+      }
+    ],
+    "proofs": [
+      {
+        "slot_id": "concern",
+        "answer_id": "commute",
+        "rule": "fact_equals",
+        "premises": [
+          "concern"
+        ]
+      },
+      {
+        "slot_id": "condition",
+        "answer_id": "trial",
+        "rule": "fact_equals",
+        "premises": [
+          "condition"
+        ]
+      },
+      {
+        "slot_id": "step",
+        "answer_id": "try",
+        "rule": "fact_equals",
+        "premises": [
+          "step"
+        ]
+      }
+    ]
+  }
+}

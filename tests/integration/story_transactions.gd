@@ -8,6 +8,7 @@ var sequence := 0
 var changes := 0
 var rules: Dictionary
 var definitions: Dictionary
+var dynamic_cases: Array = []
 var saw_tao := false
 var deferred_visit_id := ""
 var deferred_definition_id := ""
@@ -68,6 +69,11 @@ func run() -> void:
 		await epilogues()
 	finish()
 func solve(id: String, advice_id: String, wrong: bool = true, closing_retry: bool = true) -> bool:
+	definitions = game._divination.definitions_for(game.snapshot())
+	var definition: Dictionary = definitions.get(id,{})
+	check(not definition.is_empty() and definition.get("id")==id,"the active Session exposes the actual verified board definition")
+	if definition.is_empty() or definition.get("id")!=id:
+		return false
 	for round_index: int in range(3):
 		var questions: Array = game.case_board_view().questions.filter(func(row:Dictionary)->bool:return row.enabled and (id!="fixed_invitation" or row.id!="venue_route"))
 		if questions.is_empty() or not (await act("case_question",{"question_id":questions[0].id})).success:
@@ -76,21 +82,29 @@ func solve(id: String, advice_id: String, wrong: bool = true, closing_retry: boo
 		if not (await act("case_flip_card",{"card_index":index})).success:
 			return false
 	for slot: Dictionary in game.case_board_view().slots:
-		var material: Array = game.case_board_view().evidence.filter(func(row:Dictionary)->bool:return slot.id in row.slot_ids)
+		var authored: Array = definition.deduction_slots.filter(func(row: Dictionary) -> bool: return row.id==slot.id)
+		check(authored.size()==1,"the verified definition resolves this public slot ID exactly once")
+		if authored.size()!=1:
+			return false
+		var correct: String = authored[0].correct_answer
+		var material: Array = game.case_board_view().evidence.filter(func(row:Dictionary)->bool:return slot.id in row.slot_ids and row.id in authored[0].unlock_evidence)
 		if material.is_empty() or not (await act("case_attach_evidence",{"slot_id":slot.id,"evidence_id":material[0].id})).success:
 			return false
-		var definition: Dictionary = definitions[id]
-		var correct := ""
-		for candidate_slot: Dictionary in definition.deduction_slots:
-			if candidate_slot.id==slot.id:
-				correct = candidate_slot.correct_answer
 		var current_slot: Dictionary = game.case_board_view().slots.filter(func(row:Dictionary)->bool:return row.id==slot.id)[0]
 		var answer: Array = current_slot.candidates.filter(func(row:Dictionary)->bool:return row.enabled and (row.id!=correct if wrong else row.id==correct))
 		check(not answer.is_empty(),"attached material opens an actual candidate")
 		if answer.is_empty() or not (await act("case_choose_answer",{"slot_id":slot.id,"answer_id":answer[0].id})).success:
 			return false
+	if not rules.cases.has(id):
+		advice_id = definition.advice[0].id
+	var enabled_advice: Array = game.case_board_view().advice.filter(func(row: Dictionary) -> bool: return row.id==advice_id and row.enabled)
+	check(not enabled_advice.is_empty(),"the actual configured or dynamic advice is publicly enabled")
+	if enabled_advice.is_empty():
+		return false
 	var closed: Dictionary = await retry("case_close",{"advice_id":advice_id}) if closing_retry else await act("case_close",{"advice_id":advice_id})
 	check(closed.success and game.case_board_view().stars==(1 if wrong else 3),"story case closes at backend-computed stars")
+	if closed.success and not rules.cases.has(id):
+		remember_dynamic(id)
 	return closed.success
 func next_visit() -> bool:
 	var result: Dictionary = await act("next_customer")
@@ -99,6 +113,9 @@ func next_visit() -> bool:
 	var row: Dictionary = game.state.people.arrivals[game.active_visit().arrival_id]
 	if str(row.get("story_rule_id","")).begins_with("followup_"):
 		saw_tao = true
+	var view: Dictionary = game.case_board_view()
+	if view.get("enabled",false) and not rules.cases.has(view.id):
+		return await solve(view.id,"")
 	return true
 func prepare_finale() -> bool:
 	if not (await act("new_game",{"name":"剧情真实事务"})).success:
@@ -115,7 +132,7 @@ func prepare_finale() -> bool:
 			if not await next_visit():
 				return false
 			var view: Dictionary = game.case_board_view()
-			if view.get("enabled",false):
+			if view.get("enabled",false) and not view.get("closed",false):
 				if view.id==rules.ending.case_id:
 					check(game.state.people.profiles[rules.final_prelude.repair.npc_id].trust<int(rules.final_prelude.repair.min_trust),"actual lost invitation feedback creates the low-trust repair route")
 					check(game.story_view().notes.filter(func(row:Dictionary)->bool:return row.unlocked).size()==3,"three pages are public before finale and final page stays locked")
@@ -219,6 +236,18 @@ func epilogues() -> void:
 			await act("end_visit")
 		await act("close_shop")
 	check(seen.size()==rules.epilogues.size(),"all five fixed people return on later days")
+func remember_dynamic(id: String) -> void:
+	var visit_id: String = game.state.active_visit_id
+	var board: Dictionary = game.state.divination.cases[visit_id].board
+	dynamic_cases.append({"case_id":id,"visit_id":visit_id,"definition_hash":board.hash,"advice_id":board.closure.advice_id,"stars":int(board.closure.stars),"questions":board.questions_asked.size(),"cards":board.flipped_indices.size(),"answers":board.answers.size(),"closed":board.phase=="closed"})
 func finish() -> void:
+	check(not dynamic_cases.is_empty(),"ordinary dynamic CASEs were actually solved with the feature enabled")
+	var receipt_path: String = saves.base_dir+"-dynamic-receipt.json"
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(receipt_path.get_base_dir()))
+	var output: FileAccess = FileAccess.open(receipt_path,FileAccess.WRITE)
+	check(output!=null,"write the separate actual dynamic-case receipt")
+	if output!=null:
+		output.store_string(JSON.stringify({"dynamic_cases":dynamic_cases},"  "))
+		output.close()
 	print("STORY TRANSACTIONS: %d checks, %d failures" % [checks,failures])
 	quit(1 if failures else 0)

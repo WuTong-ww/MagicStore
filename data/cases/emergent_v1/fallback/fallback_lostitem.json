@@ -1,0 +1,530 @@
+{
+  "protocol_version": 1,
+  "template_id": "fallback_lostitem",
+  "kind": "lostitem",
+  "definition": {
+    "id": "fallback_lostitem",
+    "version": 1,
+    "title": "蓝布袋暂住的抽屉",
+    "question": "布袋最后去了哪里，为什么被移走，又该怎样核对？",
+    "truth": {
+      "where": {
+        "value": "drawer",
+        "text": "蓝布袋被放进阅览室的失物抽屉。",
+        "requires_clue": "clue_where"
+      },
+      "cause": {
+        "value": "tidy",
+        "text": "值班人清理阅读桌时，将蓝布袋登记收纳。",
+        "requires_clue": "clue_cause"
+      },
+      "step": {
+        "value": "register",
+        "text": "认领说明要求先说出布袋特征，再核对登记。",
+        "requires_clue": "clue_step"
+      }
+    },
+    "deduction_slots": [
+      {
+        "id": "where",
+        "title": "布袋最后在哪里",
+        "answers": [
+          {
+            "id": "table",
+            "text": "留在靠窗阅读桌"
+          },
+          {
+            "id": "drawer",
+            "text": "放进失物抽屉"
+          },
+          {
+            "id": "door",
+            "text": "移到门外置物架"
+          }
+        ],
+        "correct_answer": "drawer",
+        "unlock_evidence": [
+          "fact_where",
+          "statement_0",
+          "statement_2"
+        ]
+      },
+      {
+        "id": "cause",
+        "title": "它为什么被移走",
+        "answers": [
+          {
+            "id": "borrow",
+            "text": "被临时借去装书"
+          },
+          {
+            "id": "rain",
+            "text": "为了避开雨水"
+          },
+          {
+            "id": "tidy",
+            "text": "清桌时登记收纳"
+          }
+        ],
+        "correct_answer": "tidy",
+        "unlock_evidence": [
+          "fact_cause",
+          "statement_0"
+        ]
+      },
+      {
+        "id": "step",
+        "title": "先核对哪一步",
+        "answers": [
+          {
+            "id": "register",
+            "text": "带特征核对登记"
+          },
+          {
+            "id": "search",
+            "text": "先沿离开的路查找"
+          },
+          {
+            "id": "ask",
+            "text": "先询问当天的读者"
+          }
+        ],
+        "correct_answer": "register",
+        "unlock_evidence": [
+          "fact_step",
+          "statement_1"
+        ]
+      }
+    ],
+    "questions": [
+      [
+        {
+          "id": "question_0_0",
+          "text": "最后在哪里看见布袋？",
+          "answer": "来客补充：蓝布袋被放进阅览室的失物抽屉。",
+          "evidence_ids": [
+            "fact_where"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_0_0"
+        },
+        {
+          "id": "question_0_1",
+          "text": "当时桌边还有什么？",
+          "answer": "来客补充：蓝布袋被放进阅览室的失物抽屉。 离开时，桌旁堆着待归架的书。",
+          "evidence_ids": [
+            "fact_where",
+            "statement_0"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_0_1"
+        },
+        {
+          "id": "question_0_2",
+          "text": "相似的蓝袋核实过吗？",
+          "answer": "来客补充：蓝布袋被放进阅览室的失物抽屉。 布袋内侧有我补过的一小块浅色布。",
+          "evidence_ids": [
+            "fact_where",
+            "statement_1"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_0_2"
+        }
+      ],
+      [
+        {
+          "id": "question_1_0",
+          "text": "有没有留下移放记录？",
+          "answer": "来客补充：值班人清理阅读桌时，将蓝布袋登记收纳。",
+          "evidence_ids": [
+            "fact_cause"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_1_0"
+        },
+        {
+          "id": "question_1_1",
+          "text": "谁负责整理那张桌子？",
+          "answer": "来客补充：值班人清理阅读桌时，将蓝布袋登记收纳。 布袋内侧有我补过的一小块浅色布。",
+          "evidence_ids": [
+            "fact_cause",
+            "statement_1"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_1_1"
+        },
+        {
+          "id": "question_1_2",
+          "text": "收纳和借走能怎样分清？",
+          "answer": "来客补充：值班人清理阅读桌时，将蓝布袋登记收纳。 有人提着相似的蓝袋路过，我就猜自己的袋子被带走了。",
+          "evidence_ids": [
+            "fact_cause",
+            "statement_2"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_1_2"
+        }
+      ],
+      [
+        {
+          "id": "question_2_0",
+          "text": "认领前需要核对什么？",
+          "answer": "来客补充：认领说明要求先说出布袋特征，再核对登记。",
+          "evidence_ids": [
+            "fact_step"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_2_0"
+        },
+        {
+          "id": "question_2_1",
+          "text": "袋子上有没有独特记号？",
+          "answer": "来客补充：认领说明要求先说出布袋特征，再核对登记。 有人提着相似的蓝袋路过，我就猜自己的袋子被带走了。",
+          "evidence_ids": [
+            "fact_step",
+            "statement_2"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_2_1"
+        },
+        {
+          "id": "question_2_2",
+          "text": "先查登记，再问人怎样？",
+          "answer": "来客补充：认领说明要求先说出布袋特征，再核对登记。 离开时，桌旁堆着待归架的书。",
+          "evidence_ids": [
+            "fact_step",
+            "statement_0"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_2_2"
+        }
+      ]
+    ],
+    "evidence": [
+      {
+        "id": "fact_where",
+        "text": "蓝布袋被放进阅览室的失物抽屉。",
+        "type": "fact",
+        "source": "失物登记卡",
+        "slot_ids": [
+          "where"
+        ],
+        "legacy_clue_ids": [
+          "clue_where"
+        ]
+      },
+      {
+        "id": "fact_cause",
+        "text": "值班人清理阅读桌时，将蓝布袋登记收纳。",
+        "type": "fact",
+        "source": "值班收纳记录",
+        "slot_ids": [
+          "cause"
+        ],
+        "legacy_clue_ids": [
+          "clue_cause"
+        ]
+      },
+      {
+        "id": "fact_step",
+        "text": "认领说明要求先说出布袋特征，再核对登记。",
+        "type": "fact",
+        "source": "失物领取说明",
+        "slot_ids": [
+          "step"
+        ],
+        "legacy_clue_ids": [
+          "clue_step"
+        ]
+      },
+      {
+        "id": "statement_0",
+        "text": "离开时，桌旁堆着待归架的书。",
+        "type": "testimony",
+        "source": "来客对细节的陈述",
+        "slot_ids": [
+          "where",
+          "cause"
+        ]
+      },
+      {
+        "id": "statement_1",
+        "text": "布袋内侧有我补过的一小块浅色布。",
+        "type": "testimony",
+        "source": "来客对细节的陈述",
+        "slot_ids": [
+          "step"
+        ]
+      },
+      {
+        "id": "statement_2",
+        "text": "有人提着相似的蓝袋路过，我就猜自己的袋子被带走了。",
+        "type": "misleading",
+        "source": "尚未核对的转述或猜测",
+        "slot_ids": [
+          "where"
+        ]
+      }
+    ],
+    "cards": [
+      {
+        "deck_id": "hermit",
+        "text": "先找到能独立核对的痕迹，让一处细节照亮方向。",
+        "slot_id": "where"
+      },
+      {
+        "deck_id": "swords_2",
+        "text": "把已发生的事情与尚未核实的猜测分开。",
+        "slot_id": "cause"
+      },
+      {
+        "deck_id": "star",
+        "text": "把愿望落在一个可完成、也容许回应的小步骤上。",
+        "slot_id": "step"
+      },
+      {
+        "deck_id": "cups_6",
+        "text": "旧日熟悉感能提供方向，仍需眼前材料印证。",
+        "slot_id": "where"
+      },
+      {
+        "deck_id": "world",
+        "text": "把来源、经过和下一步接起来，检查还缺哪一环。",
+        "slot_id": "step"
+      }
+    ],
+    "advice": [
+      {
+        "id": "verify",
+        "text": "带补丁特征，先去核对失物登记。",
+        "requires_deductions": [
+          "where",
+          "cause",
+          "step"
+        ],
+        "legacy_advice_key": "verify",
+        "reaction": "我先核对清楚，再照这个步骤试试。",
+        "mood": "smile",
+        "prediction": {
+          "text": "按所选步骤核对后，这件事会得到相应推进。",
+          "condition": "if_verify",
+          "expected": "met",
+          "window_after_due_minutes": 30
+        }
+      },
+      {
+        "id": "ask",
+        "text": "请值班人回想整理经过，再按记录寻找。",
+        "requires_deductions": [
+          "where",
+          "cause",
+          "step"
+        ],
+        "legacy_advice_key": "ask",
+        "reaction": "我会把看到的与猜到的分开，慢慢问明白。",
+        "mood": "neutral",
+        "prediction": {
+          "text": "按所选步骤核对后，这件事会得到相应推进。",
+          "condition": "if_ask",
+          "expected": "met",
+          "window_after_due_minutes": 30
+        }
+      },
+      {
+        "id": "wait",
+        "text": "留下特征与联系方式，等新的认领消息。",
+        "requires_deductions": [
+          "where",
+          "cause",
+          "step"
+        ],
+        "legacy_advice_key": "wait",
+        "reaction": "我先留住材料，准备好以后再继续。",
+        "mood": "hesitant",
+        "prediction": {
+          "text": "这次先暂缓，事情暂时不会有新的推进。",
+          "condition": "always",
+          "expected": "missed",
+          "window_after_due_minutes": 30
+        }
+      }
+    ],
+    "outcomes": {
+      "version": 1,
+      "subject_id": "case_owner",
+      "target_name": "布袋最后去了哪里，为什么被移走，又该怎样核对？",
+      "minute_of_day": 1080,
+      "feedback_delay": 180,
+      "world_facts": {
+        "where": {
+          "values": [
+            "table",
+            "drawer",
+            "door"
+          ],
+          "default": "drawer"
+        },
+        "cause": {
+          "values": [
+            "borrow",
+            "rain",
+            "tidy"
+          ],
+          "default": "tidy"
+        },
+        "step": {
+          "values": [
+            "register",
+            "search",
+            "ask"
+          ],
+          "default": "register"
+        }
+      },
+      "branch_ids": [],
+      "item_effect_ids": [],
+      "item_effect": {},
+      "advice_options": [
+        {
+          "key": "verify",
+          "label": "带补丁特征，先去核对失物登记。"
+        },
+        {
+          "key": "ask",
+          "label": "请值班人回想整理经过，再按记录寻找。"
+        },
+        {
+          "key": "wait",
+          "label": "留下特征与联系方式，等新的认领消息。"
+        }
+      ],
+      "advice": {
+        "verify": {
+          "text": "带补丁特征，先去核对失物登记。"
+        },
+        "ask": {
+          "text": "请值班人回想整理经过，再按记录寻找。"
+        },
+        "wait": {
+          "text": "留下特征与联系方式，等新的认领消息。"
+        }
+      },
+      "prediction_conditions": {
+        "always": {
+          "label": "无附加条件"
+        },
+        "if_verify": {
+          "label": "若先核对材料再行动",
+          "outcomes": [
+            "verified"
+          ]
+        },
+        "if_ask": {
+          "label": "若先询问相关照看人或保管人",
+          "outcomes": [
+            "checked"
+          ]
+        }
+      },
+      "prediction_labels": {
+        "met": "事情得到核对与推进",
+        "missed": "事情暂未推进"
+      },
+      "rules": [
+        {
+          "when": {
+            "advice": "verify",
+            "accepted": true
+          },
+          "outcome": "verified"
+        },
+        {
+          "when": {
+            "advice": "ask",
+            "accepted": true
+          },
+          "outcome": "checked"
+        },
+        {
+          "when": {},
+          "outcome": "deferred"
+        }
+      ],
+      "outcomes": {
+        "verified": {
+          "actual_action": "带补丁特征，先去核对失物登记。",
+          "outcome": "met",
+          "evidence": "sufficient",
+          "feedback": "delayed",
+          "delay_minutes": 180,
+          "text": "登记与内侧补丁都对上了，蓝布袋已经找回。",
+          "effects": []
+        },
+        "checked": {
+          "actual_action": "请值班人回想整理经过，再按记录寻找。",
+          "outcome": "met",
+          "evidence": "sufficient",
+          "feedback": "delayed",
+          "delay_minutes": 180,
+          "text": "值班人想起了清桌经过，约好带特征再去核对。",
+          "effects": []
+        },
+        "deferred": {
+          "actual_action": "留下特征与联系方式，等新的认领消息。",
+          "outcome": "missed",
+          "evidence": "sufficient",
+          "feedback": "delayed",
+          "delay_minutes": 180,
+          "text": "我留下了布袋特征，还没收到能确认去向的回音。",
+          "effects": []
+        }
+      },
+      "feedback_effects": []
+    }
+  },
+  "support": {
+    "facts": [
+      {
+        "fact_key": "where",
+        "evidence_id": "fact_where",
+        "value": "drawer"
+      },
+      {
+        "fact_key": "cause",
+        "evidence_id": "fact_cause",
+        "value": "tidy"
+      },
+      {
+        "fact_key": "step",
+        "evidence_id": "fact_step",
+        "value": "register"
+      }
+    ],
+    "proofs": [
+      {
+        "slot_id": "where",
+        "answer_id": "drawer",
+        "rule": "fact_equals",
+        "premises": [
+          "where"
+        ]
+      },
+      {
+        "slot_id": "cause",
+        "answer_id": "tidy",
+        "rule": "fact_equals",
+        "premises": [
+          "cause"
+        ]
+      },
+      {
+        "slot_id": "step",
+        "answer_id": "register",
+        "rule": "fact_equals",
+        "premises": [
+          "step"
+        ]
+      }
+    ]
+  }
+}

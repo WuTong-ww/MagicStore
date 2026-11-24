@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "vectors": [
+    {
+      "kind": "lostitem",
+      "draft_hash": "196729580cbe124ec43d75332a5f2793f79c47f5174086913898a72b840f9563",
+      "save_id": "save_gd_v1_golden",
+      "arrival_id": "arrival_daily_8_0",
+      "npc_id": "npc_o_8_100",
+      "namespace": "ec_2c03b5bd598e305916553e59",
+      "bound_definition_hash": "ebe5c18ce48d72c14bb698dcb8d628cf7922034986b2f0eb421479b295c817de",
+      "fallback_kind": "lostitem"
+    },
+    {
+      "kind": "neighbormisunderstanding",
+      "draft_hash": "88058227d6f865f870d1feb1853340a32be43522dc9c2b5c70d290c8bcd6f073",
+      "save_id": "save_gd_v1_golden",
+      "arrival_id": "arrival_daily_9_0",
+      "npc_id": "npc_o_9_100",
+      "namespace": "ec_ddc88b3ce3e47c0516bbbc0a",
+      "bound_definition_hash": "527920b52fdfe163d14ef33038c9041d6e8a5853f8ae1c7e4e5574cd69a676cd",
+      "fallback_kind": "moving"
+    },
+    {
+      "kind": "lostpet",
+      "draft_hash": "a3b4fa48f6eaea81cc1afa508aedd6a92fa864a01ba82bc5709fa6bf375d9da7",
+      "save_id": "save_gd_v1_golden",
+      "arrival_id": "arrival_daily_10_0",
+      "npc_id": "npc_o_10_100",
+      "namespace": "ec_d8d4734912e02c9b06b59ad5",
+      "bound_definition_hash": "f3995577b8a4e8b43d8986e3170f9c12a869bf3f55e8831f493b076ff01192a6",
+      "fallback_kind": "moving"
+    },
+    {
+      "kind": "oldphoto",
+      "draft_hash": "7331b32b697748113170933a4549da82c8fcadd423255736f9440f910e512c7f",
+      "save_id": "save_gd_v1_golden",
+      "arrival_id": "arrival_daily_11_0",
+      "npc_id": "npc_o_11_100",
+      "namespace": "ec_3320200485ee786637ed32de",
+      "bound_definition_hash": "55269c1c795d86888c9a351b13e6a27c39a1aaf0c01adcb454d227b5f0ee51b0",
+      "fallback_kind": "lostitem"
+    },
+    {
+      "kind": "anonymousgift",
+      "draft_hash": "7a558b4767f05fa9cd47ccec742f2fbeb6dc923b68ccb94217d4c08d6b62cf87",
+      "save_id": "save_gd_v1_golden",
+      "arrival_id": "arrival_daily_12_0",
+      "npc_id": "npc_o_12_100",
+      "namespace": "ec_e7c5180f456f8dcbb2ea5672",
+      "bound_definition_hash": "fa4be740588554f70e914b06e7df8319f392ddbca34903a6e9b5dda2c9d26af1",
+      "fallback_kind": "moving"
+    },
+    {
+      "kind": "moving",
+      "draft_hash": "45cd18697e8654ed1fc60d34d2c3d230158b46e1b725afa8bc5cb879a03a3a0a",
+      "save_id": "save_gd_v1_golden",
+      "arrival_id": "arrival_daily_13_0",
+      "npc_id": "npc_o_13_100",
+      "namespace": "ec_6dd96460b19925986dd1bc70",
+      "bound_definition_hash": "76bb6fb6fb51c49d961aa45c87b5f2003a9a5911a7e339affe6112fe6057d5bb",
+      "fallback_kind": "anonymousgift"
+    }
+  ]
+}

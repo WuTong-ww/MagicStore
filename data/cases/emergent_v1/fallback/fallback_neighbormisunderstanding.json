@@ -1,0 +1,532 @@
+{
+  "protocol_version": 1,
+  "template_id": "fallback_neighbormisunderstanding",
+  "kind": "neighbormisunderstanding",
+  "definition": {
+    "id": "fallback_neighbormisunderstanding",
+    "version": 1,
+    "title": "清晨那阵轻响",
+    "question": "响动来自哪里，误会怎样形成，又该如何向邻居核实？",
+    "truth": {
+      "what": {
+        "value": "cart",
+        "text": "清晨的轻响来自搬花盆的小推车。",
+        "requires_clue": "clue_what"
+      },
+      "cause": {
+        "value": "half_note",
+        "text": "便条后半句说明，挪花盆是为了清理走廊。",
+        "requires_clue": "clue_cause"
+      },
+      "step": {
+        "value": "check",
+        "text": "联络本建议带完整便条，核对当天的维护安排。",
+        "requires_clue": "clue_step"
+      }
+    },
+    "deduction_slots": [
+      {
+        "id": "what",
+        "title": "真正发出响声的是什么",
+        "answers": [
+          {
+            "id": "door",
+            "text": "邻居在敲门"
+          },
+          {
+            "id": "cart",
+            "text": "搬花盆的小推车"
+          },
+          {
+            "id": "radio",
+            "text": "窗边的收音机"
+          }
+        ],
+        "correct_answer": "cart",
+        "unlock_evidence": [
+          "fact_what",
+          "statement_0"
+        ]
+      },
+      {
+        "id": "cause",
+        "title": "误会从哪里开始",
+        "answers": [
+          {
+            "id": "half_note",
+            "text": "只看见便条前半句"
+          },
+          {
+            "id": "argument",
+            "text": "前一天有过争执"
+          },
+          {
+            "id": "name",
+            "text": "便条直接写了姓名"
+          }
+        ],
+        "correct_answer": "half_note",
+        "unlock_evidence": [
+          "fact_cause",
+          "statement_0",
+          "statement_1",
+          "statement_2"
+        ]
+      },
+      {
+        "id": "step",
+        "title": "怎样开始沟通",
+        "answers": [
+          {
+            "id": "accuse",
+            "text": "先问是否在责怪自己"
+          },
+          {
+            "id": "check",
+            "text": "带完整便条核对安排"
+          },
+          {
+            "id": "avoid",
+            "text": "继续回避不问"
+          }
+        ],
+        "correct_answer": "check",
+        "unlock_evidence": [
+          "fact_step",
+          "statement_1"
+        ]
+      }
+    ],
+    "questions": [
+      [
+        {
+          "id": "question_0_0",
+          "text": "响声与什么动作一起出现？",
+          "answer": "来客补充：清晨的轻响来自搬花盆的小推车。",
+          "evidence_ids": [
+            "fact_what"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_0_0"
+        },
+        {
+          "id": "question_0_1",
+          "text": "有没有公共维护记录？",
+          "answer": "来客补充：清晨的轻响来自搬花盆的小推车。 响动常在花盆移到墙边后停下来。",
+          "evidence_ids": [
+            "fact_what",
+            "statement_0"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_0_1"
+        },
+        {
+          "id": "question_0_2",
+          "text": "响声停下时有什么变化？",
+          "answer": "来客补充：清晨的轻响来自搬花盆的小推车。 我只从门缝看见便条开头，还没拿起来读完。",
+          "evidence_ids": [
+            "fact_what",
+            "statement_1"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_0_2"
+        }
+      ],
+      [
+        {
+          "id": "question_1_0",
+          "text": "便条完整写了什么？",
+          "answer": "来客补充：便条后半句说明，挪花盆是为了清理走廊。",
+          "evidence_ids": [
+            "fact_cause"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_1_0"
+        },
+        {
+          "id": "question_1_1",
+          "text": "你当时看清了几句？",
+          "answer": "来客补充：便条后半句说明，挪花盆是为了清理走廊。 我只从门缝看见便条开头，还没拿起来读完。",
+          "evidence_ids": [
+            "fact_cause",
+            "statement_1"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_1_1"
+        },
+        {
+          "id": "question_1_2",
+          "text": "没打招呼能说明全部用意吗？",
+          "answer": "来客补充：便条后半句说明，挪花盆是为了清理走廊。 擦肩时没打招呼，我就猜她在生我的气。",
+          "evidence_ids": [
+            "fact_cause",
+            "statement_2"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_1_2"
+        }
+      ],
+      [
+        {
+          "id": "question_2_0",
+          "text": "可以怎样开口核对安排？",
+          "answer": "来客补充：联络本建议带完整便条，核对当天的维护安排。",
+          "evidence_ids": [
+            "fact_step"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_2_0"
+        },
+        {
+          "id": "question_2_1",
+          "text": "带上便条会容易些吗？",
+          "answer": "来客补充：联络本建议带完整便条，核对当天的维护安排。 擦肩时没打招呼，我就猜她在生我的气。",
+          "evidence_ids": [
+            "fact_step",
+            "statement_2"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_2_1"
+        },
+        {
+          "id": "question_2_2",
+          "text": "怎样给对方解释的余地？",
+          "answer": "来客补充：联络本建议带完整便条，核对当天的维护安排。 响动常在花盆移到墙边后停下来。",
+          "evidence_ids": [
+            "fact_step",
+            "statement_0"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_2_2"
+        }
+      ]
+    ],
+    "evidence": [
+      {
+        "id": "fact_what",
+        "text": "清晨的轻响来自搬花盆的小推车。",
+        "type": "fact",
+        "source": "走廊维护记录",
+        "slot_ids": [
+          "what"
+        ],
+        "legacy_clue_ids": [
+          "clue_what"
+        ]
+      },
+      {
+        "id": "fact_cause",
+        "text": "便条后半句说明，挪花盆是为了清理走廊。",
+        "type": "fact",
+        "source": "便条原件",
+        "slot_ids": [
+          "cause"
+        ],
+        "legacy_clue_ids": [
+          "clue_cause"
+        ]
+      },
+      {
+        "id": "fact_step",
+        "text": "联络本建议带完整便条，核对当天的维护安排。",
+        "type": "fact",
+        "source": "楼道联络本",
+        "slot_ids": [
+          "step"
+        ],
+        "legacy_clue_ids": [
+          "clue_step"
+        ]
+      },
+      {
+        "id": "statement_0",
+        "text": "响动常在花盆移到墙边后停下来。",
+        "type": "testimony",
+        "source": "来客对细节的陈述",
+        "slot_ids": [
+          "what",
+          "cause"
+        ]
+      },
+      {
+        "id": "statement_1",
+        "text": "我只从门缝看见便条开头，还没拿起来读完。",
+        "type": "testimony",
+        "source": "来客对细节的陈述",
+        "slot_ids": [
+          "cause",
+          "step"
+        ]
+      },
+      {
+        "id": "statement_2",
+        "text": "擦肩时没打招呼，我就猜她在生我的气。",
+        "type": "misleading",
+        "source": "尚未核对的转述或猜测",
+        "slot_ids": [
+          "cause"
+        ]
+      }
+    ],
+    "cards": [
+      {
+        "deck_id": "hermit",
+        "text": "先找到能独立核对的痕迹，让一处细节照亮方向。",
+        "slot_id": "what"
+      },
+      {
+        "deck_id": "swords_2",
+        "text": "把已发生的事情与尚未核实的猜测分开。",
+        "slot_id": "cause"
+      },
+      {
+        "deck_id": "star",
+        "text": "把愿望落在一个可完成、也容许回应的小步骤上。",
+        "slot_id": "step"
+      },
+      {
+        "deck_id": "cups_6",
+        "text": "旧日熟悉感能提供方向，仍需眼前材料印证。",
+        "slot_id": "what"
+      },
+      {
+        "deck_id": "world",
+        "text": "把来源、经过和下一步接起来，检查还缺哪一环。",
+        "slot_id": "step"
+      }
+    ],
+    "advice": [
+      {
+        "id": "verify",
+        "text": "带完整便条，平静询问维护安排。",
+        "requires_deductions": [
+          "what",
+          "cause",
+          "step"
+        ],
+        "legacy_advice_key": "verify",
+        "reaction": "我先核对清楚，再照这个步骤试试。",
+        "mood": "smile",
+        "prediction": {
+          "text": "按所选步骤核对后，这件事会得到相应推进。",
+          "condition": "if_verify",
+          "expected": "met",
+          "window_after_due_minutes": 30
+        }
+      },
+      {
+        "id": "ask",
+        "text": "约邻居方便时聊聊，各自说明清晨的需要。",
+        "requires_deductions": [
+          "what",
+          "cause",
+          "step"
+        ],
+        "legacy_advice_key": "ask",
+        "reaction": "我会把看到的与猜到的分开，慢慢问明白。",
+        "mood": "neutral",
+        "prediction": {
+          "text": "按所选步骤核对后，这件事会得到相应推进。",
+          "condition": "if_ask",
+          "expected": "met",
+          "window_after_due_minutes": 30
+        }
+      },
+      {
+        "id": "wait",
+        "text": "先读完便条，记录一天再决定何时开口。",
+        "requires_deductions": [
+          "what",
+          "cause",
+          "step"
+        ],
+        "legacy_advice_key": "wait",
+        "reaction": "我先留住材料，准备好以后再继续。",
+        "mood": "hesitant",
+        "prediction": {
+          "text": "这次先暂缓，事情暂时不会有新的推进。",
+          "condition": "always",
+          "expected": "missed",
+          "window_after_due_minutes": 30
+        }
+      }
+    ],
+    "outcomes": {
+      "version": 1,
+      "subject_id": "case_owner",
+      "target_name": "响动来自哪里，误会怎样形成，又该如何向邻居核实？",
+      "minute_of_day": 1080,
+      "feedback_delay": 180,
+      "world_facts": {
+        "what": {
+          "values": [
+            "door",
+            "cart",
+            "radio"
+          ],
+          "default": "cart"
+        },
+        "cause": {
+          "values": [
+            "half_note",
+            "argument",
+            "name"
+          ],
+          "default": "half_note"
+        },
+        "step": {
+          "values": [
+            "accuse",
+            "check",
+            "avoid"
+          ],
+          "default": "check"
+        }
+      },
+      "branch_ids": [],
+      "item_effect_ids": [],
+      "item_effect": {},
+      "advice_options": [
+        {
+          "key": "verify",
+          "label": "带完整便条，平静询问维护安排。"
+        },
+        {
+          "key": "ask",
+          "label": "约邻居方便时聊聊，各自说明清晨的需要。"
+        },
+        {
+          "key": "wait",
+          "label": "先读完便条，记录一天再决定何时开口。"
+        }
+      ],
+      "advice": {
+        "verify": {
+          "text": "带完整便条，平静询问维护安排。"
+        },
+        "ask": {
+          "text": "约邻居方便时聊聊，各自说明清晨的需要。"
+        },
+        "wait": {
+          "text": "先读完便条，记录一天再决定何时开口。"
+        }
+      },
+      "prediction_conditions": {
+        "always": {
+          "label": "无附加条件"
+        },
+        "if_verify": {
+          "label": "若先核对材料再行动",
+          "outcomes": [
+            "verified"
+          ]
+        },
+        "if_ask": {
+          "label": "若先询问相关照看人或保管人",
+          "outcomes": [
+            "checked"
+          ]
+        }
+      },
+      "prediction_labels": {
+        "met": "事情得到核对与推进",
+        "missed": "事情暂未推进"
+      },
+      "rules": [
+        {
+          "when": {
+            "advice": "verify",
+            "accepted": true
+          },
+          "outcome": "verified"
+        },
+        {
+          "when": {
+            "advice": "ask",
+            "accepted": true
+          },
+          "outcome": "checked"
+        },
+        {
+          "when": {},
+          "outcome": "deferred"
+        }
+      ],
+      "outcomes": {
+        "verified": {
+          "actual_action": "带完整便条，平静询问维护安排。",
+          "outcome": "met",
+          "evidence": "sufficient",
+          "feedback": "delayed",
+          "delay_minutes": 180,
+          "text": "核对记录后才知道是推车挪花盆，读完便条，我们都笑了。",
+          "effects": []
+        },
+        "checked": {
+          "actual_action": "约邻居方便时聊聊，各自说明清晨的需要。",
+          "outcome": "met",
+          "evidence": "sufficient",
+          "feedback": "delayed",
+          "delay_minutes": 180,
+          "text": "我们约好了傍晚的交流时间，先说清各自的作息。",
+          "effects": []
+        },
+        "deferred": {
+          "actual_action": "先读完便条，记录一天再决定何时开口。",
+          "outcome": "missed",
+          "evidence": "sufficient",
+          "feedback": "delayed",
+          "delay_minutes": 180,
+          "text": "我读完便条并记下响动时间，还没有和邻居谈过。",
+          "effects": []
+        }
+      },
+      "feedback_effects": []
+    }
+  },
+  "support": {
+    "facts": [
+      {
+        "fact_key": "what",
+        "evidence_id": "fact_what",
+        "value": "cart"
+      },
+      {
+        "fact_key": "cause",
+        "evidence_id": "fact_cause",
+        "value": "half_note"
+      },
+      {
+        "fact_key": "step",
+        "evidence_id": "fact_step",
+        "value": "check"
+      }
+    ],
+    "proofs": [
+      {
+        "slot_id": "what",
+        "answer_id": "cart",
+        "rule": "fact_equals",
+        "premises": [
+          "what"
+        ]
+      },
+      {
+        "slot_id": "cause",
+        "answer_id": "half_note",
+        "rule": "fact_equals",
+        "premises": [
+          "cause"
+        ]
+      },
+      {
+        "slot_id": "step",
+        "answer_id": "check",
+        "rule": "fact_equals",
+        "premises": [
+          "step"
+        ]
+      }
+    ]
+  }
+}

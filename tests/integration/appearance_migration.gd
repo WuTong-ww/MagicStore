@@ -52,6 +52,8 @@ func old_copy(schema: int) -> Dictionary:
 	for profile: Dictionary in legacy.people.profiles.values():
 		profile.erase("birth_identity")
 	legacy.schema_version = schema
+	check(not legacy.divination.has("emergent_cases") or legacy.divination.get("emergent_cases")=={"version":1,"instances":{}},"historical projection retains no populated schema14 ordinary-case namespace")
+	legacy.divination.erase("emergent_cases")
 	legacy.divination.erase("past_lines")
 	for case: Dictionary in legacy.divination.cases.values():
 		case.erase("cause")
@@ -145,6 +147,8 @@ func historical_selection_boundary(hat: String = "accessory_10") -> void:
 	for profile: Dictionary in old_snapshot.people.profiles.values():
 		profile.erase("birth_identity")
 	old_snapshot.schema_version = 6
+	check(not old_snapshot.divination.has("emergent_cases") or old_snapshot.divination.get("emergent_cases")=={"version":1,"instances":{}},"historical projection retains no populated schema14 ordinary-case namespace")
+	old_snapshot.divination.erase("emergent_cases")
 	old_snapshot.divination.erase("past_lines")
 	for case: Dictionary in old_snapshot.divination.cases.values():
 		case.erase("cause")

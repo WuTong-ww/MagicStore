@@ -26,6 +26,8 @@ func run() -> void:
 	for profile: Dictionary in old.people.profiles.values():
 		profile.erase("birth_identity")
 	old.schema_version = 9
+	check(not old.divination.has("emergent_cases") or old.divination.get("emergent_cases")=={"version":1,"instances":{}},"historical projection retains no populated schema14 ordinary-case namespace")
+	old.divination.erase("emergent_cases")
 	old.erase("daily_loop")
 	check(saves.write_save(old).success,"historic schema9 validates")
 	var path: String = saves._path(old.save_id)
@@ -57,6 +59,8 @@ func active_schema9() -> void:
 	for profile: Dictionary in old.people.profiles.values():
 		profile.erase("birth_identity")
 	old.schema_version = 9
+	check(not old.divination.has("emergent_cases") or old.divination.get("emergent_cases")=={"version":1,"instances":{}},"historical projection retains no populated schema14 ordinary-case namespace")
+	old.divination.erase("emergent_cases")
 	old.erase("daily_loop")
 	check(saves.write_save(old).success,"active schema9 envelope validates")
 	var path: String = saves._path(old.save_id)
@@ -70,7 +74,10 @@ func active_schema9() -> void:
 	var historical_people: Dictionary = migrated.people.duplicate(true)
 	check(historical_people.get("birth_identity_version",0)==1,"migration adds the checked birth-policy marker")
 	historical_people.erase("birth_identity_version")
-	check(historical_people == old.people and migrated.divination == old.divination,"migration preserves people, old plans, outcomes and identities exactly")
+	var historical_divination: Dictionary = migrated.divination.duplicate(true)
+	check(historical_divination.get("emergent_cases")=={"version":1,"instances":{}},"old daily progress gains only an empty schema14 ordinary-case namespace")
+	historical_divination.erase("emergent_cases")
+	check(historical_people == old.people and historical_divination == old.divination,"migration preserves people, old plans, outcomes and identities exactly")
 	check(FileAccess.get_sha256(path) == sha and saves.read_save(old.save_id).state.schema_version == 9,"load never rewrites historical bytes")
 	var command := {"type":"end_visit","action_id":game.make_id("first_save")}
 	saves.fail_next_write = true
@@ -100,6 +107,8 @@ func crowded_schema9() -> void:
 	for profile: Dictionary in old.people.profiles.values():
 		profile.erase("birth_identity")
 	old.schema_version = 9
+	check(not old.divination.has("emergent_cases") or old.divination.get("emergent_cases")=={"version":1,"instances":{}},"historical projection retains no populated schema14 ordinary-case namespace")
+	old.divination.erase("emergent_cases")
 	old.erase("daily_loop")
 	# Historic planned traffic may already occupy every slot before migration.
 	for row: Dictionary in old.people.arrivals.values():

@@ -50,3 +50,9 @@ tests/fixtures/schema12_pre_names.json -text
 tests/fixtures/names_ui/europe.json -text
 tests/fixtures/names_ui/africa_or_south_asia.json -text
 tests/fixtures/names_ui/mixed.json -text
+
+# Genuine NAMES schema13 migration fixture; keep its original envelope bytes.
+tests/fixtures/emergent_schema13.json -text
+
+# Byte-exact genuine schema14 interrupted legacy-mode run.
+tests/fixtures/emergent_legacy_mode.json -text

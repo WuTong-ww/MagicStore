@@ -4,7 +4,7 @@ extends Node
 ## belongs in a snapshot. Tests must replace base_dir with an isolated directory.
 
 const ENVELOPE_FORMAT := "midnight-grocery-save-v1"
-const CURRENT_SCHEMA := 13
+const CURRENT_SCHEMA := 14
 const MAX_BYTES := 16 * 1024 * 1024
 const MAX_INTEGER := 2147483647
 const MAX_EXACT_JSON_INTEGER := 9007199254740991
@@ -17,6 +17,7 @@ const PeopleBridge = preload("res://scripts/shop/people_bridge.gd")
 const Appearance = preload("res://scripts/people/appearance.gd")
 const BirthIdentityCopy = preload("res://scripts/people/birth_identity_copy.gd")
 const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
+const SnapshotCatalog = preload("res://scripts/divination/emergent_case_catalog.gd")
 const DailyLoop = preload("res://scripts/core/daily_loop.gd")
 const StoryContent = preload("res://scripts/story/story_content.gd")
 const StoryProgress = preload("res://scripts/story/story_progress.gd")
@@ -177,6 +178,19 @@ func list_saves() -> Array:
 	return rows
 
 
+## Pure per-snapshot catalog. No migration, file write, or live Session mutation.
+func build_case_catalog(snapshot: Dictionary) -> Dictionary:
+	if not _is_plain_json(snapshot,0):
+		return {"success":false,"error_code":"AICASE_SNAPSHOT_SHAPE_INVALID"}
+	if _divination_data.is_empty():
+		var loaded := ContentLoader.load_content()
+		if not loaded.get("success",false):
+			return {"success":false,"error_code":"CONTENT_INVALID"}
+		_divination_data = DivinationCatalog.load_data(loaded.content)
+	if _divination_data.is_empty():
+		return {"success":false,"error_code":"CONTENT_INVALID"}
+	return SnapshotCatalog.build(_normalize_numbers(snapshot),_divination_data)
+
 func validate_snapshot(snapshot: Dictionary) -> Dictionary:
 	var problem := _validate(snapshot)
 	if not problem.is_empty():
@@ -206,14 +220,16 @@ func _validate(s: Dictionary) -> String:
 		return "内容配置不可用"
 	var config: Dictionary = loaded.content
 	var current_data: Dictionary = {}
+	var case_projection: Dictionary = {}
 	if extended:
 		if _divination_data.is_empty():
 			_divination_data = DivinationCatalog.load_data(config)
 		if _divination_data.is_empty():
 			return "问卜内容配置不可用"
-		current_data = GeneratedCases.catalog(s, _divination_data)
-		if current_data.is_empty():
+		case_projection = build_case_catalog(s)
+		if not case_projection.get("success",false):
 			return "生成人物的案例配置无效"
+		current_data = case_projection.catalog
 		config["clues"] = current_data.clues
 	for card in config.cards:
 		if not card is Dictionary or not card.get("card_id") is String:
@@ -337,9 +353,13 @@ func _validate(s: Dictionary) -> String:
 			return "动作编号或结果无效"
 		if not result.get("success") is bool or not result.get("error_code") is String or not result.get("message") is String or not result.get("result") is Dictionary or not _integer(result.get("state_version"), 0, int(s.state_version)):
 			return "已处理动作结果字段无效"
-		if result.has("action_type") and not result.action_type in ["start_visit", "talk", "reading", "end_visit", "rest", "next_day"] and (not extended or not result.action_type in DivinationSession.ACTIONS) and (int(s.schema_version) < 3 or not result.action_type in SHOP_ACTIONS) and (int(s.schema_version) < 10 or not result.action_type in DailyLoop.ACTIONS) and (int(s.schema_version) < 11 or result.action_type != "set_free_question") and (int(s.schema_version) < 12 or result.action_type != "story_choice"):
+		if result.has("action_type") and not result.action_type in ["start_visit", "talk", "reading", "end_visit", "rest", "next_day"] and (not extended or not result.action_type in DivinationSession.ACTIONS) and (int(s.schema_version) < 3 or not result.action_type in SHOP_ACTIONS) and (int(s.schema_version) < 10 or not result.action_type in DailyLoop.ACTIONS) and (int(s.schema_version) < 11 or result.action_type != "set_free_question") and (int(s.schema_version) < 12 or result.action_type != "story_choice") and (int(s.schema_version) < 14 or result.action_type != "admit_generated_case"):
 			return "已处理动作类型无效"
 		var output: Dictionary = result.result
+		if int(s.schema_version)>=14 and result.get("action_type")=="admit_generated_case":
+			var instance: Variant = s.divination.emergent_cases.instances.get(output.get("reservation_id"))
+			if not instance is Dictionary or instance.get("status")!="ready" or output.get("case_id")!=instance.get("case_id") or output.get("definition_hash")!=instance.get("definition_hash"):
+				return "已处理动作类型无效"
 		if output.has("visit_id") and (not output.visit_id is String or not visit_ids.has(output.visit_id)):
 			return "动作指向未知接待"
 		if output.has("reading"):
@@ -368,10 +388,10 @@ func _validate(s: Dictionary) -> String:
 		if int(s.schema_version) >= 4 and not _integer(s.people.stats.get("lost_customers"), 0, MAX_INTEGER):
 			return "顾客流失统计无效"
 	if int(s.schema_version) >= 10:
-		var daily_error := DailyLoop.validate(s)
+		var daily_error := DailyLoop.validate(s,case_projection.get("bindings",{}))
 		if not daily_error.is_empty():
 			return daily_error
-	var case_error: String = DivinationSave.validate(s,current_data,visit_ids) if extended else ""
+	var case_error: String = DivinationSave.validate(s,current_data,visit_ids,case_projection.get("definitions",{}),case_projection.get("bindings",{})) if extended else ""
 	if not case_error.is_empty():
 		return case_error
 	return StoryProgress.validate(s,current_data,StoryContent.load_config()) if int(s.schema_version) >= 12 else ""

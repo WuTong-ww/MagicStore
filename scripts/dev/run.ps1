@@ -65,6 +65,18 @@ try {
     }
     if ($Test) {
         Invoke-Godot @('--headless', '--path', $repo, '--import')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/divination/emergent_case_kernel_v1.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/divination/full_definition_codec_v1.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/emergent_case_transactions.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/emergent_model_admission.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/emergent_saved_shapes.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/emergent_schema13_target.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/emergent_catalog_target.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/emergent_template_history_target.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/providers/emergent_request_privacy.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/emergent_mode_recovery.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/providers/emergent_transport.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/emergent_case_routes.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/divination/case_schema.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/divination/deduction_board.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/case_host.gd')

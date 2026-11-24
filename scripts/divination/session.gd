@@ -6,6 +6,7 @@ const Cards = preload("res://scripts/divination/oracle_cards.gd")
 const Economy = preload("res://scripts/divination/economy.gd")
 const Events = preload("res://scripts/divination/event_rules.gd")
 const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
+const SnapshotCatalog = preload("res://scripts/divination/emergent_case_catalog.gd")
 const EventCopy = preload("res://scripts/divination/event_copy.gd")
 const ProductRules = preload("res://scripts/divination/event_schema.gd")
 const PastLines = preload("res://scripts/divination/past_lines.gd")
@@ -25,6 +26,10 @@ var data: Dictionary
 var base: Dictionary
 var _base_catalog: Dictionary
 var board_config: Dictionary = CaseSchema.load_rules()
+var case_definitions: Dictionary = {}
+var verified_bindings: Dictionary = {}
+var _definition_save_id := ""
+var _definition_namespace_hash := ""
 
 static func advice_style_options() -> Dictionary:
 	var rules := ProductRules.load_product_rules()
@@ -36,13 +41,42 @@ func _init(catalog: Dictionary, content: Dictionary) -> void:
 	data = catalog
 	_base_catalog = catalog.duplicate(true)
 	base = content
+	case_definitions = CaseSchema.load_all(catalog)
 
 func sync_generated(state: Dictionary) -> bool:
-	var projected := GeneratedCases.catalog(state, _base_catalog)
-	if projected.is_empty():
+	var projected := SnapshotCatalog.build(state,_base_catalog)
+	if not projected.get("success",false):
 		return false
-	data = projected
+	# Install all three verified maps together, never a half-projected Session.
+	data = projected.catalog
+	case_definitions = projected.definitions
+	verified_bindings = projected.bindings.duplicate(true)
+	_definition_save_id = str(state.get("save_id",""))
+	_definition_namespace_hash = _namespace_hash(state)
 	return true
+
+func _namespace_hash(state: Dictionary) -> String:
+	var work: Variant = state.get("divination")
+	if not work is Dictionary or not work.get("emergent_cases") is Dictionary:
+		return ""
+	return CaseSchema.definition_hash(work.emergent_cases)
+
+func definitions_for(state: Dictionary) -> Dictionary:
+	if int(state.get("schema_version",0))<14:
+		return CaseSchema.load_all(data)
+	if _definition_save_id==str(state.get("save_id","")) and _definition_namespace_hash==_namespace_hash(state):
+		return case_definitions.duplicate(true)
+	# Read-only fallback for independent callers. It never swaps live data.
+	var projected := SnapshotCatalog.build(state,_base_catalog)
+	return projected.definitions if projected.get("success",false) else {}
+
+func candidate_for(state: Dictionary) -> Dictionary:
+	var proposed = get_script().new(_base_catalog.duplicate(true),base.duplicate(true))
+	# Tests and debug flows deliberately override this field; keep exact settings.
+	proposed.board_config = board_config.duplicate(true)
+	if not proposed.sync_generated(state):
+		return {"success":false,"error_code":"AICASE_CANDIDATE_CATALOG_INVALID"}
+	return {"success":true,"session":proposed,"bindings":proposed.verified_bindings.duplicate(true)}
 
 func initialize(state: Dictionary) -> void:
 	state.schema_version = 2
@@ -106,7 +140,7 @@ func add_case(state: Dictionary, visit: Dictionary, case_id: String, schedule_ev
 	if int(state.get("schema_version",0)) >= 11:
 		record["board"] = {}
 		if board_config.get("enabled",true) and state.get("daily_loop",{}).get("mode") == "sequential" and visit.get("intent","") != "shopping":
-			for definition: Dictionary in CaseSchema.load_all(data).values():
+			for definition: Dictionary in definitions_for(state).values():
 				if CaseSchema.g3_case_id(definition) == case_id:
 					record.board = DeductionBoard.create(state,visit,definition)
 					if int(state.get("schema_version",0)) >= 12:
@@ -119,7 +153,7 @@ func add_case(state: Dictionary, visit: Dictionary, case_id: String, schedule_ev
 func case_board_view(state: Dictionary, visit: Dictionary) -> Dictionary:
 	if visit.is_empty() or not state.get("divination",{}).get("cases",{}).has(visit.get("visit_id")):
 		return {"enabled":false}
-	var view := DeductionBoard.public_view(state,visit,state.divination.cases[visit.visit_id],CaseSchema.load_all(data))
+	var view := DeductionBoard.public_view(state,visit,state.divination.cases[visit.visit_id],definitions_for(state))
 	if view.get("enabled",false) and state.has("story"):
 		var config := StoryContent.load_config()
 		view.merge(StoryProgress.board_view(state,visit,config),true)
@@ -134,7 +168,7 @@ func case_clue_overrides(state: Dictionary, visit: Dictionary) -> Dictionary:
 	var config := StoryContent.load_config()
 	if config.is_empty():
 		return replacements
-	var definitions := CaseSchema.load_all(data)
+	var definitions := definitions_for(state)
 	for prior: Dictionary in state.get("visits",[]):
 		if prior.npc_id!=visit.get("npc_id"):
 			continue
@@ -191,6 +225,8 @@ func talks(visit: Dictionary, case: Dictionary, clock: int, state: Dictionary = 
 	var unlocked: Array = state.get("people",{}).get("unlocked_topics",{}).get(visit.npc_id,[])
 	for id: String in data.cases[case.case_id].topic_ids:
 		var topic: Dictionary = data.topic_index[id]
+		if topic.has("emergent_definition_id") and (topic.emergent_definition_id!=case.case_id or topic.get("emergent_question_id") not in case.get("board",{}).get("questions_asked",[])):
+			continue
 		var unlocked_here := unlocked.any(func(row: Dictionary) -> bool: return row.get("topic_id") == id)
 		if topic.has("requires_clue") and not topic.requires_clue in visit.clue_ids and not unlocked_here:
 			continue
@@ -259,7 +295,7 @@ func handle(state: Dictionary, visit: Dictionary, action: Dictionary) -> Diction
 	return _fail("UNKNOWN_ACTION", "不支持此问卜动作。")
 
 func _board_action(state: Dictionary, visit: Dictionary, case: Dictionary, action: Dictionary) -> Dictionary:
-	var definitions := CaseSchema.load_all(data)
+	var definitions := definitions_for(state)
 	var outcome := DeductionBoard.handle(state,visit,case,action,data,definitions)
 	if not outcome.success or action.type != "case_close":
 		return outcome
@@ -566,7 +602,7 @@ func _prediction(state: Dictionary, visit: Dictionary, case: Dictionary, action:
 	if not case.prediction.is_empty():
 		return _fail("PREDICTION_EXISTS", "本案已经交给顾客一条正式预测。")
 	var board: Dictionary = case.get("board",{})
-	var definition: Dictionary = CaseSchema.load_all(data).get(board.get("definition_id"),{})
+	var definition: Dictionary = definitions_for(state).get(board.get("definition_id"),{})
 	var complete_board: bool = not definition.is_empty() and board.get("phase") == "closed" and DeductionBoard.complete(board,definition)
 	if visit.reading.is_empty() and not case.services.values().any(func(service: Dictionary) -> bool: return service.status == "paid") and not complete_board:
 		return _fail("NEEDS_PAID_SERVICE", "请先完成正式问卜，再把预测交给来客。")

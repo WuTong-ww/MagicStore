@@ -210,7 +210,37 @@ static func public_view(state: Dictionary, config: Dictionary) -> Dictionary:
 		view.letters.append({"name":letter.name,"text":letter.text})
 	return view
 
-static func validate(state: Dictionary) -> String:
+## The table must come from the strict snapshot builder, never from saved or
+## provider-supplied metadata. This guard checks that it still names this exact
+## ready reservation; it does not replace the builder's codec/proof validation.
+static func verified_ready_case(state: Dictionary, row: Dictionary, verified_bindings: Dictionary) -> bool:
+	if not People._integer(state.get("schema_version"),14,People.MAX_INT) or not People.sequential_arrival(row) or row.get("source") != "daily_loop" or row.get("daily_loop_index") != 0 or row.has("story_rule_id") or row.has("story_definition_id"):
+		return false
+	var binding: Variant = verified_bindings.get(row.get("arrival_id"))
+	if not binding is Dictionary or binding.size() != 3 or not binding.get("npc_id") is String or not binding.get("case_id") is String or not binding.get("definition_hash") is String:
+		return false
+	if binding.npc_id != row.get("npc_id") or binding.case_id != row.get("case_id") or binding.definition_hash.is_empty():
+		return false
+	var divination: Variant = state.get("divination")
+	var people: Variant = state.get("people")
+	if not divination is Dictionary or not people is Dictionary or not people.get("profiles") is Dictionary:
+		return false
+	var emergent_space: Variant = divination.get("emergent_cases")
+	if not emergent_space is Dictionary or emergent_space.size() != 2 or emergent_space.get("version") is bool or emergent_space.get("version") != 1 or not emergent_space.get("instances") is Dictionary:
+		return false
+	var record: Variant = emergent_space.instances.get(row.arrival_id)
+	var profile: Variant = people.profiles.get(binding.npc_id)
+	if not record is Dictionary or not profile is Dictionary or record.get("status") != "ready" or record.get("day") != row.daily_loop_day or record.get("npc_id") != binding.npc_id or record.get("case_id") != binding.case_id or record.get("definition_hash") != binding.definition_hash:
+		return false
+	if profile.get("template_id") != "ordinary_v1" or profile.get("source") != "original" or profile.get("family_library_member",false) or not str(profile.get("family_id","")).is_empty() or profile.has("generated_bundle") or profile.has("generation_member"):
+		return false
+	var owner_prefix := "npc_o_%d_" % int(row.daily_loop_day)
+	if not binding.npc_id.begins_with(owner_prefix) or not binding.npc_id.trim_prefix(owner_prefix).is_valid_int():
+		return false
+	var definition: Variant = record.get("definition")
+	return definition is Dictionary and definition.get("id") == binding.case_id and definition.get("legacy_case_id","") == "" and definition.get("outcomes") is Dictionary and definition.outcomes.get("subject_id") == binding.npc_id and CaseSchema.definition_hash(definition) == binding.definition_hash
+
+static func validate(state: Dictionary, verified_bindings: Dictionary = {}) -> String:
 	var loop: Variant = state.get("daily_loop")
 	var config := load_config()
 	var error: String = str(config.get("copy",{}).get("invalid_state","DAILY_LOOP_CONFIG_INVALID"))
@@ -290,7 +320,7 @@ static func validate(state: Dictionary) -> String:
 		elif row.source == "fixed_story":
 			if day != 0 or index != 0 or row.npc_id != config.first_npc_id or row.case_id != config.first_case_id:
 				return error
-		elif row.case_id != config.ordinary_case_id:
+		elif row.case_id != config.ordinary_case_id and not verified_ready_case(state,row,verified_bindings):
 			return error
 	for letter: Variant in loop.letters:
 		if not letter is Dictionary or not letter.get("name") is String or not letter.get("text") is String or letter.text.is_empty():

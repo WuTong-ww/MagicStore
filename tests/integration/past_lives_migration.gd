@@ -45,6 +45,8 @@ func old_copy(schema: int) -> Dictionary:
 	for profile: Dictionary in old.people.profiles.values():
 		profile.erase("birth_identity")
 	old.schema_version = schema
+	check(not old.divination.has("emergent_cases") or old.divination.get("emergent_cases")=={"version":1,"instances":{}},"historical projection retains no populated schema14 ordinary-case namespace")
+	old.divination.erase("emergent_cases")
 	old.divination.erase("past_lines")
 	for case: Dictionary in old.divination.cases.values():
 		case.erase("cause")
@@ -154,6 +156,8 @@ func actual_schema7_history() -> void:
 		return
 	check(game.state.schema_version == SaveService.CURRENT_SCHEMA and FileAccess.get_sha256(path) == sha,"actual historical migration remains in memory only")
 	var after: Dictionary = game.state.divination.duplicate(true)
+	check(after.get("emergent_cases")=={"version":1,"instances":{}},"real historical past history gains only the empty ordinary-case namespace")
+	after.erase("emergent_cases")
 	check(after.get("settings") == {"free_question":false} and after.cases.values().all(func(case: Dictionary) -> bool: return case.get("board") == {}),"genuine old consultations gain disabled free questions and empty boards without converting their history")
 	after.erase("past_lines")
 	after.erase("settings")

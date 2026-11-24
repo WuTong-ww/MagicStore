@@ -46,15 +46,18 @@ func run() -> void:
 	var restored := migrated.duplicate(true)
 	restored.schema_version = 12
 	restored.people.erase("birth_identity_version")
+	check(not restored.divination.has("emergent_cases") or restored.divination.get("emergent_cases")=={"version":1,"instances":{}},"historical projection retains no populated schema14 ordinary-case namespace")
+	restored.divination.erase("emergent_cases")
 	check(restored==old,"removing only schema13 and the future marker recovers every old field exactly")
 	check(migrated.people.profiles==old.people.profiles and migrated.people.relationships==old.people.relationships and migrated.people.arrivals==old.people.arrivals and migrated.people.days==old.people.days,"old names/skins/birthdays/provenance/relations and all existing plans retain exact values")
-	check(migrated.processed_actions==old.processed_actions and migrated.divination==old.divination and migrated.story==old.story,"no action, fact, board, card order, event or story disclosure is regenerated")
+	check(migrated.processed_actions==old.processed_actions and restored.divination==old.divination and migrated.story==old.story,"no action, fact, board, card order, event or story disclosure is regenerated")
 	check(FileAccess.get_sha256(path)==FIXTURE_SHA and saves.read_save(FIXTURE_ID).state==old,"load is memory-only and leaves the old durable schema and exact bytes")
 	var invalid := migrated.duplicate(true)
 	invalid.people.erase("birth_identity_version")
 	check(not saves.validate_snapshot(invalid).success,"current schema cannot omit its future-birth policy marker")
 	invalid = migrated.duplicate(true)
 	invalid.schema_version = 12
+	invalid.divination.erase("emergent_cases")
 	check(not saves.validate_snapshot(invalid).success,"future-only marker cannot be silently stored under historical schema12")
 	var action := {"type":"set_free_question","enabled":not game.free_question_enabled(),"action_id":"names_migration_first_saved_action"}
 	var before: Dictionary = game.snapshot()

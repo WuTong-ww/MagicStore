@@ -13,7 +13,7 @@ const CaseSchema = preload("res://scripts/divination/case_schema.gd")
 const DeductionBoard = preload("res://scripts/divination/deduction_board.gd")
 const MAX_INT := 2147483647
 
-static func validate(state: Dictionary, data: Dictionary, visits: Dictionary) -> String:
+static func validate(state: Dictionary, data: Dictionary, visits: Dictionary, definition_override: Dictionary = {}, verified_bindings: Dictionary = {}) -> String:
 	var work: Variant = state.get("divination")
 	if not work is Dictionary or not work.get("skills") is Array or not work.get("cases") is Dictionary or not work.get("past") is Dictionary or not work.get("ledger") is Array or not work.get("effects") is Array:
 		return "问卜存档字段不完整"
@@ -39,7 +39,7 @@ static func validate(state: Dictionary, data: Dictionary, visits: Dictionary) ->
 		skills[id] = true
 	var events: Dictionary = {}
 	var services: Dictionary = {}
-	var definitions := CaseSchema.load_all(data)
+	var definitions: Dictionary = definition_override.duplicate(true) if not definition_override.is_empty() else CaseSchema.load_all(data)
 	if int(state.get("schema_version",0)) >= 11 and (not work.get("settings") is Dictionary or work.settings.size()!=1 or not work.settings.get("free_question") is bool):
 		return CaseSchema.load_rules().get("copy",{}).get("invalid_action","CASE_CONFIG_INVALID")
 	for visit_id: String in work.cases:
@@ -50,6 +50,8 @@ static func validate(state: Dictionary, data: Dictionary, visits: Dictionary) ->
 		if (int(state.get("schema_version",0)) >= 11 or case.has("board")) and not DeductionBoard.valid(state,visit,case,definitions):
 			return CaseSchema.load_rules().get("copy",{}).get("invalid_action","CASE_CONFIG_INVALID")
 		var template: Dictionary = data.cases[case.case_id]
+		if template.has("emergent_definition_id") and not _emergent_record_matches(state,visit,case,template,definitions,verified_bindings):
+			return "案例未关联有效接待"
 		if template.get("generated", false):
 			var inherited: Variant = case.get("inherited_clue_ids", [])
 			var allowed_clues: Array = template.world_facts.values().map(func(fact: Dictionary) -> String: return fact.requires_clue)
@@ -104,6 +106,31 @@ static func validate(state: Dictionary, data: Dictionary, visits: Dictionary) ->
 			return "事件影响缺少有效事件结果或效果来源"
 		effect_ids[effect.effect_id] = true
 	return ""
+
+static func _emergent_record_matches(state: Dictionary, visit: Dictionary, case: Dictionary, template: Dictionary, definitions: Dictionary, bindings: Dictionary) -> bool:
+	if int(state.get("schema_version",0))<14 or template.get("emergent_definition_id")!=case.case_id or not state.get("divination",{}).get("emergent_cases") is Dictionary:
+		return false
+	var arrival_id: Variant = visit.get("arrival_id")
+	var binding: Variant = bindings.get(arrival_id)
+	var instance: Variant = state.divination.emergent_cases.get("instances",{}).get(arrival_id)
+	var definition: Variant = definitions.get(case.case_id)
+	var row: Variant = state.get("people",{}).get("arrivals",{}).get(arrival_id)
+	var profile: Variant = state.get("people",{}).get("profiles",{}).get(visit.npc_id)
+	if not binding is Dictionary or not instance is Dictionary or not definition is Dictionary or not row is Dictionary or not profile is Dictionary or instance.get("status")!="ready":
+		return false
+	if binding.get("npc_id")!=visit.npc_id or binding.get("case_id")!=case.case_id or binding.get("definition_hash")!=instance.get("definition_hash") or instance.get("npc_id")!=visit.npc_id or instance.get("case_id")!=case.case_id or instance.get("definition")!=definition:
+		return false
+	if row.get("visit_id")!=visit.visit_id or row.get("npc_id")!=visit.npc_id or row.get("case_id")!=case.case_id or case.world_facts!=definition.get("truth") or template.world_facts!=definition.get("truth") or template.event!=definition.get("outcomes"):
+		return false
+	if case.get("board",{}).get("definition_id")!=case.case_id or case.get("board",{}).get("hash")!=instance.get("definition_hash") or case.event.get("subject_id")!=visit.npc_id or case.event.get("target_name")!=definition.outcomes.target_name:
+		return false
+	var public_npc: Variant = case.get("public_npc")
+	if not public_npc is Dictionary or public_npc.get("npc_id")!=visit.npc_id or public_npc.get("name")!=profile.get("name") or public_npc.get("role")!=profile.get("role") or public_npc.get("case_title")!=template.title:
+		return false
+	for clue: Variant in visit.clue_ids:
+		if not definition.truth.values().any(func(fact: Dictionary)->bool:return fact.requires_clue==clue) and not _has_product_clue(case,str(clue)):
+			return false
+	return true
 
 static func wallet(value: Variant) -> bool:
 	if not value is Dictionary or not value.get("items") is Dictionary:

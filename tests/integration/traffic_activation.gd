@@ -184,6 +184,8 @@ func check_legacy_applied() -> void:
 	check(historical.people.get("birth_identity_version",0)==1 and not old.people.has("birth_identity_version"),"historical traffic gains only the checked future-birth policy marker")
 	check(old.people.profiles.values().all(func(profile: Dictionary) -> bool: return not profile.has("birth_identity")) and historical.people.profiles.values().all(func(profile: Dictionary) -> bool: return not profile.has("birth_identity")),"historical traffic migration invents no birth records for existing people")
 	historical.people.erase("birth_identity_version")
+	check(not historical.divination.has("emergent_cases") or historical.divination.get("emergent_cases")=={"version":1,"instances":{}},"historical projection retains no populated schema14 ordinary-case namespace")
+	historical.divination.erase("emergent_cases")
 	historical.schema_version = int(old.schema_version)
 	# New daily progress is additive; every original field and raw byte must
 	# still compare exactly after excluding this explicitly tested namespace.

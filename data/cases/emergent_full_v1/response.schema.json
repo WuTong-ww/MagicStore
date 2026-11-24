@@ -1,0 +1,1105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:magicstore:full-definition-typed-v1",
+  "type": "object",
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "definition": {
+      "$ref": "#/$defs/definition"
+    },
+    "proof": {
+      "$ref": "#/$defs/proof"
+    }
+  },
+  "required": [
+    "version",
+    "definition",
+    "proof"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "fact": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "maxLength": 64
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "requires_clue": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "value",
+        "text",
+        "requires_clue"
+      ],
+      "additionalProperties": false
+    },
+    "answer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "maxLength": 64
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        }
+      },
+      "required": [
+        "id",
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    "slot": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "maxLength": 64
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "answers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/answer"
+          },
+          "minItems": 3,
+          "maxItems": 4
+        },
+        "correct_answer": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "maxLength": 64
+        },
+        "unlock_evidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$",
+            "maxLength": 64
+          },
+          "minItems": 1,
+          "maxItems": 6
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "answers",
+        "correct_answer",
+        "unlock_evidence"
+      ],
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "maxLength": 64
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "type": {
+          "enum": [
+            "fact",
+            "testimony",
+            "misleading"
+          ]
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "slot_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$",
+            "maxLength": 64
+          },
+          "minItems": 1,
+          "maxItems": 3
+        },
+        "legacy_clue_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$",
+            "maxLength": 64
+          },
+          "minItems": 1,
+          "maxItems": 1
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "type",
+        "source",
+        "slot_ids"
+      ],
+      "additionalProperties": false
+    },
+    "question": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "maxLength": 64
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "answer": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$",
+            "maxLength": 64
+          },
+          "minItems": 1,
+          "maxItems": 6
+        },
+        "requires_familiarity": {
+          "const": 0
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "answer",
+        "evidence_ids",
+        "requires_familiarity"
+      ],
+      "additionalProperties": false
+    },
+    "card": {
+      "type": "object",
+      "properties": {
+        "deck_id": {
+          "enum": [
+            "fool",
+            "magician",
+            "high_priestess",
+            "empress",
+            "emperor",
+            "hierophant",
+            "lovers",
+            "chariot",
+            "strength",
+            "hermit",
+            "wheel",
+            "justice",
+            "hanged_man",
+            "death",
+            "temperance",
+            "devil",
+            "tower",
+            "star",
+            "moon",
+            "sun",
+            "judgement",
+            "world",
+            "wands_1",
+            "wands_2",
+            "wands_3",
+            "wands_4",
+            "wands_5",
+            "wands_6",
+            "wands_7",
+            "wands_8",
+            "wands_9",
+            "wands_10",
+            "wands_11",
+            "wands_12",
+            "wands_13",
+            "wands_14",
+            "cups_1",
+            "cups_2",
+            "cups_3",
+            "cups_4",
+            "cups_5",
+            "cups_6",
+            "cups_7",
+            "cups_8",
+            "cups_9",
+            "cups_10",
+            "cups_11",
+            "cups_12",
+            "cups_13",
+            "cups_14",
+            "swords_1",
+            "swords_2",
+            "swords_3",
+            "swords_4",
+            "swords_5",
+            "swords_6",
+            "swords_7",
+            "swords_8",
+            "swords_9",
+            "swords_10",
+            "swords_11",
+            "swords_12",
+            "swords_13",
+            "swords_14",
+            "pentacles_1",
+            "pentacles_2",
+            "pentacles_3",
+            "pentacles_4",
+            "pentacles_5",
+            "pentacles_6",
+            "pentacles_7",
+            "pentacles_8",
+            "pentacles_9",
+            "pentacles_10",
+            "pentacles_11",
+            "pentacles_12",
+            "pentacles_13",
+            "pentacles_14"
+          ]
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "slot_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "deck_id",
+        "text",
+        "slot_id"
+      ],
+      "additionalProperties": false
+    },
+    "prediction": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "condition": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "maxLength": 64
+        },
+        "expected": {
+          "enum": [
+            "met",
+            "missed"
+          ]
+        },
+        "window_after_due_minutes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10080
+        }
+      },
+      "required": [
+        "text",
+        "condition",
+        "expected",
+        "window_after_due_minutes"
+      ],
+      "additionalProperties": false
+    },
+    "advice": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "maxLength": 64
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "requires_deductions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$",
+            "maxLength": 64
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "legacy_advice_key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "maxLength": 64
+        },
+        "reaction": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "mood": {
+          "enum": [
+            "neutral",
+            "smile",
+            "hesitant",
+            "surprised",
+            "sad"
+          ]
+        },
+        "prediction": {
+          "$ref": "#/$defs/prediction"
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "requires_deductions",
+        "legacy_advice_key",
+        "reaction",
+        "mood",
+        "prediction"
+      ],
+      "additionalProperties": false
+    },
+    "world_fact": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$",
+            "maxLength": 64
+          },
+          "minItems": 3,
+          "maxItems": 4
+        },
+        "default": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "values",
+        "default"
+      ],
+      "additionalProperties": false
+    },
+    "event_advice": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    "option": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "maxLength": 64
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        }
+      },
+      "required": [
+        "key",
+        "label"
+      ],
+      "additionalProperties": false
+    },
+    "event_outcome": {
+      "type": "object",
+      "properties": {
+        "actual_action": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "outcome": {
+          "enum": [
+            "met",
+            "missed"
+          ]
+        },
+        "evidence": {
+          "const": "sufficient"
+        },
+        "feedback": {
+          "const": "delayed"
+        },
+        "delay_minutes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10080
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "effects": {
+          "type": "array",
+          "items": {},
+          "minItems": 0,
+          "maxItems": 0
+        }
+      },
+      "required": [
+        "actual_action",
+        "outcome",
+        "evidence",
+        "feedback",
+        "delay_minutes",
+        "text",
+        "effects"
+      ],
+      "additionalProperties": false
+    },
+    "condition": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "outcomes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$",
+            "maxLength": 64
+          },
+          "minItems": 1,
+          "maxItems": 1
+        }
+      },
+      "required": [
+        "label"
+      ],
+      "additionalProperties": false
+    },
+    "when": {
+      "type": "object",
+      "properties": {
+        "advice": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "maxLength": 64
+        },
+        "accepted": {
+          "const": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "event_rule": {
+      "type": "object",
+      "properties": {
+        "when": {
+          "$ref": "#/$defs/when"
+        },
+        "outcome": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "when",
+        "outcome"
+      ],
+      "additionalProperties": false
+    },
+    "entity": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "object",
+            "place",
+            "reason",
+            "step"
+          ]
+        },
+        "tokens": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1200
+          },
+          "minItems": 1,
+          "maxItems": 2
+        }
+      },
+      "required": [
+        "type",
+        "tokens"
+      ],
+      "additionalProperties": false
+    },
+    "typed_fact": {
+      "type": "object",
+      "properties": {
+        "subject": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "maxLength": 64
+        },
+        "predicate": {
+          "enum": [
+            "location",
+            "cause",
+            "next_step"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "subject",
+        "predicate",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "claim": {
+      "type": "object",
+      "properties": {
+        "fact_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "maxLength": 64
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "fact_id",
+        "value"
+      ],
+      "additionalProperties": false
+    },
+    "support": {
+      "type": "object",
+      "properties": {
+        "fact_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "maxLength": 64
+        },
+        "candidate_values": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$",
+            "maxLength": 64
+          },
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$",
+            "maxLength": 64
+          },
+          "minProperties": 1
+        },
+        "rule": {
+          "const": "fact_equals"
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$",
+            "maxLength": 64
+          },
+          "minItems": 1,
+          "maxItems": 6
+        }
+      },
+      "required": [
+        "fact_id",
+        "candidate_values",
+        "rule",
+        "evidence_ids"
+      ],
+      "additionalProperties": false
+    },
+    "advice_proof": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "enum": [
+            "verify",
+            "coordinate",
+            "defer"
+          ]
+        },
+        "fact_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$",
+            "maxLength": 64
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      },
+      "required": [
+        "action",
+        "fact_ids"
+      ],
+      "additionalProperties": false
+    },
+    "rumor": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "maxLength": 64
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        }
+      },
+      "required": [
+        "id",
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    "binding": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "maxLength": 64
+        },
+        "ref": {
+          "type": "string",
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "kind",
+        "ref"
+      ],
+      "additionalProperties": false
+    },
+    "event": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "const": 1
+        },
+        "subject_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "maxLength": 64
+        },
+        "target_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "minute_of_day": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10080
+        },
+        "feedback_delay": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10080
+        },
+        "world_facts": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$",
+            "maxLength": 64
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/world_fact"
+          },
+          "minProperties": 1
+        },
+        "branch_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$",
+            "maxLength": 64
+          },
+          "minItems": 0,
+          "maxItems": 0
+        },
+        "item_effect_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$",
+            "maxLength": 64
+          },
+          "minItems": 0,
+          "maxItems": 0
+        },
+        "item_effect": {
+          "type": "object",
+          "maxProperties": 0
+        },
+        "advice_options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/option"
+          },
+          "minItems": 2,
+          "maxItems": 3
+        },
+        "advice": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$",
+            "maxLength": 64
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/event_advice"
+          },
+          "minProperties": 1
+        },
+        "prediction_conditions": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$",
+            "maxLength": 64
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/condition"
+          },
+          "minProperties": 1
+        },
+        "prediction_labels": {
+          "type": "object",
+          "properties": {
+            "met": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1200
+            },
+            "missed": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1200
+            }
+          },
+          "required": [
+            "met",
+            "missed"
+          ],
+          "additionalProperties": false
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/event_rule"
+          },
+          "minItems": 2,
+          "maxItems": 3
+        },
+        "outcomes": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$",
+            "maxLength": 64
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/event_outcome"
+          },
+          "minProperties": 1
+        },
+        "feedback_effects": {
+          "type": "array",
+          "items": {},
+          "minItems": 0,
+          "maxItems": 0
+        }
+      },
+      "required": [
+        "version",
+        "subject_id",
+        "target_name",
+        "minute_of_day",
+        "feedback_delay",
+        "world_facts",
+        "branch_ids",
+        "item_effect_ids",
+        "item_effect",
+        "advice_options",
+        "advice",
+        "prediction_conditions",
+        "prediction_labels",
+        "rules",
+        "outcomes",
+        "feedback_effects"
+      ],
+      "additionalProperties": false
+    },
+    "definition": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "maxLength": 64
+        },
+        "version": {
+          "const": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "legacy_case_id": {
+          "const": ""
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "truth": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$",
+            "maxLength": 64
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/fact"
+          },
+          "minProperties": 1
+        },
+        "deduction_slots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/slot"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "questions": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/question"
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          },
+          "minItems": 6,
+          "maxItems": 6
+        },
+        "cards": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/card"
+          },
+          "minItems": 5,
+          "maxItems": 5
+        },
+        "advice": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/advice"
+          },
+          "minItems": 2,
+          "maxItems": 3
+        },
+        "outcomes": {
+          "$ref": "#/$defs/event"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "title",
+        "legacy_case_id",
+        "question",
+        "truth",
+        "deduction_slots",
+        "questions",
+        "evidence",
+        "cards",
+        "advice",
+        "outcomes"
+      ],
+      "additionalProperties": false
+    },
+    "proof": {
+      "type": "object",
+      "properties": {
+        "entities": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$",
+            "maxLength": 64
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/entity"
+          },
+          "minProperties": 1
+        },
+        "facts": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$",
+            "maxLength": 64
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/typed_fact"
+          },
+          "minProperties": 1
+        },
+        "evidence_claims": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$",
+            "maxLength": 64
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/claim"
+          },
+          "minProperties": 1
+        },
+        "slots": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$",
+            "maxLength": 64
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/support"
+          },
+          "minProperties": 1
+        },
+        "advice": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,63}$",
+            "maxLength": 64
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/advice_proof"
+          },
+          "minProperties": 1
+        },
+        "rumors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/rumor"
+          },
+          "minItems": 0,
+          "maxItems": 4
+        },
+        "text_bindings": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/binding"
+          }
+        }
+      },
+      "required": [
+        "entities",
+        "facts",
+        "evidence_claims",
+        "slots",
+        "advice",
+        "rumors",
+        "text_bindings"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

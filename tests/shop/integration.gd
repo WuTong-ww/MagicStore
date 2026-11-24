@@ -109,6 +109,8 @@ func _migration() -> void:
 	legacy.erase("shop")
 	legacy.erase("people")
 	legacy.schema_version = 2
+	check(not legacy.divination.has("emergent_cases") or legacy.divination.get("emergent_cases")=={"version":1,"instances":{}},"historical projection retains no populated schema14 ordinary-case namespace")
+	legacy.divination.erase("emergent_cases")
 	legacy.save_id = gs.make_id("save_legacy_shop")
 	# Synthetic v2 projection: remove only G5's additive namespace and cause.
 	legacy.divination.erase("past_lines")
@@ -157,6 +159,8 @@ func _arrival_schema_migration() -> void:
 		profile.erase("birth_identity")
 	check(not legacy.people.has("birth_identity_version") and legacy.people.profiles.values().all(func(profile: Dictionary) -> bool: return not profile.has("birth_identity")),"G1 synthetic v3 people excludes future birth fields")
 	legacy.schema_version = 3
+	check(not legacy.divination.has("emergent_cases") or legacy.divination.get("emergent_cases")=={"version":1,"instances":{}},"historical projection retains no populated schema14 ordinary-case namespace")
+	legacy.divination.erase("emergent_cases")
 	legacy.divination.erase("past_lines")
 	for case: Dictionary in legacy.divination.cases.values():
 		case.erase("cause")

@@ -46,6 +46,8 @@ func legacy_copy(schema: int) -> Dictionary:
 	for profile: Dictionary in value.people.profiles.values():
 		profile.erase("birth_identity")
 	value.schema_version = schema
+	check(not value.divination.has("emergent_cases") or value.divination.get("emergent_cases")=={"version":1,"instances":{}},"historical projection retains no populated schema14 ordinary-case namespace")
+	value.divination.erase("emergent_cases")
 	# This is a synthetic old-version projection, not a recorded legacy envelope.
 	value.divination.erase("past_lines")
 	for case: Dictionary in value.divination.cases.values():

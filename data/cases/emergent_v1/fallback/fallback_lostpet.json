@@ -1,0 +1,528 @@
+{
+  "protocol_version": 1,
+  "template_id": "fallback_lostpet",
+  "kind": "lostpet",
+  "definition": {
+    "id": "fallback_lostpet",
+    "version": 1,
+    "title": "花房里的一声轻喵",
+    "question": "猫最后躲在哪，是什么让它躲起来，又该怎样寻找？",
+    "truth": {
+      "where": {
+        "value": "box",
+        "text": "照看人在花房空纸箱里看见了猫。",
+        "requires_clue": "clue_where"
+      },
+      "cause": {
+        "value": "wheels",
+        "text": "猫听到陌生滚轮声后钻进了遮蔽物。",
+        "requires_clue": "clue_cause"
+      },
+      "step": {
+        "value": "quiet",
+        "text": "说明建议联系熟悉的照看人，安静查看遮蔽物。",
+        "requires_clue": "clue_step"
+      }
+    },
+    "deduction_slots": [
+      {
+        "id": "where",
+        "title": "最后可靠的位置在哪",
+        "answers": [
+          {
+            "id": "gate",
+            "text": "街口的长椅下"
+          },
+          {
+            "id": "box",
+            "text": "花房的空纸箱里"
+          },
+          {
+            "id": "shelf",
+            "text": "后院的木架上"
+          }
+        ],
+        "correct_answer": "box",
+        "unlock_evidence": [
+          "fact_where",
+          "statement_2"
+        ]
+      },
+      {
+        "id": "cause",
+        "title": "它为什么躲起来",
+        "answers": [
+          {
+            "id": "wheels",
+            "text": "被陌生滚轮声惊到"
+          },
+          {
+            "id": "nap",
+            "text": "想找安静地方睡觉"
+          },
+          {
+            "id": "sun",
+            "text": "追着暖光换位置"
+          }
+        ],
+        "correct_answer": "wheels",
+        "unlock_evidence": [
+          "fact_cause",
+          "statement_0"
+        ]
+      },
+      {
+        "id": "step",
+        "title": "怎样安排寻找",
+        "answers": [
+          {
+            "id": "chase",
+            "text": "一群人喊着名字追找"
+          },
+          {
+            "id": "alone",
+            "text": "不联系照看人，独自等候"
+          },
+          {
+            "id": "quiet",
+            "text": "联系照看人，安静查看"
+          }
+        ],
+        "correct_answer": "quiet",
+        "unlock_evidence": [
+          "fact_step",
+          "statement_1"
+        ]
+      }
+    ],
+    "questions": [
+      [
+        {
+          "id": "question_0_0",
+          "text": "最后一次可靠目击在哪里？",
+          "answer": "来客补充：照看人在花房空纸箱里看见了猫。",
+          "evidence_ids": [
+            "fact_where"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_0_0"
+        },
+        {
+          "id": "question_0_1",
+          "text": "花房有什么可躲藏的位置？",
+          "answer": "来客补充：照看人在花房空纸箱里看见了猫。 它平时听见陌生推车声，会往遮挡物后面退。",
+          "evidence_ids": [
+            "fact_where",
+            "statement_0"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_0_1"
+        },
+        {
+          "id": "question_0_2",
+          "text": "街口的猫核对过斑纹吗？",
+          "answer": "来客补充：照看人在花房空纸箱里看见了猫。 它认得照看人的脚步，听见时常会抬头。",
+          "evidence_ids": [
+            "fact_where",
+            "statement_1"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_0_2"
+        }
+      ],
+      [
+        {
+          "id": "question_1_0",
+          "text": "它躲起来前有什么声音？",
+          "answer": "来客补充：猫听到陌生滚轮声后钻进了遮蔽物。",
+          "evidence_ids": [
+            "fact_cause"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_1_0"
+        },
+        {
+          "id": "question_1_1",
+          "text": "它遇到陌生声音会怎样？",
+          "answer": "来客补充：猫听到陌生滚轮声后钻进了遮蔽物。 它认得照看人的脚步，听见时常会抬头。",
+          "evidence_ids": [
+            "fact_cause",
+            "statement_1"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_1_1"
+        },
+        {
+          "id": "question_1_2",
+          "text": "两份记录的时间能对上吗？",
+          "answer": "来客补充：猫听到陌生滚轮声后钻进了遮蔽物。 有人远看街口一只颜色相近的猫，还没核对斑纹。",
+          "evidence_ids": [
+            "fact_cause",
+            "statement_2"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_1_2"
+        }
+      ],
+      [
+        {
+          "id": "question_2_0",
+          "text": "照看人留下什么寻找办法？",
+          "answer": "来客补充：说明建议联系熟悉的照看人，安静查看遮蔽物。",
+          "evidence_ids": [
+            "fact_step"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_2_0"
+        },
+        {
+          "id": "question_2_1",
+          "text": "它认得哪些熟悉声音？",
+          "answer": "来客补充：说明建议联系熟悉的照看人，安静查看遮蔽物。 有人远看街口一只颜色相近的猫，还没核对斑纹。",
+          "evidence_ids": [
+            "fact_step",
+            "statement_2"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_2_1"
+        },
+        {
+          "id": "question_2_2",
+          "text": "怎样避免让它更紧张？",
+          "answer": "来客补充：说明建议联系熟悉的照看人，安静查看遮蔽物。 它平时听见陌生推车声，会往遮挡物后面退。",
+          "evidence_ids": [
+            "fact_step",
+            "statement_0"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_2_2"
+        }
+      ]
+    ],
+    "evidence": [
+      {
+        "id": "fact_where",
+        "text": "照看人在花房空纸箱里看见了猫。",
+        "type": "fact",
+        "source": "照看人的现场记录",
+        "slot_ids": [
+          "where"
+        ],
+        "legacy_clue_ids": [
+          "clue_where"
+        ]
+      },
+      {
+        "id": "fact_cause",
+        "text": "猫听到陌生滚轮声后钻进了遮蔽物。",
+        "type": "fact",
+        "source": "花房门口时间记录",
+        "slot_ids": [
+          "cause"
+        ],
+        "legacy_clue_ids": [
+          "clue_cause"
+        ]
+      },
+      {
+        "id": "fact_step",
+        "text": "说明建议联系熟悉的照看人，安静查看遮蔽物。",
+        "type": "fact",
+        "source": "照看人的寻找说明",
+        "slot_ids": [
+          "step"
+        ],
+        "legacy_clue_ids": [
+          "clue_step"
+        ]
+      },
+      {
+        "id": "statement_0",
+        "text": "它平时听见陌生推车声，会往遮挡物后面退。",
+        "type": "testimony",
+        "source": "来客对细节的陈述",
+        "slot_ids": [
+          "cause"
+        ]
+      },
+      {
+        "id": "statement_1",
+        "text": "它认得照看人的脚步，听见时常会抬头。",
+        "type": "testimony",
+        "source": "来客对细节的陈述",
+        "slot_ids": [
+          "step"
+        ]
+      },
+      {
+        "id": "statement_2",
+        "text": "有人远看街口一只颜色相近的猫，还没核对斑纹。",
+        "type": "misleading",
+        "source": "尚未核对的转述或猜测",
+        "slot_ids": [
+          "where"
+        ]
+      }
+    ],
+    "cards": [
+      {
+        "deck_id": "hermit",
+        "text": "先找到能独立核对的痕迹，让一处细节照亮方向。",
+        "slot_id": "where"
+      },
+      {
+        "deck_id": "swords_2",
+        "text": "把已发生的事情与尚未核实的猜测分开。",
+        "slot_id": "cause"
+      },
+      {
+        "deck_id": "star",
+        "text": "把愿望落在一个可完成、也容许回应的小步骤上。",
+        "slot_id": "step"
+      },
+      {
+        "deck_id": "cups_6",
+        "text": "旧日熟悉感能提供方向，仍需眼前材料印证。",
+        "slot_id": "where"
+      },
+      {
+        "deck_id": "world",
+        "text": "把来源、经过和下一步接起来，检查还缺哪一环。",
+        "slot_id": "step"
+      }
+    ],
+    "advice": [
+      {
+        "id": "verify",
+        "text": "联系熟悉的照看人，安静查看最后目击处。",
+        "requires_deductions": [
+          "where",
+          "cause",
+          "step"
+        ],
+        "legacy_advice_key": "verify",
+        "reaction": "我先核对清楚，再照这个步骤试试。",
+        "mood": "smile",
+        "prediction": {
+          "text": "按所选步骤核对后，这件事会得到相应推进。",
+          "condition": "if_verify",
+          "expected": "met",
+          "window_after_due_minutes": 30
+        }
+      },
+      {
+        "id": "ask",
+        "text": "留下斑纹与联系方式，逐一核对附近目击。",
+        "requires_deductions": [
+          "where",
+          "cause",
+          "step"
+        ],
+        "legacy_advice_key": "ask",
+        "reaction": "我会把看到的与猜到的分开，慢慢问明白。",
+        "mood": "neutral",
+        "prediction": {
+          "text": "按所选步骤核对后，这件事会得到相应推进。",
+          "condition": "if_ask",
+          "expected": "met",
+          "window_after_due_minutes": 30
+        }
+      },
+      {
+        "id": "wait",
+        "text": "留下寻找说明，等照看人的下一次回报。",
+        "requires_deductions": [
+          "where",
+          "cause",
+          "step"
+        ],
+        "legacy_advice_key": "wait",
+        "reaction": "我先留住材料，准备好以后再继续。",
+        "mood": "hesitant",
+        "prediction": {
+          "text": "这次先暂缓，事情暂时不会有新的推进。",
+          "condition": "always",
+          "expected": "missed",
+          "window_after_due_minutes": 30
+        }
+      }
+    ],
+    "outcomes": {
+      "version": 1,
+      "subject_id": "case_owner",
+      "target_name": "猫最后躲在哪，是什么让它躲起来，又该怎样寻找？",
+      "minute_of_day": 1080,
+      "feedback_delay": 180,
+      "world_facts": {
+        "where": {
+          "values": [
+            "gate",
+            "box",
+            "shelf"
+          ],
+          "default": "box"
+        },
+        "cause": {
+          "values": [
+            "wheels",
+            "nap",
+            "sun"
+          ],
+          "default": "wheels"
+        },
+        "step": {
+          "values": [
+            "chase",
+            "alone",
+            "quiet"
+          ],
+          "default": "quiet"
+        }
+      },
+      "branch_ids": [],
+      "item_effect_ids": [],
+      "item_effect": {},
+      "advice_options": [
+        {
+          "key": "verify",
+          "label": "联系熟悉的照看人，安静查看最后目击处。"
+        },
+        {
+          "key": "ask",
+          "label": "留下斑纹与联系方式，逐一核对附近目击。"
+        },
+        {
+          "key": "wait",
+          "label": "留下寻找说明，等照看人的下一次回报。"
+        }
+      ],
+      "advice": {
+        "verify": {
+          "text": "联系熟悉的照看人，安静查看最后目击处。"
+        },
+        "ask": {
+          "text": "留下斑纹与联系方式，逐一核对附近目击。"
+        },
+        "wait": {
+          "text": "留下寻找说明，等照看人的下一次回报。"
+        }
+      },
+      "prediction_conditions": {
+        "always": {
+          "label": "无附加条件"
+        },
+        "if_verify": {
+          "label": "若先核对材料再行动",
+          "outcomes": [
+            "verified"
+          ]
+        },
+        "if_ask": {
+          "label": "若先询问相关照看人或保管人",
+          "outcomes": [
+            "checked"
+          ]
+        }
+      },
+      "prediction_labels": {
+        "met": "事情得到核对与推进",
+        "missed": "事情暂未推进"
+      },
+      "rules": [
+        {
+          "when": {
+            "advice": "verify",
+            "accepted": true
+          },
+          "outcome": "verified"
+        },
+        {
+          "when": {
+            "advice": "ask",
+            "accepted": true
+          },
+          "outcome": "checked"
+        },
+        {
+          "when": {},
+          "outcome": "deferred"
+        }
+      ],
+      "outcomes": {
+        "verified": {
+          "actual_action": "联系熟悉的照看人，安静查看最后目击处。",
+          "outcome": "met",
+          "evidence": "sufficient",
+          "feedback": "delayed",
+          "delay_minutes": 180,
+          "text": "照看人轻轻走近纸箱，猫抬头了。它已经安心回去。",
+          "effects": []
+        },
+        "checked": {
+          "actual_action": "留下斑纹与联系方式，逐一核对附近目击。",
+          "outcome": "met",
+          "evidence": "sufficient",
+          "feedback": "delayed",
+          "delay_minutes": 180,
+          "text": "街口那只是另一只猫，我们把范围缩回花房继续寻找。",
+          "effects": []
+        },
+        "deferred": {
+          "actual_action": "留下寻找说明，等照看人的下一次回报。",
+          "outcome": "missed",
+          "evidence": "sufficient",
+          "feedback": "delayed",
+          "delay_minutes": 180,
+          "text": "照看人又看见它在花房活动，我还在等接它回去的消息。",
+          "effects": []
+        }
+      },
+      "feedback_effects": []
+    }
+  },
+  "support": {
+    "facts": [
+      {
+        "fact_key": "where",
+        "evidence_id": "fact_where",
+        "value": "box"
+      },
+      {
+        "fact_key": "cause",
+        "evidence_id": "fact_cause",
+        "value": "wheels"
+      },
+      {
+        "fact_key": "step",
+        "evidence_id": "fact_step",
+        "value": "quiet"
+      }
+    ],
+    "proofs": [
+      {
+        "slot_id": "where",
+        "answer_id": "box",
+        "rule": "fact_equals",
+        "premises": [
+          "where"
+        ]
+      },
+      {
+        "slot_id": "cause",
+        "answer_id": "wheels",
+        "rule": "fact_equals",
+        "premises": [
+          "cause"
+        ]
+      },
+      {
+        "slot_id": "step",
+        "answer_id": "quiet",
+        "rule": "fact_equals",
+        "premises": [
+          "step"
+        ]
+      }
+    ]
+  }
+}

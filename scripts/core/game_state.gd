@@ -28,12 +28,22 @@ const DailyLoop = preload("res://scripts/core/daily_loop.gd")
 const CaseSchema = preload("res://scripts/divination/case_schema.gd")
 const StoryContent = preload("res://scripts/story/story_content.gd")
 const StoryProgress = preload("res://scripts/story/story_progress.gd")
+const EmergentStore = preload("res://scripts/divination/emergent_case_store.gd")
+const EmergentRegistry = preload("res://scripts/divination/emergent_case_registry.gd")
+const EmergentCopy = preload("res://scripts/divination/emergent_case_copy.gd")
+const CaseCoordinator = preload("res://scripts/providers/case_generation_coordinator.gd")
+const CaseTransport = preload("res://scripts/providers/case_transport_config.gd")
 const SHOP_ACTIONS := ["procure_item", "receive_material_gift", "gather_material", "sell_material", "register_demand", "research_recipe", "craft_item", "sell_product", "use_product", "review_case"]
 const PEOPLE_ACTIONS := ["book_arrival", "save_appearance", "wait", "invite_contact"]
 var shop_config: Dictionary = {}
 var people_config: Dictionary = {}
 var daily_loop_config: Dictionary = {}
 var story_config: Dictionary = {}
+var _case_runtime: Dictionary = {}
+var _case_copy: Dictionary = {}
+var _case_coordinator: RefCounted
+var _case_attempted: Dictionary = {}
+var _case_admission_scheduled := false
 var _api_url := ""
 var _api_model := ""
 var _api_key := ""
@@ -84,11 +94,16 @@ func _ready() -> void:
 		return
 	var catalog := DivinationCatalog.load_data(content)
 	if catalog.is_empty() or CaseSchema.load_rules().is_empty() or CaseSchema.load_all(catalog).is_empty():
-		content_error = "问卜案例配置无效。"
+		content_error = str(_case_copy.get("invalid",_content_failure_message()))
 		push_error(content_error)
 		return
 	if not DailyLoop.references_valid(daily_loop_config,catalog):
 		content_error = daily_loop_config.copy.invalid_config
+		return
+	_case_runtime = EmergentRegistry.open(catalog)
+	_case_copy = EmergentCopy.load_config()
+	if not _case_runtime.get("success",false) or _case_copy.is_empty() or CaseTransport.load_config().is_empty():
+		content_error = "问卜案例配置无效。"
 		return
 	_divination = DivinationSession.new(catalog, content)
 	dialogue_provider = MockProvider.new()
@@ -119,6 +134,7 @@ func _ready() -> void:
 		dialogue_provider = HttpProvider.new()
 		dialogue_provider.configure(self, catalog.topics + content.topics)
 	_reset_people_generator()
+	_reset_case_generator()
 
 ## Engine and verification snapshot. UI must use player_snapshot and divination_view.
 func snapshot() -> Dictionary:
@@ -199,6 +215,7 @@ func configure_network(url: String, token: String) -> void:
 		dialogue_provider = HttpProvider.new()
 		dialogue_provider.configure(self, _divination.data.topics + content.topics, url, token)
 	_reset_people_generator()
+	_reset_case_generator()
 	state_changed.emit()
 
 func connection_settings() -> Dictionary:
@@ -233,6 +250,7 @@ func configure_api(url: String, model: String, api_key: String) -> Dictionary:
 		dialogue_provider = HttpProvider.new()
 		dialogue_provider.configure_api(self,_divination.data.topics + content.topics,url,model,_api_key)
 		_reset_people_generator()
+		_reset_case_generator()
 		state_changed.emit()
 	return {"success":true,"message":"设置好了。"}
 
@@ -243,6 +261,7 @@ func set_people_generation_options(enabled: bool, concurrency: int = 2) -> void:
 	_generation_enabled = enabled
 	_generation_concurrency = clampi(concurrency, 1, 3)
 	_reset_people_generator()
+	_reset_case_generator()
 	state_changed.emit()
 
 func _reset_people_generator() -> void:
@@ -472,12 +491,14 @@ func _admit_generated_person(action: Dictionary) -> Dictionary:
 func _sync_generated_catalog() -> void:
 	if _divination == null:
 		return
-	_divination.sync_generated(state)
-	var topics: Array = _divination.data.topics + content.topics
-	if dialogue_provider.has_method("update_topics"):
-		dialogue_provider.update_topics(topics)
-	elif dialogue_provider is MockProvider:
-		dialogue_provider.configure(topics)
+	if state.is_empty():
+		var empty := DivinationSession.new(_divination._base_catalog.duplicate(true),content)
+		empty.board_config = _divination.board_config.duplicate(true)
+		_publish_case_session(empty)
+		return
+	var prepared := _divination.candidate_for(state)
+	if prepared.get("success",false):
+		_publish_case_session(prepared.session)
 
 func ledger_view() -> Array:
 	return (state.get("shop", {}).get("ledger", []) + state.get("divination", {}).get("ledger", [])).duplicate(true)
@@ -669,6 +690,8 @@ func execute_action(action: Dictionary) -> Dictionary:
 		return _fail("CASE_WORKFLOW_REQUIRED",CaseSchema.load_rules().copy.wrong_phase)
 	if _sequential() and action.type in ["wait","rest","start_visit","start_arrival","admit_generated_person","book_arrival","invite_contact"]:
 		return _fail("SEQUENTIAL_MODE",daily_loop_config.copy.legacy_disabled)
+	if action.type == "admit_generated_case":
+		return _admit_generated_case(action)
 	if action.type in DailyLoop.ACTIONS:
 		return _daily_action(action)
 	if action.type == "set_free_question":
@@ -764,14 +787,19 @@ func _new_game(action: Dictionary) -> Dictionary:
 		return _fail("INVALID_APPEARANCE",Appearance.load_config().get("copy",{}).get("migration_failed",content_error))
 	if _sequential():
 		candidate.player.energy = int(daily_loop_config.daily_energy)
-		DailyLoop.plan(candidate,daily_loop_config,people_config,_story_enabled(),_divination.data)
+		if not _plan_daily(candidate):
+			return _case_failure()
 	candidate = SaveService._normalize_numbers(candidate)
+	var prepared := _divination.candidate_for(candidate)
+	if not prepared.get("success",false):
+		return _case_failure()
 	var saved: Dictionary = SaveService.write_save(candidate)
 	if not saved.success:
 		return _fail(saved.get("error_code", "SAVE_FAILED"), "新建失败，原存档仍保留。" + saved.get("message", ""))
+	_publish_case_session(prepared.session)
 	state = candidate
-	_sync_generated_catalog()
 	_reset_people_generator()
+	_reset_case_generator()
 	state_changed.emit()
 	return _ok("新店铺已保存。", {"save_id": state.save_id})
 
@@ -783,21 +811,27 @@ func _load_game(action: Dictionary) -> Dictionary:
 		var failure: Dictionary = _fail(loaded.get("error_code", "LOAD_FAILED"), loaded.get("message", "读取失败，当前游戏仍保留。"))
 		failure["backup_available"] = loaded.get("backup_available", false)
 		return failure
-	var loaded_candidate: Dictionary = loaded.state.duplicate(true)
-	_divination.sync_generated(loaded_candidate)
-	if int(loaded_candidate.schema_version) == 1:
-		_divination.initialize(loaded_candidate)
-	if not _initialize_integrated(loaded_candidate):
-		_sync_generated_catalog()
+	var candidate: Dictionary = loaded.state.duplicate(true)
+	var initial := _divination.candidate_for(candidate) if int(candidate.schema_version)>1 else {"success":true,"session":DivinationSession.new(_divination._base_catalog.duplicate(true),content)}
+	if not initial.get("success",false):
+		return _case_failure()
+	if int(candidate.schema_version)==1:
+		initial.session.board_config = _divination.board_config.duplicate(true)
+		initial.session.initialize(candidate)
+	if not _initialize_integrated(candidate,false,initial.session):
 		return _fail("INVALID_APPEARANCE",Appearance.load_config().get("copy",{}).get("migration_failed",content_error))
-	DailyLoop.sync_mode(loaded_candidate,_sequential())
-	var story_error := StoryProgress.validate(loaded_candidate,_divination.data,story_config)
+	DailyLoop.sync_mode(candidate,_sequential())
+	candidate = SaveService._normalize_numbers(candidate)
+	var prepared: Dictionary = initial.session.candidate_for(candidate)
+	if not prepared.get("success",false):
+		return _case_failure()
+	var story_error := StoryProgress.validate(candidate,prepared.session.data,story_config)
 	if not story_error.is_empty():
-		_sync_generated_catalog()
 		return _fail("INVALID_STORY",story_error)
-	state = SaveService._normalize_numbers(loaded_candidate)
-	_sync_generated_catalog()
+	_publish_case_session(prepared.session)
+	state = candidate
 	_reset_people_generator()
+	_reset_case_generator()
 	state_changed.emit()
 	return _ok(loaded.get("message", "存档已载入。"), {"save_id": state.save_id})
 
@@ -808,10 +842,13 @@ func _delete_game(action: Dictionary) -> Dictionary:
 	var deleted: Dictionary = SaveService.delete_save(action.save_id)
 	if not deleted.success:
 		return _fail(deleted.error_code, deleted.message)
+	if _case_coordinator != null:
+		_case_coordinator.clear_save(action.save_id)
 	if was_active:
 		state = {}
 		_sync_generated_catalog()
 		_reset_people_generator()
+		_reset_case_generator()
 		state_changed.emit()
 	return _ok(deleted.message, {"deleted_save_id":action.save_id,"active_deleted":was_active,"cleanup_pending":deleted.get("cleanup_pending",false)})
 
@@ -1051,7 +1088,8 @@ func _end_visit(action: Dictionary) -> Dictionary:
 	var ordered: bool = not str(candidate.daily_loop.active_arrival_id).is_empty()
 	if ordered:
 		DailyLoop.finish(candidate,visit)
-		DailyLoop.plan(candidate,daily_loop_config,people_config,_story_enabled(),_divination.data)
+		if not _plan_daily(candidate):
+			return _case_failure()
 	if _sequential():
 		presentation_events.append_array(_advance(candidate,mini(int(daily_loop_config.close_minutes),maxi(0,int(content.rules.closing_minute)-int(candidate.clock_minutes)%1440))))
 	var output := {"visit_id": visit.visit_id}
@@ -1101,7 +1139,8 @@ func _next_day(action: Dictionary) -> Dictionary:
 		var story_result := StoryProgress.sync(candidate,_divination.data,story_config,people_config)
 		if not story_result.get("success",false):
 			return _fail(story_result.get("error_code","STORY_INVALID"),story_result.get("message",""))
-		DailyLoop.plan(candidate,daily_loop_config,people_config,_story_enabled(),_divination.data)
+		if not _plan_daily(candidate):
+			return _case_failure()
 	return _commit(candidate, action, "已进入下一天，已处理到期的案例事项。", {},presentation_events)
 
 func _candidate_visit(candidate: Dictionary) -> Dictionary:
@@ -1115,7 +1154,8 @@ func _has_time(minutes: int) -> bool:
 		return true
 	return int(state.clock_minutes) % 1440 + minutes <= int(content.rules.closing_minute)
 
-func _advance(candidate: Dictionary, minutes: int) -> Array:
+func _advance(candidate: Dictionary, minutes: int, candidate_session: Variant = null) -> Array:
+	var session: Variant = candidate_session if candidate_session != null else _divination
 	var current: Dictionary = candidate.get("divination",{}).get("cases",{}).get(candidate.get("active_visit_id",""),{})
 	var board: Dictionary = current.get("board",{})
 	var event: Dictionary = current.get("event",{})
@@ -1123,17 +1163,20 @@ func _advance(candidate: Dictionary, minutes: int) -> Array:
 		# Atmosphere cannot resolve the customer's event before advice is saved.
 		# Closing the board releases the unchanged original G3 deadline.
 		minutes = mini(minutes,maxi(0,int(event.due_at)-int(candidate.clock_minutes)-1))
-	var presentation_events: Array = PeopleBridge.advance(candidate, people_config, minutes, _divination,_sequential())
+	var presentation_events: Array = PeopleBridge.advance(candidate, people_config, minutes, session,_sequential())
 	# The commit repeats validation and refuses a failed sync; this sweep makes
 	# disclosures reached during the clock advance available to closing summaries.
-	StoryProgress.sync(candidate,_divination.data,story_config,people_config)
+	StoryProgress.sync(candidate,session.data,story_config,people_config)
 	Shop.sync_effects(candidate, shop_config)
 	return presentation_events
 
 func _commit(candidate: Dictionary, action: Dictionary, message: String, result: Dictionary, presentation_events: Variant = null) -> Dictionary:
+	var prepared := _divination.candidate_for(candidate)
+	if not prepared.get("success",false):
+		return _case_failure()
 	Shop.sync_effects(candidate, shop_config)
-	PeopleBridge.sync(candidate, people_config, _divination,_sequential())
-	var story_result := StoryProgress.sync(candidate,_divination.data,story_config,people_config)
+	PeopleBridge.sync(candidate, people_config, prepared.session,_sequential())
+	var story_result := StoryProgress.sync(candidate,prepared.session.data,story_config,people_config)
 	if not story_result.get("success",false):
 		return _fail(story_result.get("error_code","STORY_INVALID"),story_result.get("message",""))
 	DailyLoop.sync_mode(candidate,_sequential())
@@ -1148,6 +1191,7 @@ func _commit(candidate: Dictionary, action: Dictionary, message: String, result:
 	# Capture this commit's identity before state_changed: a listener may
 	# synchronously commit another action while this local call is still active.
 	var committed_events := _presentation_payload(candidate,presentation_events)
+	_publish_case_session(prepared.session)
 	state = candidate
 	state_changed.emit()
 	if not committed_events.is_empty():
@@ -1179,9 +1223,9 @@ func _presentation_payload(candidate: Dictionary, raw: Variant) -> Array:
 		result[index].sequence = index
 	return result
 
-func _initialize_integrated(candidate: Dictionary, fresh: bool = false) -> bool:
+func _initialize_integrated(candidate: Dictionary, fresh: bool = false, candidate_session: Variant = null) -> bool:
 	Shop.initialize(candidate)
-	PeopleBridge.initialize(candidate, people_config, _divination,fresh,_sequential())
+	PeopleBridge.initialize(candidate, people_config, candidate_session if candidate_session != null else _divination,fresh,_sequential())
 	_migrate_arrival_schema(candidate)
 	_migrate_event_schema(candidate)
 	if not _migrate_appearance_schema(candidate):
@@ -1219,6 +1263,8 @@ func _initialize_integrated(candidate: Dictionary, fresh: bool = false) -> bool:
 		if not People.initialize_birth_identity(candidate.people):
 			return false
 		candidate.schema_version = 13
+	if int(candidate.schema_version) < 14 and not EmergentStore.migrate_schema13(candidate).get("success",false):
+		return false
 	return People.validate(candidate.people).is_empty()
 
 func _set_free_question(action: Dictionary) -> Dictionary:
@@ -1248,21 +1294,29 @@ func _daily_action(action: Dictionary) -> Dictionary:
 		"read_morning_letters":
 			if loop.phase != "morning":
 				return _fail("MORNING_ALREADY_READ",copy.already_read)
-			DailyLoop.plan(candidate,daily_loop_config,people_config,_story_enabled(),_divination.data)
+			if not _plan_daily(candidate):
+				return _case_failure()
 			DailyLoop.read_letters(candidate,_divination.data,daily_loop_config)
-			loop.phase = "reception"
+			candidate.daily_loop.phase = "reception"
 			return _commit(candidate,action,copy.letters_read,{},events)
 		"next_customer":
 			if not candidate.active_visit_id.is_empty():
 				return _fail("ACTIVE_VISIT",copy.active_visit)
 			if loop.phase != "reception":
 				return _fail("MORNING_REQUIRED",copy.morning_required)
-			DailyLoop.plan(candidate,daily_loop_config,people_config,_story_enabled(),_divination.data)
+			if not _plan_daily(candidate):
+				return _case_failure()
 			var id := DailyLoop.next_arrival(candidate)
 			if id.is_empty():
 				return _fail("DAY_COMPLETE",copy.all_done)
+			var chosen := _prepare_daily_case(candidate,id)
+			if not chosen.get("success",false):
+				return _case_failure()
+			candidate = chosen.candidate
+			loop = candidate.daily_loop
+			var candidate_session: Variant = chosen.session
 			var row: Dictionary = candidate.people.arrivals[id]
-			events.append_array(_advance(candidate,maxi(0,int(row.at)-int(candidate.clock_minutes))))
+			events.append_array(_advance(candidate,maxi(0,int(row.at)-int(candidate.clock_minutes)),candidate_session))
 			row = candidate.people.arrivals[id]
 			row.state = "queued"
 			row.deadline = People.MAX_INT
@@ -1272,11 +1326,14 @@ func _daily_action(action: Dictionary) -> Dictionary:
 			var proposal := action.duplicate(true)
 			proposal["arrival_id"] = id
 			proposal["visit_id"] = make_id("visit")
-			var outcome: Dictionary = PeopleBridge.start(candidate,proposal,_divination,people_config,true)
+			var outcome: Dictionary = PeopleBridge.start(candidate,proposal,candidate_session,people_config,true)
 			if not outcome.success:
 				return _fail(outcome.error_code,outcome.message)
 			loop.active_arrival_id = id
-			return _commit(candidate,action,copy.next_started,outcome.result,events)
+			var committed := _commit(candidate,action,copy.next_started,outcome.result,events)
+			if committed.success and not chosen.get("binding",{}).is_empty():
+				_case_coordinator.retire(chosen.binding)
+			return committed
 		"close_shop":
 			if not candidate.active_visit_id.is_empty():
 				return _fail("ACTIVE_VISIT",copy.active_visit)
@@ -1417,3 +1474,143 @@ func _fail(error_code: String, message: String) -> Dictionary:
 		message=_content_failure_message()
 	action_failed.emit(message)
 	return {"success": false, "error_code": error_code, "message": message, "state_version": state.get("state_version", 0), "result": {}}
+
+## Transient case drafts never enter a save until this authority commits them.
+func _case_failure() -> Dictionary:
+	return _fail("AICASE_INVALID",str(_case_copy.get("invalid",_content_failure_message())))
+
+func _publish_case_session(session: Variant) -> void:
+	_divination = session
+	var topics: Array = session.data.topics + content.topics
+	if dialogue_provider.has_method("update_topics"):
+		dialogue_provider.update_topics(topics)
+	elif dialogue_provider is MockProvider:
+		dialogue_provider.configure(topics)
+
+func _reset_case_generator() -> void:
+	_case_attempted.clear()
+	_case_admission_scheduled = false
+	if _case_coordinator == null:
+		_case_coordinator = CaseCoordinator.new()
+		_case_coordinator.case_ready.connect(_case_ready)
+	_case_coordinator.configure(self,_api_url,_api_model,_api_key,CaseTransport.load_config(),_case_runtime.get("policy",{}))
+
+func _plan_daily(candidate: Dictionary) -> bool:
+	DailyLoop.sync_mode(candidate,_sequential())
+	var prior: Dictionary = candidate.people.arrivals.duplicate(false)
+	DailyLoop.plan(candidate,daily_loop_config,people_config,_story_enabled(),_divination.data)
+	if not candidate.daily_loop.planned:
+		return false
+	if not _sequential() or not _case_runtime.get("policy",{}).get("enabled",false) or not _divination.board_config.get("enabled",true):
+		return true
+	for id: String in candidate.daily_loop.arrival_ids:
+		if prior.has(id):
+			continue
+		var row: Dictionary = candidate.people.arrivals[id]
+		if row.source=="daily_loop" and row.daily_kind=="case" and row.daily_loop_index==0 and row.intent=="divination" and not row.has("story_rule_id"):
+			if not EmergentStore.reserve_new(candidate,id,_case_runtime.policy).get("success",false):
+				return false
+	return true
+
+func _case_binding(snapshot_state: Dictionary, arrival_id: String) -> Dictionary:
+	var record: Dictionary = snapshot_state.get("divination",{}).get("emergent_cases",{}).get("instances",{}).get(arrival_id,{})
+	if record.is_empty():
+		return {}
+	return {"save_id":str(snapshot_state.save_id),"arrival_id":arrival_id,"npc_id":str(record.npc_id),"case_id":str(record.case_id)}
+
+func _prepare_daily_case(candidate: Dictionary, arrival_id: String) -> Dictionary:
+	var binding := _case_binding(candidate,arrival_id)
+	var instances: Dictionary = candidate.get("divination",{}).get("emergent_cases",{}).get("instances",{})
+	if not binding.is_empty() and instances[arrival_id].status=="reserved":
+		var selection: Dictionary = _case_coordinator.selected_for(binding)
+		if selection.is_empty():
+			selection = _case_coordinator.ready_for(binding)
+		var proposed: Dictionary
+		if selection.is_empty():
+			proposed = EmergentStore.fallback(candidate,arrival_id,_case_runtime.policy,_case_runtime.codecs,_case_runtime.schema)
+		else:
+			proposed = EmergentStore.admit(candidate,arrival_id,selection.payload,selection.source,_case_runtime.policy,_case_runtime.codecs,_case_runtime.schema)
+		if not proposed.get("success",false):
+			return {"success":false}
+		candidate = proposed.candidate
+		var checked := _divination.candidate_for(candidate)
+		if not checked.get("success",false):
+			return {"success":false}
+		var record: Dictionary = candidate.divination.emergent_cases.instances[arrival_id]
+		var payload := {"definition":record.definition,"proof":record.proof,"expected_context":record.expected_context}
+		if not _case_coordinator.remember_selected(binding,payload,record.source):
+			return {"success":false}
+		return {"success":true,"candidate":candidate,"session":checked.session,"binding":binding}
+	var prepared := _divination.candidate_for(candidate)
+	if not prepared.get("success",false):
+		return {"success":false}
+	return {"success":true,"candidate":candidate,"session":prepared.session,"binding":binding}
+
+func pump_background_cases(ui_busy: bool = false) -> void:
+	if ui_busy or _provider_pending or state.is_empty() or not _sequential() or _case_coordinator==null or OS.has_feature("web") or not _case_runtime.get("policy",{}).get("enabled",false):
+		return
+	var loop: Dictionary = state.get("daily_loop",{})
+	if loop.get("phase") not in ["morning","reception"] or int(loop.get("cursor",-1))!=0 or not str(state.get("active_visit_id","")).is_empty():
+		return
+	var id := DailyLoop.next_arrival(state)
+	var record: Dictionary = state.get("divination",{}).get("emergent_cases",{}).get("instances",{}).get(id,{})
+	if record.get("status")!="reserved":
+		return
+	var binding := _case_binding(state,id)
+	if not _case_coordinator.ready_for(binding).is_empty():
+		_case_ready(binding)
+		return
+	var key := CaseSchema.definition_hash(binding)
+	if _case_attempted.has(key) or _api_url.is_empty() or not _case_coordinator.status().configured:
+		return
+	# Only actual disclosed reports may cross the request boundary. Empty is the
+	# smallest valid public whitelist; no fixed facts, plans, tools or proofs leave.
+	var context := EmergentStore.context_for(state,id,[],_case_runtime.policy)
+	if context.is_empty():
+		return
+	var profile: Dictionary = state.people.profiles[record.npc_id]
+	_case_attempted[key] = true
+	_case_coordinator.enqueue(binding,context,{"name":profile.name,"role":profile.role})
+
+func _case_ready(binding: Dictionary) -> void:
+	if _case_admission_scheduled or state.is_empty() or binding!=_case_binding(state,str(binding.get("arrival_id",""))):
+		return
+	_case_admission_scheduled = true
+	_admit_ready_case.call_deferred(binding.duplicate(true))
+
+func _admit_ready_case(binding: Dictionary) -> void:
+	_case_admission_scheduled = false
+	if _provider_pending or state.is_empty() or binding!=_case_binding(state,str(binding.get("arrival_id",""))):
+		return
+	var record: Dictionary = state.divination.emergent_cases.instances[binding.arrival_id]
+	if record.get("status")!="reserved" or _case_coordinator.ready_for(binding).is_empty():
+		return
+	var id := "case_admit_"+CaseSchema.definition_hash(binding)
+	await execute_action_async({"type":"admit_generated_case","action_id":id,"arrival_id":binding.arrival_id})
+
+func _admit_generated_case(action: Dictionary) -> Dictionary:
+	if not action.get("arrival_id") is String or _case_coordinator==null:
+		return _case_failure()
+	var binding := _case_binding(state,action.arrival_id)
+	if binding.is_empty():
+		return _case_failure()
+	var held: Dictionary = _case_coordinator.selected_for(binding)
+	if held.is_empty():
+		held = _case_coordinator.ready_for(binding)
+	if held.is_empty() or held.get("source",{}).get("kind")!="model":
+		return _case_failure()
+	var proposed := EmergentStore.admit(state,action.arrival_id,held.payload,held.source,_case_runtime.policy,_case_runtime.codecs,_case_runtime.schema)
+	if not proposed.get("success",false):
+		return _case_failure()
+	var checked := _divination.candidate_for(proposed.candidate)
+	if not checked.get("success",false) or not _case_coordinator.remember_selected(binding,held.payload,held.source):
+		return _case_failure()
+	var result := {"reservation_id":action.arrival_id,"case_id":proposed.case_id,"definition_hash":proposed.definition_hash}
+	var committed := _commit(proposed.candidate,action,_case_copy.admitted,result)
+	if committed.success:
+		_case_coordinator.retire(binding)
+	return committed
+
+func _exit_tree() -> void:
+	if _case_coordinator != null:
+		_case_coordinator.shutdown()

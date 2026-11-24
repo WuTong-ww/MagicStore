@@ -125,6 +125,7 @@ func _ready() -> void:
 		slot_area.add_child(slot)
 		slot_nodes[str(index)] = slot
 	evidence_title = _label(config.copy.evidence_title,int(config.layout.small_font))
+	evidence_title.autowrap_mode = TextServer.AUTOWRAP_OFF
 	paper.add_child(evidence_title)
 	_place(evidence_title,config.layout.evidence_title_rect)
 	evidence_scroll = ScrollContainer.new()

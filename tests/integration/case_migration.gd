@@ -20,6 +20,8 @@ func act(kind: String, fields: Dictionary = {}) -> Dictionary:
 	return result
 func historical_divination(value: Dictionary) -> Dictionary:
 	var old: Dictionary = value.duplicate(true)
+	check(old.get("emergent_cases")=={"version":1,"instances":{}},"historical case projection excludes only the empty schema14 ordinary-case namespace")
+	old.erase("emergent_cases")
 	old.erase("settings")
 	for case: Dictionary in old.cases.values():
 		case.erase("board")

@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "enabled": true,
+  "namespace_prefix": "ec_",
+  "id_digest_length": 24,
+  "fallback_codec_id": "fallback_v1",
+  "codecs": {"fallback_v1": "fallback", "model_v1": "model"},
+  "method_ids": ["tarot", "lenormand", "plum", "yijing", "xiaoliu", "astrology", "bazi", "ziwei"],
+  "limits": {
+    "depth": 28,
+    "instance_bytes": 196608,
+    "total_instance_bytes": 8388608,
+    "instances": 128,
+    "public_sources": 4,
+    "public_source_text": 280,
+    "resource_bytes": 65536,
+    "resource_depth": 32
+  }
+}

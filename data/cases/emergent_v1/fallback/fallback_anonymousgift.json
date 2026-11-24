@@ -1,0 +1,530 @@
+{
+  "protocol_version": 1,
+  "template_id": "fallback_anonymousgift",
+  "kind": "anonymousgift",
+  "definition": {
+    "id": "fallback_anonymousgift",
+    "version": 1,
+    "title": "没有署名的书签盒",
+    "question": "礼物从哪里来，有什么能核实的用意，又该怎样回应？",
+    "truth": {
+      "where": {
+        "value": "exchange",
+        "text": "包装登记注明书签盒经邻里交换架转交。",
+        "requires_clue": "clue_where"
+      },
+      "motive": {
+        "value": "thanks",
+        "text": "卡片原文感谢来客帮忙找回旧书签。",
+        "requires_clue": "clue_motive"
+      },
+      "step": {
+        "value": "public_note",
+        "text": "留言说明允许留公开谢条，并尊重不署名的选择。",
+        "requires_clue": "clue_step"
+      }
+    },
+    "deduction_slots": [
+      {
+        "id": "where",
+        "title": "礼物从哪里送来",
+        "answers": [
+          {
+            "id": "shop",
+            "text": "书店例行赠品"
+          },
+          {
+            "id": "exchange",
+            "text": "经邻里交换架转交"
+          },
+          {
+            "id": "wrong",
+            "text": "寄错地址的包裹"
+          }
+        ],
+        "correct_answer": "exchange",
+        "unlock_evidence": [
+          "fact_where",
+          "statement_0"
+        ]
+      },
+      {
+        "id": "motive",
+        "title": "能核实的用意是什么",
+        "answers": [
+          {
+            "id": "promise",
+            "text": "约定以后共同生活"
+          },
+          {
+            "id": "thanks",
+            "text": "感谢帮忙找回书签"
+          },
+          {
+            "id": "advert",
+            "text": "邀请购买同款物品"
+          }
+        ],
+        "correct_answer": "thanks",
+        "unlock_evidence": [
+          "fact_motive",
+          "statement_0",
+          "statement_2"
+        ]
+      },
+      {
+        "id": "step",
+        "title": "怎样回应并尊重边界",
+        "answers": [
+          {
+            "id": "trace",
+            "text": "追问赠送者的身份"
+          },
+          {
+            "id": "public_note",
+            "text": "不追问身份，留下谢条"
+          },
+          {
+            "id": "claim",
+            "text": "替对方宣布亲近关系"
+          }
+        ],
+        "correct_answer": "public_note",
+        "unlock_evidence": [
+          "fact_step",
+          "statement_1"
+        ]
+      }
+    ],
+    "questions": [
+      [
+        {
+          "id": "question_0_0",
+          "text": "包装登记能说明送来途径吗？",
+          "answer": "来客补充：包装登记注明书签盒经邻里交换架转交。",
+          "evidence_ids": [
+            "fact_where"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_0_0"
+        },
+        {
+          "id": "question_0_1",
+          "text": "最近帮谁找过东西？",
+          "answer": "来客补充：包装登记注明书签盒经邻里交换架转交。 前几天，我帮人从书缝里找到过一枚旧书签。",
+          "evidence_ids": [
+            "fact_where",
+            "statement_0"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_0_1"
+        },
+        {
+          "id": "question_0_2",
+          "text": "包装能说明全部用意吗？",
+          "answer": "来客补充：包装登记注明书签盒经邻里交换架转交。 我愿意道谢，也不想让不署名的人为难。",
+          "evidence_ids": [
+            "fact_where",
+            "statement_1"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_0_2"
+        }
+      ],
+      [
+        {
+          "id": "question_1_0",
+          "text": "感谢卡原文写了什么？",
+          "answer": "来客补充：卡片原文感谢来客帮忙找回旧书签。",
+          "evidence_ids": [
+            "fact_motive"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_1_0"
+        },
+        {
+          "id": "question_1_1",
+          "text": "那枚旧书签后来找到了吗？",
+          "answer": "来客补充：卡片原文感谢来客帮忙找回旧书签。 我愿意道谢，也不想让不署名的人为难。",
+          "evidence_ids": [
+            "fact_motive",
+            "statement_1"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_1_1"
+        },
+        {
+          "id": "question_1_2",
+          "text": "哪些是原话，哪些是猜测？",
+          "answer": "来客补充：卡片原文感谢来客帮忙找回旧书签。 朋友见包装细致，就猜礼物代表更亲近的关系。",
+          "evidence_ids": [
+            "fact_motive",
+            "statement_2"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_1_2"
+        }
+      ],
+      [
+        {
+          "id": "question_2_0",
+          "text": "留言说明允许怎样回应？",
+          "answer": "来客补充：留言说明允许留公开谢条，并尊重不署名的选择。",
+          "evidence_ids": [
+            "fact_step"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_2_0"
+        },
+        {
+          "id": "question_2_1",
+          "text": "你希望保留怎样的边界？",
+          "answer": "来客补充：留言说明允许留公开谢条，并尊重不署名的选择。 朋友见包装细致，就猜礼物代表更亲近的关系。",
+          "evidence_ids": [
+            "fact_step",
+            "statement_2"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_2_1"
+        },
+        {
+          "id": "question_2_2",
+          "text": "不追问姓名也能道谢吗？",
+          "answer": "来客补充：留言说明允许留公开谢条，并尊重不署名的选择。 前几天，我帮人从书缝里找到过一枚旧书签。",
+          "evidence_ids": [
+            "fact_step",
+            "statement_0"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_2_2"
+        }
+      ]
+    ],
+    "evidence": [
+      {
+        "id": "fact_where",
+        "text": "包装登记注明书签盒经邻里交换架转交。",
+        "type": "fact",
+        "source": "包装转交登记",
+        "slot_ids": [
+          "where"
+        ],
+        "legacy_clue_ids": [
+          "clue_where"
+        ]
+      },
+      {
+        "id": "fact_motive",
+        "text": "卡片原文感谢来客帮忙找回旧书签。",
+        "type": "fact",
+        "source": "盒内感谢卡原文",
+        "slot_ids": [
+          "motive"
+        ],
+        "legacy_clue_ids": [
+          "clue_motive"
+        ]
+      },
+      {
+        "id": "fact_step",
+        "text": "留言说明允许留公开谢条，并尊重不署名的选择。",
+        "type": "fact",
+        "source": "交换架留言说明",
+        "slot_ids": [
+          "step"
+        ],
+        "legacy_clue_ids": [
+          "clue_step"
+        ]
+      },
+      {
+        "id": "statement_0",
+        "text": "前几天，我帮人从书缝里找到过一枚旧书签。",
+        "type": "testimony",
+        "source": "来客对细节的陈述",
+        "slot_ids": [
+          "where",
+          "motive"
+        ]
+      },
+      {
+        "id": "statement_1",
+        "text": "我愿意道谢，也不想让不署名的人为难。",
+        "type": "testimony",
+        "source": "来客对细节的陈述",
+        "slot_ids": [
+          "step"
+        ]
+      },
+      {
+        "id": "statement_2",
+        "text": "朋友见包装细致，就猜礼物代表更亲近的关系。",
+        "type": "misleading",
+        "source": "尚未核对的转述或猜测",
+        "slot_ids": [
+          "motive"
+        ]
+      }
+    ],
+    "cards": [
+      {
+        "deck_id": "hermit",
+        "text": "先找到能独立核对的痕迹，让一处细节照亮方向。",
+        "slot_id": "where"
+      },
+      {
+        "deck_id": "swords_2",
+        "text": "把已发生的事情与尚未核实的猜测分开。",
+        "slot_id": "motive"
+      },
+      {
+        "deck_id": "star",
+        "text": "把愿望落在一个可完成、也容许回应的小步骤上。",
+        "slot_id": "step"
+      },
+      {
+        "deck_id": "cups_6",
+        "text": "旧日熟悉感能提供方向，仍需眼前材料印证。",
+        "slot_id": "where"
+      },
+      {
+        "deck_id": "world",
+        "text": "把来源、经过和下一步接起来，检查还缺哪一环。",
+        "slot_id": "step"
+      }
+    ],
+    "advice": [
+      {
+        "id": "verify",
+        "text": "在交换架留张谢条，不追问赠送者身份。",
+        "requires_deductions": [
+          "where",
+          "motive",
+          "step"
+        ],
+        "legacy_advice_key": "verify",
+        "reaction": "我先核对清楚，再照这个步骤试试。",
+        "mood": "smile",
+        "prediction": {
+          "text": "按所选步骤核对后，这件事会得到相应推进。",
+          "condition": "if_verify",
+          "expected": "met",
+          "window_after_due_minutes": 30
+        }
+      },
+      {
+        "id": "ask",
+        "text": "请值班人核对转交经过，再准备回应。",
+        "requires_deductions": [
+          "where",
+          "motive",
+          "step"
+        ],
+        "legacy_advice_key": "ask",
+        "reaction": "我会把看到的与猜到的分开，慢慢问明白。",
+        "mood": "neutral",
+        "prediction": {
+          "text": "按所选步骤核对后，这件事会得到相应推进。",
+          "condition": "if_ask",
+          "expected": "met",
+          "window_after_due_minutes": 30
+        }
+      },
+      {
+        "id": "wait",
+        "text": "先保存礼物与卡片，想好后再回应。",
+        "requires_deductions": [
+          "where",
+          "motive",
+          "step"
+        ],
+        "legacy_advice_key": "wait",
+        "reaction": "我先留住材料，准备好以后再继续。",
+        "mood": "hesitant",
+        "prediction": {
+          "text": "这次先暂缓，事情暂时不会有新的推进。",
+          "condition": "always",
+          "expected": "missed",
+          "window_after_due_minutes": 30
+        }
+      }
+    ],
+    "outcomes": {
+      "version": 1,
+      "subject_id": "case_owner",
+      "target_name": "礼物从哪里来，有什么能核实的用意，又该怎样回应？",
+      "minute_of_day": 1080,
+      "feedback_delay": 180,
+      "world_facts": {
+        "where": {
+          "values": [
+            "shop",
+            "exchange",
+            "wrong"
+          ],
+          "default": "exchange"
+        },
+        "motive": {
+          "values": [
+            "promise",
+            "thanks",
+            "advert"
+          ],
+          "default": "thanks"
+        },
+        "step": {
+          "values": [
+            "trace",
+            "public_note",
+            "claim"
+          ],
+          "default": "public_note"
+        }
+      },
+      "branch_ids": [],
+      "item_effect_ids": [],
+      "item_effect": {},
+      "advice_options": [
+        {
+          "key": "verify",
+          "label": "在交换架留张谢条，不追问赠送者身份。"
+        },
+        {
+          "key": "ask",
+          "label": "请值班人核对转交经过，再准备回应。"
+        },
+        {
+          "key": "wait",
+          "label": "先保存礼物与卡片，想好后再回应。"
+        }
+      ],
+      "advice": {
+        "verify": {
+          "text": "在交换架留张谢条，不追问赠送者身份。"
+        },
+        "ask": {
+          "text": "请值班人核对转交经过，再准备回应。"
+        },
+        "wait": {
+          "text": "先保存礼物与卡片，想好后再回应。"
+        }
+      },
+      "prediction_conditions": {
+        "always": {
+          "label": "无附加条件"
+        },
+        "if_verify": {
+          "label": "若先核对材料再行动",
+          "outcomes": [
+            "verified"
+          ]
+        },
+        "if_ask": {
+          "label": "若先询问相关照看人或保管人",
+          "outcomes": [
+            "checked"
+          ]
+        }
+      },
+      "prediction_labels": {
+        "met": "事情得到核对与推进",
+        "missed": "事情暂未推进"
+      },
+      "rules": [
+        {
+          "when": {
+            "advice": "verify",
+            "accepted": true
+          },
+          "outcome": "verified"
+        },
+        {
+          "when": {
+            "advice": "ask",
+            "accepted": true
+          },
+          "outcome": "checked"
+        },
+        {
+          "when": {},
+          "outcome": "deferred"
+        }
+      ],
+      "outcomes": {
+        "verified": {
+          "actual_action": "在交换架留张谢条，不追问赠送者身份。",
+          "outcome": "met",
+          "evidence": "sufficient",
+          "feedback": "delayed",
+          "delay_minutes": 180,
+          "text": "交换架多了一句不用客气，没有署名或额外承诺，感谢已经到了。",
+          "effects": []
+        },
+        "checked": {
+          "actual_action": "请值班人核对转交经过，再准备回应。",
+          "outcome": "met",
+          "evidence": "sufficient",
+          "feedback": "delayed",
+          "delay_minutes": 180,
+          "text": "值班人确认没有送错，我正在写一张简短的谢条。",
+          "effects": []
+        },
+        "deferred": {
+          "actual_action": "先保存礼物与卡片，想好后再回应。",
+          "outcome": "missed",
+          "evidence": "sufficient",
+          "feedback": "delayed",
+          "delay_minutes": 180,
+          "text": "卡片和书签放在一起了，我还没有给那份感谢增加别的意思。",
+          "effects": []
+        }
+      },
+      "feedback_effects": []
+    }
+  },
+  "support": {
+    "facts": [
+      {
+        "fact_key": "where",
+        "evidence_id": "fact_where",
+        "value": "exchange"
+      },
+      {
+        "fact_key": "motive",
+        "evidence_id": "fact_motive",
+        "value": "thanks"
+      },
+      {
+        "fact_key": "step",
+        "evidence_id": "fact_step",
+        "value": "public_note"
+      }
+    ],
+    "proofs": [
+      {
+        "slot_id": "where",
+        "answer_id": "exchange",
+        "rule": "fact_equals",
+        "premises": [
+          "where"
+        ]
+      },
+      {
+        "slot_id": "motive",
+        "answer_id": "thanks",
+        "rule": "fact_equals",
+        "premises": [
+          "motive"
+        ]
+      },
+      {
+        "slot_id": "step",
+        "answer_id": "public_note",
+        "rule": "fact_equals",
+        "premises": [
+          "step"
+        ]
+      }
+    ]
+  }
+}

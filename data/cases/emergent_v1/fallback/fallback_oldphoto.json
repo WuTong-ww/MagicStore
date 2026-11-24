@@ -1,0 +1,530 @@
+{
+  "protocol_version": 1,
+  "template_id": "fallback_oldphoto",
+  "kind": "oldphoto",
+  "definition": {
+    "id": "fallback_oldphoto",
+    "version": 1,
+    "title": "合影角落的围裙",
+    "question": "合影里的人是什么身份，日期说明什么，又能向谁核实？",
+    "truth": {
+      "who": {
+        "value": "apprentice",
+        "text": "名册将那个人记作当时的装订学徒。",
+        "requires_clue": "clue_who"
+      },
+      "when": {
+        "value": "reopen",
+        "text": "日期与阅览室重新开放的活动卡一致。",
+        "requires_clue": "clue_when"
+      },
+      "step": {
+        "value": "keeper",
+        "text": "保管记录列出了能核对日期和名册的相册保管人。",
+        "requires_clue": "clue_step"
+      }
+    },
+    "deduction_slots": [
+      {
+        "id": "who",
+        "title": "照片里的人是什么身份",
+        "answers": [
+          {
+            "id": "reader",
+            "text": "临时来访的读者"
+          },
+          {
+            "id": "apprentice",
+            "text": "当时的装订学徒"
+          },
+          {
+            "id": "courier",
+            "text": "运送书箱的送货人"
+          }
+        ],
+        "correct_answer": "apprentice",
+        "unlock_evidence": [
+          "fact_who",
+          "statement_0",
+          "statement_2"
+        ]
+      },
+      {
+        "id": "when",
+        "title": "照片属于哪次活动",
+        "answers": [
+          {
+            "id": "fair",
+            "text": "街角春季集会"
+          },
+          {
+            "id": "reopen",
+            "text": "阅览室重新开放"
+          },
+          {
+            "id": "move",
+            "text": "书架搬迁前一天"
+          }
+        ],
+        "correct_answer": "reopen",
+        "unlock_evidence": [
+          "fact_when",
+          "statement_0"
+        ]
+      },
+      {
+        "id": "step",
+        "title": "先找谁核实身份",
+        "answers": [
+          {
+            "id": "keeper",
+            "text": "带日期询问相册保管人"
+          },
+          {
+            "id": "relative",
+            "text": "仅凭相貌询问远亲"
+          },
+          {
+            "id": "guess",
+            "text": "按衣着自行认定"
+          }
+        ],
+        "correct_answer": "keeper",
+        "unlock_evidence": [
+          "fact_step",
+          "statement_1"
+        ]
+      }
+    ],
+    "questions": [
+      [
+        {
+          "id": "question_0_0",
+          "text": "背面有没有留下名册？",
+          "answer": "来客补充：名册将那个人记作当时的装订学徒。",
+          "evidence_ids": [
+            "fact_who"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_0_0"
+        },
+        {
+          "id": "question_0_1",
+          "text": "合影里的小桌做什么用？",
+          "answer": "来客补充：名册将那个人记作当时的装订学徒。 家里曾有人提过阅览室的装订小桌。",
+          "evidence_ids": [
+            "fact_who",
+            "statement_0"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_0_1"
+        },
+        {
+          "id": "question_0_2",
+          "text": "只凭围裙能认出人吗？",
+          "answer": "来客补充：名册将那个人记作当时的装订学徒。 相册一直由阅览室保管，我只借到这一张。",
+          "evidence_ids": [
+            "fact_who",
+            "statement_1"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_0_2"
+        }
+      ],
+      [
+        {
+          "id": "question_1_0",
+          "text": "日期与哪张活动卡能对上？",
+          "answer": "来客补充：日期与阅览室重新开放的活动卡一致。",
+          "evidence_ids": [
+            "fact_when"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_1_0"
+        },
+        {
+          "id": "question_1_1",
+          "text": "家里怎样提起这张照片？",
+          "answer": "来客补充：日期与阅览室重新开放的活动卡一致。 相册一直由阅览室保管，我只借到这一张。",
+          "evidence_ids": [
+            "fact_when",
+            "statement_1"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_1_1"
+        },
+        {
+          "id": "question_1_2",
+          "text": "照片夹还有时间记录吗？",
+          "answer": "来客补充：日期与阅览室重新开放的活动卡一致。 围裙看着眼熟，我就猜一定是认识的人。",
+          "evidence_ids": [
+            "fact_when",
+            "statement_2"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_1_2"
+        }
+      ],
+      [
+        {
+          "id": "question_2_0",
+          "text": "相册由谁保管？",
+          "answer": "来客补充：保管记录列出了能核对日期和名册的相册保管人。",
+          "evidence_ids": [
+            "fact_step"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_2_0"
+        },
+        {
+          "id": "question_2_1",
+          "text": "带日期能问清哪些事？",
+          "answer": "来客补充：保管记录列出了能核对日期和名册的相册保管人。 围裙看着眼熟，我就猜一定是认识的人。",
+          "evidence_ids": [
+            "fact_step",
+            "statement_2"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_2_1"
+        },
+        {
+          "id": "question_2_2",
+          "text": "怎样不把猜测当成身份？",
+          "answer": "来客补充：保管记录列出了能核对日期和名册的相册保管人。 家里曾有人提过阅览室的装订小桌。",
+          "evidence_ids": [
+            "fact_step",
+            "statement_0"
+          ],
+          "requires_familiarity": 0,
+          "legacy_topic_id": "question_2_2"
+        }
+      ]
+    ],
+    "evidence": [
+      {
+        "id": "fact_who",
+        "text": "名册将那个人记作当时的装订学徒。",
+        "type": "fact",
+        "source": "合影背面的值班名册",
+        "slot_ids": [
+          "who"
+        ],
+        "legacy_clue_ids": [
+          "clue_who"
+        ]
+      },
+      {
+        "id": "fact_when",
+        "text": "日期与阅览室重新开放的活动卡一致。",
+        "type": "fact",
+        "source": "日期与活动卡",
+        "slot_ids": [
+          "when"
+        ],
+        "legacy_clue_ids": [
+          "clue_when"
+        ]
+      },
+      {
+        "id": "fact_step",
+        "text": "保管记录列出了能核对日期和名册的相册保管人。",
+        "type": "fact",
+        "source": "相册保管记录",
+        "slot_ids": [
+          "step"
+        ],
+        "legacy_clue_ids": [
+          "clue_step"
+        ]
+      },
+      {
+        "id": "statement_0",
+        "text": "家里曾有人提过阅览室的装订小桌。",
+        "type": "testimony",
+        "source": "来客对细节的陈述",
+        "slot_ids": [
+          "who",
+          "when"
+        ]
+      },
+      {
+        "id": "statement_1",
+        "text": "相册一直由阅览室保管，我只借到这一张。",
+        "type": "testimony",
+        "source": "来客对细节的陈述",
+        "slot_ids": [
+          "step"
+        ]
+      },
+      {
+        "id": "statement_2",
+        "text": "围裙看着眼熟，我就猜一定是认识的人。",
+        "type": "misleading",
+        "source": "尚未核对的转述或猜测",
+        "slot_ids": [
+          "who"
+        ]
+      }
+    ],
+    "cards": [
+      {
+        "deck_id": "hermit",
+        "text": "先找到能独立核对的痕迹，让一处细节照亮方向。",
+        "slot_id": "who"
+      },
+      {
+        "deck_id": "swords_2",
+        "text": "把已发生的事情与尚未核实的猜测分开。",
+        "slot_id": "when"
+      },
+      {
+        "deck_id": "star",
+        "text": "把愿望落在一个可完成、也容许回应的小步骤上。",
+        "slot_id": "step"
+      },
+      {
+        "deck_id": "cups_6",
+        "text": "旧日熟悉感能提供方向，仍需眼前材料印证。",
+        "slot_id": "who"
+      },
+      {
+        "deck_id": "world",
+        "text": "把来源、经过和下一步接起来，检查还缺哪一环。",
+        "slot_id": "step"
+      }
+    ],
+    "advice": [
+      {
+        "id": "verify",
+        "text": "带照片与日期，请保管人核对名册。",
+        "requires_deductions": [
+          "who",
+          "when",
+          "step"
+        ],
+        "legacy_advice_key": "verify",
+        "reaction": "我先核对清楚，再照这个步骤试试。",
+        "mood": "smile",
+        "prediction": {
+          "text": "按所选步骤核对后，这件事会得到相应推进。",
+          "condition": "if_verify",
+          "expected": "met",
+          "window_after_due_minutes": 30
+        }
+      },
+      {
+        "id": "ask",
+        "text": "先整理家中回忆，标明哪些还需要核实。",
+        "requires_deductions": [
+          "who",
+          "when",
+          "step"
+        ],
+        "legacy_advice_key": "ask",
+        "reaction": "我会把看到的与猜到的分开，慢慢问明白。",
+        "mood": "neutral",
+        "prediction": {
+          "text": "按所选步骤核对后，这件事会得到相应推进。",
+          "condition": "if_ask",
+          "expected": "met",
+          "window_after_due_minutes": 30
+        }
+      },
+      {
+        "id": "wait",
+        "text": "暂不认定身份，保存照片等更多材料。",
+        "requires_deductions": [
+          "who",
+          "when",
+          "step"
+        ],
+        "legacy_advice_key": "wait",
+        "reaction": "我先留住材料，准备好以后再继续。",
+        "mood": "hesitant",
+        "prediction": {
+          "text": "这次先暂缓，事情暂时不会有新的推进。",
+          "condition": "always",
+          "expected": "missed",
+          "window_after_due_minutes": 30
+        }
+      }
+    ],
+    "outcomes": {
+      "version": 1,
+      "subject_id": "case_owner",
+      "target_name": "合影里的人是什么身份，日期说明什么，又能向谁核实？",
+      "minute_of_day": 1080,
+      "feedback_delay": 180,
+      "world_facts": {
+        "who": {
+          "values": [
+            "reader",
+            "apprentice",
+            "courier"
+          ],
+          "default": "apprentice"
+        },
+        "when": {
+          "values": [
+            "fair",
+            "reopen",
+            "move"
+          ],
+          "default": "reopen"
+        },
+        "step": {
+          "values": [
+            "keeper",
+            "relative",
+            "guess"
+          ],
+          "default": "keeper"
+        }
+      },
+      "branch_ids": [],
+      "item_effect_ids": [],
+      "item_effect": {},
+      "advice_options": [
+        {
+          "key": "verify",
+          "label": "带照片与日期，请保管人核对名册。"
+        },
+        {
+          "key": "ask",
+          "label": "先整理家中回忆，标明哪些还需要核实。"
+        },
+        {
+          "key": "wait",
+          "label": "暂不认定身份，保存照片等更多材料。"
+        }
+      ],
+      "advice": {
+        "verify": {
+          "text": "带照片与日期，请保管人核对名册。"
+        },
+        "ask": {
+          "text": "先整理家中回忆，标明哪些还需要核实。"
+        },
+        "wait": {
+          "text": "暂不认定身份，保存照片等更多材料。"
+        }
+      },
+      "prediction_conditions": {
+        "always": {
+          "label": "无附加条件"
+        },
+        "if_verify": {
+          "label": "若先核对材料再行动",
+          "outcomes": [
+            "verified"
+          ]
+        },
+        "if_ask": {
+          "label": "若先询问相关照看人或保管人",
+          "outcomes": [
+            "checked"
+          ]
+        }
+      },
+      "prediction_labels": {
+        "met": "事情得到核对与推进",
+        "missed": "事情暂未推进"
+      },
+      "rules": [
+        {
+          "when": {
+            "advice": "verify",
+            "accepted": true
+          },
+          "outcome": "verified"
+        },
+        {
+          "when": {
+            "advice": "ask",
+            "accepted": true
+          },
+          "outcome": "checked"
+        },
+        {
+          "when": {},
+          "outcome": "deferred"
+        }
+      ],
+      "outcomes": {
+        "verified": {
+          "actual_action": "带照片与日期，请保管人核对名册。",
+          "outcome": "met",
+          "evidence": "sufficient",
+          "feedback": "delayed",
+          "delay_minutes": 180,
+          "text": "保管人找出了活动名册，照片日期与小桌的来历都能对上。",
+          "effects": []
+        },
+        "checked": {
+          "actual_action": "先整理家中回忆，标明哪些还需要核实。",
+          "outcome": "met",
+          "evidence": "sufficient",
+          "feedback": "delayed",
+          "delay_minutes": 180,
+          "text": "家里想起一张活动卡，我把这条待查线索记在照片旁。",
+          "effects": []
+        },
+        "deferred": {
+          "actual_action": "暂不认定身份，保存照片等更多材料。",
+          "outcome": "missed",
+          "evidence": "sufficient",
+          "feedback": "delayed",
+          "delay_minutes": 180,
+          "text": "照片重新装好了，我没有凭相貌写下姓名，等有名册再看。",
+          "effects": []
+        }
+      },
+      "feedback_effects": []
+    }
+  },
+  "support": {
+    "facts": [
+      {
+        "fact_key": "who",
+        "evidence_id": "fact_who",
+        "value": "apprentice"
+      },
+      {
+        "fact_key": "when",
+        "evidence_id": "fact_when",
+        "value": "reopen"
+      },
+      {
+        "fact_key": "step",
+        "evidence_id": "fact_step",
+        "value": "keeper"
+      }
+    ],
+    "proofs": [
+      {
+        "slot_id": "who",
+        "answer_id": "apprentice",
+        "rule": "fact_equals",
+        "premises": [
+          "who"
+        ]
+      },
+      {
+        "slot_id": "when",
+        "answer_id": "reopen",
+        "rule": "fact_equals",
+        "premises": [
+          "when"
+        ]
+      },
+      {
+        "slot_id": "step",
+        "answer_id": "keeper",
+        "rule": "fact_equals",
+        "premises": [
+          "step"
+        ]
+      }
+    ]
+  }
+}

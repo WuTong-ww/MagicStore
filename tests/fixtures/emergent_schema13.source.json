@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "source_file": "res://tests/fixtures/names_ui/africa_or_south_asia.json",
+  "source_receipt": "res://tests/fixtures/names_ui/receipt.json",
+  "source_receipt_sha256": "1c1568e4cab615077bdacb6838c73d065ed59fa5ca037abcaf38eb0b256d2b55",
+  "source_subject": "africa_or_south_asia",
+  "destination_file": "res://tests/fixtures/emergent_schema13.json",
+  "sha256": "1a5d7501491a7171e4ad5f21e3385c9b49f0f78a8fd91924926be1d4006fc327",
+  "bytes": 26641,
+  "schema_version": 13,
+  "save_id": "save_fc42bc188656e9e63350482fef94e8ed",
+  "npc_id": "npc_o_0_10001",
+  "cultural_origin": "south_asia",
+  "original_capture_edited": false,
+  "byte_exact_copy": true
+}

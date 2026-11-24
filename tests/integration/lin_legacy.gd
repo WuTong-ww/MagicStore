@@ -55,6 +55,8 @@ func run() -> void:
 	var historical := migrated.duplicate(true)
 	check(historical.people.get("birth_identity_version")==1 and not old.people.has("birth_identity_version"),"migration adds only the validated future-birth policy to old people")
 	historical.people.erase("birth_identity_version")
+	check(not historical.divination.has("emergent_cases") or historical.divination.get("emergent_cases")=={"version":1,"instances":{}},"historical projection retains no populated schema14 ordinary-case namespace")
+	historical.divination.erase("emergent_cases")
 	for key: String in old:
 		if key!="schema_version":
 			check(historical.get(key)==old[key],"Lin display adaptation changes none of the historical payload / "+key)

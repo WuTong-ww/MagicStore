@@ -1,0 +1,1925 @@
+{
+  "task": "R3-AICASE",
+  "status": "complete",
+  "baseline": "8227d6d0aff189e939e4fc825a60dc1416fd918f",
+  "branch": "codex/round3",
+  "commit": "PENDING_TASK_COMMIT",
+  "pushed": false,
+  "schema_version": 14,
+  "engine": "Godot 4.6.3 stable standard / Compatibility",
+  "full_runs": [
+    {
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/dev/run.ps1 -Test",
+      "exit_code": 0,
+      "seconds": 6806.0,
+      "source_files": 441,
+      "source_changes": [],
+      "groups": [
+        {
+          "name": "AICASE V1 KERNEL",
+          "checks": 764,
+          "failures": 0
+        },
+        {
+          "name": "FULL DEFINITION V1",
+          "checks": 2025,
+          "failures": 0
+        },
+        {
+          "name": "AICASE TRANSACTIONS",
+          "checks": 54,
+          "failures": 0
+        },
+        {
+          "name": "AICASE MODEL ADMISSION",
+          "checks": 90,
+          "failures": 0
+        },
+        {
+          "name": "AICASE SAVED SHAPES",
+          "checks": 19,
+          "failures": 0
+        },
+        {
+          "name": "EMERGENT GENUINE13 TARGET",
+          "checks": 16,
+          "failures": 0
+        },
+        {
+          "name": "EMERGENT CATALOG TARGET",
+          "checks": 26,
+          "failures": 0
+        },
+        {
+          "name": "EMERGENT TEMPLATE HISTORY TARGET",
+          "checks": 30,
+          "failures": 0
+        },
+        {
+          "name": "EMERGENT TEMPLATE HISTORY PARENT",
+          "checks": 1,
+          "failures": 0
+        },
+        {
+          "name": "AICASE REQUEST PRIVACY",
+          "checks": 24,
+          "failures": 0
+        },
+        {
+          "name": "AICASE MODE RECOVERY",
+          "checks": 14,
+          "failures": 0
+        },
+        {
+          "name": "AICASE HTTP PROVIDER",
+          "checks": 63,
+          "failures": 0
+        },
+        {
+          "name": "AICASE CASE COORDINATOR",
+          "checks": 55,
+          "failures": 0
+        },
+        {
+          "name": "EMERGENT TRANSPORT WRAPPER",
+          "checks": 18,
+          "failures": 0
+        },
+        {
+          "name": "AICASE ROUTES",
+          "checks": 419,
+          "failures": 0
+        },
+        {
+          "name": "CASE SCHEMA",
+          "checks": 149,
+          "failures": 0
+        },
+        {
+          "name": "DEDUCTION BOARD",
+          "checks": 456,
+          "failures": 0
+        },
+        {
+          "name": "CASE HOST",
+          "checks": 17,
+          "failures": 0
+        },
+        {
+          "name": "CASE DEADLINE",
+          "checks": 25,
+          "failures": 0
+        },
+        {
+          "name": "CASE SAVE CONFIG",
+          "checks": 5,
+          "failures": 0
+        },
+        {
+          "name": "CASE SAVE CONFIG",
+          "checks": 5,
+          "failures": 0
+        },
+        {
+          "name": "CASE SAVE CONFIG",
+          "checks": 11,
+          "failures": 0
+        },
+        {
+          "name": "CASE TRANSACTIONS",
+          "checks": 216,
+          "failures": 0
+        },
+        {
+          "name": "CASE MIGRATION",
+          "checks": 43,
+          "failures": 0
+        },
+        {
+          "name": "CASE BOARD UI",
+          "checks": 235,
+          "failures": 0
+        },
+        {
+          "name": "STORY CONTENT",
+          "checks": 103,
+          "failures": 0
+        },
+        {
+          "name": "STORY PROGRESS",
+          "checks": 26,
+          "failures": 0
+        },
+        {
+          "name": "STORY PLAYTHROUGH",
+          "checks": 840,
+          "failures": 0
+        },
+        {
+          "name": "STORY TRANSACTIONS",
+          "checks": 651,
+          "failures": 0
+        },
+        {
+          "name": "STORY RETURN BACKLOG",
+          "checks": 222,
+          "failures": 0
+        },
+        {
+          "name": "STORY MIGRATION",
+          "checks": 41,
+          "failures": 0
+        },
+        {
+          "name": "STORY FOLLOWUP TRANSACTIONS",
+          "checks": 25,
+          "failures": 0
+        },
+        {
+          "name": "STORY UI READER",
+          "checks": 20,
+          "failures": 0
+        },
+        {
+          "name": "STORY BOARD UI",
+          "checks": 212,
+          "failures": 0
+        },
+        {
+          "name": "LIN APPEARANCE",
+          "checks": 39,
+          "failures": 0
+        },
+        {
+          "name": "LIN TRANSACTIONS",
+          "checks": 40,
+          "failures": 0
+        },
+        {
+          "name": "LIN LEGACY",
+          "checks": 80,
+          "failures": 0
+        },
+        {
+          "name": "LIN UI",
+          "checks": 64,
+          "failures": 0
+        },
+        {
+          "name": "BIRTH IDENTITY",
+          "checks": 88,
+          "failures": 0
+        },
+        {
+          "name": "NAMES ORDINARY",
+          "checks": 71,
+          "failures": 0
+        },
+        {
+          "name": "NAMES PROTOCOL",
+          "checks": 75,
+          "failures": 0
+        },
+        {
+          "name": "NAMES PROVIDER",
+          "checks": 20,
+          "failures": 0
+        },
+        {
+          "name": "NAMES COPY",
+          "checks": 13,
+          "failures": 0
+        },
+        {
+          "name": "NAMES CATALOG",
+          "checks": 29,
+          "failures": 0
+        },
+        {
+          "name": "NAMES DIALOGUE",
+          "checks": 30,
+          "failures": 0
+        },
+        {
+          "name": "NAMES BIRTH FAILURES",
+          "checks": 21,
+          "failures": 0
+        },
+        {
+          "name": "NAMES MIGRATION",
+          "checks": 20,
+          "failures": 0
+        },
+        {
+          "name": "NAMES TRANSACTIONS",
+          "checks": 28,
+          "failures": 0
+        },
+        {
+          "name": "NAMES UI",
+          "checks": 206,
+          "failures": 0
+        },
+        {
+          "name": "SMOKE RESULT",
+          "checks": 57,
+          "failures": 0
+        },
+        {
+          "name": "DAILY LOOP",
+          "checks": 103,
+          "failures": 0
+        },
+        {
+          "name": "DAILY MIGRATION",
+          "checks": 94,
+          "failures": 0
+        },
+        {
+          "name": "DAILY LOOP GUARDS",
+          "checks": 57,
+          "failures": 0
+        },
+        {
+          "name": "DELETE SAVE",
+          "checks": 52,
+          "failures": 0
+        },
+        {
+          "name": "PROVIDER RESULT",
+          "checks": 48,
+          "failures": 0
+        },
+        {
+          "name": "DIALOGUE GROUNDING",
+          "checks": 127,
+          "failures": 0
+        },
+        {
+          "name": "FOLLOWUP QUESTIONS",
+          "checks": 86,
+          "failures": 0
+        },
+        {
+          "name": "ORACLE RULES",
+          "checks": 29,
+          "failures": 0
+        },
+        {
+          "name": "DIVINATION RESULT",
+          "checks": 543,
+          "failures": 0
+        },
+        {
+          "name": "LEGACY DIVINATION GUESTS",
+          "checks": 31,
+          "failures": 0
+        },
+        {
+          "name": "GENERATED CASES",
+          "checks": 80,
+          "failures": 0
+        },
+        {
+          "name": "EVENT GOLDEN",
+          "checks": 100,
+          "failures": 0
+        },
+        {
+          "name": "INVITATION FEEDBACK GOLDEN",
+          "checks": 22,
+          "failures": 0
+        },
+        {
+          "name": "EVENT DATA RULES",
+          "checks": 72,
+          "failures": 0
+        },
+        {
+          "name": "EVENT MIGRATION",
+          "checks": 130,
+          "failures": 0
+        },
+        {
+          "name": "G3 WORKFLOWS",
+          "checks": 129,
+          "failures": 0
+        },
+        {
+          "name": "G4 COMPONENTS",
+          "checks": 62,
+          "failures": 0
+        },
+        {
+          "name": "GENERIC EFFECTS",
+          "checks": 43,
+          "failures": 0
+        },
+        {
+          "name": "EVENT EFFECTS",
+          "checks": 29,
+          "failures": 0
+        },
+        {
+          "name": "INVITATION REFERRAL",
+          "checks": 38,
+          "failures": 0
+        },
+        {
+          "name": "EVENT NOTEBOOK UI",
+          "checks": 116,
+          "failures": 0
+        },
+        {
+          "name": "UI_SMOKE",
+          "checks": 319,
+          "failures": 0
+        },
+        {
+          "name": "SHOP RULES",
+          "checks": 89,
+          "failures": 0
+        },
+        {
+          "name": "SHOP INTEGRATION",
+          "checks": 81,
+          "failures": 0
+        },
+        {
+          "name": "SHOP CONTENT",
+          "checks": 31,
+          "failures": 0
+        },
+        {
+          "name": "ECONOMIC VALIDATION",
+          "checks": 14,
+          "failures": 0
+        },
+        {
+          "name": "ORDINARY CONTENT",
+          "checks": 36,
+          "failures": 0
+        },
+        {
+          "name": "ORDINARY POPULATION",
+          "checks": 41,
+          "failures": 0
+        },
+        {
+          "name": "SHOP CONTENT MIGRATION",
+          "checks": 116,
+          "failures": 0
+        },
+        {
+          "name": "SHOP CONTENT TRANSACTIONS",
+          "checks": 136,
+          "failures": 0
+        },
+        {
+          "name": "TRAFFIC ACTIVATION",
+          "checks": 106,
+          "failures": 0
+        },
+        {
+          "name": "COMPONENT FEEDBACK",
+          "checks": 157,
+          "failures": 0
+        },
+        {
+          "name": "SHOP CONTENT UI",
+          "checks": 57,
+          "failures": 0
+        },
+        {
+          "name": "G4 CAPTURE",
+          "checks": 10,
+          "failures": 0
+        },
+        {
+          "name": "PEOPLE INTEGRATION",
+          "checks": 52,
+          "failures": 0
+        },
+        {
+          "name": "C UI RESULT",
+          "checks": 1518,
+          "failures": 0
+        },
+        {
+          "name": "DAILY LOOP UI",
+          "checks": 113,
+          "failures": 0
+        },
+        {
+          "name": "ITEM VISUALS",
+          "checks": 212,
+          "failures": 0
+        },
+        {
+          "name": "SHELF LAYOUT",
+          "checks": 74,
+          "failures": 0
+        },
+        {
+          "name": "SHELF RENDER",
+          "checks": 38,
+          "failures": 0
+        },
+        {
+          "name": "WIND/SPRING",
+          "checks": 100,
+          "failures": 0
+        },
+        {
+          "name": "COMMITTED PRESENTATION EVENTS",
+          "checks": 277,
+          "failures": 0
+        },
+        {
+          "name": "SCENE MOTION",
+          "checks": 49,
+          "failures": 0
+        },
+        {
+          "name": "MOTION SETTINGS",
+          "checks": 31,
+          "failures": 0
+        },
+        {
+          "name": "MOTION PERFORMANCE",
+          "checks": 24,
+          "failures": 0
+        },
+        {
+          "name": "MOTION PREVIEW",
+          "checks": 7,
+          "failures": 0
+        },
+        {
+          "name": "APPEARANCE",
+          "checks": 264,
+          "failures": 0
+        },
+        {
+          "name": "APPEARANCE BIRTH",
+          "checks": 33,
+          "failures": 0
+        },
+        {
+          "name": "APPEARANCE DESCRIPTION",
+          "checks": 20,
+          "failures": 0
+        },
+        {
+          "name": "APPEARANCE MIGRATION",
+          "checks": 124,
+          "failures": 0
+        },
+        {
+          "name": "APPEARANCE UI",
+          "checks": 70,
+          "failures": 0
+        },
+        {
+          "name": "PORTRAIT PREVIEW SCHEMA ONLY",
+          "checks": 8,
+          "failures": 0
+        },
+        {
+          "name": "A4 MOOD",
+          "checks": 45,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY LIBRARY",
+          "checks": 115,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY ARRIVAL BUDGET",
+          "checks": 51,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY LIBRARY FLOW",
+          "checks": 47,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY LIBRARY DISTRIBUTION",
+          "checks": 96,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY MIGRATION",
+          "checks": 118,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY TRANSACTIONS",
+          "checks": 71,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY UI",
+          "checks": 133,
+          "failures": 0
+        },
+        {
+          "name": "PAST LIBRARY",
+          "checks": 134,
+          "failures": 0
+        },
+        {
+          "name": "PAST MIGRATION",
+          "checks": 213,
+          "failures": 0
+        },
+        {
+          "name": "PAST TRANSACTIONS",
+          "checks": 128,
+          "failures": 0
+        },
+        {
+          "name": "PAST UI",
+          "checks": 74,
+          "failures": 0
+        },
+        {
+          "name": "G5 CAPTURE",
+          "checks": 15,
+          "failures": 0
+        },
+        {
+          "name": "STYLE REPORT",
+          "checks": 68,
+          "failures": 0
+        },
+        {
+          "name": "STYLE TRANSACTIONS",
+          "checks": 66,
+          "failures": 0
+        },
+        {
+          "name": "STYLE REPORT UI",
+          "checks": 843,
+          "failures": 0
+        },
+        {
+          "name": "G6 CAPTURE",
+          "checks": 15,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY POLICY",
+          "checks": 37,
+          "failures": 0
+        },
+        {
+          "name": "SCENE VISUALS",
+          "checks": 1644,
+          "failures": 0
+        },
+        {
+          "name": "ALIGNED SCENE LAYERS",
+          "checks": 79,
+          "failures": 0
+        },
+        {
+          "name": "SCENE ASSET ACCEPTANCE",
+          "checks": 570,
+          "failures": 0
+        },
+        {
+          "name": "ARRIVAL UI RESULT",
+          "checks": 45,
+          "failures": 0
+        },
+        {
+          "name": "CONSULTATION LAYOUT",
+          "checks": 34,
+          "failures": 0
+        },
+        {
+          "name": "ROUND2 SHELL RESULT",
+          "checks": 1606,
+          "failures": 0
+        },
+        {
+          "name": "ROUND2 SHELL EDGES",
+          "checks": 87,
+          "failures": 0
+        },
+        {
+          "name": "ROUND2 CONSULTATION",
+          "checks": 51,
+          "failures": 0
+        },
+        {
+          "name": "A3R AUDIO/THEME",
+          "checks": 30,
+          "failures": 0
+        },
+        {
+          "name": "AUDIO LIFECYCLE",
+          "checks": 43,
+          "failures": 0
+        },
+        {
+          "name": "ARRIVAL TRANSACTIONS",
+          "checks": 42,
+          "failures": 0
+        },
+        {
+          "name": "SAVE DELETE UI",
+          "checks": 37,
+          "failures": 0
+        },
+        {
+          "name": "GENERATED PEOPLE INTEGRATION",
+          "checks": 157,
+          "failures": 0
+        },
+        {
+          "name": "GENERATION ARRIVAL SLOTS",
+          "checks": 38,
+          "failures": 0
+        },
+        {
+          "name": "GENERATED PEOPLE UI",
+          "checks": 49,
+          "failures": 0
+        },
+        {
+          "name": "FOLLOWUP CORE RESULT",
+          "checks": 29,
+          "failures": 0
+        },
+        {
+          "name": "FOLLOWUP QUESTIONS UI",
+          "checks": 39,
+          "failures": 0
+        },
+        {
+          "name": "CHAT KEYBOARD UI",
+          "checks": 49,
+          "failures": 0
+        },
+        {
+          "name": "OPENING GUEST INTEGRATION",
+          "checks": 1206,
+          "failures": 0
+        },
+        {
+          "name": "PROJECT CLEANUP RESULT",
+          "checks": 16,
+          "failures": 0
+        },
+        {
+          "name": "API SETTINGS UI",
+          "checks": 45,
+          "failures": 0
+        },
+        {
+          "name": "API ENDPOINT",
+          "checks": 187,
+          "failures": 0
+        },
+        {
+          "name": "MODEL POLICY RESULT",
+          "checks": 38,
+          "failures": 0
+        },
+        {
+          "name": "HTTP DEADLINE RESULT",
+          "checks": 17,
+          "failures": 0
+        },
+        {
+          "name": "HTTP RESULT",
+          "checks": 41,
+          "failures": 0
+        },
+        {
+          "name": "HTTP CORE RESULT",
+          "checks": 56,
+          "failures": 0
+        },
+        {
+          "name": "DIRECT API RESULT",
+          "checks": 77,
+          "failures": 0
+        },
+        {
+          "name": "HTTP RECOVERY RESULT",
+          "checks": 43,
+          "failures": 0
+        },
+        {
+          "name": "A4 HTTP MOOD",
+          "checks": 23,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY HTTP",
+          "checks": 48,
+          "failures": 0
+        },
+        {
+          "name": "PERSON HTTP RESULT",
+          "checks": 64,
+          "failures": 0
+        },
+        {
+          "name": "PEOPLE RULES",
+          "checks": 52,
+          "failures": 0
+        },
+        {
+          "name": "GENERATED PERSON",
+          "checks": 103,
+          "failures": 0
+        },
+        {
+          "name": "PRODUCTION PEOPLE CONFIG",
+          "checks": 11,
+          "failures": 0
+        },
+        {
+          "name": "ARRIVAL CAPACITY",
+          "checks": 27,
+          "failures": 0
+        },
+        {
+          "name": "OPENING GUEST RULES",
+          "checks": 12,
+          "failures": 0
+        },
+        {
+          "name": "MEMORY RULES",
+          "checks": 21,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY FLOW",
+          "checks": 16,
+          "failures": 0
+        },
+        {
+          "name": "ARRIVAL EDGES",
+          "checks": 28,
+          "failures": 0
+        },
+        {
+          "name": "FEEDBACK RULES",
+          "checks": 11,
+          "failures": 0
+        },
+        {
+          "name": "DISTRIBUTION",
+          "checks": 36,
+          "failures": 0
+        },
+        {
+          "name": "DIRECTOR RULES",
+          "checks": 8,
+          "failures": 0
+        },
+        {
+          "name": "PEOPLE PANEL",
+          "checks": 6,
+          "failures": 0
+        },
+        {
+          "name": "A/B HANDOFF",
+          "checks": 28,
+          "failures": 0
+        }
+      ],
+      "reported_checks": 23117,
+      "reported_failures": 0,
+      "python_unittest_counts": [
+        137,
+        254
+      ],
+      "script_errors": 0,
+      "error_lines": [],
+      "log_sha256": "2ce41e0401616f74ada8d5d7f19c248cf9514cc5f659ba8724643c9516061d96"
+    }
+  ],
+  "final_full_source_sha256": "00e2d25b1559c52c52bd9b1c172e299de4cae43a380445d474d9b6a3875aa8b4",
+  "checks": 23117,
+  "failures": 0,
+  "python_tests": 391,
+  "source_files_unchanged": 441,
+  "targets": {
+    "leaf": 2789,
+    "offline_transactions": 54,
+    "model_admission_and_hanging_late": 90,
+    "transport": 136,
+    "genuine13_migration": 16,
+    "catalog": 26,
+    "saved_bad_shapes": 19,
+    "fresh_and_historical_templates": 31,
+    "six_advice_routes": 419,
+    "legacy_compat": 1152,
+    "gpu": 858,
+    "shop_gpu": 1548,
+    "request_privacy": 24,
+    "mode_recovery": 14
+  },
+  "independent_review": {
+    "critical": 0,
+    "important": 0,
+    "minor": 0,
+    "source_ready": true,
+    "full_suite_passed": false,
+    "status": "I1_I2_CLOSED_BY_SOURCE_AND_OWNER_RUNTIME_EVIDENCE_FULL_AND_ROUTES_PENDING",
+    "original_finding_reports_preserved": {
+      "md": {
+        "path": ".tools\\r3-aicase\\final-independent-review.md",
+        "sha256": "2393c70839ea2387edbc4e1358569d77d8c6a7d5c6b3640187dddd96c2a9227d"
+      },
+      "json": {
+        "path": ".tools\\r3-aicase\\final-independent-review.json",
+        "sha256": "d71d83bfd1320dc38fddf32d215a6ea5a47618d3a8de17b1ee5bb3d7f4e066bd"
+      },
+      "audit": {
+        "path": ".tools\\r3-aicase\\final-independent-review-audit.json",
+        "sha256": "248ef7551302e8559ad7e1a94c6fdc0fb3f792c72bc343835cef5719f3a69417"
+      }
+    },
+    "reviewed_source_changes": [
+      {
+        "path": "scripts/divination/emergent_case_fallback_codec_v1.gd",
+        "before_sha256": "ce3adf1451296bac7316d520ed93414c617a4bbb35253ea29b5a7597b11fb650",
+        "current_sha256": "5a35ed4fdcb63f49c7e0f3b37d3530c624f0dbbb1a06951b1f5ceadd7b90c77a"
+      },
+      {
+        "path": "scripts/divination/emergent_case_store.gd",
+        "before_sha256": "57251e47fb0e0af90dc6edadd1fa0a05bb73fc57c4bbe10ef0c95e8b7f09e547",
+        "current_sha256": "f37aa9d445d427fa94addb62540139d4984e1843d38f4ac1c0d236363a362c41"
+      }
+    ],
+    "other_prior_33_source_json_files_unchanged": 31,
+    "closed_findings": [
+      {
+        "id": "I1",
+        "path": "scripts/divination/emergent_case_store.gd",
+        "line": 143,
+        "current_sha256": "f37aa9d445d427fa94addb62540139d4984e1843d38f4ac1c0d236363a362c41",
+        "minimal_gate_reconstruction_matches_prior_sha": true,
+        "red_predicate_counts": [
+          19,
+          0
+        ],
+        "red_wrapper_exit_reported_by_root": 1,
+        "red_script_errors_expected": true,
+        "green_counts": [
+          19,
+          0
+        ],
+        "green_errors": 0
+      },
+      {
+        "id": "I2",
+        "path": "scripts/divination/emergent_case_fallback_codec_v1.gd",
+        "line": 26,
+        "current_sha256": "5a35ed4fdcb63f49c7e0f3b37d3530c624f0dbbb1a06951b1f5ceadd7b90c77a",
+        "check_saved_suffix_sha256": "864a053299d0ae757ab7fbf7a80b0197c9223e0a2522ff23060d547526111ebe",
+        "check_saved_unchanged": true,
+        "registry_sha256": "dc0b3c32f1927bd97ccc534e2df1f75088d57aa422c765aa469a3b714873a8c5",
+        "registry_unchanged": true,
+        "red_child_counts": [
+          30,
+          2
+        ],
+        "green_child_counts": [
+          30,
+          0
+        ],
+        "green_parent_counts": [
+          1,
+          0
+        ],
+        "historical_projection_exact_preserved": true,
+        "fresh_bundle_used_for": [
+          "fallback_for",
+          "bind"
+        ]
+      }
+    ],
+    "ui_single_line_closure": {
+      "path": "scripts/ui/case_board.gd",
+      "sha256": "00920792151adf89bcdfff0865dc78480a8974d1ca5bb4f7f6c421672aaba0c3",
+      "line": 128,
+      "change": "evidence_title.autowrap_mode = TextServer.AUTOWRAP_OFF; sole delta to baseline8227d6d in this source",
+      "gpu_log": ".tools\\r3-aicase\\gpu-final.log",
+      "checks": 858,
+      "failures": 0,
+      "capture_count": 6,
+      "privacy_checks_failed": 0,
+      "real_mouse_claim": false,
+      "private_definition_injected_to_ui": false,
+      "frames": [
+        {
+          "path": "D:/MagicStore/.tools/round3/.tools/r3-aicase/ui-captures/aicase_ui_ac24f1a459f69a9428651ceea6ac8d15/questions-1280x720.png",
+          "sha256": "1f1d8b7ede18c4e3efa807b89424a6deecbdf1af8d8785a6df2818259cf50ef4",
+          "dimensions": [
+            1280,
+            720
+          ],
+          "phase": "questions"
+        },
+        {
+          "path": "D:/MagicStore/.tools/round3/.tools/r3-aicase/ui-captures/aicase_ui_ac24f1a459f69a9428651ceea6ac8d15/cards-1280x720.png",
+          "sha256": "338f8e387a62dd4aa4f81519e56b8b7c070259b636f26aa8e7657eae41a37677",
+          "dimensions": [
+            1280,
+            720
+          ],
+          "phase": "cards"
+        },
+        {
+          "path": "D:/MagicStore/.tools/round3/.tools/r3-aicase/ui-captures/aicase_ui_ac24f1a459f69a9428651ceea6ac8d15/closed-1280x720.png",
+          "sha256": "91a74eaf2494e30c75008971ea980182c37a6ac23e49d30ede0cfa9aec6ec570",
+          "dimensions": [
+            1280,
+            720
+          ],
+          "phase": "closed"
+        },
+        {
+          "path": "D:/MagicStore/.tools/round3/.tools/r3-aicase/ui-captures/aicase_ui_ac24f1a459f69a9428651ceea6ac8d15/questions-1920x1080.png",
+          "sha256": "c8e1c0ab7d00d7be1d50791f55be65f6fd8a5bb09259dc66f118cca83cba481f",
+          "dimensions": [
+            1920,
+            1080
+          ],
+          "phase": "questions"
+        },
+        {
+          "path": "D:/MagicStore/.tools/round3/.tools/r3-aicase/ui-captures/aicase_ui_ac24f1a459f69a9428651ceea6ac8d15/cards-1920x1080.png",
+          "sha256": "60ba6416f7f72b9f5b49cac21e1e5f32eae1b0654303d71e09a91d0ba953c8dc",
+          "dimensions": [
+            1920,
+            1080
+          ],
+          "phase": "cards"
+        },
+        {
+          "path": "D:/MagicStore/.tools/round3/.tools/r3-aicase/ui-captures/aicase_ui_ac24f1a459f69a9428651ceea6ac8d15/closed-1920x1080.png",
+          "sha256": "7ed7103666dddeabce23de498aeaf44590388c0d5e743f43486d8f34f92ef51b",
+          "dimensions": [
+            1920,
+            1080
+          ],
+          "phase": "closed"
+        }
+      ],
+      "pixel_review": "Root reports all six native images actually opened; this reviewer checked source/log/receipt/hashes only."
+    },
+    "logs": [
+      {
+        "path": ".tools/r3-aicase/saved-shapes-red.log",
+        "sha256": "c326f653a23c9c7f6e7b755b46f572aad3b5596d95c02499331df0ef622b5cd0",
+        "summaries": [
+          "AICASE SAVED SHAPES: 19 checks, 0 failures"
+        ],
+        "script_error_count": 10,
+        "error_count": 2
+      },
+      {
+        "path": ".tools/r3-aicase/saved-shapes-green.log",
+        "sha256": "eef3655c451364616fe65296720239496c1e78c876b6f1d84386ceb8f1a665da",
+        "summaries": [
+          "AICASE SAVED SHAPES: 19 checks, 0 failures"
+        ],
+        "script_error_count": 0,
+        "error_count": 0
+      },
+      {
+        "path": ".tools/r3-aicase/fresh-templates-red.log",
+        "sha256": "614c93fcc2f80da919d2bf214dbab7f224bbe400b7c4515da9cd1b3758db37a5",
+        "summaries": [
+          "EMERGENT TEMPLATE HISTORY TARGET: 30 checks, 2 failures",
+          "EMERGENT TEMPLATE HISTORY TARGET: 1 checks, 1 failures"
+        ],
+        "script_error_count": 0,
+        "error_count": 0
+      },
+      {
+        "path": ".tools/r3-aicase/fresh-templates-green.log",
+        "sha256": "4711dac3bdebcb2c18ae2633565c0344e477e2653f87b325604d548a127804c6",
+        "summaries": [
+          "EMERGENT TEMPLATE HISTORY TARGET: 30 checks, 0 failures",
+          "EMERGENT TEMPLATE HISTORY PARENT: 1 checks, 0 failures"
+        ],
+        "script_error_count": 0,
+        "error_count": 0
+      },
+      {
+        "path": ".tools/r3-aicase/gpu-attempt-2.log",
+        "sha256": "d2135d697a2ed0e45df285c33701353214d0b669eefdef7d194ebee01a88e01f",
+        "summaries": [
+          "AICASE GPU: 858 checks, 6 failures, 6 captures; renderer=gl_compatibility"
+        ],
+        "script_error_count": 0,
+        "error_count": 0
+      },
+      {
+        "path": ".tools/r3-aicase/gpu-final.log",
+        "sha256": "b3d85c1e2a0a57b0a0007196dd7baadc7c783787198fa7a48fbed9ccda5a5fb0",
+        "summaries": [
+          "AICASE GPU: 858 checks, 0 failures, 6 captures; renderer=gl_compatibility"
+        ],
+        "script_error_count": 0,
+        "error_count": 0
+      },
+      {
+        "path": ".tools/r3-aicase/model-admission-final.log",
+        "sha256": "f38a5ca7e397b07a178e7d4052109833494ccafbefdb439daf6ac67c3e58fd39",
+        "summaries": [
+          "AICASE MODEL ADMISSION: 90 checks, 0 failures"
+        ],
+        "script_error_count": 0,
+        "error_count": 0
+      },
+      {
+        "path": ".tools/r3-aicase/transport-final-clean.log",
+        "sha256": "15937dc4a69d05d5522c5ff49c4128aec4dea3fe1faadfcdc024d2e8492f81d6",
+        "summaries": [
+          "AICASE HTTP PROVIDER: 63 checks, 0 failures",
+          "AICASE CASE COORDINATOR: 55 checks, 0 failures",
+          "EMERGENT TRANSPORT WRAPPER: 18 checks, 0 failures",
+          "EMERGENT TRANSPORT TOTAL: checks=136 failures=0"
+        ],
+        "script_error_count": 0,
+        "error_count": 0
+      }
+    ],
+    "additional_owner_evidence": {
+      "model_admission": [
+        90,
+        0
+      ],
+      "http_transport": [
+        136,
+        0
+      ]
+    },
+    "full_runs_at_closure": 0,
+    "six_routes_runtime": "UNRUN_AT_ROOT_CLOSURE_REQUEST",
+    "shop_gpu": "Root-owned separate verification; not accepted by this closure.",
+    "reviewer_engine_runs": 0,
+    "reviewer_http_calls": 0,
+    "reviewer_source_edits": 0,
+    "reviewer_git_read_only_diff": true,
+    "limitations": [
+      "No repeated full source review or engine execution.",
+      "Six native captures inspected by root; reviewer did not open pixels.",
+      "Programmatic public saved actions are not real-mouse evidence.",
+      "No standard full pass, six-route pass or paid model compatibility claim."
+    ]
+  },
+  "legacy_receipt_sha256": "355554b6a1b6f5a7a338b72c95bb9bb7b99ab1cd2224195031852eb6fdee87da",
+  "additional_independent_review": {
+    "critical": 0,
+    "important": 0,
+    "minor": 0,
+    "status": "I3_I4_CLOSED",
+    "closed_findings": [
+      {
+        "id": "I3",
+        "status": "closed",
+        "path": "scripts/divination/full_case_codec_v1.gd",
+        "line": 254,
+        "reason": "Explicit12 top/3safety deep public projection excludes undisclosed cast list and local switches; local rules,pins and complete response semantics unchanged.",
+        "red_counts": [
+          24,
+          15
+        ],
+        "green_counts": [
+          24,
+          0
+        ]
+      },
+      {
+        "id": "I4",
+        "status": "closed",
+        "path": "scripts/core/game_state.gd",
+        "line": 1499,
+        "related_line": 1300,
+        "reason": "Sync mode on detached candidate before plan/reservation, skip reservations in legacy configuration, write current daily_loop phase rather than stale reference. Store eligibility not weakened.",
+        "red_counts": [
+          8,
+          1
+        ],
+        "green_counts": [
+          14,
+          0
+        ]
+      }
+    ],
+    "reviewed_sources": [
+      {
+        "path": "scripts/core/game_state.gd",
+        "sha256": "abe1857a81f6ec3f1983f678989ba67a77400e85c5ab91ca834654f5e821779c"
+      },
+      {
+        "path": "scripts/divination/full_case_codec_v1.gd",
+        "sha256": "850d13f1aee469e6d0ad4cb39f84439f4e1528120e35e391b39cbba1d5e9fe01"
+      }
+    ],
+    "reviewed_exact_patches": [
+      {
+        "path": ".tools/r3-aicase/repairs/game_state.gd.patch",
+        "sha256": "bf301b72cfac9b1d7d62e32533299f58a475939f04649569e9ac4d90dab3d932",
+        "before_sha256": "daac69a3daf1038a14f0034fa16138095f29e8fced5f9b49bc2aa22bf3f525f5",
+        "candidate_equals_actual_bytes": true
+      },
+      {
+        "path": ".tools/r3-aicase/repairs/full_case_codec_v1.gd.patch",
+        "sha256": "ba62b5bd6ba8a94d9f28f4ee64f4586fdedb9fb33679cf2f226f914414937dab",
+        "before_sha256": "24ba0cff808700e47812e15edcba5043ef9e6138438d7d21a789338e682b906e",
+        "candidate_equals_actual_bytes": true
+      }
+    ],
+    "runtime_log_evidence": [
+      {
+        "path": ".tools/r3-aicase/request-privacy-red.log",
+        "sha256": "63c28ae897b9c6aefb5fbbf5de52fb407848a2d78a2ce6cf16cde8b3246bc1ec",
+        "kind": "red",
+        "checks": 24,
+        "failures": 15,
+        "script_errors": 0,
+        "exit_code": 1,
+        "target": "tests/providers/emergent_request_privacy.gd",
+        "target_source_sha256": "21c3be4cb38a925414e15f5e492026c19f51ae23f74d58ebabf6107f7d62938f",
+        "result_json": ".tools/r3-aicase/request-privacy-red-result.json",
+        "result_sha256": "5d76863becc0bdc5e38a4e7ccf78ff385c83ee26acb5963d7ee631710e01e02e"
+      },
+      {
+        "path": ".tools/r3-aicase/request-privacy-green.log",
+        "sha256": "3feb22f14f0d24c1d5927931dc4e0609d8727d4fef2b0df8af2d5a0520350e32",
+        "kind": "green",
+        "checks": 24,
+        "failures": 0,
+        "script_errors": 0,
+        "exit_code": 0,
+        "target": "tests/providers/emergent_request_privacy.gd",
+        "target_source_sha256": "21c3be4cb38a925414e15f5e492026c19f51ae23f74d58ebabf6107f7d62938f",
+        "result_json": ".tools/r3-aicase/request-privacy-green-result.json",
+        "result_sha256": "9711f89bc7ec651ee84fe07c22586654a5f038ef25d7a7de55741dccfd99f30a"
+      },
+      {
+        "path": ".tools/r3-aicase/mode-recovery-red.log",
+        "sha256": "35cb2c3ae96ebf1ce293ac6b0c1f2043f89722a4bff23011e1cf1d936a2bf9d9",
+        "kind": "red",
+        "checks": 8,
+        "failures": 1,
+        "script_errors": 0,
+        "exit_code": 1,
+        "target": "tests/integration/emergent_mode_recovery.gd",
+        "target_source_sha256": "537d70c6d0f010261279940b2451883df5b4d63a2f46db59180e37ae275dbc24",
+        "result_json": ".tools/r3-aicase/mode-recovery-red-result.json",
+        "result_sha256": "73e3ea67603b2b3b3097a2d94a6e78b3fca1c60f196dff867e5e1d9f2d4a7f2b"
+      },
+      {
+        "path": ".tools/r3-aicase/mode-recovery-green.log",
+        "sha256": "9a9b4c02b4f10c894ed4b0c16c2b47c09f3bf7217c4ef1ffeafccf3c9f4a8c2c",
+        "kind": "green",
+        "checks": 14,
+        "failures": 0,
+        "script_errors": 0,
+        "exit_code": 0,
+        "target": "tests/integration/emergent_mode_recovery.gd",
+        "target_source_sha256": "537d70c6d0f010261279940b2451883df5b4d63a2f46db59180e37ae275dbc24",
+        "result_json": ".tools/r3-aicase/mode-recovery-green-result.json",
+        "result_sha256": "d89e64cf1a3902b8990c8937b96f4e4ccbdb84301c6cfe5bb8cc5cc92767a27f"
+      }
+    ],
+    "fixture": {
+      "path": "tests/fixtures/emergent_legacy_mode.json",
+      "sha256": "ab4be7674a116f615a618b4b1652ed44b651f23b4e9a271f97c4efe31854b791"
+    },
+    "fixture_provenance": {
+      "captured_original": ".tools/r3-aicase/story-dynamic-compat/backlog-failed-green-envelope.json",
+      "captured_original_sha256": "ab4be7674a116f615a618b4b1652ed44b651f23b4e9a271f97c4efe31854b791",
+      "byte_exact": true,
+      "bytes": 266174,
+      "envelope_checksum_valid": true,
+      "schema_version": 14,
+      "mode": "legacy",
+      "phase": "morning",
+      "planned": false,
+      "day": 8,
+      "clock_minutes": 12060
+    },
+    "prior_review_files_preserved": [
+      {
+        "path": ".tools/r3-aicase/final-independent-review.md",
+        "sha256": "2393c70839ea2387edbc4e1358569d77d8c6a7d5c6b3640187dddd96c2a9227d"
+      },
+      {
+        "path": ".tools/r3-aicase/final-independent-review.json",
+        "sha256": "d71d83bfd1320dc38fddf32d215a6ea5a47618d3a8de17b1ee5bb3d7f4e066bd"
+      },
+      {
+        "path": ".tools/r3-aicase/final-independent-review-closure.md",
+        "sha256": "2d58ae4346be07f42ad2361e195cef2e6d0d7b330e325bf17bca104b5dba4621"
+      },
+      {
+        "path": ".tools/r3-aicase/final-independent-review-closure.json",
+        "sha256": "02505c4d591ca81ddaf0bcb1f9b2cc7e62ff16fced2a0a0cae1efceb4d4ee1e9"
+      },
+      {
+        "path": ".tools/r3-aicase/request-privacy-review.md",
+        "sha256": "3945d9d99f5e8719a52fd247715c527dd5e2a2403af34b2519df285629321ad4"
+      },
+      {
+        "path": ".tools/r3-aicase/request-privacy-review.json",
+        "sha256": "b21294c63ed824016bfba62926b3e990b8a85abbf57cdb429b27f8b9480ff0ab"
+      },
+      {
+        "path": ".tools/r3-aicase/compat-closure.md",
+        "sha256": "d33078bdada598515acc3f28877bb279ab2fc4f31e1424fa57f2ac51ab864890"
+      },
+      {
+        "path": ".tools/r3-aicase/compat-closure.json",
+        "sha256": "6c8b543995d5b9fdf0af0aa9d75a286f1e284dc19d5dd75a57bfa3038ae94db1"
+      }
+    ],
+    "verified_green_behaviors": [
+      "Actual ordinary owner/case context binding; generic instructions/rules/schema exclude private cast terms.",
+      "Exact public rules keys; full local rules canonical and resource SHA unchanged; original response golden accepted.",
+      "Real valid legacy source hits failing durable write after repair and publishes no state/bytes/signal change.",
+      "Same action retry restores sequential reception, reserves only the actual new ordinary slot and preserves old instances.",
+      "Same action replay changes no state/signal; actual next customer enters a CASE; real durable read equals live state."
+    ],
+    "source_review_complete": true,
+    "full_suite_passed": false,
+    "deferred_to_standard_full1": [
+      "Leaf2025",
+      "Transport136",
+      "ModelAdmission90",
+      "Whole revised Story playthrough",
+      "Whole backlog after mode repair"
+    ],
+    "historical_story_status": {
+      "playthrough_original": [
+        838,
+        1
+      ],
+      "playthrough_revised_whole": "PENDING_STANDARD_FULL1",
+      "backlog_original": [
+        183,
+        1
+      ],
+      "backlog_repaired_whole": "PENDING_STANDARD_FULL1",
+      "transactions_latest_owner": [
+        651,
+        0
+      ]
+    },
+    "reviewer_engine_runs": 0,
+    "reviewer_http_calls": 0,
+    "reviewer_production_edits": 0,
+    "limitations": [
+      "Closure covers two exact patches and four owner-run short logs only.",
+      "No extra leaf/transport/model reruns were required before full; standard full1 is running, with no terminal result.",
+      "Original Important reports and failed long Story attempts remain historical evidence, not overwritten to GREEN.",
+      "No paid model service or whole-suite completion claim."
+    ],
+    "standard_full_status": "Standard full1 running under root session81245; no terminal result.",
+    "completed_full_runs_at_closure": 0,
+    "started_full_runs_at_closure": 1
+  },
+  "additional_independent_review_sha256": "db0c5f1013c22f1e0dbe2cef006baea2802c84318462b0150c926dc074bf76e0",
+  "mode_fixture": {
+    "path": "tests/fixtures/emergent_legacy_mode.json",
+    "source": ".tools/r3-aicase/story-dynamic-compat/backlog-failed-green-envelope.json",
+    "sha256": "ab4be7674a116f615a618b4b1652ed44b651f23b4e9a271f97c4efe31854b791",
+    "byteexact": true
+  },
+  "new_target_counts_source": {
+    "path": ".tools/r3-aicase/full1.log",
+    "sha256": "2ce41e0401616f74ada8d5d7f19c248cf9514cc5f659ba8724643c9516061d96",
+    "groups": {
+      "AICASE REQUEST PRIVACY": {
+        "name": "AICASE REQUEST PRIVACY",
+        "checks": 24,
+        "failures": 0
+      },
+      "AICASE MODE RECOVERY": {
+        "name": "AICASE MODE RECOVERY",
+        "checks": 14,
+        "failures": 0
+      }
+    }
+  },
+  "runner_registration_sha256": "c0040bd3d4a8d577fb5bd0cdd26aeadf3bca77cfdb252df0acf9ecdb4504e230",
+  "story_prior_failed_attempts": [
+    {
+      "path": ".tools/r3-aicase/story-dynamic-compat/story_playthrough-green.log",
+      "sha256": "4e94f8314c115cec722fea60d9664c07dd6812678d3e8d2ffdf864fab1d6a119",
+      "status": "historical_failure_preserved",
+      "name": "STORY PLAYTHROUGH",
+      "checks": 838,
+      "failures": 1
+    },
+    {
+      "path": ".tools/r3-aicase/story-dynamic-compat/story_return_backlog-green.log",
+      "sha256": "b929ba44de18ab9def680b0c318ddc709390f5062bc4412ad403a8f959fecc6a",
+      "status": "historical_failure_preserved",
+      "name": "STORY RETURN BACKLOG",
+      "checks": 183,
+      "failures": 1
+    }
+  ],
+  "story_closure_observed_in_final_standard_full": {
+    "STORY PLAYTHROUGH": {
+      "name": "STORY PLAYTHROUGH",
+      "checks": 840,
+      "failures": 0
+    },
+    "STORY TRANSACTIONS": {
+      "name": "STORY TRANSACTIONS",
+      "checks": 651,
+      "failures": 0
+    },
+    "STORY RETURN BACKLOG": {
+      "name": "STORY RETURN BACKLOG",
+      "checks": 222,
+      "failures": 0
+    }
+  },
+  "screenshots": {
+    "receipt_sha256": "f10eed45920e6982e2e679c301c0ef38e6c957a4c7ae64716675e03c7b3fc374",
+    "records": [
+      {
+        "source": "D:\\MagicStore\\.tools\\round3\\.tools\\r3-aicase\\ui-captures\\aicase_ui_ac24f1a459f69a9428651ceea6ac8d15\\questions-1280x720.png",
+        "source_sha256": "1f1d8b7ede18c4e3efa807b89424a6deecbdf1af8d8785a6df2818259cf50ef4",
+        "path": "docs/screenshots/round3/R3-AICASE/questions-1280x720.jpg",
+        "size": [
+          1280,
+          720
+        ],
+        "bytes": 168136,
+        "sha256": "9f4d9a823cdbd573df3e8d71fd7e1b257fc7197d999de6f464fd691e6bfaebf1",
+        "root_opened_source": true,
+        "format_only": "JPEG quality85, no crop/resize/content edit",
+        "root_opened_jpeg": true
+      },
+      {
+        "source": "D:\\MagicStore\\.tools\\round3\\.tools\\r3-aicase\\ui-captures\\aicase_ui_ac24f1a459f69a9428651ceea6ac8d15\\cards-1280x720.png",
+        "source_sha256": "338f8e387a62dd4aa4f81519e56b8b7c070259b636f26aa8e7657eae41a37677",
+        "path": "docs/screenshots/round3/R3-AICASE/cards-1280x720.jpg",
+        "size": [
+          1280,
+          720
+        ],
+        "bytes": 189388,
+        "sha256": "83534507fee1163c32490d470195c124cff1e3203fc08586a39828f93b815f91",
+        "root_opened_source": true,
+        "format_only": "JPEG quality85, no crop/resize/content edit",
+        "root_opened_jpeg": true
+      },
+      {
+        "source": "D:\\MagicStore\\.tools\\round3\\.tools\\r3-aicase\\ui-captures\\aicase_ui_ac24f1a459f69a9428651ceea6ac8d15\\closed-1280x720.png",
+        "source_sha256": "91a74eaf2494e30c75008971ea980182c37a6ac23e49d30ede0cfa9aec6ec570",
+        "path": "docs/screenshots/round3/R3-AICASE/closed-1280x720.jpg",
+        "size": [
+          1280,
+          720
+        ],
+        "bytes": 195059,
+        "sha256": "170d22eff4b8a8cd03b1031921e0ed61a1f1b9934a93a0bcbc4184c354a77689",
+        "root_opened_source": true,
+        "format_only": "JPEG quality85, no crop/resize/content edit",
+        "root_opened_jpeg": true
+      },
+      {
+        "source": "D:\\MagicStore\\.tools\\round3\\.tools\\r3-aicase\\ui-captures\\aicase_ui_ac24f1a459f69a9428651ceea6ac8d15\\questions-1920x1080.png",
+        "source_sha256": "c8e1c0ab7d00d7be1d50791f55be65f6fd8a5bb09259dc66f118cca83cba481f",
+        "path": "docs/screenshots/round3/R3-AICASE/questions-1920x1080.jpg",
+        "size": [
+          1920,
+          1080
+        ],
+        "bytes": 296088,
+        "sha256": "cd365acc969e6de5dd8b61267ba5fb064e285ddbbda85278de3e8c1780ffb7d3",
+        "root_opened_source": true,
+        "format_only": "JPEG quality85, no crop/resize/content edit",
+        "root_opened_jpeg": true
+      },
+      {
+        "source": "D:\\MagicStore\\.tools\\round3\\.tools\\r3-aicase\\ui-captures\\aicase_ui_ac24f1a459f69a9428651ceea6ac8d15\\cards-1920x1080.png",
+        "source_sha256": "60ba6416f7f72b9f5b49cac21e1e5f32eae1b0654303d71e09a91d0ba953c8dc",
+        "path": "docs/screenshots/round3/R3-AICASE/cards-1920x1080.jpg",
+        "size": [
+          1920,
+          1080
+        ],
+        "bytes": 328479,
+        "sha256": "bddf2180ba859ce824ba48c2013f3d030770f153b8a579bdb3e4d803a59a137f",
+        "root_opened_source": true,
+        "format_only": "JPEG quality85, no crop/resize/content edit",
+        "root_opened_jpeg": true
+      },
+      {
+        "source": "D:\\MagicStore\\.tools\\round3\\.tools\\r3-aicase\\ui-captures\\aicase_ui_ac24f1a459f69a9428651ceea6ac8d15\\closed-1920x1080.png",
+        "source_sha256": "7ed7103666dddeabce23de498aeaf44590388c0d5e743f43486d8f34f92ef51b",
+        "path": "docs/screenshots/round3/R3-AICASE/closed-1920x1080.jpg",
+        "size": [
+          1920,
+          1080
+        ],
+        "bytes": 333700,
+        "sha256": "05ab6ce9e3544a2286d3879860e4644cea12de1c96d317b886758ad1d4d07ea0",
+        "root_opened_source": true,
+        "format_only": "JPEG quality85, no crop/resize/content edit",
+        "root_opened_jpeg": true
+      }
+    ],
+    "total_bytes": 1510850
+  },
+  "gpu_receipt": {
+    "actions": [
+      {
+        "error_code": "",
+        "state_version": 10,
+        "success": true,
+        "type": "load_game"
+      },
+      {
+        "error_code": "",
+        "state_version": 11,
+        "success": true,
+        "type": "case_question"
+      },
+      {
+        "error_code": "",
+        "state_version": 12,
+        "success": true,
+        "type": "case_question"
+      },
+      {
+        "error_code": "",
+        "state_version": 13,
+        "success": true,
+        "type": "case_question"
+      },
+      {
+        "error_code": "",
+        "state_version": 14,
+        "success": true,
+        "type": "case_flip_card"
+      },
+      {
+        "error_code": "",
+        "state_version": 15,
+        "success": true,
+        "type": "case_flip_card"
+      },
+      {
+        "error_code": "",
+        "state_version": 16,
+        "success": true,
+        "type": "case_flip_card"
+      },
+      {
+        "error_code": "",
+        "state_version": 17,
+        "success": true,
+        "type": "case_attach_evidence"
+      },
+      {
+        "error_code": "",
+        "state_version": 18,
+        "success": true,
+        "type": "case_choose_answer"
+      },
+      {
+        "error_code": "",
+        "state_version": 19,
+        "success": true,
+        "type": "case_attach_evidence"
+      },
+      {
+        "error_code": "",
+        "state_version": 20,
+        "success": true,
+        "type": "case_choose_answer"
+      },
+      {
+        "error_code": "",
+        "state_version": 21,
+        "success": true,
+        "type": "case_attach_evidence"
+      },
+      {
+        "error_code": "",
+        "state_version": 22,
+        "success": true,
+        "type": "case_choose_answer"
+      },
+      {
+        "error_code": "",
+        "state_version": 23,
+        "success": true,
+        "type": "case_close"
+      },
+      {
+        "error_code": "",
+        "state_version": 10,
+        "success": true,
+        "type": "load_game"
+      },
+      {
+        "error_code": "",
+        "state_version": 11,
+        "success": true,
+        "type": "case_question"
+      },
+      {
+        "error_code": "",
+        "state_version": 12,
+        "success": true,
+        "type": "case_question"
+      },
+      {
+        "error_code": "",
+        "state_version": 13,
+        "success": true,
+        "type": "case_question"
+      },
+      {
+        "error_code": "",
+        "state_version": 14,
+        "success": true,
+        "type": "case_flip_card"
+      },
+      {
+        "error_code": "",
+        "state_version": 15,
+        "success": true,
+        "type": "case_flip_card"
+      },
+      {
+        "error_code": "",
+        "state_version": 16,
+        "success": true,
+        "type": "case_flip_card"
+      },
+      {
+        "error_code": "",
+        "state_version": 17,
+        "success": true,
+        "type": "case_attach_evidence"
+      },
+      {
+        "error_code": "",
+        "state_version": 18,
+        "success": true,
+        "type": "case_choose_answer"
+      },
+      {
+        "error_code": "",
+        "state_version": 19,
+        "success": true,
+        "type": "case_attach_evidence"
+      },
+      {
+        "error_code": "",
+        "state_version": 20,
+        "success": true,
+        "type": "case_choose_answer"
+      },
+      {
+        "error_code": "",
+        "state_version": 21,
+        "success": true,
+        "type": "case_attach_evidence"
+      },
+      {
+        "error_code": "",
+        "state_version": 22,
+        "success": true,
+        "type": "case_choose_answer"
+      },
+      {
+        "error_code": "",
+        "state_version": 23,
+        "success": true,
+        "type": "case_close"
+      }
+    ],
+    "adapter_name": "Intel(R) Iris(R) Xe Graphics",
+    "checks": 858,
+    "display_server": "Windows",
+    "failures": [],
+    "frames": [
+      {
+        "dimensions": [
+          1280,
+          720
+        ],
+        "evidence_count": 0,
+        "owner": {
+          "arrival_id": "arrival_daily_1_0",
+          "name": "苏立诚",
+          "name_rendered": false,
+          "npc_id": "npc_o_1_10000",
+          "portrait_rect": "[P: (304.0, 72.5), S: (195.0, 315.0)]"
+        },
+        "path": "D:/MagicStore/.tools/round3/.tools/r3-aicase/ui-captures/aicase_ui_ac24f1a459f69a9428651ceea6ac8d15/questions-1280x720.png",
+        "phase": "questions",
+        "revealed_cards": 0,
+        "selection": "programmatic public saved actions; private correct-answer oracle only; no real mouse claim",
+        "sha256": "1f1d8b7ede18c4e3efa807b89424a6deecbdf1af8d8785a6df2818259cf50ef4",
+        "stars": 0,
+        "state_version": 10
+      },
+      {
+        "dimensions": [
+          1280,
+          720
+        ],
+        "evidence_count": 4,
+        "owner": {
+          "arrival_id": "arrival_daily_1_0",
+          "name": "苏立诚",
+          "name_rendered": false,
+          "npc_id": "npc_o_1_10000",
+          "portrait_rect": "[P: (304.0, 72.5), S: (195.0, 315.0)]"
+        },
+        "path": "D:/MagicStore/.tools/round3/.tools/r3-aicase/ui-captures/aicase_ui_ac24f1a459f69a9428651ceea6ac8d15/cards-1280x720.png",
+        "phase": "cards",
+        "revealed_cards": 1,
+        "selection": "programmatic public saved actions; private correct-answer oracle only; no real mouse claim",
+        "sha256": "338f8e387a62dd4aa4f81519e56b8b7c070259b636f26aa8e7657eae41a37677",
+        "stars": 0,
+        "state_version": 14
+      },
+      {
+        "dimensions": [
+          1280,
+          720
+        ],
+        "evidence_count": 6,
+        "owner": {
+          "arrival_id": "arrival_daily_1_0",
+          "name": "苏立诚",
+          "name_rendered": false,
+          "npc_id": "npc_o_1_10000",
+          "portrait_rect": "[P: (304.0, 72.5), S: (195.0, 315.0)]"
+        },
+        "path": "D:/MagicStore/.tools/round3/.tools/r3-aicase/ui-captures/aicase_ui_ac24f1a459f69a9428651ceea6ac8d15/closed-1280x720.png",
+        "phase": "closed",
+        "revealed_cards": 3,
+        "selection": "programmatic public saved actions; private correct-answer oracle only; no real mouse claim",
+        "sha256": "91a74eaf2494e30c75008971ea980182c37a6ac23e49d30ede0cfa9aec6ec570",
+        "stars": 3,
+        "state_version": 23
+      },
+      {
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "evidence_count": 0,
+        "owner": {
+          "arrival_id": "arrival_daily_1_0",
+          "name": "苏立诚",
+          "name_rendered": false,
+          "npc_id": "npc_o_1_10000",
+          "portrait_rect": "[P: (456.0, 108.75), S: (292.5, 472.5)]"
+        },
+        "path": "D:/MagicStore/.tools/round3/.tools/r3-aicase/ui-captures/aicase_ui_ac24f1a459f69a9428651ceea6ac8d15/questions-1920x1080.png",
+        "phase": "questions",
+        "revealed_cards": 0,
+        "selection": "programmatic public saved actions; private correct-answer oracle only; no real mouse claim",
+        "sha256": "c8e1c0ab7d00d7be1d50791f55be65f6fd8a5bb09259dc66f118cca83cba481f",
+        "stars": 0,
+        "state_version": 10
+      },
+      {
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "evidence_count": 4,
+        "owner": {
+          "arrival_id": "arrival_daily_1_0",
+          "name": "苏立诚",
+          "name_rendered": false,
+          "npc_id": "npc_o_1_10000",
+          "portrait_rect": "[P: (456.0, 108.75), S: (292.5, 472.5)]"
+        },
+        "path": "D:/MagicStore/.tools/round3/.tools/r3-aicase/ui-captures/aicase_ui_ac24f1a459f69a9428651ceea6ac8d15/cards-1920x1080.png",
+        "phase": "cards",
+        "revealed_cards": 1,
+        "selection": "programmatic public saved actions; private correct-answer oracle only; no real mouse claim",
+        "sha256": "60ba6416f7f72b9f5b49cac21e1e5f32eae1b0654303d71e09a91d0ba953c8dc",
+        "stars": 0,
+        "state_version": 14
+      },
+      {
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "evidence_count": 6,
+        "owner": {
+          "arrival_id": "arrival_daily_1_0",
+          "name": "苏立诚",
+          "name_rendered": false,
+          "npc_id": "npc_o_1_10000",
+          "portrait_rect": "[P: (456.0, 108.75), S: (292.5, 472.5)]"
+        },
+        "path": "D:/MagicStore/.tools/round3/.tools/r3-aicase/ui-captures/aicase_ui_ac24f1a459f69a9428651ceea6ac8d15/closed-1920x1080.png",
+        "phase": "closed",
+        "revealed_cards": 3,
+        "selection": "programmatic public saved actions; private correct-answer oracle only; no real mouse claim",
+        "sha256": "7ed7103666dddeabce23de498aeaf44590388c0d5e743f43486d8f34f92ef51b",
+        "stars": 3,
+        "state_version": 23
+      }
+    ],
+    "privacy_checks_failed": 0,
+    "real_mouse_claim": false,
+    "renderer_method": "gl_compatibility",
+    "script_sha256": "4c6e68ec838bee18479382749f61e2937911c7ec234f78174602e950686b0e78",
+    "source_transaction": {
+      "arrival_id": "arrival_daily_1_0",
+      "base_dir": "res://.tools/r3-aicase/transactions/run_ca2352676d32b5229bfd60240f255440",
+      "save_id": "save_2ee8115923cfc22b1bd5498b24d877d9",
+      "sha256": "1d8e236f3684f655e79f1f9aa6c9d371ee7eafa5eaf90e76107f650225549d5e"
+    },
+    "test_injected_private_definition_to_ui": false
+  },
+  "shop_review_sha256": "56576ec7b6cf4f2a1c5e2f2abfb2bfad7155b2c66247678f6fbe1dbf51abdf31",
+  "frozen_gui_evidence_sha256": "3982082236cd51b560fad115e1db45360036540f002dda015a3d587180191551",
+  "task_files": [
+    ".gitattributes",
+    "data/ai/case_transport.json",
+    "data/cases/emergent_full_v1/response.schema.json",
+    "data/cases/emergent_full_v1/rules.json",
+    "data/cases/emergent_messages.json",
+    "data/cases/emergent_runtime.json",
+    "data/cases/emergent_v1/fallback/fallback_anonymousgift.json",
+    "data/cases/emergent_v1/fallback/fallback_lostitem.json",
+    "data/cases/emergent_v1/fallback/fallback_lostpet.json",
+    "data/cases/emergent_v1/fallback/fallback_moving.json",
+    "data/cases/emergent_v1/fallback/fallback_neighbormisunderstanding.json",
+    "data/cases/emergent_v1/fallback/fallback_oldphoto.json",
+    "data/cases/emergent_v1/generation_rules.json",
+    "docs/codex/PROGRESS.md",
+    "docs/codex/REVIEW_PACKET_R3.md",
+    "docs/codex/plans/R3-AICASE.md",
+    "docs/codex/results/R3-AICASE-validation.json",
+    "docs/features.md",
+    "docs/screenshots/round3/R3-AICASE/cards-1280x720.jpg",
+    "docs/screenshots/round3/R3-AICASE/cards-1920x1080.jpg",
+    "docs/screenshots/round3/R3-AICASE/closed-1280x720.jpg",
+    "docs/screenshots/round3/R3-AICASE/closed-1920x1080.jpg",
+    "docs/screenshots/round3/R3-AICASE/questions-1280x720.jpg",
+    "docs/screenshots/round3/R3-AICASE/questions-1920x1080.jpg",
+    "scripts/core/daily_loop.gd",
+    "scripts/core/game_state.gd",
+    "scripts/dev/run.ps1",
+    "scripts/divination/case_save.gd",
+    "scripts/divination/emergent_case_catalog.gd",
+    "scripts/divination/emergent_case_catalog.gd.uid",
+    "scripts/divination/emergent_case_copy.gd",
+    "scripts/divination/emergent_case_copy.gd.uid",
+    "scripts/divination/emergent_case_fallback_codec_v1.gd",
+    "scripts/divination/emergent_case_fallback_codec_v1.gd.uid",
+    "scripts/divination/emergent_case_json_v1.gd",
+    "scripts/divination/emergent_case_json_v1.gd.uid",
+    "scripts/divination/emergent_case_kernel_v1.gd",
+    "scripts/divination/emergent_case_kernel_v1.gd.uid",
+    "scripts/divination/emergent_case_registry.gd",
+    "scripts/divination/emergent_case_registry.gd.uid",
+    "scripts/divination/emergent_case_rules_v1.gd",
+    "scripts/divination/emergent_case_rules_v1.gd.uid",
+    "scripts/divination/emergent_case_store.gd",
+    "scripts/divination/emergent_case_store.gd.uid",
+    "scripts/divination/full_case_codec_v1.gd",
+    "scripts/divination/full_case_codec_v1.gd.uid",
+    "scripts/divination/full_case_json_v1.gd",
+    "scripts/divination/full_case_json_v1.gd.uid",
+    "scripts/divination/past_lines.gd",
+    "scripts/divination/session.gd",
+    "scripts/providers/case_generation_coordinator.gd",
+    "scripts/providers/case_generation_coordinator.gd.uid",
+    "scripts/providers/case_transport_config.gd",
+    "scripts/providers/case_transport_config.gd.uid",
+    "scripts/providers/http_case_provider.gd",
+    "scripts/providers/http_case_provider.gd.uid",
+    "scripts/save/save_service.gd",
+    "scripts/shop/people_bridge.gd",
+    "scripts/ui/case_board.gd",
+    "scripts/ui/main.gd",
+    "tests/divination/emergent_case_kernel_v1.gd",
+    "tests/divination/event_migration.gd",
+    "tests/divination/fixtures/emergent_case_v1_golden.json",
+    "tests/divination/fixtures/full_definition_v1_golden.json",
+    "tests/divination/full_definition_codec_v1.gd",
+    "tests/fixtures/emergent_legacy_mode.json",
+    "tests/fixtures/emergent_schema13.json",
+    "tests/fixtures/emergent_schema13.sha256",
+    "tests/fixtures/emergent_schema13.source.json",
+    "tests/fixtures/emergent_ui_capture.json",
+    "tests/integration/appearance_migration.gd",
+    "tests/integration/case_migration.gd",
+    "tests/integration/daily_loop_migration.gd",
+    "tests/integration/emergent_case_entry_guards.gd",
+    "tests/integration/emergent_case_routes.gd",
+    "tests/integration/emergent_case_transactions.gd",
+    "tests/integration/emergent_case_ui.gd",
+    "tests/integration/emergent_catalog_glue.gd",
+    "tests/integration/emergent_catalog_target.gd",
+    "tests/integration/emergent_genuine13_migration.gd",
+    "tests/integration/emergent_mode_recovery.gd",
+    "tests/integration/emergent_model_admission.gd",
+    "tests/integration/emergent_saved_shapes.gd",
+    "tests/integration/emergent_schema13_target.gd",
+    "tests/integration/emergent_template_history.gd",
+    "tests/integration/emergent_template_history_target.gd",
+    "tests/integration/family_migration.gd",
+    "tests/integration/lin_legacy.gd",
+    "tests/integration/names_migration.gd",
+    "tests/integration/past_lives_migration.gd",
+    "tests/integration/shop_content_migration.gd",
+    "tests/integration/story_migration.gd",
+    "tests/integration/story_playthrough.gd",
+    "tests/integration/story_return_backlog.gd",
+    "tests/integration/story_transactions.gd",
+    "tests/integration/traffic_activation.gd",
+    "tests/providers/case_generation_coordinator_mock.gd",
+    "tests/providers/emergent_request_privacy.gd",
+    "tests/providers/emergent_transport.gd",
+    "tests/providers/http_case_provider_mock.gd",
+    "tests/shop/integration.gd"
+  ],
+  "new_binary_bytes": 1510850,
+  "music_or_video_committed": false,
+  "real_paid_model_calls": 0,
+  "human_mouse_claim": false,
+  "limits": [
+    "Controlled typed daily-object topic family, not arbitrary Chinese entailment.",
+    "Actual supplier/network service and human reading/listening experience not exercised.",
+    "Old UI style/Unicode icons/short-window layout remain assigned to POLISH/WEB."
+  ],
+  "history": [
+    "Original feature RED4/3 and all compile/runtime failures retained.",
+    "Bad saved outcomes runtime errors repaired without weakening codec/hash checks.",
+    "Fresh template missing/corrupt RED30/2 repaired; historical saved content stays exact.",
+    "GPU rect RED858/6 repaired by single-line evidence heading wrapping rule.",
+    "Story helper original dynamic-ID RED and overstrict per-route coverage failure retained.",
+    "Prior Story playthrough/backlog failed whole-run logs remain failures; revised closure is taken only from the final standard full.",
+    "I3 request-only privacy projection and I4 interrupted-mode restoration require separate RED/GREEN independent closure; private version rules and original mode-fixture bytes remain preserved."
+  ]
+}

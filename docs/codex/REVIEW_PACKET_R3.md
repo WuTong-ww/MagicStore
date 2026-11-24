@@ -12,13 +12,27 @@ R3-CASE｜完成，整合复核｜ab7a220｜原三轮失败记录保留；STORY�
 R3-STORY｜完成｜6d4e95c｜标准full3：17878检查+371 Python测试零失败；GPU244/244、shop1548/1548、35.267秒录像81/81。
 R3-LIN｜完成｜7b09759｜标准full2：18066检查+371 Python测试零失败、364源SHA保持；GPU72/72、shop1548/1548、六JPG1558936B已核，保留full1失败。
 R3-NAMES｜完成｜818d604｜已普通推送codex/round3；schema13，full3：18716检查＋391 Python零失败、390源保持；GPU243/0、shop1548/0、六JPG1414386B；保留两轮失败与627/0兼容专项。
-R3-AICASE｜未开始｜—｜
+R3-AICASE｜完成待提交｜PENDING_TASK_COMMIT｜schema14；标准full1唯一一轮退出0：23117检查＋391 Python/0、441源保持；I1–I4闭环0C/I/M，六JPG1510850B，尚未提交/推送。
 R3-TITLE｜未开始｜—｜
 R3-MUSIC｜未开始｜—｜
 R3-POLISH｜未开始｜—｜
 R3-CRAFT｜未开始｜—｜
 R3-LEARN｜未开始｜—｜
 R3-WEB｜未开始｜—｜
+
+## R3-AICASE（完成待提交）
+
+普通每日首位案件客使用独立完整CASE定义，固定剧情、尾声、购物、家族与原人物包保持各自合同。新增六份日常备用案、受控完整模型定义/证明、纯snapshot目录与版本化来源；schema14旧档迁移只在内存加空命名空间，不补改已经安排的旧客人。候选完整校验并成功写盘后，目录与状态在同一个同步通知前发布；失败重试保留第一次选中的完整案件，迟到模型不能换掉已存真相。
+
+主要文件为data/cases/emergent_v1、emergent_full_v1、emergent_runtime/messages与data/ai/case_transport；scripts/divination的Kernel、FullCodec、Store、Registry、Catalog，providers的独立传输/协调器，以及GameState、SaveService、Session、DailyLoop、PeopleBridge接线。验证入口、真实schema13原始envelope和历史比较投影在tests；未修改五固定案与原邀请数据。
+
+已实际验证leaf2789/0、离线事务54/0、模型入档/挂起即回退/有效迟到90/0、传输136/0、真实schema13迁移16/0、目录26/0。六条建议路线独立原验收395/0，本次标准full1同组419/0，分别记录：备用案三支和模型案三支逐一真实问答、翻牌、放材料、选答、建议、结束接待、打烊、次晨反馈与重载；首支全错为1星，其余为3星，另含真实结案写失败、同ID重试和成功重放。12组旧迁移/比较目标1152/0，17份原始fixture字节不变。本次标准full的Story通关840/0、事务651/0、积压222/0，事务实际覆盖13桩动态案件和原7个观察日。
+
+I1/I2原两项Important闭环收据保持：畸形outcomes容器最初会在拒绝前报脚本错误，补Dictionary门后19/0；fresh备用生成最初绕过六份JSON，隔离移走/改坏模板的两条RED修后为30/0加parent1/0，旧ready目录始终精确不变。新增I3请求隐私目标真实RED24/15→GREEN24/0；新增I4以真实schema14模式恢复fixture复现RED8/1→GREEN14/0，原raw字节保持。FullCodec仅公开规则projection，完整本地规则、pins与响应语义不变；GameState仅三处hunk修正模式同步与顺序预约边界。I1–I4独审闭环0C/I/M，I3/I4追加closure已完成（SHA256 db0c5f1013c22f1e0dbe2cef006baea2802c84318462b0150c926dc074bf76e0），未覆盖旧失败或旧收据。模型只通过假HTTP节点测试真实codec/Store/保存动作，没有调用付费服务；首版证明针对有限的温和物件核对题材，不宣称能验证任意中文推理。当前请求传闻清单选择为空，只发送姓名/职业和技术归属。
+
+实际Windows/Iris Xe/Compatibility图形验收858/0、隐私失败0。三个阶段各1280×720与1920×1080的六张quality85 JPG共1510850B，位于docs/screenshots/round3/R3-AICASE，六张原生PNG及JPEG均逐张打开；原始envelope和图形证据已另行逐字节封存，完整测试刷新共享fixture路径不会覆盖此证据。修复材料栏单行标题在初始零宽布局保留595px高度的问题，858/6→858/0。规定shop_ui实际1548/0、30张PNG逐张审阅；必需原生双尺寸为`.tools/c-ui-captures/front-1280.png`（1280×720）和`.tools/c-ui-captures/front-1920.png`（1920×1080），另有逐字节封存副本；既有Unicode图标、旧画风、短滚动视窗和浮窗对比留POLISH。
+
+标准full1已实际退出0，6806.0秒：23117项检查/0失败，Python137+254=391/0，441源SHA保持、0 SCRIPT ERROR；日志SHA256为2ce41e0401616f74ada8d5d7f19c248cf9514cc5f659ba8724643c9516061d96。本任务仅这一轮标准full，不需第2/3轮。旧playthrough838/1（每路线必须随机案的过强后置条件）和backlog183/1（真实模式恢复bug）保留为失败记录，修订完整目标由本轮实际通过闭环。完整逐组计数与101任务文件清单已生成results/R3-AICASE-validation.json。状态完成待提交，commit=PENDING_TASK_COMMIT，尚未提交/推送，root随后META回填；main保持不动，TITLE仍未开始。真人阅读节奏、实际供应商服务和听觉体验仍为人工验收项。
 
 ## R3-NAMES
 

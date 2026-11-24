@@ -7,6 +7,7 @@ var failures := 0
 var sequence := 0
 var config: Dictionary
 var definitions: Dictionary
+var dynamic_cases: Array = []
 var tao_rule := ""
 var epilogue_rule := ""
 var interrupted_tao := false
@@ -42,6 +43,11 @@ func interrupt(rule_id: String) -> bool:
 	check(current_has(rule_id),"an actually interrupted unserved return is reoffered / "+rule_id)
 	return true
 func solve(id: String) -> bool:
+	definitions = game._divination.definitions_for(game.snapshot())
+	var definition: Dictionary = definitions.get(id,{})
+	check(not definition.is_empty() and definition.get("id")==id,"the active Session exposes the actual verified board definition")
+	if definition.is_empty() or definition.get("id")!=id:
+		return false
 	var rules: Dictionary = config.rules
 	var current: Dictionary = game.case_board_view().prelude
 	for step: int in range(8):
@@ -62,16 +68,27 @@ func solve(id: String) -> bool:
 		if not (await act("case_flip_card",{"card_index":index})).success:
 			return false
 	for slot: Dictionary in game.case_board_view().slots:
-		var materials: Array = game.case_board_view().evidence.filter(func(row:Dictionary)->bool:return slot.id in row.slot_ids)
-		if not (await act("case_attach_evidence",{"slot_id":slot.id,"evidence_id":materials[0].id})).success:
+		var authored: Array = definition.deduction_slots.filter(func(row: Dictionary) -> bool: return row.id==slot.id)
+		check(authored.size()==1,"the verified definition resolves this public slot ID exactly once")
+		if authored.size()!=1:
 			return false
-		var correct := ""
-		for authored: Dictionary in definitions[id].deduction_slots:
-			if authored.id==slot.id:
-				correct = authored.correct_answer
+		var correct: String = authored[0].correct_answer
+		var materials: Array = game.case_board_view().evidence.filter(func(row:Dictionary)->bool:return slot.id in row.slot_ids and row.id in authored[0].unlock_evidence)
+		check(not materials.is_empty(),"the real answered questions disclosed an unlocking material for this slot")
+		if materials.is_empty() or not (await act("case_attach_evidence",{"slot_id":slot.id,"evidence_id":materials[0].id})).success:
+			return false
 		if not (await act("case_choose_answer",{"slot_id":slot.id,"answer_id":correct})).success:
 			return false
-	return (await act("case_close",{"advice_id":rules.cases[id].best_advice_id})).success
+	var advice_id: String = rules.cases[id].best_advice_id if rules.cases.has(id) else str(definition.advice[0].id)
+	var enabled_advice: Array = game.case_board_view().advice.filter(func(row: Dictionary) -> bool: return row.id==advice_id and row.enabled)
+	check(not enabled_advice.is_empty(),"the actual configured or dynamic advice is publicly enabled")
+	if enabled_advice.is_empty():
+		return false
+	var closed: Dictionary = await act("case_close",{"advice_id":advice_id})
+	if closed.success and not rules.cases.has(id):
+		check(int(game.case_board_view().stars)==3,"dynamic backlog CASE closes with all correct deductions")
+		remember_dynamic(id)
+	return closed.success
 func run() -> void:
 	game = root.get_node("GameState")
 	saves = root.get_node("SaveService")
@@ -136,6 +153,18 @@ func run() -> void:
 			return
 	check(false,"bounded real playthrough reaches both return interruptions")
 	finish()
+func remember_dynamic(id: String) -> void:
+	var visit_id: String = game.state.active_visit_id
+	var board: Dictionary = game.state.divination.cases[visit_id].board
+	dynamic_cases.append({"case_id":id,"visit_id":visit_id,"definition_hash":board.hash,"advice_id":board.closure.advice_id,"stars":int(board.closure.stars),"questions":board.questions_asked.size(),"cards":board.flipped_indices.size(),"answers":board.answers.size(),"closed":board.phase=="closed"})
 func finish() -> void:
+	check(not dynamic_cases.is_empty(),"ordinary dynamic CASEs were actually solved with the feature enabled")
+	var receipt_path: String = saves.base_dir+"-dynamic-receipt.json"
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(receipt_path.get_base_dir()))
+	var output: FileAccess = FileAccess.open(receipt_path,FileAccess.WRITE)
+	check(output!=null,"write the separate actual dynamic-case receipt")
+	if output!=null:
+		output.store_string(JSON.stringify({"dynamic_cases":dynamic_cases},"  "))
+		output.close()
 	print("STORY RETURN BACKLOG: %d checks, %d failures" % [checks,failures])
 	quit(1 if failures else 0)

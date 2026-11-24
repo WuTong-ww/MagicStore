@@ -6,6 +6,8 @@ const People = preload("res://scripts/people/people.gd")
 const Memory = preload("res://scripts/people/memory.gd")
 const Events = preload("res://scripts/divination/event_rules.gd")
 const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
+const DailyLoop = preload("res://scripts/core/daily_loop.gd")
+const CaseSchema = preload("res://scripts/divination/case_schema.gd")
 const Appearance = preload("res://scripts/people/appearance.gd")
 const Catalog = preload("res://scripts/divination/catalog.gd")
 const DialoguePolicy = preload("res://scripts/providers/dialogue_policy.gd")
@@ -177,6 +179,25 @@ static func start(state: Dictionary, action: Dictionary, divination: Variant, co
 	if not arrival_id is String or not visit_id is String or visit_id.is_empty() or not state.people.arrivals.has(arrival_id):
 		return _fail("INVALID_ARRIVAL", "请选择仍在等候的来客。")
 	var row: Dictionary = state.people.arrivals[arrival_id]
+	# Only a builder-verified ready instance can take the ordinary CASE path.
+	# Check before People.begin changes the row, met status or visit references.
+	var bindings: Variant = divination.get("verified_bindings")
+	var emergent_space: Variant = state.get("divination",{}).get("emergent_cases",{})
+	var instances: Variant = emergent_space.get("instances",{}) if emergent_space is Dictionary else {}
+	var template: Dictionary = divination.data.cases.get(row.case_id,{})
+	var emergent: bool = (bindings is Dictionary and bindings.has(arrival_id)) or (instances is Dictionary and instances.has(arrival_id)) or template.has("emergent_definition_id")
+	var definition: Dictionary = {}
+	if emergent:
+		var invalid_case: String = str(DailyLoop.load_config().get("copy",{}).get("invalid_state","AICASE_ENTRY_INVALID"))
+		if not bindings is Dictionary or not DailyLoop.verified_ready_case(state,row,bindings):
+			return _fail("CASE_INVALID", invalid_case)
+		var definitions: Variant = divination.get("case_definitions")
+		var checked: Variant = definitions.get(row.case_id) if definitions is Dictionary else null
+		if not checked is Dictionary or checked.get("id") != row.case_id or CaseSchema.definition_hash(checked) != bindings[arrival_id].definition_hash or not checked.get("question") is String or checked.question.is_empty() or not checked.get("outcomes") is Dictionary or not checked.outcomes.get("target_name") is String or checked.outcomes.target_name.is_empty():
+			return _fail("CASE_INVALID", invalid_case)
+		if template.get("emergent_definition_id") != row.case_id or template.get("world_facts") != checked.get("truth") or template.get("event") != checked.outcomes or template.get("generated",false):
+			return _fail("CASE_INVALID", invalid_case)
+		definition = checked
 	if not People.begin(state.people, arrival_id, visit_id):
 		return _fail("ARRIVAL_UNAVAILABLE", "这位来客已经离开或正在接待。")
 	var npc_id: String = row.npc_id
@@ -184,7 +205,9 @@ static func start(state: Dictionary, action: Dictionary, divination: Variant, co
 	if not state.npcs.has(npc_id):
 		state.npcs[npc_id] = {"coins": 60, "items": {}}
 	var case_id: String = row.case_id
-	if profile.has("generated_bundle") or profile.get("generation_member") == "contact":
+	if not definition.is_empty():
+		case_id = definition.id
+	elif profile.has("generated_bundle") or profile.get("generation_member") == "contact":
 		case_id = GeneratedCases.case_id(npc_id)
 	elif case_id.is_empty():
 		case_id = "invitation" if npc_id == "npc_lin" else "archive"
@@ -204,7 +227,11 @@ static func start(state: Dictionary, action: Dictionary, divination: Variant, co
 	if divination.data.cases.get(case_id,{}).get("generated",false) or npc_id == "npc_lin" or divination.data.guests.has(npc_id):
 		opening = divination.opening(npc_id, case_id, prior)
 	var family_statement := false
-	if profile.get("family_library_member",false) and profile.get("goal") is Dictionary:
+	if not definition.is_empty():
+		opening = definition.question
+		context["subject_id"] = npc_id
+		context["target_name"] = definition.outcomes.target_name
+	elif profile.get("family_library_member",false) and profile.get("goal") is Dictionary:
 		var goal: Dictionary = profile.goal
 		var relation: Dictionary = state.people.relationships[goal.relationship_id]
 		var subject: Dictionary = state.people.profiles[goal.subject_id]
@@ -219,7 +246,7 @@ static func start(state: Dictionary, action: Dictionary, divination: Variant, co
 		family_statement = true
 	elif row.intent == "shopping":
 		opening = "我今天想看看店里的商品。"
-	if not str(row.get("daily_opening","")).is_empty():
+	if definition.is_empty() and not str(row.get("daily_opening","")).is_empty():
 		opening = row.daily_opening
 	var visit := {"visit_id": visit_id, "npc_id": npc_id, "day": floori(float(state.clock_minutes) / 1440.0),
 		"phase": "talking", "clue_ids": [], "dialogue": [{"speaker": "npc", "text": opening}],

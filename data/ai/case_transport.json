@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "enabled": true,
+  "max_jobs": 1,
+  "max_retries": 0,
+  "max_redirects": 0,
+  "deadline_ms": 60000,
+  "request_bytes": 262144,
+  "response_bytes": 262144,
+  "visible_bytes": 98304,
+  "context_bytes": 8192,
+  "json_depth": 24,
+  "job_id_chars": 128,
+  "token_chars": 256,
+  "model_chars": 120,
+  "key_chars": 8192,
+  "retired_jobs": 64,
+  "require_api_key": false,
+  "provenance_tag": "configured_case_model",
+  "families": {
+    "generic": {"max_tokens": 16384, "temperature": 0.25, "parameters": {}},
+    "deepseek": {"max_tokens": 16384, "temperature": 0.25, "parameters": {"thinking": {"type": "disabled"}}},
+    "glm": {"max_tokens": 24576, "temperature": 0.25, "parameters": {"thinking": {"type": "enabled"}, "reasoning_effort": "low"}},
+    "qwen": {"max_tokens": 16384, "temperature": 0.25, "parameters": {"enable_thinking": false, "chat_template_kwargs": {"enable_thinking": false}}}
+  }
+}

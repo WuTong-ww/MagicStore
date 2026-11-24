@@ -74,6 +74,8 @@ func compatibility_schema(game: Node, saves: Node, schema: int) -> void:
 	for profile: Dictionary in old.people.profiles.values():
 		profile.erase("birth_identity")
 	old.schema_version = schema
+	check(not old.divination.has("emergent_cases") or old.divination.get("emergent_cases")=={"version":1,"instances":{}},"historical projection retains no populated schema14 ordinary-case namespace")
+	old.divination.erase("emergent_cases")
 	old.divination.erase("past_lines")
 	for case: Dictionary in old.divination.cases.values():
 		case.erase("cause")
@@ -165,6 +167,8 @@ func actual_schema7_history(game: Node, saves: Node) -> void:
 	# Compare the entire real old B namespace after validating/removing only the
 	# two additive G5 fields from an in-memory copy; never edit the recorded v7.
 	var old_divination: Dictionary = migrated.divination.duplicate(true)
+	check(old_divination.get("emergent_cases")=={"version":1,"instances":{}},"actual old shop history gains only the empty ordinary-case namespace")
+	old_divination.erase("emergent_cases")
 	check(old_divination.get("past_lines") == {"version":1,"instances":{}},"actual historical save gains only an empty modern past namespace")
 	old_divination.erase("past_lines")
 	check(old_divination.get("settings") == {"free_question":false},"historical consultation gains only the disabled free-question preference")

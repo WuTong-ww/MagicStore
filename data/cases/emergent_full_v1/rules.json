@@ -1,0 +1,287 @@
+{
+  "version": 1,
+  "protocol_id": "full_definition_typed_v1",
+  "enabled": false,
+  "generation_prompt": "请返回完整案件JSON对象，严格含version、definition、proof。definition必须实际写出全部案件字段与中文文字，包括3轮共9问、6证据、3推理格、5牌示、2至3建议和完整G3后果，不能只返回模板ID或选择ID。你可以在受控实体词元中创造不同的新日常事实组合；证据与正确答案必须同typed事实一致。所有逻辑文字须按rules句型与proof绑定，不接受自由补写或任意中文逻辑证明。固定角色、旧世界事实、事件效果与非公开传闻不能改写。仅用context绑定的普通来客与case_id；public_rumors只能逐字引用，不作为新案事实证明。 证据中的fact必须包含本案精确非空legacy_clue_ids；testimony和misleading必须完全省略legacy_clue_ids字段，不可传空数组。",
+  "limits": {
+    "bytes": 98304,
+    "depth": 18,
+    "entities": 18,
+    "text": 1200,
+    "id": 64,
+    "rumors": 4,
+    "rumor_text": 280
+  },
+  "counts": {
+    "facts": 3,
+    "slots": 3,
+    "evidence": 6,
+    "cards": 5,
+    "rounds": 3,
+    "questions": 3,
+    "answers_min": 3,
+    "answers_max": 4,
+    "advice_min": 2,
+    "advice_max": 3
+  },
+  "safety": {
+    "allowed_moods": [
+      "neutral",
+      "smile",
+      "hesitant",
+      "surprised",
+      "sad"
+    ],
+    "deny_terms": [
+      "自杀",
+      "自残",
+      "杀人",
+      "毒品",
+      "色情",
+      "投资回报",
+      "股票代码",
+      "处方药",
+      "银行卡",
+      "身份证号",
+      "API密钥",
+      "忽略之前的指令",
+      "忽略以上指令",
+      "system prompt"
+    ],
+    "deny_patterns": [
+      "https?://",
+      "(?:res|user|file)://",
+      "[A-Za-z]:[\\\\/]",
+      "<script",
+      "[\\x00-\\x08\\x0b\\x0c\\x0e-\\x1f]"
+    ],
+    "fixed_character_terms": [
+      "林照晚",
+      "温月",
+      "溫月",
+      "温晴川",
+      "溫晴川",
+      "皮特",
+      "沈念秋",
+      "玛丽安",
+      "顾念",
+      "顾予安",
+      "陶书宁",
+      "江远舟"
+    ]
+  },
+  "entity_types": {
+    "object": [
+      [
+        "蓝色",
+        "铜色",
+        "米色",
+        "绿色"
+      ],
+      [
+        "育苗盘",
+        "雨量筒",
+        "风铃",
+        "浇水壶"
+      ]
+    ],
+    "place": [
+      [
+        "窗边",
+        "门边",
+        "墙边"
+      ],
+      [
+        "置物架",
+        "长凳",
+        "挂架"
+      ]
+    ],
+    "reason": [
+      [
+        "通风晾干",
+        "为清洁让出位置",
+        "调整光照"
+      ]
+    ],
+    "step": [
+      [
+        "核对标签后归位",
+        "先记录位置再确认",
+        "约好时间共同调整"
+      ]
+    ]
+  },
+  "compatibility": {
+    "育苗盘": [
+      "通风晾干",
+      "为清洁让出位置",
+      "调整光照"
+    ],
+    "雨量筒": [
+      "通风晾干",
+      "为清洁让出位置"
+    ],
+    "风铃": [
+      "通风晾干",
+      "为清洁让出位置"
+    ],
+    "浇水壶": [
+      "通风晾干",
+      "为清洁让出位置"
+    ]
+  },
+  "predicates": {
+    "location": {
+      "subject_type": "object",
+      "value_type": "place",
+      "sentence": "{subject}在{value}。",
+      "slot": "摆放位置"
+    },
+    "cause": {
+      "subject_type": "object",
+      "value_type": "reason",
+      "sentence": "{subject}的摆放变化是为了{value}。",
+      "slot": "变化原因"
+    },
+    "next_step": {
+      "subject_type": "object",
+      "value_type": "step",
+      "sentence": "{subject}适合的下一步是{value}。",
+      "slot": "下一步安排"
+    }
+  },
+  "templates": {
+    "title": "{object}的摆放安排",
+    "question": "{object}现在放在哪里，为什么变了位置，接下来怎样核对？",
+    "fact_source": "现场记录与实物核对",
+    "testimony_source": "来客尚未核对的转述",
+    "misleading_source": "未经核对的猜测",
+    "testimony": "有人转述：{claim}",
+    "misleading": "有人据此猜测：{claim}",
+    "question_variants": [
+      "关于{slot}，能先核对哪条记录？",
+      "还有什么材料可以确认{slot}？",
+      "把{slot}的材料按来源说清楚，好吗？"
+    ],
+    "answer_join": " ",
+    "rumor_suffix": " 听说：{rumor}",
+    "card": "牌示提醒先核对{slot}，它不代替事实材料。",
+    "no_condition": "无附加条件",
+    "prediction_met": "记录得到核对",
+    "prediction_missed": "暂未完成核对"
+  },
+  "actions": {
+    "verify": {
+      "text": "带着记录核对{object}，再按标签调整。",
+      "reaction": "我会先带记录去核对，再决定怎样调整。",
+      "prediction": "按记录核对后，{object}的安排会得到确认。",
+      "report": "我带着记录核对了{object}。材料确认：{facts}",
+      "expected": "met",
+      "mood": "smile"
+    },
+    "coordinate": {
+      "text": "请照看人一起核对{object}的摆放安排。",
+      "reaction": "我会约照看人一起核对，不先替对方下结论。",
+      "prediction": "一起核对后，{object}的安排会得到确认。",
+      "report": "我和照看人核对了{object}。材料确认：{facts}",
+      "expected": "met",
+      "mood": "neutral"
+    },
+    "defer": {
+      "text": "先保留{object}的记录，暂缓调整。",
+      "reaction": "我先保留记录，等能核对时再调整。",
+      "prediction": "暂缓调整时，{object}的安排暂未得到新确认。",
+      "report": "我保留了{object}的记录，还没有完成新的核对。",
+      "expected": "missed",
+      "mood": "hesitant"
+    }
+  },
+  "event": {
+    "version": 1,
+    "minute_of_day": 1080,
+    "feedback_delay": 180,
+    "report_delay": 180,
+    "prediction_window": 30
+  },
+  "deck_ids": [
+    "fool",
+    "magician",
+    "high_priestess",
+    "empress",
+    "emperor",
+    "hierophant",
+    "lovers",
+    "chariot",
+    "strength",
+    "hermit",
+    "wheel",
+    "justice",
+    "hanged_man",
+    "death",
+    "temperance",
+    "devil",
+    "tower",
+    "star",
+    "moon",
+    "sun",
+    "judgement",
+    "world",
+    "wands_1",
+    "wands_2",
+    "wands_3",
+    "wands_4",
+    "wands_5",
+    "wands_6",
+    "wands_7",
+    "wands_8",
+    "wands_9",
+    "wands_10",
+    "wands_11",
+    "wands_12",
+    "wands_13",
+    "wands_14",
+    "cups_1",
+    "cups_2",
+    "cups_3",
+    "cups_4",
+    "cups_5",
+    "cups_6",
+    "cups_7",
+    "cups_8",
+    "cups_9",
+    "cups_10",
+    "cups_11",
+    "cups_12",
+    "cups_13",
+    "cups_14",
+    "swords_1",
+    "swords_2",
+    "swords_3",
+    "swords_4",
+    "swords_5",
+    "swords_6",
+    "swords_7",
+    "swords_8",
+    "swords_9",
+    "swords_10",
+    "swords_11",
+    "swords_12",
+    "swords_13",
+    "swords_14",
+    "pentacles_1",
+    "pentacles_2",
+    "pentacles_3",
+    "pentacles_4",
+    "pentacles_5",
+    "pentacles_6",
+    "pentacles_7",
+    "pentacles_8",
+    "pentacles_9",
+    "pentacles_10",
+    "pentacles_11",
+    "pentacles_12",
+    "pentacles_13",
+    "pentacles_14"
+  ]
+}

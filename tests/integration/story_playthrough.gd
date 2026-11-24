@@ -9,6 +9,7 @@ var sequence := 0
 var route := ""
 var rules: Dictionary
 var definitions: Dictionary = {}
+var dynamic_cases: Array = []
 var receipt: Dictionary = {"routes":{},"fixtures":{}}
 var save_root := ""
 
@@ -48,10 +49,15 @@ func run() -> void:
 		await play_route("worst")
 	if not failures:
 		await play_route("missing_key")
+	var dynamic_closed: int = 0
+	for route_result: Dictionary in receipt.routes.values():
+		dynamic_closed += route_result.dynamic_cases.filter(func(entry: Dictionary) -> bool: return entry.closed).size()
+	check(dynamic_closed>0,"the three routes actually close ordinary dynamic CASEs with the feature enabled")
 	finish()
 
 func play_route(name: String) -> void:
 	route = name
+	dynamic_cases = []
 	var start_checks := checks
 	if not (await act("new_game",{"name":"固定剧情验收·"+name})).get("success",false):
 		return
@@ -82,7 +88,8 @@ func play_route(name: String) -> void:
 						capture_save("missing-key-case5-start")
 				if not await solve_board(view.id):
 					return
-				seen[view.id] = int(game.case_board_view().stars)
+				if rules.cases.has(view.id):
+					seen[view.id] = int(game.case_board_view().stars)
 				if view.id == "fixed_last_pages" and route == "worst":
 					check(game.story_view().get("ending",{}).get("status") == "waiting","letter route is genuinely waiting before its reunion")
 					capture_save("letter-waiting")
@@ -121,10 +128,14 @@ func play_route(name: String) -> void:
 		elif not (await act("next_day")).get("success",false):
 			return
 	check(ending_day > 0,"route reaches a non-tragic actual reunion within bounded game days")
-	receipt.routes[name] = {"save_id":game.state.save_id,"ending_day":ending_day,"case_stars":seen,"checks":checks-start_checks,"story":game.story_view()}
+	receipt.routes[name] = {"save_id":game.state.save_id,"ending_day":ending_day,"case_stars":seen,"dynamic_cases":dynamic_cases.duplicate(true),"checks":checks-start_checks,"story":game.story_view()}
 
 func solve_board(id: String) -> bool:
-	var definition: Dictionary = definitions[id]
+	definitions = game._divination.definitions_for(game.snapshot())
+	var definition: Dictionary = definitions.get(id,{})
+	check(not definition.is_empty() and definition.get("id")==id,"the active Session exposes the actual verified board definition")
+	if definition.is_empty() or definition.get("id")!=id:
+		return false
 	var best: bool = route == "best" or (route == "missing_key" and id != "fixed_invitation")
 	var wrong_assembly_tested := false
 	for step: int in range(8):
@@ -160,19 +171,34 @@ func solve_board(id: String) -> bool:
 			return false
 	for slot_index: int in range(3):
 		var slot: Dictionary = game.case_board_view().slots[slot_index]
-		var materials: Array = game.case_board_view().evidence.filter(func(row: Dictionary) -> bool: return slot.id in row.slot_ids)
+		var authored: Array = definition.deduction_slots.filter(func(row: Dictionary) -> bool: return row.id==slot.id)
+		check(authored.size()==1,"the verified definition resolves this public slot ID exactly once")
+		if authored.size()!=1:
+			return false
+		var correct: String = authored[0].correct_answer
+		var materials: Array = game.case_board_view().evidence.filter(func(row: Dictionary) -> bool: return slot.id in row.slot_ids and row.id in authored[0].unlock_evidence)
 		check(not materials.is_empty(),"base choices provide material for every deduction")
 		if materials.is_empty() or not (await act("case_attach_evidence",{"slot_id":slot.id,"evidence_id":materials[0].id})).get("success",false):
 			return false
-		var correct: String = definition.deduction_slots[slot_index].correct_answer
 		var answers: Array = game.case_board_view().slots[slot_index].candidates.filter(func(row: Dictionary) -> bool: return row.enabled and (row.id == correct if best else row.id != correct))
 		if answers.is_empty() or not (await act("case_choose_answer",{"slot_id":slot.id,"answer_id":answers[0].id})).get("success",false):
 			return false
-	var advice_id: String = rules.cases[id].best_advice_id if best else rules.cases[id].worst_advice_id
+	var advice_id: String = (rules.cases[id].best_advice_id if best else rules.cases[id].worst_advice_id) if rules.cases.has(id) else str(definition.advice[0].id)
+	var enabled_advice: Array = game.case_board_view().advice.filter(func(row: Dictionary) -> bool: return row.id==advice_id and row.enabled)
+	check(not enabled_advice.is_empty(),"the actual configured or dynamic advice is publicly enabled")
+	if enabled_advice.is_empty():
+		return false
 	if not (await act("case_close",{"advice_id":advice_id})).get("success",false):
 		return false
 	check(int(game.case_board_view().stars) == (3 if best else 1),"actual stars reflect all correct or all wrong deductions: "+id)
+	if not rules.cases.has(id):
+		remember_dynamic(id)
 	return true
+
+func remember_dynamic(id: String) -> void:
+	var visit_id: String = game.state.active_visit_id
+	var board: Dictionary = game.state.divination.cases[visit_id].board
+	dynamic_cases.append({"case_id":id,"visit_id":visit_id,"definition_hash":board.hash,"advice_id":board.closure.advice_id,"stars":int(board.closure.stars),"questions":board.questions_asked.size(),"cards":board.flipped_indices.size(),"answers":board.answers.size(),"closed":board.phase=="closed"})
 
 func capture_save(label: String) -> void:
 	var directory := save_root+"/"+label
