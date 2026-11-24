@@ -9,6 +9,7 @@ const GeneratedPerson = preload("res://scripts/people/generated_person.gd")
 const Appearance = preload("res://scripts/people/appearance.gd")
 const FamilyLibrary = preload("res://scripts/people/family_library.gd")
 const OrdinaryContent = preload("res://scripts/people/ordinary_content.gd")
+const BirthIdentity = preload("res://scripts/people/birth_identity.gd")
 
 static func load_config() -> Dictionary:
 	var parser := JSON.new()
@@ -18,9 +19,12 @@ static func load_config() -> Dictionary:
 	data["family_library"] = FamilyLibrary.load_config()
 	if data.has("ordinary_content_path"):
 		data["ordinary_content"] = OrdinaryContent.load_config(data)
+	data["birth_identity"] = BirthIdentity.load_config(data)
 	return data if config_valid(data) else {}
 
 static func config_valid(data: Dictionary) -> bool:
+	if data.has("birth_identity") and not BirthIdentity.config_valid(data.birth_identity):
+		return false
 	if data.has("family_library") and not FamilyLibrary.config_valid(data.family_library):
 		return false
 	if data.has("ordinary_content_path"):
@@ -497,10 +501,21 @@ static func initialize_ordinary_content(people: Dictionary, config: Dictionary) 
 	if config.has("ordinary_content_path") and config.ordinary_content_path == OrdinaryContent.CONFIG_PATH:
 		people["ordinary_content_version"] = 1
 
+static func initialize_birth_identity(people: Dictionary) -> bool:
+	var birth_config := BirthIdentity.load_config()
+	if birth_config.is_empty():
+		return false
+	var version := int(birth_config.rules.version)
+	if people.has("birth_identity_version"):
+		return people.birth_identity_version==version and not people.birth_identity_version is bool
+	people["birth_identity_version"] = version
+	return true
+
 static func _ordinary(people: Dictionary, config: Dictionary, rng: RandomNumberGenerator, day: int, index: int) -> String:
 	var id := "npc_o_%d_%d" % [day,index]
 	if people.profiles.has(id):
 		return id
+	var existing_friend: Dictionary = people.profiles.get(id+"_friend",{}).duplicate(true)
 	# Bounds, array order, and the entire old body matter, not just draw count.
 	var sampler: Dictionary = config.duplicate(true)
 	for key: String in config.get("legacy_sampler",{}):
@@ -516,6 +531,39 @@ static func _ordinary(people: Dictionary, config: Dictionary, rng: RandomNumberG
 				var overlay := OrdinaryContent.propose({"save_id":str(people.save_id),"seed":int(people.seed),"npc_id":npc_id},population)
 				if not overlay.is_empty():
 					people.profiles[npc_id].merge(overlay,true)
+	# The old factory consumes the same draws even in the unusual case where an
+	# unpaired friend already exists. Preserve that committed profile afterward.
+	if people.get("birth_identity_version")==1 and not existing_friend.is_empty():
+		people.profiles[id+"_friend"] = existing_friend
+	if people.get("birth_identity_version")==1:
+		var birth_config: Dictionary = {}
+		if config.has("birth_identity"):
+			if config.birth_identity is Dictionary:
+				birth_config = config.birth_identity
+		else:
+			birth_config = BirthIdentity.load_config()
+		if birth_config.is_empty() or not BirthIdentity.config_valid(birth_config):
+			people.profiles[created]["birth_identity"] = {}
+		elif birth_config.rules.enabled:
+			var born: Array = [created]
+			if existing_friend.is_empty():
+				born.append(created+"_friend")
+			var excluded: Array = []
+			for other_id: String in people.profiles:
+				if other_id not in born:
+					excluded.append(str(people.profiles[other_id].name))
+			var appearance_config := Appearance.load_config()
+			for npc_id: String in born:
+				var birth := BirthIdentity.propose({"save_id":str(people.save_id),"seed":int(people.seed),"npc_id":npc_id},birth_config,excluded)
+				var revised := OrdinaryContent.with_birth_identity(people.profiles[npc_id],birth,birth_config,appearance_config)
+				if revised.is_empty():
+					# Callers keep their original String API and RNG sequence. This
+					# incomplete candidate is rejected by People/SaveService; never
+					# silently commit an unlocked legacy identity after policy failure.
+					people.profiles[npc_id]["birth_identity"] = {}
+				else:
+					people.profiles[npc_id] = revised
+					excluded.append(birth.name)
 	return created
 
 static func _ordinary_legacy(people: Dictionary, config: Dictionary, rng: RandomNumberGenerator, day: int, index: int) -> String:
@@ -1632,6 +1680,11 @@ static func validate(people: Variant) -> String:
 	if not _integer(people.stats.get("lost_customers", 0), 0, MAX_INT):
 		return "来客流失统计无效"
 	var ordinary_config := {}
+	var birth_config := {}
+	if people.has("birth_identity_version"):
+		birth_config = BirthIdentity.load_config()
+		if birth_config.is_empty() or people.birth_identity_version is bool or people.birth_identity_version != birth_config.rules.version:
+			return "BIRTH_IDENTITY_POLICY_INVALID"
 	var ordinary_fields := ["ordinary_content_version","occupation_id","age_group","gender_group","work_schedule","advice_preference_version","advice_preference"]
 	for id in people.profiles:
 		var profile: Variant = people.profiles[id]
@@ -1641,6 +1694,11 @@ static func validate(people: Variant) -> String:
 			return "人物经历或外貌无效"
 		if modern_appearance and not Appearance.appearance_valid(profile.appearance,parts_config):
 			return "人物经历或外貌无效"
+		if profile.has("birth_identity"):
+			if birth_config.is_empty():
+				birth_config = BirthIdentity.load_config()
+			if not OrdinaryContent.birth_profile_valid(profile,birth_config,parts_config):
+				return "BIRTH_IDENTITY_INVALID"
 		if profile.has("return_schedule") and not _valid_return_schedule(profile.return_schedule):
 			return "人物回访行程无效"
 		if ordinary_fields.any(func(field: String) -> bool: return profile.has(field)):

@@ -40,6 +40,10 @@ func run() -> void:
 
 func old_copy(schema: int) -> Dictionary:
 	var old: Dictionary = game.snapshot()
+	# Synthetic historical input excludes the later birth-policy namespace.
+	old.people.erase("birth_identity_version")
+	for profile: Dictionary in old.people.profiles.values():
+		profile.erase("birth_identity")
 	old.schema_version = schema
 	old.divination.erase("past_lines")
 	for case: Dictionary in old.divination.cases.values():

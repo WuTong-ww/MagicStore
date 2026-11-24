@@ -1,0 +1,83 @@
+{
+  "bundle": {
+    "version": 3,
+    "person": {
+      "name": "玛丽·莫里斯",
+      "role": "手工修伞匠",
+      "personality": "细致温和，遇到关系问题容易反复斟酌。",
+      "speech_style": "语气平和，先说自己的顾虑，也愿意停下来听人回应。",
+      "background": "在河边经营修伞的小铺，平常愿意帮邻里修补旧物。",
+      "preferences": [
+        "收集雨声",
+        "竹编手艺"
+      ],
+      "appearance_description": "齐耳短发，戴着圆框眼镜，穿着素色针织外套。",
+      "birth_identity": {
+        "version": 1,
+        "cultural_origin": "europe",
+        "name_pool_id": "europe_english",
+        "name": "玛丽·莫里斯",
+        "skin_id": "skin_01"
+      }
+    },
+    "contact": {
+      "name": "费米·阿德巴约",
+      "role": "社区陶艺老师",
+      "personality": "做事认真，重视彼此都能表达自己的意愿。",
+      "speech_style": "表达简洁，会先问清对方真正想商量的事情。",
+      "background": "在社区教人做陶器，经常和不同手艺的邻居交流。",
+      "preferences": [
+        "读书会",
+        "种植物"
+      ],
+      "appearance_description": "头发在脑后束起，穿着浅色衬衫和日常围裙。",
+      "birth_identity": {
+        "version": 1,
+        "cultural_origin": "africa",
+        "name_pool_id": "africa_yoruba",
+        "name": "费米·阿德巴约",
+        "skin_id": "skin_05"
+      }
+    },
+    "relationship": {
+      "kind": "旧邻居",
+      "shared_history": "两人以前住在同一条街，曾经一起为邻居修理公共花架。"
+    },
+    "case": {
+      "title": "一件想重新商量的修补活",
+      "opening": "最近我想和旧邻居商量一件合作的事，但不想让对方觉得受了催促。",
+      "question": "怎样把自己的想法说清楚，也让对方能安心地拒绝？",
+      "situation": "我想和旧邻居办一次手艺交流，正在犹豫该怎样发出邀请。",
+      "concern": "我怕自己谈得太热切，让对方不好意思说出真实想法。",
+      "detail": "我把两种合作方式画在了练习纸上，还没挑好先介绍哪一幅。",
+      "hidden_fact": "对方之前给社区留过一条备注，希望参与活动的人能自行选择时间。",
+      "followup": "我想先问对方愿不愿意听，再慢慢把能商量的部分说出来。"
+    }
+  },
+  "canonical": "{\"case\":{\"concern\":\"我怕自己谈得太热切，让对方不好意思说出真实想法。\",\"detail\":\"我把两种合作方式画在了练习纸上，还没挑好先介绍哪一幅。\",\"followup\":\"我想先问对方愿不愿意听，再慢慢把能商量的部分说出来。\",\"hidden_fact\":\"对方之前给社区留过一条备注，希望参与活动的人能自行选择时间。\",\"opening\":\"最近我想和旧邻居商量一件合作的事，但不想让对方觉得受了催促。\",\"question\":\"怎样把自己的想法说清楚，也让对方能安心地拒绝？\",\"situation\":\"我想和旧邻居办一次手艺交流，正在犹豫该怎样发出邀请。\",\"title\":\"一件想重新商量的修补活\"},\"contact\":{\"appearance_description\":\"头发在脑后束起，穿着浅色衬衫和日常围裙。\",\"background\":\"在社区教人做陶器，经常和不同手艺的邻居交流。\",\"birth_identity\":{\"cultural_origin\":\"africa\",\"name\":\"费米·阿德巴约\",\"name_pool_id\":\"africa_yoruba\",\"skin_id\":\"skin_05\",\"version\":1},\"name\":\"费米·阿德巴约\",\"personality\":\"做事认真，重视彼此都能表达自己的意愿。\",\"preferences\":[\"读书会\",\"种植物\"],\"role\":\"社区陶艺老师\",\"speech_style\":\"表达简洁，会先问清对方真正想商量的事情。\"},\"person\":{\"appearance_description\":\"齐耳短发，戴着圆框眼镜，穿着素色针织外套。\",\"background\":\"在河边经营修伞的小铺，平常愿意帮邻里修补旧物。\",\"birth_identity\":{\"cultural_origin\":\"europe\",\"name\":\"玛丽·莫里斯\",\"name_pool_id\":\"europe_english\",\"skin_id\":\"skin_01\",\"version\":1},\"name\":\"玛丽·莫里斯\",\"personality\":\"细致温和，遇到关系问题容易反复斟酌。\",\"preferences\":[\"收集雨声\",\"竹编手艺\"],\"role\":\"手工修伞匠\",\"speech_style\":\"语气平和，先说自己的顾虑，也愿意停下来听人回应。\"},\"relationship\":{\"kind\":\"旧邻居\",\"shared_history\":\"两人以前住在同一条街，曾经一起为邻居修理公共花架。\"},\"version\":3}",
+  "draft_hash": "1f4f57492c9c9a08edc6322d4d47ed3fe804c65390f5beedd3d3331a4421af8f",
+  "context": {
+    "setting": "当代中文生活叙事，一家听取来客困扰的小店。创作独立的新人物，不补写已有游戏人物或案例。",
+    "existing_names": [
+      "林照晚"
+    ],
+    "theme_hint": "社区手艺",
+    "birth_identities": {
+      "person": {
+        "version": 1,
+        "cultural_origin": "europe",
+        "name_pool_id": "europe_english",
+        "name": "玛丽·莫里斯",
+        "skin_id": "skin_01"
+      },
+      "contact": {
+        "version": 1,
+        "cultural_origin": "africa",
+        "name_pool_id": "africa_yoruba",
+        "name": "费米·阿德巴约",
+        "skin_id": "skin_05"
+      }
+    },
+    "identity_hash": "e2e7c132ffec411cdd409d993a7db7f1201f526f1484345baba05fc7934f4792"
+  }
+}

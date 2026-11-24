@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "maximum_new_games": 128,
+  "settle_frames": 8,
+  "jpeg_quality": 0.85,
+  "sizes": [[1280, 720], [1920, 1080]],
+  "subjects": {
+    "europe": ["europe"],
+    "africa_or_south_asia": ["africa", "south_asia"],
+    "mixed": ["mixed"]
+  },
+  "copy": {"save_name": "真实出生身份展示验收"}
+}

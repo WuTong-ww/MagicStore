@@ -47,6 +47,10 @@ func run() -> void:
 
 func old_copy(schema: int) -> Dictionary:
 	var legacy: Dictionary = game.snapshot()
+	# Historical fixture versions cannot carry future birth-policy fields.
+	legacy.people.erase("birth_identity_version")
+	for profile: Dictionary in legacy.people.profiles.values():
+		profile.erase("birth_identity")
 	legacy.schema_version = schema
 	legacy.divination.erase("past_lines")
 	for case: Dictionary in legacy.divination.cases.values():
@@ -136,6 +140,10 @@ func historical_selection_boundary(hat: String = "accessory_10") -> void:
 	check((await act("new_game",{"name":"外观组合兼容验收"})).success,"create isolated current-schema selection fixture")
 	var old_snapshot: Dictionary = game.snapshot()
 	# Keep the historical A4 input at schema6, predating G2's separate metadata.
+	# Historical fixture versions cannot carry future birth-policy fields.
+	old_snapshot.people.erase("birth_identity_version")
+	for profile: Dictionary in old_snapshot.people.profiles.values():
+		profile.erase("birth_identity")
 	old_snapshot.schema_version = 6
 	old_snapshot.divination.erase("past_lines")
 	for case: Dictionary in old_snapshot.divination.cases.values():

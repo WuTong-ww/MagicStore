@@ -151,6 +151,11 @@ func _arrival_schema_migration() -> void:
 	require_action("new_game", {"name":"G1 旧客流计划迁移"})
 	_departure_risk()
 	var legacy: Dictionary = gs.snapshot()
+	# Project only the future birth-policy fields out of this synthetic v3 input.
+	legacy.people.erase("birth_identity_version")
+	for profile: Dictionary in legacy.people.profiles.values():
+		profile.erase("birth_identity")
+	check(not legacy.people.has("birth_identity_version") and legacy.people.profiles.values().all(func(profile: Dictionary) -> bool: return not profile.has("birth_identity")),"G1 synthetic v3 people excludes future birth fields")
 	legacy.schema_version = 3
 	legacy.divination.erase("past_lines")
 	for case: Dictionary in legacy.divination.cases.values():

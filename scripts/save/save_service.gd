@@ -4,7 +4,7 @@ extends Node
 ## belongs in a snapshot. Tests must replace base_dir with an isolated directory.
 
 const ENVELOPE_FORMAT := "midnight-grocery-save-v1"
-const CURRENT_SCHEMA := 12
+const CURRENT_SCHEMA := 13
 const MAX_BYTES := 16 * 1024 * 1024
 const MAX_INTEGER := 2147483647
 const MAX_EXACT_JSON_INTEGER := 9007199254740991
@@ -15,6 +15,7 @@ const DivinationSession = preload("res://scripts/divination/session.gd")
 const Shop = preload("res://scripts/shop/shop.gd")
 const PeopleBridge = preload("res://scripts/shop/people_bridge.gd")
 const Appearance = preload("res://scripts/people/appearance.gd")
+const BirthIdentityCopy = preload("res://scripts/people/birth_identity_copy.gd")
 const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
 const DailyLoop = preload("res://scripts/core/daily_loop.gd")
 const StoryContent = preload("res://scripts/story/story_content.gd")
@@ -359,6 +360,11 @@ func _validate(s: Dictionary) -> String:
 		var people_error: String = PeopleBridge.validate(s)
 		if not people_error.is_empty():
 			return people_error
+		if int(s.schema_version)>=13:
+			if s.people.get("birth_identity_version")!=1 or s.people.birth_identity_version is bool:
+				return "BIRTH_IDENTITY_POLICY_INVALID"
+		elif s.people.has("birth_identity_version") or s.people.profiles.values().any(func(profile:Dictionary)->bool:return profile.has("birth_identity")):
+			return "BIRTH_IDENTITY_SCHEMA_INVALID"
 		if int(s.schema_version) >= 4 and not _integer(s.people.stats.get("lost_customers"), 0, MAX_INTEGER):
 			return "顾客流失统计无效"
 	if int(s.schema_version) >= 10:
@@ -509,4 +515,4 @@ func _success(message: String) -> Dictionary:
 
 
 func _failure(code: String, message: String) -> Dictionary:
-	return {"success": false, "error_code": code, "message": message, "backup_available": false}
+	return {"success": false, "error_code": code, "message": BirthIdentityCopy.public_message(message), "backup_available": false}

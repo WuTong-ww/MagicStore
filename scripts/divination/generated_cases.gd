@@ -4,6 +4,7 @@ extends RefCounted
 
 const Catalog = preload("res://scripts/divination/catalog.gd")
 const EventSchema = preload("res://scripts/divination/event_schema.gd")
+const GeneratedPerson = preload("res://scripts/people/generated_person.gd")
 
 const CASE_LIMITS := {"title":40,"opening":120,"question":80,"situation":160,"concern":120,"detail":160,"hidden_fact":160,"followup":120}
 const METHOD_IDS := ["tarot", "lenormand", "plum", "yijing", "xiaoliu"]
@@ -57,8 +58,8 @@ static func catalog(state: Dictionary, base: Dictionary) -> Dictionary:
 		var profile: Variant = profiles[npc_id]
 		if not profile is Dictionary or not profile.has("generated_bundle"):
 			continue
-		var bundle: Variant = profile.generated_bundle
-		if not bundle is Dictionary or bundle.get("version") != 1 or not valid_case(bundle.get("case")) or not profile.get("name") is String or not profile.get("role") is String:
+		var bundle: Dictionary = GeneratedPerson.validate_bundle(profile.generated_bundle)
+		if bundle.is_empty() or not valid_case(bundle.get("case")) or not profile.get("name") is String or not profile.get("role") is String:
 			return {}
 		if not bundle.get("contact") is Dictionary or not bundle.contact.get("name") is String or not bundle.get("relationship") is Dictionary or not bundle.relationship.get("kind") is String or not bundle.relationship.get("shared_history") is String:
 			return {}

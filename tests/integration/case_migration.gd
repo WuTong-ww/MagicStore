@@ -45,11 +45,15 @@ func run() -> void:
 	await act("talk",{"topic_id":"invitation","text":"邀请上写了什么？"})
 	await act("receive_feedback",{"event_id":event.event_id})
 	var old: Dictionary = game.snapshot()
+	# This historical version projection excludes future birth-policy fields.
+	old.people.erase("birth_identity_version")
+	for profile: Dictionary in old.people.profiles.values():
+		profile.erase("birth_identity")
 	old.schema_version = 10
 	old.erase("story")
 	old.divination = historical_divination(old.divination)
 	check(not old.divination.cases[source_visit].event.feedback.report.is_empty(),"historic source has genuinely settled feedback and rewards")
-	check(saves.write_save(old).success,"genuine schema10 history saves without new namespace")
+	check(saves.write_save(old).success,"schema10 historical projection saves without new namespaces")
 	var path: String = saves._path(old.save_id)
 	var sha := FileAccess.get_sha256(path)
 	game.daily_loop_config.enabled = true
@@ -58,7 +62,10 @@ func run() -> void:
 	check(migrated.schema_version==saves.CURRENT_SCHEMA and migrated.divination.settings=={"free_question":false},"schema11 migration defaults free question to false")
 	for key: String in ["save_id","name","state_version","clock_minutes","player","npcs","visits","processed_actions","active_visit_id"]:
 		check(migrated[key]==old[key],"migration preserves historic "+key)
-	check(migrated.people==old.people and migrated.shop==old.shop,"migration preserves identities, rewards and inventory")
+	var historical_people: Dictionary = migrated.people.duplicate(true)
+	check(historical_people.get("birth_identity_version",0)==1,"migration adds the checked birth-policy marker")
+	historical_people.erase("birth_identity_version")
+	check(historical_people==old.people and migrated.shop==old.shop,"migration preserves identities, rewards and inventory")
 	check(historical_divination(migrated.divination)==old.divination,"all existing world, statements, clues, hypotheses, predictions, services and events are preserved")
 	for case: Dictionary in migrated.divination.cases.values():
 		check(case.board=={},"old case retains empty board without redrawing or recalculating")

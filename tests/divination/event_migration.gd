@@ -54,6 +54,11 @@ func old_copy(schema: int) -> Dictionary:
 			case.erase("cause")
 		legacy.divination.erase("legacy_eventless_visits")
 	if legacy.has("people"):
+		# The synthetic v1-v4 projection cannot include the later birth policy.
+		legacy.people.erase("birth_identity_version")
+		for profile: Dictionary in legacy.people.profiles.values():
+			profile.erase("birth_identity")
+		check(not legacy.people.has("birth_identity_version") and legacy.people.profiles.values().all(func(profile: Dictionary) -> bool: return not profile.has("birth_identity")),"synthetic old people excludes future birth fields / v"+str(schema))
 		legacy.people.erase("unlocked_topics")
 		legacy.people.erase("family_library_version")
 		legacy.people.erase("family_metrics")

@@ -4,6 +4,7 @@ extends RefCounted
 const PERSONA_FIELDS := ["name", "role", "personality", "speech_style"]
 const SOURCE_KINDS := ["persona", "statement", "clue", "prediction", "feedback", "event", "relationship", "history", "topic"]
 const PUBLIC_FIELDS := ["npc", "safe_persona", "relationship", "input", "selected_topic", "allowed_topics", "question_topics", "current_dialogue", "visible_history", "known_memories", "sources"]
+const GeneratedPerson = preload("res://scripts/people/generated_person.gd")
 const SETTINGS_PATH := "res://data/people/character_protocol.json"
 const FAMILY_SETTINGS_PATH := "res://data/people/family_dialogue_policy.json"
 
@@ -122,26 +123,7 @@ static func _family_public_safe(value: Variant, guard: Dictionary) -> bool:
 	return true
 
 static func settings_valid(data: Variant) -> bool:
-	if not data is Dictionary or data.size() != 8:
-		return false
-	for key: String in ["schema_version","bundle_version","legacy_bundle_version","moods","default_mood","appearance_description","person_fields","person_fields_v2"]:
-		if not data.has(key):
-			return false
-	for key: String in ["schema_version","bundle_version","legacy_bundle_version"]:
-		var expected := 2 if key == "bundle_version" else 1
-		if not (data[key] is int or data[key] is float) or not is_finite(float(data[key])) or float(data[key]) != expected:
-			return false
-	if not data.moods is Array or data.moods != ["neutral","smile","hesitant","surprised","sad"] or data.default_mood != "neutral":
-		return false
-	if not data.person_fields is Array or data.person_fields != ["name","role","personality","speech_style","background","preferences"] or not data.person_fields_v2 is Array or data.person_fields_v2 != data.person_fields + ["appearance_description"]:
-		return false
-	var bounds: Variant = data.appearance_description
-	if not bounds is Dictionary or bounds.size() != 3 or not bounds.has("min_length") or not bounds.has("max_length") or not bounds.get("prompt") is String or bounds.prompt.strip_edges().is_empty():
-		return false
-	for key: String in ["min_length","max_length"]:
-		if not (bounds[key] is int or bounds[key] is float) or not is_finite(float(bounds[key])) or float(bounds[key]) != floor(float(bounds[key])) or bounds[key] <= 0:
-			return false
-	return bounds.min_length <= bounds.max_length
+	return GeneratedPerson.protocol_valid(data)
 
 static func load_settings() -> Dictionary:
 	var data: Variant = JSON.parse_string(FileAccess.get_file_as_string(SETTINGS_PATH))

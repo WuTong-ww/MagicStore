@@ -17,6 +17,9 @@ static func initialize(state: Dictionary, config: Dictionary, divination: Varian
 	state["people"] = People.create(state.save_id, absi(String(state.save_id).hash()), int(state.clock_minutes))
 	var people: Dictionary = state.people
 	if fresh:
+		# Activate before plan_day can create the first ordinary main/contact.
+		if not People.initialize_birth_identity(people):
+			return
 		People.initialize_family_library(people,config.get("family_library",{}),"new_game")
 		People.initialize_ordinary_content(people,config)
 	# Enable the full catalog before first-day births. People.create remains a

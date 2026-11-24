@@ -14,6 +14,8 @@ const DivinationEvents = preload("res://scripts/divination/event_rules.gd")
 const Shop = preload("res://scripts/shop/shop.gd")
 const PeopleBridge = preload("res://scripts/shop/people_bridge.gd")
 const People = preload("res://scripts/people/people.gd")
+const BirthIdentity = preload("res://scripts/people/birth_identity.gd")
+const BirthIdentityCopy = preload("res://scripts/people/birth_identity_copy.gd")
 const Memory = preload("res://scripts/people/memory.gd")
 const HttpProvider = preload("res://scripts/providers/http_dialogue_provider.gd")
 const ApiEndpoint = preload("res://scripts/providers/api_endpoint.gd")
@@ -66,6 +68,9 @@ func _ready() -> void:
 		push_error(content_error)
 		return
 	content = loaded.content
+	if BirthIdentity.load_config().is_empty():
+		content_error = "BIRTH_IDENTITY_CONFIG_INVALID"
+		return
 	daily_loop_config = DailyLoop.load_config()
 	story_config = StoryContent.load_config()
 	if story_config.is_empty():
@@ -143,7 +148,7 @@ func free_question_enabled() -> bool:
 	return bool(state.get("divination",{}).get("settings",{}).get("free_question",false))
 
 func _case_configuration_valid() -> bool:
-	return _divination != null and not StoryContent.load_config().is_empty() and not CaseSchema.load_rules().is_empty() and not CaseSchema.load_all(_divination.data).is_empty()
+	return _divination != null and not BirthIdentityCopy.load_config().is_empty() and not StoryContent.load_config().is_empty() and not CaseSchema.load_rules().is_empty() and not CaseSchema.load_all(_divination.data).is_empty()
 
 func _story_enabled() -> bool:
 	return _sequential() and bool(_divination.board_config.get("enabled",false)) and bool(story_config.get("rules",{}).get("enabled",false))
@@ -277,14 +282,44 @@ func people_generation_status() -> Dictionary:
 	return {"enabled":_generation_enabled,"configured":people_generator != null,"pending":_generation_jobs.size(),"ready":ready_count,
 		"awaiting_commit":_generation_ready.size(),"concurrency":_generation_concurrency,"notice":_generation_notice}
 
+func _generation_job_current(job_id: String, token: String) -> bool:
+	var job: Dictionary = _generation_jobs.get(job_id,{})
+	return not state.is_empty() and not job.is_empty() and job.get("token")==token and job.get("save_id")==state.save_id and token=="%s:%d" % [state.save_id,_generation_epoch]
+
 func _person_ready(job_id: String, token: String, bundle: Dictionary, provenance: Dictionary) -> void:
-	if not _generation_jobs.has(job_id) or _generation_jobs[job_id].token != token:
+	if not _generation_job_current(job_id,token):
 		return
+	if _generation_ready.any(func(row: Dictionary)->bool:return row.job_id==job_id):
+		return
+	var job: Dictionary = _generation_jobs[job_id]
+	if job.get("birth_policy_version")==1:
+		var pair := GeneratedPerson.validate_birth_identities(job.get("birth_identities",{}))
+		if pair.is_empty() or GeneratedPerson.validate_draft(bundle,{"birth_identities":pair,"identity_hash":GeneratedPerson.identity_hash(pair)}).is_empty():
+			_person_failed(job_id,token,"INVALID_BUNDLE")
+			return
+		if job.get("fallback_used",false) and provenance.get("source")!="offline":
+			return
 	_generation_ready.append({"job_id":job_id,"token":token,"bundle":bundle.duplicate(true),"provenance":provenance.duplicate(true)})
 
 func _person_failed(job_id: String, token: String, code: String) -> void:
-	if not _generation_jobs.has(job_id) or _generation_jobs[job_id].token != token:
+	if not _generation_job_current(job_id,token):
 		return
+	if code=="CANCELLED":
+		_generation_jobs.erase(job_id)
+		_generation_ready = _generation_ready.filter(func(row:Dictionary)->bool:return row.job_id!=job_id)
+		return
+	if _generation_ready.any(func(row: Dictionary)->bool:return row.job_id==job_id):
+		return
+	var job: Dictionary = _generation_jobs[job_id]
+	if job.get("birth_policy_version")==1 and not job.get("fallback_used",false) and code not in ["CANCELLED","INVALID_CONTEXT","INVALID_OR_DUPLICATE_JOB"]:
+		var pair := GeneratedPerson.validate_birth_identities(job.get("birth_identities",{}))
+		if not pair.is_empty():
+			var bundle := GeneratedPerson.offline_bundle_for_identities(job_id,pair)
+			var provenance := GeneratedPerson.offline_provenance_for_identities(job_id,pair)
+			if not bundle.is_empty() and not provenance.is_empty():
+				job["fallback_used"] = true
+				_person_ready(job_id,token,bundle,provenance)
+				return
 	_generation_jobs.erase(job_id)
 	# A rejected setting is not a rate-limit or an outage. Discard that draft
 	# and refill its slot promptly with a new job, within the daily attempt
@@ -331,13 +366,38 @@ func pump_background_people(ui_busy: bool = false, force: bool = false) -> void:
 		var avoid_names: Array = []
 		for profile: Dictionary in state.people.profiles.values():
 			avoid_names.append(str(profile.name))
+		for pending: Dictionary in _generation_jobs.values():
+			for record: Variant in pending.get("birth_identities",{}).values():
+				if record is Dictionary and record.get("name") is String:
+					avoid_names.append(record.name)
 		var themes := ["日常工作里的一个取舍", "邻里之间的一次小约定", "搬家整理时放不下的一件事", "想和熟人商量却迟迟没开口的事"]
 		var theme: String = themes[_generation_sequence % themes.size()]
 		var role_hint: String = _generation_role_hints[_generation_sequence % _generation_role_hints.size()]
 		var context := {"generation_id":job_id,"avoid_names":avoid_names,"theme_hint":"%s。职业可以参考%s或相近工作，写出这一行自己的日常细节，不要统一成快递驿站或旧友写信。" % [theme,role_hint]}
-		_generation_jobs[job_id] = {"token":token,"save_id":state.save_id}
+		var job := {"token":token,"save_id":state.save_id}
+		if state.people.get("birth_identity_version")==1:
+			var ids := GeneratedPerson._ids(job_id)
+			var configured_birth: Variant = people_config.get("birth_identity",{})
+			if not configured_birth is Dictionary or configured_birth.is_empty() or not BirthIdentity.config_valid(configured_birth):
+				continue
+			var birth_config: Dictionary = configured_birth
+			var person := BirthIdentity.propose({"save_id":state.save_id,"seed":state.people.seed,"npc_id":ids.npc_id},birth_config,avoid_names)
+			if person.is_empty():
+				continue
+			var contact := BirthIdentity.propose({"save_id":state.save_id,"seed":state.people.seed,"npc_id":ids.contact_id},birth_config,avoid_names+[person.name])
+			var pair := GeneratedPerson.validate_birth_identities({"person":person,"contact":contact})
+			if pair.is_empty():
+				continue
+			job["birth_policy_version"] = 1
+			job["birth_identities"] = pair.duplicate(true)
+			context["birth_identities"] = pair.duplicate(true)
+			context["identity_hash"] = GeneratedPerson.identity_hash(pair)
+		_generation_jobs[job_id] = job
 		if not people_generator.enqueue(job_id,context,token):
-			_generation_jobs.erase(job_id)
+			if job.get("birth_policy_version")==1:
+				_person_failed(job_id,token,"NOT_CONFIGURED")
+			else:
+				_generation_jobs.erase(job_id)
 		else:
 			_generation_attempts[attempt_key] = int(_generation_attempts.get(attempt_key,0))+1
 			_generation_sequence += 1
@@ -384,6 +444,8 @@ func _admit_generated_person(action: Dictionary) -> Dictionary:
 	var job_id: String = str(action.get("job_id", ""))
 	var slot_id: String = str(action.get("slot_id", ""))
 	var job: Dictionary = _generation_jobs.get(job_id, {})
+	if not _generation_job_current(job_id,str(job.get("token",""))):
+		return _fail("ADMISSION_REJECTED","BIRTH_IDENTITY_SOURCE_INVALID")
 	var ready: Dictionary = {}
 	for row: Dictionary in _generation_ready:
 		if row.job_id == job_id and row.token == job.get("token") and job.get("save_id") == state.save_id:
@@ -392,7 +454,14 @@ func _admit_generated_person(action: Dictionary) -> Dictionary:
 	if ready.is_empty() or slot_id.is_empty() or not state.people.arrivals.has(slot_id):
 		return _fail("ADMISSION_REJECTED", "人物草稿或审核来源无效。")
 	var candidate := state.duplicate(true)
-	var applied := GeneratedPerson.apply(candidate.people, people_config, job_id, ready.bundle, ready.provenance, int(candidate.people.arrivals[slot_id].at), slot_id)
+	var expected := {}
+	if candidate.people.get("birth_identity_version")==1 or job.has("birth_policy_version"):
+		if job.get("birth_policy_version")!=1:
+			return _fail("ADMISSION_REJECTED","BIRTH_IDENTITY_SOURCE_INVALID")
+		expected = GeneratedPerson.validate_birth_identities(job.get("birth_identities",{}))
+		if expected.is_empty():
+			return _fail("ADMISSION_REJECTED","BIRTH_IDENTITY_SOURCE_INVALID")
+	var applied := GeneratedPerson.apply(candidate.people, people_config, job_id, ready.bundle, ready.provenance, int(candidate.people.arrivals[slot_id].at), slot_id, expected)
 	if not applied.get("success", false):
 		return _fail("ADMISSION_REJECTED", applied.get("message", ""))
 	var committed := _commit(candidate, action, "一位新来客已经约好到店时间。", applied)
@@ -583,7 +652,7 @@ func execute_action(action: Dictionary) -> Dictionary:
 	if _provider_pending:
 		return _fail("BUSY", "正在等待对话回复，请稍候。")
 	if not content_error.is_empty() or content.is_empty() or not _case_configuration_valid():
-		return _fail("CONTENT_INVALID", "内容配置不可用。" + content_error)
+		return _fail("CONTENT_INVALID", _content_failure_message() + content_error)
 	if not action.get("type") is String:
 		return _fail("INVALID_ACTION", "动作缺少有效的 type。")
 	match action.type:
@@ -642,7 +711,7 @@ func execute_action(action: Dictionary) -> Dictionary:
 
 func _preflight(action: Dictionary) -> Dictionary:
 	if not content_error.is_empty() or content.is_empty() or not _case_configuration_valid():
-		return _fail("CONTENT_INVALID", "内容配置不可用。" + content_error)
+		return _fail("CONTENT_INVALID", _content_failure_message() + content_error)
 	if state.is_empty():
 		return _fail("NO_SAVE", "请先新建或选择存档。")
 	if not action.get("type") is String or not action.get("action_id") is String or action.action_id.is_empty() or action.action_id.length() > 128:
@@ -1146,6 +1215,10 @@ func _initialize_integrated(candidate: Dictionary, fresh: bool = false) -> bool:
 	if int(candidate.schema_version) < 12:
 		StoryProgress.initialize(candidate,story_config)
 		candidate.schema_version = 12
+	if int(candidate.schema_version) < 13:
+		if not People.initialize_birth_identity(candidate.people):
+			return false
+		candidate.schema_version = 13
 	return People.validate(candidate.people).is_empty()
 
 func _set_free_question(action: Dictionary) -> Dictionary:
@@ -1335,6 +1408,12 @@ func _use_unlocked_option(action: Dictionary) -> Dictionary:
 func _ok(message: String, result: Dictionary) -> Dictionary:
 	return {"success": true, "error_code": "", "message": message, "state_version": state.get("state_version", 0), "result": result}
 
+func _content_failure_message() -> String:
+	return "内容配置不可用。"
+
 func _fail(error_code: String, message: String) -> Dictionary:
+	message=BirthIdentityCopy.public_message(message)
+	if message.is_empty():
+		message=_content_failure_message()
 	action_failed.emit(message)
 	return {"success": false, "error_code": error_code, "message": message, "state_version": state.get("state_version", 0), "result": {}}

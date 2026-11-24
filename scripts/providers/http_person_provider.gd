@@ -63,6 +63,9 @@ func enqueue(job_id: String, context: Dictionary, token: String) -> bool:
 		_last_error = "NOT_CONFIGURED"
 		return false
 	var public_context: Dictionary = Policy.request_context(context)
+	if public_context.is_empty():
+		_last_error = "INVALID_CONTEXT"
+		return false
 	_jobs[job_id] = {"id":job_id,"token":token,"epoch":_epoch,"context":public_context,"phase":"generate",
 		"pending":false,"http":null,"serial":0,"started":-1,"deadline":-1,"retry_at":0,"attempts":{},"bundle":{},"draft_hash":""}
 	call_deferred("_pump")
@@ -195,7 +198,7 @@ func _start(job: Dictionary) -> void:
 func _body(job: Dictionary) -> Dictionary:
 	var generating: bool = job.phase == "generate"
 	var context: Dictionary = job.context.duplicate(true) if generating else Policy.review_context(job.context,job.bundle,job.draft_hash)
-	return ModelRequestPolicy.build_body(_model,Policy.generation_prompt() if generating else Policy.review_prompt(),context,str(job.phase),"person")
+	return ModelRequestPolicy.build_body(_model,Policy.generation_prompt(job.context) if generating else Policy.review_prompt(),context,str(job.phase),"person")
 
 func _on_completed(result: int, code: int, headers: PackedStringArray, data: PackedByteArray, id: String, epoch: int, serial: int) -> void:
 	if epoch != _epoch or not _jobs.has(id):
@@ -225,7 +228,7 @@ func _on_completed(result: int, code: int, headers: PackedStringArray, data: Pac
 		_finish_failed(id,"INVALID_RESPONSE")
 		return
 	if job.phase == "generate":
-		var bundle: Dictionary = Policy.validate_bundle(content)
+		var bundle: Dictionary = Policy.validate_draft(content,job.context)
 		if bundle.is_empty() or not _names_allowed(bundle,job.context):
 			_record_rejection(job,"INVALID_BUNDLE",content,{})
 			_finish_failed(id,"INVALID_BUNDLE")
@@ -236,7 +239,7 @@ func _on_completed(result: int, code: int, headers: PackedStringArray, data: Pac
 		job.retry_at = 0
 		call_deferred("_pump")
 	else:
-		if not Policy.approve_review(content,job.bundle):
+		if Policy.validate_draft(job.bundle,job.context).is_empty() or not Policy.approve_review(content,job.bundle):
 			_record_rejection(job,"REVIEW_REJECTED",job.bundle,content)
 			_finish_failed(id,"REVIEW_REJECTED")
 			return
@@ -246,7 +249,7 @@ func _accept_gateway(job: Dictionary, value: Variant) -> void:
 	if not value is Dictionary or value.size() != 2 or not value.get("bundle") is Dictionary or not value.get("provenance") is Dictionary:
 		_finish_failed(job.id,"INVALID_RESPONSE")
 		return
-	var bundle: Dictionary = Policy.validate_bundle(value.bundle)
+	var bundle: Dictionary = Policy.validate_draft(value.bundle,job.context)
 	var provenance: Dictionary = value.provenance
 	if bundle.is_empty() or not _names_allowed(bundle,job.context) or provenance.size() != 4 or provenance.get("source") != "model" or not provenance.get("model") is String or provenance.model.strip_edges().is_empty() or provenance.model.length() > 120 or provenance.get("draft_hash") != Policy.draft_hash(bundle) or not provenance.get("review") is Dictionary or not Policy.approve_review(provenance.review,bundle):
 		_record_rejection(job,"REVIEW_REJECTED",value.bundle,provenance.get("review",{}))

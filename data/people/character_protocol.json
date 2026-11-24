@@ -1,14 +1,121 @@
 {
   "schema_version": 1,
-  "bundle_version": 2,
+  "bundle_version": 3,
   "legacy_bundle_version": 1,
-  "moods": ["neutral", "smile", "hesitant", "surprised", "sad"],
+  "moods": [
+    "neutral",
+    "smile",
+    "hesitant",
+    "surprised",
+    "sad"
+  ],
   "default_mood": "neutral",
-  "person_fields": ["name", "role", "personality", "speech_style", "background", "preferences"],
-  "person_fields_v2": ["name", "role", "personality", "speech_style", "background", "preferences", "appearance_description"],
+  "person_fields": [
+    "name",
+    "role",
+    "personality",
+    "speech_style",
+    "background",
+    "preferences"
+  ],
+  "person_fields_v2": [
+    "name",
+    "role",
+    "personality",
+    "speech_style",
+    "background",
+    "preferences",
+    "appearance_description"
+  ],
   "appearance_description": {
     "min_length": 8,
     "max_length": 160,
     "prompt": "appearance_description仅描述现代居民自然可见的发长、发型、眼镜、年龄阶段和日常衣着，长度{min_length}至{max_length}字；不选部件ID、色板ID、资源路径，不写关系经历、私密材料或规则指令。外观由本地程序映射。"
+  },
+  "default_bundle_version": 2,
+  "person_fields_v3": [
+    "name",
+    "role",
+    "personality",
+    "speech_style",
+    "background",
+    "preferences",
+    "appearance_description",
+    "birth_identity"
+  ],
+  "bundle_fields_by_version": {
+    "1": [
+      "version",
+      "person",
+      "contact",
+      "relationship",
+      "case"
+    ],
+    "2": [
+      "version",
+      "person",
+      "contact",
+      "relationship",
+      "case"
+    ],
+    "3": [
+      "version",
+      "person",
+      "contact",
+      "relationship",
+      "case"
+    ]
+  },
+  "person_fields_by_version": {
+    "1": [
+      "name",
+      "role",
+      "personality",
+      "speech_style",
+      "background",
+      "preferences"
+    ],
+    "2": [
+      "name",
+      "role",
+      "personality",
+      "speech_style",
+      "background",
+      "preferences",
+      "appearance_description"
+    ],
+    "3": [
+      "name",
+      "role",
+      "personality",
+      "speech_style",
+      "background",
+      "preferences",
+      "appearance_description",
+      "birth_identity"
+    ]
+  },
+  "birth_identity_fields": [
+    "version",
+    "cultural_origin",
+    "name_pool_id",
+    "name",
+    "skin_id"
+  ],
+  "birth_identity_version": 1,
+  "birth_identity_roles": [
+    "person",
+    "contact"
+  ],
+  "identity_context_fields": [
+    "birth_identities",
+    "identity_hash"
+  ],
+  "identity_text": {
+    "free_name_clause": "姓名、职业、性格、说话习惯、背景、偏好和独有困扰由你自由创作",
+    "locked_name_clause": "职业、性格、说话习惯、背景、偏好和独有困扰由你创作；两人的姓名、地域和肤色已由程序确定",
+    "prompt": "本次人物使用程序预先确定的公开身份约束：严格输出version=3。person与contact各自的name须与context.birth_identities同位置记录的name逐字相同，并原样附上该位置的birth_identity五字段记录。不得互换人物，不得改名、地域、名字池、肤色或出生记录版本；不得用旧包版本或新增字段绕开约束。identity_hash仅是程序对这两条公开记录的校验，不能替代或改变记录。appearance_description仍只描述可见的发型与日常衣着，本地程序会保留预选肤色。",
+    "offline_person_description": "头发整齐地收在耳后，穿着适合日常走动的素色外套。",
+    "offline_contact_description": "留着利落的短发，穿着宽松衬衫与便于行动的日常衣着。"
   }
 }

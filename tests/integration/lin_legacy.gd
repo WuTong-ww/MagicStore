@@ -1,5 +1,5 @@
 extends SceneTree
-## Real CASE11 bytes plus explicitly cosmetic-only schema12 fixture variants.
+## Real CASE11 bytes plus explicitly cosmetic-only current-schema variants.
 ## Loading and public rendering must never rewrite either saved preset or parts.
 const Appearance = preload("res://scripts/people/appearance.gd")
 const People = preload("res://scripts/people/people.gd")
@@ -52,10 +52,13 @@ func run() -> void:
 		return
 	var old: Dictionary = source.state
 	var migrated: Dictionary = game.snapshot()
+	var historical := migrated.duplicate(true)
+	check(historical.people.get("birth_identity_version")==1 and not old.people.has("birth_identity_version"),"migration adds only the validated future-birth policy to old people")
+	historical.people.erase("birth_identity_version")
 	for key: String in old:
 		if key!="schema_version":
-			check(migrated.get(key)==old[key],"Lin display adaptation changes none of the historical payload / "+key)
-	check(migrated.schema_version==12 and migrated.people.profiles.npc_lin.appearance==old.people.profiles.npc_lin.appearance,"migration preserves old appearance storage and existing schema12 contract")
+			check(historical.get(key)==old[key],"Lin display adaptation changes none of the historical payload / "+key)
+	check(migrated.schema_version==saves.CURRENT_SCHEMA and migrated.people.profiles.npc_lin.appearance==old.people.profiles.npc_lin.appearance,"migration preserves old appearance storage in the current schema")
 	check_public(old.people.profiles.npc_lin.appearance)
 	check(FileAccess.get_sha256(path)==FIXTURE_SHA and saves.read_save(FIXTURE_ID).state==old,"readonly mapping and load preserve the exact old file bytes and durable payload")
 	await first_saved_action("portrait_lin actual CASE11")

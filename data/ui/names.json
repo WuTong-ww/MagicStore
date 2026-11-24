@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "messages": {
+    "BIRTH_IDENTITY_CONFIG_INVALID": "来客姓名与外貌配置不可用，请检查游戏资源。",
+    "BIRTH_IDENTITY_SOURCE_INVALID": "新来客的身份约束已失效，请稍后重试。",
+    "BIRTH_IDENTITY_POLICY_INVALID": "来客身份策略与存档不一致，原进度已保留。",
+    "BIRTH_IDENTITY_INVALID": "来客姓名、地域与肤色记录不一致，原进度已保留。",
+    "BIRTH_IDENTITY_SCHEMA_INVALID": "来客身份记录与存档版本不一致，原存档未改变。"
+  }
+}

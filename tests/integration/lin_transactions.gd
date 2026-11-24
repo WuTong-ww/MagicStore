@@ -49,7 +49,7 @@ func run() -> void:
 		finish()
 		return
 	var first_id: String = game.state.save_id
-	check(game.state.schema_version==12 and game.state.people.profiles.npc_lin.appearance==fixed,"first new save durably uses the complete fixed A4 selection without a schema change")
+	check(game.state.schema_version==saves.CURRENT_SCHEMA and game.state.people.profiles.npc_lin.appearance==fixed,"first new save durably uses the complete fixed A4 selection in the current schema")
 	check(saves.read_save(first_id).state==game.snapshot(),"appearance is part of the actual full new-game write")
 	if not (await act("read_morning_letters")).success or not (await act("next_customer")).success:
 		finish()

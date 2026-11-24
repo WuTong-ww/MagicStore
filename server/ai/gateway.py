@@ -5,6 +5,7 @@ intent, but cannot mutate a save or approve the effects of an intent.
 """
 from __future__ import annotations
 
+import copy
 import json
 import hmac
 import hashlib
@@ -83,7 +84,7 @@ def api_endpoint_policy():
 
 
 def prepare_person_request(value):
-    allowed = {"generation_id", "avoid_names", "existing_names", "theme_hint", "hint", "setting"}
+    allowed = {"generation_id", "avoid_names", "existing_names", "theme_hint", "hint", "setting", "birth_identities", "identity_hash"}
     if not isinstance(value, dict) or set(value) - allowed:
         raise ValueError("invalid new person request")
     names = value.get("existing_names", value.get("avoid_names", []))
@@ -93,19 +94,30 @@ def prepare_person_request(value):
     for field in ("theme_hint", "hint", "setting", "generation_id"):
         if field in value and (not isinstance(value[field], str) or len(value[field]) > 300):
             raise ValueError("invalid creation constraints")
-    return person_policy().request_context(value)
+    context = person_policy().request_context(value)
+    if not context:
+        raise ValueError("invalid public birth identity constraints")
+    return context
 
 
 def person_package_result(context, config, creator=None, auditor=None):
     policy = person_policy()
-    raw = creator(context, config) if creator else call_upstream(policy.generation_prompt(), context, config, stage="person_generate")
-    bundle = policy.validate_bundle(raw)
+    context = policy.request_context(context)
+    if not context:
+        raise ValueError("invalid public birth identity constraints")
+    # Callbacks receive their own public projection; they cannot rewrite the
+    # locally held identity constraints used to validate the returned package.
+    creation_context = copy.deepcopy(context)
+    raw = creator(creation_context, config) if creator else call_upstream(policy.generation_prompt(context), creation_context, config, stage="person_generate")
+    bundle = policy.validate_draft(raw, context)
     if not bundle or policy.references_existing(bundle, context["existing_names"]):
         raise ValueError("invalid new character bundle")
     digest = policy.draft_hash(bundle)
     review_context = policy.review_context(context, bundle, digest)
+    if not review_context:
+        raise ValueError("invalid new character review constraints")
     review = auditor(review_context, config) if auditor else call_upstream(policy.review_prompt(), review_context, config, stage="person_review")
-    if not policy.approve_review(review, bundle):
+    if not policy.validate_draft(bundle, context) or not policy.approve_review(review, bundle):
         raise ValueError("new character review rejected")
     return {"bundle": bundle, "provenance": {"source": "model", "model": config["model"], "draft_hash": digest, "review": review}}
 

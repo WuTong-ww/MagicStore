@@ -19,7 +19,15 @@ func check(ok: bool, label: String) -> void:
 		printerr("G3 WORKFLOWS FAIL: "+label)
 func fixture(npc: String) -> Dictionary:
 	var request := {"title":"分工的下一步","opening":"我想把分工说清楚。","question":"我该怎样和搭档商量分工？","situation":"我们还没商量好分工。","concern":"我担心说不清。","detail":"我们有一张共同的草图。","hidden_fact":"草图背面留着约定。","followup":"我想继续聊上次的事。"}
-	var bundle := {"version":1,"person":{"name":"许禾"},"contact":{"name":"江岑"},"case":request,"relationship":{"kind":"搭档","shared_history":"我们一起修过旧灯。"}}
+	# Keep the original authored event scenario inside a complete legacy v1
+	# person package so catalog admission still exercises its strict validator.
+	var bundle: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://tests/people/fixtures/person_generation.json")).bundle
+	bundle.person.merge({"name":"许禾","role":"修灯师"},true)
+	bundle.contact.name = "江岑"
+	bundle.case = request
+	# Keep the original concern verbatim as a prefix while meeting v1 length.
+	bundle.case.concern += "想说清楚。"
+	bundle.relationship = {"kind":"搭档","shared_history":"我们一起修过旧灯。"}
 	return {"schema_version":5,"clock_minutes":540,"player":{"coins":40,"energy":100,"items":{}},"npcs":{npc:{"coins":60,"items":{}}},"people":{"profiles":{npc:{"npc_id":npc,"name":"许禾","role":"修灯师","generated_bundle":bundle,"generation_id":"generation_fixture","generation_member":"person"}}},"divination":{"skills":["tarot"],"cases":{},"past":{},"ledger":[],"effects":[],"legacy_eventless_visits":[]},"visits":[],"active_visit_id":"","processed_actions":{}}
 func run() -> void:
 	var loaded: Dictionary = Loader.load_content()
@@ -27,6 +35,12 @@ func run() -> void:
 	var data := Catalog.load_data(loaded.content)
 	check(data.cases.archive.has("event"),"archive defines a data-driven event")
 	var state := fixture("npc_generic_workflow")
+	var fixture_valid := not Person.validate_bundle(state.people.profiles.npc_generic_workflow.generated_bundle).is_empty()
+	check(fixture_valid,"authored workflow uses a complete valid legacy v1 package")
+	if not fixture_valid:
+		print("G3 WORKFLOWS: %d checks, %d failures" % [checks,failures])
+		quit(1)
+		return
 	var generated := Generated.catalog(state,data)
 	var id := Generated.case_id("npc_generic_workflow")
 	check(not generated.is_empty() and generated.cases[id].has("event"),"schema5 generated case has a bounded template event")

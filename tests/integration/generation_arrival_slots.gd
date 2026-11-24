@@ -4,6 +4,7 @@ extends SceneTree
 const People = preload("res://scripts/people/people.gd")
 const Generated = preload("res://scripts/people/generated_person.gd")
 const Appearance = preload("res://scripts/people/appearance.gd")
+const Birth = preload("res://scripts/people/birth_identity.gd")
 
 class FakeBackground extends RefCounted:
 	signal job_ready(job_id: String, token: String, bundle: Dictionary, provenance: Dictionary)
@@ -43,6 +44,7 @@ func fixture(count: int) -> FakeBackground:
 	# baseline; the legacy factory remains useful for historical unit fixtures.
 	People.initialize_family_library(gs.state.people,gs.people_config.family_library,"new_game")
 	People.initialize_ordinary_content(gs.state.people,gs.people_config)
+	check(People.initialize_birth_identity(gs.state.people),"replacement current-schema people enables its real birth policy before planning")
 	# This fixture replaces people inside a current-schema save, so enable the
 	# current catalog before births just as the production Bridge does. Keep the
 	# legacy People.create factory and the sampled traffic assertions unchanged.
@@ -62,7 +64,32 @@ func fixture(count: int) -> FakeBackground:
 	return provider
 
 func complete(provider: FakeBackground, job: Dictionary) -> void:
-	provider.job_ready.emit(job.job_id, job.token, Generated.offline_bundle(job.job_id), Generated.offline_provenance(job.job_id))
+	var pair := Generated.validate_birth_identities(job.get("context",{}).get("birth_identities",{}))
+	var bundle := Generated.offline_bundle_for_identities(job.job_id,pair)
+	var provenance := Generated.offline_provenance_for_identities(job.job_id,pair)
+	check(not pair.is_empty() and not Generated.validate_draft(bundle,job.context).is_empty() and not provenance.is_empty(),"slot completion obeys both identities held by the actual job")
+	if pair.is_empty() or bundle.is_empty() or provenance.is_empty():
+		return
+	provider.job_ready.emit(job.job_id,job.token,bundle,provenance)
+
+func zero_slot_held_job() -> Dictionary:
+	# A zero-slot boundary needs already-prepared private work. Construct its
+	# transient held record with the same program selector and epoch binding.
+	var id := "held_zero_day"
+	var ids := Generated._ids(id)
+	var avoid: Array = gs.state.people.profiles.values().map(func(profile: Dictionary) -> String: return str(profile.name))
+	var config: Dictionary = gs.people_config.birth_identity
+	var person := Birth.propose({"save_id":gs.state.save_id,"seed":gs.state.people.seed,"npc_id":ids.npc_id},config,avoid)
+	var contact := Birth.propose({"save_id":gs.state.save_id,"seed":gs.state.people.seed,"npc_id":ids.contact_id},config,avoid+[person.get("name","")])
+	var pair := Generated.validate_birth_identities({"person":person,"contact":contact})
+	check(not pair.is_empty(),"zero-slot prepared work uses two complete program-selected identities")
+	if pair.is_empty():
+		return {}
+	var token := "%s:%d" % [gs.state.save_id,gs._generation_epoch]
+	var context := {"generation_id":id,"avoid_names":avoid,"theme_hint":"一件想和邻里商量的小事","birth_identities":pair.duplicate(true),"identity_hash":Generated.identity_hash(pair)}
+	gs._generation_jobs[id] = {"token":token,"save_id":gs.state.save_id,"birth_policy_version":1,"birth_identities":pair.duplicate(true)}
+	check(gs._generation_job_current(id,token),"zero-slot held work has the actual current save and epoch token")
+	return {"job_id":id,"token":token,"context":context}
 
 func run() -> void:
 	gs = root.get_node("GameState")
@@ -75,8 +102,10 @@ func run() -> void:
 	var before: Dictionary = gs.snapshot()
 	gs.pump_background_people(false, true)
 	check(provider.jobs.is_empty() and gs.snapshot() == before, "zero natural slots start no jobs and do not plan future days")
-	var held := {"job_id": "held_zero_day", "token": "held_token"}
-	gs._generation_jobs[held.job_id] = {"token": held.token, "save_id": gs.state.save_id}
+	var held := zero_slot_held_job()
+	if held.is_empty():
+		finish()
+		return
 	complete(provider, held)
 	gs.pump_background_people(false, true)
 	check(gs.snapshot() == before and gs._generation_ready.size() == 1, "a ready draft on a zero-slot day cannot add an arrival")

@@ -21,6 +21,10 @@ func run() -> void:
 	game.daily_loop_config.enabled = false
 	check((await game.execute_action_async({"type":"new_game","name":"迁移源"})).success,"source creates")
 	var old: Dictionary = game.snapshot()
+	# A synthetic schema9 fixture cannot contain future birth-policy fields.
+	old.people.erase("birth_identity_version")
+	for profile: Dictionary in old.people.profiles.values():
+		profile.erase("birth_identity")
 	old.schema_version = 9
 	old.erase("daily_loop")
 	check(saves.write_save(old).success,"historic schema9 validates")
@@ -45,8 +49,13 @@ func active_schema9() -> void:
 	game.daily_loop_config.enabled = false
 	check((await act("new_game",{"name":"旧接待继续"})).success,"disabled flow creates a genuine legacy traffic baseline")
 	check((await act("start_visit",{"npc_id":"npc_lin","case_id":"invitation"})).success,"legacy source has a genuine active visit")
-	check((await act("talk",{"text":"为什么还没回信？","topic_id":"letter"})).success,"legacy source includes witnessed clues and conversation")
+	var talk_reply: Dictionary = await act("talk",{"text":"为什么还没回信？","topic_id":"letter"})
+	check(talk_reply.success,"legacy source includes witnessed clues and conversation: "+str(talk_reply))
 	var old: Dictionary = game.snapshot()
+	# A synthetic schema9 fixture cannot contain future birth-policy fields.
+	old.people.erase("birth_identity_version")
+	for profile: Dictionary in old.people.profiles.values():
+		profile.erase("birth_identity")
 	old.schema_version = 9
 	old.erase("daily_loop")
 	check(saves.write_save(old).success,"active schema9 envelope validates")
@@ -58,7 +67,10 @@ func active_schema9() -> void:
 	check(migrated.schema_version == SaveService.CURRENT_SCHEMA and migrated.daily_loop.phase == "reception" and migrated.active_visit_id == old.active_visit_id,"migration adopts the real active visit without a morning lock")
 	for key: String in ["player","npcs","clock_minutes","visits","processed_actions"]:
 		check(migrated[key] == old[key],"migration preserves exact historic "+key)
-	check(migrated.people == old.people and migrated.divination == old.divination,"migration preserves people, old plans, outcomes and identities exactly")
+	var historical_people: Dictionary = migrated.people.duplicate(true)
+	check(historical_people.get("birth_identity_version",0)==1,"migration adds the checked birth-policy marker")
+	historical_people.erase("birth_identity_version")
+	check(historical_people == old.people and migrated.divination == old.divination,"migration preserves people, old plans, outcomes and identities exactly")
 	check(FileAccess.get_sha256(path) == sha and saves.read_save(old.save_id).state.schema_version == 9,"load never rewrites historical bytes")
 	var command := {"type":"end_visit","action_id":game.make_id("first_save")}
 	saves.fail_next_write = true
@@ -83,6 +95,10 @@ func crowded_schema9() -> void:
 	game.daily_loop_config.enabled = false
 	check((await act("new_game",{"name":"旧日满员"})).success,"legacy full-day source creates")
 	var old: Dictionary = game.snapshot()
+	# A synthetic schema9 fixture cannot contain future birth-policy fields.
+	old.people.erase("birth_identity_version")
+	for profile: Dictionary in old.people.profiles.values():
+		profile.erase("birth_identity")
 	old.schema_version = 9
 	old.erase("daily_loop")
 	# Historic planned traffic may already occupy every slot before migration.
@@ -102,7 +118,10 @@ func crowded_schema9() -> void:
 	var sha := FileAccess.get_sha256(path)
 	game.daily_loop_config.enabled = true
 	check((await act("load_game",{"save_id":old.save_id})).success,"a historically full day loads without rewriting bytes")
-	check(game.state.people == old.people and FileAccess.get_sha256(path) == sha,"full-day migration preserves every old person and arrival")
+	var historical_people: Dictionary = game.state.people.duplicate(true)
+	check(historical_people.get("birth_identity_version",0)==1,"full-day migration adds the checked birth-policy marker")
+	historical_people.erase("birth_identity_version")
+	check(historical_people == old.people and FileAccess.get_sha256(path) == sha,"full-day migration preserves every old person and arrival")
 	var read: Dictionary = await act("read_morning_letters")
 	check(read.success,"morning can reserve its separate sequential roster even after twenty old arrivals: "+str(read))
 	if not read.success:

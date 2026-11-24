@@ -41,6 +41,10 @@ func run() -> void:
 
 func legacy_copy(schema: int) -> Dictionary:
 	var value: Dictionary = game.snapshot()
+	# This synthetic historical input excludes the later birth-policy fields.
+	value.people.erase("birth_identity_version")
+	for profile: Dictionary in value.people.profiles.values():
+		profile.erase("birth_identity")
 	value.schema_version = schema
 	# This is a synthetic old-version projection, not a recorded legacy envelope.
 	value.divination.erase("past_lines")

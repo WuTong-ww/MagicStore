@@ -61,7 +61,7 @@ func run() -> void:
 	if not (await act("new_game",{"name":"自由提问保存回归"})).success or not (await act("read_morning_letters")).success or not (await act("next_customer")).success:
 		finish()
 		return
-	check(game.state.schema_version==12 and game.case_board_view().enabled,"exercise the actual schema12 sequential story board")
+	check(game.state.schema_version==saves.CURRENT_SCHEMA and game.case_board_view().enabled,"exercise the current-schema sequential story board")
 	await act("set_free_question",{"enabled":true})
 	check(game.free_question_enabled(),"saved preference enables the real free-question route")
 	provider.configure(game._divination.data.topics+game.content.topics)

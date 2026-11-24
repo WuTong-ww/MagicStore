@@ -28,6 +28,7 @@ var saves: Node
 var checks := 0
 var failures := 0
 var saved_generation_config: Dictionary = {}
+var model_contexts: Dictionary = {}
 
 func _initialize() -> void:
 	call_deferred("run")
@@ -76,15 +77,29 @@ func plan_slots(day: int, count: int) -> void:
 	People.plan_day(gs.state.people, gs.people_config, day, 0, count, 0)
 	check(int(gs.state.people.days[str(day)].natural_count) == count, "fixture creates the requested real natural slots on day " + str(day))
 
+func creator_context_valid(context: Dictionary) -> bool:
+	var fields := ["generation_id","avoid_names","theme_hint","birth_identities","identity_hash"]
+	if context.size()!=fields.size() or not fields.all(func(field: String) -> bool: return context.has(field)):
+		return false
+	if not context.generation_id is String or context.generation_id.is_empty() or not context.avoid_names is Array or not context.avoid_names.all(func(name: Variant) -> bool: return name is String) or not context.theme_hint is String or context.theme_hint.is_empty():
+		return false
+	var pair := Generated.validate_birth_identities(context.birth_identities)
+	return not pair.is_empty() and context.identity_hash is String and context.identity_hash==Generated.identity_hash(pair)
+
+func bind_model_context(index: int, job: Dictionary) -> bool:
+	var valid := job.get("context") is Dictionary and creator_context_valid(job.context)
+	check(valid,"model fixture binds the exact validated public context for index "+str(index))
+	if valid:
+		model_contexts[index] = job.context.duplicate(true)
+	return valid
+
 func bundle_for(index: int) -> Dictionary:
-	# Start with the reviewed-shape offline fixture, then use fixed novel names
-	# and one distinct case to make test outcomes independent of random save IDs.
-	# A fake model verdict below binds the exact changed package; no real model
-	# or unreviewed free-text admission is implied by this fixture.
-	var bundle: Dictionary = Generated.offline_bundle("integration_model_" + str(index))
-	var names := [["俞栖禾","邵闻溪"],["罗映桥","黎书原"],["白听澜","苏映岚"]]
-	bundle.person.name = names[index % names.size()][0]
-	bundle.contact.name = names[index % names.size()][1]
+	# The fake model retains this scenario's authored bodies/case distinction,
+	# while both names and birth records come from this actual held job's pair.
+	var context: Dictionary = model_contexts.get(index,{})
+	if not creator_context_valid(context):
+		return {}
+	var bundle := Generated.offline_bundle_for_identities(context.generation_id,context.birth_identities)
 	if index == 1:
 		bundle.case = {
 			"title":"借阅卡上留着的一句话","opening":"我有件和旧同学商量的小事，一直拿不准怎么开口。",
@@ -94,7 +109,7 @@ func bundle_for(index: int) -> Dictionary:
 			"hidden_fact":"那位旧同学留的便笺上，提过自己愿意负责植物照片的归档。",
 			"followup":"我想先问对方喜欢从哪一件事入手，再商量各自负责的部分。"
 		}
-	return Generated.validate_bundle(bundle)
+	return Generated.validate_draft(bundle,context)
 
 func provenance(bundle: Dictionary) -> Dictionary:
 	var hash := Generated.draft_hash(bundle)
@@ -102,6 +117,8 @@ func provenance(bundle: Dictionary) -> Dictionary:
 		"review":{"approved":true,"draft_hash":hash,"contradictions":[],"unsupported_claims":[]}}
 
 func complete(provider: FakeBackground, job: Dictionary, index: int) -> void:
+	if not bind_model_context(index,job):
+		return
 	var bundle := bundle_for(index)
 	check(not bundle.is_empty(), "test model package validates before completion")
 	provider.job_ready.emit(job.job_id,job.token,bundle,provenance(bundle))
@@ -127,13 +144,16 @@ func run() -> void:
 	check(provider.jobs.size() == 2 and gs._generation_jobs.size() == 2, "heartbeat enqueues two independent jobs")
 	check(gs.snapshot() == original, "enqueue makes no public state, clock or resource change")
 	for job: Dictionary in provider.jobs:
-		check(job.context.keys().size() == 3 and job.context.has("generation_id") and job.context.has("avoid_names") and job.context.has("theme_hint"), "creator job contains only new draft context and collision-avoidance names")
+		check(creator_context_valid(job.context), "creator job contains exactly the five public draft/identity fields with valid pair and hash")
 		check(not JSON.stringify(job.context).contains("world_facts") and not JSON.stringify(job.context).contains("API Key"), "creator context contains no hidden cases or credentials")
 	if provider.jobs.size() != 2:
 		finish()
 		return
 	var first: Dictionary = provider.jobs[0]
 	var second: Dictionary = provider.jobs[1]
+	if not bind_model_context(0,first) or not bind_model_context(1,second):
+		finish()
+		return
 	act("wait",{"minutes":1})
 	check(gs._generation_jobs.size() == 2 and gs.state.clock_minutes == int(original.clock_minutes)+1, "foreground action can commit while independent creator jobs are pending")
 	original = gs.snapshot()
@@ -142,16 +162,17 @@ func run() -> void:
 	complete(provider,second,1)
 	complete(provider,first,0)
 	complete(provider,second,1)
-	check(gs._generation_ready.size() == 3 and gs.snapshot() == original, "out-of-order and duplicate completion remain private until commit")
+	check(gs._generation_ready.size() == 2 and gs.snapshot() == original, "out-of-order completion stays private and duplicate callback keeps exactly two unique ready jobs")
+	check(gs._generation_ready.size()==2 and gs._generation_ready[0].job_id==second.job_id and gs._generation_ready[1].job_id==first.job_id,"ready work preserves completion order without duplicating a job")
 	gs._provider_pending = true
 	gs.pump_background_people(false,true)
-	check(provider.dialogue_busy and gs.snapshot() == original and gs._generation_ready.size() == 3, "foreground dialogue blocks admission and signals background pause")
+	check(provider.dialogue_busy and gs.snapshot() == original and gs._generation_ready.size() == 2, "foreground dialogue blocks admission and signals background pause")
 	gs._provider_pending = false
 	gs.pump_background_people(true,true)
 	check(gs.snapshot() == original, "busy UI also prevents background commit")
 	saves.fail_next_write = true
 	gs.pump_background_people(false,true)
-	check(gs.snapshot() == original and gs._generation_ready.size() == 3 and gs._generation_jobs.size() == 2, "failed disk write keeps draft retryable and entire old state unchanged")
+	check(gs.snapshot() == original and gs._generation_ready.size() == 2 and gs._generation_jobs.size() == 2, "failed disk write keeps draft retryable and entire old state unchanged")
 	var disk: Dictionary = saves.read_save(original.save_id)
 	check(disk.success and disk.state == original, "failed admission leaves saved state unchanged")
 	gs._generation_retry_at = 0
@@ -347,6 +368,9 @@ func run() -> void:
 	var fresh := install_fake()
 	gs.pump_background_people(false,true)
 	var fresh_job: Dictionary = fresh.jobs[0]
+	if not bind_model_context(2,fresh_job):
+		finish()
+		return
 	fresh.job_ready.emit(fresh_job.job_id,stale_job.token,bundle_for(2),provenance(bundle_for(2)))
 	check(gs._generation_ready.is_empty(), "old epoch token cannot bind to a current job ID")
 	var pending_count: int = gs._generation_jobs.size()
@@ -356,7 +380,7 @@ func run() -> void:
 	invalid_provenance.draft_hash = "wrong"
 	fresh.job_ready.emit(fresh_job.job_id,fresh_job.token,bundle_for(2),invalid_provenance)
 	gs.pump_background_people(false,true)
-	check(gs.snapshot() == other and gs._generation_ready.is_empty(), "unreviewed or hash-mismatched package is never written to a save")
+	check(gs.snapshot() == other and gs._generation_ready.size()==1 and gs._generation_ready[0].job_id==fresh_job.job_id and gs._generation_ready[0].provenance.source=="offline" and gs._generation_ready[0].provenance.draft_hash!="wrong" and gs._generation_jobs.has(fresh_job.job_id) and gs._generation_jobs[fresh_job.job_id].get("fallback_used",false) and gs._generation_ready[0].bundle.person.birth_identity==fresh_job.context.birth_identities.person and gs._generation_ready[0].bundle.contact.birth_identity==fresh_job.context.birth_identities.contact, "unreviewed or hash-mismatched package is never written; only the same-pair offline fallback remains private")
 	act("load_game",{"save_id":save_a})
 	complete(fresh,fresh_job,2)
 	check(gs.snapshot() == save_a_final and gs._generation_ready.is_empty(), "late result from other save cannot enter restored save")
@@ -393,6 +417,18 @@ func refill_tests() -> void:
 	var transport: Dictionary = provider.jobs[1]
 	var later_rejected: Dictionary = provider.jobs[2]
 	var before: Dictionary = gs.snapshot()
+	var attempts_before_faults: Dictionary = gs._generation_attempts.duplicate(true)
+	var jobs_before_faults: Dictionary = gs._generation_jobs.duplicate(true)
+	var disk_before_faults: Dictionary = saves.read_save(before.save_id)
+	# This backoff scenario starts after the new local fallback is exhausted.
+	# Seed only transient fault-job flags; never alter identities or save data.
+	# Normal fallback creation/admission is covered by names_birth_failures.gd.
+	for fault: Dictionary in [rejected,transport,later_rejected]:
+		gs._generation_jobs[fault.job_id]["fallback_used"] = true
+	var jobs_without_fault_flags: Dictionary = gs._generation_jobs.duplicate(true)
+	for fault: Dictionary in [rejected,transport,later_rejected]:
+		jobs_without_fault_flags[fault.job_id].erase("fallback_used")
+	check([rejected,transport,later_rejected].all(func(fault: Dictionary) -> bool: return gs._generation_jobs[fault.job_id].get("fallback_used",false)) and jobs_without_fault_flags==jobs_before_faults and gs._generation_attempts==attempts_before_faults and gs.snapshot()==before and disk_before_faults.success and disk_before_faults.state==before and saves.read_save(before.save_id)==disk_before_faults,"backoff fixture changes only transient failure flags, preserving held identities, attempt budget and saved payload")
 	provider.job_failed.emit(rejected.job_id,rejected.token,"REVIEW_REJECTED")
 	var semantic_deadline: int = gs._generation_network_retry_at
 	var semantic_wait: int = int(gs._generation_network_retry_at)-Time.get_ticks_msec()

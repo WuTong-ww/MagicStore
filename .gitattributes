@@ -42,3 +42,11 @@ assets/fonts/OFL.txt -text
 
 # Genuine delivered schema11 migration fixture; preserve its envelope bytes.
 tests/fixtures/schema11_case_active.json -text
+
+# Genuine delivered schema12 before NAMES; preserve its envelope bytes.
+tests/fixtures/schema12_pre_names.json -text
+
+# Genuine NAMES UI envelopes; source receipts bind their exact saved bytes.
+tests/fixtures/names_ui/europe.json -text
+tests/fixtures/names_ui/africa_or_south_asia.json -text
+tests/fixtures/names_ui/mixed.json -text

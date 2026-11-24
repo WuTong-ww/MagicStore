@@ -1,0 +1,2243 @@
+{
+  "task": "R3-NAMES",
+  "status": "complete",
+  "date": "2026-11-24",
+  "engine": "Godot 4.6.3 stable standard / Compatibility",
+  "schema_version": 13,
+  "base_head": "d89e89f2fd5aa93924d3ad78cb1fbae4369689ba",
+  "files": [
+    ".gitattributes",
+    "data/people/character_protocol.json",
+    "data/people/name_pools.json",
+    "data/ui/names.json",
+    "docs/codex/PROGRESS.md",
+    "docs/codex/REVIEW_PACKET_R3.md",
+    "docs/codex/plans/R3-NAMES.md",
+    "docs/codex/results/R3-NAMES-validation.json",
+    "docs/features.md",
+    "docs/screenshots/round3/R3-NAMES/africa_or_south_asia-archive-1280x720.jpg",
+    "docs/screenshots/round3/R3-NAMES/africa_or_south_asia-archive-1920x1080.jpg",
+    "docs/screenshots/round3/R3-NAMES/europe-archive-1280x720.jpg",
+    "docs/screenshots/round3/R3-NAMES/europe-archive-1920x1080.jpg",
+    "docs/screenshots/round3/R3-NAMES/mixed-archive-1280x720.jpg",
+    "docs/screenshots/round3/R3-NAMES/mixed-archive-1920x1080.jpg",
+    "scripts/core/game_state.gd",
+    "scripts/dev/run.ps1",
+    "scripts/divination/generated_cases.gd",
+    "scripts/divination/past_lines.gd",
+    "scripts/people/birth_identity.gd",
+    "scripts/people/birth_identity.gd.uid",
+    "scripts/people/birth_identity_copy.gd",
+    "scripts/people/birth_identity_copy.gd.uid",
+    "scripts/people/generated_person.gd",
+    "scripts/people/ordinary_content.gd",
+    "scripts/people/people.gd",
+    "scripts/providers/dialogue_policy.gd",
+    "scripts/providers/http_person_provider.gd",
+    "scripts/save/save_service.gd",
+    "scripts/shop/people_bridge.gd",
+    "server/ai/gateway.py",
+    "server/ai/person_generation.py",
+    "tests/divination/event_migration.gd",
+    "tests/divination/event_workflows.gd",
+    "tests/divination/generated_cases.gd",
+    "tests/fixtures/names_ui/africa_or_south_asia.json",
+    "tests/fixtures/names_ui/europe.json",
+    "tests/fixtures/names_ui/mixed.json",
+    "tests/fixtures/names_ui/receipt.json",
+    "tests/fixtures/names_ui_capture.json",
+    "tests/fixtures/schema12_pre_names.json",
+    "tests/integration/appearance_migration.gd",
+    "tests/integration/case_migration.gd",
+    "tests/integration/daily_loop_migration.gd",
+    "tests/integration/family_migration.gd",
+    "tests/integration/generated_people.gd",
+    "tests/integration/generation_arrival_slots.gd",
+    "tests/integration/lin_legacy.gd",
+    "tests/integration/lin_transactions.gd",
+    "tests/integration/names_birth_failures.gd",
+    "tests/integration/names_migration.gd",
+    "tests/integration/names_transactions.gd",
+    "tests/integration/names_ui.gd",
+    "tests/integration/past_lives_migration.gd",
+    "tests/integration/shop_content_migration.gd",
+    "tests/integration/story_followup_transactions.gd",
+    "tests/integration/story_migration.gd",
+    "tests/integration/traffic_activation.gd",
+    "tests/people/birth_identity.gd",
+    "tests/people/fixtures/person_generation_v2_prompt.txt",
+    "tests/people/fixtures/person_generation_v3.json",
+    "tests/people/names_catalog.gd",
+    "tests/people/names_copy.gd",
+    "tests/people/names_dialogue.gd",
+    "tests/people/names_ordinary.gd",
+    "tests/people/names_protocol.gd",
+    "tests/people/names_provider.gd",
+    "tests/people/test_birth_identity_data.py",
+    "tests/people/test_names_wire.py",
+    "tests/shop/integration.gd"
+  ],
+  "full_suite_passed": true,
+  "full_rounds": [
+    {
+      "round": 1,
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/dev/run.ps1 -Test",
+      "exit_code": 1,
+      "seconds": 1231.4379999999946,
+      "source_files": 390,
+      "source_changes": [],
+      "groups": [
+        {
+          "name": "CASE SCHEMA",
+          "checks": 149,
+          "failures": 0
+        },
+        {
+          "name": "DEDUCTION BOARD",
+          "checks": 456,
+          "failures": 0
+        },
+        {
+          "name": "CASE HOST",
+          "checks": 17,
+          "failures": 0
+        },
+        {
+          "name": "CASE DEADLINE",
+          "checks": 25,
+          "failures": 0
+        },
+        {
+          "name": "CASE SAVE CONFIG",
+          "checks": 5,
+          "failures": 0
+        },
+        {
+          "name": "CASE SAVE CONFIG",
+          "checks": 5,
+          "failures": 0
+        },
+        {
+          "name": "CASE SAVE CONFIG",
+          "checks": 11,
+          "failures": 0
+        },
+        {
+          "name": "CASE TRANSACTIONS",
+          "checks": 216,
+          "failures": 0
+        },
+        {
+          "name": "CASE MIGRATION",
+          "checks": 41,
+          "failures": 0
+        },
+        {
+          "name": "CASE BOARD UI",
+          "checks": 235,
+          "failures": 0
+        },
+        {
+          "name": "STORY CONTENT",
+          "checks": 103,
+          "failures": 0
+        },
+        {
+          "name": "STORY PROGRESS",
+          "checks": 26,
+          "failures": 0
+        },
+        {
+          "name": "STORY PLAYTHROUGH",
+          "checks": 560,
+          "failures": 0
+        },
+        {
+          "name": "STORY TRANSACTIONS",
+          "checks": 293,
+          "failures": 0
+        },
+        {
+          "name": "STORY RETURN BACKLOG",
+          "checks": 135,
+          "failures": 0
+        },
+        {
+          "name": "STORY MIGRATION",
+          "checks": 40,
+          "failures": 0
+        }
+      ],
+      "reported_checks": 2317,
+      "reported_failures": 0,
+      "python_unittest_counts": [],
+      "script_errors": 0
+    },
+    {
+      "round": 2,
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/dev/run.ps1 -Test",
+      "exit_code": 1,
+      "seconds": 1782.375,
+      "source_files": 390,
+      "source_changes": [],
+      "groups": [
+        {
+          "name": "CASE SCHEMA",
+          "checks": 149,
+          "failures": 0
+        },
+        {
+          "name": "DEDUCTION BOARD",
+          "checks": 456,
+          "failures": 0
+        },
+        {
+          "name": "CASE HOST",
+          "checks": 17,
+          "failures": 0
+        },
+        {
+          "name": "CASE DEADLINE",
+          "checks": 25,
+          "failures": 0
+        },
+        {
+          "name": "CASE SAVE CONFIG",
+          "checks": 5,
+          "failures": 0
+        },
+        {
+          "name": "CASE SAVE CONFIG",
+          "checks": 5,
+          "failures": 0
+        },
+        {
+          "name": "CASE SAVE CONFIG",
+          "checks": 11,
+          "failures": 0
+        },
+        {
+          "name": "CASE TRANSACTIONS",
+          "checks": 218,
+          "failures": 0
+        },
+        {
+          "name": "CASE MIGRATION",
+          "checks": 41,
+          "failures": 0
+        },
+        {
+          "name": "CASE BOARD UI",
+          "checks": 235,
+          "failures": 0
+        },
+        {
+          "name": "STORY CONTENT",
+          "checks": 103,
+          "failures": 0
+        },
+        {
+          "name": "STORY PROGRESS",
+          "checks": 26,
+          "failures": 0
+        },
+        {
+          "name": "STORY PLAYTHROUGH",
+          "checks": 558,
+          "failures": 0
+        },
+        {
+          "name": "STORY TRANSACTIONS",
+          "checks": 301,
+          "failures": 0
+        },
+        {
+          "name": "STORY RETURN BACKLOG",
+          "checks": 137,
+          "failures": 0
+        },
+        {
+          "name": "STORY MIGRATION",
+          "checks": 40,
+          "failures": 0
+        },
+        {
+          "name": "STORY FOLLOWUP TRANSACTIONS",
+          "checks": 25,
+          "failures": 0
+        },
+        {
+          "name": "STORY UI READER",
+          "checks": 20,
+          "failures": 0
+        },
+        {
+          "name": "STORY BOARD UI",
+          "checks": 212,
+          "failures": 0
+        },
+        {
+          "name": "LIN APPEARANCE",
+          "checks": 39,
+          "failures": 0
+        },
+        {
+          "name": "LIN TRANSACTIONS",
+          "checks": 40,
+          "failures": 0
+        },
+        {
+          "name": "LIN LEGACY",
+          "checks": 79,
+          "failures": 0
+        },
+        {
+          "name": "LIN UI",
+          "checks": 64,
+          "failures": 0
+        },
+        {
+          "name": "BIRTH IDENTITY",
+          "checks": 88,
+          "failures": 0
+        },
+        {
+          "name": "NAMES ORDINARY",
+          "checks": 71,
+          "failures": 0
+        },
+        {
+          "name": "NAMES COPY",
+          "checks": 13,
+          "failures": 0
+        },
+        {
+          "name": "NAMES CATALOG",
+          "checks": 29,
+          "failures": 0
+        },
+        {
+          "name": "NAMES DIALOGUE",
+          "checks": 30,
+          "failures": 0
+        },
+        {
+          "name": "NAMES BIRTH FAILURES",
+          "checks": 21,
+          "failures": 0
+        },
+        {
+          "name": "NAMES MIGRATION",
+          "checks": 19,
+          "failures": 0
+        },
+        {
+          "name": "NAMES TRANSACTIONS",
+          "checks": 28,
+          "failures": 0
+        },
+        {
+          "name": "NAMES UI",
+          "checks": 206,
+          "failures": 0
+        },
+        {
+          "name": "SMOKE RESULT",
+          "checks": 57,
+          "failures": 0
+        },
+        {
+          "name": "DAILY LOOP",
+          "checks": 103,
+          "failures": 0
+        },
+        {
+          "name": "DAILY MIGRATION",
+          "checks": 87,
+          "failures": 0
+        },
+        {
+          "name": "DAILY LOOP GUARDS",
+          "checks": 71,
+          "failures": 0
+        },
+        {
+          "name": "DELETE SAVE",
+          "checks": 52,
+          "failures": 0
+        },
+        {
+          "name": "PROVIDER RESULT",
+          "checks": 48,
+          "failures": 0
+        },
+        {
+          "name": "DIALOGUE GROUNDING",
+          "checks": 127,
+          "failures": 0
+        },
+        {
+          "name": "FOLLOWUP QUESTIONS",
+          "checks": 86,
+          "failures": 0
+        },
+        {
+          "name": "ORACLE RULES",
+          "checks": 29,
+          "failures": 0
+        },
+        {
+          "name": "DIVINATION RESULT",
+          "checks": 543,
+          "failures": 0
+        },
+        {
+          "name": "LEGACY DIVINATION GUESTS",
+          "checks": 31,
+          "failures": 0
+        },
+        {
+          "name": "GENERATED CASES",
+          "checks": 80,
+          "failures": 0
+        },
+        {
+          "name": "EVENT GOLDEN",
+          "checks": 100,
+          "failures": 0
+        },
+        {
+          "name": "INVITATION FEEDBACK GOLDEN",
+          "checks": 22,
+          "failures": 0
+        },
+        {
+          "name": "EVENT DATA RULES",
+          "checks": 72,
+          "failures": 0
+        }
+      ],
+      "reported_checks": 4819,
+      "reported_failures": 0,
+      "python_unittest_counts": [],
+      "script_errors": 0
+    },
+    {
+      "round": 3,
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/dev/run.ps1 -Test",
+      "exit_code": 0,
+      "seconds": 3136.3279999999795,
+      "source_files": 390,
+      "source_changes": [],
+      "groups": [
+        {
+          "name": "CASE SCHEMA",
+          "checks": 149,
+          "failures": 0
+        },
+        {
+          "name": "DEDUCTION BOARD",
+          "checks": 456,
+          "failures": 0
+        },
+        {
+          "name": "CASE HOST",
+          "checks": 17,
+          "failures": 0
+        },
+        {
+          "name": "CASE DEADLINE",
+          "checks": 25,
+          "failures": 0
+        },
+        {
+          "name": "CASE SAVE CONFIG",
+          "checks": 5,
+          "failures": 0
+        },
+        {
+          "name": "CASE SAVE CONFIG",
+          "checks": 5,
+          "failures": 0
+        },
+        {
+          "name": "CASE SAVE CONFIG",
+          "checks": 11,
+          "failures": 0
+        },
+        {
+          "name": "CASE TRANSACTIONS",
+          "checks": 216,
+          "failures": 0
+        },
+        {
+          "name": "CASE MIGRATION",
+          "checks": 41,
+          "failures": 0
+        },
+        {
+          "name": "CASE BOARD UI",
+          "checks": 235,
+          "failures": 0
+        },
+        {
+          "name": "STORY CONTENT",
+          "checks": 103,
+          "failures": 0
+        },
+        {
+          "name": "STORY PROGRESS",
+          "checks": 26,
+          "failures": 0
+        },
+        {
+          "name": "STORY PLAYTHROUGH",
+          "checks": 554,
+          "failures": 0
+        },
+        {
+          "name": "STORY TRANSACTIONS",
+          "checks": 297,
+          "failures": 0
+        },
+        {
+          "name": "STORY RETURN BACKLOG",
+          "checks": 133,
+          "failures": 0
+        },
+        {
+          "name": "STORY MIGRATION",
+          "checks": 40,
+          "failures": 0
+        },
+        {
+          "name": "STORY FOLLOWUP TRANSACTIONS",
+          "checks": 25,
+          "failures": 0
+        },
+        {
+          "name": "STORY UI READER",
+          "checks": 20,
+          "failures": 0
+        },
+        {
+          "name": "STORY BOARD UI",
+          "checks": 212,
+          "failures": 0
+        },
+        {
+          "name": "LIN APPEARANCE",
+          "checks": 39,
+          "failures": 0
+        },
+        {
+          "name": "LIN TRANSACTIONS",
+          "checks": 40,
+          "failures": 0
+        },
+        {
+          "name": "LIN LEGACY",
+          "checks": 79,
+          "failures": 0
+        },
+        {
+          "name": "LIN UI",
+          "checks": 64,
+          "failures": 0
+        },
+        {
+          "name": "BIRTH IDENTITY",
+          "checks": 88,
+          "failures": 0
+        },
+        {
+          "name": "NAMES ORDINARY",
+          "checks": 71,
+          "failures": 0
+        },
+        {
+          "name": "NAMES COPY",
+          "checks": 13,
+          "failures": 0
+        },
+        {
+          "name": "NAMES CATALOG",
+          "checks": 29,
+          "failures": 0
+        },
+        {
+          "name": "NAMES DIALOGUE",
+          "checks": 30,
+          "failures": 0
+        },
+        {
+          "name": "NAMES BIRTH FAILURES",
+          "checks": 21,
+          "failures": 0
+        },
+        {
+          "name": "NAMES MIGRATION",
+          "checks": 19,
+          "failures": 0
+        },
+        {
+          "name": "NAMES TRANSACTIONS",
+          "checks": 28,
+          "failures": 0
+        },
+        {
+          "name": "NAMES UI",
+          "checks": 206,
+          "failures": 0
+        },
+        {
+          "name": "SMOKE RESULT",
+          "checks": 57,
+          "failures": 0
+        },
+        {
+          "name": "DAILY LOOP",
+          "checks": 103,
+          "failures": 0
+        },
+        {
+          "name": "DAILY MIGRATION",
+          "checks": 95,
+          "failures": 0
+        },
+        {
+          "name": "DAILY LOOP GUARDS",
+          "checks": 71,
+          "failures": 0
+        },
+        {
+          "name": "DELETE SAVE",
+          "checks": 52,
+          "failures": 0
+        },
+        {
+          "name": "PROVIDER RESULT",
+          "checks": 48,
+          "failures": 0
+        },
+        {
+          "name": "DIALOGUE GROUNDING",
+          "checks": 127,
+          "failures": 0
+        },
+        {
+          "name": "FOLLOWUP QUESTIONS",
+          "checks": 86,
+          "failures": 0
+        },
+        {
+          "name": "ORACLE RULES",
+          "checks": 29,
+          "failures": 0
+        },
+        {
+          "name": "DIVINATION RESULT",
+          "checks": 543,
+          "failures": 0
+        },
+        {
+          "name": "LEGACY DIVINATION GUESTS",
+          "checks": 31,
+          "failures": 0
+        },
+        {
+          "name": "GENERATED CASES",
+          "checks": 80,
+          "failures": 0
+        },
+        {
+          "name": "EVENT GOLDEN",
+          "checks": 100,
+          "failures": 0
+        },
+        {
+          "name": "INVITATION FEEDBACK GOLDEN",
+          "checks": 22,
+          "failures": 0
+        },
+        {
+          "name": "EVENT DATA RULES",
+          "checks": 72,
+          "failures": 0
+        },
+        {
+          "name": "EVENT MIGRATION",
+          "checks": 121,
+          "failures": 0
+        },
+        {
+          "name": "G3 WORKFLOWS",
+          "checks": 129,
+          "failures": 0
+        },
+        {
+          "name": "G4 COMPONENTS",
+          "checks": 62,
+          "failures": 0
+        },
+        {
+          "name": "GENERIC EFFECTS",
+          "checks": 43,
+          "failures": 0
+        },
+        {
+          "name": "EVENT EFFECTS",
+          "checks": 29,
+          "failures": 0
+        },
+        {
+          "name": "INVITATION REFERRAL",
+          "checks": 38,
+          "failures": 0
+        },
+        {
+          "name": "EVENT NOTEBOOK UI",
+          "checks": 116,
+          "failures": 0
+        },
+        {
+          "name": "UI_SMOKE",
+          "checks": 319,
+          "failures": 0
+        },
+        {
+          "name": "SHOP RULES",
+          "checks": 89,
+          "failures": 0
+        },
+        {
+          "name": "SHOP INTEGRATION",
+          "checks": 79,
+          "failures": 0
+        },
+        {
+          "name": "SHOP CONTENT",
+          "checks": 31,
+          "failures": 0
+        },
+        {
+          "name": "ECONOMIC VALIDATION",
+          "checks": 14,
+          "failures": 0
+        },
+        {
+          "name": "ORDINARY CONTENT",
+          "checks": 36,
+          "failures": 0
+        },
+        {
+          "name": "ORDINARY POPULATION",
+          "checks": 41,
+          "failures": 0
+        },
+        {
+          "name": "SHOP CONTENT MIGRATION",
+          "checks": 109,
+          "failures": 0
+        },
+        {
+          "name": "SHOP CONTENT TRANSACTIONS",
+          "checks": 136,
+          "failures": 0
+        },
+        {
+          "name": "TRAFFIC ACTIVATION",
+          "checks": 105,
+          "failures": 0
+        },
+        {
+          "name": "COMPONENT FEEDBACK",
+          "checks": 158,
+          "failures": 0
+        },
+        {
+          "name": "SHOP CONTENT UI",
+          "checks": 57,
+          "failures": 0
+        },
+        {
+          "name": "G4 CAPTURE",
+          "checks": 10,
+          "failures": 0
+        },
+        {
+          "name": "PEOPLE INTEGRATION",
+          "checks": 52,
+          "failures": 0
+        },
+        {
+          "name": "C UI RESULT",
+          "checks": 1518,
+          "failures": 0
+        },
+        {
+          "name": "DAILY LOOP UI",
+          "checks": 110,
+          "failures": 0
+        },
+        {
+          "name": "ITEM VISUALS",
+          "checks": 212,
+          "failures": 0
+        },
+        {
+          "name": "SHELF LAYOUT",
+          "checks": 74,
+          "failures": 0
+        },
+        {
+          "name": "SHELF RENDER",
+          "checks": 38,
+          "failures": 0
+        },
+        {
+          "name": "WIND/SPRING",
+          "checks": 100,
+          "failures": 0
+        },
+        {
+          "name": "COMMITTED PRESENTATION EVENTS",
+          "checks": 277,
+          "failures": 0
+        },
+        {
+          "name": "SCENE MOTION",
+          "checks": 49,
+          "failures": 0
+        },
+        {
+          "name": "MOTION SETTINGS",
+          "checks": 31,
+          "failures": 0
+        },
+        {
+          "name": "MOTION PERFORMANCE",
+          "checks": 24,
+          "failures": 0
+        },
+        {
+          "name": "MOTION PREVIEW",
+          "checks": 7,
+          "failures": 0
+        },
+        {
+          "name": "APPEARANCE",
+          "checks": 264,
+          "failures": 0
+        },
+        {
+          "name": "APPEARANCE BIRTH",
+          "checks": 33,
+          "failures": 0
+        },
+        {
+          "name": "APPEARANCE DESCRIPTION",
+          "checks": 20,
+          "failures": 0
+        },
+        {
+          "name": "APPEARANCE MIGRATION",
+          "checks": 120,
+          "failures": 0
+        },
+        {
+          "name": "APPEARANCE UI",
+          "checks": 70,
+          "failures": 0
+        },
+        {
+          "name": "PORTRAIT PREVIEW SCHEMA ONLY",
+          "checks": 8,
+          "failures": 0
+        },
+        {
+          "name": "A4 MOOD",
+          "checks": 45,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY LIBRARY",
+          "checks": 115,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY ARRIVAL BUDGET",
+          "checks": 51,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY LIBRARY FLOW",
+          "checks": 47,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY LIBRARY DISTRIBUTION",
+          "checks": 96,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY MIGRATION",
+          "checks": 109,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY TRANSACTIONS",
+          "checks": 71,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY UI",
+          "checks": 133,
+          "failures": 0
+        },
+        {
+          "name": "PAST LIBRARY",
+          "checks": 134,
+          "failures": 0
+        },
+        {
+          "name": "PAST MIGRATION",
+          "checks": 182,
+          "failures": 0
+        },
+        {
+          "name": "PAST TRANSACTIONS",
+          "checks": 128,
+          "failures": 0
+        },
+        {
+          "name": "PAST UI",
+          "checks": 74,
+          "failures": 0
+        },
+        {
+          "name": "G5 CAPTURE",
+          "checks": 15,
+          "failures": 0
+        },
+        {
+          "name": "STYLE REPORT",
+          "checks": 68,
+          "failures": 0
+        },
+        {
+          "name": "STYLE TRANSACTIONS",
+          "checks": 66,
+          "failures": 0
+        },
+        {
+          "name": "STYLE REPORT UI",
+          "checks": 843,
+          "failures": 0
+        },
+        {
+          "name": "G6 CAPTURE",
+          "checks": 15,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY POLICY",
+          "checks": 37,
+          "failures": 0
+        },
+        {
+          "name": "SCENE VISUALS",
+          "checks": 1644,
+          "failures": 0
+        },
+        {
+          "name": "ALIGNED SCENE LAYERS",
+          "checks": 79,
+          "failures": 0
+        },
+        {
+          "name": "SCENE ASSET ACCEPTANCE",
+          "checks": 570,
+          "failures": 0
+        },
+        {
+          "name": "ARRIVAL UI RESULT",
+          "checks": 45,
+          "failures": 0
+        },
+        {
+          "name": "CONSULTATION LAYOUT",
+          "checks": 34,
+          "failures": 0
+        },
+        {
+          "name": "ROUND2 SHELL RESULT",
+          "checks": 1606,
+          "failures": 0
+        },
+        {
+          "name": "ROUND2 SHELL EDGES",
+          "checks": 87,
+          "failures": 0
+        },
+        {
+          "name": "ROUND2 CONSULTATION",
+          "checks": 51,
+          "failures": 0
+        },
+        {
+          "name": "A3R AUDIO/THEME",
+          "checks": 30,
+          "failures": 0
+        },
+        {
+          "name": "AUDIO LIFECYCLE",
+          "checks": 43,
+          "failures": 0
+        },
+        {
+          "name": "ARRIVAL TRANSACTIONS",
+          "checks": 42,
+          "failures": 0
+        },
+        {
+          "name": "SAVE DELETE UI",
+          "checks": 37,
+          "failures": 0
+        },
+        {
+          "name": "GENERATED PEOPLE INTEGRATION",
+          "checks": 154,
+          "failures": 0
+        },
+        {
+          "name": "GENERATION ARRIVAL SLOTS",
+          "checks": 38,
+          "failures": 0
+        },
+        {
+          "name": "GENERATED PEOPLE UI",
+          "checks": 49,
+          "failures": 0
+        },
+        {
+          "name": "FOLLOWUP CORE RESULT",
+          "checks": 29,
+          "failures": 0
+        },
+        {
+          "name": "FOLLOWUP QUESTIONS UI",
+          "checks": 39,
+          "failures": 0
+        },
+        {
+          "name": "CHAT KEYBOARD UI",
+          "checks": 49,
+          "failures": 0
+        },
+        {
+          "name": "OPENING GUEST INTEGRATION",
+          "checks": 1210,
+          "failures": 0
+        },
+        {
+          "name": "PROJECT CLEANUP RESULT",
+          "checks": 16,
+          "failures": 0
+        },
+        {
+          "name": "API SETTINGS UI",
+          "checks": 45,
+          "failures": 0
+        },
+        {
+          "name": "API ENDPOINT",
+          "checks": 187,
+          "failures": 0
+        },
+        {
+          "name": "MODEL POLICY RESULT",
+          "checks": 38,
+          "failures": 0
+        },
+        {
+          "name": "HTTP DEADLINE RESULT",
+          "checks": 17,
+          "failures": 0
+        },
+        {
+          "name": "HTTP RESULT",
+          "checks": 41,
+          "failures": 0
+        },
+        {
+          "name": "HTTP CORE RESULT",
+          "checks": 56,
+          "failures": 0
+        },
+        {
+          "name": "DIRECT API RESULT",
+          "checks": 77,
+          "failures": 0
+        },
+        {
+          "name": "HTTP RECOVERY RESULT",
+          "checks": 43,
+          "failures": 0
+        },
+        {
+          "name": "A4 HTTP MOOD",
+          "checks": 23,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY HTTP",
+          "checks": 48,
+          "failures": 0
+        },
+        {
+          "name": "PERSON HTTP RESULT",
+          "checks": 64,
+          "failures": 0
+        },
+        {
+          "name": "PEOPLE RULES",
+          "checks": 52,
+          "failures": 0
+        },
+        {
+          "name": "GENERATED PERSON",
+          "checks": 103,
+          "failures": 0
+        },
+        {
+          "name": "PRODUCTION PEOPLE CONFIG",
+          "checks": 11,
+          "failures": 0
+        },
+        {
+          "name": "ARRIVAL CAPACITY",
+          "checks": 27,
+          "failures": 0
+        },
+        {
+          "name": "OPENING GUEST RULES",
+          "checks": 12,
+          "failures": 0
+        },
+        {
+          "name": "MEMORY RULES",
+          "checks": 21,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY FLOW",
+          "checks": 16,
+          "failures": 0
+        },
+        {
+          "name": "ARRIVAL EDGES",
+          "checks": 28,
+          "failures": 0
+        },
+        {
+          "name": "FEEDBACK RULES",
+          "checks": 11,
+          "failures": 0
+        },
+        {
+          "name": "DISTRIBUTION",
+          "checks": 36,
+          "failures": 0
+        },
+        {
+          "name": "DIRECTOR RULES",
+          "checks": 8,
+          "failures": 0
+        },
+        {
+          "name": "PEOPLE PANEL",
+          "checks": 6,
+          "failures": 0
+        },
+        {
+          "name": "A/B HANDOFF",
+          "checks": 28,
+          "failures": 0
+        }
+      ],
+      "reported_checks": 18621,
+      "reported_failures": 0,
+      "python_unittest_counts": [
+        137,
+        254
+      ],
+      "script_errors": 0
+    }
+  ],
+  "full3_all_summary_formats": {
+    "groups": [
+      {
+        "name": "CASE SCHEMA",
+        "checks": 149,
+        "failures": 0
+      },
+      {
+        "name": "DEDUCTION BOARD",
+        "checks": 456,
+        "failures": 0
+      },
+      {
+        "name": "CASE HOST",
+        "checks": 17,
+        "failures": 0
+      },
+      {
+        "name": "CASE DEADLINE",
+        "checks": 25,
+        "failures": 0
+      },
+      {
+        "name": "CASE SAVE CONFIG",
+        "checks": 5,
+        "failures": 0
+      },
+      {
+        "name": "CASE SAVE CONFIG",
+        "checks": 5,
+        "failures": 0
+      },
+      {
+        "name": "CASE SAVE CONFIG",
+        "checks": 11,
+        "failures": 0
+      },
+      {
+        "name": "CASE TRANSACTIONS",
+        "checks": 216,
+        "failures": 0
+      },
+      {
+        "name": "CASE MIGRATION",
+        "checks": 41,
+        "failures": 0
+      },
+      {
+        "name": "CASE BOARD UI",
+        "checks": 235,
+        "failures": 0
+      },
+      {
+        "name": "STORY CONTENT",
+        "checks": 103,
+        "failures": 0
+      },
+      {
+        "name": "STORY PROGRESS",
+        "checks": 26,
+        "failures": 0
+      },
+      {
+        "name": "STORY PLAYTHROUGH",
+        "checks": 554,
+        "failures": 0
+      },
+      {
+        "name": "STORY TRANSACTIONS",
+        "checks": 297,
+        "failures": 0
+      },
+      {
+        "name": "STORY RETURN BACKLOG",
+        "checks": 133,
+        "failures": 0
+      },
+      {
+        "name": "STORY MIGRATION",
+        "checks": 40,
+        "failures": 0
+      },
+      {
+        "name": "STORY FOLLOWUP TRANSACTIONS",
+        "checks": 25,
+        "failures": 0
+      },
+      {
+        "name": "STORY UI READER",
+        "checks": 20,
+        "failures": 0
+      },
+      {
+        "name": "STORY BOARD UI",
+        "checks": 212,
+        "failures": 0
+      },
+      {
+        "name": "LIN APPEARANCE",
+        "checks": 39,
+        "failures": 0
+      },
+      {
+        "name": "LIN TRANSACTIONS",
+        "checks": 40,
+        "failures": 0
+      },
+      {
+        "name": "LIN LEGACY",
+        "checks": 79,
+        "failures": 0
+      },
+      {
+        "name": "LIN UI",
+        "checks": 64,
+        "failures": 0
+      },
+      {
+        "name": "BIRTH IDENTITY",
+        "checks": 88,
+        "failures": 0
+      },
+      {
+        "name": "NAMES ORDINARY",
+        "checks": 71,
+        "failures": 0
+      },
+      {
+        "name": "NAMES PROTOCOL",
+        "checks": 75,
+        "failures": 0
+      },
+      {
+        "name": "NAMES PROVIDER",
+        "checks": 20,
+        "failures": 0
+      },
+      {
+        "name": "NAMES COPY",
+        "checks": 13,
+        "failures": 0
+      },
+      {
+        "name": "NAMES CATALOG",
+        "checks": 29,
+        "failures": 0
+      },
+      {
+        "name": "NAMES DIALOGUE",
+        "checks": 30,
+        "failures": 0
+      },
+      {
+        "name": "NAMES BIRTH FAILURES",
+        "checks": 21,
+        "failures": 0
+      },
+      {
+        "name": "NAMES MIGRATION",
+        "checks": 19,
+        "failures": 0
+      },
+      {
+        "name": "NAMES TRANSACTIONS",
+        "checks": 28,
+        "failures": 0
+      },
+      {
+        "name": "NAMES UI",
+        "checks": 206,
+        "failures": 0
+      },
+      {
+        "name": "SMOKE RESULT",
+        "checks": 57,
+        "failures": 0
+      },
+      {
+        "name": "DAILY LOOP",
+        "checks": 103,
+        "failures": 0
+      },
+      {
+        "name": "DAILY MIGRATION",
+        "checks": 95,
+        "failures": 0
+      },
+      {
+        "name": "DAILY LOOP GUARDS",
+        "checks": 71,
+        "failures": 0
+      },
+      {
+        "name": "DELETE SAVE",
+        "checks": 52,
+        "failures": 0
+      },
+      {
+        "name": "PROVIDER RESULT",
+        "checks": 48,
+        "failures": 0
+      },
+      {
+        "name": "DIALOGUE GROUNDING",
+        "checks": 127,
+        "failures": 0
+      },
+      {
+        "name": "FOLLOWUP QUESTIONS",
+        "checks": 86,
+        "failures": 0
+      },
+      {
+        "name": "ORACLE RULES",
+        "checks": 29,
+        "failures": 0
+      },
+      {
+        "name": "DIVINATION RESULT",
+        "checks": 543,
+        "failures": 0
+      },
+      {
+        "name": "LEGACY DIVINATION GUESTS",
+        "checks": 31,
+        "failures": 0
+      },
+      {
+        "name": "GENERATED CASES",
+        "checks": 80,
+        "failures": 0
+      },
+      {
+        "name": "EVENT GOLDEN",
+        "checks": 100,
+        "failures": 0
+      },
+      {
+        "name": "INVITATION FEEDBACK GOLDEN",
+        "checks": 22,
+        "failures": 0
+      },
+      {
+        "name": "EVENT DATA RULES",
+        "checks": 72,
+        "failures": 0
+      },
+      {
+        "name": "EVENT MIGRATION",
+        "checks": 121,
+        "failures": 0
+      },
+      {
+        "name": "G3 WORKFLOWS",
+        "checks": 129,
+        "failures": 0
+      },
+      {
+        "name": "G4 COMPONENTS",
+        "checks": 62,
+        "failures": 0
+      },
+      {
+        "name": "GENERIC EFFECTS",
+        "checks": 43,
+        "failures": 0
+      },
+      {
+        "name": "EVENT EFFECTS",
+        "checks": 29,
+        "failures": 0
+      },
+      {
+        "name": "INVITATION REFERRAL",
+        "checks": 38,
+        "failures": 0
+      },
+      {
+        "name": "EVENT NOTEBOOK UI",
+        "checks": 116,
+        "failures": 0
+      },
+      {
+        "name": "UI_SMOKE",
+        "checks": 319,
+        "failures": 0
+      },
+      {
+        "name": "SHOP RULES",
+        "checks": 89,
+        "failures": 0
+      },
+      {
+        "name": "SHOP INTEGRATION",
+        "checks": 79,
+        "failures": 0
+      },
+      {
+        "name": "SHOP CONTENT",
+        "checks": 31,
+        "failures": 0
+      },
+      {
+        "name": "ECONOMIC VALIDATION",
+        "checks": 14,
+        "failures": 0
+      },
+      {
+        "name": "ORDINARY CONTENT",
+        "checks": 36,
+        "failures": 0
+      },
+      {
+        "name": "ORDINARY POPULATION",
+        "checks": 41,
+        "failures": 0
+      },
+      {
+        "name": "SHOP CONTENT MIGRATION",
+        "checks": 109,
+        "failures": 0
+      },
+      {
+        "name": "SHOP CONTENT TRANSACTIONS",
+        "checks": 136,
+        "failures": 0
+      },
+      {
+        "name": "TRAFFIC ACTIVATION",
+        "checks": 105,
+        "failures": 0
+      },
+      {
+        "name": "COMPONENT FEEDBACK",
+        "checks": 158,
+        "failures": 0
+      },
+      {
+        "name": "SHOP CONTENT UI",
+        "checks": 57,
+        "failures": 0
+      },
+      {
+        "name": "G4 CAPTURE",
+        "checks": 10,
+        "failures": 0
+      },
+      {
+        "name": "PEOPLE INTEGRATION",
+        "checks": 52,
+        "failures": 0
+      },
+      {
+        "name": "C UI RESULT",
+        "checks": 1518,
+        "failures": 0
+      },
+      {
+        "name": "DAILY LOOP UI",
+        "checks": 110,
+        "failures": 0
+      },
+      {
+        "name": "ITEM VISUALS",
+        "checks": 212,
+        "failures": 0
+      },
+      {
+        "name": "SHELF LAYOUT",
+        "checks": 74,
+        "failures": 0
+      },
+      {
+        "name": "SHELF RENDER",
+        "checks": 38,
+        "failures": 0
+      },
+      {
+        "name": "WIND/SPRING",
+        "checks": 100,
+        "failures": 0
+      },
+      {
+        "name": "COMMITTED PRESENTATION EVENTS",
+        "checks": 277,
+        "failures": 0
+      },
+      {
+        "name": "SCENE MOTION",
+        "checks": 49,
+        "failures": 0
+      },
+      {
+        "name": "MOTION SETTINGS",
+        "checks": 31,
+        "failures": 0
+      },
+      {
+        "name": "MOTION PERFORMANCE",
+        "checks": 24,
+        "failures": 0
+      },
+      {
+        "name": "MOTION PREVIEW",
+        "checks": 7,
+        "failures": 0
+      },
+      {
+        "name": "APPEARANCE",
+        "checks": 264,
+        "failures": 0
+      },
+      {
+        "name": "APPEARANCE BIRTH",
+        "checks": 33,
+        "failures": 0
+      },
+      {
+        "name": "APPEARANCE DESCRIPTION",
+        "checks": 20,
+        "failures": 0
+      },
+      {
+        "name": "APPEARANCE MIGRATION",
+        "checks": 120,
+        "failures": 0
+      },
+      {
+        "name": "APPEARANCE UI",
+        "checks": 70,
+        "failures": 0
+      },
+      {
+        "name": "PORTRAIT PREVIEW SCHEMA ONLY",
+        "checks": 8,
+        "failures": 0
+      },
+      {
+        "name": "A4 MOOD",
+        "checks": 45,
+        "failures": 0
+      },
+      {
+        "name": "FAMILY LIBRARY",
+        "checks": 115,
+        "failures": 0
+      },
+      {
+        "name": "FAMILY ARRIVAL BUDGET",
+        "checks": 51,
+        "failures": 0
+      },
+      {
+        "name": "FAMILY LIBRARY FLOW",
+        "checks": 47,
+        "failures": 0
+      },
+      {
+        "name": "FAMILY LIBRARY DISTRIBUTION",
+        "checks": 96,
+        "failures": 0
+      },
+      {
+        "name": "FAMILY MIGRATION",
+        "checks": 109,
+        "failures": 0
+      },
+      {
+        "name": "FAMILY TRANSACTIONS",
+        "checks": 71,
+        "failures": 0
+      },
+      {
+        "name": "FAMILY UI",
+        "checks": 133,
+        "failures": 0
+      },
+      {
+        "name": "PAST LIBRARY",
+        "checks": 134,
+        "failures": 0
+      },
+      {
+        "name": "PAST MIGRATION",
+        "checks": 182,
+        "failures": 0
+      },
+      {
+        "name": "PAST TRANSACTIONS",
+        "checks": 128,
+        "failures": 0
+      },
+      {
+        "name": "PAST UI",
+        "checks": 74,
+        "failures": 0
+      },
+      {
+        "name": "G5 CAPTURE",
+        "checks": 15,
+        "failures": 0
+      },
+      {
+        "name": "STYLE REPORT",
+        "checks": 68,
+        "failures": 0
+      },
+      {
+        "name": "STYLE TRANSACTIONS",
+        "checks": 66,
+        "failures": 0
+      },
+      {
+        "name": "STYLE REPORT UI",
+        "checks": 843,
+        "failures": 0
+      },
+      {
+        "name": "G6 CAPTURE",
+        "checks": 15,
+        "failures": 0
+      },
+      {
+        "name": "FAMILY POLICY",
+        "checks": 37,
+        "failures": 0
+      },
+      {
+        "name": "SCENE VISUALS",
+        "checks": 1644,
+        "failures": 0
+      },
+      {
+        "name": "ALIGNED SCENE LAYERS",
+        "checks": 79,
+        "failures": 0
+      },
+      {
+        "name": "SCENE ASSET ACCEPTANCE",
+        "checks": 570,
+        "failures": 0
+      },
+      {
+        "name": "ARRIVAL UI RESULT",
+        "checks": 45,
+        "failures": 0
+      },
+      {
+        "name": "CONSULTATION LAYOUT",
+        "checks": 34,
+        "failures": 0
+      },
+      {
+        "name": "ROUND2 SHELL RESULT",
+        "checks": 1606,
+        "failures": 0
+      },
+      {
+        "name": "ROUND2 SHELL EDGES",
+        "checks": 87,
+        "failures": 0
+      },
+      {
+        "name": "ROUND2 CONSULTATION",
+        "checks": 51,
+        "failures": 0
+      },
+      {
+        "name": "A3R AUDIO/THEME",
+        "checks": 30,
+        "failures": 0
+      },
+      {
+        "name": "AUDIO LIFECYCLE",
+        "checks": 43,
+        "failures": 0
+      },
+      {
+        "name": "ARRIVAL TRANSACTIONS",
+        "checks": 42,
+        "failures": 0
+      },
+      {
+        "name": "SAVE DELETE UI",
+        "checks": 37,
+        "failures": 0
+      },
+      {
+        "name": "GENERATED PEOPLE INTEGRATION",
+        "checks": 154,
+        "failures": 0
+      },
+      {
+        "name": "GENERATION ARRIVAL SLOTS",
+        "checks": 38,
+        "failures": 0
+      },
+      {
+        "name": "GENERATED PEOPLE UI",
+        "checks": 49,
+        "failures": 0
+      },
+      {
+        "name": "FOLLOWUP CORE RESULT",
+        "checks": 29,
+        "failures": 0
+      },
+      {
+        "name": "FOLLOWUP QUESTIONS UI",
+        "checks": 39,
+        "failures": 0
+      },
+      {
+        "name": "CHAT KEYBOARD UI",
+        "checks": 49,
+        "failures": 0
+      },
+      {
+        "name": "OPENING GUEST INTEGRATION",
+        "checks": 1210,
+        "failures": 0
+      },
+      {
+        "name": "PROJECT CLEANUP RESULT",
+        "checks": 16,
+        "failures": 0
+      },
+      {
+        "name": "API SETTINGS UI",
+        "checks": 45,
+        "failures": 0
+      },
+      {
+        "name": "API ENDPOINT",
+        "checks": 187,
+        "failures": 0
+      },
+      {
+        "name": "MODEL POLICY RESULT",
+        "checks": 38,
+        "failures": 0
+      },
+      {
+        "name": "HTTP DEADLINE RESULT",
+        "checks": 17,
+        "failures": 0
+      },
+      {
+        "name": "HTTP RESULT",
+        "checks": 41,
+        "failures": 0
+      },
+      {
+        "name": "HTTP CORE RESULT",
+        "checks": 56,
+        "failures": 0
+      },
+      {
+        "name": "DIRECT API RESULT",
+        "checks": 77,
+        "failures": 0
+      },
+      {
+        "name": "HTTP RECOVERY RESULT",
+        "checks": 43,
+        "failures": 0
+      },
+      {
+        "name": "A4 HTTP MOOD",
+        "checks": 23,
+        "failures": 0
+      },
+      {
+        "name": "FAMILY HTTP",
+        "checks": 48,
+        "failures": 0
+      },
+      {
+        "name": "PERSON HTTP RESULT",
+        "checks": 64,
+        "failures": 0
+      },
+      {
+        "name": "PEOPLE RULES",
+        "checks": 52,
+        "failures": 0
+      },
+      {
+        "name": "GENERATED PERSON",
+        "checks": 103,
+        "failures": 0
+      },
+      {
+        "name": "PRODUCTION PEOPLE CONFIG",
+        "checks": 11,
+        "failures": 0
+      },
+      {
+        "name": "ARRIVAL CAPACITY",
+        "checks": 27,
+        "failures": 0
+      },
+      {
+        "name": "OPENING GUEST RULES",
+        "checks": 12,
+        "failures": 0
+      },
+      {
+        "name": "MEMORY RULES",
+        "checks": 21,
+        "failures": 0
+      },
+      {
+        "name": "FAMILY FLOW",
+        "checks": 16,
+        "failures": 0
+      },
+      {
+        "name": "ARRIVAL EDGES",
+        "checks": 28,
+        "failures": 0
+      },
+      {
+        "name": "FEEDBACK RULES",
+        "checks": 11,
+        "failures": 0
+      },
+      {
+        "name": "DISTRIBUTION",
+        "checks": 36,
+        "failures": 0
+      },
+      {
+        "name": "DIRECTOR RULES",
+        "checks": 8,
+        "failures": 0
+      },
+      {
+        "name": "PEOPLE PANEL",
+        "checks": 6,
+        "failures": 0
+      },
+      {
+        "name": "A/B HANDOFF",
+        "checks": 28,
+        "failures": 0
+      }
+    ],
+    "checks": 18716,
+    "failures": 0,
+    "additional_no_colon_checks": 95,
+    "log_sha256": "b0daab9d5e738c0e3640b7f4f819385e4fa478c39c8d394a8b656500b3600c75"
+  },
+  "full1_unreported_assertion": "STORY FOLLOWUP: actual schema12 board assertion; NativeCommandError stops capture before its summary. Separate RED25/1 then test-only GREEN25/0.",
+  "full1_actual_observed_assertion_failures": 1,
+  "full2_unreported_assertion": "EVENT MIGRATION: synthetic old schema3 copied future birth fields. NativeCommandError stops capture before its summary; targeted fixture compatibility evidence follows.",
+  "full2_actual_observed_assertion_failures": 1,
+  "source_freeze_file": ".tools/r3-names/full3-source.json",
+  "source_freeze_sha256": "f4b14457c9bf05172c8b0a461743f21aae80029ed76488178580651378500e5e",
+  "targeted_core_before_minor_fix": {
+    "targets": 26,
+    "checks": 1712,
+    "failures": 0,
+    "python_tests": 51,
+    "receipt_sha256": "29bfbd6eaa6366598cd584bc8479548f14df064136f10fe90daaf13faa0feac0"
+  },
+  "configuration_shape_fix": {
+    "production_changed_lines": 2,
+    "before_snapshot_red": {
+      "checks": 87,
+      "failures": 3,
+      "exit_code": 1
+    },
+    "production_green": {
+      "checks": 88,
+      "failures": 0,
+      "exit_code": 0
+    },
+    "selector_sha256": "d932df5c5d652a64303babe802d1a0585f2f7fb7fd968623beeae98e6bbd2ff1",
+    "target_sha256": "44e3a6ec66bddd29e790eb8ea6ec21b0b27b33af1e6b5b89405d17e9ad423525"
+  },
+  "independent_review": {
+    "critical": 0,
+    "important": 0,
+    "minor": 0,
+    "paths": 57,
+    "receipt_sha256": "a5c2d2818dcb1ec145b61a9e16df8925e9ce3c0018a6130a6306732a573e4a65",
+    "test_compatibility_receipt_sha256": "3fb6c73c0b479e4e6b02df6171fb9bfe57fd4d4a51da8df7fff2fac8058be3b6",
+    "six_legacy_test_receipt_sha256": "dff3e2db8aa6086d83f0bdd274ce06e8ab448818ba63b6faedb1ed2859fb2eee"
+  },
+  "targeted_legacy_compatibility": {
+    "targets": 6,
+    "checks": 627,
+    "failures": 0,
+    "changed_paths": [
+      "tests/divination/event_migration.gd",
+      "tests/divination/event_workflows.gd",
+      "tests/shop/integration.gd",
+      "tests/integration/traffic_activation.gd",
+      "tests/integration/generated_people.gd",
+      "tests/integration/generation_arrival_slots.gd"
+    ],
+    "owner_receipt_sha256": "635e7654c1d166f1e388ff76f43712f782e66d3ba8394ec395aa7e12028d2d07",
+    "product_data_runner_ui_changed": false
+  },
+  "visual": {
+    "gpu_exit_code": 0,
+    "checks": 243,
+    "failures": 0,
+    "receipt_sha256": "bb8832b2fc55ef6de62fdc9aa082b6c5f250d980d9e73a3999089cfdbb1decbf",
+    "source_script_sha256": "3d49b6ddf7197f1b1f0116a61e319114d12d26e2c66dc125032dac556c572685",
+    "selection": "programmatic archive selection; no real mouse claim",
+    "frames": [
+      {
+        "path": "docs/screenshots/round3/R3-NAMES/europe-archive-1280x720.jpg",
+        "sha256": "dfc6989a9c55ec42c07aebc8dbe282d3f923ad34b8729f51984a28f87e513d70",
+        "bytes": 140258,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "root_opened_and_checked": true
+      },
+      {
+        "path": "docs/screenshots/round3/R3-NAMES/europe-archive-1920x1080.jpg",
+        "sha256": "8002e8c3fe762e550fecc1a9ca55e4107c1b9142702941635500399e226c8b6a",
+        "bytes": 330696,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "root_opened_and_checked": true
+      },
+      {
+        "path": "docs/screenshots/round3/R3-NAMES/africa_or_south_asia-archive-1280x720.jpg",
+        "sha256": "de24452c5b6b9fb9d7c0dd29a71a4a4d53361b5a227326b2fb5e057589621f7e",
+        "bytes": 140334,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "root_opened_and_checked": true
+      },
+      {
+        "path": "docs/screenshots/round3/R3-NAMES/africa_or_south_asia-archive-1920x1080.jpg",
+        "sha256": "7262a966ef3dda6171f8336349c193758b6a7a42f84efcc5448855ebf47146d5",
+        "bytes": 330802,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "root_opened_and_checked": true
+      },
+      {
+        "path": "docs/screenshots/round3/R3-NAMES/mixed-archive-1280x720.jpg",
+        "sha256": "02b34cfbc419c0788dd87ee2488ae00dd3e961e16cbf78af31786dbbc5a38520",
+        "bytes": 140984,
+        "dimensions": [
+          1280,
+          720
+        ],
+        "root_opened_and_checked": true
+      },
+      {
+        "path": "docs/screenshots/round3/R3-NAMES/mixed-archive-1920x1080.jpg",
+        "sha256": "3b4fe81e544df3668b4fe601988fdecc7f77d8a51f3933b717b8a2620ab25ce2",
+        "bytes": 331312,
+        "dimensions": [
+          1920,
+          1080
+        ],
+        "root_opened_and_checked": true
+      }
+    ],
+    "total_jpg_bytes": 1414386,
+    "shop_gpu": {
+      "exit_code": 0,
+      "checks": 1548,
+      "failures": 0,
+      "captures": 30,
+      "root_opened": [
+        "front-1280.png",
+        "front-1920.png",
+        "consultation-1280.png",
+        "consultation-1920.png"
+      ]
+    }
+  },
+  "genuine_ui_fixtures": {
+    "version": 1,
+    "source_script_sha256": "3d49b6ddf7197f1b1f0116a61e319114d12d26e2c66dc125032dac556c572685",
+    "provenance": {
+      "default_sequential": true,
+      "seed_or_weight_or_state_edited": false,
+      "source_receipt_sha256": "5e8ddd5ee2158c22eb63ebf42d670a6f1c08e28e6789a228297c284312a07763"
+    },
+    "subjects": {
+      "europe": {
+        "arrival_id": "arrival_daily_0_1",
+        "birth_identity": {
+          "cultural_origin": "europe",
+          "name": "玛丽·赖特",
+          "name_pool_id": "europe_english",
+          "skin_id": "skin_03",
+          "version": 1
+        },
+        "lin_identity": {
+          "appearance": {
+            "age_stage": "adult",
+            "colors": {
+              "hair": "hair_02",
+              "outfit": "outfit_01",
+              "skin": "skin_02"
+            },
+            "parts": {
+              "accessory": "none",
+              "body": "body_01",
+              "brows_expr": "brows_01",
+              "eyes_expr": "eyes_01",
+              "face_shape": "face_01",
+              "features": "features_adult",
+              "hair_back": "hair_back_10",
+              "hair_front": "hair_front_02",
+              "mouth_expr": "mouth_01",
+              "outfit": "outfit_02"
+            },
+            "version": 2
+          },
+          "birthday": "1996-03-14",
+          "mbti": "INFJ",
+          "name": "林照晚",
+          "npc_id": "npc_lin",
+          "personality": "细心内敛",
+          "role": "旧书修复师",
+          "zodiac": "双鱼座"
+        },
+        "npc_id": "npc_o_0_10001",
+        "save_id": "save_971e6ca63b549ed7cf181fd1bc700b36",
+        "sha256": "1b08495e93f6261f9040b42f425125031b751b9aed8a0a757c86f652d2a2e6a0",
+        "state_version": 17,
+        "trial": 6,
+        "source_file": "res://tests/fixtures/names_ui/europe.json"
+      },
+      "africa_or_south_asia": {
+        "arrival_id": "arrival_daily_0_1",
+        "birth_identity": {
+          "cultural_origin": "south_asia",
+          "name": "尼哈·维尔马",
+          "name_pool_id": "south_asia_hindi",
+          "skin_id": "skin_04",
+          "version": 1
+        },
+        "lin_identity": {
+          "appearance": {
+            "age_stage": "adult",
+            "colors": {
+              "hair": "hair_02",
+              "outfit": "outfit_01",
+              "skin": "skin_02"
+            },
+            "parts": {
+              "accessory": "none",
+              "body": "body_01",
+              "brows_expr": "brows_01",
+              "eyes_expr": "eyes_01",
+              "face_shape": "face_01",
+              "features": "features_adult",
+              "hair_back": "hair_back_10",
+              "hair_front": "hair_front_02",
+              "mouth_expr": "mouth_01",
+              "outfit": "outfit_02"
+            },
+            "version": 2
+          },
+          "birthday": "1996-03-14",
+          "mbti": "INFJ",
+          "name": "林照晚",
+          "npc_id": "npc_lin",
+          "personality": "细心内敛",
+          "role": "旧书修复师",
+          "zodiac": "双鱼座"
+        },
+        "npc_id": "npc_o_0_10001",
+        "save_id": "save_fc42bc188656e9e63350482fef94e8ed",
+        "sha256": "1a5d7501491a7171e4ad5f21e3385c9b49f0f78a8fd91924926be1d4006fc327",
+        "state_version": 17,
+        "trial": 1,
+        "source_file": "res://tests/fixtures/names_ui/africa_or_south_asia.json"
+      },
+      "mixed": {
+        "arrival_id": "arrival_daily_0_1",
+        "birth_identity": {
+          "cultural_origin": "mixed",
+          "name": "何克劳迪娅",
+          "name_pool_id": "mixed_latin_america",
+          "skin_id": "skin_02",
+          "version": 1
+        },
+        "lin_identity": {
+          "appearance": {
+            "age_stage": "adult",
+            "colors": {
+              "hair": "hair_02",
+              "outfit": "outfit_01",
+              "skin": "skin_02"
+            },
+            "parts": {
+              "accessory": "none",
+              "body": "body_01",
+              "brows_expr": "brows_01",
+              "eyes_expr": "eyes_01",
+              "face_shape": "face_01",
+              "features": "features_adult",
+              "hair_back": "hair_back_10",
+              "hair_front": "hair_front_02",
+              "mouth_expr": "mouth_01",
+              "outfit": "outfit_02"
+            },
+            "version": 2
+          },
+          "birthday": "1996-03-14",
+          "mbti": "INFJ",
+          "name": "林照晚",
+          "npc_id": "npc_lin",
+          "personality": "细心内敛",
+          "role": "旧书修复师",
+          "zodiac": "双鱼座"
+        },
+        "npc_id": "npc_o_0_10001",
+        "save_id": "save_ddb48e2ac798f242be6e8dd65cf17ac5",
+        "sha256": "7c76f5bf3d52dbf2958cc4a8e109b1b47b059e802358da2b4707a76187ea8e69",
+        "state_version": 17,
+        "trial": 35,
+        "source_file": "res://tests/fixtures/names_ui/mixed.json"
+      }
+    }
+  },
+  "genuine_schema12_fixture": {
+    "bytes": 41935,
+    "sha256": "5bbb63c3113c7d5b097ab129a2a65dd686fa1d91844444d2dc786ceb71ed4de8"
+  },
+  "performance": {
+    "before_save_ms_range": [
+      5230,
+      6050
+    ],
+    "after_same_people_save_ms": [
+      546,
+      819,
+      848
+    ],
+    "complete_people_equal": true,
+    "comparison_receipt_sha256": "4231d0e0d41cc8da094c4cb4c3a3398025f445873f6c4a237f5f8b8cd7e26f29",
+    "limit": "Working copy includes normal settings/action receipts/version changes; no exact speedup ratio claim."
+  },
+  "limits": [
+    "Archive selection is programmatic, not real mouse coverage.",
+    "No paid or real model API calls were made; protocol HTTP checks use local mocks.",
+    "Culture pool review is AI reading with selected primary checks, not human certification.",
+    "Existing old UI glyphs/layout remain in the authorized later POLISH scope.",
+    "Stable global new_game replay remains the planned TITLE integration."
+  ],
+  "historical_failure_evidence_retained": true,
+  "main_modified": false,
+  "music_or_video_staged": false
+}

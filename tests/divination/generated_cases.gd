@@ -22,7 +22,16 @@ func fixture() -> Dictionary:
 		"concern":"我怕把话说重了，让对方以为我不愿意做。","detail":"DETAIL_491: 草图上改动的是灯罩的接缝。",
 		"hidden_fact":"SECRET_829: 便笺背面写着先试样再决定。","followup":"我又来了。上次谈的分工，我还想接着理一理。"
 	}
-	var bundle := {"version":1,"person":{"name":"许灯禾"},"contact":{"name":"江岑"},"case":request,"relationship":{"kind":"搭档","shared_history":"我们曾一起修过旧灯。"}}
+	# Keep this target's eventless B case and sentinel evidence, but begin with
+	# the real complete v1 protocol fixture rather than an invalid partial person.
+	var original: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://tests/people/fixtures/person_generation.json"))
+	var bundle: Dictionary=original.bundle.duplicate(true)
+	bundle.person.name="许灯禾"
+	bundle.person.role="灯具修理师"
+	bundle.contact.name="江岑"
+	bundle.contact.role="木工"
+	bundle.case=request
+	bundle.relationship={"kind":"搭档","shared_history":"我们曾一起修过旧灯。"}
 	return {
 		# Explicit pre-G3 B fixture; this target keeps its eventless contract.
 		# Modern generated events are covered separately by event_workflows.gd.

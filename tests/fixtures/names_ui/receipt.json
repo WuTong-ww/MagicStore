@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "source_script_sha256": "3d49b6ddf7197f1b1f0116a61e319114d12d26e2c66dc125032dac556c572685",
+  "provenance": {
+    "default_sequential": true,
+    "seed_or_weight_or_state_edited": false,
+    "source_receipt_sha256": "5e8ddd5ee2158c22eb63ebf42d670a6f1c08e28e6789a228297c284312a07763"
+  },
+  "subjects": {
+    "europe": {
+      "arrival_id": "arrival_daily_0_1",
+      "birth_identity": {
+        "cultural_origin": "europe",
+        "name": "玛丽·赖特",
+        "name_pool_id": "europe_english",
+        "skin_id": "skin_03",
+        "version": 1
+      },
+      "lin_identity": {
+        "appearance": {
+          "age_stage": "adult",
+          "colors": {
+            "hair": "hair_02",
+            "outfit": "outfit_01",
+            "skin": "skin_02"
+          },
+          "parts": {
+            "accessory": "none",
+            "body": "body_01",
+            "brows_expr": "brows_01",
+            "eyes_expr": "eyes_01",
+            "face_shape": "face_01",
+            "features": "features_adult",
+            "hair_back": "hair_back_10",
+            "hair_front": "hair_front_02",
+            "mouth_expr": "mouth_01",
+            "outfit": "outfit_02"
+          },
+          "version": 2
+        },
+        "birthday": "1996-03-14",
+        "mbti": "INFJ",
+        "name": "林照晚",
+        "npc_id": "npc_lin",
+        "personality": "细心内敛",
+        "role": "旧书修复师",
+        "zodiac": "双鱼座"
+      },
+      "npc_id": "npc_o_0_10001",
+      "save_id": "save_971e6ca63b549ed7cf181fd1bc700b36",
+      "sha256": "1b08495e93f6261f9040b42f425125031b751b9aed8a0a757c86f652d2a2e6a0",
+      "state_version": 17,
+      "trial": 6,
+      "source_file": "res://tests/fixtures/names_ui/europe.json"
+    },
+    "africa_or_south_asia": {
+      "arrival_id": "arrival_daily_0_1",
+      "birth_identity": {
+        "cultural_origin": "south_asia",
+        "name": "尼哈·维尔马",
+        "name_pool_id": "south_asia_hindi",
+        "skin_id": "skin_04",
+        "version": 1
+      },
+      "lin_identity": {
+        "appearance": {
+          "age_stage": "adult",
+          "colors": {
+            "hair": "hair_02",
+            "outfit": "outfit_01",
+            "skin": "skin_02"
+          },
+          "parts": {
+            "accessory": "none",
+            "body": "body_01",
+            "brows_expr": "brows_01",
+            "eyes_expr": "eyes_01",
+            "face_shape": "face_01",
+            "features": "features_adult",
+            "hair_back": "hair_back_10",
+            "hair_front": "hair_front_02",
+            "mouth_expr": "mouth_01",
+            "outfit": "outfit_02"
+          },
+          "version": 2
+        },
+        "birthday": "1996-03-14",
+        "mbti": "INFJ",
+        "name": "林照晚",
+        "npc_id": "npc_lin",
+        "personality": "细心内敛",
+        "role": "旧书修复师",
+        "zodiac": "双鱼座"
+      },
+      "npc_id": "npc_o_0_10001",
+      "save_id": "save_fc42bc188656e9e63350482fef94e8ed",
+      "sha256": "1a5d7501491a7171e4ad5f21e3385c9b49f0f78a8fd91924926be1d4006fc327",
+      "state_version": 17,
+      "trial": 1,
+      "source_file": "res://tests/fixtures/names_ui/africa_or_south_asia.json"
+    },
+    "mixed": {
+      "arrival_id": "arrival_daily_0_1",
+      "birth_identity": {
+        "cultural_origin": "mixed",
+        "name": "何克劳迪娅",
+        "name_pool_id": "mixed_latin_america",
+        "skin_id": "skin_02",
+        "version": 1
+      },
+      "lin_identity": {
+        "appearance": {
+          "age_stage": "adult",
+          "colors": {
+            "hair": "hair_02",
+            "outfit": "outfit_01",
+            "skin": "skin_02"
+          },
+          "parts": {
+            "accessory": "none",
+            "body": "body_01",
+            "brows_expr": "brows_01",
+            "eyes_expr": "eyes_01",
+            "face_shape": "face_01",
+            "features": "features_adult",
+            "hair_back": "hair_back_10",
+            "hair_front": "hair_front_02",
+            "mouth_expr": "mouth_01",
+            "outfit": "outfit_02"
+          },
+          "version": 2
+        },
+        "birthday": "1996-03-14",
+        "mbti": "INFJ",
+        "name": "林照晚",
+        "npc_id": "npc_lin",
+        "personality": "细心内敛",
+        "role": "旧书修复师",
+        "zodiac": "双鱼座"
+      },
+      "npc_id": "npc_o_0_10001",
+      "save_id": "save_ddb48e2ac798f242be6e8dd65cf17ac5",
+      "sha256": "7c76f5bf3d52dbf2958cc4a8e109b1b47b059e802358da2b4707a76187ea8e69",
+      "state_version": 17,
+      "trial": 35,
+      "source_file": "res://tests/fixtures/names_ui/mixed.json"
+    }
+  }
+}

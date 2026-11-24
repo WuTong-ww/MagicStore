@@ -69,6 +69,10 @@ func act(game: Node, kind: String, values: Dictionary = {}) -> Dictionary:
 func compatibility_schema(game: Node, saves: Node, schema: int) -> void:
 	check((await act(game,"new_game",{"name":"经营旧结构兼容"})).success,"create isolated version-contract source / "+str(schema))
 	var old: Dictionary = game.snapshot()
+	# Synthetic historical versions cannot carry the later birth-policy namespace.
+	old.people.erase("birth_identity_version")
+	for profile: Dictionary in old.people.profiles.values():
+		profile.erase("birth_identity")
 	old.schema_version = schema
 	old.divination.erase("past_lines")
 	for case: Dictionary in old.divination.cases.values():
@@ -178,6 +182,8 @@ func actual_schema7_history(game: Node, saves: Node) -> void:
 	var old_people: Dictionary = canonical.people.duplicate(true)
 	var new_people: Dictionary = migrated.people.duplicate(true)
 	new_people.erase("ordinary_content_version")
+	check(new_people.get("birth_identity_version",0)==1,"actual historical population gains the checked birth-policy marker")
+	new_people.erase("birth_identity_version")
 	check(new_people == old_people,"actual G2 graph/episode/reservations, birthdays, A4 and every old profile remain unchanged")
 	var old_shop: Dictionary = canonical.shop.duplicate(true)
 	var new_shop: Dictionary = migrated.shop.duplicate(true)

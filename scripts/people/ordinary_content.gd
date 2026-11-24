@@ -3,6 +3,7 @@ extends RefCounted
 const CONFIG_PATH := "res://data/people/ordinary_content.json"
 const TEMPLATE_PATH := "res://data/people/templates.json"
 const Appearance = preload("res://scripts/people/appearance.gd")
+const BirthIdentity = preload("res://scripts/people/birth_identity.gd")
 
 static func _read(path: String) -> Dictionary:
 	if not FileAccess.file_exists(path):
@@ -139,6 +140,37 @@ static func config_valid(data: Variant, templates: Dictionary = {}) -> bool:
 	if not _keys(data.copy,["background","speech_styles"]) or not _text(data.copy.background) or not data.copy.background.contains("{role}") or not _keys(data.copy.speech_styles,data.advice_preferences.keys()) or not data.copy.speech_styles.values().all(func(text: Variant) -> bool: return _text(text)):
 		return false
 	return true
+
+## Only called after the full legacy/G4 birth. Existing profiles never enter it.
+static func with_birth_identity(profile: Dictionary, record: Dictionary, birth_config: Dictionary = {}, appearance_config: Dictionary = {}) -> Dictionary:
+	if birth_config.is_empty():
+		birth_config = BirthIdentity.load_config()
+	if appearance_config.is_empty():
+		appearance_config = Appearance.load_config()
+	if not BirthIdentity.record_valid(record,birth_config) or not Appearance.appearance_valid(profile.get("appearance"),appearance_config) or profile.appearance.has("preset"):
+		return {}
+	var result := profile.duplicate(true)
+	result.name = record.name
+	result["cultural_origin"] = record.cultural_origin
+	result["birth_identity"] = record.duplicate(true)
+	result.birth_identity.version = int(record.version)
+	result.appearance.colors.skin = record.skin_id
+	return result if Appearance.selection_valid(result.appearance,appearance_config) and birth_profile_valid(result,birth_config,appearance_config) else {}
+
+## No-birth records deliberately retain the original metadata/identity path.
+static func birth_profile_valid(profile: Dictionary, birth_config: Dictionary = {}, appearance_config: Dictionary = {}) -> bool:
+	if not profile.has("birth_identity"):
+		return true
+	var ordinary: bool = profile.get("template_id") in ["ordinary_v1","ordinary_contact_v1"] and profile.get("origin") in ["random_first","relationship"]
+	var generated: bool = profile.get("generation_member") in ["person","contact"]
+	if not ordinary and not generated:
+		return false
+	if birth_config.is_empty():
+		birth_config = BirthIdentity.load_config()
+	if appearance_config.is_empty():
+		appearance_config = Appearance.load_config()
+	var birth: Variant = profile.birth_identity
+	return BirthIdentity.record_valid(birth,birth_config) and profile.get("name")==birth.name and profile.get("cultural_origin")==birth.cultural_origin and Appearance.appearance_valid(profile.get("appearance"),appearance_config) and not profile.appearance.has("preset") and profile.appearance.colors.skin==birth.skin_id
 
 static func propose(context: Dictionary, config: Dictionary = {}) -> Dictionary:
 	if config.is_empty():

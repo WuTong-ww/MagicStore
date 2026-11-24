@@ -49,19 +49,21 @@ func run() -> void:
 		finish()
 		return
 	var migrated: Dictionary = game.snapshot()
-	check(migrated.schema_version==saves.CURRENT_SCHEMA and migrated.schema_version==12,"migration reaches schema12 in memory")
+	check(migrated.schema_version==saves.CURRENT_SCHEMA,"migration reaches the current schema in memory")
+	check(migrated.people.get("birth_identity_version",0)==1 and not old.people.has("birth_identity_version"),"migration adds the checked birth-policy marker without historical birth records")
+	var historical: Dictionary = migrated.duplicate(true)
+	historical.people.erase("birth_identity_version")
 	for key: String in old:
 		if key!="schema_version":
-			check(migrated.has(key) and migrated[key]==old[key],"migration preserves the entire historical payload field / "+key)
-	var historical: Dictionary = migrated.duplicate(true)
+			check(historical.has(key) and historical[key]==old[key],"migration preserves the entire historical payload field / "+key)
 	historical.erase("story")
 	historical.schema_version = old.schema_version
-	check(historical==old,"removing only story and the schema bump recovers the complete original payload")
+	check(historical==old,"removing only story, birth-policy marker and schema bump recovers the complete original payload")
 	check(migrated.keys().size()==old.keys().size()+1,"migration adds only the story namespace")
 	check(migrated.story.completions.is_empty() and migrated.story.notes.size()==1,"active old board does not invent a completion or extra notebook pages")
 	var notes: Array = game.story_view().notes.filter(func(row:Dictionary)->bool:return row.unlocked)
 	check(notes.size()==1 and notes[0].page_number==1,"only the actual opening notebook page is public after migration")
-	check(migrated.people==old.people and migrated.npcs==old.npcs,"loading injects no story identity, profile or wallet")
+	check(historical.people==old.people and migrated.npcs==old.npcs,"loading injects no story identity, profile or wallet")
 	var board: Dictionary = migrated.divination.cases[old.active_visit_id].board
 	check(board==old_board and board.hash==old_board.hash and board.card_order==old_board.card_order,"active board definition hash, order and every saved field remain exact")
 	check(game.case_board_view().enabled and game.case_board_view().phase=="cards","old active board continues on the same public cards phase")
@@ -83,14 +85,14 @@ func run() -> void:
 	var retried: Dictionary = await game.execute_action_async(command)
 	check(retried.success,"same action ID retries the first post-migration save")
 	var committed: Dictionary = game.snapshot()
-	check(saves.read_save(FIXTURE_ID).success and saves.read_save(FIXTURE_ID).state==committed and committed.schema_version==12,"only the successful retry durably writes schema12")
+	check(saves.read_save(FIXTURE_ID).success and saves.read_save(FIXTURE_ID).state==committed and committed.schema_version==saves.CURRENT_SCHEMA,"only the successful retry durably writes the current schema")
 	check(committed.divination.cases[old.active_visit_id].board.card_order==old_board.card_order and committed.divination.cases[old.active_visit_id].board.hash==old_board.hash,"first successful action retains the original saved card order and definition")
 	check(committed.processed_actions.has(command.action_id) and changes==count+1,"first action is recorded and published once")
 	var published := changes
 	var replayed: Dictionary = await game.execute_action_async(command)
 	check(replayed.success and replayed.get("replayed",false) and game.snapshot()==committed and changes==published,"first-action replay cannot redraw, advance or publish again")
 	var reloaded: Dictionary = await game.execute_action_async({"type":"load_game","save_id":FIXTURE_ID})
-	check(reloaded.success and game.snapshot()==committed,"actual schema12 disk reload retains the exact committed migration")
+	check(reloaded.success and game.snapshot()==committed,"actual current-schema disk reload retains the exact committed migration")
 	check(FileAccess.get_sha256(FIXTURE)==FIXTURE_SHA,"checked-in genuine source fixture is never modified")
 	finish()
 func finish() -> void:
