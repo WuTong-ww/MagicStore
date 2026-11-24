@@ -11,7 +11,7 @@ R3-LOOP｜完成（STORY整合复核）｜89b7334｜原三轮失败记录保留�
 R3-CASE｜完成（STORY整合复核）｜ab7a220｜原三轮失败记录保留；HTTP原断言/预算未变，STORY修首帧deadline后标准full3整体全绿。
 R3-STORY｜完成｜6d4e95c｜标准full3退出0：17878检查+371 Python测试零失败，360源SHA保持；UI244/244、shop1548/1548、35.267秒录像81/81。
 R3-LIN｜完成｜7b09759｜标准full2退出0：18066检查+371 Python测试零失败、364源SHA保持；GPU72/72、shop1548/1548、六JPG1558936B。保留首轮失败，不跑第3轮。
-R3-NAMES｜验收通过，待提交｜未提交｜标准full3退出0：18716检查＋391 Python零失败，390源保持；GPU243/0六JPG1414386B、shop1548/0；57路径独审0C/I/M，保留前两轮旧夹具失败，无第4轮。
+R3-NAMES｜完成｜818d604｜已普通推送codex/round3；full3退出0：18716检查＋391 Python零失败、390源保持；GPU243/0六JPG1414386B、shop1548/0；57路径独审0C/I/M，保留两轮旧夹具失败，无第4轮。
 
 最新恢复点（覆盖下面历史过程）：实际R3仍在D:/MagicStore/.tools/round3、codex/round3，C盘第二轮旧基线保留不覆盖；LIN已正常推送。NAMES生产schema13，核心1712/0＋51 Python、实际UI243/0六JPG1414386B、shop1548/0均终态。full1旧schema12测试预期已单hunk修为当前版，25/1→25/0。full2 session19959已terminal1，1782秒/390源保持，名字全部专项及此前4819汇总检查通过（另95无冒号协议/提供方检查）；实际失败是event_migration把当前档降为v3却残留新出生字段。names_core现独占Godot有界兼容窗口，只修合成旧档/比较副本并审同类traffic_activation、shop/integration，产品与真实fixture不改；root只补docs/.tools。标准第3轮尚未启动，最多3轮，不得第四轮。finalize_evidence已指向full3但待补最终兼容路径收据，不可提前执行或提交。AICASE、TITLE、MUSIC等仍仅.tools草稿。更细恢复见.tools/r3-names/root-live-recovery.md。
 

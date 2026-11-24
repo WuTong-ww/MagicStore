@@ -11,7 +11,7 @@ R3-LOOP｜完成，整合复核｜89b7334｜原三轮失败记录保留；STORY�
 R3-CASE｜完成，整合复核｜ab7a220｜原三轮失败记录保留；STORY修HTTP首帧deadline并由标准full3整体全绿复核。
 R3-STORY｜完成｜6d4e95c｜标准full3：17878检查+371 Python测试零失败；GPU244/244、shop1548/1548、35.267秒录像81/81。
 R3-LIN｜完成｜7b09759｜标准full2：18066检查+371 Python测试零失败、364源SHA保持；GPU72/72、shop1548/1548、六JPG1558936B已核，保留full1失败。
-R3-NAMES｜验收通过，待提交｜未提交｜schema13；标准full3：18716检查＋391 Python零失败、390源保持；GPU243/0、shop1548/0、六JPG1414386B；保留前两轮失败与627/0兼容专项。
+R3-NAMES｜完成｜818d604｜已普通推送codex/round3；schema13，full3：18716检查＋391 Python零失败、390源保持；GPU243/0、shop1548/0、六JPG1414386B；保留两轮失败与627/0兼容专项。
 R3-AICASE｜未开始｜—｜
 R3-TITLE｜未开始｜—｜
 R3-MUSIC｜未开始｜—｜
