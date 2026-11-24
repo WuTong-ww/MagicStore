@@ -30,14 +30,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  publish:
+  build:
     # Manual runs must publish the same playtest branch as automatic runs.
     if: github.ref == 'refs/heads/codex/web-playtest'
     runs-on: windows-latest
     timeout-minutes: 45
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     defaults:
       run:
         shell: pwsh
@@ -70,6 +67,17 @@ jobs:
           include-hidden-files: false
           retention-days: 1
 
+  # A completed build job is the artifact visibility boundary. Do not deploy
+  # immediately after upload in the same job (actions/deploy-pages#451).
+  deploy:
+    if: github.ref == 'refs/heads/codex/web-playtest'
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Deploy GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
