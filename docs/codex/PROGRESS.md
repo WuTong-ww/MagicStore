@@ -1,5 +1,11 @@
 # 第二轮 v3 续跑进度
 
+新增请求 WEB（2026-11-24）：独立分支codex/web-playtest，部分完成、实验试玩待发布。三轮完整测试均exit1，按上限不跑full4；第1轮DIRECT API77／1，第2轮HTTP41／1，第3轮90个已完成summary合计14170 checks／0 reported failures，随后默认环境HTTP夹具超过30秒期限，后续总数null，不能称完整全绿或已证网络阻断。生产provider／游戏规则与2b34ecb相同；只修HTTP夹具真实时钟等待／初始长帧，保原断言及阈值。允许127的有限包装器513＋wire256通过独立列，尾段检查也不拼成full。导出6实际Web PCK原生隔离烟测634／634、0错误警告；原生GPU1544／1544、30张capture，root只实看所选2张JPG，通用8／10，旧林笔触两项未过。CUA因不能可靠识别浏览器URL停止，不冒称WebGL／IndexedDB／Claude实操。Pages已启用，待普通push触发CI及HTTPS文件验证；终态见results/WEB-validation.json、plans/WEB.md。Cozy Tunes／用户音乐下载包未追踪，保留、不提交、不打包。
+
+WEB实验初版提交时尾段仍运行（complete=false）：HTTP只完成442项／3失败，recovery43／3后mood／family未达；PERSON64、People359与Python117分别通过。该尾段终态随后META补记，不与full3相加。
+
+以下页首原记录为此前第二轮11任务收口状态，WEB是之后追加的独立请求。
+
 最新恢复点：2026-11-24，codex/round2-clean。11项均已处理：G3完成，其余10项部分完成；G6任务94586d1已普通Git推送。最新完整第1轮15504/15504、GPU121/121／6帧、shop1544/1544／30帧，root42帧190/210，六JPG。所有测试已终止；任务工作结束，最终审阅包REVIEW_PACKET.md已汇总。无需poll旧handle、重跑已过测试或继续新增功能。
 
 ## 早期恢复摘录（以页首及当前任务总表为准）

@@ -181,7 +181,9 @@ class Handler(BaseHTTPRequestHandler):
         if route == "delay" or (route in ("cancel", "late_review") and stage == "review"):
             time.sleep(0.65)
         if route == "budget":
-            time.sleep(0.13 if stage != "review" else 0.4)
+            # Both initial stages stay130ms; review must outlast even a wrongly
+            # renewed650ms deadline so the unchanged900ms wall cap detects it.
+            time.sleep(0.13 if stage != "review" else 0.8)
         if route == "recover_budget":
             time.sleep(0.08 if stage == "generate" else 0.3)
         body = json.dumps(reply, ensure_ascii=False).encode("utf-8")

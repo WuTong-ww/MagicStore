@@ -70,8 +70,15 @@ func run() -> void:
 	check(provider.status().pending and not pending_done, "request remains pending during network wait")
 	var second: Dictionary = await provider.request_reply(request_data())
 	check(second.error_code == "BUSY", "concurrent request cannot overwrite pending context")
-	await create_timer(0.05).timeout
-	check(provider.status().pending and provider.status().elapsed_ms >= 30 and provider.status().stage_timings_ms.gateway >= 30, "pending status exposes live monotonic duration without waiting for completion")
+	# A timer created mid-frame can consume that frame's earlier delta. Measure
+	# real monotonic time while yielding frames, just like the transport metrics.
+	var pending_wait_started := Time.get_ticks_msec()
+	while Time.get_ticks_msec() - pending_wait_started < 50:
+		await process_frame
+	metrics = provider.status()
+	if not (metrics.pending and metrics.elapsed_ms >= 30 and metrics.stage_timings_ms.gateway >= 30):
+		printerr("HTTP TIMING: stage=gateway pending=%d waited_ms=%d elapsed_ms=%d gateway_ms=%d" % [int(metrics.pending),Time.get_ticks_msec()-pending_wait_started,metrics.elapsed_ms,metrics.stage_timings_ms.gateway])
+	check(metrics.pending and metrics.elapsed_ms >= 30 and metrics.stage_timings_ms.gateway >= 30, "pending status exposes live monotonic duration without waiting for completion")
 	provider.cancel()
 	await process_frame
 	check(pending_done and pending_reply.error_code == "CANCELLED", "cancellation wakes waiter without fallback or action")

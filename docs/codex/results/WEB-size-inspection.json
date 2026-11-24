@@ -1,0 +1,41 @@
+{
+  "task": "WEB",
+  "scope": "initial_staged_snapshot_relative_to_2b34ecb",
+  "passed": true,
+  "source_report_sha256": "c9631713fec27df9ccae05330d930ca9c85f91d82f32c799f1642fd26988c886",
+  "baseline": "2b34ecb558bcfb95eb5f0648882120147f8cbec6",
+  "index_listing_sha256": "229561869aebc3af14057b96b22cc3545fbcb9d867be4c028d1813b219981264",
+  "method": "Unique blob OIDs in HEAD union stage-0 index, minus all objects reachable from baseline.",
+  "binary_definition": "Git default binary heuristic: NUL in first 8000 blob bytes.",
+  "new_unique_blobs": {
+    "count": 19,
+    "bytes": 830062,
+    "binary_count": 2,
+    "binary_bytes": 622504
+  },
+  "maximum_new_blob": {
+    "bytes": 404493,
+    "path": "docs/screenshots/round2/WEB/native-front-1920x1080.jpg"
+  },
+  "WEB_screenshots": [
+    "docs/screenshots/round2/WEB/native-front-1280x720.jpg",
+    "docs/screenshots/round2/WEB/native-front-1920x1080.jpg"
+  ],
+  "forbidden_index_paths": [],
+  "forbidden_history_paths": [],
+  "unmerged_index_entries": [],
+  "manifest_bytes": 497438,
+  "later_text_metadata": {
+    "included_in_initial_snapshot": false,
+    "paths": [
+      "docs/codex/results/WEB-validation.json",
+      "docs/codex/results/WEB-size-inspection.json",
+      "docs/codex/plans/WEB.md",
+      "docs/codex/PROGRESS.md",
+      "docs/codex/UPLOAD_STATUS.md",
+      "docs/web-playtest.md"
+    ],
+    "note": "Validation and publication text was added after the initial snapshot. No further binary is authorized. Explicit final index paths and binary total are checked before commit."
+  },
+  "scope_note": "Size-only PASS, not full regression or browser/deployment approval. Detailed object and clean-commit inventories remain ignored; music downloads, saves and build outputs are excluded."
+}

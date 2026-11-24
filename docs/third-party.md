@@ -8,6 +8,8 @@ Godot Engine **4.6.3.stable.official.7d41c59c4**，MIT。官方引擎与 Windows
 
 下载压缩包及模板 SHA256 记录于 `scripts/dev/toolchain.json`；安装脚本强制校验下载内容，未使用来历不明的镜像。校验值为本次官方 HTTPS 下载的实际哈希，不声称独立签名认证。
 
+网页试玩同样使用该官方 Godot 4.6.3 release 的 `Godot_v4.6.3-stable_export_templates.tpz`，作者 Godot Engine contributors，MIT及上述第三方声明。抽出的 `templates/web_nothreads_release.zip` SHA256为 `1446F79DC12F60CE5D244C39FB6628EC298337CA5C4F91A16491FEEA72AA1BC9`；整包仍按toolchain.json校验。Web发布目录附六份现有引擎／字体／音效许可，运行文件的实际SHA与来源commit另写build-info.json；不把导出引擎当作本工程原创素材。
+
 ## 中文字体
 
 `assets/fonts/NotoSansSC.ttf` 为 Google Fonts 仓库的 `ofl/notosanssc/NotoSansSC[wght].ttf`，SIL Open Font License 1.1；同目录 `OFL.txt` 保留完整版权与许可文字。

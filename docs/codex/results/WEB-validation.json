@@ -1,0 +1,296 @@
+{
+  "task": "WEB",
+  "status": "partial_experimental_playtest",
+  "standard_full_passed": false,
+  "full_round": 3,
+  "full_exit_code": 1,
+  "full_passed": null,
+  "full_total": null,
+  "completed_target_summaries": 90,
+  "completed_target_checks": 14170,
+  "completed_target_reported_failures": 0,
+  "godot_checks": 14170,
+  "python_tests": [],
+  "HTTP_wire_assertions": null,
+  "HTTP_wire_requests": null,
+  "full_log_sha256": "313acba3a493677d956f689c86103e49615347bc8b2f82d884e4db532d87ad76",
+  "engine_errors_or_warnings": 0,
+  "full_attempts": [
+    {
+      "round": 1,
+      "exit_code": 1,
+      "reported_summary_count": 93,
+      "reported_checks": 14345,
+      "reported_failures": 1,
+      "full_total": null,
+      "last_summary": {
+        "target": "DIRECT API RESULT",
+        "checks": 77,
+        "failures": 1
+      },
+      "log_sha256": "022fe006815747b5c73f82c94d6d4493fd369e90ca15214830273f90d19e1910",
+      "scope": "Only completed target summaries; unfinished HTTP scope and later targets are not counted."
+    },
+    {
+      "round": 2,
+      "exit_code": 1,
+      "reported_summary_count": 91,
+      "reported_checks": 14229,
+      "reported_failures": 1,
+      "full_total": null,
+      "last_summary": {
+        "target": "HTTP RESULT",
+        "checks": 41,
+        "failures": 1
+      },
+      "log_sha256": "13022ad60f673c92bdbbe7bdd68d60cf09dd2da5920d1762534d15e203cd9a63",
+      "scope": "Only completed target summaries; unfinished HTTP scope and later targets are not counted."
+    },
+    {
+      "round": 3,
+      "exit_code": 1,
+      "reported_summary_count": 90,
+      "reported_checks": 14170,
+      "reported_failures": 0,
+      "full_total": null,
+      "last_summary": {
+        "target": "MODEL POLICY RESULT",
+        "checks": 38,
+        "failures": 0
+      },
+      "log_sha256": "313acba3a493677d956f689c86103e49615347bc8b2f82d884e4db532d87ad76",
+      "scope": "Only completed target summaries; unfinished HTTP scope and later targets are not counted."
+    }
+  ],
+  "full3_failure": {
+    "message": "HTTP fixture exceeded the 30-second test deadline.",
+    "unfinished": [
+      "HTTP wrapper",
+      "gateway/protocol Python tests",
+      "art unit tests",
+      "later formal/alpha checks"
+    ],
+    "environment_claim": "Default execution environment; no claim that network blocking caused the timeout."
+  },
+  "full1": {
+    "exit_code": 1,
+    "failure": "DIRECT API total-budget stage timing assertion: 77 checks / 1 failure",
+    "raw_log_sha256": "022fe006815747b5c73f82c94d6d4493fd369e90ca15214830273f90d19e1910",
+    "later_original_wrapper_reproduction_exit": 0,
+    "scope": "No provider, test assertion or fixture delay changed; exact failed subcondition was not logged and is not claimed proven."
+  },
+  "full2": {
+    "exit_code": 1,
+    "failure": "HTTP provider pending monotonic timing: 41 checks / 1 failure",
+    "raw_log_sha256": "13022ad60f673c92bdbbe7bdd68d60cf09dd2da5920d1762534d15e203cd9a63"
+  },
+  "timing_fixture_correction": {
+    "production_provider_changed": false,
+    "original_assertion_thresholds_preserved": true,
+    "provider_wait": "50 real monotonic milliseconds instead of a SceneTreeTimer consuming an earlier frame delta",
+    "direct_budget": "650ms shared budget; initial stages 130ms each / review800ms; original wall<900ms and completed-stage assertions retained",
+    "core_setup": "two process frames after synchronous new-game/reception setup, before first request; original2s timeout retained",
+    "core_observed_before_fix": {
+      "HTTPRequest_result": 13,
+      "timeout_ms": 2000,
+      "remaining_ms": 1997,
+      "gateway_ms": 3
+    },
+    "timer_probe": {
+      "scene_tree_timer_wall_ms": 1,
+      "monotonic_loop_wall_ms": 56
+    },
+    "finite_wrapper_exit": 0,
+    "finite_wrapper_godot_checks": 513,
+    "finite_wrapper_wire_assertions": 256
+  },
+  "static_export": {
+    "export_exit": 0,
+    "threads": false,
+    "canvas_resize_policy": 2,
+    "loader_node_syntax_passed": true,
+    "config_file_sizes_match": true,
+    "no_template_placeholders": true,
+    "pack_bytes": 147791660,
+    "wasm_bytes": 37700666,
+    "pack_sha256": "8e83356c608b76f3702952ad7cfef532dfd88ec8a9fd048dbbcfd1bb9d4e17eb",
+    "build_info_four_hashes_verified": true,
+    "scope": "Final local Export6 static/binary contract only; dirty working source identified by HEAD, not a CI clean-source attestation. Not browser execution or durability."
+  },
+  "native_exported_pack": {
+    "checks": 634,
+    "failures": 0,
+    "log_errors_or_warnings": 0,
+    "packed_files": 859,
+    "forbidden_paths": [],
+    "resource_groups": {
+      "eras": {
+        "expected": 3,
+        "actual": 3
+      },
+      "items": {
+        "expected": 70,
+        "actual": 70
+      },
+      "portraits": {
+        "expected": 139,
+        "actual": 139
+      },
+      "scenes": {
+        "expected": 23,
+        "actual": 23
+      }
+    },
+    "pack_sha256": "8e83356c608b76f3702952ad7cfef532dfd88ec8a9fd048dbbcfd1bb9d4e17eb",
+    "actions": [
+      "new_game",
+      "wait",
+      "load_game"
+    ],
+    "exact_reload_equal": true,
+    "player_resources_equal": true,
+    "npc_wallets_equal": true,
+    "log_sha256": "002c8f53160eee02a79de791e4061167dbf629a7bac17b40410bd94037fa9545",
+    "scope": "Native Godot over exported Web PCK; not WebAssembly/WebGL/IndexedDB browser verification"
+  },
+  "native_gpu": {
+    "checks": 1544,
+    "failures": 0,
+    "captures": 30,
+    "log_sha256": "2e95743fe27d7984e1d05df4047664913208e5cdb7aac2ea32d0cfa070a99889",
+    "manually_reviewed_key_JPGs": 2,
+    "common_visual_passed": 8,
+    "common_visual_total": 10,
+    "remaining": "Both frames retain old Lin portrait brushwork mismatch; no art change in WEB."
+  },
+  "browser_validation": {
+    "passed": false,
+    "status": "tool_stopped",
+    "reason": "CUA could not reliably determine the Windows browser URL; no alternative browser automation used.",
+    "actual_WebGL_verified": false,
+    "IndexedDB_refresh_verified": false,
+    "Claude_session_play_verified": false
+  },
+  "binary_added_bytes": 622504,
+  "build_outputs_in_git": false,
+  "prepublication_status": "Experimental deployment authorized after three failed standard rounds; no full4. Online result recorded separately after CI.",
+  "independent_tail": {
+    "complete": false,
+    "not_a_full_pass": true,
+    "targets": [
+      {
+        "name": "http",
+        "exit_code": 1,
+        "timed_out": false,
+        "counts_by_unit": {
+          "checks": {
+            "total": 442,
+            "passed": 439,
+            "failures": 3
+          }
+        },
+        "status": "failed",
+        "stdout": {
+          "path": ".tools/web-playtest/tail/http.stdout.log",
+          "bytes": 1697,
+          "sha256": "39cd3c2548fad043e372bb94794ac3486eec91f82ff121f7c4007852a5b50f45"
+        },
+        "stderr": {
+          "path": ".tools/web-playtest/tail/http.stderr.log",
+          "bytes": 418,
+          "sha256": "dd0229ab3bb72a75bd05e136b98e692656df3b7301d0622f4b5eb872936e77de"
+        },
+        "script_error_lines": 0,
+        "error_lines": 3,
+        "warning_lines": 0
+      },
+      {
+        "name": "person-http",
+        "exit_code": 0,
+        "timed_out": false,
+        "counts_by_unit": {
+          "checks": {
+            "total": 64,
+            "passed": 64,
+            "failures": 0
+          }
+        },
+        "status": "passed",
+        "stdout": {
+          "path": ".tools/web-playtest/tail/person-http.stdout.log",
+          "bytes": 118,
+          "sha256": "da5af63b8664eb55c472841fa0cf442f65e43075f262453c7117b264df6f3c97"
+        },
+        "stderr": {
+          "path": ".tools/web-playtest/tail/person-http.stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "script_error_lines": 0,
+        "error_lines": 0,
+        "warning_lines": 0
+      },
+      {
+        "name": "people",
+        "exit_code": 0,
+        "timed_out": false,
+        "counts_by_unit": {
+          "checks": {
+            "total": 359,
+            "passed": 359,
+            "failures": 0
+          },
+          "python_tests": {
+            "total": 117,
+            "passed": 117,
+            "failures": 0,
+            "reported_seconds": 18.592
+          }
+        },
+        "status": "passed",
+        "stdout": {
+          "path": ".tools/web-playtest/tail/people.stdout.log",
+          "bytes": 15172,
+          "sha256": "c484fe67a92f781b1beaa7c35d426294a96f5c90b7de8205d80173142430e2da"
+        },
+        "stderr": {
+          "path": ".tools/web-playtest/tail/people.stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "script_error_lines": 0,
+        "error_lines": 0,
+        "warning_lines": 0
+      },
+      {
+        "name": "art-unittest",
+        "exit_code": 0,
+        "timed_out": false,
+        "counts_by_unit": {
+          "python_tests": {
+            "total": 254,
+            "passed": 254,
+            "failures": 0,
+            "reported_seconds": 434.662
+          }
+        },
+        "status": "passed",
+        "stdout": {
+          "path": ".tools/web-playtest/tail/art-unittest.stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": ".tools/web-playtest/tail/art-unittest.stderr.log",
+          "bytes": 29559,
+          "sha256": "34b2a353521704e8537198b0adf4221fa57506e15b08eecb31dc5fa8d5d55ace"
+        },
+        "script_error_lines": 0,
+        "error_lines": 0,
+        "warning_lines": 0
+      }
+    ],
+    "receipt_sha256": "1957299c81623b8c7623a6d1f783f96674a50b2cc4594decd4fdf9f6db926111",
+    "scope": "Snapshot of separate finite remaining-scope checks; complete=false means later targets still running. Never appended to a full-round total or used to mark full3 green."
+  }
+}

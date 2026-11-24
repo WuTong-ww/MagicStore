@@ -1,5 +1,15 @@
 # codex/round2-clean 上传状态
 
+## WEB 独立实验试玩：待发布（2026-11-24）
+
+分支codex/web-playtest基于2b34ecb，main／round2-clean／旧round2均不改写。完整三轮都exit1；第3轮90个已完成summary共14170检查、0 reported failures后，默认环境HTTP夹具30秒超时，未完成HTTP及尾段不填全绿总数。按三轮上限授权部分完成实验发布，不开full4。生产游戏规则／provider无变化，四HTTP夹具保留原断言／阈值；独立有限检查与原生634包烟测、GPU1544／30张分域记录。
+
+初始暂存体积快照相对2b34ecb新增唯一blob830062B，二进制仅2张质量85 JPG合计622504B；后补验收／发布文本不计入该初始快照，二进制不再新增。禁止目录0、中央497438B保持，详见results/WEB-size-inspection.json。Cozy Tunes与用户音乐包未追踪、不提交、不删除、不移动；build/web不进Git，只作为Pages artifact。
+
+已启用Pages workflow与仅允许codex/web-playtest的部署环境；实际任务commit／push、CI和公网文件结果将在发布后补记。原生两JPG人工8／10，旧林笔触未齐；浏览器工具因URL识别不可靠停止，WebGL／IndexedDB／Claude实操不签通过。
+
+实验初版发布时独立尾段仍进行，回执complete=false；HTTP442项／3失败保留，mood／family未达，不能据更早一次513＋wire256通过抹除本次失败。PERSON64、People359及Python117分别通过；尾段终态另用纯文档META更新，不跑full4。
+
 最新状态（2026-11-23）：G4任务ea6a4f8已普通Git推送到codex/round2-clean；三轮上限部分完成，当前META仅补实际hash与体积。首段2026-11-21为历史建分支记录。
 
 G4发布字节核查：为四个已记录SHA的CSV／SVG／JSON回执设置精确路径-text属性；生成SVG的路径行尾空格和回执CRLF按原字节保留。四文件暂存对象和checkout过滤结果均与原文件相等，diff检查exit0；游戏源码／测试／数据冻结不变，1201路径仅.gitattributes这一项发布元数据变化。二进制依旧3,128,672B，无LFS，见results/G4-publication-integrity.json。

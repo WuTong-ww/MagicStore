@@ -142,11 +142,16 @@ func run() -> void:
 	check(response.error_code.is_empty() and provider.status().mode == "offline", "generation timeout falls back")
 	check(provider.status().failure_stage == "generate" and provider.status().stage_timings_ms.generate >= 100 and provider.status().stage_timings_ms.review == 0, "generation timeout does not report an unattempted review duration")
 	provider.configure_api(root, topics, base_url + "/api-budget/v1/chat/completions", "fixture-model", "fixture-api-key")
-	provider.timeout_seconds = 0.35
+	# Give the two 130ms stages room to reach review under a busy full run.
+	# A wrongly renewed 650ms review budget still exceeds the original 900ms cap.
+	provider.timeout_seconds = 0.65
 	var started := Time.get_ticks_msec()
 	response = await provider.request_reply(request_data(true))
-	check(provider.status().mode == "offline" and Time.get_ticks_msec() - started < 900, "classification/generation/review share one total timeout budget")
+	var budget_elapsed_ms := Time.get_ticks_msec() - started
 	metrics = provider.status()
+	if not (metrics.mode == "offline" and budget_elapsed_ms < 900 and metrics.failure_stage == "review" and metrics.stage_timings_ms.classify >= 100 and metrics.stage_timings_ms.generate >= 100 and metrics.stage_timings_ms.review > 0):
+		printerr("DIRECT TIMING: stage=%s wall_ms=%d budget_ms=650 classify_ms=%d generate_ms=%d review_ms=%d" % [metrics.failure_stage,budget_elapsed_ms,metrics.stage_timings_ms.classify,metrics.stage_timings_ms.generate,metrics.stage_timings_ms.review])
+	check(metrics.mode == "offline" and budget_elapsed_ms < 900, "classification/generation/review share one total timeout budget")
 	check(metrics.failure_stage == "review" and metrics.stage_timings_ms.classify >= 100 and metrics.stage_timings_ms.generate >= 100 and metrics.stage_timings_ms.review > 0, "total budget expiry preserves completed stages and incomplete review time")
 	provider.configure_api(root, topics, base_url + "/api-cancel/v1/chat/completions", "fixture-model", "fixture-api-key")
 	start_pending(provider, request_data())

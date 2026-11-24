@@ -1,4 +1,4 @@
-param([switch]$WithExportTemplates)
+param([switch]$WithExportTemplates, [switch]$WithWebExportTemplates)
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $toolsDir = Join-Path $repo '.tools'
@@ -19,14 +19,17 @@ if (!(Test-Path -LiteralPath $engine)) {
 }
 # Portable editor settings/cache remain inside the ignored tool directory.
 New-Item -ItemType File -Force -Path (Join-Path $engineDir '_sc_') | Out-Null
-if ($WithExportTemplates) {
+if ($WithExportTemplates -or $WithWebExportTemplates) {
     Get-VerifiedFile $lock.templates_url (Join-Path $toolsDir 'export_templates.tpz') $lock.templates_sha256
     Add-Type -AssemblyName System.IO.Compression.FileSystem
     $archive = [IO.Compression.ZipFile]::OpenRead((Join-Path $toolsDir 'export_templates.tpz'))
     try {
         $templateDir = Join-Path $toolsDir 'templates'
         New-Item -ItemType Directory -Force -Path $templateDir | Out-Null
-        foreach ($name in @('windows_release_x86_64.exe', 'windows_debug_x86_64.exe')) {
+        $templateNames = @()
+        if ($WithExportTemplates) { $templateNames += @('windows_release_x86_64.exe', 'windows_debug_x86_64.exe') }
+        if ($WithWebExportTemplates) { $templateNames += 'web_nothreads_release.zip' }
+        foreach ($name in $templateNames) {
             $entry = $archive.GetEntry("templates/$name")
             if (!$entry) { throw "Missing template: $name" }
             [IO.Compression.ZipFileExtensions]::ExtractToFile($entry, (Join-Path $templateDir $name), $true)

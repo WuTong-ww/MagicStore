@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="零点杂货铺 · 浏览器试玩">
+  <title>$GODOT_PROJECT_NAME · 网页试玩</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #364943; color: #47372b; }
+    body { font: 17px/1.7 system-ui, "Microsoft YaHei", sans-serif; }
+    #canvas { display: block; width: 100%; height: 100%; outline: none; }
+    #loading { position: fixed; inset: 0; display: grid; place-items: center; padding: 24px; background: #364943; }
+    #paper { width: min(560px, 100%); padding: 32px; background: #f2e6cc; border: 1px solid #b79a64; border-radius: 12px; box-shadow: 0 18px 60px #18272270; }
+    h1 { margin: 0 0 12px; font-size: 28px; font-weight: 600; }
+    p { margin: 12px 0; }
+    #progress { display: block; width: 100%; margin: 20px 0; accent-color: #607e67; }
+    #status { overflow-wrap: anywhere; }
+    .small { color: #635947; font-size: 15px; }
+    button { font: inherit; border: 1px solid #8f784e; color: #47372b; background: #e8d7af; border-radius: 6px; padding: 8px 20px; cursor: pointer; }
+    [hidden] { display: none !important; }
+  </style>
+  $GODOT_HEAD_INCLUDE
+</head>
+<body>
+  <canvas id="canvas" tabindex="0" aria-label="零点杂货铺游戏画面">浏览器需要支持 Canvas 和 WebGL 2 才能试玩。</canvas>
+  <section id="loading" aria-live="polite">
+    <div id="paper">
+      <h1>零点杂货铺</h1>
+      <p id="status">正在准备开店，首次加载需要下载游戏资源……</p>
+      <progress id="progress" aria-label="游戏加载进度"></progress>
+      <p class="small">进入后，在存档簿里新建独立存档。普通来客与经营玩法可离线体验。</p>
+      <p class="small">进度保存在当前浏览器。隐私模式或清除网站数据可能使进度丢失。</p>
+      <button id="retry" hidden type="button">重新加载</button>
+    </div>
+  </section>
+  <noscript>请启用 JavaScript 后刷新页面。</noscript>
+  <script src="$GODOT_URL"></script>
+  <script>
+    const configuration = $GODOT_CONFIG;
+    const engine = new Engine(configuration);
+    const status = document.getElementById('status');
+    const progress = document.getElementById('progress');
+    const retry = document.getElementById('retry');
+    retry.addEventListener('click', () => location.reload());
+    function failed(error) {
+      console.error(error);
+      status.textContent = '游戏未能加载。请使用支持 WebGL 2 的新版 Chrome、Edge 或 Firefox，并检查网络后重试。';
+      progress.hidden = true;
+      retry.hidden = false;
+    }
+    if (Engine.getMissingFeatures({threads: $GODOT_THREADS_ENABLED}).length) {
+      failed('Browser features unavailable');
+    } else {
+      engine.startGame({
+        canvas: document.getElementById('canvas'),
+        onProgress(current, total) {
+          if (total > 0) {
+            progress.max = total;
+            progress.value = current;
+            status.textContent = '正在准备开店…… ' + Math.floor(current * 100 / total) + '%';
+          }
+        }
+      }).then(() => {
+        document.getElementById('loading').remove();
+        document.getElementById('canvas').focus();
+      }).catch(failed);
+    }
+  </script>
+</body>
+</html>

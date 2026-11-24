@@ -1,0 +1,75 @@
+name: Web playtest
+
+on:
+  push:
+    branches:
+      - codex/web-playtest
+    paths:
+      - .github/workflows/web-playtest.yml
+      - export_presets.cfg
+      - project.godot
+      - scripts/**
+      - scenes/**
+      - themes/**
+      - data/**
+      - assets/**
+      - web/**
+      - tools/web_export_resources.py
+      - docs/GODOT-LICENSE.txt
+      - docs/GODOT-COPYRIGHT.txt
+      - docs/third-party.md
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: web-playtest-pages
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    # Manual runs must publish the same playtest branch as automatic runs.
+    if: github.ref == 'refs/heads/codex/web-playtest'
+    runs-on: windows-latest
+    timeout-minutes: 45
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      # Official stable major releases; see docs/web-playtest.md.
+      - name: Check out playtest
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v6
+
+      - name: Install pinned Godot and Web templates
+        run: ./scripts/dev/bootstrap.ps1 -WithWebExportTemplates
+
+      - name: Export Web playtest
+        run: ./scripts/dev/export-web.ps1
+
+      - name: Check Web entry point
+        run: |
+          if (!(Test-Path -LiteralPath 'build/web/index.html' -PathType Leaf)) {
+            throw 'Web export did not produce build/web/index.html.'
+          }
+
+      - name: Upload only the Web build
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: build/web
+          include-hidden-files: false
+          retention-days: 1
+
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

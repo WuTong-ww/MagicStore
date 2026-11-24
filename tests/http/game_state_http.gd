@@ -87,10 +87,17 @@ func run() -> void:
 	topics += JSON.parse_string(FileAccess.get_file_as_string("res://data/divination.json")).topics
 	check(game.execute_action(action("new_game", {"name": "HTTP整合隔离测试"})).success, "new isolated core save")
 	check(game.execute_action(action("start_visit")).success, "start case through real core")
+	# Synchronous setup can occupy a long frame. Drain its delta before starting
+	# HTTPRequest's engine Timer; otherwise a fresh2s timeout can fire in3ms.
+	await process_frame
+	await process_frame
 	provider = Provider.new()
 	configure("ok")
 	var before: Dictionary = game.snapshot()
 	var reply: Dictionary = await game.execute_action_async(action("talk", {"text": "邀请", "topic_id": "invitation"}))
+	if not (reply.success and reply.result.reply_text == "线上回复" and game.provider_status().mode == "online"):
+		var diagnostics: Dictionary = provider.status()
+		printerr("HTTP CORE TIMING: mode=%s stage=%s http=%d elapsed_ms=%d gateway_ms=%d" % [diagnostics.mode,diagnostics.failure_stage,diagnostics.api_http_status,diagnostics.elapsed_ms,diagnostics.stage_timings_ms.gateway])
 	check(reply.success and reply.result.reply_text == "线上回复", "real HTTP reply passes core validation")
 	check(game.snapshot().clock_minutes == before.clock_minutes + 5, "online dialogue charges configured time once")
 	check(game.provider_status().mode == "online", "core exposes actual online mode")
