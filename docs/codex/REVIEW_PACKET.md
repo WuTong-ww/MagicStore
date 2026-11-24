@@ -338,3 +338,7 @@ A4的139部件中79数值、60描述，不含人台，不能编统一139总分�
 G5合29/30，各1次；native1672×941→Lanczos cover1920×1080，倍率1.1483253588516746，crop[0,.25,1672,940.75]，不是原生1920。[评分／actualprompt](D:/MagicStore/docs/codex/results/G5-art-review.json)。A4仍是79数值＋60描述，不能补139总分；第4次嘴图已过，body4加工接缝partial非4次生成失败。
 
 **同窗口前后：**[S02 v2／1280](D:/MagicStore/docs/screenshots/round2/A1R/s02-before-v2-1280.jpg) → [S02 v3／1280](D:/MagicStore/docs/screenshots/round2/A1R/s02-v3-day-1280.jpg)。G5未知→核实是同NPC不同真实进度，非同一时点A/B或三世同屏。旧v2源不删，actualprompt／连续attempt／拒图／回退字节保留，缺数值不补造。
+
+## WEB 独立追加
+
+后续独立请求，实验试玩部分完成；三轮完整回归均失败，浏览器实操未验。[公开入口](https://wutong-ww.github.io/MagicStore/)已部署，CI／HTTPS证据及限制见[发布回执](results/WEB-deployment.json)与[计划](plans/WEB.md)。不改上文11任务结论。

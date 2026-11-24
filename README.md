@@ -14,7 +14,7 @@
 
 ## 环境与启动
 
-网页试玩采用独立的 `codex/web-playtest` 分支，通过 GitHub Pages 发布。浏览器要求、玩法入口、存档及联网限制见[网页试玩说明](docs/web-playtest.md)。首次加载需下载资源；不配置模型也能体验本地对白和普通经营。Claude 实际试玩需有能读屏、点击和输入的浏览器操作工具。
+[打开实验网页版试玩](https://wutong-ww.github.io/MagicStore/)（独立 `codex/web-playtest` 分支，部分完成）。浏览器要求、玩法入口、完整回归失败及存档／联网限制见[网页试玩说明](docs/web-playtest.md)。首次下载较大；默认本地对白，不需模型密钥。Claude实际试玩需有能读屏、点击和输入的浏览器操作工具，不能把HTTP文件检查当成已玩过。
 
 双击根目录 `start-game.cmd` 运行游戏，或 `start-editor.cmd` 打开编辑器。路径由脚本所在目录解析，可在 `E:\MagicStore` 或其他目录运行；存档、日志、缓存和临时文件均留在当前工程目录。
 

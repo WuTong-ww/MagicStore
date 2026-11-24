@@ -33,9 +33,25 @@
       "docs/codex/plans/WEB.md",
       "docs/codex/PROGRESS.md",
       "docs/codex/UPLOAD_STATUS.md",
-      "docs/web-playtest.md"
+      "docs/web-playtest.md",
+      "docs/codex/results/WEB-deployment.json",
+      "docs/codex/REVIEW_PACKET.md",
+      "README.md",
+      "docs/features.md"
     ],
-    "note": "Validation and publication text was added after the initial snapshot. No further binary is authorized. Explicit final index paths and binary total are checked before commit."
+    "note": "Actual feature commit totals are recorded separately from the initial snapshot. Workflow fix and final META add text only; build outputs/music/saves are excluded. No extra binary."
   },
-  "scope_note": "Size-only PASS, not full regression or browser/deployment approval. Detailed object and clean-commit inventories remain ignored; music downloads, saves and build outputs are excluded."
+  "scope_note": "Size-only PASS, not full regression or browser/deployment approval. Detailed object and clean-commit inventories remain ignored; music downloads, saves and build outputs are excluded.",
+  "actual_feature_commit": {
+    "oid": "2b4ec419fc56d285b5cafe3647a41ef42e33e379",
+    "new_unique_blob_count": 22,
+    "new_unique_blob_bytes": 866211,
+    "binary_count": 2,
+    "binary_bytes": 622504
+  },
+  "workflow_fix": {
+    "oid": "02d1d423aba4741c929acb1b2542a818ff939ef9",
+    "files": 1,
+    "binary_added_bytes": 0
+  }
 }

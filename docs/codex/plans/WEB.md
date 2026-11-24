@@ -16,7 +16,7 @@
 
 自主选择：用户此前明确无需中途提问。采用可撤回的静态发布与独立分支，不配置公共模型代理、不消费用户 API、不改用户存档。
 
-## 验收收口：部分完成、实验试玩待发布
+## 验收收口：部分完成、实验试玩已部署
 
 2026-11-24按用户最多三轮完整测试的上限收口，授权发布实验试玩；**完整回归未全绿，不运行第四轮**。游戏规则、provider、事务及存档生产代码与基线 `2b34ecb` 相同，本任务新增导出／发布工具及测试夹具修正。正式回执见 [WEB-validation.json](../results/WEB-validation.json)。
 
@@ -30,7 +30,7 @@
 
 计时实证与最小夹具修正：原50ms SceneTreeTimer实际仅耗1ms，改为真实单调时钟等待；2秒HTTP请求曾在3ms提前结束、remaining仍1997ms，同步新建／接待后的初始长帧改为先经过两帧再发请求。DIRECT API仍用650ms共享预算、前两阶段各130ms／审核800ms，保留原wall＜900ms及阶段断言。四个HTTP测试夹具保留原断言与阈值，生产provider未改。此前允许127本机服务的有限包装器513项＋wire256项通过属于独立范围，不能拼成完整测试全绿。
 
-本次独立尾段尚在运行，初次发布回执complete=false：HTTP包装器只完成442项／3失败，停止于recovery43／3，mood／family未到达、HTTP全套总数仍null；PERSON64／64、People359／359与Python117／117分别通过，其他范围待实际终态。按授权与远端导出CI并行发布实验初版，尾段最终结果将在META补记，不追认任何full通过。
+实验初版2b4ec41提交时独立尾段仍运行，回执complete=false；已按授权与远端导出CI并行。现在尾段已全部终止、complete=true／exit1：HTTP439／442，recovery43项中3失败，mood／family未到达，HTTP全套总数仍null；PERSON64／64、People359／359、Python117／117、美术254／254分别通过，formal364记录／367文件与alpha70通过，退役registry明确SKIP。14份原日志SHA均核对，415限定源码前后无变化。不把这些独立范围与14170相加冒充完整回归。
 
 导出6已实际通过静态检查与Web PCK原生隔离烟测634／634、0引擎错误／警告，859个打包文件、禁止路径0；覆盖引用资源、真实新建／等待／读档及资源／钱包等值。PCK为147791660B、Wasm为37700666B。该检查不执行WebAssembly或WebGL，不等于浏览器保存验收。
 
@@ -39,3 +39,11 @@
 电脑操作工具因不能可靠识别Windows浏览器URL而停止，未改用其他浏览器路径绕过。实际WebGL、IndexedDB刷新续玩及Claude会话操作均未验证，明确保持部分完成。公开HTTPS文件／CI结果在部署后记录，CLI文件成功也不代替浏览器实操。
 
 体积初始暂存快照新增unique blob830062B，其中两JPG二进制622504B；后补文本单独登记，见 [WEB-size-inspection.json](../results/WEB-size-inspection.json)。本地音乐下载包、存档、候选原图、`.tools`及构建输出均不提交；Git普通上传，无LFS、无main／旧分支改写。
+
+## 实际发布与剩余限制
+
+初始功能提交 `2b4ec419fc56d285b5cafe3647a41ef42e33e379` 已普通push；首轮CI [45321775777](https://github.com/WuTong-ww/MagicStore/actions/runs/45321775777) 导出634／0及上传成功，但紧接的同job artifact查询返回0，部署失败。REST随后实际列出同名artifact14888061533；与 [上游#451](https://github.com/actions/deploy-pages/issues/451) 同型。仅workflow拆成Windows build与 `needs: build` 的独立deploy，未改检查、阈值或游戏代码；修复提交 `02d1d423aba4741c929acb1b2542a818ff939ef9` 普通push后，实际CI [45322600343](https://github.com/WuTong-ww/MagicStore/actions/runs/45322600343) 构建634／0、部署均success，查询实际找到1个artifact。
+
+公开入口：[https://wutong-ww.github.io/MagicStore/](https://wutong-ww.github.io/MagicStore/)。匿名CLI实读build-info.commit等于02d1d42，HTML3845B／JS315759B全量SHA匹配；Wasm37700666B／CI PCK147776572B的HEAD长度与Range206前4字节magic通过。大文件SHA是CI公布值，未公网全量下载，不与本地导出6的PCK147791660B混同；见 [WEB-deployment.json](../results/WEB-deployment.json)。
+
+最后META只补文档及证据，workflow路径过滤排除这批普通文档，不触发重复构建。初始feature、workflow修复及实际部署source分别登记；无force／无LFS，main=e27441b、round2-clean=2b34ecb、旧round2=18da84a保持。首次下载较大、旧林笔触、HTTP重试回归与浏览器实操缺口仍在；使用默认本地对白作为实验入口，不称任务100%完成。

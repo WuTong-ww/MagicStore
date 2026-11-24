@@ -1,12 +1,16 @@
 # 网页试玩
 
+**公开实验试玩：[https://wutong-ww.github.io/MagicStore/](https://wutong-ww.github.io/MagicStore/)**
+
+实际部署源码为 `02d1d423aba4741c929acb1b2542a818ff939ef9`，初始功能提交为 `2b4ec419fc56d285b5cafe3647a41ef42e33e379`；其后的修复仅分离构建与部署任务。[CI 45322600343](https://github.com/WuTong-ww/MagicStore/actions/runs/45322600343) 已实际成功，匿名HTTPS的build-info、HTML／JS全量SHA及Wasm／PCK长度与前4字节检查通过，见 [发布回执](codex/results/WEB-deployment.json)。大型文件的完整SHA仅为CI公布值，未在公网全量下载复核。
+
 本分支是**实验试玩，部分完成**：三轮标准完整测试均未通过，已达到本次上限，不把有限尾段或导出烟测相加称为全绿。实际浏览器WebGL、刷新存档和Claude操作尚未验证；原生导出包检查与原生画面结果见 [WEB验收回执](codex/results/WEB-validation.json)。
 
-给 Claude 的试玩任务可以直接复制以下文字，并替换为已发布的链接：
+给 Claude 的试玩任务可以直接复制以下文字：
 
-> 请用浏览器操作工具打开试玩链接，新建一个名为“Claude试玩”的独立存档，用本地对话体验前台接待、咨询、案例手记与经营入口。不要填写API密钥或删除其他存档。零客日可以打烊进入下一天，再用“等一会儿”推进游戏时间。请记录真实操作步骤、画面和结果，列出阻塞问题及可复现缺陷；如果你的会话没有浏览器操作能力，请明确说明无法实际试玩，不把网页文本阅读当作已玩过。
+> 请用浏览器操作工具打开 https://wutong-ww.github.io/MagicStore/ ，新建一个名为“Claude试玩”的独立存档，用本地对话体验前台接待、咨询、案例手记与经营入口。不要填写API密钥或删除其他存档。零客日可以打烊进入下一天，再用“等一会儿”推进游戏时间。请记录真实操作步骤、画面和结果，列出阻塞问题及可复现缺陷；如果你的会话没有浏览器操作能力，请明确说明无法实际试玩，不把网页文本阅读当作已玩过。
 
-这是 `codex/web-playtest` 分支的链接试玩入口。实际网址以 GitHub Actions 中 **Web playtest → publish → github-pages** 的部署链接为准；workflow 成功部署前，不能把配置文件存在当成网站已经可用。
+这是 `codex/web-playtest` 分支的链接试玩入口。后续发布以 GitHub Actions 中 **Web playtest → deploy → github-pages** 的实际部署记录为准。首次加载主要包含约37.7MB Wasm和147.8MB PCK，下载较大；默认不配置模型，使用本地对白。
 
 ## 开始游玩
 
@@ -49,6 +53,8 @@ python -m http.server 8060 --bind 127.0.0.1 --directory build/web
 打开 `http://127.0.0.1:8060/`。本地 HTTP 不等同于线上 HTTPS/CORS 验收；正式 Pages 链接仍需实际浏览器试玩。
 
 [发布 workflow](../.github/workflows/web-playtest.yml) 在推送 `codex/web-playtest` 时运行；保留手动入口，手动选择其他分支会跳过发布。只执行固定工具链安装、Web 导出与部署，不重复完整测试。新推送会取消旧发布运行，artifact 仅包含 `build/web`，保留一天。Actions 失败时查看失败步骤，不用旧网站仍可访问来推断新提交已上线。
+
+Windows构建／包检查与上传完成后，独立部署任务通过 `needs: build` 消费产物。首轮CI45321775777曾在同一任务上传后立即查询到0个artifact而失败，稍后REST实际列出同名产物；分离后查询到1个并成功发布，原失败记录保留。该现象与 [官方上游报告](https://github.com/actions/deploy-pages/issues/451) 一致。最终有限尾段HTTP仍有3项重试断言未过，三轮完整失败不被CI部署成功覆盖。
 
 仓库管理员需先将 Pages 的发布来源设为 **GitHub Actions**（API 中为 `build_type: workflow`）；若 `github-pages` 环境有分支保护规则，须允许 `codex/web-playtest`。workflow 不自行创建站点或申请额外管理权限；部署仅使用 `contents: read`、`pages: write`、`id-token: write`。官方配置依据见 [GitHub Pages 自定义 workflow](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)。
 

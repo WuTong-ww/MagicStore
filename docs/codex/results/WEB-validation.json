@@ -175,7 +175,7 @@
   "build_outputs_in_git": false,
   "prepublication_status": "Experimental deployment authorized after three failed standard rounds; no full4. Online result recorded separately after CI.",
   "independent_tail": {
-    "complete": false,
+    "complete": true,
     "not_a_full_pass": true,
     "targets": [
       {
@@ -288,9 +288,133 @@
         "script_error_lines": 0,
         "error_lines": 0,
         "warning_lines": 0
+      },
+      {
+        "name": "formal-manifest",
+        "exit_code": 0,
+        "timed_out": false,
+        "counts_by_unit": {},
+        "status": "passed",
+        "stdout": {
+          "path": ".tools/web-playtest/tail/formal-manifest.stdout.log",
+          "bytes": 126,
+          "sha256": "f1af7bb69d9d1b7a5a42471d00c23d1fbc3b88df3b22f0a0f8a8f471d64e2b86"
+        },
+        "stderr": {
+          "path": ".tools/web-playtest/tail/formal-manifest.stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "script_error_lines": 0,
+        "error_lines": 0,
+        "warning_lines": 0
+      },
+      {
+        "name": "alpha",
+        "exit_code": 0,
+        "timed_out": false,
+        "counts_by_unit": {},
+        "status": "passed",
+        "stdout": {
+          "path": ".tools/web-playtest/tail/alpha.stdout.log",
+          "bytes": 43719,
+          "sha256": "bdab93761e4d6db1220c5e979b83f6781557827846b81576d00ff2e932b0b5e8"
+        },
+        "stderr": {
+          "path": ".tools/web-playtest/tail/alpha.stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "script_error_lines": 0,
+        "error_lines": 0,
+        "warning_lines": 0
+      },
+      {
+        "name": "optional-local-audit",
+        "exit_code": 0,
+        "timed_out": false,
+        "counts_by_unit": {},
+        "status": "passed",
+        "stdout": {
+          "path": ".tools/web-playtest/tail/optional-local-audit.stdout.log",
+          "bytes": 531,
+          "sha256": "afe898524db7b001503ac466e34f877dc298ba65977b4febcf98816c4da5315e"
+        },
+        "stderr": {
+          "path": ".tools/web-playtest/tail/optional-local-audit.stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "script_error_lines": 0,
+        "error_lines": 0,
+        "warning_lines": 0
+      },
+      {
+        "name": "optional-real-registry",
+        "exit_code": null,
+        "timed_out": null,
+        "counts_by_unit": null,
+        "status": "skipped",
+        "stdout": null,
+        "stderr": null,
+        "script_error_lines": null,
+        "error_lines": null,
+        "warning_lines": null
       }
     ],
-    "receipt_sha256": "1957299c81623b8c7623a6d1f783f96674a50b2cc4594decd4fdf9f6db926111",
-    "scope": "Snapshot of separate finite remaining-scope checks; complete=false means later targets still running. Never appended to a full-round total or used to mark full3 green."
+    "receipt_sha256": "6fc75f31572c468b547b00d2e6b737476e5ec59ae13d62f1cc33df4fa0419637",
+    "scope": "Snapshot of separate finite remaining-scope checks; complete=false means later targets still running. Never appended to a full-round total or used to mark full3 green.",
+    "tail_status": "failed",
+    "HTTP_full_suite_total": null,
+    "HTTP_unreached": [
+      "A4 HTTP mood",
+      "family HTTP and wire capture"
+    ],
+    "source_guard": {
+      "files": 415,
+      "unchanged": true,
+      "differences": [],
+      "before": {
+        "path": ".tools/web-playtest/tail/source-before.json",
+        "bytes": 83050,
+        "sha256": "4594b27b1d6bf33eb054d4c3a1c13497d5a109e40858597df48ab07ca1831016"
+      },
+      "after": {
+        "path": ".tools/web-playtest/tail/source-after.json",
+        "bytes": 83050,
+        "sha256": "4594b27b1d6bf33eb054d4c3a1c13497d5a109e40858597df48ab07ca1831016"
+      },
+      "scope": "415 files: scripts/tests/data .gd/.uid/.json/.ps1/.py; project.godot, export_presets.cfg, art manifest; excludes docs, assets binaries, tools, build and ignored evidence"
+    },
+    "log_integrity": {
+      "verified_files": 14,
+      "all_match": true,
+      "paths": [
+        ".tools/web-playtest/tail/http.stdout.log",
+        ".tools/web-playtest/tail/http.stderr.log",
+        ".tools/web-playtest/tail/person-http.stdout.log",
+        ".tools/web-playtest/tail/person-http.stderr.log",
+        ".tools/web-playtest/tail/people.stdout.log",
+        ".tools/web-playtest/tail/people.stderr.log",
+        ".tools/web-playtest/tail/art-unittest.stdout.log",
+        ".tools/web-playtest/tail/art-unittest.stderr.log",
+        ".tools/web-playtest/tail/formal-manifest.stdout.log",
+        ".tools/web-playtest/tail/formal-manifest.stderr.log",
+        ".tools/web-playtest/tail/alpha.stdout.log",
+        ".tools/web-playtest/tail/alpha.stderr.log",
+        ".tools/web-playtest/tail/optional-local-audit.stdout.log",
+        ".tools/web-playtest/tail/optional-local-audit.stderr.log"
+      ]
+    },
+    "formal_art": {
+      "records": 364,
+      "retained_files": 367,
+      "valid": true
+    },
+    "alpha": {
+      "checked": 70,
+      "passed": true
+    },
+    "optional_history": "Retired local audit validation only; old real registry SKIP, no art acceptance claimed."
   }
 }

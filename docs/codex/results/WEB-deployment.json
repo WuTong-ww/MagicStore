@@ -1,0 +1,213 @@
+{
+  "task": "WEB",
+  "status": "deployed_experimental_partial",
+  "checked_at_utc": "2026-11-24T03:57:25.850576+00:00",
+  "url": "https://wutong-ww.github.io/MagicStore/",
+  "source_commit": "02d1d423aba4741c929acb1b2542a818ff939ef9",
+  "ci": {
+    "id": 45322600343,
+    "head_sha": "02d1d423aba4741c929acb1b2542a818ff939ef9",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/WuTong-ww/MagicStore/actions/runs/45322600343",
+    "name": "Web playtest",
+    "jobs": [
+      {
+        "id": 138204458884,
+        "name": "build",
+        "status": "completed",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out playtest",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Configure GitHub Pages",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install pinned Godot and Web templates",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Export Web playtest",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check Web entry point",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Upload only the Web build",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out playtest",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "id": 138205137178,
+        "name": "deploy",
+        "status": "completed",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Deploy GitHub Pages",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ]
+  },
+  "build_info": {
+    "version": 1,
+    "commit": "02d1d423aba4741c929acb1b2542a818ff939ef9",
+    "engine": "4.6.3.stable.official.7d41c59c4",
+    "threads": false,
+    "files": [
+      {
+        "path": "index.html",
+        "bytes": 3845,
+        "sha256": "487519015b078379f255bfb958e3942a8c2358a83957ada46dc4ead72d7d699b"
+      },
+      {
+        "path": "index.js",
+        "bytes": 315759,
+        "sha256": "e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981"
+      },
+      {
+        "path": "index.wasm",
+        "bytes": 37700666,
+        "sha256": "26b61ce95247012ab3dca3ff51e96d1cdbff44ee91a8c20a83e150afca83f1b6"
+      },
+      {
+        "path": "index.pck",
+        "bytes": 147776572,
+        "sha256": "03ca1a2091c92e56e5e71bb2b919661a30707ea98f95f07f68eaa6ce0a2656dd"
+      }
+    ]
+  },
+  "build_info_sha256": "c1350930aeabb4f820b68d50fd051842d970cb52ecd4aae29423878f966e0037",
+  "HTTPS_files": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "bytes_downloaded": 3845,
+      "sha256": "487519015b078379f255bfb958e3942a8c2358a83957ada46dc4ead72d7d699b",
+      "exact_sha256_matches_build_info": true
+    },
+    {
+      "path": "index.js",
+      "status": 200,
+      "bytes_downloaded": 315759,
+      "sha256": "e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981",
+      "exact_sha256_matches_build_info": true
+    },
+    {
+      "path": "index.wasm",
+      "HEAD_status": 200,
+      "content_length": 37700666,
+      "content_length_matches_build_info": true,
+      "range_status": 206,
+      "content_range": "bytes 0-3/37700666",
+      "bytes_read": 4,
+      "first_four_hex": "0061736d",
+      "magic_verified": true,
+      "reported_sha256": "26b61ce95247012ab3dca3ff51e96d1cdbff44ee91a8c20a83e150afca83f1b6",
+      "entire_payload_sha256_download_verified": false
+    },
+    {
+      "path": "index.pck",
+      "HEAD_status": 200,
+      "content_length": 147776572,
+      "content_length_matches_build_info": true,
+      "range_status": 206,
+      "content_range": "bytes 0-3/147776572",
+      "bytes_read": 4,
+      "first_four_hex": "47445043",
+      "magic_verified": true,
+      "reported_sha256": "03ca1a2091c92e56e5e71bb2b919661a30707ea98f95f07f68eaa6ce0a2656dd",
+      "entire_payload_sha256_download_verified": false
+    }
+  ],
+  "standard_full_passed": false,
+  "validation_report": "docs/codex/results/WEB-validation.json",
+  "browser_render_verified": false,
+  "browser_IndexedDB_refresh_verified": false,
+  "Claude_session_play_verified": false,
+  "scope": "Public CLI HTTPS, small files fully hashed; large files checked by HEAD length and four-byte magic only. No browser or paid API requests.",
+  "initial_feature_commit": "2b4ec419fc56d285b5cafe3647a41ef42e33e379",
+  "workflow_boundary_fix_commit": "02d1d423aba4741c929acb1b2542a818ff939ef9",
+  "CI_export_pack_smoke": {
+    "checks": 634,
+    "failures": 0,
+    "scope": "Native Godot smoke over actual CI Web PCK, not browser/WASM execution."
+  },
+  "CI_logs": [
+    {
+      "name": "build",
+      "path": ".tools\\web-playtest\\ci-run45322600343-build.log",
+      "bytes": 287082,
+      "sha256": "b6e88e0eb6ae20ade3a25a5be04a979177cd2370d50f41408a8d7621d15d39e3",
+      "evidence": [
+        "2026-11-24T03:55:22.8961034Z WEB PACK SMOKE: 634 checks, 0 failures; native packed-resource/async-save smoke only; 0 browser/WebGL claims"
+      ]
+    },
+    {
+      "name": "deploy",
+      "path": ".tools\\web-playtest\\ci-run45322600343-deploy.log",
+      "bytes": 3707,
+      "sha256": "36fc7226d15a7f20eeab402ff5ff9cf45378c4220a809d7623dd9e42d1fec15a",
+      "evidence": [
+        "2026-11-24T03:55:39.2269596Z Found 1 artifact(s)",
+        "2026-11-24T03:55:51.1312262Z Reported success!"
+      ]
+    }
+  ],
+  "prior_CI_failure": {
+    "run_id": 45321775777,
+    "url": "https://github.com/WuTong-ww/MagicStore/actions/runs/45321775777",
+    "source_commit": "2b4ec419fc56d285b5cafe3647a41ef42e33e379",
+    "conclusion": "failure",
+    "failure_step": "Deploy GitHub Pages",
+    "export_pack_checks": 634,
+    "export_pack_failures": 0,
+    "artifact_id": 14888061533,
+    "artifact_bytes": 156348604,
+    "observed": "Same-job deploy list returned 0 immediately after upload finalized; subsequent REST list contained one github-pages artifact. Build/deploy separation then listed 1 and deployed successfully.",
+    "log_sha256": "17ecb1bc128c13153067538af560790af0d5702557e2554d8f37ab61ac2e646d",
+    "upstream_report": "https://github.com/actions/deploy-pages/issues/451"
+  },
+  "CI_deprecation_warning": "deploy-pages emits Node DEP0040 punycode deprecation; successful deployment is not claimed warning-free."
+}

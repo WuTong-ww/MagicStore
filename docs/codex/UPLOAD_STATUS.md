@@ -1,6 +1,10 @@
 # codex/round2-clean 上传状态
 
-## WEB 独立实验试玩：待发布（2026-11-24）
+## WEB 独立实验试玩：已部署、部分完成（2026-11-24）
+
+实际feature `2b4ec419fc56d285b5cafe3647a41ef42e33e379`、workflow修复 `02d1d423aba4741c929acb1b2542a818ff939ef9` 已普通push至codex/web-playtest。成功CI45322600343部署 https://wutong-ww.github.io/MagicStore/ ，build-info绑定02d1d42；HTML／JS实际全SHA，大文件只HEAD／Range，浏览器未验。首次CI45321775777失败保留；生产provider／游戏规则无变化，完整三轮exit1及尾段HTTP3fail不因部署成功变绿。尾段现complete=true／exit1，最终分域与14log SHA／415源码零变见WEB-validation；只补文本META，不新增二进制，不触发docs以外的新CI。
+
+发布前远端已实读main=e27441b51a4415777971cf2d8142ce4c725437e5、round2-clean=2b34ecb558bcfb95eb5f0648882120147f8cbec6、旧round2=18da84a23b287fbb7be506b50e3778b727850f3a；最终push后再核。以下初版／体积说明按当时快照保留，当前终态以上段及WEB-deployment为准。
 
 分支codex/web-playtest基于2b34ecb，main／round2-clean／旧round2均不改写。完整三轮都exit1；第3轮90个已完成summary共14170检查、0 reported failures后，默认环境HTTP夹具30秒超时，未完成HTTP及尾段不填全绿总数。按三轮上限授权部分完成实验发布，不开full4。生产游戏规则／provider无变化，四HTTP夹具保留原断言／阈值；独立有限检查与原生634包烟测、GPU1544／30张分域记录。
 

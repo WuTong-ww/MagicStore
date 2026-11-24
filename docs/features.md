@@ -211,11 +211,13 @@ v8保留公共钱包、来源批次、人物时钟、接待、分级反馈、事
 A7最终复验：第三轮GUI940/940、19帧及shop710/710；标定后完整第2轮9154/9154（Godot8888+gateway94+art172），exit0、0错误警告。47窗口帧通用225/235，12组200%接触通过；A7专项完成，全站旧人物十项未过按部分完成，详见docs/codex/plans/A7.md。
 
 
-## 网页试玩导出
+## 网页试玩导出（实验版、部分完成）
 
 独立 `codex/web-playtest` 分支提供 Godot 4.6.3 Compatibility 单线程 Web 导出与 GitHub Pages 自动部署。加载页使用中文并显示进度／错误重试；游戏保持全屏画布及原有事务／schema9。资源裁剪根据五份运行配置和代码引用，保留当前场景、头像、物品及字体，未使用的场景原图只排除出包，不删除源文件。只发布 build/web，附引擎及素材许可和可核对来源提交的 build-info.json，不打包本机存档、凭证或候选图。
 
 默认本地对白可玩；联网模型由试玩者自配且服务须支持 HTTPS/CORS。进度保存在当前浏览器 IndexedDB，不与桌面档自动同步。浏览器实际点击、WebGL画面及刷新持久性仍需实测：本次电脑操作工具因无法确定浏览器URL而停止，静态／原生headless检查不替代浏览器验收。发布与验证终态见[网页试玩说明](web-playtest.md)及[WEB计划](codex/plans/WEB.md)。
+
+[公开试玩](https://wutong-ww.github.io/MagicStore/)已由实际CI部署，source为02d1d42；HTML／JS全量SHA及大文件HEAD／Range检查通过。三轮完整回归均exit1，最终有限尾段HTTP仍3fail；原生导出包634及GPU1544通过分别记账，不追认完整全绿或浏览器试玩通过。
 
 ## G6 店长手帐（部分完成）
 

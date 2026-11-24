@@ -1,5 +1,9 @@
 # 第二轮 v3 续跑进度
 
+WEB最终收口（2026-11-24）：**部分完成，实验试玩已部署** https://wutong-ww.github.io/MagicStore/ 。初始feature2b4ec41、纯workflow修复02d1d42均普通推送，实际部署source=02d1d423aba4741c929acb1b2542a818ff939ef9；成功CI45322600343。首次CI45321775777的同job artifact查询失败保留，拆build／needs／deploy后成功；HTML／JS全SHA及大文件HEAD／Range均通过，仅CLI，不签WebGL／IndexedDB／Claude实操。三轮full均exit1，full3只有90个完成summary／14170项、HTTP30s期限退出；完整总数null、不full4。尾段已complete=true／exit1，HTTP439／442且recovery3fail，mood／family未到；PERSON64、People359＋Python117、美术254、formal364／367文件、alpha70独立通过，retiredregistry SKIP，不加成full绿。原生包634、GPU1544／30capture、两JPG人工8／10单列；源码／音乐包不变。最终回执results/WEB-validation.json、WEB-deployment.json，已授权实验partial提交推送。
+
+以下两段保留WEB初次筹备／初版发布时点，当前以此处最终收口为准。
+
 新增请求 WEB（2026-11-24）：独立分支codex/web-playtest，部分完成、实验试玩待发布。三轮完整测试均exit1，按上限不跑full4；第1轮DIRECT API77／1，第2轮HTTP41／1，第3轮90个已完成summary合计14170 checks／0 reported failures，随后默认环境HTTP夹具超过30秒期限，后续总数null，不能称完整全绿或已证网络阻断。生产provider／游戏规则与2b34ecb相同；只修HTTP夹具真实时钟等待／初始长帧，保原断言及阈值。允许127的有限包装器513＋wire256通过独立列，尾段检查也不拼成full。导出6实际Web PCK原生隔离烟测634／634、0错误警告；原生GPU1544／1544、30张capture，root只实看所选2张JPG，通用8／10，旧林笔触两项未过。CUA因不能可靠识别浏览器URL停止，不冒称WebGL／IndexedDB／Claude实操。Pages已启用，待普通push触发CI及HTTPS文件验证；终态见results/WEB-validation.json、plans/WEB.md。Cozy Tunes／用户音乐下载包未追踪，保留、不提交、不打包。
 
 WEB实验初版提交时尾段仍运行（complete=false）：HTTP只完成442项／3失败，recovery43／3后mood／family未达；PERSON64、People359与Python117分别通过。该尾段终态随后META补记，不与full3相加。
