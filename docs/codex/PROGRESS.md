@@ -9,9 +9,9 @@
 R3-0｜完成（随 LOOP 提交）｜89b7334｜Cozy Tunes/、assets/audio/music/ 已忽略且零追踪；剧情附录原文封存 docs/story/fixed_cases.md。
 R3-LOOP｜完成（STORY整合复核）｜89b7334｜原三轮失败记录保留；后续夹具修正在STORY标准full3整体全绿复核，无LOOP第四轮。
 R3-CASE｜完成（STORY整合复核）｜ab7a220｜原三轮失败记录保留；HTTP原断言/预算未变，STORY修首帧deadline后标准full3整体全绿。
-R3-STORY｜完成，待提交｜待填｜标准full3退出0：17878检查+371 Python测试零失败，360源SHA保持；UI244/244、shop1548/1548、35.267秒录像81/81。
+R3-STORY｜完成｜6d4e95c｜标准full3退出0：17878检查+371 Python测试零失败，360源SHA保持；UI244/244、shop1548/1548、35.267秒录像81/81。
 
-最新恢复点（覆盖下面历史过程）：STORY完整第3轮root session63829已terminal exit0，2835.688秒、134报告组17878检查/0失败，Python117+254全过，360源逐SHA未变、0SCRIPT ERROR；formal364记录/367文件及alpha70另通过。full1/2失败和两项test-only兼容修正原样保留，不跑full4。最终实际GPU244/0六图、shop1548/0三十图、原生1920×1080影片81/0、1058帧/35.2667秒，六JPG含三实际关键帧共1192972B全部root实开。results/R3-STORY-validation.json与commit-paths已生成65路径，当前准备普通提交/push；未来R3-LIN/NAMES计划与所有.tools草稿不随本任务提交。所有engine均终态；接下来提交后才应用LIN。新工作恢复请先读.tools/r3-story/root-live-recovery.md，勿再跑已过GPU/HTTP/完整测试。
+最新恢复点（覆盖下面历史过程）：STORY完整第3轮root session63829已terminal exit0，2835.688秒、134报告组17878检查/0失败，Python117+254全过，360源逐SHA未变、0SCRIPT ERROR；formal364记录/367文件及alpha70另通过。full1/2失败和两项test-only兼容修正原样保留，不跑full4。最终实际GPU244/0六图、shop1548/0三十图、原生1920×1080影片81/0、1058帧/35.2667秒，六JPG含三实际关键帧共1192972B全部root实开。results/R3-STORY-validation.json与commit-paths已生成65路径，任务提交6d4e95c，普通推送后继续LIN；未来R3-LIN/NAMES计划与所有.tools草稿不随本任务提交。所有engine均终态；接下来提交后才应用LIN。新工作恢复请先读.tools/r3-story/root-live-recovery.md，勿再跑已过GPU/HTTP/完整测试。
 
 STORY当前恢复点（优先于下面历史过程）：CASE已以ab7a220＋META cd78da50c65e82dd4b85694c2d30bed2d96ed442普通push成功。root先只拷新story_playthrough做真实生产RED1/1，然后`.tools/r3-story/apply_drafts.py`按data/core/UI三清单SHA＋root九路径实际应用40文件，收据applied-drafts.json；**不要再次覆盖这些生产文件**。生产schema12，首次import session16463已terminal0（401资源重导、无ERROR），生产story_ui reader18/18已terminal0。root已接run.ps1八个STORY目标，core将新增迁移/freefollowup两个target与真实CASE11 fixture（38768B/phasecards）。UI owner正在正式修首帧HTTPRequest Timer：已有tools-only cold RED→monotonic224/224，原预算/断言保留，生产HTTP补丁尚未验证；先core两短目标，终态后单引擎交UI做正式HTTP RED/GREEN。root在HTTP时序目标结束前不跑playthrough/GPU。STORY标准full轮数仍0，截图/录像/实际全三路尚未生产复验。原fixed_invitation实际字节未改；talk旧visit引用已在root生产_advance后重取，待freefollowup真实验证。用户WEB追加见WEB_ADDENDUM_R3.md，1–3待POLISH按原序做，当前不提前改短视窗。
 
