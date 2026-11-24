@@ -8,7 +8,7 @@
 ---｜---｜---｜---
 R3-0｜完成（随 LOOP 提交）｜89b7334｜Cozy Tunes/、assets/audio/music/ 已忽略且零追踪；剧情附录原文封存 docs/story/fixed_cases.md。
 R3-LOOP｜部分完成｜89b7334｜顺序日程及专项全绿；第三轮标准全测停在旧 traffic 快照比较漏排除新增 daily_loop 字段，未跑第四轮。
-R3-CASE｜部分完成｜待提交｜推理板/三建议/迁移/双尺寸/31.87秒录像专项通过；标准第3轮在HTTP core两断言失败，按上限不跑full4。
+R3-CASE｜部分完成｜ab7a220｜推理板/三建议/迁移/双尺寸/31.87秒录像专项通过；标准第3轮在HTTP core两断言失败，按上限不跑full4。
 
 R3-CASE 恢复点：实际工作区 D:/MagicStore/.tools/round3，schema11；full1 session71394 已 terminal exit1，不再poll，日志 .tools/r3-case/full1.log。新CASE八组和前序已过，旧 event_effects 的 wait 返回 CONTENT_INVALID。case_core仅定位最小兼容修正并检查后续未到达夹具，禁止放松生产校验。CASE独审Critical/Important/Minor均0；真实deadline25/25、坏配置10/10、host17/17、迁移40/40、transactions218/218、board456/456、schema149/149、UI GPU241/241六帧、旧shop GPU1546/1546三十帧。GPU session44965 已terminal0，不再poll。最终本地录像 .tools/case-board-movie/r3-case.avi，956帧/30fps/31.8667秒/227989708B；不提交视频。完整上限三轮，下一为第2轮。产品源尚未提交，不得标完成；root补文档/JPG后跑全套。
 
@@ -17,6 +17,8 @@ R3-CASE 完整第2轮已terminal exit1：root session70127已收终态，不再p
 R3-CASE 最新恢复点：完整第3轮root session91127已terminal exit1并收终态，不再poll；1123.266秒，326源文件逐SHA未变，reported15796检查/2失败，2个ERROR均为HTTP core断言push_error。网络已通（provider41/41），game_state_http.gd的real reply validation/online mode两项未过，UI agent仅在.tools诊断，生产未动。三轮上限已到，CASE按partial提交继续STORY，禁止full4。正式证据results/R3-CASE-validation.json（66任务路径、六JPG1594709B、本地视频956帧/31.8667秒）。第2轮外因证据与原脚本提权专项仍保留，但不能替代失败的标准全套。OFL已恢复HEAD/原登记LF SHA1c05c68c…并锁该精确路径-text；formal专项364记录/367文件有效，未改manifest/作者内容。68581/30612/51784/70127/71394/44965/91127均已terminal，不poll旧handle。CASE提交/推送后才应用STORY隔离草稿。
 
 STORY正式计划已写plans/R3-STORY.md，目前仅`.tools/r3-story/drafts`隔离准备数据/core/UI与root接线，不改CASE冻结生产文件。CASE提交后才应用STORY草稿；该计划不随CASE提交。STORY需最佳/最差五案、缺案3取信补笔记2、低信任可自拼、写信真延迟3日、雨夜保存与五人短访，固定invitation定义/hash保持。
+
+CASE实际任务提交ab7a22079a59a9cbe6b72e809acc05658e510dd9：66文件，仅六JPG1594709B，无音乐/录像/候选/草稿，main仍e27441b。HTTP复核原Core两断言可通过但DirectAPI预算断言另有波动；被动探针已抓到内置HTTPRequest RESULT_TIMEOUT在4ms发生、绝对总deadline尚余1996ms且无入站，正在.tools验证首帧Timer问题，未提高timeout。接下来普通push当前CASE＋META，再应用STORY（data103/0，core26/0＋三路初稳定559/0＋修复后积压139/0及worst事务295/0；UI尚未实际编译）。STORY新增talk引用修复还需真实followup写入与失败重试测试。
 
 R3-LOOP 终态：实现与独立审查已完成，核心103/103、迁移/模式98/98、入口守卫57/57、最终7天66/66；新UI GPU116/116六帧、shop1544/1544三十帧，六JPG已逐开。完整第3轮已exit1（.tools/r3-loop/full3.log），此前2858检查零失败，traffic模块单独复跑101检查/1失败。独立真实加载确认新增键仅daily_loop，移除该新增namespace后所有历史字段精确相等，原夹具及复制文件字节不变。按三轮上限部分完成，不跑第四轮。所有session均终止，不poll旧handle。正式结果在results/R3-LOOP-validation.json；提交推送后立即继续R3-CASE，随下一schema兼容工作补该夹具，再整体复核。不得冒称本轮标准全绿。
 
