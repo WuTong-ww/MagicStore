@@ -167,6 +167,8 @@ func run() -> void:
 	response = await provider.request_reply(request_data(true))
 	check(response.intent == "clarify" and response.clue_ids.is_empty(), "early configuration fallback clears previous turn classification authorization")
 	var game := root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	var saves := root.get_node("SaveService")
 	saves.base_dir = "user://test-runs/" + game.make_id("direct_api")
 	check(game.execute_action({"type": "new_game", "name": "生成对白隔离测试"}).success, "create isolated save")

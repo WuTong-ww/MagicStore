@@ -27,6 +27,17 @@ var arrival_source: Label
 var patience_list: VBoxContainer
 var quiet_suggestions: HBoxContainer
 var arrival_copy: Dictionary = {}
+var daily_panel: VBoxContainer
+var daily_title: Label
+var daily_progress: Label
+var daily_letters: VBoxContainer
+var daily_read_button: Button
+var daily_summary: Label
+var daily_monologue: Label
+var legacy_title: Label
+var legacy_note: Label
+var guest_profile: HBoxContainer
+var daily_fonts: Dictionary = {}
 
 func _ready() -> void:
 	arrival_copy = ArrivalUI.load_config()
@@ -48,7 +59,9 @@ func _ready() -> void:
 	drawer.panel.item_rect_changed.connect(stage._layout)
 	drawer.panel.visibility_changed.connect(stage._layout)
 	var column: VBoxContainer = drawer.content
-	column.add_child(UI.label("今日来客", 16, UI.GOLD))
+	_build_daily_journal(column)
+	legacy_title = UI.label("今日来客", 16, UI.GOLD)
+	column.add_child(legacy_title)
 	patience_list = VBoxContainer.new()
 	patience_list.name = "ArrivalPatienceList"
 	column.add_child(patience_list)
@@ -57,6 +70,7 @@ func _ready() -> void:
 	guest_picker.item_selected.connect(func(_index: int): refresh())
 	column.add_child(guest_picker)
 	var profile := HBoxContainer.new()
+	guest_profile = profile
 	profile.add_theme_constant_override("separation", 12)
 	column.add_child(profile)
 	portrait = UI.image(LIN_PORTRAIT if ResourceLoader.exists(LIN_PORTRAIT) else LIN_PORTRAIT_FALLBACK)
@@ -103,10 +117,34 @@ func _ready() -> void:
 	tools.add_child(study_button)
 	rest_button = UI.button("休息", func(): await host.run_action("rest"))
 	column.add_child(rest_button)
-	next_button = UI.button("打烊，进入下一天", func(): await host.run_action("next_day"))
+	next_button = UI.button("打烊，进入下一天", _close_or_next_day)
 	column.add_child(next_button)
-	column.add_child(UI.label("熟客的故事，会在下一次见面继续。", 15, UI.MUTED))
+	legacy_note = UI.label("熟客的故事，会在下一次见面继续。", 15, UI.MUTED)
+	column.add_child(legacy_note)
 	refresh()
+
+func _build_daily_journal(column: VBoxContainer) -> void:
+	daily_fonts = preload("res://scripts/ui/shell_config.gd").load_config().layout
+	daily_panel = VBoxContainer.new()
+	daily_panel.name = "DailyLoopPanel"
+	column.add_child(daily_panel)
+	daily_progress = UI.label("",int(daily_fonts.status_size),UI.MUTED)
+	daily_progress.name = "DailyLoopProgress"
+	daily_panel.add_child(daily_progress)
+	daily_title = UI.label("",int(daily_fonts.brand_size))
+	daily_panel.add_child(daily_title)
+	daily_letters = VBoxContainer.new()
+	daily_letters.name = "DailyLoopLetters"
+	daily_panel.add_child(daily_letters)
+	daily_read_button = UI.button("",func(): await host.run_action("read_morning_letters"))
+	daily_read_button.name = "ReadMorningLetters"
+	daily_panel.add_child(daily_read_button)
+	daily_summary = UI.label("",int(daily_fonts.brand_size))
+	daily_summary.name = "DailyLoopSummary"
+	daily_panel.add_child(daily_summary)
+	daily_monologue = UI.label("",int(daily_fonts.brand_size),UI.MUTED)
+	daily_monologue.name = "DailyLoopMonologue"
+	daily_panel.add_child(daily_monologue)
 
 func _add_hotspot(parent: Control, key: String) -> Button:
 	var target: String = parent.config.scenes[parent.scene_id].hotspots[key].target
@@ -132,6 +170,9 @@ func _enter_consultation() -> void:
 	if not GameState.active_visit().is_empty():
 		host.show_screen("consultation")
 		return
+	if GameState.daily_loop_view().get("enabled",false):
+		await _begin()
+		return
 	if guest_picker.selected >= 0:
 		await _begin()
 
@@ -143,6 +184,20 @@ func refresh() -> void:
 	var state: Dictionary = GameState.player_snapshot()
 	var no_save := state.is_empty()
 	var active: Dictionary = GameState.active_visit()
+	var daily: Dictionary = GameState.daily_loop_view()
+	daily_panel.visible = not no_save and daily.get("enabled",false)
+	if daily_panel.visible:
+		_refresh_daily_journal(daily,active)
+		return
+	legacy_title.show()
+	legacy_note.show()
+	guest_profile.show()
+	arrival_source.show()
+	patience_list.show()
+	begin_button.show()
+	case_label.show()
+	next_button.show()
+	rest_button.show()
 	var previous_index := maxi(guest_picker.selected, 0)
 	var people: Dictionary = GameState.people_view()
 	guests = []
@@ -213,6 +268,69 @@ func refresh() -> void:
 	history_button.disabled = no_save
 	study_button.disabled = no_save or not active.is_empty()
 
+func _refresh_daily_journal(daily: Dictionary, active: Dictionary) -> void:
+	var copy: Dictionary = daily.copy
+	var phase := str(daily.phase)
+	var pending: bool = is_instance_valid(host) and bool(host.busy)
+	var completed := int(daily.completed)
+	var total := int(daily.total)
+	legacy_title.hide()
+	legacy_note.hide()
+	guest_picker.hide()
+	patience_list.hide()
+	quiet_suggestions.hide()
+	wait_button.hide()
+	rest_button.hide()
+	arrival_source.hide()
+	portrait.hide()
+	guests.clear()
+	daily_progress.text = str(copy.day_progress).format({"day":daily.day,"completed":completed,"total":total})
+	daily_title.text = str(copy.morning_title) if phase == "morning" else (str(copy.closing_title) if phase == "closing" else "")
+	daily_title.visible = not daily_title.text.is_empty()
+	for child: Node in daily_letters.get_children():
+		daily_letters.remove_child(child)
+		child.queue_free()
+	for letter: Dictionary in daily.letters:
+		var sender := UI.label(str(letter.name),int(daily_fonts.status_size),UI.GOLD)
+		daily_letters.add_child(sender)
+		daily_letters.add_child(UI.label(str(letter.text),int(daily_fonts.brand_size)))
+	if phase == "morning" and daily.letters.is_empty():
+		daily_letters.add_child(UI.label(str(copy.letters_empty),int(daily_fonts.brand_size),UI.MUTED))
+	daily_letters.visible = phase != "closing" and daily_letters.get_child_count() > 0
+	daily_read_button.text = str(copy.read_letters)
+	daily_read_button.visible = phase == "morning"
+	daily_read_button.disabled = pending
+	var next_guest: Dictionary = daily.next_guest
+	if not active.is_empty():
+		next_guest = GameState.divination_view().get("guest",{})
+	guest_profile.visible = phase == "reception" and not next_guest.is_empty()
+	guest_name.text = str(next_guest.get("name",""))
+	guest_role.text = str(next_guest.get("role",""))
+	guest_status.text = str(copy.guest_active) if not active.is_empty() else str(copy.guest_waiting)
+	case_label.visible = phase == "reception" and completed >= total
+	case_label.text = str(copy.all_served)
+	begin_button.visible = phase == "reception"
+	begin_button.text = str(copy.resume_visit) if not active.is_empty() else str(copy.next_customer)
+	begin_button.disabled = phase != "reception" or pending or (active.is_empty() and (completed >= total or next_guest.is_empty()))
+	next_button.visible = phase != "morning"
+	next_button.text = str(copy.next_day) if phase == "closing" else str(copy.close_shop)
+	next_button.disabled = pending or not active.is_empty() or (phase == "reception" and completed < total)
+	history_button.disabled = pending
+	study_button.disabled = pending or not active.is_empty()
+	daily_summary.visible = phase == "closing"
+	daily_monologue.visible = phase == "closing"
+	if phase == "closing":
+		var summary: Dictionary = daily.summary
+		var fields := summary.duplicate(true)
+		fields["notes"] = str(copy.notes_empty) if summary.get("notes",[]).is_empty() else "\n".join(PackedStringArray(summary.notes))
+		daily_summary.text = str(copy.summary_format).format(fields)
+		daily_monologue.text = str(copy.monologue_title)+"\n"+str(summary.monologue)
+
+func _close_or_next_day() -> void:
+	var daily: Dictionary = GameState.daily_loop_view()
+	var kind := "close_shop" if daily.get("enabled",false) and daily.get("phase") == "reception" else "next_day"
+	await host.run_action(kind)
+
 func _refresh_patience(people: Dictionary) -> void:
 	for child: Node in patience_list.get_children():
 		patience_list.remove_child(child)
@@ -229,6 +347,8 @@ func _refresh_patience(people: Dictionary) -> void:
 			patience_list.add_child(UI.label(str(arrival_copy.get("outside_format" if key == "outside_queue" else "requests_format", "")) % count, 14, UI.GOLD))
 
 func _wait_for_guest() -> void:
+	if GameState.daily_loop_view().get("enabled",false):
+		return
 	var state: Dictionary = GameState.player_snapshot()
 	if state.is_empty() or not GameState.active_visit().is_empty() or not GameState.people_view().get("queue",[]).is_empty():
 		return
@@ -237,6 +357,15 @@ func _wait_for_guest() -> void:
 		await host.run_action("wait",{"minutes":mini(30,remaining)})
 
 func _begin() -> void:
+	var daily: Dictionary = GameState.daily_loop_view()
+	if daily.get("enabled",false):
+		if daily.get("phase") != "reception":
+			return
+		if not GameState.active_visit().is_empty():
+			host.show_screen("consultation")
+		else:
+			await host.run_action("next_customer")
+		return
 	if not GameState.active_visit().is_empty():
 		await host.run_action("start_visit")
 		return

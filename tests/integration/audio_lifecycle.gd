@@ -95,6 +95,8 @@ func run() -> void:
 	held_audio.queue_free()
 	await process_frame
 	var game: Node = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	game.set_people_generation_options(false)
 	root.get_node("SaveService").base_dir = "res://.tools/audio-close-saves/" + game.make_id("run")
 	var main: Control = load("res://scenes/main.tscn").instantiate()

@@ -75,6 +75,8 @@ func setup_movie() -> void:
 	root.size = Vector2i(validation.window.width,validation.window.height)
 	root.content_scale_size = root.size
 	game = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	saves = root.get_node("SaveService")
 	wind = root.get_node_or_null("WindField")
 	check(wind != null and Wind.settings_valid(wind.settings),"use the actual configured WindField autoload, never a movie-only substitute")

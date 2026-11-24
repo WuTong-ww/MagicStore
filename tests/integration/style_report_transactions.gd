@@ -41,6 +41,8 @@ func run() -> void:
 	var model: Variant = load("res://scripts/people/style_report.gd")
 	rules = model.load_rules()
 	game = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	saves = root.get_node("SaveService")
 	saves.base_dir = "res://.tools/g6/transaction-saves/"+game.make_id("run")
 	game.configure_api("","","")

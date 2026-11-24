@@ -73,6 +73,8 @@ func run() -> void:
 	var config: Dictionary = parsed
 	var original_visuals_hash := FileAccess.get_sha256(Visual.CONFIG_PATH)
 	game = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	root.get_node("SaveService").base_dir = "res://.tools/a1r-preview-saves/"+game.make_id("run")
 	game.configure_api("","","")
 	game.set_people_generation_options(false)

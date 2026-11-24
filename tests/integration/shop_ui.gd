@@ -27,6 +27,8 @@ func settle() -> void:
 
 func run() -> void:
 	game = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	root.get_node("SaveService").base_dir = "res://.tools/c-ui-test-saves/" + game.make_id("run")
 	root.size = Vector2i(1280, 720)
 	root.content_scale_size = root.size

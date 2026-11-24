@@ -66,6 +66,9 @@ try {
     if ($Test) {
         Invoke-Godot @('--headless', '--path', $repo, '--import')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/smoke.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/daily_loop.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/daily_loop_migration.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/daily_loop_guards.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/save_delete.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/provider_contract.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/dialogue/grounding.gd')
@@ -103,6 +106,7 @@ try {
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/people_restart.gd', '--', 'write')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/people_restart.gd', '--', 'read')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/shop_ui.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/daily_loop_ui.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/item_visuals.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/shop/shelf_layout.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/shelf_render.gd')

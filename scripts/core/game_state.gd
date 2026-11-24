@@ -22,10 +22,12 @@ const PersonProvider = preload("res://scripts/providers/http_person_provider.gd"
 const GeneratedPerson = preload("res://scripts/people/generated_person.gd")
 const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
 const Appearance = preload("res://scripts/people/appearance.gd")
+const DailyLoop = preload("res://scripts/core/daily_loop.gd")
 const SHOP_ACTIONS := ["procure_item", "receive_material_gift", "gather_material", "sell_material", "register_demand", "research_recipe", "craft_item", "sell_product", "use_product", "review_case"]
 const PEOPLE_ACTIONS := ["book_arrival", "save_appearance", "wait", "invite_contact"]
 var shop_config: Dictionary = {}
 var people_config: Dictionary = {}
+var daily_loop_config: Dictionary = {}
 var _api_url := ""
 var _api_model := ""
 var _api_key := ""
@@ -60,10 +62,20 @@ func _ready() -> void:
 		push_error(content_error)
 		return
 	content = loaded.content
+	daily_loop_config = DailyLoop.load_config()
+	if daily_loop_config.is_empty():
+		content_error = "DAILY_LOOP_CONFIG_INVALID"
+		return
+	if int(daily_loop_config.daily_energy) > int(content.rules.max_energy):
+		content_error = daily_loop_config.copy.invalid_config
+		return
 	var catalog := DivinationCatalog.load_data(content)
 	if catalog.is_empty():
 		content_error = "问卜案例配置无效。"
 		push_error(content_error)
+		return
+	if not DailyLoop.references_valid(daily_loop_config,catalog):
+		content_error = daily_loop_config.copy.invalid_config
 		return
 	_divination = DivinationSession.new(catalog, content)
 	dialogue_provider = MockProvider.new()
@@ -104,12 +116,21 @@ func player_snapshot() -> Dictionary:
 	visible.erase("divination")
 	visible.erase("processed_actions")
 	visible.erase("people")
+	visible.erase("daily_loop")
 	return visible.duplicate(true)
+
+func daily_loop_view() -> Dictionary:
+	return DailyLoop.public_view(state,daily_loop_config)
+
+func _sequential() -> bool:
+	return DailyLoop.enabled(daily_loop_config)
 
 func people_view() -> Dictionary:
 	return PeopleBridge.public_view(state) if not state.is_empty() else {}
 
 func departure_risk(minutes: int) -> int:
+	if _sequential():
+		return 0
 	if minutes <= 0 or state.is_empty():
 		return 0
 	var until := int(state.clock_minutes) + minutes
@@ -201,7 +222,7 @@ func _reset_people_generator() -> void:
 	_generation_retry_at = 0
 	_generation_network_retry_at = 0
 	_generation_notice = ""
-	if not _generation_enabled:
+	if not _generation_enabled or _sequential():
 		return
 	if _api_url.is_empty() and _gateway_url.is_empty():
 		return
@@ -242,6 +263,8 @@ func _person_failed(job_id: String, token: String, code: String) -> void:
 	_generation_notice = "新来客还没准备好，稍后再试。现有来客照常接待。"
 
 func pump_background_people(ui_busy: bool = false, force: bool = false) -> void:
+	if _sequential():
+		return
 	# The main UI calls this heartbeat; headless rule tests never start network
 	# work implicitly. Job results wait until no foreground action is committing.
 	if people_generator == null or state.is_empty():
@@ -540,6 +563,10 @@ func execute_action(action: Dictionary) -> Dictionary:
 	var preliminary: Dictionary = _preflight(action)
 	if not preliminary.is_empty():
 		return preliminary
+	if _sequential() and action.type in ["wait","rest","start_visit","start_arrival","admit_generated_person","book_arrival","invite_contact"]:
+		return _fail("SEQUENTIAL_MODE",daily_loop_config.copy.legacy_disabled)
+	if action.type in DailyLoop.ACTIONS:
+		return _daily_action(action)
 	match action.type:
 		"start_visit":
 			return _start_visit(action)
@@ -627,6 +654,9 @@ func _new_game(action: Dictionary) -> Dictionary:
 	_divination.initialize(candidate)
 	if not _initialize_integrated(candidate,true):
 		return _fail("INVALID_APPEARANCE",Appearance.load_config().get("copy",{}).get("migration_failed",content_error))
+	if _sequential():
+		candidate.player.energy = int(daily_loop_config.daily_energy)
+		DailyLoop.plan(candidate,daily_loop_config,people_config)
 	candidate = SaveService._normalize_numbers(candidate)
 	var saved: Dictionary = SaveService.write_save(candidate)
 	if not saved.success:
@@ -652,6 +682,7 @@ func _load_game(action: Dictionary) -> Dictionary:
 	if not _initialize_integrated(loaded_candidate):
 		_sync_generated_catalog()
 		return _fail("INVALID_APPEARANCE",Appearance.load_config().get("copy",{}).get("migration_failed",content_error))
+	DailyLoop.sync_mode(loaded_candidate,_sequential())
 	state = SaveService._normalize_numbers(loaded_candidate)
 	_sync_generated_catalog()
 	_reset_people_generator()
@@ -853,9 +884,14 @@ func _complete_talk(action: Dictionary, input_text: String, response: Variant) -
 	_divination.record_talk(candidate, visit, action, response, new_clues)
 	PeopleBridge.record_talk(candidate, visit, action, response)
 	PeopleBridge.observe(candidate, action, "question", response.intent, allowed.keys())
+	if _sequential():
+		candidate.player.energy = maxi(0,int(candidate.player.energy)-int(daily_loop_config.question_energy))
 	# Async callers arrive here only after the provider await and stale-version
 	# check. Nothing in this transaction's collector survives across that await.
-	var presentation_events: Array = _advance(candidate, int(content.rules.talk_minutes))
+	var talk_minutes: int = int(daily_loop_config.question_minutes) if _sequential() else int(content.rules.talk_minutes)
+	if _sequential():
+		talk_minutes = mini(talk_minutes,maxi(0,int(content.rules.closing_minute)-int(candidate.clock_minutes)%1440))
+	var presentation_events: Array = _advance(candidate,talk_minutes)
 	var questions: Array = DialoguePolicy.parse_questions(response.get("followup_questions",[]),_question_context(candidate,visit))
 	visit["followup_questions"] = questions
 	visit["followup_action_id"] = action.action_id
@@ -888,6 +924,12 @@ func _end_visit(action: Dictionary) -> Dictionary:
 	visit.ended_at = int(candidate.clock_minutes)
 	var presentation_events: Array = PeopleBridge.finish(candidate, visit)
 	candidate.active_visit_id = ""
+	var ordered: bool = not str(candidate.daily_loop.active_arrival_id).is_empty()
+	if ordered:
+		DailyLoop.finish(candidate,visit)
+		DailyLoop.plan(candidate,daily_loop_config,people_config)
+	if _sequential():
+		presentation_events.append_array(_advance(candidate,mini(int(daily_loop_config.close_minutes),maxi(0,int(content.rules.closing_minute)-int(candidate.clock_minutes)%1440))))
 	var output := {"visit_id": visit.visit_id}
 	if action.has("return_at"):
 		var arrival_id := "return_" + str(action.action_id)
@@ -923,10 +965,16 @@ func _rest(action: Dictionary) -> Dictionary:
 func _next_day(action: Dictionary) -> Dictionary:
 	if not state.active_visit_id.is_empty():
 		return _fail("ACTIVE_VISIT", "还有未结束的接待，请先返回咨询区处理并结束接待。")
+	if _sequential() and state.daily_loop.phase != "closing":
+		return _fail("CLOSING_REQUIRED",daily_loop_config.copy.closing_required)
 	var candidate: Dictionary = state.duplicate(true)
 	var next_opening: int = (int(candidate.clock_minutes / 1440) + 1) * 1440 + int(content.rules.opening_minute)
 	var presentation_events: Array = _advance(candidate, next_opening - int(candidate.clock_minutes))
 	candidate.player.energy = int(content.rules.max_energy)
+	if _sequential():
+		candidate.player.energy = int(daily_loop_config.daily_energy)
+		DailyLoop.new_day(candidate)
+		DailyLoop.plan(candidate,daily_loop_config,people_config)
 	return _commit(candidate, action, "已进入下一天，已处理到期的案例事项。", {},presentation_events)
 
 func _candidate_visit(candidate: Dictionary) -> Dictionary:
@@ -936,16 +984,19 @@ func _candidate_visit(candidate: Dictionary) -> Dictionary:
 	return {}
 
 func _has_time(minutes: int) -> bool:
+	if _sequential():
+		return true
 	return int(state.clock_minutes) % 1440 + minutes <= int(content.rules.closing_minute)
 
 func _advance(candidate: Dictionary, minutes: int) -> Array:
-	var presentation_events: Array = PeopleBridge.advance(candidate, people_config, minutes, _divination)
+	var presentation_events: Array = PeopleBridge.advance(candidate, people_config, minutes, _divination,_sequential())
 	Shop.sync_effects(candidate, shop_config)
 	return presentation_events
 
 func _commit(candidate: Dictionary, action: Dictionary, message: String, result: Dictionary, presentation_events: Variant = null) -> Dictionary:
 	Shop.sync_effects(candidate, shop_config)
-	PeopleBridge.sync(candidate, people_config, _divination)
+	PeopleBridge.sync(candidate, people_config, _divination,_sequential())
+	DailyLoop.sync_mode(candidate,_sequential())
 	candidate = SaveService._normalize_numbers(candidate)
 	result = SaveService._normalize_numbers(result)
 	candidate.state_version = int(state.state_version) + 1
@@ -990,7 +1041,7 @@ func _presentation_payload(candidate: Dictionary, raw: Variant) -> Array:
 
 func _initialize_integrated(candidate: Dictionary, fresh: bool = false) -> bool:
 	Shop.initialize(candidate)
-	PeopleBridge.initialize(candidate, people_config, _divination,fresh)
+	PeopleBridge.initialize(candidate, people_config, _divination,fresh,_sequential())
 	_migrate_arrival_schema(candidate)
 	_migrate_event_schema(candidate)
 	if not _migrate_appearance_schema(candidate):
@@ -1008,7 +1059,62 @@ func _initialize_integrated(candidate: Dictionary, fresh: bool = false) -> bool:
 			if not case.has("cause"):
 				case["cause"] = DivinationCatalog.case_cause(case.case_id)
 		candidate.schema_version = 9
+	if int(candidate.schema_version) < 10:
+		DailyLoop.initialize(candidate,_sequential())
+		candidate.schema_version = 10
 	return People.validate(candidate.people).is_empty()
+
+func _daily_action(action: Dictionary) -> Dictionary:
+	if not _sequential():
+		return _fail("SEQUENTIAL_DISABLED",daily_loop_config.copy.legacy_disabled)
+	var candidate: Dictionary = state.duplicate(true)
+	var loop: Dictionary = candidate.daily_loop
+	var copy: Dictionary = daily_loop_config.copy
+	var events: Array = []
+	match action.type:
+		"read_morning_letters":
+			if loop.phase != "morning":
+				return _fail("MORNING_ALREADY_READ",copy.already_read)
+			DailyLoop.plan(candidate,daily_loop_config,people_config)
+			DailyLoop.read_letters(candidate,_divination.data,daily_loop_config)
+			loop.phase = "reception"
+			return _commit(candidate,action,copy.letters_read,{},events)
+		"next_customer":
+			if not candidate.active_visit_id.is_empty():
+				return _fail("ACTIVE_VISIT",copy.active_visit)
+			if loop.phase != "reception":
+				return _fail("MORNING_REQUIRED",copy.morning_required)
+			DailyLoop.plan(candidate,daily_loop_config,people_config)
+			var id := DailyLoop.next_arrival(candidate)
+			if id.is_empty():
+				return _fail("DAY_COMPLETE",copy.all_done)
+			var row: Dictionary = candidate.people.arrivals[id]
+			row.state = "queued"
+			row.deadline = People.MAX_INT
+			if not People._physical_arrival(candidate.people,people_config,row,int(candidate.clock_minutes)):
+				return _fail("ARRIVAL_UNAVAILABLE",copy.invalid_state)
+			People._presentation_event(events,row,"guest_entered",int(candidate.clock_minutes))
+			var proposal := action.duplicate(true)
+			proposal["arrival_id"] = id
+			proposal["visit_id"] = make_id("visit")
+			var outcome: Dictionary = PeopleBridge.start(candidate,proposal,_divination,people_config,true)
+			if not outcome.success:
+				return _fail(outcome.error_code,outcome.message)
+			loop.active_arrival_id = id
+			return _commit(candidate,action,copy.next_started,outcome.result,events)
+		"close_shop":
+			if not candidate.active_visit_id.is_empty():
+				return _fail("ACTIVE_VISIT",copy.active_visit)
+			if loop.phase == "closing":
+				return _fail("ALREADY_CLOSED",copy.already_closed)
+			if loop.phase != "reception" or not loop.planned or int(loop.cursor) != loop.arrival_ids.size():
+				return _fail("DAY_INCOMPLETE",copy.not_done)
+			var night: int = int(loop.day)*1440+int(daily_loop_config.night_minute)
+			events = _advance(candidate,maxi(0,night-int(candidate.clock_minutes)))
+			candidate.player.energy = int(daily_loop_config.daily_energy)
+			DailyLoop.close(candidate,daily_loop_config)
+			return _commit(candidate,action,copy.closed,{},events)
+	return _fail("UNKNOWN_ACTION",copy.invalid_state)
 
 func _migrate_appearance_schema(candidate: Dictionary) -> bool:
 	if int(candidate.schema_version) >= 6:

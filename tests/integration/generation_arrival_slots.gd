@@ -66,6 +66,8 @@ func complete(provider: FakeBackground, job: Dictionary) -> void:
 
 func run() -> void:
 	gs = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	gs.daily_loop_config.enabled = false
 	saves = root.get_node("SaveService")
 	saves.base_dir = "res://.tools/test-generation-arrival-slots/" + gs.make_id("run")
 	gs.configure_network("", "")

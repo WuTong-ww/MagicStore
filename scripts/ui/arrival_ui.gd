@@ -101,6 +101,9 @@ static func action_minutes(kind: String, extra: Dictionary) -> int:
 	return 0
 
 static func run_action(host: Node, parent: Node, kind: String, extra: Dictionary = {}) -> Dictionary:
+	var game: Node = parent.get_tree().root.get_node("GameState")
+	if game.daily_loop_view().get("enabled",false):
+		return await host.run_action(kind, extra)
 	var minutes := action_minutes(kind, extra)
 	if minutes <= 0:
 		return await host.run_action(kind, extra)
@@ -112,7 +115,6 @@ static func run_action(host: Node, parent: Node, kind: String, extra: Dictionary
 	var dialog := ConfirmationDialog.new()
 	dialog.name = "ArrivalActionConfirmation"
 	dialog.title = config.confirmation_title
-	var game: Node = parent.get_tree().root.get_node("GameState")
 	dialog.dialog_text = str(config.confirmation_format) % [minutes, int(game.call("departure_risk", minutes))]
 	dialog.ok_button_text = config.confirm
 	dialog.cancel_button_text = config.cancel

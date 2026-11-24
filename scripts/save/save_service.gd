@@ -15,6 +15,7 @@ const Shop = preload("res://scripts/shop/shop.gd")
 const PeopleBridge = preload("res://scripts/shop/people_bridge.gd")
 const Appearance = preload("res://scripts/people/appearance.gd")
 const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
+const DailyLoop = preload("res://scripts/core/daily_loop.gd")
 const SHOP_ACTIONS := ["procure_item", "receive_material_gift", "gather_material", "sell_material", "register_demand", "research_recipe", "craft_item", "sell_product", "use_product", "review_case", "use_unlocked_option", "start_arrival", "book_arrival", "save_appearance", "wait", "admit_generated_person", "invite_contact"]
 var base_dir: String = "user://saves"
 var _divination_data: Dictionary = {}
@@ -189,7 +190,7 @@ func _validate(s: Dictionary) -> String:
 	for field in ["schema_version", "save_id", "name", "state_version", "clock_minutes", "player", "npcs", "active_visit_id", "visits", "processed_actions"]:
 		if not s.has(field):
 			return "缺少 " + field
-	if not _integer(s.schema_version, 1, 9):
+	if not _integer(s.schema_version, 1, 10):
 		return Appearance.load_config().get("copy",{}).get("unsupported_schema","不支持的 schema_version")
 	var extended := int(s.schema_version) >= 2
 	if not _safe_id(s.save_id) or not _text(s.name, 1, 80):
@@ -332,7 +333,7 @@ func _validate(s: Dictionary) -> String:
 			return "动作编号或结果无效"
 		if not result.get("success") is bool or not result.get("error_code") is String or not result.get("message") is String or not result.get("result") is Dictionary or not _integer(result.get("state_version"), 0, int(s.state_version)):
 			return "已处理动作结果字段无效"
-		if result.has("action_type") and not result.action_type in ["start_visit", "talk", "reading", "end_visit", "rest", "next_day"] and (not extended or not result.action_type in DivinationSession.ACTIONS) and (int(s.schema_version) < 3 or not result.action_type in SHOP_ACTIONS):
+		if result.has("action_type") and not result.action_type in ["start_visit", "talk", "reading", "end_visit", "rest", "next_day"] and (not extended or not result.action_type in DivinationSession.ACTIONS) and (int(s.schema_version) < 3 or not result.action_type in SHOP_ACTIONS) and (int(s.schema_version) < 10 or not result.action_type in DailyLoop.ACTIONS):
 			return "已处理动作类型无效"
 		var output: Dictionary = result.result
 		if output.has("visit_id") and (not output.visit_id is String or not visit_ids.has(output.visit_id)):
@@ -357,6 +358,10 @@ func _validate(s: Dictionary) -> String:
 			return people_error
 		if int(s.schema_version) >= 4 and not _integer(s.people.stats.get("lost_customers"), 0, MAX_INTEGER):
 			return "顾客流失统计无效"
+	if int(s.schema_version) >= 10:
+		var daily_error := DailyLoop.validate(s)
+		if not daily_error.is_empty():
+			return daily_error
 	return DivinationSave.validate(s, current_data, visit_ids) if extended else ""
 
 

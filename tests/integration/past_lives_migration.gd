@@ -22,6 +22,8 @@ func act(kind: String, values: Dictionary = {}) -> Dictionary:
 
 func run() -> void:
 	game = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	saves = root.get_node("SaveService")
 	saves.base_dir = "res://.tools/g5/migration-saves/"+game.make_id("run")
 	game.configure_api("","","")
@@ -29,7 +31,7 @@ func run() -> void:
 	var created: Dictionary = await act("new_game",{"name":"前世线迁移隔离"})
 	check(created.success,"real new game creates the initial source")
 	if created.success:
-		check(game.state.get("schema_version") == 9 and game.state.divination.get("past_lines") == {"version":1,"instances":{}},"new games require schema9 and an empty explicit progress namespace")
+		check(game.state.get("schema_version") == 10 and game.state.divination.get("past_lines") == {"version":1,"instances":{}},"new games require schema10 and an empty explicit progress namespace")
 	for schema: int in [1,2,3,4,5,6,7,8]:
 		await compatibility_schema(schema)
 	await actual_schema7_history()
@@ -90,7 +92,7 @@ func compatibility_schema(schema: int) -> void:
 	check(loaded.success,"old snapshot loads through the actual action API / "+str(schema))
 	if not loaded.success:
 		return
-	check(game.state.get("schema_version") == 9 and game.state.divination.get("past_lines") == {"version":1,"instances":{}},"old namespaces migrate additively to schema9 / "+str(schema))
+	check(game.state.get("schema_version") == 10 and game.state.divination.get("past_lines") == {"version":1,"instances":{}},"old namespaces migrate additively to schema10 / "+str(schema))
 	check(FileAccess.get_sha256(path) == old_sha and saves.read_save(old.save_id).state.schema_version == schema,"load changes memory only and leaves original bytes/version untouched / "+str(schema))
 	check(game.state.player.coins == old.player.coins and game.state.player.energy == old.player.energy and game.state.clock_minutes == old.clock_minutes and game.state.processed_actions == old.processed_actions,"migration never recomputes money, energy, time or processed replies / "+str(schema))
 	if schema >= 2:
@@ -105,26 +107,26 @@ func compatibility_schema(schema: int) -> void:
 		check(before_ids == after_ids and game.state.people.days == old.people.days and game.state.people.arrivals == old.people.arrivals and game.state.people.relationships == old.people.relationships,"exact identity sets, relationships and G1 plans survive independently of JSON key order / "+str(schema))
 		for id: String in before_ids:
 			check(game.state.people.profiles[id].birthday == old.people.profiles[id].birthday,"birthday survives migration / "+id)
-	if game.state.get("schema_version") != 9:
+	if game.state.get("schema_version") != 10:
 		return
 	check(game.state.divination.cases.values().all(func(case: Dictionary) -> bool: return case.get("cause") == ("both" if case.case_id == "archive" else "present")),"every migrated case has a trusted frozen cause / "+str(schema))
 	var migrated: Dictionary = game.snapshot()
 	var case_id: String = migrated.divination.cases.keys()[0]
 	var no_cause: Dictionary = migrated.duplicate(true)
 	no_cause.divination.cases[case_id].erase("cause")
-	check(not saves.validate_snapshot(no_cause).success,"schema9 cannot erase cause and silently enter the legacy branch / "+str(schema))
+	check(not saves.validate_snapshot(no_cause).success,"schema10 cannot erase cause and silently enter the legacy branch / "+str(schema))
 	var no_progress: Dictionary = migrated.duplicate(true)
 	no_progress.divination.erase("past_lines")
-	check(not saves.validate_snapshot(no_progress).success,"schema9 cannot erase the mandatory progress namespace / "+str(schema))
+	check(not saves.validate_snapshot(no_progress).success,"schema10 cannot erase the mandatory progress namespace / "+str(schema))
 	var action_id: String = game.make_id("past_migration_commit")
 	saves.fail_next_write = true
 	var failed: Dictionary = await act("wait",{"action_id":action_id,"minutes":1})
 	check(not failed.success and game.snapshot() == migrated and FileAccess.get_sha256(path) == old_sha,"failed first action preserves migrated memory and the old file / "+str(schema))
 	var committed: Dictionary = await act("wait",{"action_id":action_id,"minutes":1})
-	check(committed.success and saves.read_save(game.state.save_id).state.schema_version == 9,"same-ID retry durably stores schema9 / "+str(schema))
+	check(committed.success and saves.read_save(game.state.save_id).state.schema_version == 10,"same-ID retry durably stores schema10 / "+str(schema))
 	var snapshot: Dictionary = game.snapshot()
 	check((await act("wait",{"action_id":action_id,"minutes":1})).success and game.snapshot() == snapshot,"replaying the migration commit cannot charge or migrate twice / "+str(schema))
-	check((await act("load_game",{"save_id":snapshot.save_id})).success and game.snapshot() == snapshot,"committed schema9 reloads exactly / "+str(schema))
+	check((await act("load_game",{"save_id":snapshot.save_id})).success and game.snapshot() == snapshot,"committed schema10 reloads exactly / "+str(schema))
 	if schema == 8:
 		check((await act("end_visit")).success and (await act("next_day")).success,"a real next-day revisit can follow the historical binding fixture")
 		var revisited: Dictionary = await act("start_visit",{"npc_id":"npc_lin","case_id":"archive"})
@@ -146,7 +148,7 @@ func actual_schema7_history() -> void:
 	check(loaded.success,"actual historical schema7 save loads without synthetic reconstruction")
 	if not loaded.success:
 		return
-	check(game.state.schema_version == 9 and FileAccess.get_sha256(path) == sha,"actual historical migration remains in memory only")
+	check(game.state.schema_version == 10 and FileAccess.get_sha256(path) == sha,"actual historical migration remains in memory only")
 	var after: Dictionary = game.state.divination.duplicate(true)
 	after.erase("past_lines")
 	for case: Dictionary in after.cases.values():

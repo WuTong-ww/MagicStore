@@ -13,6 +13,8 @@ func _initialize() -> void:
 
 func run() -> void:
 	game = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	saves = root.get_node("SaveService")
 	if not saves.has_method("delete_save"):
 		check(false, "SaveService provides delete_save")

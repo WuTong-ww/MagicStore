@@ -254,7 +254,11 @@ func _refresh() -> void:
 		if is_instance_valid(wind):
 			wind.set_weather(str(people.get("day",{}).get("weather","")))
 		var shop: Dictionary = GameState.shop_view().get("shop",{})
-		resources.text = shell_config.status_format % [int(player.get("coins",0)),int(shop.get("reputation",0)),GameState.clock_text(),people.get("queue",[]).size()]
+		var daily: Dictionary = GameState.daily_loop_view()
+		if daily.get("enabled",false):
+			resources.text = str(daily.copy.status_format).format({"coins":int(player.get("coins",0)),"reputation":int(shop.get("reputation",0)),"time":GameState.clock_text(),"day":daily.day,"completed":daily.completed,"total":daily.total})
+		else:
+			resources.text = shell_config.status_format % [int(player.get("coins",0)),int(shop.get("reputation",0)),GameState.clock_text(),people.get("queue",[]).size()]
 		energy_bar.max_value = int(GameState.content.rules.max_energy)
 		energy_bar.value = int(player.get("energy",0))
 		energy_label.text = shell_config.energy_format % [int(player.get("energy",0)),int(GameState.content.rules.max_energy)]
@@ -293,7 +297,7 @@ func run_action(action_type: String, extra: Dictionary = {}) -> Dictionary:
 		if action_type in ["new_game", "load_game"]:
 			save_window.hide()
 			show_screen("consultation" if not GameState.active_visit().is_empty() else "front",true)
-		elif action_type in ["start_visit", "start_arrival"]:
+		elif action_type in ["start_visit", "start_arrival", "next_customer"]:
 			show_screen("consultation")
 			people_window.hide()
 		elif action_type == "end_visit":

@@ -178,6 +178,8 @@ func capture_hotspots(dimensions: Vector2i) -> void:
 
 func check_runtime(config: Dictionary) -> void:
 	var game := root.get_node("GameState")
+	# Preserve the pre-loop clock, waiting, and scene transition fixture.
+	game.daily_loop_config.enabled = false
 	var saves := root.get_node("SaveService")
 	saves.base_dir = "res://.tools/scene-visual-test-saves/"+game.make_id("run")
 	var main: Control = load("res://scenes/main.tscn").instantiate()

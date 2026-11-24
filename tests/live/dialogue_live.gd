@@ -82,6 +82,8 @@ func prepare_visit(number: int) -> bool:
 func run() -> void:
 	started_at = Time.get_ticks_msec()
 	game = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	# Benchmark one dialogue pipeline without unrelated background traffic.
 	game.set_people_generation_options(false)
 	saves = root.get_node("SaveService")

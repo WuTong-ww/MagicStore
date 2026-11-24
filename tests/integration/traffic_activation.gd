@@ -34,6 +34,8 @@ func fixture_valid(value: Variant) -> bool:
 	return true
 func run() -> void:
 	game = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	saves = root.get_node("SaveService")
 	game.configure_api("","","")
 	game.set_people_generation_options(false)
@@ -172,7 +174,7 @@ func check_legacy_applied() -> void:
 	output.close()
 	check((await game.execute_action_async(action("load_game",{"save_id":old.save_id}))).success,"actual applied snapshot remains loadable after strategy upgrade")
 	var migrated: Dictionary = game.snapshot()
-	check(migrated.schema_version == 9 and migrated.divination.get("past_lines") == {"version":1,"instances":{}},"historical applied snapshot gains only the explicit empty schema9 progress namespace")
+	check(migrated.schema_version == 10 and migrated.divination.get("past_lines") == {"version":1,"instances":{}},"historical applied snapshot reaches current schema10 with the explicit empty progress namespace")
 	check(migrated.divination.cases.values().all(func(case: Dictionary) -> bool: return case.get("cause") == ("both" if case.case_id == "archive" else "present")),"each historical case gains its trusted cause without acquiring new content")
 	# Compare every historical field after validating/removing only G5's additive
 	# fields from a copy. The genuine source envelope remains byte-for-byte old.

@@ -46,6 +46,8 @@ func run() -> void:
 	check(legacy.error_code.is_empty() and legacy.get("mood") == "neutral","legacy gateway missing mood defaults neutral")
 	provider.cancel()
 	var game: Node = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	var saves: Node = root.get_node("SaveService")
 	saves.base_dir = "res://.tools/art/a4/http-mood-saves/"+game.make_id("run")
 	check((await game.execute_action_async({"type":"new_game","name":"表情事务隔离"})).success,"isolated save created via async action")

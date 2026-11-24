@@ -241,6 +241,8 @@ func check_editor(panel: Control) -> void:
 
 func check_main_transaction() -> void:
 	var game := root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	var saves := root.get_node("SaveService")
 	var original_dir: String = saves.base_dir
 	saves.base_dir = "res://.tools/art/a4/ui-saves/"+game.make_id("run")

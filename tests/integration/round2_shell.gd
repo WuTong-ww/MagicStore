@@ -27,6 +27,8 @@ func settle() -> void:
 func run() -> void:
 	check_shell_config()
 	game = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	root.get_node("SaveService").base_dir = "res://.tools/round2-shell-saves/" + game.make_id("run")
 	main = load("res://scenes/main.tscn").instantiate()
 	root.add_child(main)

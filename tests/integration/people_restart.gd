@@ -24,6 +24,8 @@ func act(kind: String, extra: Dictionary = {}) -> Dictionary:
 
 func run() -> void:
 	gs = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	gs.daily_loop_config.enabled = false
 	saves = root.get_node("SaveService")
 	saves.base_dir = "user://test-restart-integrated-people/saves"
 	var args := OS.get_cmdline_user_args()

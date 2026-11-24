@@ -27,6 +27,8 @@ func act(kind: String, extra: Dictionary = {}) -> Dictionary:
 
 func run() -> void:
 	game = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	saves = root.get_node("SaveService")
 	check(game.get("_divination") != null and game.get("content_error") == "","event rule dependencies initialize")
 	if failures:

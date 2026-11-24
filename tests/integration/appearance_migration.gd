@@ -24,12 +24,14 @@ func _initialize() -> void:
 
 func run() -> void:
 	game = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	saves = root.get_node("SaveService")
 	saves.base_dir = "res://.tools/art/a4/migration-saves/"+game.make_id("run")
 	game.configure_api("","","")
 	game.set_people_generation_options(false)
 	var started: Dictionary = await act("new_game",{"name":"外观迁移入口验收"})
-	check(started.success and game.state.get("schema_version") == 9,"production new game uses current schema9 with family metadata and appearance catalog2")
+	check(started.success and game.state.get("schema_version") == 10,"production new game uses current schema10 with family metadata and appearance catalog2")
 	if failures:
 		print("APPEARANCE MIGRATION: %d checks, %d failures"%[checks,failures])
 		quit(1)
@@ -78,7 +80,7 @@ func old_schema(schema: int) -> void:
 	var path: String = saves._path(legacy.save_id)
 	var before_hash := FileAccess.get_sha256(path)
 	check((await act("load_game",{"save_id":legacy.save_id})).success,"load real old save / v"+str(schema))
-	check(game.state.schema_version == 9 and game.state.people.appearance_catalog_version == 2,"old save migrates to current schema9 without changing appearance catalog2 / v"+str(schema))
+	check(game.state.schema_version == 10 and game.state.people.appearance_catalog_version == 2,"old save migrates to current schema10 without changing appearance catalog2 / v"+str(schema))
 	check(Appearance.appearance_valid(game.state.people.player_appearance),"player rig validates after migration / v"+str(schema))
 	if schema >= 3:
 		check(game.state.people.days == legacy.people.days and game.state.people.arrivals == legacy.people.arrivals,"old traffic plans and arrivals are not rerolled / v"+str(schema))
@@ -99,7 +101,7 @@ func old_schema(schema: int) -> void:
 	var failed: Dictionary = await act("save_appearance",{"action_id":action_id,"appearance":selection})
 	check(not failed.success and game.snapshot() == before and FileAccess.get_sha256(path) == before_hash,"failed appearance save changes no state/file / v"+str(schema))
 	check((await act("save_appearance",{"action_id":action_id,"appearance":selection})).success,"same action retry succeeds / v"+str(schema))
-	check(game.state.people.player_appearance == selection and saves.read_save(legacy.save_id).state.schema_version == 9,"first successful action persists canonical selection and current schema9 / v"+str(schema))
+	check(game.state.people.player_appearance == selection and saves.read_save(legacy.save_id).state.schema_version == 10,"first successful action persists canonical selection and current schema10 / v"+str(schema))
 	var committed: Dictionary = game.snapshot()
 	check((await act("save_appearance",{"action_id":action_id,"appearance":selection})).success and game.snapshot() == committed,"replay never regenerates or recommits appearance / v"+str(schema))
 	check((await act("load_game",{"save_id":legacy.save_id})).success and game.state.people.player_appearance == selection,"reopen exact saved appearance / v"+str(schema))

@@ -152,6 +152,8 @@ func run() -> void:
 	nonfinite.sheet.portrait_size[0] = NAN
 	check(not config_valid(nonfinite),"nonfinite preview geometry is rejected")
 	game = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	saves = root.get_node("SaveService")
 	var initial := _hash(game.snapshot())
 	var missing := _source_audit() if not catalog.is_empty() else []

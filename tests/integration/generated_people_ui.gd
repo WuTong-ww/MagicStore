@@ -24,6 +24,8 @@ func settle() -> void:
 
 func run() -> void:
 	game = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	game.set_people_generation_options(false)
 	root.get_node("SaveService").base_dir = "res://.tools/test-generated-ui/" + game.make_id("run")
 	main = load("res://scenes/main.tscn").instantiate()

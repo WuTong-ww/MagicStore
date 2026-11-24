@@ -20,6 +20,8 @@ func _initialize() -> void:
 
 func run() -> void:
 	gs = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	gs.daily_loop_config.enabled = false
 	saves = root.get_node("SaveService")
 	saves.base_dir = "user://test-runs/" + gs.make_id("divination")
 	_service_and_knowledge()
@@ -382,13 +384,13 @@ func _v1_migration() -> void:
 	check(saves.write_save(legacy).success, "B1 original schema fixture writes")
 	require_action("load_game", {"save_id": legacy.save_id})
 	# This asserts the latest destination after preserving the genuine B1 legacy visit.
-	check(gs.state.schema_version == 9 and gs.state.visits == legacy.visits and gs.state.clock_minutes == legacy.clock_minutes and gs.state.active_visit_id == legacy.active_visit_id and gs.state.player.coins == legacy.player.coins and gs.state.player.energy == legacy.player.energy, "B1 migration preserves paid unfinished visit, history, clocks and balances")
+	check(gs.state.schema_version == 10 and gs.state.visits == legacy.visits and gs.state.clock_minutes == legacy.clock_minutes and gs.state.active_visit_id == legacy.active_visit_id and gs.state.player.coins == legacy.player.coins and gs.state.player.energy == legacy.player.energy, "B1 migration preserves paid unfinished visit, history, clocks and balances")
 	check(gs.divination_view().event.is_empty() and saves.read_save(legacy.save_id).state.schema_version == 1, "B1 load creates no retrospective event or file write")
 	var before: Dictionary = gs.snapshot()
 	require_action("reading")
 	check(gs.snapshot() == before, "B1 migrated paid reading is still replayable for free")
 	require_action("rest")
-	check(saves.read_save(legacy.save_id).state.schema_version == 9, "B1 next transaction persists current integrated v9")
+	check(saves.read_save(legacy.save_id).state.schema_version == 10, "B1 next transaction persists current integrated v10")
 	require_action("load_game", {"save_id": legacy.save_id, "recover_backup": true})
 	check(gs.state.visits == legacy.visits and gs.state.clock_minutes == legacy.clock_minutes, "B1 v1 backup restoration remains available")
 

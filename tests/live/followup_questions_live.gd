@@ -107,6 +107,8 @@ func record_turn(model: String, kind: String, payload: Dictionary, click: bool =
 
 func run() -> void:
 	game = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	game.set_people_generation_options(false)
 	root.get_node("SaveService").base_dir = "res://.tools/live-followup-saves/"+game.make_id("run")
 	output = OS.get_environment("MAGIC_LIVE_SWITCH_REPORT")

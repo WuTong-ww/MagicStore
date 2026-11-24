@@ -26,6 +26,8 @@ func _initialize() -> void:
 
 func run_test() -> void:
 	gs = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	gs.daily_loop_config.enabled = false
 	var saves: Node = root.get_node("SaveService")
 	saves.base_dir = "user://test-runs/" + gs.make_id("people_b")
 	act("new_game", {"name": "A/B 隔离联调"})

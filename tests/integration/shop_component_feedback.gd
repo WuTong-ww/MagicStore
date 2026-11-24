@@ -36,6 +36,8 @@ func run() -> void:
 		uid_file.store_line(ResourceUID.id_to_text(ResourceUID.create_id()))
 		uid_file.close()
 	game = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	saves = root.get_node("SaveService")
 	saves.base_dir = "res://.tools/g4/component-feedback-saves/"+game.make_id("run")
 	game.configure_api("","","")

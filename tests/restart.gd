@@ -5,6 +5,8 @@ func _initialize() -> void:
 
 func run() -> void:
 	var gs: Node = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	gs.daily_loop_config.enabled = false
 	var saves: Node = root.get_node("SaveService")
 	saves.base_dir = "user://test-restart"
 	var marker := "user://test-restart/expected.json"

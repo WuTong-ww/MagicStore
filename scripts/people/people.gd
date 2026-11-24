@@ -906,11 +906,24 @@ static func _stable_expected(value: float) -> float:
 static func arrival_count_on_day(people: Dictionary, day: int) -> int:
 	var count := 0
 	for row: Dictionary in people.get("arrivals",{}).values():
+		if sequential_arrival(row):
+			continue
 		if row.get("state") not in ["planned","queued","outside","appointment_requested","in_service","completed","left"]:
 			continue
 		if floori(float(row.get("at",-1440))/1440.0) == day or day in row.get("counted_days",[]):
 			count += 1
 	return count
+
+## This shape is only the local half of the contract. Schema10 DailyLoop also
+## requires the exact ID to occur at this index in its current or completed day.
+static func sequential_arrival(row: Dictionary) -> bool:
+	if not _integer(row.get("daily_loop_day"),0,MAX_INT) or not _integer(row.get("daily_loop_index"),0,2):
+		return false
+	if not row.get("counted_days",[]) is Array:
+		return false
+	var day: int = row.daily_loop_day
+	var index: int = row.daily_loop_index
+	return row.get("arrival_id") == "arrival_daily_%d_%d" % [day,index] and floori(float(row.get("at",-1))/1440.0) == day and row.get("source") in ["fixed_story","daily_loop"] and row.get("daily_kind") == ("case" if index == 0 else "commission") and row.get("intent") == ("divination" if index == 0 else "shopping") and row.get("counted_days",[]).is_empty()
 
 static func _daily_limit(people: Dictionary, config: Dictionary = {}) -> int:
 	return int(config.arrival.get("max_total_per_day",20)) if config.has("arrival") else int(people.get("arrival_limit_per_day",20))
@@ -960,6 +973,8 @@ static func advance(people: Dictionary, config: Dictionary, until: int, presenta
 		var next_kind := ""
 		for id: String in people.arrivals:
 			var row: Dictionary = people.arrivals[id]
+			if sequential_arrival(row):
+				continue
 			var waiting: bool = row.state in ["queued", "outside"]
 			var when := int(row.deadline) if waiting else int(row.at)
 			if row.state not in ["planned", "queued", "outside"] or when > until:
@@ -1664,6 +1679,9 @@ static func validate(people: Variant) -> String:
 			return "到店记录无效"
 		if not _integer(row.get("at"), 0, MAX_INT) or not _integer(row.get("deadline"), -1, MAX_INT):
 			return "到店时间无效"
+		var sequential: bool = sequential_arrival(row)
+		if (row.has("daily_loop_day") or row.has("daily_loop_index") or row.get("source") == "daily_loop") and not sequential:
+			return "到店记录无效"
 		if not row.get("counted_days",[]) is Array:
 			return "到店名额记录无效"
 		var occupied := {floori(float(row.at)/1440.0):true}
@@ -1674,6 +1692,8 @@ static func validate(people: Variant) -> String:
 			unique_days[int(day)] = true
 			occupied[int(day)] = true
 		for day: int in occupied:
+			if sequential:
+				continue
 			daily_totals[day] = int(daily_totals.get(day,0))+1
 			if int(daily_totals[day]) > _daily_limit(people):
 				return "每日来访人数超过上限"

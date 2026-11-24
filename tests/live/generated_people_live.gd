@@ -320,6 +320,8 @@ func invite_and_receive_contact(owner_record: Dictionary) -> bool:
 func run() -> void:
 	started = Time.get_ticks_msec()
 	game = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	saves = root.get_node("SaveService")
 	output_path = OS.get_environment("MAGIC_LIVE_PEOPLE_REPORT")
 	if output_path.is_empty():

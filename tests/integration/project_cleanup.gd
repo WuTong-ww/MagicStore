@@ -18,6 +18,8 @@ func check(ok: bool, label: String) -> void:
 
 func run() -> void:
 	game = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	game.set_people_generation_options(false)
 	root.get_node("SaveService").base_dir = "res://.tools/test-project-cleanup/"+game.make_id("run")
 	for removed: String in ["start-people-demo.cmd","scripts/dev/run-people-demo.ps1","scenes/people/people_demo.tscn","scripts/people/people_demo.gd","tests/people/demo.gd","scripts/divination/demo_economy.gd"]:

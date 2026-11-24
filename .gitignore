@@ -33,3 +33,7 @@ docs/codex/results/art_audit/
 docs/codex/results/*.translation
 docs/codex/results/*.csv.import
 docs/codex/results/*.svg.import
+
+# Licensed music stays local and is copied only into local builds.
+Cozy Tunes/
+assets/audio/music/

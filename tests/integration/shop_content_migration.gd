@@ -15,6 +15,8 @@ func check(value: bool, label: String) -> void:
 
 func run() -> void:
 	var game: Node = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	var saves: Node = root.get_node("SaveService")
 	saves.base_dir = "res://.tools/g4/migration-saves/" + game.make_id("run")
 	game.configure_api("","","")
@@ -22,7 +24,7 @@ func run() -> void:
 	var started: Dictionary = await game.execute_action_async({"type":"new_game","name":"经营内容迁移隔离"})
 	check(started.success,"new game is created through the real async action boundary")
 	if started.success:
-		check(game.snapshot().get("schema_version") == 9,"new business metadata retains its explicit markers at current schema9")
+		check(game.snapshot().get("schema_version") == 10,"new business metadata retains its explicit markers at current schema10")
 		check(game.snapshot().shop.get("content_version") == 1,"new business metadata has an explicit additive content version")
 		check(game.snapshot().people.get("ordinary_content_version") == 1,"new-game population enables the independent content domain before first-day births")
 		check(game.snapshot().shop.batches.all(func(batch: Dictionary) -> bool: return batch.get("quality_id") == "standard" and batch.get("sell_multiplier") == 1.0),"opening inventory has explicit standard quality and preserves the original price multiplier")
@@ -109,7 +111,7 @@ func compatibility_schema(game: Node, saves: Node, schema: int) -> void:
 	var path: String = saves._path(old.save_id)
 	var old_sha := FileAccess.get_sha256(path)
 	check((await act(game,"load_game",{"save_id":old.save_id})).success,"real load migrates schema / "+str(schema))
-	check(game.state.schema_version == 9 and game.state.shop.content_version == 1 and game.state.people.get("ordinary_content_version") == 1,"additive content markers persist through schema9 / "+str(schema))
+	check(game.state.schema_version == 10 and game.state.shop.content_version == 1 and game.state.people.get("ordinary_content_version") == 1,"additive content markers persist through schema10 / "+str(schema))
 	check(FileAccess.get_sha256(path) == old_sha and saves.read_save(old.save_id).state.schema_version == schema,"load never rewrites historic bytes / "+str(schema))
 	check(game.state.player.coins == old.player.coins and game.state.clock_minutes == old.clock_minutes and game.state.processed_actions == old.processed_actions,"no past money/action/time is recomputed / "+str(schema))
 	if schema >= 3:
@@ -129,7 +131,7 @@ func commit_migrated(game: Node, saves: Node, path: String, old_sha: String, sch
 	var failed: Dictionary = await act(game,"wait",{"action_id":action_id,"minutes":1})
 	check(not failed.success and game.snapshot() == before and FileAccess.get_sha256(path) == old_sha,"failed first commit preserves memory and old file / "+str(schema))
 	var passed: Dictionary = await act(game,"wait",{"action_id":action_id,"minutes":1})
-	check(passed.success and saves.read_save(game.state.save_id).state.schema_version == 9,"same-ID retry durably commits schema9 / "+str(schema))
+	check(passed.success and saves.read_save(game.state.save_id).state.schema_version == 10,"same-ID retry durably commits schema10 / "+str(schema))
 	var committed: Dictionary = game.snapshot()
 	check((await act(game,"wait",{"action_id":action_id,"minutes":1})).success and game.snapshot() == committed,"replay cannot migrate/charge twice / "+str(schema))
 	check((await act(game,"load_game",{"save_id":committed.save_id})).success and game.snapshot() == committed,"exact committed snapshot survives reload / "+str(schema))
@@ -155,7 +157,7 @@ func actual_schema7_history(game: Node, saves: Node) -> void:
 	if not loaded.success:
 		return
 	var migrated: Dictionary = game.snapshot()
-	check(migrated.schema_version == 9 and FileAccess.get_sha256(path) == old_sha,"actual schema7 load migrates only memory")
+	check(migrated.schema_version == 10 and FileAccess.get_sha256(path) == old_sha,"actual schema7 load migrates only memory")
 	# Compare the entire real old B namespace after validating/removing only the
 	# two additive G5 fields from an in-memory copy; never edit the recorded v7.
 	var old_divination: Dictionary = migrated.divination.duplicate(true)

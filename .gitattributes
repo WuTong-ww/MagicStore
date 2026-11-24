@@ -33,3 +33,6 @@ docs/codex/results/G4-economy-first30.csv -text
 docs/codex/results/G4-economy-first30.svg -text whitespace=-blank-at-eol
 docs/codex/results/G4-economy-stop.json -text whitespace=cr-at-eol
 docs/codex/results/G4-source-freeze.json -text whitespace=cr-at-eol
+
+# Keep the user-supplied fixed-case appendix verbatim, including line endings.
+docs/story/fixed_cases.md -text

@@ -99,6 +99,8 @@ func run() -> void:
 			"flow": invalid.flow.need_tags = "rest"
 		check(not config_valid(invalid),"invalid capture configuration rejects / "+key)
 	game = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	var catalog: Dictionary = game.shop_config
 	# Some consumers expose catalog only after a save exists; load the same file
 	# for static cross-reference checks without creating or patching a save.

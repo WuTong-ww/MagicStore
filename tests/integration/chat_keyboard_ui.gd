@@ -110,6 +110,8 @@ func mouse_click(button: Button) -> void:
 
 func run() -> void:
 	game = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	saves = root.get_node("SaveService")
 	saves.base_dir = "res://.tools/test-chat-keyboard-ui/"+game.make_id("run")
 	game.configure_api("","","")

@@ -20,6 +20,8 @@ func action(kind: String, fields: Dictionary = {}) -> Dictionary:
 
 func run() -> void:
 	game = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	var saves: Node = root.get_node("SaveService")
 	saves.base_dir = "res://.tools/test-legacy-divination/" + game.make_id("run")
 	game.set_people_generation_options(false)

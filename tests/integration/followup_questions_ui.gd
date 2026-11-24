@@ -81,6 +81,8 @@ func callback(button: Button) -> Callable:
 
 func run() -> void:
 	game = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	root.get_node("SaveService").base_dir = "res://.tools/test-followup-ui/"+game.make_id("run")
 	game.configure_api("","","")
 	game.set_people_generation_options(false)

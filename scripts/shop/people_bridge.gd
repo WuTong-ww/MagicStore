@@ -11,7 +11,7 @@ const Catalog = preload("res://scripts/divination/catalog.gd")
 const DialoguePolicy = preload("res://scripts/providers/dialogue_policy.gd")
 const StyleReportSources = preload("res://scripts/people/style_report_sources.gd")
 
-static func initialize(state: Dictionary, config: Dictionary, divination: Variant = null, fresh: bool = false) -> void:
+static func initialize(state: Dictionary, config: Dictionary, divination: Variant = null, fresh: bool = false, sequential: bool = false) -> void:
 	if state.has("people"):
 		return
 	state["people"] = People.create(state.save_id, absi(String(state.save_id).hash()), int(state.clock_minutes))
@@ -34,14 +34,15 @@ static func initialize(state: Dictionary, config: Dictionary, divination: Varian
 	for visit: Dictionary in state.get("visits", []):
 		register_legacy_visit(state, visit, divination,null,config)
 	# The handwritten opening customer is a real queue entry, not a debug selection.
-	if int(state.clock_minutes) < 1440 and config.arrival.opening_guest and state.visits.is_empty() and not people.arrivals.has("arrival_opening_lin"):
+	if not sequential and int(state.clock_minutes) < 1440 and config.arrival.opening_guest and state.visits.is_empty() and not people.arrivals.has("arrival_opening_lin"):
 		var at := int(state.clock_minutes)
 		people.arrivals["arrival_opening_lin"] = _arrival("arrival_opening_lin", "npc_lin", at, "fixed_story", "invitation")
 	var day := floori(float(state.clock_minutes) / 1440.0)
-	People.plan_day(people, config, day, _reputation(state), -1, _experience(state), _traffic_bonus(state, config, day),_family_context(state))
-	People.advance(people, config, int(state.clock_minutes))
+	if not sequential:
+		People.plan_day(people, config, day, _reputation(state), -1, _experience(state), _traffic_bonus(state, config, day),_family_context(state))
+		People.advance(people, config, int(state.clock_minutes))
 	if divination != null:
-		sync(state, config, divination)
+		sync(state, config, divination,sequential)
 
 static func _family_context(state: Dictionary) -> Dictionary:
 	return {"learned_spell_ids":state.get("divination",{}).get("skills",[]).duplicate()}
@@ -120,7 +121,7 @@ static func register_legacy_visit(state: Dictionary, visit: Dictionary, divinati
 			pending["left_at"] = int(state.clock_minutes)
 	return true
 
-static func advance(state: Dictionary, config: Dictionary, minutes: int, divination: Variant) -> Array:
+static func advance(state: Dictionary, config: Dictionary, minutes: int, divination: Variant, sequential: bool = false) -> Array:
 	var presentation_events: Array = []
 	var target := int(state.clock_minutes) + maxi(0, minutes)
 	# B event/evaluation times and day boundaries are checkpoints. A processes its own
@@ -149,14 +150,22 @@ static func advance(state: Dictionary, config: Dictionary, minutes: int, divinat
 		state.clock_minutes = at
 		Events.advance(state, divination.data)
 		var previous_day := floori(float(state.people.clock) / 1440.0)
-		People.advance_with_schedule(state.people, config, at, _reputation(state), _experience(state), _traffic_bonus(state, config, previous_day),presentation_events,_family_context(state))
+		if sequential:
+			state.people.clock = at
+			# Legacy queued people remain recoverable; atmosphere never expires them.
+			for row: Dictionary in state.people.arrivals.values():
+				if row.state in ["queued","outside"]:
+					row.deadline = People.MAX_INT
+		else:
+			People.advance_with_schedule(state.people, config, at, _reputation(state), _experience(state), _traffic_bonus(state, config, previous_day),presentation_events,_family_context(state))
 		# advance_with_schedule does not plan the newly entered day when at is exactly midnight.
 		var day := floori(float(at) / 1440.0)
-		People.plan_day(state.people, config, day, _reputation(state), -1, _experience(state), _traffic_bonus(state, config, day),_family_context(state))
-		sync(state, config, divination)
+		if not sequential:
+			People.plan_day(state.people, config, day, _reputation(state), -1, _experience(state), _traffic_bonus(state, config, day),_family_context(state))
+		sync(state, config, divination,sequential)
 	return presentation_events
 
-static func start(state: Dictionary, action: Dictionary, divination: Variant, config: Dictionary = {}) -> Dictionary:
+static func start(state: Dictionary, action: Dictionary, divination: Variant, config: Dictionary = {}, sequential: bool = false) -> Dictionary:
 	var presentation_events: Array = []
 	if not state.get("active_visit_id", "").is_empty():
 		return _fail("ACTIVE_VISIT", "请先结束当前接待。")
@@ -207,6 +216,8 @@ static func start(state: Dictionary, action: Dictionary, divination: Variant, co
 		family_statement = true
 	elif row.intent == "shopping":
 		opening = "我今天想看看店里的商品。"
+	if not str(row.get("daily_opening","")).is_empty():
+		opening = row.daily_opening
 	var visit := {"visit_id": visit_id, "npc_id": npc_id, "day": floori(float(state.clock_minutes) / 1440.0),
 		"phase": "talking", "clue_ids": [], "dialogue": [{"speaker": "npc", "text": opening}],
 		"reading": {}, "started_at": int(state.clock_minutes), "ended_at": -1, "arrival_id": arrival_id, "intent": row.intent}
@@ -223,7 +234,7 @@ static func start(state: Dictionary, action: Dictionary, divination: Variant, co
 			"statement_index":0,"statement_text":visit.dialogue[0].text},true)
 	# The newly freed indoor seat goes to the earliest outside guest, preserving
 	# their original deadline. This remains inside the caller's save transaction.
-	if not config.is_empty():
+	if not config.is_empty() and not sequential:
 		People.advance(state.people, config, int(state.clock_minutes),presentation_events)
 	var outcome := _ok("接待已开始。", {"visit_id": visit_id, "npc_id": npc_id, "arrival_id": arrival_id})
 	# This return-only context is outside result, so it never reaches a save or
@@ -241,7 +252,7 @@ static func finish(state: Dictionary, visit: Dictionary) -> Array:
 			return presentation_events
 	return presentation_events
 
-static func sync(state: Dictionary, _config: Dictionary, divination: Variant) -> void:
+static func sync(state: Dictionary, _config: Dictionary, divination: Variant, sequential: bool = false) -> void:
 	if not state.has("people"):
 		return
 	var people: Dictionary = state.people
@@ -253,11 +264,14 @@ static func sync(state: Dictionary, _config: Dictionary, divination: Variant) ->
 				if source_case.get("npc_id") != effect.get("npc_id") or not divination.data.topic_index.has(effect.get("topic_id")) or effect.get("topic_id") not in definition.get("topic_ids",[]):
 					continue
 			People.apply_effect(people, effect, _config)
-	for job: Dictionary in divination.feedback_queue(state):
-		People.schedule_feedback(people, job, _config)
+	if not sequential:
+		for job: Dictionary in divination.feedback_queue(state):
+			People.schedule_feedback(people, job, _config)
 	for case: Dictionary in state.divination.cases.values():
 		if not case.event.is_empty() and not case.event.feedback.report.is_empty():
 			People.record_disclosed_feedback(people, case.event.feedback.report)
+	if sequential:
+		return
 	# A's proven referral targets are scheduled once during business hours.
 	var referral_ids: Array = people.referrals.keys()
 	referral_ids.sort()
@@ -384,6 +398,10 @@ static func validate(state: Dictionary) -> String:
 	if not error.is_empty():
 		return error
 	var people: Dictionary = state.people
+	if int(state.get("schema_version",1)) < 10:
+		for row: Dictionary in people.arrivals.values():
+			if row.has("daily_loop_day") or row.has("daily_loop_index") or row.get("source") == "daily_loop":
+				return "到店记录无效"
 	if int(state.get("schema_version",1)) >= 6 and people.get("appearance_catalog_version") != 2:
 		return "人物经历或外貌无效"
 	if int(state.get("schema_version",1)) >= 7 and people.get("family_library_version") != 1:

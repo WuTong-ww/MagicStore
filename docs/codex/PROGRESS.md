@@ -1,3 +1,17 @@
+# 第三轮：占卜推理（2026-11-24）
+
+当前工作区：D:/MagicStore/.tools/round3，分支 codex/round3，基于 codex/round2-clean 的 2b34ecb。原 codex/web-playtest 未提交工作保持原样。原生新建的 C:/Users/WT/.codex/worktrees/round3/MagicStore 因沙箱 Git 访问与跨盘移动失败未使用；已将可写独立工作区挂接本聊天。
+
+任务ID｜状态｜提交｜一句话
+---｜---｜---｜---
+R3-0｜完成（随 LOOP 提交）｜待提交｜Cozy Tunes/、assets/audio/music/ 已忽略且零追踪；剧情附录原文封存 docs/story/fixed_cases.md。
+R3-LOOP｜部分完成｜待提交｜顺序日程及专项全绿；第三轮标准全测停在旧 traffic 快照比较漏排除新增 daily_loop 字段，未跑第四轮。
+
+R3-LOOP 终态：实现与独立审查已完成，核心103/103、迁移/模式98/98、入口守卫57/57、最终7天66/66；新UI GPU116/116六帧、shop1544/1544三十帧，六JPG已逐开。完整第3轮已exit1（.tools/r3-loop/full3.log），此前2858检查零失败，traffic模块单独复跑101检查/1失败。独立真实加载确认新增键仅daily_loop，移除该新增namespace后所有历史字段精确相等，原夹具及复制文件字节不变。按三轮上限部分完成，不跑第四轮。所有session均终止，不poll旧handle。正式结果在results/R3-LOOP-validation.json；提交推送后立即继续R3-CASE，随下一schema兼容工作补该夹具，再整体复核。不得冒称本轮标准全绿。
+
+恢复时：先核对当前 Git 与 R3 记录，从第一个未完成任务继续。后续按目标文件顺序 R3-CASE → STORY → LIN → NAMES → AICASE → TITLE → MUSIC → POLISH → CRAFT → LEARN → WEB。原第二轮历史记录如下，不作本轮状态。
+
+---
 # 第二轮 v3 续跑进度
 
 最新恢复点：2026-11-24，codex/round2-clean。11项均已处理：G3完成，其余10项部分完成；G6任务94586d1已普通Git推送。最新完整第1轮15504/15504、GPU121/121／6帧、shop1544/1544／30帧，root42帧190/210，六JPG。所有测试已终止；任务工作结束，最终审阅包REVIEW_PACKET.md已汇总。无需poll旧handle、重跑已过测试或继续新增功能。

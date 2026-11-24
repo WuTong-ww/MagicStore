@@ -24,12 +24,14 @@ func act(kind: String, values: Dictionary = {}) -> Dictionary:
 
 func run() -> void:
 	game = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	saves = root.get_node("SaveService")
 	saves.base_dir = "res://.tools/g2/family-migration/"+game.make_id("run")
 	game.configure_api("","","")
 	game.set_people_generation_options(false)
 	check((await act("new_game",{"name":"家族迁移验收"})).success,"create isolated real save")
-	check(game.state.schema_version == 9,"new game uses current schema9 with family metadata")
+	check(game.state.schema_version == 10,"new game uses current schema10 with family metadata")
 	for schema: int in [1,2,3,4,5,6]:
 		await old_schema(schema)
 	await generated_integrity()
@@ -82,7 +84,7 @@ func old_schema(schema: int) -> void:
 	var disk: String = saves._path(legacy.save_id)
 	var disk_sha := FileAccess.get_sha256(disk)
 	check((await act("load_game",{"save_id":legacy.save_id})).success,"load old schema / "+str(schema))
-	check(game.state.schema_version == 9 and game.state.people.get("family_library_version") == 1,"old schema migrates to family metadata / "+str(schema))
+	check(game.state.schema_version == 10 and game.state.people.get("family_library_version") == 1,"old schema migrates to family metadata / "+str(schema))
 	check(FileAccess.get_sha256(disk) == disk_sha and saves.read_save(legacy.save_id).state.schema_version == schema,"load migrates memory only / "+str(schema))
 	check(game.state.people.get("family_metrics",{}).get("actual_total",-1) == 0 and game.state.people.get("family_metrics",{}).get("actual_special",-1) == 0,"migration does not invent historic physical arrivals / "+str(schema))
 	if schema >= 3:
@@ -105,7 +107,7 @@ func old_schema(schema: int) -> void:
 	var retry_id: String = game.make_id("family_migration_retry")
 	saves.fail_next_write = true
 	check(not (await act("wait",{"action_id":retry_id,"minutes":1})).success and game.snapshot() == before and FileAccess.get_sha256(disk) == disk_sha,"failed migration commit preserves state/disk / "+str(schema))
-	check((await act("wait",{"action_id":retry_id,"minutes":1})).success and saves.read_save(legacy.save_id).state.schema_version == 9,"successful retry commits schema9 / "+str(schema))
+	check((await act("wait",{"action_id":retry_id,"minutes":1})).success and saves.read_save(legacy.save_id).state.schema_version == 10,"successful retry commits schema10 / "+str(schema))
 	var committed: Dictionary = game.snapshot()
 	check((await act("wait",{"action_id":retry_id,"minutes":1})).success and game.snapshot() == committed,"processed action replay changes no metrics/graph / "+str(schema))
 	check((await act("load_game",{"save_id":legacy.save_id})).success and game.snapshot() == committed,"reload preserves committed exact snapshot / "+str(schema))
@@ -121,7 +123,7 @@ func generated_integrity() -> void:
 	var profiles: Dictionary = legacy.people.profiles.duplicate(true)
 	check(saves.write_save(legacy).success,"write original schema6 generated identities")
 	check((await act("load_game",{"save_id":legacy.save_id})).success,"load original generated identities")
-	check(game.state.schema_version == 9 and game.state.people.profiles == saves._normalize_numbers(profiles) and Generated.validate_people(game.state.people).is_empty(),"family migration never rehashes/rerolls schema6 generated source/identity/appearance")
+	check(game.state.schema_version == 10 and game.state.people.profiles == saves._normalize_numbers(profiles) and Generated.validate_people(game.state.people).is_empty(),"family migration never rehashes/rerolls schema6 generated source/identity/appearance")
 
 func old_confirmed_appointment() -> void:
 	check((await act("new_game",{"name":"旧家族预约承诺迁移"})).success,"new old-appointment source")

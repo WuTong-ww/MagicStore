@@ -50,6 +50,8 @@ func start_pending(action: Dictionary) -> void:
 
 func run() -> void:
 	gs = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	gs.daily_loop_config.enabled = false
 	saves = root.get_node("SaveService")
 	saves.base_dir = "user://test-runs/" + gs.make_id("provider")
 	check(gs.execute_action(command("new_game", {"name": "对话边界测试"})).success, "create isolated provider test save")

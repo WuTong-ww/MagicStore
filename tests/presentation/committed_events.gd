@@ -35,6 +35,8 @@ func check(ok: bool, label: String) -> void:
 
 func run() -> void:
 	game = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	saves = root.get_node("SaveService")
 	check(game.has_signal("presentation_events_committed"),"GameState exposes a committed-only presentation event signal")
 	if not game.has_signal("presentation_events_committed"):

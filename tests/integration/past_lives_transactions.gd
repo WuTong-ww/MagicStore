@@ -56,13 +56,15 @@ func run() -> void:
 	var fixture: Script = load("res://tests/past_lives/transaction_game.gd")
 	game = fixture.new()
 	root.add_child(game)
+	# This historical transaction chain exercises the real-time reception mode.
+	game.daily_loop_config.enabled = false
 	game.configure_api("","","")
 	game.set_people_generation_options(false)
 	check((await act("new_game",{"name":"三世实际事务"})).success,"real new game derives the fixed legal save domain and G1 population naturally")
 	if game.state.is_empty():
 		finish()
 		return
-	check(game.state.get("schema_version") == 9,"new transaction source uses schema9")
+	check(game.state.get("schema_version") == 10,"new transaction source uses schema10")
 	if not await legacy_miss_branch():
 		finish()
 		return

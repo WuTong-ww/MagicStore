@@ -39,6 +39,8 @@ func run() -> void:
 	check(not EventCopy.config_valid(invalid),"event UI rejects an empty forecast time window")
 	generated_unlock_validation(data,loaded.content)
 	game = root.get_node("GameState")
+	# This fixture retains the pre-loop reception and transaction contract.
+	game.daily_loop_config.enabled = false
 	saves = root.get_node("SaveService")
 	saves.base_dir = "res://.tools/g3-workflow-saves/"+game.make_id("run")
 	game.configure_api("","","")
