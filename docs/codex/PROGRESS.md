@@ -4,8 +4,8 @@
 
 任务ID｜状态｜提交｜一句话
 ---｜---｜---｜---
-R3-0｜完成（随 LOOP 提交）｜待提交｜Cozy Tunes/、assets/audio/music/ 已忽略且零追踪；剧情附录原文封存 docs/story/fixed_cases.md。
-R3-LOOP｜部分完成｜待提交｜顺序日程及专项全绿；第三轮标准全测停在旧 traffic 快照比较漏排除新增 daily_loop 字段，未跑第四轮。
+R3-0｜完成（随 LOOP 提交）｜89b7334｜Cozy Tunes/、assets/audio/music/ 已忽略且零追踪；剧情附录原文封存 docs/story/fixed_cases.md。
+R3-LOOP｜部分完成｜89b7334｜顺序日程及专项全绿；第三轮标准全测停在旧 traffic 快照比较漏排除新增 daily_loop 字段，未跑第四轮。
 
 R3-LOOP 终态：实现与独立审查已完成，核心103/103、迁移/模式98/98、入口守卫57/57、最终7天66/66；新UI GPU116/116六帧、shop1544/1544三十帧，六JPG已逐开。完整第3轮已exit1（.tools/r3-loop/full3.log），此前2858检查零失败，traffic模块单独复跑101检查/1失败。独立真实加载确认新增键仅daily_loop，移除该新增namespace后所有历史字段精确相等，原夹具及复制文件字节不变。按三轮上限部分完成，不跑第四轮。所有session均终止，不poll旧handle。正式结果在results/R3-LOOP-validation.json；提交推送后立即继续R3-CASE，随下一schema兼容工作补该夹具，再整体复核。不得冒称本轮标准全绿。
 
