@@ -12,7 +12,7 @@ R3-CASE｜完成，整合复核｜ab7a220｜原三轮失败记录保留；STORY�
 R3-STORY｜完成｜6d4e95c｜标准full3：17878检查+371 Python测试零失败；GPU244/244、shop1548/1548、35.267秒录像81/81。
 R3-LIN｜完成｜7b09759｜标准full2：18066检查+371 Python测试零失败、364源SHA保持；GPU72/72、shop1548/1548、六JPG1558936B已核，保留full1失败。
 R3-NAMES｜完成｜818d604｜已普通推送codex/round3；schema13，full3：18716检查＋391 Python零失败、390源保持；GPU243/0、shop1548/0、六JPG1414386B；保留两轮失败与627/0兼容专项。
-R3-AICASE｜完成待提交｜PENDING_TASK_COMMIT｜schema14；标准full1唯一一轮退出0：23117检查＋391 Python/0、441源保持；I1–I4闭环0C/I/M，六JPG1510850B，尚未提交/推送。
+R3-AICASE｜完成｜53ad3f0｜schema14；标准full1唯一一轮退出0：23117检查＋391 Python/0、441源保持；I1–I4闭环0C/I/M，六JPG1510850B，已普通推送codex/round3。
 R3-TITLE｜未开始｜—｜
 R3-MUSIC｜未开始｜—｜
 R3-POLISH｜未开始｜—｜
@@ -20,7 +20,7 @@ R3-CRAFT｜未开始｜—｜
 R3-LEARN｜未开始｜—｜
 R3-WEB｜未开始｜—｜
 
-## R3-AICASE（完成待提交）
+## R3-AICASE（完成）
 
 普通每日首位案件客使用独立完整CASE定义，固定剧情、尾声、购物、家族与原人物包保持各自合同。新增六份日常备用案、受控完整模型定义/证明、纯snapshot目录与版本化来源；schema14旧档迁移只在内存加空命名空间，不补改已经安排的旧客人。候选完整校验并成功写盘后，目录与状态在同一个同步通知前发布；失败重试保留第一次选中的完整案件，迟到模型不能换掉已存真相。
 
@@ -32,7 +32,7 @@ I1/I2原两项Important闭环收据保持：畸形outcomes容器最初会在拒�
 
 实际Windows/Iris Xe/Compatibility图形验收858/0、隐私失败0。三个阶段各1280×720与1920×1080的六张quality85 JPG共1510850B，位于docs/screenshots/round3/R3-AICASE，六张原生PNG及JPEG均逐张打开；原始envelope和图形证据已另行逐字节封存，完整测试刷新共享fixture路径不会覆盖此证据。修复材料栏单行标题在初始零宽布局保留595px高度的问题，858/6→858/0。规定shop_ui实际1548/0、30张PNG逐张审阅；必需原生双尺寸为`.tools/c-ui-captures/front-1280.png`（1280×720）和`.tools/c-ui-captures/front-1920.png`（1920×1080），另有逐字节封存副本；既有Unicode图标、旧画风、短滚动视窗和浮窗对比留POLISH。
 
-标准full1已实际退出0，6806.0秒：23117项检查/0失败，Python137+254=391/0，441源SHA保持、0 SCRIPT ERROR；日志SHA256为2ce41e0401616f74ada8d5d7f19c248cf9514cc5f659ba8724643c9516061d96。本任务仅这一轮标准full，不需第2/3轮。旧playthrough838/1（每路线必须随机案的过强后置条件）和backlog183/1（真实模式恢复bug）保留为失败记录，修订完整目标由本轮实际通过闭环。完整逐组计数与101任务文件清单已生成results/R3-AICASE-validation.json。状态完成待提交，commit=PENDING_TASK_COMMIT，尚未提交/推送，root随后META回填；main保持不动，TITLE仍未开始。真人阅读节奏、实际供应商服务和听觉体验仍为人工验收项。
+标准full1已实际退出0，6806.0秒：23117项检查/0失败，Python137+254=391/0，441源SHA保持、0 SCRIPT ERROR；日志SHA256为2ce41e0401616f74ada8d5d7f19c248cf9514cc5f659ba8724643c9516061d96。本任务仅这一轮标准full，不需第2/3轮。旧playthrough838/1（每路线必须随机案的过强后置条件）和backlog183/1（真实模式恢复bug）保留为失败记录，修订完整目标由本轮实际通过闭环。完整逐组计数与101任务文件清单已生成results/R3-AICASE-validation.json。主提交53ad3f0已普通推送codex/round3，提交与推送状态已回填；main保持不动，下一任务TITLE尚未正式开始。真人阅读节奏、实际供应商服务和听觉体验仍为人工验收项。
 
 ## R3-NAMES
 

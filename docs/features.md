@@ -277,7 +277,7 @@ data/people/name_pools.json保存local/foreign/mixed权重78/20/2、五个外国
 
 双尺寸真实GPU243/0，六张quality85 JPG共1414386字节已逐张检查，保存在docs/screenshots/round3/R3-NAMES。欧洲、南亚及混合姓名三组来自正常78/20/2抽样与真实接待，分别在第6、1、35次新建出现，未改seed或人物payload；原始envelope逐字节封存为回归fixture。档案选择为程序路径，不声称真人鼠标验收。规定shop_ui实际GPU1548/0、30PNG。full1旧schema12预期、full2旧合成档/旧mock合同失败均保留，最小测试兼容单项627/0；最终标准full3退出0，18716检查与391 Python测试零失败，390源SHA保持，57路径累计独审0C/I/M，无第4轮。详见docs/codex/results/R3-NAMES-validation.json。
 
-## 第三轮：普通案件的完整定义与即时备用案（R3-AICASE，完成待提交）
+## 第三轮：普通案件的完整定义与即时备用案（R3-AICASE，完成）
 
 普通每日首位案件客在新计划中获得独立预约；固定剧情、购物、尾声、家族和已有生成包保留各自流程。六份备用题材为遗失物、邻里误会、宠物走失、旧照片、匿名礼物与搬家。没有网络设置或模型尚未返回时，「请下一位」在同一次保存事务中选好本地案件并入店，不等待请求超时。关闭旧调试流程的推理板时不创建新预约，默认玩法保持开启。
 
@@ -291,4 +291,4 @@ schema14 的 `divination.emergent_cases` 保存完整案件、独立证明、当
 
 新增请求隐私目标真实RED24/15→GREEN24/0；模式恢复以字节不变的真实schema14旧档复现RED8/1→GREEN14/0。FullCodec只增加公开规则投影，完整本地规则、pins和响应校验保持；GameState仅三处小hunk修正模式同步与顺序日程预约边界。I1–I4独审闭环0C/I/M，I3/I4追加收据已完成，原I1/I2收据不覆盖。Story事务完整实跑651/0，实际覆盖13桩动态案件及原7个观察日；本次标准full中通关840/0、事务651/0、积压222/0均通过，旧playthrough838/1与backlog183/1失败记录保留。
 
-标准full1已实际退出0，耗时6806.0秒：23117项检查/0失败，Python137+254=391/0，441份源码SHA保持、0 SCRIPT ERROR。本任务只运行这一轮标准full，不需第2/3轮。文件清单与逐组收据已生成docs/codex/results/R3-AICASE-validation.json，共101任务文件、六JPG1510850B。状态为完成待提交，commit=PENDING_TASK_COMMIT，尚未提交或推送；root后续META回填实际提交，main保持不动，TITLE仍未开始。
+标准full1已实际退出0，耗时6806.0秒：23117项检查/0失败，Python137+254=391/0，441份源码SHA保持、0 SCRIPT ERROR。本任务只运行这一轮标准full，不需第2/3轮。文件清单与逐组收据已生成docs/codex/results/R3-AICASE-validation.json，共101任务文件、六JPG1510850B。主提交53ad3f0已普通推送codex/round3，验证记录已回填提交与推送状态；main保持不动，下一任务TITLE尚未正式开始。

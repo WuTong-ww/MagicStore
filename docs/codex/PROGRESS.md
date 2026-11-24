@@ -12,9 +12,9 @@ R3-CASE｜完成（STORY整合复核）｜ab7a220｜原三轮失败记录保留�
 R3-STORY｜完成｜6d4e95c｜标准full3退出0：17878检查+371 Python测试零失败，360源SHA保持；UI244/244、shop1548/1548、35.267秒录像81/81。
 R3-LIN｜完成｜7b09759｜标准full2退出0：18066检查+371 Python测试零失败、364源SHA保持；GPU72/72、shop1548/1548、六JPG1558936B。保留首轮失败，不跑第3轮。
 R3-NAMES｜完成｜818d604｜已普通推送codex/round3；full3退出0：18716检查＋391 Python零失败、390源保持；GPU243/0六JPG1414386B、shop1548/0；57路径独审0C/I/M，保留两轮旧夹具失败，无第4轮。
-R3-AICASE｜完成待提交｜PENDING_TASK_COMMIT｜标准full1唯一一轮退出0：23117检查＋391 Python/0、441源保持；I1–I4闭环0C/I/M，六JPG1510850B，尚未提交/推送。
+R3-AICASE｜完成｜53ad3f0｜标准full1唯一一轮退出0：23117检查＋391 Python/0、441源保持；I1–I4闭环0C/I/M，六JPG1510850B，已普通推送codex/round3。
 
-最新恢复点（覆盖下面历史过程）：2026-11-25，实际R3仍在D:/MagicStore/.tools/round3、codex/round3；NAMES已818d604＋META8227d6d正常推送完成，不得重跑其finalize/full。R3-AICASE schema14已完成待提交，commit=PENDING_TASK_COMMIT，root随后META回填；标准full1已实际terminal0，6806.0秒，23117检查/0＋Python137+254=391/0，441源SHA保持、0 SCRIPT ERROR，只需本任务这一轮，不跑第2/3轮。专项leaf2789/0、事务54/0、模型90/0、transport136/0、真13迁移16/0、旧兼容12组1152/0、GPU858/0＋shop1548/0保留；六JPG1510850B已逐开。六建议路线独立原395/0、本次full419/0分开记录；本次Story通关840/0、事务651/0（13桩动态案件与原7个观察日）、积压222/0，旧playthrough838/1和积压183/1保留为失败历史。请求隐私RED24/15→GREEN24/0，真实schema14原raw模式fixture RED8/1→GREEN14/0；FullCodec仅公开projection、GameState仅三处hunk，原模式/来源与本地规则校验保持。I1–I4闭环0C/I/M，I3/I4追加收据db0c5f1013c22f1e0dbe2cef006baea2802c84318462b0150c926dc074bf76e0已完成，原I1/I2收据不覆盖。正式结果docs/codex/results/R3-AICASE-validation.json已生成，含101任务文件；尚未提交/推送，main不动，TITLE仍未开始。
+最新恢复点（覆盖下面历史过程）：2026-11-25，实际R3仍在D:/MagicStore/.tools/round3、codex/round3；NAMES已818d604＋META8227d6d正常推送完成，不得重跑其finalize/full。R3-AICASE schema14已完成并普通推送，主提交53ad3f0；标准full1已实际terminal0，6806.0秒，23117检查/0＋Python137+254=391/0，441源SHA保持、0 SCRIPT ERROR，只需本任务这一轮，不跑第2/3轮。专项leaf2789/0、事务54/0、模型90/0、transport136/0、真13迁移16/0、旧兼容12组1152/0、GPU858/0＋shop1548/0保留；六JPG1510850B已逐开。六建议路线独立原395/0、本次full419/0分开记录；本次Story通关840/0、事务651/0（13桩动态案件与原7个观察日）、积压222/0，旧playthrough838/1和积压183/1保留为失败历史。请求隐私RED24/15→GREEN24/0，真实schema14原raw模式fixture RED8/1→GREEN14/0；FullCodec仅公开projection、GameState仅三处hunk，原模式/来源与本地规则校验保持。I1–I4闭环0C/I/M，I3/I4追加收据db0c5f1013c22f1e0dbe2cef006baea2802c84318462b0150c926dc074bf76e0已完成，原I1/I2收据不覆盖。正式结果docs/codex/results/R3-AICASE-validation.json已生成，含101任务文件；提交与推送记录已回填，main不动，下一任务TITLE尚未正式开始。
 
 AICASE full1阶段历史（由上方整轮终态覆盖）：三条完整路线先终态840/0，原838/1保留；当时尚未完成结案事务与后续兼容，未提前记全套通过。
 
