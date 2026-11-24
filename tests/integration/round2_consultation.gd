@@ -67,8 +67,22 @@ func run() -> void:
 		label.text = markup
 		check(label.get_parsed_text().contains(payload), "player BBCode is literal text")
 		check(markup.contains("[right]") and markup.contains("[center][i]"), "player and system messages have their required alignment")
-		var guest_bubble: String = main.screen.history_bbcode([{ "speaker":"npc", "text":"记下一条新线索。" }], {"npc_id":"npc_lin", "name":"林照晚"}, main.screen.load_layout_config(), 0)
-		check(guest_bubble.contains("[left]") and guest_bubble.contains("[img=") and guest_bubble.contains("〔新线索〕"), "guest bubble contains portrait and earned-clue stamp")
+		var guest_dialogue := [{ "speaker":"npc", "text":"记下一条新线索。" }]
+		var guest := {"npc_id":"npc_lin", "name":"林照晚"}
+		var guest_bubble: String = main.screen.history_bbcode(guest_dialogue, guest, main.screen.load_layout_config(), 0)
+		check(guest_bubble.contains("[left]") and guest_bubble.contains("〔新线索〕"), "guest bubble keeps left alignment and earned-clue stamp")
+		# A4 avatars are in-memory ImageTextures; the live RichTextLabel uses
+		# add_image rather than a static [img=] path to Lin's retired PNG.
+		main.screen._render_history(guest_dialogue,guest,0)
+		var avatars: Array = main.screen.bubble_avatar_textures
+		check(not avatars.is_empty() and main.screen.transcript.get_parsed_text().contains("〔新线索〕"), "guest bubble contains portrait and earned-clue stamp")
+		check(avatars.size()==1 and avatars[0] is ImageTexture,"live guest bubble owns one actual composed avatar")
+		if not avatars.is_empty():
+			var appearance: Script = load("res://scripts/people/appearance.gd")
+			var portrait: Script = load("res://scripts/people/portrait.gd")
+			var pixels: Image = avatars[0].get_image()
+			var expected: ImageTexture = portrait.composite_texture(appearance.fixed_npc_appearance("npc_lin"),"neutral",{},pixels.get_size())
+			check(expected!=null and pixels.get_data()==expected.get_image().get_data(),"live guest bubble draws authored A4 pixels instead of the old Lin preset")
 		label.queue_free()
 	await UITeardown.release_audio(main)
 	main.queue_free()

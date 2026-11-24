@@ -2,12 +2,11 @@ extends Control
 
 const UI = preload("res://scripts/ui/ui_kit.gd")
 const ArrivalUI = preload("res://scripts/ui/arrival_ui.gd")
+const Appearance = preload("res://scripts/people/appearance.gd")
+const Portrait = preload("res://scripts/people/portrait.gd")
 
 const SceneArt = preload("res://scripts/shop/scene_visual.gd")
 var scene_visual: Control
-const LIN_PORTRAIT := "res://assets/portraits/npc_lin_neutral.png"
-const LIN_PORTRAIT_FALLBACK := "res://assets/portrait_lin.svg"
-const LIN_EXPRESSIONS := {"neutral":"res://assets/portraits/npc_lin_neutral.png", "hesitant":"res://assets/portraits/npc_lin_hesitant.png", "relieved":"res://assets/portraits/npc_lin_relieved.png"}
 
 var host
 var guest_name: Label
@@ -21,7 +20,7 @@ var history_button: Button
 var study_button: Button
 var guest_picker: OptionButton
 var guest_role: Label
-var portrait: TextureRect
+var portrait: Control
 var guests: Array = []
 var arrival_source: Label
 var patience_list: VBoxContainer
@@ -73,7 +72,7 @@ func _ready() -> void:
 	guest_profile = profile
 	profile.add_theme_constant_override("separation", 12)
 	column.add_child(profile)
-	portrait = UI.image(LIN_PORTRAIT if ResourceLoader.exists(LIN_PORTRAIT) else LIN_PORTRAIT_FALLBACK)
+	portrait = Portrait.new()
 	portrait.custom_minimum_size = Vector2(120, 148)
 	profile.add_child(portrait)
 	var profile_text := VBoxContainer.new()
@@ -204,7 +203,7 @@ func refresh() -> void:
 	for arrival: Dictionary in people.get("queue", []):
 		var case_id: String = arrival.case_id if not str(arrival.case_id).is_empty() else ("invitation" if arrival.npc_id == "npc_lin" else "archive")
 		var level := ArrivalUI.patience(arrival)
-		guests.append({"npc_id":arrival.npc_id,"arrival_id":arrival.arrival_id,"case_id":case_id,"label":str(arrival.name) + " · " + str(level.get("icon", "")),"name":arrival.name,"role":arrival.role,"source":arrival.get("source", ""),"case_title":"想看看店里的商品" if arrival.intent == "shopping" else "有些事想和你谈谈"})
+		guests.append({"npc_id":arrival.npc_id,"arrival_id":arrival.arrival_id,"case_id":case_id,"label":str(arrival.name) + " · " + str(level.get("icon", "")),"name":arrival.name,"role":arrival.role,"appearance":arrival.get("appearance",{}).duplicate(true),"source":arrival.get("source", ""),"case_title":"想看看店里的商品" if arrival.intent == "shopping" else "有些事想和你谈谈"})
 	_refresh_patience(people)
 	var active_view: Dictionary = GameState.divination_view()
 	if not active.is_empty() and not guests.any(func(row: Dictionary) -> bool: return row.npc_id == active.npc_id and row.case_id == active_view.case_id):
@@ -228,17 +227,11 @@ func refresh() -> void:
 	arrival_source.text = ArrivalUI.source_text(guest) if guest.has("arrival_id") else ""
 	portrait.visible = guest.get("npc_id") == "npc_lin"
 	if portrait.visible:
-		var expression := "neutral"
-		var active_visit: Dictionary = GameState.active_visit()
-		for turn: Dictionary in active_visit.get("dialogue", []):
-			var line := str(turn.get("text", ""))
-			if line.contains("担心") or line.contains("犹豫") or line.contains("害怕"):
-				expression = "hesitant"
-			elif line.contains("放心") or line.contains("轻松") or line.contains("谢谢"):
-				expression = "relieved"
-		var expression_path: String = LIN_EXPRESSIONS.get(expression, LIN_PORTRAIT)
-		if ResourceLoader.exists(expression_path):
-			portrait.texture = load(expression_path)
+		var appearance_config := Appearance.load_config()
+		var expression := str(appearance_config.get("default_mood","neutral"))
+		if active_view.get("guest",{}).get("npc_id") == guest.get("npc_id"):
+			expression = str(active_view.guest.get("mood",expression))
+		portrait.configure(Appearance.for_display(guest.get("appearance",{}),str(guest.npc_id),appearance_config),expression,appearance_config)
 	case_label.text = guest.get("case_title", "还没有来客，先翻翻档案，或者安静等一会儿。")
 	var already_today: bool = guest.get("visited_today", false)
 	begin_button.text = "继续原接待 →" if not active.is_empty() else "请入咨询区 →"

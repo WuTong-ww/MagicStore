@@ -150,7 +150,7 @@ func check_portrait() -> void:
 		portrait.set_mood("sad")
 		check(portrait.mood == "sad","validated expression changes remain separate from permanent part IDs")
 		portrait.configure({"preset":"portrait_lin"},"smile",config)
-		check(portrait.get_node("PortraitLayers/preset").texture != null,"Lin keeps his independently configured preset aliases")
+		check(portrait.get_node_or_null("PortraitLayers/preset") == null and portrait.appearance == load("res://scripts/people/appearance.gd").fixed_npc_appearance("npc_lin",config),"Lin legacy aliases display the authored A4 selection through the same Portrait component")
 		var preset_fixture := config.duplicate(true)
 		var preset_source := Image.create(720,840,false,Image.FORMAT_RGBA8)
 		preset_source.fill(Color.WHITE)
@@ -158,9 +158,10 @@ func check_portrait() -> void:
 		check(preset_source.save_png(preset_file) == OK,"independent preset canvas is a real local fixture")
 		var preset_texture := ImageTexture.create_from_image(preset_source)
 		preset_texture.take_over_path(preset_file)
-		for expression: String in preset_fixture.presets.portrait_lin.paths:
-			preset_fixture.presets.portrait_lin.paths[expression] = preset_file
-		var contained: ImageTexture = portrait.composite_texture({"preset":"portrait_lin"},"neutral",preset_fixture,Vector2i(48,64))
+		preset_fixture.presets["fixture_non_lin"] = {"canvas":[720,840],"paths":{}}
+		for expression: String in preset_fixture.moods:
+			preset_fixture.presets.fixture_non_lin.paths[expression] = preset_file
+		var contained: ImageTexture = portrait.composite_texture({"preset":"fixture_non_lin"},"neutral",preset_fixture,Vector2i(48,64))
 		check(contained != null and contained.get_image().get_pixel(24,0).a == 0.0 and contained.get_image().get_pixel(24,32).a == 1.0,"independent preset aspect ratio is contained rather than stretched into the v3 avatar canvas")
 		Portrait.call("clear_cache")
 	portrait.queue_free()

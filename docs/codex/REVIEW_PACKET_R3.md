@@ -10,7 +10,7 @@ R3-0｜完成，随 LOOP 提交｜89b7334｜音乐目录忽略、零追踪；固
 R3-LOOP｜完成，整合复核｜89b7334｜原三轮失败记录保留；STORY标准full3整体全绿复核后续旧夹具修正。
 R3-CASE｜完成，整合复核｜ab7a220｜原三轮失败记录保留；STORY修HTTP首帧deadline并由标准full3整体全绿复核。
 R3-STORY｜完成｜6d4e95c｜标准full3：17878检查+371 Python测试零失败；GPU244/244、shop1548/1548、35.267秒录像81/81。
-R3-LIN｜未开始｜—｜
+R3-LIN｜完成，待提交｜待提交｜标准full2：18066检查+371 Python测试零失败、364源SHA保持；GPU72/72、shop1548/1548、六JPG1558936B已核，保留full1失败。
 R3-NAMES｜未开始｜—｜
 R3-AICASE｜未开始｜—｜
 R3-TITLE｜未开始｜—｜
@@ -67,6 +67,15 @@ R3-STORY生产代码已实际跑完最佳、最差、缺案件3三条路线，�
 
 最终完整第3轮实际exit0、2835.688秒，360源SHA全部保持：134组共17878检查/0失败，Python117+254测试全部通过；formal364记录/367文件与alpha70另通过。旧LOOP/CASE由本次后续整合复核验证，原三轮失败历史保留，没有为旧任务开启第四轮。逐组证据与65文件清单见[STORY验证记录](results/R3-STORY-validation.json)。
 
+## R3-LIN
+
+固定组合写在data/story/npcs.json并由现有部件校验：深棕长后发、柔和杏眼、鼠尾草工作围裙；新档首位仍是林照晚与原邀请案。新档保存候选内明确设定外观；旧档两个预设仅在公开/渲染层只读映射，旧字段、既有合法组合、生日、人格、关系、信任与邀请事实保持。咨询、气泡、档案及旧前台统一走Portrait；旧手绘资源与登记保留，不再作为Lin运行时画面。未新增持久结构，schema仍12。
+
+- 动态功能RED为3检查/2预期失败，随后外观39/39、事务40/40、旧档78/78；相关原外观、邀请金样本和推荐379/379。最终UI headless64/64、实际Windows/Iris Xe/Compatibility GPU72/72，规定shop_ui为1548/1548、30张PNG。完整第1轮exit1、3979.515秒、364源SHA不变；已报告15302检查零失败后旧round2_consultation断言要求静态[img=]失败，不能算完整通过。该项独立RED48/1；只修测试为live纹理+印章，保留对齐/转义/四尺寸几何并加实际A4像素等式，GREEN51/0，独审0C/I/M。产品与GPU源不变。完整第2轮已terminal exit0、1994.734秒，138报告组18066检查零失败、Python117+254全过、364源SHA保持、0SCRIPT ERROR；不跑第3轮。完整文件清单和每组结果见[LIN验证记录](results/R3-LIN-validation.json)。
+- 最初66/66的GPU档案截图实际停在笔记页，不作为最终档案证据；增加真实tab/可见性/边界断言后实际RED62/2，再修test-only harness选择真实档案页。原产品与旧断言不改。headless的Window.size为1×1，窗口边界只在真实GPU断言，headless仍检查tab和可见性。
+- 六张原生quality85 JPG已由root逐张打开，原字节复制到docs/screenshots/round3/R3-LIN，共1558936B：archive、legacy-front、sofa各1280×720与1920×1080。档案选择是程序路径，不声称真实鼠标选择；五态层组合断言通过，截图只显示已保存表情。本任务不要求操作录像。
+- mandatory shop原尺寸路径为.tools/c-ui-captures/front-1280.png、front-1920.png、consultation-1280.png、consultation-1920.png；实际均已打开。旧咨询自由框及牌列仍遮住部分立绘，保留现有几何，交POLISH处理。新建成功请求全局重放的历史缺口留TITLE修复，本任务普通保存动作的幂等测试不代替该项。
+
 ## 音乐对照表
 
 待 R3-MUSIC 盘点文件名、时长、五种场景与候补。
@@ -91,4 +100,4 @@ R3-STORY生产代码已实际跑完最佳、最差、缺案件3三条路线，�
 
 ## 已知未完成
 
-R3-LIN至R3-WEB按原顺序继续。真人3–6分钟阅读节奏及听觉体验尚未实测；旧卡面装饰回退、Unicode图标、短视窗与整体美术适配由后续POLISH/WEB处理。LOOP/CASE原失败及STORY前两轮失败均保留，STORY最后标准full3已全绿。当前已有五案三路线及四页笔记闭环，新开场、正式固定组合、名字策略与后续玩法尚按任务表实施。
+R3-NAMES至R3-WEB按原顺序继续。真人3–6分钟阅读节奏及听觉体验尚未实测；旧卡面装饰回退、Unicode图标、短视窗与整体美术适配由后续POLISH/WEB处理。LOOP/CASE原失败、STORY前两轮和LIN首轮失败均保留，STORY full3及LIN full2已全绿。当前已有五案三路线、四页笔记与固定组合闭环，新开场、名字策略与后续玩法尚按任务表实施。

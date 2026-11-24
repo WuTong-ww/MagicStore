@@ -556,9 +556,7 @@ static func history_bbcode(dialogue: Array, guest: Dictionary, config: Dictionar
 
 static func guest_appearance(guest: Dictionary) -> Dictionary:
 	var value: Variant = guest.get("appearance",{})
-	if value is Dictionary and not value.is_empty():
-		return value.duplicate(true)
-	return {"preset":"portrait_lin"} if guest.get("npc_id") == "npc_lin" else {}
+	return Appearance.for_display(value if value is Dictionary else {},str(guest.get("npc_id","")))
 
 static func presentation_mood(guest: Dictionary) -> String:
 	var catalog := Appearance.load_config()

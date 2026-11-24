@@ -16,9 +16,9 @@
       "appearance": {
         "version": 2,
         "parts": {
-          "hair_back": "hair_back_02",
+          "hair_back": "hair_back_10",
           "body": "body_01",
-          "outfit": "outfit_06",
+          "outfit": "outfit_02",
           "face_shape": "face_01",
           "features": "features_adult",
           "eyes_expr": "eyes_01",
@@ -30,7 +30,7 @@
         "colors": {
           "skin": "skin_02",
           "hair": "hair_02",
-          "outfit": "outfit_03"
+          "outfit": "outfit_01"
         },
         "age_stage": "adult"
       },

@@ -422,7 +422,7 @@ func divination_view(visit_id: String = "") -> Dictionary:
 		if visit.visit_id == (state.active_visit_id if visit_id.is_empty() else visit_id):
 			var projected := DivinationView.project(_divination, state, visit)
 			if projected.get("guest") is Dictionary:
-				projected.guest["appearance"] = state.get("people",{}).get("profiles",{}).get(visit.npc_id,{}).get("appearance",{}).duplicate(true)
+				projected.guest["appearance"] = Appearance.for_display(state.get("people",{}).get("profiles",{}).get(visit.npc_id,{}).get("appearance",{}),str(visit.npc_id))
 				projected.guest["mood"] = DialoguePolicy.mood_from_turns(visit.get("dialogue",[]))
 			return projected
 	return {}
@@ -1117,6 +1117,11 @@ func _initialize_integrated(candidate: Dictionary, fresh: bool = false) -> bool:
 	_migrate_event_schema(candidate)
 	if not _migrate_appearance_schema(candidate):
 		return false
+	if fresh:
+		var fixed_lin := Appearance.fixed_npc_appearance("npc_lin")
+		if fixed_lin.is_empty() or not candidate.people.profiles.has("npc_lin"):
+			return false
+		candidate.people.profiles.npc_lin.appearance = fixed_lin
 	if int(candidate.schema_version) < 7:
 		People.initialize_family_library(candidate.people,people_config.get("family_library",{}),"since_migration")
 		candidate.schema_version = 7

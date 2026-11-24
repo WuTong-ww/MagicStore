@@ -1,6 +1,10 @@
 extends RefCounted
 ## Pure appearance catalog/rules. No image generation, state or global RNG writes.
 const CONFIG_PATH := "res://data/people/appearance_parts.json"
+const FIXED_NPCS_PATH := "res://data/story/npcs.json"
+const LIN_LEGACY_PRESETS := ["portrait_lin","npc_lin"]
+static var _fixed_npcs: Dictionary = {}
+static var _fixed_npcs_sha := ""
 static var _cached: Dictionary = {}
 static var _cached_sha := ""
 
@@ -197,6 +201,31 @@ static func normalize(value: Dictionary, config: Dictionary = {}, identity_key: 
 		return generate(config,"legacy",identity_key)
 	return {}
 
+## Read the authored selection without loading StoryContent (which depends on us).
+## No saved profile is normalized or updated by this presentation lookup.
+static func fixed_npc_appearance(npc_id: String, config: Dictionary = {}) -> Dictionary:
+	if config.is_empty():
+		config = load_config()
+	var digest := FileAccess.get_sha256(FIXED_NPCS_PATH)
+	if digest != _fixed_npcs_sha or _fixed_npcs.is_empty():
+		var raw: Variant = JSON.parse_string(FileAccess.get_file_as_string(FIXED_NPCS_PATH))
+		if not raw is Dictionary or not raw.get("npcs") is Dictionary:
+			return {}
+		_fixed_npcs = raw.npcs.duplicate(true)
+		_fixed_npcs_sha = digest
+	var descriptor: Variant = _fixed_npcs.get(npc_id,{})
+	var value: Variant = descriptor.get("appearance",{}) if descriptor is Dictionary else {}
+	if not value is Dictionary or value.has("preset") or not selection_valid(value,config):
+		return {}
+	return normalize(value,config)
+
+## Compatibility is display-only. Valid historical A4 parts remain unchanged,
+## including combinations excluded from new player selections.
+static func for_display(value: Dictionary, npc_id: String = "", config: Dictionary = {}) -> Dictionary:
+	if (_keys(value,["preset"]) and value.preset in LIN_LEGACY_PRESETS) or (value.is_empty() and npc_id == "npc_lin"):
+		return fixed_npc_appearance("npc_lin",config)
+	return normalize(value,config)
+
 static func selection_valid(value: Variant, config: Dictionary = {}) -> bool:
 	if config.is_empty():
 		config = load_config()
@@ -280,6 +309,7 @@ static func map_description(description: String, appearance: Dictionary, config:
 static func layer_records(appearance: Dictionary, mood: String = "neutral", config: Dictionary = {}) -> Array:
 	if config.is_empty():
 		config = load_config()
+	appearance = for_display(appearance,"",config)
 	if not appearance_valid(appearance,config):
 		return []
 	if mood not in config.moods:

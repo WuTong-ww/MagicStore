@@ -23,7 +23,7 @@ func configure(value: Dictionary, expression: String = "neutral", catalog: Dicti
 	config = catalog.duplicate(true) if not catalog.is_empty() else Appearance.load_config()
 	if not Appearance.config_valid(config):
 		config = {}
-	appearance = Appearance.normalize(value,config)
+	appearance = Appearance.for_display(value,"",config)
 	mood = expression if expression in config.get("moods",[]) else str(config.get("default_mood","neutral"))
 	records = Appearance.layer_records(appearance,mood,config)
 	var sources: Array = []
@@ -165,7 +165,7 @@ static func composite_texture(value: Dictionary, expression: String = "neutral",
 		catalog = Appearance.load_config()
 	if not Appearance.config_valid(catalog):
 		return null
-	var normalized := Appearance.normalize(value,catalog)
+	var normalized := Appearance.for_display(value,"",catalog)
 	if normalized.is_empty():
 		return null
 	var layers := Appearance.layer_records(normalized,expression,catalog)

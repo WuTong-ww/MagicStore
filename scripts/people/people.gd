@@ -1133,7 +1133,7 @@ static func visible_queue(people: Dictionary, status: String = "queued") -> Arra
 			continue
 		var profile: Dictionary = people.profiles[row.npc_id]
 		var referrer: Dictionary = people.profiles.get(row.referrer_npc_id, {})
-		result.append({"arrival_id": row.arrival_id, "npc_id": row.npc_id, "name": profile.name, "role": profile.role,"appearance":profile.appearance.duplicate(true),
+		result.append({"arrival_id": row.arrival_id, "npc_id": row.npc_id, "name": profile.name, "role": profile.role,"appearance":Appearance.for_display(profile.appearance,str(row.npc_id)),
 			"case_id": row.case_id, "intent": row.intent, "arrived_at": row.at,
 			"source": row.get("original_source", row.source), "state": row.state, "deadline": row.deadline,
 			"patience_minutes": maxi(0, int(row.deadline) - int(people.clock)),
@@ -1499,7 +1499,7 @@ static func public_profile(people: Dictionary, npc_id: String) -> Dictionary:
 	for memory: Dictionary in profile.memories:
 		if not memory.has("memory_id"):
 			public_memories.append(memory.duplicate(true))
-	var view := {"npc_id": npc_id, "name": profile.name, "role": profile.role, "appearance": profile.appearance.duplicate(true),
+	var view := {"npc_id": npc_id, "name": profile.name, "role": profile.role, "appearance": Appearance.for_display(profile.appearance,npc_id),
 		"familiarity": profile.familiarity, "trust": profile.trust, "memories": public_memories,
 		"birthday": profile.get("birthday", ""), "zodiac": profile.get("zodiac", ""),
 		"mbti": profile.get("mbti", ""), "personality": profile.get("personality", ""),
