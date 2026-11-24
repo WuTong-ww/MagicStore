@@ -23,6 +23,7 @@ const OracleGuide := preload("res://scripts/divination/oracle_guide.gd")
 const SHOP_SCREEN := preload("res://scripts/shop/shop_screen.gd")
 const PEOPLE_PANEL := preload("res://scenes/people/people_panel.tscn")
 const AppearanceEditorConfig = preload("res://scripts/people/appearance_editor_config.gd")
+const CaseBoardConfig = preload("res://scripts/ui/case_board_config.gd")
 const PAGES := {"exterior": "店外", "front": "前台", "consultation": "咨询区", "inventory": "储物柜", "workshop": "工坊", "market": "原料商店", "gathering": "采集"}
 var people_window: Window
 var people_panel: Control
@@ -292,7 +293,7 @@ func run_action(action_type: String, extra: Dictionary = {}) -> Dictionary:
 	open_button.disabled = false
 	show_notice(str(result.get("message", "操作完成")))
 	if result.get("success", false):
-		if is_instance_valid(presentation_audio):
+		if is_instance_valid(presentation_audio) and not action_type.begins_with("case_"):
 			presentation_audio.play_ui("coin" if action_type in ["procure_item","sell_product","sell_material"] else "confirm")
 		if action_type in ["new_game", "load_game"]:
 			save_window.hide()
@@ -456,6 +457,7 @@ func open_network_settings() -> void:
 	if is_instance_valid(presentation_audio):
 		presentation_audio.add_settings_controls(box)
 	_add_motion_settings(box)
+	_add_free_question_setting(box)
 	dialog.confirmed.connect(func():
 		if not check_url.call():
 			return
@@ -475,6 +477,28 @@ func open_network_settings() -> void:
 	dialog.canceled.connect(dialog.queue_free)
 	add_child(dialog)
 	dialog.popup_centered()
+
+func _add_free_question_setting(box: VBoxContainer) -> void:
+	var config: Dictionary = CaseBoardConfig.load_config()
+	if config.is_empty():
+		return
+	var toggle := CheckButton.new()
+	toggle.name = "FreeQuestionCheck"
+	toggle.text = config.copy.free_question
+	toggle.tooltip_text = config.copy.free_question_note
+	toggle.custom_minimum_size.y = float(config.layout.settings_minimum_height)
+	toggle.button_pressed = GameState.free_question_enabled()
+	toggle.disabled = GameState.player_snapshot().is_empty()
+	box.add_child(toggle)
+	toggle.toggled.connect(func(value: bool):
+		toggle.set_pressed_no_signal(GameState.free_question_enabled())
+		toggle.disabled = true
+		var result: Dictionary = await run_action("set_free_question",{"enabled":value})
+		if not is_instance_valid(toggle):
+			return
+		toggle.set_pressed_no_signal(GameState.free_question_enabled())
+		toggle.disabled = false
+		show_notice(config.copy.free_question_saved if result.get("success",false) else config.copy.free_question_failed))
 
 func show_notice(message: String) -> void:
 	if is_instance_valid(notice):

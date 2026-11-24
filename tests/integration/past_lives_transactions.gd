@@ -64,7 +64,7 @@ func run() -> void:
 	if game.state.is_empty():
 		finish()
 		return
-	check(game.state.get("schema_version") == 10,"new transaction source uses schema10")
+	check(game.state.get("schema_version") == SaveService.CURRENT_SCHEMA,"new transaction source uses current schema")
 	if not await legacy_miss_branch():
 		finish()
 		return

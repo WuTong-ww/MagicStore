@@ -33,6 +33,7 @@ static func project(session, state: Dictionary, visit: Dictionary) -> Dictionary
 		"past_line": PastLines.public_view(state.divination.get("past_lines",{}),visit.npc_id,known_names,PastLines.load_config()),
 		"purchase": case.purchase, "item_use": case.item_use, "demand": case.get("demand", {}), "feedback_options": [], "ledger": []
 	}
+	view["board"] = session.case_board_view(state,visit)
 	for clue_id: String in visit.clue_ids:
 		var clue: Dictionary = data.clues[clue_id]
 		view.clues.append({"clue_id": clue_id, "title": clue.title, "text": clue.text})

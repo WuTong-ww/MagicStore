@@ -40,6 +40,8 @@ func retry(kind: String, fields: Dictionary = {}) -> Dictionary:
 
 func run() -> void:
 	game = root.get_node("GameState")
+	# Isolate the daily-flow contract while CASE separately tests the new board.
+	game._divination.board_config.enabled = false
 	saves = root.get_node("SaveService")
 	saves.base_dir = "res://.tools/r3-loop-tests/"+game.make_id("run")
 	game.configure_api("","","")
@@ -56,7 +58,7 @@ func run() -> void:
 	if game.has_method("daily_loop_view"):
 		var view: Dictionary = game.call("daily_loop_view")
 		check(view.enabled and view.phase == "morning" and view.total >= 2 and view.total <= 3,"morning reserves one case and one or two small commissions")
-		check(game.state.schema_version == 10,"new flow has explicit schema10")
+		check(game.state.schema_version == SaveService.CURRENT_SCHEMA,"new flow has explicit current schema")
 		await daily_flow()
 	print("DAILY LOOP: %d checks, %d failures" % [checks,failures])
 	quit(1 if failures else 0)

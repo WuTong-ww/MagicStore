@@ -12,6 +12,8 @@ func check(ok: bool, label: String) -> void:
 		print("DAILY MIGRATION FAIL: "+label)
 func run() -> void:
 	game = root.get_node("GameState")
+	# Isolate the daily-flow contract while CASE separately tests the new board.
+	game._divination.board_config.enabled = false
 	saves = root.get_node("SaveService")
 	saves.base_dir = "res://.tools/r3-loop-migration/"+game.make_id("run")
 	game.configure_api("","","")
@@ -26,7 +28,7 @@ func run() -> void:
 	var sha := FileAccess.get_sha256(path)
 	game.daily_loop_config.enabled = true
 	check((await game.execute_action_async({"type":"load_game","save_id":old.save_id})).success,"historic schema9 loads")
-	check(game.state.schema_version == 10 and game.state.has("daily_loop"),"old save migrates to explicit daily progress in memory")
+	check(game.state.schema_version == SaveService.CURRENT_SCHEMA and game.state.has("daily_loop"),"old save migrates to explicit daily progress in memory")
 	check(FileAccess.get_sha256(path) == sha,"load leaves historic bytes untouched")
 	await active_schema9()
 	await crowded_schema9()
@@ -53,7 +55,7 @@ func active_schema9() -> void:
 	game.daily_loop_config.enabled = true
 	check((await act("load_game",{"save_id":old.save_id})).success,"active schema9 loads in sequential mode")
 	var migrated: Dictionary = game.snapshot()
-	check(migrated.schema_version == 10 and migrated.daily_loop.phase == "reception" and migrated.active_visit_id == old.active_visit_id,"migration adopts the real active visit without a morning lock")
+	check(migrated.schema_version == SaveService.CURRENT_SCHEMA and migrated.daily_loop.phase == "reception" and migrated.active_visit_id == old.active_visit_id,"migration adopts the real active visit without a morning lock")
 	for key: String in ["player","npcs","clock_minutes","visits","processed_actions"]:
 		check(migrated[key] == old[key],"migration preserves exact historic "+key)
 	check(migrated.people == old.people and migrated.divination == old.divination,"migration preserves people, old plans, outcomes and identities exactly")
@@ -63,7 +65,7 @@ func active_schema9() -> void:
 	var failed: Dictionary = await game.execute_action_async(command)
 	check(not failed.success and game.snapshot() == migrated and FileAccess.get_sha256(path) == sha,"failed first action keeps both migrated memory and old bytes")
 	var ended: Dictionary = await game.execute_action_async(command)
-	check(ended.success and game.daily_loop_view().completed == 1 and saves.read_save(old.save_id).state.schema_version == 10,"same-ID retry ends the old visit and first persists schema10")
+	check(ended.success and game.daily_loop_view().completed == 1 and saves.read_save(old.save_id).state.schema_version == SaveService.CURRENT_SCHEMA,"same-ID retry ends the old visit and first persists current schema")
 	var committed: Dictionary = game.snapshot()
 	check((await game.execute_action_async(command)).get("replayed",false) and game.snapshot() == committed,"replay never completes the old visit twice")
 	check((await act("next_customer")).success and game.state.active_visit_id != old.active_visit_id,"an old active visit can continue immediately into the next new slot")

@@ -36,3 +36,6 @@ docs/codex/results/G4-source-freeze.json -text whitespace=cr-at-eol
 
 # Keep the user-supplied fixed-case appendix verbatim, including line endings.
 docs/story/fixed_cases.md -text
+
+# Preserve the exact registered third-party license bytes in new worktrees.
+assets/fonts/OFL.txt -text

@@ -25,6 +25,8 @@ func settle() -> void:
 
 func run() -> void:
 	game = root.get_node("GameState")
+	# Isolate the daily-flow contract while CASE separately tests the new board.
+	game._divination.board_config.enabled = false
 	saves = root.get_node("SaveService")
 	saves.base_dir = "res://.tools/daily-loop-ui-saves/"+game.make_id("run")
 	game.configure_api("","","")

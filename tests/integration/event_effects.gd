@@ -4,6 +4,7 @@ extends SceneTree
 const People = preload("res://scripts/people/people.gd")
 const Bridge = preload("res://scripts/shop/people_bridge.gd")
 const Shop = preload("res://scripts/shop/shop.gd")
+const EventFixture = preload("res://tests/fixtures/event_case_override.gd")
 var checks := 0
 var failures := 0
 var game: Node
@@ -42,8 +43,10 @@ func run() -> void:
 	await act("start_visit")
 	var visit_id: String = game.state.active_visit_id
 	var original_data: Dictionary = game._divination.data.duplicate(true)
+	var original_base: Dictionary = game._divination._base_catalog.duplicate(true)
 	var original_cache: Dictionary = saves._divination_data.duplicate(true)
-	var definition: Dictionary = game._divination.data.cases.invitation.event
+	var definition: Dictionary = EventFixture.install(game,"g3_effect_fixture")
+	EventFixture.bind(game,"g3_effect_fixture",visit_id)
 	People.add_fixed(game.state.people,"npc_effect_target","测试目标","测试身份")
 	game.state.people.relationships["rel_effect_hidden"] = {"relationship_id":"rel_effect_hidden","from":"npc_lin_friend","to":"npc_effect_target","kind":"测试关系","closeness":50,"changes":[]}
 	definition.outcomes.waited["effects"] = [
@@ -59,7 +62,7 @@ func run() -> void:
 		{"kind":"review_growth","amount":3},
 		{"kind":"unlock_topic","topic_id":"venue"}
 	]
-	saves._divination_data = game._divination.data.duplicate(true)
+	EventFixture.sync(game,saves)
 	check(game.divination_view().topics.any(func(row: Dictionary) -> bool: return row.topic_id == "venue" and not row.enabled) and not "invitation_note" in game.active_visit().clue_ids,"question starts locked without its required clue")
 	var due := int(game.state.divination.cases[visit_id].event.due_at)
 	while int(game.state.clock_minutes) < due-1:
@@ -113,6 +116,7 @@ func run() -> void:
 	await act("talk",{"topic_id":"venue","text":"核对侧门告示"})
 	check("venue_notice" in game.active_visit().clue_ids and not "invitation_note" in game.active_visit().clue_ids,"only the explicit unlocked conversation grants its own clue")
 	game._divination.data = original_data
+	game._divination._base_catalog = original_base
 	saves._divination_data = original_cache
 	print("EVENT EFFECTS: %d checks, %d failures" % [checks,failures])
 	quit(1 if failures else 0)

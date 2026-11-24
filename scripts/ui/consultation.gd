@@ -9,6 +9,7 @@ const Portrait = preload("res://scripts/people/portrait.gd")
 const AppearanceEditorConfig = preload("res://scripts/people/appearance_editor_config.gd")
 
 const OracleGuide = preload("res://scripts/divination/oracle_guide.gd")
+const CaseBoard = preload("res://scripts/ui/case_board.gd")
 
 var host
 var transcript: RichTextLabel
@@ -51,6 +52,10 @@ var _rendered_visit_id := ""
 var _rendered_clue_count := 0
 var _new_clue_turn := -1
 var _default_seat: Array = []
+var case_board: Control
+var input_row: HBoxContainer
+var keyboard_hint: Label
+var title_row: HBoxContainer
 
 static func layout_config_valid(config: Dictionary) -> bool:
 	var height: Variant = config.get("transcript_minimum_height")
@@ -145,7 +150,7 @@ func _ready() -> void:
 	conversation = VBoxContainer.new()
 	conversation.add_theme_constant_override("separation", int(layout_config.dialogue_gap))
 	padding.add_child(conversation)
-	var title_row := HBoxContainer.new()
+	title_row = HBoxContainer.new()
 	conversation.add_child(title_row)
 	title = UI.label("", int(layout_config.title_font_size))
 	title.autowrap_mode = TextServer.AUTOWRAP_OFF
@@ -166,7 +171,7 @@ func _ready() -> void:
 	questions.add_theme_constant_override("h_separation", int(layout_config.question_gap))
 	questions.add_theme_constant_override("v_separation", int(layout_config.dialogue_gap))
 	conversation.add_child(questions)
-	var input_row := HBoxContainer.new()
+	input_row = HBoxContainer.new()
 	conversation.add_child(input_row)
 	input = TextEdit.new()
 	input.placeholder_text = copy.input_hint
@@ -179,6 +184,7 @@ func _ready() -> void:
 	send_button = UI.button(copy.send, _send_text)
 	input_row.add_child(send_button)
 	var hint := UI.label(copy.keyboard_hint % int(GameState.content.get("rules", {}).get("talk_minutes", 5)), int(layout_config.small_font_size), UI.MUTED)
+	keyboard_hint = hint
 	hint.autowrap_mode = TextServer.AUTOWRAP_OFF
 	conversation.add_child(hint)
 
@@ -233,6 +239,11 @@ func _ready() -> void:
 	drawer_toggle.name = "ConsultationBookmark"
 	drawer_toggle.z_index = int(layout_config.drawer_z) + 1
 	add_child(drawer_toggle)
+	case_board = CaseBoard.new()
+	case_board.name = "CaseBoard"
+	case_board.host = host
+	add_child(case_board)
+	case_board.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	resized.connect(_queue_layout)
 	conversation.minimum_size_changed.connect(_queue_layout)
 	refresh()
@@ -259,6 +270,17 @@ func _layout_consultation() -> void:
 	_layout_pending = false
 	if not is_instance_valid(dialogue_panel):
 		return
+	if _case_board_enabled():
+		var board_config: Dictionary = case_board.config
+		var factor := minf(size.x/float(board_config.layout.base_width),size.y/float(board_config.layout.base_height))
+		var rect: Array = board_config.layout.speech_rect
+		var origin := (size-Vector2(board_config.layout.base_width,board_config.layout.base_height)*factor)/2.0
+		dialogue_panel.scale = Vector2.ONE*factor
+		dialogue_panel.size = Vector2(rect[2],rect[3])
+		dialogue_panel.position = origin+Vector2(rect[0],rect[1])*factor
+		_layout_portrait()
+		return
+	dialogue_panel.scale = Vector2.ONE
 	var edge := float(layout_config.edge_inset)
 	var available_width := minf(float(layout_config.dialogue_max_width),maxf(0.0,size.x-edge*2.0))
 	var minimum_height := dialogue_panel.get_combined_minimum_size().y
@@ -287,7 +309,9 @@ func _layout_portrait() -> void:
 	# the room or changing the shared cover transform.
 	var compact: Dictionary = layout_config.compact_seat
 	var seat: Array = _default_seat
-	if size.y <= float(compact.height_limit):
+	if _case_board_enabled():
+		seat = case_board.config.layout.portrait_rect
+	elif size.y <= float(compact.height_limit):
 		seat = compact.narrow_rect if size.x <= float(compact.narrow_width_limit) else compact.rect
 		if room_art.config.get("scene_settings",{}).get("version",2) == 3:
 			var scene: Dictionary = room_art.config.scenes[room_art.scene_id]
@@ -412,6 +436,33 @@ func refresh() -> void:
 	send_button.disabled = not active or _last_busy
 	input.editable = active and not _last_busy
 	_refresh_topics(_available_questions(),str(visit.get("visit_id","")))
+	_refresh_case_board()
+
+func _case_board_enabled() -> bool:
+	return is_instance_valid(case_board) and not case_board.config.is_empty() and bool(GameState.case_board_view().get("enabled",false))
+
+func _refresh_case_board() -> void:
+	if not is_instance_valid(case_board):
+		return
+	case_board.refresh()
+	var board_enabled := _case_board_enabled()
+	var free_questions: bool = board_enabled and GameState.free_question_enabled()
+	dialogue_panel.visible = not board_enabled or free_questions
+	drawer_panel.visible = not board_enabled
+	drawer_toggle.visible = not board_enabled
+	title_row.visible = not board_enabled
+	questions.visible = not board_enabled
+	keyboard_hint.visible = not board_enabled
+	if board_enabled:
+		transcript.custom_minimum_size.y = float(case_board.config.layout.card_name_height)
+		transcript.add_theme_font_size_override("normal_font_size",int(case_board.config.layout.small_font))
+		input.custom_minimum_size.y = float(layout_config.input_height)
+		case_board.speech_panel.visible = not free_questions and not case_board.public_view.get("closed",false)
+		case_board.reaction_panel.visible = not free_questions and case_board.public_view.get("closed",false)
+	else:
+		transcript.custom_minimum_size.y = float(layout_config.transcript_minimum_height)+float(layout_config.bubble_avatar_size[1])+float(layout_config.bubble_padding[1])+float(layout_config.bubble_padding[3])
+		transcript.add_theme_font_size_override("normal_font_size",int(layout_config.body_font_size))
+	_queue_layout()
 
 func _available_questions() -> Array:
 	if GameState.active_visit().is_empty():

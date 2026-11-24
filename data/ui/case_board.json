@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "layout": {
+    "base_width": 1280, "base_height": 720,
+    "canvas_rect": [0, 0, 1280, 720],
+    "heading_rect": [24, 72, 610, 68],
+    "speech_rect": [24, 148, 356, 162],
+    "cards_rect": [24, 328, 610, 180],
+    "question_rect": [24, 520, 610, 102],
+    "board_rect": [652, 72, 604, 550],
+    "board_title_rect": [14, 8, 576, 27],
+    "slots_rect": [14, 42, 576, 333],
+    "evidence_title_rect": [14, 382, 576, 26],
+    "evidence_rect": [14, 412, 576, 124],
+    "reaction_rect": [24, 148, 356, 162],
+    "slot_height": 105, "slot_gap": 6, "slot_count": 3,
+    "card_count": 5, "evidence_columns": 2, "question_columns": 3,
+    "card_width": 114, "card_height": 180, "card_gap": 10,
+    "card_art_height": 142, "card_name_height": 30,
+    "question_height": 70, "question_gap": 8,
+    "evidence_height": 48, "evidence_gap": 6,
+    "title_font": 23, "body_font": 18, "small_font": 15,
+    "answer_font": 15, "button_font": 17,
+    "padding": 10, "slot_padding": 6, "border": 2,
+    "seal_size": 26, "ornament_font": 54,
+    "z_index": 31, "portrait_rect": [608, 145, 390, 630],
+    "settings_minimum_height": 36,
+    "flip_seconds": 0.22, "feedback_seconds": 0.2,
+    "reject_offset": 8, "evidence_fly_offset": 20, "seal_scale": 1.16,
+    "fly_width": 220, "fly_height": 48,
+    "movie_pause_seconds": 1.1, "movie_drag_seconds": 0.5,
+    "movie_end_seconds": 3.0
+  },
+  "colors": {
+    "paper": "#F3E9D6", "paper_soft": "#E2D2B4", "ink": "#3B2A1E",
+    "muted": "#7A6450", "gold": "#C99A4B", "seal": "#B5654D",
+    "selected": "#E6D4AC", "tool": "#E3DEE9", "testimony": "#DFE4D4", "locked": "#E9DFCB"
+  },
+  "assets": {
+    "card_back": "res://assets/card_back.svg",
+    "faces": {"star": "res://assets/ui/tarot_star.png", "hermit": "res://assets/ui/tarot_hermit.png", "temperance": "res://assets/ui/tarot_temperance.png"}
+  },
+  "copy": {
+    "heading": "一席话 · 一桩心事", "board_title": "推理手记",
+    "question_round": "第 {round} 轮 · 选一个问题听来客说", "cards_instruction": "牌示 · 五张选三张，看看新的线索",
+    "deduction_instruction": "把相关材料拖入推理格，再盖下你的判断",
+    "closed_instruction": "这次判断已记下，故事还会继续", "extra_instruction": "再问一次 · 选一个想补问的问题",
+    "evidence_title": "材料栏 · 拖入右侧推理格，也可先点材料再点格子",
+    "evidence_empty": "来客的陈述和牌示会分别留在这里。", "testimony": "顾客陈述", "fact": "已知事实", "tool": "牌示线索",
+    "locked": "放入相关材料，展开候选判断", "attached": "材料 {count} 条", "selected_material": "已选材料，点对应的推理格",
+    "sealed": "已盖蜡封 · 结案前可改选", "seal_mark": "◆", "ornament": "◇",
+    "card_back_label": "未翻开的牌", "card_tooltip": "翻开这张牌，留下新的牌示线索。",
+    "card_count": "已翻 {count} 张", "card_pending": "保存后再翻开这张牌。",
+    "suggestions": "给出建议 · 保存这次判断", "extra_question": "再问一次", "eliminate": "梅花排除",
+    "choose_elimination": "点一下想排除候选的推理格", "not_related": "这条材料还不能支持这个推理格，试试别的材料。",
+    "drop_failed": "材料没有留存，请再试一次。", "saving": "正在保存这一步…",
+    "close_title": "这一席话 · {stars}", "star": "★", "end_visit": "合上手记 · 返回前台",
+    "reaction_empty": "来客收下了这份建议。", "free_question": "自由提问",
+    "free_question_note": "开启后显示对话输入，推理板仍可使用。", "free_question_saved": "自由提问设置已保存。",
+    "free_question_failed": "设置未能保存，请再试一次。", "continue_board": "推理板继续可用",
+    "empty_speech": "先听一听来客的心事，再选一个问题。", "board_hint": "判断可以改，建议一旦送出就会留下后果。"
+  }
+}

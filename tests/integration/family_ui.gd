@@ -3,6 +3,7 @@ extends SceneTree
 ## Runtime fixture settings never overwrite the disabled production registry.
 const UITeardown = preload("res://tests/ui_teardown.gd")
 const People = preload("res://scripts/people/people.gd")
+const EventFixture = preload("res://tests/fixtures/event_case_override.gd")
 const CAPTURE_BASE := "res://.tools/g2/ui-captures"
 const DIMENSIONS := [Vector2i(1280,720),Vector2i(1920,1080)]
 var game: Node
@@ -15,6 +16,7 @@ var commands: Array = []
 var source_hashes: Dictionary = {}
 var original_config: Dictionary = {}
 var original_divination: Dictionary = {}
+var original_divination_base: Dictionary = {}
 var original_save_data: Dictionary = {}
 var original_save_dir := ""
 var family_id := ""
@@ -61,6 +63,7 @@ func run() -> void:
 	saves = root.get_node("SaveService")
 	original_config = game.people_config.duplicate(true)
 	original_divination = game._divination.data.duplicate(true)
+	original_divination_base = game._divination._base_catalog.duplicate(true)
 	original_save_data = saves._divination_data.duplicate(true)
 	original_save_dir = saves.base_dir
 	for path: String in ["res://data/people/family_library.json","res://data/people/families/family_placeholder.json"]:
@@ -192,11 +195,13 @@ func settle_three_real_g3_effects() -> bool:
 		expected_closeness[id] = int(game.state.people.relationships[id].closeness)+deltas[index]
 	# A data-only event-rule fixture, identical to the transaction target: the
 	# outcome remains resolved by Events.advance and saved via real wait actions.
-	game._divination.data.cases.invitation.event.outcomes.waited.effects = effects
-	saves._divination_data = game._divination.data.duplicate(true)
+	var definition: Dictionary = EventFixture.install(game,"g3_family_ui_fixture")
+	definition.outcomes.waited.effects = effects
+	EventFixture.sync(game,saves)
 	if not (await act("start_visit")).get("success",false):
 		return false
 	var visit: Dictionary = game.active_visit()
+	EventFixture.bind(game,"g3_family_ui_fixture",visit.visit_id)
 	var due: int = int(game.state.divination.cases[visit.visit_id].event.due_at)
 	if not await move_to(due):
 		return false
@@ -353,6 +358,7 @@ func finish() -> void:
 	if is_instance_valid(game) and not original_config.is_empty():
 		game.people_config = original_config
 		game._divination.data = original_divination
+		game._divination._base_catalog = original_divination_base
 		saves._divination_data = original_save_data
 		saves.base_dir = original_save_dir
 	if is_instance_valid(main):

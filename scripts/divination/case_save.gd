@@ -9,6 +9,8 @@ const OracleSaved = preload("res://scripts/divination/oracle_saved.gd")
 const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
 const Shop = preload("res://scripts/shop/shop.gd")
 const PastLines = preload("res://scripts/divination/past_lines.gd")
+const CaseSchema = preload("res://scripts/divination/case_schema.gd")
+const DeductionBoard = preload("res://scripts/divination/deduction_board.gd")
 const MAX_INT := 2147483647
 
 static func validate(state: Dictionary, data: Dictionary, visits: Dictionary) -> String:
@@ -37,11 +39,16 @@ static func validate(state: Dictionary, data: Dictionary, visits: Dictionary) ->
 		skills[id] = true
 	var events: Dictionary = {}
 	var services: Dictionary = {}
+	var definitions := CaseSchema.load_all(data)
+	if int(state.get("schema_version",0)) >= 11 and (not work.get("settings") is Dictionary or work.settings.size()!=1 or not work.settings.get("free_question") is bool):
+		return CaseSchema.load_rules().get("copy",{}).get("invalid_action","CASE_CONFIG_INVALID")
 	for visit_id: String in work.cases:
 		var visit: Variant = visits.get(visit_id)
 		var case: Variant = work.cases[visit_id]
 		if not visit is Dictionary or not case is Dictionary or case.get("visit_id") != visit_id or case.get("npc_id") != visit.npc_id or not data.cases.has(case.get("case_id")):
 			return "案例未关联有效接待"
+		if (int(state.get("schema_version",0)) >= 11 or case.has("board")) and not DeductionBoard.valid(state,visit,case,definitions):
+			return CaseSchema.load_rules().get("copy",{}).get("invalid_action","CASE_CONFIG_INVALID")
 		var template: Dictionary = data.cases[case.case_id]
 		if template.get("generated", false):
 			var inherited: Variant = case.get("inherited_clue_ids", [])

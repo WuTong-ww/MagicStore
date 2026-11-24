@@ -65,6 +65,14 @@ try {
     }
     if ($Test) {
         Invoke-Godot @('--headless', '--path', $repo, '--import')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/divination/case_schema.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/divination/deduction_board.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/case_host.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/case_deadline.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/case_save_bad_rules.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/case_transactions.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/case_migration.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/case_board_ui.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/smoke.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/daily_loop.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/daily_loop_migration.gd')

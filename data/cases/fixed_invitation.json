@@ -1,0 +1,625 @@
+{
+  "id": "fixed_invitation",
+  "version": 1,
+  "title": "一封没有寄出的邀请",
+  "legacy_case_id": "invitation",
+  "question": "这份邀请来自谁，她为什么迟迟没回，又该怎样迈出下一步？",
+  "truth": {
+    "personal_invitation": {
+      "value": true,
+      "text": "邀请确实由朋友单独写给照晚。",
+      "requires_clue": "invitation_note"
+    },
+    "changed_entrance": {
+      "value": true,
+      "text": "展览从侧门入场。",
+      "requires_clue": "venue_notice"
+    }
+  },
+  "deduction_slots": [
+    {
+      "id": "sender",
+      "title": "邀请是谁寄的",
+      "answers": [
+        {
+          "id": "old_friend",
+          "text": "旧友单独寄给她的"
+        },
+        {
+          "id": "exhibition_group",
+          "text": "展馆群发的通知"
+        },
+        {
+          "id": "unknown_sender",
+          "text": "不认识的人寄错了"
+        }
+      ],
+      "correct_answer": "old_friend",
+      "unlock_evidence": [
+        "invitation_note",
+        "shared_memory",
+        "group_assumption"
+      ]
+    },
+    {
+      "id": "hesitation",
+      "title": "她为什么迟迟不回",
+      "answers": [
+        {
+          "id": "fear_disturbing",
+          "text": "担心打扰对方的生活"
+        },
+        {
+          "id": "no_invitation",
+          "text": "没有收到邀请原件"
+        },
+        {
+          "id": "forgot_reply",
+          "text": "忙得忘了写回信"
+        }
+      ],
+      "correct_answer": "fear_disturbing",
+      "unlock_evidence": [
+        "unfinished_letter",
+        "self_concern"
+      ]
+    },
+    {
+      "id": "next_step",
+      "title": "该怎么做",
+      "answers": [
+        {
+          "id": "confirm_then_contact",
+          "text": "先确认近况与安排，给彼此回应的余地"
+        },
+        {
+          "id": "assume_rejection",
+          "text": "把沉默当成拒绝，替对方下结论"
+        },
+        {
+          "id": "leave_unverified",
+          "text": "不核对安排，直接把回信留给陌生人"
+        }
+      ],
+      "correct_answer": "confirm_then_contact",
+      "unlock_evidence": [
+        "shared_memory",
+        "unfinished_letter",
+        "self_concern",
+        "venue_notice"
+      ]
+    }
+  ],
+  "questions": [
+    [
+      {
+        "id": "invitation_text",
+        "text": "邀请上具体写了什么？",
+        "answer": "邀请上有一句手写的附言：“替你留了靠窗的位置。”那是我们以前一起看书的位置。",
+        "evidence_ids": [
+          "invitation_note"
+        ],
+        "requires_familiarity": 0,
+        "legacy_topic_id": "invitation"
+      },
+      {
+        "id": "invitation_memory",
+        "text": "那个靠窗的位置，对你们意味着什么？",
+        "answer": "我们以前总坐在窗边一起看书。这次邀请上，她又专门写了替我留着那个位置。",
+        "evidence_ids": [
+          "shared_memory",
+          "invitation_note"
+        ],
+        "requires_familiarity": 0,
+        "legacy_topic_id": "invitation"
+      },
+      {
+        "id": "invitation_assumption",
+        "text": "你为什么觉得它可能是群发的？",
+        "answer": "我还没问过她。展览的通知看着很正式，我就猜也许别人都收到了。可是那句手写的附言又只有我们才懂。",
+        "evidence_ids": [
+          "group_assumption",
+          "invitation_note"
+        ],
+        "requires_familiarity": 0,
+        "legacy_topic_id": "invitation"
+      }
+    ],
+    [
+      {
+        "id": "letter_written",
+        "text": "回信写好了吗？",
+        "answer": "回信其实已经写好了。我担心突然出现会打乱她的生活，所以一直把它夹在修复笔记里。",
+        "evidence_ids": [
+          "unfinished_letter"
+        ],
+        "requires_familiarity": 0,
+        "legacy_topic_id": "letter"
+      },
+      {
+        "id": "letter_concern",
+        "text": "让你停在寄出之前的，是哪种顾虑？",
+        "answer": "我没有听她说过不愿见面，是我怕打扰。信早就写好了，只是一直不敢寄。",
+        "evidence_ids": [
+          "self_concern",
+          "unfinished_letter"
+        ],
+        "requires_familiarity": 0,
+        "legacy_topic_id": "letter"
+      },
+      {
+        "id": "work_pace",
+        "text": "修书时懂得慢慢来，回信时也能这样吗？",
+        "answer": "给书时间我很熟悉，给自己一点开口的时间却不容易。回信就在笔记里，我总怕突然打扰她。",
+        "evidence_ids": [
+          "self_concern",
+          "unfinished_letter"
+        ],
+        "requires_familiarity": 0,
+        "legacy_topic_id": "letter"
+      }
+    ],
+    [
+      {
+        "id": "venue_route",
+        "text": "展览入口和约见位置，核对过了吗？",
+        "answer": "我翻到一张更新的告示。展览要从侧门进，她留的位置没有变。",
+        "evidence_ids": [
+          "venue_notice"
+        ],
+        "requires_familiarity": 0,
+        "legacy_topic_id": "venue"
+      },
+      {
+        "id": "message_first",
+        "text": "如果先问一句近况，你想怎样开口？",
+        "answer": "也许先发一句问候，问她哪天方便，比把整封回信一下子寄过去容易。那封写好的信可以先留在手边。",
+        "evidence_ids": [
+          "unfinished_letter"
+        ],
+        "requires_familiarity": 0
+      },
+      {
+        "id": "keep_boundary",
+        "text": "怎样让你们都有回应或改期的余地？",
+        "answer": "我可以说我还记得靠窗的位置，再问她方不方便。先听她自己的回应，总比我替她想完好。",
+        "evidence_ids": [
+          "shared_memory",
+          "self_concern"
+        ],
+        "requires_familiarity": 0
+      }
+    ]
+  ],
+  "evidence": [
+    {
+      "id": "invitation_note",
+      "text": "附言写着“替你留了靠窗的位置”，说明这份邀请并非群发。",
+      "type": "fact",
+      "source": "邀请原件",
+      "slot_ids": [
+        "sender"
+      ],
+      "legacy_clue_ids": [
+        "invitation_note"
+      ]
+    },
+    {
+      "id": "shared_memory",
+      "text": "照晚说，靠窗的位置是她和旧友以前一起看书的位置。",
+      "type": "testimony",
+      "source": "林照晚的回忆",
+      "slot_ids": [
+        "sender",
+        "next_step"
+      ]
+    },
+    {
+      "id": "unfinished_letter",
+      "text": "照晚已经写好回信，却因担心打扰对方一直没有寄出。",
+      "type": "fact",
+      "source": "夹在修复笔记里的回信",
+      "slot_ids": [
+        "hesitation",
+        "next_step"
+      ],
+      "legacy_clue_ids": [
+        "unfinished_letter"
+      ]
+    },
+    {
+      "id": "self_concern",
+      "text": "照晚说，旧友并没有说过不愿见面，是自己担心突然出现会打扰她。",
+      "type": "testimony",
+      "source": "林照晚的自述",
+      "slot_ids": [
+        "hesitation",
+        "next_step"
+      ]
+    },
+    {
+      "id": "venue_notice",
+      "text": "展览改从侧门进入，原来约见的窗边位置仍保留。",
+      "type": "fact",
+      "source": "展览更新告示",
+      "slot_ids": [
+        "next_step"
+      ],
+      "legacy_clue_ids": [
+        "venue_notice"
+      ]
+    },
+    {
+      "id": "group_assumption",
+      "text": "照晚看见正式的展览通知后，猜测这份邀请也许和其他人收到的一样。",
+      "type": "misleading",
+      "source": "林照晚尚未核对的猜测",
+      "slot_ids": [
+        "sender"
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "deck_id": "lovers",
+      "text": "分开两个人各自的意愿，再看邀请上是谁亲自留下的话。",
+      "slot_id": "sender"
+    },
+    {
+      "deck_id": "swords_2",
+      "text": "她停在两种想法之间；看看真正挡住寄信的，是事实还是顾虑。",
+      "slot_id": "hesitation"
+    },
+    {
+      "deck_id": "star",
+      "text": "把愿望落到一句能送出的问候上，再等待对方回应。",
+      "slot_id": "next_step"
+    },
+    {
+      "deck_id": "cups_6",
+      "text": "旧日共同的位置留在纸上，但今天的意愿仍要亲口确认。",
+      "slot_id": "sender"
+    },
+    {
+      "deck_id": "world",
+      "text": "邀请、回信和赴约之间，还差哪一环需要核对？",
+      "slot_id": "next_step"
+    }
+  ],
+  "advice": [
+    {
+      "id": "message",
+      "text": "先发一条消息确认，再按约去展览。",
+      "requires_deductions": [
+        "sender",
+        "hesitation",
+        "next_step"
+      ],
+      "legacy_advice_key": "message",
+      "reaction": "那我先发一句问候，把时间问清楚，再去见她。",
+      "mood": "smile",
+      "prediction": {
+        "text": "若先发消息确认，两人会在展览上说上话。",
+        "condition": "if_message",
+        "expected": "met",
+        "window_after_due_minutes": 30
+      }
+    },
+    {
+      "id": "attend",
+      "text": "直接去展览，按邀请寻找靠窗的位置。",
+      "requires_deductions": [
+        "sender",
+        "hesitation",
+        "next_step"
+      ],
+      "legacy_advice_key": "attend",
+      "reaction": "我会带着邀请去展览，也会留意现在的入口。",
+      "mood": "hesitant",
+      "prediction": {
+        "text": "若直接去展览，两人会按邀请见面。",
+        "condition": "if_attend",
+        "expected": "met",
+        "window_after_due_minutes": 30
+      }
+    },
+    {
+      "id": "wait",
+      "text": "这次先不赴约，等自己准备好再联系。",
+      "requires_deductions": [
+        "sender",
+        "hesitation",
+        "next_step"
+      ],
+      "legacy_advice_key": "wait",
+      "reaction": "这次先不去。我想等自己能好好开口的时候，再联系她。",
+      "mood": "neutral",
+      "prediction": {
+        "text": "这次暂缓赴约，两人暂时不会在展览上说上话。",
+        "condition": "always",
+        "expected": "missed",
+        "window_after_due_minutes": 30
+      }
+    }
+  ],
+  "outcomes": {
+    "subject_id": "npc_lin",
+    "target_name": "林照晚与旧友能否说上话",
+    "minute_of_day": 1080,
+    "feedback_delay": 180,
+    "outcomes": {
+      "sent": {
+        "actual_action": "先发消息确认，再依约赴会",
+        "outcome": "met",
+        "evidence": "sufficient",
+        "feedback": "delayed",
+        "text": "我先发了短消息。她回了时间，我们在展览上说上话了。",
+        "delay_minutes": 180,
+        "effects": []
+      },
+      "arrived": {
+        "actual_action": "找到了入口，按约赴会",
+        "outcome": "met",
+        "evidence": "sufficient",
+        "feedback": "delayed",
+        "text": "我找到了入口。她真的留了靠窗的位置，我们说上话了。",
+        "delay_minutes": 180,
+        "effects": []
+      },
+      "lost": {
+        "actual_action": "到了旧入口，未能赴约",
+        "outcome": "missed",
+        "evidence": "sufficient",
+        "feedback": "delayed",
+        "text": "我在原来的入口等了很久，后来打烊了，我们没说上话。",
+        "delay_minutes": 180,
+        "effects": []
+      },
+      "private": {
+        "actual_action": "约好在侧厅私下见面",
+        "outcome": "met",
+        "evidence": "sufficient",
+        "feedback": "never",
+        "text": "",
+        "delay_minutes": 180,
+        "effects": []
+      },
+      "note": {
+        "actual_action": "把回信留在前台，未能确认收件人",
+        "outcome": "missed",
+        "evidence": "partial",
+        "feedback": "delayed",
+        "text": "这件事让我有些惦记，还没得到能核对的消息。",
+        "delay_minutes": 1140,
+        "effects": []
+      },
+      "waited": {
+        "actual_action": "暂缓赴约",
+        "outcome": "missed",
+        "evidence": "sufficient",
+        "feedback": "delayed",
+        "text": "那天我没有去，也没和她说上话。",
+        "delay_minutes": 180,
+        "effects": []
+      }
+    },
+    "item_effect": {
+      "key": "stay_and_ask",
+      "need": "找不到原入口时，仍愿意停下来询问展览的改道安排。",
+      "advice_keys": [
+        "attend"
+      ]
+    },
+    "advice": {
+      "message": {
+        "text": "先发一条消息确认，再按约去展览。",
+        "requires_clue": "unfinished_letter"
+      },
+      "attend": {
+        "text": "直接去展览，按邀请寻找靠窗的位置。",
+        "requires_clue": "invitation_note"
+      },
+      "private": {
+        "text": "约到侧厅私下聊，并尊重对方保密的请求。",
+        "requires_clue": "unfinished_letter"
+      },
+      "note": {
+        "text": "先把信留给展馆前台，请他们转交。"
+      },
+      "wait": {
+        "text": "这次先不赴约，等自己准备好再联系。"
+      }
+    },
+    "version": 1,
+    "world_facts": {
+      "personal_invitation": {
+        "values": [
+          true,
+          false
+        ],
+        "default": true
+      },
+      "changed_entrance": {
+        "values": [
+          true,
+          false
+        ],
+        "default": true
+      }
+    },
+    "branch_ids": [
+      "confirmed_venue"
+    ],
+    "item_effect_ids": [
+      "stay_and_ask"
+    ],
+    "prediction_conditions": {
+      "always": {
+        "label": "无附加条件"
+      },
+      "if_message": {
+        "label": "若先发消息确认",
+        "outcomes": [
+          "sent"
+        ]
+      },
+      "if_attend": {
+        "label": "若直接去展览",
+        "outcomes": [
+          "arrived",
+          "lost"
+        ]
+      }
+    },
+    "prediction_labels": {
+      "met": "约定的事情有进展",
+      "missed": "约定的事情未达成"
+    },
+    "advice_options": [
+      {
+        "key": "message",
+        "label": "先发一条消息确认，再按约去展览。",
+        "requires_clue": "unfinished_letter"
+      },
+      {
+        "key": "attend",
+        "label": "直接去展览，按邀请寻找靠窗的位置。",
+        "requires_clue": "invitation_note",
+        "item_effect_keys": [
+          "stay_and_ask"
+        ]
+      },
+      {
+        "key": "private",
+        "label": "约到侧厅私下聊，并尊重对方保密的请求。",
+        "requires_clue": "unfinished_letter"
+      },
+      {
+        "key": "note",
+        "label": "先把信留给展馆前台，请他们转交。"
+      },
+      {
+        "key": "wait",
+        "label": "这次先不赴约，等自己准备好再联系。"
+      }
+    ],
+    "rules": [
+      {
+        "when": {
+          "advice": "message",
+          "accepted": true
+        },
+        "outcome": "sent"
+      },
+      {
+        "when": {
+          "advice": "attend",
+          "accepted": true,
+          "fact": {
+            "changed_entrance": false
+          }
+        },
+        "outcome": "arrived"
+      },
+      {
+        "when": {
+          "advice": "attend",
+          "accepted": true,
+          "branch": "confirmed_venue"
+        },
+        "outcome": "arrived"
+      },
+      {
+        "when": {
+          "advice": "attend",
+          "accepted": true,
+          "item_effect": "stay_and_ask"
+        },
+        "outcome": "arrived"
+      },
+      {
+        "when": {
+          "advice": "attend",
+          "accepted": true
+        },
+        "outcome": "lost"
+      },
+      {
+        "when": {
+          "advice": "private",
+          "accepted": true
+        },
+        "outcome": "private"
+      },
+      {
+        "when": {
+          "advice": "note",
+          "accepted": true
+        },
+        "outcome": "note"
+      },
+      {
+        "when": {},
+        "outcome": "waited"
+      }
+    ],
+    "feedback_effects": [
+      {
+        "kind": "trust",
+        "amount": 2,
+        "when": {
+          "evaluation": "aligned"
+        }
+      },
+      {
+        "kind": "reputation",
+        "amount": 1,
+        "when": {
+          "evaluation": "aligned",
+          "outcome": "met"
+        }
+      },
+      {
+        "kind": "traffic_boost",
+        "minutes": 2880,
+        "amount": 1,
+        "when": {
+          "evaluation": "aligned",
+          "outcome": "met"
+        }
+      },
+      {
+        "kind": "referral",
+        "amount": 1,
+        "target_npc_id": "npc_lin_friend",
+        "when": {
+          "evaluation": "aligned",
+          "outcome_id": "sent"
+        }
+      },
+      {
+        "kind": "gift",
+        "item_id": "silver_leaf",
+        "qty": 1,
+        "when": {
+          "evaluation": "aligned",
+          "outcome_id": "sent"
+        }
+      },
+      {
+        "kind": "trust",
+        "amount": -2,
+        "when": {
+          "evaluation": "deviated"
+        }
+      },
+      {
+        "kind": "review_growth",
+        "amount": 1,
+        "when": {
+          "evaluation": "deviated"
+        }
+      }
+    ]
+  }
+}

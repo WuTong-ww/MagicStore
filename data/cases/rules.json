@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "enabled": true,
+  "costs": {
+    "question": {
+      "energy": 5,
+      "minutes": 5
+    },
+    "extra_question": {
+      "energy": 10,
+      "minutes": 5
+    },
+    "flip_card": {
+      "energy": 0,
+      "minutes": 10
+    },
+    "extra_card": {
+      "energy": 10,
+      "minutes": 10
+    },
+    "attach_evidence": {
+      "energy": 0,
+      "minutes": 0
+    },
+    "choose_answer": {
+      "energy": 0,
+      "minutes": 0
+    },
+    "eliminate": {
+      "energy": 0,
+      "minutes": 0
+    },
+    "close": {
+      "energy": 0,
+      "minutes": 10
+    }
+  },
+  "limits": {
+    "question_rounds": 3,
+    "questions_per_round": 3,
+    "base_cards": 3,
+    "extra_cards": 1,
+    "extra_questions": 1,
+    "eliminations": 1,
+    "minimum_stars": 1,
+    "maximum_stars": 3
+  },
+  "skills": {
+    "extra_card": "lenormand",
+    "eliminate": "plum"
+  },
+  "copy": {
+    "case_finish_required": "先把建议交给来客，再结束这次接待。",
+    "unavailable": "这份案件的推理板暂时不可用。",
+    "invalid_action": "这个操作无法用于当前案件。",
+    "wrong_phase": "请先完成当前步骤。",
+    "closed": "这份案件已经结案。",
+    "question_locked": "这轮问题还未开放。",
+    "question_asked": "这句已经问过了。",
+    "extra_question_used": "这次已经再问过一句。",
+    "question_recorded": "回答与证据已记下。",
+    "card_revealed": "牌示已加入证据栏。",
+    "card_already_revealed": "这张牌已经翻开。",
+    "card_limit": "本次可翻的牌已经用完。",
+    "energy_low": "精力不足，请使用基础选项。",
+    "skill_required": "学会对应技法后才能使用这项帮助。",
+    "evidence_unavailable": "还没有取得这份材料。",
+    "evidence_wrong_slot": "这份材料与这个问题没有直接关联。",
+    "evidence_attached": "材料已放入推理格。",
+    "slot_locked": "先放入相关材料，再选择答案。",
+    "invalid_answer": "这个答案不在当前候选中。",
+    "answer_selected": "推理已记下，结案前可以改选。",
+    "elimination_used": "这次已经排除过一个候选。",
+    "candidate_eliminated": "梅花易数帮助排除了一个候选。",
+    "incomplete": "先完成三个推理格，再给出建议。",
+    "advice_unavailable": "这条建议暂时不能提交。",
+    "closed_message": "建议已交给来客，后续回信会带来结果。",
+    "familiarity_required": "再熟悉一些后，来客才愿意回答这句。",
+    "free_question_saved": "自由提问设置已保存。",
+    "invalid_free_question": "自由提问设置需要开启或关闭。",
+    "free_question_disabled": "需要先在设置中开启自由提问。"
+  }
+}

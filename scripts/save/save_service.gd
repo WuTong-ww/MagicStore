@@ -4,6 +4,7 @@ extends Node
 ## belongs in a snapshot. Tests must replace base_dir with an isolated directory.
 
 const ENVELOPE_FORMAT := "midnight-grocery-save-v1"
+const CURRENT_SCHEMA := 11
 const MAX_BYTES := 16 * 1024 * 1024
 const MAX_INTEGER := 2147483647
 const MAX_EXACT_JSON_INTEGER := 9007199254740991
@@ -190,7 +191,7 @@ func _validate(s: Dictionary) -> String:
 	for field in ["schema_version", "save_id", "name", "state_version", "clock_minutes", "player", "npcs", "active_visit_id", "visits", "processed_actions"]:
 		if not s.has(field):
 			return "缺少 " + field
-	if not _integer(s.schema_version, 1, 10):
+	if not _integer(s.schema_version, 1, CURRENT_SCHEMA):
 		return Appearance.load_config().get("copy",{}).get("unsupported_schema","不支持的 schema_version")
 	var extended := int(s.schema_version) >= 2
 	if not _safe_id(s.save_id) or not _text(s.name, 1, 80):
@@ -333,7 +334,7 @@ func _validate(s: Dictionary) -> String:
 			return "动作编号或结果无效"
 		if not result.get("success") is bool or not result.get("error_code") is String or not result.get("message") is String or not result.get("result") is Dictionary or not _integer(result.get("state_version"), 0, int(s.state_version)):
 			return "已处理动作结果字段无效"
-		if result.has("action_type") and not result.action_type in ["start_visit", "talk", "reading", "end_visit", "rest", "next_day"] and (not extended or not result.action_type in DivinationSession.ACTIONS) and (int(s.schema_version) < 3 or not result.action_type in SHOP_ACTIONS) and (int(s.schema_version) < 10 or not result.action_type in DailyLoop.ACTIONS):
+		if result.has("action_type") and not result.action_type in ["start_visit", "talk", "reading", "end_visit", "rest", "next_day"] and (not extended or not result.action_type in DivinationSession.ACTIONS) and (int(s.schema_version) < 3 or not result.action_type in SHOP_ACTIONS) and (int(s.schema_version) < 10 or not result.action_type in DailyLoop.ACTIONS) and (int(s.schema_version) < 11 or result.action_type != "set_free_question"):
 			return "已处理动作类型无效"
 		var output: Dictionary = result.result
 		if output.has("visit_id") and (not output.visit_id is String or not visit_ids.has(output.visit_id)):

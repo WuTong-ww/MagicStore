@@ -27,6 +27,8 @@ func rejected_without_changes(kind: String, fields: Dictionary = {}) -> void:
 
 func run() -> void:
 	game = root.get_node("GameState")
+	# Isolate the daily-flow contract while CASE separately tests the new board.
+	game._divination.board_config.enabled = false
 	saves = root.get_node("SaveService")
 	saves.base_dir = "res://.tools/r3-loop-guard-saves/" + game.make_id("run")
 	game.configure_api("","","")

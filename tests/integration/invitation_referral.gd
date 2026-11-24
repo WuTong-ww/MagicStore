@@ -2,6 +2,7 @@ extends SceneTree
 ## Current invitation rewards and already-committed G3 ordinary referrals must
 ## both survive real save transactions. All files live below isolated .tools.
 const People = preload("res://scripts/people/people.gd")
+const EventFixture = preload("res://tests/fixtures/event_case_override.gd")
 var game: Node
 var saves: Node
 var checks := 0
@@ -32,11 +33,13 @@ func catalog(value: Dictionary) -> void:
 	game._divination._base_catalog = value.duplicate(true)
 	saves._divination_data = value.duplicate(true)
 
-func prepare(name: String) -> Dictionary:
+func prepare(name: String, fixture_case: String = "") -> Dictionary:
 	if not (await act("new_game",{"name":name})).get("success",false):
 		return {}
 	if not (await act("start_visit")).get("success",false):
 		return {}
+	if not fixture_case.is_empty():
+		EventFixture.bind(game,fixture_case)
 	var view: Dictionary = game.divination_view()
 	var source := {"visit_id":game.state.active_visit_id,"event_id":view.event.event_id}
 	for command: Dictionary in [
@@ -96,12 +99,13 @@ func run() -> void:
 	# Replay the previous G3 data definition only in this fixture's in-memory
 	# catalogs; restore the fixed definition before reading the resulting save.
 	var historical := original_data.duplicate(true)
-	for effect: Dictionary in historical.cases.invitation.event.feedback_effects:
+	historical.cases["g3_historical_referral"] = historical.cases.invitation.duplicate(true)
+	for effect: Dictionary in historical.cases.g3_historical_referral.event.feedback_effects:
 		if effect.kind == "referral":
 			effect.erase("target_npc_id")
 			effect["template"] = "ordinary"
 	catalog(historical)
-	var old_source := await prepare("已结算普通客推荐历史")
+	var old_source := await prepare("已结算普通客推荐历史","g3_historical_referral")
 	if old_source.is_empty():
 		finish()
 		return
@@ -111,7 +115,9 @@ func run() -> void:
 	var old_state: Dictionary = game.snapshot()
 	var old_referrals: Array = old_state.people.referrals.values()
 	check(old_referrals.size() == 1 and old_referrals[0].target_npc_id != "npc_lin_friend" and old_state.people.profiles[old_referrals[0].target_npc_id].template_id == "ordinary_v1","fixture contains an actually settled ordinary referral")
-	catalog(original_data)
+	var current_content := original_data.duplicate(true)
+	current_content.cases["g3_historical_referral"] = current_content.cases.invitation.duplicate(true)
+	catalog(current_content)
 	check(saves.read_save(old_state.save_id).get("success",false),"fixed content still validates already-settled ordinary reward history")
 	await act("load_game",{"save_id":old_state.save_id})
 	check(game.state.people == saves._normalize_numbers(old_state.people) and game.state.divination.effects == saves._normalize_numbers(old_state.divination.effects),"loading preserves historical targets, profiles and effect IDs")

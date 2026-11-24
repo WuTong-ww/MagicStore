@@ -9,15 +9,20 @@ const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
 const EventCopy = preload("res://scripts/divination/event_copy.gd")
 const ProductRules = preload("res://scripts/divination/event_schema.gd")
 const PastLines = preload("res://scripts/divination/past_lines.gd")
+const CaseSchema = preload("res://scripts/divination/case_schema.gd")
+const DeductionBoard = preload("res://scripts/divination/deduction_board.gd")
 const ACTIONS := [
 	"quote_service", "settle_service", "cancel_service", "learn_method", "note_hypothesis",
 	"record_prediction", "give_advice", "buy_case_item", "use_case_item", "receive_feedback",
-	"interpret_past", "verify_past", "interpret_past_line", "verify_past_line"
+	"interpret_past", "verify_past", "interpret_past_line", "verify_past_line",
+	"case_question", "case_extra_question", "case_flip_card", "case_attach_evidence",
+	"case_choose_answer", "case_eliminate", "case_close"
 ]
 
 var data: Dictionary
 var base: Dictionary
 var _base_catalog: Dictionary
+var board_config: Dictionary = CaseSchema.load_rules()
 
 static func advice_style_options() -> Dictionary:
 	var rules := ProductRules.load_product_rules()
@@ -96,7 +101,19 @@ func add_case(state: Dictionary, visit: Dictionary, case_id: String, schedule_ev
 			if clue not in visit.clue_ids:
 				visit.clue_ids.append(clue)
 	state.divination.cases[visit.visit_id] = record
+	if int(state.get("schema_version",0)) >= 11:
+		record["board"] = {}
+		if board_config.get("enabled",true) and state.get("daily_loop",{}).get("mode") == "sequential" and visit.get("intent","") != "shopping":
+			for definition: Dictionary in CaseSchema.load_all(data).values():
+				if definition.legacy_case_id == case_id:
+					record.board = DeductionBoard.create(state,visit,definition)
+					break
 	return true
+
+func case_board_view(state: Dictionary, visit: Dictionary) -> Dictionary:
+	if visit.is_empty() or not state.get("divination",{}).get("cases",{}).has(visit.get("visit_id")):
+		return {"enabled":false}
+	return DeductionBoard.public_view(state,visit,state.divination.cases[visit.visit_id],CaseSchema.load_all(data))
 
 func guest_options(state: Dictionary) -> Array:
 	var guests: Array = [
@@ -164,6 +181,8 @@ func handle(state: Dictionary, visit: Dictionary, action: Dictionary) -> Diction
 	if visit.is_empty():
 		return _fail("NO_VISIT", "请先接待顾客。")
 	var case: Dictionary = state.divination.cases[visit.visit_id]
+	if action.type in DeductionBoard.ACTIONS:
+		return _board_action(state,visit,case,action)
 	match action.type:
 		"quote_service":
 			return _quote(state, visit, case, action)
@@ -200,6 +219,31 @@ func handle(state: Dictionary, visit: Dictionary, action: Dictionary) -> Diction
 		"interpret_past_line", "verify_past_line":
 			return _past_line_action(state,visit,case,action)
 	return _fail("UNKNOWN_ACTION", "不支持此问卜动作。")
+
+func _board_action(state: Dictionary, visit: Dictionary, case: Dictionary, action: Dictionary) -> Dictionary:
+	var definitions := CaseSchema.load_all(data)
+	var outcome := DeductionBoard.handle(state,visit,case,action,data,definitions)
+	if not outcome.success or action.type != "case_close":
+		return outcome
+	var definition: Dictionary = definitions[case.board.definition_id]
+	var chosen: Dictionary = {}
+	for advice: Dictionary in definition.advice:
+		if advice.id == action.advice_id:
+			chosen = advice
+			break
+	var prediction: Dictionary = chosen.prediction
+	var predicted := _prediction(state,visit,case,{"action_id":action.action_id,"subject_id":case.event.get("subject_id"),"text":prediction.text,"condition":prediction.condition,"expected":prediction.expected,"window_start":int(case.event.get("due_at",0)),"window_end":int(case.event.get("due_at",0))+int(prediction.window_after_due_minutes)})
+	if not predicted.success:
+		return predicted
+	var advised := _advice(state,visit,case,{"action_id":action.action_id,"advice_key":chosen.legacy_advice_key})
+	if not advised.success:
+		return advised
+	case.board.closure["prediction_id"] = case.prediction.prediction_id
+	case.board.closure["advice_record_id"] = case.advice.back().advice_id
+	visit.dialogue.append({"speaker":"player","text":chosen.text})
+	visit.dialogue.append({"speaker":"npc","text":chosen.reaction,"mood":chosen.mood})
+	outcome.result.merge({"prediction_id":case.prediction.prediction_id,"advice_record_id":case.advice.back().advice_id,"accepted":advised.result.accepted,"reply_text":chosen.reaction})
+	return outcome
 
 func cancel_open_service(case: Dictionary) -> void:
 	var service_id: String = case.open_service_id
@@ -479,7 +523,10 @@ func _prediction(state: Dictionary, visit: Dictionary, case: Dictionary, action:
 		return _fail("NO_PENDING_EVENT", "本案没有可以继续提交预测的待发生事件。")
 	if not case.prediction.is_empty():
 		return _fail("PREDICTION_EXISTS", "本案已经交给顾客一条正式预测。")
-	if visit.reading.is_empty() and not case.services.values().any(func(service: Dictionary) -> bool: return service.status == "paid"):
+	var board: Dictionary = case.get("board",{})
+	var definition: Dictionary = CaseSchema.load_all(data).get(board.get("definition_id"),{})
+	var complete_board: bool = not definition.is_empty() and board.get("phase") == "closed" and DeductionBoard.complete(board,definition)
+	if visit.reading.is_empty() and not case.services.values().any(func(service: Dictionary) -> bool: return service.status == "paid") and not complete_board:
 		return _fail("NEEDS_PAID_SERVICE", "请先完成正式问卜，再把预测交给来客。")
 	var start: Variant = action.get("window_start")
 	var end: Variant = action.get("window_end")

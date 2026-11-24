@@ -23,6 +23,7 @@ const GeneratedPerson = preload("res://scripts/people/generated_person.gd")
 const GeneratedCases = preload("res://scripts/divination/generated_cases.gd")
 const Appearance = preload("res://scripts/people/appearance.gd")
 const DailyLoop = preload("res://scripts/core/daily_loop.gd")
+const CaseSchema = preload("res://scripts/divination/case_schema.gd")
 const SHOP_ACTIONS := ["procure_item", "receive_material_gift", "gather_material", "sell_material", "register_demand", "research_recipe", "craft_item", "sell_product", "use_product", "review_case"]
 const PEOPLE_ACTIONS := ["book_arrival", "save_appearance", "wait", "invite_contact"]
 var shop_config: Dictionary = {}
@@ -70,7 +71,7 @@ func _ready() -> void:
 		content_error = daily_loop_config.copy.invalid_config
 		return
 	var catalog := DivinationCatalog.load_data(content)
-	if catalog.is_empty():
+	if catalog.is_empty() or CaseSchema.load_rules().is_empty() or CaseSchema.load_all(catalog).is_empty():
 		content_error = "问卜案例配置无效。"
 		push_error(content_error)
 		return
@@ -121,6 +122,17 @@ func player_snapshot() -> Dictionary:
 
 func daily_loop_view() -> Dictionary:
 	return DailyLoop.public_view(state,daily_loop_config)
+
+func case_board_view() -> Dictionary:
+	if state.is_empty() or _divination == null:
+		return {"enabled":false}
+	return _divination.case_board_view(state,active_visit())
+
+func free_question_enabled() -> bool:
+	return bool(state.get("divination",{}).get("settings",{}).get("free_question",false))
+
+func _case_configuration_valid() -> bool:
+	return _divination != null and not CaseSchema.load_rules().is_empty() and not CaseSchema.load_all(_divination.data).is_empty()
 
 func _sequential() -> bool:
 	return DailyLoop.enabled(daily_loop_config)
@@ -549,7 +561,7 @@ func execute_action_async(action: Dictionary) -> Dictionary:
 func execute_action(action: Dictionary) -> Dictionary:
 	if _provider_pending:
 		return _fail("BUSY", "正在等待对话回复，请稍候。")
-	if not content_error.is_empty() or content.is_empty():
+	if not content_error.is_empty() or content.is_empty() or not _case_configuration_valid():
 		return _fail("CONTENT_INVALID", "内容配置不可用。" + content_error)
 	if not action.get("type") is String:
 		return _fail("INVALID_ACTION", "动作缺少有效的 type。")
@@ -563,10 +575,14 @@ func execute_action(action: Dictionary) -> Dictionary:
 	var preliminary: Dictionary = _preflight(action)
 	if not preliminary.is_empty():
 		return preliminary
+	if action.type in ["reading","quote_service","settle_service","record_prediction","give_advice"] and case_board_view().get("enabled",false):
+		return _fail("CASE_WORKFLOW_REQUIRED",CaseSchema.load_rules().copy.wrong_phase)
 	if _sequential() and action.type in ["wait","rest","start_visit","start_arrival","admit_generated_person","book_arrival","invite_contact"]:
 		return _fail("SEQUENTIAL_MODE",daily_loop_config.copy.legacy_disabled)
 	if action.type in DailyLoop.ACTIONS:
 		return _daily_action(action)
+	if action.type == "set_free_question":
+		return _set_free_question(action)
 	match action.type:
 		"start_visit":
 			return _start_visit(action)
@@ -602,7 +618,7 @@ func execute_action(action: Dictionary) -> Dictionary:
 	return _fail("UNKNOWN_ACTION", "不支持此动作。")
 
 func _preflight(action: Dictionary) -> Dictionary:
-	if not content_error.is_empty() or content.is_empty():
+	if not content_error.is_empty() or content.is_empty() or not _case_configuration_valid():
 		return _fail("CONTENT_INVALID", "内容配置不可用。" + content_error)
 	if state.is_empty():
 		return _fail("NO_SAVE", "请先新建或选择存档。")
@@ -735,6 +751,8 @@ func _start_visit(action: Dictionary) -> Dictionary:
 	return _commit(candidate, action, "接待已开始并保存。", {"visit_id": visit.visit_id},presentation_events)
 
 func _prepare_talk(action: Dictionary) -> Dictionary:
+	if case_board_view().get("enabled",false) and not free_question_enabled():
+		return _fail("FREE_QUESTION_DISABLED",CaseSchema.load_rules().copy.free_question_disabled)
 	var visit: Dictionary = active_visit()
 	if visit.is_empty():
 		return _fail("NO_VISIT", "请先接待顾客。")
@@ -909,12 +927,18 @@ func _divination_action(action: Dictionary) -> Dictionary:
 	var outcome := _divination.handle(candidate, visit, action)
 	if not outcome.success:
 		return _fail(outcome.error_code, outcome.message)
-	var presentation_events: Array = _advance(candidate, outcome.minutes)
+	var minutes: int = int(outcome.minutes)
+	if _sequential() and action.type.begins_with("case_"):
+		minutes = mini(minutes,maxi(0,int(content.rules.closing_minute)-int(candidate.clock_minutes)%1440))
+	var presentation_events: Array = _advance(candidate, minutes)
 	return _commit(candidate, action, outcome.message, outcome.result,presentation_events)
 
 func _end_visit(action: Dictionary) -> Dictionary:
 	if active_visit().is_empty():
 		return _fail("NO_VISIT", "没有正在进行的接待。")
+	var board_view := case_board_view()
+	if board_view.get("enabled",false) and not board_view.get("closed",false):
+		return _fail("CASE_INCOMPLETE",CaseSchema.load_rules().copy.case_finish_required)
 	if action.has("return_at") and (not action.get("guest_agreed",false) is bool or not action.get("guest_agreed",false) or not People._integer(action.return_at, int(state.clock_minutes)+1,2147483647) or next_return_time() == 0):
 		return _fail("RETURN_NOT_AGREED", "请先交谈，并与来客确认合适的回访时间。")
 	var candidate: Dictionary = state.duplicate(true)
@@ -989,6 +1013,13 @@ func _has_time(minutes: int) -> bool:
 	return int(state.clock_minutes) % 1440 + minutes <= int(content.rules.closing_minute)
 
 func _advance(candidate: Dictionary, minutes: int) -> Array:
+	var current: Dictionary = candidate.get("divination",{}).get("cases",{}).get(candidate.get("active_visit_id",""),{})
+	var board: Dictionary = current.get("board",{})
+	var event: Dictionary = current.get("event",{})
+	if not board.is_empty() and board.get("phase") != "closed" and event.get("occurrence") == "pending":
+		# Atmosphere cannot resolve the customer's event before advice is saved.
+		# Closing the board releases the unchanged original G3 deadline.
+		minutes = mini(minutes,maxi(0,int(event.due_at)-int(candidate.clock_minutes)-1))
 	var presentation_events: Array = PeopleBridge.advance(candidate, people_config, minutes, _divination,_sequential())
 	Shop.sync_effects(candidate, shop_config)
 	return presentation_events
@@ -1062,7 +1093,20 @@ func _initialize_integrated(candidate: Dictionary, fresh: bool = false) -> bool:
 	if int(candidate.schema_version) < 10:
 		DailyLoop.initialize(candidate,_sequential())
 		candidate.schema_version = 10
+	if int(candidate.schema_version) < 11:
+		candidate.divination["settings"] = {"free_question":false}
+		for case: Dictionary in candidate.divination.cases.values():
+			case["board"] = {}
+		candidate.schema_version = SaveService.CURRENT_SCHEMA
 	return People.validate(candidate.people).is_empty()
+
+func _set_free_question(action: Dictionary) -> Dictionary:
+	var copy: Dictionary = CaseSchema.load_rules().copy
+	if not action.get("enabled") is bool:
+		return _fail("INVALID_FREE_QUESTION",copy.invalid_free_question)
+	var candidate: Dictionary = state.duplicate(true)
+	candidate.divination.settings.free_question = action.enabled
+	return _commit(candidate,action,copy.free_question_saved,{"enabled":action.enabled})
 
 func _daily_action(action: Dictionary) -> Dictionary:
 	if not _sequential():

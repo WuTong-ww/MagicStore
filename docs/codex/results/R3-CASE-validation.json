@@ -1,0 +1,1420 @@
+{
+  "task": "R3-CASE",
+  "status": "partial",
+  "date": "2026-11-24",
+  "engine": "Godot 4.6.3 stable standard / Compatibility",
+  "schema_version": 11,
+  "files": [
+    ".gitattributes",
+    "data/cases/fixed_invitation.json",
+    "data/cases/index.json",
+    "data/cases/rules.json",
+    "data/ui/case_board.json",
+    "docs/codex/PROGRESS.md",
+    "docs/codex/REVIEW_PACKET_R3.md",
+    "docs/codex/WEB_ADDENDUM_R3.md",
+    "docs/codex/plans/R3-CASE.md",
+    "docs/features.md",
+    "docs/screenshots/round3/R3-CASE/closed-native-1280x720.jpg",
+    "docs/screenshots/round3/R3-CASE/deduction-native-1280x720.jpg",
+    "docs/screenshots/round3/R3-CASE/movie-keyframe-0060-1920x1080.jpg",
+    "docs/screenshots/round3/R3-CASE/movie-keyframe-0600-1920x1080.jpg",
+    "docs/screenshots/round3/R3-CASE/movie-keyframe-0880-1920x1080.jpg",
+    "docs/screenshots/round3/R3-CASE/questions-rollback-retry-native-1280x720.jpg",
+    "scripts/core/game_state.gd",
+    "scripts/dev/run.ps1",
+    "scripts/divination/case_save.gd",
+    "scripts/divination/case_schema.gd",
+    "scripts/divination/case_schema.gd.uid",
+    "scripts/divination/case_view.gd",
+    "scripts/divination/deduction_board.gd",
+    "scripts/divination/deduction_board.gd.uid",
+    "scripts/divination/past_lines.gd",
+    "scripts/divination/session.gd",
+    "scripts/save/save_service.gd",
+    "scripts/ui/case_board.gd",
+    "scripts/ui/case_board.gd.uid",
+    "scripts/ui/case_board_config.gd",
+    "scripts/ui/case_board_config.gd.uid",
+    "scripts/ui/case_deduction_slot.gd",
+    "scripts/ui/case_deduction_slot.gd.uid",
+    "scripts/ui/case_evidence_token.gd",
+    "scripts/ui/case_evidence_token.gd.uid",
+    "scripts/ui/consultation.gd",
+    "scripts/ui/main.gd",
+    "tests/divination/acceptance.gd",
+    "tests/divination/case_schema.gd",
+    "tests/divination/deduction_board.gd",
+    "tests/divination/event_migration.gd",
+    "tests/fixtures/event_case_override.gd",
+    "tests/integration/appearance_migration.gd",
+    "tests/integration/case_board_movie.gd",
+    "tests/integration/case_board_ui.gd",
+    "tests/integration/case_deadline.gd",
+    "tests/integration/case_host.gd",
+    "tests/integration/case_migration.gd",
+    "tests/integration/case_save_bad_rules.gd",
+    "tests/integration/case_transactions.gd",
+    "tests/integration/daily_loop.gd",
+    "tests/integration/daily_loop_guards.gd",
+    "tests/integration/daily_loop_migration.gd",
+    "tests/integration/daily_loop_ui.gd",
+    "tests/integration/event_effects.gd",
+    "tests/integration/family_migration.gd",
+    "tests/integration/family_transactions.gd",
+    "tests/integration/family_ui.gd",
+    "tests/integration/invitation_referral.gd",
+    "tests/integration/past_lives_migration.gd",
+    "tests/integration/past_lives_transactions.gd",
+    "tests/integration/people_bridge.gd",
+    "tests/integration/shop_content_migration.gd",
+    "tests/integration/traffic_activation.gd",
+    "tests/shop/integration.gd",
+    "docs/codex/results/R3-CASE-validation.json"
+  ],
+  "full_rounds": [
+    {
+      "round": 1,
+      "exit_code": 1,
+      "log": ".tools/r3-case/full1.log",
+      "prior_reported_checks": 3019,
+      "failure": "event_effects fixture replaced canonical invitation outcome effects; strict authored mirror rejected wait. Fixed only test fixture rules, without weakening production validation."
+    },
+    {
+      "round": 2,
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/dev/run.ps1 -Test",
+      "exit_code": 1,
+      "seconds": 898.0309999999881,
+      "source_files": 326,
+      "source_changes": [],
+      "groups": [
+        {
+          "name": "CASE SCHEMA",
+          "checks": 149,
+          "failures": 0
+        },
+        {
+          "name": "DEDUCTION BOARD",
+          "checks": 456,
+          "failures": 0
+        },
+        {
+          "name": "CASE HOST",
+          "checks": 17,
+          "failures": 0
+        },
+        {
+          "name": "CASE DEADLINE",
+          "checks": 25,
+          "failures": 0
+        },
+        {
+          "name": "CASE SAVE CONFIG",
+          "checks": 3,
+          "failures": 0
+        },
+        {
+          "name": "CASE SAVE CONFIG",
+          "checks": 3,
+          "failures": 0
+        },
+        {
+          "name": "CASE SAVE CONFIG",
+          "checks": 10,
+          "failures": 0
+        },
+        {
+          "name": "CASE TRANSACTIONS",
+          "checks": 216,
+          "failures": 0
+        },
+        {
+          "name": "CASE MIGRATION",
+          "checks": 40,
+          "failures": 0
+        },
+        {
+          "name": "CASE BOARD UI",
+          "checks": 235,
+          "failures": 0
+        },
+        {
+          "name": "SMOKE RESULT",
+          "checks": 57,
+          "failures": 0
+        },
+        {
+          "name": "DAILY LOOP",
+          "checks": 91,
+          "failures": 0
+        },
+        {
+          "name": "DAILY MIGRATION",
+          "checks": 112,
+          "failures": 0
+        },
+        {
+          "name": "DAILY LOOP GUARDS",
+          "checks": 57,
+          "failures": 0
+        },
+        {
+          "name": "DELETE SAVE",
+          "checks": 52,
+          "failures": 0
+        },
+        {
+          "name": "PROVIDER RESULT",
+          "checks": 48,
+          "failures": 0
+        },
+        {
+          "name": "DIALOGUE GROUNDING",
+          "checks": 127,
+          "failures": 0
+        },
+        {
+          "name": "FOLLOWUP QUESTIONS",
+          "checks": 86,
+          "failures": 0
+        },
+        {
+          "name": "ORACLE RULES",
+          "checks": 29,
+          "failures": 0
+        },
+        {
+          "name": "DIVINATION RESULT",
+          "checks": 543,
+          "failures": 0
+        },
+        {
+          "name": "LEGACY DIVINATION GUESTS",
+          "checks": 30,
+          "failures": 0
+        },
+        {
+          "name": "GENERATED CASES",
+          "checks": 80,
+          "failures": 0
+        },
+        {
+          "name": "EVENT GOLDEN",
+          "checks": 100,
+          "failures": 0
+        },
+        {
+          "name": "INVITATION FEEDBACK GOLDEN",
+          "checks": 22,
+          "failures": 0
+        },
+        {
+          "name": "EVENT DATA RULES",
+          "checks": 72,
+          "failures": 0
+        },
+        {
+          "name": "EVENT MIGRATION",
+          "checks": 112,
+          "failures": 0
+        },
+        {
+          "name": "G3 WORKFLOWS",
+          "checks": 128,
+          "failures": 0
+        },
+        {
+          "name": "G4 COMPONENTS",
+          "checks": 62,
+          "failures": 0
+        },
+        {
+          "name": "GENERIC EFFECTS",
+          "checks": 43,
+          "failures": 0
+        },
+        {
+          "name": "EVENT EFFECTS",
+          "checks": 29,
+          "failures": 0
+        },
+        {
+          "name": "INVITATION REFERRAL",
+          "checks": 38,
+          "failures": 0
+        },
+        {
+          "name": "EVENT NOTEBOOK UI",
+          "checks": 116,
+          "failures": 0
+        },
+        {
+          "name": "UI_SMOKE",
+          "checks": 319,
+          "failures": 0
+        },
+        {
+          "name": "SHOP RULES",
+          "checks": 89,
+          "failures": 0
+        },
+        {
+          "name": "SHOP INTEGRATION",
+          "checks": 78,
+          "failures": 0
+        },
+        {
+          "name": "SHOP CONTENT",
+          "checks": 31,
+          "failures": 0
+        },
+        {
+          "name": "ECONOMIC VALIDATION",
+          "checks": 14,
+          "failures": 0
+        },
+        {
+          "name": "ORDINARY CONTENT",
+          "checks": 36,
+          "failures": 0
+        },
+        {
+          "name": "ORDINARY POPULATION",
+          "checks": 41,
+          "failures": 0
+        },
+        {
+          "name": "SHOP CONTENT MIGRATION",
+          "checks": 108,
+          "failures": 0
+        },
+        {
+          "name": "SHOP CONTENT TRANSACTIONS",
+          "checks": 136,
+          "failures": 0
+        },
+        {
+          "name": "TRAFFIC ACTIVATION",
+          "checks": 102,
+          "failures": 0
+        },
+        {
+          "name": "COMPONENT FEEDBACK",
+          "checks": 151,
+          "failures": 0
+        },
+        {
+          "name": "SHOP CONTENT UI",
+          "checks": 57,
+          "failures": 0
+        },
+        {
+          "name": "G4 CAPTURE",
+          "checks": 10,
+          "failures": 0
+        },
+        {
+          "name": "PEOPLE INTEGRATION",
+          "checks": 52,
+          "failures": 0
+        },
+        {
+          "name": "C UI RESULT",
+          "checks": 1516,
+          "failures": 0
+        },
+        {
+          "name": "DAILY LOOP UI",
+          "checks": 110,
+          "failures": 0
+        },
+        {
+          "name": "ITEM VISUALS",
+          "checks": 212,
+          "failures": 0
+        },
+        {
+          "name": "SHELF LAYOUT",
+          "checks": 74,
+          "failures": 0
+        },
+        {
+          "name": "SHELF RENDER",
+          "checks": 38,
+          "failures": 0
+        },
+        {
+          "name": "WIND/SPRING",
+          "checks": 100,
+          "failures": 0
+        },
+        {
+          "name": "COMMITTED PRESENTATION EVENTS",
+          "checks": 277,
+          "failures": 0
+        },
+        {
+          "name": "SCENE MOTION",
+          "checks": 49,
+          "failures": 0
+        },
+        {
+          "name": "MOTION SETTINGS",
+          "checks": 31,
+          "failures": 0
+        },
+        {
+          "name": "MOTION PERFORMANCE",
+          "checks": 24,
+          "failures": 0
+        },
+        {
+          "name": "MOTION PREVIEW",
+          "checks": 7,
+          "failures": 0
+        },
+        {
+          "name": "APPEARANCE",
+          "checks": 264,
+          "failures": 0
+        },
+        {
+          "name": "APPEARANCE BIRTH",
+          "checks": 33,
+          "failures": 0
+        },
+        {
+          "name": "APPEARANCE DESCRIPTION",
+          "checks": 20,
+          "failures": 0
+        },
+        {
+          "name": "APPEARANCE MIGRATION",
+          "checks": 132,
+          "failures": 0
+        },
+        {
+          "name": "APPEARANCE UI",
+          "checks": 70,
+          "failures": 0
+        },
+        {
+          "name": "PORTRAIT PREVIEW SCHEMA ONLY",
+          "checks": 8,
+          "failures": 0
+        },
+        {
+          "name": "A4 MOOD",
+          "checks": 45,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY LIBRARY",
+          "checks": 115,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY ARRIVAL BUDGET",
+          "checks": 51,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY LIBRARY FLOW",
+          "checks": 47,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY LIBRARY DISTRIBUTION",
+          "checks": 96,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY MIGRATION",
+          "checks": 109,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY TRANSACTIONS",
+          "checks": 71,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY UI",
+          "checks": 133,
+          "failures": 0
+        },
+        {
+          "name": "PAST LIBRARY",
+          "checks": 134,
+          "failures": 0
+        },
+        {
+          "name": "PAST MIGRATION",
+          "checks": 188,
+          "failures": 0
+        },
+        {
+          "name": "PAST TRANSACTIONS",
+          "checks": 128,
+          "failures": 0
+        },
+        {
+          "name": "PAST UI",
+          "checks": 74,
+          "failures": 0
+        },
+        {
+          "name": "G5 CAPTURE",
+          "checks": 15,
+          "failures": 0
+        },
+        {
+          "name": "STYLE REPORT",
+          "checks": 68,
+          "failures": 0
+        },
+        {
+          "name": "STYLE TRANSACTIONS",
+          "checks": 66,
+          "failures": 0
+        },
+        {
+          "name": "STYLE REPORT UI",
+          "checks": 843,
+          "failures": 0
+        },
+        {
+          "name": "G6 CAPTURE",
+          "checks": 15,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY POLICY",
+          "checks": 37,
+          "failures": 0
+        },
+        {
+          "name": "SCENE VISUALS",
+          "checks": 1644,
+          "failures": 0
+        },
+        {
+          "name": "ALIGNED SCENE LAYERS",
+          "checks": 79,
+          "failures": 0
+        },
+        {
+          "name": "SCENE ASSET ACCEPTANCE",
+          "checks": 570,
+          "failures": 0
+        },
+        {
+          "name": "ARRIVAL UI RESULT",
+          "checks": 45,
+          "failures": 0
+        },
+        {
+          "name": "CONSULTATION LAYOUT",
+          "checks": 34,
+          "failures": 0
+        },
+        {
+          "name": "ROUND2 SHELL RESULT",
+          "checks": 1606,
+          "failures": 0
+        },
+        {
+          "name": "ROUND2 SHELL EDGES",
+          "checks": 87,
+          "failures": 0
+        },
+        {
+          "name": "ROUND2 CONSULTATION",
+          "checks": 48,
+          "failures": 0
+        },
+        {
+          "name": "A3R AUDIO/THEME",
+          "checks": 30,
+          "failures": 0
+        },
+        {
+          "name": "AUDIO LIFECYCLE",
+          "checks": 43,
+          "failures": 0
+        },
+        {
+          "name": "ARRIVAL TRANSACTIONS",
+          "checks": 42,
+          "failures": 0
+        },
+        {
+          "name": "SAVE DELETE UI",
+          "checks": 37,
+          "failures": 0
+        },
+        {
+          "name": "GENERATED PEOPLE INTEGRATION",
+          "checks": 146,
+          "failures": 0
+        },
+        {
+          "name": "GENERATION ARRIVAL SLOTS",
+          "checks": 30,
+          "failures": 0
+        },
+        {
+          "name": "GENERATED PEOPLE UI",
+          "checks": 49,
+          "failures": 0
+        },
+        {
+          "name": "FOLLOWUP CORE RESULT",
+          "checks": 29,
+          "failures": 0
+        },
+        {
+          "name": "FOLLOWUP QUESTIONS UI",
+          "checks": 39,
+          "failures": 0
+        },
+        {
+          "name": "CHAT KEYBOARD UI",
+          "checks": 49,
+          "failures": 0
+        },
+        {
+          "name": "OPENING GUEST INTEGRATION",
+          "checks": 1211,
+          "failures": 0
+        },
+        {
+          "name": "PROJECT CLEANUP RESULT",
+          "checks": 16,
+          "failures": 0
+        },
+        {
+          "name": "API SETTINGS UI",
+          "checks": 45,
+          "failures": 0
+        },
+        {
+          "name": "API ENDPOINT",
+          "checks": 187,
+          "failures": 0
+        },
+        {
+          "name": "MODEL POLICY RESULT",
+          "checks": 38,
+          "failures": 0
+        }
+      ],
+      "reported_checks": 15716,
+      "reported_failures": 0,
+      "script_errors": 0,
+      "log": ".tools/r3-case/full2.log",
+      "failure": "fake_gateway provider fixture exceeded its existing 30-second deadline"
+    },
+    {
+      "round": 3,
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/dev/run.ps1 -Test",
+      "exit_code": 1,
+      "seconds": 1123.2660000000033,
+      "source_files": 326,
+      "source_changes": [],
+      "groups": [
+        {
+          "name": "CASE SCHEMA",
+          "checks": 149,
+          "failures": 0
+        },
+        {
+          "name": "DEDUCTION BOARD",
+          "checks": 456,
+          "failures": 0
+        },
+        {
+          "name": "CASE HOST",
+          "checks": 17,
+          "failures": 0
+        },
+        {
+          "name": "CASE DEADLINE",
+          "checks": 25,
+          "failures": 0
+        },
+        {
+          "name": "CASE SAVE CONFIG",
+          "checks": 3,
+          "failures": 0
+        },
+        {
+          "name": "CASE SAVE CONFIG",
+          "checks": 3,
+          "failures": 0
+        },
+        {
+          "name": "CASE SAVE CONFIG",
+          "checks": 10,
+          "failures": 0
+        },
+        {
+          "name": "CASE TRANSACTIONS",
+          "checks": 218,
+          "failures": 0
+        },
+        {
+          "name": "CASE MIGRATION",
+          "checks": 40,
+          "failures": 0
+        },
+        {
+          "name": "CASE BOARD UI",
+          "checks": 235,
+          "failures": 0
+        },
+        {
+          "name": "SMOKE RESULT",
+          "checks": 57,
+          "failures": 0
+        },
+        {
+          "name": "DAILY LOOP",
+          "checks": 103,
+          "failures": 0
+        },
+        {
+          "name": "DAILY MIGRATION",
+          "checks": 84,
+          "failures": 0
+        },
+        {
+          "name": "DAILY LOOP GUARDS",
+          "checks": 57,
+          "failures": 0
+        },
+        {
+          "name": "DELETE SAVE",
+          "checks": 52,
+          "failures": 0
+        },
+        {
+          "name": "PROVIDER RESULT",
+          "checks": 48,
+          "failures": 0
+        },
+        {
+          "name": "DIALOGUE GROUNDING",
+          "checks": 127,
+          "failures": 0
+        },
+        {
+          "name": "FOLLOWUP QUESTIONS",
+          "checks": 86,
+          "failures": 0
+        },
+        {
+          "name": "ORACLE RULES",
+          "checks": 29,
+          "failures": 0
+        },
+        {
+          "name": "DIVINATION RESULT",
+          "checks": 543,
+          "failures": 0
+        },
+        {
+          "name": "LEGACY DIVINATION GUESTS",
+          "checks": 30,
+          "failures": 0
+        },
+        {
+          "name": "GENERATED CASES",
+          "checks": 80,
+          "failures": 0
+        },
+        {
+          "name": "EVENT GOLDEN",
+          "checks": 100,
+          "failures": 0
+        },
+        {
+          "name": "INVITATION FEEDBACK GOLDEN",
+          "checks": 22,
+          "failures": 0
+        },
+        {
+          "name": "EVENT DATA RULES",
+          "checks": 72,
+          "failures": 0
+        },
+        {
+          "name": "EVENT MIGRATION",
+          "checks": 112,
+          "failures": 0
+        },
+        {
+          "name": "G3 WORKFLOWS",
+          "checks": 128,
+          "failures": 0
+        },
+        {
+          "name": "G4 COMPONENTS",
+          "checks": 62,
+          "failures": 0
+        },
+        {
+          "name": "GENERIC EFFECTS",
+          "checks": 43,
+          "failures": 0
+        },
+        {
+          "name": "EVENT EFFECTS",
+          "checks": 29,
+          "failures": 0
+        },
+        {
+          "name": "INVITATION REFERRAL",
+          "checks": 38,
+          "failures": 0
+        },
+        {
+          "name": "EVENT NOTEBOOK UI",
+          "checks": 116,
+          "failures": 0
+        },
+        {
+          "name": "UI_SMOKE",
+          "checks": 319,
+          "failures": 0
+        },
+        {
+          "name": "SHOP RULES",
+          "checks": 89,
+          "failures": 0
+        },
+        {
+          "name": "SHOP INTEGRATION",
+          "checks": 78,
+          "failures": 0
+        },
+        {
+          "name": "SHOP CONTENT",
+          "checks": 31,
+          "failures": 0
+        },
+        {
+          "name": "ECONOMIC VALIDATION",
+          "checks": 14,
+          "failures": 0
+        },
+        {
+          "name": "ORDINARY CONTENT",
+          "checks": 36,
+          "failures": 0
+        },
+        {
+          "name": "ORDINARY POPULATION",
+          "checks": 41,
+          "failures": 0
+        },
+        {
+          "name": "SHOP CONTENT MIGRATION",
+          "checks": 108,
+          "failures": 0
+        },
+        {
+          "name": "SHOP CONTENT TRANSACTIONS",
+          "checks": 136,
+          "failures": 0
+        },
+        {
+          "name": "TRAFFIC ACTIVATION",
+          "checks": 102,
+          "failures": 0
+        },
+        {
+          "name": "COMPONENT FEEDBACK",
+          "checks": 161,
+          "failures": 0
+        },
+        {
+          "name": "SHOP CONTENT UI",
+          "checks": 57,
+          "failures": 0
+        },
+        {
+          "name": "G4 CAPTURE",
+          "checks": 10,
+          "failures": 0
+        },
+        {
+          "name": "PEOPLE INTEGRATION",
+          "checks": 52,
+          "failures": 0
+        },
+        {
+          "name": "C UI RESULT",
+          "checks": 1516,
+          "failures": 0
+        },
+        {
+          "name": "DAILY LOOP UI",
+          "checks": 113,
+          "failures": 0
+        },
+        {
+          "name": "ITEM VISUALS",
+          "checks": 212,
+          "failures": 0
+        },
+        {
+          "name": "SHELF LAYOUT",
+          "checks": 74,
+          "failures": 0
+        },
+        {
+          "name": "SHELF RENDER",
+          "checks": 38,
+          "failures": 0
+        },
+        {
+          "name": "WIND/SPRING",
+          "checks": 100,
+          "failures": 0
+        },
+        {
+          "name": "COMMITTED PRESENTATION EVENTS",
+          "checks": 277,
+          "failures": 0
+        },
+        {
+          "name": "SCENE MOTION",
+          "checks": 49,
+          "failures": 0
+        },
+        {
+          "name": "MOTION SETTINGS",
+          "checks": 31,
+          "failures": 0
+        },
+        {
+          "name": "MOTION PERFORMANCE",
+          "checks": 24,
+          "failures": 0
+        },
+        {
+          "name": "MOTION PREVIEW",
+          "checks": 7,
+          "failures": 0
+        },
+        {
+          "name": "APPEARANCE",
+          "checks": 264,
+          "failures": 0
+        },
+        {
+          "name": "APPEARANCE BIRTH",
+          "checks": 33,
+          "failures": 0
+        },
+        {
+          "name": "APPEARANCE DESCRIPTION",
+          "checks": 20,
+          "failures": 0
+        },
+        {
+          "name": "APPEARANCE MIGRATION",
+          "checks": 114,
+          "failures": 0
+        },
+        {
+          "name": "APPEARANCE UI",
+          "checks": 70,
+          "failures": 0
+        },
+        {
+          "name": "PORTRAIT PREVIEW SCHEMA ONLY",
+          "checks": 8,
+          "failures": 0
+        },
+        {
+          "name": "A4 MOOD",
+          "checks": 45,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY LIBRARY",
+          "checks": 115,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY ARRIVAL BUDGET",
+          "checks": 51,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY LIBRARY FLOW",
+          "checks": 47,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY LIBRARY DISTRIBUTION",
+          "checks": 96,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY MIGRATION",
+          "checks": 109,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY TRANSACTIONS",
+          "checks": 71,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY UI",
+          "checks": 133,
+          "failures": 0
+        },
+        {
+          "name": "PAST LIBRARY",
+          "checks": 134,
+          "failures": 0
+        },
+        {
+          "name": "PAST MIGRATION",
+          "checks": 190,
+          "failures": 0
+        },
+        {
+          "name": "PAST TRANSACTIONS",
+          "checks": 128,
+          "failures": 0
+        },
+        {
+          "name": "PAST UI",
+          "checks": 74,
+          "failures": 0
+        },
+        {
+          "name": "G5 CAPTURE",
+          "checks": 15,
+          "failures": 0
+        },
+        {
+          "name": "STYLE REPORT",
+          "checks": 68,
+          "failures": 0
+        },
+        {
+          "name": "STYLE TRANSACTIONS",
+          "checks": 66,
+          "failures": 0
+        },
+        {
+          "name": "STYLE REPORT UI",
+          "checks": 843,
+          "failures": 0
+        },
+        {
+          "name": "G6 CAPTURE",
+          "checks": 15,
+          "failures": 0
+        },
+        {
+          "name": "FAMILY POLICY",
+          "checks": 37,
+          "failures": 0
+        },
+        {
+          "name": "SCENE VISUALS",
+          "checks": 1644,
+          "failures": 0
+        },
+        {
+          "name": "ALIGNED SCENE LAYERS",
+          "checks": 79,
+          "failures": 0
+        },
+        {
+          "name": "SCENE ASSET ACCEPTANCE",
+          "checks": 570,
+          "failures": 0
+        },
+        {
+          "name": "ARRIVAL UI RESULT",
+          "checks": 45,
+          "failures": 0
+        },
+        {
+          "name": "CONSULTATION LAYOUT",
+          "checks": 34,
+          "failures": 0
+        },
+        {
+          "name": "ROUND2 SHELL RESULT",
+          "checks": 1606,
+          "failures": 0
+        },
+        {
+          "name": "ROUND2 SHELL EDGES",
+          "checks": 87,
+          "failures": 0
+        },
+        {
+          "name": "ROUND2 CONSULTATION",
+          "checks": 48,
+          "failures": 0
+        },
+        {
+          "name": "A3R AUDIO/THEME",
+          "checks": 30,
+          "failures": 0
+        },
+        {
+          "name": "AUDIO LIFECYCLE",
+          "checks": 43,
+          "failures": 0
+        },
+        {
+          "name": "ARRIVAL TRANSACTIONS",
+          "checks": 42,
+          "failures": 0
+        },
+        {
+          "name": "SAVE DELETE UI",
+          "checks": 37,
+          "failures": 0
+        },
+        {
+          "name": "GENERATED PEOPLE INTEGRATION",
+          "checks": 146,
+          "failures": 0
+        },
+        {
+          "name": "GENERATION ARRIVAL SLOTS",
+          "checks": 30,
+          "failures": 0
+        },
+        {
+          "name": "GENERATED PEOPLE UI",
+          "checks": 49,
+          "failures": 0
+        },
+        {
+          "name": "FOLLOWUP CORE RESULT",
+          "checks": 29,
+          "failures": 0
+        },
+        {
+          "name": "FOLLOWUP QUESTIONS UI",
+          "checks": 39,
+          "failures": 0
+        },
+        {
+          "name": "CHAT KEYBOARD UI",
+          "checks": 49,
+          "failures": 0
+        },
+        {
+          "name": "OPENING GUEST INTEGRATION",
+          "checks": 1211,
+          "failures": 0
+        },
+        {
+          "name": "PROJECT CLEANUP RESULT",
+          "checks": 16,
+          "failures": 0
+        },
+        {
+          "name": "API SETTINGS UI",
+          "checks": 45,
+          "failures": 0
+        },
+        {
+          "name": "API ENDPOINT",
+          "checks": 187,
+          "failures": 0
+        },
+        {
+          "name": "MODEL POLICY RESULT",
+          "checks": 38,
+          "failures": 0
+        },
+        {
+          "name": "HTTP RESULT",
+          "checks": 41,
+          "failures": 0
+        },
+        {
+          "name": "HTTP CORE RESULT",
+          "checks": 56,
+          "failures": 2
+        }
+      ],
+      "reported_checks": 15796,
+      "reported_failures": 2,
+      "script_errors": 2,
+      "log": ".tools/r3-case/full3.log",
+      "unittest_reported_counts": [],
+      "failure": "Local HTTP connected and provider41/0; game_state_http real reply validation and online-mode assertions failed (56 checks/2 failures). The two ERROR lines are push_error assertion reports. No full4 per task limit."
+    }
+  ],
+  "legacy_fixture_compatibility": {
+    "product_changes": false,
+    "root_cause": "Strict authored fixed_invitation mirror rejects legacy in-memory overrides to invitation event outcomes or feedback effects.",
+    "approach": "Clone invitation into a distinct fixture case; bind the real legacy visit; retain canonical invitation and all assertions; sync and restore runtime/base/save catalogs.",
+    "helper": "tests/fixtures/event_case_override.gd",
+    "targets": [
+      {
+        "file": "tests/integration/event_effects.gd",
+        "red_checks": 5,
+        "red_failures": 1,
+        "green_checks": 29,
+        "green_failures": 0
+      },
+      {
+        "file": "tests/integration/invitation_referral.gd",
+        "red_checks": 21,
+        "red_failures": 1,
+        "green_checks": 38,
+        "green_failures": 0
+      },
+      {
+        "file": "tests/integration/family_transactions.gd",
+        "red_checks": 55,
+        "red_failures": 1,
+        "green_checks": 71,
+        "green_failures": 0
+      },
+      {
+        "file": "tests/integration/family_ui.gd",
+        "red_checks": 7,
+        "red_failures": 1,
+        "green_checks": 133,
+        "green_failures": 0,
+        "gpu_captures": 0
+      }
+    ]
+  },
+  "loopback_execution_boundary": {
+    "cause": "Restricted execution denied local loopback sockets with Windows error 10013.",
+    "product_changed": false,
+    "timeouts_changed": false,
+    "assertions_weakened": false,
+    "restricted_run": {
+      "fake_gateway": "API187/model38 passed, provider request received zero POSTs before existing30s deadline",
+      "person_jobs": "reply dictionaries absent, followed by deadline",
+      "people_python": "117 tests; failures1/errors34, multiple urllib URLError WinError10013"
+    },
+    "escalated_original_scripts": {
+      "scripts/dev/test-http.ps1": {
+        "exit_code": 0,
+        "log": ".tools/r3-case/http-elevated.log",
+        "godot_reported_checks": 513,
+        "wire_assertions": 256,
+        "captured_requests": 16
+      },
+      "scripts/dev/test-person-http.ps1": {
+        "exit_code": 0,
+        "log": ".tools/r3-case/person-http-elevated.log",
+        "checks": 64,
+        "failures": 0
+      },
+      "scripts/dev/test-people.ps1": {
+        "exit_code": 0,
+        "log": ".tools/r3-case/people-elevated.log",
+        "godot_reported_checks": 359,
+        "python_tests": 117,
+        "python_failures": 0
+      }
+    },
+    "scope": "Original local fixture scripts and isolated save directories; no external model calls or credentials required. Full3 must allow these same localhost fixtures.",
+    "diagnosis": ".tools/r3-case/http-diagnosis.md"
+  },
+  "unreached_preflight": {
+    "targets": 76,
+    "passed": 76,
+    "failed": 0,
+    "not_full_suite": true,
+    "results": ".tools/r3-case/unreached-targets.json"
+  },
+  "independent_review": {
+    "critical": 0,
+    "important": 0,
+    "minor": 0,
+    "closed_findings": [
+      "original event deadline must not resolve before board closes",
+      "malformed rules must return nonempty validation error"
+    ]
+  },
+  "graphical": {
+    "renderer": "Windows / Intel Iris Xe / Compatibility",
+    "case_ui": {
+      "checks": 241,
+      "failures": 0,
+      "captures": 6
+    },
+    "shop_ui": {
+      "checks": 1546,
+      "failures": 0,
+      "captures": 30
+    },
+    "png_pattern": ".tools/c-ui-captures/r3-case-{questions,deduction,closed}-{1280x720,1920x1080}.png"
+  },
+  "screenshots": {
+    "version": 1,
+    "jpeg_count": 6,
+    "quality": 85,
+    "subsampling": "4:4:4",
+    "total_bytes": 1594709,
+    "visual_qa": "all_six_opened_with_view_image; native_rollback_notice_intentional; frame_0060_contains_transient_evidence_flight",
+    "files": [
+      {
+        "source": ".tools/c-ui-captures/r3-case-questions-1280x720.png",
+        "path": "docs/screenshots/round3/R3-CASE/questions-rollback-retry-native-1280x720.jpg",
+        "kind": "native_ui",
+        "description": "First question choices after an intentional save-write failure; rolled back and ready to retry.",
+        "width": 1280,
+        "height": 720,
+        "quality": 85,
+        "bytes": 214690,
+        "sha256": "ff8a9275d628fc15d1553b1a4543b74e6a92a405c1d114c73890e677d12cd296",
+        "source_sha256": "2a777a383c0fa0ac27b22d02036ca750d7621eb9cec058e65284aa626b0a46ae",
+        "visual_qa": "opened_with_view_image_and_checked",
+        "conversion_resampled": false
+      },
+      {
+        "source": ".tools/c-ui-captures/r3-case-deduction-1280x720.png",
+        "path": "docs/screenshots/round3/R3-CASE/deduction-native-1280x720.jpg",
+        "kind": "native_ui",
+        "description": "Native UI: three selected deductions, evidence and advice choices.",
+        "width": 1280,
+        "height": 720,
+        "quality": 85,
+        "bytes": 250441,
+        "sha256": "d4900ce84cba63445890311b6ee06811d3ddfe3a8450e91d1adde03457728e49",
+        "source_sha256": "2caa9afcb046aafc30bc864a63835f2c804684c1fc5253287f6512898465642d",
+        "visual_qa": "opened_with_view_image_and_checked",
+        "conversion_resampled": false
+      },
+      {
+        "source": ".tools/c-ui-captures/r3-case-closed-1280x720.png",
+        "path": "docs/screenshots/round3/R3-CASE/closed-native-1280x720.jpg",
+        "kind": "native_ui",
+        "description": "Native UI: committed three-star closure and guest reaction.",
+        "width": 1280,
+        "height": 720,
+        "quality": 85,
+        "bytes": 234042,
+        "sha256": "2bf06cb776b8265abf777f32f1033b5ccdc1cfc16e6ed31b7fa2b50e07a330fd",
+        "source_sha256": "fdb7963e5d1de9f0280c3112f47a72595f89478221ccdca9759f85c1353e431a",
+        "visual_qa": "opened_with_view_image_and_checked",
+        "conversion_resampled": false
+      },
+      {
+        "source": ".tools/r3-case/movie-frames/frame-0060.png",
+        "path": "docs/screenshots/round3/R3-CASE/movie-keyframe-0060-1920x1080.jpg",
+        "kind": "movie_frame",
+        "description": "Actual movie frame 60: second question round and post-commit evidence-flight animation.",
+        "width": 1920,
+        "height": 1080,
+        "quality": 85,
+        "bytes": 284758,
+        "sha256": "a68e29964100e1b89ed922f7f5a68cfea0f5543f8f39019feb0c3497b6f98205",
+        "source_sha256": "dde6c34e8de3607da802cddbda9b0132cd0ac302d81471b93dec5d0019c11d16",
+        "visual_qa": "opened_with_view_image_and_checked",
+        "conversion_resampled": false
+      },
+      {
+        "source": ".tools/r3-case/movie-frames/frame-0600.png",
+        "path": "docs/screenshots/round3/R3-CASE/movie-keyframe-0600-1920x1080.jpg",
+        "kind": "movie_frame",
+        "description": "Actual movie frame 600: ongoing deduction with revealed cards and one saved wax seal.",
+        "width": 1920,
+        "height": 1080,
+        "quality": 85,
+        "bytes": 302706,
+        "sha256": "3ff084d4d7b20473bb675532b844cedcadcb964f33a164ae431ad7a6a9241031",
+        "source_sha256": "7df52963ab00bf2e4588d1fe561560a5d01bcdf549a1fc5a725a4b131b8cf554",
+        "visual_qa": "opened_with_view_image_and_checked",
+        "conversion_resampled": false
+      },
+      {
+        "source": ".tools/r3-case/movie-frames/frame-0880.png",
+        "path": "docs/screenshots/round3/R3-CASE/movie-keyframe-0880-1920x1080.jpg",
+        "kind": "movie_frame",
+        "description": "Actual movie frame 880: committed three-star closure and guest reaction.",
+        "width": 1920,
+        "height": 1080,
+        "quality": 85,
+        "bytes": 308072,
+        "sha256": "a54873ffb1fcebbdb275f6309dc4f8225df54cd8537117080757b02e1503a9ec",
+        "source_sha256": "dbea2c994d3f9e596743146e422d011d017c4fe59528b4ec6ebf7fae2416aed4",
+        "visual_qa": "opened_with_view_image_and_checked",
+        "conversion_resampled": false
+      }
+    ],
+    "scope": "Artifact packaging only. No product/test edits and no UI/movie reruns."
+  },
+  "movie": {
+    "path": ".tools/case-board-movie/r3-case.avi",
+    "committed": false,
+    "checks": 30,
+    "failures": 0,
+    "video_frames": 956,
+    "fps": 30,
+    "duration_seconds": 31.866666666666667,
+    "width": 1920,
+    "height": 1080,
+    "bytes": 227989708,
+    "avi_sha256": "e8f2515f2272ee41fac0873a9f0b8faf0c898ec243d205e3de6713db01244019",
+    "frames": [
+      {
+        "frame": 60,
+        "seconds": 2.0,
+        "source_chunk_offset": 12490652,
+        "jpeg_bytes": 218850,
+        "path": ".tools/r3-case/movie-frames/frame-0060.png"
+      },
+      {
+        "frame": 600,
+        "seconds": 20.0,
+        "source_chunk_offset": 141402306,
+        "jpeg_bytes": 237854,
+        "path": ".tools/r3-case/movie-frames/frame-0600.png"
+      },
+      {
+        "frame": 880,
+        "seconds": 29.333333333333332,
+        "source_chunk_offset": 212412634,
+        "jpeg_bytes": 238685,
+        "path": ".tools/r3-case/movie-frames/frame-0880.png"
+      }
+    ]
+  },
+  "privacy": "Public board excludes truth, correct answers and unflipped identities; testimony/tool clues/hypotheses/predictions stay separate.",
+  "fun_review": {
+    "immediate_feedback": true,
+    "multiple_judgments": [
+      "which cards to reveal",
+      "which material belongs to a slot",
+      "deduction answers and advice"
+    ],
+    "wrong_reasoning_continues": true,
+    "typing_required": false,
+    "realtime_wait_required": false,
+    "human_3_to_6_minute_timing_measured": false
+  },
+  "limitations": [
+    "Standard full3 exited1 at two HTTP core assertions; CASE is partial at the three-round limit, with followup verification assigned to STORY. Earlier targeted HTTP success does not replace the failed full suite.",
+    "Human reading/decision timing and audible sound assessment remain manual review items.",
+    "Some existing deck faces use dynamic decorative fallback; no new raster artwork was generated."
+  ],
+  "post_verification_formatting": {
+    "file": "tests/divination/deduction_board.gd",
+    "change": "Removed one extra blank line at EOF for git diff --check; no test behavior changed, no full4."
+  }
+}

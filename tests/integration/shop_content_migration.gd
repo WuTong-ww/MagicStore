@@ -24,7 +24,7 @@ func run() -> void:
 	var started: Dictionary = await game.execute_action_async({"type":"new_game","name":"经营内容迁移隔离"})
 	check(started.success,"new game is created through the real async action boundary")
 	if started.success:
-		check(game.snapshot().get("schema_version") == 10,"new business metadata retains its explicit markers at current schema10")
+		check(game.snapshot().get("schema_version") == SaveService.CURRENT_SCHEMA,"new business metadata retains its explicit markers at current schema")
 		check(game.snapshot().shop.get("content_version") == 1,"new business metadata has an explicit additive content version")
 		check(game.snapshot().people.get("ordinary_content_version") == 1,"new-game population enables the independent content domain before first-day births")
 		check(game.snapshot().shop.batches.all(func(batch: Dictionary) -> bool: return batch.get("quality_id") == "standard" and batch.get("sell_multiplier") == 1.0),"opening inventory has explicit standard quality and preserves the original price multiplier")
@@ -111,7 +111,7 @@ func compatibility_schema(game: Node, saves: Node, schema: int) -> void:
 	var path: String = saves._path(old.save_id)
 	var old_sha := FileAccess.get_sha256(path)
 	check((await act(game,"load_game",{"save_id":old.save_id})).success,"real load migrates schema / "+str(schema))
-	check(game.state.schema_version == 10 and game.state.shop.content_version == 1 and game.state.people.get("ordinary_content_version") == 1,"additive content markers persist through schema10 / "+str(schema))
+	check(game.state.schema_version == SaveService.CURRENT_SCHEMA and game.state.shop.content_version == 1 and game.state.people.get("ordinary_content_version") == 1,"additive content markers persist through current schema / "+str(schema))
 	check(FileAccess.get_sha256(path) == old_sha and saves.read_save(old.save_id).state.schema_version == schema,"load never rewrites historic bytes / "+str(schema))
 	check(game.state.player.coins == old.player.coins and game.state.clock_minutes == old.clock_minutes and game.state.processed_actions == old.processed_actions,"no past money/action/time is recomputed / "+str(schema))
 	if schema >= 3:
@@ -131,7 +131,7 @@ func commit_migrated(game: Node, saves: Node, path: String, old_sha: String, sch
 	var failed: Dictionary = await act(game,"wait",{"action_id":action_id,"minutes":1})
 	check(not failed.success and game.snapshot() == before and FileAccess.get_sha256(path) == old_sha,"failed first commit preserves memory and old file / "+str(schema))
 	var passed: Dictionary = await act(game,"wait",{"action_id":action_id,"minutes":1})
-	check(passed.success and saves.read_save(game.state.save_id).state.schema_version == 10,"same-ID retry durably commits schema10 / "+str(schema))
+	check(passed.success and saves.read_save(game.state.save_id).state.schema_version == SaveService.CURRENT_SCHEMA,"same-ID retry durably commits current schema / "+str(schema))
 	var committed: Dictionary = game.snapshot()
 	check((await act(game,"wait",{"action_id":action_id,"minutes":1})).success and game.snapshot() == committed,"replay cannot migrate/charge twice / "+str(schema))
 	check((await act(game,"load_game",{"save_id":committed.save_id})).success and game.snapshot() == committed,"exact committed snapshot survives reload / "+str(schema))
@@ -157,15 +157,19 @@ func actual_schema7_history(game: Node, saves: Node) -> void:
 	if not loaded.success:
 		return
 	var migrated: Dictionary = game.snapshot()
-	check(migrated.schema_version == 10 and FileAccess.get_sha256(path) == old_sha,"actual schema7 load migrates only memory")
+	check(migrated.schema_version == SaveService.CURRENT_SCHEMA and FileAccess.get_sha256(path) == old_sha,"actual schema7 load migrates only memory")
 	# Compare the entire real old B namespace after validating/removing only the
 	# two additive G5 fields from an in-memory copy; never edit the recorded v7.
 	var old_divination: Dictionary = migrated.divination.duplicate(true)
 	check(old_divination.get("past_lines") == {"version":1,"instances":{}},"actual historical save gains only an empty modern past namespace")
 	old_divination.erase("past_lines")
+	check(old_divination.get("settings") == {"free_question":false},"historical consultation gains only the disabled free-question preference")
+	old_divination.erase("settings")
 	for case: Dictionary in old_divination.cases.values():
 		check(case.get("cause") == ("both" if case.case_id == "archive" else "present"),"actual old case gains only its trusted cause / "+case.case_id)
+		check(case.get("board") == {},"historical cases retain their old interface through an empty board")
 		case.erase("cause")
+		case.erase("board")
 	var unchanged := true
 	for key: String in ["save_id","state_version","clock_minutes","player","npcs","visits","active_visit_id","processed_actions"]:
 		unchanged = unchanged and migrated[key] == canonical[key]

@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "definitions": [
+    {
+      "id": "fixed_invitation",
+      "path": "res://data/cases/fixed_invitation.json"
+    }
+  ]
+}

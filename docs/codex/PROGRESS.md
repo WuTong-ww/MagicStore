@@ -1,11 +1,22 @@
 # 第三轮：占卜推理（2026-11-24）
 
+收到网页版补充（2026-11-24）：保留本轮已有工作，继续当前CASE。以本聊天追加规格替换原R3-WEB；第1–3项并入尚未开始的R3-POLISH：嵌入字体覆盖扫描100%、图片图标、网页滚轮修复及测试、<640px覆盖抽屉/对话≤45%/立绘上移与整体缩放，验收1280×529、1366×768、1920×1080。WEB另修存档簿遮罩/其他面板隐藏、测量并缩小导出包、离线固定/备用案件与无密钥/私有地址、缺音乐静音；codex/round3推送自动发布/preview/，main合并后才发布正式，当前不改main。技术总监旧版试玩的四下拉/两确认/整页结果、静止时钟/无新客作为CASE/LOOP验收依据；默认顺序接待与按钮翻牌流程继续，未重启目标。
+
 当前工作区：D:/MagicStore/.tools/round3，分支 codex/round3，基于 codex/round2-clean 的 2b34ecb。原 codex/web-playtest 未提交工作保持原样。原生新建的 C:/Users/WT/.codex/worktrees/round3/MagicStore 因沙箱 Git 访问与跨盘移动失败未使用；已将可写独立工作区挂接本聊天。
 
 任务ID｜状态｜提交｜一句话
 ---｜---｜---｜---
 R3-0｜完成（随 LOOP 提交）｜89b7334｜Cozy Tunes/、assets/audio/music/ 已忽略且零追踪；剧情附录原文封存 docs/story/fixed_cases.md。
 R3-LOOP｜部分完成｜89b7334｜顺序日程及专项全绿；第三轮标准全测停在旧 traffic 快照比较漏排除新增 daily_loop 字段，未跑第四轮。
+R3-CASE｜部分完成｜待提交｜推理板/三建议/迁移/双尺寸/31.87秒录像专项通过；标准第3轮在HTTP core两断言失败，按上限不跑full4。
+
+R3-CASE 恢复点：实际工作区 D:/MagicStore/.tools/round3，schema11；full1 session71394 已 terminal exit1，不再poll，日志 .tools/r3-case/full1.log。新CASE八组和前序已过，旧 event_effects 的 wait 返回 CONTENT_INVALID。case_core仅定位最小兼容修正并检查后续未到达夹具，禁止放松生产校验。CASE独审Critical/Important/Minor均0；真实deadline25/25、坏配置10/10、host17/17、迁移40/40、transactions218/218、board456/456、schema149/149、UI GPU241/241六帧、旧shop GPU1546/1546三十帧。GPU session44965 已terminal0，不再poll。最终本地录像 .tools/case-board-movie/r3-case.avi，956帧/30fps/31.8667秒/227989708B；不提交视频。完整上限三轮，下一为第2轮。产品源尚未提交，不得标完成；root补文档/JPG后跑全套。
+
+R3-CASE 完整第2轮已terminal exit1：root session70127已收终态，不再poll；`.tools/r3-case/full2.log`与full2-result.json。898.03秒，source326逐SHA未变，已报告15716检查0失败、0SCRIPT ERROR；随后test-http.ps1在fake_gateway的provider.gd超过30秒deadline，整轮失败，不能标全绿。UI agent正在精确复现定位，data agent仅跑未到达person/people/art尾段；最后机会为第3轮，尚未启动。第1轮夹具已test-only修复：独立fixture case承载alternate事件，不覆盖生产invitation；event29/29、referral38/38、family事务71/71、familyUI133/133，均先真实RED。后续76个固定Godot目标预跑全部通过（write/read原顺序、无timeout/错误），不代替全套。六JPG已逐开，共1594709B；只含三界面+三录像帧。
+
+R3-CASE 最新恢复点：完整第3轮root session91127已terminal exit1并收终态，不再poll；1123.266秒，326源文件逐SHA未变，reported15796检查/2失败，2个ERROR均为HTTP core断言push_error。网络已通（provider41/41），game_state_http.gd的real reply validation/online mode两项未过，UI agent仅在.tools诊断，生产未动。三轮上限已到，CASE按partial提交继续STORY，禁止full4。正式证据results/R3-CASE-validation.json（66任务路径、六JPG1594709B、本地视频956帧/31.8667秒）。第2轮外因证据与原脚本提权专项仍保留，但不能替代失败的标准全套。OFL已恢复HEAD/原登记LF SHA1c05c68c…并锁该精确路径-text；formal专项364记录/367文件有效，未改manifest/作者内容。68581/30612/51784/70127/71394/44965/91127均已terminal，不poll旧handle。CASE提交/推送后才应用STORY隔离草稿。
+
+STORY正式计划已写plans/R3-STORY.md，目前仅`.tools/r3-story/drafts`隔离准备数据/core/UI与root接线，不改CASE冻结生产文件。CASE提交后才应用STORY草稿；该计划不随CASE提交。STORY需最佳/最差五案、缺案3取信补笔记2、低信任可自拼、写信真延迟3日、雨夜保存与五人短访，固定invitation定义/hash保持。
 
 R3-LOOP 终态：实现与独立审查已完成，核心103/103、迁移/模式98/98、入口守卫57/57、最终7天66/66；新UI GPU116/116六帧、shop1544/1544三十帧，六JPG已逐开。完整第3轮已exit1（.tools/r3-loop/full3.log），此前2858检查零失败，traffic模块单独复跑101检查/1失败。独立真实加载确认新增键仅daily_loop，移除该新增namespace后所有历史字段精确相等，原夹具及复制文件字节不变。按三轮上限部分完成，不跑第四轮。所有session均终止，不poll旧handle。正式结果在results/R3-LOOP-validation.json；提交推送后立即继续R3-CASE，随下一schema兼容工作补该夹具，再整体复核。不得冒称本轮标准全绿。
 
