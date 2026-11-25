@@ -60,3 +60,20 @@ R3-TITLE 入店提示复用上表已有的 Kenney `Audio/bong_001.ogg`（项目�
 指定来源为 [Cozy Tunes + Cozy FX](https://pizzadoggy.itch.io/cozy-tunes)，作者 Pizza Doggy。2026-11-21 官方页面可读取，先前实际下载请求返回 HTTP 429；v3续跑再查官网及免费领取页仍可读取，但本机获准联网后的下载入口请求遇到TLS EOF，仍未取得三首音乐及完整包内许可，因此本仓库**没有收录或伪造这些音乐**，也没有音乐文件 SHA256。最新访问证据见 docs/codex/results/A3R-music-retry.json。
 
 `data/ui/audio.json` 的 day/night/consultation 三个路径为空并标记 missing；播放器保留 Music 总线、时钟切换与交叉淡入流程，缺文件时安静回退。人工补齐路径分别为 `assets/audio/music/day.ogg`、`night.ogg`、`consultation.ogg`。补入前须核验当时包内许可并登记曲名、来源和 SHA256；遵守手册约束：不得作为素材单独再发布、不得训练 AI、音乐不得进入任何模型请求。当前未取得的许可不被冒称为 CC0 或 OFL。
+
+
+## R3-MUSIC：本地 Cozy Tunes（2026-11-25）
+
+作者 Pizza Doggy；[官方来源](https://pizzadoggy.itch.io/cozy-tunes)。官方当前 `License Agreement.pdf` 标注 2026-11-01，上传 ID 20743451，SHA256 `6416675b7f0696a8be0a9eea57e0dd441b815ee5dce6501f6aaff43be2713e88`。它是带限制的定制协议，允许项目内使用/修改，限制独立素材再分发与 AI 用途，不按无条件 CC0 登记。历史本地原包的取得版本许可尚未证明，留人工核对。原音乐、转换产物和许可 PDF 仅保存在 ignored 本地，均不随公开源码或默认导出发布；音频未进入模型。
+
+前述 A3R 下载失败是当时历史；本轮来源为用户指定的本地原包。`data/audio.json` 登记全部 21 首源 SHA/时长；以下是实际接入的五首（q6 Vorbis，仅本地构建）。
+
+曲目｜原源 SHA256｜本地运行文件 SHA256
+---｜---｜---
+Gentle Breeze.ogg｜`65f71595d14ed5fabb814e995fe5f8d931b061f64fbda532e7ab86d7ebfa05da`｜`c60d89ffe727557f468b67bce2e69acbfc28582e46dd2299f6dbde5587721c1b`
+Sunlight Through Leaves.ogg｜`f9adb44e02947ab36a34300c30243b88d1c9fa6f80d52a5f6fe7bf54561d6799`｜`22f73ad96ed7423dc6724fb83bfd9b0e84cace613e8b4006b7ffbbd9eca4f682`
+Evening Harmony.ogg｜`71701ca53aa31d375d5544e590aec818a8326765f98d884c130c7b30e09da43c`｜`510f98c59b8afcc35156b5547e954503e2556e09481a9b5732f3d146c4528d97`
+Whispering Woods.ogg｜`93597af7f6ae1cbf6b0bf68caa931d45dc8695a3baaf5910b402336ce8a76f0a`｜`36e92a197df575a721456c79bf81648c04125ca4ef11731a77d5ba6c493c3013`
+Fabric Of Life.ogg｜`8622ec2d6391153a52fe53cfc278a53fa62bf03a46ca6215df98a57f63f5f573`｜`3ceb034e9527818c3c62bcaf1b0ad77276609d6e5aa497aae27a42b175693721`
+
+转码工具继续使用上文登记的 ImageIO/FFmpeg 7.1；仅执行本地解码/编码，不将音乐输入生成、评估或训练模型。文件名初选不等于人工试听；授权与听感复核由项目持有人保留。

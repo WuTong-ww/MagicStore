@@ -1,10 +1,18 @@
 extends Node
+## UNRUN R3-MUSIC runtime draft.
 ## Presentation preferences are deliberately separate from GameState and saves.
+const MusicCatalog = preload("res://scripts/audio/music_catalog.gd")
 const CONFIG_PATH := "res://data/ui/audio.json"
 var config: Dictionary = {}
 var settings_path := ""
 var volumes: Dictionary = {}
 var current_music := ""
+var music_config: Dictionary = {}
+var _requested_path := ""
+var _requested_allowed := false
+var _transition_epoch := 0
+var _voice_generations: Array[int] = []
+var _voice_paths: Array[String] = []
 var music_players: Array[AudioStreamPlayer] = []
 var ui_players: Array[AudioStreamPlayer] = []
 var active_player := -1
@@ -70,6 +78,7 @@ static func music_key(data: Dictionary, page: String, clock_minutes: int) -> Str
 
 func _ready() -> void:
 	config = load_config()
+	music_config = MusicCatalog.load_data()
 	if config.is_empty():
 		return
 	if settings_path.is_empty():
@@ -86,6 +95,8 @@ func _ready() -> void:
 		player.volume_db = float(config.silence_db)
 		add_child(player)
 		music_players.append(player)
+		_voice_generations.append(0)
+		_voice_paths.append("")
 	for index: int in range(int(config.ui_voices)):
 		var player := AudioStreamPlayer.new()
 		player.bus = "UI"
@@ -114,53 +125,117 @@ func set_volume(channel: String, value: float) -> bool:
 	if data.save(settings_path) != OK:
 		return false
 	volumes[channel] = value
-	_apply_volume()
+	_apply_volume(channel)
 	return true
 
-func _apply_volume() -> void:
+func _apply_volume(channel: String = "") -> void:
 	for row: Array in [["music", "Music"], ["ui", "UI"]]:
+		if not channel.is_empty() and row[0] != channel:
+			continue
 		var index := AudioServer.get_bus_index(row[1])
 		if index >= 0:
 			var value := float(volumes.get(row[0], 0.0))
 			AudioServer.set_bus_mute(index, is_zero_approx(value))
 			AudioServer.set_bus_volume_db(index, linear_to_db(value) if value > 0 else float(config.silence_db))
 
-func transition(page: String, clock_minutes: int) -> void:
+## UNRUN fragment for ShopAudio. Missing/forbidden assets never reach ResourceLoader.load.
+static func policy_allows_music(is_web: bool, is_public: bool, with_music: bool) -> bool:
+	if is_public:
+		return false
+	return not is_web or with_music
+
+func _runtime_music_allowed() -> bool:
+	# Public feature wins even if a mistaken export also includes withmusic.
+	return policy_allows_music(OS.has_feature("web"),OS.has_feature("webpublic"),OS.has_feature("withmusic"))
+
+func _load_music_stream(path: String) -> AudioStream:
+	if not _runtime_music_allowed() or path.is_empty() or not ResourceLoader.exists(path,"AudioStream"):
+		return null
+	var source := ResourceLoader.load(path,"AudioStream") as AudioStream
+	if source == null:
+		return null
+	# Mutate only this voice's private resource, never the import cache.
+	var stream := source.duplicate() as AudioStream
+	if stream is AudioStreamOggVorbis:
+		stream.loop = true
+	return stream
+
+func transition(page: String, clock_minutes: int, public_context: Dictionary = {}) -> void:
 	if _shutting_down or config.is_empty() or music_players.is_empty():
 		return
-	var key := music_key(config, page, clock_minutes)
-	if key == current_music:
+	var key := MusicCatalog.key_for(page,clock_minutes,music_config,public_context)
+	var track := MusicCatalog.track_for_slot(key,music_config)
+	var allowed := _runtime_music_allowed()
+	var path: String = str(track.get("runtime_path","")) if allowed else ""
+	if key == current_music and path == _requested_path and allowed == _requested_allowed:
 		return
 	current_music = key
-	if fade != null and fade.is_running():
-		fade.kill()
-	fade = create_tween().set_parallel(true)
-	var previous := active_player
-	var path: String = config.tracks[key].path
-	if path.is_empty() or not ResourceLoader.exists(path):
-		for player: AudioStreamPlayer in music_players:
-			fade.tween_property(player, "volume_db", float(config.silence_db), float(config.crossfade_seconds))
-		fade.chain().tween_callback(_stop_music)
-		active_player = -1
+	_requested_path = path
+	_requested_allowed = allowed
+	_invalidate_music_fade()
+	var epoch := _transition_epoch
+	var next := -1
+	# A -> B -> A reuses the still-live A voice at its current gain.
+	if allowed and not path.is_empty():
+		for index: int in range(music_players.size()):
+			if _voice_paths[index] == path and music_players[index].playing:
+				next = index
+				break
+		if next < 0:
+			var stream := _load_music_stream(path)
+			if stream != null:
+				next = (active_player + 1) % music_players.size()
+				_release_music_voice(next)
+				var player: AudioStreamPlayer = music_players[next]
+				_voice_paths[next] = path
+				player.stream = stream
+				player.volume_db = float(config.silence_db)
+				player.play()
+				_remember_playback(player)
+	active_player = next
+	# Invalid/missing catalog is immediate silence: no guessed music defaults.
+	if music_config.is_empty():
+		for index: int in range(music_players.size()):
+			_release_music_voice(index)
 		return
-	active_player = (previous + 1) % music_players.size()
-	var next: AudioStreamPlayer = music_players[active_player]
-	# Loop belongs to this music voice, never mutate a shared source resource.
-	next.stream = load(path).duplicate()
-	if next.stream is AudioStreamOggVorbis:
-		next.stream.loop = true
-	next.volume_db = float(config.silence_db)
-	next.play()
-	_remember_playback(next)
-	fade.tween_property(next, "volume_db", 0.0, float(config.crossfade_seconds))
-	if previous >= 0:
-		var old: AudioStreamPlayer = music_players[previous]
-		fade.tween_property(old, "volume_db", float(config.silence_db), float(config.crossfade_seconds))
-		fade.chain().tween_callback(old.stop)
+	var seconds := float(music_config.crossfade_seconds)
+	fade = create_tween().set_parallel(true)
+	for index: int in range(music_players.size()):
+		var player: AudioStreamPlayer = music_players[index]
+		fade.tween_property(player,"volume_db",0.0 if index == next else float(config.silence_db),seconds)
+	var generations: Array[int] = _voice_generations.duplicate()
+	fade.finished.connect(_finish_music_fade.bind(epoch,generations),CONNECT_ONE_SHOT)
+
+func _invalidate_music_fade() -> void:
+	_transition_epoch += 1
+	if fade != null and fade.is_valid():
+		fade.kill()
+	fade = null
+
+func _release_music_voice(index: int) -> void:
+	var player: AudioStreamPlayer = music_players[index]
+	_remember_playback(player)
+	player.stop()
+	player.stream = null
+	player.volume_db = float(config.silence_db)
+	_voice_paths[index] = ""
+	_voice_generations[index] += 1
+
+func _finish_music_fade(epoch: int, generations: Array[int]) -> void:
+	if _shutting_down or epoch != _transition_epoch:
+		return
+	for index: int in range(music_players.size()):
+		if index != active_player and generations[index] == _voice_generations[index]:
+			_release_music_voice(index)
+	fade = null
 
 func _stop_music() -> void:
-	for player: AudioStreamPlayer in music_players:
-		player.stop()
+	_invalidate_music_fade()
+	for index: int in range(music_players.size()):
+		_release_music_voice(index)
+	active_player = -1
+	current_music = ""
+	_requested_path = ""
 
 func _exit_tree() -> void:
 	_stop_players()
@@ -177,13 +252,15 @@ func playback_handles() -> Array[WeakRef]:
 
 func _stop_players() -> void:
 	_shutting_down = true
-	if fade != null and fade.is_running():
-		fade.kill()
-	for player: AudioStreamPlayer in music_players + ui_players:
+	_invalidate_music_fade()
+	for index: int in range(music_players.size()):
+		_release_music_voice(index)
+	for player: AudioStreamPlayer in ui_players:
 		_remember_playback(player)
 		player.stop()
 		player.stream = null
 	active_player = -1
+	_requested_path = ""
 
 func _pending_playbacks() -> int:
 	# Do not hold a playback Ref in the suspended coroutine's locals. This

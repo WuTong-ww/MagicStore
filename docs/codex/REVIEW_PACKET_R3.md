@@ -14,11 +14,27 @@ R3-LIN｜完成｜7b09759｜标准full2：18066检查+371 Python测试零失败�
 R3-NAMES｜完成｜818d604｜已普通推送codex/round3；schema13，full3：18716检查＋391 Python零失败、390源保持；GPU243/0、shop1548/0、六JPG1414386B；保留两轮失败与627/0兼容专项。
 R3-AICASE｜完成｜53ad3f0｜schema14；标准full1唯一一轮退出0：23117检查＋391 Python/0、441源保持；I1–I4闭环0C/I/M，六JPG1510850B，已普通推送codex/round3。
 R3-TITLE｜完成｜06fe4e5｜标准full3：24016检查＋401 Python零失败、492源保持；当前UI350/窗光64/shop1548/录像33，六JPG1697637B。保留两轮失败与专项修正记录。
-R3-MUSIC｜未开始｜—｜
+R3-MUSIC｜验收通过，待提交｜基线5e22bf7｜标准full1退出0：24141项检查＋437项Python零失败，953源与素材SHA保持；专项303/0、shop1548/0，六JPG1995753B，默认/带音乐实包22/25项通过。
 R3-POLISH｜未开始｜—｜
 R3-CRAFT｜未开始｜—｜
 R3-LEARN｜未开始｜—｜
 R3-WEB｜未开始｜—｜
+
+## R3-MUSIC（验收通过，待提交）
+
+标准full1退出0：24141项检查＋437项Python零失败，953源与素材SHA保持；专项303/0、shop1548/0，六JPG1995753B，默认/带音乐实包22/25项通过。 本轮只需一次完整测试，用时 7118.078 秒；不跑第2/3轮。独立专项与全量覆盖有重复，不相加充作更多检查。
+
+主要文件：`data/audio.json`、`scripts/audio/music_catalog.gd`、`music_context.gd`、ShopAudio/Main最小接线，`tools/music_build.py` 与隔离导出接线；新目录/运行时/真实宿主/显式本地Ogg/外部实包目标及Python构建测试。没有修改世界schema15、隐藏事实、既有NPC或main。完整31文件清单与SHA见 `results/R3-MUSIC-validation.json`（收集后生成）。
+
+原图回归30帧已实际审阅：12 reviewer PNG、12 root PNG、6 root原生尺寸JPG来源覆盖；六张提交JPG在 `docs/screenshots/round3/R3-MUSIC/`，含前台、设置与咨询区的1280×720/1920×1080。0Critical/0Important、3Minor观察：商店数量标签换行、窗口标题对比度、零客截图额外同名浮层留POLISH；后者符合已有tooltip机制，但未经节点/鼠标遥测确认，不能断言重复节点或音乐回退。本组沿用旧接待fixture，不把等待/输入文案当默认R3流程。
+
+默认导出398,314,904 B，包中整个音乐目录缺失且实际播放器静音；显式带音乐导出410,396,104 B，实际五曲加载/播放/淡入/释放通过。此为native包验证，不能替代WEB浏览器和Web加载体积验收。原始五曲及q6运行文件均Git忽略、未公开发布。
+
+保留的失败：沙箱长临时路径使两次stage失败，普通短路径导出成功；一次带音乐初次导入结束时Godot原生C0000005，独立新stage重试成功，未改产品规避。原日志均保留。首次运行时测试定时器早于Tween处理、宿主错误假设已有存档仍启动兜底页，两处均只修测试前置/完成观察，原状态与释放断言保留。首个旧API探针中的隐式结局页假设已被实际可见公开结局契约替代，最终runtime/host/实包目标为准。
+
+外层观察器原 `accepted=false` 保留：其把既有 `item_visuals.gd` 正常新增的895B合成PNG计为源码变化。953个原保护文件逐SHA全同，新增文件与同轮large.png逐字节及65536像素相同；两份独审0C/I/M。固定SHA的独立范围closure仅接受这个精确测试产物，不泛排除incoming、不改原报告/测试/产品，不为此重跑第二轮。标准测试命令本身退出0，24141/0＋437 Python/0。
+
+待人工：曲目均按文件名初选、未试听；情绪/音量平衡与循环接缝请策划听取；历史取得原包时的许可版本尚未证明。现行定制许可、21曲对照、五曲候补和本地构建命令见下方音乐对照与 `docs/third-party.md`。
 
 ## R3-TITLE（完成）
 
@@ -116,9 +132,56 @@ R3-STORY生产代码已实际跑完最佳、最差、缺案件3三条路线，�
 - 六张原生quality85 JPG已由root逐张打开，原字节复制到docs/screenshots/round3/R3-LIN，共1558936B：archive、legacy-front、sofa各1280×720与1920×1080。档案选择是程序路径，不声称真实鼠标选择；五态层组合断言通过，截图只显示已保存表情。本任务不要求操作录像。
 - mandatory shop原尺寸路径为.tools/c-ui-captures/front-1280.png、front-1920.png、consultation-1280.png、consultation-1920.png；实际均已打开。旧咨询自由框及牌列仍遮住部分立绘，保留现有几何，交POLISH处理。新建成功请求全局重放的历史缺口留TITLE修复，本任务普通保存动作的幂等测试不代替该项。
 
-## 音乐对照表
+## 音乐对照表（R3-MUSIC，已验收）
 
-待 R3-MUSIC 盘点文件名、时长、五种场景与候补。
+选曲依据仅为文件名意象，**未试听，不保证情绪匹配、音量平衡或循环接缝听感**。全部 21 首已对原源逐 SHA、完整 OGG 页 CRC/序列/BOS/EOS 与时长核对，原字节和修改时间保持；仅选中五首实际 q6 转码，其余仍是元数据目录。
+
+场景｜选曲｜时长｜候补（按文件名初选）
+---｜---｜---｜---
+开场｜Gentle Breeze.ogg｜3:00.000｜Wanderer's Tale.ogg
+白天｜Sunlight Through Leaves.ogg｜2:24.000｜Golden Gleam.ogg
+夜晚｜Evening Harmony.ogg｜2:12.000｜Polar Lights.ogg
+案件推理｜Whispering Woods.ogg｜2:13.331｜Drifting Memories.ogg
+结局｜Fabric Of Life.ogg｜2:08.000｜Cuddle Clouds.ogg
+
+曲目文件名｜时长｜本轮用途
+---｜---｜---
+Chickens In The Meadow.ogg｜2:03.871｜可替换选曲
+Cuddle Clouds.ogg｜2:14.737｜可替换选曲
+Drifting Memories.ogg｜2:15.263｜可替换选曲
+Ducks In A Pond.ogg｜2:30.588｜可替换选曲
+Evening Harmony.ogg｜2:12.000｜夜晚
+Fabric Of Life.ogg｜2:08.000｜结局
+Far Far Away.ogg｜2:27.692｜可替换选曲
+Floating Dream.ogg｜4:07.619｜可替换选曲
+Forgotten Biomes.ogg｜2:17.679｜可替换选曲
+Gentle Breeze.ogg｜3:00.000｜开场
+Golden Gleam.ogg｜2:17.778｜可替换选曲
+Pineapple Under The Sea.ogg｜1:55.200｜可替换选曲
+Polar Lights.ogg｜2:54.545｜可替换选曲
+Sheep.ogg｜2:49.412｜可替换选曲
+Strange Worlds.ogg｜2:04.138｜可替换选曲
+Sunlight Through Leaves.ogg｜2:24.000｜白天
+Wanderer's Tale.ogg｜2:52.632｜可替换选曲
+What Clouds Are Made Of.ogg｜3:07.317｜可替换选曲
+Whispering Woods.ogg｜2:13.331｜案件推理
+Wildflowers By The River.ogg｜2:33.600｜可替换选曲
+Wind Over The Trees.ogg｜2:35.676｜可替换选曲
+
+在 `data/audio.json` 修改任意槽的 `track_id` 一行即可从 21 首中换曲，候补只是建议；重新运行本地构建 helper 生成所选运行文件。JSON 的 `encoding.policy=local_outputs_untracked` 是输出策略，实际转码记录独立保存，不暗示目录中所有曲目都已转码。
+
+本地准备命令（先核验 FFmpeg SHA，不修改 PATH）：
+
+```powershell
+python -B tools/music_build.py --catalog data/audio.json --source-root 'D:/MagicStore/Cozy Tunes/Audio/Music' --runtime-root assets/audio/music --work-root .tools/music-build --encoder .tools/r3-music/toolchain-preflight/ffmpeg-win-x86_64-v7.1.exe --encoder-sha256 2ce797a0f88d7f067180338fb227f7b1928ea727bd9a4d7a1d022f7c52af71a3 --apply --with-music
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/dev/run.ps1 -Export -WithMusic
+```
+
+默认 `-Export` 从全新的隔离工程树导出，排除全部音乐、原料包、私有配置和旧构建；`-WithMusic` 才复制 `assets/audio/music/`。两种导出均不移动或删除本地音乐。自备引擎/导出模板时先运行 `scripts/dev/bootstrap.ps1 -WithExportTemplates`。缺曲正常静音，公开 Web 后续也必须使用无音乐隔离树；本任务的 native 包验证不代替 WEB 的实际浏览器验收。
+
+五曲实际运行文件共 11,830,546 B，q6/libvorbis、双声道 44.1kHz、CRC/EOS 与全曲 PCM 解码通过；重跑已验证五曲按 owned SHA 跳过编码并再次整曲解码。音乐音量沿用独立 `presentation.cfg`，场景交叉淡入 1.5 秒、两声部；关闭时观察混音句柄释放。音乐未上传、未输入任何模型，仓库中只有目录与构建代码。
+
+官方当前提供带限制的定制许可，不能将其标为无条件 CC0；详见 [来源页面](https://pizzadoggy.itch.io/cozy-tunes) 与 `docs/third-party.md`。当前协议 PDF 不证明用户历史取得原包时的许可版本；这是待人工确认项，不阻断已授权的本地接入。试听选曲与循环接缝也留人工复核。
 
 ## 我做的决定
 

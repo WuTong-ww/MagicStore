@@ -1,6 +1,8 @@
 extends SceneTree
 ## Confirm real Ogg playbacks are gone before their scene can be destroyed.
 const Audio = preload("res://scripts/audio/shop_audio.gd")
+const MusicFixture = preload("res://tests/fixtures/music_fixture.gd")
+## UNRUN MUSIC fixture amendment; retains real existing UI-Ogg shutdown checks.
 
 class ClosingProvider extends RefCounted:
 	signal replied
@@ -55,7 +57,7 @@ func run() -> void:
 	invalid = config.duplicate(true)
 	invalid.shutdown_poll_frames = 0.5
 	check(not Audio.config_valid(invalid), "shutdown polling cadence must be a configured whole frame count")
-	var audio: Node = Audio.new()
+	var audio: Node = MusicFixture.new()
 	root.add_child(audio)
 	var handles: Array[WeakRef] = []
 	for index: int in range(audio.ui_players.size()*2):
@@ -63,9 +65,8 @@ func run() -> void:
 		var voice: AudioStreamPlayer = audio.ui_players[(audio.next_voice+audio.ui_players.size()-1)%audio.ui_players.size()]
 		check(voice.has_stream_playback(), "real Ogg voice starts / " + str(index))
 		handles.append(weakref(voice.get_stream_playback()))
-	audio.config.tracks.day.path = audio.config.sounds.notify
 	audio.transition("front",540)
-	check(audio.music_players[0].has_stream_playback(), "real looping music starts")
+	check(audio.music_players[0].has_stream_playback(), "synthetic in-memory music fixture starts")
 	handles.append(weakref(audio.music_players[0].get_stream_playback()))
 	check(pending(handles) > 0, "regression observes live mixer-owned playback handles")
 	check(audio.has_method("shutdown_async"), "audio exposes an observable shutdown lifecycle")

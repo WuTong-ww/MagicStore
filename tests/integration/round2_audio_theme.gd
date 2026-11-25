@@ -1,4 +1,6 @@
 extends SceneTree
+## UNRUN MUSIC fixture amendment.
+const MusicFixture = preload("res://tests/fixtures/music_fixture.gd")
 
 var checks := 0
 var failures := 0
@@ -30,7 +32,7 @@ func run() -> void:
 	check(script.music_key(config, "front", 540) == "day", "day music follows clock")
 	check(script.music_key(config, "front", 1080) == "night", "night music follows clock")
 	check(script.music_key(config, "consultation", 540) == "consultation", "consultation overrides clock")
-	var audio: Node = script.new()
+	var audio: Node = MusicFixture.new()
 	audio.settings_path = "res://.tools/a3r-audio-settings-" + str(Time.get_ticks_usec()) + ".cfg"
 	root.add_child(audio)
 	await process_frame
@@ -48,16 +50,13 @@ func run() -> void:
 	audio.transition("front", 540)
 	audio.transition("front", 1080)
 	check(audio.current_music == "night", "music transition records desired period even when assets unavailable")
-	# The licensed UI files are stand-ins only for this playback fixture. They
-	# exercise real streams and fades without pretending the music was acquired.
-	for key: String in config.tracks:
-		audio.config.tracks[key].path = config.sounds.notify
+	# Runtime music fixture is synthetic; no Cozy Tunes file is needed.
 	audio.current_music = ""
 	audio.transition("front", 540)
 	check(audio.music_players[0].playing, "available day stream starts playing")
-	audio.transition("consultation", 540)
+	audio.transition("consultation", 540, {"case_active":true})
 	check(audio.music_players[0].playing and audio.music_players[1].playing, "crossfade overlaps old and new streams")
-	await create_timer(float(config.crossfade_seconds) + 0.1).timeout
+	await create_timer(float(audio.music_config.crossfade_seconds) + 0.1).timeout
 	check(not audio.music_players[0].playing and audio.music_players[1].playing, "crossfade stops old stream after fade")
 	var paper: Theme = load("res://themes/paper.tres")
 	var chrome: Theme = load("res://themes/chrome.tres")

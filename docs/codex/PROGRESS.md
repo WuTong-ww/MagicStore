@@ -14,6 +14,7 @@ R3-LIN｜完成｜7b09759｜标准full2退出0：18066检查+371 Python测试零
 R3-NAMES｜完成｜818d604｜已普通推送codex/round3；full3退出0：18716检查＋391 Python零失败、390源保持；GPU243/0六JPG1414386B、shop1548/0；57路径独审0C/I/M，保留两轮旧夹具失败，无第4轮。
 R3-AICASE｜完成｜53ad3f0｜标准full1唯一一轮退出0：23117检查＋391 Python/0、441源保持；I1–I4闭环0C/I/M，六JPG1510850B，已普通推送codex/round3。
 R3-TITLE｜完成｜06fe4e5｜标准full3实际24016检查＋401 Python零失败、492源保持；当前UI350/窗光64/录像33/shop1548与49抽帧已看，六JPG1697637B。
+R3-MUSIC｜验收通过，待提交｜基线5e22bf7｜标准full1退出0：24141项检查＋437项Python零失败，953源与素材SHA保持；专项303/0、shop1548/0，六JPG1995753B，默认/带音乐实包22/25项通过。
 
 最终全量恢复点：full3实际退出0，root session69942终态已收，不再poll；7044.75秒、runid title_full_4e9edc6c59a04b67b8af6a9bd28030cd，180组24016检查零失败，Python137+264=401/0，492源SHA保持、0 SCRIPT ERROR、16个TITLE阶段全部覆盖。log SHA9b8b15fe30524ce33c65b2ece0884d2e68f9129271d623a6f92a721272b90a84。不得第四轮。当前Main d2635fea；新UI六图、窗光八图、shop三十图与a3录像49抽帧全部实际打开，零Important；尾段0.1秒清理暗帧、旧工坊热点部分遮挡及商店两项小排版留POLISH。新六JPG1697637B已复制，原六另存ignored；主提交06fe4e5已普通推送并核验远端；验证JSON已生成，记录正在回填，main仍e274不动。以下为保留的过程快照，不替代此终态。
 

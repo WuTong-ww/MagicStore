@@ -1,6 +1,7 @@
 extends Control
 
 signal scene_changed(previous: String, next: String)
+const MusicContext = preload("res://scripts/audio/music_context.gd")
 const MotionConfig = preload("res://scripts/presentation/wind_field.gd")
 var motion_settings: Dictionary = {}
 var _motion_seen_events: Dictionary = {}
@@ -21,6 +22,15 @@ var title_control: Control
 var title_config_path := TitleConfig.PATH
 var title_error_panel: PanelContainer
 var title_error_label: Label
+# Read-only presentation phase: the saved opening notebook is already in-store.
+var title_visible: bool:
+	get:
+		if is_instance_valid(title_error_panel) and title_error_panel.is_visible_in_tree():
+			return true
+		if not is_instance_valid(title_control) or not title_control.is_visible_in_tree():
+			return false
+		var artwork: Control = title_control.get("art_root") as Control
+		return is_instance_valid(artwork) and artwork.is_visible_in_tree()
 var _title_blocking := false
 var _title_input_records: Dictionary = {}
 var _focus_before_title: WeakRef
@@ -237,8 +247,6 @@ func _build_shell() -> void:
 func show_screen(which: String, silent_motion: bool = false) -> void:
 	var previous := current_screen if is_instance_valid(screen) else ""
 	current_screen = which
-	if is_instance_valid(presentation_audio):
-		presentation_audio.transition(which,int(GameState.player_snapshot().get("clock_minutes",0)))
 	if is_instance_valid(screen):
 		scene_holder.remove_child(screen)
 		screen.queue_free()
@@ -296,8 +304,7 @@ func _refresh() -> void:
 
 	if is_instance_valid(screen):
 		screen.call("refresh")
-	if is_instance_valid(presentation_audio):
-		presentation_audio.transition(current_screen,int(snapshot.get("clock_minutes",0)))
+	_refresh_music()
 	if _title_blocking: _isolate_gameplay_inputs()
 
 func run_action(action_type: String, extra: Dictionary = {}, command_id: String = "") -> Dictionary:
@@ -369,6 +376,10 @@ func _build_title() -> void:
 		title_control = null
 		_build_title_unavailable()
 		return
+	title_control.visibility_changed.connect(_music_story_visibility_changed)
+	var title_art: Control = title_control.get("art_root") as Control
+	if is_instance_valid(title_art):
+		title_art.visibility_changed.connect(_music_story_visibility_changed)
 	title_control.continue_requested.connect(open_saves)
 	title_control.settings_requested.connect(open_network_settings)
 	title_control.new_requested.connect(_ui_create_game)
@@ -382,6 +393,7 @@ func _build_title_unavailable() -> void:
 	title_error_panel = UI.panel()
 	title_error_panel.name = "TitleUnavailable"
 	add_child(title_error_panel)
+	title_error_panel.visibility_changed.connect(_music_story_visibility_changed)
 	title_error_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	var margin := UI.margin(int(shell_config.layout.margin))
 	title_error_panel.add_child(margin)
@@ -553,6 +565,7 @@ func _build_people_window() -> void:
 	people_window.transient = true
 	people_window.theme = theme
 	people_window.close_requested.connect(people_window.hide)
+	people_window.visibility_changed.connect(_music_story_visibility_changed)
 	add_child(people_window)
 	UI.paper_window(people_window)
 	var people_scroll := ScrollContainer.new()
@@ -603,6 +616,9 @@ func _sync_story_archive() -> void:
 		return
 	var public: Variant = GameState.call("story_view") if GameState.has_method("story_view") else {"enabled":false}
 	people_panel.call("set_story_view",public if public is Dictionary else {"enabled":false},str(GameState.player_snapshot().get("save_id","")))
+	var notes: Control = people_panel.get("story_notes") as Control
+	if is_instance_valid(notes) and not notes.visibility_changed.is_connected(_music_story_visibility_changed):
+		notes.visibility_changed.connect(_music_story_visibility_changed)
 
 func open_story_notes() -> bool:
 	# Reusable read-only entry. The formal TITLE entry can call this later.
@@ -1049,3 +1065,31 @@ func _add_motion_settings(box: VBoxContainer) -> void:
 		if not wind.set_reduced_motion(value):
 			toggle.set_pressed_no_signal(bool(wind.reduced_motion))
 			show_notice(str(motion_settings.labels.save_failed)))
+
+func _music_title_visible() -> bool:
+	return title_visible
+
+func _music_story_visibility_changed() -> void:
+	# Visibility signals can fire mid-layout; inspect the rendered result after it settles.
+	call_deferred("_refresh_music")
+
+func _music_ending_visible() -> bool:
+	if not is_instance_valid(people_window) or not people_window.visible or not is_instance_valid(people_panel):
+		return false
+	var notes := people_panel.get("story_notes") as Control
+	if not is_instance_valid(notes) or not notes.is_visible_in_tree():
+		return false
+	var label := notes.get("ending_label") as RichTextLabel
+	return is_instance_valid(label) and label.is_visible_in_tree() and not label.text.is_empty()
+
+func _refresh_music() -> void:
+	if _closing or not is_instance_valid(presentation_audio):
+		return
+	var player_public: Dictionary = GameState.player_snapshot()
+	var case_public: Dictionary = GameState.case_board_view()
+	var story_public: Dictionary = GameState.story_view()
+	var routed := MusicContext.project(current_screen,int(player_public.get("clock_minutes",0)),case_public,story_public,{
+		"title_visible":_music_title_visible(),
+		"ending_visible":_music_ending_visible()
+	})
+	presentation_audio.transition(routed.page,int(routed.clock_minutes),routed.context)

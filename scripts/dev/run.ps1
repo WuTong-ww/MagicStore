@@ -1,6 +1,8 @@
-param([switch]$Editor, [switch]$Test, [switch]$Export, [string[]]$GameArgs = @())
+param([switch]$Editor, [switch]$Test, [switch]$Export, [switch]$WithMusic, [string[]]$GameArgs = @())
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
+$exportStageBase = [IO.Path]::GetTempPath()
+if ($WithMusic -and !$Export) { throw '-WithMusic requires -Export.' }
 $lock = Get-Content -LiteralPath (Join-Path $PSScriptRoot 'toolchain.json') -Raw | ConvertFrom-Json
 $engine = Join-Path $repo ".tools/godot/Godot_v$($lock.version)-stable_win64_console.exe"
 if (!(Test-Path -LiteralPath $engine)) { throw 'Run scripts/dev/bootstrap.ps1 first.' }
@@ -65,6 +67,10 @@ try {
     }
     if ($Test) {
         Invoke-Godot @('--headless', '--path', $repo, '--import')
+        # MUSIC uses synthetic voices; licensed local Ogg checks require explicit opt-in.
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/audio/music_catalog.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/music_runtime.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/music_host.gd')
         # TITLE runs first; each invocation gets new local evidence and restart identity.
         $titleRunId = 'title_full_' + [Guid]::NewGuid().ToString('N')
         $titleLogDir = Join-Path $repo (".tools/r3-title/full-runs/" + $titleRunId)
@@ -257,9 +263,30 @@ try {
             if ($LASTEXITCODE -ne 0) { throw 'Retained real scene data validation failed.' }
         }
     } elseif ($Export) {
+        # Build from a fresh input tree. Default packages never contain local music.
+        $stageDir = Join-Path $exportStageBase ('MagicStore-export-' + [Guid]::NewGuid().ToString('N'))
+        $stageArgs = @('-B', (Join-Path $repo 'tools/music_build.py'), '--stage-from', $repo, '--stage-to', $stageDir)
+        if ($WithMusic) { $stageArgs += '--with-music' }
+        $stageJson = & python @stageArgs
+        if ($LASTEXITCODE -ne 0) {
+            Write-Host ($stageJson -join "`n")
+            throw 'Isolated export staging failed.'
+        }
+        $stageReport = ($stageJson -join "`n") | ConvertFrom-Json
+        if ($stageReport.status -ne 'complete') { throw 'Isolated export staging did not complete.' }
+        $stagePreset = Join-Path $stageDir 'export_presets.cfg'
+        $presetText = [IO.File]::ReadAllText($stagePreset)
+        foreach ($template in @('windows_debug_x86_64.exe', 'windows_release_x86_64.exe')) {
+            $templatePath = Join-Path $repo ('.tools/templates/' + $template)
+            if (!(Test-Path -LiteralPath $templatePath)) { throw 'Run scripts/dev/bootstrap.ps1 -WithExportTemplates first.' }
+            $presetText = $presetText.Replace('res://.tools/templates/' + $template, $templatePath.Replace('\', '/'))
+        }
+        [IO.File]::WriteAllText($stagePreset, $presetText, (New-Object Text.UTF8Encoding($false)))
+        Invoke-Godot @('--headless', '--path', $stageDir, '--import')
         $outDir = Join-Path $repo 'build/windows'
         New-Item -ItemType Directory -Force -Path $outDir | Out-Null
-        Invoke-Godot @('--headless', '--path', $repo, '--export-release', 'Windows Desktop', (Join-Path $outDir 'ZeroHourStore.exe'))
+        Invoke-Godot @('--headless', '--path', $stageDir, '--export-release', 'Windows Desktop', (Join-Path $outDir 'ZeroHourStore.exe'))
+        [IO.File]::WriteAllText((Join-Path $outDir 'music-stage-receipt.json'), ($stageJson -join "`n"), (New-Object Text.UTF8Encoding($false)))
         Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'play-export.ps1') -Destination (Join-Path $outDir 'play-export.ps1') -Force
         $licenseDir = Join-Path $outDir 'licenses'
         New-Item -ItemType Directory -Force -Path $licenseDir | Out-Null

@@ -1,0 +1,244 @@
+{
+  "version": 1,
+  "enabled": true,
+  "inventory_count": 21,
+  "crossfade_seconds": 1.5,
+  "clock": {
+    "day_minute": 540,
+    "night_minute": 1080,
+    "minutes_per_day": 1440,
+    "day_slot": "day",
+    "night_slot": "night"
+  },
+  "encoding": {
+    "container": "ogg",
+    "codec": "libvorbis",
+    "vorbis_quality": 6,
+    "policy": "local_outputs_untracked"
+  },
+  "validation": {
+    "id_max_length": 80,
+    "quality_min": -1,
+    "quality_max": 10,
+    "filename_max_length": 255
+  },
+  "routing": {
+    "page_slots": {
+      "title": "opening",
+      "ending": "ending"
+    },
+    "case_pages": [
+      "consultation"
+    ],
+    "case_slot": "deduction",
+    "ending_slot": "ending"
+  },
+  "runtime_missing_behavior": "silence",
+  "slots": {
+    "opening": {
+      "label": "开场",
+      "track_id": "gentle_breeze",
+      "candidates": [
+        "wanderers_tale"
+      ]
+    },
+    "day": {
+      "label": "白天",
+      "track_id": "sunlight_through_leaves",
+      "candidates": [
+        "golden_gleam"
+      ]
+    },
+    "night": {
+      "label": "夜晚",
+      "track_id": "evening_harmony",
+      "candidates": [
+        "polar_lights"
+      ]
+    },
+    "deduction": {
+      "label": "案件推理",
+      "track_id": "whispering_woods",
+      "candidates": [
+        "drifting_memories"
+      ]
+    },
+    "ending": {
+      "label": "结局",
+      "track_id": "fabric_of_life",
+      "candidates": [
+        "cuddle_clouds"
+      ]
+    }
+  },
+  "tracks": [
+    {
+      "id": "chickens_in_the_meadow",
+      "source_filename": "Chickens In The Meadow.ogg",
+      "duration_seconds": 123.870975,
+      "source_sha256": "707289209a64746c43cf80fc8423b0e5cb2efb5ed5ecf2630f793df09793959a",
+      "runtime_path": "res://assets/audio/music/chickens_in_the_meadow.ogg"
+    },
+    {
+      "id": "cuddle_clouds",
+      "source_filename": "Cuddle Clouds.ogg",
+      "duration_seconds": 134.736848,
+      "source_sha256": "2c27693131f0dfd8a376dcbd2763660d7f13f71cbde47ef46f022e2d9ae2957c",
+      "runtime_path": "res://assets/audio/music/cuddle_clouds.ogg"
+    },
+    {
+      "id": "drifting_memories",
+      "source_filename": "Drifting Memories.ogg",
+      "duration_seconds": 135.263152,
+      "source_sha256": "de96baaf77c87bf9aa4a307cbbc2278c13a09b938cd8960313954a8dfcce6864",
+      "runtime_path": "res://assets/audio/music/drifting_memories.ogg"
+    },
+    {
+      "id": "ducks_in_a_pond",
+      "source_filename": "Ducks In A Pond.ogg",
+      "duration_seconds": 150.588231,
+      "source_sha256": "d9768c052bfb22483a709d7d9e742d2f201f25968519124131da3e32c961340e",
+      "runtime_path": "res://assets/audio/music/ducks_in_a_pond.ogg"
+    },
+    {
+      "id": "evening_harmony",
+      "source_filename": "Evening Harmony.ogg",
+      "duration_seconds": 132.0,
+      "source_sha256": "71701ca53aa31d375d5544e590aec818a8326765f98d884c130c7b30e09da43c",
+      "runtime_path": "res://assets/audio/music/evening_harmony.ogg"
+    },
+    {
+      "id": "fabric_of_life",
+      "source_filename": "Fabric Of Life.ogg",
+      "duration_seconds": 128.0,
+      "source_sha256": "8622ec2d6391153a52fe53cfc278a53fa62bf03a46ca6215df98a57f63f5f573",
+      "runtime_path": "res://assets/audio/music/fabric_of_life.ogg"
+    },
+    {
+      "id": "far_far_away",
+      "source_filename": "Far Far Away.ogg",
+      "duration_seconds": 147.692313,
+      "source_sha256": "442728b1fbac52fdb8549b2634d31b0fe176e2918f3051f88580033075ff2ab8",
+      "runtime_path": "res://assets/audio/music/far_far_away.ogg"
+    },
+    {
+      "id": "floating_dream",
+      "source_filename": "Floating Dream.ogg",
+      "duration_seconds": 247.619048,
+      "source_sha256": "2a72c47a37ce2595b20642dacfa76a362b46c756e0bea32e0ba84cf562335331",
+      "runtime_path": "res://assets/audio/music/floating_dream.ogg"
+    },
+    {
+      "id": "forgotten_biomes",
+      "source_filename": "Forgotten Biomes.ogg",
+      "duration_seconds": 137.678571,
+      "source_sha256": "fe83415ca737d9f49af7ba8267a630750b8243369a1ec9048851756f13b88d0c",
+      "runtime_path": "res://assets/audio/music/forgotten_biomes.ogg"
+    },
+    {
+      "id": "gentle_breeze",
+      "source_filename": "Gentle Breeze.ogg",
+      "duration_seconds": 180.0,
+      "source_sha256": "65f71595d14ed5fabb814e995fe5f8d931b061f64fbda532e7ab86d7ebfa05da",
+      "runtime_path": "res://assets/audio/music/gentle_breeze.ogg"
+    },
+    {
+      "id": "golden_gleam",
+      "source_filename": "Golden Gleam.ogg",
+      "duration_seconds": 137.777778,
+      "source_sha256": "95cfffde10308b9caee38f714b08031873e5fff098da08b60a9e011b0fbe2751",
+      "runtime_path": "res://assets/audio/music/golden_gleam.ogg"
+    },
+    {
+      "id": "pineapple_under_the_sea",
+      "source_filename": "Pineapple Under The Sea.ogg",
+      "duration_seconds": 115.2,
+      "source_sha256": "d4b72e7bfb3e9f00a5ad3fcfffce45271853a337ed64035980f7679009e179e2",
+      "runtime_path": "res://assets/audio/music/pineapple_under_the_sea.ogg"
+    },
+    {
+      "id": "polar_lights",
+      "source_filename": "Polar Lights.ogg",
+      "duration_seconds": 174.545465,
+      "source_sha256": "389d8f43b5133d32d580c9782859cc1fcf512ea960cc4c32a9ecacda1457c70d",
+      "runtime_path": "res://assets/audio/music/polar_lights.ogg"
+    },
+    {
+      "id": "sheep",
+      "source_filename": "Sheep.ogg",
+      "duration_seconds": 169.411769,
+      "source_sha256": "306ef172d216f5cebc3a2cefd7cd1df32860a32f6251b4d2737676ac80396b53",
+      "runtime_path": "res://assets/audio/music/sheep.ogg"
+    },
+    {
+      "id": "strange_worlds",
+      "source_filename": "Strange Worlds.ogg",
+      "duration_seconds": 124.137937,
+      "source_sha256": "a8208c6dac669e10fbf459730bdf5f8da59c5592c4fd2f999886a4077727a5d8",
+      "runtime_path": "res://assets/audio/music/strange_worlds.ogg"
+    },
+    {
+      "id": "sunlight_through_leaves",
+      "source_filename": "Sunlight Through Leaves.ogg",
+      "duration_seconds": 144.0,
+      "source_sha256": "f9adb44e02947ab36a34300c30243b88d1c9fa6f80d52a5f6fe7bf54561d6799",
+      "runtime_path": "res://assets/audio/music/sunlight_through_leaves.ogg"
+    },
+    {
+      "id": "wanderers_tale",
+      "source_filename": "Wanderer's Tale.ogg",
+      "duration_seconds": 172.631587,
+      "source_sha256": "fb8115cd63b5c9b2dde4ddd22419876937c5379584da63e0fbafece6be194558",
+      "runtime_path": "res://assets/audio/music/wanderers_tale.ogg"
+    },
+    {
+      "id": "what_clouds_are_made_of",
+      "source_filename": "What Clouds Are Made Of.ogg",
+      "duration_seconds": 187.317075,
+      "source_sha256": "0304bda09affd95428df987686f45e8dd8c28c71691d7f1124f4889b3c44573b",
+      "runtime_path": "res://assets/audio/music/what_clouds_are_made_of.ogg"
+    },
+    {
+      "id": "whispering_woods",
+      "source_filename": "Whispering Woods.ogg",
+      "duration_seconds": 133.331429,
+      "source_sha256": "93597af7f6ae1cbf6b0bf68caa931d45dc8695a3baaf5910b402336ce8a76f0a",
+      "runtime_path": "res://assets/audio/music/whispering_woods.ogg"
+    },
+    {
+      "id": "wildflowers_by_the_river",
+      "source_filename": "Wildflowers By The River.ogg",
+      "duration_seconds": 153.6,
+      "source_sha256": "9c664315fc537650555b0ed085c8ba450add182bf36ba0f5e73cc113d7a0a42a",
+      "runtime_path": "res://assets/audio/music/wildflowers_by_the_river.ogg"
+    },
+    {
+      "id": "wind_over_the_trees",
+      "source_filename": "Wind Over The Trees.ogg",
+      "duration_seconds": 155.675669,
+      "source_sha256": "a28cef3ac20bc906a4d50a405bad12dabe0365b9fb72bcb62309c1e79fe78fa5",
+      "runtime_path": "res://assets/audio/music/wind_over_the_trees.ogg"
+    }
+  ],
+  "source": {
+    "author": "Pizza Doggy",
+    "url": "https://pizzadoggy.itch.io/cozy-tunes",
+    "license": {
+      "type": "custom license",
+      "document_date": "2026-11-01",
+      "official_upload_id": "20743451",
+      "document_sha256": "6416675b7f0696a8be0a9eea57e0dd441b815ee5dce6501f6aaff43be2713e88",
+      "historical_local_pack_license_proven": false
+    },
+    "metadata_inventory_sha256": "c958dc2bcb2b7a88c707d7e324e6f8e3b884cecabb166bab50513098873a927a",
+    "selection_basis": "filename_only",
+    "listening_review": "not_performed"
+  },
+  "copy": {
+    "catalog_title": "背景音乐",
+    "missing_runtime": "本地音乐缺失时保持静音。",
+    "selection_note": "初选与候补仅按曲名意象决定，均未试听。",
+    "metadata_note": "容器时长元数据不代表循环接缝、响度或风格已经验收。",
+    "license_note": "当前官方文本是自定义许可；本地包取得时的许可版本尚未证实。"
+  }
+}
