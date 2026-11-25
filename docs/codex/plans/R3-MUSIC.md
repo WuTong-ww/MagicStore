@@ -26,7 +26,7 @@
 - [x] 3. 安装 `tools/music_build.py` 及 Python 测试；五曲 q6 本地转码。逐曲核对原始 SHA、命令与输出 SHA、OGG CRC/EOS、元数据与整段解码；公共隔离 stage 排除音乐，本地 stage 明确复制。
 - [x] 4. 将新目标纳入原 `scripts/dev/run.ps1 -Test`；本地真实 Ogg 目标仅显式 opt-in。逐项关闭独立审查 Important 问题，运行实际 shop_ui 两尺寸并打开截图，提交至多六 JPG。
 - [x] 5. 更新 `docs/features.md`、`docs/third-party.md`、审阅包完整 21 曲对照与候补/本地构建步骤；固定源 SHA 后执行标准完整测试，最多三轮，保留失败证据。
-- [ ] 6. 生成 `docs/codex/results/R3-MUSIC-validation.json`，准确记录通过数、媒体与限制；普通提交 `[R3-MUSIC]`、推送 codex/round3，回填提交记录，继续 POLISH。
+- [x] 6. 生成 `docs/codex/results/R3-MUSIC-validation.json`，准确记录通过数、媒体与限制；普通提交 `[R3-MUSIC]`、推送 codex/round3，回填提交记录，继续 POLISH。
 
 ## 验收命令
 
@@ -36,4 +36,4 @@
 
 ## 当前结果
 
-标准full1退出0：24141项检查＋437项Python零失败，953源与素材SHA保持；专项303/0、shop1548/0，六JPG1995753B，默认/带音乐实包22/25项通过。 原mini40与fake21准备证据不替代正式目标，先前失败日志保留。提交推送仍待完成。
+标准full1退出0：24141项检查＋437项Python零失败，953源与素材SHA保持；专项303/0、shop1548/0，六JPG1995753B，默认/带音乐实包22/25项通过。 原mini40与fake21准备证据不替代正式目标，先前失败日志保留。主提交f1f53d6已普通推送，远端main e27441b未动；下一任务POLISH。

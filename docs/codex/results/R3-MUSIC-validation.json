@@ -1,9 +1,9 @@
 {
   "task": "R3-MUSIC",
-  "status": "READY_TO_COMMIT",
+  "status": "COMPLETE",
   "baseline": "5e22bf72fe28be3cd0ccc96aa03659486f1fd68f",
-  "task_commit": null,
-  "pushed": false,
+  "task_commit": "f1f53d65c073ed10e302c04f242210bc9b7ecc8c",
+  "pushed": true,
   "full": {
     "status": "ACTUAL_TERMINAL",
     "label": "full1",
@@ -4244,157 +4244,188 @@
     {
       "path": ".gitattributes",
       "sha256": "c3170a91ccba07622c8dd1f6d2f0a2f3ba142743aa30b812dad67e34104706d2",
-      "bytes": 2809
+      "bytes": 2809,
+      "primary_commit_blob_sha256": "29e9088d30d7bf4eea24afd3d4c6cc99878d748f8ebaa1fdaf6475fb23c89987"
     },
     {
       "path": "data/audio.json",
       "sha256": "5484bdb22bde257ec0b32e3987a4d794903b60e422eafc5c1e1af5119d74c86b",
-      "bytes": 8824
+      "bytes": 8824,
+      "primary_commit_blob_sha256": "bec2334e9618908134e775e1dfd7ce4da3a7f5fe4083bba8bdcf814d231afc33"
     },
     {
       "path": "docs/codex/PROGRESS.md",
       "sha256": "4d7e5001d28172f8132ff25ed5d0debc07ec8b078844c41679693caa8f4d3da6",
-      "bytes": 65826
+      "bytes": 65826,
+      "primary_commit_blob_sha256": "2f6f94c3a1789dc25105d320e6de283062adcac31a5070fae9b71dab3d6d3980"
     },
     {
       "path": "docs/codex/REVIEW_PACKET_R3.md",
       "sha256": "8d58093ae6013755ab9f4d5f897440e6e3be30a373db4aee318de07687515ceb",
-      "bytes": 34513
+      "bytes": 34513,
+      "primary_commit_blob_sha256": "211f1a287bd75c4688a105e2db75a7642ff77afc9d2ebadc255d72280191d396"
     },
     {
       "path": "docs/codex/plans/R3-MUSIC.md",
       "sha256": "bf04c27313f50d97a8ed95ea60766ccc0b30daac9f7c48b3960fc5a17896c8a7",
-      "bytes": 3997
+      "bytes": 3997,
+      "primary_commit_blob_sha256": "bc3bdabbfd763186bcfbddbab33a43c99cea93ae696d0157aecc6dc8864d7a6f"
     },
     {
       "path": "docs/features.md",
       "sha256": "1184d1efcfca9c8bc104dc60c5a7fe3474edf1b99763cb41405c0c5b5fdb47ed",
-      "bytes": 61302
+      "bytes": 61302,
+      "primary_commit_blob_sha256": "68fe7c353ce6b26961240350dffd33d3c686e3614777e6538ea51a637d34a4ed"
     },
     {
       "path": "docs/screenshots/round3/R3-MUSIC/consultation-1280.jpg",
       "sha256": "21283c49618e48d710fd2f70a29db00b78033ea6aae093167827bac71d586675",
-      "bytes": 175534
+      "bytes": 175534,
+      "primary_commit_blob_sha256": "21283c49618e48d710fd2f70a29db00b78033ea6aae093167827bac71d586675"
     },
     {
       "path": "docs/screenshots/round3/R3-MUSIC/consultation-1920.jpg",
       "sha256": "34f79b6b897344f4f2e6d5ac0ae6945d36090db68454906d6ba4a60521972833",
-      "bytes": 420098
+      "bytes": 420098,
+      "primary_commit_blob_sha256": "34f79b6b897344f4f2e6d5ac0ae6945d36090db68454906d6ba4a60521972833"
     },
     {
       "path": "docs/screenshots/round3/R3-MUSIC/front-1280.jpg",
       "sha256": "ec1a14f85f2a01447c2a8fc50653f959e054b354732c32a4fe47fcf110ab46a7",
-      "bytes": 261021
+      "bytes": 261021,
+      "primary_commit_blob_sha256": "ec1a14f85f2a01447c2a8fc50653f959e054b354732c32a4fe47fcf110ab46a7"
     },
     {
       "path": "docs/screenshots/round3/R3-MUSIC/front-1920.jpg",
       "sha256": "86b8e39bf6ff147d816aa8423af7b1d0e33014a29a2bd1d34b51426186612d89",
-      "bytes": 493877
+      "bytes": 493877,
+      "primary_commit_blob_sha256": "86b8e39bf6ff147d816aa8423af7b1d0e33014a29a2bd1d34b51426186612d89"
     },
     {
       "path": "docs/screenshots/round3/R3-MUSIC/network-1280.jpg",
       "sha256": "2520f40d23a263526c7a5846bd01f3c6229773de55c214000a250adb86007c01",
-      "bytes": 200204
+      "bytes": 200204,
+      "primary_commit_blob_sha256": "2520f40d23a263526c7a5846bd01f3c6229773de55c214000a250adb86007c01"
     },
     {
       "path": "docs/screenshots/round3/R3-MUSIC/network-1920.jpg",
       "sha256": "11bda2e21b1b0b0d25f3eeeabe530dd8a6f9f194de432d311124dc5675d2a2b4",
-      "bytes": 445019
+      "bytes": 445019,
+      "primary_commit_blob_sha256": "11bda2e21b1b0b0d25f3eeeabe530dd8a6f9f194de432d311124dc5675d2a2b4"
     },
     {
       "path": "docs/third-party.md",
       "sha256": "69ecce9a77e609815708e7185856c27e4f902d39b68d76c6e8e98d47e8a1bd84",
-      "bytes": 8669
+      "bytes": 8669,
+      "primary_commit_blob_sha256": "0f341587983e994060b6b0ac9e705896a925646201c7eca53eb2fc04ac005f87"
     },
     {
       "path": "scripts/audio/music_catalog.gd",
       "sha256": "a05164fa60d531577fa06969ad84fb4818860a3f4018d1a57311d09e6b76ad10",
-      "bytes": 8630
+      "bytes": 8630,
+      "primary_commit_blob_sha256": "a05164fa60d531577fa06969ad84fb4818860a3f4018d1a57311d09e6b76ad10"
     },
     {
       "path": "scripts/audio/music_catalog.gd.uid",
       "sha256": "028a85103e7433469dd8016a65c9f1f5c9cf7ca2b8a1166b472394b458c5cbe2",
-      "bytes": 20
+      "bytes": 20,
+      "primary_commit_blob_sha256": "028a85103e7433469dd8016a65c9f1f5c9cf7ca2b8a1166b472394b458c5cbe2"
     },
     {
       "path": "scripts/audio/music_context.gd",
       "sha256": "59279d4fe792ad451571493244980e6312d50c527731894b0bede19298185f4c",
-      "bytes": 1056
+      "bytes": 1056,
+      "primary_commit_blob_sha256": "59279d4fe792ad451571493244980e6312d50c527731894b0bede19298185f4c"
     },
     {
       "path": "scripts/audio/music_context.gd.uid",
       "sha256": "472ef4df18511ef2a34caea14588664d0c974606a5f4b19d41852da1a5a6ebe3",
-      "bytes": 20
+      "bytes": 20,
+      "primary_commit_blob_sha256": "472ef4df18511ef2a34caea14588664d0c974606a5f4b19d41852da1a5a6ebe3"
     },
     {
       "path": "scripts/audio/shop_audio.gd",
       "sha256": "0dd1dc82e6e483baa65d26ddc3f52cb644e5beccb65f3658957c34d529caba00",
-      "bytes": 11988
+      "bytes": 11988,
+      "primary_commit_blob_sha256": "0dd1dc82e6e483baa65d26ddc3f52cb644e5beccb65f3658957c34d529caba00"
     },
     {
       "path": "scripts/dev/run.ps1",
       "sha256": "179526858b534d06225a2e7bb35bec46aedc586977d963af237c5e0759f83944",
-      "bytes": 29754
+      "bytes": 29754,
+      "primary_commit_blob_sha256": "e593d02bae93efe29b453f9b8582c2ba12b4b18d81e6a3d09b4ebefbd666109e"
     },
     {
       "path": "scripts/ui/main.gd",
       "sha256": "1c21a72a366186a664b909d1ff7e29a2873f9f38f349477b6cbf8e85a2fdf693",
-      "bytes": 49184
+      "bytes": 49184,
+      "primary_commit_blob_sha256": "1c21a72a366186a664b909d1ff7e29a2873f9f38f349477b6cbf8e85a2fdf693"
     },
     {
       "path": "tests/art/test_music_build.py",
       "sha256": "d8c923726ca7803c6bcb54d2bb12a17e13478e3adf97e933340c0c79f696c25d",
-      "bytes": 33093
+      "bytes": 33093,
+      "primary_commit_blob_sha256": "d8c923726ca7803c6bcb54d2bb12a17e13478e3adf97e933340c0c79f696c25d"
     },
     {
       "path": "tests/audio/music_catalog.gd",
       "sha256": "e4a04cd92bd31b86c35a89346de9a0710cccbcf5fcced61d651a2442c94be465",
-      "bytes": 5103
+      "bytes": 5103,
+      "primary_commit_blob_sha256": "e4a04cd92bd31b86c35a89346de9a0710cccbcf5fcced61d651a2442c94be465"
     },
     {
       "path": "tests/fixtures/music_ending_v15.json",
       "sha256": "7be512a2760a6275c92ea93cc1881412a2e185056040e8605b3817044811a6c1",
-      "bytes": 240533
+      "bytes": 240533,
+      "primary_commit_blob_sha256": "7be512a2760a6275c92ea93cc1881412a2e185056040e8605b3817044811a6c1"
     },
     {
       "path": "tests/fixtures/music_fixture.gd",
       "sha256": "4fbda3e5c11f73547bfec921f9aa1f79a50a076a32b818984b49d2a4d5ecabbf",
-      "bytes": 743
+      "bytes": 743,
+      "primary_commit_blob_sha256": "4fbda3e5c11f73547bfec921f9aa1f79a50a076a32b818984b49d2a4d5ecabbf"
     },
     {
       "path": "tests/integration/audio_lifecycle.gd",
       "sha256": "b4388665e644f88b4130ef77e260835bfb8b02237964d5da35237e9c98188c81",
-      "bytes": 8076
+      "bytes": 8076,
+      "primary_commit_blob_sha256": "b4388665e644f88b4130ef77e260835bfb8b02237964d5da35237e9c98188c81"
     },
     {
       "path": "tests/integration/music_host.gd",
       "sha256": "3a29bfbd9875885031c1b3e08394485708f659bb248be6e918a29b2a62175262",
-      "bytes": 10365
+      "bytes": 10365,
+      "primary_commit_blob_sha256": "3a29bfbd9875885031c1b3e08394485708f659bb248be6e918a29b2a62175262"
     },
     {
       "path": "tests/integration/music_local_ogg.gd",
       "sha256": "ee2c45d51bbb779b6b01ff4056586e53dfa09e513535c7fff0c8a0f6d7f7324c",
-      "bytes": 2809
+      "bytes": 2809,
+      "primary_commit_blob_sha256": "ee2c45d51bbb779b6b01ff4056586e53dfa09e513535c7fff0c8a0f6d7f7324c"
     },
     {
       "path": "tests/integration/music_pack.gd",
       "sha256": "01ec41e20dc2936c41cb3651c2ea0c0f588b05fc4563a4107c1cf9b77048c6c4",
-      "bytes": 2942
+      "bytes": 2942,
+      "primary_commit_blob_sha256": "01ec41e20dc2936c41cb3651c2ea0c0f588b05fc4563a4107c1cf9b77048c6c4"
     },
     {
       "path": "tests/integration/music_runtime.gd",
       "sha256": "b9176a5276c581cb1c992218e899b2548e1c9e9eebe12e4b25af1dc536e1a0c5",
-      "bytes": 7977
+      "bytes": 7977,
+      "primary_commit_blob_sha256": "b9176a5276c581cb1c992218e899b2548e1c9e9eebe12e4b25af1dc536e1a0c5"
     },
     {
       "path": "tests/integration/round2_audio_theme.gd",
       "sha256": "0ddbe83e1667c50dd5a82be8e41c26a4f4fe7792da7bb77f08612a76f305d263",
-      "bytes": 4497
+      "bytes": 4497,
+      "primary_commit_blob_sha256": "0ddbe83e1667c50dd5a82be8e41c26a4f4fe7792da7bb77f08612a76f305d263"
     },
     {
       "path": "tools/music_build.py",
       "sha256": "9105d969ab40e28f7e49a1f491bd7ba864ccd443fa62229f97ace18c656c8e1b",
-      "bytes": 32149
+      "bytes": 32149,
+      "primary_commit_blob_sha256": "9105d969ab40e28f7e49a1f491bd7ba864ccd443fa62229f97ace18c656c8e1b"
     }
   ],
   "self_hash": "omitted_to_avoid_circular_hash",
@@ -4409,5 +4440,12 @@
     "SHOP capture fixture uses legacy reception; no default-flow timing claim.",
     "No Web/browser acceptance or public music redistribution claimed.",
     "Build review retains its earlier runner pin; final runner is pinned by both actual exports and accepted full."
-  ]
+  ],
+  "push_verification": {
+    "branch": "codex/round3",
+    "remote_task_commit": "f1f53d65c073ed10e302c04f242210bc9b7ecc8c",
+    "remote_main_unchanged": "e27441b51a4415777971cf2d8142ce4c725437e5"
+  },
+  "primary_report_sha256": "48c121c5b89e4e9a4f85624606c564e7119430005a5025890fb6f53af9b0280a",
+  "metadata_note": "Validation SHA values bind the accepted worktree session and original full/closure. Git may normalize text EOL; primary_commit_blob_sha256 explicitly binds committed task-file bytes. Binary screenshots and genuine fixture were verified byte-identical before commit. This follow-up changes records only."
 }

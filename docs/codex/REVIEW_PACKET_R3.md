@@ -14,17 +14,17 @@ R3-LIN｜完成｜7b09759｜标准full2：18066检查+371 Python测试零失败�
 R3-NAMES｜完成｜818d604｜已普通推送codex/round3；schema13，full3：18716检查＋391 Python零失败、390源保持；GPU243/0、shop1548/0、六JPG1414386B；保留两轮失败与627/0兼容专项。
 R3-AICASE｜完成｜53ad3f0｜schema14；标准full1唯一一轮退出0：23117检查＋391 Python/0、441源保持；I1–I4闭环0C/I/M，六JPG1510850B，已普通推送codex/round3。
 R3-TITLE｜完成｜06fe4e5｜标准full3：24016检查＋401 Python零失败、492源保持；当前UI350/窗光64/shop1548/录像33，六JPG1697637B。保留两轮失败与专项修正记录。
-R3-MUSIC｜验收通过，待提交｜基线5e22bf7｜标准full1退出0：24141项检查＋437项Python零失败，953源与素材SHA保持；专项303/0、shop1548/0，六JPG1995753B，默认/带音乐实包22/25项通过。
+R3-MUSIC｜完成｜f1f53d6｜标准full1退出0：24141项检查＋437项Python零失败，953源与素材SHA保持；专项303/0、shop1548/0，六JPG1995753B，默认/带音乐实包22/25项通过。
 R3-POLISH｜未开始｜—｜
 R3-CRAFT｜未开始｜—｜
 R3-LEARN｜未开始｜—｜
 R3-WEB｜未开始｜—｜
 
-## R3-MUSIC（验收通过，待提交）
+## R3-MUSIC（完成）
 
 标准full1退出0：24141项检查＋437项Python零失败，953源与素材SHA保持；专项303/0、shop1548/0，六JPG1995753B，默认/带音乐实包22/25项通过。 本轮只需一次完整测试，用时 7118.078 秒；不跑第2/3轮。独立专项与全量覆盖有重复，不相加充作更多检查。
 
-主要文件：`data/audio.json`、`scripts/audio/music_catalog.gd`、`music_context.gd`、ShopAudio/Main最小接线，`tools/music_build.py` 与隔离导出接线；新目录/运行时/真实宿主/显式本地Ogg/外部实包目标及Python构建测试。没有修改世界schema15、隐藏事实、既有NPC或main。完整31文件清单与SHA见 `results/R3-MUSIC-validation.json`（收集后生成）。
+主要文件：`data/audio.json`、`scripts/audio/music_catalog.gd`、`music_context.gd`、ShopAudio/Main最小接线，`tools/music_build.py` 与隔离导出接线；新目录/运行时/真实宿主/显式本地Ogg/外部实包目标及Python构建测试。没有修改世界schema15、隐藏事实、既有NPC或main。主提交 `f1f53d6` 已普通推送，main保持e27441b。完整31文件与报告自身共32路径及SHA见 `results/R3-MUSIC-validation.json`。
 
 原图回归30帧已实际审阅：12 reviewer PNG、12 root PNG、6 root原生尺寸JPG来源覆盖；六张提交JPG在 `docs/screenshots/round3/R3-MUSIC/`，含前台、设置与咨询区的1280×720/1920×1080。0Critical/0Important、3Minor观察：商店数量标签换行、窗口标题对比度、零客截图额外同名浮层留POLISH；后者符合已有tooltip机制，但未经节点/鼠标遥测确认，不能断言重复节点或音乐回退。本组沿用旧接待fixture，不把等待/输入文案当默认R3流程。
 
