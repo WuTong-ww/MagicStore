@@ -47,6 +47,11 @@ func run() -> void:
 	await act("talk",{"topic_id":"invitation","text":"邀请上写了什么？"})
 	await act("receive_feedback",{"event_id":event.event_id})
 	var old: Dictionary = game.snapshot()
+	# Synthetic old versions cannot retain TITLE15's creation receipt.
+	if old.get("schema_version") == saves.NEW_GAME_RECEIPT_SCHEMA:
+		for action_id: String in old.processed_actions.keys():
+			if old.processed_actions[action_id].get("action_type") == "new_game":
+				old.processed_actions.erase(action_id)
 	# This historical version projection excludes future birth-policy fields.
 	old.people.erase("birth_identity_version")
 	for profile: Dictionary in old.people.profiles.values():

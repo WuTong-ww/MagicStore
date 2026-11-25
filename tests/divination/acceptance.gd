@@ -363,6 +363,11 @@ func _v1_migration() -> void:
 	talk("邀请上的附言")
 	require_action("reading")
 	var legacy: Dictionary = gs.snapshot()
+	# Synthetic old versions cannot retain TITLE15's creation receipt.
+	if legacy.get("schema_version") == saves.NEW_GAME_RECEIPT_SCHEMA:
+		for action_id: String in legacy.processed_actions.keys():
+			if legacy.processed_actions[action_id].get("action_type") == "new_game":
+				legacy.processed_actions.erase(action_id)
 	legacy.schema_version = 1
 	legacy.save_id = gs.make_id("v1_test")
 	legacy.erase("divination")

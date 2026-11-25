@@ -248,6 +248,85 @@ def exact_item_prompt(row, profile):
     return prompt
 
 
+TITLE_PROMPTS_PATH = "data/art/title_prompts.json"
+TITLE_SOURCE_PATHS = {
+    "bg": "assets/generated_scenes/runtime/title/S01_dusk_unlit.png",
+    "sign": "assets/generated_scenes/runtime/title/S01_hanging_sign.png",
+    "canopy": "assets/generated_scenes/runtime/title/S01_tree_canopy.png",
+    "wood": "assets/ui/title_wood_sign.png",
+    "leaf": "assets/ui/title_leaf.png",
+    "glow": "assets/generated_scenes/runtime/title/S01_window_glow.png",
+}
+TITLE_SOURCE_NAMES = {"bg": "background", "sign": "hanging_sign", "canopy": "canopy",
+                      "wood": "wood_menu", "leaf": "leaf", "glow": "glow"}
+
+
+def validate_title_prompts(value):
+    """The six immutable TITLE full rows are tracked here, not in local history."""
+    _require(isinstance(value, dict) and set(value) == {"type", "version", "entries"} and
+             value["type"] == "r3_title_v1" and type(value["version"]) is int and value["version"] == 1,
+             "invalid TITLE provenance catalog")
+    entries = value["entries"]
+    _require(isinstance(entries, dict) and set(entries) == set(TITLE_SOURCE_PATHS),
+             "TITLE provenance requires exactly six known entries")
+    fields = {"path", "sha256", "dim", "native_size", "version", "status", "group", "prompt", "source", "runtime_usage"}
+    for key, path in TITLE_SOURCE_PATHS.items():
+        row = entries[key]
+        _require(isinstance(row, dict) and set(row) == fields and row["path"] == path and
+                 row["group"] == "title_sources", "invalid TITLE full-row identity")
+        _require(isinstance(row["sha256"], str) and re.fullmatch(r"[a-f0-9]{64}", row["sha256"]),
+                 "invalid TITLE source SHA256")
+        _require(_integer(row["version"], 1), "invalid TITLE source version")
+        for field in ("dim", "native_size"):
+            _require(isinstance(row[field], list) and len(row[field]) == 2 and
+                     all(_integer(n, 1) for n in row[field]), "invalid TITLE source dimensions")
+        _require(row["dim"] == row["native_size"], "TITLE native dimensions differ")
+        _require(isinstance(row["prompt"], str) and bool(row["prompt"].strip()), "missing exact TITLE prompt")
+        expected_status = "candidate_runtime_glass_mask_only" if key == "glow" else "selected_source_runtime_unrun"
+        expected_usage = "masked_pane_texture_only" if key == "glow" else "native_source_runtime_transform"
+        _require(row["status"] == expected_status and row["runtime_usage"] == expected_usage,
+                 "invalid TITLE runtime provenance")
+        source = row["source"]
+        _require(isinstance(source, dict) and set(source) == {"generator", "record_id", "original_path", "preparation_source"} and
+                 all(isinstance(v, str) and bool(v.strip()) for v in source.values()) and
+                 source["generator"] == "builtin_imagegen" and
+                 source["record_id"] == "R3_TITLE_" + TITLE_SOURCE_NAMES[key] + "_v" + str(row["version"]),
+                 "invalid TITLE generation provenance")
+        # Historical absolute original_path is opaque audit text, never opened.
+    return value
+
+
+def _title_json_object(pairs):
+    result = {}
+    for key, value in pairs:
+        _require(key not in result, "duplicate TITLE provenance JSON key")
+        result[key] = value
+    return result
+
+
+def resolve_title_provenance(workspace, asset):
+    """Explicit strict I/O boundary; pure expand/compact deliberately keep refs."""
+    _require(isinstance(asset, dict) and set(asset) == {"path", "sha256", "dim", "version", "group", "prompt_reference"},
+             "invalid TITLE compact row")
+    reference = asset["prompt_reference"]
+    _require(isinstance(reference, dict) and set(reference) == {"path", "key", "sha256"} and
+             reference["path"] == TITLE_PROMPTS_PATH and isinstance(reference["key"], str) and
+             reference["key"] in TITLE_SOURCE_PATHS and isinstance(reference["sha256"], str) and
+             re.fullmatch(r"[a-f0-9]{64}", reference["sha256"]), "invalid TITLE prompt reference")
+    _require(asset["path"] == TITLE_SOURCE_PATHS[reference["key"]] and asset["group"] == "title_sources" and
+             _integer(asset["version"], 1) and isinstance(asset["dim"], list) and len(asset["dim"]) == 2 and
+             all(_integer(n, 1) for n in asset["dim"]), "invalid TITLE compact identity")
+    path = safe_path(workspace, reference["path"], must_exist=True)
+    catalog = json.loads(path.read_text(encoding="utf-8-sig"), object_pairs_hook=_title_json_object,
+                         parse_constant=lambda value: (_ for _ in ()).throw(ValueError("nonfinite TITLE JSON: " + value)))
+    row = validate_title_prompts(catalog)["entries"][reference["key"]]
+    _require(all(asset[field] == row[field] for field in ("path", "sha256", "dim", "version", "group")),
+             "TITLE reference differs from full-row identity")
+    canonical = json.dumps(row, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf-8")
+    _require(hashlib.sha256(canonical).hexdigest() == reference["sha256"], "TITLE full-row SHA256 mismatch")
+    return copy.deepcopy(row)
+
+
 def validate_compact_manifest(workspace, manifest):
     """Validate metadata, not the optional retired audit or absent style draft."""
     _require(type(manifest.get("schema_version")) is int and manifest["schema_version"] == 3,
@@ -273,6 +352,10 @@ def validate_compact_manifest(workspace, manifest):
             _require(isinstance(asset["inputs"], list), "compact asset inputs must be an array")
             for input_path in asset["inputs"]:
                 safe_path(workspace, input_path)
+        title_path = path.casefold().startswith(("assets/generated_scenes/runtime/title/", "assets/ui/title_"))
+        title_group = isinstance(asset.get("group"), str) and asset["group"].casefold() == "title_sources"
+        if title_path or title_group or "prompt_reference" in asset:
+            resolve_title_provenance(workspace, asset)
         if asset.get("group") == "scenes" and PurePosixPath(path).name == "C.png":
             scene, period = asset.get("scene_id"), asset.get("period")
             _require(isinstance(scene, str) and re.fullmatch(r"S\d{2}", scene) and period in ("day", "night", "closed"),

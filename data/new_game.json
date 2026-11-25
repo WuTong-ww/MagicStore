@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "identity_namespace": "new_game_v1",
+  "save_prefix": "save_new_",
+  "initial_state_version": 1,
+  "copy": {
+    "invalid_action_id": "新建请求需要有效且唯一的动作编号。",
+    "target_conflict": "这个新建请求对应的存档已有记录，但缺少匹配的创建回执。原存档未改变，请从存档簿选择或使用新的新建请求。",
+    "receipt_invalid": "创建回执字段或目标存档不一致。",
+    "saved": "新店铺已保存。",
+    "write_failed_prefix": "新建失败，原存档仍保留。",
+    "config_invalid": "新建存档配置不可用，请保留已有存档并稍后重试。",
+    "cleanup_failed": "临时文件未能清理，现有文件仍保留；请检查目录权限后处理，勿覆盖未知文件。",
+    "inspect_failed": "无法确认新建目标是否已有文件。现有文件仍保留，请检查存档目录权限。"
+  }
+}

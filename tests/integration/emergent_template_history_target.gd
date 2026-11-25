@@ -60,8 +60,8 @@ func run() -> void:
 		return
 	var state: Variant = JSON.parse_string(file.get_as_text())
 	file.close()
-	if not state is Dictionary or state.get("schema_version")!=14 or not saves.validate_snapshot(state).success:
-		_fail("history fixture must be a genuine valid schema14 snapshot")
+	if not state is Dictionary or not saves._integer(state.get("schema_version"),14,saves.CURRENT_SCHEMA) or not saves.validate_snapshot(state).success:
+		_fail("history fixture must be a genuine schema14+ snapshot accepted by current SaveService")
 		return
 	state = saves._normalize_numbers(state)
 	var game = root.get_node("GameState")

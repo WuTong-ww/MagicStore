@@ -56,3 +56,8 @@ tests/fixtures/emergent_schema13.json -text
 
 # Byte-exact genuine schema14 interrupted legacy-mode run.
 tests/fixtures/emergent_legacy_mode.json -text
+
+# Genuine pre-TITLE schema14 creation/migration inputs; keep raw envelopes exact.
+tests/fixtures/title_creation/opened-fallback.json -text
+tests/fixtures/title_creation/opened-model.json -text
+tests/fixtures/title_creation/reserved-fallback.json -text

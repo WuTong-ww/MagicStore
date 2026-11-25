@@ -15,6 +15,7 @@
   "drawer_close": "收起手帐",
   "status_format": "金币 %d  口碑 %d  %s  候客 %d",
   "energy_format": "精力 %d / %d",
+  "title_unavailable": "开场配置暂时无法读取，请检查资源后重试。你仍可打开已有存档或调整设置。",
   "no_save_status": "打开存档，开始经营",
   "notice_default": "每个成功动作都会自动保存。",
   "provider_online": "在线对话",

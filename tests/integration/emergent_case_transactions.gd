@@ -69,7 +69,7 @@ func run() -> void:
 	if not (await act("new_game",{"name":"普通案件事务验收"})).success:
 		finish()
 		return
-	check(game.state.schema_version==14 and game.state.divination.emergent_cases=={"version":1,"instances":{}},"fresh current save has an empty namespace and retains fixed Lin first")
+	check(game.state.schema_version==saves.CURRENT_SCHEMA and saves.validate_snapshot(game.snapshot()).success and game.state.divination.emergent_cases=={"version":1,"instances":{}},"fresh current save has an empty namespace and retains fixed Lin first")
 	await act("read_morning_letters")
 	while game.daily_loop_view().completed<game.daily_loop_view().total:
 		if not (await act("next_customer")).success:

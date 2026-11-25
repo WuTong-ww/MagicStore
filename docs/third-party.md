@@ -47,6 +47,14 @@ Godot Engine **4.6.3.stable.official.7d41c59c4**，MIT。官方引擎与 Windows
 | `assets/audio/ui/coin.ogg` | `Audio/drop_001.ogg` | `692ee3a6f1821402ca649ff735bee9591dc4846c8098fc7d6a90fd15fa57c1af` |
 | `assets/audio/ui/notify.ogg` | `Audio/bong_001.ogg` | `d21d0f0b782445db579d11e2506b24cd1ac9d664ee33aeaf807761aa7b6fd710` |
 
+## R3-TITLE 入店提示
+
+R3-TITLE 入店提示复用上表已有的 Kenney `Audio/bong_001.ogg`（项目文件 `assets/audio/ui/notify.ogg`，SHA256 `d21d0f0b782445db579d11e2506b24cd1ac9d664ee33aeaf807761aa7b6fd710`），新增 `entry_chime` 播放键；未新增、编辑或复制音频素材。原 CC0 来源、作者和许可继续适用。自动化检查覆盖实际 Ogg 播放与关闭释放，人工听感验收另列。
+
+本任务本地录像解码与关键帧提取使用 FFmpeg `7.1-essentials_build-www.gyan.dev`：作者 FFmpeg developers，Windows 构建来自 www.gyan.dev；该实际构建的 `-L` 输出为 GPL-3.0-or-later，参见 [FFmpeg 许可说明](https://ffmpeg.org/legal.html)。可执行文件 SHA256 为 `2ce797a0f88d7f067180338fb227f7b1928ea727bd9a4d7a1d022f7c52af71a3`。
+
+工具取自 [ImageIO 官方上游](https://github.com/imageio/imageio-ffmpeg) 的 [imageio-ffmpeg 0.6.0 Windows wheel](https://files.pythonhosted.org/packages/2c/c6/fa760e12a2483469e2bf5058c5faff664acf66cadb4df2ad6205b016a73d/imageio_ffmpeg-0.6.0-py3-none-win_amd64.whl)，包装作者为 imageio contributors，包装许可 BSD-2-Clause（不替代内含 FFmpeg 的 GPL）；wheel SHA256 为 `02fa47c83703c37df6bfe4896aab339013f62bf02c5ebf2dce6da56af04ffc0a`。工具与包装仅保存在 ignored `.tools`，游戏与公开资源包不分发它们；未修改系统 PATH。
+
 ## A3R 待补音乐
 
 指定来源为 [Cozy Tunes + Cozy FX](https://pizzadoggy.itch.io/cozy-tunes)，作者 Pizza Doggy。2026-11-21 官方页面可读取，先前实际下载请求返回 HTTP 429；v3续跑再查官网及免费领取页仍可读取，但本机获准联网后的下载入口请求遇到TLS EOF，仍未取得三首音乐及完整包内许可，因此本仓库**没有收录或伪造这些音乐**，也没有音乐文件 SHA256。最新访问证据见 docs/codex/results/A3R-music-retry.json。

@@ -40,6 +40,11 @@ func run() -> void:
 
 func old_copy(schema: int) -> Dictionary:
 	var old: Dictionary = game.snapshot()
+	# Synthetic old versions cannot retain TITLE15's creation receipt.
+	if old.get("schema_version") == saves.NEW_GAME_RECEIPT_SCHEMA:
+		for action_id: String in old.processed_actions.keys():
+			if old.processed_actions[action_id].get("action_type") == "new_game":
+				old.processed_actions.erase(action_id)
 	# Synthetic historical input excludes the later birth-policy namespace.
 	old.people.erase("birth_identity_version")
 	for profile: Dictionary in old.people.profiles.values():

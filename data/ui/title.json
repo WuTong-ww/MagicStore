@@ -1,0 +1,752 @@
+{
+  "version": 1,
+  "canvas": [
+    1920,
+    1080
+  ],
+  "assets": {
+    "status": "ready",
+    "background": "res://assets/generated_scenes/runtime/title/S01_dusk_unlit.png",
+    "window_glow": "res://assets/generated_scenes/runtime/title/S01_window_glow.png",
+    "wood_sign": "res://assets/ui/title_wood_sign.png",
+    "hanging_sign": "res://assets/generated_scenes/runtime/title/S01_hanging_sign.png",
+    "tree_canopy": "res://assets/generated_scenes/runtime/title/S01_tree_canopy.png",
+    "leaf": "res://assets/ui/title_leaf.png",
+    "calligraphy": "res://assets/ui/title_calligraphy.png",
+    "font": "res://assets/fonts/LXGWWenKai-Regular.ttf",
+    "entry_chime": "res://assets/audio/ui/notify.ogg",
+    "chime_key": "entry_chime"
+  },
+  "copy": {
+    "title": "零点杂货铺",
+    "subtitle": "灯还没亮，故事正要开始。",
+    "missing_assets": "开场素材尚未准备完成，当前画面不作正式美术验收。",
+    "no_saves": "还没有可继续的存档，先开启一家新店吧。",
+    "name_prompt": "给这家小店起个名字",
+    "default_name": "我的零点",
+    "create": "开启新店",
+    "retry": "重试保存",
+    "cancel": "返回",
+    "saving": "正在保存新店…",
+    "close": "合上",
+    "notes_unavailable": "新店已经保存，开场笔记暂时无法显示。可从档案阅读。",
+    "entry_audio_missing": "入店风铃素材尚未准备完成。",
+    "credits_title": "制作名单",
+    "credits_body": "零点杂货铺\n美术与开发资料请见项目资源清单。",
+    "notes_entry": "前任店主的笔记"
+  },
+  "menu": [
+    {
+      "id": "continue",
+      "text": "继续",
+      "tooltip": "选择存档继续原来的故事",
+      "rect": [
+        1170,
+        400,
+        350,
+        98
+      ]
+    },
+    {
+      "id": "new",
+      "text": "新的一天",
+      "tooltip": "新建独立存档，已有进度仍保留",
+      "rect": [
+        1185,
+        516,
+        350,
+        98
+      ]
+    },
+    {
+      "id": "settings",
+      "text": "设置",
+      "tooltip": "调整接口、声音与动态偏好",
+      "rect": [
+        1175,
+        632,
+        350,
+        98
+      ]
+    },
+    {
+      "id": "credits",
+      "text": "制作名单",
+      "tooltip": "查看制作与资源信息",
+      "rect": [
+        1190,
+        748,
+        350,
+        98
+      ]
+    }
+  ],
+  "layout": {
+    "title_rect": [
+      1500,
+      70,
+      390,
+      110
+    ],
+    "subtitle_rect": [
+      1505,
+      188,
+      385,
+      62
+    ],
+    "notice_rect": [
+      230,
+      956,
+      1460,
+      68
+    ],
+    "new_panel_rect": [
+      540,
+      330,
+      840,
+      420
+    ],
+    "credits_rect": [
+      440,
+      200,
+      1040,
+      680
+    ],
+    "notes_rect": [
+      360,
+      140,
+      1200,
+      800
+    ],
+    "title_font": 70,
+    "subtitle_font": 25,
+    "menu_font": 34,
+    "body_font": 24,
+    "notice_font": 21,
+    "panel_margin": 30,
+    "gap": 16,
+    "button_height": 64,
+    "name_length": 32,
+    "title_color": "#352b25",
+    "ink_grain_strength": 0.13,
+    "text_color": "#f1dfbf",
+    "disabled_text_color": "#c7b497",
+    "fallback_color": "#302d32"
+  },
+  "motion": {
+    "hover_degrees": 1.7,
+    "hover_frequency": 1.8,
+    "wind_torque": 0.35,
+    "hanging_sign": {
+      "wind_torque": 6
+    },
+    "light_seconds": 0.18,
+    "zoom_seconds": 0.72,
+    "fade_seconds": 0.45,
+    "zoom_scale": 1.22,
+    "reduced_hover_factor": 0.05,
+    "reduced_zoom_scale": 1.0,
+    "reduced_fade_seconds": 0.16,
+    "leaves": {
+      "rect": [
+        120,
+        50,
+        820,
+        230
+      ],
+      "amount": 8,
+      "lifetime": 7,
+      "speed": 65,
+      "gravity": [
+        12,
+        18
+      ],
+      "scale": 0.022598870056497175
+    }
+  },
+  "qa": {
+    "sizes": [
+      [
+        1280,
+        720
+      ],
+      [
+        1920,
+        1080
+      ]
+    ],
+    "settle_frames": 12,
+    "input_timeout_ms": 2500,
+    "maximum_jpg": 6,
+    "jpeg_quality": 0.85,
+    "movie": {
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "duration_seconds": 30,
+      "hold_seconds": 2,
+      "minimum_seconds": 20,
+      "maximum_seconds": 40
+    }
+  },
+  "geometry": {
+    "version": 1,
+    "status": "verified",
+    "background_size": [
+      1672,
+      941
+    ],
+    "asset_sizes": {
+      "background": [
+        1672,
+        941
+      ],
+      "hanging_sign": [
+        1671,
+        941
+      ],
+      "tree_canopy": [
+        1672,
+        941
+      ],
+      "wood_sign": [
+        2184,
+        720
+      ],
+      "leaf": [
+        1388,
+        1133
+      ],
+      "window_glow": [
+        1671,
+        941
+      ]
+    },
+    "window_light": {
+      "region": [
+        405,
+        490,
+        80,
+        55
+      ],
+      "strength": 0.08,
+      "outer": [
+        [
+          214,
+          657
+        ],
+        [
+          213,
+          496
+        ],
+        [
+          216,
+          462
+        ],
+        [
+          222,
+          433
+        ],
+        [
+          236,
+          406
+        ],
+        [
+          254,
+          381
+        ],
+        [
+          278,
+          358
+        ],
+        [
+          307,
+          340
+        ],
+        [
+          340,
+          328
+        ],
+        [
+          373,
+          321
+        ],
+        [
+          409,
+          320
+        ],
+        [
+          443,
+          320
+        ],
+        [
+          477,
+          326
+        ],
+        [
+          510,
+          338
+        ],
+        [
+          542,
+          356
+        ],
+        [
+          571,
+          378
+        ],
+        [
+          599,
+          404
+        ],
+        [
+          624,
+          434
+        ],
+        [
+          645,
+          466
+        ],
+        [
+          660,
+          500
+        ],
+        [
+          664,
+          657
+        ]
+      ],
+      "panes": [
+        {
+          "id": "top_left",
+          "points": [
+            [
+              222,
+              449
+            ],
+            [
+              232,
+              422
+            ],
+            [
+              250,
+              395
+            ],
+            [
+              279,
+              367
+            ],
+            [
+              312,
+              347
+            ],
+            [
+              346,
+              332
+            ],
+            [
+              376,
+              326
+            ],
+            [
+              376,
+              451
+            ]
+          ]
+        },
+        {
+          "id": "top_middle",
+          "points": [
+            [
+              395,
+              325
+            ],
+            [
+              429,
+              322
+            ],
+            [
+              463,
+              325
+            ],
+            [
+              498,
+              335
+            ],
+            [
+              499,
+              456
+            ],
+            [
+              396,
+              453
+            ]
+          ]
+        },
+        {
+          "id": "top_right",
+          "points": [
+            [
+              521,
+              347
+            ],
+            [
+              551,
+              366
+            ],
+            [
+              579,
+              388
+            ],
+            [
+              605,
+              417
+            ],
+            [
+              625,
+              447
+            ],
+            [
+              521,
+              453
+            ]
+          ]
+        },
+        {
+          "id": "middle_left",
+          "points": [
+            [
+              222,
+              479
+            ],
+            [
+              376,
+              480
+            ],
+            [
+              376,
+              552
+            ],
+            [
+              214,
+              550
+            ]
+          ]
+        },
+        {
+          "id": "middle_middle",
+          "points": [
+            [
+              396,
+              480
+            ],
+            [
+              498,
+              481
+            ],
+            [
+              498,
+              558
+            ],
+            [
+              396,
+              555
+            ]
+          ]
+        },
+        {
+          "id": "middle_right",
+          "points": [
+            [
+              522,
+              481
+            ],
+            [
+              653,
+              489
+            ],
+            [
+              660,
+              558
+            ],
+            [
+              522,
+              558
+            ]
+          ]
+        },
+        {
+          "id": "bottom_left",
+          "points": [
+            [
+              215,
+              582
+            ],
+            [
+              376,
+              584
+            ],
+            [
+              376,
+              654
+            ],
+            [
+              215,
+              652
+            ]
+          ]
+        },
+        {
+          "id": "bottom_middle",
+          "points": [
+            [
+              396,
+              584
+            ],
+            [
+              499,
+              585
+            ],
+            [
+              499,
+              655
+            ],
+            [
+              396,
+              655
+            ]
+          ]
+        },
+        {
+          "id": "bottom_right",
+          "points": [
+            [
+              522,
+              584
+            ],
+            [
+              661,
+              585
+            ],
+            [
+              663,
+              655
+            ],
+            [
+              522,
+              655
+            ]
+          ]
+        }
+      ],
+      "occluders": [
+        {
+          "id": "main_vertical_left",
+          "points": [
+            [
+              380,
+              324
+            ],
+            [
+              392,
+              323
+            ],
+            [
+              393,
+              661
+            ],
+            [
+              380,
+              661
+            ]
+          ]
+        },
+        {
+          "id": "main_vertical_right",
+          "points": [
+            [
+              504,
+              335
+            ],
+            [
+              518,
+              340
+            ],
+            [
+              518,
+              663
+            ],
+            [
+              504,
+              662
+            ]
+          ]
+        },
+        {
+          "id": "horizontal_upper",
+          "points": [
+            [
+              213,
+              451
+            ],
+            [
+              670,
+              461
+            ],
+            [
+              671,
+              477
+            ],
+            [
+              211,
+              470
+            ]
+          ]
+        },
+        {
+          "id": "horizontal_lower",
+          "points": [
+            [
+              207,
+              557
+            ],
+            [
+              674,
+              563
+            ],
+            [
+              675,
+              578
+            ],
+            [
+              207,
+              573
+            ]
+          ]
+        },
+        {
+          "id": "sill",
+          "points": [
+            [
+              198,
+              660
+            ],
+            [
+              681,
+              663
+            ],
+            [
+              681,
+              680
+            ],
+            [
+              196,
+              679
+            ]
+          ]
+        },
+        {
+          "id": "thin_post_left",
+          "points": [
+            [
+              249,
+              401
+            ],
+            [
+              258,
+              398
+            ],
+            [
+              258,
+              660
+            ],
+            [
+              248,
+              659
+            ]
+          ]
+        },
+        {
+          "id": "thin_post_right",
+          "points": [
+            [
+              603,
+              394
+            ],
+            [
+              612,
+              403
+            ],
+            [
+              613,
+              663
+            ],
+            [
+              603,
+              661
+            ]
+          ]
+        },
+        {
+          "id": "left_lavender_intrusion",
+          "points": [
+            [
+              206,
+              581
+            ],
+            [
+              228,
+              583
+            ],
+            [
+              245,
+              611
+            ],
+            [
+              264,
+              628
+            ],
+            [
+              269,
+              661
+            ],
+            [
+              205,
+              661
+            ]
+          ]
+        }
+      ],
+      "bounds": [
+        213,
+        320,
+        451,
+        337
+      ]
+    },
+    "hanging_sign": {
+      "scale": 0.6472966927151566,
+      "rotation_degrees": -4.398705354995532,
+      "translation": [
+        436.4680851063831,
+        139.5744680851064
+      ],
+      "pivot": [
+        1306.5,
+        198
+      ]
+    },
+    "canopy_pivot": [
+      0,
+      135
+    ],
+    "door_center": [
+      922.5,
+      583
+    ],
+    "leaf": {
+      "visible_height": 24,
+      "alpha_height": 1062
+    }
+  }
+}

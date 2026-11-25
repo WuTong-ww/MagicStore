@@ -26,8 +26,8 @@ func run() -> void:
 		return
 	var state: Variant = JSON.parse_string(file.get_as_text())
 	file.close()
-	if not state is Dictionary or state.get("schema_version")!=14 or not saves.validate_snapshot(state).success:
-		_fail("opened ordinary fixture must be a real valid schema14 snapshot, not an envelope or fabricated downgrade")
+	if not state is Dictionary or not saves._integer(state.get("schema_version"),14,saves.CURRENT_SCHEMA) or not saves.validate_snapshot(state).success:
+		_fail("opened ordinary fixture must be a real schema14+ snapshot accepted by current SaveService, not an envelope or fabricated downgrade")
 		return
 	state = saves._normalize_numbers(state)
 	var projected: Dictionary = saves.build_case_catalog(state)

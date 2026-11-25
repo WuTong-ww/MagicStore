@@ -22,6 +22,7 @@
     "confirm": "res://assets/audio/ui/confirm.ogg",
     "cancel": "res://assets/audio/ui/cancel.ogg",
     "coin": "res://assets/audio/ui/coin.ogg",
-    "notify": "res://assets/audio/ui/notify.ogg"
+    "notify": "res://assets/audio/ui/notify.ogg",
+    "entry_chime": "res://assets/audio/ui/notify.ogg"
   }
 }

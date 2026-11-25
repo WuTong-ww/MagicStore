@@ -15,6 +15,23 @@ var shell_header: PanelContainer
 var presentation_audio: Node
 var cancel_button: Button
 var _closing := false
+const TitleControl = preload("res://scripts/ui/title_control.gd")
+const TitleConfig = preload("res://scripts/ui/title_config.gd")
+var title_control: Control
+var title_config_path := TitleConfig.PATH
+var title_error_panel: PanelContainer
+var title_error_label: Label
+var _title_blocking := false
+var _title_input_records: Dictionary = {}
+var _focus_before_title: WeakRef
+var shell_dock: Control
+var _startup_resolved := false
+var _entry_ui := false
+var _new_game_intent: Dictionary = {}
+var _load_intent: Dictionary = {}
+var _title_cues: Dictionary = {}
+var title_entry_cue_count := 0
+var save_create_button: Button
 
 const FRONT := preload("res://scenes/shop_front.tscn")
 const CONSULTATION := preload("res://scenes/consultation.tscn")
@@ -55,7 +72,7 @@ var open_button: Button
 var workbench: DivinationWorkbench
 
 func _process(_delta: float) -> void:
-	if not _closing:
+	if not _closing and not _title_blocking:
 		GameState.pump_background_people(busy)
 		GameState.pump_background_cases(busy)
 
@@ -80,8 +97,10 @@ func _ready() -> void:
 	GameState.presentation_events_committed.connect(_on_presentation_events)
 	GameState.action_failed.connect(show_notice)
 	_build_people_window()
+	_build_title()
 	show_screen("exterior")
-	call_deferred("open_saves")
+	set_title_blocking(true)
+	call_deferred("_open_title_if_unresolved")
 
 func prepare_close_async() -> bool:
 	if _closing:
@@ -101,6 +120,9 @@ func prepare_close_async() -> bool:
 			_closing = false
 			show_notice(close_config.labels.close_failed)
 			return false
+	if is_instance_valid(title_control) and not await title_control.shutdown_async():
+		_closing = false
+		return false
 	var motion := _current_motion()
 	if is_instance_valid(motion) and not await motion.shutdown_async():
 		_closing = false
@@ -167,6 +189,7 @@ func _build_shell() -> void:
 	settings_button.add_theme_font_size_override("font_size",int(shell_config.layout.status_size))
 	header.add_child(settings_button)
 	var dock := PanelContainer.new()
+	shell_dock = dock
 	dock.theme = shell_header.theme
 	add_child(dock)
 	dock.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
@@ -275,8 +298,9 @@ func _refresh() -> void:
 		screen.call("refresh")
 	if is_instance_valid(presentation_audio):
 		presentation_audio.transition(current_screen,int(snapshot.get("clock_minutes",0)))
+	if _title_blocking: _isolate_gameplay_inputs()
 
-func run_action(action_type: String, extra: Dictionary = {}) -> Dictionary:
+func run_action(action_type: String, extra: Dictionary = {}, command_id: String = "") -> Dictionary:
 	if busy or _closing:
 		return {"success": false, "error_code": "BUSY", "message": "正在处理，请稍候。"}
 	busy = true
@@ -284,7 +308,8 @@ func run_action(action_type: String, extra: Dictionary = {}) -> Dictionary:
 	open_button.disabled = true
 	var action: Dictionary = extra.duplicate(true)
 	action["type"] = action_type
-	action["action_id"] = GameState.make_id("ui")
+	# Explicit tail wins over extra; old callers retain random IDs.
+	action["action_id"] = command_id if not command_id.is_empty() else GameState.make_id("ui")
 	var snapshot: Dictionary = GameState.player_snapshot()
 	if not snapshot.is_empty():
 		action["expected_version"] = snapshot.get("state_version", 0)
@@ -295,11 +320,18 @@ func run_action(action_type: String, extra: Dictionary = {}) -> Dictionary:
 	open_button.disabled = false
 	show_notice(str(result.get("message", "操作完成")))
 	if result.get("success", false):
-		if is_instance_valid(presentation_audio) and not action_type.begins_with("case_") and action_type != "story_choice":
+		if is_instance_valid(presentation_audio) and not action_type.begins_with("case_") and action_type != "story_choice" and not (_entry_ui and action_type in ["new_game","load_game"]):
 			presentation_audio.play_ui("coin" if action_type in ["procure_item","sell_product","sell_material"] else "confirm")
 		if action_type in ["new_game", "load_game"]:
+			_startup_resolved = true
 			save_window.hide()
 			show_screen("consultation" if not GameState.active_visit().is_empty() else "front",true)
+			# No animations or modal waits in the ordinary business entry point.
+			if not _entry_ui:
+				_dismiss_title_direct()
+				cancel_ui_new_game()
+				_load_intent.clear()
+				set_title_blocking(false)
 		elif action_type in ["start_visit", "start_arrival", "next_customer"]:
 			show_screen("consultation")
 			people_window.hide()
@@ -318,6 +350,200 @@ func run_action(action_type: String, extra: Dictionary = {}) -> Dictionary:
 			save_note.text = str(result.get("message", "无法读取，请检查存档。"))
 	_refresh()
 	return result
+
+func _title_available() -> bool:
+	return is_instance_valid(title_control) and not title_control.config.is_empty()
+
+func _build_title() -> void:
+	# Reject real invalid data; never synthesize a valid-looking Title config.
+	if TitleConfig.load_config(title_config_path).is_empty():
+		_build_title_unavailable()
+		return
+	title_control = TitleControl.new()
+	title_control.name = "TitleControl"
+	title_control.host = self
+	title_control.config_path = title_config_path
+	add_child(title_control)
+	if not _title_available():
+		title_control.queue_free()
+		title_control = null
+		_build_title_unavailable()
+		return
+	title_control.continue_requested.connect(open_saves)
+	title_control.settings_requested.connect(open_network_settings)
+	title_control.new_requested.connect(_ui_create_game)
+	var notebook := UI.button(str(title_control.config.copy.notes_entry),open_story_notes)
+	notebook.add_theme_font_size_override("font_size",int(shell_config.layout.status_size))
+	notebook.name = "OpenStoryNotes"
+	shell_header.get_child(0).add_child(notebook)
+
+func _build_title_unavailable() -> void:
+	# Independently validated Shell data supplies public Chinese failure copy.
+	title_error_panel = UI.panel()
+	title_error_panel.name = "TitleUnavailable"
+	add_child(title_error_panel)
+	title_error_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var margin := UI.margin(int(shell_config.layout.margin))
+	title_error_panel.add_child(margin)
+	var box := VBoxContainer.new()
+	box.alignment = BoxContainer.ALIGNMENT_CENTER
+	margin.add_child(box)
+	title_error_label = UI.label(str(shell_config.title_unavailable),int(shell_config.layout.status_size))
+	box.add_child(title_error_label)
+	var saves := UI.button(str(shell_config.save_label),open_saves)
+	saves.name = "TitleFallbackSaves"
+	box.add_child(saves)
+	var settings := UI.button(str(shell_config.settings_label),open_network_settings)
+	settings.name = "TitleFallbackSettings"
+	box.add_child(settings)
+	saves.grab_focus()
+
+func _dismiss_title_direct() -> void:
+	if _title_available(): title_control.dismiss_direct()
+	if is_instance_valid(title_error_panel): title_error_panel.hide()
+
+func _open_title_if_unresolved() -> void:
+	# A direct command may succeed before this deferred startup callback.
+	if _startup_resolved or not GameState.player_snapshot().is_empty():
+		_dismiss_title_direct()
+		set_title_blocking(false)
+		if not _startup_resolved:
+			show_screen("consultation" if not GameState.active_visit().is_empty() else "front",true)
+		return
+	save_window.hide()
+	people_window.hide()
+	history_window.hide()
+	if _title_available():
+		title_control.show()
+		title_control.refresh_continue()
+	elif is_instance_valid(title_error_panel): title_error_panel.show()
+	set_title_blocking(true)
+
+func set_title_blocking(value: bool) -> void:
+	if value and not _title_blocking:
+		var focused := get_viewport().gui_get_focus_owner()
+		if is_instance_valid(focused) and (scene_holder.is_ancestor_of(focused) or shell_header.is_ancestor_of(focused) or shell_dock.is_ancestor_of(focused)):
+			_focus_before_title = weakref(focused)
+			focused.release_focus()
+		for popup: Node in [people_window,history_window,workbench]:
+			if is_instance_valid(popup): popup.hide()
+	_title_blocking = value
+	for node: Control in [shell_header,shell_dock,notice,cancel_button]:
+		node.visible = not value and (node != cancel_button or busy)
+	if value: _isolate_gameplay_inputs()
+	else: _restore_gameplay_inputs()
+	var motion: Node
+	if is_instance_valid(screen):
+		var art: Control = screen.get("room_art") if current_screen == "consultation" else screen.get("scene_visual")
+		motion = art.motion_controller if is_instance_valid(art) else null
+	if is_instance_valid(motion): motion.set_active(not value)
+
+func _isolate_gameplay_inputs() -> void:
+	# Keep rendering for the fade; remove mouse, focus and global key routes.
+	var nodes: Array[Node] = [scene_holder]
+	while not nodes.is_empty():
+		var node: Node = nodes.pop_back()
+		nodes.append_array(node.get_children())
+		var id := node.get_instance_id()
+		if not _title_input_records.has(id):
+			var row := {"node":weakref(node),"input":node.is_processing_input(),"unhandled":node.is_processing_unhandled_input(),"key":node.is_processing_unhandled_key_input(),"shortcut":node.is_processing_shortcut_input()}
+			if node is Control:
+				row.focus = node.focus_mode
+				row.mouse = node.mouse_filter
+				if node is PaperDrawer or node.has_meta("decorative_hotspot") or str(node.name).begins_with("HotspotLabel_"):
+					row.visibility = node.visible
+					row.overlay_modulate = node.modulate
+			_title_input_records[id] = row
+		node.set_process_input(false)
+		node.set_process_unhandled_input(false)
+		node.set_process_unhandled_key_input(false)
+		node.set_process_shortcut_input(false)
+		if node is Control:
+			if _title_input_records[id].has("visibility"):
+				node.hide()
+				# SceneArtwork may relayout labels after a viewport resize.
+				node.modulate.a = 0.0
+			if node.has_focus(): node.release_focus()
+			node.focus_mode = Control.FOCUS_NONE
+			node.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+func _restore_gameplay_inputs() -> void:
+	for row: Dictionary in _title_input_records.values():
+		var node: Node = row.node.get_ref()
+		if not is_instance_valid(node): continue
+		node.set_process_input(row.input)
+		node.set_process_unhandled_input(row.unhandled)
+		node.set_process_unhandled_key_input(row.key)
+		node.set_process_shortcut_input(row.shortcut)
+		if node is Control:
+			if row.has("visibility"):
+				node.visible = row.visibility
+				node.modulate = row.overlay_modulate
+			node.focus_mode = row.focus
+			node.mouse_filter = row.mouse
+	_title_input_records.clear()
+	var previous: Control = _focus_before_title.get_ref() if _focus_before_title != null else null
+	_focus_before_title = null
+	if is_instance_valid(previous) and previous.is_inside_tree() and previous.is_visible_in_tree() and previous.focus_mode != Control.FOCUS_NONE:
+		previous.grab_focus()
+	elif is_instance_valid(screen):
+		for candidate: Control in screen.find_children("*","Control",true,false):
+			if candidate.is_visible_in_tree() and candidate.focus_mode != Control.FOCUS_NONE and (not candidate is BaseButton or not candidate.disabled):
+				candidate.grab_focus()
+				break
+
+func ui_new_game_intent() -> Dictionary:
+	return _new_game_intent.duplicate(true)
+
+func cancel_ui_new_game() -> void:
+	if busy: return
+	_new_game_intent.clear()
+	save_name.editable = true
+
+func _ui_create_from_saves() -> void:
+	await _ui_create_game(save_name.text)
+
+func _ui_create_game(requested_name: String) -> void:
+	if busy: return
+	if not _title_available():
+		show_notice(str(shell_config.title_unavailable))
+		save_note.text = str(shell_config.title_unavailable)
+		return
+	if title_control.entering: return
+	if _new_game_intent.is_empty():
+		_new_game_intent = {"id":GameState.make_id("ui_new"),"name":requested_name}
+	# Retain the original name and ID until committed or explicitly canceled.
+	var command: Dictionary = _new_game_intent.duplicate(true)
+	save_name.text = str(command.name)
+	save_name.editable = false
+	save_create_button.disabled = true
+	title_control.set_request_pending(true)
+	var was_blocking := _title_blocking
+	set_title_blocking(true)
+	_entry_ui = true
+	var result: Dictionary = await run_action("new_game",{"name":command.name},str(command.id))
+	_entry_ui = false
+	save_create_button.disabled = false
+	title_control.set_request_pending(false,str(result.get("message","")))
+	if not result.get("success",false):
+		if not was_blocking: set_title_blocking(false)
+		return
+	_new_game_intent.clear()
+	save_name.editable = true
+	await title_control.finish_entry(result,true,str(command.id))
+
+func play_title_entry_cue(command_id: String) -> bool:
+	if command_id.is_empty() or _title_cues.has(command_id): return false
+	var config: Dictionary = TitleConfig.load_config()
+	if config.is_empty() or not is_instance_valid(presentation_audio): return false
+	var key := str(config.assets.chime_key)
+	if presentation_audio.config.get("sounds",{}).get(key) != config.assets.entry_chime or not ResourceLoader.exists(str(config.assets.entry_chime)): return false
+	presentation_audio.play_ui(key)
+	_title_cues[command_id] = true
+	title_entry_cue_count += 1
+	var wind := get_node_or_null("/root/WindField")
+	if is_instance_valid(wind): wind.notify_door_event("title/"+command_id)
+	return true
 
 func _build_people_window() -> void:
 	people_window = Window.new()
@@ -533,7 +759,11 @@ func _build_save_window() -> void:
 	save_window.transient = true
 	save_window.exclusive = true
 	save_window.theme = theme
-	save_window.close_requested.connect(func(): save_window.hide())
+	save_window.close_requested.connect(func():
+		if busy: return
+		cancel_ui_new_game()
+		_load_intent.clear()
+		save_window.hide())
 	add_child(save_window)
 	UI.paper_window(save_window)
 	var margin: MarginContainer = UI.margin(22)
@@ -564,12 +794,20 @@ func _build_save_window() -> void:
 	var create_row := HBoxContainer.new()
 	layout.add_child(create_row)
 	save_name = LineEdit.new()
-	save_name.placeholder_text = "给这家小店起个名字"
-	save_name.text = "我的零点"
-	save_name.max_length = 32
+	var title_data: Dictionary = TitleConfig.load_config(title_config_path)
+	if not title_data.is_empty():
+		save_name.placeholder_text = str(title_data.copy.name_prompt)
+		save_name.text = str(title_data.copy.default_name)
+		save_name.max_length = int(title_data.layout.name_length)
+	else:
+		save_name.placeholder_text = str(shell_config.title_unavailable)
+		save_name.editable = false
 	save_name.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	create_row.add_child(save_name)
-	create_row.add_child(UI.button("新建独立存档", func(): await run_action("new_game", {"name": save_name.text})))
+	save_create_button = UI.button("新建独立存档", _ui_create_from_saves)
+	save_create_button.name = "SaveCreate"
+	save_create_button.disabled = title_data.is_empty()
+	create_row.add_child(save_create_button)
 	backup_confirm = ConfirmationDialog.new()
 	backup_confirm.title = "确认恢复较早的备份"
 	backup_confirm.dialog_text = "备份可能比主档早一个或多个动作。\n恢复后资源、对话和牌面会回到备份时刻；最近行动可能丢失。\n确认恢复所选存档？"
@@ -622,7 +860,17 @@ func _load_selected(recover: bool = false) -> void:
 		save_note.text = "请先选择存档，或新建独立存档。"
 		return
 	var entry: Dictionary = save_entries[selected[0]]
-	await run_action("load_game", {"save_id": entry.get("save_id", ""), "recover_backup": recover})
+	var entering_from_title := _title_available() and title_control.visible
+	var target := str(entry.get("save_id",""))
+	if _load_intent.get("save_id") != target or _load_intent.get("recover") != recover:
+		_load_intent = {"id":GameState.make_id("ui_load"),"save_id":target,"recover":recover}
+	_entry_ui = entering_from_title
+	var command_id := str(_load_intent.id)
+	var result: Dictionary = await run_action("load_game", {"save_id":target,"recover_backup":recover},command_id)
+	_entry_ui = false
+	if result.get("success",false):
+		_load_intent.clear()
+		if entering_from_title: await title_control.finish_entry(result,false,command_id)
 
 func _confirm_backup() -> void:
 	var selected := save_list.get_selected_items()
@@ -759,6 +1007,8 @@ func _refresh_history(show_details: bool) -> void:
 	history_text.scroll_to_line(0)
 
 func _current_motion() -> Node:
+	if is_instance_valid(title_control) and title_control.visible:
+		return title_control.motion_controller
 	if not is_instance_valid(screen):
 		return null
 	var artwork: Control = screen.get("room_art") if current_screen == "consultation" else screen.get("scene_visual")

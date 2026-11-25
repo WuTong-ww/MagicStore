@@ -54,6 +54,11 @@ func active_schema9() -> void:
 	var talk_reply: Dictionary = await act("talk",{"text":"为什么还没回信？","topic_id":"letter"})
 	check(talk_reply.success,"legacy source includes witnessed clues and conversation: "+str(talk_reply))
 	var old: Dictionary = game.snapshot()
+	# Synthetic old versions cannot retain TITLE15's creation receipt.
+	if old.get("schema_version") == saves.NEW_GAME_RECEIPT_SCHEMA:
+		for action_id: String in old.processed_actions.keys():
+			if old.processed_actions[action_id].get("action_type") == "new_game":
+				old.processed_actions.erase(action_id)
 	# A synthetic schema9 fixture cannot contain future birth-policy fields.
 	old.people.erase("birth_identity_version")
 	for profile: Dictionary in old.people.profiles.values():
@@ -102,6 +107,11 @@ func crowded_schema9() -> void:
 	game.daily_loop_config.enabled = false
 	check((await act("new_game",{"name":"旧日满员"})).success,"legacy full-day source creates")
 	var old: Dictionary = game.snapshot()
+	# Synthetic old versions cannot retain TITLE15's creation receipt.
+	if old.get("schema_version") == saves.NEW_GAME_RECEIPT_SCHEMA:
+		for action_id: String in old.processed_actions.keys():
+			if old.processed_actions[action_id].get("action_type") == "new_game":
+				old.processed_actions.erase(action_id)
 	# A synthetic schema9 fixture cannot contain future birth-policy fields.
 	old.people.erase("birth_identity_version")
 	for profile: Dictionary in old.people.profiles.values():

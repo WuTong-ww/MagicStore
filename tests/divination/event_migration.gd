@@ -47,6 +47,11 @@ func run() -> void:
 
 func old_copy(schema: int) -> Dictionary:
 	var legacy: Dictionary = game.snapshot()
+	# Synthetic old versions cannot retain TITLE15's creation receipt.
+	if legacy.get("schema_version") == saves.NEW_GAME_RECEIPT_SCHEMA:
+		for action_id: String in legacy.processed_actions.keys():
+			if legacy.processed_actions[action_id].get("action_type") == "new_game":
+				legacy.processed_actions.erase(action_id)
 	legacy.schema_version = schema
 	if legacy.has("divination"):
 		check(not legacy.divination.has("emergent_cases") or legacy.divination.get("emergent_cases")=={"version":1,"instances":{}},"historical projection retains no populated schema14 ordinary-case namespace")

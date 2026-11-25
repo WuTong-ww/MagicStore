@@ -12,7 +12,7 @@ static func config_valid(data: Dictionary) -> bool:
 			return false
 	if not _dimensions_valid(data.get("screen_minimum")):
 		return false
-	for key: String in ["brand","save_label","settings_label","drawer_open","drawer_close","status_format","energy_format","no_save_status","notice_default","provider_online","provider_offline","cancel_label"]:
+	for key: String in ["brand","save_label","settings_label","drawer_open","drawer_close","status_format","energy_format","no_save_status","notice_default","provider_online","provider_offline","cancel_label","title_unavailable"]:
 		if not data.get(key) is String or data[key].is_empty():
 			return false
 	if not _format_valid(data.status_format,["d","d","s","d"]) or not _format_valid(data.energy_format,["d","d"]):

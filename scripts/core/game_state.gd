@@ -763,6 +763,26 @@ func _preflight(action: Dictionary) -> Dictionary:
 	return {}
 
 func _new_game(action: Dictionary) -> Dictionary:
+	var rules: Dictionary = SaveService.new_game_rules()
+	if rules.is_empty():
+		return _fail("CONTENT_INVALID",SaveService.new_game_public_message("NEW_GAME_CONFIG_INVALID"))
+	var creation_id := ""
+	var target_id := ""
+	if action.has("action_id"):
+		var target: Dictionary = SaveService.inspect_new_game(action.action_id)
+		if not target.success:
+			var failure := _fail(target.error_code,target.message)
+			failure["backup_available"] = target.get("backup_available",false)
+			return failure
+		creation_id = action.action_id
+		if not target.empty:
+			var replay: Dictionary = target.receipt.duplicate(true)
+			var restored := _apply_loaded_game(target,false)
+			if not restored.success:
+				return restored
+			replay["replayed"] = true
+			return replay
+		target_id = target.save_id
 	if not action.get("name", "新店铺") is String:
 		return _fail("INVALID_NAME", "存档名称应为文本。")
 	var save_name: String = action.get("name", "新店铺").strip_edges()
@@ -772,9 +792,9 @@ func _new_game(action: Dictionary) -> Dictionary:
 		return _fail("INVALID_NAME", "存档名称最多 32 个字符。")
 	var candidate: Dictionary = {
 		"schema_version": 2,
-		"save_id": make_id("save"),
+		"save_id": make_id("save") if creation_id.is_empty() else target_id,
 		"name": save_name,
-		"state_version": 1,
+		"state_version": int(rules.initial_state_version),
 		"clock_minutes": int(content.rules.opening_minute),
 		"player": {"coins": int(content.rules.starting_coins), "energy": int(content.rules.max_energy)},
 		"npcs": {"npc_lin": {"coins": int(content.rules.npc_coins)}},
@@ -793,15 +813,20 @@ func _new_game(action: Dictionary) -> Dictionary:
 	var prepared := _divination.candidate_for(candidate)
 	if not prepared.get("success",false):
 		return _case_failure()
-	var saved: Dictionary = SaveService.write_save(candidate)
+	# Capture the first receipt before write/publication and any signal reentry.
+	var reply := {"success":true,"error_code":"","message":rules.copy.saved,"state_version":candidate.state_version,"result":{"save_id":candidate.save_id}}
+	if not creation_id.is_empty():
+		reply["action_type"] = "new_game"
+		candidate.processed_actions[creation_id] = reply.duplicate(true)
+	var saved: Dictionary = SaveService.write_save(candidate) if creation_id.is_empty() else SaveService.write_new_game(candidate,creation_id)
 	if not saved.success:
-		return _fail(saved.get("error_code", "SAVE_FAILED"), "新建失败，原存档仍保留。" + saved.get("message", ""))
+		return _fail(saved.get("error_code", "SAVE_FAILED"), str(rules.copy.write_failed_prefix) + saved.get("message", ""))
 	_publish_case_session(prepared.session)
 	state = candidate
 	_reset_people_generator()
 	_reset_case_generator()
 	state_changed.emit()
-	return _ok("新店铺已保存。", {"save_id": state.save_id})
+	return reply
 
 func _load_game(action: Dictionary) -> Dictionary:
 	if not action.get("save_id") is String or not action.get("recover_backup", false) is bool:
@@ -811,6 +836,10 @@ func _load_game(action: Dictionary) -> Dictionary:
 		var failure: Dictionary = _fail(loaded.get("error_code", "LOAD_FAILED"), loaded.get("message", "读取失败，当前游戏仍保留。"))
 		failure["backup_available"] = loaded.get("backup_available", false)
 		return failure
+	return _apply_loaded_game(loaded)
+
+## Reuse the entire current AICASE load pipeline, never fresh planning/writing.
+func _apply_loaded_game(loaded: Dictionary, publish_unchanged: bool = true) -> Dictionary:
 	var candidate: Dictionary = loaded.state.duplicate(true)
 	var initial := _divination.candidate_for(candidate) if int(candidate.schema_version)>1 else {"success":true,"session":DivinationSession.new(_divination._base_catalog.duplicate(true),content)}
 	if not initial.get("success",false):
@@ -828,6 +857,8 @@ func _load_game(action: Dictionary) -> Dictionary:
 	var story_error := StoryProgress.validate(candidate,prepared.session.data,story_config)
 	if not story_error.is_empty():
 		return _fail("INVALID_STORY",story_error)
+	if not publish_unchanged and state==candidate:
+		return _ok(loaded.get("message",""),{"save_id":candidate.save_id})
 	_publish_case_session(prepared.session)
 	state = candidate
 	_reset_people_generator()
@@ -1265,7 +1296,13 @@ func _initialize_integrated(candidate: Dictionary, fresh: bool = false, candidat
 		candidate.schema_version = 13
 	if int(candidate.schema_version) < 14 and not EmergentStore.migrate_schema13(candidate).get("success",false):
 		return false
+	_migrate_creation_receipt_schema(candidate)
 	return People.validate(candidate.people).is_empty()
+
+func _migrate_creation_receipt_schema(candidate: Dictionary) -> void:
+	# Contract-only 14 -> 15. Do not invent receipts/markers or rewrite old data.
+	if int(candidate.schema_version)==SaveService.PRE_TITLE_SCHEMA:
+		candidate.schema_version = SaveService.NEW_GAME_RECEIPT_SCHEMA
 
 func _set_free_question(action: Dictionary) -> Dictionary:
 	var copy: Dictionary = CaseSchema.load_rules().copy

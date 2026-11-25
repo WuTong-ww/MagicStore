@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "fixtures": {
+    "opened-fallback": {
+      "path": "res://tests/fixtures/title_creation/opened-fallback.json",
+      "sha256": "1d8e236f3684f655e79f1f9aa6c9d371ee7eafa5eaf90e76107f650225549d5e",
+      "save_id": "save_2ee8115923cfc22b1bd5498b24d877d9",
+      "source": ".tools/r3-title/transaction-rebased-aicase14/tests/fixtures/title_creation/opened-fallback.json",
+      "schema_version": 14,
+      "byteexact": true
+    },
+    "opened-model": {
+      "path": "res://tests/fixtures/title_creation/opened-model.json",
+      "sha256": "bca7d6524a20d08a9791a1e8d2882d95dd834ffc442a7caae1c303f9479c754f",
+      "save_id": "save_2ee8115923cfc22b1bd5498b24d877d9",
+      "source": ".tools/r3-title/transaction-rebased-aicase14/tests/fixtures/title_creation/opened-model.json",
+      "schema_version": 14,
+      "byteexact": true
+    },
+    "reserved-fallback": {
+      "path": "res://tests/fixtures/title_creation/reserved-fallback.json",
+      "sha256": "7c9b9d82ed4e82a2773d41a7b27d0fbcb50044f93adf160addab84c5d893e683",
+      "save_id": "save_2ee8115923cfc22b1bd5498b24d877d9",
+      "source": ".tools/r3-title/transaction-rebased-aicase14/tests/fixtures/title_creation/reserved-fallback.json",
+      "schema_version": 14,
+      "byteexact": true
+    }
+  }
+}

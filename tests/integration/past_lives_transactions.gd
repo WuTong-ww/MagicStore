@@ -43,6 +43,10 @@ func finish() -> void:
 func act(kind: String, values: Dictionary = {}) -> Dictionary:
 	var action := {"type":kind,"action_id":game.make_id("past_action"),"expected_version":game.state.get("state_version",0)}
 	action.merge(values,true)
+	# Historical G5 fixed identity uses the preserved missing-ID CLI creation path.
+	# Explicit TITLE creation idempotence has its separate title_creation.gd coverage.
+	if kind == "new_game":
+		action.erase("action_id")
 	return await game.execute_action_async(action)
 
 func disk_sha() -> String:

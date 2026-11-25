@@ -37,9 +37,9 @@ func run(game, saves, genuine_path: String, genuine_sha256: String) -> Dictionar
 	var loaded: Dictionary = await game.execute_action_async({"type":"load_game","save_id":source.save_id})
 	check(loaded.success,"real load action accepts genuine schema13 UI envelope")
 	var migrated: Dictionary = game.snapshot()
-	check(migrated.schema_version==14 and migrated.divination.emergent_cases=={"version":1,"instances":{}},"memory-only migration adds exactly empty namespace")
+	check(migrated.schema_version==saves.CURRENT_SCHEMA and saves.validate_snapshot(migrated).success and migrated.divination.emergent_cases=={"version":1,"instances":{}},"memory-only migration adds exactly empty namespace")
 	var expected: Dictionary = source.duplicate(true)
-	expected.schema_version = 14
+	expected.schema_version = saves.CURRENT_SCHEMA
 	expected.divination["emergent_cases"] = {"version":1,"instances":{}}
 	check(migrated==expected,"names/birth identities, fixed truth, old board, plans, events and action receipts remain exact")
 	check(FileAccess.get_sha256(copied_path)==genuine_sha256 and saves.read_save(source.save_id).state.schema_version==13,"load migration writes no bytes")
@@ -48,7 +48,7 @@ func run(game, saves, genuine_path: String, genuine_sha256: String) -> Dictionar
 	var failed: Dictionary = await game.execute_action_async(command)
 	check(not failed.success and failed.error_code=="SAVE_WRITE_FAILED" and game.snapshot()==migrated and FileAccess.get_sha256(copied_path)==genuine_sha256,"failed first commit preserves real schema13 bytes and migrated memory")
 	var retry: Dictionary = await game.execute_action_async(command)
-	check(retry.success and saves.read_save(source.save_id).state.schema_version==14,"same action retry is the first write of schema14")
+	check(retry.success and saves.read_save(source.save_id).state.schema_version==saves.CURRENT_SCHEMA,"same action retry is the first write of the current schema")
 	var committed: Dictionary = game.snapshot()
 	var replay: Dictionary = await game.execute_action_async(command)
 	check(replay.success and replay.get("replayed",false) and game.snapshot()==committed,"same ID replay does not settle twice")

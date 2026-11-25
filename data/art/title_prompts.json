@@ -1,0 +1,144 @@
+{
+  "type": "r3_title_v1",
+  "version": 1,
+  "entries": {
+    "bg": {
+      "path": "assets/generated_scenes/runtime/title/S01_dusk_unlit.png",
+      "sha256": "4763b247cb22788a780ce173533c49b3650306f6d306327fd93a2ac2a01f5095",
+      "dim": [
+        1672,
+        941
+      ],
+      "native_size": [
+        1672,
+        941
+      ],
+      "version": 1,
+      "status": "selected_source_runtime_unrun",
+      "group": "title_sources",
+      "prompt": "Use case: lighting-weather edit. Asset: wide 16:9 title-screen clean background for the same small shop, intended logical canvas 1920x1080. The attached image is the exact architecture/composition and painting-style reference. Preserve the camera, roof, masonry, upper windows, large arched display window on the left, green entrance door, stone step, pots, and calm empty right third. Change the lighting to natural early dusk before the shop lights are switched on: fading peach-grey sky and muted sage/teal cool shade, readable details, no night-dark blue. The display window remains clear glass with dim cool interior; absolutely no warm interior illumination, wall lamp illumination, or light spill. Hand-painted opaque poster colors on paper, visible brushwork, softer corners, medium saturation, no digital bloom. CLEAN PLATE FOR SEPARATE WIND LAYERS: remove only the dangling rectangular blank shop sign AND its two chains (retain the fixed wall bracket/arm behind it, fill in sky naturally); remove only the yellow-leaf foreground canopy hanging in from the upper-left corner (retain the trunk, architectural ivy and pots, restore wall/sky behind removed leaves). Keep the single existing wisteria near the door; no extra wisteria. All labels remain blank. No people, no writing, letters, digits, logos, UI, magical glow, sparkles, lens flares or gold filigree. Do not redesign or shift the door or window. Maintain the full wide frame and clear right-side menu space.",
+      "source": {
+        "generator": "builtin_imagegen",
+        "record_id": "R3_TITLE_background_v1",
+        "original_path": "C:/Users/WT/.codex/generated_images/01a20b6f-9596-7131-9453-7e25387d50e8/exec-5a12755a-f810-40b7-a216-6f31908b018a.png",
+        "preparation_source": ".tools/r3-title/art-drafts/S01_dusk_unlit-v1.png"
+      },
+      "runtime_usage": "native_source_runtime_transform"
+    },
+    "sign": {
+      "path": "assets/generated_scenes/runtime/title/S01_hanging_sign.png",
+      "sha256": "2b7abaacb88c4cf1a5253f33d5fb6abe8daaee3917bb4fb3823f0d10fe33955b",
+      "dim": [
+        1671,
+        941
+      ],
+      "native_size": [
+        1671,
+        941
+      ],
+      "version": 1,
+      "status": "selected_source_runtime_unrun",
+      "group": "title_sources",
+      "prompt": "Use case: background-extraction. Asset: isolated moving hanging shop sign with real transparent background. Image 1 is the extraction/design target: use its exact plain blank wooden rectangular sign and two short iron chains below the fixed wooden bracket on the right. Image 2 is the new dusk clean-plate composition and color reference, where this dangling part has been removed. Output ONLY the blank dangling board plus its two chains, recolored gently to the muted natural dusk of Image 2. Do NOT include the fixed wall bracket, sky, building, window, foliage, ground or any background. Keep the same wide full-frame canvas and position/scale relative to Image 2; do not move the sign to the center or enlarge it. The sign belongs beneath the empty right-hand bracket of Image 2. Preserve attachment ends for a slight swing. Visible hand-painted opaque poster-color wood grain, modest weathering, no gold filigree, no glow, clean natural alpha edges with no black/white fringe. Absolutely no letters, words, digits, labels, icons or UI. Every pixel not belonging to the board/chains must be alpha zero, no faint stray pixels, no checkerboard baked into pixels.",
+      "source": {
+        "generator": "builtin_imagegen",
+        "record_id": "R3_TITLE_hanging_sign_v1",
+        "original_path": "C:/Users/WT/.codex/generated_images/01a20b6f-9596-7131-9453-7e25387d50e8/exec-a59531c5-9ae1-43fb-a2e8-19890a0cee4e.png",
+        "preparation_source": ".tools/r3-title/art-drafts/S01_hanging_sign-v1.png"
+      },
+      "runtime_usage": "native_source_runtime_transform"
+    },
+    "canopy": {
+      "path": "assets/generated_scenes/runtime/title/S01_tree_canopy.png",
+      "sha256": "752a12d7dcf0737b52faa9ba815eb63644f218f4a7ea9ccb9da5487df70bc78e",
+      "dim": [
+        1672,
+        941
+      ],
+      "native_size": [
+        1672,
+        941
+      ],
+      "version": 1,
+      "status": "selected_source_runtime_unrun",
+      "group": "title_sources",
+      "prompt": "Use case: background-extraction. Asset: isolated upper-left foreground leaf-canopy wind layer for this shop. Image 1 is the source object/style reference: the yellow-green foliage hanging into the upper-left corner. Image 2 is the exact dusk clean plate with that canopy removed. Extract/repaint ONLY that same small canopy cluster and the slender supporting twigs, subtly muted for the natural dusk colors of Image 2. Preserve the wide full-frame canvas and the cluster's upper-left placement/scale, clipped naturally by top/left frame edges. Do not include the building, wall ivy lower down, downpipe, pots, trunk, sky or any other scene part. Entire rest of the canvas is truly transparent, alpha exactly zero, no stray floating pixels. Leaves must have recognizable simple leaf silhouettes and visible opaque-poster-color brushwork, warm ochre with quiet sage greens, cool soft shadows, no glossy highlights or gold rim light. Keep a few clear gaps between clusters and restrained density. No purple flowers, no added wisteria, no words, letters, numbers, emblems, glow or sparkles. This layer will sway gently over Image 2; do not draw a second full background.",
+      "source": {
+        "generator": "builtin_imagegen",
+        "record_id": "R3_TITLE_canopy_v1",
+        "original_path": "C:/Users/WT/.codex/generated_images/01a20b6f-9596-7131-9453-7e25387d50e8/exec-29acf26c-a298-4cbc-b2a7-f57f52e2107a.png",
+        "preparation_source": ".tools/r3-title/art-drafts/S01_tree_canopy-v1.png"
+      },
+      "runtime_usage": "native_source_runtime_transform"
+    },
+    "wood": {
+      "path": "assets/ui/title_wood_sign.png",
+      "sha256": "61e013b8aa57720d74ecbcc80d46486097f99f9c95447b95dc1a505c180498f9",
+      "dim": [
+        2184,
+        720
+      ],
+      "native_size": [
+        2184,
+        720
+      ],
+      "version": 1,
+      "status": "selected_source_runtime_unrun",
+      "group": "title_sources",
+      "prompt": "Use case: stylized-concept. Asset: exactly ONE blank horizontal wooden menu board for a hand-painted shop game. The supplied image is only a palette/material style reference, not a composition target. Produce a separate front-facing wooden board with a broad empty center, about 3.5 times wider than tall. Muted medium-dark warm wood, soft irregular hand-painted edges, modest wood grain concentrated at the rim, a little natural wear, no elaborate carving. Opaque poster-color brushwork on paper, dusk-muted brown with subtle cool shadows, matching the source shop timber. Keep the center calm and uncluttered so Godot can draw a short Simplified Chinese label dynamically. True transparent background outside the single board, no cast shadow outside its silhouette, no extra boards, no architecture, no chains, no scenery. No letters, names, digits, icons, writing, border text, watermark, glow, glitter or gold ornament. Center the board with modest transparent padding.",
+      "source": {
+        "generator": "builtin_imagegen",
+        "record_id": "R3_TITLE_wood_menu_v1",
+        "original_path": "C:/Users/WT/.codex/generated_images/01a20b6f-9596-7131-9453-7e25387d50e8/exec-6ff44d9c-a8a4-4761-a53b-774736f1239e.png",
+        "preparation_source": ".tools/r3-title/art-drafts/title_wood_sign-v1.png"
+      },
+      "runtime_usage": "native_source_runtime_transform"
+    },
+    "leaf": {
+      "path": "assets/ui/title_leaf.png",
+      "sha256": "950a6d89d3b4a12502523fb46c9721b22dde294725cba543d97c12c288dacb03",
+      "dim": [
+        1388,
+        1133
+      ],
+      "native_size": [
+        1388,
+        1133
+      ],
+      "version": 3,
+      "status": "selected_source_runtime_unrun",
+      "group": "title_sources",
+      "prompt": "Botanical paper-paint cutout. Extract and enlarge ONE ordinary broad pointed ivy-like leaf from the supplied foliage reference. One matte sage-green leaf with a small muted ochre patch, one short brown stem, simple visible veins and opaque poster-paint strokes. Keep an organic defined leaf edge. The subject is a physical leaf, like a cut-paper botanical specimen. Isolate this single physical leaf and stem on a completely transparent empty background; remove every neighboring leaf and twig. Flat even ambient color, quiet low saturation, no lighting effect or cast shadow, no scenery, no text, no border decoration. Exactly one leaf.",
+      "source": {
+        "generator": "builtin_imagegen",
+        "record_id": "R3_TITLE_leaf_v3",
+        "original_path": "C:/Users/WT/.codex/generated_images/01a20b6f-9596-7131-9453-7e25387d50e8/exec-9e7aa390-3fd6-437d-ac56-a7500a7de69a.png",
+        "preparation_source": ".tools/r3-title/art-drafts/title_leaf-v3.png"
+      },
+      "runtime_usage": "native_source_runtime_transform"
+    },
+    "glow": {
+      "path": "assets/generated_scenes/runtime/title/S01_window_glow.png",
+      "sha256": "4db78177e10a2f0625959da56fa531321ca14596cbafe7f65cdd8cbaecfcbd8c",
+      "dim": [
+        1671,
+        941
+      ],
+      "native_size": [
+        1671,
+        941
+      ],
+      "version": 2,
+      "status": "candidate_runtime_glass_mask_only",
+      "group": "title_sources",
+      "prompt": "Use case: compositing. Make an ABSTRACT WARM-LIGHT MASK, not a scene illustration or a window cutout. Input image is the exact registration target. Preserve its full wide canvas and relative placement. Output only a soft semi-transparent amber color wash confined to the nine glass panes of the large arched display window at the lower left; this mask will be added over the existing base, so DO NOT redraw books, jars, herbs, shelves, reflections, masonry, glass frames or any identifiable object. The top follows the arch; leave all wood mullions transparent. In the reference canvas the display glass occupies approximately x=175..682, y=280..678. Every pixel outside that window region MUST have alpha exactly zero, including any faint specks; the rest of the full-frame canvas is entirely absent. No opaque background, no black rectangle, no checkerboard. The visible painted mask is gentle warm honey/cream brush texture with varied translucent intensity, suggesting light from inside the room, no halo outside the glass. Do not center, enlarge, crop, shift or add another window. No words, digits, symbols, labels, sparkle, stars or UI. TRUE transparent background.",
+      "source": {
+        "generator": "builtin_imagegen",
+        "record_id": "R3_TITLE_glow_v2",
+        "original_path": "C:/Users/WT/.codex/generated_images/01a20b6f-9596-7131-9453-7e25387d50e8/exec-9f4b98ee-fb03-4bff-9282-7bdee88ed426.png",
+        "preparation_source": ".tools/r3-title/art-drafts/S01_window_glow-v2.png"
+      },
+      "runtime_usage": "masked_pane_texture_only"
+    }
+  }
+}

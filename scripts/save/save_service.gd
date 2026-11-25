@@ -4,7 +4,10 @@ extends Node
 ## belongs in a snapshot. Tests must replace base_dir with an isolated directory.
 
 const ENVELOPE_FORMAT := "midnight-grocery-save-v1"
-const CURRENT_SCHEMA := 14
+const PRE_TITLE_SCHEMA := 14
+const NEW_GAME_RECEIPT_SCHEMA := 15 # Frozen historical gate after first TITLE release.
+const CURRENT_SCHEMA := 15
+const NEW_GAME_CONFIG_PATH := "res://data/new_game.json"
 const MAX_BYTES := 16 * 1024 * 1024
 const MAX_INTEGER := 2147483647
 const MAX_EXACT_JSON_INTEGER := 9007199254740991
@@ -27,6 +30,107 @@ var _divination_data: Dictionary = {}
 ## Deterministic test seam: fail before touching any file. Never enabled by UI.
 var fail_next_write: bool = false
 var fail_next_delete: bool = false
+
+func new_game_rules_valid(value: Variant) -> bool:
+	if not value is Dictionary or value.size()!=5:
+		return false
+	if not _integer(value.get("version"),1,1) or value.get("identity_namespace")!="new_game_v1" or value.get("save_prefix")!="save_new_" or not _integer(value.get("initial_state_version"),1,1):
+		return false
+	var copy: Variant = value.get("copy")
+	var keys := ["invalid_action_id","target_conflict","receipt_invalid","saved","write_failed_prefix","config_invalid","cleanup_failed","inspect_failed"]
+	var han := RegEx.create_from_string("[\\p{Han}]")
+	return copy is Dictionary and copy.size()==keys.size() and keys.all(func(key:String)->bool:return _text(copy.get(key),1,2000) and copy[key]==str(copy[key]).strip_edges() and han.search(copy[key])!=null and not str(copy[key]).contains("NEW_GAME_"))
+
+func new_game_rules() -> Dictionary:
+	var raw: Variant = JSON.parse_string(FileAccess.get_file_as_string(NEW_GAME_CONFIG_PATH))
+	return raw.duplicate(true) if new_game_rules_valid(raw) else {}
+
+func new_game_save_id(action_id: Variant) -> String:
+	if not _safe_id(action_id):
+		return ""
+	var rules := new_game_rules()
+	if rules.is_empty():
+		return ""
+	return str(rules.save_prefix)+(str(rules.identity_namespace)+"|"+str(action_id)).sha256_text()
+
+func new_game_receipt_valid(action_id: Variant, receipt: Variant, snapshot: Dictionary) -> bool:
+	var rules := new_game_rules()
+	if rules.is_empty() or not _safe_id(action_id) or not receipt is Dictionary or not _integer(snapshot.get("schema_version"),NEW_GAME_RECEIPT_SCHEMA,CURRENT_SCHEMA) or not _safe_id(snapshot.get("save_id")):
+		return false
+	var keys := ["success","error_code","message","state_version","result","action_type"]
+	if receipt.size()!=keys.size() or not keys.all(func(key:String)->bool:return receipt.has(key)):
+		return false
+	if not receipt.success is bool or not receipt.success or receipt.error_code!="" or receipt.action_type!="new_game" or not _text(receipt.message,1,2000):
+		return false
+	if not _integer(receipt.state_version,int(rules.initial_state_version),int(rules.initial_state_version)) or not _integer(snapshot.get("state_version"),int(rules.initial_state_version),MAX_INTEGER):
+		return false
+	return receipt.result is Dictionary and receipt.result.size()==1 and receipt.result.get("save_id")==snapshot.get("save_id") and new_game_save_id(action_id)==snapshot.get("save_id")
+
+## Read-only creation gate. Existing primaries or backup artifacts never mean empty.
+## Explicit recovery remains read_save(id,true), outside this creation path.
+func inspect_new_game(action_id: Variant) -> Dictionary:
+	var rules := new_game_rules()
+	if rules.is_empty():
+		return _failure("CONTENT_INVALID","NEW_GAME_CONFIG_INVALID")
+	var target := new_game_save_id(action_id)
+	if target.is_empty():
+		return _failure("INVALID_ACTION",rules.copy.invalid_action_id)
+	var path := _path(target)
+	var occupied := FileAccess.file_exists(path)
+	var folder := DirAccess.open(base_dir)
+	if folder==null and DirAccess.dir_exists_absolute(ProjectSettings.globalize_path(base_dir)):
+		return _failure("SAVE_READ_FAILED",rules.copy.inspect_failed)
+	if folder != null:
+		folder.include_hidden = true
+		if folder.list_dir_begin()!=OK:
+			return _failure("SAVE_READ_FAILED",rules.copy.inspect_failed)
+		var basename := target+".json"
+		var filename := folder.get_next()
+		while not filename.is_empty():
+			var candidate_name := filename.to_lower()
+			if candidate_name==basename or candidate_name.begins_with(basename+"."):
+				occupied = true
+			filename = folder.get_next()
+		folder.list_dir_end()
+	if not occupied:
+		return {"success":true,"empty":true,"save_id":target}
+	var loaded := read_save(target,false)
+	if not loaded.success:
+		return loaded
+	var receipt: Variant = loaded.state.processed_actions.get(action_id,{})
+	if not new_game_receipt_valid(action_id,receipt,loaded.state):
+		return _failure("NEW_GAME_CONFLICT",rules.copy.target_conflict)
+	loaded["empty"] = false
+	loaded["receipt"] = receipt.duplicate(true)
+	return loaded
+
+## New codes stay internal. Invalid copy cannot make validation succeed:
+## validation returns a nonempty code; only the response boundary strips/maps it.
+func new_game_public_message(message: String) -> String:
+	if not message.contains("NEW_GAME_"):
+		return message
+	var rules := new_game_rules()
+	var result := message
+	for code: String in ["NEW_GAME_CONFIG_INVALID","NEW_GAME_RECEIPT_INVALID"]:
+		var key := "config_invalid" if code=="NEW_GAME_CONFIG_INVALID" else "receipt_invalid"
+		result = result.replace(code,str(rules.get("copy",{}).get(key,"")))
+	return result
+
+## Current single-GameState serial transaction contract, not a process lock.
+## Only a temp path proven absent immediately before this call is owned here.
+func write_new_game(snapshot: Dictionary, action_id: Variant) -> Dictionary:
+	var gate := inspect_new_game(action_id)
+	var rules := new_game_rules()
+	if not gate.get("success",false):
+		return gate
+	if not gate.get("empty",false) or snapshot.get("save_id")!=gate.get("save_id") or not snapshot.get("processed_actions") is Dictionary or not new_game_receipt_valid(action_id,snapshot.processed_actions.get(action_id),snapshot):
+		return _failure("NEW_GAME_CONFLICT",str(rules.copy.target_conflict))
+	var temporary := _path(gate.save_id)+".tmp"
+	var saved := write_save(snapshot)
+	if not saved.get("success",false) and FileAccess.file_exists(temporary):
+		if DirAccess.remove_absolute(temporary)!=OK:
+			saved.message = str(saved.get("message",""))+str(rules.copy.cleanup_failed)
+	return saved
 
 func delete_save(save_id: String) -> Dictionary:
 	if not _safe_id(save_id):
@@ -353,8 +457,13 @@ func _validate(s: Dictionary) -> String:
 			return "动作编号或结果无效"
 		if not result.get("success") is bool or not result.get("error_code") is String or not result.get("message") is String or not result.get("result") is Dictionary or not _integer(result.get("state_version"), 0, int(s.state_version)):
 			return "已处理动作结果字段无效"
-		if result.has("action_type") and not result.action_type in ["start_visit", "talk", "reading", "end_visit", "rest", "next_day"] and (not extended or not result.action_type in DivinationSession.ACTIONS) and (int(s.schema_version) < 3 or not result.action_type in SHOP_ACTIONS) and (int(s.schema_version) < 10 or not result.action_type in DailyLoop.ACTIONS) and (int(s.schema_version) < 11 or result.action_type != "set_free_question") and (int(s.schema_version) < 12 or result.action_type != "story_choice") and (int(s.schema_version) < 14 or result.action_type != "admit_generated_case"):
+		if result.has("action_type") and not result.action_type in ["start_visit", "talk", "reading", "end_visit", "rest", "next_day"] and (not extended or not result.action_type in DivinationSession.ACTIONS) and (int(s.schema_version) < 3 or not result.action_type in SHOP_ACTIONS) and (int(s.schema_version) < 10 or not result.action_type in DailyLoop.ACTIONS) and (int(s.schema_version) < 11 or result.action_type != "set_free_question") and (int(s.schema_version) < 12 or result.action_type != "story_choice") and (int(s.schema_version) < 14 or result.action_type != "admit_generated_case") and (int(s.schema_version) < NEW_GAME_RECEIPT_SCHEMA or result.action_type != "new_game"):
 			return "已处理动作类型无效"
+		# Creation-shaped output cannot erase its new type. Historical actions keep
+		# their prior contract; old and random-CLI saves need no creation receipt.
+		if result.get("action_type")=="new_game" or (int(s.schema_version)>=NEW_GAME_RECEIPT_SCHEMA and result.result.get("save_id")==s.save_id and new_game_save_id(action_id)==s.save_id):
+			if not new_game_receipt_valid(action_id,result,s):
+				return "NEW_GAME_RECEIPT_INVALID"
 		var output: Dictionary = result.result
 		if int(s.schema_version)>=14 and result.get("action_type")=="admit_generated_case":
 			var instance: Variant = s.divination.emergent_cases.instances.get(output.get("reservation_id"))
@@ -535,4 +644,4 @@ func _success(message: String) -> Dictionary:
 
 
 func _failure(code: String, message: String) -> Dictionary:
-	return {"success": false, "error_code": code, "message": BirthIdentityCopy.public_message(message), "backup_available": false}
+	return {"success": false, "error_code": code, "message": new_game_public_message(BirthIdentityCopy.public_message(message)), "backup_available": false}

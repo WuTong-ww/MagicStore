@@ -48,6 +48,8 @@ static func config_valid(data: Dictionary) -> bool:
 	for key: String in ["click", "page", "confirm", "cancel", "coin", "notify"]:
 		if not _audio_path(data.sounds.get(key)):
 			return false
+	if data.sounds.has("entry_chime") and not _audio_path(data.sounds.entry_chime):
+		return false
 	return true
 
 static func _valid_volume(value: Variant) -> bool:

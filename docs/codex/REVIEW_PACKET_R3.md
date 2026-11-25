@@ -13,12 +13,24 @@ R3-STORY｜完成｜6d4e95c｜标准full3：17878检查+371 Python测试零失�
 R3-LIN｜完成｜7b09759｜标准full2：18066检查+371 Python测试零失败、364源SHA保持；GPU72/72、shop1548/1548、六JPG1558936B已核，保留full1失败。
 R3-NAMES｜完成｜818d604｜已普通推送codex/round3；schema13，full3：18716检查＋391 Python零失败、390源保持；GPU243/0、shop1548/0、六JPG1414386B；保留两轮失败与627/0兼容专项。
 R3-AICASE｜完成｜53ad3f0｜schema14；标准full1唯一一轮退出0：23117检查＋391 Python/0、441源保持；I1–I4闭环0C/I/M，六JPG1510850B，已普通推送codex/round3。
-R3-TITLE｜未开始｜—｜
+R3-TITLE｜验收通过，待提交｜—｜标准full3：24016检查＋401 Python零失败、492源保持；当前UI350/窗光64/shop1548/录像33，六JPG1697637B。保留两轮失败与专项修正记录。
 R3-MUSIC｜未开始｜—｜
 R3-POLISH｜未开始｜—｜
 R3-CRAFT｜未开始｜—｜
 R3-LEARN｜未开始｜—｜
 R3-WEB｜未开始｜—｜
+
+## R3-TITLE（验收通过，待提交）
+
+1. 做了什么：新增黄昏开场、四块动态木牌、局部窗光、招牌与树叶风场、保存后推门淡入和前任店主笔记入口。主要文件为 `data/new_game.json`、`data/ui/title.json`、`scripts/ui/title_{config,control,geometry}.gd`、两个标题 shader，以及 Main、GameState、SaveService 的最小接线。标题、菜单、页码与状态均由控件绘制。六张原生PNG登记完整提示词、版本与SHA；中央清单用严格引用连接 `data/art/title_prompts.json`，旧364条和六条完整溯源不变，原500000B上限保持，中央499448B。新增严格解析器及10项Python测试，未改旧美术测试或图片。
+
+2. 测试结果：规定标准 full3 实际退出0，耗时7044.75秒，180组摘要共24016检查/0失败、Python137+264=401/0；492份源码SHA保持，0 SCRIPT ERROR，16个TITLE注册阶段全部覆盖。不跑第四轮。当前完整三路线通关834/0、结案事务659/0、六条普通案件建议路线419/0；历史 full1 的5344/3与 full2 中途10611/0后启动断言失败均保留。仅修历史合成投影、旧启动预期与前世固定域测试；真实旧档与产品校验不放宽。新建93/0、真实14迁移112/0、独立进程seed5/replay8、临时占位保护19/0、入店音效12/0；同ID只读重放原档最新进度，保存成功后才显示。顶栏新笔记入口18px未沿用配置16px的真实遗漏，以唯一一行配置字号修复，原边界测试91/4→91/0。所有源码独审闭环0C/I/M。默认执行边界曾阻止本机回环与junction，同源码、同预算在受控权限下通过；全量命令保持 `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/dev/run.ps1 -Test`。
+
+3. 截图路径：当前Main已重新运行实际Compatibility UI350/0、窗光/减动64/0、shop1548/0与录像33/0。UI六JPG、窗光八PNG、shop三十PNG均实际逐张打开；shop原生双尺寸为 `.tools/c-ui-captures/front-1280.png`、`.tools/c-ui-captures/front-1920.png`，新冻结副本位于 `.tools/r3-title/frozen-gui/shop-final/`。正式六张JPG共1697637B，含[1280×720开场](../screenshots/round3/R3-TITLE/title-dusk-1280.jpg)、[1920×1080悬停](../screenshots/round3/R3-TITLE/title-hover-1920.jpg)、[1920×1080开篇笔记](../screenshots/round3/R3-TITLE/title-note-1920.jpg)，以及录像[悬停](../screenshots/round3/R3-TITLE/movie-01-hover.jpg)、[保存后笔记](../screenshots/round3/R3-TITLE/movie-02-note.jpg)、[前台](../screenshots/round3/R3-TITLE/movie-03-front.jpg)。所有文件原尺寸复制，无裁切缩放；旧六图另存ignored历史。影片 `.tools/r3-title/movie-runs/movie-formal-a3/title.avi` 为1920×1080、926帧/30fps=30.8667秒，258161244B，不提交。完整视频与PCM解码通过，49张原尺寸抽帧已实际打开；这是抽帧检查和程序注入真实输入，不声称真人连续观看或鼠标实录。六PNG与六JPG新增二进制合计7939788B。
+
+4. 待确认：个人署名名单及入店提示的实际听感由策划核定；当前制作名单显示项目资源说明，来源已有登记。机器证据为播放、非零PCM和一次入店cue，模型未听审。网页1280×529等新增适配要求按追加规格留给POLISH，尚未以本任务的双尺寸验收代替。
+
+5. 已知未完成：验证JSON、提交及普通推送正在收尾。原片最后923–925三帧为0.1秒深色清理尾帧，保留媒体Minor；前台工坊世界热点标签部分被手帐遮住，以及旧商店数量标签换行、图库标题对比问题留POLISH。原生Godot4.6.3 AVI头与严格RIFF存在70字节差异，原片不改；固定版本验证器完整核对926个JPEG、926块PCM及1852个索引到物理EOF，明确不声称标准RIFF合规。差异对照[Godot 4.6.3固定版本写入器](https://github.com/godotengine/godot/blob/4.6.3-stable/modules/jpg/movie_writer_mjpeg.cpp#L215-L249)。main未改写。
 
 ## R3-AICASE（完成）
 

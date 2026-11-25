@@ -65,6 +65,28 @@ try {
     }
     if ($Test) {
         Invoke-Godot @('--headless', '--path', $repo, '--import')
+        # TITLE runs first; each invocation gets new local evidence and restart identity.
+        $titleRunId = 'title_full_' + [Guid]::NewGuid().ToString('N')
+        $titleLogDir = Join-Path $repo (".tools/r3-title/full-runs/" + $titleRunId)
+        $titleSaveRoot = "res://.tools/r3-title/full-saves/" + $titleRunId
+        New-Item -ItemType Directory -Path $titleLogDir -ErrorAction Stop | Out-Null
+        Write-Host "TITLE_FULL_RUN_ID $titleRunId"
+        Invoke-Godot @('--headless', '--path', $repo, '--log-file', (Join-Path $titleLogDir 'creation.native.log'), '--script', 'res://tests/integration/title_creation.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--log-file', (Join-Path $titleLogDir 'migration.native.log'), '--script', 'res://tests/integration/title_creation_migration.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--log-file', (Join-Path $titleLogDir 'ownership.native.log'), '--script', 'res://tests/integration/title_creation_ownership.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--log-file', (Join-Path $titleLogDir 'restart-seed.native.log'), '--script', 'res://tests/integration/title_creation_restart.gd', '--', '--seed', $titleRunId)
+        Invoke-Godot @('--headless', '--path', $repo, '--log-file', (Join-Path $titleLogDir 'restart-replay.native.log'), '--script', 'res://tests/integration/title_creation_restart.gd', '--', '--replay', $titleRunId)
+        Invoke-Godot @('--headless', '--path', $repo, '--log-file', (Join-Path $titleLogDir 'geometry.native.log'), '--script', 'res://tests/integration/title_geometry.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--log-file', (Join-Path $titleLogDir 'entry-audio.native.log'), '--script', 'res://tests/integration/title_entry_audio.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--log-file', (Join-Path $titleLogDir 'presence.native.log'), '--script', 'res://tests/integration/title_presence.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--log-file', (Join-Path $titleLogDir 'ui.native.log'), '--script', 'res://tests/integration/title_ui.gd')
+        Invoke-Godot @('--headless', '--path', $repo, '--log-file', (Join-Path $titleLogDir 'invalid-empty-missing.native.log'), '--script', 'res://tests/integration/title_invalid_config.gd', '--', '--case=missing', "--save-dir=$titleSaveRoot/invalid-empty-missing")
+        Invoke-Godot @('--headless', '--path', $repo, '--log-file', (Join-Path $titleLogDir 'invalid-empty-syntax.native.log'), '--script', 'res://tests/integration/title_invalid_config.gd', '--', '--case=syntax', "--save-dir=$titleSaveRoot/invalid-empty-syntax")
+        Invoke-Godot @('--headless', '--path', $repo, '--log-file', (Join-Path $titleLogDir 'invalid-empty-field.native.log'), '--script', 'res://tests/integration/title_invalid_config.gd', '--', '--case=field', "--save-dir=$titleSaveRoot/invalid-empty-field")
+        Invoke-Godot @('--headless', '--path', $repo, '--log-file', (Join-Path $titleLogDir 'invalid-prepare-existing.native.log'), '--script', 'res://tests/integration/title_invalid_config.gd', '--', '--prepare-existing', "--save-dir=$titleSaveRoot/invalid-existing")
+        Invoke-Godot @('--headless', '--path', $repo, '--log-file', (Join-Path $titleLogDir 'invalid-existing-missing.native.log'), '--script', 'res://tests/integration/title_invalid_config.gd', '--', '--case=missing', "--existing-receipt=$titleSaveRoot/invalid-existing.receipt.json")
+        Invoke-Godot @('--headless', '--path', $repo, '--log-file', (Join-Path $titleLogDir 'invalid-existing-syntax.native.log'), '--script', 'res://tests/integration/title_invalid_config.gd', '--', '--case=syntax', "--existing-receipt=$titleSaveRoot/invalid-existing.receipt.json")
+        Invoke-Godot @('--headless', '--path', $repo, '--log-file', (Join-Path $titleLogDir 'invalid-existing-field.native.log'), '--script', 'res://tests/integration/title_invalid_config.gd', '--', '--case=field', "--existing-receipt=$titleSaveRoot/invalid-existing.receipt.json")
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/divination/emergent_case_kernel_v1.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/divination/full_definition_codec_v1.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/emergent_case_transactions.gd')
