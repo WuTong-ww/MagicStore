@@ -1,9 +1,9 @@
 {
   "task": "R3-TITLE",
-  "status": "VALIDATION_COMPLETE_PENDING_TASK_COMMIT",
+  "status": "COMPLETE",
   "baseline": "a0868151a59c3e2dd9da1dfb9a4fa9b5a35605c3",
-  "task_commit": "PENDING_TASK_COMMIT",
-  "pushed": false,
+  "task_commit": "06fe4e569f23f6516849d1b835e1fa13e49312a0",
+  "pushed": true,
   "protected_refs": {
     "HEAD": "a0868151a59c3e2dd9da1dfb9a4fa9b5a35605c3",
     "refs/heads/main": "e27441b51a4415777971cf2d8142ce4c725437e5",
@@ -5656,5 +5656,25 @@
     }
   ],
   "self_hash": "Intentionally external; prevents self-referential SHA",
-  "file_count": 82
+  "file_count": 82,
+  "push_verification": {
+    "branch": "refs/heads/codex/round3",
+    "remote_commit": "06fe4e569f23f6516849d1b835e1fa13e49312a0",
+    "main_commit": "e27441b51a4415777971cf2d8142ce4c725437e5",
+    "ordinary_push_exit_code": 0,
+    "ls_remote_exit_code": 0,
+    "observed_by": "root actual tool terminal output",
+    "main_unchanged": true
+  },
+  "metadata_followup": {
+    "paths": [
+      "docs/codex/PROGRESS.md",
+      "docs/codex/REVIEW_PACKET_R3.md",
+      "docs/features.md",
+      "docs/codex/results/R3-TITLE-validation.json"
+    ],
+    "runtime_or_test_source_changes": false,
+    "492_full_sources_rechecked_equal": true,
+    "file_hashes_describe_primary_task_commit_before_metadata_followup": true
+  }
 }

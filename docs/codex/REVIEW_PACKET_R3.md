@@ -13,14 +13,14 @@ R3-STORY｜完成｜6d4e95c｜标准full3：17878检查+371 Python测试零失�
 R3-LIN｜完成｜7b09759｜标准full2：18066检查+371 Python测试零失败、364源SHA保持；GPU72/72、shop1548/1548、六JPG1558936B已核，保留full1失败。
 R3-NAMES｜完成｜818d604｜已普通推送codex/round3；schema13，full3：18716检查＋391 Python零失败、390源保持；GPU243/0、shop1548/0、六JPG1414386B；保留两轮失败与627/0兼容专项。
 R3-AICASE｜完成｜53ad3f0｜schema14；标准full1唯一一轮退出0：23117检查＋391 Python/0、441源保持；I1–I4闭环0C/I/M，六JPG1510850B，已普通推送codex/round3。
-R3-TITLE｜验收通过，待提交｜—｜标准full3：24016检查＋401 Python零失败、492源保持；当前UI350/窗光64/shop1548/录像33，六JPG1697637B。保留两轮失败与专项修正记录。
+R3-TITLE｜完成｜06fe4e5｜标准full3：24016检查＋401 Python零失败、492源保持；当前UI350/窗光64/shop1548/录像33，六JPG1697637B。保留两轮失败与专项修正记录。
 R3-MUSIC｜未开始｜—｜
 R3-POLISH｜未开始｜—｜
 R3-CRAFT｜未开始｜—｜
 R3-LEARN｜未开始｜—｜
 R3-WEB｜未开始｜—｜
 
-## R3-TITLE（验收通过，待提交）
+## R3-TITLE（完成）
 
 1. 做了什么：新增黄昏开场、四块动态木牌、局部窗光、招牌与树叶风场、保存后推门淡入和前任店主笔记入口。主要文件为 `data/new_game.json`、`data/ui/title.json`、`scripts/ui/title_{config,control,geometry}.gd`、两个标题 shader，以及 Main、GameState、SaveService 的最小接线。标题、菜单、页码与状态均由控件绘制。六张原生PNG登记完整提示词、版本与SHA；中央清单用严格引用连接 `data/art/title_prompts.json`，旧364条和六条完整溯源不变，原500000B上限保持，中央499448B。新增严格解析器及10项Python测试，未改旧美术测试或图片。
 
@@ -30,7 +30,7 @@ R3-WEB｜未开始｜—｜
 
 4. 待确认：个人署名名单及入店提示的实际听感由策划核定；当前制作名单显示项目资源说明，来源已有登记。机器证据为播放、非零PCM和一次入店cue，模型未听审。网页1280×529等新增适配要求按追加规格留给POLISH，尚未以本任务的双尺寸验收代替。
 
-5. 已知未完成：验证JSON、提交及普通推送正在收尾。原片最后923–925三帧为0.1秒深色清理尾帧，保留媒体Minor；前台工坊世界热点标签部分被手帐遮住，以及旧商店数量标签换行、图库标题对比问题留POLISH。原生Godot4.6.3 AVI头与严格RIFF存在70字节差异，原片不改；固定版本验证器完整核对926个JPEG、926块PCM及1852个索引到物理EOF，明确不声称标准RIFF合规。差异对照[Godot 4.6.3固定版本写入器](https://github.com/godotengine/godot/blob/4.6.3-stable/modules/jpg/movie_writer_mjpeg.cpp#L215-L249)。main未改写。
+5. 已知未完成：本任务无阻断未完成项。主提交06fe4e5已普通推送并核验远端；82文件与逐组结果见[验证JSON](results/R3-TITLE-validation.json)。原片最后923–925三帧为0.1秒深色清理尾帧，保留媒体Minor；前台工坊世界热点标签部分被手帐遮住，以及旧商店数量标签换行、图库标题对比问题留POLISH。原生Godot4.6.3 AVI头与严格RIFF存在70字节差异，原片不改；固定版本验证器完整核对926个JPEG、926块PCM及1852个索引到物理EOF，明确不声称标准RIFF合规。差异对照[Godot 4.6.3固定版本写入器](https://github.com/godotengine/godot/blob/4.6.3-stable/modules/jpg/movie_writer_mjpeg.cpp#L215-L249)。main未改写。
 
 ## R3-AICASE（完成）
 
