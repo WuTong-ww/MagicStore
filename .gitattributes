@@ -39,6 +39,7 @@ docs/story/fixed_cases.md -text
 
 # Preserve the exact registered third-party license bytes in new worktrees.
 assets/fonts/OFL.txt -text
+assets/fonts/MidnightNumeric-OFL.txt -text
 
 # Genuine delivered schema11 migration fixture; preserve its envelope bytes.
 tests/fixtures/schema11_case_active.json -text

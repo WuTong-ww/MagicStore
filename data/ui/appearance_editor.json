@@ -25,7 +25,7 @@
     "personality":"性格：","preferences":"平时喜欢：","latest":"上次：",
     "birthday_format":"生日：%s · %s · MBTI %s","unknown":"未知","relation":"认识的人",
     "memories_title":"一起聊过的事","report_format":"本局观察：%d 条有效记录\n%s\n%s",
-    "report_empty":"可在积累记录后查看经营风格。","draft_hint":"这里是本地预览，保存成功后才会替换店长外观。",
+    "report_empty":"可在积累记录后查看经营风格。","draft_hint":"本地预览，保存后生效。",
     "randomize":"随机外观","save":"保存外观","saving":"正在保存外观…",
     "saved":"外观已保存。","save_failed":"外观未保存，草稿仍在。","invalid_choice":"这组搭配暂不能使用。",
     "pending_art":"头像部件待绘制","partial_art":"部分头像部件待绘制","no_public_appearance":"尚无可显示的外观",

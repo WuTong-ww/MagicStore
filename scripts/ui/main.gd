@@ -2,16 +2,24 @@ extends Control
 
 signal scene_changed(previous: String, next: String)
 const MusicContext = preload("res://scripts/audio/music_context.gd")
+const ResponsiveConfig = preload("res://scripts/ui/responsive_config.gd")
+const ViewportMetrics = preload("res://scripts/ui/viewport_metrics.gd")
+const ResponsiveLayout = preload("res://scripts/ui/responsive_layout.gd")
 const MotionConfig = preload("res://scripts/presentation/wind_field.gd")
 var motion_settings: Dictionary = {}
 var _motion_seen_events: Dictionary = {}
 
 const UI = preload("res://scripts/ui/ui_kit.gd")
+const NotebookPages = preload("res://scripts/ui/notebook_pages.gd")
+const PanelMaterials = preload("res://scripts/ui/panel_materials.gd")
+const StatusStrip = preload("res://scripts/ui/status_strip.gd")
+const Icons = preload("res://scripts/ui/icon_policy.gd")
 const Shell = preload("res://scripts/ui/shell_config.gd")
 var shell_config: Dictionary = {}
 var energy_bar: ProgressBar
 var energy_label: Label
 var energy_group: VBoxContainer
+var status_strip: Control
 var shell_header: PanelContainer
 var presentation_audio: Node
 var cancel_button: Button
@@ -73,6 +81,8 @@ var delete_confirm: ConfirmationDialog
 var delete_button: Button
 var _delete_target := ""
 var history_window: Window
+var _material_backdrop: ColorRect
+var _material_hidden_panels: Dictionary = {}
 var history_text: RichTextLabel
 var history_details: CheckButton
 var _history_visit_id: String = ""
@@ -91,8 +101,12 @@ func _ready() -> void:
 	get_tree().root.close_requested.connect(_request_close)
 	shell_config = Shell.load_config()
 	motion_settings = MotionConfig.load_settings()
-	DisplayServer.window_set_min_size(Vector2i(shell_config.screen_minimum[0],shell_config.screen_minimum[1]))
+	var responsive: Dictionary = ResponsiveConfig.load_config()
+	var native_minimum: Array = responsive.get("native_minimum",shell_config.screen_minimum)
+	DisplayServer.window_set_min_size(Vector2i(native_minimum[0],native_minimum[1]))
+	_prepare_responsive_windows()
 	_build_shell()
+	_prepare_presentation_chrome()
 	if ResourceLoader.exists("res://scripts/audio/shop_audio.gd"):
 		presentation_audio = load("res://scripts/audio/shop_audio.gd").new()
 		presentation_audio.name = "ShopAudio"
@@ -173,25 +187,37 @@ func _build_shell() -> void:
 	location = UI.label("",int(shell_config.layout.status_size),Color("f3e9d6"))
 	location.visible = false
 	header.add_child(location)
-	resources = UI.label(shell_config.no_save_status,int(shell_config.layout.status_size),Color("f3e9d6"))
-	resources.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	resources.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	resources.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	header.add_child(resources)
-	energy_group = VBoxContainer.new()
-	energy_group.add_theme_constant_override("separation",int(shell_config.layout.energy_gap))
-	energy_group.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	header.add_child(energy_group)
-	energy_label = UI.label("",int(shell_config.layout.status_size),Color("f3e9d6"))
-	energy_label.name = "EnergyText"
-	energy_label.autowrap_mode = TextServer.AUTOWRAP_OFF
-	energy_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	energy_group.add_child(energy_label)
-	energy_bar = ProgressBar.new()
-	energy_bar.custom_minimum_size = Vector2(shell_config.layout.energy_width,shell_config.layout.energy_bar_height)
-	energy_bar.show_percentage = false
-	energy_bar.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	energy_group.add_child(energy_bar)
+	var strip := StatusStrip.new()
+	if strip.setup(int(shell_config.layout.status_size)):
+		status_strip = strip
+		header.add_child(strip)
+		resources = strip.resources
+		energy_group = strip.energy_group
+		energy_label = strip.energy_label
+		energy_bar = strip.energy_bar
+		var wood := StatusStrip.wood_style()
+		if wood != null: shell_header.add_theme_stylebox_override("panel",wood)
+	else:
+		strip.queue_free()
+		resources = UI.label(shell_config.no_save_status,int(shell_config.layout.status_size),Color("f3e9d6"))
+		resources.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		resources.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		resources.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		header.add_child(resources)
+		energy_group = VBoxContainer.new()
+		energy_group.add_theme_constant_override("separation",int(shell_config.layout.energy_gap))
+		energy_group.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		header.add_child(energy_group)
+		energy_label = UI.label("",int(shell_config.layout.status_size),Color("f3e9d6"))
+		energy_label.name = "EnergyText"
+		energy_label.autowrap_mode = TextServer.AUTOWRAP_OFF
+		energy_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		energy_group.add_child(energy_label)
+		energy_bar = ProgressBar.new()
+		energy_bar.custom_minimum_size = Vector2(shell_config.layout.energy_width,shell_config.layout.energy_bar_height)
+		energy_bar.show_percentage = false
+		energy_bar.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		energy_group.add_child(energy_bar)
 	open_button = UI.button(shell_config.save_label,open_saves)
 	open_button.add_theme_font_size_override("font_size",int(shell_config.layout.status_size))
 	header.add_child(open_button)
@@ -207,20 +233,22 @@ func _build_shell() -> void:
 	dock.add_child(navigation)
 	for row: Dictionary in shell_config.navigation:
 		var destination: String = row.page
-		var nav := UI.button(str(row.icon)+" "+str(row.label),func():
+		var nav := UI.button(str(row.label),func():
 			if destination == "people":
 				open_people()
 			else:
 				show_screen(destination))
 		nav.name = "Navigate_"+destination
+		nav.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		nav.icon = Icons.texture(str(row.icon))
 		nav.add_theme_font_size_override("font_size",int(shell_config.layout.status_size))
 		navigation.add_child(nav)
-	var place_dock := func():
-		var width := dock.get_combined_minimum_size().x
-		dock.offset_left = -width/2.0
-		dock.offset_right = width/2.0
-		dock.offset_top = -float(shell_config.dock_height)
-		dock.offset_bottom = 0
+	# Keep the material on the physical strip; its labels remain live controls.
+	PanelMaterials.apply_panel(shell_header,"wood")
+	PanelMaterials.apply_panel(dock,"wood")
+	shell_header.set_meta("material_fixed_layout",true)
+	dock.set_meta("material_fixed_layout",true)
+	var place_dock := func(): _queue_presentation_chrome()
 	navigation.minimum_size_changed.connect(place_dock)
 	place_dock.call_deferred()
 	notice = UI.label(shell_config.notice_default,int(shell_config.layout.compact_status_size),Color("f3e9d6"))
@@ -280,7 +308,8 @@ func _refresh() -> void:
 	if is_instance_valid(history_window) and history_window.visible and _history_save_id != str(snapshot.get("save_id","")):
 		show_history()
 	if snapshot.is_empty():
-		resources.text = shell_config.no_save_status
+		if is_instance_valid(status_strip): status_strip.render({})
+		else: resources.text = shell_config.no_save_status
 	else:
 		var player: Dictionary = snapshot.get("player", {})
 		var people: Dictionary = GameState.people_view()
@@ -289,7 +318,9 @@ func _refresh() -> void:
 			wind.set_weather(str(people.get("day",{}).get("weather","")))
 		var shop: Dictionary = GameState.shop_view().get("shop",{})
 		var daily: Dictionary = GameState.daily_loop_view()
-		if daily.get("enabled",false):
+		if is_instance_valid(status_strip):
+			status_strip.render({"coins":int(player.get("coins",0)),"energy":int(player.get("energy",0)),"maximum_energy":int(GameState.content.rules.max_energy),"reputation":int(shop.get("reputation",0)),"time":GameState.clock_text(),"daily":bool(daily.get("enabled",false)),"completed":int(daily.get("completed",0)),"total":int(daily.get("total",0)),"queue":people.get("queue",[]).size()})
+		elif daily.get("enabled",false):
 			resources.text = str(daily.copy.status_format).format({"coins":int(player.get("coins",0)),"reputation":int(shop.get("reputation",0)),"time":GameState.clock_text(),"day":daily.day,"completed":daily.completed,"total":daily.total})
 		else:
 			resources.text = shell_config.status_format % [int(player.get("coins",0)),int(shop.get("reputation",0)),GameState.clock_text(),people.get("queue",[]).size()]
@@ -305,6 +336,7 @@ func _refresh() -> void:
 	if is_instance_valid(screen):
 		screen.call("refresh")
 	_refresh_music()
+	_sync_material_backdrop()
 	if _title_blocking: _isolate_gameplay_inputs()
 
 func run_action(action_type: String, extra: Dictionary = {}, command_id: String = "") -> Dictionary:
@@ -496,11 +528,11 @@ func _restore_gameplay_inputs() -> void:
 	_title_input_records.clear()
 	var previous: Control = _focus_before_title.get_ref() if _focus_before_title != null else null
 	_focus_before_title = null
-	if is_instance_valid(previous) and previous.is_inside_tree() and previous.is_visible_in_tree() and previous.focus_mode != Control.FOCUS_NONE:
+	if is_instance_valid(previous) and previous.is_inside_tree() and previous.is_visible_in_tree() and (previous.focus_mode in [Control.FOCUS_CLICK,Control.FOCUS_ALL] or (get_tree().is_accessibility_enabled() and previous.focus_mode != Control.FOCUS_NONE)):
 		previous.grab_focus()
 	elif is_instance_valid(screen):
 		for candidate: Control in screen.find_children("*","Control",true,false):
-			if candidate.is_visible_in_tree() and candidate.focus_mode != Control.FOCUS_NONE and (not candidate is BaseButton or not candidate.disabled):
+			if candidate.is_visible_in_tree() and (candidate.focus_mode in [Control.FOCUS_CLICK,Control.FOCUS_ALL] or (get_tree().is_accessibility_enabled() and candidate.focus_mode != Control.FOCUS_NONE)) and (not candidate is BaseButton or not candidate.disabled):
 				candidate.grab_focus()
 				break
 
@@ -626,8 +658,17 @@ func open_story_notes() -> bool:
 	return bool(people_panel.call("open_story_notes")) if is_instance_valid(people_panel) and people_panel.has_method("open_story_notes") else false
 
 func _fit_window(window: Window, desired: Vector2i) -> void:
+	var metrics: Dictionary = presentation_metrics()
+	var responsive: Dictionary = ResponsiveConfig.load_config()
+	var design: Vector2i = desired
+	if design == Vector2i.ZERO:
+		design = window.get_meta("responsive_design_size",window.size)
+	if not responsive.is_empty() and ResponsiveLayout.fit_window(window,Vector2(design),metrics,float(responsive.safe_margin)):
+		window.set_meta("responsive_design_size",design)
+		window.set_meta("responsive_last_size",window.size)
+		return
 	var inset := int(shell_config.layout.margin)*2
-	window.size = desired.min(Vector2i(size)-Vector2i(inset,inset))
+	window.size = design.min(Vector2i(size)-Vector2i(inset,inset))
 
 func confirm_return_visit() -> void:
 	var at := GameState.next_return_time()
@@ -667,11 +708,30 @@ func open_network_settings() -> void:
 	dialog.size = Vector2i(660,445)
 	dialog.ok_button_text = "应用"
 	dialog.get_cancel_button().text = "取消"
+	var settings_root := MarginContainer.new()
+	settings_root.name = "SettingsLetterContents"
+	settings_root.set_meta("material_window_content",true)
+	settings_root.set_as_top_level(true)
+	dialog.add_child(settings_root)
+	var letter_layout: Dictionary = PanelMaterials.load_config().layout
+	for side: String in ["left","top","right","bottom"]:
+		var side_index: int = ["left","top","right","bottom"].find(side)
+		settings_root.add_theme_constant_override("margin_"+side,int(letter_layout.content_margins[side_index]))
+	var settings_box := VBoxContainer.new()
+	settings_root.add_child(settings_box)
+	var settings_scroll := ScrollContainer.new()
+	settings_scroll.name = "SettingsLetterScroll"
+	settings_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	settings_scroll.follow_focus = true
+	settings_scroll.custom_minimum_size = Vector2(600,340)
+	settings_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	settings_box.add_child(settings_scroll)
 	var box := VBoxContainer.new()
-	box.custom_minimum_size = Vector2(600,340)
-	dialog.add_child(box)
+	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	settings_scroll.add_child(box)
+	box.add_child(UI.paper_heading(dialog.title))
 	var description := UI.label(str(motion_settings.get("labels",{}).get("settings_description","填写 AI 接口信息。设置只在本次游戏中有效。")),18)
-	description.autowrap_mode = TextServer.AUTOWRAP_OFF
+	description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	box.add_child(description)
 	var address_label := UI.label("URL",18)
 	address_label.autowrap_mode = TextServer.AUTOWRAP_OFF
@@ -733,7 +793,22 @@ func open_network_settings() -> void:
 			GameState.configure_api("","","")
 			dialog.queue_free())
 	dialog.canceled.connect(dialog.queue_free)
+	# Keep the dialog's confirmation API/signals for existing callers, while its
+	# paper layout uses the design viewport instead of the native window size.
+	dialog.get_label().hide()
+	dialog.get_ok_button().get_parent().hide()
+	var settings_actions := HBoxContainer.new()
+	settings_box.add_child(settings_actions)
+	for definition: Array in [[dialog.ok_button_text,"apply"],[dialog.get_cancel_button().text,"cancel"],["使用本地对话","offline"]]:
+		var key: String = definition[1]
+		var action := UI.button(str(definition[0]),func():
+			if key == "apply": dialog.confirmed.emit()
+			elif key == "cancel": dialog.canceled.emit()
+			else: dialog.custom_action.emit("offline"))
+		action.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		settings_actions.add_child(action)
 	add_child(dialog)
+	UI.paper_window(dialog)
 	dialog.popup_centered()
 
 func _add_free_question_setting(box: VBoxContainer) -> void:
@@ -770,8 +845,8 @@ func _build_save_window() -> void:
 	save_window = Window.new()
 	save_window.visible = false
 	save_window.title = "存档簿 · 每家店都有自己的故事"
-	save_window.size = Vector2i(760, 550)
-	save_window.min_size = Vector2i(700, 520)
+	save_window.size = Vector2i(NotebookPages.preferred_book_size())
+	save_window.min_size = Vector2i(NotebookPages.minimum_book_size())
 	save_window.transient = true
 	save_window.exclusive = true
 	save_window.theme = theme
@@ -781,16 +856,14 @@ func _build_save_window() -> void:
 		_load_intent.clear()
 		save_window.hide())
 	add_child(save_window)
-	UI.paper_window(save_window)
-	var margin: MarginContainer = UI.margin(22)
-	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	save_window.add_child(margin)
-	var layout := VBoxContainer.new()
-	margin.add_child(layout)
-	layout.add_child(UI.label("打开你的零点", 27, UI.GOLD))
-	var save_art := UI.image("res://assets/ui/report_notebook.png")
-	save_art.custom_minimum_size = Vector2(220, 60)
-	layout.add_child(save_art)
+	UI.paper_window(save_window,"notebook")
+	var pages := NotebookPages.new()
+	pages.name = "SaveNotebookPages"
+	save_window.add_child(pages)
+	pages.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var layout: VBoxContainer = pages.left
+	var details: VBoxContainer = pages.right
+	layout.add_child(UI.paper_heading("打开你的零点"))
 	layout.add_child(UI.label("新建会创建独立存档。每次成功行动自动保存，关闭游戏后可以继续。", 16, UI.MUTED))
 	save_list = ItemList.new()
 	save_list.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -799,16 +872,16 @@ func _build_save_window() -> void:
 	layout.add_child(save_list)
 	save_note = UI.label("", 15, UI.GOLD)
 	save_note.custom_minimum_size.y = 45
-	layout.add_child(save_note)
-	var buttons := HBoxContainer.new()
-	layout.add_child(buttons)
+	details.add_child(save_note)
+	var buttons := VBoxContainer.new()
+	details.add_child(buttons)
 	buttons.add_child(UI.button("继续所选存档", _load_selected))
 	buttons.add_child(UI.button("从备份恢复…", _confirm_backup))
 	buttons.add_child(UI.button("刷新", _refresh_saves))
 	delete_button = UI.button("删除所选存档…", _confirm_delete_save)
 	buttons.add_child(delete_button)
-	var create_row := HBoxContainer.new()
-	layout.add_child(create_row)
+	var create_row := VBoxContainer.new()
+	details.add_child(create_row)
 	save_name = LineEdit.new()
 	var title_data: Dictionary = TitleConfig.load_config(title_config_path)
 	if not title_data.is_empty():
@@ -831,6 +904,7 @@ func _build_save_window() -> void:
 	backup_confirm.cancel_button_text = "取消"
 	backup_confirm.confirmed.connect(func(): await _load_selected(true))
 	save_window.add_child(backup_confirm)
+	UI.paper_window(backup_confirm)
 	delete_confirm = ConfirmationDialog.new()
 	delete_confirm.visible = false
 	delete_confirm.title = "删除存档"
@@ -839,11 +913,16 @@ func _build_save_window() -> void:
 	delete_confirm.confirmed.connect(_delete_selected)
 	delete_confirm.canceled.connect(func(): _delete_target = "")
 	save_window.add_child(delete_confirm)
+	UI.paper_window(delete_confirm)
 
 func open_saves() -> void:
 	if busy:
 		return
+	for other: Node in get_children():
+		if other is Window and other != save_window and other.visible:
+			other.hide()
 	_refresh_saves()
+	_fit_window(save_window,Vector2i.ZERO)
 	save_window.popup_centered()
 
 func _refresh_saves() -> void:
@@ -925,16 +1004,18 @@ func _build_history_window() -> void:
 	history_window.exclusive = true
 	history_window.close_requested.connect(func(): history_window.hide())
 	add_child(history_window)
-	UI.paper_window(history_window)
-	var margin: MarginContainer = UI.margin(22)
-	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	history_window.add_child(margin)
-	var box := VBoxContainer.new()
-	margin.add_child(box)
-	box.add_child(UI.label("来客手记 / 接待经历", 26, UI.GOLD))
+	UI.paper_window(history_window,"notebook")
+	var pages := NotebookPages.new()
+	pages.name = "HistoryNotebookPages"
+	history_window.add_child(pages)
+	pages.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var box: VBoxContainer = pages.left
+	box.add_child(UI.paper_heading("来客手记 / 接待经历"))
 	history_text = UI.rich()
 	history_text.scroll_following = false
-	box.add_child(history_text)
+	history_text.fit_content = true
+	history_text.scroll_active = false
+	pages.right.add_child(history_text)
 	history_details = CheckButton.new()
 	history_details.text = "显示术式的原始记录"
 	history_details.toggled.connect(_refresh_history)
@@ -1018,7 +1099,7 @@ func _refresh_history(show_details: bool) -> void:
 			elif speaker == "npc":
 				speaker = guest.get("name", "顾客")
 			lines.append("%s：%s" % [speaker, str(turn.get("text", ""))])
-		lines.append("────────────────────────────\n")
+		lines.append("")
 	history_text.text = "\n".join(lines) if not lines.is_empty() else "手记还是空白的。完成一次接待后，故事会留在这里。"
 	history_text.scroll_to_line(0)
 
@@ -1093,3 +1174,101 @@ func _refresh_music() -> void:
 		"ending_visible":_music_ending_visible()
 	})
 	presentation_audio.transition(routed.page,int(routed.clock_minutes),routed.context)
+
+func presentation_metrics() -> Dictionary:
+	return ViewportMetrics.measure(self)
+
+func _input(event: InputEvent) -> void:
+	if _title_blocking or busy or not is_instance_valid(screen): return
+	if not event is InputEventMouseButton: return
+	if not event.pressed: return
+	for child: Node in get_children():
+		if child is Window and child.visible: return
+	var controls: Array[Node] = [screen]
+	controls.append_array(screen.find_children("*","Control",true,false))
+	for node: Node in controls:
+		if node.has_method("consume_drawer_event") and node.call("consume_drawer_event",event):
+			get_viewport().set_input_as_handled()
+			return
+
+func _prepare_responsive_windows() -> void:
+	var layer := CanvasLayer.new()
+	layer.name = "PanelMaterialBackdropLayer"
+	add_child(layer)
+	_material_backdrop = ColorRect.new()
+	_material_backdrop.name = "PanelMaterialBackdrop"
+	_material_backdrop.set_meta("material_modal_backdrop",true)
+	_material_backdrop.color = PanelMaterials.backdrop_color()
+	_material_backdrop.visible = false
+	_material_backdrop.mouse_filter = Control.MOUSE_FILTER_STOP
+	layer.add_child(_material_backdrop)
+	_material_backdrop.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	child_entered_tree.connect(_responsive_child_entered)
+	get_tree().root.size_changed.connect(_responsive_client_resized)
+	for child: Node in get_children(): _responsive_child_entered(child)
+
+func _responsive_child_entered(child: Node) -> void:
+	if not child is Window: return
+	var callback: Callable = _responsive_window_shown.bind(child)
+	if not child.visibility_changed.is_connected(callback): child.visibility_changed.connect(callback)
+	if not child.tree_exited.is_connected(_sync_material_backdrop): child.tree_exited.connect(_sync_material_backdrop,CONNECT_DEFERRED)
+	_responsive_window_shown.call_deferred(child)
+
+func _responsive_window_shown(window: Window) -> void:
+	_sync_material_backdrop()
+	if not is_instance_valid(window) or not window.visible: return
+	var design: Vector2i = window.get_meta("responsive_design_size",window.size)
+	_fit_window(window,design)
+
+func _responsive_client_resized() -> void:
+	_responsive_fit_visible.call_deferred()
+
+func _responsive_fit_visible() -> void:
+	for child: Node in get_children():
+		if child is Window and child.visible:
+			_fit_window(child,child.get_meta("responsive_design_size",child.size))
+
+func _prepare_presentation_chrome() -> void:
+	get_tree().root.size_changed.connect(_queue_presentation_chrome)
+	shell_header.minimum_size_changed.connect(_queue_presentation_chrome)
+	shell_dock.minimum_size_changed.connect(_queue_presentation_chrome)
+	_queue_presentation_chrome()
+
+func _queue_presentation_chrome() -> void:
+	_layout_presentation_chrome.call_deferred()
+
+func _layout_presentation_chrome() -> void:
+	if _closing or not is_instance_valid(shell_header) or not is_instance_valid(shell_dock): return
+	for child: Node in shell_header.get_child(0).get_children():
+		if child is Button: child.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	var metrics: Dictionary = presentation_metrics()
+	if not ViewportMetrics.valid(metrics): return
+	var client_size: Vector2 = metrics.visible_css
+	var header_box := Rect2(Vector2.ZERO,Vector2(client_size.x,float(shell_config.top_height)))
+	var header_minimum := shell_header.get_combined_minimum_size().max(Vector2(1,float(shell_config.top_height)))
+	shell_header.set_anchors_preset(Control.PRESET_TOP_LEFT,true)
+	ResponsiveLayout.apply(shell_header,ResponsiveLayout.fit_minimum(header_minimum,header_box,metrics,Vector2(0.5,0),true))
+	var dock_minimum := shell_dock.get_combined_minimum_size().max(Vector2(1,float(shell_config.dock_height)))
+	var margin := float(shell_config.layout.margin)
+	var dock_box := Rect2(Vector2(margin,client_size.y-float(shell_config.dock_height)),Vector2(client_size.x-margin*2.0,float(shell_config.dock_height)))
+	shell_dock.set_anchors_preset(Control.PRESET_TOP_LEFT,true)
+	ResponsiveLayout.apply(shell_dock,ResponsiveLayout.fit_minimum(dock_minimum,dock_box,metrics,Vector2(0.5,1)))
+
+func _sync_material_backdrop() -> void:
+	if not is_instance_valid(_material_backdrop): return
+	_material_backdrop.visible = get_children().any(func(node: Node) -> bool: return node is Window and node.visible)
+	# Preserve the scene artwork under the dimmer, but hide competing paper UI.
+	var save_open := is_instance_valid(save_window) and save_window.visible
+	if save_open and is_instance_valid(screen):
+		for panel_name: String in ["FrontDrawer","SceneControls","CaseBoard","PaperConversation","ConsultationDrawer","ConsultationBookmark"]:
+			var panel := screen.find_child(panel_name,true,false) as Control
+			if panel == null: continue
+			var id := panel.get_instance_id()
+			if not _material_hidden_panels.has(id):
+				_material_hidden_panels[id] = {"node":weakref(panel),"visible":panel.visible}
+			panel.hide()
+	elif not _material_hidden_panels.is_empty():
+		for record: Dictionary in _material_hidden_panels.values():
+			var panel: Control = record.node.get_ref()
+			if is_instance_valid(panel): panel.visible = bool(record.visible)
+		_material_hidden_panels.clear()

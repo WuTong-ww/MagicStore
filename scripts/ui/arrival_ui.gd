@@ -38,6 +38,8 @@ static func config_valid(config: Dictionary) -> bool:
 		for key: String in ["icon", "label", "color"]:
 			if not row.get(key) is String or row[key].is_empty():
 				return false
+		if row.icon != "patience" or not (row.get("icon_count") is int or row.get("icon_count") is float) or row.icon_count != floor(float(row.icon_count)) or row.icon_count < 1 or row.icon_count > 3:
+			return false
 		if not Color.html_is_valid(row.color):
 			return false
 	if previous != 0.0:
@@ -62,7 +64,7 @@ static func patience_text(row: Dictionary) -> String:
 	var level := patience(row)
 	if config.is_empty() or level.is_empty():
 		return ""
-	return str(config.patience_format) % [level.icon, level.label, maxi(0, int(row.get("patience_minutes", 0)))]
+	return str(config.patience_format) % [level.label, maxi(0, int(row.get("patience_minutes", 0)))]
 
 static func source_text(row: Dictionary) -> String:
 	var config := load_config()

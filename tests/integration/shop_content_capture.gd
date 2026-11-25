@@ -1,4 +1,5 @@
 extends SceneTree
+const CardChoice = preload("res://scripts/ui/card_choice.gd")
 ## Optional real-GPU capture only. Headless validates schema/consumer loading,
 ## explicitly skips graphics, and never writes a pretend screenshot.
 const CONFIG_PATH := "res://data/art/g4_preview.json"
@@ -181,7 +182,7 @@ func capture_size(dimensions: Vector2i) -> bool:
 	await settle()
 	main.workbench._show_tab(settings.flow.forecast_page)
 	await settle()
-	var styles: OptionButton = main.workbench.find_child(settings.flow.style_control,true,false) as OptionButton
+	var styles: CardChoice = main.workbench.find_child(settings.flow.style_control,true,false) as CardChoice
 	if not check(styles != null,"real forecast contains advice style selector"): return false
 	var labels: Array = []
 	var ids: Array = []
@@ -191,10 +192,11 @@ func capture_size(dimensions: Vector2i) -> bool:
 	check(labels == settings.expected.style_labels and ids == settings.expected.style_ids,"all three advice labels and metadata match their data")
 	await focus_control(styles)
 	if settings.layout.advice_popup:
-		styles.show_popup()
+		var face := styles.find_child("ChoiceCard_"+str(styles.selected),false,false) as Button
+		if not check(face != null and face.is_visible_in_tree() and face.text == styles.get_item_text(styles.selected),"advice choices display the real selected paper-card face"): return false
+		face.grab_focus()
 		await settle()
 	await capture_frame("forecast",dimensions,main.workbench,{"style_labels":labels,"style_ids":ids,"read_only":true})
-	styles.get_popup().hide()
 	main.workbench.hide()
 	if not await act("register_demand",{"recipe_id":recipe_id,"need_tags":settings.flow.need_tags,"text":settings.flow.demand_text}): return false
 	if not await act("end_visit"): return false
@@ -208,7 +210,7 @@ func capture_size(dimensions: Vector2i) -> bool:
 	var actual_batches: Array = game.shop_view().shop.batches.filter(func(row: Dictionary) -> bool: return row.get("variant_id") == variant_id and int(row.remaining) > 0)
 	if not check(actual_batches.size() == 1 and actual_batches[0].quality_id == variant.quality,"real crafted batch contains the selected variant and quality"): return false
 	await show_page("workshop")
-	var picker: OptionButton = main.screen.find_child("RecipeVariant_"+recipe_id,true,false) as OptionButton
+	var picker: CardChoice = main.screen.find_child("RecipeVariant_"+recipe_id,true,false) as CardChoice
 	if not check(picker != null,"learned recipe exposes its real variant picker"): return false
 	for index: int in range(picker.item_count):
 		if picker.get_item_metadata(index) == variant_id:

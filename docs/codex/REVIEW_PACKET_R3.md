@@ -15,10 +15,24 @@ R3-NAMES｜完成｜818d604｜已普通推送codex/round3；schema13，full3：1
 R3-AICASE｜完成｜53ad3f0｜schema14；标准full1唯一一轮退出0：23117检查＋391 Python/0、441源保持；I1–I4闭环0C/I/M，六JPG1510850B，已普通推送codex/round3。
 R3-TITLE｜完成｜06fe4e5｜标准full3：24016检查＋401 Python零失败、492源保持；当前UI350/窗光64/shop1548/录像33，六JPG1697637B。保留两轮失败与专项修正记录。
 R3-MUSIC｜完成｜f1f53d6｜标准full1退出0：24141项检查＋437项Python零失败，953源与素材SHA保持；专项303/0、shop1548/0，六JPG1995753B，默认/带音乐实包22/25项通过。
-R3-POLISH｜未开始｜—｜
+R3-POLISH｜部分完成｜本次提交｜原生布局/头像947、材质702、shop1577、滚轮GUI9项零失败；Chrome聚焦滚轮实测。标准完整三轮均失败，最后停于原生零矩阵求逆；裁切和旧控件外框未通过。
 R3-CRAFT｜未开始｜—｜
 R3-LEARN｜未开始｜—｜
 R3-WEB｜未开始｜—｜
+
+## R3-POLISH（部分完成，三轮上限）
+
+实现范围：内嵌字体和等宽数字、SVG/PNG图标、木条顶栏与导航、13张透明材质、双页笔记本、信纸对话与名牌、纸条/吊牌/朱红印记、圆桌投影牌列、矮视窗覆盖抽屉、保存成功后的选择反馈、帽发与围巾绘制次序。原有世界事实、案件、交易和存档结构维持schema15。
+
+当前验证：`polish-ui-final` 947/0，五种真实客户区尺寸及19张GPU图；`material-ui-final2` 702/0，五页面×720/1080、529矮窗、开场对照共18张原生PNG及2张派生拼图；`shop-ui-polish` 1577/0、30张原生图；GUI滚轮9/0；同曲播放/交叉淡入合成音44/0；未显示视口动效初始化复现3/0。截图之后仅追加生命周期防护，原始记录不覆盖。
+
+标准完整三轮均退出1，原始日志保留。full1为Sheep同曲后旧测试前提失效；full2出现零矩阵求逆，限定复现修掉动效初始化中的四处鼠标读取错误，仍余一条原生错误。full3耗时206.187秒、1023源SHA保持，报告108项断言零失败后仍被该错误中断，后续组未执行。headless缩放对照未消除错误，已撤回；不跑full4，不将限定检查冒称整体通过。终态及每轮日志SHA见results/R3-POLISH-validation.json。
+
+Chrome实测1280×529 CSS、DPR2，设置滚轮90→0，左右两页各自0→691.875且另一页不动；普通桌面DPR1.5聚焦后左页691.875→0、右页保持。保留未聚焦注入未移动的两次观察，因此不宣称悬停无需聚焦已验收。临时导出是验证探针，PCK 311,140,744B、Wasm 37,700,666B，尚未做R3-WEB包体优化或发布。
+
+提交用截图仅六张JPG，共1,710,683B，位于`docs/screenshots/round3/R3-POLISH/`。原始18张图及对照在`.tools/r3-polish/material-ui/run_fe0f264ca2be8098e802f7bd951cceef/`，额外五尺寸/头像在`.tools/r3-polish/ui/run_10d66b9f402c141f84ee5e5556767af1/`，必需经营场景图在`.tools/c-ui-captures/`。
+
+已知未完成：手帐/设置页部分首字裁切，设置边缘底色、部分旧按钮/切换控件方框，不能认定“全界面无框中框”通过；未配独立牌面插图的牌以纸面符号和动态牌名呈现。三个旧界面长目标超过360秒，不能称其已通过。19张布局/头像与20张材质图已实际查看；六JPG保留未过设置图供复核。下一项为面部区分度、国籍与具体类型显示修订，随后CRAFT、LEARN、WEB，不重启已完成的1–8。
 
 ## R3-MUSIC（完成）
 
@@ -134,14 +148,14 @@ R3-STORY生产代码已实际跑完最佳、最差、缺案件3三条路线，�
 
 ## 音乐对照表（R3-MUSIC，已验收）
 
-选曲依据仅为文件名意象，**未试听，不保证情绪匹配、音量平衡或循环接缝听感**。全部 21 首已对原源逐 SHA、完整 OGG 页 CRC/序列/BOS/EOS 与时长核对，原字节和修改时间保持；仅选中五首实际 q6 转码，其余仍是元数据目录。
+初选依据为文件名意象，代理未试听。2026-11-25 玩家反馈原日常与案件配乐阴森，指定这两处改用 **Sheep**；开场、夜晚、结局保留。新选择不代表代理已验收音量平衡或循环接缝。全部21首原源SHA与修改时间保持；初选五首转码仍保留在本地，追加Sheep q6转码及完整解码通过，当前五场景选用四首不同曲目。追加GD 6/0、Python 2/0，待随POLISH完整复核；原MUSIC验证报告和旧实包证据保持原样。
 
 场景｜选曲｜时长｜候补（按文件名初选）
 ---｜---｜---｜---
 开场｜Gentle Breeze.ogg｜3:00.000｜Wanderer's Tale.ogg
-白天｜Sunlight Through Leaves.ogg｜2:24.000｜Golden Gleam.ogg
+白天｜Sheep.ogg｜2:49.412｜Golden Gleam.ogg
 夜晚｜Evening Harmony.ogg｜2:12.000｜Polar Lights.ogg
-案件推理｜Whispering Woods.ogg｜2:13.331｜Drifting Memories.ogg
+案件推理｜Sheep.ogg｜2:49.412｜Drifting Memories.ogg
 结局｜Fabric Of Life.ogg｜2:08.000｜Cuddle Clouds.ogg
 
 曲目文件名｜时长｜本轮用途
@@ -159,12 +173,12 @@ Gentle Breeze.ogg｜3:00.000｜开场
 Golden Gleam.ogg｜2:17.778｜可替换选曲
 Pineapple Under The Sea.ogg｜1:55.200｜可替换选曲
 Polar Lights.ogg｜2:54.545｜可替换选曲
-Sheep.ogg｜2:49.412｜可替换选曲
+Sheep.ogg｜2:49.412｜白天、案件接待（玩家指定）
 Strange Worlds.ogg｜2:04.138｜可替换选曲
-Sunlight Through Leaves.ogg｜2:24.000｜白天
+Sunlight Through Leaves.ogg｜2:24.000｜原白天，已替换
 Wanderer's Tale.ogg｜2:52.632｜可替换选曲
 What Clouds Are Made Of.ogg｜3:07.317｜可替换选曲
-Whispering Woods.ogg｜2:13.331｜案件推理
+Whispering Woods.ogg｜2:13.331｜原案件推理，已替换
 Wildflowers By The River.ogg｜2:33.600｜可替换选曲
 Wind Over The Trees.ogg｜2:35.676｜可替换选曲
 

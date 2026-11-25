@@ -1,0 +1,113 @@
+{
+  "type": "r3_polish_v1",
+  "version": 1,
+  "entries": {
+    "style_reference": {
+      "path": "assets/generated_scenes/v3_final/style_reference.png",
+      "group": "style_reference",
+      "status": "approved",
+      "prompt": "Edit this selected hand-painted opaque poster-color background on paper. Preserve the exact room layout, furniture positions, camera, richly painted but tidy shelf groups, warm-left-window sunlight and cool teal shadows, brushwork, native canvas proportions, and edge-to-edge painted image. This is a small functional prop revision for later animation, not a new composition.\nReplace the hanging purple bundle above the shelves with clearly recognizable dry tan and sage-green herbs, with no purple blossoms; the ONLY wisteria is the one purple branch at the left window. Add a small, simple brass wind chime hanging from the upper left window frame, with an ordinary small bell and a dangling plain wooden clapper, clearly separated from the outside leaves. At the central doorway add two narrow plain sage-green cloth curtain panels, one on each side, tied back so the arched passage and back room remain open and fully visible; use a simple unadorned rail, no patterns, no gold trim. Add a small matte ceramic incense burner near the rear edge of the left half of the foreground counter, upright and flat on the counter, with no baked smoke, no symbols. Add a small unlit cloth-shaded table lamp near that counter corner and a single small unlit cloth-shaded pendant from the ceiling; daylight remains lit only by the left window sun, the lamps do not glow. Keep the bottom 12 percent and right third calm, and keep every newly added object painted with the same upper-left warm illumination and cool shadow treatment as the room. All cast shadows must point away from the window. No halos, no rays around lamps, no sparkles, no gold ornaments, no glossy plastic, no text, no letters, no people, no cream border. Landscape 16:9 at highest available native resolution, ideally 2560x1440.",
+      "inputs": [
+        "assets/_incoming/a1r_v3_pilot/candidate_2_round1.png"
+      ],
+      "references": [],
+      "dim": [
+        1672,
+        941
+      ],
+      "sha256": "0e6a45af456b9453896629c04bec45ea5b3631f64cd752be2b3194b2d60f1097",
+      "native_resolution_met": false,
+      "source": {
+        "generator": "image_gen.imagegen",
+        "version": "v3-pilot-candidate2-r2"
+      },
+      "previous_edit": {
+        "prompt": "Repaint this image as a hand-painted background painting for a traditional animated film, made with opaque poster colors on paper. Keep the room layout, camera angle, and furniture positions. Lighting is the most important part of this painting and should feel natural and beautiful. Late-afternoon sun enters through the left window and lays warm, soft-edged, window-shaped patches of light across the floor, the counter top, and the lower shelves, catching the edges of the objects it touches. Where sunlight passes through glass jars, thin leaves, and the cloth curtain, they glow warmly from behind. In the slightly dusty air near the window, a single faint, soft shaft of sunlight is barely visible, running in the same direction as the sun. Light bounces off the wooden floor and gives the undersides of the shelves and the ceiling a warm reflected tint. Areas away from the window fall into calm, cool blue-green shade with gentle gradations, never black. Keep a clear contrast between the warm sunlit patches and the cool shade; all cast shadows point away from the window. Keep the shelves lived-in but tidy: objects grouped in small clusters of three to five with clear space between groups, about a quarter of each shelf left empty, every object an ordinary recognizable item from an old small-town curio shop (glass jars with plain blank paper labels, tin boxes, ceramic pots, a few books, dried herb bundles, a small brass scale, rattan baskets, wooden drawers with brass pulls). Reduce the wisteria to a single branch near the window. Remove all ornate gold filigree, carved ornaments, glowing crystals, and sparkles. Concentrate fine detail around the counter and the middle shelves; paint the walls, ceiling, and corners more loosely with visible brush strokes and soft edges. Muted warm palette balanced with sage green and dusty teal. Keep the right third of the image calm with low detail. No text, no letters, no people. No bloom or halo around light sources, no multiple light rays, no sparkles or twinkles, no objects glowing on their own, no golden rim light on every edge, no lens flare, no bokeh, no depth-of-field blur.\nLandscape 16:9, highest available native resolution, ideally 2560x1440; preserve the existing layout.",
+        "inputs": [
+          "assets/generated_scenes/v2/S02_day.png"
+        ],
+        "output_sha256": "2c5ee0bf43f0ca094d7ada707fd1c2a72f03cc9468861e9bf5a351cc4e548f43"
+      }
+    },
+    "money_bag": {
+      "path": "assets/ui/status_v3/money_bag.png",
+      "sha256": "8db3afc583a9f631ff85552181bcd3eb06b82469dc73bde5fe90aebd2dbe298e",
+      "dim": [
+        1312,
+        1199
+      ],
+      "version": 1,
+      "group": "polish_ui",
+      "status": "selected_ui_source",
+      "prompt": "One isolated small game HUD icon, hand-painted in opaque poster colors on paper, with natural dry brush texture and a clear readable silhouette at 32 pixels. Cozy old street grocery shop, restrained sage green, warm old wood brown, muted brass and cream, soft upper-left daylight. Center the complete object with generous transparent padding. Transparent background with true alpha. No lettering, numbers, words, glyphs, border, glow, halo, sparkles, lens flare or additional props. Subject: one humble small brown cloth coin purse, tied with a simple cord, a little rounded weight at its bottom. A couple of plain unmarked muted brass coin edges can peek from the opening. No currency sign or stamped emblem.",
+      "source": {
+        "generator": "builtin_imagegen",
+        "record_id": "R3_POLISH_money_bag_v1"
+      }
+    },
+    "oil_lamp": {
+      "path": "assets/ui/status_v3/oil_lamp.png",
+      "sha256": "c20454fe640889cbe42e30447c04d8474d705ae90f4206cd61af4a67406f3441",
+      "dim": [
+        1312,
+        1199
+      ],
+      "version": 3,
+      "group": "polish_ui",
+      "status": "selected_ui_source",
+      "prompt": "A clean cutout sprite of ONE UNLIT small antique oil lamp for a hand-painted grocery-shop game HUD. The wick is NOT burning. No flame. No emitted light. A squat sage-green glass oil reservoir, worn matte brass fitting, short clear glass chimney. Opaque gouache brush strokes on the physical object, simple readable proportions. Soft diffuse daylight highlights are painted only inside the object's contour. No shadow beneath, no background, no haze, no glow of any kind. Truly transparent empty canvas outside the object, alpha zero. No words, symbols or numbers. Entire object centered, no cropping. Practical illustrated inventory icon, not an atmospheric scene.",
+      "source": {
+        "generator": "builtin_imagegen",
+        "record_id": "R3_POLISH_oil_lamp_v3"
+      }
+    },
+    "pocket_watch": {
+      "path": "assets/ui/status_v3/pocket_watch.png",
+      "sha256": "2075b59483098e564ae13d1408e835473e96f7c4b8329844b793c0a2b5059a7e",
+      "dim": [
+        1312,
+        1199
+      ],
+      "version": 1,
+      "group": "polish_ui",
+      "status": "selected_ui_source",
+      "prompt": "One isolated small game HUD icon, hand-painted in opaque poster colors on paper, with natural dry brush texture and a clear readable silhouette at 32 pixels. Cozy old street grocery shop, restrained sage green, warm old wood brown, muted brass and cream, soft upper-left daylight. Center the complete object with generous transparent padding. Transparent background with true alpha. No lettering, numbers, words, glyphs, border, glow, halo, sparkles, lens flare or additional props. Subject: one modest worn brass pocket watch, three-quarter front view, with a short loop on top and a plain cream dial. Only two simple dark clock hands on the otherwise blank dial, absolutely no numerals, tick marks, symbols or writing.",
+      "source": {
+        "generator": "builtin_imagegen",
+        "record_id": "R3_POLISH_pocket_watch_v1"
+      }
+    },
+    "reputation_star": {
+      "path": "assets/ui/status_v3/reputation_star.svg",
+      "sha256": "f0b8e28bb3a2b789ce2b0f48b9dd1608d3ec2b13d205f4fb7017f8c6f5252aa6",
+      "dim": [
+        96,
+        96
+      ],
+      "version": 1,
+      "group": "polish_ui",
+      "status": "selected_ui_source",
+      "prompt": "Project-original editable SVG, not an AI-generated selection: one irregular matte sage five-point paper badge with worn ochre edges and restrained hand-drawn internal strokes. No glow, halo, backdrop, words, numbers, face or game-state data. Preserve the complete transparent silhouette. Version project-svg-v1; the four rejected ImageGen star attempts are not this selected source.",
+      "source": {
+        "generator": "project_original_svg",
+        "record_id": "R3_POLISH_reputation_star_v1"
+      }
+    },
+    "navigation": {
+      "path": "assets/ui/polish_icons.svg",
+      "sha256": "1ada22c37b6bae5d0018d4a51a77a8eeba5995766a8c7c3c95483cc71331f400",
+      "dim": [
+        512,
+        32
+      ],
+      "version": 1,
+      "group": "polish_ui",
+      "status": "selected_ui_source",
+      "prompt": "Project-original editable SVG atlas, simple-icons-v1: sixteen separate 32px cells for door, counter, chat, cabinet, mortar, shop, leaf, archive, close, patience hourglass, outline star, wax seal, card ornament, right arrow, solid yang line and broken yin line. Original geometric line paths, transparent padding, no text, no numbers and no baked state. Not AI-generated; theme and controls supply tint and dynamic values.",
+      "source": {
+        "generator": "project_original_svg",
+        "record_id": "R3_POLISH_navigation_v1"
+      }
+    }
+  }
+}

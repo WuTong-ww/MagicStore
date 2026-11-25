@@ -1,6 +1,7 @@
 extends Control
 
 const UI = preload("res://scripts/ui/ui_kit.gd")
+const CardChoice = preload("res://scripts/ui/card_choice.gd")
 const ArrivalUI = preload("res://scripts/ui/arrival_ui.gd")
 ## Seven public destinations share layout, while all actions go through GameState.
 
@@ -61,6 +62,7 @@ func _layout_scene_controls() -> void:
 func refresh() -> void:
 	if not is_instance_valid(body):
 		return
+	drawer.begin_content_update()
 	for child: Node in body.get_children():
 		body.remove_child(child)
 		child.queue_free()
@@ -92,6 +94,7 @@ func refresh() -> void:
 			_market(view)
 		"gathering":
 			_gathering(view)
+	drawer.balance_content_pages()
 
 func _toggle_cabinet() -> void:
 	cabinet_open = not cabinet_open
@@ -113,7 +116,7 @@ func _inventory(view: Dictionary) -> void:
 	if not cabinet_open:
 		text("柜门已经合上。打开后可查看商品、原料、来源与用途。", 16)
 		return
-	var filter := OptionButton.new()
+	var filter := CardChoice.new()
 	filter.add_item("全部物品")
 	filter.set_item_metadata(0, "all")
 	filter.add_item("原料")
@@ -199,7 +202,7 @@ func _workshop(view: Dictionary) -> void:
 		var row := _item_row(base.output,base.name)
 		row.name = "RecipeActions_"+id
 		if state.get("known",false):
-			var selector := OptionButton.new()
+			var selector := CardChoice.new()
 			selector.name = "RecipeVariant_"+id
 			selector.set_meta("recipe_id",id)
 			selector.custom_minimum_size.x = float(content_settings.layout.picker_width)
@@ -336,7 +339,7 @@ func _gathering(view: Dictionary) -> void:
 		var drops: PackedStringArray = []
 		for item_id: String in site.drops:
 			drops.append("%s ×%d" % [view.catalog.items[item_id].name, int(site.drops[item_id])])
-		var panel := UI.panel()
+		var panel := UI.panel("plain")
 		body.add_child(panel)
 		var column := VBoxContainer.new()
 		panel.add_child(column)
@@ -443,7 +446,7 @@ func _add_use_actions(parent: BoxContainer, actions: Array, item_id: String) -> 
 		return
 	var waiting: Array = actions.filter(func(row: Dictionary) -> bool: return row.target == "waiting")
 	if not waiting.is_empty():
-		var target := OptionButton.new()
+		var target := CardChoice.new()
 		target.name = "ProductUseTarget_"+item_id
 		target.fit_to_longest_item = false
 		target.custom_minimum_size.x = float(content_settings.layout.picker_width)

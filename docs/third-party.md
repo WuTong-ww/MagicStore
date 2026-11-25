@@ -77,3 +77,11 @@ Whispering Woods.ogg｜`93597af7f6ae1cbf6b0bf68caa931d45dc8695a3baaf5910b402336c
 Fabric Of Life.ogg｜`8622ec2d6391153a52fe53cfc278a53fa62bf03a46ca6215df98a57f63f5f573`｜`3ceb034e9527818c3c62bcaf1b0ad77276609d6e5aa497aae27a42b175693721`
 
 转码工具继续使用上文登记的 ImageIO/FFmpeg 7.1；仅执行本地解码/编码，不将音乐输入生成、评估或训练模型。文件名初选不等于人工试听；授权与听感复核由项目持有人保留。
+
+2026-11-25 玩家试听后指定白天营业与案件接待改用 `Sheep.ogg`，原五首转换文件保留本地。追加原源 SHA256 `306ef172d216f5cebc3a2cefd7cd1df32860a32f6251b4d2737676ac80396b53`；本地 q6 文件 `assets/audio/music/sheep.ogg` SHA256 `1435a3ac15adce7dba6086078c8c3214ee90eb9e294a2c54566ece7698243080`。同一来源、作者与定制许可，不进入公开仓库/默认构建。
+
+## R3-POLISH 等宽数字字体
+
+数字及ASCII标点使用本项目从霞鹜文楷等宽 Regular v1.530 制作的子集，作者 LXGW / The Klee Project Authors；[固定版本原字体](https://raw.githubusercontent.com/lxgw/LxgwWenKai/v1.530/fonts/TTF/LXGWWenKaiMono-Regular.ttf)，[原许可](https://raw.githubusercontent.com/lxgw/LxgwWenKai/v1.530/OFL.txt)，SIL Open Font License 1.1。原字体SHA256 `895ce1d2fa00d5ca3bec0329d38e3190454f4b5fa7b4733f491c419faf9753a1`，仅保留U+0020–U+007E的95字形，统一原有500 advance；衍生字体改名Midnight Numeric以避开保留名称，原版权通知完整保留。
+
+项目字体 `assets/fonts/MidnightNumeric-Regular.ttf`（30944B）SHA256 `ff3dd9fce45675922f803bae772f0260e4fe126031862a0262a2c0bdcafde8d0`；完整许可 `assets/fonts/MidnightNumeric-OFL.txt` SHA256 `1a25e35da1031c6c3436fde545bb9cb5aca954e9873afe510c834b8b79bd21a0`。中文继续使用前述完整霞鹜文楷，两个FontFile均关闭系统字体回退；未向系统安装字体。

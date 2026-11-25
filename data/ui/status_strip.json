@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "wood_source": "title.wood_sign",
+  "icons": {
+    "money": "res://assets/ui/status_v3/money_bag.png",
+    "energy": "res://assets/ui/status_v3/oil_lamp.png",
+    "time": "res://assets/ui/status_v3/pocket_watch.png",
+    "reputation": "res://assets/ui/status_v3/reputation_star.svg"
+  },
+  "layout": {
+    "font_size": 16, "icon_size": 28, "gap": 6, "energy_gap": 2,
+    "energy_width": 70, "energy_bar_height": 10, "recommended_header_height": 88,
+    "wood_region": [40, 90, 2090, 550],
+    "wood_slice": [80, 36, 80, 36], "wood_padding": [16, 6, 16, 6]
+  },
+  "colors": {"text": "#F3E9D6", "energy": "#82916F", "track": "#E2D2B4"},
+  "clock_pattern": "^第 [0-9]+ 天  [0-9]{2}:[0-9]{2}$",
+  "copy": {
+    "money": "金币 %d", "energy": "精力 %d / %d", "reputation": "口碑 %d",
+    "daily": "已接待 %d/%d", "queue": "候客 %d", "no_save": "打开存档，开始经营"
+  }
+}

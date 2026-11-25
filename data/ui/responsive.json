@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "reference_size": [1920, 1080],
+  "native_minimum": [800, 480],
+  "short_height": 640,
+  "dialogue_max_ratio": 0.45,
+  "safe_margin": 16,
+  "dialogue_bottom": 64,
+  "dialogue_minimum": [1100, 316],
+  "drawer_width": 480,
+  "drawer_minimum": [420, 480],
+  "case_drawer_width": 640,
+  "toggle_size": [104, 48],
+  "toggle_top": 100,
+  "portrait_lift": 80,
+  "overlay_z": 240,
+  "title_z": 1000,
+  "overlay_color": "#18231b66",
+  "copy": {
+    "case_open": "打开推理纸",
+    "case_close": "收起推理纸"
+  }
+}

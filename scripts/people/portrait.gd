@@ -3,6 +3,7 @@ extends Control
 const Appearance = preload("res://scripts/people/appearance.gd")
 const EditorConfig = preload("res://scripts/people/appearance_editor_config.gd")
 const GradientShader = preload("res://shaders/gradient_map.gdshader")
+const RenderPlan = preload("res://scripts/people/portrait_render_plan.gd")
 static var _composites: Dictionary = {}
 static var _recent: Array[String] = []
 static var _limit := 1
@@ -10,6 +11,7 @@ var appearance: Dictionary = {}
 var mood := "neutral"
 var config: Dictionary = {}
 var records: Array = []
+var render_plan_data: Dictionary = {}
 var layer_canvas: Control
 var missing_label: Label
 var _signature := ""
@@ -25,11 +27,12 @@ func configure(value: Dictionary, expression: String = "neutral", catalog: Dicti
 		config = {}
 	appearance = Appearance.for_display(value,"",config)
 	mood = expression if expression in config.get("moods",[]) else str(config.get("default_mood","neutral"))
-	records = Appearance.layer_records(appearance,mood,config)
+	render_plan_data = Appearance.render_plan(appearance,mood,config)
+	records = render_plan_data.get("layers",[])
 	var sources: Array = []
 	for record: Dictionary in records:
 		sources.append([record.layer,record.path,record.available,_source_digest(record.path) if record.available else ""])
-	var signature := JSON.stringify([appearance,mood,config,sources])
+	var signature := JSON.stringify([appearance,mood,config,render_plan_data.get("digest",""),sources])
 	if signature != _signature:
 		_signature = signature
 		_rebuild()
@@ -85,6 +88,31 @@ static func _texture(path: String) -> Texture2D:
 	_trim_cache(_limit)
 	return texture
 
+## Private image copy, shared by live layers and CPU composites. Imported
+## Texture2D fallback follows the same preparation path as native PNG bytes.
+static func prepared_layer_image(record: Dictionary, _catalog: Dictionary = {}) -> Image:
+	if not record.get("available",false) or not record.get("path") is String:
+		return null
+	var source := _image(record.path)
+	return RenderPlan.prepare_image(source,record.get("operations",[]))
+
+static func _prepared_texture(record: Dictionary, catalog: Dictionary, plan_digest: String) -> Texture2D:
+	if record.get("operations",[]).is_empty():
+		return _texture(record.path)
+	var key := "prepared:"+JSON.stringify([plan_digest,record,_source_digest(record.path)]).sha256_text()
+	if _composites.has(key):
+		_recent.erase(key)
+		_recent.append(key)
+		return _composites[key]
+	var source := prepared_layer_image(record,catalog)
+	if source == null or source.is_empty():
+		return null
+	var texture := ImageTexture.create_from_image(source)
+	_composites[key] = texture
+	_recent.append(key)
+	_trim_cache(_limit)
+	return texture
+
 func _rebuild() -> void:
 	if not is_node_ready():
 		return
@@ -108,11 +136,13 @@ func _rebuild() -> void:
 		layer.stretch_mode = TextureRect.STRETCH_SCALE
 		layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		layer.set_meta("part_id",record.id)
+		layer.set_meta("display_id",record.get("display_id",record.id))
+		layer.set_meta("render_plan_digest",render_plan_data.get("digest",""))
 		layer.set_meta("art_status",record.status)
 		layer_canvas.add_child(layer)
 		layer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		if record.available:
-			layer.texture = _texture(record.path)
+			layer.texture = _prepared_texture(record,config,str(render_plan_data.get("digest","")))
 			available += 1 if layer.texture != null else 0
 		var palette := palette_for(appearance,record.tint,config)
 		if palette.size() == 3:
@@ -168,7 +198,8 @@ static func composite_texture(value: Dictionary, expression: String = "neutral",
 	var normalized := Appearance.for_display(value,"",catalog)
 	if normalized.is_empty():
 		return null
-	var layers := Appearance.layer_records(normalized,expression,catalog)
+	var plan := Appearance.render_plan(normalized,expression,catalog)
+	var layers: Array = plan.get("layers",[])
 	if layers.is_empty():
 		return null
 	var native: Array = layers[0].canvas
@@ -180,7 +211,7 @@ static func composite_texture(value: Dictionary, expression: String = "neutral",
 	var sources: Array = []
 	for layer: Dictionary in layers:
 		sources.append([layer.layer,layer.id,layer.tint,layer.canvas,layer.path,layer.available,layer.status,_source_digest(layer.path) if layer.available else ""])
-	var key := JSON.stringify([normalized,expression,catalog.get("version"),catalog.get("palettes"),native,output_size,sources]).sha256_text()
+	var key := JSON.stringify([normalized,expression,plan.get("digest",""),catalog.get("version"),catalog.get("palettes"),native,output_size,sources]).sha256_text()
 	_trim_cache(int(catalog.get("cache",{}).get("max_entries",1)))
 	if _composites.has(key):
 		_recent.erase(key)
@@ -195,7 +226,7 @@ static func composite_texture(value: Dictionary, expression: String = "neutral",
 	for layer: Dictionary in layers:
 		if not layer.available:
 			continue
-		var source := _image(layer.path)
+		var source := prepared_layer_image(layer,catalog)
 		if source == null or source.is_empty() or source.get_size() != Vector2i(native[0],native[1]):
 			continue
 		available += 1

@@ -64,7 +64,7 @@ func set_report(value: Dictionary) -> void:
 	add_child(_details)
 
 func _dimension(parent: GridContainer, dimension: Dictionary) -> void:
-	var card: PanelContainer = UI.panel()
+	var card: PanelContainer = UI.panel("plain")
 	card.name = "StyleDimension_"+dimension.id
 	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	parent.add_child(card)

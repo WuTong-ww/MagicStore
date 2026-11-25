@@ -1,4 +1,5 @@
 extends SceneTree
+const CardChoice = preload("res://scripts/ui/card_choice.gd")
 ## Authored progress -> production public_view -> real Graph controls/signals.
 ## This is headless behavior coverage, not committed gameplay or GPU evidence.
 
@@ -117,7 +118,7 @@ func run() -> void:
 		check(interpret_events.size() == 1, "repeated render has exactly one current interpretation handler")
 	await render_model(first,false)
 	check(all_buttons_disabled(graph), "can_act=false disables every action button")
-	var passive_choice: OptionButton = graph.find_child("PastLineInterpretationChoice",true,false) as OptionButton
+	var passive_choice: CardChoice = graph.find_child("PastLineInterpretationChoice",true,false) as CardChoice
 	check(passive_choice != null and passive_choice.disabled, "passive graph cannot change the interpretation choice")
 
 	var evidence: Dictionary = fixture.evidence
@@ -164,10 +165,10 @@ func render_model(model: Dictionary,can_act: bool) -> void:
 	await process_frame
 
 func exercise_interpret(model: Dictionary) -> bool:
-	var choice: OptionButton = graph.find_child("PastLineInterpretationChoice",true,false) as OptionButton
+	var choice: CardChoice = graph.find_child("PastLineInterpretationChoice",true,false) as CardChoice
 	var input: LineEdit = graph.find_child("PastLineInterpretationText",true,false) as LineEdit
 	var submit: Button = graph.find_child("PastLineInterpretationSubmit",true,false) as Button
-	if not check(choice != null and input != null and submit != null, "interpretation uses real OptionButton, LineEdit and Button controls"):
+	if not check(choice != null and input != null and submit != null, "interpretation uses real CardChoice, LineEdit and Button controls"):
 		return false
 	if not check(choice.item_count == model.options.size() and choice.item_count > 1, "flat public options populate all real choices"):
 		return false

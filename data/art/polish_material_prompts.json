@@ -1,0 +1,588 @@
+{
+  "type": "r3_polish_material_v1",
+  "version": 1,
+  "runtime_config": "data/ui/panel_materials.json",
+  "entries": {
+    "notebook": {
+      "sha256": "48d9647f83e41bdce4b77d5429401354a15c489994d74b100d4419c31898fe53",
+      "dim": [
+        1536,
+        1024
+      ],
+      "version": 2,
+      "prompt": "Remove the brown blurred background COMPLETELY from this image. Preserve ONLY the complete open leather notebook and its sage ribbon bookmark, exactly the same painted object, full shape and existing colors and ruled lines. Everything outside the leather outer contour and ribbon must be perfectly transparent (alpha zero), with a clean accurate cutout edge. No replacement background, no surface beneath it, no shadow, no glow or haze. Do not change, crop, add or redraw anything inside the notebook. This is a production game UI cutout PNG.",
+      "review": {
+        "opened": true,
+        "score": 9
+      },
+      "path": "assets/ui/material_v3/notebook.png",
+      "group": "polish_materials",
+      "status": "selected_material_source",
+      "source": {
+        "generator": "builtin_imagegen",
+        "record_id": "R3_POLISH_MATERIAL_notebook_v2"
+      },
+      "runtime_asset": {
+        "path": "res://assets/ui/material_v3/notebook.png",
+        "mode": "book",
+        "region": [
+          53,
+          49,
+          1430,
+          927
+        ],
+        "margins": [
+          40,
+          64,
+          40,
+          48
+        ],
+        "native_size": [
+          1536,
+          1024
+        ],
+        "book_regions": {
+          "left": [
+            0,
+            0,
+            0.48,
+            1
+          ],
+          "spine": [
+            0.48,
+            0,
+            0.04,
+            1
+          ],
+          "right": [
+            0.52,
+            0,
+            0.48,
+            1
+          ]
+        }
+      },
+      "runtime_asset_sha256": "3fb16d1e49c6e1efa99fbcece4c07ae096826182607d5a3782f1f645b99629c2"
+    },
+    "letter": {
+      "sha256": "39843f14faf2b07919726e14ae077606bf80db9b0b52eacd73067023c5c37c88",
+      "dim": [
+        1536,
+        1024
+      ],
+      "version": 3,
+      "prompt": "Remove the grey-brown blurred background COMPLETELY. Preserve ONLY the single warm-white letter paper sheet with its irregular physical edges, unchanged paper face and fibers. Every pixel outside the actual paper silhouette must have zero alpha. Accurate crisp cutout with NO outer haze, NO background, NO shadow, NO surface, NO glow. Keep the paper interior opaque, not semitransparent. Do not crop or add anything. Output a real transparent production UI PNG.",
+      "review": {
+        "opened": true,
+        "score": 9
+      },
+      "path": "assets/ui/material_v3/letter.png",
+      "group": "polish_materials",
+      "status": "selected_material_source",
+      "source": {
+        "generator": "builtin_imagegen",
+        "record_id": "R3_POLISH_MATERIAL_letter_v3"
+      },
+      "runtime_asset": {
+        "path": "res://assets/ui/material_v3/letter.png",
+        "mode": "nine_slice",
+        "region": [
+          61,
+          53,
+          1408,
+          930
+        ],
+        "margins": [
+          44,
+          44,
+          44,
+          44
+        ],
+        "native_size": [
+          1536,
+          1024
+        ]
+      },
+      "runtime_asset_sha256": "20009e0527642d9bf74415d413fa2baf38105fcedf4aab71283d5614e97ef5aa"
+    },
+    "paper_cream": {
+      "sha256": "db1238515931f2b029d3c9b84e4636ac6e232bbff2807ea25189d7e1364247ba",
+      "dim": [
+        2172,
+        724
+      ],
+      "version": 1,
+      "prompt": "Create ONE isolated production UI material texture for a cozy small-town curio shop game. True transparent RGBA background outside the object. Entire object visible, straight-on orthographic flat lay, no perspective, centered with generous transparent padding on every side. Hand-painted opaque poster colors on fine paper, muted warm earth colors with sage and dusty teal accents, slightly uneven hand-brushed contours, delicate physical material variation. Match an old wooden shop with late afternoon light; light softly from upper left, shadows quiet and cool. NO text, NO letters, NO numbers, NO symbols pretending to be writing, NO interface, NO surrounding scene, NO mockup, NO caption, NO border around the canvas, NO glows, NO sparkle particles, NO bloom. This is a stretchable nine-patch object: preserve distinct corners/edge details within roughly the outer 15 percent; center is calm blank writing space, broad smooth low-contrast grain. Do not bake an external drop shadow; runtime paints it. Make the object clearly recognizable at a small display size.\n\nA single small horizontal loose paper strip, warm cream/ivory, softly irregular torn edges and slightly curled lower corner, completely blank center, no printed outline or border. Plain light paper with faint fibers, calm enough for dark dynamic text. Width about three times height.",
+      "review": {
+        "opened": true,
+        "score": 8
+      },
+      "path": "assets/ui/material_v3/paper_cream.png",
+      "group": "polish_materials",
+      "status": "selected_material_source",
+      "source": {
+        "generator": "builtin_imagegen",
+        "record_id": "R3_POLISH_MATERIAL_paper_cream_v1"
+      },
+      "runtime_asset": {
+        "path": "res://assets/ui/material_v3/paper_cream.png",
+        "mode": "nine_slice",
+        "region": [
+          47,
+          59,
+          2072,
+          592
+        ],
+        "margins": [
+          160,
+          96,
+          180,
+          96
+        ],
+        "native_size": [
+          2172,
+          724
+        ]
+      },
+      "runtime_asset_sha256": "9f1881499c0c97b4d35de524f0bac3c515df50bf1c3e08bc5833d1910a12a26b"
+    },
+    "paper_blue": {
+      "sha256": "29d41f272b4165dc61388ad563b0a4ad31ecdb796c9a9c200c197be15b615cdd",
+      "dim": [
+        2172,
+        724
+      ],
+      "version": 2,
+      "prompt": "Create one flat blank PALE DUSTY BLUE paper strip matching the blue ruled paper in the reference. Remove the string and the punched hole entirely: this is just a small horizontal piece of blue writing paper with very faint horizontal lines and lightly irregular edges. Keep the same hand-painted opaque-poster-color material. No text. NO frame, NO white border, NO outer glow, NO shadow, NO halo, NO background, NO surface. Every pixel outside the exact blue-paper silhouette is transparent. Keep a modest transparent margin, whole sheet visible. Width around three times height. Production UI cutout, center quiet and blank.",
+      "review": {
+        "opened": true,
+        "score": 9
+      },
+      "path": "assets/ui/material_v3/paper_blue.png",
+      "group": "polish_materials",
+      "status": "selected_material_source",
+      "source": {
+        "generator": "builtin_imagegen",
+        "record_id": "R3_POLISH_MATERIAL_paper_blue_v2"
+      },
+      "runtime_asset": {
+        "path": "res://assets/ui/material_v3/paper_blue.png",
+        "mode": "nine_slice",
+        "region": [
+          197,
+          117,
+          1779,
+          499
+        ],
+        "margins": [
+          60,
+          60,
+          60,
+          60
+        ],
+        "native_size": [
+          2172,
+          724
+        ]
+      },
+      "runtime_asset_sha256": "524dcb4522b08783a16217ec22d64e9a08a00a79c3724ad0953ec31f8213ae6e"
+    },
+    "paper_lilac": {
+      "sha256": "4998f017bfe8755011515b7f8c0be6d390085c5e425b1e7a009996ac8db5277e",
+      "dim": [
+        2172,
+        724
+      ],
+      "version": 1,
+      "prompt": "Create ONE isolated production UI material texture for a cozy small-town curio shop game. True transparent RGBA background outside the object. Entire object visible, straight-on orthographic flat lay, no perspective, centered with generous transparent padding on every side. Hand-painted opaque poster colors on fine paper, muted warm earth colors with sage and dusty teal accents, slightly uneven hand-brushed contours, delicate physical material variation. Match an old wooden shop with late afternoon light; light softly from upper left, shadows quiet and cool. NO text, NO letters, NO numbers, NO symbols pretending to be writing, NO interface, NO surrounding scene, NO mockup, NO caption, NO border around the canvas, NO glows, NO sparkle particles, NO bloom. This is a stretchable nine-patch object: preserve distinct corners/edge details within roughly the outer 15 percent; center is calm blank writing space, broad smooth low-contrast grain. Do not bake an external drop shadow; runtime paints it. Make the object clearly recognizable at a small display size.\n\nA single small horizontal loose paper strip, very pale desaturated lilac paper, softly irregular cut edges with one tiny five-point corner cut in the paper silhouette. No printed outline or border and no decorative ink. Calm blank center for dark dynamic text. Width about three times height.\nClean flat game sprite cutout, NOT a photo on a surface. Outside the complete object is fully transparent alpha zero. No haze, no blurred field, no external shadow, no white backing mat.",
+      "review": {
+        "opened": true,
+        "score": 8
+      },
+      "path": "assets/ui/material_v3/paper_lilac.png",
+      "group": "polish_materials",
+      "status": "selected_material_source",
+      "source": {
+        "generator": "builtin_imagegen",
+        "record_id": "R3_POLISH_MATERIAL_paper_lilac_v1"
+      },
+      "runtime_asset": {
+        "path": "res://assets/ui/material_v3/paper_lilac.png",
+        "mode": "nine_slice",
+        "region": [
+          92,
+          137,
+          1983,
+          459
+        ],
+        "margins": [
+          70,
+          54,
+          70,
+          54
+        ],
+        "native_size": [
+          2172,
+          724
+        ]
+      },
+      "runtime_asset_sha256": "3e96fde7b7784d360aaab13d7538e73fa759f2632a92bcc6c33e16dd9e405ab7"
+    },
+    "tag_cream": {
+      "sha256": "c3ef91f06578b9df5cbc6b48d654a53b64bca347c0fa54983a915b07225b2124",
+      "dim": [
+        2172,
+        724
+      ],
+      "version": 1,
+      "prompt": "Create ONE isolated production UI material texture for a cozy small-town curio shop game. True transparent RGBA background outside the object. Entire object visible, straight-on orthographic flat lay, no perspective, centered with generous transparent padding on every side. Hand-painted opaque poster colors on fine paper, muted warm earth colors with sage and dusty teal accents, slightly uneven hand-brushed contours, delicate physical material variation. Match an old wooden shop with late afternoon light; light softly from upper left, shadows quiet and cool. NO text, NO letters, NO numbers, NO symbols pretending to be writing, NO interface, NO surrounding scene, NO mockup, NO caption, NO border around the canvas, NO glows, NO sparkle particles, NO bloom. This is a stretchable nine-patch object: preserve distinct corners/edge details within roughly the outer 15 percent; center is calm blank writing space, broad smooth low-contrast grain. Do not bake an external drop shadow; runtime paints it. Make the object clearly recognizable at a small display size.\n\nA single warm cream paper luggage tag, horizontal wide blank body, softly cut corners at the short left end, a small punched hole at the left and a short natural cotton string tied through it, string extending toward the upper left but fully inside the image. Delicate fibrous paper, no border, no text, blank readable center. Width about three times height.\nMake a clean isolated small game prop, NOT a photograph of a tag on a surface. Use flat painted shapes with a sharp isolated silhouette. The entire outside background is alpha zero. NO blurred field, NO fog, NO big drop shadow, NO white mat/halo. The cotton string and tag form the only visible pixels.",
+      "review": {
+        "opened": true,
+        "score": 9
+      },
+      "path": "assets/ui/material_v3/tag_cream.png",
+      "group": "polish_materials",
+      "status": "selected_material_source",
+      "source": {
+        "generator": "builtin_imagegen",
+        "record_id": "R3_POLISH_MATERIAL_tag_cream_v1"
+      },
+      "runtime_asset": {
+        "path": "res://assets/ui/material_v3/tag_cream.png",
+        "mode": "nine_slice",
+        "region": [
+          26,
+          7,
+          2108,
+          692
+        ],
+        "margins": [
+          560,
+          120,
+          220,
+          84
+        ],
+        "native_size": [
+          2172,
+          724
+        ]
+      },
+      "runtime_asset_sha256": "4798570dd84098653cc53bfb6c182433a25639e0cbc1ac14b4b1dab808a57967"
+    },
+    "tag_blue": {
+      "sha256": "fd5acca28f29c378b6b1cd35566341a4cd774ac83dca119ba90f314eddb98f4e",
+      "dim": [
+        2172,
+        724
+      ],
+      "version": 1,
+      "prompt": "Create ONE isolated production UI material texture for a cozy small-town curio shop game. True transparent RGBA background outside the object. Entire object visible, straight-on orthographic flat lay, no perspective, centered with generous transparent padding on every side. Hand-painted opaque poster colors on fine paper, muted warm earth colors with sage and dusty teal accents, slightly uneven hand-brushed contours, delicate physical material variation. Match an old wooden shop with late afternoon light; light softly from upper left, shadows quiet and cool. NO text, NO letters, NO numbers, NO symbols pretending to be writing, NO interface, NO surrounding scene, NO mockup, NO caption, NO border around the canvas, NO glows, NO sparkle particles, NO bloom. This is a stretchable nine-patch object: preserve distinct corners/edge details within roughly the outer 15 percent; center is calm blank writing space, broad smooth low-contrast grain. Do not bake an external drop shadow; runtime paints it. Make the object clearly recognizable at a small display size.\n\nA single very pale dusty blue paper luggage tag, horizontal wide blank body with faint thin blue horizontal ruled lines, softly cut corners at the short left end, a small punched hole and a short natural cotton string tied through it, string extending toward the upper left but fully inside the image. No border, no text, blank readable center. Width about three times height.\nMake a clean isolated small game prop, NOT a photograph of a tag on a surface. Use flat painted shapes with a sharp isolated silhouette. The entire outside background is alpha zero. NO blurred field, NO fog, NO big drop shadow, NO white mat/halo. The cotton string and tag form the only visible pixels.",
+      "review": {
+        "opened": true,
+        "score": 9
+      },
+      "path": "assets/ui/material_v3/tag_blue.png",
+      "group": "polish_materials",
+      "status": "selected_material_source",
+      "source": {
+        "generator": "builtin_imagegen",
+        "record_id": "R3_POLISH_MATERIAL_tag_blue_v1"
+      },
+      "runtime_asset": {
+        "path": "res://assets/ui/material_v3/tag_blue.png",
+        "mode": "nine_slice",
+        "region": [
+          40,
+          36,
+          2083,
+          648
+        ],
+        "margins": [
+          560,
+          120,
+          220,
+          84
+        ],
+        "native_size": [
+          2172,
+          724
+        ]
+      },
+      "runtime_asset_sha256": "49cc1f9f1ad952d1b571b66d989b5afd9ef8f6df8659f569dd084dcbae2f3272"
+    },
+    "tag_lilac": {
+      "sha256": "16a988e9972442471665326a49be7e9a5e68e7f4510b3480b39882f575db0e72",
+      "dim": [
+        2172,
+        724
+      ],
+      "version": 1,
+      "prompt": "Create ONE isolated production UI material texture for a cozy small-town curio shop game. True transparent RGBA background outside the object. Entire object visible, straight-on orthographic flat lay, no perspective, centered with generous transparent padding on every side. Hand-painted opaque poster colors on fine paper, muted warm earth colors with sage and dusty teal accents, slightly uneven hand-brushed contours, delicate physical material variation. Match an old wooden shop with late afternoon light; light softly from upper left, shadows quiet and cool. NO text, NO letters, NO numbers, NO symbols pretending to be writing, NO interface, NO surrounding scene, NO mockup, NO caption, NO border around the canvas, NO glows, NO sparkle particles, NO bloom. This is a stretchable nine-patch object: preserve distinct corners/edge details within roughly the outer 15 percent; center is calm blank writing space, broad smooth low-contrast grain. Do not bake an external drop shadow; runtime paints it. Make the object clearly recognizable at a small display size.\n\nA single very pale muted lilac paper luggage tag, horizontal wide blank body, small five-point star shape cut into the upper right corner of the paper silhouette, softly cut left corners with a small punched hole and a short natural cotton string tied through it. String extends toward upper left, entirely inside canvas. No ink star, no sparkles, no border, no text, blank readable center. Width about three times height.\nMake a clean isolated small game prop, NOT a photograph of a tag on a surface. Use flat painted shapes with a sharp isolated silhouette. The entire outside background is alpha zero. NO blurred field, NO fog, NO big drop shadow, NO white mat/halo. The cotton string and tag form the only visible pixels.",
+      "review": {
+        "opened": true,
+        "score": 9
+      },
+      "path": "assets/ui/material_v3/tag_lilac.png",
+      "group": "polish_materials",
+      "status": "selected_material_source",
+      "source": {
+        "generator": "builtin_imagegen",
+        "record_id": "R3_POLISH_MATERIAL_tag_lilac_v1"
+      },
+      "runtime_asset": {
+        "path": "res://assets/ui/material_v3/tag_lilac.png",
+        "mode": "nine_slice",
+        "region": [
+          38,
+          6,
+          2096,
+          685
+        ],
+        "margins": [
+          560,
+          180,
+          240,
+          84
+        ],
+        "native_size": [
+          2172,
+          724
+        ]
+      },
+      "runtime_asset_sha256": "c803bc3b239675eb42a82f0958e182d0daa95c91fdef62977163b973e9085a67"
+    },
+    "tag_neutral": {
+      "sha256": "c09ec965f1ff3c3c5f6622396b86842a2bdf926a4d360b00e118f9d6ac8ff21c",
+      "dim": [
+        2172,
+        724
+      ],
+      "version": 1,
+      "prompt": "Create ONE isolated production UI material texture for a cozy small-town curio shop game. True transparent RGBA background outside the object. Entire object visible, straight-on orthographic flat lay, no perspective, centered with generous transparent padding on every side. Hand-painted opaque poster colors on fine paper, muted warm earth colors with sage and dusty teal accents, slightly uneven hand-brushed contours, delicate physical material variation. Match an old wooden shop with late afternoon light; light softly from upper left, shadows quiet and cool. NO text, NO letters, NO numbers, NO symbols pretending to be writing, NO interface, NO surrounding scene, NO mockup, NO caption, NO border around the canvas, NO glows, NO sparkle particles, NO bloom. This is a stretchable nine-patch object: preserve distinct corners/edge details within roughly the outer 15 percent; center is calm blank writing space, broad smooth low-contrast grain. Do not bake an external drop shadow; runtime paints it. Make the object clearly recognizable at a small display size.\n\nA single pale oat-grey paper luggage tag, horizontal wide blank body, softly cut corners at the short left end, a small punched hole and a short natural cotton string tied through it. String extends toward upper left fully inside image. This neutral tag has no warning sign, no special status mark, no border and no text. Calm blank center. Width about three times height.\nClean flat game sprite cutout, NOT a photo on a surface. Outside the complete object is fully transparent alpha zero. No haze, no blurred field, no external shadow, no white backing mat.",
+      "review": {
+        "opened": true,
+        "score": 8
+      },
+      "path": "assets/ui/material_v3/tag_neutral.png",
+      "group": "polish_materials",
+      "status": "selected_material_source",
+      "source": {
+        "generator": "builtin_imagegen",
+        "record_id": "R3_POLISH_MATERIAL_tag_neutral_v1"
+      },
+      "runtime_asset": {
+        "path": "res://assets/ui/material_v3/tag_neutral.png",
+        "mode": "nine_slice",
+        "region": [
+          5,
+          5,
+          2153,
+          685
+        ],
+        "margins": [
+          560,
+          120,
+          220,
+          84
+        ],
+        "native_size": [
+          2172,
+          724
+        ]
+      },
+      "runtime_asset_sha256": "3ed3cd4815f46fb9315cf1b273165619ecf0e8c5b7e4b800dac3b518dcac4c93"
+    },
+    "wax_seal": {
+      "sha256": "bab58da62de506d5c0d6945b169e7251bdd8aae58626f7bbb11cf35fa105a499",
+      "dim": [
+        1983,
+        793
+      ],
+      "version": 1,
+      "prompt": "Create ONE isolated production UI material texture for a cozy small-town curio shop game. True transparent RGBA background outside the object. Entire object visible, straight-on orthographic flat lay, no perspective, centered with generous transparent padding on every side. Hand-painted opaque poster colors on fine paper, muted warm earth colors with sage and dusty teal accents, slightly uneven hand-brushed contours, delicate physical material variation. Match an old wooden shop with late afternoon light; light softly from upper left, shadows quiet and cool. NO text, NO letters, NO numbers, NO symbols pretending to be writing, NO interface, NO surrounding scene, NO mockup, NO caption, NO border around the canvas, NO glows, NO sparkle particles, NO bloom. This is a stretchable nine-patch object: preserve distinct corners/edge details within roughly the outer 15 percent; center is calm blank writing space, broad smooth low-contrast grain. Do not bake an external drop shadow; runtime paints it. Make the object clearly recognizable at a small display size.\n\nA single wide low oval puddle of matte muted brick-red sealing wax used as a tactile button. Organic gently scalloped silhouette, subtly depressed smooth center with very restrained embossed inner rim. Broad EMPTY center, no letter, no monogram, no icon, no emblem. Physical thickness indicated by gentle lower edge shadow inside wax only. No shiny plastic, no gold, no ribbon. Width about two and a half times height.",
+      "review": {
+        "opened": true,
+        "score": 8
+      },
+      "path": "assets/ui/material_v3/wax_seal.png",
+      "group": "polish_materials",
+      "status": "selected_material_source",
+      "source": {
+        "generator": "builtin_imagegen",
+        "record_id": "R3_POLISH_MATERIAL_wax_seal_v1"
+      },
+      "runtime_asset": {
+        "path": "res://assets/ui/material_v3/wax_seal.png",
+        "mode": "nine_slice",
+        "region": [
+          111,
+          54,
+          1748,
+          715
+        ],
+        "margins": [
+          360,
+          180,
+          360,
+          160
+        ],
+        "native_size": [
+          1983,
+          793
+        ]
+      },
+      "runtime_asset_sha256": "7a8d8bbed8adf52424713f757db7a7af4a89d03640f8a9719832083b29d3d391"
+    },
+    "paper_tag": {
+      "sha256": "8f5f9a00b001172fcbaa7358d079f960c1fcfdecbf9e6e1d8ff868e989a292ed",
+      "dim": [
+        2172,
+        724
+      ],
+      "version": 1,
+      "prompt": "Create ONE isolated production UI material texture for a cozy small-town curio shop game. True transparent RGBA background outside the object. Entire object visible, straight-on orthographic flat lay, no perspective, centered with generous transparent padding on every side. Hand-painted opaque poster colors on fine paper, muted warm earth colors with sage and dusty teal accents, slightly uneven hand-brushed contours, delicate physical material variation. Match an old wooden shop with late afternoon light; light softly from upper left, shadows quiet and cool. NO text, NO letters, NO numbers, NO symbols pretending to be writing, NO interface, NO surrounding scene, NO mockup, NO caption, NO border around the canvas, NO glows, NO sparkle particles, NO bloom. This is a stretchable nine-patch object: preserve distinct corners/edge details within roughly the outer 15 percent; center is calm blank writing space, broad smooth low-contrast grain. Do not bake an external drop shadow; runtime paints it. Make the object clearly recognizable at a small display size.\n\nA single blank warm-ivory tied paper label used as a secondary button. Horizontal wide shape, gently clipped corners at left, tiny punched hole near left edge with short natural cotton string loop fully inside image. Soft paper grain, no border, no writing, no gold outline. Large smooth blank center. Width about three times height.\nProduce only the clean isolated painted prop on alpha-zero transparent exterior, no surface beneath it, no fog or gradient background, no white mat, no caption. Use minimal opaque poster-paint brushwork, not photographic rendering.",
+      "review": {
+        "opened": true,
+        "score": 9
+      },
+      "path": "assets/ui/material_v3/paper_tag.png",
+      "group": "polish_materials",
+      "status": "selected_material_source",
+      "source": {
+        "generator": "builtin_imagegen",
+        "record_id": "R3_POLISH_MATERIAL_paper_tag_v1"
+      },
+      "runtime_asset": {
+        "path": "res://assets/ui/material_v3/paper_tag.png",
+        "mode": "nine_slice",
+        "region": [
+          28,
+          47,
+          2109,
+          624
+        ],
+        "margins": [
+          440,
+          80,
+          180,
+          80
+        ],
+        "native_size": [
+          2172,
+          724
+        ]
+      },
+      "runtime_asset_sha256": "25dbbee65fce54de5f48634497e4d795d93baae65e7f8dbf8731275cc6874fcb"
+    },
+    "red_stamp": {
+      "sha256": "0ea603d85fb60a8d3d9d2d5044b966ede46ec34fd366117805305df25a91e346",
+      "dim": [
+        1536,
+        1024
+      ],
+      "version": 1,
+      "prompt": "Create ONE isolated production UI material texture for a cozy small-town curio shop game. True transparent RGBA background outside the object. Entire object visible, straight-on orthographic flat lay, no perspective, centered with generous transparent padding on every side. Hand-painted opaque poster colors on fine paper, muted warm earth colors with sage and dusty teal accents, slightly uneven hand-brushed contours, delicate physical material variation. Match an old wooden shop with late afternoon light; light softly from upper left, shadows quiet and cool. NO text, NO letters, NO numbers, NO symbols pretending to be writing, NO interface, NO surrounding scene, NO mockup, NO caption, NO border around the canvas, NO glows, NO sparkle particles, NO bloom. This is a stretchable nine-patch object: preserve distinct corners/edge details within roughly the outer 15 percent; center is calm blank writing space, broad smooth low-contrast grain. Do not bake an external drop shadow; runtime paints it. Make the object clearly recognizable at a small display size.\n\nA single circular vermilion-red ink stamp impression, hollow ring with softly broken irregular edges and handmade ink density, transparent center, NO writing, NO character, NO pictogram, NO seal lettering. Muted cinnabar brick-red ink only. A tiny uneven second partial inner ring conveys a hand-stamped acceptance mark. No physical stamp tool, no paper rectangle, no backing plate. Keep the whole circular impression on fully transparent canvas.\nProduce only the clean isolated painted prop on alpha-zero transparent exterior, no surface beneath it, no fog or gradient background, no white mat, no caption. Use minimal opaque poster-paint brushwork, not photographic rendering.",
+      "review": {
+        "opened": true,
+        "score": 9
+      },
+      "path": "assets/ui/material_v3/red_stamp.png",
+      "group": "polish_materials",
+      "status": "selected_material_source",
+      "source": {
+        "generator": "builtin_imagegen",
+        "record_id": "R3_POLISH_MATERIAL_red_stamp_v1"
+      },
+      "runtime_asset": {
+        "path": "res://assets/ui/material_v3/red_stamp.png",
+        "mode": "texture",
+        "region": [
+          310,
+          64,
+          910,
+          896
+        ],
+        "margins": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "native_size": [
+          1536,
+          1024
+        ]
+      },
+      "runtime_asset_sha256": "993b0c81dcbc066e700601c18cf458fcecd0b8ef467b44ef58daac09c00f009f"
+    },
+    "vine": {
+      "sha256": "e7fd4e37fb7a6fae7596e213c4169f53204ce1bbbbcb3e8475ea02308b2b6219",
+      "dim": [
+        2172,
+        724
+      ],
+      "version": 1,
+      "prompt": "Create ONE isolated production UI material texture for a cozy small-town curio shop game. True transparent RGBA background outside the object. Entire object visible, straight-on orthographic flat lay, no perspective, centered with generous transparent padding on every side. Hand-painted opaque poster colors on fine paper, muted warm earth colors with sage and dusty teal accents, slightly uneven hand-brushed contours, delicate physical material variation. Match an old wooden shop with late afternoon light; light softly from upper left, shadows quiet and cool. NO text, NO letters, NO numbers, NO symbols pretending to be writing, NO interface, NO surrounding scene, NO mockup, NO caption, NO border around the canvas, NO glows, NO sparkle particles, NO bloom. This is a stretchable nine-patch object: preserve distinct corners/edge details within roughly the outer 15 percent; center is calm blank writing space, broad smooth low-contrast grain. Do not bake an external drop shadow; runtime paints it. Make the object clearly recognizable at a small display size.\n\nA single very thin horizontal hand-painted sage-green vine divider, a gently meandering stem with a few tiny asymmetrical muted sage leaves near both ends. Extremely restrained, organic and quiet, wide empty middle interrupted only by thin stem. NO rectangular frame, NO corner brackets, NO flowers, NO gold, NO text, NO magical ornament. Isolated delicate plant line on fully transparent background. Width about eight times height.\nProduce only the clean isolated painted prop on alpha-zero transparent exterior, no surface beneath it, no fog or gradient background, no white mat, no caption. Use minimal opaque poster-paint brushwork, not photographic rendering.",
+      "review": {
+        "opened": true,
+        "score": 9
+      },
+      "path": "assets/ui/material_v3/vine.png",
+      "group": "polish_materials",
+      "status": "selected_material_source",
+      "source": {
+        "generator": "builtin_imagegen",
+        "record_id": "R3_POLISH_MATERIAL_vine_v1"
+      },
+      "runtime_asset": {
+        "path": "res://assets/ui/material_v3/vine.png",
+        "mode": "texture",
+        "region": [
+          102,
+          282,
+          1978,
+          151
+        ],
+        "margins": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "native_size": [
+          2172,
+          724
+        ]
+      },
+      "runtime_asset_sha256": "4636817239027795d09b4e4195f33fde355058a7020e2f46e2162212dbc8544c"
+    }
+  },
+  "legacy_entries": {
+    "legacy_s04_slot": {
+      "path": "assets/generated_scenes/v2/slices/S04_slot.png",
+      "sha256": "8c3e1555b937a996a03898a276e242fab2c35adbdfb070b0be0b1c1e704436d4",
+      "dim": [
+        1536,
+        1024
+      ],
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people\nUse case: stylized-concept. Asset type: single isolated game furniture cutout on a truly transparent PNG background.\nPrimary request: exactly one REAL empty wooden storage cubby / small wooden open box, straight-on front view, horizontal rectangular opening. This is a single empty cabinet compartment, with four clearly thick wooden boards forming top, bottom, left and right walls, and visible wooden inner sidewalls, floor, ceiling and back panel giving real shallow box depth. Aged warm wood, fine grain, slightly worn edges. The cubby interior is completely EMPTY: no personal objects, bottles, books, contents or decoration. The general style mentions lived-in clutter, but this individual asset must have none.\nComposition: isolated whole object centered, fully within the canvas, no clipped edges; no adjoining compartments or entire cabinet. Transparency outside the cubby silhouette must be alpha 0, including all margins. The box interior is wooden, not a transparent hole. Fine watercolor texture belongs only on the wood.\nConstraints: actual alpha transparency; no background color, paper backdrop, wash, glow, halo, drop shadow, floor, surface or scenery. No text, letters, numerals, labels, doors, glass, people, decorative frame or additional objects.",
+      "source": {
+        "generator": "builtin-imagegen"
+      },
+      "group": "legacy_sources"
+    },
+    "legacy_s04_door_closed": {
+      "path": "assets/generated_scenes/v2/slices/S04_door_closed.png",
+      "sha256": "311f3953570f5393781012cc57605e94592da8622499601d991f597d8a24ac1b",
+      "dim": [
+        1429,
+        1100
+      ],
+      "prompt": "hand-painted watercolor illustration with fine sepia ink linework, cozy small-town mystic curio shop, warm lamp light, soft paper grain texture, muted parchment and aged wood palette accented with antique gold, moss green and wisteria purple, lived-in clutter with personal objects, gentle rim light, no text, no letters, no UI elements, no blank labels, no frames, no people\nUse case: stylized-concept. Asset type: single isolated game furniture cutout on a truly transparent PNG background.\nPrimary request: exactly one pair of WIDE CLOSED wooden cupboard doors, straight-on front view. The pair is one combined horizontal rectangular silhouette with overall width to height ratio about 1.3:1. Two plain flat aged-wood leaves meet along a narrow vertical center seam. Exactly two small antique brass handles, one on each leaf, adjacent to the center seam at the same height. Warm old plank wood and fine sepia linework, gently worn edges, flat simple panels.\nComposition: show ONLY the closed paired doors, no cabinet body, no countertop, no legs, no drawers, no surrounding frame, no glass and no visible interior or contents. Entire door pair centered and fully within the canvas with clear transparent margins; no clipped edges. This individual object has no clutter despite the general style phrase.\nConstraints: all area outside the door pair silhouette is genuinely transparent with alpha 0. Watercolor texture is restricted to wood and brass. No background color, paper backdrop, wash, glow, halo, drop shadow, floor, surface or scenery. No text, letters, numerals, labels, people, books, bottles or decorative objects.",
+      "source": {
+        "generator": "builtin-imagegen"
+      },
+      "group": "legacy_sources"
+    }
+  }
+}

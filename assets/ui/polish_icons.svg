@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="32" viewBox="0 0 512 32">
+<!-- POLISH simple-icons-v1: original editable geometry, no text or game values. -->
+<g fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+ <g><path d="M6 27V8l17-3v22M4 27h23M10 10v17M19 16h1"/><path d="M10 8v19"/></g>
+ <g transform="translate(32)"><path d="M4 13h24v13H4zM7 13V8h18v5M8 18h16M8 22h7"/><path d="M19 8V5h5v3"/></g>
+ <g transform="translate(64)"><path d="M5 6h22v17H15l-7 5v-5H5zM10 12h12M10 17h8"/></g>
+ <g transform="translate(96)"><path d="M6 5h20v23H6zM6 13h20M6 21h20M14 9h4M14 17h4M14 25h4"/></g>
+ <g transform="translate(128)"><path d="M5 15h23c-1 8-5 12-11 12S7 23 5 15zM20 14l7-10 3 2-8 10M5 28h23"/></g>
+ <g transform="translate(160)"><path d="M6 13v14h20V13M4 13l3-8h18l3 8M4 13c0 4 6 4 6 0 0 4 6 4 6 0 0 4 6 4 6 0 0 4 6 4 6 0M12 27v-9h8v9"/></g>
+ <g transform="translate(192)"><path d="M7 26C3 13 11 5 27 5c0 16-7 24-20 21zM6 27l16-16M13 21v-7M13 21h8"/></g>
+ <g transform="translate(224)"><path d="M5 9h9l3-4h10v22H5zM5 12h22M10 17h12M10 22h9"/></g>
+ <g transform="translate(256)"><path d="M8 8l16 16M24 8L8 24"/></g>
+ <g transform="translate(288)"><path d="M8 4h16M8 28h16M10 4c0 7 2 9 6 12-4 3-6 5-6 12M22 4c0 7-2 9-6 12 4 3 6 5 6 12M12 24h8"/></g>
+ <g transform="translate(320)"><path d="M16 4l4 8 9 1-7 6 2 9-8-5-8 5 2-9-7-6 9-1z"/></g>
+ <g transform="translate(352)"><path d="M16 4l4 2 4 1 1 5 3 4-3 4-1 5-4 1-4 2-4-2-4-1-1-5-3-4 3-4 1-5 4-1z"/><circle cx="16" cy="16" r="6"/></g>
+ <g transform="translate(384)"><path d="M16 5l11 11-11 11L5 16zM12 16h8M16 12v8"/></g>
+ <g transform="translate(416)"><path d="M5 16h22M18 7l9 9-9 9"/></g>
+ <g transform="translate(448)"><path stroke-width="5" d="M5 16h22"/></g>
+ <g transform="translate(480)"><path stroke-width="5" d="M5 16h8M20 16h7"/></g>
+</g></svg>

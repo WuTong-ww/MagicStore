@@ -1,4 +1,5 @@
 extends SceneTree
+const CardChoice = preload("res://scripts/ui/card_choice.gd")
 ## G4 public consumer/UI target. No screenshots or GPU acceptance in this target.
 var checks := 0
 var failures := 0
@@ -72,7 +73,7 @@ func run() -> void:
 	await settle()
 	var forbidden: Array = buttons(screen.body).filter(func(node: Button) -> bool: return node.get_meta("item_id","") == "honey_drop" and node.get_meta("trade_kind","") == "buy")
 	check(forbidden.is_empty(),"gift/hidden materials have no procurement action")
-	check(all_text(screen.body).contains("赠送或隐藏"),"non-purchasable materials explain their real source")
+	check(all_text(screen.drawer.notebook_pages).contains("赠送或隐藏"),"non-purchasable materials explain their real source across both notebook pages")
 	var quantities: Array = find_nodes(screen.body,func(node: Node) -> bool: return node is SpinBox)
 	check(not quantities.is_empty() and quantities[0].custom_minimum_size.x >= 120,"market quantity has enough width for multi-digit values and arrows")
 	screen.page = "gathering"
@@ -131,10 +132,10 @@ func check_new_flow() -> void:
 	await activate(action_button("research_recipe","recipe_id","clarity_crystal"),true)
 	var craft := action_button("craft_item","recipe_id","clarity_crystal")
 	check(craft != null,"successful save updates the same recipe's crafting controls")
-	var variants: Array = find_nodes(screen.body,func(node: Node) -> bool: return node is OptionButton and node.get_meta("recipe_id","") == "clarity_crystal")
+	var variants: Array = find_nodes(screen.body,func(node: Node) -> bool: return node is CardChoice and node.get_meta("recipe_id","") == "clarity_crystal")
 	check(variants.size() == 1 and variants[0].item_count >= 2,"a learned recipe offers base and actual variant choices")
 	if variants.size() == 1 and variants[0].item_count >= 2:
-		var selector: OptionButton = variants[0]
+		var selector: CardChoice = variants[0]
 		var variant_id: String = selector.get_item_metadata(1)
 		selector.select(1)
 		selector.item_selected.emit(1)
@@ -193,7 +194,7 @@ func check_waiting_product_layout() -> void:
 			child.queue_free()
 		screen._inventory_item_actions(projected,"patience_charm")
 		await settle()
-		var picker: OptionButton = screen.body.find_child("ProductUseTarget_patience_charm",true,false) as OptionButton
+		var picker: CardChoice = screen.body.find_child("ProductUseTarget_patience_charm",true,false) as CardChoice
 		var use: Button = screen.body.find_child("UseWaitingProduct_patience_charm",true,false) as Button
 		var sell := action_button("sell_product","item_id","patience_charm")
 		check(picker != null and use != null and sell != null,"production item renderer creates sell, real target and whole-product use controls / "+str(dimensions))

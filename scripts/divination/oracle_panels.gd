@@ -1,6 +1,7 @@
 extends RefCounted
 
 const UI = preload("res://scripts/ui/ui_kit.gd")
+const Icons = preload("res://scripts/ui/icon_policy.gd")
 ## Paid media panels. A spread preview takes positions only and shows card backs.
 
 const Wheel = preload("res://scripts/divination/chart_wheel.gd")
@@ -10,7 +11,7 @@ static func spread(parent: Container, positions: Array, cards: Array = [], deck_
 	row.add_theme_constant_override("separation", 9)
 	parent.add_child(row)
 	for index in range(positions.size()):
-		var panel := UI.panel()
+		var panel := UI.panel("plain")
 		panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.add_child(panel)
 		var box := VBoxContainer.new()
@@ -56,7 +57,7 @@ static func _hexagrams(parent: Container, medium: Dictionary) -> void:
 	for key: String in captions:
 		if not medium.has(key):
 			continue
-		var panel := UI.panel()
+		var panel := UI.panel("plain")
 		panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.add_child(panel)
 		var column := VBoxContainer.new()
@@ -66,11 +67,21 @@ static func _hexagrams(parent: Container, medium: Dictionary) -> void:
 		for index in range(5, -1, -1):
 			var yang := (int(hexagram.bits) & (1 << index)) != 0
 			var moving: bool = key == "base" and index + 1 in medium.moving
-			var description := "%s  %d%s" % ["━━━━" if yang else "━━  ━━", index + 1, " 动" if moving else ""]
+			var description := "%d%s" % [index + 1, " 动" if moving else ""]
 			var focused: bool = key == "base" and index + 1 == medium.get("focus", 0)
 			if focused:
 				description += " · 本次细看"
-			column.add_child(UI.label(description, 15, UI.GOLD if moving or focused else UI.MUTED))
+			var line := HBoxContainer.new()
+			column.add_child(line)
+			var graphic := TextureRect.new()
+			graphic.texture = Icons.texture("yao_solid" if yang else "yao_broken")
+			graphic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			graphic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			graphic.custom_minimum_size = Vector2.ONE*float(UI.Style.load_config().metrics.icon_size)
+			graphic.modulate = UI.GOLD if moving or focused else UI.MUTED
+			graphic.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			line.add_child(graphic)
+			line.add_child(UI.label(description, 15, UI.GOLD if moving or focused else UI.MUTED))
 
 static func _astrology(parent: Container, medium: Dictionary) -> void:
 	var wheel := Wheel.new()
@@ -93,7 +104,7 @@ static func _pillars(parent: Container, medium: Dictionary) -> void:
 	var row := HBoxContainer.new()
 	parent.add_child(row)
 	for pillar: Dictionary in medium.pillars:
-		var panel := UI.panel()
+		var panel := UI.panel("plain")
 		panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.add_child(panel)
 		var column := VBoxContainer.new()
@@ -111,7 +122,7 @@ static func _ziwei(parent: Container, medium: Dictionary) -> void:
 	# Conventional south-up arrangement: 寅 at lower left and 巳 at upper left.
 	var layout := [5, 6, 7, 8, 4, -1, -2, 9, 3, -3, -4, 10, 2, 1, 0, 11]
 	for branch: int in layout:
-		var panel := UI.panel()
+		var panel := UI.panel("plain")
 		panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		grid.add_child(panel)
 		var style: StyleBox = panel.get_theme_stylebox("panel").duplicate()

@@ -1,4 +1,5 @@
 extends SceneTree
+const CardChoice = preload("res://scripts/ui/card_choice.gd")
 const UITeardown = preload("res://tests/ui_teardown.gd")
 ## Real UI actions with authored isolated fixtures; never calls an upstream API.
 const Person = preload("res://scripts/people/generated_person.gd")
@@ -90,7 +91,7 @@ func run() -> void:
 		main.open_people()
 		await settle()
 		check(game.people_view().profiles[fixture.npc_id].background == game.state.people.profiles[fixture.npc_id].background,"approved biography is visible after meeting")
-		var archive: OptionButton = main.people_panel.archive
+		var archive: CardChoice = main.people_panel.archive
 		for index in range(archive.item_count):
 			if archive.get_item_metadata(index) == fixture.npc_id:
 				archive.select(index)

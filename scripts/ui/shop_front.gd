@@ -1,6 +1,8 @@
 extends Control
 
 const UI = preload("res://scripts/ui/ui_kit.gd")
+const Icons = preload("res://scripts/ui/icon_policy.gd")
+const CardChoice = preload("res://scripts/ui/card_choice.gd")
 const ArrivalUI = preload("res://scripts/ui/arrival_ui.gd")
 const Appearance = preload("res://scripts/people/appearance.gd")
 const Portrait = preload("res://scripts/people/portrait.gd")
@@ -18,7 +20,7 @@ var rest_button: Button
 var next_button: Button
 var history_button: Button
 var study_button: Button
-var guest_picker: OptionButton
+var guest_picker: CardChoice
 var guest_role: Label
 var portrait: Control
 var guests: Array = []
@@ -64,7 +66,7 @@ func _ready() -> void:
 	patience_list = VBoxContainer.new()
 	patience_list.name = "ArrivalPatienceList"
 	column.add_child(patience_list)
-	guest_picker = OptionButton.new()
+	guest_picker = CardChoice.new()
 	guest_picker.fit_to_longest_item = false
 	guest_picker.item_selected.connect(func(_index: int): refresh())
 	column.add_child(guest_picker)
@@ -101,7 +103,7 @@ func _ready() -> void:
 				host.show_screen(destination))
 		suggestion.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		quiet_suggestions.add_child(suggestion)
-	begin_button = UI.button("请入咨询区", _begin)
+	begin_button = UI.button("请入咨询区", _begin,"primary")
 	begin_button.custom_minimum_size.y = 52
 	column.add_child(begin_button)
 	wait_button = UI.button("等一会儿", _wait_for_guest)
@@ -135,7 +137,7 @@ func _build_daily_journal(column: VBoxContainer) -> void:
 	daily_letters = VBoxContainer.new()
 	daily_letters.name = "DailyLoopLetters"
 	daily_panel.add_child(daily_letters)
-	daily_read_button = UI.button("",func(): await host.run_action("read_morning_letters"))
+	daily_read_button = UI.button("",func(): await host.run_action("read_morning_letters"),"primary")
 	daily_read_button.name = "ReadMorningLetters"
 	daily_panel.add_child(daily_read_button)
 	daily_summary = UI.label("",int(daily_fonts.brand_size))
@@ -187,6 +189,7 @@ func refresh() -> void:
 	daily_panel.visible = not no_save and daily.get("enabled",false)
 	if daily_panel.visible:
 		_refresh_daily_journal(daily,active)
+		get_node("FrontDrawer").balance_content_pages()
 		return
 	legacy_title.show()
 	legacy_note.show()
@@ -203,7 +206,7 @@ func refresh() -> void:
 	for arrival: Dictionary in people.get("queue", []):
 		var case_id: String = arrival.case_id if not str(arrival.case_id).is_empty() else ("invitation" if arrival.npc_id == "npc_lin" else "archive")
 		var level := ArrivalUI.patience(arrival)
-		guests.append({"npc_id":arrival.npc_id,"arrival_id":arrival.arrival_id,"case_id":case_id,"label":str(arrival.name) + " · " + str(level.get("icon", "")),"name":arrival.name,"role":arrival.role,"appearance":arrival.get("appearance",{}).duplicate(true),"source":arrival.get("source", ""),"case_title":"想看看店里的商品" if arrival.intent == "shopping" else "有些事想和你谈谈"})
+		guests.append({"npc_id":arrival.npc_id,"arrival_id":arrival.arrival_id,"case_id":case_id,"label":str(arrival.name) + " · " + str(level.get("label", "")),"name":arrival.name,"role":arrival.role,"appearance":arrival.get("appearance",{}).duplicate(true),"source":arrival.get("source", ""),"case_title":"想看看店里的商品" if arrival.intent == "shopping" else "有些事想和你谈谈"})
 	_refresh_patience(people)
 	var active_view: Dictionary = GameState.divination_view()
 	if not active.is_empty() and not guests.any(func(row: Dictionary) -> bool: return row.npc_id == active.npc_id and row.case_id == active_view.case_id):
@@ -234,7 +237,8 @@ func refresh() -> void:
 		portrait.configure(Appearance.for_display(guest.get("appearance",{}),str(guest.npc_id),appearance_config),expression,appearance_config)
 	case_label.text = guest.get("case_title", "还没有来客，先翻翻档案，或者安静等一会儿。")
 	var already_today: bool = guest.get("visited_today", false)
-	begin_button.text = "继续原接待 →" if not active.is_empty() else "请入咨询区 →"
+	begin_button.text = "继续原接待" if not active.is_empty() else "请入咨询区"
+	begin_button.icon = Icons.texture("arrow_right")
 	begin_button.disabled = no_save or (active.is_empty() and guests.is_empty()) or (already_today and active.is_empty())
 	var empty_shop: bool = not no_save and active.is_empty() and guests.is_empty()
 	var zero_guest_day: bool = empty_shop and ArrivalUI.zero_guest_day(people)
@@ -260,6 +264,7 @@ func refresh() -> void:
 	next_button.disabled = no_save
 	history_button.disabled = no_save
 	study_button.disabled = no_save or not active.is_empty()
+	get_node("FrontDrawer").balance_content_pages()
 
 func _refresh_daily_journal(daily: Dictionary, active: Dictionary) -> void:
 	var copy: Dictionary = daily.copy
@@ -333,7 +338,18 @@ func _refresh_patience(people: Dictionary) -> void:
 	for row: Dictionary in waiting:
 		var level := ArrivalUI.patience(row)
 		var line := UI.label(str(row.get("name", "")) + " · " + ArrivalUI.patience_text(row), 14, Color(str(level.get("color", "ffffff"))))
-		patience_list.add_child(line)
+		var entry := HBoxContainer.new()
+		patience_list.add_child(entry)
+		for index: int in range(int(level.get("icon_count",0))):
+			var symbol := TextureRect.new()
+			symbol.texture = Icons.texture(str(level.icon))
+			symbol.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			symbol.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			symbol.custom_minimum_size = Vector2.ONE*float(UI.Style.load_config().metrics.icon_size)
+			symbol.modulate = Color(str(level.color))
+			symbol.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			entry.add_child(symbol)
+		entry.add_child(line)
 	for key: String in ["outside_queue", "appointment_requests"]:
 		var count: int = people.get(key, []).size()
 		if count > 0:

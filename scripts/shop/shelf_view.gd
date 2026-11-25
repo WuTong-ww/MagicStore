@@ -2,6 +2,7 @@ class_name ShelfView
 extends Control
 ## Committed-inventory presentation. No action, save or wind simulation lives here.
 const ItemArt = preload("res://scripts/shop/item_visual.gd")
+const Fonts = preload("res://scripts/ui/font_policy.gd")
 const LayoutCore = preload("res://scripts/shop/shelf_layout.gd")
 signal item_selected(item_id: String)
 signal item_added(item_id: String, quantity: int, node: Node2D)
@@ -287,8 +288,8 @@ func _tag(text: String, settings: Dictionary, node_name: String, label_name: Str
 	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	label.add_theme_color_override("font_color",Color(settings.text_color))
 	label.add_theme_font_size_override("font_size",int(settings.font_size))
-	if ResourceLoader.exists(settings.font_path):
-		label.add_theme_font_override("font",load(settings.font_path))
+	if Fonts.composite() != null:
+		label.add_theme_font_override("font",Fonts.composite())
 	panel.add_child(label)
 	panel.reset_size()
 	return panel

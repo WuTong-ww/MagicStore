@@ -1,6 +1,7 @@
 extends Control
 ## Isolated draft: title presentation only; all writes belong to Main actions.
 const UI = preload("res://scripts/ui/ui_kit.gd")
+const Fonts = preload("res://scripts/ui/font_policy.gd")
 const Config = preload("res://scripts/ui/title_config.gd")
 const Art = preload("res://scripts/shop/scene_visual.gd")
 const Motion = preload("res://scripts/presentation/scene_motion.gd")
@@ -9,6 +10,9 @@ const Spring = preload("res://scripts/presentation/damped_spring.gd")
 const Notes = preload("res://scripts/ui/story_notes.gd")
 const Geometry = preload("res://scripts/ui/title_geometry.gd")
 const GlassShader = preload("res://shaders/title_glass.gdshader")
+const ResponsiveConfig = preload("res://scripts/ui/responsive_config.gd")
+const ViewportMetrics = preload("res://scripts/ui/viewport_metrics.gd")
+const ResponsiveLayout = preload("res://scripts/ui/responsive_layout.gd")
 signal new_requested(name: String)
 signal continue_requested
 signal settings_requested
@@ -27,6 +31,8 @@ var window_light_image: Image
 var window_mask_image: Image
 var window_glow_atlas: AtlasTexture
 var overlay_root: Control
+var safe_ui_root: Control
+var responsive_config: Dictionary = {}
 var window_glow: TextureRect
 var status: Label
 var buttons: Dictionary = {}
@@ -52,14 +58,18 @@ var _time := 0.0
 
 func _ready() -> void:
 	config = Config.load_config(config_path)
+	responsive_config = ResponsiveConfig.load_config()
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_STOP
-	if config.is_empty():
+	if config.is_empty() or responsive_config.is_empty():
+		config = {}
 		hide()
 		return
+	z_index = int(responsive_config.title_z)
 	_wind = get_node_or_null("/root/WindField")
 	_build()
 	resized.connect(_layout)
+	get_tree().root.size_changed.connect(_on_client_resized)
 	_layout()
 	if not Config.missing_resources(config).is_empty(): status.text = str(config.copy.missing_assets)
 	refresh_continue()
@@ -89,6 +99,10 @@ func _build() -> void:
 	art_root = Control.new()
 	art_root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(art_root)
+	safe_ui_root = Control.new()
+	safe_ui_root.name = "TitleSafeUI"
+	safe_ui_root.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(safe_ui_root)
 	var geometry: Dictionary = config.geometry
 	var native := Vector2(geometry.background_size[0],geometry.background_size[1])
 	native_art_root = Control.new()
@@ -158,21 +172,21 @@ func _build() -> void:
 			spring.configure(parameters)
 			_springs[row.id] = spring
 	if ResourceLoader.exists(str(config.assets.calligraphy)):
-		title_visual = _image(str(config.assets.calligraphy),art_root)
+		title_visual = _image(str(config.assets.calligraphy),safe_ui_root)
 	else:
 		var heading := UI.label(str(config.copy.title),int(config.layout.title_font),Color(config.layout.title_color))
-		if ResourceLoader.exists(str(config.assets.font)): heading.add_theme_font_override("font",load(str(config.assets.font)))
+		if Fonts.composite() != null: heading.add_theme_font_override("font",Fonts.composite())
 		var ink := ShaderMaterial.new()
 		ink.shader = preload("res://shaders/title_ink.gdshader")
 		ink.set_shader_parameter("grain_strength",float(config.layout.ink_grain_strength))
 		heading.material = ink
-		art_root.add_child(heading)
+		safe_ui_root.add_child(heading)
 		title_visual = heading
 	_place(title_visual,config.layout.title_rect)
 	var subtitle := UI.label(str(config.copy.subtitle),int(config.layout.subtitle_font),Color(config.layout.title_color))
-	if ResourceLoader.exists(str(config.assets.font)): subtitle.add_theme_font_override("font",load(str(config.assets.font)))
+	if Fonts.composite() != null: subtitle.add_theme_font_override("font",Fonts.composite())
 	if title_visual is Label: subtitle.material = title_visual.material
-	art_root.add_child(subtitle)
+	safe_ui_root.add_child(subtitle)
 	_place(subtitle,config.layout.subtitle_rect)
 	for row: Dictionary in config.menu:
 		var id := str(row.id)
@@ -189,7 +203,7 @@ func _build() -> void:
 				var style := StyleBoxTexture.new()
 				style.texture = wood
 				button.add_theme_stylebox_override(state,style)
-		art_root.add_child(button)
+		safe_ui_root.add_child(button)
 		_place(button,row.rect)
 		button.pivot_offset = button.size*0.5
 		button.mouse_entered.connect(_set_highlight.bind(id,true,false))
@@ -198,7 +212,7 @@ func _build() -> void:
 		button.focus_exited.connect(_set_highlight.bind(id,false,true))
 		buttons[id] = button
 	status = UI.label("",int(config.layout.notice_font),Color(config.layout.text_color))
-	art_root.add_child(status)
+	safe_ui_root.add_child(status)
 	_place(status,config.layout.notice_rect)
 	overlay_root = Control.new()
 	overlay_root.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -324,6 +338,7 @@ func _build_leaves() -> void:
 
 func _process(delta: float) -> void:
 	if config.is_empty() or not visible: return
+	safe_ui_root.visible = art_root.visible and not entering
 	_time += delta
 	var reduced: bool = is_instance_valid(_wind) and _wind.reduced_motion == true
 	for id: String in _springs:
@@ -344,10 +359,21 @@ func _layout() -> void:
 	if config.is_empty() or size.x <= 0 or size.y <= 0: return
 	var native := Vector2(config.canvas[0],config.canvas[1])
 	var fitted: Rect2 = Art.cover_rect(size,native)
-	for node: Control in [art_root,overlay_root]:
-		node.position = fitted.position
-		node.size = native
-		node.scale = Vector2.ONE*(fitted.size.x/native.x)
+	art_root.position = fitted.position
+	art_root.size = native
+	art_root.scale = Vector2.ONE*(fitted.size.x/native.x)
+	var metrics: Dictionary = ViewportMetrics.measure(self)
+	if not ViewportMetrics.valid(metrics): return
+	var available: Rect2 = ResponsiveLayout.safe_box(metrics,float(responsive_config.safe_margin))
+	ResponsiveLayout.apply(safe_ui_root,ResponsiveLayout.fit_minimum(native,available,metrics))
+	for descriptor: Array in [[new_panel,config.layout.new_panel_rect],[credits_panel,config.layout.credits_rect],[notes_panel,config.layout.notes_rect]]:
+		var panel: PanelContainer = descriptor[0]
+		var rectangle: Array = descriptor[1]
+		var minimum := Vector2(rectangle[2],rectangle[3]).max(panel.get_combined_minimum_size())
+		ResponsiveLayout.apply(panel,ResponsiveLayout.fit_minimum(minimum,available,metrics))
+
+func _on_client_resized() -> void:
+	_layout.call_deferred()
 
 func native_point(point: Vector2, native_size: Array, source_crop: Array) -> Vector2:
 	var crop: Array = source_crop if not source_crop.is_empty() else [0,0,native_size[0],native_size[1]]
@@ -361,6 +387,7 @@ func native_scale(native_size: Array, source_crop: Array) -> float:
 func finish_entry(result: Dictionary, is_new: bool, command_id: String) -> void:
 	if not result.get("success",false) or entering: return
 	entering = true
+	safe_ui_root.hide()
 	new_panel.hide()
 	credits_panel.hide()
 	for button: Button in buttons.values(): button.disabled = true
@@ -381,6 +408,7 @@ func finish_entry(result: Dictionary, is_new: bool, command_id: String) -> void:
 	if not result.get("replayed",false):
 		if not host.play_title_entry_cue(command_id): status.text = str(config.copy.entry_audio_missing)
 	art_root.hide()
+	safe_ui_root.hide()
 	if is_instance_valid(motion_controller): motion_controller.set_active(false)
 	if is_instance_valid(_leaves): _leaves.emitting = false
 	if is_new:

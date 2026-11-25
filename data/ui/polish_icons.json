@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "atlas": "res://assets/ui/polish_icons.svg",
+  "cell_size": [32, 32],
+  "icons": {
+    "nav_door": 0, "nav_counter": 1, "nav_chat": 2, "nav_cabinet": 3,
+    "nav_mortar": 4, "nav_shop": 5, "nav_leaf": 6, "nav_archive": 7,
+    "close": 8, "patience": 9, "star": 10, "seal": 11,
+    "ornament": 12, "arrow_right": 13, "yao_solid": 14, "yao_broken": 15
+  }
+}

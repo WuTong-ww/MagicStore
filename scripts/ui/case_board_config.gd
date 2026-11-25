@@ -15,7 +15,7 @@ static func config_valid(value: Variant) -> bool:
 		var number: Variant = value.layout.get(key)
 		if not (number is int or number is float) or not is_finite(float(number)) or number <= 0:
 			return false
-	for key: String in ["canvas_rect","heading_rect","speech_rect","cards_rect","question_rect","board_rect","board_title_rect","slots_rect","evidence_title_rect","evidence_rect","reaction_rect","portrait_rect"]:
+	for key: String in ["canvas_rect","heading_rect","speech_rect","cards_rect","table_surface_rect","question_rect","board_rect","board_title_rect","slots_rect","evidence_title_rect","evidence_rect","reaction_rect","portrait_rect"]:
 		var rect: Variant = value.layout.get(key)
 		if not rect is Array or rect.size() != 4 or not rect.all(func(n: Variant) -> bool: return (n is int or n is float) and is_finite(float(n)) and n >= 0):
 			return false
@@ -38,4 +38,5 @@ static func config_valid(value: Variant) -> bool:
 	for key: String in ["heading","board_title","question_round","cards_instruction","deduction_instruction","closed_instruction","extra_instruction","evidence_title","evidence_empty","testimony","fact","tool","locked","attached","selected_material","sealed","seal_mark","ornament","card_back_label","card_tooltip","card_count","card_pending","suggestions","extra_question","eliminate","choose_elimination","not_related","drop_failed","saving","close_title","star","end_visit","reaction_empty","free_question","free_question_note","free_question_saved","free_question_failed","continue_board","empty_speech","board_hint"]:
 		if not value.copy.get(key) is String or value.copy[key].strip_edges().is_empty():
 			return false
+	if value.copy.star != "star" or value.copy.seal_mark != "seal" or value.copy.ornament != "ornament": return false
 	return true

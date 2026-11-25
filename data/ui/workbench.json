@@ -13,7 +13,7 @@
   "notice_minimum_height": 24,
   "close_font_size": 22,
   "close_minimum_size": [42, 42],
-  "close_symbol": "✕",
+  "close_symbol": "close",
   "close_tooltip": "关闭手帐",
   "back_label": "返回",
   "backdrop_color": "#1F3A3DA6",

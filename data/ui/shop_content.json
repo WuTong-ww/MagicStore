@@ -3,7 +3,7 @@
   "layout": {"heading_font":20,"body_font":18,"note_font":15,"gap":10,"action_gap":12,"quantity_width":144,"picker_width":224,"action_width":148,"action_height":44,"history_rows":8,"quantity_min":1,"quantity_max":99,"quantity_step":1},
   "copy": {
     "unavailable":"经营内容暂不可用。",
-    "workshop_intro":"先在接待中留下有来源的需求记录，接待结束后研究；掌握配方后可选择基础做法或变体。",
+    "workshop_intro":"先留需求来源，接待后研究；学会后选做法。",
     "no_inspiration":"还没有灵感",
     "inspiration_pending":"已有相关记录；请先结束接待，再确认研究费用。",
     "known":"已掌握",

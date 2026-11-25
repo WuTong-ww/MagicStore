@@ -71,6 +71,32 @@ try {
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/audio/music_catalog.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/music_runtime.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/music_host.gd')
+        # POLISH presentation contracts share the normal save/action boundaries.
+        foreach ($polishTarget in @(
+            'tests/audio/music_sheep.gd',
+            'tests/people/portrait_clipping.gd',
+            'tests/integration/polish_style_config.gd',
+            'tests/integration/polish_style.gd',
+            'tests/integration/polish_font_arrays.gd',
+            'tests/integration/polish_icon_contract.gd',
+            'tests/integration/polish_button_materials.gd',
+            'tests/integration/polish_card_choice.gd',
+            'tests/integration/polish_layout.gd',
+            'tests/integration/polish_windows.gd',
+            'tests/integration/polish_wheel.gd',
+            'tests/integration/polish_header.gd',
+            'tests/integration/polish_panel_materials.gd',
+            'tests/integration/polish_motion_lifecycle.gd',
+            'tests/integration/polish_notebook_pages.gd',
+            'tests/integration/polish_surface_consumers.gd',
+            'tests/integration/polish_case_materials.gd'
+        )) {
+            Invoke-Godot @('--headless', '--path', $repo, '--script', ('res://' + $polishTarget))
+        }
+        & python -B (Join-Path $repo 'tools/check_font_coverage.py') --check --report (Join-Path $repo '.tools/font-coverage.json')
+        if ($LASTEXITCODE -ne 0) { throw 'Bundled font coverage validation failed.' }
+        & python -B (Join-Path $repo 'tools/check_portrait_clipping.py') --report (Join-Path $repo '.tools/portrait-clipping.json')
+        if ($LASTEXITCODE -ne 0) { throw 'Portrait clipping validation failed.' }
         # TITLE runs first; each invocation gets new local evidence and restart identity.
         $titleRunId = 'title_full_' + [Guid]::NewGuid().ToString('N')
         $titleLogDir = Join-Path $repo (".tools/r3-title/full-runs/" + $titleRunId)

@@ -1,0 +1,453 @@
+{
+  "version": 1,
+  "assets": {
+    "notebook": {
+      "path": "res://assets/ui/material_v3/notebook.png",
+      "mode": "book",
+      "region": [
+        53,
+        49,
+        1430,
+        927
+      ],
+      "margins": [
+        40,
+        64,
+        40,
+        48
+      ],
+      "native_size": [
+        1536,
+        1024
+      ],
+      "book_regions": {
+        "left": [
+          0,
+          0,
+          0.48,
+          1
+        ],
+        "spine": [
+          0.48,
+          0,
+          0.04,
+          1
+        ],
+        "right": [
+          0.52,
+          0,
+          0.48,
+          1
+        ]
+      }
+    },
+    "letter": {
+      "path": "res://assets/ui/material_v3/letter.png",
+      "mode": "nine_slice",
+      "region": [
+        61,
+        53,
+        1408,
+        930
+      ],
+      "margins": [
+        44,
+        44,
+        44,
+        44
+      ],
+      "native_size": [
+        1536,
+        1024
+      ]
+    },
+    "paper_cream": {
+      "path": "res://assets/ui/material_v3/paper_cream.png",
+      "mode": "nine_slice",
+      "region": [
+        47,
+        59,
+        2072,
+        592
+      ],
+      "margins": [
+        160,
+        96,
+        180,
+        96
+      ],
+      "native_size": [
+        2172,
+        724
+      ]
+    },
+    "paper_blue": {
+      "path": "res://assets/ui/material_v3/paper_blue.png",
+      "mode": "nine_slice",
+      "region": [
+        197,
+        117,
+        1779,
+        499
+      ],
+      "margins": [
+        60,
+        60,
+        60,
+        60
+      ],
+      "native_size": [
+        2172,
+        724
+      ]
+    },
+    "paper_lilac": {
+      "path": "res://assets/ui/material_v3/paper_lilac.png",
+      "mode": "nine_slice",
+      "region": [
+        92,
+        137,
+        1983,
+        459
+      ],
+      "margins": [
+        70,
+        54,
+        70,
+        54
+      ],
+      "native_size": [
+        2172,
+        724
+      ]
+    },
+    "tag_cream": {
+      "path": "res://assets/ui/material_v3/tag_cream.png",
+      "mode": "nine_slice",
+      "region": [
+        26,
+        7,
+        2108,
+        692
+      ],
+      "margins": [
+        560,
+        120,
+        220,
+        84
+      ],
+      "native_size": [
+        2172,
+        724
+      ]
+    },
+    "tag_blue": {
+      "path": "res://assets/ui/material_v3/tag_blue.png",
+      "mode": "nine_slice",
+      "region": [
+        40,
+        36,
+        2083,
+        648
+      ],
+      "margins": [
+        560,
+        120,
+        220,
+        84
+      ],
+      "native_size": [
+        2172,
+        724
+      ]
+    },
+    "tag_lilac": {
+      "path": "res://assets/ui/material_v3/tag_lilac.png",
+      "mode": "nine_slice",
+      "region": [
+        38,
+        6,
+        2096,
+        685
+      ],
+      "margins": [
+        560,
+        180,
+        240,
+        84
+      ],
+      "native_size": [
+        2172,
+        724
+      ]
+    },
+    "tag_neutral": {
+      "path": "res://assets/ui/material_v3/tag_neutral.png",
+      "mode": "nine_slice",
+      "region": [
+        5,
+        5,
+        2153,
+        685
+      ],
+      "margins": [
+        560,
+        120,
+        220,
+        84
+      ],
+      "native_size": [
+        2172,
+        724
+      ]
+    },
+    "wax_seal": {
+      "path": "res://assets/ui/material_v3/wax_seal.png",
+      "mode": "nine_slice",
+      "region": [
+        111,
+        54,
+        1748,
+        715
+      ],
+      "margins": [
+        360,
+        180,
+        360,
+        160
+      ],
+      "native_size": [
+        1983,
+        793
+      ]
+    },
+    "paper_tag": {
+      "path": "res://assets/ui/material_v3/paper_tag.png",
+      "mode": "nine_slice",
+      "region": [
+        28,
+        47,
+        2109,
+        624
+      ],
+      "margins": [
+        440,
+        80,
+        180,
+        80
+      ],
+      "native_size": [
+        2172,
+        724
+      ]
+    },
+    "red_stamp": {
+      "path": "res://assets/ui/material_v3/red_stamp.png",
+      "mode": "texture",
+      "region": [
+        310,
+        64,
+        910,
+        896
+      ],
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "native_size": [
+        1536,
+        1024
+      ]
+    },
+    "vine": {
+      "path": "res://assets/ui/material_v3/vine.png",
+      "mode": "texture",
+      "region": [
+        102,
+        282,
+        1978,
+        151
+      ],
+      "margins": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "native_size": [
+        2172,
+        724
+      ]
+    },
+    "wood": {
+      "path": "res://assets/ui/title_wood_sign.png",
+      "mode": "nine_slice",
+      "region": [
+        28,
+        17,
+        2098,
+        703
+      ],
+      "margins": [
+        120,
+        80,
+        120,
+        80
+      ],
+      "native_size": [
+        2184,
+        720
+      ]
+    }
+  },
+  "roles": {
+    "notebook": {
+      "default": "default",
+      "variants": {
+        "default": "notebook"
+      },
+      "fallback": "#F3E9D6"
+    },
+    "dialogue": {
+      "default": "letter",
+      "variants": {
+        "letter": "letter"
+      },
+      "fallback": "#F3E9D6"
+    },
+    "paper": {
+      "default": "cream",
+      "variants": {
+        "cream": "paper_cream",
+        "blue": "paper_blue",
+        "lilac": "paper_lilac"
+      },
+      "fallback": "#F3E9D6"
+    },
+    "smalltag": {
+      "default": "neutral",
+      "variants": {
+        "cream": "tag_cream",
+        "blue": "tag_blue",
+        "lilac": "tag_lilac",
+        "neutral": "tag_neutral"
+      },
+      "fallback": "#F3E9D6"
+    },
+    "plain": {
+      "default": "default",
+      "variants": {
+        "default": ""
+      },
+      "fallback": "#00000000"
+    },
+    "titledivider": {
+      "default": "default",
+      "variants": {
+        "default": "vine"
+      },
+      "fallback": "#00000000"
+    },
+    "wood": {
+      "default": "default",
+      "variants": {
+        "default": "wood"
+      },
+      "fallback": "#62472F"
+    }
+  },
+  "aliases": {
+    "letter": "dialogue"
+  },
+  "shadow": {
+    "color": "#3B2A1E",
+    "opacity": 0.25,
+    "offset": [
+      0,
+      6
+    ],
+    "blur": 12,
+    "hover_opacity": 0.32
+  },
+  "backdrop": {
+    "color": "#000000",
+    "opacity": 0.15
+  },
+  "layout": {
+    "content_margins": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "fallback_corner_radius": 8,
+    "book_spine_width": 12,
+    "book_spine_gap": 8,
+    "book_page_insets": [
+      18,
+      18,
+      18,
+      18
+    ],
+    "divider_height": 12,
+    "divider_gap": 6,
+    "stamp_size": [
+      32,
+      32
+    ],
+    "drag_preview_size": [
+      210,
+      76
+    ],
+    "slice_border": 16,
+    "book_minimum_size": [
+      940,
+      480
+    ],
+    "book_preferred_width": 1000,
+    "book_preferred_height": 550
+  },
+  "effects": {
+    "seed_namespace": "r3_panel_materials_v1",
+    "paper_hover_y": -2,
+    "hover_seconds": 0.12,
+    "wood_sway_degrees": 0.35,
+    "wood_sway_hz": 0.65,
+    "candidate_degrees": 1.5,
+    "drag_sway_degrees": 1.0,
+    "drag_sway_hz": 2.0,
+    "stamp_seconds": 0.2,
+    "stamp_scale_from": 1.35,
+    "stamp_scale_to": 1.0,
+    "card_y_scale": 0.9,
+    "contact_shadow_height": 8,
+    "contact_shadow_width_ratio": 0.82
+  },
+  "audio": {
+    "paper": "page",
+    "wood": "click",
+    "wax": "click"
+  },
+  "evidence": {
+    "fact": "cream",
+    "testimony": "blue",
+    "tool": "lilac",
+    "neutral": "neutral"
+  },
+  "empty_slot": {
+    "color": "#B49B78",
+    "width": 1,
+    "dash": 7,
+    "gap": 5
+  },
+  "copy": {
+    "missing": "面板材质尚未准备完成，暂用简洁底色。"
+  },
+  "colors": {
+    "ink": "#3B2A1E",
+    "stamp": "#963F35",
+    "light_ink": "#F3E9D6"
+  }
+}

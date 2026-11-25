@@ -73,6 +73,15 @@ func run() -> void:
 	audio.transition("front",540)
 	check(audio.active_player==started and audio._voice_generations[started]==generation and audio.load_requests.size()==requests and audio._transition_epoch==epoch,"same slot never reloads/restarts/resets fade")
 	audio.transition("consultation",540,{"case_active":true})
+	check(audio.current_music == "deduction" and audio.active_player == started and audio._voice_generations[started] == generation and audio.load_requests.size() == requests,"production Sheep aliases keep the current voice and playback when entering a CASE")
+	audio.transition("front",540)
+	# Crossfade exercises two different synthetic streams, independently of the
+	# player's production choice to use Sheep in both day and deduction slots.
+	var reserved_paths: Array = [Catalog.track_for_slot("day",audio.music_config).runtime_path,Catalog.track_for_slot("night",audio.music_config).runtime_path]
+	var alternatives: Array = audio.music_config.tracks.filter(func(row: Dictionary) -> bool: return row.runtime_path not in reserved_paths)
+	check(not alternatives.is_empty(),"synthetic crossfade track is distinct from both day and later night recovery")
+	audio.music_config.slots.deduction.track_id = alternatives[0].id
+	audio.transition("consultation",540,{"case_active":true})
 	var stale_epoch: int = audio._transition_epoch
 	var stale_generations: Array[int] = audio._voice_generations.duplicate()
 	check(audio.music_players.all(func(player:AudioStreamPlayer)->bool:return player.playing),"crossfade briefly overlaps both voices")
@@ -90,7 +99,7 @@ func run() -> void:
 		audio.transition(route.page,int(route.clock),route.context)
 		check(audio.current_music==Catalog.key_for(route.page,int(route.clock),catalog,route.context),"runtime routes selected slot / "+audio.current_music)
 	check(audio.music_players.size()==2,"rapid changes never allocate more voices")
-	var deduction_path: String = Catalog.track_for_slot("deduction",catalog).runtime_path
+	var deduction_path: String = Catalog.track_for_slot("deduction",audio.music_config).runtime_path
 	audio.missing_paths.append(deduction_path)
 	audio._stop_music()
 	audio.transition("consultation",540,{"case_active":true})

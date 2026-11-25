@@ -1,4 +1,5 @@
 extends SceneTree
+const CardChoice = preload("res://scripts/ui/card_choice.gd")
 const UITeardown = preload("res://tests/ui_teardown.gd")
 var main: Control
 var game: Node
@@ -109,7 +110,8 @@ func check_modal_frame() -> void:
 		check(notebook.borderless,"native titlebar cannot draw a second central notebook title")
 		check(mask.visible and mask.get_global_rect().is_equal_approx(Rect2(Vector2.ZERO,Vector2(dimensions))),"visible backdrop covers the whole parent viewport / "+str(dimensions))
 		check(mask.get_global_rect().encloses(main.shell_header.get_global_rect()) and mask.z_index > main.shell_header.z_index,"backdrop actually includes the parent top bar")
-		check(mask.mouse_filter == Control.MOUSE_FILTER_STOP and mask.color.a > 0.0 and mask.color.a < 1.0,"backdrop blocks parent clicks and retains the scene through translucency")
+		var dimmer: ColorRect = main.get_node("PanelMaterialBackdropLayer/PanelMaterialBackdrop") if main.has_node("PanelMaterialBackdropLayer/PanelMaterialBackdrop") else mask
+		check(mask.mouse_filter == Control.MOUSE_FILTER_STOP and dimmer.visible and dimmer.color.a > 0.0 and dimmer.color.a < 1.0,"backdrop blocks parent clicks and its shared dimmer retains the scene through translucency")
 		check(close.get_parent() is HBoxContainer and close.get_parent().get_global_rect().encloses(close.get_global_rect()),"close control belongs inside the paper header")
 		if DisplayServer.get_name() != "headless":
 			check(Rect2(Vector2.ZERO,Vector2(notebook.size)).encloses(close.get_global_rect()),"close glyph fits inside the actual notebook viewport")
@@ -163,7 +165,7 @@ func inspect_notebook(origin: String, dimensions: Vector2i, verified: bool) -> v
 	await settle()
 	main.open_divination("casebook")
 	await settle()
-	var picker := main.workbench.find_child("CaseHistoryPicker",true,false) as OptionButton
+	var picker := main.workbench.find_child("CaseHistoryPicker",true,false) as CardChoice
 	check(picker != null,"casebook provides a real historical reception selector")
 	var found := false
 	if picker != null:

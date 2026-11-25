@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "top_height": 52,
+  "top_height": 88,
   "dock_height": 64,
   "drawer_width": 420,
   "drawer_seconds": 0.25,
@@ -24,42 +24,42 @@
     {
       "page": "exterior",
       "label": "店外",
-      "icon": "⌂"
+      "icon": "nav_door"
     },
     {
       "page": "front",
       "label": "前台",
-      "icon": "◇"
+      "icon": "nav_counter"
     },
     {
       "page": "consultation",
       "label": "咨询",
-      "icon": "☏"
+      "icon": "nav_chat"
     },
     {
       "page": "inventory",
       "label": "柜子",
-      "icon": "▣"
+      "icon": "nav_cabinet"
     },
     {
       "page": "workshop",
       "label": "工坊",
-      "icon": "⚒"
+      "icon": "nav_mortar"
     },
     {
       "page": "market",
       "label": "商店",
-      "icon": "▤"
+      "icon": "nav_shop"
     },
     {
       "page": "gathering",
       "label": "采集",
-      "icon": "♧"
+      "icon": "nav_leaf"
     },
     {
       "page": "people",
       "label": "档案",
-      "icon": "▧"
+      "icon": "nav_archive"
     }
   ],
   "layout": {

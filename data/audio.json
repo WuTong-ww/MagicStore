@@ -44,7 +44,7 @@
     },
     "day": {
       "label": "白天",
-      "track_id": "sunlight_through_leaves",
+      "track_id": "sheep",
       "candidates": [
         "golden_gleam"
       ]
@@ -58,7 +58,7 @@
     },
     "deduction": {
       "label": "案件推理",
-      "track_id": "whispering_woods",
+      "track_id": "sheep",
       "candidates": [
         "drifting_memories"
       ]
@@ -231,13 +231,13 @@
       "historical_local_pack_license_proven": false
     },
     "metadata_inventory_sha256": "c958dc2bcb2b7a88c707d7e324e6f8e3b884cecabb166bab50513098873a927a",
-    "selection_basis": "filename_only",
+    "selection_basis": "filename_and_user_choice",
     "listening_review": "not_performed"
   },
   "copy": {
     "catalog_title": "背景音乐",
     "missing_runtime": "本地音乐缺失时保持静音。",
-    "selection_note": "初选与候补仅按曲名意象决定，均未试听。",
+    "selection_note": "白天与案件接待按玩家指定改用 Sheep；其余曲目及候补仍为未试听的初选。",
     "metadata_note": "容器时长元数据不代表循环接缝、响度或风格已经验收。",
     "license_note": "当前官方文本是自定义许可；本地包取得时的许可版本尚未证实。"
   }

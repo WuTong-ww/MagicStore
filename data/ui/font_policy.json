@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "regular": "res://assets/fonts/LXGWWenKai-Regular.ttf",
+  "ascii_mono": "res://assets/fonts/MidnightNumeric-Regular.ttf",
+  "ascii_range": [32, 126],
+  "required_digits": "0123456789:"
+}

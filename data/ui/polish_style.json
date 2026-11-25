@@ -1,0 +1,286 @@
+{
+  "version": 1,
+  "colors": {
+    "wood": "#62472F", "paper": "#F3E9D6", "ink": "#3B2A1E",
+    "sage": "#82916F", "night": "#294548", "wax": "#963F35",
+    "paper_soft": "#E2D2B4", "muted": "#7A6450", "border": "#B49B78",
+    "paper_hover": "#EBE0C9", "night_hover": "#35575B", "night_pressed": "#21393B",
+    "wax_hover": "#A94B40", "wax_pressed": "#78332B", "field": "#FBF5E9"
+  },
+  "metrics": {
+    "font_size": 18, "dialogue_size": 20, "corner_radius": 8, "border_width": 1,
+    "horizontal_padding": 14, "vertical_padding": 8, "gap": 8,
+    "minimum_button_height": 42, "icon_size": 22, "choice_minimum_width": 124
+  },
+  "button_materials": {
+    "version": 1,
+    "stroke_width": 1.0,
+    "focus_width": 2.0,
+    "cap_fraction": 0.25,
+    "wax": {
+      "cap_width": 12.0,
+      "outline": [
+        [
+          0.03,
+          0.25
+        ],
+        [
+          0.08,
+          0.12
+        ],
+        [
+          0.16,
+          0.07
+        ],
+        [
+          0.25,
+          0.09
+        ],
+        [
+          0.35,
+          0.05
+        ],
+        [
+          0.47,
+          0.07
+        ],
+        [
+          0.58,
+          0.04
+        ],
+        [
+          0.7,
+          0.08
+        ],
+        [
+          0.82,
+          0.06
+        ],
+        [
+          0.92,
+          0.14
+        ],
+        [
+          0.98,
+          0.29
+        ],
+        [
+          0.97,
+          0.45
+        ],
+        [
+          0.99,
+          0.57
+        ],
+        [
+          0.94,
+          0.77
+        ],
+        [
+          0.85,
+          0.87
+        ],
+        [
+          0.74,
+          0.91
+        ],
+        [
+          0.63,
+          0.88
+        ],
+        [
+          0.51,
+          0.94
+        ],
+        [
+          0.39,
+          0.91
+        ],
+        [
+          0.27,
+          0.94
+        ],
+        [
+          0.14,
+          0.88
+        ],
+        [
+          0.06,
+          0.75
+        ],
+        [
+          0.02,
+          0.59
+        ],
+        [
+          0.035,
+          0.43
+        ]
+      ],
+      "fills": {
+        "normal": "#963F35",
+        "hover": "#A94B40",
+        "pressed": "#78332B",
+        "disabled": "#76524B"
+      },
+      "edge_color": "#622D28",
+      "focus_color": "#F3E9D6",
+      "text_color": "#F3E9D6",
+      "disabled_text": "#F3E9D6",
+      "ridge_inset": 3.0,
+      "ridge_width": 1.0,
+      "ridge_color": "#C17460",
+      "margin_bias": 6.0,
+      "seal_center": [
+        0.5,
+        0.5
+      ],
+      "seal_radius": 9.0,
+      "seal_ridge_inset": 2.0,
+      "seal_outline": [
+        [
+          0.97,
+          0.5
+        ],
+        [
+          0.91,
+          0.69
+        ],
+        [
+          0.84,
+          0.83
+        ],
+        [
+          0.67,
+          0.91
+        ],
+        [
+          0.5,
+          0.97
+        ],
+        [
+          0.3,
+          0.92
+        ],
+        [
+          0.17,
+          0.82
+        ],
+        [
+          0.08,
+          0.67
+        ],
+        [
+          0.03,
+          0.5
+        ],
+        [
+          0.08,
+          0.31
+        ],
+        [
+          0.18,
+          0.16
+        ],
+        [
+          0.34,
+          0.08
+        ],
+        [
+          0.5,
+          0.03
+        ],
+        [
+          0.69,
+          0.08
+        ],
+        [
+          0.83,
+          0.17
+        ],
+        [
+          0.92,
+          0.33
+        ]
+      ]
+    },
+    "paper": {
+      "cap_width": 8.0,
+      "outline": [
+        [
+          0.02,
+          0.15
+        ],
+        [
+          0.06,
+          0.03
+        ],
+        [
+          0.94,
+          0.03
+        ],
+        [
+          0.98,
+          0.15
+        ],
+        [
+          0.98,
+          0.85
+        ],
+        [
+          0.94,
+          0.97
+        ],
+        [
+          0.06,
+          0.97
+        ],
+        [
+          0.02,
+          0.85
+        ]
+      ],
+      "fills": {
+        "normal": "#F3E9D6",
+        "hover": "#EBE0C9",
+        "pressed": "#E2D2B4",
+        "disabled": "#E2D2B4"
+      },
+      "edge_color": "#B49B78",
+      "focus_color": "#294548",
+      "text_color": "#3B2A1E",
+      "disabled_text": "#7A6450",
+      "hole_position": [
+        0.62,
+        0.5
+      ],
+      "hole_radius": 2.0,
+      "hole_color": "#B8A182",
+      "cord_width": 1.2,
+      "cord_color": "#7A6450",
+      "cord_points": [
+        [
+          0.08,
+          0.3
+        ],
+        [
+          0.25,
+          0.24
+        ],
+        [
+          0.62,
+          0.5
+        ],
+        [
+          0.25,
+          0.72
+        ],
+        [
+          0.08,
+          0.65
+        ]
+      ],
+      "margin_bias": 0.0
+    }
+  }
+}

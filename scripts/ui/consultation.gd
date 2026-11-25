@@ -1,11 +1,15 @@
 extends Control
 
 const UI = preload("res://scripts/ui/ui_kit.gd")
+const Materials = preload("res://scripts/ui/panel_materials.gd")
 const LAYOUT_CONFIG := "res://data/ui/consultation.json"
 
 const SceneArt = preload("res://scripts/shop/scene_visual.gd")
 const Appearance = preload("res://scripts/people/appearance.gd")
 const Portrait = preload("res://scripts/people/portrait.gd")
+const ResponsiveConfig = preload("res://scripts/ui/responsive_config.gd")
+const ViewportMetrics = preload("res://scripts/ui/viewport_metrics.gd")
+const ResponsiveLayout = preload("res://scripts/ui/responsive_layout.gd")
 const AppearanceEditorConfig = preload("res://scripts/people/appearance_editor_config.gd")
 
 const OracleGuide = preload("res://scripts/divination/oracle_guide.gd")
@@ -56,6 +60,17 @@ var case_board: Control
 var input_row: HBoxContainer
 var keyboard_hint: Label
 var title_row: HBoxContainer
+var _material_tabs: TabContainer
+var _material_drawer_margin: MarginContainer
+var _material_book_frame: Control
+var _material_book_title: Label
+var _material_book_vine: TextureRect
+var _material_book_summary: RichTextLabel
+var _material_letter_padding: MarginContainer
+var _material_letter_frame: Control
+var _material_nameplate: Control
+var _material_name: Label
+var _material_scene_base := Color.WHITE
 
 static func layout_config_valid(config: Dictionary) -> bool:
 	var height: Variant = config.get("transcript_minimum_height")
@@ -146,6 +161,7 @@ func _ready() -> void:
 	dialogue_panel.z_index = int(layout_config.dialogue_z)
 	add_child(dialogue_panel)
 	var padding := UI.margin(int(layout_config.dialogue_padding))
+	_material_letter_padding = padding
 	dialogue_panel.add_child(padding)
 	conversation = VBoxContainer.new()
 	conversation.add_theme_constant_override("separation", int(layout_config.dialogue_gap))
@@ -159,6 +175,14 @@ func _ready() -> void:
 	clue_label = UI.label("", int(layout_config.small_font_size), UI.MUTED)
 	clue_label.autowrap_mode = TextServer.AUTOWRAP_OFF
 	title_row.add_child(clue_label)
+	var history_scroll := ScrollContainer.new()
+	history_scroll.name = "ConversationBodyScroll"
+	history_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	history_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	conversation.add_child(history_scroll)
+	var history_column := VBoxContainer.new()
+	history_column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	history_scroll.add_child(history_column)
 	transcript = UI.rich()
 	transcript.bbcode_enabled = true
 	transcript.theme_type_variation = &"Dialogue"
@@ -166,11 +190,11 @@ func _ready() -> void:
 	# Keep the existing text budget plus the new composite-avatar header visible.
 	transcript.custom_minimum_size.y = float(layout_config.transcript_minimum_height) + float(layout_config.bubble_avatar_size[1]) + float(layout_config.bubble_padding[1]) + float(layout_config.bubble_padding[3])
 	transcript.add_theme_font_size_override("normal_font_size", int(layout_config.body_font_size))
-	conversation.add_child(transcript)
+	history_column.add_child(transcript)
 	questions = HFlowContainer.new()
 	questions.add_theme_constant_override("h_separation", int(layout_config.question_gap))
 	questions.add_theme_constant_override("v_separation", int(layout_config.dialogue_gap))
-	conversation.add_child(questions)
+	history_column.add_child(questions)
 	input_row = HBoxContainer.new()
 	conversation.add_child(input_row)
 	input = TextEdit.new()
@@ -193,8 +217,10 @@ func _ready() -> void:
 	drawer_panel.z_index = int(layout_config.drawer_z)
 	add_child(drawer_panel)
 	var drawer_margin := UI.margin(int(layout_config.dialogue_padding))
+	_material_drawer_margin = drawer_margin
 	drawer_panel.add_child(drawer_margin)
 	var tabs := TabContainer.new()
+	_material_tabs = tabs
 	tabs.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	tabs.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	drawer_margin.add_child(tabs)
@@ -245,7 +271,9 @@ func _ready() -> void:
 	case_board.story_choice_saved.connect(_refresh_case_board)
 	add_child(case_board)
 	case_board.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_setup_material_consultation()
 	resized.connect(_queue_layout)
+	get_tree().root.size_changed.connect(_queue_layout)
 	conversation.minimum_size_changed.connect(_queue_layout)
 	refresh()
 	_queue_layout()
@@ -269,34 +297,39 @@ func _queue_layout() -> void:
 
 func _layout_consultation() -> void:
 	_layout_pending = false
-	if not is_instance_valid(dialogue_panel):
-		return
+	if not is_instance_valid(dialogue_panel): return
+	var metrics: Dictionary = ViewportMetrics.measure(self)
+	var responsive: Dictionary = ResponsiveConfig.load_config()
+	if not ViewportMetrics.valid(metrics) or responsive.is_empty(): return
+	var client_size: Vector2 = metrics.visible_css
+	var maximum_height: float = client_size.y*float(responsive.dialogue_max_ratio)
+	var available: Rect2
+	var minimum: Vector2
 	if _case_board_enabled():
-		var board_config: Dictionary = case_board.config
-		var factor := minf(size.x/float(board_config.layout.base_width),size.y/float(board_config.layout.base_height))
-		var rect: Array = board_config.layout.speech_rect
-		var origin := (size-Vector2(board_config.layout.base_width,board_config.layout.base_height)*factor)/2.0
-		dialogue_panel.scale = Vector2.ONE*factor
-		dialogue_panel.size = Vector2(rect[2],rect[3])
-		dialogue_panel.position = origin+Vector2(rect[0],rect[1])*factor
-		_layout_portrait()
-		return
-	dialogue_panel.scale = Vector2.ONE
-	var edge := float(layout_config.edge_inset)
-	var available_width := minf(float(layout_config.dialogue_max_width),maxf(0.0,size.x-edge*2.0))
-	var minimum_height := dialogue_panel.get_combined_minimum_size().y
-	var desired_height := maxf(float(layout_config.dialogue_minimum_height), size.y * float(layout_config.dialogue_ratio))
-	var height := maxf(minimum_height, desired_height)
-	dialogue_panel.size = Vector2(available_width, height)
-	dialogue_panel.position = Vector2((size.x-dialogue_panel.size.x)*0.5,size.y-float(layout_config.bottom_inset)-dialogue_panel.size.y)
+		case_board.call("_layout_material_speech")
+		available = ViewportMetrics.css_rect(case_board.speech_panel,metrics)
+		available.size.y = minf(available.size.y,maximum_height)
+		var speech: Array = case_board.config.layout.speech_rect
+		minimum = Vector2(speech[2],speech[3]).max(dialogue_panel.get_combined_minimum_size())
+	else:
+		var dialogue_width := minf(float(layout_config.dialogue_max_width),client_size.x-float(responsive.safe_margin)*2.0)
+		var desired_height := maxf(float(layout_config.dialogue_minimum_height),client_size.y*float(layout_config.dialogue_ratio))
+		var dialogue_height := minf(maximum_height,desired_height)
+		available = Rect2(Vector2((client_size.x-dialogue_width)/2.0,client_size.y-float(responsive.dialogue_bottom)-dialogue_height),Vector2(dialogue_width,dialogue_height))
+		minimum = Vector2(responsive.dialogue_minimum[0],responsive.dialogue_minimum[1]).max(dialogue_panel.get_combined_minimum_size())
+	ResponsiveLayout.apply(dialogue_panel,ResponsiveLayout.fit_minimum(minimum,available,metrics,Vector2(0.5,1),true))
 	_layout_portrait()
-	if drawer_tween != null and drawer_tween.is_running():
-		drawer_tween.kill()
-	var width := minf(float(layout_config.drawer_width), size.x - float(layout_config.drawer_bookmark_width))
-	drawer_panel.size = Vector2(width, maxf(0.0, dialogue_panel.position.y - float(layout_config.top_inset) - float(layout_config.drawer_gap)))
-	drawer_panel.position = Vector2(size.x-width if drawer_open else size.x, float(layout_config.top_inset))
-	drawer_toggle.position = Vector2(drawer_panel.position.x - float(layout_config.drawer_bookmark_width), float(layout_config.top_inset))
-	drawer_toggle.size.x = float(layout_config.drawer_bookmark_width)
+	if drawer_tween != null and drawer_tween.is_running(): drawer_tween.kill()
+	if _layout_material_tools(metrics,responsive): return
+	var width := minf(float(responsive.drawer_width),client_size.x)
+	var top: float = 0.0 if metrics.short else float(layout_config.top_inset)
+	var height: float = client_size.y if metrics.short else maxf(1.0,available.position.y-top-float(layout_config.drawer_gap))
+	var drawer_box := Rect2(Vector2(client_size.x-width if drawer_open else client_size.x,top),Vector2(width,height))
+	var drawer_minimum := drawer_panel.get_combined_minimum_size().max(Vector2(float(layout_config.drawer_width),height))
+	ResponsiveLayout.apply(drawer_panel,ResponsiveLayout.fit_minimum(drawer_minimum,drawer_box,metrics,Vector2(0.5,0.5),true))
+	var toggle_size := drawer_toggle.get_combined_minimum_size().max(Vector2(responsive.toggle_size[0],responsive.toggle_size[1]))
+	var toggle_box := Rect2(Vector2(maxf(0,drawer_box.position.x-toggle_size.x),maxf(top,float(responsive.toggle_top))),toggle_size)
+	ResponsiveLayout.apply(drawer_toggle,ResponsiveLayout.fit_minimum(toggle_size,toggle_box,metrics))
 
 func _fit_portrait_occlusion(occlusion: CanvasItem) -> void:
 	if room_art.config.scene_settings.version == 3:
@@ -309,34 +342,39 @@ func _layout_portrait() -> void:
 	# source-space pose keeps the guest's face above that paper without moving
 	# the room or changing the shared cover transform.
 	var compact: Dictionary = layout_config.compact_seat
+	var metrics: Dictionary = ViewportMetrics.measure(self)
+	var responsive: Dictionary = ResponsiveConfig.load_config()
 	var seat: Array = _default_seat
 	if _case_board_enabled():
 		seat = case_board.config.layout.portrait_rect
-	elif size.y <= float(compact.height_limit):
-		seat = compact.narrow_rect if size.x <= float(compact.narrow_width_limit) else compact.rect
+	elif ViewportMetrics.valid(metrics) and metrics.short:
+		seat = compact.narrow_rect if metrics.visible_css.x <= float(compact.narrow_width_limit) else compact.rect
 		if room_art.config.get("scene_settings",{}).get("version",2) == 3:
 			var scene: Dictionary = room_art.config.scenes[room_art.scene_id]
-			seat = scene.get("seat_narrow_rect",seat) if size.x <= float(compact.narrow_width_limit) else scene.get("seat_compact_rect",seat)
+			seat = scene.get("seat_narrow_rect",seat) if metrics.visible_css.x <= float(compact.narrow_width_limit) else scene.get("seat_compact_rect",seat)
 	for row: Dictionary in room_art.placed_nodes:
 		if row.node == guest_portrait:
 			row.rect = seat
 	var projected: Rect2 = room_art.projected_rect(seat)
 	guest_portrait.position = projected.position
 	guest_portrait.size = projected.size
+	if ViewportMetrics.valid(metrics) and metrics.short and not responsive.is_empty():
+		guest_portrait.position.y = maxf(float(responsive.safe_margin)/metrics.css_per_local_unit.y,projected.position.y-float(responsive.portrait_lift)/metrics.css_per_local_unit.y)
 
 func set_drawer_expanded(expanded: bool, animate: bool = true) -> void:
+	var from_panel := drawer_panel.position
+	var from_toggle := drawer_toggle.position
 	drawer_open = expanded
 	drawer_toggle.text = layout_config.copy.drawer_close if expanded else layout_config.copy.drawer_open
-	if drawer_tween != null and drawer_tween.is_running():
-		drawer_tween.kill()
-	var target_x := size.x - drawer_panel.size.x if expanded else size.x
-	if not animate:
-		drawer_panel.position.x = target_x
-		drawer_toggle.position.x = target_x - float(layout_config.drawer_bookmark_width)
-		return
+	_layout_consultation()
+	if not animate or not is_inside_tree(): return
+	var panel_destination := drawer_panel.position
+	var toggle_destination := drawer_toggle.position
+	drawer_panel.position = from_panel
+	drawer_toggle.position = from_toggle
 	drawer_tween = create_tween().set_parallel(true)
-	drawer_tween.tween_property(drawer_panel, "position:x", target_x, float(layout_config.drawer_seconds)).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	drawer_tween.tween_property(drawer_toggle, "position:x", target_x-float(layout_config.drawer_bookmark_width), float(layout_config.drawer_seconds)).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	drawer_tween.tween_property(drawer_panel,"position",panel_destination,float(layout_config.drawer_seconds)).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	drawer_tween.tween_property(drawer_toggle,"position",toggle_destination,float(layout_config.drawer_seconds)).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
 func _on_input_gui_input(event: InputEvent) -> void:
 	if not event is InputEventKey or not event.pressed or event.keycode not in [KEY_ENTER, KEY_KP_ENTER]:
@@ -438,6 +476,7 @@ func refresh() -> void:
 	input.editable = active and not _last_busy
 	_refresh_topics(_available_questions(),str(visit.get("visit_id","")))
 	_refresh_case_board()
+	_refresh_material_public_summary(view)
 
 func _case_board_enabled() -> bool:
 	return is_instance_valid(case_board) and not case_board.config.is_empty() and bool(GameState.case_board_view().get("enabled",false))
@@ -627,3 +666,139 @@ func _history_bubble(turn: Dictionary, guest: Dictionary, player: bool, stamp: b
 	transcript.pop()
 	transcript.pop()
 	transcript.pop()
+
+func consume_drawer_event(event: InputEventMouseButton) -> bool:
+	var metrics: Dictionary = ViewportMetrics.measure(self)
+	if _case_board_enabled() or not drawer_open or not is_visible_in_tree() or not ViewportMetrics.valid(metrics) or (not metrics.short and Materials.load_config().is_empty()) or not event.pressed: return false
+	var point: Vector2 = event.position*metrics.css_per_local_unit
+	if ViewportMetrics.css_rect(drawer_panel,metrics).has_point(point) or ViewportMetrics.css_rect(drawer_toggle,metrics).has_point(point): return false
+	if event.button_index == MOUSE_BUTTON_LEFT: set_drawer_expanded(false,false)
+	return true
+
+func _setup_material_consultation() -> void:
+	_material_scene_base = room_art.modulate
+	if Materials.load_config().is_empty(): return
+	Materials.apply_panel(dialogue_panel,"letter")
+	Materials.apply_panel(drawer_panel,"notebook")
+	Materials.apply_panel(_material_tabs,"plain")
+	var tab_style: StyleBox = Materials.style_for("paper","cream")
+	if tab_style != null:
+		for state: String in ["tab_unselected","tab_selected","tab_hovered","tab_disabled"]:
+			_material_tabs.get_tab_bar().add_theme_stylebox_override(state,tab_style)
+	Materials.apply_button(drawer_toggle,"paper_tag","legacy_consultation_book")
+	# A neutral Control separates the layout container from its two page guides.
+	# The actual TabContainer and its TabBar stay intact on the right page.
+	var old_parent: Node = _material_drawer_margin.get_parent()
+	old_parent.remove_child(_material_drawer_margin)
+	_material_book_frame = Control.new()
+	_material_book_frame.name = "ConsultationNotebookPages"
+	_material_book_frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	drawer_panel.add_child(_material_book_frame)
+	_material_book_frame.add_child(_material_drawer_margin)
+	_material_book_title = UI.label(layout_config.copy.tab_casebook,int(layout_config.title_font_size))
+	_material_book_title.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_material_book_frame.add_child(_material_book_title)
+	_material_book_vine = Materials.make_divider()
+	_material_book_frame.add_child(_material_book_vine)
+	_material_book_summary = UI.rich()
+	_material_book_summary.mouse_filter = Control.MOUSE_FILTER_PASS
+	_material_book_summary.add_theme_font_size_override("normal_font_size",int(layout_config.body_font_size))
+	_material_book_frame.add_child(_material_book_summary)
+	# Keep the existing conversation minimum; the new nameplate is an overlay,
+	# not another nested framed section or a discarded body/input control.
+	var old_letter_parent: Node = _material_letter_padding.get_parent()
+	old_letter_parent.remove_child(_material_letter_padding)
+	_material_letter_frame = Control.new()
+	_material_letter_frame.name = "ConversationLetterContents"
+	dialogue_panel.add_child(_material_letter_frame)
+	_material_letter_frame.add_child(_material_letter_padding)
+	_material_letter_padding.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_material_letter_frame.custom_minimum_size = _material_letter_padding.get_combined_minimum_size()
+	_material_letter_padding.minimum_size_changed.connect(func():
+		_material_letter_frame.custom_minimum_size = _material_letter_padding.get_combined_minimum_size())
+	_material_nameplate = Panel.new()
+	_material_nameplate.name = "ConversationGuestNameplate"
+	_material_nameplate.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_material_letter_frame.add_child(_material_nameplate)
+	Materials.apply_panel(_material_nameplate,"smalltag","cream")
+	_material_name = UI.label("",int(layout_config.body_font_size))
+	_material_name.name = "ConversationGuestNameText"
+	_material_name.autowrap_mode = TextServer.AUTOWRAP_OFF
+	_material_name.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_material_nameplate.add_child(_material_name)
+	drawer_panel.resized.connect(_queue_material_consultation)
+	_queue_material_consultation()
+
+func _queue_material_consultation() -> void:
+	_layout_material_consultation.call_deferred()
+
+func _refresh_material_public_summary(view: Dictionary) -> void:
+	if not is_instance_valid(_material_name): return
+	var guest: Dictionary = view.get("guest",{})
+	_material_name.text = str(guest.get("name",""))
+	var padding: float = float(layout_config.dialogue_padding)
+	_material_name.position = Vector2(padding,padding*0.5)
+	_material_name.size = _material_name.get_combined_minimum_size()
+	_material_nameplate.size = _material_name.size+Vector2(padding*2.0,padding)
+	_material_nameplate.position = Vector2(padding,-_material_nameplate.size.y*0.5)
+	_material_letter_padding.add_theme_constant_override("margin_top",int(padding+_material_nameplate.size.y*0.5))
+	_material_book_title.text = str(guest.get("name",layout_config.copy.tab_casebook))
+	# The public opening is a customer statement, never a world-fact upgrade.
+	_material_book_summary.text = str(view.get("opening_statement",""))
+	_queue_material_consultation()
+
+func _layout_material_consultation() -> void:
+	if not is_instance_valid(_material_book_frame): return
+	var material: Dictionary = Materials.load_config()
+	var guides: Array = Materials.content_rects(drawer_panel.size,"notebook")
+	if material.is_empty() or guides.size() != 2: return
+	var left: Rect2 = guides[0]
+	var right: Rect2 = guides[1]
+	var header_height: float = float(layout_config.title_font_size)+float(material.layout.divider_gap)*2.0
+	_material_book_title.position = left.position
+	_material_book_title.size = Vector2(left.size.x,header_height)
+	_material_book_vine.position = left.position+Vector2(0,header_height)
+	_material_book_vine.size = Vector2(left.size.x,float(material.layout.divider_height))
+	var inset: float = header_height+float(material.layout.divider_height)+float(material.layout.divider_gap)
+	_material_book_summary.position = left.position+Vector2(0,inset)
+	_material_book_summary.size = Vector2(left.size.x,maxf(1,left.size.y-inset))
+	_material_drawer_margin.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+	_material_drawer_margin.position = right.position
+	_material_drawer_margin.size = right.size
+	for edge: String in ["margin_left","margin_top","margin_right","margin_bottom"]: _material_drawer_margin.add_theme_constant_override(edge,0)
+	var metrics: Dictionary = ViewportMetrics.measure(self)
+	if ViewportMetrics.valid(metrics):
+		var effective: Vector2 = drawer_panel.get_global_transform_with_canvas().get_scale()*metrics.css_per_local_unit
+		drawer_panel.set_meta("material_effective_css_scale",effective)
+		drawer_panel.set_meta("material_effective_font_sizes",{"body":float(layout_config.body_font_size)*effective.y,"small":float(layout_config.small_font_size)*effective.y})
+		drawer_panel.set_meta("material_content_rects",guides)
+
+func _update_material_scene_dimming() -> void:
+	if not is_instance_valid(room_art): return
+	var material: Dictionary = Materials.load_config()
+	if material.is_empty():
+		room_art.modulate = _material_scene_base
+		return
+	var opened: bool = is_instance_valid(case_board) and case_board.is_visible_in_tree() and case_board.paper.is_visible_in_tree() if _case_board_enabled() else drawer_open
+	var opacity: float = float(material.backdrop.opacity) if opened else 0.0
+	room_art.modulate = _material_scene_base*Color(1.0-opacity,1.0-opacity,1.0-opacity,1)
+
+func _layout_material_tools(metrics: Dictionary, responsive: Dictionary) -> bool:
+	var material: Dictionary = Materials.load_config()
+	if material.is_empty(): return false
+	var client_size: Vector2 = metrics.visible_css
+	var margin: float = float(responsive.safe_margin)
+	var width: float = minf(float(material.layout.book_preferred_width),client_size.x-margin*2.0)
+	var height: float = client_size.y if metrics.short else minf(float(material.layout.book_preferred_height),client_size.y-margin*2.0)
+	var top: float = 0.0 if metrics.short else (client_size.y-height)*0.5
+	var left: float = client_size.x-width-(0.0 if metrics.short else margin) if drawer_open else client_size.x
+	var box := Rect2(Vector2(left,top),Vector2(width,height))
+	var minimum := Vector2(material.layout.book_minimum_size[0],material.layout.book_minimum_size[1])
+	ResponsiveLayout.apply(drawer_panel,ResponsiveLayout.fit_minimum(minimum,box,metrics,Vector2(0.5,0.5),true))
+	drawer_panel.set_meta("material_fixed_layout",bool(metrics.short))
+	var toggle_size := drawer_toggle.get_combined_minimum_size().max(Vector2(responsive.toggle_size[0],responsive.toggle_size[1]))
+	var toggle_box := Rect2(Vector2(maxf(0,left-toggle_size.x),maxf(top,float(responsive.toggle_top))),toggle_size)
+	ResponsiveLayout.apply(drawer_toggle,ResponsiveLayout.fit_minimum(toggle_size,toggle_box,metrics))
+	_queue_material_consultation()
+	_update_material_scene_dimming()
+	return true

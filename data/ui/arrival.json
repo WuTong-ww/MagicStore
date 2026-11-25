@@ -6,30 +6,33 @@
   ],
   "empty_title": "今日零客日",
   "empty_status": "今天没有安排到店的来客。",
-  "empty_advice": "趁店里清静，可以去采集原料、研习术式，或制作商品，为下次开门做准备。",
+  "empty_advice": "采集、研习、制作，准备开门。",
   "suggestions": {
     "gathering": "去采集",
     "study": "去研习",
     "workshop": "去制作"
   },
   "queue_title": "候客耐心",
-  "patience_format": "%s · %s · 还可等约 %d 分钟",
+  "patience_format": "%s · 还可等约 %d 分钟",
   "patience_levels": [
     {
       "minimum_ratio": 0.66,
-      "icon": "⌛⌛⌛",
+      "icon": "patience",
+      "icon_count": 3,
       "label": "耐心充足",
       "color": "52623b"
     },
     {
       "minimum_ratio": 0.33,
-      "icon": "⌛⌛",
+      "icon": "patience",
+      "icon_count": 2,
       "label": "耐心渐少",
       "color": "7a5b2d"
     },
     {
       "minimum_ratio": 0.0,
-      "icon": "⌛",
+      "icon": "patience",
+      "icon_count": 1,
       "label": "即将离开",
       "color": "9b4937"
     }

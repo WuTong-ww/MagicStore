@@ -2,6 +2,7 @@ extends VBoxContainer
 ## Renders only the already-stripped public past-line projection.
 
 const UI = preload("res://scripts/ui/ui_kit.gd")
+const CardChoice = preload("res://scripts/ui/card_choice.gd")
 
 signal interpret_requested(instance_id: String, group_id: String, option_id: String, text: String)
 signal verify_requested(interpretation_id: String)
@@ -10,7 +11,7 @@ var model: Dictionary = {}
 var actionable: bool = false
 var copy: Dictionary = {}
 var layout: Dictionary = {}
-var choice: OptionButton
+var choice: CardChoice
 var input: LineEdit
 var submit: Button
 
@@ -60,7 +61,7 @@ func _label(text: String, heading: bool = false) -> Label:
 	return label
 
 func _era(row: Dictionary) -> void:
-	var panel := UI.panel()
+	var panel := UI.panel("plain")
 	panel.name = "PastEraRow%d" % int(row.ordinal)
 	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	add_child(panel)
@@ -112,7 +113,7 @@ func _interpretation(record: Dictionary) -> void:
 
 func _entry() -> void:
 	add_child(_label(copy.options_heading,true))
-	choice = OptionButton.new()
+	choice = CardChoice.new()
 	choice.name = "PastLineInterpretationChoice"
 	choice.fit_to_longest_item = false
 	choice.size_flags_horizontal = Control.SIZE_EXPAND_FILL

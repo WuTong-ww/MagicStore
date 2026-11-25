@@ -327,6 +327,122 @@ def resolve_title_provenance(workspace, asset):
     return copy.deepcopy(row)
 
 
+POLISH_PROMPTS_PATH = "data/art/polish_prompts.json"
+POLISH_SOURCE_PATHS = {
+    "style_reference": "assets/generated_scenes/v3_final/style_reference.png",
+    "money_bag": "assets/ui/status_v3/money_bag.png",
+    "oil_lamp": "assets/ui/status_v3/oil_lamp.png",
+    "pocket_watch": "assets/ui/status_v3/pocket_watch.png",
+    "reputation_star": "assets/ui/status_v3/reputation_star.svg",
+    "navigation": "assets/ui/polish_icons.svg",
+}
+POLISH_SOURCE_VERSIONS = {"money_bag": 1, "oil_lamp": 3, "pocket_watch": 1,
+                          "reputation_star": 1, "navigation": 1}
+
+
+def _polish_relative_paths(values):
+    return isinstance(values, list) and all(isinstance(path, str) and path and
+        "\\" not in path and ":" not in path and not path.startswith("/") and
+        all(part not in ("", ".", "..") for part in path.split("/")) for path in values)
+
+
+def validate_polish_prompts(value):
+    """Only the original style row and five specific POLISH UI sources."""
+    _require(isinstance(value, dict) and set(value) == {"type", "version", "entries"} and
+             value["type"] == "r3_polish_v1" and type(value["version"]) is int and value["version"] == 1,
+             "invalid POLISH provenance catalog")
+    entries = value["entries"]
+    _require(isinstance(entries, dict) and set(entries) == set(POLISH_SOURCE_PATHS),
+             "POLISH provenance requires exactly six known entries")
+    ui_fields = {"path", "sha256", "dim", "version", "group", "status", "prompt", "source"}
+    style_fields = {"path", "group", "status", "prompt", "inputs", "references", "dim", "sha256",
+                    "native_resolution_met", "source", "previous_edit"}
+    for key, path in POLISH_SOURCE_PATHS.items():
+        row = entries[key]
+        _require(isinstance(row, dict) and set(row) == (style_fields if key == "style_reference" else ui_fields)
+                 and row["path"] == path, "invalid POLISH full-row identity")
+        _require(isinstance(row["sha256"], str) and re.fullmatch(r"[a-f0-9]{64}", row["sha256"]),
+                 "invalid POLISH source SHA256")
+        _require(isinstance(row["dim"], list) and len(row["dim"]) == 2 and
+                 all(_integer(n, 1) for n in row["dim"]), "invalid POLISH source dimensions")
+        _require(isinstance(row["prompt"], str) and bool(row["prompt"].strip()), "missing exact POLISH prompt")
+        source = row["source"]
+        if key == "style_reference":
+            _require(row["group"] == "style_reference" and row["status"] == "approved" and
+                     type(row["native_resolution_met"]) is bool and _polish_relative_paths(row["inputs"]) and
+                     _polish_relative_paths(row["references"]), "invalid historical style provenance")
+            _require(isinstance(source, dict) and set(source) == {"generator", "version"} and
+                     source["generator"] == "image_gen.imagegen" and isinstance(source["version"], str) and
+                     bool(source["version"].strip()), "invalid historical style source")
+            previous = row["previous_edit"]
+            _require(isinstance(previous, dict) and set(previous) == {"prompt", "inputs", "output_sha256"} and
+                     isinstance(previous["prompt"], str) and bool(previous["prompt"].strip()) and
+                     _polish_relative_paths(previous["inputs"]) and isinstance(previous["output_sha256"], str) and
+                     re.fullmatch(r"[a-f0-9]{64}", previous["output_sha256"]), "invalid historical style edit")
+        else:
+            _require(row["group"] == "polish_ui" and row["status"] == "selected_ui_source" and
+                     type(row["version"]) is int and row["version"] == POLISH_SOURCE_VERSIONS[key],
+                     "invalid POLISH UI version/group/status")
+            generator = "project_original_svg" if key in ("navigation", "reputation_star") else "builtin_imagegen"
+            _require(isinstance(source, dict) and set(source) == {"generator", "record_id"} and
+                     source["generator"] == generator and
+                     source["record_id"] == "R3_POLISH_" + key + "_v" + str(row["version"]),
+                     "invalid POLISH generation provenance")
+    return value
+
+
+def _polish_json_object(pairs):
+    result = {}
+    for key, value in pairs:
+        _require(key not in result, "duplicate POLISH provenance JSON key")
+        result[key] = value
+    return result
+
+
+def resolve_polish_provenance(workspace, asset):
+    """Strict local sidecar boundary; does not alter pure packing/queue APIs."""
+    _require(isinstance(asset, dict), "invalid POLISH compact row")
+    reference = asset.get("prompt_reference")
+    _require(isinstance(reference, dict) and set(reference) == {"path", "key", "sha256"} and
+             reference["path"] == POLISH_PROMPTS_PATH and isinstance(reference["key"], str) and
+             reference["key"] in POLISH_SOURCE_PATHS and isinstance(reference["sha256"], str) and
+             re.fullmatch(r"[a-f0-9]{64}", reference["sha256"]), "invalid POLISH prompt reference")
+    key = reference["key"]
+    fields = {"path", "sha256", "dim", "group"}
+    if key != "style_reference":
+        fields.add("version")
+    _require(set(asset) == fields | {"prompt_reference"} and asset.get("path") == POLISH_SOURCE_PATHS[key],
+             "invalid POLISH compact identity")
+    path = safe_path(workspace, reference["path"], must_exist=True)
+    catalog = json.loads(path.read_text(encoding="utf-8-sig"), object_pairs_hook=_polish_json_object,
+                         parse_constant=lambda token: (_ for _ in ()).throw(ValueError("nonfinite POLISH JSON: " + token)))
+    row = validate_polish_prompts(catalog)["entries"][key]
+    _require(all(type(asset[field]) is type(row[field]) and asset[field] == row[field] for field in fields),
+             "POLISH reference differs from full-row identity")
+    # Equality alone treats true as 1 inside arrays; check numeric dimensions explicitly.
+    _require(isinstance(asset["dim"], list) and len(asset["dim"]) == 2 and
+             all(_integer(n, 1) for n in asset["dim"]), "invalid POLISH compact dimensions")
+    canonical = json.dumps(row, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf-8")
+    _require(hashlib.sha256(canonical).hexdigest() == reference["sha256"], "POLISH full-row SHA256 mismatch")
+    return copy.deepcopy(row)
+
+
+def _material_provenance_leaf():
+    # This local, bounded namespace never changes pure packing/queue APIs.
+    spec = importlib.util.spec_from_file_location("magic_panel_material_provenance", Path(__file__).parent / "art/material_provenance.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def validate_material_prompts(value):
+    return _material_provenance_leaf().validate_material_prompts(value)
+
+
+def resolve_material_provenance(workspace, asset):
+    return _material_provenance_leaf().resolve_material_provenance(workspace, asset)
+
+
 def validate_compact_manifest(workspace, manifest):
     """Validate metadata, not the optional retired audit or absent style draft."""
     _require(type(manifest.get("schema_version")) is int and manifest["schema_version"] == 3,
@@ -354,7 +470,19 @@ def validate_compact_manifest(workspace, manifest):
                 safe_path(workspace, input_path)
         title_path = path.casefold().startswith(("assets/generated_scenes/runtime/title/", "assets/ui/title_"))
         title_group = isinstance(asset.get("group"), str) and asset["group"].casefold() == "title_sources"
-        if title_path or title_group or "prompt_reference" in asset:
+        polish_path = path.casefold().startswith(("assets/ui/status_v3/", "assets/ui/polish_icons")) or path.casefold() == POLISH_SOURCE_PATHS["style_reference"].casefold()
+        polish_group = isinstance(asset.get("group"), str) and asset["group"].casefold() in ("polish_ui", "style_reference")
+        reference = asset.get("prompt_reference")
+        polish_reference = isinstance(reference, dict) and isinstance(reference.get("path"), str) and reference["path"].casefold() == POLISH_PROMPTS_PATH.casefold()
+        material_path = path.casefold().startswith("assets/ui/material_v3/") or path.casefold() in (
+            "assets/generated_scenes/v2/slices/s04_slot.png", "assets/generated_scenes/v2/slices/s04_door_closed.png")
+        material_group = isinstance(asset.get("group"), str) and asset["group"].casefold() == "polish_materials"
+        material_reference = isinstance(reference, dict) and isinstance(reference.get("path"), str) and reference["path"].casefold() == "data/art/polish_material_prompts.json"
+        if material_path or material_group or material_reference:
+            resolve_material_provenance(workspace, asset)
+        elif polish_path or polish_group or polish_reference:
+            resolve_polish_provenance(workspace, asset)
+        elif title_path or title_group or "prompt_reference" in asset:
             resolve_title_provenance(workspace, asset)
         if asset.get("group") == "scenes" and PurePosixPath(path).name == "C.png":
             scene, period = asset.get("scene_id"), asset.get("period")

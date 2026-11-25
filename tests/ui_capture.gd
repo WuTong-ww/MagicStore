@@ -1,4 +1,5 @@
 extends SceneTree
+const CardChoice = preload("res://scripts/ui/card_choice.gd")
 const UITeardown = preload("res://tests/ui_teardown.gd")
 ## Deterministic UI smoke in an isolated directory. With a graphical renderer,
 ## also writes 1280x720 and 1920x1080 screenshots to .tools/ui-captures/.
@@ -315,13 +316,13 @@ func press_in_workbench(caption: String) -> bool:
 
 func select_in_workbench(label: String) -> bool:
 	var found := find_control(main.workbench.body, func(node: Node) -> bool:
-		if not node is OptionButton:
+		if not node is CardChoice:
 			return false
 		for index in range(node.item_count):
 			if node.get_item_text(index) == label:
 				return true
 		return false
-	) as OptionButton
+	) as CardChoice
 	check(found != null, "workbench choice available / " + label)
 	if found == null:
 		return false

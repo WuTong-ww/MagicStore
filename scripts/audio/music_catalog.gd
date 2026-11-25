@@ -52,7 +52,7 @@ static func config_valid(value: Variant) -> bool:
 	if not _keys(value.source,["author","url","license","metadata_inventory_sha256","selection_basis","listening_review"]):
 		return false
 	var license: Variant = value.source.license
-	if not _text(value.source.author) or not value.source.url is String or not value.source.url.begins_with("https://") or not _sha256(value.source.metadata_inventory_sha256) or value.source.selection_basis != "filename_only" or value.source.listening_review not in ["not_performed","human_reviewed"]:
+	if not _text(value.source.author) or not value.source.url is String or not value.source.url.begins_with("https://") or not _sha256(value.source.metadata_inventory_sha256) or value.source.selection_basis not in ["filename_only","filename_and_user_choice"] or value.source.listening_review not in ["not_performed","human_reviewed"]:
 		return false
 	if not _keys(license,["type","document_date","official_upload_id","document_sha256","historical_local_pack_license_proven"]) or license.type != "custom license" or not license.document_date is String or not license.document_date.match("????-??-??") or not _text(license.official_upload_id) or not _sha256(license.document_sha256) or not license.historical_local_pack_license_proven is bool:
 		return false

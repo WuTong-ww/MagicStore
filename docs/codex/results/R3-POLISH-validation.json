@@ -1,0 +1,121 @@
+{
+  "task": "R3-POLISH",
+  "status": "partial",
+  "full_round_limit": 3,
+  "full_rounds": [
+    {
+      "label": "full1",
+      "exit_code": 1,
+      "seconds": 87.85900000002584,
+      "reported_checks": 64,
+      "reported_failures": 0,
+      "script_errors": 0,
+      "source_files": 1021,
+      "protected_source_changes": [],
+      "accepted": false,
+      "runner_sha256": "0b37b8bf68bf2baab9d787e31c3c826d5891850db0c9df285b9b74cf0cd99160",
+      "log_sha256": "35734c3e8b7f4a2b230318fe35ae7b6bffd99a0f3dea8416080b333cfbdae9bc"
+    },
+    {
+      "label": "full2",
+      "exit_code": 1,
+      "seconds": 330.89000000001397,
+      "reported_checks": 108,
+      "reported_failures": 0,
+      "script_errors": 2,
+      "source_files": 1022,
+      "protected_source_changes": [],
+      "accepted": false,
+      "runner_sha256": "ae101e3a2200234abcec0f2e032916998cc4eea773824cd94dbfd68f51e65252",
+      "log_sha256": "3614bf7daea89c10ede104ffbaaac9cc49977f21117a8f9f18a08c0a104a25ef"
+    },
+    {
+      "label": "full3",
+      "exit_code": 1,
+      "seconds": 206.18700000000536,
+      "reported_checks": 108,
+      "reported_failures": 0,
+      "script_errors": 2,
+      "source_files": 1023,
+      "protected_source_changes": [],
+      "accepted": false,
+      "runner_sha256": "732ca631a4afcef10333db75af4c02706c151d7cfb845650ad9b9bd01c1c99e3",
+      "log_sha256": "775f6a1a577660d15abc0a4bae7faea69b9537d37f7702a33b05fc0b32126f19"
+    }
+  ],
+  "post_full3_source_changes": [
+    "scripts/ui/responsive_layout.gd",
+    "tests/integration/polish_windows.gd"
+  ],
+  "post_full3_reason": "Reverted unsuccessful headless-only scaling experiment and its expectation. Desktop/Web viewport rendering retained. No fourth full round.",
+  "graphical_checks": {
+    "polish_ui": 947,
+    "material_ui": 702,
+    "shop_ui": 1577,
+    "gui_wheel": 9,
+    "failures": 0,
+    "manual_visual_acceptance": false
+  },
+  "actual_reviewed_frames": {
+    "layout_and_portrait": 19,
+    "materials_and_title_comparisons": 20
+  },
+  "original_capture_directories": [
+    ".tools/r3-polish/ui/run_10d66b9f402c141f84ee5e5556767af1",
+    ".tools/r3-polish/material-ui/run_fe0f264ca2be8098e802f7bd951cceef",
+    ".tools/c-ui-captures"
+  ],
+  "web_probe": {
+    "receipt": ".tools/r3-polish/web-wheel-actual.json",
+    "css": [
+      1280,
+      529
+    ],
+    "focused_modal_and_independent_page_wheel": true,
+    "hover_only_verified": false,
+    "optimized_or_published": false,
+    "pck_bytes": 311140744,
+    "wasm_bytes": 37700666
+  },
+  "screenshots": [
+    {
+      "path": "docs/screenshots/round3/R3-POLISH/case-1920.jpg",
+      "bytes": 399784,
+      "sha256": "78cf42d4b9d1764ecf9ed23d56050d6b0288870857a0f4ce362fb0e9033d9d51"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-POLISH/front-1280.jpg",
+      "bytes": 168145,
+      "sha256": "ecc3cdcf82ef9451c7f149d3e023ac9dd7576973ab2b543b1490ffd81b87fe59"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-POLISH/inventory-1920.jpg",
+      "bytes": 312379,
+      "sha256": "ab8685175c025a15078566c560c74df1d1031b054e4d63ffe7edf6f168c35154"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-POLISH/savebook-short.jpg",
+      "bytes": 111437,
+      "sha256": "715db55fbea21955d73b185ea789eadb7061c5d93f9daac1f815e9fced6477cb"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-POLISH/settings-1920.jpg",
+      "bytes": 345730,
+      "sha256": "6d3ccc938264fcd30c91b40d5e9193ee7d62965be4b8fe50467a87a9227cbb7e"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-POLISH/title-vs-case-1280.jpg",
+      "bytes": 373208,
+      "sha256": "a2473cc8807fdd35818975861119f54914549292281d95d637aeb93df5f25777"
+    }
+  ],
+  "known_incomplete": [
+    "Native affine_invert det==0 interrupts MUSIC HOST in standard full run; no failed MUSIC HOST assertions in isolated terminal run.",
+    "Handbook/settings first glyphs partly clipped; settings corner background remains.",
+    "Some legacy framed controls remain; no all-panel material acceptance.",
+    "Three older UI targets exceeded the 360 second host bound; fixed type declaration/two-page observer not rerun as another full cycle.",
+    "Only focused browser wheel movement verified; remaining browser size screenshots and package optimization/publish belong to WEB."
+  ],
+  "next": "PORTRAIT/NAMES supplement, CRAFT, LEARN, WEB; preserve completed tasks 1–8.",
+  "main_unchanged": "e27441b51a4415777971cf2d8142ce4c725437e5"
+}

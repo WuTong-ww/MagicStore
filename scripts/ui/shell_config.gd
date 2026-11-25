@@ -2,6 +2,7 @@ class_name ShellConfig
 extends RefCounted
 
 const PATH := "res://data/ui/shell.json"
+const Icons = preload("res://scripts/ui/icon_policy.gd")
 
 static func config_valid(data: Dictionary) -> bool:
 	if data.get("version") != 1:
@@ -44,6 +45,8 @@ static func config_valid(data: Dictionary) -> bool:
 		for key: String in ["label","icon"]:
 			if not row.get(key) is String or row[key].is_empty():
 				return false
+		if row.icon not in Icons.IDS or not row.icon.begins_with("nav_"):
+			return false
 		seen.append(row.page)
 	return true
 

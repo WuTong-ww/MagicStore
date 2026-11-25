@@ -2,6 +2,7 @@ extends RefCounted
 ## Pure appearance catalog/rules. No image generation, state or global RNG writes.
 const CONFIG_PATH := "res://data/people/appearance_parts.json"
 const FIXED_NPCS_PATH := "res://data/story/npcs.json"
+const RenderPlan = preload("res://scripts/people/portrait_render_plan.gd")
 const LIN_LEGACY_PRESETS := ["portrait_lin","npc_lin"]
 static var _fixed_npcs: Dictionary = {}
 static var _fixed_npcs_sha := ""
@@ -155,7 +156,7 @@ static func config_valid(config: Dictionary) -> bool:
 	for id: Variant in config.legacy.outfit.values():
 		if _find(config,"outfit",id).is_empty():
 			return false
-	return config.get("defaults") is Dictionary and appearance_valid(config.defaults,config)
+	return config.get("defaults") is Dictionary and RenderPlan.config_valid(config) and appearance_valid(config.defaults,config)
 
 static func appearance_valid(value: Variant, config: Dictionary = {}) -> bool:
 	if config.is_empty():
@@ -234,7 +235,7 @@ static func selection_valid(value: Variant, config: Dictionary = {}) -> bool:
 	for exclusion: Dictionary in config.get("selection_exclusions",[]):
 		if exclusion.keys().all(func(layer: String) -> bool: return value.get("parts",{}).get(layer) == exclusion[layer]):
 			return false
-	return true
+	return RenderPlan.selection_valid(value,config)
 
 static func _allowed(config: Dictionary, layer: String, age: String) -> Array:
 	return config.parts[layer].filter(func(row: Dictionary) -> bool: return age in row.ages)
@@ -328,3 +329,24 @@ static func layer_records(appearance: Dictionary, mood: String = "neutral", conf
 			status = "missing_art"
 		result.append({"layer":layer,"id":row.id,"path":path,"tint":row.tint,"available":available,"status":status,"canvas":config.canvas.duplicate()})
 	return result
+
+## Display projection only: raw layer_records and all saved IDs keep their old
+## semantics. Both portrait renderers consume this single ordered plan.
+static func render_plan(value: Dictionary, expression: String = "neutral", config: Dictionary = {}) -> Dictionary:
+	if config.is_empty():
+		config = load_config()
+	if not config_valid(config):
+		return {}
+	var normalized := for_display(value,"",config)
+	if normalized.is_empty():
+		return {}
+	var mood: String = expression if expression in config.moods else str(config.default_mood)
+	var plan := RenderPlan.build(layer_records(normalized,mood,config),normalized,mood,config)
+	if plan.is_empty():
+		return {}
+	for row: Dictionary in plan.layers:
+		row.available = not row.path.is_empty() and row.status in ["ready","approved"] and ResourceLoader.exists(row.path)
+		if row.status in ["ready","approved"] and not row.available:
+			row.status = "missing_art"
+	plan.digest = JSON.stringify([plan.layers,normalized,mood,config.rendering]).sha256_text()
+	return plan

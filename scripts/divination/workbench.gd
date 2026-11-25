@@ -1,6 +1,9 @@
 extends Window
 
 const UI = preload("res://scripts/ui/ui_kit.gd")
+const Icons = preload("res://scripts/ui/icon_policy.gd")
+const CardChoice = preload("res://scripts/ui/card_choice.gd")
+const NotebookPages = preload("res://scripts/ui/notebook_pages.gd")
 const ArrivalUI = preload("res://scripts/ui/arrival_ui.gd")
 const EventCopy = preload("res://scripts/divination/event_copy.gd")
 const SessionRules = preload("res://scripts/divination/session.gd")
@@ -51,6 +54,7 @@ static func frame_config_valid(config: Dictionary) -> bool:
 	for field: String in ["close_symbol","close_tooltip","back_label"]:
 		if not config.get(field) is String or config[field].strip_edges().is_empty():
 			return false
+	if config.close_symbol != "close": return false
 	if not config.get("backdrop_color") is String or not Color.html_is_valid(config.backdrop_color):
 		return false
 	var opacity := Color(config.backdrop_color).a
@@ -75,10 +79,10 @@ func _ready() -> void:
 	frame_config = load_frame_config()
 	if frame_config.is_empty():
 		return
-	UI.paper_window(self)
+	UI.paper_window(self,"notebook")
 	borderless = true
 	size = Vector2i(frame_config.initial_size[0],frame_config.initial_size[1])
-	min_size = Vector2i(frame_config.minimum_size[0],frame_config.minimum_size[1])
+	min_size = Vector2i(NotebookPages.minimum_book_size())
 	transient = true
 	exclusive = true
 	close_requested.connect(hide)
@@ -86,7 +90,7 @@ func _ready() -> void:
 	# canvas so it covers the parent header as well as the scene behind it.
 	modal_mask = ColorRect.new()
 	modal_mask.name = "WorkbenchModalMask"
-	modal_mask.color = Color(frame_config.backdrop_color)
+	modal_mask.color = Color.TRANSPARENT if is_instance_valid(host) and host.has_method("_sync_material_backdrop") else UI.Materials.backdrop_color()
 	modal_mask.z_index = int(frame_config.backdrop_z_index)
 	modal_mask.mouse_filter = Control.MOUSE_FILTER_STOP
 	modal_mask.visible = false
@@ -94,12 +98,11 @@ func _ready() -> void:
 	mask_parent.add_child(modal_mask)
 	modal_mask.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	visibility_changed.connect(_sync_modal_mask)
-	var margin := UI.margin(int(frame_config.content_margin))
-	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	add_child(margin)
-	var layout := VBoxContainer.new()
-	layout.add_theme_constant_override("separation",int(frame_config.layout_gap))
-	margin.add_child(layout)
+	var pages := NotebookPages.new()
+	pages.name = "WorkbenchNotebookPages"
+	add_child(pages)
+	pages.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var layout: VBoxContainer = pages.left
 	var header := HBoxContainer.new()
 	header.name = "NotebookHeader"
 	header.add_theme_constant_override("separation",int(frame_config.layout_gap))
@@ -108,21 +111,18 @@ func _ready() -> void:
 	heading.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	heading.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	header.add_child(heading)
-	close_button = UI.button(frame_config.close_symbol,hide)
+	close_button = UI.button("",hide)
+	close_button.icon = Icons.texture(frame_config.close_symbol)
 	close_button.name = "NotebookClose"
 	close_button.tooltip_text = frame_config.close_tooltip
 	close_button.custom_minimum_size = Vector2(frame_config.close_minimum_size[0],frame_config.close_minimum_size[1])
 	close_button.add_theme_font_size_override("font_size",int(frame_config.close_font_size))
 	close_button.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 	header.add_child(close_button)
-	scroll = ScrollContainer.new()
-	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	layout.add_child(scroll)
-	body = VBoxContainer.new()
-	body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	layout.add_child(UI.Materials.make_divider())
+	scroll = pages.right_scroll
+	body = pages.right
 	body.add_theme_constant_override("separation",int(frame_config.body_gap))
-	scroll.add_child(body)
 	notice = UI.label("",int(frame_config.notice_font_size),UI.GOLD)
 	notice.custom_minimum_size.y = frame_config.notice_minimum_height
 	layout.add_child(notice)
@@ -343,7 +343,7 @@ func _readings() -> void:
 		var number := 0
 		if parameter is SpinBox:
 			number = int(parameter.value)
-		elif parameter is OptionButton:
+		elif parameter is CardChoice:
 			number = parameter.selected + (1 if method.method_id == "yijing" else 0)
 		await _run("quote_service", {
 			"method_id": method.method_id, "option_id": option.option_id,
@@ -480,7 +480,7 @@ func _casebook() -> void:
 func _history_picker() -> void:
 	var copy := EventCopy.load_config()
 	_info(copy.history_picker)
-	var picker := OptionButton.new()
+	var picker := CardChoice.new()
 	picker.name = "CaseHistoryPicker"
 	picker.fit_to_longest_item = false
 	body.add_child(picker)
@@ -617,7 +617,7 @@ func _forecast() -> void:
 		var advice := _pick(_labels(choices, func(row: Dictionary) -> String: return row.text))
 		var style_options: Dictionary = SessionRules.advice_style_options()
 		var style_keys: Array = style_options.get("styles",{}).keys()
-		var style_choice: OptionButton
+		var style_choice: CardChoice
 		if not style_keys.is_empty():
 			_info(style_options.heading)
 			style_choice = _pick(style_keys.map(func(key: String) -> String: return style_options.styles[key]),maxi(0,style_keys.find(style_options.default_style)))
@@ -727,8 +727,8 @@ func _flow() -> HFlowContainer:
 func _labels(rows: Array, mapper: Callable = Callable()) -> Array:
 	return rows.map(mapper) if mapper.is_valid() else rows.map(func(row: Dictionary) -> String: return row.label)
 
-func _pick(labels: Array, selected: int = 0, callback: Callable = Callable()) -> OptionButton:
-	var pick := OptionButton.new()
+func _pick(labels: Array, selected: int = 0, callback: Callable = Callable()) -> CardChoice:
+	var pick := CardChoice.new()
 	pick.fit_to_longest_item = false
 	for label: String in labels:
 		pick.add_item(label)

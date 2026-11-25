@@ -1,6 +1,7 @@
 extends Control
 
 const UI = preload("res://scripts/ui/ui_kit.gd")
+const CardChoice = preload("res://scripts/ui/card_choice.gd")
 const ArrivalUI = preload("res://scripts/ui/arrival_ui.gd")
 const Appearance = preload("res://scripts/people/appearance.gd")
 const Portrait = preload("res://scripts/people/portrait.gd")
@@ -22,11 +23,11 @@ var queue: ItemList
 var detail: RichTextLabel
 var start_button: Button
 var book_button: Button
-var face: OptionButton
-var hair: OptionButton
-var outfit: OptionButton
+var face: CardChoice
+var hair: CardChoice
+var outfit: CardChoice
 var evidence: ItemList
-var archive: OptionButton
+var archive: CardChoice
 var _archive_npc_id := ""
 var editor_config: Dictionary = {}
 var appearance_config: Dictionary = {}
@@ -96,7 +97,7 @@ func _ready() -> void:
 	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	columns.add_child(right)
 	right.add_child(_label(copy.archive_title, int(layout.heading_font_size)))
-	archive = OptionButton.new()
+	archive = CardChoice.new()
 	archive.name = "KnownPeople"
 	archive.fit_to_longest_item = false
 	archive.item_selected.connect(_select_archive)
@@ -188,13 +189,13 @@ func _build_editor(parent: TabContainer) -> void:
 func _paper_tabs(tabs: TabContainer) -> void:
 	var paper: Theme = load("res://themes/paper.tres")
 	tabs.theme = paper
-	tabs.add_theme_stylebox_override("panel",paper.get_stylebox("panel","PanelContainer"))
+	tabs.add_theme_stylebox_override("panel",StyleBoxEmpty.new())
 	tabs.get_tab_bar().theme = paper
 
 func _add_picker(parent: Control, key: String, palette: bool) -> void:
 	var label: String = editor_config.palette_labels[key] if palette else editor_config.part_labels[key]
 	parent.add_child(_label(label,int(editor_config.layout.small_font_size)))
-	var picker := OptionButton.new()
+	var picker := CardChoice.new()
 	picker.name = ("Color_" if palette else "Part_")+key
 	picker.fit_to_longest_item = false
 	picker.custom_minimum_size = Vector2(editor_config.layout.part_picker_width,editor_config.layout.picker_height)
@@ -494,7 +495,7 @@ func _sync_pickers() -> void:
 	for token: String in _pickers:
 		var palette := token.begins_with("color:")
 		var key := token.get_slice(":",1)
-		var picker: OptionButton = _pickers[token]
+		var picker: CardChoice = _pickers[token]
 		picker.clear()
 		var rows: Array = appearance_config.palettes[key] if palette else appearance_config.parts[key]
 		for part: Dictionary in rows:
