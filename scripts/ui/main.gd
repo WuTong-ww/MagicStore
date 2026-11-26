@@ -90,11 +90,13 @@ var _history_action_id: String = ""
 var _history_save_id: String = ""
 var open_button: Button
 var workbench: DivinationWorkbench
+var craft_window: Window
 
 func _process(_delta: float) -> void:
 	if not _closing and not _title_blocking:
-		GameState.pump_background_people(busy)
-		GameState.pump_background_cases(busy)
+		var occupied: bool = busy or (is_instance_valid(craft_window) and craft_window.visible)
+		GameState.pump_background_people(occupied)
+		GameState.pump_background_cases(occupied)
 
 func _ready() -> void:
 	get_tree().auto_accept_quit = false
@@ -350,7 +352,7 @@ func run_action(action_type: String, extra: Dictionary = {}, command_id: String 
 	# Explicit tail wins over extra; old callers retain random IDs.
 	action["action_id"] = command_id if not command_id.is_empty() else GameState.make_id("ui")
 	var snapshot: Dictionary = GameState.player_snapshot()
-	if not snapshot.is_empty():
+	if not snapshot.is_empty() and not action.has("expected_version"):
 		action["expected_version"] = snapshot.get("state_version", 0)
 	show_notice("正在等对方回应…" if action_type == "talk" else "正在保存…")
 	var result: Dictionary = await GameState.execute_action_async(action)
@@ -837,6 +839,32 @@ func _add_free_question_setting(box: VBoxContainer) -> void:
 func show_notice(message: String) -> void:
 	if is_instance_valid(notice):
 		notice.text = message
+
+func open_craft(target_id: String = "") -> bool:
+	if is_instance_valid(craft_window) and craft_window.visible: return false
+	var config := preload("res://scripts/shop/craft_config.gd").load_config(GameState.shop_view().get("catalog",{}))
+	if config.is_empty() or not GameState.active_visit().is_empty(): return false
+	if not is_instance_valid(craft_window):
+		craft_window = Window.new()
+		craft_window.name = "CraftWindow"
+		craft_window.title = config.ui.copy.title
+		craft_window.transient = true
+		craft_window.exclusive = true
+		add_child(craft_window)
+		craft_window.close_requested.connect(func():
+			var control := craft_window.get_node_or_null("CraftControl")
+			if control != null: control.close())
+		preload("res://scripts/ui/ui_kit.gd").paper_window(craft_window,"dialogue")
+	var old := craft_window.get_node_or_null("CraftControl")
+	if old != null: craft_window.remove_child(old); old.queue_free()
+	var control := preload("res://scripts/shop/craft_control.gd").new()
+	control.name = "CraftControl"
+	craft_window.add_child(control)
+	control.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	if not control.begin(self,target_id): control.queue_free(); return false
+	_fit_window(craft_window,Vector2i(config.ui.layout.design_width,config.ui.layout.design_height))
+	craft_window.popup_centered(craft_window.size)
+	return true
 
 func open_divination(which: String) -> void:
 	if not busy:

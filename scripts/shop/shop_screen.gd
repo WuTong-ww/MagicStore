@@ -196,6 +196,12 @@ func _inventory(view: Dictionary) -> void:
 func _workshop(view: Dictionary) -> void:
 	var copy: Dictionary = content_settings.copy
 	text(copy.workshop_intro,int(content_settings.layout.body_font))
+	var craft_config := preload("res://scripts/shop/craft_config.gd").load_config(view.catalog)
+	if not craft_config.is_empty():
+		var experiment := UI.button(craft_config.ui.copy.experiment,func(): host.open_craft())
+		experiment.name = "CraftExperiment"
+		experiment.disabled = not GameState.active_visit().is_empty()
+		body.add_child(experiment)
 	for id: String in view.catalog.recipes:
 		var base: Dictionary = view.catalog.recipes[id]
 		var state: Dictionary = view.get("recipe_states",{}).get(id,{})
@@ -224,7 +230,14 @@ func _workshop(view: Dictionary) -> void:
 			var recipe := ContentUI.selected_recipe(view.catalog,id,selected_id)
 			var params := {"recipe_id":id}
 			if not selected_id.is_empty(): params["variant_id"] = selected_id
-			var craft := _content_action(String(copy.craft).format({"minutes":recipe.minutes,"energy":recipe.energy}),"craft_item",params,_can_craft(view,recipe))
+			var craft: Button
+			if view.catalog.get("debug_one_click",false):
+				craft = _content_action(String(copy.craft).format({"minutes":recipe.minutes,"energy":recipe.energy}),"craft_item",params,_can_craft(view,recipe))
+			else:
+				craft = UI.button(String(copy.craft).format({"minutes":recipe.minutes,"energy":recipe.energy}),func(): host.open_craft(selected_id if not selected_id.is_empty() else id),"primary")
+				craft.disabled = not _can_craft(view,recipe)
+				craft.set_meta("action_kind","craft_open")
+				craft.set_meta("action_params",params.duplicate(true))
 			craft.name = "CraftRecipe_"+id
 			row.add_child(craft)
 			_row_text(row,copy.known,int(content_settings.layout.note_font))

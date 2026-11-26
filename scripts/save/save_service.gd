@@ -24,7 +24,7 @@ const SnapshotCatalog = preload("res://scripts/divination/emergent_case_catalog.
 const DailyLoop = preload("res://scripts/core/daily_loop.gd")
 const StoryContent = preload("res://scripts/story/story_content.gd")
 const StoryProgress = preload("res://scripts/story/story_progress.gd")
-const SHOP_ACTIONS := ["procure_item", "receive_material_gift", "gather_material", "sell_material", "register_demand", "research_recipe", "craft_item", "sell_product", "use_product", "review_case", "use_unlocked_option", "start_arrival", "book_arrival", "save_appearance", "wait", "admit_generated_person", "invite_contact"]
+const SHOP_ACTIONS := ["procure_item", "receive_material_gift", "gather_material", "sell_material", "register_demand", "research_recipe", "craft_item", "craft_finalize", "sell_product", "use_product", "review_case", "use_unlocked_option", "start_arrival", "book_arrival", "save_appearance", "wait", "admit_generated_person", "invite_contact"]
 var base_dir: String = "user://saves"
 var _divination_data: Dictionary = {}
 ## Deterministic test seam: fail before touching any file. Never enabled by UI.

@@ -51,7 +51,9 @@ func craft_probe(game: Node, catalog: Dictionary, extra: Dictionary, action_id: 
 	var before := candidate.duplicate(true)
 	var action := extra.duplicate(true)
 	action.merge({"type":"craft_item","action_id":action_id},true)
-	var outcome := Shop.handle(candidate,action,catalog)
+	var debug_catalog := catalog.duplicate(true)
+	debug_catalog.debug_one_click = true
+	var outcome := Shop.handle(candidate,action,debug_catalog)
 	return {"outcome":outcome,"before":before,"after":candidate}
 
 func run() -> void:

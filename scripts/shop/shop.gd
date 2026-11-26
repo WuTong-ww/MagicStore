@@ -2,7 +2,10 @@ extends RefCounted
 ## Candidate-only business rules. Shared item counts remain in player.items.
 ## The caller owns the sole clock, cross-module validation and durable commit.
 
-const ACTIONS := ["procure_item", "receive_material_gift", "gather_material", "sell_material", "register_demand", "research_recipe", "craft_item", "sell_product", "use_product", "review_case"]
+const ACTIONS := ["procure_item", "receive_material_gift", "gather_material", "sell_material", "register_demand", "research_recipe", "craft_item", "craft_finalize", "sell_product", "use_product", "review_case"]
+const CraftConfig = preload("res://scripts/shop/craft_config.gd")
+const CraftRules = preload("res://scripts/shop/craft_rules.gd")
+const CRAFT_POLICY_FIELDS := ["quality_id","sell_multiplier","recipe_id","variant_id","quality_policy","effect_multiplier","effect_multiplier_q","multiplier_scale","craft_ruleset_id","effect_policy"]
 const MAX_VALUE := 2147483647
 const ContentLoader = preload("res://scripts/core/content_loader.gd")
 const CaseEconomy = preload("res://scripts/divination/economy.gd")
@@ -23,6 +26,7 @@ static func load_config() -> Dictionary:
 	return _normalize(data) if config_valid(data) else {}
 
 static func config_valid(data: Dictionary) -> bool:
+	if data.has("debug_one_click") and not data.debug_one_click is bool: return false
 	if data.get("version") != 1 or not data.get("items") is Dictionary or not data.get("recipes") is Dictionary or not data.get("gather_sites") is Dictionary:
 		return false
 	if not data.get("rules") is Dictionary or not _integer(data.rules.get("max_energy"), 1, MAX_VALUE) or not _integer(data.rules.get("closing_minute"), 1, 1439):
@@ -48,6 +52,7 @@ static func config_valid(data: Dictionary) -> bool:
 			return false
 		if item.kind == "material" and not _integer(item.get("buy"), 0, 100000):
 			return false
+		if item.has("potency_vector") and (item.kind != "material" or not CraftConfig.pair(item.potency_vector,-1000,1000)): return false
 		if item.has("purchase_allowed") and not item.purchase_allowed is bool:
 			return false
 		if item.has("primary_source") and item.primary_source not in ["purchase","gather","gift_hidden"]:
@@ -294,6 +299,8 @@ static func handle(state: Dictionary, action: Dictionary, config: Dictionary = {
 			return _demand(state, action, data)
 		"research_recipe", "craft_item":
 			return _recipe(state, action, data)
+		"craft_finalize":
+			return _craft_finalize(state,action,data)
 		"sell_product":
 			return _sell_product(state, action, data)
 		"use_product":
@@ -425,6 +432,8 @@ static func _demand(state: Dictionary, action: Dictionary, data: Dictionary) -> 
 static func _recipe(state: Dictionary, action: Dictionary, data: Dictionary) -> Dictionary:
 	if not str(state.get("active_visit_id", "")).is_empty():
 		return _fail("ACTIVE_VISIT", "请先结束接待再研究或制作。")
+	if action.type == "craft_item" and not data.get("debug_one_click",CraftConfig.load_config(data).get("debug_one_click",false)):
+		return CraftRules.fail("DEBUG_DISABLED",CraftConfig.load_config(data))
 	var id: Variant = action.get("recipe_id")
 	if not id is String or not data.recipes.has(id):
 		return _fail("INVALID_RECIPE", "请选择有效配方。")
@@ -529,7 +538,9 @@ static func _use(state: Dictionary, action: Dictionary, data: Dictionary, popula
 		return blocked
 	var player_use: bool = transaction_id.is_empty()
 	var item_use_id: String = "use_" + action.action_id
-	var wrappers := product_components(item,data)
+	var effective := effective_product_components(state,action,data)
+	if not effective.success: return effective
+	var wrappers: Array = effective.components
 	var plans: Array = []
 	var shadow: Dictionary = state.duplicate(true)
 	var event_id := ""
@@ -543,7 +554,7 @@ static func _use(state: Dictionary, action: Dictionary, data: Dictionary, popula
 			event_id = prepared.result.event_id
 	var result := {"item_use_id":item_use_id,"item_id":id,"transaction_id":transaction_id,"visit_id":visit.get("visit_id", ""),"npc_id":visit.get("npc_id", ""),"event_id":event_id,"effect_key":effect.get("effect_key", ""),"effect":effect.duplicate(true),"at":int(state.clock_minutes)}
 	if state.shop.has("content_version") or data.has("effect_rules"):
-		result["version"] = 2
+		result["version"] = 3 if effective.get("policy3",false) else 2
 		result["component_results"] = plans.duplicate(true)
 	var consumed: Array = []
 	if player_use:
@@ -720,8 +731,8 @@ static func sync_effects(state: Dictionary, config: Dictionary = {}) -> void:
 		if not report.is_empty():
 			for use: Dictionary in state.shop.uses:
 				if not use.event_id.is_empty() and use.event_id == case.event.event_id:
-					var linked: bool = use.get("version") != 2
-					if use.get("version") == 2:
+					var linked: bool = not use.has("version") or use.get("version") == 1
+					if use.get("version") in [2,3]:
 						for ref: Dictionary in report.get("item_component_refs",[]):
 							for component: Dictionary in use.component_results:
 								if ref.get("item_use_id") == use.item_use_id and ref.get("component_id") == component.component_id and ref.get("source_id") == use.item_use_id+":"+component.component_id and ref.get("event_id") == use.event_id:
@@ -987,11 +998,14 @@ static func validate(state: Dictionary) -> String:
 	for link: Variant in work.feedback_links:
 		if not link is Dictionary or not seen.has(link.get("item_use_id")) or not link.get("event_id") is String or not link.get("feedback_id") is String:
 			return "商品反馈来源无效"
+	var craft_config := CraftConfig.load_config(data)
+	if craft_config.is_empty(): return _content_copy(data,"component_blocked")
+	if not _craft_records_valid(state,data,craft_config): return str(craft_config.ui.copy.invalid_draft)
 	return ""
 
 static func _component_record_valid(state: Dictionary, use: Dictionary, data: Dictionary) -> bool:
 	var fields := ["item_use_id","item_id","transaction_id","visit_id","npc_id","event_id","effect_key","effect","at","version","component_results","source_batches"]
-	if use.get("version") != 2 or not use.get("component_results") is Array or use.size() != fields.size() or not fields.all(func(key: String) -> bool: return use.has(key)):
+	if use.get("version") not in [2,3] or not use.get("component_results") is Array or use.size() != fields.size() or not fields.all(func(key: String) -> bool: return use.has(key)):
 		return false
 	if int(state.get("schema_version",0)) >= 8:
 		if not use.item_use_id.begins_with("use_"):
@@ -1003,7 +1017,9 @@ static func _component_record_valid(state: Dictionary, use: Dictionary, data: Di
 			return false
 		if not state.shop.ledger.any(func(entry: Dictionary) -> bool: return entry.category == "use" and entry.action_id == action_id and entry.result == initial):
 			return false
-	var definitions := product_components(data.items[use.item_id],data)
+	var resolved := components_for_sources(data.items[use.item_id],use.get("source_batches",[]),data)
+	if not resolved.success or (use.version == 3) != resolved.get("policy3",false): return false
+	var definitions: Array = resolved.components
 	if definitions.size() != use.component_results.size():
 		return false
 	var seen := {}
@@ -1157,7 +1173,7 @@ static func _add(state: Dictionary, item_id: String, quantity: int, source: Stri
 	var batch := {"batch_id":"batch_%d_%s" % [state.shop.batches.size(), reference_id],"item_id":item_id,"quantity":quantity,"remaining":quantity,"source":source,"reference_id":reference_id,"at":int(state.clock_minutes)}
 	if state.shop.has("content_version") or not metadata.is_empty():
 		batch.merge({"quality_id":"standard","sell_multiplier":1.0,"recipe_id":"","variant_id":""})
-		batch.merge(metadata,true)
+		batch.merge(metadata.duplicate(true),true)
 	state.shop.batches.append(batch)
 
 static func _first_batch(state: Dictionary, item_id: String) -> Dictionary:
@@ -1178,9 +1194,9 @@ static func _remove(state: Dictionary, item_id: String, quantity: int) -> Array:
 		batch.remaining -= amount
 		remaining -= amount
 		var source := {"batch_id":batch.batch_id,"quantity":amount}
-		for key: String in ["quality_id","sell_multiplier","recipe_id","variant_id"]:
+		for key: String in CRAFT_POLICY_FIELDS:
 			if batch.has(key):
-				source[key] = batch[key]
+				source[key] = batch[key].duplicate(true) if batch[key] is Dictionary or batch[key] is Array else batch[key]
 		consumed.append(source)
 		if remaining == 0:
 			break
@@ -1259,3 +1275,107 @@ static func _ok(message: String, result: Dictionary = {}, minutes: int = 0) -> D
 
 static func _fail(code: String, message: String) -> Dictionary:
 	return {"success":false,"error_code":code,"message":message,"minutes":0,"result":{}}
+
+static func _craft_finalize(candidate: Dictionary, action: Dictionary, catalog: Dictionary) -> Dictionary:
+	var c := CraftConfig.load_config(catalog)
+	if not CraftConfig.valid(c,catalog): return CraftRules.fail("INVALID_CONFIG",c)
+	if not CraftConfig.keys(action,["type","action_id","expected_version","draft"]) or action.type != "craft_finalize" or not CraftConfig.text(action.action_id) or not action.draft is Dictionary: return CraftRules.fail("INVALID_DRAFT",c)
+	var draft: Dictionary = action.draft
+	if not CraftRules.draft_valid(draft,c): return CraftRules.fail("INVALID_DRAFT",c)
+	if draft.save_id != candidate.get("save_id") or draft.base_version != candidate.get("state_version") or action.expected_version != draft.base_version: return CraftRules.fail("STALE_VERSION",c)
+	if not candidate.get("shop") is Dictionary or not candidate.get("player",{}).get("items") is Dictionary or not candidate.shop.get("recipes") is Array: return CraftRules.fail("INVALID_DRAFT",c)
+	if not str(candidate.get("active_visit_id","")).is_empty(): return CraftRules.fail("ACTIVE_VISIT",c)
+	var stock := CraftRules.preflight_stock(draft,candidate.player.items,c,catalog)
+	if not stock.success: return stock
+	var evaluation := CraftRules.evaluate(draft,c,catalog,candidate.shop.recipes)
+	if not evaluation.success: return evaluation
+	var result: Dictionary = evaluation.result.duplicate(true)
+	var blocked: Dictionary = _cost(candidate,int(result.minutes),int(result.energy),catalog.rules)
+	if not blocked.is_empty(): return blocked
+	if int(candidate.player.coins) < int(result.research_coins): return CraftRules.fail("PLAYER_FUNDS_LOW",c)
+	# All eligibility checks have finished. Mutations below affect this candidate only.
+	var consumed: Array = []
+	var materials: Array = stock.required.keys()
+	materials.sort()
+	for item_id: String in materials:
+		consumed.append_array(_remove(candidate,item_id,int(stock.required[item_id])))
+	candidate.player.coins -= int(result.research_coins)
+	candidate.player.energy -= int(result.energy)
+	candidate.shop.experience += int(result.experience)
+	result["transaction_id"] = "craft_"+str(action.action_id)
+	result["source_batches"] = consumed
+	result["operation"] = draft.duplicate(true)
+	result["discovered_recipe_id"] = result.recipe_id if result.get("discovery_candidate",false) else ""
+	if result.outcome == "experiment_no_match":
+		_record(candidate,action,"craft",result,0,int(result.minutes),int(result.energy))
+		return _ok(c.ui.copy.no_match,result,int(result.minutes))
+	if result.discovery_candidate: candidate.shop.recipes.append(result.recipe_id)
+	var metadata := {}
+	for field: String in CRAFT_POLICY_FIELDS: metadata[field] = result[field]
+	_add(candidate,result.item_id,int(result.quantity),"craft",result.transaction_id,metadata)
+	_record(candidate,action,"craft",result,int(result.research_coins),int(result.minutes),int(result.energy))
+	# GameState._shop_action must advance the sole clock, then call _commit(candidate).
+	# Only _commit's successful SaveService.write_save may publish stock/discovery/UI.
+	var quality: Dictionary = c.quality.levels.filter(func(level: Dictionary) -> bool: return level.id == result.quality_id)[0]
+	var message := String(c.ui.copy.saved).format({"item":catalog.items[result.item_id].name,"quality":quality.label})
+	if result.discovery_candidate: message += " " + str(c.ui.copy.discovered)
+	return {"success":true,"error_code":"","message":message,"result":result,"minutes":int(result.minutes)}
+
+static func effective_product_components(state: Dictionary, action: Dictionary, data: Dictionary) -> Dictionary:
+	var id: String = str(action.get("item_id",""))
+	if not data.items.has(id): return CraftRules.fail("INVALID_DRAFT",CraftConfig.load_config(data))
+	var sources: Array = []
+	var transaction: String = str(action.get("transaction_id",""))
+	if transaction.is_empty():
+		var batch := _first_batch(state,id)
+		if not batch.is_empty(): sources.append(batch)
+	else:
+		for entry: Dictionary in state.shop.ledger:
+			if entry.category == "product" and entry.result.get("transaction_id") == transaction and entry.result.get("item_id") == id:
+				sources = entry.result.get("source_batches",[]).duplicate(true)
+	return components_for_sources(data.items[id],sources,data)
+
+static func components_for_sources(item: Dictionary, sources: Array, data: Dictionary) -> Dictionary:
+	var definitions := product_components(item,data)
+	var c := CraftConfig.load_config(data)
+	if sources.size() == 1 and sources[0].get("quality_policy") == 3:
+		if c.is_empty() or not CraftRules.policy_valid(sources[0],c): return CraftRules.fail("INVALID_POLICY",c)
+		var scaled := CraftRules.scale_components(definitions,sources[0],c)
+		scaled["policy3"] = true
+		return scaled
+	if sources.any(func(row: Dictionary) -> bool: return row.has("quality_policy")): return CraftRules.fail("INVALID_POLICY",c)
+	return {"success":true,"components":definitions,"policy3":false}
+
+static func _craft_records_valid(state: Dictionary, data: Dictionary, c: Dictionary) -> bool:
+	for entry: Dictionary in state.shop.ledger:
+		if entry.category != "craft" or not entry.result.has("operation"): continue
+		var result: Dictionary = entry.result
+		if not CraftRules.record_valid(state,result,c,data,entry.action_id): return false
+		if entry.coins != result.research_coins or entry.cost.minutes != result.minutes or entry.cost.energy != result.energy: return false
+		var processed: Dictionary = state.processed_actions.get(entry.action_id,{})
+		if processed.get("action_type") != "craft_finalize" or processed.get("result") != result: return false
+	for batch: Dictionary in state.shop.batches:
+		if not batch.has("quality_policy"):
+			if batch.has("craft_ruleset_id") or batch.has("effect_multiplier_q") or batch.has("effect_policy"): return false
+			continue
+		if not CraftRules.policy_valid(batch,c) or batch.source != "craft": return false
+		var matching := false
+		for entry: Dictionary in state.shop.ledger:
+			if entry.category != "craft" or entry.result.get("transaction_id") != batch.reference_id: continue
+			var result: Dictionary = entry.result
+			if result.get("item_id") != batch.item_id or result.get("quantity") != batch.quantity: return false
+			for field: String in CRAFT_POLICY_FIELDS:
+				if batch.get(field) != result.get(field): return false
+			matching = true
+		if not matching: return false
+	for use: Dictionary in state.shop.uses:
+		for source: Dictionary in use.get("source_batches",[]):
+			if source.get("quality_policy") != 3: continue
+			var matching := false
+			for batch: Dictionary in state.shop.batches:
+				if batch.batch_id != source.batch_id: continue
+				for field: String in CRAFT_POLICY_FIELDS:
+					if source.get(field) != batch.get(field): return false
+				matching = true
+			if not matching: return false
+	return true

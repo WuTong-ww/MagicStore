@@ -1,0 +1,822 @@
+{
+  "version": 1,
+  "status": "ACTIVE",
+  "ruleset_id": "r3_craft_v1",
+  "quality_policy": 3,
+  "debug_one_click": false,
+  "limits": {
+    "quantity_min": 1,
+    "quantity_max": 3,
+    "ingredient_rows_max": 24,
+    "ingredient_units_max": 24,
+    "row_units_max": 6,
+    "trace_samples_max": 500,
+    "tick_ms": 50
+  },
+  "potency": {
+    "minimum": -1000,
+    "maximum": 1000,
+    "accumulation": "ordered_clamped_sum"
+  },
+  "grind": {
+    "angle_cycle": 360000,
+    "radius_min": 350,
+    "radius_max": 1000,
+    "required_travel": 1440000,
+    "safe_speed_per_second": 180000,
+    "spill_after_fast_ticks": 4,
+    "spill_penalty_steps": 1,
+    "completion": "stop_at_threshold"
+  },
+  "fire": {
+    "minimum": 0,
+    "maximum": 100000,
+    "initial": 30000,
+    "heat_per_tick": 250,
+    "cool_per_tick": 150,
+    "green_min": 45000,
+    "green_max": 55000,
+    "required_green_ms": 3000,
+    "stability_scale": 1000,
+    "outside_penalty": 8,
+    "stability_scope": "after_first_green",
+    "completion": "stop_at_threshold"
+  },
+  "quality": {
+    "scale": 1000,
+    "distance_weight": 650,
+    "fire_weight": 350,
+    "levels": [
+      {
+        "id": "standard",
+        "label": "普通",
+        "minimum_score": 0,
+        "sell_multiplier_q": 1000,
+        "effect_multiplier_q": 1000
+      },
+      {
+        "id": "fine",
+        "label": "精制",
+        "minimum_score": 600,
+        "sell_multiplier_q": 1200,
+        "effect_multiplier_q": 1100
+      },
+      {
+        "id": "superior",
+        "label": "上品",
+        "minimum_score": 850,
+        "sell_multiplier_q": 1500,
+        "effect_multiplier_q": 1250
+      }
+    ]
+  },
+  "economy": {
+    "cost_scaling": "linear",
+    "experience_per_portion": 1,
+    "research_coins_on_discovery": 0
+  },
+  "experiment": {
+    "miss_policy": "consume_without_product",
+    "tie_break": "priority_then_target_id",
+    "discover_on_commit": true,
+    "minutes_per_portion": 30,
+    "energy_per_portion": 5,
+    "experience_on_miss": 0
+  },
+  "effect_policy": {
+    "version": 3,
+    "legacy_policy": "unchanged",
+    "transforms": [
+      {
+        "kind": "attribute",
+        "fields": [
+          "amount"
+        ],
+        "rounding": "floor",
+        "minimum": 1,
+        "maximum": 100
+      },
+      {
+        "kind": "patience",
+        "fields": [
+          "minutes",
+          "max_extension_minutes"
+        ],
+        "rounding": "floor",
+        "minimum": 1,
+        "maximum": 240
+      },
+      {
+        "kind": "traffic",
+        "fields": [
+          "amount"
+        ],
+        "rounding": "rational",
+        "minimum": 0,
+        "maximum": 2
+      }
+    ],
+    "passthrough_kinds": [
+      "option",
+      "event",
+      "relationship",
+      "clue"
+    ]
+  },
+  "targets": {
+    "calming_incense": {
+      "recipe_id": "calming_incense",
+      "variant_id": "",
+      "output": "calming_incense",
+      "name": "定心香配方",
+      "minimum_ingredients": {
+        "lavender": 1,
+        "spring_water": 1
+      },
+      "allowed_ingredients": [
+        "lavender",
+        "spring_water"
+      ],
+      "center": [
+        -400,
+        300
+      ],
+      "radius": 240,
+      "discovery_radius": 180,
+      "priority": 1,
+      "minutes": 20,
+      "energy": 6,
+      "hint": {
+        "center": [
+          -400,
+          200
+        ],
+        "radius": 480,
+        "copy_key": "inspiration_hint"
+      }
+    },
+    "restorative_draught": {
+      "recipe_id": "restorative_draught",
+      "variant_id": "",
+      "output": "restorative_draught",
+      "name": "醒神药水配方",
+      "minimum_ingredients": {
+        "lavender": 1,
+        "spring_water": 2
+      },
+      "allowed_ingredients": [
+        "lavender",
+        "spring_water"
+      ],
+      "center": [
+        -400,
+        500
+      ],
+      "radius": 240,
+      "discovery_radius": 180,
+      "priority": 2,
+      "minutes": 25,
+      "energy": 8,
+      "hint": {
+        "center": [
+          -400,
+          400
+        ],
+        "radius": 480,
+        "copy_key": "inspiration_hint"
+      }
+    },
+    "restorative_draught_mint": {
+      "recipe_id": "restorative_draught",
+      "variant_id": "restorative_draught_mint",
+      "output": "restorative_draught",
+      "name": "薄荷醒神药水",
+      "minimum_ingredients": {
+        "dried_mint": 1,
+        "spring_water": 1,
+        "glass_vial": 1
+      },
+      "allowed_ingredients": [
+        "dried_mint",
+        "glass_vial",
+        "spring_water"
+      ],
+      "center": [
+        400,
+        400
+      ],
+      "radius": 240,
+      "discovery_radius": 180,
+      "priority": 3,
+      "minutes": 30,
+      "energy": 10,
+      "hint": {
+        "center": [
+          400,
+          400
+        ],
+        "radius": 480,
+        "copy_key": "inspiration_hint"
+      }
+    },
+    "clarity_crystal": {
+      "recipe_id": "clarity_crystal",
+      "variant_id": "",
+      "output": "clarity_crystal",
+      "name": "澄心晶配方",
+      "minimum_ingredients": {
+        "quartz": 1,
+        "spring_water": 1
+      },
+      "allowed_ingredients": [
+        "quartz",
+        "spring_water"
+      ],
+      "center": [
+        -250,
+        300
+      ],
+      "radius": 240,
+      "discovery_radius": 180,
+      "priority": 4,
+      "minutes": 30,
+      "energy": 10,
+      "hint": {
+        "center": [
+          -400,
+          200
+        ],
+        "radius": 480,
+        "copy_key": "inspiration_hint"
+      }
+    },
+    "clarity_crystal_resin": {
+      "recipe_id": "clarity_crystal",
+      "variant_id": "clarity_crystal_resin",
+      "output": "clarity_crystal",
+      "name": "树脂澄心晶",
+      "minimum_ingredients": {
+        "quartz": 1,
+        "moon_dust": 1
+      },
+      "allowed_ingredients": [
+        "moon_dust",
+        "quartz"
+      ],
+      "center": [
+        -450,
+        0
+      ],
+      "radius": 240,
+      "discovery_radius": 180,
+      "priority": 5,
+      "minutes": 35,
+      "energy": 12,
+      "hint": {
+        "center": [
+          -600,
+          0
+        ],
+        "radius": 480,
+        "copy_key": "inspiration_hint"
+      }
+    },
+    "focus_candle": {
+      "recipe_id": "focus_candle",
+      "variant_id": "",
+      "output": "focus_candle",
+      "name": "专注蜡烛配方",
+      "minimum_ingredients": {
+        "beeswax": 1,
+        "cotton_thread": 1
+      },
+      "allowed_ingredients": [
+        "beeswax",
+        "cotton_thread"
+      ],
+      "center": [
+        -100,
+        -200
+      ],
+      "radius": 240,
+      "discovery_radius": 180,
+      "priority": 6,
+      "minutes": 25,
+      "energy": 8,
+      "hint": {
+        "center": [
+          -200,
+          -200
+        ],
+        "radius": 480,
+        "copy_key": "inspiration_hint"
+      }
+    },
+    "focus_candle_mint": {
+      "recipe_id": "focus_candle",
+      "variant_id": "focus_candle_mint",
+      "output": "focus_candle",
+      "name": "薄荷专注蜡烛",
+      "minimum_ingredients": {
+        "beeswax": 1,
+        "cotton_thread": 1,
+        "dried_mint": 1
+      },
+      "allowed_ingredients": [
+        "beeswax",
+        "cotton_thread",
+        "dried_mint"
+      ],
+      "center": [
+        300,
+        0
+      ],
+      "radius": 240,
+      "discovery_radius": 180,
+      "priority": 7,
+      "minutes": 30,
+      "energy": 10,
+      "hint": {
+        "center": [
+          200,
+          0
+        ],
+        "radius": 480,
+        "copy_key": "inspiration_hint"
+      }
+    },
+    "welcome_sachet": {
+      "recipe_id": "welcome_sachet",
+      "variant_id": "",
+      "output": "welcome_sachet",
+      "name": "迎客香囊配方",
+      "minimum_ingredients": {
+        "mugwort": 1,
+        "cotton_thread": 1
+      },
+      "allowed_ingredients": [
+        "cotton_thread",
+        "mugwort"
+      ],
+      "center": [
+        -150,
+        -250
+      ],
+      "radius": 240,
+      "discovery_radius": 180,
+      "priority": 8,
+      "minutes": 25,
+      "energy": 8,
+      "hint": {
+        "center": [
+          -200,
+          -400
+        ],
+        "radius": 480,
+        "copy_key": "inspiration_hint"
+      }
+    },
+    "patience_charm": {
+      "recipe_id": "patience_charm",
+      "variant_id": "",
+      "output": "patience_charm",
+      "name": "缓心护符配方",
+      "minimum_ingredients": {
+        "red_thread": 1,
+        "cotton_thread": 1
+      },
+      "allowed_ingredients": [
+        "cotton_thread",
+        "red_thread"
+      ],
+      "center": [
+        50,
+        -50
+      ],
+      "radius": 240,
+      "discovery_radius": 180,
+      "priority": 9,
+      "minutes": 25,
+      "energy": 8,
+      "hint": {
+        "center": [
+          0,
+          -200
+        ],
+        "radius": 480,
+        "copy_key": "inspiration_hint"
+      }
+    },
+    "memory_lens": {
+      "recipe_id": "memory_lens",
+      "variant_id": "",
+      "output": "memory_lens",
+      "name": "细察晶片配方",
+      "minimum_ingredients": {
+        "quartz": 1,
+        "blue_glass": 1
+      },
+      "allowed_ingredients": [
+        "blue_glass",
+        "quartz"
+      ],
+      "center": [
+        -300,
+        350
+      ],
+      "radius": 240,
+      "discovery_radius": 180,
+      "priority": 10,
+      "minutes": 30,
+      "energy": 10,
+      "hint": {
+        "center": [
+          -400,
+          200
+        ],
+        "radius": 480,
+        "copy_key": "inspiration_hint"
+      }
+    },
+    "friendship_knot": {
+      "recipe_id": "friendship_knot",
+      "variant_id": "",
+      "output": "friendship_knot",
+      "name": "和谈绳结配方",
+      "minimum_ingredients": {
+        "cotton_thread": 1,
+        "old_key": 1
+      },
+      "allowed_ingredients": [
+        "cotton_thread",
+        "old_key"
+      ],
+      "center": [
+        -100,
+        -50
+      ],
+      "radius": 240,
+      "discovery_radius": 180,
+      "priority": 11,
+      "minutes": 25,
+      "energy": 8,
+      "hint": {
+        "center": [
+          -200,
+          -200
+        ],
+        "radius": 480,
+        "copy_key": "inspiration_hint"
+      }
+    },
+    "fresh_air_incense": {
+      "recipe_id": "fresh_air_incense",
+      "variant_id": "",
+      "output": "fresh_air_incense",
+      "name": "清风线香配方",
+      "minimum_ingredients": {
+        "pine_needle": 1,
+        "reed_stem": 1
+      },
+      "allowed_ingredients": [
+        "pine_needle",
+        "reed_stem"
+      ],
+      "center": [
+        0,
+        250
+      ],
+      "radius": 240,
+      "discovery_radius": 180,
+      "priority": 12,
+      "minutes": 20,
+      "energy": 6,
+      "hint": {
+        "center": [
+          0,
+          200
+        ],
+        "radius": 480,
+        "copy_key": "inspiration_hint"
+      }
+    },
+    "fresh_air_incense_salt": {
+      "recipe_id": "fresh_air_incense",
+      "variant_id": "fresh_air_incense_salt",
+      "output": "fresh_air_incense",
+      "name": "盐香清风线香",
+      "minimum_ingredients": {
+        "pine_needle": 1,
+        "reed_stem": 1,
+        "sea_salt": 1
+      },
+      "allowed_ingredients": [
+        "pine_needle",
+        "reed_stem",
+        "sea_salt"
+      ],
+      "center": [
+        50,
+        400
+      ],
+      "radius": 240,
+      "discovery_radius": 180,
+      "priority": 13,
+      "minutes": 25,
+      "energy": 8,
+      "hint": {
+        "center": [
+          0,
+          400
+        ],
+        "radius": 480,
+        "copy_key": "inspiration_hint"
+      }
+    },
+    "night_tea": {
+      "recipe_id": "night_tea",
+      "variant_id": "",
+      "output": "night_tea",
+      "name": "晚间茶包配方",
+      "minimum_ingredients": {
+        "dried_mint": 1,
+        "spring_water": 1
+      },
+      "allowed_ingredients": [
+        "dried_mint",
+        "spring_water"
+      ],
+      "center": [
+        400,
+        400
+      ],
+      "radius": 240,
+      "discovery_radius": 180,
+      "priority": 14,
+      "minutes": 20,
+      "energy": 6,
+      "hint": {
+        "center": [
+          400,
+          400
+        ],
+        "radius": 480,
+        "copy_key": "inspiration_hint"
+      }
+    },
+    "grounding_stone": {
+      "recipe_id": "grounding_stone",
+      "variant_id": "",
+      "output": "grounding_stone",
+      "name": "安稳石配方",
+      "minimum_ingredients": {
+        "quartz": 1,
+        "river_clay": 1,
+        "iron_flake": 1
+      },
+      "allowed_ingredients": [
+        "iron_flake",
+        "quartz",
+        "river_clay"
+      ],
+      "center": [
+        -250,
+        -150
+      ],
+      "radius": 240,
+      "discovery_radius": 180,
+      "priority": 15,
+      "minutes": 30,
+      "energy": 10,
+      "hint": {
+        "center": [
+          -400,
+          -200
+        ],
+        "radius": 480,
+        "copy_key": "inspiration_hint"
+      }
+    },
+    "soothing_candle": {
+      "recipe_id": "soothing_candle",
+      "variant_id": "",
+      "output": "soothing_candle",
+      "name": "舒缓蜡烛配方",
+      "minimum_ingredients": {
+        "beeswax": 1,
+        "mugwort": 1,
+        "cotton_thread": 1
+      },
+      "allowed_ingredients": [
+        "beeswax",
+        "cotton_thread",
+        "mugwort"
+      ],
+      "center": [
+        -250,
+        -450
+      ],
+      "radius": 240,
+      "discovery_radius": 180,
+      "priority": 16,
+      "minutes": 25,
+      "energy": 8,
+      "hint": {
+        "center": [
+          -400,
+          -600
+        ],
+        "radius": 480,
+        "copy_key": "inspiration_hint"
+      }
+    },
+    "bright_draught": {
+      "recipe_id": "bright_draught",
+      "variant_id": "",
+      "output": "bright_draught",
+      "name": "清醒药水配方",
+      "minimum_ingredients": {
+        "spring_water": 1,
+        "dried_mint": 1,
+        "glass_vial": 1,
+        "honey_drop": 1
+      },
+      "allowed_ingredients": [
+        "dried_mint",
+        "glass_vial",
+        "honey_drop",
+        "spring_water"
+      ],
+      "center": [
+        550,
+        200
+      ],
+      "radius": 240,
+      "discovery_radius": 180,
+      "priority": 17,
+      "minutes": 25,
+      "energy": 8,
+      "hint": {
+        "center": [
+          400,
+          200
+        ],
+        "radius": 480,
+        "copy_key": "inspiration_hint"
+      }
+    },
+    "clear_thought_tea": {
+      "recipe_id": "clear_thought_tea",
+      "variant_id": "",
+      "output": "clear_thought_tea",
+      "name": "理绪茶包配方",
+      "minimum_ingredients": {
+        "dried_mint": 1,
+        "reed_stem": 1
+      },
+      "allowed_ingredients": [
+        "dried_mint",
+        "reed_stem"
+      ],
+      "center": [
+        300,
+        350
+      ],
+      "radius": 240,
+      "discovery_radius": 180,
+      "priority": 18,
+      "minutes": 25,
+      "energy": 8,
+      "hint": {
+        "center": [
+          200,
+          200
+        ],
+        "radius": 480,
+        "copy_key": "inspiration_hint"
+      }
+    },
+    "together_sachet": {
+      "recipe_id": "together_sachet",
+      "variant_id": "",
+      "output": "together_sachet",
+      "name": "相伴香包配方",
+      "minimum_ingredients": {
+        "cotton_thread": 1,
+        "red_thread": 1,
+        "lavender": 1
+      },
+      "allowed_ingredients": [
+        "cotton_thread",
+        "lavender",
+        "red_thread"
+      ],
+      "center": [
+        -350,
+        50
+      ],
+      "radius": 240,
+      "discovery_radius": 180,
+      "priority": 19,
+      "minutes": 30,
+      "energy": 10,
+      "hint": {
+        "center": [
+          -400,
+          0
+        ],
+        "radius": 480,
+        "copy_key": "inspiration_hint"
+      }
+    }
+  },
+  "ui": {
+    "expected_seconds": [
+      20,
+      30
+    ],
+    "layout": {
+      "maximum_width": 1440,
+      "minimum_font": 22,
+      "material_columns": 3,
+      "potency_size_ratio": 0.24,
+      "mortar_size_ratio": 0.3,
+      "design_width": 1440,
+      "design_height": 930,
+      "board_size": 320,
+      "shelf_width": 350,
+      "gap": 16,
+      "padding": 34
+    },
+    "resources": {
+      "background": "res://assets/generated_scenes/runtime/v3_final/S05/day/v3r2/C.png",
+      "mortar": "res://assets/generated_scenes/v2/slices/S05_mortar.png",
+      "drop_sound": "res://assets/audio/ui/click.ogg",
+      "grind_sound": "res://assets/audio/ui/page.ogg",
+      "fire_sound": "res://assets/audio/ui/click.ogg",
+      "success_sound": "res://assets/audio/ui/confirm.ogg",
+      "cancel_sound": "res://assets/audio/ui/cancel.ogg"
+    },
+    "copy": {
+      "title": "亲手做一炉",
+      "loading": "一 · 投料",
+      "grinding": "二 · 研磨",
+      "heating": "三 · 火候",
+      "calm": "安神",
+      "alert": "提神",
+      "warm": "温",
+      "cool": "凉",
+      "ingredient_count": "库存 {stock} · 每份已放 {selected}",
+      "quantity": "制作 {quantity} 份",
+      "start": "开始研磨",
+      "hold_grind": "按住研钵画圈，慢慢磨匀。",
+      "spill": "转得太快，洒出了一点；品质可能降低一档。",
+      "hold_fire": "按住添火，松手降温；在绿色区累计三秒。",
+      "inspiration_hint": "手记中的灵感大约在这里。",
+      "experiment": "自由实验",
+      "unknown": "没有配方也可以试试；未成形的实验仍会消耗投入的原料。",
+      "finalize": "收锅并保存",
+      "cancel": "收回原料",
+      "saving": "正在保存这一炉……",
+      "saved": "{item}做好了，品质为{quality}。",
+      "discovered": "新配方！已记入配方册。",
+      "invalid_config": "工坊资料暂不可用。",
+      "invalid_draft": "操作记录不完整，请重新摆好这一炉。",
+      "materials_low": "原料不足，这一炉没有开始。",
+      "incomplete_grind": "还要再慢慢磨几圈。",
+      "incomplete_fire": "火候还差一点，请继续。",
+      "no_match": "这一炉还没成形。原料已经用掉，新的尝试会更有把握。",
+      "stale": "存档已变化，请重新摆好这一炉。",
+      "retry": "保存未成功，原料未消耗，可以重试。",
+      "debug": "调试：一键制作",
+      "reset": "重新投料",
+      "feed_hint": "将原料拖入研钵，也可以点一下纸签投料。每份按左侧用量加入。",
+      "known": "配方目标区",
+      "ready": "这一炉火候到了，可以收锅。",
+      "cost": "每份：{minutes} 分钟 · {energy} 精力",
+      "selected": "已放：{items}",
+      "no_ingredients": "先放入原料。",
+      "fire_status": "绿区 {seconds} / 3 秒 · 稳定度 {stability}%",
+      "grind_status": "研磨 {percent}%",
+      "completed": "这一炉已经收好。",
+      "close": "离开工坊"
+    },
+    "visual": {
+      "ink": "#46352a",
+      "paper": "#efe5cf",
+      "target": "#7e9b8055",
+      "hint": "#b292bb44",
+      "pointer": "#aa493c",
+      "green": "#91a37c",
+      "fire": "#b66e45",
+      "dim": "#21180f40",
+      "line": "#947d5b",
+      "marker_radius": 7,
+      "target_steps": 64,
+      "axis_inset": 26,
+      "mortar_radius_ratio": 0.36,
+      "ring_width": 7,
+      "smoothing_seconds": 0.22
+    }
+  }
+}

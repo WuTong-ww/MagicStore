@@ -127,6 +127,7 @@ func trajectory(seed_value: int, strategy: Dictionary, pair: String, mode: Strin
 	root.add_child(game)
 	# Preserve the pre-loop economic trajectory and real-time arrival rules.
 	game.daily_loop_config.enabled = false
+	game.shop_config.debug_one_click = true
 	game.configure_api("","","")
 	game.set_people_generation_options(false)
 	var folder: String = output_dir+"/"+pair+"/"+mode

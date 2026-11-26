@@ -41,6 +41,8 @@ func settle() -> void:
 
 func run() -> void:
 	game = root.get_node("GameState")
+	# Explicit legacy debug coverage; normal player path stays three-step.
+	game.shop_config.debug_one_click = true
 	# This fixture retains the pre-loop reception and transaction contract.
 	game.daily_loop_config.enabled = false
 	saves = root.get_node("SaveService")

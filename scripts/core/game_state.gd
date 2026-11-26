@@ -35,7 +35,7 @@ const EmergentRegistry = preload("res://scripts/divination/emergent_case_registr
 const EmergentCopy = preload("res://scripts/divination/emergent_case_copy.gd")
 const CaseCoordinator = preload("res://scripts/providers/case_generation_coordinator.gd")
 const CaseTransport = preload("res://scripts/providers/case_transport_config.gd")
-const SHOP_ACTIONS := ["procure_item", "receive_material_gift", "gather_material", "sell_material", "register_demand", "research_recipe", "craft_item", "sell_product", "use_product", "review_case"]
+const SHOP_ACTIONS := ["procure_item", "receive_material_gift", "gather_material", "sell_material", "register_demand", "research_recipe", "craft_item", "craft_finalize", "sell_product", "use_product", "review_case"]
 const PEOPLE_ACTIONS := ["book_arrival", "save_appearance", "wait", "invite_contact"]
 var shop_config: Dictionary = {}
 var people_config: Dictionary = {}
@@ -1307,6 +1307,7 @@ func _initialize_integrated(candidate: Dictionary, fresh: bool = false, candidat
 	if int(candidate.schema_version) < 16:
 		if not _sync_person_variation(candidate): return false
 		candidate.schema_version = 16
+	if int(candidate.schema_version) < 17: candidate.schema_version = 17
 	return People.validate(candidate.people).is_empty()
 
 func _sync_person_variation(candidate: Dictionary) -> bool:
@@ -1464,7 +1465,9 @@ func _shop_action(action: Dictionary) -> Dictionary:
 	var components: Array = []
 	var use_context := {}
 	if action.type == "use_product" and shop_config.get("items",{}).has(action.get("item_id")):
-		components = Shop.product_components(shop_config.items[action.item_id],shop_config)
+		var resolved := Shop.effective_product_components(candidate,action,shop_config)
+		if not resolved.success: return _fail(resolved.error_code,resolved.message)
+		components = resolved.components
 		use_context = {"item_use_id":"use_"+action.action_id,"transaction_id":str(action.get("transaction_id","")),"item_id":action.item_id,"at":int(candidate.clock_minutes)}
 		var preview: Dictionary = _divination.preview_product_components(candidate,_candidate_visit(candidate),components,use_context)
 		if not preview.success:
@@ -1477,7 +1480,7 @@ func _shop_action(action: Dictionary) -> Dictionary:
 		return _fail(outcome.error_code, outcome.message)
 	if outcome.get("result", {}).has("item_use"):
 		var use: Dictionary = outcome.result.item_use
-		if use.get("version") == 2:
+		if use.get("version") in [2,3]:
 			var applied: Dictionary = _divination.apply_product_components(candidate,_candidate_visit(candidate),components,use_context)
 			if not applied.success:
 				return _fail(applied.error_code,applied.message)

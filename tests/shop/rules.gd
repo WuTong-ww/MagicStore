@@ -15,6 +15,7 @@ func _initialize() -> void:
 	# handoff, before Session finalization or GameState's durable commit. The v2
 	# committed component contract has its own real async integration targets.
 	data = JSON.parse_string(FileAccess.get_file_as_string("res://tests/shop/fixtures/catalog_v1.json"))
+	data.debug_one_click = true
 	data["rules"] = production.get("rules",{}).duplicate(true)
 	data["legacy_gift"] = production.get("legacy_gift",{}).duplicate(true)
 	check(Shop.config_valid(data), "historical rule input still uses the actual shared clock and energy configuration")

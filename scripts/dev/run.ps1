@@ -67,6 +67,9 @@ try {
     }
     if ($Test) {
         Invoke-Godot @('--headless', '--path', $repo, '--import')
+        foreach ($craftTarget in @('tests/shop/crafting.gd','tests/integration/craft_migration.gd')) {
+            Invoke-Godot @('--headless', '--path', $repo, '--script', "res://$craftTarget")
+        }
         # The shared schema16 boundary is verified once with the full suite.
         foreach ($personTarget in @('tests/people/nationality.gd','tests/people/face_details.gd','tests/integration/person_details_migration.gd')) {
             Invoke-Godot @('--headless', '--path', $repo, '--script', "res://$personTarget")

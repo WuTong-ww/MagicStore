@@ -46,7 +46,7 @@ func run() -> void:
 		finish()
 		return
 	var migrated: Dictionary = game.snapshot()
-	check(migrated.schema_version == 16 and N.state_valid(migrated.people) and F.state_valid(migrated.people,A.load_config()),"schema16 initializes country and facial detail policy")
+	check(migrated.schema_version == preload("res://scripts/save/schema_version.gd").CURRENT and N.state_valid(migrated.people) and F.state_valid(migrated.people,A.load_config()),"schema16 boundary initializes country and facial detail policy in current schema")
 	for id: String in old.people.profiles:
 		var previous: Dictionary = old.people.profiles[id]
 		var projected: Dictionary = Projection.before16(migrated.people,old.people).profiles[id]
@@ -58,7 +58,7 @@ func run() -> void:
 	var reply: Dictionary = await game.execute_action_async(action)
 	check(not reply.get("success",false) and game.snapshot() == migrated and FileAccess.get_sha256(path) == SHA,"failed first write publishes neither migration nor action")
 	reply = await game.execute_action_async(action)
-	check(reply.get("success",false) and saves.read_save(SAVE_ID).state.schema_version == 16,"successful retry durably writes current schema / "+str(reply.get("error_code",""))+" / "+str(reply.get("message","")))
+	check(reply.get("success",false) and saves.read_save(SAVE_ID).state.schema_version == preload("res://scripts/save/schema_version.gd").CURRENT,"successful retry durably writes current schema / "+str(reply.get("error_code",""))+" / "+str(reply.get("message","")))
 	if not reply.get("success",false):
 		print("MIGRATED_SNAPSHOT_VALIDATION ",saves.validate_snapshot(game.snapshot()))
 		finish()

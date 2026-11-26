@@ -100,6 +100,8 @@ func run() -> void:
 			"flow": invalid.flow.need_tags = "rest"
 		check(not config_valid(invalid),"invalid capture configuration rejects / "+key)
 	game = root.get_node("GameState")
+	# Explicit legacy debug coverage; normal player path stays three-step.
+	game.shop_config.debug_one_click = true
 	# This fixture retains the pre-loop reception and transaction contract.
 	game.daily_loop_config.enabled = false
 	var catalog: Dictionary = game.shop_config

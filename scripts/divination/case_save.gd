@@ -267,7 +267,7 @@ static func _product_records(case: Dictionary, visit: Dictionary, state: Diction
 			if entry is Dictionary and entry.get("item_use_id") == row.item_use_id:
 				use = entry
 				break
-		if use.get("version") != 2 or use.get("visit_id") != visit.visit_id or use.get("item_id") != row.item_id or use.get("transaction_id") != row.transaction_id or use.get("at") != row.at:
+		if use.get("version") not in [2,3] or use.get("visit_id") != visit.visit_id or use.get("item_id") != row.item_id or use.get("transaction_id") != row.transaction_id or use.get("at") != row.at:
 			return false
 		var matching := false
 		for component: Variant in use.get("component_results",[]):

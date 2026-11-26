@@ -16,6 +16,7 @@ func check(value: bool, label: String) -> void:
 
 func legacy_config() -> Dictionary:
 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://tests/shop/fixtures/catalog_v1.json"))
+	data.debug_one_click = true
 	data.rules = Content.load_content().content.rules.duplicate(true)
 	return Shop._normalize(data)
 

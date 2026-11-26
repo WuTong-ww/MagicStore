@@ -11,6 +11,10 @@
       "purchase_allowed": true,
       "secondary_sources": [
         "purchase"
+      ],
+      "potency_vector": [
+        -400,
+        100
       ]
     },
     "spring_water": {
@@ -23,6 +27,10 @@
       "purchase_allowed": true,
       "secondary_sources": [
         "gather"
+      ],
+      "potency_vector": [
+        0,
+        200
       ]
     },
     "quartz": {
@@ -35,6 +43,10 @@
       "purchase_allowed": true,
       "secondary_sources": [
         "gather"
+      ],
+      "potency_vector": [
+        -250,
+        100
       ]
     },
     "moon_dust": {
@@ -48,6 +60,10 @@
       "purchase_allowed": true,
       "secondary_sources": [
         "gather"
+      ],
+      "potency_vector": [
+        -200,
+        -100
       ]
     },
     "calming_incense": {
@@ -102,7 +118,11 @@
       "visual_key": "beeswax",
       "primary_source": "purchase",
       "purchase_allowed": true,
-      "secondary_sources": []
+      "secondary_sources": [],
+      "potency_vector": [
+        -100,
+        -200
+      ]
     },
     "cotton_thread": {
       "name": "棉线团",
@@ -112,7 +132,11 @@
       "visual_key": "cotton_thread",
       "primary_source": "purchase",
       "purchase_allowed": true,
-      "secondary_sources": []
+      "secondary_sources": [],
+      "potency_vector": [
+        0,
+        0
+      ]
     },
     "dried_mint": {
       "name": "干薄荷",
@@ -122,7 +146,11 @@
       "visual_key": "dried_mint",
       "primary_source": "purchase",
       "purchase_allowed": true,
-      "secondary_sources": []
+      "secondary_sources": [],
+      "potency_vector": [
+        400,
+        200
+      ]
     },
     "sea_salt": {
       "name": "海盐",
@@ -132,7 +160,11 @@
       "visual_key": "sea_salt",
       "primary_source": "purchase",
       "purchase_allowed": true,
-      "secondary_sources": []
+      "secondary_sources": [],
+      "potency_vector": [
+        50,
+        150
+      ]
     },
     "glass_vial": {
       "name": "磨砂小瓶",
@@ -142,7 +174,11 @@
       "visual_key": "glass_vial",
       "primary_source": "purchase",
       "purchase_allowed": true,
-      "secondary_sources": []
+      "secondary_sources": [],
+      "potency_vector": [
+        0,
+        0
+      ]
     },
     "pine_needle": {
       "name": "松针束",
@@ -152,7 +188,11 @@
       "visual_key": "pine_needle",
       "primary_source": "gather",
       "purchase_allowed": false,
-      "secondary_sources": []
+      "secondary_sources": [],
+      "potency_vector": [
+        100,
+        100
+      ]
     },
     "mugwort": {
       "name": "艾叶",
@@ -162,7 +202,11 @@
       "visual_key": "mugwort",
       "primary_source": "gather",
       "purchase_allowed": false,
-      "secondary_sources": []
+      "secondary_sources": [],
+      "potency_vector": [
+        -150,
+        -250
+      ]
     },
     "reed_stem": {
       "name": "芦苇茎",
@@ -172,7 +216,11 @@
       "visual_key": "reed_stem",
       "primary_source": "gather",
       "purchase_allowed": false,
-      "secondary_sources": []
+      "secondary_sources": [],
+      "potency_vector": [
+        -100,
+        150
+      ]
     },
     "river_clay": {
       "name": "河泥陶团",
@@ -182,7 +230,11 @@
       "visual_key": "river_clay",
       "primary_source": "gather",
       "purchase_allowed": false,
-      "secondary_sources": []
+      "secondary_sources": [],
+      "potency_vector": [
+        -200,
+        -100
+      ]
     },
     "iron_flake": {
       "name": "旧铁片",
@@ -192,7 +244,11 @@
       "visual_key": "iron_flake",
       "primary_source": "gather",
       "purchase_allowed": false,
-      "secondary_sources": []
+      "secondary_sources": [],
+      "potency_vector": [
+        200,
+        -150
+      ]
     },
     "honey_drop": {
       "name": "蜂蜜小瓶",
@@ -202,7 +258,11 @@
       "visual_key": "honey_drop",
       "primary_source": "gift_hidden",
       "purchase_allowed": false,
-      "secondary_sources": []
+      "secondary_sources": [],
+      "potency_vector": [
+        150,
+        -200
+      ]
     },
     "old_key": {
       "name": "旧铜钥匙",
@@ -212,7 +272,11 @@
       "visual_key": "old_key",
       "primary_source": "gift_hidden",
       "purchase_allowed": false,
-      "secondary_sources": []
+      "secondary_sources": [],
+      "potency_vector": [
+        -100,
+        -50
+      ]
     },
     "blue_glass": {
       "name": "蓝玻璃片",
@@ -222,7 +286,11 @@
       "visual_key": "blue_glass",
       "primary_source": "gift_hidden",
       "purchase_allowed": false,
-      "secondary_sources": []
+      "secondary_sources": [],
+      "potency_vector": [
+        -50,
+        250
+      ]
     },
     "red_thread": {
       "name": "暗红线结",
@@ -232,7 +300,11 @@
       "visual_key": "red_thread",
       "primary_source": "gift_hidden",
       "purchase_allowed": false,
-      "secondary_sources": []
+      "secondary_sources": [],
+      "potency_vector": [
+        50,
+        -50
+      ]
     },
     "focus_candle": {
       "name": "专注蜡烛",
@@ -797,6 +869,10 @@
     "fine": {
       "label": "精制",
       "sell_multiplier": 1.2
+    },
+    "superior": {
+      "label": "上品",
+      "sell_multiplier": 1.5
     }
   },
   "recipe_variants": {
@@ -894,5 +970,6 @@
     "tool_clue": "已记录本案工具线索及其来源。",
     "event_pending": "已记录商品用途，等待本案真实结果。",
     "npc_feedback": "已关联来客实际反馈及原商品批次。"
-  }
+  },
+  "debug_one_click": false
 }
