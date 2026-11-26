@@ -1,0 +1,324 @@
+{
+  "scope": "R3-WEB observed notebook/chrome pointer collision",
+  "finding": "At short viewport height, the visible front study button was drawn above the settings button but GUI picking still selected settings.",
+  "change": "Expanded notebooks receive GUI input ahead of wooden chrome; collapsing restores prior tree order. Drawing remains independently ordered from responsive config.",
+  "pointer": {
+    "label": "web-drawer-input-a1",
+    "target": "tests/integration/web_drawer_input.gd",
+    "exit_code": 0,
+    "seconds": 61.781,
+    "source_sha256": "7a4d4e31947e24696d168e8fab944c3798a9d2dbd59542c2d8aadad21cd3ad63",
+    "source_unchanged": true,
+    "summaries": [
+      "WEB DRAWER INPUT: 12 checks, 0 failures"
+    ],
+    "error_lines": [],
+    "log_sha256": "6eab4a5702dbbaf5cc40332403671939c07346ed924ae8c347e568b63b755d5a",
+    "host_timeout_360_seconds": false
+  },
+  "shop": {
+    "label": "web-drawer-shop-a1",
+    "target": "tests/integration/shop_ui.gd",
+    "exit_code": 0,
+    "seconds": 231.64,
+    "source_sha256": "62e83769e3616fa0249a396c45ec039bfb339d34dcd947751ffe64d52205d0db",
+    "source_unchanged": true,
+    "summaries": [
+      "C UI RESULT: 1681 checks, 0 failures, 30 graphical captures; renderer=Windows"
+    ],
+    "error_lines": [],
+    "log_sha256": "fae215af8a50c42d9af55681df9d0355888a775bfa43b1a7853e763053575000",
+    "host_timeout_360_seconds": false
+  },
+  "captures": [
+    {
+      "path": ".tools/c-ui-captures/catalog-icons-64px-page-1-1280.png",
+      "bytes": 1507898,
+      "sha256": "0a3270bc8f73ec70c0aabb9828e46990091078dfa3f284a72d90d706060c8008",
+      "pixels": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/catalog-icons-64px-page-1-1920.png",
+      "bytes": 3213362,
+      "sha256": "cca6cb99ccfe552a88c28129e24c28a197c7e72c7309cecfd3e982b6eba63e79",
+      "pixels": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/catalog-icons-64px-page-2-1280.png",
+      "bytes": 1505953,
+      "sha256": "3990a88485b1b9c5c0db0e8a80ee5c5f12888f73ef840a30cbd602dbe222ab73",
+      "pixels": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/catalog-icons-64px-page-2-1920.png",
+      "bytes": 3211016,
+      "sha256": "a09afbb6db57fde579ae78aac9a809650448c4880c60b8852addb82d460fecd0",
+      "pixels": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/catalog-icons-64px-page-3-1280.png",
+      "bytes": 1511158,
+      "sha256": "069282d370b7ebe8faa1bfd440809404aed790d1e5ab6313553ed8fee76747f8",
+      "pixels": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/catalog-icons-64px-page-3-1920.png",
+      "bytes": 3216909,
+      "sha256": "315142a017ba7ea1ed20654589cb443c4c179f49b47fd54dc53cc327d5416cb1",
+      "pixels": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/catalog-icons-64px-page-4-1280.png",
+      "bytes": 1505309,
+      "sha256": "6c46b59b1f5fb8593a42c6e884aedfa461ccc96db48b0b6de952a27a46884cc5",
+      "pixels": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/catalog-icons-64px-page-4-1920.png",
+      "bytes": 3210207,
+      "sha256": "7a6dd0e2e4ed75cc9332ee7d2f54af3b83de3b4cfc5f8f54a17085cf4c6b3cde",
+      "pixels": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/consultation-1280.png",
+      "bytes": 1382817,
+      "sha256": "2f6f7ec9dc87bdc9b994315978892701d668f68b6e245408870bd9545f966ccf",
+      "pixels": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/consultation-1920.png",
+      "bytes": 3220336,
+      "sha256": "d5c693bc29e662dc54640528cea580649a129eb1e65e0eadefd81bdc99a1fc57",
+      "pixels": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/exterior-1280.png",
+      "bytes": 1558500,
+      "sha256": "82a8210b1143e1dd3badfd4ebf14bbbb6a251ee0a91a483e74ec7c65ce13909d",
+      "pixels": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/exterior-1920.png",
+      "bytes": 3544447,
+      "sha256": "3f05a13581e5fe36de505f4bc15630daf17418e8aae93ae9c58a4ac554a42146",
+      "pixels": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/front-1280.png",
+      "bytes": 1554940,
+      "sha256": "7f1ca520c0b82bda2b9c343ad46405799d3180c62259010edc4c58e4fa2913f4",
+      "pixels": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/front-1920.png",
+      "bytes": 3365055,
+      "sha256": "053882476f4fb00d8556cdf3a66842c935b5d6cfb34326dc91abd33cd1393d96",
+      "pixels": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/gathering-1280.png",
+      "bytes": 1496912,
+      "sha256": "1ffbd393a7ab5e0b8ee079dce0117e6695d5d72597d87008ba2b98e10277b91f",
+      "pixels": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/gathering-1920.png",
+      "bytes": 3430813,
+      "sha256": "33d6bd8a2654db5c387caefc6515110787add00dbba9592674d4fef8dc437d04",
+      "pixels": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/gathering-after-trade-1920.png",
+      "bytes": 3429760,
+      "sha256": "34b0ba71b1e482a87d38a2bb3684a9d092e77e72ae0e991b7b39126b5c6f58ae",
+      "pixels": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/inventory-1280.png",
+      "bytes": 1405616,
+      "sha256": "0aebb3974609ad06bc70a1cdabbb200e14f0ea6d8889fc353cadc33a0f6a2354",
+      "pixels": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/inventory-1920.png",
+      "bytes": 2960544,
+      "sha256": "e321d7ed44a452186474104c98d29c159755a9515859b3ffcc424b90fdf2bce3",
+      "pixels": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/market-1280.png",
+      "bytes": 1493355,
+      "sha256": "eb797e3e44fb2b821572b20806691619db033c3e82ad5fea556248a62a012179",
+      "pixels": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/market-1920.png",
+      "bytes": 3401222,
+      "sha256": "b1d5952e2e629ba9df9acedbd6ad400cda8b31ce0efc9c3c8eeb3f71a34bed24",
+      "pixels": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/market-after-trade-1920.png",
+      "bytes": 3397839,
+      "sha256": "2c5cd796704fc22be8da53621b3ef7b9fa64540dab7f1ce4b95f6c7e30bd0ae2",
+      "pixels": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/network-1280.png",
+      "bytes": 1491151,
+      "sha256": "9d3e1b5dfd36f6289d7a4f7708394f1656e5f057bbd2f4d8d93c0c2ac1d7a5db",
+      "pixels": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/network-1920.png",
+      "bytes": 3187959,
+      "sha256": "a2bc36af028afaeb94ed104020e1e798a12879b13cb4794a5e0033a6d7089237",
+      "pixels": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/people-1280.png",
+      "bytes": 1178097,
+      "sha256": "26a6e58b9a2b2eae42a97dd2a91c05476ddf437b0cd366060120a1145d0bfd96",
+      "pixels": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/people-1920.png",
+      "bytes": 2969392,
+      "sha256": "14cee77bb44526718fe6a7311eda72d5a50696d6f5e359ecf78616776bce1c1b",
+      "pixels": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/workshop-1280.png",
+      "bytes": 1477216,
+      "sha256": "8d5ebf609a307b891722df6d5fcd608440f0f85059211383c565f9d345bb569b",
+      "pixels": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/workshop-1920.png",
+      "bytes": 3333493,
+      "sha256": "6557c3158678cd3c32e5eefe10a04b9319eaf50f56ce0d41b55fb85fcdb264bb",
+      "pixels": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/zero-guest-front-1280.png",
+      "bytes": 1550863,
+      "sha256": "78eb8d0289b7117a534a1263877668bc68b30edf9eeeb1bdcc82a9b40cb0d628",
+      "pixels": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": ".tools/c-ui-captures/zero-guest-front-1920.png",
+      "bytes": 3358082,
+      "sha256": "d1f14e4c905ef2645fc8703c9f81a43d7f0e02d66d941ee29eeefd4e86c279b7",
+      "pixels": [
+        1920,
+        1080
+      ]
+    }
+  ],
+  "browser_status": "New deployment and live browser verification pending",
+  "full_standard_regression": "Original three failed rounds retained; no fourth full suite.",
+  "visual_review": {
+    "native_front_full_size": [
+      "front-1280.png",
+      "front-1920.png"
+    ],
+    "all_30_captures_reviewed_in_five_labeled_contact_sheets": true,
+    "known_limits": [
+      "Legacy guest status can wrap vertically; original POLISH partial status retained.",
+      "Existing letter corners and clipped first glyphs are not marked fixed by this input-order change."
+    ]
+  },
+  "source_sha256": {
+    "scripts/ui/main.gd": "d0e34f6b392f3468ab3e2d8964869fe20979878383e674886f69579b31f60b68",
+    "scripts/ui/paper_drawer.gd": "c67c3ad14510364eec6a674173d811a659f6b7374b75a2ebedd7b42c6f4f0f53",
+    "scripts/ui/case_board.gd": "0e83182afba5c00db0fd88411a9692bf69c1ba035a797b4d68aba8c8f5b453bc",
+    "tests/integration/web_drawer_input.gd": "7a4d4e31947e24696d168e8fab944c3798a9d2dbd59542c2d8aadad21cd3ad63"
+  }
+}

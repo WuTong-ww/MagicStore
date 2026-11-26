@@ -98,6 +98,7 @@ try {
             'tests/integration/polish_layout.gd',
             'tests/integration/polish_windows.gd',
             'tests/integration/polish_wheel.gd',
+            'tests/integration/web_drawer_input.gd',
             'tests/integration/polish_header.gd',
             'tests/integration/polish_panel_materials.gd',
             'tests/integration/polish_motion_lifecycle.gd',

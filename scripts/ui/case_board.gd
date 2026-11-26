@@ -1,4 +1,5 @@
 extends Control
+signal input_overlay_changed
 ## This screen consumes only the committed public projection. It never reads
 ## the case definition, card order, answers, or the private world state.
 const UI = preload("res://scripts/ui/ui_kit.gd")
@@ -741,6 +742,10 @@ func _layout_short_drawer() -> void:
 	_queue_material_pages()
 	_layout_material_speech()
 	_notify_material_dimming()
+	input_overlay_changed.emit()
+
+func input_overlay_open() -> bool:
+	return is_visible_in_tree() and drawer_open and is_instance_valid(paper) and paper.visible
 
 func set_drawer_expanded(value: bool, _animate: bool = false) -> void:
 	drawer_open = value

@@ -68,6 +68,7 @@ var busy := false
 var current_screen := "front"
 var screen: Control
 var scene_holder: Control
+var _scene_holder_input_index := 0
 var resources: Label
 var notice: Label
 var location: Label
@@ -175,6 +176,7 @@ func _build_shell() -> void:
 	scene_holder = Control.new()
 	scene_holder.name = "FullScreenScene"
 	add_child(scene_holder)
+	_scene_holder_input_index = scene_holder.get_index()
 	scene_holder.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	shell_header = PanelContainer.new()
 	shell_header.theme = load("res://themes/chrome.tres") if ResourceLoader.exists("res://themes/chrome.tres") else theme
@@ -253,6 +255,10 @@ func _build_shell() -> void:
 	# Keep the material on the physical strip; its labels remain live controls.
 	PanelMaterials.apply_panel(shell_header,"wood")
 	PanelMaterials.apply_panel(dock,"wood")
+	var responsive: Dictionary = ResponsiveConfig.load_config()
+	if not responsive.is_empty():
+		shell_header.z_index = int(responsive.overlay_z)-1
+		dock.z_index = shell_header.z_index
 	shell_header.set_meta("material_fixed_layout",true)
 	dock.set_meta("material_fixed_layout",true)
 	var place_dock := func(): _queue_presentation_chrome()
@@ -292,6 +298,7 @@ func show_screen(which: String, silent_motion: bool = false) -> void:
 	screen.set("host", self)
 	scene_holder.add_child(screen)
 	screen.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_bind_drawer_input_order()
 	screen.modulate.a = 0.0
 	create_tween().tween_property(screen, "modulate:a", 1.0, 0.18)
 	_refresh()
@@ -1442,3 +1449,29 @@ func _sync_material_backdrop() -> void:
 			var panel: Control = record.node.get_ref()
 			if is_instance_valid(panel): panel.visible = bool(record.visible)
 		_material_hidden_panels.clear()
+	_sync_drawer_input_order()
+
+func _bind_drawer_input_order() -> void:
+	if not is_instance_valid(screen): return
+	var controls: Array[Node] = [screen]
+	controls.append_array(screen.find_children("*","Control",true,false))
+	for node: Node in controls:
+		if not node.has_method("input_overlay_open"): continue
+		if not node.is_connected("input_overlay_changed",_sync_drawer_input_order):
+			node.connect("input_overlay_changed",_sync_drawer_input_order,CONNECT_DEFERRED)
+		if not node.is_connected("visibility_changed",_sync_drawer_input_order):
+			node.connect("visibility_changed",_sync_drawer_input_order,CONNECT_DEFERRED)
+
+func _sync_drawer_input_order() -> void:
+	if not is_instance_valid(screen) or not is_instance_valid(scene_holder): return
+	var controls: Array[Node] = [screen]
+	controls.append_array(screen.find_children("*","Control",true,false))
+	var overlay_open := controls.any(func(node: Node) -> bool:
+		return node.has_method("input_overlay_open") and node.call("input_overlay_open"))
+	# CanvasItem z_index changes drawing, while GUI hit testing follows tree order.
+	# An open book must receive its visible buttons ahead of the wooden chrome.
+	if overlay_open:
+		var chrome_index: int = maxi(shell_header.get_index(),shell_dock.get_index())
+		if scene_holder.get_index() < chrome_index: move_child(scene_holder,chrome_index)
+	elif scene_holder.get_index() != _scene_holder_input_index:
+		move_child(scene_holder,_scene_holder_input_index)

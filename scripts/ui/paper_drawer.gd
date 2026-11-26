@@ -1,5 +1,6 @@
 class_name PaperDrawer
 extends Control
+signal input_overlay_changed
 ## Reversible presentation only. Never writes gameplay state.
 const UI = preload("res://scripts/ui/ui_kit.gd")
 const Shell = preload("res://scripts/ui/shell_config.gd")
@@ -170,6 +171,10 @@ func _layout() -> void:
 	var toggle_box := Rect2(Vector2(maxf(0,toggle_left),float(responsive_config.toggle_top)),toggle_size)
 	ResponsiveLayout.apply(bookmark,ResponsiveLayout.fit_minimum(toggle_size,toggle_box,metrics))
 	bookmark.z_index = int(responsive_config.overlay_z)+2
+	input_overlay_changed.emit()
+
+func input_overlay_open() -> bool:
+	return is_visible_in_tree() and expanded and is_instance_valid(panel) and panel.visible
 
 func _on_client_resized() -> void:
 	_layout.call_deferred()
