@@ -2,7 +2,7 @@ name: Round3 Pages preview and production
 on:
   push:
     branches: [codex/round3, main]
-    paths: ['scripts/**', 'scenes/**', 'themes/**', 'shaders/**', 'data/**', 'assets/**', 'web/**', 'tools/web_build.py', 'tools/merge_pages.py', '.github/workflows/round3-pages.yml', 'project.godot', 'docs/third-party.md']
+    paths: ['scripts/**', 'scenes/**', 'themes/**', 'shaders/**', 'data/**', 'assets/**', 'web/**', 'build-sources/**', 'tools/web_build.py', 'tools/web_audio.py', 'tools/merge_pages.py', '.github/workflows/round3-pages.yml', 'project.godot', 'docs/third-party.md']
   workflow_dispatch:
 permissions:
   contents: read
@@ -26,7 +26,19 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
-      - run: python -m pip install fonttools==4.60.2 brotli==1.1.0
+      - run: python -m pip install fonttools==4.60.2 brotli==1.1.0 cryptography==46.0.3
+      - name: Decrypt and verify selected music for this build
+        env:
+          WEB_AUDIO_KEY: ${{ secrets.WEB_AUDIO_KEY }}
+        run: |
+          python tools/web_audio.py --decrypt
+          if ($LASTEXITCODE -ne 0) { throw 'Music decryption or integrity check failed; refusing a silent deployment.' }
+      - name: Check audio source and channel preservation
+        run: |
+          python tests/web/audio_bundle.py
+          if ($LASTEXITCODE -ne 0) { throw 'Web music bundle checks failed.' }
+          python tests/web/build_policy.py
+          if ($LASTEXITCODE -ne 0) { throw 'Pages preservation checks failed.' }
       - uses: actions/configure-pages@v6
       - name: Install pinned standard Godot and single-thread template
         run: ./scripts/dev/bootstrap.ps1 -WithWebExportTemplates
@@ -35,12 +47,12 @@ jobs:
         run: |
           $variant = if ($env:GITHUB_REF -eq 'refs/heads/main') { 'main' } else { 'preview' }
           "variant=$variant" >> $env:GITHUB_OUTPUT
-          ./scripts/dev/export-web.ps1 -Variant $variant
+          ./scripts/dev/export-web.ps1 -Variant $variant -WithMusic
           node tests/web/wheel_focus.cjs
           python tests/web/font_artifact.py
       - name: Restore live site and preserve the other channel
         run: |
-          python tools/merge_pages.py --variant '${{ steps.channel.outputs.variant }}' --build '.tools/r3-web/builds/${{ steps.channel.outputs.variant }}-optimized/output' --output '.tools/pages-combined'
+          python tools/merge_pages.py --variant '${{ steps.channel.outputs.variant }}' --build '.tools/r3-web/builds/${{ steps.channel.outputs.variant }}-optimized-music/output' --output '.tools/pages-combined'
           if ($LASTEXITCODE -ne 0) { throw 'Pages merge or preservation check failed.' }
       - uses: actions/upload-pages-artifact@v5
         with:

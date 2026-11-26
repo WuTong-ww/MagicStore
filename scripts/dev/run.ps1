@@ -69,6 +69,8 @@ try {
         Invoke-Godot @('--headless', '--path', $repo, '--import')
         & python (Join-Path $repo 'tests/web/build_policy.py')
         if ($LASTEXITCODE -ne 0) { throw 'Pages channel-preservation checks failed.' }
+        & python (Join-Path $repo 'tests/web/audio_bundle.py')
+        if ($LASTEXITCODE -ne 0) { throw 'Web audio bundle checks failed.' }
         & node (Join-Path $repo 'tests/web/wheel_focus.cjs')
         if ($LASTEXITCODE -ne 0) { throw 'Web wheel focus checks failed.' }
         foreach ($learningTarget in @('tests/learning/content.gd','tests/learning/transactions.gd','tests/learning/migration.gd')) {

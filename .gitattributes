@@ -17,6 +17,7 @@ assets/items/inventory-reference.svg text eol=lf
 *.avi binary -filter
 *.wav binary -filter
 *.zip binary -filter
+*.fernet binary -filter
 # Preserve upstream license bytes so the recorded SHA256 survives checkout.
 assets/audio/KENNEY-LICENSE.txt -text whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol
 assets/fonts/LXGWWenKai-OFL.txt -text whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab,cr-at-eol

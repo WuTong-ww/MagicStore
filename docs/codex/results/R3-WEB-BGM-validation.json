@@ -1,0 +1,71 @@
+{
+  "task": "R3-WEB-BGM",
+  "date": "2026-11-26",
+  "repository_visibility": "public",
+  "secret_name": "WEB_AUDIO_KEY",
+  "secret_value_recorded": false,
+  "secret_created_and_verified_in_browser": true,
+  "main_modified": false,
+  "source_music_tracked": false,
+  "ciphertext": {
+    "path": "build-sources/music/r3-music-v1.fernet",
+    "bytes": 14471948,
+    "sha256": "88f4f404e46b1a8303be4611d12d01f62514e0b522d3c50c9ae2fafe02b98641"
+  },
+  "source_archive_sha256": "3cdcc738cd4044b0d6c92494c84762e51782ff230bc1d1c85f6857e5a567e764",
+  "selected_tracks": [
+    "evening_harmony",
+    "fabric_of_life",
+    "gentle_breeze",
+    "sheep"
+  ],
+  "checks": {
+    "audio_bundle": {
+      "passed": 15,
+      "failed": 0
+    },
+    "pages_preservation": {
+      "passed": 11,
+      "failed": 0
+    },
+    "music_runtime": {
+      "passed": 44,
+      "failed": 0,
+      "log_sha256": "a90a52eb7c10a4c3004136ae825ad95213d37c654cc30e6708276ea9ec2e1b80"
+    },
+    "real_web_pack": {
+      "passed": 24,
+      "failed": 0,
+      "log_sha256": "f703f47c5a5351ce9a8e38cd908823721f731ac7612d5beef5a3cc0a07b7edf8"
+    },
+    "sheep_selection": {
+      "passed": 2,
+      "failed": 0
+    }
+  },
+  "package": {
+    "entries": 1023,
+    "music_resources": [
+      "assets/audio/music/evening_harmony.ogg",
+      "assets/audio/music/fabric_of_life.ogg",
+      "assets/audio/music/gentle_breeze.ogg",
+      "assets/audio/music/sheep.ogg"
+    ],
+    "forbidden_entries": [],
+    "site_bytes": 85817549,
+    "pck_bytes": 47605824
+  },
+  "standard_suite": {
+    "attempts": 1,
+    "exit_code": 1,
+    "log_sha256": "3552013976221d41c54afbe954fed9779b988951f1335c2aa396df6f191bc199",
+    "failure": "Unchanged tests/integration/title_creation_migration.gd:66 requires CURRENT_SCHEMA==15 while the project is schema18. Not green; no unrelated migration/test edits."
+  },
+  "deployment": {
+    "status": "pending",
+    "preview_only": true,
+    "root_preservation_required": true
+  },
+  "screenshots": [],
+  "visual_layout_modified": false
+}

@@ -44,7 +44,7 @@ func run() -> void:
 	for web: bool in [false,true]:
 		for public: bool in [false,true]:
 			for with_music: bool in [false,true]:
-				check(Audio.policy_allows_music(web,public,with_music) == (not public and (not web or with_music)),"public deny wins over withmusic")
+				check(Audio.policy_allows_music(web,public,with_music) == (with_music or (not web and not public)),"Web/public music requires the explicit verified export feature")
 	var complete := {"enabled":true,"ending":{"has_ending":true,"status":"complete","text":"已经披露的结局"}}
 	var waiting := {"enabled":true,"ending":{"has_ending":true,"status":"waiting","text":"已经披露的等待"}}
 	check(slot_for("front",540,{},complete,{},catalog)=="day","historic completion never implies currently visible ending")

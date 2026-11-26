@@ -1,8 +1,10 @@
-import importlib.util,json,tempfile,unittest
+import importlib.util,json,sys,tempfile,unittest
 from pathlib import Path
 from unittest.mock import patch,MagicMock
 
 ROOT=Path(__file__).resolve().parents[2]
+sys.path.insert(0,str(ROOT/'tools'))
+import web_audio
 spec=importlib.util.spec_from_file_location('merge_pages',ROOT/'tools/merge_pages.py'); pages=importlib.util.module_from_spec(spec); spec.loader.exec_module(pages)
 
 class PagesPreservation(unittest.TestCase):
@@ -35,6 +37,15 @@ class PagesPreservation(unittest.TestCase):
         with self.assertRaises(AssertionError): self.run_merge('preview')
     def test_private_music_build_cannot_publish(self):
         (self.build/'build-info.json').write_text(json.dumps({'commit':'c'*40,'variant':'preview','music_included':True}))
+        with self.assertRaises(AssertionError): pages.merge(self.build,self.base/'site','preview',fetch=self.fetch)
+    def test_verified_music_preserves_every_formal_file(self):
+        (self.build/'build-info.json').write_text(json.dumps({'commit':'c'*40,'variant':'preview','music_included':True,'source_dirty':False,'music_provenance':web_audio.proof()}))
+        result=pages.merge(self.build,self.base/'site','preview',fetch=self.fetch)
+        self.assertEqual(result['root_commit'],'a'*40)
+        for name,data in self.live.items():
+            if not name.startswith('preview/'): self.assertEqual((self.base/'site'/name).read_bytes(),data)
+    def test_unverified_music_stops_publication(self):
+        (self.build/'build-info.json').write_text(json.dumps({'commit':'c'*40,'variant':'preview','music_included':True,'source_dirty':False,'music_provenance':{'archive_sha256':'0'*64,'track_ids':['unknown']}}))
         with self.assertRaises(AssertionError): pages.merge(self.build,self.base/'site','preview',fetch=self.fetch)
     def test_unsafe_manifest_paths_rejected(self):
         for path in ['../index.html','/index.html','preview/../index.html','x\\index.html',None,'.','site-manifest.json']:

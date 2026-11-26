@@ -82,6 +82,10 @@ Fabric Of Life.ogg｜`8622ec2d6391153a52fe53cfc278a53fa62bf03a46ca6215df98a57f63
 
 2026-11-25 玩家试听后指定白天营业与案件接待改用 `Sheep.ogg`，原五首转换文件保留本地。追加原源 SHA256 `306ef172d216f5cebc3a2cefd7cd1df32860a32f6251b4d2737676ac80396b53`；本地 q6 文件 `assets/audio/music/sheep.ogg` SHA256 `1435a3ac15adce7dba6086078c8c3214ee90eb9e294a2c54566ece7698243080`。同一来源、作者与定制许可，不进入公开仓库/默认构建。
 
+2026-11-26用户要求每次自动部署携带BGM供试听，并明确保持仓库公开。沿用上述Pizza Doggy来源与定制许可，选中4首运行曲目共10,853,444B（Gentle Breeze、Sheep、Evening Harmony、Fabric Of Life），逐首SHA见上述表及`data/web_audio_build.json`。构建源ZIP的SHA256为`3cdcc738cd4044b0d6c92494c84762e51782ff230bc1d1c85f6857e5a567e764`，原始素材、明文ZIP与OGG不入Git；只有Fernet认证加密后的14,471,948B密文入普通Git，SHA256 `88f4f404e46b1a8303be4611d12d01f62514e0b522d3c50c9ae2fafe02b98641`，解密密钥另存用户已授权的Actions secret。公开Pages仅分发项目内游戏包，不提供单独素材归档。此项替代前述“默认部署无音乐”的构建选择，不改作者许可或历史版本核对状态；没有将音频输入模型。
+
+构建加密使用Python Cryptographic Authority及贡献者的[cryptography](https://pypi.org/project/cryptography/46.0.3/)，许可Apache-2.0或BSD-3-Clause；[Fernet协议及实现说明](https://cryptography.io/en/46.0.3/fernet/)。CI固定46.0.3，[官方源码包](https://files.pythonhosted.org/packages/source/c/cryptography/cryptography-46.0.3.tar.gz)SHA256 `a8b17438104fed022ce745b362294d9ce35b4c2e45c1d958ad4a4b019285f4a1`（官方PyPI元数据核对）。本机Python3.9.1不受该新版本支持，密文以既有3.3.1的同一Fernet格式生成并完成认证解密往返；未修改系统Python。它仅是构建工具，游戏不打包该库或密钥。
+
 ## R3-POLISH 等宽数字字体
 
 数字及ASCII标点使用本项目从霞鹜文楷等宽 Regular v1.530 制作的子集，作者 LXGW / The Klee Project Authors；[固定版本原字体](https://raw.githubusercontent.com/lxgw/LxgwWenKai/v1.530/fonts/TTF/LXGWWenKaiMono-Regular.ttf)，[原许可](https://raw.githubusercontent.com/lxgw/LxgwWenKai/v1.530/OFL.txt)，SIL Open Font License 1.1。原字体SHA256 `895ce1d2fa00d5ca3bec0329d38e3190454f4b5fa7b4733f491c419faf9753a1`，仅保留U+0020–U+007E的95字形，统一原有500 advance；衍生字体改名Midnight Numeric以避开保留名称，原版权通知完整保留。

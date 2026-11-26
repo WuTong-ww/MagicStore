@@ -34,15 +34,22 @@ def directory(path):
         for row in rows: row['source']=owners.get(row['path'],row['path'])
     return {'file_bytes':size,'file_count':count,'payload_bytes':sum(r['bytes'] for r in rows),'files':rows}
 
-def audit_public(path,allow_music=False):
+def audit_public(path,allow_music=False,music_sources=None):
     report=directory(path)
     banned=[]
+    music_seen=set()
     for row in report['files']:
         source=row['source']
         if source.startswith(('tests/','docs/','.tools/','tools/','server/','Cozy Tunes/')) or source.endswith(('.env','.key','.pem')): banned.append(source)
-        if not allow_music and source.startswith('assets/audio/music/'): banned.append(source)
+        if source.startswith('data/build/') or source=='data/web_audio_build.json': banned.append(source)
+        if source.startswith('assets/audio/music/'):
+            original=source[:-7] if source.endswith('.import') else source
+            music_seen.add(original)
+            if not allow_music or (music_sources is not None and original not in music_sources): banned.append(source)
     if banned: raise ValueError('Non-public package entries: '+','.join(banned))
+    if music_sources is not None and music_seen!=set(music_sources): raise ValueError('Selected Web music missing from package')
     report['forbidden_entries']=[]
+    report['music_resources']=sorted(music_seen)
     return report
 if __name__=='__main__':
     import sys

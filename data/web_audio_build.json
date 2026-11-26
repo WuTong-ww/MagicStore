@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "archive_sha256": "3cdcc738cd4044b0d6c92494c84762e51782ff230bc1d1c85f6857e5a567e764",
+  "tracks": [
+    {
+      "id": "evening_harmony",
+      "path": "assets/audio/music/evening_harmony.ogg",
+      "sha256": "510f98c59b8afcc35156b5547e954503e2556e09481a9b5732f3d146c4528d97",
+      "bytes": 1956601
+    },
+    {
+      "id": "fabric_of_life",
+      "path": "assets/audio/music/fabric_of_life.ogg",
+      "sha256": "3ceb034e9527818c3c62bcaf1b0ad77276609d6e5aa497aae27a42b175693721",
+      "bytes": 1934613
+    },
+    {
+      "id": "gentle_breeze",
+      "path": "assets/audio/music/gentle_breeze.ogg",
+      "sha256": "c60d89ffe727557f468b67bce2e69acbfc28582e46dd2299f6dbde5587721c1b",
+      "bytes": 3498557
+    },
+    {
+      "id": "sheep",
+      "path": "assets/audio/music/sheep.ogg",
+      "sha256": "1435a3ac15adce7dba6086078c8c3214ee90eb9e294a2c54566ece7698243080",
+      "bytes": 3463673
+    }
+  ],
+  "encrypted_path": "build-sources/music/r3-music-v1.fernet",
+  "encrypted_sha256": "88f4f404e46b1a8303be4611d12d01f62514e0b522d3c50c9ae2fafe02b98641"
+}

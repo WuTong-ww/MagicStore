@@ -92,6 +92,8 @@ func _ready() -> void:
 	for index: int in range(2):
 		var player := AudioStreamPlayer.new()
 		player.bus = "Music"
+		if OS.has_feature("web"):
+			player.playback_type = AudioServer.PLAYBACK_TYPE_STREAM
 		player.volume_db = float(config.silence_db)
 		add_child(player)
 		music_players.append(player)
@@ -140,12 +142,10 @@ func _apply_volume(channel: String = "") -> void:
 
 ## UNRUN fragment for ShopAudio. Missing/forbidden assets never reach ResourceLoader.load.
 static func policy_allows_music(is_web: bool, is_public: bool, with_music: bool) -> bool:
-	if is_public:
-		return false
-	return not is_web or with_music
+	return with_music or (not is_web and not is_public)
 
 func _runtime_music_allowed() -> bool:
-	# Public feature wins even if a mistaken export also includes withmusic.
+	# Only explicitly music-enabled exports can play on the Web/public channel.
 	return policy_allows_music(OS.has_feature("web"),OS.has_feature("webpublic"),OS.has_feature("withmusic"))
 
 func _load_music_stream(path: String) -> AudioStream:

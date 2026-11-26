@@ -1,6 +1,7 @@
 """Restore the live complete Pages tree, replace one channel, preserve the other."""
 import argparse,hashlib,json,shutil,time,urllib.error,urllib.parse,urllib.request
 from pathlib import Path,PurePosixPath
+import web_audio
 
 BASE='https://wutong-ww.github.io/MagicStore/'
 def digest(data): return hashlib.sha256(data).hexdigest()
@@ -56,7 +57,9 @@ def merge(build,output,variant,fetch=download,bootstrap=None):
     before=file_rows(output)
     preserved=[row for row in before if row['path'].startswith('preview/')==(variant=='main')]
     info=json.loads((build/'build-info.json').read_text(encoding='utf8'))
-    assert info.get('variant')==variant and info.get('music_included') is False and info.get('source_dirty') is False, 'Only clean public builds can be published'
+    assert info.get('variant')==variant and type(info.get('music_included')) is bool and info.get('source_dirty') is False, 'Only clean public builds can be published'
+    if info['music_included']:
+        assert web_audio.proof_valid(info.get('music_provenance')), 'Music publication requires the verified selected bundle'
     if variant=='preview':
         target=output/'preview'
         assert target.resolve().parent==output and target.name=='preview'

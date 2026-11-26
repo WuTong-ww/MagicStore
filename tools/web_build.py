@@ -4,6 +4,7 @@ from pathlib import Path
 from fontTools import subset
 from fontTools.ttLib import TTFont
 from pck_audit import audit_public
+import web_audio
 
 ROOT=Path(__file__).resolve().parents[1]
 RUNTIME=('assets','data','scenes','scripts','themes','shaders','web')
@@ -43,7 +44,11 @@ def excluded(path,optimized,refs,music):
     name=path.as_posix()
     if any(p.startswith('.') for p in path.parts) or path.suffix in ('.key','.pem','.env','.cfg'): return True
     if name.startswith(('assets/_incoming/','data/art/','scripts/dev/')) or name=='assets/ART_ASSET_MANIFEST.json': return True
+    if name.startswith('data/build/') or name=='data/web_audio_build.json': return True
     if name.startswith('assets/audio/music/') and not music: return True
+    if name.startswith('assets/audio/music/') and isinstance(music,set):
+        original=name[:-7] if name.endswith('.import') else name
+        if original not in music: return True
     if optimized and name=='assets/fonts/NotoSansSC.ttf': return True
     if optimized and path.suffix=='.png':
         candidate=(name.startswith(('assets/generated_scenes/','assets/_legacy/'))
@@ -74,16 +79,17 @@ def build(variant='preview',baseline=False,music=False,attempt=''):
     safe_reset(area)
     stage=area/'project'; output=area/'output'; stage.mkdir(); output.mkdir()
     refs=references(ROOT)
+    music_paths=web_audio.selected_paths() if music else set()
     skipped=[]; copied=0
     for dirname in RUNTIME:
         for path in (ROOT/dirname).rglob('*'):
             if not path.is_file(): continue
             rel=path.relative_to(ROOT)
-            if excluded(rel,not baseline,refs,music):
+            if excluded(rel,not baseline,refs,music_paths if music else False):
                 if path.suffix!='.import': skipped.append({'path':rel.as_posix(),'bytes':path.stat().st_size})
                 continue
             # Never copy an import sidecar for an omitted original.
-            if path.suffix=='.import' and excluded(Path(str(rel)[:-7]),not baseline,refs,music): continue
+            if path.suffix=='.import' and excluded(Path(str(rel)[:-7]),not baseline,refs,music_paths if music else False): continue
             dest=stage/rel; dest.parent.mkdir(parents=True,exist_ok=True); shutil.copy2(str(path),str(dest)); copied+=1
     project=(ROOT/'project.godot').read_text(encoding='utf8')
     user_dir='MagicStorePreviewR3' if variant=='preview' else 'ZeroHourStore'
@@ -118,7 +124,7 @@ platform="Web"
 runnable=true
 advanced_options=false
 dedicated_server=false
-custom_features="public_web"
+custom_features="%s"
 export_filter="all_resources"
 include_filter="data/*.json"
 exclude_filter="web/*,assets/ART_ASSET_MANIFEST.json,*.env,*.key,*.pem"
@@ -136,7 +142,7 @@ html/canvas_resize_policy=2
 html/focus_canvas_on_start=true
 progressive_web_app/enabled=false
 progressive_web_app/ensure_cross_origin_isolation_headers=false
-''' % template.as_posix()
+''' % ('public_web,withmusic' if music else 'public_web',template.as_posix())
     (stage/'export_presets.cfg').write_text(preset,encoding='utf8')
     env=os.environ.copy(); env.pop('SSLKEYLOGFILE',None)
     for name in ('APPDATA','LOCALAPPDATA','TEMP','TMP'):
@@ -145,11 +151,13 @@ progressive_web_app/ensure_cross_origin_isolation_headers=false
     expected=json.loads((ROOT/'scripts/dev/toolchain.json').read_text())['version_output']
     assert subprocess.check_output([str(engine),'--version'],env=env).decode().strip()==expected
     stages=[run_engine(engine,stage,env,'import',['--import'],area),run_engine(engine,stage,env,'export',['--export-release','Web Public',str(output/'index.html')],area)]
-    audit=audit_public(output/'index.pck',allow_music=music)
+    audit=audit_public(output/'index.pck',allow_music=music,music_sources=music_paths if music else None)
     (area/'package-audit.json').write_text(json.dumps(audit,indent=2)+'\n',encoding='utf8')
-    if not baseline and not music:
+    if not baseline:
         pack_root=area/'pack-root'; pack_root.mkdir()
-        stages.append(run_engine(engine,pack_root,env,'pack-smoke',['--main-pack',str(output/'index.pck'),'--script',str(ROOT/'tests/export/r3_web_pack.gd')],area))
+        pack_args=['--main-pack',str(output/'index.pck'),'--script',str(ROOT/'tests/export/r3_web_pack.gd')]
+        if music: pack_args+=['--','--expect-music']
+        stages.append(run_engine(engine,pack_root,env,'pack-smoke',pack_args,area))
     shutil.copy2(str(ROOT/'web/wheel-focus.js'),str(output/'wheel-focus.js'))
     export_loading_font(copy,output/'loading.woff2')
     licenses=output/'licenses'; licenses.mkdir()
@@ -160,6 +168,7 @@ progressive_web_app/ensure_cross_origin_isolation_headers=false
     files=[{'path':p.relative_to(output).as_posix(),'bytes':p.stat().st_size,'sha256':sha(p)} for p in sorted(output.rglob('*')) if p.is_file()]
     dirty=bool(subprocess.check_output(['git','status','--porcelain'],cwd=str(ROOT)).strip())
     info={'version':1,'commit':commit,'source_dirty':dirty,'engine':expected,'threads':False,'variant':variant,'music_included':music,'user_dir':user_dir,'persistent_paths':mounts,'files':files}
+    if music: info['music_provenance']=web_audio.proof()
     (output/'build-info.json').write_text(json.dumps(info,ensure_ascii=True,indent=2)+'\n',encoding='utf8')
     report={'variant':label,'source_commit':commit,'copied_files':copied,'excluded':skipped,'lossy_imports':compressed,'stages':stages,'site_bytes':sum(p.stat().st_size for p in output.rglob('*') if p.is_file()),'files':files,'output':str(output),'music_included':music,'font_source_sha256':sha(ROOT/'assets/fonts/LXGWWenKai-Regular.ttf')}
     (area/'receipt.json').write_text(json.dumps(report,ensure_ascii=True,indent=2)+'\n',encoding='utf8')

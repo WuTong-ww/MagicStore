@@ -1,5 +1,9 @@
 # 第三轮：占卜推理（2026-11-24）
 
+2026-11-26收到自动部署带BGM要求：作为已结束第三轮后的独立构建补充，沿用codex/round3与/preview/，不重启旧目标、不改main。浏览器确认仓库Public，用户明确保持公开，并已授权新增Actions secret WEB_AUDIO_KEY。4首q6音频封装认证加密包，只有14,471,948B密文入普通Git，原音频、明文ZIP及密钥仍ignored；不创建音乐Release。解密后清单/逐文件SHA校验、PCK白名单、Web流式循环及前台/案件Sheep连续播放已接线。专项Python26/0、音频运行44/0、实际Web PCK24/0，带音乐85,817,549B（PCK47,605,824B）；实际自动部署仍在验证，不冒称已上线。
+
+本次标准整合仅跑1轮：.tools/r3-web/bgm-full-a1.log真实exit1，止于未改动的title_creation_migration.gd:66仍要求CURRENT_SCHEMA==15的历史门槛（现schema18）；本次未改schema/迁移，不为音乐任务改写该旧断言，不声称整合全绿。用户要求减少复测，未重复全套。GitHub已实际显示Repository secret added及WEB_AUDIO_KEY条目，未输出密钥；无API凭证、私有服务地址或原音频入Git。
+
 收到面部区分度、国籍与 MBTI 显示补充（2026-11-25）：按用户指定在当前R3-POLISH完成后处理，归入R3-PORTRAIT与R3-NAMES修订，随后继续CRAFT/LEARN/WEB；不重启或回退。增加可配置瞳色/妆容/面部层及最多20次差异重抽、24人96px与6人受控对照；国家先行生成、分国名字池与旧人不改名迁移，外来者显示真实国名、本地/混血省略、未知推断不显示；信息只显示具体MBTI类型。原文范围存于plans/R3-PORTRAIT-NAMES-supplement.md。
 
 收到面板材质补充（2026-11-25）：追加到当前R3-POLISH，保留既有工作。按木条、皮面笔记本、信纸、纸条、吊牌、蜡封/纸签/朱红印章及藤蔓分隔线逐项替换；移除框中框，补材质9宫格与来源登记、悬停/盖章/拖动反馈。新增五页面双尺寸截图、开场并排对照与529矮窗复核；仍不改main或重新开始目标。
