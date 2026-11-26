@@ -18,7 +18,7 @@ def valid_manifest(value):
         names.add(row['path'])
     return True
 def download(name,optional=False):
-    assert safe_name(name)
+    assert name=='site-manifest.json' or safe_name(name)
     for attempt in range(3):
         try:
             request=urllib.request.Request(BASE+urllib.parse.quote(name),headers={'User-Agent':'MagicStore-Pages-release','Cache-Control':'no-cache'})
