@@ -21,6 +21,126 @@
     "log_sha256": "f87f8d0e51785ecf8dfabe4c09341326db9076a98bdc561c454a37675a0ceaf9",
     "host_timeout_360_seconds": false
   },
-  "browser_status": "New deployment and first-hover acceptance pending",
-  "standard_regression": "Three existing failed full rounds retained; no fourth full suite."
+  "browser_status": "Passed in live Chrome preview 25af676 at CSS 1280x529: first hover from the study button outside the course window, with no content click, scrolls down to the final courses and back up to Tarot.",
+  "standard_regression": "Three existing failed full rounds retained; no fourth full suite.",
+  "publication": {
+    "commit": "25af67672942bfbaec2ecba95cc38d6dccb65d60",
+    "run_url": "https://github.com/WuTong-ww/MagicStore/actions/runs/45822932400",
+    "status": "success",
+    "source_dirty": false,
+    "music_included": false,
+    "persistent_paths": [
+      "/userfs/MagicStorePreviewR3"
+    ],
+    "preview_bytes": 74729440,
+    "root_commit": "02d1d423aba4741c929acb1b2542a818ff939ef9",
+    "root_files_unchanged": 16
+  },
+  "browser_capture_source": "Native Chrome screenshots with DevTools responsive viewport 1280x529, DPR 1, Desktop, no network throttling.",
+  "modal_wheel_evidence": [
+    {
+      "path": ".tools/r3-web/browser/wheel-final-before.png",
+      "sha256": "785636ba316431a744e9d8e5b2ab17cc471f0135f525e4e064d7a752350d26c9",
+      "bytes": 156805
+    },
+    {
+      "path": ".tools/r3-web/browser/wheel-final-after.png",
+      "sha256": "ab0d7818bffc2c0e3e3236ff27be3591e4a51464b8caea580caf429ded819468",
+      "bytes": 155557
+    },
+    {
+      "path": ".tools/r3-web/browser/wheel-final-returned.png",
+      "sha256": "a323447900e7b67fb5a7836d340a3295e3bfa94edf3db53a5d6dcbb7f26a815b",
+      "bytes": 156824
+    }
+  ],
+  "remaining": "Final 1366x768 and 1920x1080 consultation PNG captures, plus complete two-entry persistence acceptance.",
+  "sidebar_wheel_status": "Passed in live Chrome preview 25af676 at CSS 1280x529: first hover from outside into the real market right page scrolls from mint/salt/bottle to the final collectible entries and back; left book list remains fixed. No purchases.",
+  "sidebar_wheel_evidence": [
+    {
+      "path": ".tools/r3-web/browser/sidebar-wheel-before.png",
+      "sha256": "955c9f99e21bbfeb31d04ee7bbdc3cc903ba12f227e168e1f0c32190597d698c",
+      "bytes": 157216
+    },
+    {
+      "path": ".tools/r3-web/browser/sidebar-wheel-after.png",
+      "sha256": "bfc43139bbadfdcfed7e70c86bfc4219fa7114659b9b0a8b9584eecfaf9913d6",
+      "bytes": 157299
+    },
+    {
+      "path": ".tools/r3-web/browser/sidebar-wheel-returned.png",
+      "sha256": "cb61b9ee0b5ccec3d4ac4245d44ac8e4b92f44c00f655def7806f7062a86dd8c",
+      "bytes": 157225
+    }
+  ],
+  "font_coverage_current": {
+    "format": "font_coverage_v1",
+    "scope": "finite repository JSON/GD CJK literals and conservative escapes; no rendering claim",
+    "source_files": 614,
+    "counts": {
+      "json": 242,
+      "gd": 372,
+      "tests": 277,
+      "fixtures_json": 20
+    },
+    "cjk_codepoints": 1986,
+    "missing": [],
+    "missing_count": 0,
+    "fonts": [
+      {
+        "role": "ascii_mono",
+        "path": "assets/fonts/MidnightNumeric-Regular.ttf",
+        "sha256": "ff3dd9fce45675922f803bae772f0260e4fe126031862a0262a2c0bdcafde8d0",
+        "cmap_count": 95
+      },
+      {
+        "role": "regular",
+        "path": "assets/fonts/LXGWWenKai-Regular.ttf",
+        "sha256": "2d73eea94ad808999d90c0000c239a84a33b09d4bc6ab6c5b8bbf1eda8a7fc8b",
+        "cmap_count": 46926
+      }
+    ],
+    "ascii_subset_exact": true,
+    "ascii_subset_renamed": true,
+    "ascii_monospace": true,
+    "parse_errors": [],
+    "sources_unchanged": true,
+    "payload_text_serialized": false,
+    "success": true
+  },
+  "visual_review": {
+    "consultation_1280x529": "Full-size PNG opened; face is clear of the letter, all five cards and three question buttons visible, letter height below 45 percent. Existing POLISH glyph clipping and soft text remain documented.",
+    "savebook_1280x529": "Full-size PNG opened; qa and prior save present, no qb; other in-store panels do not protrude behind the notebook.",
+    "wheel_proof": "Four original game-area crops combined with external captions; all four inspected; Chrome tabs, bookmarks and tool panels excluded."
+  },
+  "public_screenshots": [
+    {
+      "path": "docs/screenshots/round3/R3-WEB/consultation-1280x529.jpg",
+      "pixels": [
+        1280,
+        529
+      ],
+      "bytes": 133147,
+      "sha256": "85dc164f5c6274609c655bd72d8fd8af0363cf0ffad85cd18e0c33bee453d99a"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-WEB/savebook-1280x529.jpg",
+      "pixels": [
+        1280,
+        529
+      ],
+      "bytes": 89839,
+      "sha256": "faea8ddfcec1b142607c2168b9d8f464c477b14400f22e9b362582241e1afe2b"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-WEB/wheel-proof.jpg",
+      "pixels": [
+        1536,
+        700
+      ],
+      "bytes": 236641,
+      "sha256": "d876d45316f10c5a2fed108fd1817e1b523c8677dfe875a4746895b1e8f510b8"
+    }
+  ],
+  "public_screenshots_reviewed": true
 }

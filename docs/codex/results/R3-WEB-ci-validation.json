@@ -60,5 +60,20 @@
     "url": "https://github.com/WuTong-ww/MagicStore/actions/runs/45805865584/job/139868858250",
     "reused_build_artifact": true
   },
-  "publication_evidence": "docs/codex/results/R3-WEB-publication-validation.json"
+  "publication_evidence": "docs/codex/results/R3-WEB-publication-validation.json",
+  "latest_successful_run": {
+    "commit": "25af67672942bfbaec2ecba95cc38d6dccb65d60",
+    "run_url": "https://github.com/WuTong-ww/MagicStore/actions/runs/45822932400",
+    "status": "success",
+    "build_job_url": "https://github.com/WuTong-ww/MagicStore/actions/runs/45822932400/job/139919577721",
+    "deploy_job_url": "https://github.com/WuTong-ww/MagicStore/actions/runs/45822932400/job/139920545958",
+    "live_commit_verified": true,
+    "root_manifest_files_preserved": 16
+  },
+  "old_workflow_retirement": {
+    "workflow": "Web playtest",
+    "status": "Not disabled. Explicit authorization remains pending.",
+    "automatic_review_rejection": "Persistent external service configuration change was not explicitly covered by preview publication authorization.",
+    "blocks_current_preview": false
+  }
 }
