@@ -16,6 +16,8 @@ Godot固定4.6.3标准版、Compatibility、单线程，无须跨源隔离响应
 
 本地已验证15项加密/归档/导出策略、11项双入口保留策略、44项音频运行及实际Web PCK24项，均零失败。带音乐全站85,817,549B、PCK47,605,824B，静音旧预览为74,729,440B；此处为文件大小，不当作实际下载耗时。密钥本地备份位于ignored `.tools/r3-web/audio-source/web-audio-key.txt`，不要粘贴到审阅包或日志。仅在需要从密文恢复运行曲目时，将密钥作为当前进程环境变量`WEB_AUDIO_KEY`运行`python tools/web_audio.py --decrypt`，随后按上述带音乐命令导出；已有4首匹配的本地音乐可直接导出。
 
+带音乐预览代码091e0fe已由Actions [45848095173](https://github.com/WuTong-ww/MagicStore/actions/runs/45848095173)自动构建并发布成功。实际线上全站85,801,174B、PCK47,588,576B，构建信息music_included=true、source_dirty=false及4首来源摘要均匹配；正式16文件与冻结版本完全一致。Chrome用既有qa存档进入，点击49.51秒后仍在咨询画面显示持续音频活动；不以此替代玩家听感。使用[预览入口](https://wutong-ww.github.io/MagicStore/preview/)，首次点击继续并进入游戏后可试听，音量在设置页调整。本次标准整合一轮仍因未修改的历史schema15迁移门槛失败，专项结果不冒称全套绿，详见R3-WEB-BGM-validation.json。
+
 Actions部署由站点级串行锁覆盖构建到发布；合并前下载并逐文件验证当前站点，仅替换目标子树，并校验另一子树SHA不变。首次恢复清单记录旧正式02d1d423；如果线上已变而清单不匹配，构建会停止，不发布旧站。之后沿用在线site-manifest.json恢复当前双入口。Pages需设GitHub Actions作为来源，并允许codex/round3与main部署；旧codex/web-playtest整站发布需退役。用户已明确授权推送与预览发布，无须重批。2026-11-26运行45805865584构建成功，但环境白名单仅允许main和旧试玩分支，deploy被拒绝；自动审批要求另行明确授权新增精确codex/round3规则，保存前已停止，原规则未改。批准后可在该运行中仅重试失败的deploy，复用已有产物；这不需要第四轮完整测试。
 
 官方参考：[Godot Web导出](https://docs.godotengine.org/en/4.6/tutorials/export/exporting_for_web.html)、[Pages产物](https://github.com/actions/upload-pages-artifact)、[Pages部署](https://github.com/actions/deploy-pages)。最终浏览器与回归结果以审阅包及R3-WEB-validation.json为准。

@@ -4,6 +4,8 @@
 
 本次标准整合仅跑1轮：.tools/r3-web/bgm-full-a1.log真实exit1，止于未改动的title_creation_migration.gd:66仍要求CURRENT_SCHEMA==15的历史门槛（现schema18）；本次未改schema/迁移，不为音乐任务改写该旧断言，不声称整合全绿。用户要求减少复测，未重复全套。GitHub已实际显示Repository secret added及WEB_AUDIO_KEY条目，未输出密钥；无API凭证、私有服务地址或原音频入Git。
 
+BGM代码091e0fe已普通推送，Actions 45848095173构建/部署均success；46.0.3解密及清单、实包检查实际通过。线上preview的music_included=true、source_dirty=false、选曲摘要匹配，全站85,801,174B、PCK47,588,576B（SHA fc43c28a5a21cb54876d3cfae9c2d671257381fb2b89f042d8793b11fad3ee85）。正式16文件逐条与冻结02d1d423清单一致；main仍e27441b。Chrome首次下载完毕后以既有qa存档进入，未作剧情选择或购买；首次点击49,510ms后，在林照晚咨询画面持续显示“正在播放音频”（窗口与tab两处AX），已确认真实Web持续播放。音乐听感交由玩家试听；当前预览保留打开，未冒称人工听感通过。
+
 收到面部区分度、国籍与 MBTI 显示补充（2026-11-25）：按用户指定在当前R3-POLISH完成后处理，归入R3-PORTRAIT与R3-NAMES修订，随后继续CRAFT/LEARN/WEB；不重启或回退。增加可配置瞳色/妆容/面部层及最多20次差异重抽、24人96px与6人受控对照；国家先行生成、分国名字池与旧人不改名迁移，外来者显示真实国名、本地/混血省略、未知推断不显示；信息只显示具体MBTI类型。原文范围存于plans/R3-PORTRAIT-NAMES-supplement.md。
 
 收到面板材质补充（2026-11-25）：追加到当前R3-POLISH，保留既有工作。按木条、皮面笔记本、信纸、纸条、吊牌、蜡封/纸签/朱红印章及藤蔓分隔线逐项替换；移除框中框，补材质9宫格与来源登记、悬停/盖章/拖动反馈。新增五页面双尺寸截图、开场并排对照与529矮窗复核；仍不改main或重新开始目标。

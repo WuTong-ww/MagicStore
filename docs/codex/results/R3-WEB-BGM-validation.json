@@ -62,9 +62,31 @@
     "failure": "Unchanged tests/integration/title_creation_migration.gd:66 requires CURRENT_SCHEMA==15 while the project is schema18. Not green; no unrelated migration/test edits."
   },
   "deployment": {
-    "status": "pending",
-    "preview_only": true,
-    "root_preservation_required": true
+    "status": "success",
+    "run_id": 45848095173,
+    "run_url": "https://github.com/WuTong-ww/MagicStore/actions/runs/45848095173",
+    "commit": "091e0fe0498a1ac19a7f0affb36b46cb90ba02ef",
+    "music_included": true,
+    "source_dirty": false,
+    "site_bytes": 85801174,
+    "pck": {
+      "path": "index.pck",
+      "bytes": 47588576,
+      "sha256": "fc43c28a5a21cb54876d3cfae9c2d671257381fb2b89f042d8793b11fad3ee85"
+    },
+    "root_commit": "02d1d423aba4741c929acb1b2542a818ff939ef9",
+    "preserved_files": 16,
+    "root_rows_equal_frozen_bootstrap": true,
+    "browser_playback": {
+      "status": "verified",
+      "browser": "Chrome",
+      "url": "https://wutong-ww.github.io/MagicStore/preview/?bgm=091e0fe",
+      "method": "Native browser UI, existing qa save; no storyline choices or purchases",
+      "audio_indicator": "Tab and window accessibility title show active audio playback",
+      "observed_ms_after_initial_entry_click": 49510,
+      "scene": "consultation with Lin and unflipped cards",
+      "human_listening_review": false
+    }
   },
   "screenshots": [],
   "visual_layout_modified": false
