@@ -1,0 +1,26 @@
+{
+  "scope": "R3-WEB first-hover wheel pointer synchronization",
+  "finding": "Live Chrome course window scrolls after clicking the content, but the first wheel crossing from another region uses stale pointer coordinates.",
+  "change": "Synchronize backing-store coordinates and flush Input before the original engine wheel listener; no synthetic clicks or replacement scrolling.",
+  "javascript": {
+    "checks": 19,
+    "failures": 0,
+    "source_sha256": "b303b7021154686f31717520ba519e7a5eada49c79da7701abaf07811eae320e"
+  },
+  "native_root_route": {
+    "label": "web-wheel-pointer-a1",
+    "target": "tests/integration/web_wheel_pointer.gd",
+    "exit_code": 0,
+    "seconds": 52.75,
+    "source_sha256": "9a09b2cf37b8be62bd1278a8e6c5a90cf6d87010fd8a37b7582c9b10c2eed162",
+    "source_unchanged": true,
+    "summaries": [
+      "WEB WHEEL POINTER: 12 checks, 0 failures"
+    ],
+    "error_lines": [],
+    "log_sha256": "f87f8d0e51785ecf8dfabe4c09341326db9076a98bdc561c454a37675a0ceaf9",
+    "host_timeout_360_seconds": false
+  },
+  "browser_status": "New deployment and first-hover acceptance pending",
+  "standard_regression": "Three existing failed full rounds retained; no fourth full suite."
+}

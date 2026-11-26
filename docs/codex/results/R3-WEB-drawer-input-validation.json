@@ -302,7 +302,7 @@
       ]
     }
   ],
-  "browser_status": "New deployment and live browser verification pending",
+  "browser_status": "Verified in live Chrome after toolbar reload: the visible study button opens LearningWindow rather than Settings.",
   "full_standard_regression": "Original three failed rounds retained; no fourth full suite.",
   "visual_review": {
     "native_front_full_size": [
@@ -320,5 +320,11 @@
     "scripts/ui/paper_drawer.gd": "c67c3ad14510364eec6a674173d811a659f6b7374b75a2ebedd7b42c6f4f0f53",
     "scripts/ui/case_board.gd": "0e83182afba5c00db0fd88411a9692bf69c1ba035a797b4d68aba8c8f5b453bc",
     "tests/integration/web_drawer_input.gd": "7a4d4e31947e24696d168e8fab944c3798a9d2dbd59542c2d8aadad21cd3ad63"
+  },
+  "published": {
+    "commit": "655ec12",
+    "run_url": "https://github.com/WuTong-ww/MagicStore/actions/runs/45818031526",
+    "build": "success, 2m 22s",
+    "deploy": "success, 14s"
   }
 }

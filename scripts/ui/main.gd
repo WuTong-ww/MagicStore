@@ -5,6 +5,8 @@ const MusicContext = preload("res://scripts/audio/music_context.gd")
 const ResponsiveConfig = preload("res://scripts/ui/responsive_config.gd")
 const ViewportMetrics = preload("res://scripts/ui/viewport_metrics.gd")
 const ResponsiveLayout = preload("res://scripts/ui/responsive_layout.gd")
+const WebWheelPointer = preload("res://scripts/ui/web_wheel_pointer.gd")
+var _web_wheel_pointer := WebWheelPointer.new()
 const MotionConfig = preload("res://scripts/presentation/wind_field.gd")
 var motion_settings: Dictionary = {}
 var _motion_seen_events: Dictionary = {}
@@ -133,6 +135,10 @@ func _ready() -> void:
 	show_screen("exterior")
 	set_title_blocking(true)
 	call_deferred("_open_title_if_unresolved")
+	_web_wheel_pointer.attach()
+
+func _exit_tree() -> void:
+	_web_wheel_pointer.detach()
 
 func prepare_close_async() -> bool:
 	if _closing:
