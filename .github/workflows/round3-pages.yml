@@ -37,6 +37,7 @@ jobs:
           "variant=$variant" >> $env:GITHUB_OUTPUT
           ./scripts/dev/export-web.ps1 -Variant $variant
           node tests/web/wheel_focus.cjs
+          python tests/web/font_artifact.py
       - name: Restore live site and preserve the other channel
         run: |
           python tools/merge_pages.py --variant '${{ steps.channel.outputs.variant }}' --build '.tools/r3-web/builds/${{ steps.channel.outputs.variant }}-optimized/output' --output '.tools/pages-combined'

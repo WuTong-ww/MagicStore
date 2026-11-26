@@ -1,0 +1,440 @@
+{
+  "scope": "Final shared R3 integration; historical POLISH runs are separate",
+  "standard_full_attempts": [
+    {
+      "status": "ACTUAL_TERMINAL",
+      "label": "full1",
+      "command": [
+        "powershell",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/dev/run.ps1",
+        "-Test"
+      ],
+      "exit_code": 1,
+      "seconds": 48.01600000000326,
+      "run_id": null,
+      "source_files": 1098,
+      "source_changes": [],
+      "protected_source_changes": [],
+      "exact_generated_test_outputs": [],
+      "polish_registration_covered": false,
+      "groups": [
+        {
+          "name": "WEB WHEEL",
+          "checks": 9,
+          "failures": 0
+        }
+      ],
+      "reported_checks": 9,
+      "reported_failures": 0,
+      "python_unittest_counts": [
+        6
+      ],
+      "script_errors": 2,
+      "error_lines": [
+        "Godot_v4.6.3-stable_win64_console.exe : SCRIPT ERROR: Invalid access to property or key 'bound' on a base object of typ",
+        "    + CategoryInfo          : NotSpecified: (SCRIPT ERROR: I...e 'Dictionary'.:String) [], RemoteException"
+      ],
+      "title_native_logs": [],
+      "title_registration_covered": false,
+      "music_registration_covered": false,
+      "accepted": false,
+      "runner_sha256": "dd867192299a9ca3ded0aaa6e899633e5ba38282287fca0694f74dfd0ab03d26",
+      "log_sha256": "fe21b4057d0c8c66ea29aa5606a74f027394d61a5fb99fa78a72b641369b39fb"
+    },
+    {
+      "status": "ACTUAL_TERMINAL",
+      "label": "full2",
+      "command": [
+        "powershell",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/dev/run.ps1",
+        "-Test"
+      ],
+      "exit_code": 1,
+      "seconds": 155.98399999999674,
+      "run_id": null,
+      "source_files": 1098,
+      "source_changes": [],
+      "protected_source_changes": [],
+      "exact_generated_test_outputs": [],
+      "polish_registration_covered": false,
+      "groups": [
+        {
+          "name": "WEB WHEEL",
+          "checks": 9,
+          "failures": 0
+        },
+        {
+          "name": "LEARN CONTENT",
+          "checks": 151,
+          "failures": 0
+        },
+        {
+          "name": "LEARN TRANSACTIONS",
+          "checks": 113,
+          "failures": 0
+        },
+        {
+          "name": "LEARN MIGRATION",
+          "checks": 11,
+          "failures": 0
+        },
+        {
+          "name": "CRAFT",
+          "checks": 69,
+          "failures": 0
+        },
+        {
+          "name": "CRAFT MIGRATION",
+          "checks": 11,
+          "failures": 0
+        },
+        {
+          "name": "NATIONALITY",
+          "checks": 256,
+          "failures": 0
+        },
+        {
+          "name": "FACE DETAILS",
+          "checks": 115,
+          "failures": 0
+        }
+      ],
+      "reported_checks": 735,
+      "reported_failures": 0,
+      "python_unittest_counts": [
+        6
+      ],
+      "script_errors": 2,
+      "error_lines": [
+        "Godot_v4.6.3-stable_win64_console.exe : SCRIPT ERROR: Parse Error: The member \"Projection\" cannot have the same name as",
+        "    + CategoryInfo          : NotSpecified: (SCRIPT ERROR: P...a builtin type.:String) [], RemoteException"
+      ],
+      "title_native_logs": [],
+      "title_registration_covered": false,
+      "music_registration_covered": false,
+      "accepted": false,
+      "runner_sha256": "dd867192299a9ca3ded0aaa6e899633e5ba38282287fca0694f74dfd0ab03d26",
+      "log_sha256": "afa5091c6b4165947b7be3dcb935b8fa1d45a4c39fec2c7d3c11c08494224454"
+    },
+    {
+      "status": "ACTUAL_TERMINAL",
+      "label": "full3",
+      "command": [
+        "powershell",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/dev/run.ps1",
+        "-Test"
+      ],
+      "exit_code": 1,
+      "seconds": 378.46899999998277,
+      "run_id": null,
+      "source_files": 1098,
+      "source_changes": [],
+      "protected_source_changes": [],
+      "exact_generated_test_outputs": [],
+      "polish_registration_covered": false,
+      "groups": [
+        {
+          "name": "WEB WHEEL",
+          "checks": 9,
+          "failures": 0
+        },
+        {
+          "name": "LEARN CONTENT",
+          "checks": 151,
+          "failures": 0
+        },
+        {
+          "name": "LEARN TRANSACTIONS",
+          "checks": 113,
+          "failures": 0
+        },
+        {
+          "name": "LEARN MIGRATION",
+          "checks": 11,
+          "failures": 0
+        },
+        {
+          "name": "CRAFT",
+          "checks": 69,
+          "failures": 0
+        },
+        {
+          "name": "CRAFT MIGRATION",
+          "checks": 11,
+          "failures": 0
+        },
+        {
+          "name": "NATIONALITY",
+          "checks": 256,
+          "failures": 0
+        },
+        {
+          "name": "FACE DETAILS",
+          "checks": 115,
+          "failures": 0
+        },
+        {
+          "name": "PERSON DETAILS MIGRATION",
+          "checks": 41,
+          "failures": 0
+        },
+        {
+          "name": "MUSIC CATALOG",
+          "checks": 64,
+          "failures": 0
+        },
+        {
+          "name": "MUSIC RUNTIME",
+          "checks": 44,
+          "failures": 0
+        },
+        {
+          "name": "MUSIC HOST",
+          "checks": 43,
+          "failures": 0
+        },
+        {
+          "name": "MUSIC SHEEP",
+          "checks": 6,
+          "failures": 0
+        },
+        {
+          "name": "PORTRAIT CLIPPING",
+          "checks": 189,
+          "failures": 0
+        },
+        {
+          "name": "POLISH CONFIG",
+          "checks": 51,
+          "failures": 0
+        },
+        {
+          "name": "POLISH STYLE",
+          "checks": 141,
+          "failures": 0
+        },
+        {
+          "name": "POLISH NUMERIC CONFIG",
+          "checks": 24,
+          "failures": 0
+        },
+        {
+          "name": "POLISH ICONS",
+          "checks": 72,
+          "failures": 0
+        },
+        {
+          "name": "POLISH BUTTON MATERIAL",
+          "checks": 213,
+          "failures": 0
+        },
+        {
+          "name": "POLISH CARDS",
+          "checks": 14,
+          "failures": 0
+        },
+        {
+          "name": "POLISH LAYOUT",
+          "checks": 158,
+          "failures": 0
+        },
+        {
+          "name": "RESPONSIVE WINDOWS",
+          "checks": 146,
+          "failures": 0
+        },
+        {
+          "name": "POLISH WHEEL",
+          "checks": 9,
+          "failures": 0
+        },
+        {
+          "name": "POLISH HEADER",
+          "checks": 25,
+          "failures": 0
+        },
+        {
+          "name": "PANEL MATERIAL",
+          "checks": 21,
+          "failures": 0
+        },
+        {
+          "name": "POLISH MOTION LIFECYCLE",
+          "checks": 3,
+          "failures": 0
+        },
+        {
+          "name": "NOTEBOOK PAGES",
+          "checks": 8,
+          "failures": 0
+        }
+      ],
+      "reported_checks": 2007,
+      "reported_failures": 0,
+      "python_unittest_counts": [
+        6
+      ],
+      "script_errors": 0,
+      "error_lines": [],
+      "title_native_logs": [],
+      "title_registration_covered": false,
+      "music_registration_covered": true,
+      "accepted": false,
+      "runner_sha256": "dd867192299a9ca3ded0aaa6e899633e5ba38282287fca0694f74dfd0ab03d26",
+      "log_sha256": "e05426a1a047b03a5e49bd9cd798a00c50577eba3dff6ed083b4b6bb01455e14"
+    }
+  ],
+  "standard_full_passed": false,
+  "actual_final_stop": "Surface-consumer test expected a scroll node as a direct child although it lives inside the letter margins; test corrected and focused run 14/0",
+  "focused_surface": {
+    "label": "final-surface-layout",
+    "target": "tests/integration/polish_surface_consumers.gd",
+    "exit_code": 0,
+    "seconds": 15.875,
+    "source_sha256": "7e924289adebefd13e5c59f037e9b4883b3b39c0f19afe0cc557faab4539e284",
+    "source_unchanged": true,
+    "summaries": [
+      "SURFACE CONSUMERS: 14 checks, 0 failures"
+    ],
+    "error_lines": [],
+    "log_sha256": "f4d675ba2e4c928f298cbe0b4e327920057ae061ef9267e7550570dda4391a04",
+    "host_timeout_360_seconds": false
+  },
+  "font_coverage": {
+    "format": "font_coverage_v1",
+    "scope": "finite repository JSON/GD CJK literals and conservative escapes; no rendering claim",
+    "source_files": 606,
+    "counts": {
+      "json": 237,
+      "gd": 369,
+      "tests": 275,
+      "fixtures_json": 20
+    },
+    "cjk_codepoints": 1986,
+    "missing": [],
+    "missing_count": 0,
+    "fonts": [
+      {
+        "role": "ascii_mono",
+        "path": "assets/fonts/MidnightNumeric-Regular.ttf",
+        "sha256": "ff3dd9fce45675922f803bae772f0260e4fe126031862a0262a2c0bdcafde8d0",
+        "cmap_count": 95
+      },
+      {
+        "role": "regular",
+        "path": "assets/fonts/LXGWWenKai-Regular.ttf",
+        "sha256": "2d73eea94ad808999d90c0000c239a84a33b09d4bc6ab6c5b8bbf1eda8a7fc8b",
+        "cmap_count": 46926
+      }
+    ],
+    "ascii_subset_exact": true,
+    "ascii_subset_renamed": true,
+    "ascii_monospace": true,
+    "parse_errors": [],
+    "sources_unchanged": true,
+    "payload_text_serialized": false,
+    "success": true
+  },
+  "story_routes": {
+    "label": "final-story-routes",
+    "target": "tests/integration/story_playthrough.gd",
+    "exit_code": 0,
+    "seconds": 1570.718,
+    "source_sha256": "a0fef6cbca268d1b7b350b30cfb72cd9b2e89810ba73d3922544ee715ae94940",
+    "source_unchanged": true,
+    "summaries": [
+      "STORY PLAYTHROUGH: 834 checks, 0 failures"
+    ],
+    "error_lines": [
+      "ERROR: The user name or password is incorrect."
+    ],
+    "log_sha256": "3a79161bba0ba7bbbbe61afe14a85a50689911e952b091f7148ab9acaaa85d0f",
+    "host_timeout_360_seconds": true
+  },
+  "shop_ui": {
+    "label": "final-shop-layout",
+    "target": "tests/integration/shop_ui.gd",
+    "exit_code": 0,
+    "seconds": 91.375,
+    "source_sha256": "62e83769e3616fa0249a396c45ec039bfb339d34dcd947751ffe64d52205d0db",
+    "source_unchanged": true,
+    "summaries": [
+      "C UI RESULT: 1651 checks, 0 failures, 0 graphical captures; renderer=headless"
+    ],
+    "error_lines": [],
+    "log_sha256": "175d0cf5877f2ab5bf03139241ba7eee73025636542d6244002f205e54155921",
+    "host_timeout_360_seconds": false
+  },
+  "browser": "Stopped by physical Escape; awaiting user reply before further browser operations",
+  "preview": "HTTP 404 observed for /preview/build-info.json; workflow commit a69b7e0 pushed, successful deployment unproven",
+  "no_fourth_standard_full": true,
+  "story_engine": {
+    "exit_code": 0,
+    "native_summaries": [
+      "STORY PLAYTHROUGH: 834 checks, 0 failures"
+    ],
+    "native_errors": [],
+    "native_log_sha256": "02c9a3f7ef35091c0e3716ad1b9177b12d2a589d6b01c9121d9ab1ab8cfecc63",
+    "receipt_sha256": "f648f6440c2b5092eefea00b315767819e88e669f67325c4aed60b021f1093e8",
+    "routes": {
+      "best": {
+        "checks": 251,
+        "ending_day": 7,
+        "case_stars": {
+          "fixed_bread": 3,
+          "fixed_invitation": 3,
+          "fixed_key": 3,
+          "fixed_last_pages": 3,
+          "fixed_music_box": 3
+        },
+        "note_count": 4,
+        "ending_status": "complete",
+        "route_id": "phone",
+        "dynamic_closed": 2
+      },
+      "missing_key": {
+        "checks": 193,
+        "ending_day": 7,
+        "case_stars": {
+          "fixed_bread": 3,
+          "fixed_invitation": 1,
+          "fixed_key": 3,
+          "fixed_last_pages": 3,
+          "fixed_music_box": 3
+        },
+        "note_count": 4,
+        "ending_status": "complete",
+        "route_id": "phone",
+        "dynamic_closed": 0
+      },
+      "worst": {
+        "checks": 388,
+        "ending_day": 11,
+        "case_stars": {
+          "fixed_bread": 1,
+          "fixed_invitation": 1,
+          "fixed_key": 1,
+          "fixed_last_pages": 1,
+          "fixed_music_box": 1
+        },
+        "note_count": 4,
+        "ending_status": "complete",
+        "route_id": "letter",
+        "dynamic_closed": 6
+      }
+    },
+    "wrapper_note": "The 360-second wrapper timed out and its taskkill failed with an OS authentication error; the same actual engine was observed until terminal exit0. Its own native log reports 834/0 and no errors. Wrapper failure is retained separately."
+  }
+}

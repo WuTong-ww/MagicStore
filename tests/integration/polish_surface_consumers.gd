@@ -51,7 +51,7 @@ func run() -> void:
 		if node is Window and node.title == "设置" and node.visible: settings = node
 	check(settings != null and settings.has_node("PaperWindowBackground") and settings.get_node("PaperWindowBackground").get_meta("material_role","") == "dialogue","settings are one actual letter sheet")
 	if settings != null:
-		check(settings.has_node("SettingsLetterScroll"),"settings preserve complete content with a real scroll container")
+		check(settings.find_child("SettingsLetterScroll",true,false) is ScrollContainer,"settings preserve complete content with a real scroll container inside the letter margins")
 		settings.hide()
 		settings.queue_free()
 	await settle()

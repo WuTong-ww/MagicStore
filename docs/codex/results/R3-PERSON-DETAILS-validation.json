@@ -1,6 +1,6 @@
 {
   "task": "R3-PORTRAIT / R3-NAMES supplement",
-  "status": "implementation_and_targeted_evidence_complete_shared_regression_pending",
+  "status": "IMPLEMENTED_FOCUSED_PASSED_STANDARD_INTEGRATION_NOT_GREEN",
   "schema_version": 16,
   "test_frequency": "Latest user instruction: reduce repeated tests; shared full regression follows related remaining work.",
   "observed_targeted_results": {
@@ -97,5 +97,13 @@
     "Shared full regression and final shop_ui capture pending.",
     "Existing POLISH first-glyph clipping and old framed controls remain documented."
   ],
-  "full_regression_passed": false
+  "full_regression_passed": false,
+  "shared_final_regression": {
+    "status": "FAILED_AFTER_THREE_ATTEMPTS",
+    "evidence": "docs/codex/results/R3-FINAL-validation.json",
+    "last_reported_checks": 2007,
+    "last_reported_failures": 0,
+    "whole_suite_green": false,
+    "note": "Printed groups were green; one later surface assertion stopped the suite. Its targeted correction passed, but no fourth full run was made."
+  }
 }

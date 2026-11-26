@@ -1,6 +1,6 @@
 {
   "task": "R3-LEARN",
-  "status": "IMPLEMENTED_FOCUSED_PASSED_SHARED_REGRESSION_PENDING",
+  "status": "IMPLEMENTED_FOCUSED_PASSED_STANDARD_INTEGRATION_NOT_GREEN",
   "schema_version": 18,
   "tests": [
     {
@@ -113,5 +113,13 @@
     "Legacy POLISH window corners remain.",
     "Full-model emergent cases without authored verified annotations omit preview/key-slot effects.",
     "Fallback hint assertions added after focused content run; covered by pending shared full."
-  ]
+  ],
+  "shared_final_regression": {
+    "status": "FAILED_AFTER_THREE_ATTEMPTS",
+    "evidence": "docs/codex/results/R3-FINAL-validation.json",
+    "last_reported_checks": 2007,
+    "last_reported_failures": 0,
+    "whole_suite_green": false,
+    "note": "Printed groups were green; one later surface assertion stopped the suite. Its targeted correction passed, but no fourth full run was made."
+  }
 }

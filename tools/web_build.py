@@ -14,6 +14,16 @@ def copy_valid(raw):
     return (type(raw) is dict and set(raw)=={'version','copy'} and type(raw['version']) is int and raw['version']==1
             and type(raw['copy']) is dict and set(raw['copy'])==COPY_KEYS
             and all(type(s) is str and s.strip() and len(s)<300 for s in raw['copy'].values()))
+def export_loading_font(copy,output):
+    assert copy_valid(copy)
+    font=TTFont(str(ROOT/'assets/fonts/LXGWWenKai-Regular.ttf'))
+    font.recalcTimestamp=False
+    options=subset.Options(); options.flavor='woff2'; options.name_IDs=['*']; options.name_legacy=True
+    subsetter=subset.Subsetter(options=options); subsetter.populate(text=''.join(copy['copy'].values())); subsetter.subset(font)
+    names={1:'Midnight Loading',3:'MidnightLoading-Regular-1',4:'Midnight Loading',6:'MidnightLoading',16:'Midnight Loading',25:'MidnightLoading'}
+    for record in font['name'].names:
+        if record.nameID in names: record.string=names[record.nameID].encode(record.getEncoding(),errors='replace')
+    font.flavor='woff2'; font.save(str(output)); font.close()
 def references(root):
     found=set()
     def visit(value):
@@ -141,12 +151,7 @@ progressive_web_app/ensure_cross_origin_isolation_headers=false
         pack_root=area/'pack-root'; pack_root.mkdir()
         stages.append(run_engine(engine,pack_root,env,'pack-smoke',['--main-pack',str(output/'index.pck'),'--script',str(ROOT/'tests/export/r3_web_pack.gd')],area))
     shutil.copy2(str(ROOT/'web/wheel-focus.js'),str(output/'wheel-focus.js'))
-    font=TTFont(str(ROOT/'assets/fonts/LXGWWenKai-Regular.ttf'))
-    options=subset.Options(); options.flavor='woff2'; options.name_IDs=['*']; options.name_legacy=True
-    subsetter=subset.Subsetter(options=options); subsetter.populate(text=''.join(copy['copy'].values())); subsetter.subset(font)
-    for record in font['name'].names:
-        if record.nameID in (1,4,6): record.string='Midnight Loading'.encode(record.getEncoding(),errors='replace')
-    font.flavor='woff2'; font.save(str(output/'loading.woff2')); font.close()
+    export_loading_font(copy,output/'loading.woff2')
     licenses=output/'licenses'; licenses.mkdir()
     for name in ('docs/GODOT-LICENSE.txt','docs/GODOT-COPYRIGHT.txt','docs/third-party.md','assets/fonts/LXGWWenKai-OFL.txt','assets/fonts/MidnightNumeric-OFL.txt','assets/audio/KENNEY-LICENSE.txt'):
         shutil.copy2(str(ROOT/name),str(licenses/Path(name).name))

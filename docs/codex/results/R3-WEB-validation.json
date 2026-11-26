@@ -990,10 +990,30 @@
   ],
   "published_preview": null,
   "browser_screenshots": [],
-  "shared_full": "full1 failed in new fixture binding; legal ordinary NPC fix applied, full2 in progress",
+  "shared_full": "Three actual failed standard rounds preserved; corrected surface target passed 14/0; no fourth full.",
   "limitations": [
     "No first-interactive browser timing yet.",
     "No published browser persistence-isolation proof yet.",
     "Legacy POLISH clipping/corners remain partially complete."
-  ]
+  ],
+  "shared_final_regression": {
+    "status": "FAILED_AFTER_THREE_ATTEMPTS",
+    "evidence": "docs/codex/results/R3-FINAL-validation.json",
+    "last_reported_checks": 2007,
+    "last_reported_failures": 0,
+    "whole_suite_green": false,
+    "note": "Printed groups were green; one later surface assertion stopped the suite. Its targeted correction passed, but no fourth full run was made."
+  },
+  "browser_operations": "stopped_by_user_escape_waiting_for_reply",
+  "font_coverage": {
+    "source_files": 606,
+    "cjk_codepoints": 1986,
+    "missing_count": 0,
+    "ascii_monospace": true
+  },
+  "loading_font_artifact_test": {
+    "passed": 1,
+    "failed": 0,
+    "scope": "Actual WOFF2 cmap, valid PostScript name, deterministic bytes, original TTF unchanged; standalone build change after local size measurement"
+  }
 }

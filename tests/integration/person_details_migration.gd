@@ -6,7 +6,7 @@ const N = preload("res://scripts/people/nationality.gd")
 const F = preload("res://scripts/people/face_details.gd")
 const A = preload("res://scripts/people/appearance.gd")
 const Person = preload("res://scripts/people/generated_person.gd")
-const Projection = preload("res://tests/fixtures/person_details_projection.gd")
+const LegacyPersonProjection = preload("res://tests/fixtures/person_details_projection.gd")
 var checks := 0
 var failures := 0
 var game: Node
@@ -49,7 +49,7 @@ func run() -> void:
 	check(migrated.schema_version == preload("res://scripts/save/schema_version.gd").CURRENT and N.state_valid(migrated.people) and F.state_valid(migrated.people,A.load_config()),"schema16 boundary initializes country and facial detail policy in current schema")
 	for id: String in old.people.profiles:
 		var previous: Dictionary = old.people.profiles[id]
-		var projected: Dictionary = Projection.before16(migrated.people,old.people).profiles[id]
+		var projected: Dictionary = LegacyPersonProjection.before16(migrated.people,old.people).profiles[id]
 		check(projected == previous,"every previous name, skin, part and identity field survives / "+id)
 	check(migrated.people.profiles.npc_lin.age == 26 and migrated.people.profiles.npc_lin.mbti == "INFP","fixed Lin metadata agrees with the authoritative story dossier")
 	check(FileAccess.get_sha256(path) == SHA and saves.read_save(SAVE_ID).state.schema_version == 15,"migration changes memory only")

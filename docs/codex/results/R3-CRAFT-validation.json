@@ -1,6 +1,6 @@
 {
   "task": "R3-CRAFT",
-  "status": "implementation_and_targeted_evidence_complete_shared_regression_pending",
+  "status": "IMPLEMENTED_FOCUSED_PASSED_STANDARD_INTEGRATION_NOT_GREEN",
   "schema_version": 17,
   "core": {
     "label": "craft-core-fixture-fixed",
@@ -207,5 +207,13 @@
     "sha256": "0bf694ee24d420c18e086929789fb5b349b7c121d61669f75f9c845e262ad853",
     "source": "Real schema16 save from final person-details GPU run, copied byte-exact."
   },
-  "manual_review": "All eight final native frames and three extracted movie keyframes opened and checked."
+  "manual_review": "All eight final native frames and three extracted movie keyframes opened and checked.",
+  "shared_final_regression": {
+    "status": "FAILED_AFTER_THREE_ATTEMPTS",
+    "evidence": "docs/codex/results/R3-FINAL-validation.json",
+    "last_reported_checks": 2007,
+    "last_reported_failures": 0,
+    "whole_suite_green": false,
+    "note": "Printed groups were green; one later surface assertion stopped the suite. Its targeted correction passed, but no fourth full run was made."
+  }
 }
