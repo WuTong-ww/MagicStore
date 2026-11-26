@@ -10,6 +10,7 @@ const Appearance = preload("res://scripts/people/appearance.gd")
 const FamilyLibrary = preload("res://scripts/people/family_library.gd")
 const OrdinaryContent = preload("res://scripts/people/ordinary_content.gd")
 const BirthIdentity = preload("res://scripts/people/birth_identity.gd")
+const Nationality = preload("res://scripts/people/nationality.gd")
 
 static func load_config() -> Dictionary:
 	var parser := JSON.new()
@@ -555,7 +556,7 @@ static func _ordinary(people: Dictionary, config: Dictionary, rng: RandomNumberG
 			var appearance_config := Appearance.load_config()
 			for npc_id: String in born:
 				var birth := BirthIdentity.propose({"save_id":str(people.save_id),"seed":int(people.seed),"npc_id":npc_id},birth_config,excluded)
-				var revised := OrdinaryContent.with_birth_identity(people.profiles[npc_id],birth,birth_config,appearance_config)
+				var revised := OrdinaryContent.with_birth_identity(people.profiles[npc_id],birth,birth_config,appearance_config,people.profiles.values(),str(people.save_id))
 				if revised.is_empty():
 					# Callers keep their original String API and RNG sequence. This
 					# incomplete candidate is rejected by People/SaveService; never
@@ -1181,7 +1182,7 @@ static func visible_queue(people: Dictionary, status: String = "queued") -> Arra
 			continue
 		var profile: Dictionary = people.profiles[row.npc_id]
 		var referrer: Dictionary = people.profiles.get(row.referrer_npc_id, {})
-		result.append({"arrival_id": row.arrival_id, "npc_id": row.npc_id, "name": profile.name, "role": profile.role,"appearance":Appearance.for_display(profile.appearance,str(row.npc_id)),
+		result.append({"arrival_id": row.arrival_id, "npc_id": row.npc_id, "name": profile.name, "role": profile.role,"age":Nationality.public_metadata(profile).age,"nationality":profile.get("nationality",Nationality.infer(profile)),"mbti":str(profile.get("mbti","")),"appearance":Appearance.for_display(profile.appearance,str(row.npc_id)),
 			"case_id": row.case_id, "intent": row.intent, "arrived_at": row.at,
 			"source": row.get("original_source", row.source), "state": row.state, "deadline": row.deadline,
 			"patience_minutes": maxi(0, int(row.deadline) - int(people.clock)),
@@ -1552,6 +1553,7 @@ static func public_profile(people: Dictionary, npc_id: String) -> Dictionary:
 		"birthday": profile.get("birthday", ""), "zodiac": profile.get("zodiac", ""),
 		"mbti": profile.get("mbti", ""), "personality": profile.get("personality", ""),
 		"background": profile.get("background", ""), "preferences": profile.get("preferences", []).duplicate(true)}
+	view.merge(Nationality.public_metadata(profile))
 	if profile.get("generation_member") == "person" and profile.get("generated_bundle") is Dictionary:
 		view.merge({"background":profile.background,"preferences":profile.preferences.duplicate(),"speech_style":profile.speech_style,"generation_source":profile.generation.source})
 	elif profile.get("generation_member") == "contact" and people.profiles.has(profile.get("generated_owner_id")):

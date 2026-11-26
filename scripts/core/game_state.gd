@@ -14,6 +14,8 @@ const DivinationEvents = preload("res://scripts/divination/event_rules.gd")
 const Shop = preload("res://scripts/shop/shop.gd")
 const PeopleBridge = preload("res://scripts/shop/people_bridge.gd")
 const People = preload("res://scripts/people/people.gd")
+const Nationality = preload("res://scripts/people/nationality.gd")
+const FaceDetails = preload("res://scripts/people/face_details.gd")
 const BirthIdentity = preload("res://scripts/people/birth_identity.gd")
 const BirthIdentityCopy = preload("res://scripts/people/birth_identity_copy.gd")
 const Memory = preload("res://scripts/people/memory.gd")
@@ -512,6 +514,8 @@ func divination_view(visit_id: String = "") -> Dictionary:
 		if visit.visit_id == (state.active_visit_id if visit_id.is_empty() else visit_id):
 			var projected := DivinationView.project(_divination, state, visit)
 			if projected.get("guest") is Dictionary:
+				var profile: Dictionary = state.get("people",{}).get("profiles",{}).get(visit.npc_id,{})
+				if not profile.is_empty(): projected.guest.merge(Nationality.public_metadata(profile))
 				projected.guest["appearance"] = Appearance.for_display(state.get("people",{}).get("profiles",{}).get(visit.npc_id,{}).get("appearance",{}),str(visit.npc_id))
 				projected.guest["mood"] = DialoguePolicy.mood_from_turns(visit.get("dialogue",[]))
 			return projected
@@ -809,6 +813,7 @@ func _new_game(action: Dictionary) -> Dictionary:
 		candidate.player.energy = int(daily_loop_config.daily_energy)
 		if not _plan_daily(candidate):
 			return _case_failure()
+	if not _sync_person_variation(candidate): return _case_failure()
 	candidate = SaveService._normalize_numbers(candidate)
 	var prepared := _divination.candidate_for(candidate)
 	if not prepared.get("success",false):
@@ -850,6 +855,7 @@ func _apply_loaded_game(loaded: Dictionary, publish_unchanged: bool = true) -> D
 	if not _initialize_integrated(candidate,false,initial.session):
 		return _fail("INVALID_APPEARANCE",Appearance.load_config().get("copy",{}).get("migration_failed",content_error))
 	DailyLoop.sync_mode(candidate,_sequential())
+	if int(candidate.schema_version) >= 16 and not _sync_person_variation(candidate): return _case_failure()
 	candidate = SaveService._normalize_numbers(candidate)
 	var prepared: Dictionary = initial.session.candidate_for(candidate)
 	if not prepared.get("success",false):
@@ -1211,6 +1217,7 @@ func _commit(candidate: Dictionary, action: Dictionary, message: String, result:
 	if not story_result.get("success",false):
 		return _fail(story_result.get("error_code","STORY_INVALID"),story_result.get("message",""))
 	DailyLoop.sync_mode(candidate,_sequential())
+	if int(candidate.schema_version) >= 16 and not _sync_person_variation(candidate): return _case_failure()
 	candidate = SaveService._normalize_numbers(candidate)
 	result = SaveService._normalize_numbers(result)
 	candidate.state_version = int(state.state_version) + 1
@@ -1297,7 +1304,20 @@ func _initialize_integrated(candidate: Dictionary, fresh: bool = false, candidat
 	if int(candidate.schema_version) < 14 and not EmergentStore.migrate_schema13(candidate).get("success",false):
 		return false
 	_migrate_creation_receipt_schema(candidate)
+	if int(candidate.schema_version) < 16:
+		if not _sync_person_variation(candidate): return false
+		candidate.schema_version = 16
 	return People.validate(candidate.people).is_empty()
+
+func _sync_person_variation(candidate: Dictionary) -> bool:
+	# Fixed story dossiers are authoritative for the public age and type.
+	# The old generic opening profile could otherwise show Lin as 30/INFJ.
+	for npc_id: String in story_config.get("npcs",{}):
+		if not candidate.people.profiles.has(npc_id): continue
+		var descriptor: Dictionary = story_config.npcs[npc_id]
+		candidate.people.profiles[npc_id]["age"] = int(descriptor.age)
+		candidate.people.profiles[npc_id]["mbti"] = str(descriptor.mbti)
+	return Nationality.sync(candidate.people) and FaceDetails.sync(candidate.people,Appearance.load_config(),func(profile: Dictionary, mapped: Dictionary) -> bool: return GeneratedPerson.migrate_appearance(profile,mapped))
 
 func _migrate_creation_receipt_schema(candidate: Dictionary) -> void:
 	# Contract-only 14 -> 15. Do not invent receipts/markers or rewrite old data.

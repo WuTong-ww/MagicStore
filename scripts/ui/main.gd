@@ -640,8 +640,9 @@ func open_people() -> void:
 		return
 	people_panel.set_view(GameState.people_view(),str(GameState.player_snapshot().get("save_id","")))
 	_sync_story_archive()
-	_fit_window(people_window,Vector2i(shell_config.dialogs.people[0],shell_config.dialogs.people[1]))
-	people_window.popup_centered()
+	if not people_window.visible:
+		_fit_window(people_window,Vector2i(shell_config.dialogs.people[0],shell_config.dialogs.people[1]))
+		people_window.popup_centered()
 
 func _sync_story_archive() -> void:
 	if not is_instance_valid(people_panel) or not people_panel.has_method("set_story_view"):

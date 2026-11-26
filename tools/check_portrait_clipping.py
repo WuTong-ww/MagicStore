@@ -271,6 +271,36 @@ def validate_godot_parity(config, receipt, root=ROOT):
     return verified
 
 
+def audit_face_layers(config, alphas):
+    """Verify the mask/order contract used by the actual runtime paint layers.
+
+    Pixel alpha containment is exercised against the generated buffers by
+    tests/people/face_details.gd; this static audit does not claim visual QA.
+    """
+    face = config.get("face_variation")
+    if face is None:
+        return {"legacy_catalog": True, "layers": []}
+    expected = [{"id":"makeup","after":"face_shape","mask":"face_shape"},
+                {"id":"lip_color","after":"mouth_expr","mask":"mouth_expr"},
+                {"id":"face_marks","after":"mouth_expr","mask":"face_shape"}]
+    need(face.get("overlays") == expected, "FACE_OVERLAY_ORDER_OR_MASK_INVALID")
+    order = config["rendering"]["render_order"]
+    need(order.index("face_shape") < order.index("eyes_expr"), "FACE_MAKEUP_ORDER_INVALID")
+    need(order.index("mouth_expr") < order.index("hair_front"), "FACE_LIP_ORDER_INVALID")
+    masks = []
+    for layer in ("face_shape", "mouth_expr"):
+        for row in config["parts"][layer]:
+            # All expression files were already verified against the manifest.
+            paths = row.get("paths", {"neutral": row.get("path")})
+            for mood, path in paths.items():
+                need(isinstance(path, str) and path.startswith("res://"), "FACE_MASK_PATH_INVALID")
+                with Image.open(ROOT/path[6:]) as image:
+                    alpha = np.asarray(image.convert("RGBA"))[:, :, 3]
+                    need(image.size == tuple(config["canvas"]) and np.any(alpha), "FACE_MASK_EMPTY_OR_SIZE_INVALID")
+                masks.append({"layer":layer,"id":row["id"],"mood":mood,"path":path})
+    return {"layers":expected,"source_masks":masks,"pixel_containment_target":"tests/people/face_details.gd","visual_acceptance":False}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=ROOT / "data/people/appearance_parts.json")
@@ -292,6 +322,7 @@ def main():
         result.update(config_sha256=digest(args.config), sources=sources, source_count=len(sources), source_sha_all_match_manifest=True, matrix=rows, matrix_count=len(rows), primary_count=1680, accessory_none_count=120, appearance_valid_count=sum(x["appearance_valid"] for x in rows), selection_valid_count=sum(x["new_selection_valid"] for x in rows), selection_reachability=reachable)
         if policy is not None:
             result["prepared_hair"] = audit_prepared_hair(config, policy, alphas)
+            result["face_layers"] = audit_face_layers(config, alphas)
             if args.godot_parity is not None:
                 result["godot_parity"] = validate_godot_parity(config, json.loads(args.godot_parity.read_text(encoding="utf-8-sig")))
                 result["godot_parity_receipt"] = {"path": str(args.godot_parity), "sha256": digest(args.godot_parity)}

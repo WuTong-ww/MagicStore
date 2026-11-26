@@ -1,4 +1,5 @@
 extends RefCounted
+const MAX_SCHEMA := preload("res://scripts/save/schema_version.gd").CURRENT
 ## Pure versioned G5 proposals. The transaction owner applies and saves patches.
 const CONFIG_PATH := "res://data/past_lives/registry.json"
 const COPY_KEYS := ["title","empty","unknown_era","unknown_identity","observed","interpretation_heading","options_heading","evidence_heading","verified","refuted","unverified","invalid_config","invalid_context","present","missing_artifact","ineligible","insufficient_wallet","legacy_memory","probability_missed","no_slot","not_bound","no_fragment","needs_interpretation","needs_evidence","duplicate_interpretation","invalid_interpretation","already_verified","invalid_source","paid_lead","echo_lead","signal_source","signal_meaning","signal_topic_label","signal_tone_label","signal_prompt"]
@@ -484,7 +485,7 @@ static func progress_valid(state: Dictionary, library: Dictionary) -> bool:
 	var progress: Variant = state.divination.get("past_lines")
 	if progress == null:
 		return _integer(state.get("schema_version"),1,8)
-	if not _integer(state.get("schema_version"),9,15):
+	if not _integer(state.get("schema_version"),9,MAX_SCHEMA):
 		return false
 	if not _keys(progress,["version","instances"]) or not _integer(progress.version,1,1) or not progress.instances is Dictionary or progress.instances.size() > int(library.limits.max_instances) or not _text(state.get("save_id")) or not _integer(state.get("clock_minutes")) or not state.get("npcs") is Dictionary or not state.get("visits") is Array or not state.get("processed_actions") is Dictionary or not state.divination.get("cases") is Dictionary or not state.divination.get("ledger") is Array:
 		return false

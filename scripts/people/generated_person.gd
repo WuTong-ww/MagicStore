@@ -7,6 +7,7 @@ const IDENTITY_VERSION := 3
 const MAX_INT := 2147483647
 const Appearance = preload("res://scripts/people/appearance.gd")
 const BirthIdentity = preload("res://scripts/people/birth_identity.gd")
+const Nationality = preload("res://scripts/people/nationality.gd")
 const PROTOCOL_PATH := "res://data/people/character_protocol.json"
 const PERSON_FIELDS := ["name", "role", "personality", "speech_style", "background", "preferences"]
 const CASE_FIELDS := ["title", "opening", "question", "situation", "concern", "detail", "hidden_fact", "followup"]
@@ -567,7 +568,9 @@ static func _profile(identity: Dictionary, config: Dictionary, npc_id: String, g
 		result["appearance_description"] = identity.appearance_description
 	if int(people.get("appearance_catalog_version",1)) >= 2:
 		var parts_config := Appearance.load_config()
-		result.appearance = Appearance.generate(parts_config,str(people.save_id),npc_id,people.profiles.values())
+		var context := result.duplicate(true)
+		context["nationality"] = Nationality.infer(identity)
+		result.appearance = Appearance.generate(parts_config,str(people.save_id),npc_id,people.profiles.values(),context)
 		result.appearance = Appearance.map_description(str(identity.get("appearance_description","")),result.appearance,parts_config)
 	if identity.has("birth_identity"):
 		var birth := _normalize_birth_identity(identity.birth_identity)

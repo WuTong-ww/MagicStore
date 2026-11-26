@@ -3,6 +3,7 @@ extends SceneTree
 const FIXTURE := "res://tests/fixtures/schema12_pre_names.json"
 const FIXTURE_SHA := "5bbb63c3113c7d5b097ab129a2a65dd686fa1d91844444d2dc786ceb71ed4de8"
 const FIXTURE_ID := "save_fb0308fddcb024c1caf597d4e30af755"
+const DetailsProjection = preload("res://tests/fixtures/person_details_projection.gd")
 var game: Node
 var saves: Node
 var checks := 0
@@ -46,10 +47,11 @@ func run() -> void:
 	var restored := migrated.duplicate(true)
 	restored.schema_version = 12
 	restored.people.erase("birth_identity_version")
+	restored.people = DetailsProjection.before16(restored.people,old.people)
 	check(not restored.divination.has("emergent_cases") or restored.divination.get("emergent_cases")=={"version":1,"instances":{}},"historical projection retains no populated schema14 ordinary-case namespace")
 	restored.divination.erase("emergent_cases")
 	check(restored==old,"removing only schema13 and the future marker recovers every old field exactly")
-	check(migrated.people.profiles==old.people.profiles and migrated.people.relationships==old.people.relationships and migrated.people.arrivals==old.people.arrivals and migrated.people.days==old.people.days,"old names/skins/birthdays/provenance/relations and all existing plans retain exact values")
+	check(DetailsProjection.before16(migrated.people,old.people).profiles==old.people.profiles and migrated.people.relationships==old.people.relationships and migrated.people.arrivals==old.people.arrivals and migrated.people.days==old.people.days,"old identity and plans remain exact after projecting only the authorized schema16 additions")
 	check(migrated.processed_actions==old.processed_actions and restored.divination==old.divination and migrated.story==old.story,"no action, fact, board, card order, event or story disclosure is regenerated")
 	check(FileAccess.get_sha256(path)==FIXTURE_SHA and saves.read_save(FIXTURE_ID).state==old,"load is memory-only and leaves the old durable schema and exact bytes")
 	var invalid := migrated.duplicate(true)

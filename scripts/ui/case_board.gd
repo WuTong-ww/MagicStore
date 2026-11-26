@@ -2,6 +2,7 @@ extends Control
 ## This screen consumes only the committed public projection. It never reads
 ## the case definition, card order, answers, or the private world state.
 const UI = preload("res://scripts/ui/ui_kit.gd")
+const Nationality = preload("res://scripts/people/nationality.gd")
 const Materials = preload("res://scripts/ui/panel_materials.gd")
 const Icons = preload("res://scripts/ui/icon_policy.gd")
 const Config = preload("res://scripts/ui/case_board_config.gd")
@@ -346,6 +347,8 @@ func refresh() -> void:
 			story_lines.append(text)
 	if not story_lines.is_empty() and (reply.is_empty() or not prelude.is_empty()):
 		speech_label.text = separator.join(story_lines)
+	var guest_info := Nationality.information(GameState.divination_view().get("guest",{}))
+	if not guest_info.is_empty(): speech_label.text = guest_info+"\n\n"+speech_label.text
 	cards_row.visible = not _extra_open
 	_refresh_cards()
 	_refresh_slots()

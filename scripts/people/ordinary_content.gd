@@ -4,6 +4,7 @@ const CONFIG_PATH := "res://data/people/ordinary_content.json"
 const TEMPLATE_PATH := "res://data/people/templates.json"
 const Appearance = preload("res://scripts/people/appearance.gd")
 const BirthIdentity = preload("res://scripts/people/birth_identity.gd")
+const Nationality = preload("res://scripts/people/nationality.gd")
 
 static func _read(path: String) -> Dictionary:
 	if not FileAccess.file_exists(path):
@@ -142,7 +143,7 @@ static func config_valid(data: Variant, templates: Dictionary = {}) -> bool:
 	return true
 
 ## Only called after the full legacy/G4 birth. Existing profiles never enter it.
-static func with_birth_identity(profile: Dictionary, record: Dictionary, birth_config: Dictionary = {}, appearance_config: Dictionary = {}) -> Dictionary:
+static func with_birth_identity(profile: Dictionary, record: Dictionary, birth_config: Dictionary = {}, appearance_config: Dictionary = {}, existing: Array = [], save_id: String = "birth") -> Dictionary:
 	if birth_config.is_empty():
 		birth_config = BirthIdentity.load_config()
 	if appearance_config.is_empty():
@@ -154,6 +155,10 @@ static func with_birth_identity(profile: Dictionary, record: Dictionary, birth_c
 	result["cultural_origin"] = record.cultural_origin
 	result["birth_identity"] = record.duplicate(true)
 	result.birth_identity.version = int(record.version)
+	var context := result.duplicate(true)
+	context["nationality"] = Nationality.infer(result)
+	result.appearance = Appearance.refine_face(profile.appearance,appearance_config,save_id,str(profile.npc_id),existing,context)
+	if result.appearance.is_empty(): return {}
 	result.appearance.colors.skin = record.skin_id
 	return result if Appearance.selection_valid(result.appearance,appearance_config) and birth_profile_valid(result,birth_config,appearance_config) else {}
 

@@ -6,7 +6,7 @@ extends Node
 const ENVELOPE_FORMAT := "midnight-grocery-save-v1"
 const PRE_TITLE_SCHEMA := 14
 const NEW_GAME_RECEIPT_SCHEMA := 15 # Frozen historical gate after first TITLE release.
-const CURRENT_SCHEMA := 15
+const CURRENT_SCHEMA := preload("res://scripts/save/schema_version.gd").CURRENT
 const NEW_GAME_CONFIG_PATH := "res://data/new_game.json"
 const MAX_BYTES := 16 * 1024 * 1024
 const MAX_INTEGER := 2147483647
@@ -489,6 +489,10 @@ func _validate(s: Dictionary) -> String:
 		var people_error: String = PeopleBridge.validate(s)
 		if not people_error.is_empty():
 			return people_error
+		if int(s.schema_version) >= 16 and not preload("res://scripts/people/nationality.gd").state_valid(s.get("people",{})):
+			return str(preload("res://scripts/people/nationality.gd").load_config().get("presentation",{}).get("invalid",Appearance.load_config().get("copy",{}).get("migration_failed","")))
+		if int(s.schema_version) >= 16 and not preload("res://scripts/people/face_details.gd").state_valid(s.get("people",{}),Appearance.load_config()):
+			return str(Appearance.load_config().get("face_variation",{}).get("copy",{}).get("invalid",Appearance.load_config().get("copy",{}).get("migration_failed","")))
 		if int(s.schema_version)>=13:
 			if s.people.get("birth_identity_version")!=1 or s.people.birth_identity_version is bool:
 				return "BIRTH_IDENTITY_POLICY_INVALID"

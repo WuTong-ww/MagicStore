@@ -67,6 +67,10 @@ try {
     }
     if ($Test) {
         Invoke-Godot @('--headless', '--path', $repo, '--import')
+        # The shared schema16 boundary is verified once with the full suite.
+        foreach ($personTarget in @('tests/people/nationality.gd','tests/people/face_details.gd','tests/integration/person_details_migration.gd')) {
+            Invoke-Godot @('--headless', '--path', $repo, '--script', "res://$personTarget")
+        }
         # MUSIC uses synthetic voices; licensed local Ogg checks require explicit opt-in.
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/audio/music_catalog.gd')
         Invoke-Godot @('--headless', '--path', $repo, '--script', 'res://tests/integration/music_runtime.gd')

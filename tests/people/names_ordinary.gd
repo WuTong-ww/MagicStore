@@ -22,6 +22,8 @@ func old_fields(profile: Dictionary) -> Dictionary:
 	value.erase("birth_identity")
 	value.erase("cultural_origin")
 	value.appearance.colors.erase("skin")
+	value.appearance.erase("face_details")
+	value.appearance.parts.erase("mouth_expr")
 	return value
 
 func run() -> void:
@@ -50,7 +52,8 @@ func run() -> void:
 			var current: Dictionary = modern.profiles[id]
 			check(not old.has("birth_identity") and Birth.record_valid(current.get("birth_identity"),names),"only the opted-in new birth gets a valid record / "+id)
 			check(current.name==current.birth_identity.name and current.cultural_origin==current.birth_identity.cultural_origin and current.appearance.colors.skin==current.birth_identity.skin_id,"name, origin and skin match the same immutable record / "+id)
-			check(old_fields(old)==old_fields(current),"all old non-name/non-skin results remain exact, including birthday/job/MBTI/schedules/rig / "+id)
+			check(old_fields(old)==old_fields(current),"all previous biography, schedule, hair, clothes and rig fields survive the new face policy / "+id)
+			check(current.appearance.has("face_details") and current.appearance.parts.mouth_expr == current.appearance.face_details.lips,"only the new facial choices select a lip shape / "+id)
 			check(not seen.has(current.name),"main/contact names are distinct / "+id)
 			seen[current.name] = true
 			var altered := current.duplicate(true)

@@ -2,6 +2,7 @@ extends RefCounted
 ## Pure new-birth selection. No People/Story/Appearance preload or state mutation.
 ## load_config reads JSON only; supplied resolved configs keep propose/record_valid pure.
 const CONFIG_PATH := "res://data/people/name_pools.json"
+const Nationality = preload("res://scripts/people/nationality.gd")
 const TEMPLATE_PATH := "res://data/people/templates.json"
 const APPEARANCE_PATH := "res://data/people/appearance_parts.json"
 const REGIONS := ["europe","africa","south_asia","latin_america","middle_east"]
@@ -72,11 +73,13 @@ static func _palette_ids(appearance: Dictionary) -> Array:
 	return result
 
 static func load_config(templates: Dictionary = {}, appearance: Dictionary = {}) -> Dictionary:
+	if Nationality.load_config().is_empty(): return {}
 	if templates.is_empty():
 		templates = _read(TEMPLATE_PATH)
 	if appearance.is_empty():
 		appearance = _read(APPEARANCE_PATH)
 	var rules := _read(CONFIG_PATH)
+	if Nationality.load_config().available_skin_ids != _palette_ids(appearance): return {}
 	if rules.has("rules") or not config_valid(rules,templates,appearance):
 		return {}
 	return {"rules":rules,"local_given_names":templates.ordinary_names.duplicate(true),
@@ -202,7 +205,7 @@ static func _pool(config: Dictionary, id: String) -> Dictionary:
 			return {"id":id,"cultural_origin":row.cultural_origin,"given_names":row.given_names,"surnames":row.surnames,"skin_ids":row.skin_ids,"format":rules.formats[row.format_id]}
 		if id==rules.mixed.pool_id_prefix+row.cultural_origin:
 			return {"id":id,"cultural_origin":"mixed","given_names":row.given_names,"surnames":config.local_surnames,"skin_ids":rules.mixed.skin_ids,"format":rules.formats[rules.mixed.format_id]}
-	return {}
+	return Nationality.pool(config,id)
 
 static func _render(pool: Dictionary, surname: String, given: String) -> String:
 	return str(pool.format).format({"surname":surname,"given_name":given})
@@ -244,12 +247,9 @@ static func propose(context: Dictionary, config: Dictionary = {}, excluded_names
 	var id: String = config.rules.local_pool.id
 	if group!="local":
 		var region := _weighted(config.rules.regions,rng)
-		if group=="mixed":
-			id = config.rules.mixed.pool_id_prefix+region
-		else:
-			for row: Dictionary in config.rules.foreign_pools:
-				if row.cultural_origin==region:
-					id = row.id
+		var nationality := Nationality.choose(region,rng)
+		if nationality.is_empty(): return {}
+		id = ("mixed_country_" if group == "mixed" else "country_")+nationality
 	var pool := _pool(config,id)
 	if pool.is_empty():
 		return {}
@@ -275,7 +275,7 @@ static func record_valid(record: Variant, config: Dictionary = {}) -> bool:
 	if not config.has("rules") or not config_valid(config) or not _keys(record,["version","cultural_origin","name_pool_id","name","skin_id"]) or not _integer(record.version,1,1) or not record.cultural_origin is String or not record.name_pool_id is String or not record.name is String or not record.skin_id is String:
 		return false
 	var pool := _pool(config,record.name_pool_id)
-	if pool.is_empty() or record.cultural_origin!=pool.cultural_origin or record.skin_id not in pool.skin_ids:
+	if pool.is_empty() or record.cultural_origin!=pool.cultural_origin or record.skin_id not in pool.skin_ids or record.skin_id not in config.skin_palette_ids:
 		return false
 	for surname: String in pool.surnames:
 		for given: String in pool.given_names:

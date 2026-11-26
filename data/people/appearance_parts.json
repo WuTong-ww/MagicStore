@@ -1892,5 +1892,659 @@
         "incompatible_with": []
       }
     }
+  },
+  "face_variation": {
+    "version": 1,
+    "seed_namespace": "r3_face_detail_v1",
+    "iris": [
+      {
+        "id": "dark_brown",
+        "label": "深棕",
+        "color": "#3b2924"
+      },
+      {
+        "id": "brown",
+        "label": "棕",
+        "color": "#85543a"
+      },
+      {
+        "id": "amber",
+        "label": "琥珀",
+        "color": "#c58e31"
+      },
+      {
+        "id": "hazel",
+        "label": "榛色",
+        "color": "#9a9650"
+      },
+      {
+        "id": "green",
+        "label": "绿",
+        "color": "#538963"
+      },
+      {
+        "id": "gray_blue",
+        "label": "灰蓝",
+        "color": "#8aa6b6"
+      },
+      {
+        "id": "blue",
+        "label": "蓝",
+        "color": "#4388c0"
+      }
+    ],
+    "lipstick": [
+      {
+        "id": "none",
+        "label": "无",
+        "color": "#ae796c",
+        "opacity": 0.0
+      },
+      {
+        "id": "nude",
+        "label": "裸色",
+        "color": "#b48577",
+        "opacity": 0.28
+      },
+      {
+        "id": "rose",
+        "label": "玫瑰",
+        "color": "#b45e72",
+        "opacity": 0.6
+      },
+      {
+        "id": "brick",
+        "label": "砖红",
+        "color": "#a04e3c",
+        "opacity": 0.68
+      },
+      {
+        "id": "berry",
+        "label": "莓果",
+        "color": "#863c62",
+        "opacity": 0.64
+      },
+      {
+        "id": "coral",
+        "label": "珊瑚",
+        "color": "#da7c68",
+        "opacity": 0.55
+      }
+    ],
+    "blush": [
+      {
+        "id": "none",
+        "label": "无",
+        "opacity": 0.0
+      },
+      {
+        "id": "light",
+        "label": "淡",
+        "opacity": 0.18
+      },
+      {
+        "id": "medium",
+        "label": "中",
+        "opacity": 0.29
+      }
+    ],
+    "eye_makeup": [
+      {
+        "id": "none",
+        "label": "无",
+        "opacity": 0.0
+      },
+      {
+        "id": "liner",
+        "label": "淡眼线",
+        "opacity": 0.38
+      },
+      {
+        "id": "earth",
+        "label": "大地色眼影",
+        "opacity": 0.25
+      }
+    ],
+    "brows": [
+      {
+        "id": "thin",
+        "label": "细",
+        "scale": 0.78
+      },
+      {
+        "id": "medium",
+        "label": "中",
+        "scale": 1.0
+      },
+      {
+        "id": "thick",
+        "label": "粗",
+        "scale": 1.27
+      }
+    ],
+    "noses": [
+      {
+        "id": "soft",
+        "label": "小巧",
+        "scale": 0.82
+      },
+      {
+        "id": "straight",
+        "label": "直鼻",
+        "scale": 1.0
+      },
+      {
+        "id": "round",
+        "label": "圆鼻",
+        "scale": 1.14
+      },
+      {
+        "id": "broad",
+        "label": "宽鼻",
+        "scale": 1.28
+      }
+    ],
+    "lips": [
+      "mouth_01",
+      "mouth_02",
+      "mouth_03",
+      "mouth_04",
+      "mouth_05",
+      "mouth_06"
+    ],
+    "beards": [
+      {
+        "id": "none",
+        "label": "无"
+      },
+      {
+        "id": "stubble",
+        "label": "胡茬"
+      },
+      {
+        "id": "moustache",
+        "label": "短髭"
+      },
+      {
+        "id": "goatee",
+        "label": "山羊胡"
+      },
+      {
+        "id": "short",
+        "label": "短胡须"
+      }
+    ],
+    "age_stages": [
+      {
+        "minimum": 0,
+        "id": "teen"
+      },
+      {
+        "minimum": 18,
+        "id": "adult"
+      },
+      {
+        "minimum": 45,
+        "id": "middle"
+      },
+      {
+        "minimum": 65,
+        "id": "elder"
+      }
+    ],
+    "sampling": {
+      "default_age": 30,
+      "makeup_chance": {
+        "female": 0.76,
+        "male": 0.26,
+        "nonbinary": 0.55,
+        "unspecified": 0.46
+      },
+      "age_factors": [
+        {
+          "minimum": 0,
+          "factor": 0.42
+        },
+        {
+          "minimum": 20,
+          "factor": 1.0
+        },
+        {
+          "minimum": 60,
+          "factor": 0.42
+        }
+      ],
+      "occupation_factors": {
+        "student": 0.35,
+        "performer": 1.35,
+        "artist": 1.15,
+        "teacher": 0.85,
+        "retired": 0.55
+      },
+      "personality_factors": {
+        "ESFP": 1.2,
+        "ENFP": 1.12,
+        "ISFJ": 0.85,
+        "ISTJ": 0.8
+      },
+      "light_age": 20,
+      "light_senior_age": 60,
+      "light_lipstick": [
+        "none",
+        "nude",
+        "rose"
+      ],
+      "light_blush": [
+        "none",
+        "light"
+      ],
+      "light_eye_makeup": [
+        "none",
+        "liner"
+      ],
+      "beard_chance": {
+        "female": 0.0,
+        "male": 0.5,
+        "nonbinary": 0.22,
+        "unspecified": 0.2
+      },
+      "beard_minimum_age": 20,
+      "mole_chance": 0.48,
+      "moles": [
+        1,
+        3
+      ],
+      "freckles_chance": 0.3,
+      "freckles": [
+        12,
+        28
+      ],
+      "wrinkles": [
+        {
+          "minimum": 0,
+          "count": 0
+        },
+        {
+          "minimum": 40,
+          "count": 1
+        },
+        {
+          "minimum": 60,
+          "count": 2
+        }
+      ]
+    },
+    "geometry": {
+      "eye_mood_offsets": {
+        "neutral": [
+          0,
+          0
+        ],
+        "smile": [
+          0,
+          0
+        ],
+        "hesitant": [
+          -13,
+          -1
+        ],
+        "surprised": [
+          0,
+          0
+        ],
+        "sad": [
+          0,
+          3
+        ]
+      },
+      "eyes": [
+        [
+          316.0,
+          359.0
+        ],
+        [
+          452.0,
+          359.0
+        ]
+      ],
+      "iris_radius": [
+        22.0,
+        19.0
+      ],
+      "iris_enlarge": 1.12,
+      "highlight_radius": 0.18,
+      "highlight_offset": [
+        -0.28,
+        -0.3
+      ],
+      "cheeks": [
+        [
+          296.0,
+          426.0
+        ],
+        [
+          475.0,
+          426.0
+        ]
+      ],
+      "blush_radius": [
+        32.0,
+        17.0
+      ],
+      "blush_color": "#c26d62",
+      "eyeshadow_color": "#936c51",
+      "eye_shadow_radius": [
+        45.0,
+        12.0
+      ],
+      "eye_shadow_offset": [
+        0.0,
+        -12.0
+      ],
+      "nose_center": [
+        384.0,
+        427.0
+      ],
+      "nose_radius": [
+        36.0,
+        52.0
+      ],
+      "brow_center_y": 328.0,
+      "mole_bounds": [
+        300.0,
+        395.0,
+        170.0,
+        115.0
+      ],
+      "mole_radius": [
+        1.7,
+        3.3
+      ],
+      "freckle_bounds": [
+        285.0,
+        397.0,
+        195.0,
+        40.0
+      ],
+      "freckle_radius": [
+        1.0,
+        2.1
+      ],
+      "mark_color": "#644237",
+      "freckle_opacity": 0.33,
+      "mole_opacity": 0.72,
+      "beard_center": [
+        384.0,
+        518.0
+      ],
+      "beard_radius": [
+        64.0,
+        40.0
+      ],
+      "moustache_center": [
+        384.0,
+        485.0
+      ],
+      "moustache_radius": [
+        35.0,
+        7.0
+      ],
+      "goatee_center": [
+        384.0,
+        539.0
+      ],
+      "goatee_radius": [
+        20.0,
+        25.0
+      ],
+      "beard_opacity": 0.56,
+      "wrinkle_color": "#805d4e",
+      "wrinkle_opacity": 0.3,
+      "wrinkle_width": 1.2,
+      "wrinkle_lines": [
+        [
+          [
+            282.0,
+            365.0
+          ],
+          [
+            268.0,
+            371.0
+          ]
+        ],
+        [
+          [
+            487.0,
+            365.0
+          ],
+          [
+            501.0,
+            371.0
+          ]
+        ],
+        [
+          [
+            344.0,
+            452.0
+          ],
+          [
+            334.0,
+            484.0
+          ]
+        ],
+        [
+          [
+            424.0,
+            452.0
+          ],
+          [
+            434.0,
+            484.0
+          ]
+        ]
+      ],
+      "overlay_size": [
+        384,
+        512
+      ],
+      "feature_bounds": [
+        250,
+        308,
+        272,
+        285
+      ]
+    },
+    "differences": {
+      "iris": 2,
+      "makeup": 2,
+      "brows": 2,
+      "beard": 3,
+      "glasses": 2,
+      "hair_color": 2,
+      "minimum": 7,
+      "glasses_ids": [
+        "accessory_01",
+        "accessory_02"
+      ]
+    },
+    "overlays": [
+      {
+        "id": "makeup",
+        "after": "face_shape",
+        "mask": "face_shape"
+      },
+      {
+        "id": "lip_color",
+        "after": "mouth_expr",
+        "mask": "mouth_expr"
+      },
+      {
+        "id": "face_marks",
+        "after": "mouth_expr",
+        "mask": "face_shape"
+      }
+    ],
+    "fixed": {
+      "npc_lin": {
+        "version": 1,
+        "iris": "dark_brown",
+        "lipstick": "nude",
+        "blush": "light",
+        "eye_makeup": "none",
+        "brows": "medium",
+        "nose": "soft",
+        "lips": "mouth_01",
+        "beard": "none",
+        "moles": [],
+        "freckles": [],
+        "wrinkles": 0
+      },
+      "npc_pieter": {
+        "version": 1,
+        "iris": "green",
+        "lipstick": "none",
+        "blush": "none",
+        "eye_makeup": "none",
+        "brows": "thick",
+        "nose": "broad",
+        "lips": "mouth_01",
+        "beard": "stubble",
+        "moles": [],
+        "freckles": [],
+        "wrinkles": 0
+      },
+      "npc_shen_nianqiu": {
+        "version": 1,
+        "iris": "brown",
+        "lipstick": "nude",
+        "blush": "none",
+        "eye_makeup": "none",
+        "brows": "thin",
+        "nose": "straight",
+        "lips": "mouth_01",
+        "beard": "none",
+        "moles": [],
+        "freckles": [],
+        "wrinkles": 2
+      },
+      "npc_marianne": {
+        "version": 1,
+        "iris": "blue",
+        "lipstick": "rose",
+        "blush": "light",
+        "eye_makeup": "earth",
+        "brows": "medium",
+        "nose": "round",
+        "lips": "mouth_01",
+        "beard": "none",
+        "moles": [],
+        "freckles": [],
+        "wrinkles": 1
+      },
+      "npc_wen_qingchuan": {
+        "version": 1,
+        "iris": "dark_brown",
+        "lipstick": "none",
+        "blush": "none",
+        "eye_makeup": "none",
+        "brows": "thick",
+        "nose": "straight",
+        "lips": "mouth_01",
+        "beard": "stubble",
+        "moles": [],
+        "freckles": [],
+        "wrinkles": 2
+      },
+      "npc_gu_nian": {
+        "version": 1,
+        "iris": "brown",
+        "lipstick": "none",
+        "blush": "none",
+        "eye_makeup": "none",
+        "brows": "medium",
+        "nose": "soft",
+        "lips": "mouth_01",
+        "beard": "none",
+        "moles": [],
+        "freckles": [
+          [
+            310,
+            416,
+            1.7
+          ],
+          [
+            322,
+            420,
+            1.4
+          ],
+          [
+            338,
+            411,
+            1.6
+          ],
+          [
+            429,
+            413,
+            1.5
+          ],
+          [
+            447,
+            419,
+            1.7
+          ],
+          [
+            459,
+            412,
+            1.3
+          ]
+        ],
+        "wrinkles": 0
+      },
+      "npc_gu_yuanan": {
+        "version": 1,
+        "iris": "brown",
+        "lipstick": "none",
+        "blush": "none",
+        "eye_makeup": "none",
+        "brows": "thick",
+        "nose": "broad",
+        "lips": "mouth_01",
+        "beard": "short",
+        "moles": [],
+        "freckles": [],
+        "wrinkles": 1
+      },
+      "npc_tao_shuning": {
+        "version": 1,
+        "iris": "dark_brown",
+        "lipstick": "nude",
+        "blush": "light",
+        "eye_makeup": "liner",
+        "brows": "thin",
+        "nose": "round",
+        "lips": "mouth_01",
+        "beard": "none",
+        "moles": [],
+        "freckles": [],
+        "wrinkles": 1
+      },
+      "npc_jiang_yuanzhou": {
+        "version": 1,
+        "iris": "hazel",
+        "lipstick": "none",
+        "blush": "none",
+        "eye_makeup": "none",
+        "brows": "medium",
+        "nose": "broad",
+        "lips": "mouth_01",
+        "beard": "moustache",
+        "moles": [],
+        "freckles": [],
+        "wrinkles": 0
+      }
+    },
+    "copy": {
+      "invalid": "人物的面部记录不完整，原存档已保留。"
+    }
   }
 }

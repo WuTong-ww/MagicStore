@@ -4,6 +4,7 @@ const Appearance = preload("res://scripts/people/appearance.gd")
 const EditorConfig = preload("res://scripts/people/appearance_editor_config.gd")
 const GradientShader = preload("res://shaders/gradient_map.gdshader")
 const RenderPlan = preload("res://scripts/people/portrait_render_plan.gd")
+const FaceDetails = preload("res://scripts/people/face_details.gd")
 static var _composites: Dictionary = {}
 static var _recent: Array[String] = []
 static var _limit := 1
@@ -113,6 +114,20 @@ static func _prepared_texture(record: Dictionary, catalog: Dictionary, plan_dige
 	_trim_cache(_limit)
 	return texture
 
+static func _overlay_texture(kind: String, record: Dictionary, value: Dictionary, catalog: Dictionary) -> Texture2D:
+	if record.is_empty() or not FaceDetails.overlay_active(kind,value.face_details): return null
+	var key := "face_overlay:"+JSON.stringify([kind,record.path,_source_digest(record.path),value.face_details,value.colors.hair,catalog.face_variation]).sha256_text()
+	if _composites.has(key): return _composites[key]
+	var source := prepared_layer_image(record,catalog)
+	var dimensions: Array = catalog.face_variation.geometry.overlay_size
+	var painted := FaceDetails.overlay_image(source,kind,value,catalog,Vector2i(dimensions[0],dimensions[1]))
+	if painted == null: return null
+	var texture := ImageTexture.create_from_image(painted)
+	_composites[key] = texture
+	_recent.append(key)
+	_trim_cache(int(catalog.cache.max_entries))
+	return texture
+
 func _rebuild() -> void:
 	if not is_node_ready():
 		return
@@ -129,6 +144,9 @@ func _rebuild() -> void:
 	add_child(layer_canvas)
 	var available := 0
 	var missing := 0
+	var face_record := {}
+	for entry: Dictionary in records:
+		if entry.layer == "face_shape": face_record = entry
 	for record: Dictionary in records:
 		var layer := TextureRect.new()
 		layer.name = record.layer
@@ -152,6 +170,23 @@ func _rebuild() -> void:
 			material.set_shader_parameter("middle_color",Color(palette[1]))
 			material.set_shader_parameter("light_color",Color(palette[2]))
 			layer.material = material
+		if appearance.has("face_details"):
+			if record.layer in ["eyes_expr","features","brows_expr"]:
+				layer.material = FaceDetails.material(record.layer,appearance.face_details,config,mood,palette)
+			for overlay: Dictionary in config.face_variation.overlays:
+				if overlay.after != record.layer: continue
+				var mask: Dictionary = face_record if overlay.mask == "face_shape" else record
+				var texture := _overlay_texture(overlay.id,mask,appearance,config)
+				if texture == null: continue
+				var paint := TextureRect.new()
+				paint.name = "FaceOverlay_"+str(overlay.id)
+				paint.mouse_filter = Control.MOUSE_FILTER_IGNORE
+				paint.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+				paint.stretch_mode = TextureRect.STRETCH_SCALE
+				paint.texture = texture
+				paint.set_meta("face_mask_layer",overlay.mask)
+				layer_canvas.add_child(paint)
+				paint.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		if layer.texture == null and record.status != "not_required":
 			missing += 1
 	missing_label = Label.new()
@@ -211,7 +246,7 @@ static func composite_texture(value: Dictionary, expression: String = "neutral",
 	var sources: Array = []
 	for layer: Dictionary in layers:
 		sources.append([layer.layer,layer.id,layer.tint,layer.canvas,layer.path,layer.available,layer.status,_source_digest(layer.path) if layer.available else ""])
-	var key := JSON.stringify([normalized,expression,plan.get("digest",""),catalog.get("version"),catalog.get("palettes"),native,output_size,sources]).sha256_text()
+	var key := JSON.stringify([normalized,expression,plan.get("digest",""),catalog.get("version"),catalog.get("palettes"),catalog.get("face_variation"),native,output_size,sources]).sha256_text()
 	_trim_cache(int(catalog.get("cache",{}).get("max_entries",1)))
 	if _composites.has(key):
 		_recent.erase(key)
@@ -223,6 +258,7 @@ static func composite_texture(value: Dictionary, expression: String = "neutral",
 	var paint_size := Vector2i(roundi(float(native[0])*factor),roundi(float(native[1])*factor))
 	var offset := Vector2i((Vector2(output_size)-Vector2(paint_size))*0.5)
 	var available := 0
+	var face_mask: Image
 	for layer: Dictionary in layers:
 		if not layer.available:
 			continue
@@ -230,6 +266,9 @@ static func composite_texture(value: Dictionary, expression: String = "neutral",
 		if source == null or source.is_empty() or source.get_size() != Vector2i(native[0],native[1]):
 			continue
 		available += 1
+		var overlay_mask: Image = source.duplicate() if layer.layer in ["face_shape","mouth_expr"] else null
+		if layer.layer == "face_shape": face_mask = overlay_mask
+		if normalized.has("face_details"): source = FaceDetails.prepare_layer(source,layer.layer,normalized.face_details,catalog,expression)
 		source.convert(Image.FORMAT_RGBA8)
 		source.resize(paint_size.x,paint_size.y,Image.INTERPOLATE_LANCZOS)
 		var palette := palette_for(normalized,layer.tint,catalog)
@@ -247,6 +286,12 @@ static func composite_texture(value: Dictionary, expression: String = "neutral",
 					mapped.a = pixel.a
 					source.set_pixel(x,y,mapped)
 		result.blend_rect(source,Rect2i(Vector2i.ZERO,paint_size),offset)
+		if normalized.has("face_details"):
+			for overlay: Dictionary in catalog.face_variation.overlays:
+				if overlay.after != layer.layer: continue
+				var mask: Image = face_mask if overlay.mask == "face_shape" else overlay_mask
+				var paint := FaceDetails.overlay_image(mask,overlay.id,normalized,catalog,paint_size)
+				if paint != null: result.blend_rect(paint,Rect2i(Vector2i.ZERO,paint_size),offset)
 	if available == 0:
 		return null
 	var texture := ImageTexture.create_from_image(result)

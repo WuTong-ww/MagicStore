@@ -56,7 +56,13 @@ func _ready() -> void:
 	add_child(close_button)
 	_refresh()
 
-func set_view(value: Dictionary, identity: String = "") -> void:
+var _manage_visibility := true
+
+func available() -> bool:
+	return _enabled and not config.is_empty()
+
+func set_view(value: Dictionary, identity: String = "", manage_visibility: bool = true) -> void:
+	_manage_visibility = manage_visibility
 	if identity != _identity:
 		_identity = identity
 		_selected_id = ""
@@ -93,11 +99,11 @@ func select_page(id: String) -> void:
 func _refresh() -> void:
 	if not is_instance_valid(body):
 		return
-	visible = _enabled and not config.is_empty()
+	if _manage_visibility: visible = available()
 	for child: Node in page_buttons.get_children():
 		page_buttons.remove_child(child)
 		child.queue_free()
-	if not visible:
+	if not available():
 		body.text = ""
 		page_title.text = ""
 		ending_label.text = ""

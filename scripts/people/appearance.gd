@@ -3,6 +3,7 @@ extends RefCounted
 const CONFIG_PATH := "res://data/people/appearance_parts.json"
 const FIXED_NPCS_PATH := "res://data/story/npcs.json"
 const RenderPlan = preload("res://scripts/people/portrait_render_plan.gd")
+const FaceDetails = preload("res://scripts/people/face_details.gd")
 const LIN_LEGACY_PRESETS := ["portrait_lin","npc_lin"]
 static var _fixed_npcs: Dictionary = {}
 static var _fixed_npcs_sha := ""
@@ -57,6 +58,7 @@ static func _palette(config: Dictionary, kind: String, id: Variant) -> Dictionar
 	return {}
 
 static func config_valid(config: Dictionary) -> bool:
+	if not FaceDetails.config_valid(config): return false
 	if not _catalog(config) or not _keys(config.parts,config.layer_order) or config.layer_order.is_empty():
 		return false
 	if not config.get("canvas") is Array or config.canvas.size() != 2 or not config.canvas.all(func(v: Variant) -> bool: return _integer(v,1)):
@@ -114,6 +116,7 @@ static func config_valid(config: Dictionary) -> bool:
 		return false
 	if not config.generation.silhouette_weights.values().all(func(v: Variant) -> bool: return _integer(v,1)) or not config.get("cache") is Dictionary or not _integer(config.cache.get("max_entries"),1):
 		return false
+	if int(config.generation.maximum_attempts) > 20: return false
 	if not config.get("mutual_exclusions") is Array or not config.get("legacy") is Dictionary or not config.get("description_rules") is Array or not config.get("copy") is Dictionary:
 		return false
 	for exclusion: Variant in config.mutual_exclusions:
@@ -165,7 +168,11 @@ static func appearance_valid(value: Variant, config: Dictionary = {}) -> bool:
 		return false
 	if _keys(value,["preset"]):
 		return value.preset is String and config.presets.has(value.preset)
-	if not _keys(value,["version","parts","colors","age_stage"]) or value.version != config.version or not _keys(value.parts,config.layer_order) or not _keys(value.colors,["skin","hair","outfit"]) or value.age_stage not in config.age_stages:
+	var fields := ["version","parts","colors","age_stage"]
+	if value.has("face_details"):
+		fields.append("face_details")
+		if not FaceDetails.valid(value.face_details,config): return false
+	if not _keys(value,fields) or value.version != config.version or not _keys(value.parts,config.layer_order) or not _keys(value.colors,["skin","hair","outfit"]) or value.age_stage not in config.age_stages:
 		return false
 	for layer: String in config.layer_order:
 		var row := _find(config,layer,value.parts[layer])
@@ -218,6 +225,9 @@ static func fixed_npc_appearance(npc_id: String, config: Dictionary = {}) -> Dic
 	var value: Variant = descriptor.get("appearance",{}) if descriptor is Dictionary else {}
 	if not value is Dictionary or value.has("preset") or not selection_valid(value,config):
 		return {}
+	value = value.duplicate(true)
+	var fixed: Dictionary = config.face_variation.fixed.get(npc_id,{})
+	if not fixed.is_empty(): value["face_details"] = fixed.duplicate(true)
 	return normalize(value,config)
 
 ## Compatibility is display-only. Valid historical A4 parts remain unchanged,
@@ -247,9 +257,10 @@ static func _score(value: Dictionary, other: Dictionary, config: Dictionary) -> 
 			score += int(config.generation.silhouette_weights[layer])
 	if value.colors.hair != other.colors.hair:
 		score += int(config.generation.silhouette_weights.hair_color)
+	if value.has("face_details") or other.has("face_details"): score += FaceDetails.difference(value,other,config)
 	return score
 
-static func generate(config: Dictionary, save_id: String, npc_id: String, existing: Array = []) -> Dictionary:
+static func generate(config: Dictionary, save_id: String, npc_id: String, existing: Array = [], context: Dictionary = {}) -> Dictionary:
 	if config.is_empty():
 		config = load_config()
 	if not config_valid(config):
@@ -261,6 +272,7 @@ static func generate(config: Dictionary, save_id: String, npc_id: String, existi
 	for _attempt: int in range(int(config.generation.maximum_attempts)):
 		var candidate: Dictionary = config.defaults.duplicate(true)
 		candidate.version = int(config.version)
+		if not context.is_empty(): candidate.age_stage = FaceDetails.age_stage(context,config)
 		for layer: String in config.layer_order:
 			var choices := _allowed(config,layer,candidate.age_stage)
 			if choices.is_empty():
@@ -269,19 +281,45 @@ static func generate(config: Dictionary, save_id: String, npc_id: String, existi
 		for kind: String in candidate.colors:
 			var choices: Array = config.palettes[kind]
 			candidate.colors[kind] = choices[rng.randi_range(0,choices.size()-1)].id
+		if not context.is_empty():
+			candidate["face_details"] = FaceDetails.generate(config,rng,context)
+			candidate.parts.mouth_expr = candidate.face_details.lips
 		if not selection_valid(candidate,config):
 			continue
-		var score: int = int(config.generation.minimum_silhouette_score)
+		var minimum: int = int(config.face_variation.differences.minimum) if not context.is_empty() else int(config.generation.minimum_silhouette_score)
+		var score: int = minimum
 		for entry: Variant in existing:
 			var other: Variant = entry.get("appearance",entry) if entry is Dictionary else {}
+			if entry is Dictionary and entry.get("npc_id","") == npc_id: continue
 			if appearance_valid(other,config) and not other.has("preset"):
 				score = mini(score,_score(candidate,other,config))
 		if score > best_score:
 			best = candidate
 			best_score = score
-		if score >= int(config.generation.minimum_silhouette_score):
+		if score >= minimum:
 			break
 	return best.duplicate(true) if not best.is_empty() else normalize(config.defaults,config)
+
+static func refine_face(value: Dictionary, config: Dictionary, save_id: String, npc_id: String, existing: Array, context: Dictionary) -> Dictionary:
+	# Ordinary people keep the existing factory's clothing, hair, colour and rig.
+	# Only the newly requested face choices are sampled after their nationality.
+	var rng := RandomNumberGenerator.new()
+	rng.seed = (str(config.face_variation.seed_namespace)+"|"+save_id+"|"+npc_id).sha256_text().substr(0,15).hex_to_int()
+	var best := {}
+	var best_score := -1
+	for attempt: int in range(int(config.generation.maximum_attempts)):
+		var candidate := value.duplicate(true)
+		candidate["face_details"] = FaceDetails.generate(config,rng,context)
+		candidate.parts.mouth_expr = candidate.face_details.lips
+		if not selection_valid(candidate,config): continue
+		var score := int(config.face_variation.differences.minimum)
+		for entry: Variant in existing:
+			if not entry is Dictionary or entry.get("npc_id","") == npc_id: continue
+			var other: Dictionary = entry.get("appearance",entry)
+			if appearance_valid(other,config) and not other.has("preset"): score = mini(score,_score(candidate,other,config))
+		if score > best_score: best = candidate; best_score = score
+		if score >= int(config.face_variation.differences.minimum): break
+	return best
 
 static func map_description(description: String, appearance: Dictionary, config: Dictionary = {}) -> Dictionary:
 	if config.is_empty():

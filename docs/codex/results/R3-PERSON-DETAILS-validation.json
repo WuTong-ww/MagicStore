@@ -1,0 +1,101 @@
+{
+  "task": "R3-PORTRAIT / R3-NAMES supplement",
+  "status": "implementation_and_targeted_evidence_complete_shared_regression_pending",
+  "schema_version": 16,
+  "test_frequency": "Latest user instruction: reduce repeated tests; shared full regression follows related remaining work.",
+  "observed_targeted_results": {
+    "nationality": [
+      256,
+      0
+    ],
+    "face_details": [
+      115,
+      0
+    ],
+    "genuine_schema15_migration": [
+      40,
+      0
+    ],
+    "ordinary_factory": [
+      79,
+      0
+    ],
+    "python_identity_wire": [
+      16,
+      0
+    ],
+    "music_host_native_error_fix": [
+      43,
+      0
+    ],
+    "final_gpu_ui": [
+      62,
+      0
+    ]
+  },
+  "latest_changes_pending_shared_regression": [
+    "Canonical fixed-NPC age/type correction adds a migration assertion.",
+    "StoryNotes tab ownership and conversation metadata visibility.",
+    "Final strict configuration additions."
+  ],
+  "gpu_result": {
+    "label": "person-details-ui-final",
+    "target": "tests/integration/person_details_ui.gd",
+    "exit_code": 0,
+    "seconds": 238.5,
+    "source_sha256": "8c9167abf66aade8d004d26983881524e4b79bf95c1c44740a03f751eeabd932",
+    "source_unchanged": true,
+    "summaries": [
+      "PERSON DETAILS UI: 62 checks, 0 failures, 14 actual captures"
+    ],
+    "error_lines": [],
+    "log_sha256": "f5710a2137db8c994eb071547f0f26cf39f45c95c53c5113a2179775a570e71a",
+    "host_timeout_360_seconds": false
+  },
+  "native_png_receipt": "D:\\MagicStore\\.tools\\round3\\.tools\\r3-person-details\\ui\\run_412144d66587b4c4406af233d924bdd9\\receipt.json",
+  "actual_native_captures": 14,
+  "manual_review": "All fourteen final captures reviewed through two portrait sheets and four three-page overviews. Eye/lip variation visible at actual 96px; local/foreign metadata and archive tabs visible.",
+  "screenshots": [
+    {
+      "path": "docs/screenshots/round3/R3-PERSON-DETAILS/random-24-with-96px.jpg",
+      "bytes": 393083,
+      "sha256": "e2d83b9dcf8ea73b5dd4f2856b65003eabb11f475d21dc037f65c7fc49bbb176"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-PERSON-DETAILS/controlled-6-with-96px.jpg",
+      "bytes": 111834,
+      "sha256": "8bbbe9e2469d17559c3de1c4c9eed4a0155c4b97713265c20dfbad3538293639"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-PERSON-DETAILS/local-1280-overview.jpg",
+      "bytes": 828840,
+      "sha256": "eb47ec367e30ae63061cb70c78ed2c8b66548bd500f507b7c3117d0a62d1cd31"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-PERSON-DETAILS/foreign-1280-overview.jpg",
+      "bytes": 761796,
+      "sha256": "8ed790a5dfb8ad9e904e106b5b6ffca888b8fc6615e88bdff644036063f8f852"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-PERSON-DETAILS/local-1920-overview.jpg",
+      "bytes": 1856748,
+      "sha256": "3b0f21a9eaef78d210749963a9e86cb6250ec748b39a0b52ee709508e8af8eb1"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-PERSON-DETAILS/foreign-1920-overview.jpg",
+      "bytes": 1755308,
+      "sha256": "54a4d441240576c8e0e59d264679d4cd4ae3f1cc7cddb80c777cf0e6264c100f"
+    }
+  ],
+  "screenshot_note": "Four overviews stack front/consultation/archive without scaling; labels state original frame resolution. Native twelve page PNGs remain in ignored local evidence.",
+  "decisions": [
+    "Preserve old names, skin and appearance part IDs; add deterministic face details.",
+    "Fixed story NPC age and personality use already-authored canonical story data.",
+    "Legacy stored birth dates are preserved; Lin age 26 versus stored 1996 birth year needs planner clarification."
+  ],
+  "known_incomplete": [
+    "Shared full regression and final shop_ui capture pending.",
+    "Existing POLISH first-glyph clipping and old framed controls remain documented."
+  ],
+  "full_regression_passed": false
+}

@@ -2,6 +2,7 @@ extends RefCounted
 ## Mutates only the uncommitted candidate supplied by GameState.
 const CONFIG_PATH := "res://data/daily_loop.json"
 const People = preload("res://scripts/people/people.gd")
+const Nationality = preload("res://scripts/people/nationality.gd")
 const Events = preload("res://scripts/divination/event_rules.gd")
 const Memory = preload("res://scripts/people/memory.gd")
 const Content = preload("res://scripts/core/content_loader.gd")
@@ -206,6 +207,7 @@ static func public_view(state: Dictionary, config: Dictionary) -> Dictionary:
 	if not id.is_empty():
 		var profile: Dictionary = state.people.profiles[state.people.arrivals[id].npc_id]
 		view.next_guest = {"name":profile.name,"role":profile.role}
+		view.next_guest.merge(Nationality.public_metadata(profile))
 	for letter: Dictionary in loop.letters:
 		view.letters.append({"name":letter.name,"text":letter.text})
 	return view

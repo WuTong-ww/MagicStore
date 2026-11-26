@@ -1,4 +1,5 @@
 extends RefCounted
+const MAX_SCHEMA := preload("res://scripts/save/schema_version.gd").CURRENT
 ## Immutable per-save case records. Only explicit candidates may change.
 ## A codec is a versioned strict verifier, never a provider or permissive test shim.
 const Schema = preload("res://scripts/divination/case_schema.gd")
@@ -83,7 +84,7 @@ static func _owner_valid(state: Dictionary, arrival_id: String, record: Dictiona
 	return record.case_id == case_id_for(str(state.get("save_id","")),arrival_id,record.npc_id,policy)
 
 static func reserve_new(candidate: Dictionary, arrival_id: String, policy: Dictionary) -> Dictionary:
-	if not _integer(candidate.get("schema_version"),TARGET_SCHEMA,15) or not _policy_valid(policy) or not policy.enabled:
+	if not _integer(candidate.get("schema_version"),TARGET_SCHEMA,MAX_SCHEMA) or not _policy_valid(policy) or not policy.enabled:
 		return _bad("AICASE_RESERVATION_DISABLED")
 	var work: Variant = _namespace(candidate)
 	var row: Variant = candidate.get("people",{}).get("arrivals",{}).get(arrival_id)
@@ -159,7 +160,7 @@ static func _verify(record: Dictionary, state: Dictionary, arrival_id: String, s
 
 static func admit(candidate: Dictionary, arrival_id: String, payload: Dictionary, source: Dictionary, policy: Dictionary, codecs: Dictionary, schema: RefCounted) -> Dictionary:
 	var work: Variant = _namespace(candidate)
-	if not _integer(candidate.get("schema_version"),TARGET_SCHEMA,15) or not _policy_valid(policy) or not _shape(work,["version","instances"]) or not work.instances is Dictionary or not work.instances.has(arrival_id):
+	if not _integer(candidate.get("schema_version"),TARGET_SCHEMA,MAX_SCHEMA) or not _policy_valid(policy) or not _shape(work,["version","instances"]) or not work.instances is Dictionary or not work.instances.has(arrival_id):
 		return _bad("AICASE_NO_RESERVATION")
 	var reserved: Variant = work.instances[arrival_id]
 	var row: Dictionary = candidate.people.arrivals.get(arrival_id,{})
@@ -249,7 +250,7 @@ static func _install(catalog: Dictionary, definitions: Dictionary, definition: D
 	return true
 
 static func build(state: Dictionary, generated_base_catalog: Dictionary, static_definitions: Dictionary, policy: Dictionary, codecs: Dictionary, schema: RefCounted) -> Dictionary:
-	if not _integer(state.get("schema_version"),1,15) or not _policy_valid(policy) or schema == null or not schema.has_method("validate_definition"):
+	if not _integer(state.get("schema_version"),1,MAX_SCHEMA) or not _policy_valid(policy) or schema == null or not schema.has_method("validate_definition"):
 		return _bad("AICASE_BUILDER_CONFIG")
 	# SaveService invokes the builder before deeper case/people validation. Reject
 	# malformed containers here rather than triggering typed iteration/dot errors.

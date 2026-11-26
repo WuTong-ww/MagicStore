@@ -8,6 +8,7 @@ const Portrait = preload("res://scripts/people/portrait.gd")
 const EditorConfig = preload("res://scripts/people/appearance_editor_config.gd")
 const StyleReportPanel = preload("res://scripts/people/style_report_panel.gd")
 const StoryNotes = preload("res://scripts/ui/story_notes.gd")
+const Nationality = preload("res://scripts/people/nationality.gd")
 ## A-owned presentation; the host supplies a filtered view and owns actions.
 ## This panel never touches GameState, the clock, wallets or a save directly.
 
@@ -239,6 +240,7 @@ func set_story_view(value: Dictionary, identity: String = "") -> void:
 func _sync_story_notes() -> void:
 	if not is_instance_valid(_people_pages):
 		return
+	var previous_tab: int = _people_pages.current_tab
 	# CASE without a story getter retains its original tab structure.
 	if not is_instance_valid(story_notes) and not _story_view.get("enabled",false):
 		return
@@ -247,14 +249,18 @@ func _sync_story_notes() -> void:
 		story_notes.name = "StoryNotes"
 		_people_pages.add_child(story_notes)
 		story_notes.close_requested.connect(func(): story_notes_closed.emit())
-	story_notes.set_view(_story_view,_story_identity)
-	_people_pages.set_tab_hidden(story_notes.get_index(),not story_notes.visible)
+	story_notes.set_view(_story_view,_story_identity,false)
+	_people_pages.set_tab_hidden(story_notes.get_index(),not story_notes.available())
 	if not story_notes.config.is_empty():
 		_people_pages.set_tab_title(story_notes.get_index(),str(story_notes.config.copy.tab_title))
+	# Updating a page can show() it and make TabContainer select it. Read-only
+	# refreshes must preserve the page the player is actually viewing.
+	if previous_tab >= 0 and previous_tab < _people_pages.get_tab_count() and not _people_pages.is_tab_hidden(previous_tab):
+		_people_pages.current_tab = previous_tab
 
 func open_story_notes() -> bool:
 	_sync_story_notes()
-	if not is_instance_valid(story_notes) or not story_notes.visible:
+	if not is_instance_valid(story_notes) or _people_pages.is_tab_hidden(story_notes.get_index()):
 		return false
 	_people_pages.current_tab = story_notes.get_index()
 	return true
@@ -336,8 +342,8 @@ func _select(index: int) -> void:
 		var zodiac := str(profile.get("zodiac", ""))
 		var mbti := str(profile.get("mbti", ""))
 		var personality := str(profile.get("personality", ""))
-		if not birthday.is_empty() or not zodiac.is_empty() or not mbti.is_empty():
-			known += "\n"+copy.profile_format % [birthday if not birthday.is_empty() else copy.birthday_missing,zodiac if not zodiac.is_empty() else copy.zodiac_missing,mbti if not mbti.is_empty() else copy.mbti_missing]
+		if not birthday.is_empty() or not zodiac.is_empty():
+			known += "\n"+copy.profile_format % [birthday if not birthday.is_empty() else copy.birthday_missing,zodiac if not zodiac.is_empty() else copy.zodiac_missing]
 		if not personality.is_empty():
 			known += "\n"+copy.personality+personality
 		if not str(profile.get("background","")).is_empty():
@@ -354,7 +360,9 @@ func _select(index: int) -> void:
 		status = config.get("request_status", "")
 	elif row.get("state", "queued") == "outside":
 		status = str(config.get("outside_status", "")) + " · " + status
-	detail.text = "%s\n%s\n%s\n%s\n%s\n%s\n%s\n\n%s" % [row.get("name",copy.guest),row.get("role", ""),intent,status,ArrivalUI.source_text(row),introduced,known,_report_text()]
+	var public_info := profile.duplicate(true) if not profile.is_empty() else row.duplicate(true)
+	public_info.merge(row,true)
+	detail.text = "%s\n%s\n%s\n%s\n%s\n%s\n%s\n\n%s" % [row.get("name",copy.guest),Nationality.information(public_info),intent,status,ArrivalUI.source_text(row),introduced,known,_report_text()]
 	start_button.disabled = row.get("state", "queued") != "queued"
 	book_button.disabled = false
 
@@ -382,12 +390,14 @@ func _select_archive(index: int) -> void:
 	queue.deselect_all()
 	start_button.disabled = true
 	book_button.disabled = true
-	var lines: Array = [str(profile.get("name",copy.guest)),str(profile.get("role","")),copy.familiarity % [profile.get("familiarity",0),profile.get("trust",0)]]
+	var lines: Array = [str(profile.get("name",copy.guest)),Nationality.information(profile),copy.familiarity % [profile.get("familiarity",0),profile.get("trust",0)]]
+	var nationality := Nationality.label(profile)
+	if not nationality.is_empty(): lines.append(str(Nationality.load_config().presentation.nationality)+"："+nationality)
 	if profile.has("arrival_source"):
 		lines.append(ArrivalUI.source_text({"source": profile.arrival_source}))
 	var birthday := str(profile.get("birthday", ""))
 	if not birthday.is_empty():
-		lines.append(copy.birthday_format % [birthday,str(profile.get("zodiac",copy.zodiac_missing)),str(profile.get("mbti",copy.unknown))])
+		lines.append(copy.birthday_format % [birthday,str(profile.get("zodiac",copy.zodiac_missing))])
 	if not str(profile.get("personality", "")).is_empty():
 		lines.append(copy.personality+str(profile.personality))
 	if not str(profile.get("background","")).is_empty():

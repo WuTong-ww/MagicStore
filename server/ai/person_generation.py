@@ -185,6 +185,17 @@ def _birth_identity(value):
                   and value["cultural_origin"] == "mixed"):
                 pool = (templates[local["surnames_source"]], row["given_names"], rules["mixed"]["skin_ids"],
                         rules["formats"][rules["mixed"]["format_id"]])
+        country_rules = json.loads((root / "data/people/name_pools_by_country.json").read_text(encoding="utf-8"))
+        country_fields = ["id", "label", "region", "given", "surnames", "skins", "weight"]
+        if type(country_rules.get("version")) is not int or country_rules["version"] != 1 or country_rules.get("country_fields") != country_fields:
+            return {}
+        for country in country_rules["countries"]:
+            if not isinstance(country, list) or len(country) != len(country_fields):
+                return {}
+            if value["name_pool_id"] == "country_" + country[0] and value["cultural_origin"] == country[2]:
+                pool = (country[4].split("|"), country[3].split("|"), country[5], rules["formats"]["foreign"])
+            elif value["name_pool_id"] == "mixed_country_" + country[0] and value["cultural_origin"] == "mixed":
+                pool = (templates[local["surnames_source"]], country[3].split("|"), rules["mixed"]["skin_ids"], rules["formats"]["mixed"])
         if not pool or value["skin_id"] not in skin_ids or value["skin_id"] not in pool[2]:
             return {}
         if not any(value["name"] == pool[3].format(surname=surname, given_name=given)

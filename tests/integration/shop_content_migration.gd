@@ -70,7 +70,7 @@ func compatibility_schema(game: Node, saves: Node, schema: int) -> void:
 	check((await act(game,"new_game",{"name":"经营旧结构兼容"})).success,"create isolated version-contract source / "+str(schema))
 	var old: Dictionary = game.snapshot()
 	# Synthetic old versions cannot retain TITLE15's creation receipt.
-	if old.get("schema_version") == saves.NEW_GAME_RECEIPT_SCHEMA:
+	if saves.NEW_GAME_RECEIPT_SCHEMA <= int(old.get("schema_version",0)) and int(old.get("schema_version",0)) <= saves.CURRENT_SCHEMA:
 		for action_id: String in old.processed_actions.keys():
 			if old.processed_actions[action_id].get("action_type") == "new_game":
 				old.processed_actions.erase(action_id)

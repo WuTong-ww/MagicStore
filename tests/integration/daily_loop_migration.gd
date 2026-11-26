@@ -55,7 +55,7 @@ func active_schema9() -> void:
 	check(talk_reply.success,"legacy source includes witnessed clues and conversation: "+str(talk_reply))
 	var old: Dictionary = game.snapshot()
 	# Synthetic old versions cannot retain TITLE15's creation receipt.
-	if old.get("schema_version") == saves.NEW_GAME_RECEIPT_SCHEMA:
+	if saves.NEW_GAME_RECEIPT_SCHEMA <= int(old.get("schema_version",0)) and int(old.get("schema_version",0)) <= saves.CURRENT_SCHEMA:
 		for action_id: String in old.processed_actions.keys():
 			if old.processed_actions[action_id].get("action_type") == "new_game":
 				old.processed_actions.erase(action_id)
@@ -108,7 +108,7 @@ func crowded_schema9() -> void:
 	check((await act("new_game",{"name":"旧日满员"})).success,"legacy full-day source creates")
 	var old: Dictionary = game.snapshot()
 	# Synthetic old versions cannot retain TITLE15's creation receipt.
-	if old.get("schema_version") == saves.NEW_GAME_RECEIPT_SCHEMA:
+	if saves.NEW_GAME_RECEIPT_SCHEMA <= int(old.get("schema_version",0)) and int(old.get("schema_version",0)) <= saves.CURRENT_SCHEMA:
 		for action_id: String in old.processed_actions.keys():
 			if old.processed_actions[action_id].get("action_type") == "new_game":
 				old.processed_actions.erase(action_id)

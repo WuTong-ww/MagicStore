@@ -5,6 +5,7 @@ const Icons = preload("res://scripts/ui/icon_policy.gd")
 const CardChoice = preload("res://scripts/ui/card_choice.gd")
 const ArrivalUI = preload("res://scripts/ui/arrival_ui.gd")
 const Appearance = preload("res://scripts/people/appearance.gd")
+const Nationality = preload("res://scripts/people/nationality.gd")
 const Portrait = preload("res://scripts/people/portrait.gd")
 
 const SceneArt = preload("res://scripts/shop/scene_visual.gd")
@@ -83,7 +84,7 @@ func _ready() -> void:
 	profile.add_child(profile_text)
 	guest_name = UI.label("", 26)
 	profile_text.add_child(guest_name)
-	guest_role = UI.label("", 16, UI.MUTED)
+	guest_role = UI.label("", 16, UI.Palette.INK)
 	profile_text.add_child(guest_role)
 	arrival_source = UI.label("", 14, UI.MUTED)
 	profile_text.add_child(arrival_source)
@@ -206,7 +207,7 @@ func refresh() -> void:
 	for arrival: Dictionary in people.get("queue", []):
 		var case_id: String = arrival.case_id if not str(arrival.case_id).is_empty() else ("invitation" if arrival.npc_id == "npc_lin" else "archive")
 		var level := ArrivalUI.patience(arrival)
-		guests.append({"npc_id":arrival.npc_id,"arrival_id":arrival.arrival_id,"case_id":case_id,"label":str(arrival.name) + " · " + str(level.get("label", "")),"name":arrival.name,"role":arrival.role,"appearance":arrival.get("appearance",{}).duplicate(true),"source":arrival.get("source", ""),"case_title":"想看看店里的商品" if arrival.intent == "shopping" else "有些事想和你谈谈"})
+		guests.append({"npc_id":arrival.npc_id,"arrival_id":arrival.arrival_id,"case_id":case_id,"label":str(arrival.name) + " · " + str(level.get("label", "")),"name":arrival.name,"role":arrival.role,"age":arrival.get("age",0),"nationality":arrival.get("nationality",""),"mbti":arrival.get("mbti",""),"appearance":arrival.get("appearance",{}).duplicate(true),"source":arrival.get("source", ""),"case_title":"想看看店里的商品" if arrival.intent == "shopping" else "有些事想和你谈谈"})
 	_refresh_patience(people)
 	var active_view: Dictionary = GameState.divination_view()
 	if not active.is_empty() and not guests.any(func(row: Dictionary) -> bool: return row.npc_id == active.npc_id and row.case_id == active_view.case_id):
@@ -226,7 +227,7 @@ func refresh() -> void:
 	guest_picker.disabled = no_save or not active.is_empty()
 	var guest: Dictionary = guests[guest_picker.selected] if guest_picker.selected >= 0 else {}
 	guest_name.text = guest.get("name", "暂时没有来客")
-	guest_role.text = guest.get("role", "")
+	guest_role.text = Nationality.information(guest)
 	arrival_source.text = ArrivalUI.source_text(guest) if guest.has("arrival_id") else ""
 	portrait.visible = guest.get("npc_id") == "npc_lin"
 	if portrait.visible:
@@ -303,7 +304,7 @@ func _refresh_daily_journal(daily: Dictionary, active: Dictionary) -> void:
 		next_guest = GameState.divination_view().get("guest",{})
 	guest_profile.visible = phase == "reception" and not next_guest.is_empty()
 	guest_name.text = str(next_guest.get("name",""))
-	guest_role.text = str(next_guest.get("role",""))
+	guest_role.text = Nationality.information(next_guest)
 	guest_status.text = str(copy.guest_active) if not active.is_empty() else str(copy.guest_waiting)
 	case_label.visible = phase == "reception" and completed >= total
 	case_label.text = str(copy.all_served)

@@ -2,6 +2,7 @@ extends RefCounted
 ## UNRUN. Root supplies a genuine NAMES schema13 UI envelope + SHA.
 ## There is deliberately no schema14->13 projection or source-fixture generator.
 const Schema = preload("res://scripts/divination/case_schema.gd")
+const DetailsProjection = preload("res://tests/fixtures/person_details_projection.gd")
 var checks := 0
 var failures: Array[String] = []
 
@@ -41,7 +42,9 @@ func run(game, saves, genuine_path: String, genuine_sha256: String) -> Dictionar
 	var expected: Dictionary = source.duplicate(true)
 	expected.schema_version = saves.CURRENT_SCHEMA
 	expected.divination["emergent_cases"] = {"version":1,"instances":{}}
-	check(migrated==expected,"names/birth identities, fixed truth, old board, plans, events and action receipts remain exact")
+	var projected := migrated.duplicate(true)
+	projected.people = DetailsProjection.before16(projected.people,source.people)
+	check(projected==expected,"old identity, truth, boards, plans, events and receipts remain exact outside schema16's explicit additions")
 	check(FileAccess.get_sha256(copied_path)==genuine_sha256 and saves.read_save(source.save_id).state.schema_version==13,"load migration writes no bytes")
 	var command := {"type":"set_free_question","action_id":"genuine13_first_schema14_commit","enabled":not bool(migrated.divination.settings.free_question)}
 	saves.fail_next_write = true

@@ -6,6 +6,7 @@ const LAYOUT_CONFIG := "res://data/ui/consultation.json"
 
 const SceneArt = preload("res://scripts/shop/scene_visual.gd")
 const Appearance = preload("res://scripts/people/appearance.gd")
+const Nationality = preload("res://scripts/people/nationality.gd")
 const Portrait = preload("res://scripts/people/portrait.gd")
 const ResponsiveConfig = preload("res://scripts/ui/responsive_config.gd")
 const ViewportMetrics = preload("res://scripts/ui/viewport_metrics.gd")
@@ -30,6 +31,7 @@ var card_text: RichTextLabel
 var clue_label: Label
 var cost_label: Label
 var visit_label: Label
+var guest_information: Label
 var service_summary: Label
 var service_button: Button
 var casebook_button: Button
@@ -175,6 +177,10 @@ func _ready() -> void:
 	clue_label = UI.label("", int(layout_config.small_font_size), UI.MUTED)
 	clue_label.autowrap_mode = TextServer.AUTOWRAP_OFF
 	title_row.add_child(clue_label)
+	guest_information = UI.label("",int(layout_config.body_font_size),UI.Palette.INK)
+	guest_information.name = "VisibleGuestInformation"
+	guest_information.autowrap_mode = TextServer.AUTOWRAP_OFF
+	conversation.add_child(guest_information)
 	var history_scroll := ScrollContainer.new()
 	history_scroll.name = "ConversationBodyScroll"
 	history_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
@@ -429,7 +435,9 @@ func refresh() -> void:
 	if guest_portrait.visible:
 		guest_portrait.configure(guest_appearance(guest),presentation_mood(guest))
 	title.text = layout_config.copy.guest_title % guest.get("name", "") if active else layout_config.copy.empty_title
-	visit_label.text = str(guest.get("case_title", "")) if active else layout_config.copy.empty_visit
+	visit_label.text = Nationality.information(guest)+"\n"+str(guest.get("case_title", "")) if active else layout_config.copy.empty_visit
+	guest_information.text = Nationality.information(guest) if active else ""
+	guest_information.visible = active
 	var visit_id := str(visit.get("visit_id", ""))
 	var clue_count: int = view.get("clues", []).size()
 	if visit_id != _rendered_visit_id:
@@ -744,7 +752,7 @@ func _refresh_material_public_summary(view: Dictionary) -> void:
 	_material_letter_padding.add_theme_constant_override("margin_top",int(padding+_material_nameplate.size.y*0.5))
 	_material_book_title.text = str(guest.get("name",layout_config.copy.tab_casebook))
 	# The public opening is a customer statement, never a world-fact upgrade.
-	_material_book_summary.text = str(view.get("opening_statement",""))
+	_material_book_summary.text = Nationality.information(guest)+"\n"+str(view.get("opening_statement",""))
 	_queue_material_consultation()
 
 func _layout_material_consultation() -> void:

@@ -48,7 +48,7 @@ func run() -> void:
 func old_copy(schema: int) -> Dictionary:
 	var legacy: Dictionary = game.snapshot()
 	# Synthetic old versions cannot retain TITLE15's creation receipt.
-	if legacy.get("schema_version") == saves.NEW_GAME_RECEIPT_SCHEMA:
+	if saves.NEW_GAME_RECEIPT_SCHEMA <= int(legacy.get("schema_version",0)) and int(legacy.get("schema_version",0)) <= saves.CURRENT_SCHEMA:
 		for action_id: String in legacy.processed_actions.keys():
 			if legacy.processed_actions[action_id].get("action_type") == "new_game":
 				legacy.processed_actions.erase(action_id)
