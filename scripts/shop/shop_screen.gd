@@ -263,6 +263,21 @@ func _workshop(view: Dictionary) -> void:
 		text(label+" · "+str(demand.get("text","")),int(content_settings.layout.body_font))
 
 func _market(view: Dictionary) -> void:
+	var learning: Dictionary = GameState.learning_view()
+	if not learning.is_empty():
+		body.add_child(UI.paper_heading(learning.copy.book))
+		for course: Dictionary in learning.rows:
+			var book_row := HBoxContainer.new()
+			body.add_child(book_row)
+			var book_title := UI.label(course.title,int(learning.config.layout.font))
+			book_title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			book_row.add_child(book_title)
+			var book_button := UI.button(String(learning.copy.buy_book_short).format({"coins":course.book_price}),func(): await host.run_learning_action("purchase_method_book",{"method_id":course.method_id}))
+			book_button.name = "MarketBook_"+str(course.method_id)
+			book_button.disabled = course.book_registered or course.mastered
+			book_row.add_child(book_button)
+		body.add_child(UI.button(learning.copy.title,func(): host.open_learning()))
+		body.add_child(UI.Materials.make_divider())
 	var player: Dictionary = GameState.player_snapshot().get("player", {})
 	text("当前金币 %d · 采购消耗 10 分钟与 2 精力；出售消耗 5 分钟。" % int(player.get("coins", 0)))
 	var tabs := HBoxContainer.new()

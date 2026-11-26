@@ -14,12 +14,14 @@ const CaseSchema = preload("res://scripts/divination/case_schema.gd")
 const DeductionBoard = preload("res://scripts/divination/deduction_board.gd")
 const StoryContent = preload("res://scripts/story/story_content.gd")
 const StoryProgress = preload("res://scripts/story/story_progress.gd")
+const LearningRules = preload("res://scripts/learning/learning_rules.gd")
+var learning_config: Dictionary = LearningRules.load_config()
 const ACTIONS := [
 	"quote_service", "settle_service", "cancel_service", "learn_method", "note_hypothesis",
 	"record_prediction", "give_advice", "buy_case_item", "use_case_item", "receive_feedback",
 	"interpret_past", "verify_past", "interpret_past_line", "verify_past_line",
 	"case_question", "case_extra_question", "case_flip_card", "case_attach_evidence",
-	"case_choose_answer", "case_eliminate", "case_close"
+	"case_choose_answer", "case_eliminate", "case_close", "case_preview_advice", "case_key_slot"
 ]
 
 var data: Dictionary
@@ -530,6 +532,7 @@ func _settle(state: Dictionary, visit: Dictionary, case: Dictionary, id: Variant
 	return _ok("报酬与术式结果已保存。", output, int(service.minutes))
 
 func _method_block(state: Dictionary, visit: Dictionary, case: Dictionary, method_id: String, option_id: String, quoted_at: int = -1, legacy_quote: bool = false) -> Dictionary:
+	if int(state.get("schema_version",0)) >= 18 and not learning_config.get("debug_instant_learning",false) and not LearningRules.advanced_allowed(state,method_id): return _fail("METHOD_STORY_LOCKED",str(learning_config.ui.copy.late_gate))
 	if not method_id in data.cases[case.case_id].method_ids or not data.methods[method_id].options.has(option_id):
 		return _fail("METHOD_NOT_APPLICABLE", "这项操作不适用于当前案例。")
 	if not method_id in state.divination.skills:
@@ -560,6 +563,7 @@ func _method_block(state: Dictionary, visit: Dictionary, case: Dictionary, metho
 	return {}
 
 func _learn(state: Dictionary, action: Dictionary) -> Dictionary:
+	if not learning_config.get("debug_instant_learning",false): return _fail("DEBUG_DISABLED",str(learning_config.get("ui",{}).get("copy",{}).get("debug_disabled","")))
 	var id: Variant = action.get("method_id")
 	if not id is String or not data.methods.has(id):
 		return _fail("INVALID_ACTION", "请选择要研习的术式。")

@@ -75,6 +75,7 @@ func run() -> void:
 	check(ArrivalUI.source_text({"source": "burst_word_of_mouth"}).contains("口碑传开"), "burst origin is human-readable")
 	check(not ArrivalUI.source_text({"source": "unknown_technical_id"}).contains("unknown_technical_id"), "unknown source identifiers stay hidden")
 	var game: Node = root.get_node("GameState")
+	game._divination.learning_config.debug_instant_learning = true
 	# This fixture retains the pre-loop reception and transaction contract.
 	game.daily_loop_config.enabled = false
 	root.get_node("SaveService").base_dir = "res://.tools/arrival-ui-test-saves/" + game.make_id("run")

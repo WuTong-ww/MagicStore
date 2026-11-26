@@ -1,3 +1,3 @@
 extends RefCounted
 ## Upper bound shared by save validation and pure snapshot projections.
-const CURRENT := 17
+const CURRENT := 18

@@ -60,6 +60,7 @@ func run() -> void:
 	var fixture: Script = load("res://tests/past_lives/transaction_game.gd")
 	game = fixture.new()
 	root.add_child(game)
+	game._divination.learning_config.debug_instant_learning = true
 	# This historical transaction chain exercises the real-time reception mode.
 	game.daily_loop_config.enabled = false
 	game.configure_api("","","")
@@ -76,6 +77,7 @@ func run() -> void:
 	check((await act("new_game",{"name":"三世实际事务"})).success,"main positive chain starts from its own untouched real new game after the separate compatibility case")
 	var authored: Dictionary = game.snapshot()
 	authored.divination.skills.append("past")
+	check(preload("res://tests/fixtures/legacy_learning.gd").install(authored),"explicit synthetic legacy capability baseline")
 	check(saves.write_save(authored).success,"explicit authored prelearned skill fixture validates without changing people, plans or wallets")
 	check((await act("load_game",{"save_id":authored.save_id})).success,"authored learning history is actually loaded")
 	recorder = RecordingProvider.new()
@@ -311,6 +313,7 @@ func legacy_miss_branch() -> bool:
 	saves.base_dir = folder+"/legacy-miss"
 	var authored: Dictionary = game.snapshot()
 	authored.divination.skills.append("past")
+	check(preload("res://tests/fixtures/legacy_learning.gd").install(authored),"explicit synthetic legacy-miss capability baseline")
 	check(saves.write_save(authored).success and (await act("load_game",{"save_id":authored.save_id})).success,"separate legacy-miss source has only explicitly prelearned skill history")
 	var target := "npc_o_0_0"
 	var arrivals: Array = game.state.people.arrivals.values().filter(func(row: Dictionary) -> bool: return row.npc_id == target and row.state == "planned")

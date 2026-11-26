@@ -29,6 +29,7 @@ func run() -> void:
 	var migrated: Dictionary = game.snapshot()
 	var projection: Dictionary = migrated.duplicate(true)
 	projection.schema_version = original.schema_version
+	if not original.has("learning"): projection.erase("learning")
 	check(migrated.schema_version == preload("res://scripts/save/schema_version.gd").CURRENT and projection == original,"migration changes only schema; all old identity, inventory, quality and actions stay exact")
 	check(FileAccess.get_sha256(path) == SHA,"read migrates in memory without touching old disk")
 	var action := {"type":"set_free_question","enabled":not bool(migrated.divination.settings.free_question),"action_id":game.make_id("persist17"),"expected_version":migrated.state_version}

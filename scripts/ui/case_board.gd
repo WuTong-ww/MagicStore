@@ -51,8 +51,14 @@ var reaction_title: Label
 var end_button: Button
 var extra_button: Button
 var eliminate_button: Button
+var method_button: Button
+var learning_copy: Dictionary = {}
+var _method_open := false
 var public_view: Dictionary = {}
 var _pending := false
+# Future LEARN public adapter; empty keeps the actual-case path.
+var public_view_getter: Callable
+var command_submitter: Callable
 var _selected_evidence := ""
 var _extra_open := false
 var _elimination_open := false
@@ -63,6 +69,7 @@ var _slot_signatures: Dictionary = {}
 
 func _ready() -> void:
 	config = Config.load_config()
+	learning_copy = preload("res://scripts/learning/learning_rules.gd").load_config().get("ui",{}).get("copy",{})
 	story_config = StoryUI.load_config()
 	if config.is_empty():
 		return
@@ -127,6 +134,12 @@ func _ready() -> void:
 		instruction.text = config.copy.choose_elimination if _elimination_open else config.copy.deduction_instruction)
 	eliminate_button.name = "CaseEliminate"
 	utility_buttons.add_child(eliminate_button)
+	method_button = _button(str(learning_copy.get("method_tools","")),func():
+		_method_open = not _method_open
+		_extra_open = false
+		refresh())
+	method_button.name = "CaseMethodTools"
+	utility_buttons.add_child(method_button)
 	paper = _panel("CaseBoardPaper",config.layout.board_rect)
 	book_title = _label(config.copy.board_title,int(config.layout.title_font))
 	paper.add_child(book_title)
@@ -320,7 +333,7 @@ func _layout_cards_on_table() -> void:
 func refresh() -> void:
 	if config.is_empty() or _pending:
 		return
-	public_view = GameState.case_board_view()
+	public_view = public_view_getter.call() if public_view_getter.is_valid() else GameState.case_board_view()
 	visible = bool(public_view.get("enabled",false))
 	if not visible:
 		return
@@ -331,6 +344,7 @@ func refresh() -> void:
 	# Keep the basic card path accessible when that saved eligibility changes.
 	if not public_view.get("can_extra_question",false) or not prelude.is_empty():
 		_extra_open = false
+	if public_view.get("method_tools",[]).is_empty() or closed: _method_open = false
 	heading.text = str(public_view.get("title",config.copy.heading))
 	instruction.text = config.copy.closed_instruction if closed else (config.copy.question_round.format({"round":int(public_view.get("round",0))+1}) if phase == "questions" else (config.copy.cards_instruction if phase == "cards" else config.copy.deduction_instruction))
 	if _extra_open:
@@ -339,6 +353,7 @@ func refresh() -> void:
 		instruction.text = str(story_config.copy.prelude_instruction)
 	var reply := str(public_view.get("last_answer",""))
 	speech_label.text = reply if not reply.is_empty() else str(public_view.get("question",config.copy.empty_speech))
+	if reply.is_empty() and public_view.has("mentor_intro"): speech_label.text = str(public_view.mentor_intro)
 	var story_lines: Array[String] = StoryUI.public_lines(public_view.get("story_lines",[]))
 	var separator := str(story_config.get("copy",{}).get("separator","\n\n"))
 	if not prelude.is_empty():
@@ -347,9 +362,9 @@ func refresh() -> void:
 			story_lines.append(text)
 	if not story_lines.is_empty() and (reply.is_empty() or not prelude.is_empty()):
 		speech_label.text = separator.join(story_lines)
-	var guest_info := Nationality.information(GameState.divination_view().get("guest",{}))
+	var guest_info: String = str(public_view.get("guest_information",Nationality.information(public_view.get("guest",GameState.divination_view().get("guest",{})))))
 	if not guest_info.is_empty(): speech_label.text = guest_info+"\n\n"+speech_label.text
-	cards_row.visible = not _extra_open
+	cards_row.visible = not _extra_open and not _method_open
 	_refresh_cards()
 	_refresh_slots()
 	_refresh_evidence()
@@ -357,7 +372,8 @@ func refresh() -> void:
 	_refresh_advice()
 	extra_button.visible = bool(public_view.get("can_extra_question",false)) and not closed
 	eliminate_button.visible = bool(public_view.get("can_eliminate",false)) and not closed
-	utility_buttons.visible = not closed and phase != "questions" and prelude.is_empty()
+	method_button.visible = not public_view.get("method_tools",[]).is_empty() and not closed
+	utility_buttons.visible = not closed and prelude.is_empty() and (phase != "questions" or method_button.visible)
 	end_button.visible = closed
 	reaction_panel.visible = closed
 	speech_panel.visible = not closed
@@ -393,6 +409,23 @@ func _refresh_cards() -> void:
 		Materials.apply_tarot_card(button,art,"case_card_"+str(index))
 
 func _refresh_questions() -> void:
+	if _method_open:
+		var tools: Array = public_view.get("method_tools",[])
+		question_buttons.visible = true
+		question_buttons.offset_top = -float(config.layout.card_height)-float(config.layout.question_gap)
+		question_buttons.offset_bottom = -float(config.layout.question_gap)
+		var tool_signature := JSON.stringify(tools)+"methods"
+		if tool_signature == _question_signature: return
+		_question_signature = tool_signature
+		_clear(question_buttons)
+		for tool: Dictionary in tools:
+			var button := _button(str(tool.text),func(): await _submit(tool.action,tool.params))
+			button.name = "CaseMethod_"+str(question_buttons.get_child_count())
+			button.set_meta("available",true)
+			button.custom_minimum_size.y = float(config.layout.question_height)
+			question_buttons.add_child(button)
+			Materials.apply_button(button,"paper_tag",button.name)
+		return
 	var prelude := _blocking_prelude()
 	var blocked := not prelude.is_empty()
 	var rows: Array = prelude.get("options",[]) if blocked else (public_view.get("extra_questions",[]) if _extra_open else public_view.get("questions",[]))
@@ -419,14 +452,15 @@ func _refresh_questions() -> void:
 
 func _refresh_advice() -> void:
 	var rows: Array = public_view.get("advice",[])
-	advice_buttons.visible = public_view.get("phase") == "deduction" and not _extra_open and not public_view.get("closed",false) and _blocking_prelude().is_empty()
+	advice_buttons.visible = public_view.get("phase") == "deduction" and not _extra_open and not _method_open and not public_view.get("closed",false) and _blocking_prelude().is_empty()
 	var signature := JSON.stringify(rows)
 	if signature == _advice_signature:
 		return
 	_advice_signature = signature
 	_clear(advice_buttons)
 	for row: Dictionary in rows:
-		var button := _button(str(row.text),func(): await _submit("case_close",{"advice_id":row.id}))
+		var text: String = str(row.text)+(" · "+str(row.preview) if row.has("preview") else "")
+		var button := _button(text,func(): await _submit("case_close",{"advice_id":row.id}))
 		button.name = "CaseAdvice_"+str(advice_buttons.get_child_count())
 		button.set_meta("available",bool(row.get("enabled",false)))
 		advice_buttons.add_child(button)
@@ -453,7 +487,8 @@ func _refresh_slots() -> void:
 		var header := HBoxContainer.new()
 		header.mouse_filter = Control.MOUSE_FILTER_PASS
 		column.add_child(header)
-		var title := _label(str(row.title),int(config.layout.body_font))
+		var title_text: String = String(learning_copy.get("key_label","{title}")).format({"title":row.title}) if row.get("critical_hint",false) else str(row.title)
+		var title := _label(title_text,int(config.layout.body_font))
 		title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		header.add_child(title)
@@ -583,11 +618,16 @@ func _submit(action: String, values: Dictionary) -> void:
 			if token.get("evidence_id") == values.get("evidence_id"):
 				source_position = canvas.get_global_transform().affine_inverse()*token.get_global_rect().get_center()
 				flying_text = token.text
-	var result: Dictionary = await host.run_action(action,values)
+	var result: Dictionary
+	if command_submitter.is_valid():
+		result = await command_submitter.call(action,values)
+	else:
+		result = await host.run_action(action,values)
 	if not is_instance_valid(self) or not is_inside_tree():
 		return
 	_pending = false
 	if result.get("success",false):
+		_method_open = false
 		if action == "case_extra_question":
 			_extra_open = false
 		if action == "case_attach_evidence":
@@ -805,7 +845,7 @@ func _setup_materials() -> void:
 
 func _refresh_material_name() -> void:
 	if not is_instance_valid(speech_nameplate): return
-	var guest: Dictionary = GameState.divination_view().get("guest",{})
+	var guest: Dictionary = public_view.get("guest",GameState.divination_view().get("guest",{}))
 	var padding: float = float(config.layout.padding)
 	for pair: Array in [[speech_nameplate,speech_name,speech_panel],[reaction_nameplate,reaction_name,reaction_panel]]:
 		var nameplate: Control = pair[0]

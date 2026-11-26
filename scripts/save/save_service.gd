@@ -15,6 +15,7 @@ const ContentLoader = preload("res://scripts/core/content_loader.gd")
 const DivinationCatalog = preload("res://scripts/divination/catalog.gd")
 const DivinationSave = preload("res://scripts/divination/case_save.gd")
 const DivinationSession = preload("res://scripts/divination/session.gd")
+const LearningStore = preload("res://scripts/learning/learning_store.gd")
 const Shop = preload("res://scripts/shop/shop.gd")
 const PeopleBridge = preload("res://scripts/shop/people_bridge.gd")
 const Appearance = preload("res://scripts/people/appearance.gd")
@@ -457,7 +458,7 @@ func _validate(s: Dictionary) -> String:
 			return "动作编号或结果无效"
 		if not result.get("success") is bool or not result.get("error_code") is String or not result.get("message") is String or not result.get("result") is Dictionary or not _integer(result.get("state_version"), 0, int(s.state_version)):
 			return "已处理动作结果字段无效"
-		if result.has("action_type") and not result.action_type in ["start_visit", "talk", "reading", "end_visit", "rest", "next_day"] and (not extended or not result.action_type in DivinationSession.ACTIONS) and (int(s.schema_version) < 3 or not result.action_type in SHOP_ACTIONS) and (int(s.schema_version) < 10 or not result.action_type in DailyLoop.ACTIONS) and (int(s.schema_version) < 11 or result.action_type != "set_free_question") and (int(s.schema_version) < 12 or result.action_type != "story_choice") and (int(s.schema_version) < 14 or result.action_type != "admit_generated_case") and (int(s.schema_version) < NEW_GAME_RECEIPT_SCHEMA or result.action_type != "new_game"):
+		if result.has("action_type") and not result.action_type in ["start_visit", "talk", "reading", "end_visit", "rest", "next_day"] and (not extended or not result.action_type in DivinationSession.ACTIONS) and (int(s.schema_version) < 3 or not result.action_type in SHOP_ACTIONS) and (int(s.schema_version) < 10 or not result.action_type in DailyLoop.ACTIONS) and (int(s.schema_version) < 11 or result.action_type != "set_free_question") and (int(s.schema_version) < 12 or result.action_type != "story_choice") and (int(s.schema_version) < 14 or result.action_type != "admit_generated_case") and (int(s.schema_version) < 18 or result.action_type not in LearningStore.ACTIONS) and (int(s.schema_version) < NEW_GAME_RECEIPT_SCHEMA or result.action_type != "new_game"):
 			return "已处理动作类型无效"
 		# Creation-shaped output cannot erase its new type. Historical actions keep
 		# their prior contract; old and random-CLI saves need no creation receipt.
@@ -507,6 +508,7 @@ func _validate(s: Dictionary) -> String:
 	var case_error: String = DivinationSave.validate(s,current_data,visit_ids,case_projection.get("definitions",{}),case_projection.get("bindings",{})) if extended else ""
 	if not case_error.is_empty():
 		return case_error
+	if int(s.schema_version) >= 18 and not LearningStore.validate(s,current_data): return LearningStore.message()
 	return StoryProgress.validate(s,current_data,StoryContent.load_config()) if int(s.schema_version) >= 12 else ""
 
 

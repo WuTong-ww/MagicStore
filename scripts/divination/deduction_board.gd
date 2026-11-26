@@ -1,9 +1,10 @@
 extends RefCounted
 ## Private, persisted case progress. Only public_view may cross into the UI.
 const Schema = preload("res://scripts/divination/case_schema.gd")
+const Mechanics = preload("res://scripts/learning/method_mechanics.gd")
 const Cards = preload("res://scripts/divination/oracle_cards.gd")
 const Catalog = preload("res://scripts/divination/catalog.gd")
-const ACTIONS := ["case_question","case_extra_question","case_flip_card","case_attach_evidence","case_choose_answer","case_eliminate","case_close"]
+const ACTIONS := ["case_question","case_extra_question","case_flip_card","case_attach_evidence","case_choose_answer","case_eliminate","case_close","case_preview_advice","case_key_slot"]
 
 static func create(state: Dictionary, visit: Dictionary, definition: Dictionary) -> Dictionary:
 	var order: Array = range(definition.cards.size())
@@ -14,7 +15,9 @@ static func create(state: Dictionary, visit: Dictionary, definition: Dictionary)
 		var item: int = order[i]
 		order[i] = order[other]
 		order[other] = item
-	return {"definition_id":definition.id,"version":int(definition.version),"hash":Schema.definition_hash(definition),"phase":"questions","round":0,"questions_asked":[],"evidence_ids":[],"tool_clues":[],"card_order":order,"flipped_indices":[],"attachments":{},"answers":{},"eliminations":{},"extra_question_used":false,"closure":{}}
+	var board := {"definition_id":definition.id,"version":int(definition.version),"hash":Schema.definition_hash(definition),"phase":"questions","round":0,"questions_asked":[],"evidence_ids":[],"tool_clues":[],"card_order":order,"flipped_indices":[],"attachments":{},"answers":{},"eliminations":{},"extra_question_used":false,"closure":{}}
+	if state.has("learning") or state.has("fiction_capabilities"): board["mechanics"] = Mechanics.create(state,definition)
+	return board
 
 static func _find(rows: Array, id: Variant) -> Dictionary:
 	for row: Dictionary in rows:
@@ -59,8 +62,9 @@ static func complete(board: Dictionary, definition: Dictionary) -> bool:
 static func _advice_enabled(board: Dictionary, advice: Dictionary) -> bool:
 	return advice.requires_deductions.all(func(id: String) -> bool: return board.answers.has(id))
 
-static func handle(state: Dictionary, visit: Dictionary, case: Dictionary, action: Dictionary, data: Dictionary, definitions: Dictionary) -> Dictionary:
-	var rules := Schema.load_rules()
+static func handle(state: Dictionary, visit: Dictionary, case: Dictionary, action: Dictionary, data: Dictionary, definitions: Dictionary, trusted_rules: Dictionary = {}) -> Dictionary:
+	var rules := trusted_rules.duplicate(true) if not trusted_rules.is_empty() else Schema.load_rules()
+	if not Schema.validate_rules(rules): return _fail({},"CASE_UNAVAILABLE","unavailable")
 	var board: Dictionary = case.get("board",{})
 	var definition: Dictionary = definitions.get(board.get("definition_id"),{})
 	if rules.is_empty() or board.is_empty() or definition.is_empty():
@@ -69,13 +73,14 @@ static func handle(state: Dictionary, visit: Dictionary, case: Dictionary, actio
 		return _fail(rules,"CASE_CLOSED","closed")
 	var kind := str(action.get("type",""))
 	var result := {"visit_id":visit.visit_id}
+	if kind in ["case_preview_advice","case_key_slot"]: return Mechanics.help(state,visit,board,definition,action)
 	var cost: Dictionary
 	match kind:
 		"case_question", "case_extra_question":
 			var extra := kind == "case_extra_question"
 			if (not extra and board.phase != "questions") or (extra and board.phase not in ["cards","deduction"]):
 				return _fail(rules,"CASE_WRONG_PHASE","wrong_phase")
-			if extra and board.extra_question_used:
+			if extra and _extra_count(board) >= maxi(1,Mechanics.budget(board,"xiaoliu",1)):
 				return _fail(rules,"CASE_EXTRA_USED","extra_question_used")
 			var question := _question(definition,action.get("question_id"))
 			if question.is_empty() or (not extra and not question in definition.questions[int(board.round)]):
@@ -84,7 +89,9 @@ static func handle(state: Dictionary, visit: Dictionary, case: Dictionary, actio
 				return _fail(rules,"CASE_QUESTION_ASKED","question_asked")
 			if _familiarity(state,visit) < int(question.requires_familiarity):
 				return _fail(rules,"CASE_QUESTION_LOCKED","question_locked")
-			cost = rules.costs.extra_question if extra else rules.costs.question
+			cost = (rules.costs.extra_question if extra else rules.costs.question).duplicate(true)
+			var saved_energy := int(cost.energy) if extra and _extra_count(board) < Mechanics.budget(board,"xiaoliu") else 0
+			if saved_energy > 0 or (extra and board.has("mechanics") and _extra_count(board) < Mechanics.budget(board,"xiaoliu")): cost.energy = 0
 			if extra and int(state.player.energy) < int(cost.energy):
 				return _fail(rules,"CASE_ENERGY_LOW","energy_low")
 			state.player.energy = maxi(0,int(state.player.energy)-int(cost.energy))
@@ -94,6 +101,10 @@ static func handle(state: Dictionary, visit: Dictionary, case: Dictionary, actio
 					board.evidence_ids.append(id)
 			if extra:
 				board.extra_question_used = true
+				if board.has("mechanics"):
+					board.mechanics.extra_question_ids.append(question.id)
+					if _extra_count(board) <= Mechanics.budget(board,"xiaoliu"):
+						result["method_use"] = Mechanics.record(board,action,"xiaoliu",question.id,saved_energy)
 			else:
 				board.round += 1
 				if int(board.round) == int(rules.limits.question_rounds):
@@ -124,7 +135,7 @@ static func handle(state: Dictionary, visit: Dictionary, case: Dictionary, actio
 			if index in board.flipped_indices:
 				return _fail(rules,"CASE_CARD_REVEALED","card_already_revealed")
 			var extra: bool = board.flipped_indices.size() >= int(rules.limits.base_cards)
-			if board.flipped_indices.size() >= int(rules.limits.base_cards)+int(rules.limits.extra_cards):
+			if board.flipped_indices.size() >= int(rules.limits.base_cards)+_extra_cards(board,rules):
 				return _fail(rules,"CASE_CARD_LIMIT","card_limit")
 			if extra and rules.skills.extra_card not in state.divination.skills:
 				return _fail(rules,"CASE_SKILL_REQUIRED","skill_required")
@@ -138,6 +149,9 @@ static func handle(state: Dictionary, visit: Dictionary, case: Dictionary, actio
 			if board.flipped_indices.size() >= int(rules.limits.base_cards):
 				board.phase = "deduction"
 			result["card_index"] = int(index)
+			if board.has("mechanics"):
+				var used := Mechanics.record(board,action,"lenormand" if extra else "tarot","card_"+str(int(index)))
+				if not used.is_empty(): result["method_use"] = used
 			return _ok(rules,"card_revealed",result,cost)
 		"case_attach_evidence":
 			if board.phase != "deduction":
@@ -170,17 +184,19 @@ static func handle(state: Dictionary, visit: Dictionary, case: Dictionary, actio
 				return _fail(rules,"CASE_WRONG_PHASE","wrong_phase")
 			if rules.skills.eliminate not in state.divination.skills:
 				return _fail(rules,"CASE_SKILL_REQUIRED","skill_required")
-			if board.eliminations.size() >= int(rules.limits.eliminations):
+			if board.eliminations.size() >= _eliminations(board,rules):
 				return _fail(rules,"CASE_ELIMINATION_USED","elimination_used")
 			var slot := _find(definition.deduction_slots,action.get("slot_id"))
 			if slot.is_empty() or not _unlocked(board,definition,slot):
 				return _fail(rules,"CASE_SLOT_LOCKED","slot_locked")
+			if board.has("mechanics") and board.eliminations.has(slot.id): return _fail(rules,"CASE_ELIMINATION_USED","elimination_used")
 			for answer: Dictionary in slot.answers:
 				if answer.id != slot.correct_answer:
 					board.eliminations[slot.id] = [answer.id]
 					if board.answers.get(slot.id) == answer.id:
 						board.answers.erase(slot.id)
 					break
+			if board.has("mechanics"): result["method_use"] = Mechanics.record(board,action,"plum",slot.id)
 			return _ok(rules,"candidate_eliminated",result,rules.costs.eliminate)
 		"case_close":
 			if board.phase != "deduction" or not complete(board,definition):
@@ -199,14 +215,15 @@ static func handle(state: Dictionary, visit: Dictionary, case: Dictionary, actio
 			return _ok(rules,"closed_message",result,rules.costs.close)
 	return _fail(rules,"CASE_INVALID_ACTION","invalid_action")
 
-static func public_view(state: Dictionary, visit: Dictionary, case: Dictionary, definitions: Dictionary) -> Dictionary:
+static func public_view(state: Dictionary, visit: Dictionary, case: Dictionary, definitions: Dictionary, trusted_rules: Dictionary = {}) -> Dictionary:
 	var board: Dictionary = case.get("board",{})
 	var definition: Dictionary = definitions.get(board.get("definition_id"),{})
-	var rules := Schema.load_rules()
+	var rules := trusted_rules.duplicate(true) if not trusted_rules.is_empty() else Schema.load_rules()
+	if not Schema.validate_rules(rules): return {"enabled":false}
 	if board.is_empty() or definition.is_empty() or rules.is_empty():
 		return {"enabled":false}
 	var closed: bool = board.phase == "closed"
-	var view := {"enabled":true,"id":definition.id,"title":definition.title,"question":definition.question,"phase":board.phase,"round":int(board.round),"questions":[],"extra_questions":[],"evidence":[],"cards":[],"slots":[],"advice":[],"can_extra_question":not closed and board.phase in ["cards","deduction"] and not board.extra_question_used and int(state.player.energy)>=int(rules.costs.extra_question.energy),"can_eliminate":not closed and board.phase == "deduction" and rules.skills.eliminate in state.divination.skills and board.eliminations.size()<int(rules.limits.eliminations),"closed":closed,"stars":board.closure.get("stars",0),"reaction":board.closure.get("reaction",""),"copy":rules.copy.duplicate(true)}
+	var view := {"enabled":true,"id":definition.id,"title":definition.title,"question":definition.question,"phase":board.phase,"round":int(board.round),"questions":[],"extra_questions":[],"evidence":[],"cards":[],"slots":[],"advice":[],"can_extra_question":not closed and board.phase in ["cards","deduction"] and _extra_count(board)<maxi(1,Mechanics.budget(board,"xiaoliu",1)) and int(state.player.energy)>=_extra_energy(board,rules),"can_eliminate":not closed and board.phase == "deduction" and rules.skills.eliminate in state.divination.skills and board.eliminations.size()<_eliminations(board,rules),"closed":closed,"stars":board.closure.get("stars",0),"reaction":board.closure.get("reaction",""),"copy":rules.copy.duplicate(true)}
 	view["last_question"] = ""
 	view["last_answer"] = ""
 	if not board.questions_asked.is_empty():
@@ -228,7 +245,7 @@ static func public_view(state: Dictionary, visit: Dictionary, case: Dictionary, 
 		view.evidence.append({"id":row.id,"text":row.text,"kind":"tool","slot_ids":row.slot_ids.duplicate()})
 	var deck: Array = Cards.load_decks().get("tarot",[])
 	for index: int in range(board.card_order.size()):
-		var row := {"index":index,"revealed":index in board.flipped_indices,"enabled":not closed and board.phase in ["cards","deduction"] and index not in board.flipped_indices and (board.flipped_indices.size()<int(rules.limits.base_cards) or (rules.skills.extra_card in state.divination.skills and board.flipped_indices.size()<int(rules.limits.base_cards)+int(rules.limits.extra_cards) and int(state.player.energy)>=int(rules.costs.extra_card.energy)))}
+		var row := {"index":index,"revealed":index in board.flipped_indices,"enabled":not closed and board.phase in ["cards","deduction"] and index not in board.flipped_indices and (board.flipped_indices.size()<int(rules.limits.base_cards) or (rules.skills.extra_card in state.divination.skills and board.flipped_indices.size()<int(rules.limits.base_cards)+_extra_cards(board,rules) and int(state.player.energy)>=int(rules.costs.extra_card.energy)))}
 		if row.revealed:
 			var card: Dictionary = definition.cards[int(board.card_order[index])]
 			var face := _find(deck,card.deck_id)
@@ -242,7 +259,34 @@ static func public_view(state: Dictionary, visit: Dictionary, case: Dictionary, 
 		view.slots.append({"id":slot.id,"title":slot.title,"unlocked":unlocked,"candidates":candidates,"selected":board.answers.get(slot.id,""),"attached_ids":board.attachments.get(slot.id,[]).duplicate()})
 	for advice: Dictionary in definition.advice:
 		view.advice.append({"id":advice.id,"text":advice.text,"enabled":not closed and board.phase == "deduction" and complete(board,definition) and _advice_enabled(board,advice)})
+	view["method_tools"] = []
+	view["method_hint"] = ""
+	if board.has("mechanics"):
+		var curriculum := preload("res://scripts/learning/learning_rules.gd").load_config()
+		var hint := Mechanics.annotation(definition,state)
+		if not closed and not hint.is_empty():
+			if board.phase == "deduction" and Mechanics.uses(board,"yijing") < Mechanics.budget(board,"yijing"):
+				for advice: Dictionary in definition.advice:
+					if not board.mechanics.previews.has(advice.id): view.method_tools.append({"action":"case_preview_advice","params":{"advice_id":advice.id},"text":str(curriculum.ui.copy.preview)+" · "+str(advice.text)})
+			if Mechanics.uses(board,"astrology") < Mechanics.budget(board,"astrology"): view.method_tools.append({"action":"case_key_slot","params":{},"text":curriculum.ui.copy.key_slot})
+		for advice: Dictionary in view.advice:
+			if board.mechanics.previews.has(advice.id): advice["preview"] = curriculum.ui.tones[board.mechanics.previews[advice.id]]
+		for slot: Dictionary in view.slots: slot["critical_hint"] = slot.id in board.mechanics.key_slots
 	return view
+
+static func _extra_count(board: Dictionary) -> int:
+	if not board.has("mechanics"): return 1 if board.extra_question_used else 0
+	var value: Variant = board.get("mechanics")
+	return value.extra_question_ids.size() if value is Dictionary and value.get("extra_question_ids") is Array else -1
+
+static func _extra_cards(board: Dictionary, rules: Dictionary) -> int:
+	return Mechanics.budget(board,"lenormand") if board.has("mechanics") else int(rules.limits.extra_cards)
+
+static func _eliminations(board: Dictionary, rules: Dictionary) -> int:
+	return Mechanics.budget(board,"plum") if board.has("mechanics") else int(rules.limits.eliminations)
+
+static func _extra_energy(board: Dictionary, rules: Dictionary) -> int:
+	return 0 if _extra_count(board)<Mechanics.budget(board,"xiaoliu") else int(rules.costs.extra_question.energy)
 
 static func valid(state: Dictionary, visit: Dictionary, case: Dictionary, definitions: Dictionary) -> bool:
 	var value: Variant = case.get("board")
@@ -261,8 +305,9 @@ static func valid(state: Dictionary, visit: Dictionary, case: Dictionary, defini
 	for key: String in ["attachments","answers","eliminations","closure"]:
 		if not board.get(key) is Dictionary:
 			return false
-	if not board.get("extra_question_used") is bool or not Catalog._integer(board.get("round"),0,int(rules.limits.question_rounds)) or board.questions_asked.size() != int(board.round)+(1 if board.extra_question_used else 0):
+	if not board.get("extra_question_used") is bool or not Catalog._integer(board.get("round"),0,int(rules.limits.question_rounds)) or board.questions_asked.size() != int(board.round)+_extra_count(board):
 		return false
+	if board.has("mechanics") and not Mechanics.valid(state,visit,board,definition): return false
 	var known: Array = []
 	var evidence: Array = []
 	for i: int in range(board.questions_asked.size()):
@@ -278,7 +323,7 @@ static func valid(state: Dictionary, visit: Dictionary, case: Dictionary, defini
 		return false
 	var order: Array = board.card_order.duplicate()
 	order.sort()
-	if order != range(definition.cards.size()) or board.flipped_indices.size()>int(rules.limits.base_cards)+int(rules.limits.extra_cards) or board.tool_clues.size()!=board.flipped_indices.size():
+	if order != range(definition.cards.size()) or board.flipped_indices.size()>int(rules.limits.base_cards)+_extra_cards(board,rules) or board.tool_clues.size()!=board.flipped_indices.size():
 		return false
 	var flipped: Array = []
 	for i: int in range(board.flipped_indices.size()):
@@ -303,7 +348,7 @@ static func valid(state: Dictionary, visit: Dictionary, case: Dictionary, defini
 			if material.is_empty() or id not in material.slot_ids or item in seen:
 				return false
 			seen.append(item)
-	if board.eliminations.size()>int(rules.limits.eliminations):
+	if board.eliminations.size()>_eliminations(board,rules):
 		return false
 	for id: Variant in board.eliminations:
 		var slot := _find(definition.deduction_slots,id)

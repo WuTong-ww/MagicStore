@@ -129,6 +129,9 @@ func _ready() -> void:
 	layout.add_child(UI.button(frame_config.back_label,hide))
 
 func open(which: String) -> void:
+	if which == "study" and not (is_instance_valid(host) and host._divination_debug_learning()):
+		if is_instance_valid(host): host.open_learning()
+		return
 	if frame_config.is_empty():
 		return
 	page = which

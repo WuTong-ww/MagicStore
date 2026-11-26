@@ -67,6 +67,9 @@ try {
     }
     if ($Test) {
         Invoke-Godot @('--headless', '--path', $repo, '--import')
+        foreach ($learningTarget in @('tests/learning/content.gd','tests/learning/transactions.gd','tests/learning/migration.gd')) {
+            Invoke-Godot @('--headless', '--path', $repo, '--script', "res://$learningTarget")
+        }
         foreach ($craftTarget in @('tests/shop/crafting.gd','tests/integration/craft_migration.gd')) {
             Invoke-Godot @('--headless', '--path', $repo, '--script', "res://$craftTarget")
         }

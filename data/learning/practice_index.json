@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "definitions": [
+    {
+      "id": "practice_tarot_1",
+      "path": "res://data/cases/practice_tarot_1.json"
+    },
+    {
+      "id": "practice_tarot_2",
+      "path": "res://data/cases/practice_tarot_2.json"
+    },
+    {
+      "id": "practice_tarot_3",
+      "path": "res://data/cases/practice_tarot_3.json"
+    },
+    {
+      "id": "practice_lenormand_1",
+      "path": "res://data/cases/practice_lenormand_1.json"
+    },
+    {
+      "id": "practice_lenormand_2",
+      "path": "res://data/cases/practice_lenormand_2.json"
+    },
+    {
+      "id": "practice_lenormand_3",
+      "path": "res://data/cases/practice_lenormand_3.json"
+    },
+    {
+      "id": "practice_plum_1",
+      "path": "res://data/cases/practice_plum_1.json"
+    },
+    {
+      "id": "practice_plum_2",
+      "path": "res://data/cases/practice_plum_2.json"
+    },
+    {
+      "id": "practice_plum_3",
+      "path": "res://data/cases/practice_plum_3.json"
+    },
+    {
+      "id": "practice_yijing_1",
+      "path": "res://data/cases/practice_yijing_1.json"
+    },
+    {
+      "id": "practice_yijing_2",
+      "path": "res://data/cases/practice_yijing_2.json"
+    },
+    {
+      "id": "practice_yijing_3",
+      "path": "res://data/cases/practice_yijing_3.json"
+    },
+    {
+      "id": "practice_xiaoliu_1",
+      "path": "res://data/cases/practice_xiaoliu_1.json"
+    },
+    {
+      "id": "practice_xiaoliu_2",
+      "path": "res://data/cases/practice_xiaoliu_2.json"
+    },
+    {
+      "id": "practice_xiaoliu_3",
+      "path": "res://data/cases/practice_xiaoliu_3.json"
+    },
+    {
+      "id": "practice_astrology_1",
+      "path": "res://data/cases/practice_astrology_1.json"
+    },
+    {
+      "id": "practice_astrology_2",
+      "path": "res://data/cases/practice_astrology_2.json"
+    },
+    {
+      "id": "practice_astrology_3",
+      "path": "res://data/cases/practice_astrology_3.json"
+    },
+    {
+      "id": "practice_bazi_1",
+      "path": "res://data/cases/practice_bazi_1.json"
+    },
+    {
+      "id": "practice_bazi_2",
+      "path": "res://data/cases/practice_bazi_2.json"
+    },
+    {
+      "id": "practice_bazi_3",
+      "path": "res://data/cases/practice_bazi_3.json"
+    },
+    {
+      "id": "practice_ziwei_1",
+      "path": "res://data/cases/practice_ziwei_1.json"
+    },
+    {
+      "id": "practice_ziwei_2",
+      "path": "res://data/cases/practice_ziwei_2.json"
+    },
+    {
+      "id": "practice_ziwei_3",
+      "path": "res://data/cases/practice_ziwei_3.json"
+    },
+    {
+      "id": "practice_past_1",
+      "path": "res://data/cases/practice_past_1.json"
+    },
+    {
+      "id": "practice_past_2",
+      "path": "res://data/cases/practice_past_2.json"
+    },
+    {
+      "id": "practice_past_3",
+      "path": "res://data/cases/practice_past_3.json"
+    }
+  ]
+}

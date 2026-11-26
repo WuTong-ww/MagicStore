@@ -35,6 +35,7 @@ const EmergentRegistry = preload("res://scripts/divination/emergent_case_registr
 const EmergentCopy = preload("res://scripts/divination/emergent_case_copy.gd")
 const CaseCoordinator = preload("res://scripts/providers/case_generation_coordinator.gd")
 const CaseTransport = preload("res://scripts/providers/case_transport_config.gd")
+const LearningStore = preload("res://scripts/learning/learning_store.gd")
 const SHOP_ACTIONS := ["procure_item", "receive_material_gift", "gather_material", "sell_material", "register_demand", "research_recipe", "craft_item", "craft_finalize", "sell_product", "use_product", "review_case"]
 const PEOPLE_ACTIONS := ["book_arrival", "save_appearance", "wait", "invite_contact"]
 var shop_config: Dictionary = {}
@@ -730,6 +731,7 @@ func execute_action(action: Dictionary) -> Dictionary:
 		if not outcome.success:
 			return _fail(outcome.error_code, outcome.message)
 		return _commit(candidate, action, outcome.message, outcome.result,outcome.get("presentation_events",[]))
+	if action.type in LearningStore.ACTIONS: return _learning_action(action)
 	if action.type in SHOP_ACTIONS or action.type in PEOPLE_ACTIONS:
 		return _shop_action(action)
 	if action.type == "use_unlocked_option":
@@ -1211,18 +1213,24 @@ func _commit(candidate: Dictionary, action: Dictionary, message: String, result:
 	var prepared := _divination.candidate_for(candidate)
 	if not prepared.get("success",false):
 		return _case_failure()
-	Shop.sync_effects(candidate, shop_config)
-	PeopleBridge.sync(candidate, people_config, prepared.session,_sequential())
-	var story_result := StoryProgress.sync(candidate,prepared.session.data,story_config,people_config)
-	if not story_result.get("success",false):
-		return _fail(story_result.get("error_code","STORY_INVALID"),story_result.get("message",""))
-	DailyLoop.sync_mode(candidate,_sequential())
-	if int(candidate.schema_version) >= 16 and not _sync_person_variation(candidate): return _case_failure()
+	var practice: bool = action.type in LearningStore.PRACTICE_ACTIONS
+	if practice:
+		if LearningStore.world_projection(candidate) != LearningStore.world_projection(state): return _fail("PRACTICE_WORLD_CHANGED",LearningStore.message())
+	else:
+		Shop.sync_effects(candidate, shop_config)
+		PeopleBridge.sync(candidate, people_config, prepared.session,_sequential())
+		var story_result := StoryProgress.sync(candidate,prepared.session.data,story_config,people_config)
+		if not story_result.get("success",false):
+			return _fail(story_result.get("error_code","STORY_INVALID"),story_result.get("message",""))
+		DailyLoop.sync_mode(candidate,_sequential())
+		if int(candidate.schema_version) >= 16 and not _sync_person_variation(candidate): return _case_failure()
 	candidate = SaveService._normalize_numbers(candidate)
 	result = SaveService._normalize_numbers(result)
 	candidate.state_version = int(state.state_version) + 1
 	var reply: Dictionary = {"success": true, "error_code": "", "message": message, "state_version": candidate.state_version, "result": result, "action_type": action.type}
 	candidate.processed_actions[action.action_id] = reply.duplicate(true)
+	if int(candidate.schema_version) >= 18 and not LearningStore.sync_action(candidate,action,prepared.session.data): return _fail("LEARNING_INVALID",LearningStore.message())
+	if practice and LearningStore.world_projection(candidate) != LearningStore.world_projection(state): return _fail("PRACTICE_WORLD_CHANGED",LearningStore.message())
 	var saved: Dictionary = SaveService.write_save(candidate)
 	if not saved.success:
 		return _fail(saved.get("error_code", "SAVE_FAILED"), "未能保存，本次动作未生效，可重试。" + saved.get("message", ""))
@@ -1308,6 +1316,8 @@ func _initialize_integrated(candidate: Dictionary, fresh: bool = false, candidat
 		if not _sync_person_variation(candidate): return false
 		candidate.schema_version = 16
 	if int(candidate.schema_version) < 17: candidate.schema_version = 17
+	if not LearningStore.initialize(candidate,fresh): return false
+	if int(candidate.schema_version) < 18: candidate.schema_version = 18
 	return People.validate(candidate.people).is_empty()
 
 func _sync_person_variation(candidate: Dictionary) -> bool:
@@ -1674,3 +1684,12 @@ func _admit_generated_case(action: Dictionary) -> Dictionary:
 func _exit_tree() -> void:
 	if _case_coordinator != null:
 		_case_coordinator.shutdown()
+
+func learning_view() -> Dictionary:
+	return LearningStore.view(state,_divination.data) if not state.is_empty() else {}
+
+func _learning_action(action: Dictionary) -> Dictionary:
+	var candidate := state.duplicate(true)
+	var outcome := LearningStore.handle(candidate,action,_divination.data)
+	if not outcome.get("success",false): return _fail(outcome.get("error_code","LEARNING_UNAVAILABLE"),outcome.get("message",LearningStore.message()))
+	return _commit(candidate,action,outcome.message,outcome.result)

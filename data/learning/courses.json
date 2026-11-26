@@ -1,0 +1,718 @@
+{
+  "version": 1,
+  "debug_instant_learning": false,
+  "initial_basic_methods": [
+    "tarot"
+  ],
+  "required_practices": 3,
+  "level_thresholds": [
+    0,
+    3,
+    8
+  ],
+  "practice": {
+    "energy": 0,
+    "world_minutes": 0,
+    "maximum_steps": 128,
+    "minimum_correct_by_stage": [
+      1,
+      2,
+      3
+    ],
+    "book_consumed": false,
+    "namespace": "fiction",
+    "charges_at": "before_first_practice",
+    "panel_examples": {
+      "chart": {
+        "birth": "1993-04-19 09:30",
+        "utc_offset_minutes": 480,
+        "latitude": 30.27,
+        "longitude": 120.15
+      },
+      "quoted_at": 540,
+      "parameter": 0,
+      "options": {
+        "bazi": [
+          "year",
+          "month",
+          "day"
+        ],
+        "ziwei": [
+          "life",
+          "career",
+          "partner"
+        ],
+        "past": [
+          "vision",
+          "evidence",
+          "vision"
+        ]
+      },
+      "past_profile": {
+        "vision": "旧戏票的背面画着一盏灯。这只是笔记中的虚构片段，还不能当作历史事实。",
+        "evidence": "虚构票根上的日期可以独立核对；先对照日期，不要只凭片段给人物定论。"
+      }
+    }
+  },
+  "cap_policy": {
+    "status": "bounded_by_case_capacity",
+    "card_count": 5,
+    "base_cards": 3,
+    "extra_question_cap": 3,
+    "astrology_hint_cap": 3,
+    "preview_targets": "distinct_advice",
+    "elimination_targets": "distinct_slots"
+  },
+  "copy": {
+    "mentor": "温月",
+    "fiction_notice": "这是笔记中的虚构练习，不改变镇上的任何事。",
+    "mastered": "已掌握",
+    "legacy_mastered": "旧档已掌握",
+    "initial_basic": "基础可用",
+    "book": "入门书",
+    "tuition": "学费",
+    "practice": "练习进度",
+    "retry": "这次先记下遗漏，换一张练习纸再来。",
+    "cap_notice": "每案最多五张牌；额外次数按本案剩余牌数或建议数封顶。"
+  },
+  "methods": {
+    "tarot": {
+      "title": "塔罗",
+      "prerequisite": "",
+      "book_id": "intro_tarot",
+      "book_price": 3,
+      "tuition": 0,
+      "practice_ids": [
+        "practice_tarot_1",
+        "practice_tarot_2",
+        "practice_tarot_3"
+      ],
+      "gate_case": "",
+      "effect": "observe",
+      "uses_by_level": [
+        1,
+        2,
+        3
+      ]
+    },
+    "lenormand": {
+      "title": "雷诺曼",
+      "prerequisite": "tarot",
+      "book_id": "intro_lenormand",
+      "book_price": 4,
+      "tuition": 8,
+      "practice_ids": [
+        "practice_lenormand_1",
+        "practice_lenormand_2",
+        "practice_lenormand_3"
+      ],
+      "gate_case": "",
+      "effect": "extra_card",
+      "uses_by_level": [
+        1,
+        2,
+        3
+      ]
+    },
+    "plum": {
+      "title": "梅花易数",
+      "prerequisite": "tarot",
+      "book_id": "intro_plum",
+      "book_price": 4,
+      "tuition": 10,
+      "practice_ids": [
+        "practice_plum_1",
+        "practice_plum_2",
+        "practice_plum_3"
+      ],
+      "gate_case": "",
+      "effect": "eliminate",
+      "uses_by_level": [
+        1,
+        2,
+        3
+      ]
+    },
+    "yijing": {
+      "title": "易经",
+      "prerequisite": "tarot",
+      "book_id": "intro_yijing",
+      "book_price": 5,
+      "tuition": 12,
+      "practice_ids": [
+        "practice_yijing_1",
+        "practice_yijing_2",
+        "practice_yijing_3"
+      ],
+      "gate_case": "",
+      "effect": "preview",
+      "uses_by_level": [
+        1,
+        2,
+        3
+      ]
+    },
+    "xiaoliu": {
+      "title": "小六壬",
+      "prerequisite": "plum",
+      "book_id": "intro_xiaoliu",
+      "book_price": 4,
+      "tuition": 12,
+      "practice_ids": [
+        "practice_xiaoliu_1",
+        "practice_xiaoliu_2",
+        "practice_xiaoliu_3"
+      ],
+      "gate_case": "",
+      "effect": "free_question",
+      "uses_by_level": [
+        1,
+        2,
+        3
+      ]
+    },
+    "astrology": {
+      "title": "现代占星",
+      "prerequisite": "lenormand",
+      "book_id": "intro_astrology",
+      "book_price": 6,
+      "tuition": 18,
+      "practice_ids": [
+        "practice_astrology_1",
+        "practice_astrology_2",
+        "practice_astrology_3"
+      ],
+      "gate_case": "",
+      "effect": "key_slot",
+      "uses_by_level": [
+        1,
+        2,
+        3
+      ]
+    },
+    "bazi": {
+      "title": "八字",
+      "prerequisite": "yijing",
+      "book_id": "intro_bazi",
+      "book_price": 6,
+      "tuition": 20,
+      "practice_ids": [
+        "practice_bazi_1",
+        "practice_bazi_2",
+        "practice_bazi_3"
+      ],
+      "gate_case": "fixed_last_pages",
+      "effect": "panel",
+      "uses_by_level": [
+        1,
+        2,
+        3
+      ]
+    },
+    "ziwei": {
+      "title": "紫微斗数",
+      "prerequisite": "bazi",
+      "book_id": "intro_ziwei",
+      "book_price": 7,
+      "tuition": 24,
+      "practice_ids": [
+        "practice_ziwei_1",
+        "practice_ziwei_2",
+        "practice_ziwei_3"
+      ],
+      "gate_case": "fixed_last_pages",
+      "effect": "panel",
+      "uses_by_level": [
+        1,
+        2,
+        3
+      ]
+    },
+    "past": {
+      "title": "前世技法",
+      "prerequisite": "yijing",
+      "book_id": "intro_past",
+      "book_price": 6,
+      "tuition": 22,
+      "practice_ids": [
+        "practice_past_1",
+        "practice_past_2",
+        "practice_past_3"
+      ],
+      "gate_case": "fixed_last_pages",
+      "effect": "panel",
+      "uses_by_level": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  "lessons": {
+    "practice_tarot_1": {
+      "method_id": "tarot",
+      "stage": 1,
+      "title": "先看原件",
+      "mentor_intro": "我把雨伞上的纸签写在这页上。先把牌示当作问题，不把它当作已经发生的事。先找一份能直接核对的材料，再把它放到对应纸签上。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。先找一份能直接核对的材料，再把它放到对应纸签上。",
+      "teaching_goal": "先把牌示当作问题，不把它当作已经发生的事。",
+      "minimum_correct": 1,
+      "teaching_requirements": {
+        "effect": "observe",
+        "minimum_effect_uses": 0,
+        "paired_evidence_slots": 0
+      }
+    },
+    "practice_tarot_2": {
+      "method_id": "tarot",
+      "stage": 2,
+      "title": "分开转述",
+      "mentor_intro": "我把种子袋的日期写在这页上。先把牌示当作问题，不把它当作已经发生的事。两个人的说法可以不同。把转述留在证词栏，拿记录核对。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。两个人的说法可以不同。把转述留在证词栏，拿记录核对。",
+      "teaching_goal": "先把牌示当作问题，不把它当作已经发生的事。",
+      "minimum_correct": 2,
+      "teaching_requirements": {
+        "effect": "observe",
+        "minimum_effect_uses": 0,
+        "paired_evidence_slots": 1
+      }
+    },
+    "practice_tarot_3": {
+      "method_id": "tarot",
+      "stage": 3,
+      "title": "留下未定",
+      "mentor_intro": "我把灯笼的绳结写在这页上。先把牌示当作问题，不把它当作已经发生的事。最顺口的解释也可能只是猜测。把材料串起来，再选你愿意承担的建议。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。最顺口的解释也可能只是猜测。把材料串起来，再选你愿意承担的建议。",
+      "teaching_goal": "先把牌示当作问题，不把它当作已经发生的事。",
+      "minimum_correct": 3,
+      "teaching_requirements": {
+        "effect": "observe",
+        "minimum_effect_uses": 0,
+        "paired_evidence_slots": 2
+      }
+    },
+    "practice_lenormand_1": {
+      "method_id": "lenormand",
+      "stage": 1,
+      "title": "先看原件",
+      "mentor_intro": "我把蓝信封的折角写在这页上。多翻的那张牌，往往提醒你去核对证词的漏洞。先找一份能直接核对的材料，再把它放到对应纸签上。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。先找一份能直接核对的材料，再把它放到对应纸签上。",
+      "teaching_goal": "多翻的那张牌，往往提醒你去核对证词的漏洞。",
+      "minimum_correct": 1,
+      "teaching_requirements": {
+        "effect": "extra_card",
+        "minimum_effect_uses": 1,
+        "paired_evidence_slots": 0
+      }
+    },
+    "practice_lenormand_2": {
+      "method_id": "lenormand",
+      "stage": 2,
+      "title": "分开转述",
+      "mentor_intro": "我把缎带盒的底层写在这页上。多翻的那张牌，往往提醒你去核对证词的漏洞。两个人的说法可以不同。把转述留在证词栏，拿记录核对。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。两个人的说法可以不同。把转述留在证词栏，拿记录核对。",
+      "teaching_goal": "多翻的那张牌，往往提醒你去核对证词的漏洞。",
+      "minimum_correct": 2,
+      "teaching_requirements": {
+        "effect": "extra_card",
+        "minimum_effect_uses": 2,
+        "paired_evidence_slots": 1
+      }
+    },
+    "practice_lenormand_3": {
+      "method_id": "lenormand",
+      "stage": 3,
+      "title": "留下未定",
+      "mentor_intro": "我把钥匙上的木牌写在这页上。多翻的那张牌，往往提醒你去核对证词的漏洞。最顺口的解释也可能只是猜测。把材料串起来，再选你愿意承担的建议。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。最顺口的解释也可能只是猜测。把材料串起来，再选你愿意承担的建议。",
+      "teaching_goal": "多翻的那张牌，往往提醒你去核对证词的漏洞。",
+      "minimum_correct": 3,
+      "teaching_requirements": {
+        "effect": "extra_card",
+        "minimum_effect_uses": 2,
+        "paired_evidence_slots": 2
+      }
+    },
+    "practice_plum_1": {
+      "method_id": "plum",
+      "stage": 1,
+      "title": "先看原件",
+      "mentor_intro": "我把茶壶的垫布写在这页上。先把一个说不通的候选放下，再看剩下的材料。先找一份能直接核对的材料，再把它放到对应纸签上。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。先找一份能直接核对的材料，再把它放到对应纸签上。",
+      "teaching_goal": "先把一个说不通的候选放下，再看剩下的材料。",
+      "minimum_correct": 1,
+      "teaching_requirements": {
+        "effect": "eliminate",
+        "minimum_effect_uses": 1,
+        "paired_evidence_slots": 0
+      }
+    },
+    "practice_plum_2": {
+      "method_id": "plum",
+      "stage": 2,
+      "title": "分开转述",
+      "mentor_intro": "我把书架的空格写在这页上。先把一个说不通的候选放下，再看剩下的材料。两个人的说法可以不同。把转述留在证词栏，拿记录核对。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。两个人的说法可以不同。把转述留在证词栏，拿记录核对。",
+      "teaching_goal": "先把一个说不通的候选放下，再看剩下的材料。",
+      "minimum_correct": 2,
+      "teaching_requirements": {
+        "effect": "eliminate",
+        "minimum_effect_uses": 2,
+        "paired_evidence_slots": 1
+      }
+    },
+    "practice_plum_3": {
+      "method_id": "plum",
+      "stage": 3,
+      "title": "留下未定",
+      "mentor_intro": "我把招牌后的铆钉写在这页上。先把一个说不通的候选放下，再看剩下的材料。最顺口的解释也可能只是猜测。把材料串起来，再选你愿意承担的建议。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。最顺口的解释也可能只是猜测。把材料串起来，再选你愿意承担的建议。",
+      "teaching_goal": "先把一个说不通的候选放下，再看剩下的材料。",
+      "minimum_correct": 3,
+      "teaching_requirements": {
+        "effect": "eliminate",
+        "minimum_effect_uses": 3,
+        "paired_evidence_slots": 2
+      }
+    },
+    "practice_yijing_1": {
+      "method_id": "yijing",
+      "stage": 1,
+      "title": "先看原件",
+      "mentor_intro": "我把窗台上的空盆写在这页上。吉、平、凶只是一点方向；别把它说成明天已经写好的结局。先找一份能直接核对的材料，再把它放到对应纸签上。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。先找一份能直接核对的材料，再把它放到对应纸签上。",
+      "teaching_goal": "吉、平、凶只是一点方向；别把它说成明天已经写好的结局。",
+      "minimum_correct": 1,
+      "teaching_requirements": {
+        "effect": "preview",
+        "minimum_effect_uses": 1,
+        "paired_evidence_slots": 0
+      }
+    },
+    "practice_yijing_2": {
+      "method_id": "yijing",
+      "stage": 2,
+      "title": "分开转述",
+      "mentor_intro": "我把展览的两张票写在这页上。吉、平、凶只是一点方向；别把它说成明天已经写好的结局。两个人的说法可以不同。把转述留在证词栏，拿记录核对。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。两个人的说法可以不同。把转述留在证词栏，拿记录核对。",
+      "teaching_goal": "吉、平、凶只是一点方向；别把它说成明天已经写好的结局。",
+      "minimum_correct": 2,
+      "teaching_requirements": {
+        "effect": "preview",
+        "minimum_effect_uses": 2,
+        "paired_evidence_slots": 1
+      }
+    },
+    "practice_yijing_3": {
+      "method_id": "yijing",
+      "stage": 3,
+      "title": "留下未定",
+      "mentor_intro": "我把照片的第二份写在这页上。吉、平、凶只是一点方向；别把它说成明天已经写好的结局。最顺口的解释也可能只是猜测。把材料串起来，再选你愿意承担的建议。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。最顺口的解释也可能只是猜测。把材料串起来，再选你愿意承担的建议。",
+      "teaching_goal": "吉、平、凶只是一点方向；别把它说成明天已经写好的结局。",
+      "minimum_correct": 3,
+      "teaching_requirements": {
+        "effect": "preview",
+        "minimum_effect_uses": 2,
+        "paired_evidence_slots": 2
+      }
+    },
+    "practice_xiaoliu_1": {
+      "method_id": "xiaoliu",
+      "stage": 1,
+      "title": "先看原件",
+      "mentor_intro": "我把篮盖下的便条写在这页上。留一次追问给真正没说清的地方，问过的同一句不必再问。先找一份能直接核对的材料，再把它放到对应纸签上。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。先找一份能直接核对的材料，再把它放到对应纸签上。",
+      "teaching_goal": "留一次追问给真正没说清的地方，问过的同一句不必再问。",
+      "minimum_correct": 1,
+      "teaching_requirements": {
+        "effect": "free_question",
+        "minimum_effect_uses": 1,
+        "paired_evidence_slots": 0
+      }
+    },
+    "practice_xiaoliu_2": {
+      "method_id": "xiaoliu",
+      "stage": 2,
+      "title": "分开转述",
+      "mentor_intro": "我把地址里的旧街名写在这页上。留一次追问给真正没说清的地方，问过的同一句不必再问。两个人的说法可以不同。把转述留在证词栏，拿记录核对。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。两个人的说法可以不同。把转述留在证词栏，拿记录核对。",
+      "teaching_goal": "留一次追问给真正没说清的地方，问过的同一句不必再问。",
+      "minimum_correct": 2,
+      "teaching_requirements": {
+        "effect": "free_question",
+        "minimum_effect_uses": 2,
+        "paired_evidence_slots": 1
+      }
+    },
+    "practice_xiaoliu_3": {
+      "method_id": "xiaoliu",
+      "stage": 3,
+      "title": "留下未定",
+      "mentor_intro": "我把排班簿的铅笔字写在这页上。留一次追问给真正没说清的地方，问过的同一句不必再问。最顺口的解释也可能只是猜测。把材料串起来，再选你愿意承担的建议。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。最顺口的解释也可能只是猜测。把材料串起来，再选你愿意承担的建议。",
+      "teaching_goal": "留一次追问给真正没说清的地方，问过的同一句不必再问。",
+      "minimum_correct": 3,
+      "teaching_requirements": {
+        "effect": "free_question",
+        "minimum_effect_uses": 3,
+        "paired_evidence_slots": 2
+      }
+    },
+    "practice_astrology_1": {
+      "method_id": "astrology",
+      "stage": 1,
+      "title": "先看原件",
+      "mentor_intro": "我把义卖桌的位置写在这页上。先找最值得核对的那一格，星图不能替你填写答案。先找一份能直接核对的材料，再把它放到对应纸签上。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。先找一份能直接核对的材料，再把它放到对应纸签上。",
+      "teaching_goal": "先找最值得核对的那一格，星图不能替你填写答案。",
+      "minimum_correct": 1,
+      "teaching_requirements": {
+        "effect": "key_slot",
+        "minimum_effect_uses": 1,
+        "paired_evidence_slots": 0
+      }
+    },
+    "practice_astrology_2": {
+      "method_id": "astrology",
+      "stage": 2,
+      "title": "分开转述",
+      "mentor_intro": "我把书会的入场线写在这页上。先找最值得核对的那一格，星图不能替你填写答案。两个人的说法可以不同。把转述留在证词栏，拿记录核对。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。两个人的说法可以不同。把转述留在证词栏，拿记录核对。",
+      "teaching_goal": "先找最值得核对的那一格，星图不能替你填写答案。",
+      "minimum_correct": 2,
+      "teaching_requirements": {
+        "effect": "key_slot",
+        "minimum_effect_uses": 2,
+        "paired_evidence_slots": 1
+      }
+    },
+    "practice_astrology_3": {
+      "method_id": "astrology",
+      "stage": 3,
+      "title": "留下未定",
+      "mentor_intro": "我把夜市的停电牌写在这页上。先找最值得核对的那一格，星图不能替你填写答案。最顺口的解释也可能只是猜测。把材料串起来，再选你愿意承担的建议。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。最顺口的解释也可能只是猜测。把材料串起来，再选你愿意承担的建议。",
+      "teaching_goal": "先找最值得核对的那一格，星图不能替你填写答案。",
+      "minimum_correct": 3,
+      "teaching_requirements": {
+        "effect": "key_slot",
+        "minimum_effect_uses": 3,
+        "paired_evidence_slots": 2
+      }
+    },
+    "practice_bazi_1": {
+      "method_id": "bazi",
+      "stage": 1,
+      "title": "先看原件",
+      "mentor_intro": "我把出生卡的复印件写在这页上。先征得同意、核对出生资料；缺的时刻就留白。先找一份能直接核对的材料，再把它放到对应纸签上。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。先找一份能直接核对的材料，再把它放到对应纸签上。",
+      "teaching_goal": "先征得同意、核对出生资料；缺的时刻就留白。",
+      "minimum_correct": 1,
+      "teaching_requirements": {
+        "effect": "panel",
+        "minimum_effect_uses": 1,
+        "paired_evidence_slots": 0
+      }
+    },
+    "practice_bazi_2": {
+      "method_id": "bazi",
+      "stage": 2,
+      "title": "分开转述",
+      "mentor_intro": "我把时刻栏的问号写在这页上。先征得同意、核对出生资料；缺的时刻就留白。两个人的说法可以不同。把转述留在证词栏，拿记录核对。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。两个人的说法可以不同。把转述留在证词栏，拿记录核对。",
+      "teaching_goal": "先征得同意、核对出生资料；缺的时刻就留白。",
+      "minimum_correct": 2,
+      "teaching_requirements": {
+        "effect": "panel",
+        "minimum_effect_uses": 1,
+        "paired_evidence_slots": 1
+      }
+    },
+    "practice_bazi_3": {
+      "method_id": "bazi",
+      "stage": 3,
+      "title": "留下未定",
+      "mentor_intro": "我把两本历本的标记写在这页上。先征得同意、核对出生资料；缺的时刻就留白。最顺口的解释也可能只是猜测。把材料串起来，再选你愿意承担的建议。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。最顺口的解释也可能只是猜测。把材料串起来，再选你愿意承担的建议。",
+      "teaching_goal": "先征得同意、核对出生资料；缺的时刻就留白。",
+      "minimum_correct": 3,
+      "teaching_requirements": {
+        "effect": "panel",
+        "minimum_effect_uses": 1,
+        "paired_evidence_slots": 2
+      }
+    },
+    "practice_ziwei_1": {
+      "method_id": "ziwei",
+      "stage": 1,
+      "title": "先看原件",
+      "mentor_intro": "我把修屋计划的三栏写在这页上。盘面说的是观察主题，不是替来客规定一生。先找一份能直接核对的材料，再把它放到对应纸签上。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。先找一份能直接核对的材料，再把它放到对应纸签上。",
+      "teaching_goal": "盘面说的是观察主题，不是替来客规定一生。",
+      "minimum_correct": 1,
+      "teaching_requirements": {
+        "effect": "panel",
+        "minimum_effect_uses": 1,
+        "paired_evidence_slots": 0
+      }
+    },
+    "practice_ziwei_2": {
+      "method_id": "ziwei",
+      "stage": 2,
+      "title": "分开转述",
+      "mentor_intro": "我把车站图上的圈写在这页上。盘面说的是观察主题，不是替来客规定一生。两个人的说法可以不同。把转述留在证词栏，拿记录核对。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。两个人的说法可以不同。把转述留在证词栏，拿记录核对。",
+      "teaching_goal": "盘面说的是观察主题，不是替来客规定一生。",
+      "minimum_correct": 2,
+      "teaching_requirements": {
+        "effect": "panel",
+        "minimum_effect_uses": 1,
+        "paired_evidence_slots": 1
+      }
+    },
+    "practice_ziwei_3": {
+      "method_id": "ziwei",
+      "stage": 3,
+      "title": "留下未定",
+      "mentor_intro": "我把朋友约见的空栏写在这页上。盘面说的是观察主题，不是替来客规定一生。最顺口的解释也可能只是猜测。把材料串起来，再选你愿意承担的建议。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。最顺口的解释也可能只是猜测。把材料串起来，再选你愿意承担的建议。",
+      "teaching_goal": "盘面说的是观察主题，不是替来客规定一生。",
+      "minimum_correct": 3,
+      "teaching_requirements": {
+        "effect": "panel",
+        "minimum_effect_uses": 1,
+        "paired_evidence_slots": 2
+      }
+    },
+    "practice_past_1": {
+      "method_id": "past",
+      "stage": 1,
+      "title": "先看原件",
+      "mentor_intro": "我把旧纽扣的针脚写在这页上。旧物带来的片段先记作假设，拿独立材料核对以后再说。先找一份能直接核对的材料，再把它放到对应纸签上。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。先找一份能直接核对的材料，再把它放到对应纸签上。",
+      "teaching_goal": "旧物带来的片段先记作假设，拿独立材料核对以后再说。",
+      "minimum_correct": 1,
+      "teaching_requirements": {
+        "effect": "panel",
+        "minimum_effect_uses": 1,
+        "paired_evidence_slots": 0
+      }
+    },
+    "practice_past_2": {
+      "method_id": "past",
+      "stage": 2,
+      "title": "分开转述",
+      "mentor_intro": "我把明信片的邮戳写在这页上。旧物带来的片段先记作假设，拿独立材料核对以后再说。两个人的说法可以不同。把转述留在证词栏，拿记录核对。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。两个人的说法可以不同。把转述留在证词栏，拿记录核对。",
+      "teaching_goal": "旧物带来的片段先记作假设，拿独立材料核对以后再说。",
+      "minimum_correct": 2,
+      "teaching_requirements": {
+        "effect": "panel",
+        "minimum_effect_uses": 1,
+        "paired_evidence_slots": 1
+      }
+    },
+    "practice_past_3": {
+      "method_id": "past",
+      "stage": 3,
+      "title": "留下未定",
+      "mentor_intro": "我把刻字杯的来历写在这页上。旧物带来的片段先记作假设，拿独立材料核对以后再说。最顺口的解释也可能只是猜测。把材料串起来，再选你愿意承担的建议。",
+      "mentor_success": "这一页你已经核对过了。把能确定的留下，把还不知道的也好好留着。",
+      "mentor_retry": "没有关系，纸上的路可以重走。最顺口的解释也可能只是猜测。把材料串起来，再选你愿意承担的建议。",
+      "teaching_goal": "旧物带来的片段先记作假设，拿独立材料核对以后再说。",
+      "minimum_correct": 3,
+      "teaching_requirements": {
+        "effect": "panel",
+        "minimum_effect_uses": 1,
+        "paired_evidence_slots": 2
+      }
+    }
+  },
+  "ui": {
+    "layout": {
+      "width": 1320,
+      "height": 860,
+      "padding": 32,
+      "gap": 14,
+      "font": 22,
+      "row_height": 76,
+      "title_width": 220,
+      "cell_width": 290,
+      "stamp_size": 48
+    },
+    "copy": {
+      "title": "温月留下的技法清单",
+      "book_buy": "购入{method}入门书 · {coins}金币",
+      "tuition_pay": "交学费 · {coins}金币",
+      "practice_start": "开始第{stage}次练习",
+      "practice_resume": "继续这一页",
+      "practice_retry": "换一页重新练习",
+      "source_legacy": "旧档掌握，保留原技能",
+      "source_debug": "调试掌握",
+      "progress": "书：{book} · 学费：{fee} · 练习：{done}/{required}",
+      "yes": "已备",
+      "no": "未备",
+      "level": "{level}级 · 实际使用{uses}次",
+      "basic": "基础塔罗可直接使用；研习后才累计熟练度。",
+      "locked": "须先掌握{method}。",
+      "late_gate": "第五个固定案件结案后开放。",
+      "active_visit": "请先结束接待，再安静练习。",
+      "invalid": "这页记录不完整，请重新打开技法清单。",
+      "saved": "这一笔已记入技法清单。",
+      "funds_low": "金币不足，还没有付费。",
+      "already": "这一项已经记过，不会重复收费。",
+      "missing_book": "先准备对应的入门书。",
+      "missing_fee": "先交一次学费，再开始三次练习。",
+      "practice_busy": "另有一页练习尚未结束，可以继续完成。",
+      "practice_saved": "练习已保存；镇上的时间、精力和口碑都没有改变。",
+      "close": "收好笔记",
+      "preview": "易经 · 预览建议",
+      "key_slot": "占星 · 看关键一格",
+      "panel": "打开本页练习图",
+      "preview_result": "这一建议的大致走向：{tone}。",
+      "key_result": "先从“{slot}”找证据之间的连接。",
+      "hint_missing": "这份案件还没有可核对的提示，暂不能使用。",
+      "debug_disabled": "请通过入门书、学费和三次练习掌握技法。",
+      "effect_used": "这次技法已经起了作用。",
+      "completed": "这一页已经掌握。",
+      "requirements": "达标：附加技法使用{uses}次；至少{pairs}格对照两类证据。",
+      "method_tools": "使用技法",
+      "key_label": "关键 · {title}",
+      "buy_book_short": "备书 · {coins} 金币",
+      "practice_count": "练习 {done}/{required}",
+      "panel_close": "收好这张练习图"
+    },
+    "tones": {
+      "favorable": "吉",
+      "neutral": "平",
+      "difficult": "凶"
+    }
+  }
+}

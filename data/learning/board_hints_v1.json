@@ -1,0 +1,468 @@
+{
+  "version": 1,
+  "definitions": {
+    "fixed_bread": {
+      "definition_hash": "ff5e8d79493445d7ac766828dd0167b611b658133c2de1abdb59d7fa490408a6",
+      "advice_tones": {
+        "police": "difficult",
+        "leave_bread": "favorable",
+        "watch": "neutral"
+      },
+      "critical_slots": [
+        "motive",
+        "entry",
+        "taker"
+      ]
+    },
+    "fixed_invitation": {
+      "definition_hash": "a6215885debb9f8e8e8d4b5315d12bd664e4abc1021250755ffb7443e2f48a42",
+      "advice_tones": {
+        "message": "favorable",
+        "attend": "favorable",
+        "wait": "neutral"
+      },
+      "critical_slots": [
+        "hesitation",
+        "sender",
+        "next_step"
+      ]
+    },
+    "fixed_key": {
+      "definition_hash": "3bdd683a2f2af436dfc5e5e30c4271c67e79ff82f78f493ee71262c9daaf617d",
+      "advice_tones": {
+        "sell": "neutral",
+        "meet_buyer": "favorable",
+        "find_key": "neutral"
+      },
+      "critical_slots": [
+        "buyer",
+        "purpose",
+        "key_place"
+      ]
+    },
+    "fixed_last_pages": {
+      "definition_hash": "827430ad273ed8c43503f3201847e7b806225195855747b74d90e264d2883d6d",
+      "advice_tones": {
+        "phone": "favorable",
+        "travel": "neutral",
+        "letter": "neutral"
+      },
+      "critical_slots": [
+        "where",
+        "reason",
+        "reunion"
+      ]
+    },
+    "fixed_music_box": {
+      "definition_hash": "c16be2ce658dca5cf362e5440a6dbcb556c7bf50a4f7d36c56a3b0d048f04ae8",
+      "advice_tones": {
+        "restore": "favorable",
+        "keep_both": "favorable",
+        "accuse": "difficult"
+      },
+      "critical_slots": [
+        "changed",
+        "original",
+        "song"
+      ]
+    },
+    "practice_astrology_1": {
+      "definition_hash": "dfadaee48ebb46bef48f7f5a0cdcf23e5550a318f35ba510cc69eb35c8b3d58e",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_astrology_2": {
+      "definition_hash": "55b9cfe13eb2e1960923947b9741bbb4b71d70313b5cb0804efe67254a6a1429",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_astrology_3": {
+      "definition_hash": "4ca0a6f1b39af7c304e52366d92f7438d5907461ae2f98794f77015d6290cdbb",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_bazi_1": {
+      "definition_hash": "03c76a352937641b0feffc87b4f48bdc82904bf97ee848916e577a6136428789",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_bazi_2": {
+      "definition_hash": "eeb906c80275268794e4a69994971705a18bd37913e5d07546ec33609b71313a",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_bazi_3": {
+      "definition_hash": "c0a92034ef80963d78291948fdff8eeba0555dd23daad0df2de6cfc5d37de142",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_lenormand_1": {
+      "definition_hash": "a90e00206ed91fcf766703ef7498ff8066aa636b64a6457ad32ca8718cf3a226",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_lenormand_2": {
+      "definition_hash": "263198c674be4a2d635565a100eedaea6e9b97fe1ab573a97dddc4198d4629eb",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_lenormand_3": {
+      "definition_hash": "14fb01cfb6a73634f7908ca47202d2616f0b1f45da77d752a18f6fda59e8a748",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_past_1": {
+      "definition_hash": "91f2b596b7c4125cd47037bba9a2fde3dacc2c2ac2aab178f784e288e32e31a7",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_past_2": {
+      "definition_hash": "eeed94e423cd2c5b888b82114e446eeb21005f46ce65271eccdb090b551fe8a3",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_past_3": {
+      "definition_hash": "f067d5e3f6a0c325d2186b29aebbf8cab810278b86d863ec6cc73377d113e131",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_plum_1": {
+      "definition_hash": "8070f29bde1f6b77b682c28e1b62b3def8a95a2e9f8b79f11192aaea0a5636c5",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_plum_2": {
+      "definition_hash": "dd0edb3cd34558f41e475422a6be1be58568e92bebf2db784b070fd159cdca96",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_plum_3": {
+      "definition_hash": "9f9e7232255743895c4e3c73a10c26d3622bb399582a0245daa5caeb223efb22",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_tarot_1": {
+      "definition_hash": "02b60624c5accbbdc1b7bbb53b22ec55a214b93eb609b487cf02c8d5cd46aba8",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_tarot_2": {
+      "definition_hash": "e0eba5aa05c1a9eec6529c71d504d8178d490d843ac8cc94403387e08c7979f8",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_tarot_3": {
+      "definition_hash": "b7971380828cd4f9ed300d3e2b7400cabf0dfee264dfc96a4aadc969c7e23c48",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_xiaoliu_1": {
+      "definition_hash": "9f1ca3aae9202519f258135fc6b5b4b303f2410221c6c3b7e43805ab8b5ce991",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_xiaoliu_2": {
+      "definition_hash": "2a7ed15af21cdb7321a7b3084610e83cc052fd7e0cef2c0bfb13bb394ed98f4b",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_xiaoliu_3": {
+      "definition_hash": "b166257d7ae51a3d742a6581822122ac7649bcbbfa8b68befcf1c93e72a817bf",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_yijing_1": {
+      "definition_hash": "42427a0e67be30d74a71932b8ffff117cbeb0de6b29cc72177a21f797e452b73",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_yijing_2": {
+      "definition_hash": "1940993a0d5a9db4d08b88dff2bc8cf84bb7b09d6819b6ebe06e56b132f68c23",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_yijing_3": {
+      "definition_hash": "4298f85f6ff57c9ee43c0f15bd4d4a527fdb391fbc067ab035d1f226b5a58da4",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_ziwei_1": {
+      "definition_hash": "e2589dfb6d67fcbebe935904b7367117d475fe20116257c7cd39b8b1c3a7c021",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_ziwei_2": {
+      "definition_hash": "dade1b0809fc3489d6926075aa8aade13b2e70d36129aeb5a9987a2ccf627d03",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    },
+    "practice_ziwei_3": {
+      "definition_hash": "8d2b7e8c9fdb658058c4962b7ad041d814ed9a4a5176deed9b2c4144c12d7030",
+      "advice_tones": {
+        "check": "favorable",
+        "rush": "difficult"
+      },
+      "critical_slots": [
+        "location",
+        "cause",
+        "next_step"
+      ]
+    }
+  },
+  "fallbacks": {
+    "fallback_anonymousgift": {
+      "advice_tones": {
+        "verify": "favorable",
+        "ask": "neutral",
+        "wait": "neutral"
+      },
+      "critical_slots": [
+        "where",
+        "motive",
+        "step"
+      ]
+    },
+    "fallback_lostitem": {
+      "advice_tones": {
+        "verify": "favorable",
+        "ask": "neutral",
+        "wait": "neutral"
+      },
+      "critical_slots": [
+        "where",
+        "cause",
+        "step"
+      ]
+    },
+    "fallback_lostpet": {
+      "advice_tones": {
+        "verify": "favorable",
+        "ask": "neutral",
+        "wait": "neutral"
+      },
+      "critical_slots": [
+        "where",
+        "cause",
+        "step"
+      ]
+    },
+    "fallback_moving": {
+      "advice_tones": {
+        "verify": "favorable",
+        "ask": "neutral",
+        "wait": "neutral"
+      },
+      "critical_slots": [
+        "concern",
+        "condition",
+        "step"
+      ]
+    },
+    "fallback_neighbormisunderstanding": {
+      "advice_tones": {
+        "verify": "favorable",
+        "ask": "neutral",
+        "wait": "neutral"
+      },
+      "critical_slots": [
+        "what",
+        "cause",
+        "step"
+      ]
+    },
+    "fallback_oldphoto": {
+      "advice_tones": {
+        "verify": "favorable",
+        "ask": "neutral",
+        "wait": "neutral"
+      },
+      "critical_slots": [
+        "who",
+        "when",
+        "step"
+      ]
+    }
+  }
+}

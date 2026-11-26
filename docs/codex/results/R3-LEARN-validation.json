@@ -1,0 +1,117 @@
+{
+  "task": "R3-LEARN",
+  "status": "IMPLEMENTED_FOCUSED_PASSED_SHARED_REGRESSION_PENDING",
+  "schema_version": 18,
+  "tests": [
+    {
+      "label": "learn-content-final",
+      "target": "tests/learning/content.gd",
+      "exit_code": 0,
+      "seconds": 25.14,
+      "source_sha256": "6469a0cec3b0d6d99d7190586b55d42e3051cd579e5af012eb01d1c2f6ffc47e",
+      "source_unchanged": true,
+      "summaries": [
+        "LEARN CONTENT: 138 checks, 0 failures"
+      ],
+      "error_lines": [],
+      "log_sha256": "941d25fb03a83adad0b3d7ffc83d2bec6bd4c6803ef90253ffa509dc1e3b1780",
+      "host_timeout_360_seconds": false
+    },
+    {
+      "label": "learn-transactions-mastery",
+      "target": "tests/learning/transactions.gd",
+      "exit_code": 0,
+      "seconds": 175.281,
+      "source_sha256": "fdb8a2fbd2006cd1f46a3a51567309747d864e107117c27b06394c1302dbde8b",
+      "source_unchanged": true,
+      "summaries": [
+        "LEARN TRANSACTIONS: 113 checks, 0 failures"
+      ],
+      "error_lines": [],
+      "log_sha256": "432c01e62d5de6f7a6e6d1c6e68b7baa9e5286ac42b4e0e8e971820f48289075",
+      "host_timeout_360_seconds": false
+    },
+    {
+      "label": "learn-migration-final",
+      "target": "tests/learning/migration.gd",
+      "exit_code": 0,
+      "seconds": 7.891,
+      "source_sha256": "d6d4a5a116c483ff7a62427dc3080086763e526120c3b48f24b0316095824bca",
+      "source_unchanged": true,
+      "summaries": [
+        "LEARN MIGRATION: 11 checks, 0 failures"
+      ],
+      "error_lines": [],
+      "log_sha256": "f9ec0f561b604c3318a8216beadd7c1489999597cf1f05c1e3df7189912e6099",
+      "host_timeout_360_seconds": false
+    },
+    {
+      "label": "learn-ui-third",
+      "target": "tests/learning/ui.gd",
+      "exit_code": 0,
+      "seconds": 61.781,
+      "source_sha256": "b45a8345d74e86ac593db4a3dcaf6a70276dfc15817b473f274130c5d81290b7",
+      "source_unchanged": true,
+      "summaries": [
+        "LEARN UI: 22 checks, 0 failures; res://.tools/r3-learn/ui/run_eb0af0e6a4e01259337ab45328075460"
+      ],
+      "error_lines": [],
+      "log_sha256": "307668538508a5d48188c607533f1220b06d319c578f83ef34042faba0d3b562",
+      "host_timeout_360_seconds": false
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "docs/screenshots/round3/R3-LEARN/course-list-1280.jpg",
+      "bytes": 151577,
+      "sha256": "c70f05543e889eca8e864d0531f9e62a198c9797d87c9092bf6d545d82b1c2e3",
+      "native_source": ".tools\\r3-learn\\ui\\run_eb0af0e6a4e01259337ab45328075460\\course-list-1280.png",
+      "source_sha256": "9bde9ee31265a761d59f7b559e652d5792f3f353df19185d42080f4204bffd9e"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-LEARN/course-list-1920.jpg",
+      "bytes": 351502,
+      "sha256": "d863680737ba972bdb382c70a29967ff5fd78116710bbacec1a4b0e4e3777dc4",
+      "native_source": ".tools\\r3-learn\\ui\\run_eb0af0e6a4e01259337ab45328075460\\course-list-1920.png",
+      "source_sha256": "c3a21cf57e601af876d55de76032b567d31cc48de25edce29ab78ca73f02d312"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-LEARN/practice-evidence-1280.jpg",
+      "bytes": 182103,
+      "sha256": "ce88bed5e0abf06c94145446aba751f8bca764716ccb0842bf075cee3eefd3b5",
+      "native_source": ".tools\\r3-learn\\ui\\run_eb0af0e6a4e01259337ab45328075460\\practice-evidence-1280.png",
+      "source_sha256": "00c94981a97f67e3d35a7f3110f1a62b8960d2fb3bd2accde9b5a8958b86cd9e"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-LEARN/practice-evidence-1920.jpg",
+      "bytes": 369362,
+      "sha256": "e9cd11fe8111dc70e85a8e10071d82a4648b668d9ad6d0f6839270130d86a63f",
+      "native_source": ".tools\\r3-learn\\ui\\run_eb0af0e6a4e01259337ab45328075460\\practice-evidence-1920.png",
+      "source_sha256": "9efce66c4e23af0f2e3e498366ea6365762e43da85193bdb027d0d6c7e14b1f6"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-LEARN/practice-intro-1280.jpg",
+      "bytes": 186288,
+      "sha256": "7d6f3a2a7b8d56a0d90d4db8b48ee51a939c2f68a1fbcce7486dc63b864a7db4",
+      "native_source": ".tools\\r3-learn\\ui\\run_eb0af0e6a4e01259337ab45328075460\\practice-intro-1280.png",
+      "source_sha256": "baaabdf8144a4eebbadab5e60badf2b4161048ede632423e0de45dae63a44be1"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-LEARN/practice-intro-1920.jpg",
+      "bytes": 375560,
+      "sha256": "a7c22c3c47988b15762e9b4558db6c897d1d6455f98cf926defd0daf08a60891",
+      "native_source": ".tools\\r3-learn\\ui\\run_eb0af0e6a4e01259337ab45328075460\\practice-intro-1920.png",
+      "source_sha256": "d45c65c619ef15447eab9ced8d6fe0bbc163fcd3a8a6a0909ce27b8d2258bac0"
+    }
+  ],
+  "binary_bytes": 1616392,
+  "new_generated_art": 0,
+  "full_regression": "pending shared final run per user reduced-test-frequency instruction",
+  "manual_review": "all six final native images opened; course and practice readable; drawer remains closed until its paper tab is opened on short CSS viewports",
+  "limitations": [
+    "Human one-minute reading timing not measured.",
+    "Legacy POLISH window corners remain.",
+    "Full-model emergent cases without authored verified annotations omit preview/key-slot effects.",
+    "Fallback hint assertions added after focused content run; covered by pending shared full."
+  ]
+}

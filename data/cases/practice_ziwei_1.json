@@ -1,0 +1,412 @@
+{
+  "id": "practice_ziwei_1",
+  "version": 1,
+  "title": "紫微斗数练习：修屋计划的三栏",
+  "legacy_case_id": "",
+  "question": "这是温月留下的虚构练习：一张修屋计划的去向、变动原因和下一步，该怎样从材料中理清？",
+  "truth": {
+    "location": {
+      "value": "verified",
+      "text": "练习档案的查验记录：一张修屋计划现在放在住户桌面。",
+      "requires_clue": "practice_ziwei_1_truth_location"
+    },
+    "cause": {
+      "value": "verified",
+      "text": "练习档案的原始凭据记载：备注写着先讨论漏雨处。",
+      "requires_clue": "practice_ziwei_1_truth_cause"
+    },
+    "next_step": {
+      "value": "verified",
+      "text": "练习档案的交接要求是：先确认住户的当前需求。",
+      "requires_clue": "practice_ziwei_1_truth_next_step"
+    }
+  },
+  "deduction_slots": [
+    {
+      "id": "location",
+      "title": "东西在哪里",
+      "answers": [
+        {
+          "id": "verified",
+          "text": "住户桌面"
+        },
+        {
+          "id": "assumed",
+          "text": "包工队车里"
+        },
+        {
+          "id": "unknown",
+          "text": "现有材料完全无法核对"
+        }
+      ],
+      "correct_answer": "verified",
+      "unlock_evidence": [
+        "record_1",
+        "rumor"
+      ]
+    },
+    {
+      "id": "cause",
+      "title": "变动的原因是什么",
+      "answers": [
+        {
+          "id": "verified",
+          "text": "备注写着先讨论漏雨处"
+        },
+        {
+          "id": "assumed",
+          "text": "住户已同意全部拆建"
+        },
+        {
+          "id": "unknown",
+          "text": "现有材料完全无法核对"
+        }
+      ],
+      "correct_answer": "verified",
+      "unlock_evidence": [
+        "record_2",
+        "witness_1"
+      ]
+    },
+    {
+      "id": "next_step",
+      "title": "下一步怎样核对",
+      "answers": [
+        {
+          "id": "verified",
+          "text": "先确认住户的当前需求"
+        },
+        {
+          "id": "assumed",
+          "text": "替住户答应全部工程"
+        },
+        {
+          "id": "unknown",
+          "text": "现有材料完全无法核对"
+        }
+      ],
+      "correct_answer": "verified",
+      "unlock_evidence": [
+        "record_3",
+        "witness_2"
+      ]
+    }
+  ],
+  "questions": [
+    [
+      {
+        "id": "location_0",
+        "text": "先看看查验记录？",
+        "answer": "练习档案的查验记录：一张修屋计划现在放在住户桌面。",
+        "evidence_ids": [
+          "record_1"
+        ],
+        "requires_familiarity": 0
+      },
+      {
+        "id": "location_1",
+        "text": "把听说的位置和记录对一对？",
+        "answer": "练习档案的查验记录：一张修屋计划现在放在住户桌面。旁边的说法先单独记着，别合并成事实。",
+        "evidence_ids": [
+          "record_1",
+          "rumor"
+        ],
+        "requires_familiarity": 0
+      },
+      {
+        "id": "location_2",
+        "text": "哪一份材料能核对位置？",
+        "answer": "练习档案的查验记录：一张修屋计划现在放在住户桌面。你可以回到原件，再看另一种解释。",
+        "evidence_ids": [
+          "record_1",
+          "rumor"
+        ],
+        "requires_familiarity": 0
+      }
+    ],
+    [
+      {
+        "id": "cause_0",
+        "text": "原始凭据写着什么？",
+        "answer": "练习档案的原始凭据记载：备注写着先讨论漏雨处。",
+        "evidence_ids": [
+          "record_2"
+        ],
+        "requires_familiarity": 0
+      },
+      {
+        "id": "cause_1",
+        "text": "转述与凭据一致吗？",
+        "answer": "练习档案的原始凭据记载：备注写着先讨论漏雨处。旁边的说法先单独记着，别合并成事实。",
+        "evidence_ids": [
+          "record_2",
+          "witness_1"
+        ],
+        "requires_familiarity": 0
+      },
+      {
+        "id": "cause_2",
+        "text": "这件事有没有留下原件？",
+        "answer": "练习档案的原始凭据记载：备注写着先讨论漏雨处。你可以回到原件，再看另一种解释。",
+        "evidence_ids": [
+          "record_2",
+          "witness_1"
+        ],
+        "requires_familiarity": 0
+      }
+    ],
+    [
+      {
+        "id": "next_step_0",
+        "text": "交接时怎样核对？",
+        "answer": "练习档案的交接要求是：先确认住户的当前需求。",
+        "evidence_ids": [
+          "record_3"
+        ],
+        "requires_familiarity": 0
+      },
+      {
+        "id": "next_step_1",
+        "text": "核对前能否先留一点余地？",
+        "answer": "练习档案的交接要求是：先确认住户的当前需求。旁边的说法先单独记着，别合并成事实。",
+        "evidence_ids": [
+          "record_3",
+          "witness_2"
+        ],
+        "requires_familiarity": 0
+      },
+      {
+        "id": "next_step_2",
+        "text": "怎样把下一步问清楚？",
+        "answer": "练习档案的交接要求是：先确认住户的当前需求。你可以回到原件，再看另一种解释。",
+        "evidence_ids": [
+          "record_3",
+          "witness_2"
+        ],
+        "requires_familiarity": 0
+      }
+    ]
+  ],
+  "evidence": [
+    {
+      "id": "record_1",
+      "text": "练习档案的查验记录：一张修屋计划现在放在住户桌面。",
+      "type": "fact",
+      "source": "温月写下的虚构练习凭据",
+      "slot_ids": [
+        "location"
+      ],
+      "legacy_clue_ids": [
+        "practice_ziwei_1_truth_location"
+      ]
+    },
+    {
+      "id": "record_2",
+      "text": "练习档案的原始凭据记载：备注写着先讨论漏雨处。",
+      "type": "fact",
+      "source": "温月写下的虚构练习凭据",
+      "slot_ids": [
+        "cause"
+      ],
+      "legacy_clue_ids": [
+        "practice_ziwei_1_truth_cause"
+      ]
+    },
+    {
+      "id": "record_3",
+      "text": "练习档案的交接要求是：先确认住户的当前需求。",
+      "type": "fact",
+      "source": "温月写下的虚构练习凭据",
+      "slot_ids": [
+        "next_step"
+      ],
+      "legacy_clue_ids": [
+        "practice_ziwei_1_truth_next_step"
+      ]
+    },
+    {
+      "id": "rumor",
+      "text": "练习里的路人猜测：一张修屋计划可能在包工队车里，但他并未亲眼看见。",
+      "type": "misleading",
+      "source": "虚构路人的未核实猜测",
+      "slot_ids": [
+        "location"
+      ]
+    },
+    {
+      "id": "witness_1",
+      "text": "练习里的保管人说自己听到过“住户已同意全部拆建”，但不记得出自谁。",
+      "type": "testimony",
+      "source": "虚构保管人的转述",
+      "slot_ids": [
+        "cause"
+      ]
+    },
+    {
+      "id": "witness_2",
+      "text": "练习里的来客担心“替住户答应全部工程”才来得及；这是他的顾虑，并非交接要求。",
+      "type": "testimony",
+      "source": "虚构来客的顾虑",
+      "slot_ids": [
+        "next_step"
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "deck_id": "lovers",
+      "text": "先看看能直接核对的位置记录。",
+      "slot_id": "location"
+    },
+    {
+      "deck_id": "swords_2",
+      "text": "区分原始凭据和顺口的解释。",
+      "slot_id": "cause"
+    },
+    {
+      "deck_id": "star",
+      "text": "把下一步落在一个能做的核对动作上。",
+      "slot_id": "next_step"
+    },
+    {
+      "deck_id": "cups_6",
+      "text": "把转述留给转述，不替它盖事实的章。",
+      "slot_id": "cause"
+    },
+    {
+      "deck_id": "world",
+      "text": "多看一眼遗漏的材料，也别跳过原件。",
+      "slot_id": "location"
+    }
+  ],
+  "advice": [
+    {
+      "id": "check",
+      "text": "先先确认住户的当前需求，再决定。",
+      "requires_deductions": [
+        "location",
+        "cause",
+        "next_step"
+      ],
+      "legacy_advice_key": "check",
+      "reaction": "先留一点余地，核对清楚再往前走。",
+      "mood": "neutral",
+      "prediction": {
+        "text": "这条建议在纸上练习中能核对材料。",
+        "condition": "always",
+        "expected": "met",
+        "window_after_due_minutes": 0
+      }
+    },
+    {
+      "id": "rush",
+      "text": "先照“替住户答应全部工程”行动。",
+      "requires_deductions": [
+        "location",
+        "cause",
+        "next_step"
+      ],
+      "legacy_advice_key": "rush",
+      "reaction": "这次先记下遗漏，回头还能再看。",
+      "mood": "neutral",
+      "prediction": {
+        "text": "这条建议在纸上练习中仍有未核对之处。",
+        "condition": "always",
+        "expected": "missed",
+        "window_after_due_minutes": 0
+      }
+    }
+  ],
+  "outcomes": {
+    "version": 1,
+    "subject_id": "fiction_practice_ziwei_1",
+    "target_name": "温月笔记中的虚构练习结果",
+    "minute_of_day": 0,
+    "feedback_delay": 0,
+    "world_facts": {
+      "location": {
+        "values": [
+          "verified",
+          "assumed"
+        ],
+        "default": "verified"
+      },
+      "cause": {
+        "values": [
+          "verified",
+          "assumed"
+        ],
+        "default": "verified"
+      },
+      "next_step": {
+        "values": [
+          "verified",
+          "assumed"
+        ],
+        "default": "verified"
+      }
+    },
+    "branch_ids": [],
+    "item_effect_ids": [],
+    "prediction_conditions": {
+      "always": {
+        "label": "练习中的建议条件"
+      }
+    },
+    "prediction_labels": {
+      "met": "练习中得到核对",
+      "missed": "练习中仍有遗漏"
+    },
+    "advice": {
+      "check": {
+        "text": "先先确认住户的当前需求，再决定。"
+      },
+      "rush": {
+        "text": "先照“替住户答应全部工程”行动。"
+      }
+    },
+    "advice_options": [
+      {
+        "key": "check",
+        "label": "先先确认住户的当前需求，再决定。"
+      },
+      {
+        "key": "rush",
+        "label": "先照“替住户答应全部工程”行动。"
+      }
+    ],
+    "outcomes": {
+      "checked": {
+        "actual_action": "按原件核对",
+        "outcome": "met",
+        "evidence": "sufficient",
+        "feedback": "immediate",
+        "text": "练习中的材料对上了；真实来客仍需要自己回应。",
+        "delay_minutes": 0,
+        "effects": []
+      },
+      "paused": {
+        "actual_action": "暂按猜测行动",
+        "outcome": "missed",
+        "evidence": "partial",
+        "feedback": "immediate",
+        "text": "这只是纸上练习，可以回头把材料再看一遍。",
+        "delay_minutes": 0,
+        "effects": []
+      }
+    },
+    "rules": [
+      {
+        "when": {
+          "advice": "check"
+        },
+        "outcome": "checked"
+      },
+      {
+        "when": {},
+        "outcome": "paused"
+      }
+    ],
+    "feedback_effects": []
+  }
+}

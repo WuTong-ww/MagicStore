@@ -20,6 +20,7 @@ func _initialize() -> void:
 
 func run() -> void:
 	gs = root.get_node("GameState")
+	gs._divination.learning_config.debug_instant_learning = true
 	# This fixture retains the pre-loop reception and transaction contract.
 	gs.daily_loop_config.enabled = false
 	saves = root.get_node("SaveService")

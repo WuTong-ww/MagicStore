@@ -91,10 +91,15 @@ var _history_save_id: String = ""
 var open_button: Button
 var workbench: DivinationWorkbench
 var craft_window: Window
+var learning_window: Window
+var learning_panel: Control
+var practice_room: Control
+var practice_panel_window: Window
+var _learning_commands: Dictionary = {}
 
 func _process(_delta: float) -> void:
 	if not _closing and not _title_blocking:
-		var occupied: bool = busy or (is_instance_valid(craft_window) and craft_window.visible)
+		var occupied: bool = busy or (is_instance_valid(craft_window) and craft_window.visible) or (is_instance_valid(practice_room) and practice_room.visible)
 		GameState.pump_background_people(occupied)
 		GameState.pump_background_cases(occupied)
 
@@ -337,6 +342,8 @@ func _refresh() -> void:
 
 	if is_instance_valid(screen):
 		screen.call("refresh")
+	if is_instance_valid(learning_panel): learning_panel.refresh()
+	if is_instance_valid(practice_room) and practice_room.visible: practice_room.board.refresh()
 	_refresh_music()
 	_sync_material_backdrop()
 	if _title_blocking: _isolate_gameplay_inputs()
@@ -364,6 +371,11 @@ func run_action(action_type: String, extra: Dictionary = {}, command_id: String 
 		if is_instance_valid(presentation_audio) and not action_type.begins_with("case_") and action_type != "story_choice" and not (_entry_ui and action_type in ["new_game","load_game"]):
 			presentation_audio.play_ui("coin" if action_type in ["procure_item","sell_product","sell_material"] else "confirm")
 		if action_type in ["new_game", "load_game"]:
+			_learning_commands.clear()
+			if is_instance_valid(practice_room): practice_room.hide()
+			scene_holder.show()
+			if is_instance_valid(learning_window): learning_window.hide()
+			if is_instance_valid(practice_panel_window): practice_panel_window.hide()
 			_startup_resolved = true
 			save_window.hide()
 			show_screen("consultation" if not GameState.active_visit().is_empty() else "front",true)
@@ -868,7 +880,108 @@ func open_craft(target_id: String = "") -> bool:
 
 func open_divination(which: String) -> void:
 	if not busy:
-		workbench.open(which)
+		if which == "study" and not _divination_debug_learning(): open_learning()
+		else: workbench.open(which)
+
+func _divination_debug_learning() -> bool:
+	return bool(preload("res://scripts/learning/learning_rules.gd").load_config().get("debug_instant_learning",false))
+
+func open_learning() -> bool:
+	var view: Dictionary = GameState.learning_view()
+	if busy or view.is_empty(): return false
+	if not is_instance_valid(learning_window):
+		learning_window = Window.new()
+		learning_window.visible = false
+		learning_window.name = "LearningWindow"
+		learning_window.transient = true
+		learning_window.exclusive = true
+		add_child(learning_window)
+		UI.paper_window(learning_window,"dialogue")
+		learning_window.close_requested.connect(learning_window.hide)
+		learning_panel = preload("res://scripts/learning/learning_panel.gd").new()
+		learning_panel.name = "LearningList"
+		learning_window.add_child(learning_panel)
+		learning_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		if not learning_panel.setup(self): return false
+	learning_window.title = view.copy.title
+	learning_panel.refresh()
+	if not learning_window.visible:
+		_fit_window(learning_window,Vector2i(view.config.layout.width,view.config.layout.height))
+		learning_window.popup_centered(learning_window.size)
+	return true
+
+func run_learning_action(kind: String, values: Dictionary) -> Dictionary:
+	var signature := JSON.stringify([kind,values])
+	if not _learning_commands.has(signature):
+		var command: Dictionary = values.duplicate(true)
+		command["expected_version"] = GameState.player_snapshot().get("state_version",0)
+		_learning_commands[signature] = {"id":GameState.make_id("learning"),"values":command}
+	var intent: Dictionary = _learning_commands[signature]
+	var reply: Dictionary = await run_action(kind,intent.values,intent.id)
+	if reply.get("success",false) or reply.get("error_code") != "SAVE_WRITE_FAILED": _learning_commands.erase(signature)
+	return reply
+
+func open_practice() -> bool:
+	if not GameState.learning_view().get("practice",{}).get("enabled",false): return false
+	if is_instance_valid(learning_window): learning_window.hide()
+	if not is_instance_valid(practice_room):
+		practice_room = preload("res://scripts/learning/practice_room.gd").new()
+		practice_room.name = "PracticeRoom"
+		practice_room.z_index = int(ResponsiveConfig.load_config().overlay_z)+1
+		add_child(practice_room)
+		practice_room.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		practice_room.setup(self)
+	practice_room.show()
+	scene_holder.hide()
+	practice_room.board.refresh()
+	return true
+
+func close_practice() -> void:
+	if busy: return
+	if is_instance_valid(practice_room): practice_room.hide()
+	scene_holder.show()
+	if is_instance_valid(practice_panel_window): practice_panel_window.hide()
+	open_learning()
+
+func submit_practice_operation(kind: String, values: Dictionary) -> Dictionary:
+	if kind == "end_visit":
+		close_practice()
+		return {"success":true}
+	if kind == "case_inspect_panel" and not GameState.learning_view().get("practice",{}).get("panel_result",{}).is_empty():
+		open_practice_panel()
+		return {"success":true}
+	var operation := values.duplicate(true)
+	operation["type"] = kind
+	var reply := await run_learning_action("practice_step",{"run_id":GameState.learning_view().get("active_run_id",""),"operation":operation})
+	if reply.get("success",false) and kind == "case_inspect_panel": open_practice_panel()
+	return reply
+
+func open_practice_panel() -> bool:
+	var view: Dictionary = GameState.learning_view()
+	var result: Dictionary = view.get("practice",{}).get("panel_result",{})
+	if result.is_empty(): return false
+	if not is_instance_valid(practice_panel_window):
+		practice_panel_window = Window.new()
+		practice_panel_window.visible = false
+		practice_panel_window.name = "PracticePanelWindow"
+		practice_panel_window.transient = true
+		practice_panel_window.exclusive = true
+		add_child(practice_panel_window)
+		UI.paper_window(practice_panel_window,"dialogue")
+		practice_panel_window.close_requested.connect(practice_panel_window.hide)
+	for child: Node in practice_panel_window.get_children(): practice_panel_window.remove_child(child); child.queue_free()
+	var margin := UI.margin(int(view.config.layout.padding))
+	practice_panel_window.add_child(margin); margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var scroll := ScrollContainer.new(); margin.add_child(scroll)
+	var box := VBoxContainer.new(); box.size_flags_horizontal = Control.SIZE_EXPAND_FILL; scroll.add_child(box)
+	box.add_child(UI.paper_heading(view.copy.fiction_notice))
+	preload("res://scripts/divination/oracle_panels.gd").show_medium(box,result.get("medium",{}))
+	box.add_child(UI.label(str(result.get("text","")),int(view.config.layout.font)))
+	box.add_child(UI.button(view.copy.panel_close,practice_panel_window.hide))
+	if not practice_panel_window.visible:
+		_fit_window(practice_panel_window,Vector2i(view.config.layout.width,view.config.layout.height))
+		practice_panel_window.popup_centered(practice_panel_window.size)
+	return true
 
 func _build_save_window() -> void:
 	save_window = Window.new()

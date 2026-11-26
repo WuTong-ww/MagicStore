@@ -64,3 +64,5 @@ tests/fixtures/title_creation/opened-model.json -text
 tests/fixtures/title_creation/reserved-fallback.json -text
 tests/fixtures/music_ending_v15.json -text
 tests/fixtures/craft_person_details_v16.json -text
+
+/tests/fixtures/learning_craft_v17.json -text
