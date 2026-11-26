@@ -1,0 +1,265 @@
+{
+  "scope": "Full supplied Round3 objective and chat supplements.",
+  "closure_policy": {
+    "tasks_1_to_8": "Playable opening through fifth-case ending, supported by task gates and latest native 834-check genuine save routes.",
+    "tasks_9_to_12": "Original user objective permits partial completion; failed full attempts and known limits remain, with no fourth full suite.",
+    "all_tasks_processed": true,
+    "whole_standard_suite_green": false
+  },
+  "core_requirements": {
+    "LOOP": {
+      "requirements": [
+        "ordered daily reception; no waiting; old real-time mode retained behind config",
+        "one case and one or two short guests; morning letters and night settlement",
+        "energy and action time; basic low-energy continuation; save-first idempotent actions"
+      ],
+      "receipt": "docs/codex/results/R3-LOOP-validation.json"
+    },
+    "CASE": {
+      "requirements": [
+        "validated shared question/truth/slots/questions/evidence/cards/advice/outcomes schema",
+        "separate truth/statements/tool-clues/hypotheses/predictions; hidden truth not sent",
+        "three button rounds, optional extra question, five table cards and three flips",
+        "three evidence slots, candidates, saved seals, advice and continuing bad outcomes",
+        "skill effects, audiovisual feedback, optional free input, branch tests and video"
+      ],
+      "receipt": "docs/codex/results/R3-CASE-validation.json"
+    },
+    "STORY": {
+      "requirements": [
+        "verbatim appendix; five fixed cases and canonical NPC/event/letter data",
+        "timeline and gates; missed-key supplemental path; four notebook pages",
+        "invitation truth and recommendation preserved; simplified Chinese",
+        "genuine best/worst/missing-key saved routes, stars/endings/notes; video/keyframes"
+      ],
+      "receipt": "docs/codex/results/R3-STORY-validation.json"
+    },
+    "LIN": {
+      "requirements": [
+        "fixed layered appearance; unused old runtime portrait",
+        "first guest of each new save; canonical story and identity retained"
+      ],
+      "receipt": "docs/codex/results/R3-LIN-validation.json"
+    },
+    "NAMES": {
+      "requirements": [
+        "birth origin/skin/name consistency, proportions and mixed names",
+        "model cannot modify names/skin/nationality; same-identity fallback",
+        "legacy migration retains old people; unknown external nationality omitted",
+        "country-first thirty pools; local and mixed nationality omitted in UI",
+        "specific personality type with no MBTI prefix; panel/archive captures"
+      ],
+      "receipt": "docs/codex/results/R3-NAMES-validation.json"
+    },
+    "AICASE": {
+      "requirements": [
+        "validated shared case schema; saved provenance, recovery and rejection",
+        "hidden truth excluded from dialogue; identity cannot change",
+        "six fallback topics; immediate local reception; offline public build"
+      ],
+      "receipt": "docs/codex/results/R3-AICASE-validation.json"
+    },
+    "TITLE": {
+      "requirements": [
+        "opening scene; new/continue/archive/settings flow; no baked variable text",
+        "first-store notebook; four story-unlocked pages; skip/save ownership",
+        "entry audio, UI checks, video and keyframes"
+      ],
+      "receipt": "docs/codex/results/R3-TITLE-validation.json"
+    },
+    "MUSIC": {
+      "requirements": [
+        "ignored and untracked licensed source/runtime; 21-track catalog",
+        "player-selected Sheep for day/case; loops, buses and crossfades",
+        "same-track continuity, missing-file silence, public exclusion and local build instructions"
+      ],
+      "receipt": "docs/codex/results/R3-MUSIC-validation.json"
+    }
+  },
+  "loop_case_retrospective": {
+    "R3-LOOP": "Original three-round failure history remains; later traffic compatibility is verified by STORY full3, without a LOOP full4.",
+    "R3-CASE": "Original three-round failure history remains; unchanged original HTTP assertions/budgets are verified after the deadline compatibility fix in STORY full3, without a CASE full4."
+  },
+  "current_playthrough": {
+    "exit_code": 0,
+    "native_summaries": [
+      "STORY PLAYTHROUGH: 834 checks, 0 failures"
+    ],
+    "native_errors": [],
+    "native_log_sha256": "02c9a3f7ef35091c0e3716ad1b9177b12d2a589d6b01c9121d9ab1ab8cfecc63",
+    "receipt_sha256": "f648f6440c2b5092eefea00b315767819e88e669f67325c4aed60b021f1093e8",
+    "routes": {
+      "best": {
+        "checks": 251,
+        "ending_day": 7,
+        "case_stars": {
+          "fixed_bread": 3,
+          "fixed_invitation": 3,
+          "fixed_key": 3,
+          "fixed_last_pages": 3,
+          "fixed_music_box": 3
+        },
+        "note_count": 4,
+        "ending_status": "complete",
+        "route_id": "phone",
+        "dynamic_closed": 2
+      },
+      "missing_key": {
+        "checks": 193,
+        "ending_day": 7,
+        "case_stars": {
+          "fixed_bread": 3,
+          "fixed_invitation": 1,
+          "fixed_key": 3,
+          "fixed_last_pages": 3,
+          "fixed_music_box": 3
+        },
+        "note_count": 4,
+        "ending_status": "complete",
+        "route_id": "phone",
+        "dynamic_closed": 0
+      },
+      "worst": {
+        "checks": 388,
+        "ending_day": 11,
+        "case_stars": {
+          "fixed_bread": 1,
+          "fixed_invitation": 1,
+          "fixed_key": 1,
+          "fixed_last_pages": 1,
+          "fixed_music_box": 1
+        },
+        "note_count": 4,
+        "ending_status": "complete",
+        "route_id": "letter",
+        "dynamic_closed": 6
+      }
+    },
+    "wrapper_note": "The 360-second wrapper timed out and its taskkill failed with an OS authentication error; the same actual engine was observed until terminal exit0. Its own native log reports 834/0 and no errors. Wrapper failure is retained separately."
+  },
+  "allowed_partials": {
+    "POLISH": {
+      "status": "partial",
+      "receipt": "docs/codex/results/R3-POLISH-validation.json"
+    },
+    "CRAFT": {
+      "status": "IMPLEMENTED_FOCUSED_PASSED_STANDARD_INTEGRATION_NOT_GREEN",
+      "receipt": "docs/codex/results/R3-CRAFT-validation.json"
+    },
+    "LEARN": {
+      "status": "IMPLEMENTED_FOCUSED_PASSED_STANDARD_INTEGRATION_NOT_GREEN",
+      "receipt": "docs/codex/results/R3-LEARN-validation.json"
+    },
+    "WEB": {
+      "status": "PUBLISHED_TARGETED_WEB_ACCEPTANCE_PASSED_SHARED_REGRESSION_NOT_GREEN",
+      "receipt": "docs/codex/results/R3-WEB-validation.json"
+    }
+  },
+  "face_nationality_supplement": {
+    "receipt": "docs/codex/results/R3-PERSON-DETAILS-validation.json",
+    "requirements": [
+      "seven iris palettes, large visible iris/highlight, grayscale palette shader",
+      "lip/blush/eye makeup and age/profession/personality probabilities, all genders allowed",
+      "brows/noses/lips/facial hair/freckles/age wrinkles; config and validators",
+      "weighted all-existing-NPC diversity; up to twenty rerolls",
+      "24-person 96px and controlled six-person comparison; new-layer clipping coverage",
+      "six countries in each of five foreign regions; country-first names/skin/iris",
+      "fixed UK/France/local identities; mixed residents use local; immutable model identity",
+      "legacy people never renamed; unknown external nationality omitted; no local-label config",
+      "front/consultation/archive local/foreign captures; concrete type without prefix"
+    ]
+  },
+  "web_requirements": {
+    "receipt": "docs/codex/results/R3-WEB-wheel-pointer-validation.json",
+    "items": [
+      "bundled fonts, complete finite CJK coverage, monospace digits, image icons",
+      "actual popup/sidebar first-hover wheel plus focused tests",
+      "short full-height drawers, bounded letters, minimum panel scaling and exact three-size captures",
+      "save book hides competing scene panels",
+      "unused resources removed and same-input package-byte comparison",
+      "fixed/fallback public stories without keys/private configuration",
+      "music-free public export and local music build instructions",
+      "authorized exact branch rule, automatic preview publish and formal-channel preservation"
+    ]
+  },
+  "core_log_hash_verified": true,
+  "screenshots": [
+    {
+      "path": "docs/screenshots/round3/R3-WEB/consultation-1280x529.jpg",
+      "pixels": [
+        1280,
+        529
+      ],
+      "bytes": 133147,
+      "sha256": "85dc164f5c6274609c655bd72d8fd8af0363cf0ffad85cd18e0c33bee453d99a"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-WEB/consultation-1366x768.jpg",
+      "pixels": [
+        1366,
+        768
+      ],
+      "bytes": 195904,
+      "sha256": "a4b3d14ae8f6cb842ec4b8049d0e38244b8a7e8fc5edd19678ee035271af0479"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-WEB/consultation-1920x1080.jpg",
+      "pixels": [
+        1920,
+        1080
+      ],
+      "bytes": 347960,
+      "sha256": "40b5d6823392c05b1996159397e527d343e058a9d5502239f27eb27585653034"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-WEB/save-isolation.jpg",
+      "pixels": [
+        1280,
+        1160
+      ],
+      "bytes": 202926,
+      "sha256": "ffcb753c3aecd7b9d95d4a560e98c1d464e6a26b989a0cf618402f70c6ac1574"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-WEB/savebook-1280x529.jpg",
+      "pixels": [
+        1280,
+        529
+      ],
+      "bytes": 89839,
+      "sha256": "faea8ddfcec1b142607c2168b9d8f464c477b14400f22e9b362582241e1afe2b"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-WEB/wheel-proof.jpg",
+      "pixels": [
+        1536,
+        700
+      ],
+      "bytes": 236641,
+      "sha256": "d876d45316f10c5a2fed108fd1817e1b523c8677dfe875a4746895b1e8f510b8"
+    }
+  ],
+  "browser_cleanup": {
+    "native_devtools_closed": true,
+    "native_viewport_restored": true,
+    "iab_temporary_viewport_reset": true,
+    "duplicate_iab_task_tab_closed": true,
+    "user_native_tabs_retained": true
+  },
+  "delivery": {
+    "review_packet": "docs/codex/REVIEW_PACKET_R3.md",
+    "features": "docs/features.md",
+    "progress": "docs/codex/PROGRESS.md",
+    "branch": "codex/round3",
+    "runtime_commit": "25af67672942bfbaec2ecba95cc38d6dccb65d60",
+    "preview": "https://wutong-ww.github.io/MagicStore/preview/",
+    "main_commit": "e27441b51a4415777971cf2d8142ce4c725437e5",
+    "formal_files_preserved": 16
+  },
+  "known_limits": [
+    "Standard integration failed after three actual full attempts; no fourth full.",
+    "POLISH clipping, legacy frames/corners/heading and portrait edges remain.",
+    "Human pacing, subjective audio/loop judgment, directly comparable cold-load timing and old birth-year/age reconciliation remain manual review.",
+    "Optional retirement of older Web playtest workflow awaits separate explicit authorization; setting unchanged."
+  ]
+}

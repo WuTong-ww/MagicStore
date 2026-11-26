@@ -1,6 +1,6 @@
 {
   "task": "R3-WEB",
-  "status": "PUBLISHED_ACTUAL_PACKAGE_PASSED_BROWSER_ACCEPTANCE_PARTIAL",
+  "status": "PUBLISHED_TARGETED_WEB_ACCEPTANCE_PASSED_SHARED_REGRESSION_NOT_GREEN",
   "engine": "4.6.3.stable.official.7d41c59c4",
   "before_site_bytes": 351500932,
   "after_site_bytes": 74742410,
@@ -989,13 +989,67 @@
     }
   ],
   "published_preview": "https://wutong-ww.github.io/MagicStore/preview/",
-  "browser_screenshots": [],
+  "browser_screenshots": [
+    {
+      "path": "docs/screenshots/round3/R3-WEB/consultation-1280x529.jpg",
+      "pixels": [
+        1280,
+        529
+      ],
+      "bytes": 133147,
+      "sha256": "85dc164f5c6274609c655bd72d8fd8af0363cf0ffad85cd18e0c33bee453d99a"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-WEB/consultation-1366x768.jpg",
+      "pixels": [
+        1366,
+        768
+      ],
+      "bytes": 195904,
+      "sha256": "a4b3d14ae8f6cb842ec4b8049d0e38244b8a7e8fc5edd19678ee035271af0479"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-WEB/consultation-1920x1080.jpg",
+      "pixels": [
+        1920,
+        1080
+      ],
+      "bytes": 347960,
+      "sha256": "40b5d6823392c05b1996159397e527d343e058a9d5502239f27eb27585653034"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-WEB/save-isolation.jpg",
+      "pixels": [
+        1280,
+        1160
+      ],
+      "bytes": 202926,
+      "sha256": "ffcb753c3aecd7b9d95d4a560e98c1d464e6a26b989a0cf618402f70c6ac1574"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-WEB/savebook-1280x529.jpg",
+      "pixels": [
+        1280,
+        529
+      ],
+      "bytes": 89839,
+      "sha256": "faea8ddfcec1b142607c2168b9d8f464c477b14400f22e9b362582241e1afe2b"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-WEB/wheel-proof.jpg",
+      "pixels": [
+        1536,
+        700
+      ],
+      "bytes": 236641,
+      "sha256": "d876d45316f10c5a2fed108fd1817e1b523c8677dfe875a4746895b1e8f510b8"
+    }
+  ],
   "shared_full": "Three actual failed standard rounds preserved; corrected surface target passed 14/0; no fourth full.",
   "limitations": [
-    "Final three-size browser acceptance incomplete: full HD clipping/capture discrepancy needs recheck.",
-    "Actual long-panel wheel displacement and two-entry persistence isolation remain unverified.",
-    "No comparable first-interactive cold-load timing; package bytes are not timing.",
-    "Legacy POLISH clipping/corners remain partially complete."
+    "Three standard integration attempts failed; no fourth full suite under the supplied rule.",
+    "Legacy POLISH clipping, frames, corners, heading and portrait-edge artifacts remain.",
+    "Package-byte reduction is measured; no directly comparable first-interactive cold-load timing or human pacing/audio review."
   ],
   "shared_final_regression": {
     "status": "FAILED_AFTER_THREE_ATTEMPTS",
@@ -1005,9 +1059,9 @@
     "whole_suite_green": false,
     "note": "Printed groups were green; one later surface assertion stopped the suite. Its targeted correction passed, but no fourth full run was made."
   },
-  "browser_operations": "Preview published and partly inspected; later URL-confidence policy stopped browser control",
+  "browser_operations": "Completed actual Chrome first-hover modal/sidebar wheel, three exact-size consultation captures, and two-entry reload/interleaved-write isolation.",
   "font_coverage": {
-    "source_files": 606,
+    "source_files": 614,
     "cjk_codepoints": 1986,
     "missing_count": 0,
     "ascii_monospace": true
@@ -1021,12 +1075,15 @@
     "evidence": "docs/codex/results/R3-WEB-ci-validation.json",
     "build": "success",
     "deploy": "success_after_authorized_branch_rule",
-    "run_url": "https://github.com/WuTong-ww/MagicStore/actions/runs/45805865584"
+    "run_url": "https://github.com/WuTong-ww/MagicStore/actions/runs/45822932400",
+    "code_commit": "25af67672942bfbaec2ecba95cc38d6dccb65d60",
+    "targeted_browser_acceptance": "passed"
   },
   "build_policy_test": {
     "build_policy_passed": 9,
     "build_policy_failed": 0
   },
-  "published_preview_bytes": 74725663,
-  "publication_evidence": "docs/codex/results/R3-WEB-publication-validation.json"
+  "published_preview_bytes": 74729440,
+  "publication_evidence": "docs/codex/results/R3-WEB-publication-validation.json",
+  "latest_acceptance_evidence": "docs/codex/results/R3-WEB-wheel-pointer-validation.json"
 }

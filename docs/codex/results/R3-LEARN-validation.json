@@ -121,5 +121,10 @@
     "last_reported_failures": 0,
     "whole_suite_green": false,
     "note": "Printed groups were green; one later surface assertion stopped the suite. Its targeted correction passed, but no fourth full run was made."
+  },
+  "final_closure": {
+    "audit": "docs/codex/results/R3-CLOSURE-AUDIT.json",
+    "standard_full": "Three real failed integration attempts retained; no fourth full.",
+    "shop_followup": "Actual graphical 1681/0 and 30 captures, see R3-WEB-drawer-input-validation.json."
   }
 }

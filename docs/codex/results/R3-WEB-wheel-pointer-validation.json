@@ -54,7 +54,7 @@
       "bytes": 156824
     }
   ],
-  "remaining": "Final 1366x768 and 1920x1080 consultation PNG captures, plus complete two-entry persistence acceptance.",
+  "remaining": "No remaining targeted Web acceptance. Shared full regression and documented POLISH limits remain under the supplied three-round partial-completion rule.",
   "sidebar_wheel_status": "Passed in live Chrome preview 25af676 at CSS 1280x529: first hover from outside into the real market right page scrolls from mint/salt/bottle to the final collectible entries and back; left book list remains fixed. No purchases.",
   "sidebar_wheel_evidence": [
     {
@@ -111,7 +111,9 @@
   "visual_review": {
     "consultation_1280x529": "Full-size PNG opened; face is clear of the letter, all five cards and three question buttons visible, letter height below 45 percent. Existing POLISH glyph clipping and soft text remain documented.",
     "savebook_1280x529": "Full-size PNG opened; qa and prior save present, no qb; other in-store panels do not protrude behind the notebook.",
-    "wheel_proof": "Four original game-area crops combined with external captions; all four inspected; Chrome tabs, bookmarks and tool panels excluded."
+    "wheel_proof": "Four original game-area crops combined with external captions; all four inspected; Chrome tabs, bookmarks and tool panels excluded.",
+    "consultation_1366x768": "Full-size PNG opened; complete 1366x768 frame, face and letter separate, all five cards and three questions visible. Existing POLISH clipping and stray legacy heading retained as known limitations.",
+    "consultation_1920x1080": "Full-size PNG opened. Complete 1920x1080 frame; all five cards, three questions, face and letter visible; no right or bottom cropping. Existing POLISH clipping, legacy heading and portrait edge artifacts remain."
   },
   "public_screenshots": [
     {
@@ -122,6 +124,33 @@
       ],
       "bytes": 133147,
       "sha256": "85dc164f5c6274609c655bd72d8fd8af0363cf0ffad85cd18e0c33bee453d99a"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-WEB/consultation-1366x768.jpg",
+      "pixels": [
+        1366,
+        768
+      ],
+      "bytes": 195904,
+      "sha256": "a4b3d14ae8f6cb842ec4b8049d0e38244b8a7e8fc5edd19678ee035271af0479"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-WEB/consultation-1920x1080.jpg",
+      "pixels": [
+        1920,
+        1080
+      ],
+      "bytes": 347960,
+      "sha256": "40b5d6823392c05b1996159397e527d343e058a9d5502239f27eb27585653034"
+    },
+    {
+      "path": "docs/screenshots/round3/R3-WEB/save-isolation.jpg",
+      "pixels": [
+        1280,
+        1160
+      ],
+      "bytes": 202926,
+      "sha256": "ffcb753c3aecd7b9d95d4a560e98c1d464e6a26b989a0cf618402f70c6ac1574"
     },
     {
       "path": "docs/screenshots/round3/R3-WEB/savebook-1280x529.jpg",
@@ -142,5 +171,58 @@
       "sha256": "d876d45316f10c5a2fed108fd1817e1b523c8677dfe875a4746895b1e8f510b8"
     }
   ],
-  "public_screenshots_reviewed": true
+  "public_screenshots_reviewed": true,
+  "save_isolation": {
+    "status": "passed",
+    "same_chrome_profile": true,
+    "preview": "Created qa v1, reloaded the current preview and confirmed qa v1 with existing v12, no qb; then advanced only qa to v3.",
+    "official": "Initially no saves despite preview qa; created qb v1; after a real toolbar reload and preview writes it still lists only qb v1.",
+    "final_preview_list": "qa v3 and existing v12; no qb.",
+    "raw_captures": [
+      {
+        "path": ".tools/r3-web/browser/formal-qb-after-reload.png",
+        "sha256": "d0d54da8c8014dbfaf95bdc83e7be59151b76201697546a4a50d3a1ce6eb74f6"
+      },
+      {
+        "path": ".tools/r3-web/browser/preview-qa-after-formal-reload.png",
+        "sha256": "574479b6816e7629474929456ba615bb3f624bc3c9ee39f506e316029ca6b418"
+      }
+    ]
+  },
+  "viewport_acceptance": [
+    {
+      "pixels": [
+        1280,
+        529
+      ],
+      "png_path": ".tools/r3-web/browser/consultation-final-1280x529.png",
+      "png_sha256": "626cb0ca653acff60f614ea0cfac6b85fea689499e64053f30f8de2a54ef2cdd",
+      "reviewed": true
+    },
+    {
+      "pixels": [
+        1366,
+        768
+      ],
+      "png_path": ".tools/r3-web/browser/consultation-final-1366x768.png",
+      "png_sha256": "5db3c2ef45cf3e0c5d8b7c2c53392c683dca8efc7acc0ea623cb47c4032748ac",
+      "reviewed": true
+    },
+    {
+      "pixels": [
+        1920,
+        1080
+      ],
+      "png_path": ".tools/r3-web/browser/consultation-final-1920x1080.png",
+      "png_sha256": "b97238c38c49ddada9ee28cd9927f0c65e6191902bfd2bba776a31b8c7c738de",
+      "reviewed": true
+    }
+  ],
+  "browser_cleanup": {
+    "native_devtools_closed": true,
+    "native_viewport_restored": true,
+    "iab_temporary_viewport_reset": true,
+    "duplicate_iab_task_tab_closed": true,
+    "user_native_tabs_retained": true
+  }
 }

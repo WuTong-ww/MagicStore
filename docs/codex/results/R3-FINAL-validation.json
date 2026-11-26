@@ -377,8 +377,8 @@
     "log_sha256": "175d0cf5877f2ab5bf03139241ba7eee73025636542d6244002f205e54155921",
     "host_timeout_360_seconds": false
   },
-  "browser": "Stopped by physical Escape; awaiting user reply before further browser operations",
-  "preview": "HTTP 404 observed for /preview/build-info.json; workflow commit a69b7e0 pushed, successful deployment unproven",
+  "browser": "Targeted actual browser acceptance completed: exact 529/768/1080 captures, first-hover modal/sidebar wheel, and same-profile two-entry reload/interleaved-write isolation. See latest_web_acceptance; shared standard suite remains not green.",
+  "preview": "Published runtime 25af676; final documentation follows separately; root formal channel unchanged.",
   "no_fourth_standard_full": true,
   "story_engine": {
     "exit_code": 0,
@@ -436,5 +436,18 @@
       }
     },
     "wrapper_note": "The 360-second wrapper timed out and its taskkill failed with an OS authentication error; the same actual engine was observed until terminal exit0. Its own native log reports 834/0 and no errors. Wrapper failure is retained separately."
+  },
+  "latest_web_acceptance": {
+    "evidence": "docs/codex/results/R3-WEB-wheel-pointer-validation.json",
+    "targeted_browser_passed": true,
+    "code_commit": "25af67672942bfbaec2ecba95cc38d6dccb65d60",
+    "six_public_jpgs": 6,
+    "standard_full_passed": false
+  },
+  "latest_shop_graphical": {
+    "evidence": "docs/codex/results/R3-WEB-drawer-input-validation.json",
+    "checks": 1681,
+    "failures": 0,
+    "captures": 30
   }
 }
