@@ -15,3 +15,5 @@ Godot固定4.6.3标准版、Compatibility、单线程，无须跨源隔离响应
 Actions部署由站点级串行锁覆盖构建到发布；合并前下载并逐文件验证当前站点，仅替换目标子树，并校验另一子树SHA不变。首次恢复清单记录旧正式02d1d423；如果线上已变而清单不匹配，构建会停止，不发布旧站。之后沿用在线site-manifest.json恢复当前双入口。Pages需设GitHub Actions作为来源，并允许codex/round3与main部署；旧codex/web-playtest整站发布需退役。用户已明确授权推送与预览发布，无须重批。2026-11-26运行45805865584构建成功，但环境白名单仅允许main和旧试玩分支，deploy被拒绝；自动审批要求另行明确授权新增精确codex/round3规则，保存前已停止，原规则未改。批准后可在该运行中仅重试失败的deploy，复用已有产物；这不需要第四轮完整测试。
 
 官方参考：[Godot Web导出](https://docs.godotengine.org/en/4.6/tutorials/export/exporting_for_web.html)、[Pages产物](https://github.com/actions/upload-pages-artifact)、[Pages部署](https://github.com/actions/deploy-pages)。最终浏览器与回归结果以审阅包及R3-WEB-validation.json为准。
+
+2026-11-26发布记录：用户已明确授权并保存codex/round3精确规则；运行45805865584第2次尝试部署成功，复用原产物。公开预览总计74,725,663字节，实际下载PCK36,515,344字节且SHA匹配，实包12/0；正式16条清单与冻结版本一致。开发基线体积比较仍保留，不能把文件字节当加载耗时。1080截图异常、长面板滚轮位移和双入口存档隔离仍待最终浏览器复核。

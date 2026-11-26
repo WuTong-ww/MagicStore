@@ -24,20 +24,21 @@
   "environment_observation": {
     "name": "github-pages",
     "allowed_branches": [
+      "codex/round3",
       "codex/web-playtest",
       "main"
     ],
     "secrets_present": false,
     "variables_present": false,
-    "codex_round3_rule_saved": false
+    "codex_round3_rule_saved": true
   },
   "approval": {
     "push_and_preview_publication": "Explicitly authorized by user",
-    "deployment_branch_rule": "Awaiting explicit authorization; automatic review rejected saving this access-control change",
+    "deployment_branch_rule": "Explicitly authorized by user for exact codex/round3 rule, saved successfully in GitHub UI",
     "rejected_action_retried": false
   },
   "browser": {
-    "status": "Stopped by URL-confidence policy after artifact navigation",
+    "status": "Preview published and partly inspected; later URL-confidence policy stopped browser control",
     "final_acceptance_completed": false,
     "new_screenshots": []
   },
@@ -49,5 +50,15 @@
     "status": "Transport failed; no HTTP status observed",
     "note": "Local proxy connection unavailable; this is not evidence of a new HTTP 404 response."
   },
-  "next_action": "After explicit branch-rule authorization, add exact codex/round3 rule and rerun only failed deploy job; verify published preview before browser acceptance."
+  "next_action": "After explicit branch-rule authorization, add exact codex/round3 rule and rerun only failed deploy job; verify published preview before browser acceptance.",
+  "current_status": "PUBLISHED_BROWSER_ACCEPTANCE_PARTIAL",
+  "successful_retry": {
+    "run_attempt": 2,
+    "status": "success",
+    "total_duration_label": "27s",
+    "deploy_duration_label": "19s",
+    "url": "https://github.com/WuTong-ww/MagicStore/actions/runs/45805865584/job/139868858250",
+    "reused_build_artifact": true
+  },
+  "publication_evidence": "docs/codex/results/R3-WEB-publication-validation.json"
 }

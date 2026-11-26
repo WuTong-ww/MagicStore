@@ -1,6 +1,6 @@
 {
   "task": "R3-WEB",
-  "status": "CI_BUILD_PASSED_DEPLOYMENT_BRANCH_RULE_AUTHORIZATION_PENDING",
+  "status": "PUBLISHED_ACTUAL_PACKAGE_PASSED_BROWSER_ACCEPTANCE_PARTIAL",
   "engine": "4.6.3.stable.official.7d41c59c4",
   "before_site_bytes": 351500932,
   "after_site_bytes": 74742410,
@@ -988,12 +988,13 @@
       "bytes": 509
     }
   ],
-  "published_preview": null,
+  "published_preview": "https://wutong-ww.github.io/MagicStore/preview/",
   "browser_screenshots": [],
   "shared_full": "Three actual failed standard rounds preserved; corrected surface target passed 14/0; no fourth full.",
   "limitations": [
-    "No first-interactive browser timing yet.",
-    "No published browser persistence-isolation proof yet.",
+    "Final three-size browser acceptance incomplete: full HD clipping/capture discrepancy needs recheck.",
+    "Actual long-panel wheel displacement and two-entry persistence isolation remain unverified.",
+    "No comparable first-interactive cold-load timing; package bytes are not timing.",
     "Legacy POLISH clipping/corners remain partially complete."
   ],
   "shared_final_regression": {
@@ -1004,7 +1005,7 @@
     "whole_suite_green": false,
     "note": "Printed groups were green; one later surface assertion stopped the suite. Its targeted correction passed, but no fourth full run was made."
   },
-  "browser_operations": "Stopped by URL-confidence policy after artifact navigation",
+  "browser_operations": "Preview published and partly inspected; later URL-confidence policy stopped browser control",
   "font_coverage": {
     "source_files": 606,
     "cjk_codepoints": 1986,
@@ -1019,11 +1020,13 @@
   "ci_publication": {
     "evidence": "docs/codex/results/R3-WEB-ci-validation.json",
     "build": "success",
-    "deploy": "blocked_by_branch_rule",
+    "deploy": "success_after_authorized_branch_rule",
     "run_url": "https://github.com/WuTong-ww/MagicStore/actions/runs/45805865584"
   },
   "build_policy_test": {
     "build_policy_passed": 9,
     "build_policy_failed": 0
-  }
+  },
+  "published_preview_bytes": 74725663,
+  "publication_evidence": "docs/codex/results/R3-WEB-publication-validation.json"
 }

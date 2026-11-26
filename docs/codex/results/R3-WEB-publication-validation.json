@@ -1,0 +1,71 @@
+{
+  "preview_url": "https://wutong-ww.github.io/MagicStore/preview/",
+  "commit": "522414df28a55df506491491768e4d9c9a68a68d",
+  "clean_source": true,
+  "music_included": false,
+  "published_preview_bytes": 74725663,
+  "pck_bytes": 36515344,
+  "pck_sha256": "d6cd969d33307e845533a76ccd323c29fbde7b37808554b69a5f10df935bb6db",
+  "pck_entries": 1013,
+  "forbidden_entries": [],
+  "same_pck_as_local_12_check_smoke": false,
+  "official_commit": "02d1d423aba4741c929acb1b2542a818ff939ef9",
+  "official_manifest_rows_unchanged": 16,
+  "root_verification_scope": "Every live manifest root row matches the frozen 16-file bootstrap; CI merge previously fetched and hashed all root payloads.",
+  "preview_namespace": [
+    "/userfs/MagicStorePreviewR3"
+  ],
+  "browser_save_isolation": "Pending actual two-tab UI verification",
+  "actual_published_pack_smoke": {
+    "step": "published-pack-smoke",
+    "exit_code": 0,
+    "seconds": 4.812,
+    "errors": [],
+    "log_sha256": "a6ccea21e3fe1594363acdd10bdb7fc5a79a1facd249c4cf367eee7529cf26b5",
+    "checks": 12,
+    "failures": 0
+  },
+  "browser_acceptance": {
+    "viewport_observed": [
+      [
+        1280,
+        529
+      ],
+      [
+        1366,
+        768
+      ],
+      [
+        1920,
+        1080
+      ]
+    ],
+    "accepted_capture_pixels": [
+      [
+        1366,
+        768
+      ]
+    ],
+    "capture_discrepancies": [
+      "1280 CSS viewport capture is 1279 pixels wide",
+      "1920x1080 CSS viewport capture is 1920x1009 and clips content; not accepted"
+    ],
+    "observed_actions": [
+      "Create isolated preview save named 预览验收店",
+      "Open first day",
+      "Receive Lin immediately",
+      "Three button-question rounds",
+      "Three table-card flips",
+      "Attach evidence to deduction slot"
+    ],
+    "wheel_focus": {
+      "before": "BODY",
+      "after": "CANVAS",
+      "verified": true,
+      "scroll_displacement_verified": false
+    },
+    "two_entry_save_isolation_verified": false,
+    "browser_console_game_errors_observed": 0,
+    "limits": "Intermittent input-observation timeouts; later browser control stopped by URL-confidence policy. No final acceptance claimed."
+  }
+}
