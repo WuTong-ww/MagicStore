@@ -1,5 +1,7 @@
 # 素材与第三方许可
 
+网页版加载页使用既有霞鹜文楷的本地WOFF2子集，构建时由fontTools生成并改名Midnight Loading；作者、来源URL、OFL及源TTF SHA沿用下方文楷登记。没有加入另一套外部字体，派生文件SHA逐包记录于build-info.json，并分发原OFL。源字体不裁剪，Godot界面继续嵌入完整文楷及等宽数字字体。
+
 ## 引擎
 
 Godot Engine **4.6.3.stable.official.7d41c59c4**，MIT。官方引擎与 Windows 模板源自 https://github.com/godotengine/godot/releases/tag/4.6.3-stable 。

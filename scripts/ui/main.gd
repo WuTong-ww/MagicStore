@@ -717,6 +717,9 @@ func confirm_contact_invitation() -> void:
 	dialog.popup_centered(Vector2i(620,200))
 
 func open_network_settings() -> void:
+	if preload("res://scripts/core/public_web.gd").active():
+		_open_public_settings()
+		return
 	var dialog := ConfirmationDialog.new()
 	dialog.title = "设置"
 	dialog.dialog_hide_on_ok = false
@@ -826,6 +829,31 @@ func open_network_settings() -> void:
 	UI.paper_window(dialog)
 	dialog.popup_centered()
 
+func _open_public_settings() -> void:
+	var config := preload("res://scripts/core/public_web.gd").load_config()
+	if config.is_empty(): return
+	var dialog := Window.new()
+	dialog.name = "PublicSettings"
+	dialog.visible = false
+	dialog.title = config.copy.title
+	dialog.transient = true
+	dialog.exclusive = true
+	add_child(dialog)
+	UI.paper_window(dialog,"dialogue")
+	dialog.close_requested.connect(dialog.queue_free)
+	var margin := UI.margin(int(PanelMaterials.load_config().layout.content_margins[0]))
+	dialog.add_child(margin); margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var scroll := ScrollContainer.new(); scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; margin.add_child(scroll)
+	var box := VBoxContainer.new(); box.size_flags_horizontal = Control.SIZE_EXPAND_FILL; scroll.add_child(box)
+	box.add_child(UI.paper_heading(config.copy.title))
+	box.add_child(UI.label(config.copy.offline))
+	if is_instance_valid(presentation_audio): presentation_audio.add_settings_controls(box)
+	_add_motion_settings(box)
+	_add_free_question_setting(box)
+	box.add_child(UI.button(config.copy.close,dialog.queue_free))
+	_fit_window(dialog,Vector2i(config.window_size[0],config.window_size[1]))
+	dialog.popup_centered(dialog.size)
+
 func _add_free_question_setting(box: VBoxContainer) -> void:
 	var config: Dictionary = CaseBoardConfig.load_config()
 	if config.is_empty():
@@ -884,7 +912,7 @@ func open_divination(which: String) -> void:
 		else: workbench.open(which)
 
 func _divination_debug_learning() -> bool:
-	return bool(preload("res://scripts/learning/learning_rules.gd").load_config().get("debug_instant_learning",false))
+	return GameState.learning_debug_enabled()
 
 func open_learning() -> bool:
 	var view: Dictionary = GameState.learning_view()

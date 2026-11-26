@@ -32,8 +32,10 @@ func run() -> void:
 			for kind: String in loaded.bundle.rules.topics:
 				var local := kernel.materialize(kind,loaded.bundle,decks,Schema.new())
 				var arrival_id := "arrival_learning_"+kind
-				var bound := kernel.bind(local,"learning_hint_save",arrival_id,"npc_learning_hint",loaded.bundle,decks,Schema.new())
-				var record := {"case_id":bound.bound.definition.id,"npc_id":"npc_learning_hint","source":{"kind":"fallback"},"proof":{"kind":kind,"template_id":"fallback_"+kind}}
+				var bound := kernel.bind(local,"learning_hint_save",arrival_id,"npc_o_0_0",loaded.bundle,decks,Schema.new())
+				check(bound.get("success",false),"fallback hint fixture uses a legal ordinary NPC / "+kind)
+				if not bound.get("success",false): continue
+				var record := {"case_id":bound.bound.definition.id,"npc_id":"npc_o_0_0","source":{"kind":"fallback"},"proof":{"kind":kind,"template_id":"fallback_"+kind}}
 				var state := {"save_id":"learning_hint_save","divination":{"emergent_cases":{"instances":{arrival_id:record}}}}
 				check(not preload("res://scripts/learning/method_mechanics.gd").annotation(bound.bound.definition,state).is_empty(),"offline fallback hints are rebound and hash-verified / "+kind)
 		for definition: Dictionary in bundle.definitions.values():

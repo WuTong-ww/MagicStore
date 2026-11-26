@@ -204,7 +204,11 @@ func shop_view() -> Dictionary:
 func provider_status() -> Dictionary:
 	return dialogue_provider.status() if dialogue_provider.has_method("status") else {"mode": "offline", "reason": "本地对话"}
 
+func learning_debug_enabled() -> bool:
+	return _divination != null and bool(_divination.learning_config.get("debug_instant_learning",false))
+
 func configure_network(url: String, token: String) -> void:
+	if preload("res://scripts/core/public_web.gd").active(): url = ""; token = ""
 	cancel_dialogue()
 	_api_url = ""
 	_api_model = ""
@@ -228,6 +232,7 @@ func preview_api_url(url: String) -> Dictionary:
 	return ApiEndpoint.normalize_chat_url(url)
 
 func configure_api(url: String, model: String, api_key: String) -> Dictionary:
+	if preload("res://scripts/core/public_web.gd").active(): url = ""; model = ""; api_key = ""
 	var normalized := preview_api_url(url)
 	if not normalized.success:
 		return normalized

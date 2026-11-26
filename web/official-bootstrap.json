@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "root_commit": "02d1d423aba4741c929acb1b2542a818ff939ef9",
+  "preview_commit": null,
+  "files": [
+    {
+      "path": "build-info.json",
+      "bytes": 773,
+      "sha256": "c1350930aeabb4f820b68d50fd051842d970cb52ecd4aae29423878f966e0037"
+    },
+    {
+      "path": "index.apple-touch-icon.png",
+      "bytes": 7541,
+      "sha256": "b073eb81cb1371bfda65b6f1d69dba1f2e6b7548675bf621686fa5d285e05840"
+    },
+    {
+      "path": "index.audio.position.worklet.js",
+      "bytes": 2973,
+      "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8"
+    },
+    {
+      "path": "index.audio.worklet.js",
+      "bytes": 7298,
+      "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3"
+    },
+    {
+      "path": "index.html",
+      "bytes": 3845,
+      "sha256": "487519015b078379f255bfb958e3942a8c2358a83957ada46dc4ead72d7d699b"
+    },
+    {
+      "path": "index.icon.png",
+      "bytes": 3674,
+      "sha256": "698309ba701ebe07d05999fbd3bdfddd1d7070275f0210bd23bcf2a83db9538e"
+    },
+    {
+      "path": "index.js",
+      "bytes": 315759,
+      "sha256": "e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981"
+    },
+    {
+      "path": "index.pck",
+      "bytes": 147776572,
+      "sha256": "03ca1a2091c92e56e5e71bb2b919661a30707ea98f95f07f68eaa6ce0a2656dd"
+    },
+    {
+      "path": "index.png",
+      "bytes": 21443,
+      "sha256": "3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e"
+    },
+    {
+      "path": "index.wasm",
+      "bytes": 37700666,
+      "sha256": "26b61ce95247012ab3dca3ff51e96d1cdbff44ee91a8c20a83e150afca83f1b6"
+    },
+    {
+      "path": "licenses/GODOT-COPYRIGHT.txt",
+      "bytes": 102157,
+      "sha256": "c2d22020b33f516d77cf28bc91c0b1319bdd11b9e2494050a506c558c449da42"
+    },
+    {
+      "path": "licenses/GODOT-LICENSE.txt",
+      "bytes": 1169,
+      "sha256": "0cc27400b8da8c06bb35350422c14715647cd2632c138921fd49caa6610a1ef6"
+    },
+    {
+      "path": "licenses/KENNEY-LICENSE.txt",
+      "bytes": 574,
+      "sha256": "f7966c773bbed0eca6a9c75081c44a178b38eae112724dbb5fdfbd4192d118a9"
+    },
+    {
+      "path": "licenses/LXGWWenKai-OFL.txt",
+      "bytes": 5265,
+      "sha256": "cb973995026e28c931886a1d127397152187e03e53b2f71864e86cee8c25e54a"
+    },
+    {
+      "path": "licenses/OFL.txt",
+      "bytes": 4481,
+      "sha256": "e35ffdebb2225b49814c31889cbb3ce69cb3509e6a9f431edaba5e1a6de8cd15"
+    },
+    {
+      "path": "licenses/third-party.md",
+      "bytes": 5847,
+      "sha256": "a7d99c9d5ba8f9b941d1fbe11ebac6626e5a4aa47a649133e02d03b2f91f32c3"
+    }
+  ]
+}

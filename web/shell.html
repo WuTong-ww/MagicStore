@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>$R3_TITLE</title>
+  <style>
+    @font-face { font-family: MidnightLoading; src: url('loading.woff2') format('woff2'); font-display: swap; }
+    * { box-sizing:border-box; }
+    html,body { margin:0; width:100%; height:100%; overflow:hidden; background:#364943; }
+    #canvas { display:block; width:100%; height:100%; outline:none; }
+    #loading { position:fixed; inset:0; display:grid; place-items:center; padding:24px; background:#364943; color:#47372b; font:20px/1.7 MidnightLoading,serif; }
+    #paper { width:min(540px,100%); padding:34px; background:#f3eee1; border-radius:3px 7px 4px 9px; box-shadow:0 6px 12px #35271940; }
+    h1 { font-size:30px; font-weight:400; margin:0 0 16px; } p { margin:12px 0; }
+    progress { width:100%; accent-color:#667d60; } button { font:inherit; background:#eadcc1; color:inherit; padding:8px 24px; border:0; cursor:pointer; }
+    [hidden] { display:none!important; }
+  </style>
+  $GODOT_HEAD_INCLUDE
+</head>
+<body>
+  <canvas id="canvas" tabindex="0" aria-label="$R3_CANVAS"></canvas>
+  <section id="loading" aria-live="polite"><div id="paper">
+    <h1>$R3_TITLE</h1><p id="status">$R3_LOADING</p>
+    <progress id="progress" aria-label="$R3_PROGRESS"></progress>
+    <p>$R3_LOCAL</p><p>$R3_STORAGE</p><button id="retry" hidden type="button">$R3_RETRY</button>
+  </div></section>
+  <script src="wheel-focus.js"></script>
+  <script src="$GODOT_URL"></script>
+  <script>
+    const configuration = $GODOT_CONFIG;
+    configuration.persistentPaths = $R3_PERSISTENT_PATHS;
+    const engine = new Engine(configuration);
+    const canvas = document.getElementById('canvas');
+    MagicStoreWheel.install(canvas);
+    const loading = document.getElementById('loading');
+    const status = document.getElementById('status');
+    const progress = document.getElementById('progress');
+    const retry = document.getElementById('retry');
+    retry.addEventListener('click',() => location.reload());
+    function failed(error) { console.error(error); status.textContent=$R3_FAILURE_JSON; progress.hidden=true; retry.hidden=false; }
+    if (Engine.getMissingFeatures({threads:$GODOT_THREADS_ENABLED}).length) failed('WebGL 2 / WebAssembly unavailable');
+    else engine.startGame({canvas,onProgress(current,total) { if(total>0) {progress.max=total; progress.value=current;} }}).then(() => {loading.remove(); canvas.focus();}).catch(failed);
+  </script>
+</body>
+</html>

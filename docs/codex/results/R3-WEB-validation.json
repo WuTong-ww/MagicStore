@@ -1,0 +1,999 @@
+{
+  "task": "R3-WEB",
+  "status": "IMPLEMENTED_LOCAL_PACKAGE_PASSED_DEPLOYMENT_BROWSER_AND_SHARED_REGRESSION_PENDING",
+  "engine": "4.6.3.stable.official.7d41c59c4",
+  "before_site_bytes": 351500932,
+  "after_site_bytes": 74742410,
+  "reduction_percent": 78.74,
+  "before_files": [
+    {
+      "path": ".nojekyll",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "index.apple-touch-icon.png",
+      "bytes": 7541,
+      "sha256": "b073eb81cb1371bfda65b6f1d69dba1f2e6b7548675bf621686fa5d285e05840"
+    },
+    {
+      "path": "index.audio.position.worklet.js",
+      "bytes": 2973,
+      "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8"
+    },
+    {
+      "path": "index.audio.worklet.js",
+      "bytes": 7298,
+      "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3"
+    },
+    {
+      "path": "index.html",
+      "bytes": 3309,
+      "sha256": "975f0821307379d448b0f2ac6a5956a8da2400ab0d0aed3f90923633f2981d00"
+    },
+    {
+      "path": "index.icon.png",
+      "bytes": 3674,
+      "sha256": "698309ba701ebe07d05999fbd3bdfddd1d7070275f0210bd23bcf2a83db9538e"
+    },
+    {
+      "path": "index.js",
+      "bytes": 315759,
+      "sha256": "e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981"
+    },
+    {
+      "path": "index.pck",
+      "bytes": 313291036,
+      "sha256": "dc3291a9cd7ab3f80c4baf6fb760756a3fb26a07e3225ab475dda4ededcdab3e"
+    },
+    {
+      "path": "index.png",
+      "bytes": 21443,
+      "sha256": "3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e"
+    },
+    {
+      "path": "index.wasm",
+      "bytes": 37700666,
+      "sha256": "26b61ce95247012ab3dca3ff51e96d1cdbff44ee91a8c20a83e150afca83f1b6"
+    },
+    {
+      "path": "licenses/GODOT-COPYRIGHT.txt",
+      "bytes": 102157,
+      "sha256": "c2d22020b33f516d77cf28bc91c0b1319bdd11b9e2494050a506c558c449da42"
+    },
+    {
+      "path": "licenses/GODOT-LICENSE.txt",
+      "bytes": 1169,
+      "sha256": "0cc27400b8da8c06bb35350422c14715647cd2632c138921fd49caa6610a1ef6"
+    },
+    {
+      "path": "licenses/KENNEY-LICENSE.txt",
+      "bytes": 574,
+      "sha256": "f7966c773bbed0eca6a9c75081c44a178b38eae112724dbb5fdfbd4192d118a9"
+    },
+    {
+      "path": "licenses/LXGWWenKai-OFL.txt",
+      "bytes": 5265,
+      "sha256": "cb973995026e28c931886a1d127397152187e03e53b2f71864e86cee8c25e54a"
+    },
+    {
+      "path": "licenses/MidnightNumeric-OFL.txt",
+      "bytes": 5171,
+      "sha256": "1a25e35da1031c6c3436fde545bb9cb5aca954e9873afe510c834b8b79bd21a0"
+    },
+    {
+      "path": "licenses/third-party.md",
+      "bytes": 10097,
+      "sha256": "c7b4fc7104c313136d54a976487403c578e4589d30b0da12fccc57e0b577ce70"
+    },
+    {
+      "path": "loading.woff2",
+      "bytes": 19180,
+      "sha256": "ce5fc5c9612cf2bd47ceae26b2c5e3e74a2cb20610a50fa715f4ccf8d337385d"
+    },
+    {
+      "path": "wheel-focus.js",
+      "bytes": 427,
+      "sha256": "51cf39d19759befeb5cfcc97fa5a9a9579b2b74410ff76c000d5f951daae7c18"
+    }
+  ],
+  "after_files": [
+    {
+      "path": ".nojekyll",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "index.apple-touch-icon.png",
+      "bytes": 7541,
+      "sha256": "b073eb81cb1371bfda65b6f1d69dba1f2e6b7548675bf621686fa5d285e05840"
+    },
+    {
+      "path": "index.audio.position.worklet.js",
+      "bytes": 2973,
+      "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8"
+    },
+    {
+      "path": "index.audio.worklet.js",
+      "bytes": 7298,
+      "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3"
+    },
+    {
+      "path": "index.html",
+      "bytes": 3308,
+      "sha256": "76e60f44f663d4cf65c6d5c13c932360ab7ea1bae0da77a0a508835aba28cee3"
+    },
+    {
+      "path": "index.icon.png",
+      "bytes": 3674,
+      "sha256": "698309ba701ebe07d05999fbd3bdfddd1d7070275f0210bd23bcf2a83db9538e"
+    },
+    {
+      "path": "index.js",
+      "bytes": 315759,
+      "sha256": "e3f56ee40e6f84371053db06692cfac15e2c8659547b11c6b2dfa1996dabd981"
+    },
+    {
+      "path": "index.pck",
+      "bytes": 36532512,
+      "sha256": "4b9fa2fb3f6cf43ae38e5c37ae47d21ef9be4c82f206f2f243f2d73f356992c6"
+    },
+    {
+      "path": "index.png",
+      "bytes": 21443,
+      "sha256": "3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e"
+    },
+    {
+      "path": "index.wasm",
+      "bytes": 37700666,
+      "sha256": "26b61ce95247012ab3dca3ff51e96d1cdbff44ee91a8c20a83e150afca83f1b6"
+    },
+    {
+      "path": "licenses/GODOT-COPYRIGHT.txt",
+      "bytes": 102157,
+      "sha256": "c2d22020b33f516d77cf28bc91c0b1319bdd11b9e2494050a506c558c449da42"
+    },
+    {
+      "path": "licenses/GODOT-LICENSE.txt",
+      "bytes": 1169,
+      "sha256": "0cc27400b8da8c06bb35350422c14715647cd2632c138921fd49caa6610a1ef6"
+    },
+    {
+      "path": "licenses/KENNEY-LICENSE.txt",
+      "bytes": 574,
+      "sha256": "f7966c773bbed0eca6a9c75081c44a178b38eae112724dbb5fdfbd4192d118a9"
+    },
+    {
+      "path": "licenses/LXGWWenKai-OFL.txt",
+      "bytes": 5265,
+      "sha256": "cb973995026e28c931886a1d127397152187e03e53b2f71864e86cee8c25e54a"
+    },
+    {
+      "path": "licenses/MidnightNumeric-OFL.txt",
+      "bytes": 5171,
+      "sha256": "1a25e35da1031c6c3436fde545bb9cb5aca954e9873afe510c834b8b79bd21a0"
+    },
+    {
+      "path": "licenses/third-party.md",
+      "bytes": 10097,
+      "sha256": "c7b4fc7104c313136d54a976487403c578e4589d30b0da12fccc57e0b577ce70"
+    },
+    {
+      "path": "loading.woff2",
+      "bytes": 19184,
+      "sha256": "3ae5555bb7c01f04066c1ff255737b7a44f54f24e0491d7a30ad753c3be1a636"
+    },
+    {
+      "path": "wheel-focus.js",
+      "bytes": 427,
+      "sha256": "51cf39d19759befeb5cfcc97fa5a9a9579b2b74410ff76c000d5f951daae7c18"
+    }
+  ],
+  "comparison": "same uncommitted development runtime input; local packages identify c6cde8d base plus WEB changes, not a clean release commit",
+  "public_package": {
+    "entries": 1013,
+    "bytes": 36532512,
+    "forbidden_entries": [],
+    "native_pack_checks": 12,
+    "failures": 0
+  },
+  "policy_unittests": {
+    "passed": 6,
+    "failed": 0
+  },
+  "dom_wheel": {
+    "checks": 9,
+    "failures": 0
+  },
+  "lossy_imports": 69,
+  "excluded": [
+    {
+      "path": "assets/ART_ASSET_MANIFEST.json",
+      "bytes": 498188
+    },
+    {
+      "path": "assets/frontdesk_concept_reference.png",
+      "bytes": 2710516
+    },
+    {
+      "path": "assets/audio/music/evening_harmony.ogg",
+      "bytes": 1956601
+    },
+    {
+      "path": "assets/audio/music/fabric_of_life.ogg",
+      "bytes": 1934613
+    },
+    {
+      "path": "assets/audio/music/gentle_breeze.ogg",
+      "bytes": 3498557
+    },
+    {
+      "path": "assets/audio/music/sheep.ogg",
+      "bytes": 3463673
+    },
+    {
+      "path": "assets/audio/music/sunlight_through_leaves.ogg",
+      "bytes": 2297714
+    },
+    {
+      "path": "assets/audio/music/whispering_woods.ogg",
+      "bytes": 2143061
+    },
+    {
+      "path": "assets/fonts/NotoSansSC.ttf",
+      "bytes": 17772300
+    },
+    {
+      "path": "assets/generated_scenes/S01_exterior_1920x1080.png",
+      "bytes": 3692550
+    },
+    {
+      "path": "assets/generated_scenes/S02_frontdesk_1920x1080.png",
+      "bytes": 3535969
+    },
+    {
+      "path": "assets/generated_scenes/S03_consultation_1920x1080.png",
+      "bytes": 3425444
+    },
+    {
+      "path": "assets/generated_scenes/S04_storage_1920x1080.png",
+      "bytes": 3797345
+    },
+    {
+      "path": "assets/generated_scenes/S05_workshop_1920x1080.png",
+      "bytes": 3889872
+    },
+    {
+      "path": "assets/generated_scenes/S06_market_1920x1080.png",
+      "bytes": 3887070
+    },
+    {
+      "path": "assets/generated_scenes/S07_gathering_1920x1080.png",
+      "bytes": 4272736
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S01_closed.png",
+      "bytes": 3752068
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S01_day.png",
+      "bytes": 3845433
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S01_night.png",
+      "bytes": 3873591
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S02_day.png",
+      "bytes": 3522103
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S02_night.png",
+      "bytes": 3336170
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S03_day.png",
+      "bytes": 3481960
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S03_night.png",
+      "bytes": 3338964
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S04_day.png",
+      "bytes": 3195793
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S04_night.png",
+      "bytes": 3116031
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S05_day.png",
+      "bytes": 3212151
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S05_night.png",
+      "bytes": 3032192
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S06_day.png",
+      "bytes": 3633625
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S06_night.png",
+      "bytes": 3543148
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S07_day.png",
+      "bytes": 3786001
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v2/S07_night.png",
+      "bytes": 3473521
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_final/S03/day/v3r3_subset/C.png",
+      "bytes": 3509365
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_final/S03/night/v3r3_subset/C.png",
+      "bytes": 2854466
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_final/S04/day_closed/v3r3_subset/C.png",
+      "bytes": 2839929
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_final/S04/night_closed/v3r3_subset/C.png",
+      "bytes": 2476257
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_final/S07/day/v3r3_selected/C.png",
+      "bytes": 3797897
+    },
+    {
+      "path": "assets/generated_scenes/runtime/v3_final/S07/night/v3r3_selected/C.png",
+      "bytes": 3214917
+    },
+    {
+      "path": "assets/generated_scenes/v2/S01_closed.png",
+      "bytes": 3175147
+    },
+    {
+      "path": "assets/generated_scenes/v2/S01_day.png",
+      "bytes": 3250601
+    },
+    {
+      "path": "assets/generated_scenes/v2/S01_night.png",
+      "bytes": 3240093
+    },
+    {
+      "path": "assets/generated_scenes/v2/S02_day.png",
+      "bytes": 2997208
+    },
+    {
+      "path": "assets/generated_scenes/v2/S02_night.png",
+      "bytes": 2782490
+    },
+    {
+      "path": "assets/generated_scenes/v2/S03_day.png",
+      "bytes": 2930759
+    },
+    {
+      "path": "assets/generated_scenes/v2/S03_night.png",
+      "bytes": 2748974
+    },
+    {
+      "path": "assets/generated_scenes/v2/S04_day.png",
+      "bytes": 2712130
+    },
+    {
+      "path": "assets/generated_scenes/v2/S04_night.png",
+      "bytes": 2616907
+    },
+    {
+      "path": "assets/generated_scenes/v2/S05_day.png",
+      "bytes": 2674002
+    },
+    {
+      "path": "assets/generated_scenes/v2/S05_night.png",
+      "bytes": 2501793
+    },
+    {
+      "path": "assets/generated_scenes/v2/S06_day.png",
+      "bytes": 3081439
+    },
+    {
+      "path": "assets/generated_scenes/v2/S06_night.png",
+      "bytes": 2971068
+    },
+    {
+      "path": "assets/generated_scenes/v2/S07_day.png",
+      "bytes": 3202543
+    },
+    {
+      "path": "assets/generated_scenes/v2/S07_night.png",
+      "bytes": 2878121
+    },
+    {
+      "path": "assets/generated_scenes/v2/slices/S02_curtain.png",
+      "bytes": 2283833
+    },
+    {
+      "path": "assets/generated_scenes/v2/slices/S02_door.png",
+      "bytes": 2814094
+    },
+    {
+      "path": "assets/generated_scenes/v2/slices/S02_lamp_off.png",
+      "bytes": 1056010
+    },
+    {
+      "path": "assets/generated_scenes/v2/slices/S02_lamp_on.png",
+      "bytes": 1034723
+    },
+    {
+      "path": "assets/generated_scenes/v2/slices/S02_letter.png",
+      "bytes": 2297613
+    },
+    {
+      "path": "assets/generated_scenes/v2/slices/S04_door_closed.png",
+      "bytes": 2784829
+    },
+    {
+      "path": "assets/generated_scenes/v2/slices/S04_door_open.png",
+      "bytes": 1110377
+    },
+    {
+      "path": "assets/generated_scenes/v2/slices/S04_drawer.png",
+      "bytes": 2962221
+    },
+    {
+      "path": "assets/generated_scenes/v2/slices/S04_slot.png",
+      "bytes": 3155602
+    },
+    {
+      "path": "assets/generated_scenes/v2/slices/S05_bottle.png",
+      "bytes": 2076950
+    },
+    {
+      "path": "assets/generated_scenes/v2/slices/S05_scales.png",
+      "bytes": 1646095
+    },
+    {
+      "path": "assets/generated_scenes/v2/slices/S06_basket.png",
+      "bytes": 2761716
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S01/closed/v3r3/C.png",
+      "bytes": 2211948
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S01/day/v3r3/C.png",
+      "bytes": 2809071
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S01/night/v3r3/C.png",
+      "bytes": 2344431
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S02/night/v3r3/C.png",
+      "bytes": 2169416
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S03/day/v3r3_subset/B_all.png",
+      "bytes": 2810198
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S03/day/v3r3_subset/C.png",
+      "bytes": 2515201
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S03/day/v3r3_subset/layers/sofa_mask.png",
+      "bytes": 29619
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S03/night/v3r3_subset/B_all.png",
+      "bytes": 2277023
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S03/night/v3r3_subset/C.png",
+      "bytes": 2044553
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S03/night/v3r3_subset/layers/sofa_mask.png",
+      "bytes": 25613
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S04/day_closed/v3r3_subset/B_all.png",
+      "bytes": 2223425
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S04/day_closed/v3r3_subset/C.png",
+      "bytes": 1997391
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S04/day_closed/v3r3_subset/layers/door_closed.png",
+      "bytes": 673701
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S04/day_open/v3r2/C.png",
+      "bytes": 2094280
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S04/night_closed/v3r3_subset/B_all.png",
+      "bytes": 1945988
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S04/night_closed/v3r3_subset/C.png",
+      "bytes": 1799200
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S04/night_closed/v3r3_subset/layers/door_closed.png",
+      "bytes": 583425
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S04/night_open/v3r2/C.png",
+      "bytes": 1846575
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S05/day/v3r2/C.png",
+      "bytes": 2592680
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S05/night/v3r2/C.png",
+      "bytes": 2344840
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S06/day/v3r3/C.png",
+      "bytes": 2672940
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S06/night/v3r3/C.png",
+      "bytes": 2182411
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S07/day/v3r3_selected/B_all.png",
+      "bytes": 3034106
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S07/day/v3r3_selected/C.png",
+      "bytes": 2714047
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S07/day/v3r3_selected/layers/water_mask.png",
+      "bytes": 366810
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S07/night/v3r3_selected/B_all.png",
+      "bytes": 2561738
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S07/night/v3r3_selected/C.png",
+      "bytes": 2244049
+    },
+    {
+      "path": "assets/generated_scenes/v3_final/S07/night/v3r3_selected/layers/water_mask.png",
+      "bytes": 287822
+    },
+    {
+      "path": "assets/portraits/npc_character_reference_sheet.png",
+      "bytes": 2652385
+    },
+    {
+      "path": "assets/portraits/npc_reference_01.png",
+      "bytes": 241740
+    },
+    {
+      "path": "assets/portraits/npc_reference_02.png",
+      "bytes": 258519
+    },
+    {
+      "path": "assets/portraits/npc_reference_03.png",
+      "bytes": 256310
+    },
+    {
+      "path": "assets/portraits/npc_reference_04.png",
+      "bytes": 256145
+    },
+    {
+      "path": "assets/portraits/npc_reference_05.png",
+      "bytes": 300696
+    },
+    {
+      "path": "assets/portraits/npc_reference_06.png",
+      "bytes": 295107
+    },
+    {
+      "path": "assets/ui/concept_button_sheet.png",
+      "bytes": 1915073
+    },
+    {
+      "path": "assets/ui/ui_kit_reference_sheet.png",
+      "bytes": 2922054
+    },
+    {
+      "path": "assets/_incoming/.gdignore",
+      "bytes": 0
+    },
+    {
+      "path": "assets/_incoming/a2r_v3/ui-source-fixture_3845903/native.png",
+      "bytes": 895
+    },
+    {
+      "path": "assets/_incoming/a2r_v3/ui-source-fixture_4527773/native.png",
+      "bytes": 895
+    },
+    {
+      "path": "assets/_incoming/a2r_v3/ui-source-fixture_4548607/native.png",
+      "bytes": 895
+    },
+    {
+      "path": "assets/_incoming/a2r_v3/ui-source-fixture_4594796/native.png",
+      "bytes": 895
+    },
+    {
+      "path": "assets/_incoming/a2r_v3/ui-source-fixture_4628065/native.png",
+      "bytes": 895
+    },
+    {
+      "path": "assets/_incoming/a2r_v3/ui-source-fixture_4732290/native.png",
+      "bytes": 895
+    },
+    {
+      "path": "assets/_incoming/a2r_v3/ui-source-fixture_4875121/native.png",
+      "bytes": 895
+    },
+    {
+      "path": "assets/_incoming/a2r_v3/ui-source-fixture_4949853/native.png",
+      "bytes": 895
+    },
+    {
+      "path": "assets/_incoming/a2r_v3/ui-source-fixture_5134246/native.png",
+      "bytes": 895
+    },
+    {
+      "path": "assets/_incoming/a2r_v3/ui-source-fixture_5941781/native.png",
+      "bytes": 895
+    },
+    {
+      "path": "assets/_incoming/a2r_v3/ui-source-fixture_6089540/native.png",
+      "bytes": 895
+    },
+    {
+      "path": "assets/_incoming/g4_v3/beeswax_source_attempt2.png",
+      "bytes": 1670333
+    },
+    {
+      "path": "assets/_incoming/g4_v3/blue_glass_source_attempt2.png",
+      "bytes": 1663373
+    },
+    {
+      "path": "assets/_incoming/g4_v3/bright_draught_source_attempt1.png",
+      "bytes": 1489917
+    },
+    {
+      "path": "assets/_incoming/g4_v3/clear_thought_tea_source_attempt1.png",
+      "bytes": 1677499
+    },
+    {
+      "path": "assets/_incoming/g4_v3/cotton_thread_source_attempt2.png",
+      "bytes": 1756404
+    },
+    {
+      "path": "assets/_incoming/g4_v3/dried_mint_source_attempt1.png",
+      "bytes": 1564570
+    },
+    {
+      "path": "assets/_incoming/g4_v3/focus_candle_source_attempt1.png",
+      "bytes": 1642830
+    },
+    {
+      "path": "assets/_incoming/g4_v3/fresh_air_incense_source_attempt1.png",
+      "bytes": 1331950
+    },
+    {
+      "path": "assets/_incoming/g4_v3/friendship_knot_source_attempt1.png",
+      "bytes": 1489430
+    },
+    {
+      "path": "assets/_incoming/g4_v3/glass_vial_source_attempt1.png",
+      "bytes": 1560236
+    },
+    {
+      "path": "assets/_incoming/g4_v3/grounding_stone_source_attempt1.png",
+      "bytes": 1695476
+    },
+    {
+      "path": "assets/_incoming/g4_v3/honey_drop_source_attempt2.png",
+      "bytes": 1567725
+    },
+    {
+      "path": "assets/_incoming/g4_v3/iron_flake_source_attempt2.png",
+      "bytes": 1569907
+    },
+    {
+      "path": "assets/_incoming/g4_v3/memory_lens_source_attempt1.png",
+      "bytes": 1637178
+    },
+    {
+      "path": "assets/_incoming/g4_v3/mugwort_source_attempt1.png",
+      "bytes": 1543090
+    },
+    {
+      "path": "assets/_incoming/g4_v3/night_tea_source_attempt1.png",
+      "bytes": 1825589
+    },
+    {
+      "path": "assets/_incoming/g4_v3/old_key_source_attempt1.png",
+      "bytes": 1375134
+    },
+    {
+      "path": "assets/_incoming/g4_v3/patience_charm_source_attempt1.png",
+      "bytes": 1852257
+    },
+    {
+      "path": "assets/_incoming/g4_v3/pine_needle_source_attempt3.png",
+      "bytes": 1422983
+    },
+    {
+      "path": "assets/_incoming/g4_v3/red_thread_source_attempt1.png",
+      "bytes": 1558987
+    },
+    {
+      "path": "assets/_incoming/g4_v3/reed_stem_source_attempt1.png",
+      "bytes": 1395789
+    },
+    {
+      "path": "assets/_incoming/g4_v3/river_clay_source_attempt2.png",
+      "bytes": 1661872
+    },
+    {
+      "path": "assets/_incoming/g4_v3/sea_salt_source_attempt1.png",
+      "bytes": 1816191
+    },
+    {
+      "path": "assets/_incoming/g4_v3/soothing_candle_source_attempt1.png",
+      "bytes": 1646233
+    },
+    {
+      "path": "assets/_incoming/g4_v3/together_sachet_source_attempt2.png",
+      "bytes": 1818796
+    },
+    {
+      "path": "assets/_incoming/g4_v3/welcome_sachet_source_attempt1.png",
+      "bytes": 1826111
+    },
+    {
+      "path": "assets/_legacy/consultation_banner.png",
+      "bytes": 488525
+    },
+    {
+      "path": "assets/_legacy/consultation_scene.png",
+      "bytes": 1027200
+    },
+    {
+      "path": "assets/_legacy/scene_exterior.png",
+      "bytes": 1067765
+    },
+    {
+      "path": "assets/_legacy/scene_gathering.png",
+      "bytes": 1256171
+    },
+    {
+      "path": "assets/_legacy/scene_inventory.png",
+      "bytes": 1093562
+    },
+    {
+      "path": "assets/_legacy/scene_market.png",
+      "bytes": 1141061
+    },
+    {
+      "path": "assets/_legacy/scene_workshop.png",
+      "bytes": 1117089
+    },
+    {
+      "path": "assets/_legacy/shop_front_scene.png",
+      "bytes": 1070425
+    },
+    {
+      "path": "assets/_legacy/a7/.gdignore",
+      "bytes": 0
+    },
+    {
+      "path": "assets/_legacy/a7/S04_slot.png",
+      "bytes": 3155602
+    },
+    {
+      "path": "assets/_legacy/generated_scenes/S01_exterior_900x300.png",
+      "bytes": 584759
+    },
+    {
+      "path": "assets/_legacy/generated_scenes/S01_exterior_900x600.png",
+      "bytes": 1067765
+    },
+    {
+      "path": "assets/_legacy/generated_scenes/S02_frontdesk_900x300.png",
+      "bytes": 540492
+    },
+    {
+      "path": "assets/_legacy/generated_scenes/S02_frontdesk_900x600.png",
+      "bytes": 1030415
+    },
+    {
+      "path": "assets/_legacy/generated_scenes/S03_consultation_900x300.png",
+      "bytes": 492180
+    },
+    {
+      "path": "assets/_legacy/generated_scenes/S03_consultation_900x600.png",
+      "bytes": 1026042
+    },
+    {
+      "path": "assets/_legacy/generated_scenes/S04_storage_900x300.png",
+      "bytes": 530719
+    },
+    {
+      "path": "assets/_legacy/generated_scenes/S04_storage_900x600.png",
+      "bytes": 1093562
+    },
+    {
+      "path": "assets/_legacy/generated_scenes/S05_workshop_900x300.png",
+      "bytes": 558793
+    },
+    {
+      "path": "assets/_legacy/generated_scenes/S05_workshop_900x600.png",
+      "bytes": 1117089
+    },
+    {
+      "path": "assets/_legacy/generated_scenes/S06_market_900x300.png",
+      "bytes": 573585
+    },
+    {
+      "path": "assets/_legacy/generated_scenes/S06_market_900x600.png",
+      "bytes": 1141061
+    },
+    {
+      "path": "assets/_legacy/generated_scenes/S07_gathering_900x300.png",
+      "bytes": 647386
+    },
+    {
+      "path": "assets/_legacy/generated_scenes/S07_gathering_900x600.png",
+      "bytes": 1256171
+    },
+    {
+      "path": "data/art/g4_preview.json",
+      "bytes": 1646
+    },
+    {
+      "path": "data/art/g5_preview.json",
+      "bytes": 2182
+    },
+    {
+      "path": "data/art/g6_preview.json",
+      "bytes": 1688
+    },
+    {
+      "path": "data/art/item_pipeline.json",
+      "bytes": 3336
+    },
+    {
+      "path": "data/art/local_audit.json",
+      "bytes": 341
+    },
+    {
+      "path": "data/art/motion_preview.json",
+      "bytes": 2672
+    },
+    {
+      "path": "data/art/motion_validation.json",
+      "bytes": 2723
+    },
+    {
+      "path": "data/art/past_fragment_pipeline.json",
+      "bytes": 1969
+    },
+    {
+      "path": "data/art/pipeline.json",
+      "bytes": 2011
+    },
+    {
+      "path": "data/art/placeholder_scenes.json",
+      "bytes": 69186
+    },
+    {
+      "path": "data/art/polish_material_prompts.json",
+      "bytes": 35376
+    },
+    {
+      "path": "data/art/polish_prompts.json",
+      "bytes": 9986
+    },
+    {
+      "path": "data/art/portrait_pipeline.json",
+      "bytes": 254691
+    },
+    {
+      "path": "data/art/portrait_preview.json",
+      "bytes": 1225
+    },
+    {
+      "path": "data/art/real_scene_layers.json",
+      "bytes": 1351
+    },
+    {
+      "path": "data/art/real_scene_registry.json",
+      "bytes": 6023
+    },
+    {
+      "path": "data/art/scene_preview.json",
+      "bytes": 77207
+    },
+    {
+      "path": "data/art/scene_review.json",
+      "bytes": 81716
+    },
+    {
+      "path": "data/art/title_prompts.json",
+      "bytes": 11575
+    },
+    {
+      "path": "scripts/dev/bootstrap.ps1",
+      "bytes": 2438
+    },
+    {
+      "path": "scripts/dev/export-web.ps1",
+      "bytes": 511
+    },
+    {
+      "path": "scripts/dev/generate-lunar-calendar.ps1",
+      "bytes": 1103
+    },
+    {
+      "path": "scripts/dev/package.ps1",
+      "bytes": 6367
+    },
+    {
+      "path": "scripts/dev/play-export.ps1",
+      "bytes": 1796
+    },
+    {
+      "path": "scripts/dev/run-live-dialogue.ps1",
+      "bytes": 2409
+    },
+    {
+      "path": "scripts/dev/run-live-model-switch.ps1",
+      "bytes": 2403
+    },
+    {
+      "path": "scripts/dev/run-live-people.ps1",
+      "bytes": 3865
+    },
+    {
+      "path": "scripts/dev/run.ps1",
+      "bytes": 32151
+    },
+    {
+      "path": "scripts/dev/test-http.ps1",
+      "bytes": 1892
+    },
+    {
+      "path": "scripts/dev/test-people.ps1",
+      "bytes": 2659
+    },
+    {
+      "path": "scripts/dev/test-person-http.ps1",
+      "bytes": 1393
+    },
+    {
+      "path": "scripts/dev/toolchain.json",
+      "bytes": 509
+    }
+  ],
+  "published_preview": null,
+  "browser_screenshots": [],
+  "shared_full": "full1 failed in new fixture binding; legal ordinary NPC fix applied, full2 in progress",
+  "limitations": [
+    "No first-interactive browser timing yet.",
+    "No published browser persistence-isolation proof yet.",
+    "Legacy POLISH clipping/corners remain partially complete."
+  ]
+}
