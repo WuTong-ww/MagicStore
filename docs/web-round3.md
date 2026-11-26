@@ -12,6 +12,6 @@ Godot固定4.6.3标准版、Compatibility、单线程，无须跨源隔离响应
 
 本地带音乐：保留个人的 `assets/audio/music/`，运行 `scripts/dev/export-web.ps1 -Variant preview -WithMusic`。产物位于带-music后缀的隔离目录，仅供本地；不上传Git或Pages。白天及案件使用玩家指定Sheep，曲目配置仍在data/audio.json。音乐目录始终忽略。
 
-Actions部署由站点级串行锁覆盖构建到发布；合并前下载并逐文件验证当前站点，仅替换目标子树，并校验另一子树SHA不变。首次恢复清单记录旧正式02d1d423；如果线上已变而清单不匹配，构建会停止，不发布旧站。之后沿用在线site-manifest.json恢复当前双入口。Pages需设GitHub Actions作为来源，并允许codex/round3与main部署；旧codex/web-playtest整站发布需退役。当前授权已包含推送与预览发布，无须再次请求。
+Actions部署由站点级串行锁覆盖构建到发布；合并前下载并逐文件验证当前站点，仅替换目标子树，并校验另一子树SHA不变。首次恢复清单记录旧正式02d1d423；如果线上已变而清单不匹配，构建会停止，不发布旧站。之后沿用在线site-manifest.json恢复当前双入口。Pages需设GitHub Actions作为来源，并允许codex/round3与main部署；旧codex/web-playtest整站发布需退役。用户已明确授权推送与预览发布，无须重批。2026-11-26运行45805865584构建成功，但环境白名单仅允许main和旧试玩分支，deploy被拒绝；自动审批要求另行明确授权新增精确codex/round3规则，保存前已停止，原规则未改。批准后可在该运行中仅重试失败的deploy，复用已有产物；这不需要第四轮完整测试。
 
 官方参考：[Godot Web导出](https://docs.godotengine.org/en/4.6/tutorials/export/exporting_for_web.html)、[Pages产物](https://github.com/actions/upload-pages-artifact)、[Pages部署](https://github.com/actions/deploy-pages)。最终浏览器与回归结果以审阅包及R3-WEB-validation.json为准。

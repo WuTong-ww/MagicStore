@@ -1,6 +1,6 @@
 {
   "task": "R3-WEB",
-  "status": "IMPLEMENTED_LOCAL_PACKAGE_PASSED_DEPLOYMENT_BROWSER_AND_SHARED_REGRESSION_PENDING",
+  "status": "CI_BUILD_PASSED_DEPLOYMENT_BRANCH_RULE_AUTHORIZATION_PENDING",
   "engine": "4.6.3.stable.official.7d41c59c4",
   "before_site_bytes": 351500932,
   "after_site_bytes": 74742410,
@@ -1004,7 +1004,7 @@
     "whole_suite_green": false,
     "note": "Printed groups were green; one later surface assertion stopped the suite. Its targeted correction passed, but no fourth full run was made."
   },
-  "browser_operations": "stopped_by_user_escape_waiting_for_reply",
+  "browser_operations": "Stopped by URL-confidence policy after artifact navigation",
   "font_coverage": {
     "source_files": 606,
     "cjk_codepoints": 1986,
@@ -1015,5 +1015,15 @@
     "passed": 1,
     "failed": 0,
     "scope": "Actual WOFF2 cmap, valid PostScript name, deterministic bytes, original TTF unchanged; standalone build change after local size measurement"
+  },
+  "ci_publication": {
+    "evidence": "docs/codex/results/R3-WEB-ci-validation.json",
+    "build": "success",
+    "deploy": "blocked_by_branch_rule",
+    "run_url": "https://github.com/WuTong-ww/MagicStore/actions/runs/45805865584"
+  },
+  "build_policy_test": {
+    "build_policy_passed": 9,
+    "build_policy_failed": 0
   }
 }

@@ -1,0 +1,53 @@
+{
+  "scope": "R3-WEB Pages publication checkpoint, 2026-11-26",
+  "evidence_kind": "Observed GitHub Actions browser accessibility state; no artifact inspection claimed",
+  "commit": "522414df28a55df506491491768e4d9c9a68a68d",
+  "run_url": "https://github.com/WuTong-ww/MagicStore/actions/runs/45805865584",
+  "build": {
+    "status": "success",
+    "duration_label": "2m 6s",
+    "url": "https://github.com/WuTong-ww/MagicStore/actions/runs/45805865584/job/139860815187"
+  },
+  "artifact": {
+    "name": "github-pages",
+    "reported_size_label": "192 MB",
+    "sha256": "c2d6a5dea5e9efd598b99ef809f762e01b0182e786d22815bccbc562d3f5d59f",
+    "url": "https://github.com/WuTong-ww/MagicStore/actions/runs/45805865584/artifacts/15108394905",
+    "download_verified": false
+  },
+  "deploy": {
+    "status": "failure",
+    "duration_label": "2s",
+    "url": "https://github.com/WuTong-ww/MagicStore/actions/runs/45805865584/job/139861944975",
+    "annotation": "Branch \"codex/round3\" is not allowed to deploy to github-pages due to environment protection rules."
+  },
+  "environment_observation": {
+    "name": "github-pages",
+    "allowed_branches": [
+      "codex/web-playtest",
+      "main"
+    ],
+    "secrets_present": false,
+    "variables_present": false,
+    "codex_round3_rule_saved": false
+  },
+  "approval": {
+    "push_and_preview_publication": "Explicitly authorized by user",
+    "deployment_branch_rule": "Awaiting explicit authorization; automatic review rejected saving this access-control change",
+    "rejected_action_retried": false
+  },
+  "browser": {
+    "status": "Stopped by URL-confidence policy after artifact navigation",
+    "final_acceptance_completed": false,
+    "new_screenshots": []
+  },
+  "local_focused_tests": {
+    "build_policy_passed": 9,
+    "build_policy_failed": 0
+  },
+  "latest_public_probe": {
+    "status": "Transport failed; no HTTP status observed",
+    "note": "Local proxy connection unavailable; this is not evidence of a new HTTP 404 response."
+  },
+  "next_action": "After explicit branch-rule authorization, add exact codex/round3 rule and rerun only failed deploy job; verify published preview before browser acceptance."
+}
