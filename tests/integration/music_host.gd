@@ -121,6 +121,7 @@ func check_saved_ending() -> void:
 	check((await main.run_action("load_game",{"save_id":ENDING_ID})).get("success",false),"load the actual completed story through GameState")
 	await settle()
 	var public: Dictionary = game.story_view()
+	var before_read: Dictionary = game.snapshot()
 	check(public.get("ending",{}).get("has_ending",false) and public.ending.get("status") == "complete","normal public getter exposes the real completed ending")
 	check(not main._music_ending_visible() and main.presentation_audio.current_music == clock_slot(),"historical completion alone leaves clock music")
 	check(main.open_story_notes(),"open the real saved notebook archive")
@@ -139,7 +140,8 @@ func check_saved_ending() -> void:
 	main.people_window.hide()
 	await settle()
 	check(not main._music_ending_visible() and main.presentation_audio.current_music == clock_slot(),"hiding the archive window returns to clock music")
-	check(FileAccess.get_sha256(path) == ENDING_SHA,"read-only ending presentation leaves the original envelope bytes unchanged")
+	check(game.snapshot().story == before_read.story and game.snapshot().player == before_read.player,"reading updates only presentation receipts, preserving story and player state")
+	check(FileAccess.get_sha256(path+".bak") == ENDING_SHA and saves.read_save(ENDING_ID).get("success",false),"first saved read receipt retains the exact legacy envelope as a recoverable backup")
 
 func check_missing_music() -> void:
 	var audio: Node = main.presentation_audio

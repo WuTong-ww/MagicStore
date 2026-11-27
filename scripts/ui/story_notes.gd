@@ -3,6 +3,10 @@ extends VBoxContainer
 const UI = preload("res://scripts/ui/ui_kit.gd")
 const StoryUI = preload("res://scripts/ui/story_ui_config.gd")
 signal close_requested
+signal page_read_requested(id: String)
+const Tabs = preload("res://scripts/ui/note_tabs_config.gd")
+var tab_config: Dictionary = {}
+var unlock_titles: Dictionary = {}
 var config: Dictionary = {}
 var page_buttons: HBoxContainer
 var page_title: Label
@@ -18,6 +22,8 @@ var _ending: Dictionary = {}
 
 func _ready() -> void:
 	config = StoryUI.load_config()
+	tab_config = Tabs.load_config()
+	unlock_titles = Tabs.unlock_titles()
 	if config.is_empty():
 		hide()
 		return
@@ -55,6 +61,7 @@ func _ready() -> void:
 	close_button.custom_minimum_size.y = float(config.layout.button_height)
 	add_child(close_button)
 	_refresh()
+	visibility_changed.connect(_request_read)
 
 var _manage_visibility := true
 
@@ -80,7 +87,7 @@ func set_view(value: Dictionary, identity: String = "", manage_visibility: bool 
 			var page := float(supplied.page_number)
 			if not is_finite(page) or page <= 0 or page != floor(page):
 				continue
-			var row := {"id":str(supplied.id),"page_number":int(page),"unlocked":bool(supplied.get("unlocked",false))}
+			var row := {"id":str(supplied.id),"page_number":int(page),"unlocked":bool(supplied.get("unlocked",false)),"read":bool(supplied.get("read",false))}
 			# Locked text is never kept in this component, even if incorrectly supplied.
 			if row.unlocked:
 				if supplied.get("title") is String: row["title"] = str(supplied.title)
@@ -92,6 +99,7 @@ func set_view(value: Dictionary, identity: String = "", manage_visibility: bool 
 		_refresh()
 
 func select_page(id: String) -> void:
+	if not _rows.any(func(row: Dictionary) -> bool: return row.id == id and row.unlocked): return
 	_selected_id = id
 	if is_node_ready():
 		_render_page()
@@ -115,7 +123,34 @@ func _refresh() -> void:
 		button.custom_minimum_size = Vector2(config.layout.page_number_minimum_width,config.layout.button_height)
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.disabled = not row.unlocked
-		button.tooltip_text = "" if row.unlocked else str(config.copy.locked)
+		button.set_meta("note_id",row.id)
+		button.toggle_mode = true
+		button.tooltip_text = "" if row.unlocked else str(tab_config.get("locked_hint",config.copy.locked)).format({"title":unlock_titles.get(row.id,tab_config.get("unknown_case",""))})
+		if not tab_config.is_empty():
+			button.custom_minimum_size.y = float(tab_config.height)
+			button.add_theme_font_size_override("font_size",int(tab_config.font_size))
+			if not row.unlocked:
+				button.modulate = Color(tab_config.locked_color)
+				button.text = "    "+button.text
+				var lock := Control.new()
+				lock.name = "NoteLock"
+				lock.mouse_filter = Control.MOUSE_FILTER_IGNORE
+				lock.position = Vector2(tab_config.gap,tab_config.gap)
+				lock.custom_minimum_size = Vector2.ONE*float(tab_config.lock_size)
+				button.add_child(lock)
+				lock.draw.connect(func():
+					var side: float = tab_config.lock_size
+					var color := Color(tab_config.lock_color)
+					lock.draw_arc(Vector2(side*0.5,side*0.45),side*0.25,PI,TAU,16,color,2,true)
+					lock.draw_rect(Rect2(side*0.15,side*0.4,side*0.7,side*0.55),color,false,2))
+			var dot := Control.new()
+			dot.name = "NoteUnreadDot"
+			dot.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			dot.visible = row.unlocked and not row.read
+			button.add_child(dot)
+			dot.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
+			dot.position = Vector2(-float(tab_config.dot_inset),float(tab_config.dot_inset))
+			dot.draw.connect(func(): dot.draw_circle(Vector2.ZERO,float(tab_config.dot_radius),Color(tab_config.dot_color)))
 		page_buttons.add_child(button)
 	progress_label.text = str(config.copy.progress).format({"count":_rows.filter(func(row: Dictionary) -> bool: return row.unlocked).size(),"total":int(config.note_count)})
 	ending_label.visible = bool(_ending.get("has_ending",false)) and _ending.get("text") is String and not str(_ending.text).is_empty()
@@ -128,6 +163,11 @@ func _refresh() -> void:
 	_render_page()
 
 func _render_page() -> void:
+	for button: Button in page_buttons.get_children():
+		var selected: bool = str(button.get_meta("note_id","")) == _selected_id and not button.disabled
+		button.set_pressed_no_signal(selected)
+		button.set_meta("current_page",selected)
+		if not button.disabled: button.modulate = Color(tab_config.get("current_color","#FFFFFF")) if selected else Color.WHITE
 	var found: Array = _rows.filter(func(row: Dictionary) -> bool: return row.id == _selected_id)
 	if found.is_empty():
 		page_title.text = ""
@@ -138,3 +178,10 @@ func _render_page() -> void:
 	page_title.text = str(row.get("title",generic)) if row.unlocked else generic
 	body.text = str(row.get("text",config.copy.empty)) if row.unlocked else str(config.copy.locked)
 	body.scroll_to_line(0)
+	_request_read()
+
+func _request_read() -> void:
+	if not is_visible_in_tree(): return
+	for row: Dictionary in _rows:
+		if row.id == _selected_id and row.unlocked and not row.read:
+			page_read_requested.emit(str(row.id))

@@ -156,7 +156,10 @@ func daily_loop_view() -> Dictionary:
 	return DailyLoop.public_view(state,daily_loop_config)
 
 func story_view() -> Dictionary:
-	return StoryProgress.public_view(state,story_config)
+	var view: Dictionary = StoryProgress.public_view(state,story_config)
+	for row: Dictionary in view.get("notes",[]):
+		row["read"] = state.get("processed_actions",{}).has("r4_note_"+str(state.get("save_id",""))+"_"+str(row.id))
+	return view
 
 func case_board_view() -> Dictionary:
 	if state.is_empty() or _divination == null:

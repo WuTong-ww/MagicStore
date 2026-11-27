@@ -1,2 +1,4 @@
 res://tests/ui/case_flow_clarity.gd
 res://tests/ui/card_faces.gd
+res://tests/ui/note_tabs.gd
+res://tests/ui/note_read_receipts.gd

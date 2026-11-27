@@ -1,4 +1,5 @@
 extends Control
+var _note_reads_pending: Dictionary = {}
 
 signal scene_changed(previous: String, next: String)
 const MusicContext = preload("res://scripts/audio/music_context.gd")
@@ -442,6 +443,7 @@ func _build_title() -> void:
 	title_control.continue_requested.connect(open_saves)
 	title_control.settings_requested.connect(open_network_settings)
 	title_control.new_requested.connect(_ui_create_game)
+	title_control.opening_notes.page_read_requested.connect(_mark_note_read)
 	var notebook := UI.button(str(title_control.config.copy.notes_entry),open_story_notes)
 	notebook.add_theme_font_size_override("font_size",int(shell_config.layout.status_size))
 	notebook.name = "OpenStoryNotes"
@@ -679,6 +681,20 @@ func _sync_story_archive() -> void:
 	var notes: Control = people_panel.get("story_notes") as Control
 	if is_instance_valid(notes) and not notes.visibility_changed.is_connected(_music_story_visibility_changed):
 		notes.visibility_changed.connect(_music_story_visibility_changed)
+	if is_instance_valid(notes) and not notes.page_read_requested.is_connected(_mark_note_read):
+		notes.page_read_requested.connect(_mark_note_read)
+
+func _mark_note_read(id: String) -> void:
+	if busy or not GameState.story_view().get("notes",[]).any(func(row: Dictionary) -> bool: return row.id == id and row.unlocked and not row.get("read",false)): return
+	var receipt := "r4_note_"+str(GameState.player_snapshot().get("save_id",""))+"_"+id
+	if _note_reads_pending.has(receipt): return
+	_note_reads_pending[receipt] = true
+	var result: Dictionary = await run_action("set_free_question",{"enabled":GameState.free_question_enabled()},receipt)
+	_note_reads_pending.erase(receipt)
+	if result.get("success",false):
+		if is_instance_valid(title_control) and is_instance_valid(title_control.opening_notes) and title_control.opening_notes.is_visible_in_tree():
+			title_control.opening_notes.set_view(GameState.story_view(),str(GameState.player_snapshot().get("save_id","")))
+		show_notice(str(preload("res://scripts/ui/note_tabs_config.gd").load_config().read_saved))
 
 func open_story_notes() -> bool:
 	# Reusable read-only entry. The formal TITLE entry can call this later.
