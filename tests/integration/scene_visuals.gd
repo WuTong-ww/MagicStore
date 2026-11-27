@@ -134,14 +134,14 @@ func check_hotspot_cards(visual_script: Script, config: Dictionary) -> void:
 	button.release_focus()
 	var motion := InputEventMouseMotion.new()
 	motion.position = button.get_global_rect().get_center()
-	root.push_input(motion)
+	root.push_input(motion,true)
 	await settle()
 	var hovered := label.get_theme_stylebox("normal") as StyleBoxFlat
 	check(hovered != null and not settings.is_empty() and hovered.bg_color.is_equal_approx(Color(Color(settings.hover_color),settings.hover_alpha)),"real mouse hover deepens the paper background")
 	check(button.get_rect().is_equal_approx(click_rect) and label.get_rect().is_equal_approx(label_rect),"hover and focus never change the hit rectangle or paper size")
 	motion = InputEventMouseMotion.new()
 	motion.position = Vector2.ZERO
-	root.push_input(motion)
+	root.push_input(motion,true)
 	await settle()
 	var normal := label.get_theme_stylebox("normal") as StyleBoxFlat
 	check(normal != null and not settings.is_empty() and normal.bg_color.is_equal_approx(Color(Color(settings.paper_color),settings.paper_alpha)),"mouse exit restores the normal translucent paper")
@@ -244,8 +244,9 @@ func check_runtime(config: Dictionary) -> void:
 			check(row.support.is_equal_approx(Vector2(float(source.bottom_left)+(float(source.bottom_width)-1.0)/2.0,float(source.bottom_y))),"support is measured from actual opaque bottom pixels, not the texture midpoint / "+str(row.item_id))
 		await capture("a1-inventory-open-"+str(dimensions.x))
 		var original: Dictionary = game.snapshot()
+		await collapse_scene_drawer(main.screen)
 		var cabinet_button: Button = main.screen.scene_visual.get_node("Hotspot_cabinet")
-		await click_at(cabinet_button.get_global_rect().get_center())
+		await click_visible_button(cabinet_button)
 		check(not main.screen.cabinet_open,"actual click on configured wooden cabinet edge toggles cabinet / "+str(dimensions))
 		check(main.screen.scene_visual.cabinet_state == "closed" and not main.screen.shelf_view.visible and game.snapshot() == original,"cabinet presentation toggle hides shelf art without settling inventory or changing a save")
 		main.screen.cabinet_open = true
@@ -287,21 +288,9 @@ func check_runtime(config: Dictionary) -> void:
 	main.show_screen("front")
 	await settle()
 	await capture("a1-front-night-1920")
+	await collapse_scene_drawer(main.screen)
 	var exterior_button: Button = main.screen.scene_visual.get_node("Hotspot_exterior")
-	var center := exterior_button.get_global_rect().get_center()
-	var motion := InputEventMouseMotion.new()
-	motion.position = center
-	root.push_input(motion)
-	await settle()
-	var press := InputEventMouseButton.new()
-	press.button_index = MOUSE_BUTTON_LEFT
-	press.position = center
-	press.pressed = true
-	root.push_input(press)
-	var release := press.duplicate()
-	release.pressed = false
-	root.push_input(release)
-	await settle()
+	await click_at(exterior_button.get_global_rect().get_center())
 	check(main.current_screen == "exterior","mouse click at transformed hotspot reaches destination")
 	# Closing artwork is a render-only fixture: it deliberately does not save
 	# a synthetic 22:01 state, and restores the complete committed snapshot.
@@ -335,17 +324,46 @@ func capture(label: String) -> void:
 func click_at(position: Vector2) -> void:
 	var motion := InputEventMouseMotion.new()
 	motion.position = position
-	root.push_input(motion)
+	root.push_input(motion,true)
 	await settle()
 	var press := InputEventMouseButton.new()
 	press.button_index = MOUSE_BUTTON_LEFT
 	press.position = position
 	press.pressed = true
-	root.push_input(press)
+	root.push_input(press,true)
 	var release := press.duplicate()
 	release.pressed = false
-	root.push_input(release)
+	root.push_input(release,true)
 	await settle()
+
+func collapse_scene_drawer(screen: Control) -> void:
+	for key: String in ["SceneControls","FrontDrawer","ConsultationDrawer"]:
+		var drawer: Control = screen.get_node_or_null(key)
+		if drawer == null or not drawer.get("expanded"): continue
+		await click_at(drawer.bookmark.get_global_rect().get_center())
+		var slide: Tween = drawer.get("slide")
+		if slide != null and slide.is_valid() and slide.is_running(): await slide.finished
+		await settle()
+		check(not drawer.expanded,"real bookmark closes the modal paper before clicking scene artwork / "+key)
+
+func click_visible_button(button: Button) -> void:
+	var rectangle := button.get_global_rect()
+	for fraction: Vector2 in [Vector2(0.5,0.5),Vector2(0.5,0.2),Vector2(0.5,0.8),Vector2(0.2,0.5),Vector2(0.8,0.5)]:
+		var point := rectangle.position+rectangle.size*fraction
+		if not root.get_visible_rect().has_point(point): continue
+		var motion := InputEventMouseMotion.new()
+		motion.position = point
+		root.push_input(motion,true)
+		await settle()
+		if root.gui_get_hovered_control() == button:
+			await click_at(point)
+			return
+	check(false,"an uncovered part of the real hotspot remains reachable beside the drawer bookmark")
+
+func drawer_reading_order(screen: Control) -> Array[Node]:
+	var rows: Array[Node] = screen.body.get_children()
+	rows.append_array(screen.drawer.right_content.get_children())
+	return rows
 
 func shelf_signature(layout: Dictionary) -> Array:
 	var result: Array = []
@@ -413,21 +431,22 @@ func check_current_catalog_fixture(main: Control, game: Node, config: Dictionary
 	check(appearances.size() == ids.size() and appearances.keys().all(func(id: String) -> bool: return id in ids),"expanded placement creates no unexpected or missing identity / "+str(dimensions))
 	for id: String in ids:
 		check(appearances.get(id,0) == 1,"each current identity is placed exactly once on a shelf or in explicit overflow / "+id)
-		var wrappers: Array = screen.body.find_children("ItemVisual_"+id,"Control",true,false)
+		var wrappers: Array = screen.drawer.find_children("ItemVisual_"+id,"Control",true,false)
 		check(wrappers.size() == 1,"each current identity has exactly one public inventory drawer row / "+id)
 	var overflow: Array = shelf.layout_result.overflow
 	var labels: Dictionary = config.scenes.S04.shelf_layout.labels
-	var headings: Array = screen.body.get_children().filter(func(node: Node) -> bool: return node is Label and node.text == labels.overflow_heading)
+	var reading_order := drawer_reading_order(screen)
+	var headings: Array = reading_order.filter(func(node: Node) -> bool: return node is Label and node.text == labels.overflow_heading)
 	check(headings.size() == (0 if overflow.is_empty() else 1),"expanded overflow has its explicit configured drawer heading / "+str(dimensions))
 	if not overflow.is_empty() and headings.size() == 1:
-		var following: Array = screen.body.get_children().filter(func(node: Node) -> bool: return node is Label and node.text == labels.all_items_heading)
+		var following: Array = reading_order.filter(func(node: Node) -> bool: return node is Label and node.text == labels.all_items_heading)
 		check(following.size() == 1,"overflow drawer is separated from ordinary on-shelf item rows")
 		for id: String in overflow:
 			check(shelf.get_item_node(id) == null and not shelf.get_hit_rect(id).has_area(),"overflow identity has no hidden shelf sprite or click target / "+id)
-			var wrappers: Array = screen.body.find_children("ItemVisual_"+id,"Control",true,false)
+			var wrappers: Array = screen.drawer.find_children("ItemVisual_"+id,"Control",true,false)
 			if wrappers.size() == 1 and following.size() == 1:
 				var group: Node = wrappers[0].get_parent().get_parent()
-				check(group.get_parent() == screen.body and group.get_index() > headings[0].get_index() and group.get_index() < following[0].get_index(),"overflow identity is actually listed between the overflow and all-items headings / "+id)
+				check(group in reading_order and reading_order.find(group) > reading_order.find(headings[0]) and reading_order.find(group) < reading_order.find(following[0]),"overflow identity is actually listed between the overflow and all-items headings across both paper pages / "+id)
 	print("SCENE CURRENT CATALOG / %s: %d identities, %d shelf entries, %d explicit overflow" % [str(dimensions),ids.size(),shelf.layout_result.entries.size(),overflow.size()])
 	game.state = before
 	main.show_screen("inventory")
@@ -477,6 +496,7 @@ func check_shelf_selection_edges(main: Control, game: Node) -> void:
 	var lavender_target: Rect2 = shelf.get_hit_rect("lavender")
 	check(lavender_target.has_area(),"newly loaded positive lavender has a real shelf click target")
 	if lavender_target.has_area():
+		await collapse_scene_drawer(main.screen)
 		await click_at(lavender_target.get_center())
 	check(main.screen.selected_inventory_item == "lavender" and shelf.selected_item == "lavender","actual mouse click selects genuine lavender before its last unit is sold")
 	var lavender_units := int(game.shop_view().items.get("lavender",0))
@@ -496,6 +516,7 @@ func check_shelf_selection_edges(main: Control, game: Node) -> void:
 	var incense_target: Rect2 = shelf.get_hit_rect("calming_incense")
 	check(int(game.shop_view().items.get("calming_incense",0)) > 0 and incense_target.has_area(),"overflow regression starts with genuine positive incense on a shelf")
 	if incense_target.has_area():
+		await collapse_scene_drawer(main.screen)
 		await click_at(incense_target.get_center())
 	check(main.screen.selected_inventory_item == "calming_incense","actual positive item is selected before its display space is narrowed")
 	var narrow := production_config.duplicate(true)
@@ -506,7 +527,7 @@ func check_shelf_selection_edges(main: Control, game: Node) -> void:
 	await settle()
 	check("calming_incense" in main.screen.shelf_view.layout_result.get("overflow",[]),"a one-source-pixel shelf genuinely overflows the selected positive item")
 	check(inventory_action_wrappers(main.screen,"calming_incense").size() == 1,"positive selected overflow item is represented by exactly one inventory wrapper")
-	check(count_button_text(main.screen.body,"出售给当前来客") == 1,"selected-overflow detail and overflow list do not duplicate the same sale action")
+	check(count_button_text(main.screen.drawer,"出售给当前来客") == 1,"selected-overflow detail and overflow list do not duplicate the same sale action")
 	check(game.snapshot() == saved_before_display,"narrowing display shelves and deduplicating detail rows change no saved inventory or clock")
 	main.screen.visuals = production_config
 	main.screen.refresh()
@@ -543,7 +564,7 @@ func check_invalid_shelf_ui(main: Control, game: Node, config: Dictionary) -> vo
 		main.screen.visuals = bad
 		main.screen.refresh()
 		await settle()
-		var error_label: Label = main.screen.body.get_node_or_null("ShelfUnavailable") as Label
+		var error_label: Label = main.screen.drawer.find_child("ShelfUnavailable",true,false) as Label
 		check(error_label != null and error_label.text == expected,"actual drawer rejects malformed shelf labels before dynamic text or typed access")
 		check(not main.screen.shelf_view.visible and game.snapshot() == before,"invalid shelf data hides interactions without mutating the committed save")
 	main.screen.visuals = config.duplicate(true)

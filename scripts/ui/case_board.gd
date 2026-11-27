@@ -13,6 +13,8 @@ const StoryUI = preload("res://scripts/ui/story_ui_config.gd")
 const ResponsiveConfig = preload("res://scripts/ui/responsive_config.gd")
 const ViewportMetrics = preload("res://scripts/ui/viewport_metrics.gd")
 const ResponsiveLayout = preload("res://scripts/ui/responsive_layout.gd")
+const Flow = preload("res://scripts/ui/case_flow.gd")
+var flow: Control
 signal story_choice_saved
 var host
 var config: Dictionary = {}
@@ -192,6 +194,10 @@ func _ready() -> void:
 	end_button.offset_bottom = float(config.layout.question_height)
 	_build_short_drawer()
 	_setup_materials()
+	flow = Flow.new()
+	flow.name = "CaseFlow"
+	flow.board = self
+	add_child(flow)
 	resized.connect(_layout)
 	get_tree().root.size_changed.connect(_on_client_resized)
 	_layout()
@@ -307,6 +313,7 @@ func _layout() -> void:
 	canvas.position = (size-canvas.size*factor)/2.0
 	_layout_short_drawer()
 	_queue_table_layout()
+	if is_instance_valid(flow): flow.layout()
 
 func _queue_table_layout() -> void:
 	_layout_cards_on_table.call_deferred()
@@ -385,6 +392,7 @@ func refresh() -> void:
 			reaction_label.text += separator+separator.join(story_lines)
 	_set_busy(bool(host.busy) if is_instance_valid(host) else false)
 	_refresh_material_name()
+	if is_instance_valid(flow): flow.refresh()
 
 func _blocking_prelude() -> Dictionary:
 	var value: Variant = public_view.get("prelude",{})
@@ -493,7 +501,9 @@ func _refresh_slots() -> void:
 		title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		header.add_child(title)
-		var status := _label(config.copy.attached.format({"count":row.get("attached_ids",[]).size()}),int(config.layout.small_font))
+		var status_key := "slot_sealed" if not str(row.get("selected","")).is_empty() else ("slot_attached" if not row.get("attached_ids",[]).is_empty() else "slot_empty")
+		var status := _label(str(config.flow[status_key]),int(config.layout.small_font))
+		status.name = "CaseSlotStatus"
 		status.autowrap_mode = TextServer.AUTOWRAP_OFF
 		status.add_theme_color_override("font_color",Color(config.colors.muted))
 		header.add_child(status)
@@ -563,7 +573,8 @@ func _refresh_evidence() -> void:
 		token.button_down.connect(_play_material_paper_sound.bind(token))
 		token.pressed.connect(func():
 			_selected_evidence = str(row.id)
-			_refresh_evidence())
+			_refresh_evidence()
+			if is_instance_valid(flow): flow.refresh())
 		evidence_box.add_child(token)
 	_queue_material_pages()
 
@@ -610,6 +621,7 @@ func _submit(action: String, values: Dictionary) -> void:
 		return
 	_pending = true
 	_set_busy(true)
+	if is_instance_valid(flow): flow.refresh()
 	var target: Control = card_nodes[int(values.card_index)] if action == "case_flip_card" else slot_nodes.get(str(values.get("slot_id","")),question_area)
 	var source_position := Vector2.ZERO
 	var flying_text := ""

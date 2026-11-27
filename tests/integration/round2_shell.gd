@@ -119,7 +119,8 @@ func check_fullscreen(page: String,dimensions: Vector2i) -> void:
 func check_buttons(node: Node,label: String) -> void:
 	if node is Button and node.is_visible_in_tree() and not node.get_meta("decorative_hotspot",false):
 		var button: Button = node
-		check(not button.text.strip_edges().is_empty(),"visible button has text / "+label+" / "+str(button.name))
+		var public_copy: bool = not button.text.strip_edges().is_empty() or not button.tooltip_text.strip_edges().is_empty() or button.find_children("*","Label",true,false).any(func(child: Node) -> bool: return child.is_visible_in_tree() and not child.text.strip_edges().is_empty())
+		check(public_copy,"visible button has public text or a complete tooltip / "+label+" / "+str(button.name))
 		var font: Font = button.get_theme_font("font")
 		var font_size := button.get_theme_font_size("font_size")
 		var text_width := 0.0
@@ -128,7 +129,9 @@ func check_buttons(node: Node,label: String) -> void:
 		var padding := button.get_theme_stylebox("normal").get_minimum_size().x
 		var icon_width := 0.0
 		if button.icon != null:
-			icon_width = button.icon.get_width()+button.get_theme_constant("h_separation")
+			var maximum := button.get_theme_constant("icon_max_width")
+			icon_width = minf(button.icon.get_width(),maximum) if maximum > 0 else button.icon.get_width()
+			icon_width += button.get_theme_constant("h_separation")
 		if button is OptionButton:
 			icon_width += button.get_theme_icon("arrow").get_width()+button.get_theme_constant("h_separation")
 		if button is CheckButton:

@@ -61,6 +61,8 @@ func run() -> void:
 		row.urgency = 0
 		game.state.people.arrivals[id] = row
 		ids.append(id)
+	check(game._sync_person_variation(game.state),"planned fixture includes current validated nationality and face-detail fields")
+	game.state = saves._normalize_numbers(game.state)
 	var seeded: Dictionary = saves.write_save(game.snapshot())
 	check(seeded.success, "the isolated planned-arrival fixture is a valid real save")
 	if not seeded.success:

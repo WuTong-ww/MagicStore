@@ -197,7 +197,7 @@ func capture(phase: String, dimensions: Vector2i) -> void:
 	elif phase=="cards":
 		check(board.cards_row.is_visible_in_tree() and view.cards.filter(func(row: Dictionary)->bool:return row.revealed).size()==int(settings.partial_cards),"a saved partial flip appears beside remaining anonymous backs")
 	else:
-		check(view.closed and board.reaction_panel.is_visible_in_tree() and not board.reaction_label.get_parsed_text().is_empty(),"real closure shows reaction and sealed deductions")
+		check(view.closed and board.flow.page.is_visible_in_tree() and not board.reaction_label.get_parsed_text().is_empty(),"real closure shows reaction before the result page")
 	var image := root.get_texture().get_image()
 	if not check(not image.is_empty() and image.get_size()==dimensions,"native GPU framebuffer has the requested dimensions / "+phase): return
 	var colors := {}
@@ -232,12 +232,16 @@ func exercise_size(dimensions: Vector2i) -> bool:
 	if not check(not private_definition.is_empty(),"strict loaded definition is available to the test oracle only"): return false
 	_definition_ids(private_definition)
 	for token: String in [source_receipt.save_id,source_receipt.arrival_id,source_owner]: _remember_id(token)
+	main.screen.case_board.flow.primary.pressed.emit()
+	await settle()
 	await capture("questions",dimensions)
 	var rules := Schema.load_rules()
 	for _round: int in range(int(rules.limits.question_rounds)):
 		var options: Array = game.case_board_view().questions.filter(func(row: Dictionary)->bool:return row.enabled)
 		if not check(not options.is_empty(),"public current question round has a legal choice"): return false
 		if not await act("case_question",{"question_id":options[0].id}): return false
+	main.screen.case_board.flow.primary.pressed.emit()
+	await settle()
 	for index: int in range(int(settings.partial_cards)):
 		if not await act("case_flip_card",{"card_index":index}): return false
 	await capture("cards",dimensions)

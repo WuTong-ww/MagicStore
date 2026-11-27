@@ -47,7 +47,12 @@ func act(kind: String, values: Dictionary = {}) -> Dictionary:
 	# Explicit TITLE creation idempotence has its separate title_creation.gd coverage.
 	if kind == "new_game":
 		action.erase("action_id")
-	return await game.execute_action_async(action)
+	# This pre-learning-loop fixture explicitly bypasses the later story gate.
+	# Successful publication replaces Session, so restore the existing test flag on both sides.
+	game._divination.learning_config.debug_instant_learning = true
+	var result: Dictionary = await game.execute_action_async(action)
+	game._divination.learning_config.debug_instant_learning = true
+	return result
 
 func disk_sha() -> String:
 	return FileAccess.get_sha256(saves._path(game.state.save_id))

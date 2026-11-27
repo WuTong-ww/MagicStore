@@ -3,6 +3,8 @@ extends SceneTree
 ## Loading and public rendering must never rewrite either saved preset or parts.
 const Appearance = preload("res://scripts/people/appearance.gd")
 const People = preload("res://scripts/people/people.gd")
+const DetailsProjection = preload("res://tests/fixtures/person_details_projection.gd")
+const Learning = preload("res://scripts/learning/learning_store.gd")
 const FIXTURE := "res://tests/fixtures/schema11_case_active.json"
 const FIXTURE_SHA := "67943ade5c2c3bde15ab370ee127a191754b353ce6dd4df04421f064500348a2"
 const FIXTURE_ID := "save_f321096919344a75c28fd769c7b58aea"
@@ -55,6 +57,10 @@ func run() -> void:
 	var historical := migrated.duplicate(true)
 	check(historical.people.get("birth_identity_version")==1 and not old.people.has("birth_identity_version"),"migration adds only the validated future-birth policy to old people")
 	historical.people.erase("birth_identity_version")
+	historical.people = DetailsProjection.before16(historical.people,old.people)
+	var expected_learning: Dictionary = old.duplicate(true)
+	check(Learning.initialize(expected_learning,false,17) and expected_learning.learning == migrated.learning,"schema18 adds exactly the expected historical learning namespace")
+	historical.erase("learning")
 	check(not historical.divination.has("emergent_cases") or historical.divination.get("emergent_cases")=={"version":1,"instances":{}},"historical projection retains no populated schema14 ordinary-case namespace")
 	historical.divination.erase("emergent_cases")
 	for key: String in old:
@@ -75,6 +81,10 @@ func run() -> void:
 	earlier_lin_parts.parts.hair_back = "hair_back_02"
 	earlier_lin_parts.parts.outfit = "outfit_06"
 	earlier_lin_parts.colors = {"skin":"skin_02","hair":"hair_02","outfit":"outfit_03"}
+	# Current-schema cosmetic fixtures must retain the mandatory schema16 detail namespace.
+	# The genuine CASE11 preset envelope above remains byte-exact and unchanged.
+	for parts: Dictionary in [earlier_lin_parts,historical_parts]:
+		parts["face_details"] = saves._normalize_numbers(config.face_variation.fixed.npc_lin)
 	for appearance: Dictionary in [{"preset":"npc_lin"},earlier_lin_parts,historical_parts]:
 		var legacy := baseline.duplicate(true)
 		legacy.people.profiles.npc_lin.appearance = appearance.duplicate(true)

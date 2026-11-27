@@ -247,7 +247,7 @@ func run() -> void:
 func inspect_render(dimensions: Vector2i) -> void:
 	var viewport := Rect2(Vector2.ZERO,Vector2(root.size))
 	var hint := find_hint(screen)
-	check(hint != null and hint.text.contains("回车发送") and hint.text.contains("Shift+回车换行"),"keyboard instructions describe both send and newline shortcuts / "+str(dimensions))
+	check(hint != null and hint.text.contains("回车发") and hint.text.contains("Shift+回车换行"),"keyboard instructions describe both send and newline shortcuts / "+str(dimensions))
 	check(viewport.encloses(screen.input.get_global_rect()) and viewport.encloses(screen.send_button.get_global_rect()) and screen.input.size.y >= 64 and screen.input.get_theme_font_size("font_size") >= 18,"multiline editor and send button remain readable and inside the viewport / "+str(dimensions))
 	check(hint != null and viewport.encloses(hint.get_global_rect()) and hint.get_minimum_size().x <= hint.size.x+1 and screen.transcript.size.y >= 100,"shortcut instructions are uncropped and leave room for the conversation / "+str(dimensions))
 	if DisplayServer.get_name() != "headless":

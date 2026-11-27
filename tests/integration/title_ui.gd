@@ -106,7 +106,12 @@ func run() -> void:
 	if dialog == null:
 		await finish()
 		return
-	await click(dialog.get_cancel_button())
+	var cancel_choices: Array[Node] = dialog.find_children("*","Button",true,false).filter(func(node: Node) -> bool: return node.is_visible_in_tree() and str(node.text) == str(dialog.get_cancel_button().text))
+	check(cancel_choices.size() == 1,"settings exposes one visible cancel action")
+	if cancel_choices.size() != 1:
+		await finish()
+		return
+	await click(cancel_choices[0])
 	check(title.visible,"closing settings retains title without creating a game")
 	await click(title.buttons["new"])
 	check(title.new_panel.visible,"new day opens the dynamic store-name form")
@@ -174,6 +179,10 @@ func check_save_book_entry() -> void:
 	if input_failed or failures: return
 	var before: Dictionary = game.snapshot()
 	var cue_before: int = main.title_entry_cue_count
+	var drawer: Control = main.screen.get_node_or_null("FrontDrawer")
+	if is_instance_valid(drawer) and drawer.expanded:
+		await click(drawer.bookmark)
+		check(not drawer.expanded,"close the visible notebook before using the underlying chrome")
 	await click(main.open_button)
 	check(main.save_window.visible,"actual chrome button opens the existing save book")
 	root.get_node("SaveService").fail_next_write = true

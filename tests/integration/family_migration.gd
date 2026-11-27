@@ -3,6 +3,7 @@ extends SceneTree
 const People = preload("res://scripts/people/people.gd")
 const Fixture = preload("res://tests/people/fixture_config.gd")
 const Generated = preload("res://scripts/people/generated_person.gd")
+const DetailsProjection = preload("res://tests/fixtures/person_details_projection.gd")
 var game: Node
 var saves: Node
 var checks := 0
@@ -113,7 +114,8 @@ func old_schema(schema: int) -> void:
 			dates_equal = dates_equal and migrated.profiles[id].birthday == legacy.people.profiles[id].birthday
 		check(dates_equal,"permanent birthdays unchanged / "+str(schema))
 		if schema == 6:
-			check(migrated.profiles == saves._normalize_numbers(legacy.people.profiles) and migrated.player_appearance == legacy.people.player_appearance,"schema6 A4 appearances and every profile field remain exact after actual save-number codec / 6")
+			var historical := DetailsProjection.before16(migrated,saves._normalize_numbers(legacy.people))
+			check(historical.profiles == saves._normalize_numbers(legacy.people.profiles) and migrated.player_appearance == legacy.people.player_appearance,"every pre-schema16 profile field and A4 part remains exact after the actual save-number codec / 6")
 	var before: Dictionary = game.snapshot()
 	var retry_id: String = game.make_id("family_migration_retry")
 	saves.fail_next_write = true
@@ -134,7 +136,8 @@ func generated_integrity() -> void:
 	var profiles: Dictionary = legacy.people.profiles.duplicate(true)
 	check(saves.write_save(legacy).success,"write original schema6 generated identities")
 	check((await act("load_game",{"save_id":legacy.save_id})).success,"load original generated identities")
-	check(game.state.schema_version == SaveService.CURRENT_SCHEMA and game.state.people.profiles == saves._normalize_numbers(profiles) and Generated.validate_people(game.state.people).is_empty(),"family migration never rehashes/rerolls schema6 generated source/identity/appearance")
+	var historical := DetailsProjection.before16(game.state.people,saves._normalize_numbers(legacy.people))
+	check(game.state.schema_version == SaveService.CURRENT_SCHEMA and historical.profiles == saves._normalize_numbers(profiles) and Generated.validate_people(game.state.people).is_empty(),"family migration preserves all pre-schema16 generated source, identity and appearance fields")
 
 func old_confirmed_appointment() -> void:
 	check((await act("new_game",{"name":"旧家族预约承诺迁移"})).success,"new old-appointment source")

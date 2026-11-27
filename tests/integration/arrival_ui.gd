@@ -57,6 +57,8 @@ func craft_probe(game: Node, catalog: Dictionary, extra: Dictionary, action_id: 
 	return {"outcome":outcome,"before":before,"after":candidate}
 
 func run() -> void:
+	if DisplayServer.get_name() == "headless":
+		root.size = Vector2i(ProjectSettings.get_setting("display/window/size/window_width_override"),ProjectSettings.get_setting("display/window/size/window_height_override"))
 	var config := ArrivalUI.load_config()
 	check(not config.is_empty(), "arrival copy and thresholds have a validated data contract")
 	var invalid := config.duplicate(true)
@@ -65,9 +67,9 @@ func run() -> void:
 	var icons := {}
 	for ratio: float in [1.0, 0.5, 0.1]:
 		var level := ArrivalUI.patience({"patience_ratio": ratio})
-		icons[level.icon] = true
+		icons[str(level.icon)+":"+str(int(level.icon_count))] = true
 		check(not ArrivalUI.patience_text({"patience_ratio": ratio, "patience_minutes": 12}).is_empty(), "patience tier has an accessible text label")
-	check(icons.size() == 3, "three distinct hourglass tiers are shown")
+	check(icons.size() == 3, "three distinct patience icon counts are shown")
 	check(ArrivalUI.zero_guest_day({"day": {"natural_count": 0, "arrival_ids": []}, "queue": []}), "zero-customer plan displays dedicated content")
 	check(not ArrivalUI.zero_guest_day({"day": {"natural_count": 0, "arrival_ids": ["appointment"]}, "queue": []}), "a planned appointment is not labeled a zero-customer day")
 	check(not ArrivalUI.zero_guest_day({"day": {"natural_count": 0, "arrival_ids": [], "arrival_count": 1}, "queue": []}), "a later generated visitor or appointment overrides the original empty plan")
@@ -75,7 +77,6 @@ func run() -> void:
 	check(ArrivalUI.source_text({"source": "burst_word_of_mouth"}).contains("口碑传开"), "burst origin is human-readable")
 	check(not ArrivalUI.source_text({"source": "unknown_technical_id"}).contains("unknown_technical_id"), "unknown source identifiers stay hidden")
 	var game: Node = root.get_node("GameState")
-	game._divination.learning_config.debug_instant_learning = true
 	# This fixture retains the pre-loop reception and transaction contract.
 	game.daily_loop_config.enabled = false
 	root.get_node("SaveService").base_dir = "res://.tools/arrival-ui-test-saves/" + game.make_id("run")
@@ -105,6 +106,8 @@ func run() -> void:
 			dialog.canceled.emit()
 			await settle()
 			check(game.snapshot() == before, "cancel leaves clock and save unchanged / " + kind)
+	# Successful commits replace Session; enable this fixture's existing debug path at use.
+	game._divination.learning_config.debug_instant_learning = true
 	main.open_divination("study")
 	await settle()
 	var studies: Array = game.divination_study()

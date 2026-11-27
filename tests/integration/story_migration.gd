@@ -4,6 +4,8 @@ const FIXTURE := "res://tests/fixtures/schema11_case_active.json"
 const FIXTURE_SHA := "67943ade5c2c3bde15ab370ee127a191754b353ce6dd4df04421f064500348a2"
 const FIXTURE_BYTES := 38768
 const FIXTURE_ID := "save_f321096919344a75c28fd769c7b58aea"
+const DetailsProjection = preload("res://tests/fixtures/person_details_projection.gd")
+const Learning = preload("res://scripts/learning/learning_store.gd")
 var game: Node
 var saves: Node
 var checks := 0
@@ -53,6 +55,10 @@ func run() -> void:
 	check(migrated.people.get("birth_identity_version",0)==1 and not old.people.has("birth_identity_version"),"migration adds the checked birth-policy marker without historical birth records")
 	var historical: Dictionary = migrated.duplicate(true)
 	historical.people.erase("birth_identity_version")
+	historical.people = DetailsProjection.before16(historical.people,old.people)
+	var expected_learning: Dictionary = old.duplicate(true)
+	check(Learning.initialize(expected_learning,false,17) and expected_learning.learning == migrated.learning,"schema18 adds only the expected legacy learning state")
+	historical.erase("learning")
 	check(not historical.divination.has("emergent_cases") or historical.divination.get("emergent_cases")=={"version":1,"instances":{}},"historical projection retains no populated schema14 ordinary-case namespace")
 	historical.divination.erase("emergent_cases")
 	for key: String in old:
@@ -61,7 +67,7 @@ func run() -> void:
 	historical.erase("story")
 	historical.schema_version = old.schema_version
 	check(historical==old,"removing only story, birth-policy marker and schema bump recovers the complete original payload")
-	check(migrated.keys().size()==old.keys().size()+1,"migration adds only the story namespace")
+	check(migrated.keys().size()==old.keys().size()+["story","learning"].size(),"migration adds only the explicit story and learning namespaces")
 	check(migrated.story.completions.is_empty() and migrated.story.notes.size()==1,"active old board does not invent a completion or extra notebook pages")
 	var notes: Array = game.story_view().notes.filter(func(row:Dictionary)->bool:return row.unlocked)
 	check(notes.size()==1 and notes[0].page_number==1,"only the actual opening notebook page is public after migration")

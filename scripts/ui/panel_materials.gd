@@ -213,7 +213,7 @@ static func apply_evidence(button: BaseButton, public_kind: String, key: String 
 	var variant: String = config.evidence[kind]
 	var result := _apply_button_asset(button,str(config.roles.smalltag.variants[variant]),"evidence_"+kind,config)
 	_bind_resize(button,"material_pivot_sync",_sync_pivot.bind(button))
-	button.rotation_degrees = _stable_angle(key,config,float(config.effects.candidate_degrees))
+	_bind_static_angle(button,_stable_angle(key,config,float(config.effects.candidate_degrees)))
 	button.set_meta("material_variant",variant)
 	button.set_meta("render_role","smalltag")
 	return result
@@ -247,7 +247,7 @@ static func apply_candidate(button: BaseButton, key: String = "", selected: bool
 	var result := _apply_button_asset(button,"paper_cream","candidate",config)
 	button.set_meta("render_role","paper")
 	_bind_resize(button,"material_pivot_sync",_sync_pivot.bind(button))
-	button.rotation_degrees = _stable_angle(key,config,float(config.effects.candidate_degrees))
+	_bind_static_angle(button,_stable_angle(key,config,float(config.effects.candidate_degrees)))
 	button.set_meta("material_selected",selected)
 	var remembered: Variant = button.get_meta("material_stamp_node") if button.has_meta("material_stamp_node") else null
 	var stamp: Control = remembered if is_instance_valid(remembered) and remembered is Control and remembered.get_parent() == button else button.get_node_or_null("MaterialSelectionStamp") as Control
@@ -328,6 +328,30 @@ static func _bind_resize(control: Control, key: String, callback: Callable) -> v
 
 static func _sync_pivot(control: Variant) -> void:
 	if is_instance_valid(control) and control is Control: control.pivot_offset = control.size/2.0
+
+static func _bind_static_angle(button: BaseButton, angle: float) -> void:
+	button.set_meta("material_static_angle",angle)
+	button.rotation_degrees = angle
+	_install_static_angle.call_deferred(weakref(button))
+
+static func _install_static_angle(reference: WeakRef) -> void:
+	var button: BaseButton = reference.get_ref()
+	if not is_instance_valid(button) or not button.is_inside_tree(): return
+	var container := button.get_parent() as Container
+	if container != null and not container.get_meta("material_angles_bound",false):
+		container.sort_children.connect(_queue_container_angles.bind(weakref(container)))
+		container.set_meta("material_angles_bound",true)
+	_restore_static_angle(reference)
+
+static func _queue_container_angles(reference: WeakRef) -> void:
+	var container: Container = reference.get_ref()
+	if not is_instance_valid(container): return
+	for child: Node in container.get_children():
+		if child is BaseButton and child.has_meta("material_static_angle"): _restore_static_angle.call_deferred(weakref(child))
+
+static func _restore_static_angle(reference: WeakRef) -> void:
+	var button: BaseButton = reference.get_ref()
+	if is_instance_valid(button) and button.is_inside_tree() and not button.is_queued_for_deletion(): button.rotation_degrees = float(button.get_meta("material_static_angle",0.0))
 
 static func _sync_stamp(button: Variant, stamp: Variant, size: Array) -> void:
 	if not is_instance_valid(button) or not is_instance_valid(stamp) or not button is BaseButton or not stamp is Control or stamp.get_parent() != button: return

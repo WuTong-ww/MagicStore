@@ -46,7 +46,13 @@ func run() -> void:
 
 func add_selected_graph() -> String:
 	# Isolated source fixture; the actual effects/booking below use async actions.
-	return People.ensure_library_family(game.state.people,game.people_config,game.people_config.family_library.templates[0])
+	var id := People.ensure_library_family(game.state.people,game.people_config,game.people_config.family_library.templates[0])
+	if id.is_empty(): return id
+	if not game._sync_person_variation(game.state):
+		check(false,"authored family source must have the current validated nationality and face-detail fields")
+		return ""
+	game.state = saves._normalize_numbers(game.state)
+	return id
 
 func three_edge_effects() -> void:
 	await act("new_game",{"name":"三条家族边真实结算"})
@@ -136,6 +142,8 @@ func add_ordinary(count: int, at: int, offset: int) -> void:
 		var npc: String = People._ordinary(game.state.people,game.people_config,random,0,index)
 		var id := "family_booking_ordinary_"+str(index)
 		game.state.people.arrivals[id] = arrival(id,npc,at)
+	check(game._sync_person_variation(game.state),"authored ordinary plans gain the current validated nationality and face-detail fields")
+	game.state = saves._normalize_numbers(game.state)
 
 func appointment_episodes() -> void:
 	await act("new_game",{"name":"特殊预约分次到门"})

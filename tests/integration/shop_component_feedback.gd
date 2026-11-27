@@ -82,6 +82,8 @@ func authored_known_ordinary(label: String, case_id: String) -> Dictionary:
 	Shop._add(game.state,"friendship_knot",2,"fixture",game.state.save_id)
 	var arrival_id := "arrival_known_ordinary_"+label
 	game.state.people.arrivals[arrival_id] = Bridge._arrival(arrival_id,npc_id,int(game.state.clock_minutes)+1,"return",case_id)
+	if not check(game._sync_person_variation(game.state),"authored historical contact gains the current validated nationality and face-detail fields / "+label): return {}
+	game.state = saves._normalize_numbers(game.state)
 	var prepared: Dictionary = saves.write_save(game.snapshot())
 	if not check(prepared.success,"authored old history, existing goal and stock pass the real save validator / "+label+" / "+str(prepared.get("message",""))):
 		return {}

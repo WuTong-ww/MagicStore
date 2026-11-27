@@ -109,9 +109,12 @@ func check_modal_frame() -> void:
 			return
 		check(notebook.borderless,"native titlebar cannot draw a second central notebook title")
 		check(mask.visible and mask.get_global_rect().is_equal_approx(Rect2(Vector2.ZERO,Vector2(dimensions))),"visible backdrop covers the whole parent viewport / "+str(dimensions))
-		check(mask.get_global_rect().encloses(main.shell_header.get_global_rect()) and mask.z_index > main.shell_header.z_index,"backdrop actually includes the parent top bar")
 		var dimmer: ColorRect = main.get_node("PanelMaterialBackdropLayer/PanelMaterialBackdrop") if main.has_node("PanelMaterialBackdropLayer/PanelMaterialBackdrop") else mask
-		check(mask.mouse_filter == Control.MOUSE_FILTER_STOP and dimmer.visible and dimmer.color.a > 0.0 and dimmer.color.a < 1.0,"backdrop blocks parent clicks and its shared dimmer retains the scene through translucency")
+		var dimmer_layer := canvas_layer_number(dimmer)
+		var header_layer := canvas_layer_number(main.shell_header)
+		var above_header: bool = dimmer_layer > header_layer or (dimmer_layer == header_layer and dimmer.z_index > main.shell_header.z_index)
+		check(mask.get_global_rect().encloses(main.shell_header.get_global_rect()) and dimmer.get_global_rect().encloses(main.shell_header.get_global_rect()) and above_header,"actual shared dimmer covers and draws above the parent top bar")
+		check(mask.mouse_filter == Control.MOUSE_FILTER_STOP and dimmer.mouse_filter == Control.MOUSE_FILTER_STOP and dimmer.visible and dimmer.color.a > 0.0 and dimmer.color.a < 1.0,"backdrop blocks parent clicks and its shared dimmer retains the scene through translucency")
 		check(close.get_parent() is HBoxContainer and close.get_parent().get_global_rect().encloses(close.get_global_rect()),"close control belongs inside the paper header")
 		if DisplayServer.get_name() != "headless":
 			check(Rect2(Vector2.ZERO,Vector2(notebook.size)).encloses(close.get_global_rect()),"close glyph fits inside the actual notebook viewport")
@@ -152,6 +155,12 @@ func check_modal_frame() -> void:
 		notebook.close_requested.emit()
 		await settle()
 		check(not notebook.visible and not mask.visible,"native close request also releases the backdrop")
+
+func canvas_layer_number(node: Node) -> int:
+	while node != null:
+		if node is CanvasLayer: return node.layer
+		node = node.get_parent()
+	return 0
 
 func act(kind: String, extra: Dictionary = {}) -> Dictionary:
 	var result: Dictionary = await main.run_action(kind,extra)
@@ -215,7 +224,10 @@ func check_buttons(node: Node) -> void:
 		var button: Button = node
 		var needed := button.get_theme_font("font").get_string_size(button.text,HORIZONTAL_ALIGNMENT_LEFT,-1,button.get_theme_font_size("font_size")).x
 		var padding := button.get_theme_stylebox("normal").get_minimum_size().x
-		check(not button.text.is_empty() and button.size.x+1 >= needed+padding,"notebook button label has complete width / "+button.text)
+		if button.text.is_empty():
+			check(button.icon != null and not button.tooltip_text.strip_edges().is_empty() and button.size.x+1 >= button.get_combined_minimum_size().x,"notebook icon control has a visible image, complete tooltip and sufficient width / "+button.name)
+		else:
+			check(button.size.x+1 >= needed+padding,"notebook button label has complete width / "+button.text)
 	for child: Node in node.get_children():
 		check_buttons(child)
 

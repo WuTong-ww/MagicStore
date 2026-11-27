@@ -55,9 +55,13 @@ func run() -> void:
 	audio.transition("front", 540)
 	check(audio.music_players[0].playing, "available day stream starts playing")
 	audio.transition("consultation", 540, {"case_active":true})
+	var destination_voice: int = audio.active_player
 	check(audio.music_players[0].playing and audio.music_players[1].playing, "crossfade overlaps old and new streams")
 	await create_timer(float(audio.music_config.crossfade_seconds) + 0.1).timeout
-	check(not audio.music_players[0].playing and audio.music_players[1].playing, "crossfade stops old stream after fade")
+	var other_voices_stopped := true
+	for index: int in range(audio.music_players.size()):
+		if index != destination_voice: other_voices_stopped = other_voices_stopped and not audio.music_players[index].playing
+	check(destination_voice >= 0 and audio.music_players[destination_voice].playing and other_voices_stopped, "crossfade retains the actual destination voice and stops every other stream after fade")
 	var paper: Theme = load("res://themes/paper.tres")
 	var chrome: Theme = load("res://themes/chrome.tres")
 	check(paper.get_color("font_color", "Label") == Color("3b2a1e"), "paper uses ink text")

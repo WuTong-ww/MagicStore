@@ -225,6 +225,24 @@ static func public_view(state: Dictionary, visit: Dictionary, case: Dictionary, 
 	var closed: bool = board.phase == "closed"
 	var view := {"enabled":true,"id":definition.id,"title":definition.title,"question":definition.question,"phase":board.phase,"round":int(board.round),"questions":[],"extra_questions":[],"evidence":[],"cards":[],"slots":[],"advice":[],"can_extra_question":not closed and board.phase in ["cards","deduction"] and _extra_count(board)<maxi(1,Mechanics.budget(board,"xiaoliu",1)) and int(state.player.energy)>=_extra_energy(board,rules),"can_eliminate":not closed and board.phase == "deduction" and rules.skills.eliminate in state.divination.skills and board.eliminations.size()<_eliminations(board,rules),"closed":closed,"stars":board.closure.get("stars",0),"reaction":board.closure.get("reaction",""),"copy":rules.copy.duplicate(true)}
 	view["last_question"] = ""
+	view["question_history"] = board.questions_asked.map(func(id: String) -> Dictionary:
+		var asked := _question(definition,id)
+		return {"question":asked.text,"answer":asked.answer})
+	view["visit_id"] = visit.visit_id
+	view["opening_statement"] = visit.dialogue.front().get("text","") if not visit.dialogue.is_empty() else definition.question
+	view["question_rounds"] = int(rules.limits.question_rounds)
+	view["base_cards"] = int(rules.limits.base_cards)
+	view["guest_name"] = str(state.get("people",{}).get("profiles",{}).get(visit.npc_id,{}).get("name",""))
+	view["guide_seen"] = []
+	if int(board.round) > 0: view.guide_seen.append_array([0,1])
+	if not board.flipped_indices.is_empty(): view.guide_seen.append(2)
+	if not board.attachments.is_empty(): view.guide_seen.append(3)
+	if closed: view.guide_seen.append(4)
+	view["review"] = []
+	# Never disclose the answer key before a successful, persisted closure.
+	if closed:
+		for slot: Dictionary in definition.deduction_slots:
+			view.review.append({"title":slot.title,"correct":board.answers.get(slot.id)==slot.correct_answer,"answer":_find(slot.answers,slot.correct_answer).get("text","")})
 	view["last_answer"] = ""
 	if not board.questions_asked.is_empty():
 		var last := _question(definition,board.questions_asked.back())
@@ -258,7 +276,7 @@ static func public_view(state: Dictionary, visit: Dictionary, case: Dictionary, 
 			candidates.append({"id":answer.id,"text":answer.text,"enabled":not closed and board.phase == "deduction" and unlocked and answer.id not in board.eliminations.get(slot.id,[])})
 		view.slots.append({"id":slot.id,"title":slot.title,"unlocked":unlocked,"candidates":candidates,"selected":board.answers.get(slot.id,""),"attached_ids":board.attachments.get(slot.id,[]).duplicate()})
 	for advice: Dictionary in definition.advice:
-		view.advice.append({"id":advice.id,"text":advice.text,"enabled":not closed and board.phase == "deduction" and complete(board,definition) and _advice_enabled(board,advice)})
+		view.advice.append({"id":advice.id,"text":advice.text,"reaction_mood":advice.mood,"enabled":not closed and board.phase == "deduction" and complete(board,definition) and _advice_enabled(board,advice)})
 	view["method_tools"] = []
 	view["method_hint"] = ""
 	if board.has("mechanics"):

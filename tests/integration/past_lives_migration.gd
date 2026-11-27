@@ -1,4 +1,6 @@
 extends SceneTree
+const DetailsProjection = preload("res://tests/fixtures/person_details_projection.gd")
+const Learning = preload("res://scripts/learning/learning_store.gd")
 ## Synthetic version-contract inputs are separate from the genuine recorded v7 envelope.
 const Generated = preload("res://scripts/people/generated_person.gd")
 var checks: int = 0
@@ -170,4 +172,7 @@ func actual_schema7_history() -> void:
 		case.erase("cause")
 		case.erase("board")
 	check(after == old.divination,"all old case fields, paid service/results, legacy past states, ledger and source receipts remain exact")
-	check(game.state.processed_actions == old.processed_actions and game.state.people.profiles == old.people.profiles and game.state.people.days == old.people.days and game.state.people.arrivals == old.people.arrivals,"genuine old replies, A4/generated identities and G1 plans are never rewritten")
+	var historical_people := DetailsProjection.before16(game.state.people,old.people)
+	var expected_learning := old.duplicate(true)
+	check(Learning.initialize(expected_learning,false,17) and expected_learning.learning == game.state.learning,"schema18 adds only the expected historical learning namespace")
+	check(game.state.processed_actions == old.processed_actions and historical_people.profiles == old.people.profiles and game.state.people.days == old.people.days and game.state.people.arrivals == old.people.arrivals,"genuine old replies, pre-schema16 profile fields and G1 plans are never rewritten")

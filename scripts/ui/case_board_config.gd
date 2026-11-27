@@ -6,6 +6,19 @@ static func load_config() -> Dictionary:
 	return value if config_valid(value) else {}
 
 static func config_valid(value: Variant) -> bool:
+	if not value is Dictionary or not value.get("flow") is Dictionary: return false
+	var flow: Dictionary = value.flow
+	for key: String in ["back_cards","back_deduction"]:
+		if not flow.get(key) is String or flow[key].is_empty(): return false
+	if not flow.get("reaction_hints") is Dictionary: return false
+	for mood: String in ["smile","hesitant","neutral","sad"]:
+		if not flow.reaction_hints.get(mood) is String or flow.reaction_hints[mood].is_empty(): return false
+	for key: String in ["z_index","top","bottom","gap","font_size","button_height","primary_width","primary_height","reason_height","advice_height","guide_width","guide_height","nudge_angle"]:
+		if not (flow.get(key) is int or flow.get(key) is float) or not is_finite(float(flow[key])) or float(flow[key]) <= 0: return false
+	for key: String in ["steps","guides"]:
+		if not flow.get(key) is Array or flow[key].size() != 5 or not flow[key].all(func(s: Variant) -> bool: return s is String and not s.is_empty()): return false
+	for key: String in ["check","start_questions","go_cards","start_deduction","close_case","confirm_advice","neutral_guest","guide_closed","show_result","return_front","dismiss","questions_missing","cards_missing","seals_missing","select_advice","prelude_missing","advice_heading","reaction_hint","tomorrow","correct","incorrect","slot_empty","slot_attached","slot_sealed"]:
+		if not flow.get(key) is String or flow[key].is_empty(): return false
 	if not value is Dictionary or value.get("version") != 1:
 		return false
 	for key: String in ["layout","colors","assets","copy"]:

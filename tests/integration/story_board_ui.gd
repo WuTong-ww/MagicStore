@@ -13,6 +13,8 @@ var compile_only := false
 var input_failed := false
 
 func _initialize() -> void:
+	if DisplayServer.get_name() == "headless":
+		root.size = Vector2i(ProjectSettings.get_setting("display/window/size/window_width_override"),ProjectSettings.get_setting("display/window/size/window_height_override"))
 	call_deferred("run")
 
 func check(ok: bool, label: String) -> void:
@@ -24,7 +26,7 @@ func check(ok: bool, label: String) -> void:
 func settle() -> void:
 	for frame: int in range(14):
 		await process_frame
-	while is_instance_valid(main) and main.busy:
+	while is_instance_valid(main) and (main.busy or (is_instance_valid(main.screen) and main.screen.get("case_board") != null and main.screen.case_board._pending)):
 		await process_frame
 
 func run() -> void:
@@ -91,6 +93,7 @@ func load_fixture(label: String) -> bool:
 func exercise_case_two() -> void:
 	if not await load_fixture("case2-start"): return
 	check(game.case_board_view().get("id") == "fixed_bread","case two is the real bread consultation")
+	if main.screen.case_board.flow.current == 0: await click(main.screen.case_board.flow.primary)
 	while game.case_board_view().phase == "questions":
 		var buttons: Array = main.screen.case_board.question_buttons.get_children().filter(func(node: Node) -> bool: return not node.disabled)
 		if buttons.is_empty():
@@ -101,8 +104,10 @@ func exercise_case_two() -> void:
 		var advanced: bool = game.case_board_view().phase != "questions" or int(game.case_board_view().round) != previous_round
 		check(advanced,"real question click advances its saved round")
 		if not advanced: return
+	await click(main.screen.case_board.flow.primary)
 	for index: int in [0,2,4]:
 		await click(main.screen.case_board.find_child("CaseCard_"+str(index),true,false))
+	await click(main.screen.case_board.flow.primary)
 	for slot: Dictionary in game.case_board_view().slots:
 		var related: Array = game.case_board_view().evidence.filter(func(row: Dictionary) -> bool: return slot.id in row.slot_ids)
 		check(not related.is_empty(),"public material can unlock case-two slot / "+slot.id)
@@ -127,13 +132,13 @@ func exercise_prelude() -> void:
 	check(not main.screen.input.is_visible_in_tree(),"blocking prelude hides free input while keeping its saved preference")
 	var before: Dictionary = game.snapshot()
 	var old_text: String = main.screen.case_board.speech_label.text
-	var button: Button = main.screen.case_board.question_buttons.get_child(0)
+	var button: Button = main.screen.case_board.flow.body.find_children("CasePreludeChoice_*","Button",true,false)[0]
 	saves.fail_next_write = true
 	await click(button)
 	check(not saves.fail_next_write,"the real prelude click reaches the injected failed save")
 	check(game.snapshot() == before and main.screen.case_board.speech_label.text == old_text,"failed prelude save preserves state and the displayed public paragraph")
 	check(not game.story_view().notes[1].unlocked,"failed retrieval cannot unlock notebook page two")
-	await click(main.screen.case_board.question_buttons.get_child(0))
+	await click(main.screen.case_board.flow.body.find_children("CasePreludeChoice_*","Button",true,false)[0])
 	check(game.story_view().notes[1].unlocked,"saved trip to Shen unlocks the actual letter page")
 	var repair: Array = game.case_board_view().prelude.options
 	check(repair.any(func(row: Dictionary) -> bool: return row.id == "repair_lin" and not row.enabled),"low trust disables Lin repair without fabricating her help")
@@ -147,6 +152,7 @@ func exercise_prelude() -> void:
 	check(game.case_board_view().prelude.blocks_progress and game.player_snapshot().player.energy == energy,"wrong paper order stays retryable without spending energy")
 	await click(choice("assemble_greeting_address"))
 	check(not game.case_board_view().prelude.blocks_progress,"saved correct assembly resumes the ordinary question board")
+	await click(main.screen.case_board.flow.primary)
 	check(main.screen.input.is_visible_in_tree() and main.screen.case_board.visible,"free input returns beside the board after the prelude")
 	if main.screen.input.is_visible_in_tree():
 		for dimensions: Vector2i in [Vector2i(1280,720),Vector2i(1920,1080)]:
@@ -155,13 +161,14 @@ func exercise_prelude() -> void:
 			await settle()
 			var input_bounds: Rect2 = main.screen.dialogue_panel.get_global_rect()
 			for card: Control in main.screen.case_board.card_nodes:
+				if not card.is_visible_in_tree(): continue
 				check(not input_bounds.intersects(card.get_global_rect()),"restored free editor never covers a card / "+str(dimensions))
 			check(not input_bounds.intersects(main.screen.case_board.question_buttons.get_global_rect()),"restored free editor never covers question/advice area / "+str(dimensions))
 	var source_text := "\n".join(game.case_board_view().story_lines.map(func(row: Dictionary) -> String: return row.text))
 	check(not source_text.contains("照晚沿着旧装订线"),"self route never displays a claim that Lin repaired the pages")
 
 func choice(id: String) -> Button:
-	var buttons: Array = main.screen.case_board.question_buttons.get_children().filter(func(node: Node) -> bool: return node.get_meta("choice_id","") == id)
+	var buttons: Array = main.screen.case_board.flow.body.find_children("CasePreludeChoice_*","Button",true,false).filter(func(node: Node) -> bool: return node.get_meta("choice_id","") == id)
 	check(buttons.size() == 1,"the requested choice is publicly rendered / "+id)
 	return buttons[0] if not buttons.is_empty() else null
 
@@ -217,8 +224,12 @@ func capture_sizes(label: String) -> void:
 				if control is Button or control.name.begins_with("CaseSlot") or control.name == "CaseBoardPaper":
 					check(bounds.encloses(control.get_global_rect()),"board control fits viewport / "+label+" / "+str(dimensions)+" / "+control.name)
 			for slot: Control in board.slot_nodes.values():
+				if not slot.is_visible_in_tree(): continue
 				for button: Node in slot.find_children("CaseAnswer_*","Button",true,false):
-					check(slot.get_global_rect().grow(1).encloses(button.get_global_rect()),"long candidates stay within their slot / "+label+" / "+str(dimensions))
+					if not button.is_visible_in_tree(): continue
+					# Validate the Container's allocation before the intentional paper tilt.
+					var allocated: Rect2 = button.get_parent().get_global_transform()*Rect2(button.position,button.size*button.scale)
+					check(slot.get_global_rect().grow(1).encloses(allocated),"long candidates stay within their assigned slot / "+label+" / "+str(dimensions))
 		if DisplayServer.get_name() != "headless":
 			await create_timer(0.2).timeout
 			RenderingServer.force_draw()

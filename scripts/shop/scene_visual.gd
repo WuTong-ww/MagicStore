@@ -410,6 +410,7 @@ func hotspot(key: String, callback: Callable) -> Button:
 	button.name = "Hotspot_"+key
 	button.tooltip_text = str(settings.tooltip_format)%entry.label
 	button.set_meta("decorative_hotspot",true)
+	button.set_meta("material_fixed_layout",true)
 	button.z_index = mini(interaction_z_index(),4096)
 	for state: String in ["normal","hover","pressed","disabled","focus"]:
 		button.add_theme_stylebox_override(state,StyleBoxEmpty.new())

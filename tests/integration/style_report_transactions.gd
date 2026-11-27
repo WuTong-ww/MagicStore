@@ -138,6 +138,8 @@ func real_manual_contacts() -> void:
 	check(installed.success,"approved offline authored identity setup is structurally valid")
 	if not installed.success:
 		return
+	check(game._sync_person_variation(candidate),"authored identity setup has the current validated nationality and face-detail fields")
+	candidate = saves._normalize_numbers(candidate)
 	check(saves.write_save(candidate).success,"authored identity/arrival setup passes the real complete save validator")
 	await act("load_game",{"save_id":candidate.save_id})
 	await act("wait",{"minutes":30})

@@ -70,8 +70,8 @@ func run() -> void:
 	var authored_base: Dictionary = game._divination._base_catalog.duplicate(true)
 	var isolated := ProjectSettings.globalize_path("res://.tools/r3-aicase-template-history/run_"+Crypto.new().generate_random_bytes(8).hex_encode()).replace("\\","/").simplify_path()
 	var allowed := ProjectSettings.globalize_path("res://.tools/r3-aicase-template-history/").replace("\\","/").simplify_path()
-	if not isolated.begins_with(allowed+"/") or not _copy_tree(ProjectSettings.globalize_path("res://scripts"),isolated.path_join("scripts")) or not _copy_tree(ProjectSettings.globalize_path("res://data"),isolated.path_join("data")):
-		_fail("could not create checked isolated script/data copy")
+	if not isolated.begins_with(allowed+"/") or not _copy_tree(ProjectSettings.globalize_path("res://scripts"),isolated.path_join("scripts")) or not _copy_tree(ProjectSettings.globalize_path("res://data"),isolated.path_join("data")) or not _copy_tree(ProjectSettings.globalize_path("res://shaders"),isolated.path_join("shaders")):
+		_fail("could not create checked isolated script/data/shader copy")
 		return
 	if DirAccess.make_dir_recursive_absolute(isolated.path_join("tests/integration"))!=OK:
 		_fail("isolated test directory failed")

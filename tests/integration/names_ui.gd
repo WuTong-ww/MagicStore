@@ -6,6 +6,7 @@ const Teardown = preload("res://tests/ui_teardown.gd")
 const Birth = preload("res://scripts/people/birth_identity.gd")
 const Portrait = preload("res://scripts/people/portrait.gd")
 const Appearance = preload("res://scripts/people/appearance.gd")
+const DetailsProjection = preload("res://tests/fixtures/person_details_projection.gd")
 const SETTINGS := "res://tests/fixtures/names_ui_capture.json"
 const LATEST := "res://.tools/r3-names/ui-fixtures/latest-receipt.json"
 const PACKED := "res://tests/fixtures/names_ui/receipt.json"
@@ -287,6 +288,9 @@ func display_checkpoints() -> void:
 		await settle()
 		var before: Dictionary = game.snapshot()
 		if not check(checkpoint_matches(before,row),"loaded state version/current arrival and actual ordinary origin match frozen metadata"): return
+		var expected_lin := identity(before.people.profiles.npc_lin)
+		var historical_lin := DetailsProjection.before16({"profiles":{"npc_lin":expected_lin}},{"profiles":{"npc_lin":row.lin_identity}})
+		if not check(identity(historical_lin.profiles.npc_lin)==row.lin_identity,"migration preserves every recorded Lin identity field apart from the explicit schema16 additions"): return
 		var invalid_trial := row.duplicate(true)
 		invalid_trial.trial = int(settings.maximum_new_games)+1
 		if not check(not checkpoint_valid(invalid_trial),"metadata rejects trial beyond the genuine sampling cap"): return
@@ -317,7 +321,7 @@ func display_checkpoints() -> void:
 		if not check(loaded.success and game.snapshot()==committed,"real reload preserves the complete committed record"): return
 		var public := public_profile(row.npc_id)
 		if not check(public.get("name")==row.birth_identity.name and public.get("appearance",{}).get("colors",{}).get("skin")==row.birth_identity.skin_id,"met public profile agrees with the saved identity"): return
-		if not check(identity(game.snapshot().people.profiles.npc_lin)==row.lin_identity,"fixed Lin identity remains unchanged"): return
+		if not check(identity(game.snapshot().people.profiles.npc_lin)==expected_lin,"fixed Lin identity remains unchanged through admission, replay and reload"): return
 		for dimensions: Array in settings.sizes:
 			root.size=Vector2i(dimensions[0],dimensions[1])
 			root.content_scale_size=root.size

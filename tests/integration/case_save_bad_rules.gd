@@ -42,7 +42,7 @@ func run() -> void:
 		finish()
 		return
 	var isolated: String = ProjectSettings.globalize_path("res://.tools/case-save-config/"+game.make_id("run"))
-	check(_copy_tree(ProjectSettings.globalize_path("res://scripts"),isolated.path_join("scripts")) and _copy_tree(ProjectSettings.globalize_path("res://data"),isolated.path_join("data")),"isolated scripts and data copy")
+	check(_copy_tree(ProjectSettings.globalize_path("res://scripts"),isolated.path_join("scripts")) and _copy_tree(ProjectSettings.globalize_path("res://data"),isolated.path_join("data")) and _copy_tree(ProjectSettings.globalize_path("res://shaders"),isolated.path_join("shaders")),"isolated scripts, data and shader dependencies copy")
 	check(_write(isolated.path_join("project.godot"),'config_version=5\n[application]\nconfig/name="Case validation guard"\n[rendering]\nrenderer/rendering_method="gl_compatibility"\n'),"isolated project has no gameplay autoloads")
 	check(_write(isolated.path_join("fixture.json"),JSON.stringify(game.snapshot())),"real saved source fixture copied")
 	# STORY catalog installation now validates case rules. Capture the genuine
@@ -76,6 +76,9 @@ func isolated_run() -> void:
 		finish()
 		return
 	var source: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://fixture.json"))
+	var normalizer = load("res://scripts/save/save_service.gd").new()
+	source = normalizer._normalize_numbers(source)
+	normalizer.free()
 	var visits := {}
 	for visit: Dictionary in source.visits:
 		visits[visit.visit_id] = visit

@@ -2,6 +2,7 @@ extends SceneTree
 ## Exercises real controls through the committed action boundary. A lost save
 ## must never reveal a card, unlock a slot, or change the free-question setting.
 const UITeardown = preload("res://tests/ui_teardown.gd")
+const Metrics = preload("res://scripts/ui/viewport_metrics.gd")
 var game: Node
 var saves: Node
 var main: Control
@@ -21,8 +22,12 @@ func check(ok: bool, label: String) -> void:
 func settle() -> void:
 	for frame: int in range(14):
 		await process_frame
+	while is_instance_valid(main) and (main.busy or (is_instance_valid(main.screen) and main.screen.get("case_board") != null and main.screen.case_board._pending)):
+		await process_frame
 
 func run() -> void:
+	if DisplayServer.get_name() == "headless":
+		root.size = Vector2i(ProjectSettings.get_setting("display/window/size/window_width_override"),ProjectSettings.get_setting("display/window/size/window_height_override"))
 	game = root.get_node("GameState")
 	saves = root.get_node("SaveService")
 	saves.base_dir = "res://.tools/case-board-ui-saves/"+game.make_id("run")
@@ -41,7 +46,8 @@ func run() -> void:
 		await finish()
 		return
 	check(not main.screen.input.is_visible_in_tree(),"default consultation does not require typing")
-	check(board.evidence_box.get_child(0).size.x >= board.evidence_scroll.size.x/2.0,"empty material guidance uses a readable horizontal line")
+	var opening: Label = board.flow.body.get_child(1)
+	check(opening.is_visible_in_tree() and opening.text == game.case_board_view().opening_statement and opening.autowrap_mode != TextServer.AUTOWRAP_OFF,"opening guidance shows the public arrival statement with wrapping")
 	check(board.find_children("CaseCard_*","Button",true,false).size() == 5,"exactly five anonymous card backs are displayed")
 	for card: Node in board.card_nodes:
 		check(card.get_node("CardName").text.is_empty() and not card.tooltip_text.contains("deck_id"),"an unopened card has no visible identity")
@@ -54,26 +60,33 @@ func exercise_extra_question_energy() -> void:
 	check((await main.run_action("read_morning_letters")).get("success",false),"read letters for the energy boundary")
 	check((await main.run_action("next_customer")).get("success",false),"start a fresh real board for the energy boundary")
 	check((await main.run_action("set_free_question",{"enabled":true})).get("success",false),"enable free conversation through its saved setting")
+	var board: Control = main.screen.case_board
+	board.flow.primary.pressed.emit()
+	await settle()
 	for index: int in range(3):
 		var choices: Array = game.case_board_view().questions.filter(func(row: Dictionary) -> bool: return row.enabled)
 		check((await main.run_action("case_question",{"question_id":choices[0].id})).get("success",false),"complete basic questions at the energy boundary / "+str(index))
+	board.flow.primary.pressed.emit()
+	await settle()
 	while int(game.player_snapshot().player.energy) > 10:
 		var result: Dictionary = await main.run_action("talk",{"text":"我想再确认一下。"})
 		check(result.get("success",false),"a real free conversation consumes configured energy")
 		if not result.get("success",false):
 			return
 	await settle()
-	var board: Control = main.screen.case_board
+	board = main.screen.case_board
 	check(board.extra_button.visible,"the optional question is offered at exactly enough energy")
 	board.extra_button.pressed.emit()
 	await settle()
-	check(board.question_buttons.visible and not board.cards_row.visible,"the optional question opens before the energy changes")
+	check(board.flow.page.visible and board._extra_open and not board.cards_row.visible,"the optional question opens before the energy changes")
 	check((await main.run_action("talk",{"text":"让我再听听你的想法。"})).get("success",false),"free conversation can finish while extra choices are open")
 	await settle()
 	check(not game.case_board_view().can_extra_question,"the committed energy is now below the extra-question cost")
 	check(board.cards_row.visible and not board.question_buttons.visible,"losing extra-question eligibility restores the playable card backs")
 
 func exercise_board(board: Control) -> void:
+	board.flow.primary.pressed.emit()
+	await settle()
 	var config: Dictionary = board.config
 	var validator: GDScript = load("res://scripts/ui/case_board_config.gd")
 	check(validator.config_valid(config),"new UI JSON validates")
@@ -98,18 +111,20 @@ func exercise_board(board: Control) -> void:
 		usable[0].pressed.emit()
 		await settle()
 	check(game.case_board_view().phase == "cards","three saved questions lead to the card phase")
+	board.flow.primary.pressed.emit()
+	await settle()
 	check(board.extra_button.visible,"a one-time extra question remains an explicit optional button")
 	board.extra_button.pressed.emit()
 	await settle()
-	var extra_choices: Array[Node] = board.question_buttons.get_children().filter(func(node: Node) -> bool: return not node.disabled)
+	var extra_choices: Array[Node] = board.flow.body.find_children("CaseExtraChoice_*","Button",true,false).filter(func(node: Node) -> bool: return not node.disabled)
 	check(not extra_choices.is_empty() and not board.cards_row.visible,"extra questions display their choices without overlapping the cards")
 	if not extra_choices.is_empty():
 		before = game.snapshot()
 		saves.fail_next_write = true
 		extra_choices[0].pressed.emit()
 		await settle()
-		check(game.snapshot() == before and board.question_buttons.visible,"failed extra question keeps its choices and the committed state")
-		board.question_buttons.get_children().filter(func(node: Node) -> bool: return not node.disabled)[0].pressed.emit()
+		check(game.snapshot() == before and board.flow.page.visible and board._extra_open,"failed extra question keeps its choices and the committed state")
+		board.flow.body.find_children("CaseExtraChoice_*","Button",true,false).filter(func(node: Node) -> bool: return not node.disabled)[0].pressed.emit()
 		await settle()
 		check(not board.extra_button.visible and board.cards_row.visible,"the saved extra question restores the card display and consumes its one-time offer")
 	var card: Button = board.find_child("CaseCard_0",true,false)
@@ -123,12 +138,15 @@ func exercise_board(board: Control) -> void:
 		board.find_child("CaseCard_"+str(index),true,false).pressed.emit()
 		await settle()
 	check(game.case_board_view().cards.filter(func(row: Dictionary) -> bool: return row.revealed).size() == 3,"three card buttons commit exactly three reveals")
+	board.flow.primary.pressed.emit()
+	await settle()
 	var public: Dictionary = game.case_board_view()
 	var color_by_kind: Dictionary = {}
 	for token: Node in board.evidence_box.get_children():
 		var projected: Array = public.evidence.filter(func(row: Dictionary) -> bool: return row.id == token.evidence_id)
 		if not projected.is_empty():
-			color_by_kind[projected[0].kind] = token.get_theme_stylebox("normal").bg_color
+			var material: StyleBox = token.get_theme_stylebox("normal")
+			color_by_kind[projected[0].kind] = material.texture
 	check(color_by_kind.has("fact") and color_by_kind.has("testimony") and color_by_kind.fact != color_by_kind.testimony,"facts and customer statements have visibly distinct material colors")
 	var first_attachment := true
 	for slot: Dictionary in public.slots:
@@ -170,18 +188,22 @@ func exercise_board(board: Control) -> void:
 			target.find_children("CaseAnswer_*","Button",true,false)[0].pressed.emit()
 			await settle()
 	await capture_sizes("deduction")
-	var advice: Array[Node] = board.advice_buttons.get_children().filter(func(node: Node) -> bool: return not node.disabled)
+	board.flow.primary.pressed.emit()
+	await settle()
+	var advice: Array[Node] = board.flow.body.find_children("CaseAdvicePaper_*","Button",true,false).filter(func(node: Node) -> bool: return not node.disabled)
 	check(advice.size() >= 2 and advice.size() <= 3,"completed board offers two or three real suggestions")
 	if not advice.is_empty():
-		before = game.snapshot()
-		saves.fail_next_write = true
 		advice[0].pressed.emit()
 		await settle()
+		before = game.snapshot()
+		saves.fail_next_write = true
+		board.flow.primary.pressed.emit()
+		await settle()
 		check(game.snapshot() == before and not game.case_board_view().closed,"failed closure save leaves deductions editable")
-		board.advice_buttons.get_child(0).pressed.emit()
+		board.flow.primary.pressed.emit()
 		await settle()
 		check(game.case_board_view().closed,"suggestion saves the completed board")
-		check(board.reaction_panel.visible and not board.reaction_label.text.is_empty(),"saved closure displays the guest reaction and stars")
+		check(board.flow.page.is_visible_in_tree() and not board.reaction_label.text.is_empty(),"saved closure displays the guest reaction before its separate result page")
 		await capture_sizes("closed")
 	main.open_network_settings()
 	await settle()
@@ -201,9 +223,13 @@ func exercise_board(board: Control) -> void:
 		var saved_cards: Array = game.case_board_view().cards.duplicate(true)
 		check((await main.run_action("load_game",{"save_id":game.player_snapshot().save_id})).get("success",false),"reload the committed preference and finished case")
 		await settle()
+		board = main.screen.case_board
 		check(game.free_question_enabled() and main.screen.input.is_visible_in_tree(),"free-question preference survives a real reload")
 		check(game.case_board_view().cards == saved_cards,"UI reload preserves the same saved card projection")
 		toggle.get_window().hide()
+		board.flow.navigate(2)
+		board.set_drawer_expanded(false,false)
+		await settle()
 		var editor: TextEdit = main.screen.input
 		var point := editor.get_global_rect().get_center()
 		var motion := InputEventMouseMotion.new()
@@ -243,17 +269,20 @@ func capture_sizes(phase: String) -> void:
 		root.content_scale_size = dimensions
 		await settle()
 		var board: Control = main.screen.case_board
+		var metrics: Dictionary = Metrics.measure(board)
 		var area := Rect2(Vector2.ZERO,Vector2(dimensions)).grow(1)
 		var last_slot: Control = board.slot_nodes[game.case_board_view().slots.back().id]
-		check(last_slot.get_global_rect().end.y <= board.evidence_title.get_global_rect().position.y,"deduction candidates do not overlap the materials heading / "+phase+" / "+str(dimensions))
-		check(area.encloses(board.evidence_scroll.get_global_rect()),"the material scroll viewport stays inside the window / "+str(dimensions))
+		if board.paper.is_visible_in_tree():
+			check(last_slot.get_global_rect().end.x <= board.evidence_scroll.get_global_rect().position.x,"deduction candidates remain on the left notebook page / "+phase+" / "+str(dimensions))
+			check(area.encloses(Metrics.css_rect(board.evidence_scroll,metrics)),"the material scroll viewport stays inside the window / "+str(dimensions))
 		for control: Node in board.find_children("*","Control",true,false):
 			if control.is_visible_in_tree() and (control is Button or control.name.begins_with("CaseSlot") or control.name == "CaseBoardPaper"):
 				if board.evidence_scroll.is_ancestor_of(control):
-					var scroll_bounds: Rect2 = board.evidence_scroll.get_global_rect()
-					check(control.get_global_rect().position.x >= scroll_bounds.position.x-1 and control.get_global_rect().end.x <= scroll_bounds.end.x+1,"scrolling material fits its column width / "+phase+" / "+control.name)
+					var scroll_bounds: Rect2 = Metrics.css_rect(board.evidence_scroll,metrics)
+					var bounds: Rect2 = Metrics.css_rect(control,metrics)
+					check(bounds.position.x >= scroll_bounds.position.x-1 and bounds.end.x <= scroll_bounds.end.x+1,"scrolling material fits its column width / "+phase+" / "+control.name)
 				else:
-					check(area.encloses(control.get_global_rect()),"board control stays in the viewport / "+phase+" / "+str(dimensions)+" / "+control.name)
+					check(area.encloses(Metrics.css_rect(control,metrics)),"board control stays in the CSS viewport / "+phase+" / "+str(dimensions)+" / "+control.name+" / "+str(Metrics.css_rect(control,metrics)))
 		if DisplayServer.get_name() != "headless":
 			await create_timer(0.25).timeout
 			RenderingServer.force_draw()

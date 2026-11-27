@@ -161,7 +161,13 @@ func story_view() -> Dictionary:
 func case_board_view() -> Dictionary:
 	if state.is_empty() or _divination == null:
 		return {"enabled":false}
-	return _divination.case_board_view(state,active_visit())
+	var view: Dictionary = _divination.case_board_view(state,active_visit())
+	var receipt := "r4_guide_"+str(state.save_id)
+	view["guide_receipt"] = receipt
+	view["guide_dismissed"] = state.processed_actions.has(receipt)
+	var order: Array = story_config.get("rules",{}).get("case_order",[])
+	view["show_guide"] = not order.is_empty() and view.get("id") == str(order.front()) and state.processed_actions.values().any(func(row: Variant) -> bool: return row is Dictionary and row.get("action_type") == "new_game")
+	return view
 
 func free_question_enabled() -> bool:
 	return bool(state.get("divination",{}).get("settings",{}).get("free_question",false))

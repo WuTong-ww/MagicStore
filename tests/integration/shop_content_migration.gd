@@ -1,6 +1,8 @@
 extends SceneTree
 ## A real new-game/save boundary precedes the historical migration matrix.
 const Generated = preload("res://scripts/people/generated_person.gd")
+const DetailsProjection = preload("res://tests/fixtures/person_details_projection.gd")
+const Learning = preload("res://scripts/learning/learning_store.gd")
 var checks := 0
 var failures := 0
 
@@ -132,7 +134,8 @@ func compatibility_schema(game: Node, saves: Node, schema: int) -> void:
 		new_ids.sort()
 		check(new_ids == old_ids and game.state.people.days == old.people.days and game.state.people.arrivals == old.people.arrivals,"no ID/day-plan/arrival is rerolled / "+str(schema))
 		if schema == 6:
-			check(game.state.people.profiles == saves._normalize_numbers(old.people.profiles) and Generated.validate_people(game.state.people).is_empty(),"A4 profile and v1 generated canonical/hash remain exact")
+			var historical_people := DetailsProjection.before16(game.state.people,saves._normalize_numbers(old.people))
+			check(historical_people.profiles == saves._normalize_numbers(old.people.profiles) and Generated.validate_people(game.state.people).is_empty(),"all pre-schema16 profile fields and v1 generated canonical/hash remain exact")
 	await commit_migrated(game,saves,path,old_sha,schema)
 
 func commit_migrated(game: Node, saves: Node, path: String, old_sha: String, schema: int) -> void:
@@ -169,6 +172,8 @@ func actual_schema7_history(game: Node, saves: Node) -> void:
 		return
 	var migrated: Dictionary = game.snapshot()
 	check(migrated.schema_version == SaveService.CURRENT_SCHEMA and FileAccess.get_sha256(path) == old_sha,"actual schema7 load migrates only memory")
+	var expected_learning := canonical.duplicate(true)
+	check(Learning.initialize(expected_learning,false,17) and expected_learning.learning == migrated.learning,"schema18 adds exactly the expected historical learning namespace")
 	# Compare the entire real old B namespace after validating/removing only the
 	# two additive G5 fields from an in-memory copy; never edit the recorded v7.
 	var old_divination: Dictionary = migrated.divination.duplicate(true)
@@ -193,6 +198,7 @@ func actual_schema7_history(game: Node, saves: Node) -> void:
 	new_people.erase("ordinary_content_version")
 	check(new_people.get("birth_identity_version",0)==1,"actual historical population gains the checked birth-policy marker")
 	new_people.erase("birth_identity_version")
+	new_people = DetailsProjection.before16(new_people,old_people)
 	check(new_people == old_people,"actual G2 graph/episode/reservations, birthdays, A4 and every old profile remain unchanged")
 	var old_shop: Dictionary = canonical.shop.duplicate(true)
 	var new_shop: Dictionary = migrated.shop.duplicate(true)

@@ -15,6 +15,9 @@ func check(ok: bool, label: String) -> void:
 		failures += 1
 		print("CASE TRANSACTION FAIL: "+label)
 func act(kind: String, fields: Dictionary = {}) -> Dictionary:
+	# Successful commits replace the session; scope the existing debug switch
+	# to each debug learning command, which still produces a real saved receipt.
+	if kind == "learn_method": game._divination.learning_config.debug_instant_learning = true
 	sequence += 1
 	var command := {"type":kind,"action_id":"case_tx_"+str(sequence)}
 	command.merge(fields,true)
@@ -43,7 +46,6 @@ func retry(kind: String, fields: Dictionary = {}) -> Dictionary:
 	return result
 func run() -> void:
 	game = root.get_node("GameState")
-	game._divination.learning_config.debug_instant_learning = true
 	saves = root.get_node("SaveService")
 	saves.base_dir = "res://.tools/case-transactions/"+game.make_id("run")
 	game.configure_api("","","")

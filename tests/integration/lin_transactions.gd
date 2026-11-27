@@ -41,7 +41,8 @@ func run() -> void:
 	if failures:
 		finish()
 		return
-	var fixed: Dictionary = appearance_api.call("fixed_npc_appearance","npc_lin")
+	# JSON catalog numbers use floats; committed saves use the existing canonical integer form.
+	var fixed: Dictionary = saves._normalize_numbers(appearance_api.call("fixed_npc_appearance","npc_lin"))
 	var definition: Dictionary = Schema.load_all(game._divination.data).fixed_invitation
 	var invitation_sha := FileAccess.get_sha256("res://data/divination.json")
 	var original_definition_hash := Schema.definition_hash(definition)

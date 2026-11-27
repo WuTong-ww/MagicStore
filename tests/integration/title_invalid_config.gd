@@ -84,7 +84,12 @@ func run() -> void:
 	if input_failed or failures or settings == null:
 		await finish()
 		return
-	await click(settings.get_cancel_button())
+	var cancel_choices: Array[Node] = settings.find_children("*","Button",true,false).filter(func(node: Node) -> bool: return node.is_visible_in_tree() and str(node.text) == str(settings.get_cancel_button().text))
+	check(cancel_choices.size() == 1,"unavailable-title settings exposes one visible cancel action")
+	if cancel_choices.size() != 1:
+		await finish()
+		return
+	await click(cancel_choices[0])
 	await click(main.find_child("TitleFallbackSaves",true,false))
 	check(main.save_window.visible and main.save_create_button.disabled,"existing save book is reachable without enabling rejected creation")
 	if input_failed or failures:

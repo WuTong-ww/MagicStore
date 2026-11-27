@@ -27,10 +27,13 @@ func role(node: Control, expected: String, label: String) -> void:
 	check(node != null and node.get_meta("material_role","") == expected,label+" consumes the real material role")
 
 func run() -> void:
+	if DisplayServer.get_name() == "headless":
+		root.size = Vector2i(ProjectSettings.get_setting("display/window/size/window_width_override"),ProjectSettings.get_setting("display/window/size/window_height_override"))
 	game = root.get_node("GameState")
 	saves = root.get_node("SaveService")
 	saves.base_dir = "res://.tools/r3-polish/case-material-saves/"+game.make_id("run")
 	game.configure_api("","","")
+	game.set_people_generation_options(false)
 	main = load("res://scenes/main.tscn").instantiate()
 	root.add_child(main)
 	await settle()
@@ -147,7 +150,7 @@ func enter_deduction() -> void:
 	var rebuilt: Array[Node] = board.slot_nodes[first_slot.id].find_children("CaseAnswer_*","Button",true,false)
 	check(rebuilt.size() == angles.size(),"navigation reconstructs the same actual public candidates")
 	if rebuilt.size() == angles.size():
-		for i: int in range(rebuilt.size()): check(is_equal_approx(rebuilt[i].rotation,float(angles[i])),"rebuild derives exactly the same local paper angle")
+		for i: int in range(rebuilt.size()): check(is_equal_approx(rebuilt[i].rotation,float(angles[i])),"rebuild derives exactly the same local paper angle / "+str(i)+" / "+str(angles[i])+" -> "+str(rebuilt[i].rotation))
 	check(game.snapshot() == saved and FileAccess.get_sha256(save_path) == original_disk,"presentation reconstruction leaves every saved record and byte untouched")
 
 func finish() -> void:

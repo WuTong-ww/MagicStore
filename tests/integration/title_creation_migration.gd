@@ -3,6 +3,7 @@ extends SceneTree
 const Registry=preload("res://scripts/divination/emergent_case_registry.gd")
 const Store=preload("res://scripts/divination/emergent_case_store.gd")
 const Daily=preload("res://scripts/core/daily_loop.gd")
+const LegacyPeople=preload("res://tests/fixtures/person_details_projection.gd")
 var game: Node
 var saves: Node
 var checks:=0
@@ -48,10 +49,11 @@ func load_and_compare(tag: String) -> Dictionary:
 	check(baseline.success,"old catalog independently validates its saved definition/proof")
 	check((await game.execute_action_async({"type":"load_game","save_id":old.save_id})).success,"ordinary load migrates the contract only in memory")
 	var candidate: Dictionary=game.snapshot()
-	check(candidate.schema_version==15 and not candidate.has("title_creation"),"TITLE15 adds no redundant marker or fabricated creation receipt")
+	check(candidate.schema_version==saves.CURRENT_SCHEMA and not candidate.has("title_creation"),"current migration adds no redundant TITLE marker or fabricated creation receipt")
 	for key: String in old:
 		if key!="schema_version":
-			check(candidate.get(key)==old[key],"genuine old field exact / "+tag+" / "+key)
+			var projected: Variant = LegacyPeople.before16(candidate.people,old.people) if key == "people" else candidate.get(key)
+			check(projected==old[key],"genuine old fields exact after explicit schema16 projection / "+tag+" / "+key)
 	check(candidate.processed_actions==old.processed_actions and FileAccess.get_sha256(path)==before_sha,"load preserves every action and original envelope bytes")
 	var projected: Dictionary=saves.build_case_catalog(candidate)
 	check(projected.success and projected.definitions==baseline.definitions and projected.bindings==baseline.bindings,"historical model/fallback/ordinary catalog is exact at15")
@@ -63,7 +65,7 @@ func run() -> void:
 	game.configure_api("","","")
 	game.set_people_generation_options(false)
 	run_dir="res://.tools/r3-title/migration-saves/"+game.make_id("run")
-	check(saves.CURRENT_SCHEMA==15 and saves.NEW_GAME_RECEIPT_SCHEMA==15 and saves.PRE_TITLE_SCHEMA==14,"frozen TITLE historical gate follows actual AICASE14")
+	check(saves.CURRENT_SCHEMA>=15 and saves.NEW_GAME_RECEIPT_SCHEMA==15 and saves.PRE_TITLE_SCHEMA==14,"TITLE historical gate retains actual AICASE14 receipt boundary under the current schema")
 	check(saves.has_method("new_game_receipt_valid"),"TITLE receipt contract exists")
 	if failures:
 		finish()
@@ -95,7 +97,7 @@ func run() -> void:
 	var expected: Dictionary=runtime.codecs.fallback_v1.fallback_payload(binding,context)
 	check(expected.success,"strict current-template producer generates the expected ordinary payload")
 	var unknown: Dictionary=reserved.candidate.duplicate(true)
-	unknown.schema_version=16
+	unknown.schema_version=saves.CURRENT_SCHEMA+1
 	check(not Store.admit(unknown,arrival,expected.payload,{"kind":"fallback","codec_id":"fallback_v1","protocol_version":1,"tag":expected.template_id},runtime.policy,runtime.codecs,runtime.schema).success,"future unknown16 is refused by the exact14/15 admission range")
 	check(not saves.validate_snapshot(unknown).success,"SaveService15 keeps its total schema upper bound")
 	check(not saves.build_case_catalog(unknown).success,"direct pure catalog builder also rejects unknown future16")

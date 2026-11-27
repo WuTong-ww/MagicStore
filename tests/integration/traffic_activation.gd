@@ -3,6 +3,8 @@ extends SceneTree
 const Shop = preload("res://scripts/shop/shop.gd")
 const People = preload("res://scripts/people/people.gd")
 const Bridge = preload("res://scripts/shop/people_bridge.gd")
+const DetailsProjection = preload("res://tests/fixtures/person_details_projection.gd")
+const Learning = preload("res://scripts/learning/learning_store.gd")
 var game: Node
 var saves: Node
 var checks := 0
@@ -125,6 +127,8 @@ func check_preplanned_actual() -> void:
 	await act("new_game",{"name":"已排次日拒绝事务"})
 	Shop._add(game.state,"welcome_sachet",1,"fixture",game.state.save_id)
 	People.plan_day(game.state.people,game.people_config,1)
+	check(game._sync_person_variation(game.state),"authored future plan gains the current validated nationality and face-detail fields")
+	game.state = saves._normalize_numbers(game.state)
 	check(saves.write_save(game.snapshot()).success,"authored already-planned next day is a valid complete namespace before action")
 	var before: Dictionary = game.snapshot()
 	var path: String = saves._path(before.save_id)
@@ -184,6 +188,11 @@ func check_legacy_applied() -> void:
 	check(historical.people.get("birth_identity_version",0)==1 and not old.people.has("birth_identity_version"),"historical traffic gains only the checked future-birth policy marker")
 	check(old.people.profiles.values().all(func(profile: Dictionary) -> bool: return not profile.has("birth_identity")) and historical.people.profiles.values().all(func(profile: Dictionary) -> bool: return not profile.has("birth_identity")),"historical traffic migration invents no birth records for existing people")
 	historical.people.erase("birth_identity_version")
+	var canonical: Dictionary = saves._normalize_numbers(old)
+	historical.people = DetailsProjection.before16(historical.people,canonical.people)
+	var expected_learning := canonical.duplicate(true)
+	check(Learning.initialize(expected_learning,false,17) and expected_learning.learning == migrated.learning,"schema18 adds only the exact historical learning namespace")
+	historical.erase("learning")
 	check(not historical.divination.has("emergent_cases") or historical.divination.get("emergent_cases")=={"version":1,"instances":{}},"historical projection retains no populated schema14 ordinary-case namespace")
 	historical.divination.erase("emergent_cases")
 	historical.schema_version = int(old.schema_version)

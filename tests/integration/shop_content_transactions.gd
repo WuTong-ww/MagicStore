@@ -157,6 +157,8 @@ func local_effect_transactions() -> void:
 	game.state.people.profiles[npc].trust = 0
 	var id := "arrival_g4_wait_outside"
 	game.state.people.arrivals[id] = Bridge._arrival(id,npc,int(game.state.clock_minutes)+1,"natural","archive")
+	check(game._sync_person_variation(game.state),"authored legacy arrival gains the current validated nationality and face-detail fields")
+	game.state = saves._normalize_numbers(game.state)
 	check(saves.write_save(game.snapshot()).success,"authored outside source fixture validates before real arrival")
 	await act("wait",{"minutes":1})
 	var queued: Array = game.people_view().queue
