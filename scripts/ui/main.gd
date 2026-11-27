@@ -1,5 +1,4 @@
 extends Control
-var _note_reads_pending: Dictionary = {}
 
 signal scene_changed(previous: String, next: String)
 const MusicContext = preload("res://scripts/audio/music_context.gd")
@@ -62,6 +61,9 @@ const SHOP_SCREEN := preload("res://scripts/shop/shop_screen.gd")
 const PEOPLE_PANEL := preload("res://scenes/people/people_panel.tscn")
 const AppearanceEditorConfig = preload("res://scripts/people/appearance_editor_config.gd")
 const CaseBoardConfig = preload("res://scripts/ui/case_board_config.gd")
+const Readability = preload("res://scripts/ui/readability.gd")
+var readability_config: Dictionary = {}
+var _note_reads_pending: Dictionary = {}
 const PAGES := {"exterior": "店外", "front": "前台", "consultation": "咨询区", "inventory": "储物柜", "workshop": "工坊", "market": "原料商店", "gathering": "采集"}
 var people_window: Window
 var people_panel: Control
@@ -111,6 +113,10 @@ func _ready() -> void:
 	get_tree().auto_accept_quit = false
 	get_tree().root.close_requested.connect(_request_close)
 	shell_config = Shell.load_config()
+	readability_config = Readability.load_config()
+	var readable := Readability.new()
+	readable.host = self
+	add_child(readable)
 	motion_settings = MotionConfig.load_settings()
 	var responsive: Dictionary = ResponsiveConfig.load_config()
 	var native_minimum: Array = responsive.get("native_minimum",shell_config.screen_minimum)
@@ -235,9 +241,13 @@ func _build_shell() -> void:
 		energy_bar.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		energy_group.add_child(energy_bar)
 	open_button = UI.button(shell_config.save_label,open_saves)
+	open_button.name = "OpenSaves"
+	open_button.set_meta("chrome_role","save")
 	open_button.add_theme_font_size_override("font_size",int(shell_config.layout.status_size))
 	header.add_child(open_button)
 	var settings_button := UI.button(shell_config.settings_label,open_network_settings)
+	settings_button.name = "OpenSettings"
+	settings_button.set_meta("chrome_role","settings")
 	settings_button.add_theme_font_size_override("font_size",int(shell_config.layout.status_size))
 	header.add_child(settings_button)
 	var dock := PanelContainer.new()
@@ -447,6 +457,7 @@ func _build_title() -> void:
 	var notebook := UI.button(str(title_control.config.copy.notes_entry),open_story_notes)
 	notebook.add_theme_font_size_override("font_size",int(shell_config.layout.status_size))
 	notebook.name = "OpenStoryNotes"
+	notebook.set_meta("chrome_role","notes")
 	shell_header.get_child(0).add_child(notebook)
 
 func _build_title_unavailable() -> void:
@@ -763,7 +774,7 @@ func open_network_settings() -> void:
 	var letter_layout: Dictionary = PanelMaterials.load_config().layout
 	for side: String in ["left","top","right","bottom"]:
 		var side_index: int = ["left","top","right","bottom"].find(side)
-		settings_root.add_theme_constant_override("margin_"+side,int(letter_layout.content_margins[side_index]))
+		settings_root.add_theme_constant_override("margin_"+side,maxi(int(letter_layout.content_margins[side_index]),int(readability_config.get("window_padding",0))))
 	var settings_box := VBoxContainer.new()
 	settings_root.add_child(settings_box)
 	var settings_scroll := ScrollContainer.new()
@@ -1443,6 +1454,29 @@ func _layout_presentation_chrome() -> void:
 	var metrics: Dictionary = presentation_metrics()
 	if not ViewportMetrics.valid(metrics): return
 	var client_size: Vector2 = metrics.visible_css
+	if not readability_config.is_empty():
+		var needed := 0.0
+		var actions: Array[Button] = []
+		for child: Control in shell_header.get_child(0).get_children():
+			if child is Button:
+				actions.append(child)
+				if not child.has_meta("chrome_full_text"): child.set_meta("chrome_full_text",child.text)
+				var font_size := maxi(int(readability_config.button_font),child.get_theme_font_size("font_size"))
+				if not child.has_theme_font_size_override("font_size") or child.get_theme_font_size("font_size") != font_size: child.add_theme_font_size_override("font_size",font_size)
+				needed += child.get_theme_font("font").get_string_size(str(child.get_meta("chrome_full_text")),HORIZONTAL_ALIGNMENT_LEFT,-1,font_size).x+float(readability_config.horizontal_padding)*2
+			elif child.visible: needed += child.get_combined_minimum_size().x
+		needed += float(shell_config.layout.gap)*shell_header.get_child(0).get_child_count()
+		var compact: bool = needed > client_size.x
+		for button: Button in actions:
+			var full := str(button.get_meta("chrome_full_text"))
+			var target_text := "" if compact else full
+			if button.text != target_text: button.text = target_text
+			button.tooltip_text = full
+			button.set_meta("r4_chrome",true)
+			button.autowrap_mode = TextServer.AUTOWRAP_OFF
+			button.icon = Icons.texture(str(readability_config.header_icons.get(button.get_meta("chrome_role",""),"nav_archive"))) if compact else null
+			button.custom_minimum_size.x = float(readability_config.header_icon_size)+float(readability_config.horizontal_padding)*2 if compact else button.get_theme_font("font").get_string_size(full,HORIZONTAL_ALIGNMENT_LEFT,-1,button.get_theme_font_size("font_size")).x+float(readability_config.horizontal_padding)*2
+			button.custom_minimum_size.y = float(readability_config.button_height)
 	var header_box := Rect2(Vector2.ZERO,Vector2(client_size.x,float(shell_config.top_height)))
 	var header_minimum := shell_header.get_combined_minimum_size().max(Vector2(1,float(shell_config.top_height)))
 	shell_header.set_anchors_preset(Control.PRESET_TOP_LEFT,true)

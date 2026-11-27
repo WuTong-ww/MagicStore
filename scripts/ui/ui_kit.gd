@@ -31,6 +31,10 @@ static func button(text: String, callback: Callable, role: String = "secondary")
 	node.theme_type_variation = "WaxButton" if role == "primary" else "PaperButton"
 	var style := Style.load_config()
 	if not style.is_empty(): node.custom_minimum_size.y = style.metrics.minimum_button_height
+	var readable := preload("res://scripts/ui/readability.gd").load_config()
+	if not readable.is_empty():
+		node.custom_minimum_size.y = maxf(node.custom_minimum_size.y,float(readable.button_height))
+		node.add_theme_font_size_override("font_size",int(readable.button_font))
 	if Fonts.composite() != null: node.add_theme_font_override("font",Fonts.composite())
 	Materials.apply_button(node,"wax" if role == "primary" else "paper_tag")
 	node.pressed.connect(callback)

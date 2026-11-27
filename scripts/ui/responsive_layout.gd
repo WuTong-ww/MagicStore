@@ -41,16 +41,17 @@ static func fit_window(window: Window, design_minimum: Vector2, metrics: Diction
 	if not window.get_tree().root.gui_embed_subwindows or window.force_native: return false
 	var minimum := design_minimum.max(Vector2(window.min_size)).max(window.get_contents_minimum_size())
 	var available: Rect2 = safe_box(metrics,margin)
-	var layout: Dictionary = fit_minimum(minimum,available,metrics)
-	if layout.is_empty(): return false
+	var actual_css: Vector2 = minimum.min(available.size)
 	# This is the child Window's design basis, never the root production basis.
 	# Embedded canvas-items windows render text at the parent's reduced scale.
 	# Render this complete paper at its design size, then fit it as one object.
 	window.content_scale_mode = Window.CONTENT_SCALE_MODE_VIEWPORT
 	window.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_KEEP
-	window.content_scale_size = Vector2i(minimum.ceil())
-	window.size = Vector2i((Vector2(layout.css_bounds.size)/metrics.css_per_local_unit).round())
-	var actual_css: Vector2 = Vector2(window.size)*metrics.css_per_local_unit
+	# Keep text at CSS size; the existing inner scroll views handle overflow.
+	window.min_size = Vector2i.ZERO
+	window.content_scale_size = Vector2i(actual_css.round())
+	window.size = Vector2i((actual_css/metrics.css_per_local_unit).round())
+	actual_css = Vector2(window.size)*metrics.css_per_local_unit
 	window.position = Vector2i(((Vector2(metrics.visible_css)-actual_css)*0.5/metrics.css_per_local_unit).round())
 	for child: Node in window.get_children():
 		if not child is Control: continue
@@ -58,5 +59,5 @@ static func fit_window(window: Window, design_minimum: Vector2, metrics: Diction
 		child.set_as_top_level(true)
 		child.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
 		child.position = Vector2.ZERO
-		child.size = minimum
+		child.size = actual_css
 	return actual_css.x <= available.size.x+1.0 and actual_css.y <= available.size.y+1.0

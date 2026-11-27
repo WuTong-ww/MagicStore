@@ -14,6 +14,8 @@ func check(ok: bool, label: String) -> void:
 		printerr("ITEM VISUALS FAIL: "+label)
 
 func run() -> void:
+	if DisplayServer.get_name() == "headless":
+		root.size = Vector2i(ProjectSettings.get_setting("display/window/size/window_width_override"),ProjectSettings.get_setting("display/window/size/window_height_override"))
 	check(FileAccess.file_exists(SCRIPT_PATH),"shared item renderer exists before independent PNG migration")
 	if not FileAccess.file_exists(SCRIPT_PATH):
 		print("ITEM VISUALS: %d checks, %d failures" % [checks,failures])

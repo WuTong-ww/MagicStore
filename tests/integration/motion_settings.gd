@@ -33,6 +33,8 @@ func settle() -> void:
 		await process_frame
 
 func run() -> void:
+	if DisplayServer.get_name() == "headless":
+		root.size = Vector2i(ProjectSettings.get_setting("display/window/size/window_width_override"),ProjectSettings.get_setting("display/window/size/window_height_override"))
 	game = root.get_node("GameState")
 	saves = root.get_node("SaveService")
 	original_save_root = saves.base_dir

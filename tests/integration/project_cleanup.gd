@@ -17,6 +17,8 @@ func check(ok: bool, label: String) -> void:
 		push_error("PROJECT CLEANUP: "+label)
 
 func run() -> void:
+	if DisplayServer.get_name() == "headless":
+		root.size = Vector2i(ProjectSettings.get_setting("display/window/size/window_width_override"),ProjectSettings.get_setting("display/window/size/window_height_override"))
 	game = root.get_node("GameState")
 	# This fixture retains the pre-loop reception and transaction contract.
 	game.daily_loop_config.enabled = false

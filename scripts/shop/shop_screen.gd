@@ -290,7 +290,9 @@ func _market(view: Dictionary) -> void:
 		refresh()))
 	var quantity_row := HBoxContainer.new()
 	body.add_child(quantity_row)
-	quantity_row.add_child(UI.label(content_settings.copy.quantity,int(content_settings.layout.body_font)))
+	var quantity_label := UI.label(content_settings.copy.quantity,int(content_settings.layout.body_font))
+	quantity_label.autowrap_mode = TextServer.AUTOWRAP_OFF
+	quantity_row.add_child(quantity_label)
 	market_action_buttons.clear()
 	var quantity := SpinBox.new()
 	quantity.name = "MarketQuantity"

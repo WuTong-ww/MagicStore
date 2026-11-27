@@ -2,7 +2,7 @@
 
 基线：origin/codex/round3 ee576ca。工作分支：codex/r4-ui。日期：2026-11-27。
 
-本提交累计纳入 C1–C3；后续阶段说明仅代表本机准备，不计入本提交。
+本提交累计纳入 C1–C4；后续阶段说明仅代表本机准备，不计入本提交。
 
 ## 交付状态
 
@@ -11,7 +11,7 @@
 | C1 流程 | 五步导航、唯一主动作、逐格状态、建议确认、反应和结果、首案箭头、点击放证据 | 独立快照专用 97 项通过；按本次六项基线例外纳入提交 |
 | C2 牌面 | 可选索引与回退、7:12、保存后翻牌和声音、放大牌示 | 累计专用 115 项通过；按本次六项基线例外纳入提交 |
 | C3 笔记 | 灰锁与案件提示、未读红点、当前高亮、幂等已读保存 | 累计专用 164 项通过；按本次六项基线例外纳入提交 |
-| C4 可读性 | CSS 按钮下限、自然宽度、顶栏图标回退、滚动弹窗、四视窗长文案检查 | 专用 9518 项通过；本机已实作，未纳入本提交 |
+| C4 可读性 | CSS 按钮下限、自然宽度、顶栏图标回退、滚动弹窗、四视窗长文案检查 | 专用 9518 项通过；按本次六项基线例外纳入提交 |
 | C5 网页性能 | 日志、监视器、本机预览与收集端已准备 | Chrome 未连接；未优化、未完成 |
 
 ## 文件与行为
@@ -56,7 +56,7 @@
 
 ## 测试与截图
 
-最后一次专用运行器确认通过／失败数：C1 97／0、C2 115／0、C3 164／0、C4 9518／0，四个进程均退出 0。日志为 .tools/r4-c1-final-ui.log 至 .tools/r4-c4-final-ui.log；包含最终热点修复，没有新增截图。本次按授权依次提交推送 C1–C3；最终结果以分支引用为准。
+最后一次专用运行器确认通过／失败数：C1 97／0、C2 115／0、C3 164／0、C4 9518／0，四个进程均退出 0。日志为 .tools/r4-c1-final-ui.log 至 .tools/r4-c4-final-ui.log；包含最终热点修复，没有新增截图。本次按授权依次提交推送 C1–C4；最终结果以分支引用为准。
 
 四个未修改的完整运行器均已通过各自 834 项真实双路线通关，累计约 8774 项断言、0 失败；后段诊断随后发现边界外基线失败，因此停止四个仍在剧情事务段的完整运行，退出 1，未视为全绿。日志为 .tools/r4-c1-pass4-full.log 至 .tools/r4-c4-pass4-full.log；停止原因见 .tools/r4-full-cancellation.json。
 
@@ -135,18 +135,26 @@ Chrome 工具连接恢复后才能执行 C5 改前测量、按数据优化及改
 
 ## 已知未完成
 
-本提交累计包含 C1–C3，按六项基线例外发布；完整测试没有列为全绿。C5 未完成 Chrome 测量与优化。20 张截图仅生成一次，其中六张仅在 C4 提交纳入普通 Git。
+本提交累计包含 C1–C4，按六项基线例外发布；完整测试没有列为全绿。C5 未完成 Chrome 测量与优化。20 张截图仅生成一次，其中六张仅在 C4 提交纳入普通 Git。
 
 ## 本阶段累计文件清单
 
 - `data/ui/case_board.json`
 - `data/ui/note_tabs.json`
+- `data/ui/readability.json`
 - `docs/codex/progress/R4-C.md`
 - `docs/codex/review/R4-C.md`
+- `docs/screenshots/round4/C/case-1280x529.jpg`
+- `docs/screenshots/round4/C/case-1920x1080.jpg`
+- `docs/screenshots/round4/C/front-1280x720.jpg`
+- `docs/screenshots/round4/C/inventory-1280x720.jpg`
+- `docs/screenshots/round4/C/notes-1280x529.jpg`
+- `docs/screenshots/round4/C/settings-1920x1080.jpg`
 - `scripts/core/game_state.gd`
 - `scripts/dev/run-r4-ui.ps1`
 - `scripts/divination/deduction_board.gd`
 - `scripts/shop/scene_visual.gd`
+- `scripts/shop/shop_screen.gd`
 - `scripts/ui/case_board.gd`
 - `scripts/ui/case_board_config.gd`
 - `scripts/ui/case_card_art.gd`
@@ -159,9 +167,15 @@ Chrome 工具连接恢复后才能执行 C5 改前测量、按数据优化及改
 - `scripts/ui/note_tabs_config.gd`
 - `scripts/ui/note_tabs_config.gd.uid`
 - `scripts/ui/panel_materials.gd`
+- `scripts/ui/readability.gd`
+- `scripts/ui/readability.gd.uid`
+- `scripts/ui/responsive_layout.gd`
 - `scripts/ui/story_notes.gd`
+- `scripts/ui/ui_kit.gd`
+- `tests/integration/appearance_ui.gd`
 - `tests/integration/arrival_transactions.gd`
 - `tests/integration/arrival_ui.gd`
+- `tests/integration/audio_lifecycle.gd`
 - `tests/integration/case_board_ui.gd`
 - `tests/integration/case_save_bad_rules.gd`
 - `tests/integration/case_transactions.gd`
@@ -172,14 +186,20 @@ Chrome 工具连接恢复后才能执行 C5 改前测量、按数据优化及改
 - `tests/integration/event_notebook_ui.gd`
 - `tests/integration/family_migration.gd`
 - `tests/integration/family_transactions.gd`
+- `tests/integration/item_visuals.gd`
 - `tests/integration/lin_legacy.gd`
 - `tests/integration/lin_transactions.gd`
+- `tests/integration/motion_settings.gd`
 - `tests/integration/music_host.gd`
 - `tests/integration/names_migration.gd`
 - `tests/integration/names_ui.gd`
 - `tests/integration/past_lives_migration.gd`
 - `tests/integration/past_lives_transactions.gd`
+- `tests/integration/polish_card_choice.gd`
 - `tests/integration/polish_case_materials.gd`
+- `tests/integration/polish_header.gd`
+- `tests/integration/polish_style.gd`
+- `tests/integration/project_cleanup.gd`
 - `tests/integration/round2_audio_theme.gd`
 - `tests/integration/round2_shell.gd`
 - `tests/integration/scene_visuals.gd`
@@ -191,11 +211,13 @@ Chrome 工具连接恢复后才能执行 C5 改前测量、按数据优化及改
 - `tests/integration/style_report_transactions.gd`
 - `tests/integration/title_creation_migration.gd`
 - `tests/integration/title_invalid_config.gd`
+- `tests/integration/title_presence.gd`
 - `tests/integration/title_ui.gd`
 - `tests/integration/traffic_activation.gd`
 - `tests/suites/r4_ui.txt`
 - `tests/ui/card_faces.gd`
 - `tests/ui/case_flow_clarity.gd`
+- `tests/ui/no_clipped_text.gd`
 - `tests/ui/note_read_receipts.gd`
 - `tests/ui/note_tabs.gd`
 

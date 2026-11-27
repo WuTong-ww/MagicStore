@@ -19,6 +19,8 @@ func settle() -> void:
 		await process_frame
 
 func run() -> void:
+	if DisplayServer.get_name() == "headless":
+		root.size = Vector2i(ProjectSettings.get_setting("display/window/size/window_width_override"),ProjectSettings.get_setting("display/window/size/window_height_override"))
 	var panel := PeoplePanel.new()
 	root.add_child(panel)
 	panel.size = Vector2(920,530)

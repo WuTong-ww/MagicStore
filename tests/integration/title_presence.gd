@@ -15,6 +15,8 @@ func check(ok: bool, label: String) -> void:
 		printerr("TITLE PRESENCE FAIL: "+label)
 
 func run() -> void:
+	if DisplayServer.get_name() == "headless":
+		root.size = Vector2i(ProjectSettings.get_setting("display/window/size/window_width_override"),ProjectSettings.get_setting("display/window/size/window_height_override"))
 	var game: Node = root.get_node("GameState")
 	game.configure_api("","","")
 	game.set_people_generation_options(false)
