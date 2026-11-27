@@ -3,7 +3,7 @@
   "version": 1,
   "title": "一封没有寄出的邀请",
   "legacy_case_id": "invitation",
-  "question": "这份邀请来自谁，她为什么迟迟没回，又该怎样迈出下一步？",
+  "question": "这份邀请是谁寄的？她为什么迟迟不回？下一步该怎么走？",
   "truth": {
     "personal_invitation": {
       "value": true,
@@ -23,7 +23,7 @@
       "answers": [
         {
           "id": "old_friend",
-          "text": "旧友单独寄给她的"
+          "text": "旧友亲手寄给她的"
         },
         {
           "id": "exhibition_group",
@@ -31,7 +31,7 @@
         },
         {
           "id": "unknown_sender",
-          "text": "不认识的人寄错了"
+          "text": "有人寄错了"
         }
       ],
       "correct_answer": "old_friend",
@@ -43,19 +43,19 @@
     },
     {
       "id": "hesitation",
-      "title": "她为什么迟迟不回",
+      "title": "她为什么一直没回",
       "answers": [
         {
           "id": "fear_disturbing",
-          "text": "担心打扰对方的生活"
+          "text": "怕打扰对方现在的生活"
         },
         {
           "id": "no_invitation",
-          "text": "没有收到邀请原件"
+          "text": "其实没收到邀请原件"
         },
         {
           "id": "forgot_reply",
-          "text": "忙得忘了写回信"
+          "text": "太忙忘了回"
         }
       ],
       "correct_answer": "fear_disturbing",
@@ -66,19 +66,19 @@
     },
     {
       "id": "next_step",
-      "title": "该怎么做",
+      "title": "下一步该怎么走",
       "answers": [
         {
           "id": "confirm_then_contact",
-          "text": "先确认近况与安排，给彼此回应的余地"
+          "text": "先问一句近况，再决定怎么赴约"
         },
         {
           "id": "assume_rejection",
-          "text": "把沉默当成拒绝，替对方下结论"
+          "text": "把对方的沉默当成拒绝"
         },
         {
           "id": "leave_unverified",
-          "text": "不核对安排，直接把回信留给陌生人"
+          "text": "不核对时间地点，直接去碰运气"
         }
       ],
       "correct_answer": "confirm_then_contact",
@@ -94,8 +94,8 @@
     [
       {
         "id": "invitation_text",
-        "text": "邀请上具体写了什么？",
-        "answer": "邀请上有一句手写的附言：“替你留了靠窗的位置。”那是我们以前一起看书的位置。",
+        "text": "邀请上写了什么？",
+        "answer": "印好的地方是展览名称和日期。……可是背面有一行手写字：“替你留了靠窗的位置。”那是她的字，我认得，她写“窗”字总是少一点。",
         "evidence_ids": [
           "invitation_note"
         ],
@@ -104,22 +104,20 @@
       },
       {
         "id": "invitation_memory",
-        "text": "那个靠窗的位置，对你们意味着什么？",
-        "answer": "我们以前总坐在窗边一起看书。这次邀请上，她又专门写了替我留着那个位置。",
+        "text": "靠窗的位置，是什么意思？",
+        "answer": "以前我们在图书馆，总抢那个靠窗的位子。她看小说，我修书，一坐就是一下午。……她居然还记得。",
         "evidence_ids": [
-          "shared_memory",
-          "invitation_note"
+          "shared_memory"
         ],
         "requires_familiarity": 0,
         "legacy_topic_id": "invitation"
       },
       {
         "id": "invitation_assumption",
-        "text": "你为什么觉得它可能是群发的？",
-        "answer": "我还没问过她。展览的通知看着很正式，我就猜也许别人都收到了。可是那句手写的附言又只有我们才懂。",
+        "text": "你为什么觉得可能是群发的？",
+        "answer": "展馆也发了一封正式通知，信封一模一样。我就想，也许每个人都收到了一张。……这样想，好像比较不会失望。",
         "evidence_ids": [
-          "group_assumption",
-          "invitation_note"
+          "group_assumption"
         ],
         "requires_familiarity": 0,
         "legacy_topic_id": "invitation"
@@ -129,7 +127,7 @@
       {
         "id": "letter_written",
         "text": "回信写好了吗？",
-        "answer": "回信其实已经写好了。我担心突然出现会打乱她的生活，所以一直把它夹在修复笔记里。",
+        "answer": "写好了。夹在我正在修的那本书里，已经两个星期了。邮票都贴了。",
         "evidence_ids": [
           "unfinished_letter"
         ],
@@ -138,22 +136,20 @@
       },
       {
         "id": "letter_concern",
-        "text": "让你停在寄出之前的，是哪种顾虑？",
-        "answer": "我没有听她说过不愿见面，是我怕打扰。信早就写好了，只是一直不敢寄。",
+        "text": "是什么让你停在寄出之前？",
+        "answer": "她现在过得很好，开了展览，身边有很多新朋友。我怕我突然出现，像一本旧书掉在别人干净的桌上。……她没说过不想见我，是我自己在想。",
         "evidence_ids": [
-          "self_concern",
-          "unfinished_letter"
+          "self_concern"
         ],
         "requires_familiarity": 0,
         "legacy_topic_id": "letter"
       },
       {
         "id": "work_pace",
-        "text": "修书时懂得慢慢来，回信时也能这样吗？",
-        "answer": "给书时间我很熟悉，给自己一点开口的时间却不容易。回信就在笔记里，我总怕突然打扰她。",
+        "text": "修书的时候，你会怎么对待一页破掉的纸？",
+        "answer": "先不急着补。先看它是怎么破的，再一点一点对齐纤维。……你是说，回信也可以这样，对吧。",
         "evidence_ids": [
-          "self_concern",
-          "unfinished_letter"
+          "self_concern"
         ],
         "requires_familiarity": 0,
         "legacy_topic_id": "letter"
@@ -162,8 +158,8 @@
     [
       {
         "id": "venue_route",
-        "text": "展览入口和约见位置，核对过了吗？",
-        "answer": "我翻到一张更新的告示。展览要从侧门进，她留的位置没有变。",
+        "text": "展览的时间和入口，你核对过吗？",
+        "answer": "我刚好又收到一张更新告示：展览改从侧门进。告示后面印着一句，窗边的座位仍然保留。",
         "evidence_ids": [
           "venue_notice"
         ],
@@ -172,8 +168,8 @@
       },
       {
         "id": "message_first",
-        "text": "如果先问一句近况，你想怎样开口？",
-        "answer": "也许先发一句问候，问她哪天方便，比把整封回信一下子寄过去容易。那封写好的信可以先留在手边。",
+        "text": "如果先问一句近况，你会怎么开口？",
+        "answer": "大概会说……“最近好吗？展览我想去看看。”就这一句。回信太长了，我可以之后当面给她。",
         "evidence_ids": [
           "unfinished_letter"
         ],
@@ -181,10 +177,9 @@
       },
       {
         "id": "keep_boundary",
-        "text": "怎样让你们都有回应或改期的余地？",
-        "answer": "我可以说我还记得靠窗的位置，再问她方不方便。先听她自己的回应，总比我替她想完好。",
+        "text": "怎样让你们两个都有说‘不’的余地？",
+        "answer": "先问，不先去。她要是忙，就改一天。……这样谁都不会尴尬。",
         "evidence_ids": [
-          "shared_memory",
           "self_concern"
         ],
         "requires_familiarity": 0
@@ -194,9 +189,9 @@
   "evidence": [
     {
       "id": "invitation_note",
-      "text": "附言写着“替你留了靠窗的位置”，说明这份邀请并非群发。",
+      "text": "背面手写“替你留了靠窗的位置”，是旧友的字迹。",
       "type": "fact",
-      "source": "邀请原件",
+      "source": "邀请函背面",
       "slot_ids": [
         "sender"
       ],
@@ -206,9 +201,9 @@
     },
     {
       "id": "shared_memory",
-      "text": "照晚说，靠窗的位置是她和旧友以前一起看书的位置。",
+      "text": "靠窗的位置，是她们以前一起看书的地方。",
       "type": "testimony",
-      "source": "林照晚的回忆",
+      "source": "照晚的回忆",
       "slot_ids": [
         "sender",
         "next_step"
@@ -216,9 +211,9 @@
     },
     {
       "id": "unfinished_letter",
-      "text": "照晚已经写好回信，却因担心打扰对方一直没有寄出。",
+      "text": "回信早就写好、贴了邮票，却两周没寄出。",
       "type": "fact",
-      "source": "夹在修复笔记里的回信",
+      "source": "夹在书里的回信",
       "slot_ids": [
         "hesitation",
         "next_step"
@@ -229,9 +224,9 @@
     },
     {
       "id": "self_concern",
-      "text": "照晚说，旧友并没有说过不愿见面，是自己担心突然出现会打扰她。",
+      "text": "旧友从没说过不想见面，是照晚自己怕打扰对方。",
       "type": "testimony",
-      "source": "林照晚的自述",
+      "source": "照晚的话",
       "slot_ids": [
         "hesitation",
         "next_step"
@@ -239,9 +234,9 @@
     },
     {
       "id": "venue_notice",
-      "text": "展览改从侧门进入，原来约见的窗边位置仍保留。",
+      "text": "展览改从侧门进入，窗边座位仍保留。",
       "type": "fact",
-      "source": "展览更新告示",
+      "source": "更新告示",
       "slot_ids": [
         "next_step"
       ],
@@ -251,9 +246,9 @@
     },
     {
       "id": "group_assumption",
-      "text": "照晚看见正式的展览通知后，猜测这份邀请也许和其他人收到的一样。",
+      "text": "展馆的正式通知信封一样，照晚猜这也许是群发的。",
       "type": "misleading",
-      "source": "林照晚尚未核对的猜测",
+      "source": "照晚的猜测",
       "slot_ids": [
         "sender"
       ]
@@ -262,27 +257,27 @@
   "cards": [
     {
       "deck_id": "lovers",
-      "text": "分开两个人各自的意愿，再看邀请上是谁亲自留下的话。",
+      "text": "两个人的心意，要分开看，再放回一起。",
       "slot_id": "sender"
     },
     {
       "deck_id": "swords_2",
-      "text": "她停在两种想法之间；看看真正挡住寄信的，是事实还是顾虑。",
+      "text": "蒙着眼的人不是看不见，是不敢看。",
       "slot_id": "hesitation"
     },
     {
       "deck_id": "star",
-      "text": "把愿望落到一句能送出的问候上，再等待对方回应。",
+      "text": "一句小小的问候，也算一颗星。",
       "slot_id": "next_step"
     },
     {
       "deck_id": "cups_6",
-      "text": "旧日共同的位置留在纸上，但今天的意愿仍要亲口确认。",
+      "text": "旧日的座位，有人一直留着。",
       "slot_id": "sender"
     },
     {
       "deck_id": "world",
-      "text": "邀请、回信和赴约之间，还差哪一环需要核对？",
+      "text": "圈快要合上了，只差一个确认。",
       "slot_id": "next_step"
     }
   ],
@@ -296,10 +291,10 @@
         "next_step"
       ],
       "legacy_advice_key": "message",
-      "reaction": "那我先发一句问候，把时间问清楚，再去见她。",
+      "reaction": "嗯……一句话的话，我今晚就能发。",
       "mood": "smile",
       "prediction": {
-        "text": "若先发消息确认，两人会在展览上说上话。",
+        "text": "先问一句，会被好好接住。",
         "condition": "if_message",
         "expected": "met",
         "window_after_due_minutes": 30
@@ -314,10 +309,10 @@
         "next_step"
       ],
       "legacy_advice_key": "attend",
-      "reaction": "我会带着邀请去展览，也会留意现在的入口。",
+      "reaction": "直接去吗……好，我试试看。如果她不在，我就看看展。",
       "mood": "hesitant",
       "prediction": {
-        "text": "若直接去展览，两人会按邀请见面。",
+        "text": "去是能去的，只是要找对入口。",
         "condition": "if_attend",
         "expected": "met",
         "window_after_due_minutes": 30
@@ -332,10 +327,10 @@
         "next_step"
       ],
       "legacy_advice_key": "wait",
-      "reaction": "这次先不去。我想等自己能好好开口的时候，再联系她。",
+      "reaction": "也许……也许下一次会比较好。",
       "mood": "neutral",
       "prediction": {
-        "text": "这次暂缓赴约，两人暂时不会在展览上说上话。",
+        "text": "等待本身，不会替人回信。",
         "condition": "always",
         "expected": "missed",
         "window_after_due_minutes": 30

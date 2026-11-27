@@ -3,7 +3,7 @@
   "version": 1,
   "title": "每晚少一条面包",
   "legacy_case_id": "",
-  "question": "谁拿走了面包，怎样进店，又为什么这样做？",
+  "question": "谁拿走了面包？怎么进的店？为什么要拿？",
   "truth": {
     "taker": {
       "value": "gu_nian",
@@ -36,7 +36,7 @@
         },
         {
           "id": "cat",
-          "text": "街猫"
+          "text": "街口的猫"
         },
         {
           "id": "gu_yuanan",
@@ -52,11 +52,11 @@
     },
     {
       "id": "entry",
-      "title": "怎么进入店里",
+      "title": "怎么进的店",
       "answers": [
         {
           "id": "window",
-          "text": "后窗没关"
+          "text": "后窗没关牢"
         },
         {
           "id": "key",
@@ -69,12 +69,13 @@
       ],
       "correct_answer": "window",
       "unlock_evidence": [
-        "window_scratches"
+        "window_scratches",
+        "station_bag"
       ]
     },
     {
       "id": "motive",
-      "title": "为什么拿面包",
+      "title": "为什么要拿",
       "answers": [
         {
           "id": "hungry",
@@ -101,32 +102,28 @@
     [
       {
         "id": "night_people",
-        "text": "晚上附近还有谁在走动？",
-        "answer": "顾予安开夜班车。他说小念最近也常在夜里出门；公交站上有人见过我们店的纸袋。",
+        "text": "晚上店附近，还有谁会走动？",
+        "answer": "说真的，那条街晚上很安静。只有顾予安，开夜班车的，常在街口停车抽根烟。他跟我抱怨过，女儿小念最近半夜老是溜出门，也不说去哪。",
         "evidence_ids": [
-          "night_walk",
-          "station_bag"
+          "night_walk"
         ],
         "requires_familiarity": 0
       },
       {
         "id": "apprentice",
-        "text": "你为什么会怀疑学徒？",
-        "answer": "小周最近缺钱，所以我先想到了他。可是顾予安也提过小念夜里出门，店里的纸袋又出现在公交站。",
+        "text": "你为什么先怀疑学徒？",
+        "answer": "小周……他最近在凑学费，跟我借过一次钱。我知道这么想不好，可是两个星期了，我总得先想到点什么。",
         "evidence_ids": [
-          "apprentice_poor",
-          "night_walk",
-          "station_bag"
+          "apprentice_poor"
         ],
         "requires_familiarity": 0
       },
       {
         "id": "paper_bag",
-        "text": "面包袋有没有在别处出现？",
-        "answer": "公交站长椅上见过我们的纸袋。顾予安说，他女儿小念最近常在那个时候出门。",
+        "text": "你店里的纸袋，最近在哪里出现过？",
+        "answer": "这个有意思。前天早上我去公交站送货，看见长椅上有我们“麦穗”的纸袋，叠得整整齐齐。旁边睡着一位老人。",
         "evidence_ids": [
-          "station_bag",
-          "night_walk"
+          "station_bag"
         ],
         "requires_familiarity": 0
       }
@@ -134,8 +131,8 @@
     [
       {
         "id": "back_window",
-        "text": "锁和窗户检查过了吗？",
-        "answer": "正门锁没有动过。后窗插销有新刮痕，小周也承认，忙起来会忘记把后窗关牢。",
+        "text": "门和窗，你都检查过了吗？",
+        "answer": "正门的锁一点问题都没有。后窗……插销上有一道新的刮痕，亮亮的。小周承认，他收拾后屋的时候，有时会忘了把窗扣紧。",
         "evidence_ids": [
           "window_scratches"
         ],
@@ -143,8 +140,8 @@
       },
       {
         "id": "closing_check",
-        "text": "打烊时，哪一处最容易漏掉？",
-        "answer": "小周最后会去后屋收东西，有时忘记关后窗。插销上那道新刮痕，我是这两天才看见的。",
+        "text": "打烊的时候，谁最后离开？",
+        "answer": "小周最后走，他收后屋。说真的，他每次都说“关好了”，可是揉面的人，手上全是粉，哪记得那么清楚。我昨天才看见插销上的刮痕。",
         "evidence_ids": [
           "window_scratches"
         ],
@@ -152,8 +149,8 @@
       },
       {
         "id": "entry_trace",
-        "text": "有没有留下能核对的进出痕迹？",
-        "answer": "前门没有，后窗插销倒有一道新刮痕。那扇窗确实偶尔没关好。",
+        "text": "店里有没有别人进来过的痕迹？",
+        "answer": "地上没有脚印，柜子没被翻过。只有后窗的插销被拨过，刮痕是新的。像有人很小心地进来，只拿了一样东西。",
         "evidence_ids": [
           "window_scratches"
         ],
@@ -163,32 +160,28 @@
     [
       {
         "id": "bread_kind",
-        "text": "少的总是哪种面包？",
-        "answer": "都是最便宜的白面包，一次一条。早班还说，零钱罐每天会多一枚硬币；公交站那只纸袋也不是空的。",
+        "text": "每次少的，是哪一种面包？",
+        "answer": "每次都是最便宜的白面包，一次一条。说真的，偷东西的人不会拿最便宜的，对吧？架子上明明还有核桃面包。",
         "evidence_ids": [
-          "cheap_loaf",
-          "daily_coin",
-          "station_bag"
+          "cheap_loaf"
         ],
         "requires_familiarity": 0
       },
       {
         "id": "payment",
-        "text": "柜台和零钱有没有变化？",
-        "answer": "我问了早班。他说每天会收起一枚压在柜台上的硬币。少的又总是最便宜的白面包。",
+        "text": "柜台和零钱，有没有什么变化？",
+        "answer": "这个我昨天才知道。早班的阿姨说，她每天开门都会在柜台上捡到一枚硬币，以为是客人掉的，就丢进零钱罐了。一枚，正好是一条白面包的钱。",
         "evidence_ids": [
-          "daily_coin",
-          "cheap_loaf"
+          "daily_coin"
         ],
         "requires_familiarity": 0
       },
       {
         "id": "station",
-        "text": "公交站那边，你还知道什么？",
-        "answer": "夜里有位老人睡在长椅上，旁边放过我们店的纸袋。纸袋上用铅笔写着一个“温”字。少的都是最便宜的白面包。",
+        "text": "公交站那位老人，你知道些什么？",
+        "answer": "他每天晚上都睡在那里，话很少。纸袋就放在他手边。我凑近看了一眼，纸袋上用铅笔写着一个字，“温”。",
         "evidence_ids": [
-          "station_bag",
-          "cheap_loaf"
+          "station_bag"
         ],
         "requires_familiarity": 0
       }
@@ -197,7 +190,7 @@
   "evidence": [
     {
       "id": "window_scratches",
-      "text": "后窗插销上有新刮痕。",
+      "text": "后窗插销上有新的刮痕，学徒承认有时忘了扣紧。",
       "type": "fact",
       "source": "后窗插销",
       "slot_ids": [
@@ -209,9 +202,9 @@
     },
     {
       "id": "daily_coin",
-      "text": "零钱罐每天早上多一枚硬币。",
+      "text": "每天早上，柜台上都会多出一枚硬币，正好是一条白面包的钱。",
       "type": "fact",
-      "source": "早班零钱罐",
+      "source": "早班阿姨",
       "slot_ids": [
         "motive"
       ],
@@ -221,9 +214,9 @@
     },
     {
       "id": "cheap_loaf",
-      "text": "每次少的都是最便宜的白面包。",
+      "text": "每次少的都是最便宜的白面包，一次一条。",
       "type": "fact",
-      "source": "面包店的清点记录",
+      "source": "清点记录",
       "slot_ids": [
         "motive"
       ],
@@ -233,30 +226,31 @@
     },
     {
       "id": "apprentice_poor",
-      "text": "皮特说，学徒小周最近手头很紧。",
+      "text": "学徒小周最近在凑学费，借过钱。",
       "type": "misleading",
-      "source": "皮特对学徒近况的陈述",
+      "source": "皮特的担心",
       "slot_ids": [
         "taker"
       ]
     },
     {
       "id": "night_walk",
-      "text": "顾予安说，女儿顾念最近夜里常出门。",
+      "text": "顾予安说，女儿顾念最近半夜常溜出门。",
       "type": "testimony",
-      "source": "顾予安的陈述",
+      "source": "顾予安的抱怨",
       "slot_ids": [
         "taker"
       ]
     },
     {
       "id": "station_bag",
-      "text": "公交站长椅上见过麦穗面包店的纸袋。",
+      "text": "公交站长椅上有“麦穗”的纸袋，旁边睡着一位老人，纸袋上写着“温”。",
       "type": "fact",
-      "source": "公交站的纸袋",
+      "source": "公交站长椅",
       "slot_ids": [
         "taker",
-        "motive"
+        "motive",
+        "entry"
       ],
       "legacy_clue_ids": [
         "fixed_bread_station_bag"
@@ -266,44 +260,44 @@
   "cards": [
     {
       "deck_id": "moon",
-      "text": "夜里有人藏着一份善意。",
+      "text": "夜里走动的人，藏着的不一定是坏心。",
       "slot_id": "taker"
     },
     {
       "deck_id": "pentacles_6",
-      "text": "拿走的同时，也在给予。",
+      "text": "有人拿走一份，也放下了一份。",
       "slot_id": "motive"
     },
     {
       "deck_id": "swords_7",
-      "text": "有一扇不该开的门。",
+      "text": "有一扇没关好的窗。",
       "slot_id": "entry"
     },
     {
       "deck_id": "star",
-      "text": "有人在等一份温暖。",
+      "text": "有人在冷天里，等一份热的东西。",
       "slot_id": "motive"
     },
     {
       "deck_id": "hermit",
-      "text": "一位老人独自守着夜。",
+      "text": "一盏小灯，照着一个独自守夜的人。",
       "slot_id": "taker"
     }
   ],
   "advice": [
     {
       "id": "police",
-      "text": "报警，把拿面包的人查清楚。",
+      "text": "报警，让警察查清楚。",
       "requires_deductions": [
         "taker",
         "entry",
         "motive"
       ],
       "legacy_advice_key": "police",
-      "reaction": "那我先报警……可这些硬币，还是让我有点放不下。",
+      "reaction": "说真的……我现在不太想报警了。可是如果你这么说的话。",
       "mood": "hesitant",
       "prediction": {
-        "text": "若报警，把拿面包的人查清楚，事情可能会走一点弯路。",
+        "text": "查是查得清楚，只是会有人难过。",
         "condition": "if_police",
         "expected": "missed",
         "window_after_due_minutes": 30
@@ -311,17 +305,17 @@
     },
     {
       "id": "leave_bread",
-      "text": "后窗留一条面包和纸条：“下次从正门来。”",
+      "text": "在后窗留一条面包和纸条：‘下次请走正门。’",
       "requires_deductions": [
         "taker",
         "entry",
         "motive"
       ],
       "legacy_advice_key": "leave_bread",
-      "reaction": "说真的，我想先把这句话留给她。愿意从正门进来，就能把话说开了。",
+      "reaction": "哈！这个好。我再多放一条，热的。",
       "mood": "smile",
       "prediction": {
-        "text": "若后窗留一条面包和纸条：“下次从正门来。”，事情会有进展。",
+        "text": "一张纸条，可能换来一个朋友。",
         "condition": "if_leave_bread",
         "expected": "met",
         "window_after_due_minutes": 30
@@ -329,17 +323,17 @@
     },
     {
       "id": "watch",
-      "text": "自己守一晚，见到人后把话问清楚。",
+      "text": "自己守一晚，看清楚是谁，再好好谈。",
       "requires_deductions": [
         "taker",
         "entry",
         "motive"
       ],
       "legacy_advice_key": "watch",
-      "reaction": "我会守一会儿，也会先听她解释。",
+      "reaction": "好，我泡一壶咖啡，守到天亮。",
       "mood": "neutral",
       "prediction": {
-        "text": "若自己守一晚，见到人后把话问清楚，事情会有进展。",
+        "text": "会见到人，只是开头有点尴尬。",
         "condition": "if_watch",
         "expected": "met",
         "window_after_due_minutes": 30
@@ -403,27 +397,27 @@
     },
     "advice": {
       "police": {
-        "text": "报警，把拿面包的人查清楚。"
+        "text": "报警，让警察查清楚。"
       },
       "leave_bread": {
-        "text": "后窗留一条面包和纸条：“下次从正门来。”"
+        "text": "在后窗留一条面包和纸条：‘下次请走正门。’"
       },
       "watch": {
-        "text": "自己守一晚，见到人后把话问清楚。"
+        "text": "自己守一晚，看清楚是谁，再好好谈。"
       }
     },
     "advice_options": [
       {
         "key": "police",
-        "label": "报警，把拿面包的人查清楚。"
+        "label": "报警，让警察查清楚。"
       },
       {
         "key": "leave_bread",
-        "label": "后窗留一条面包和纸条：“下次从正门来。”"
+        "label": "在后窗留一条面包和纸条：‘下次请走正门。’"
       },
       {
         "key": "watch",
-        "label": "自己守一晚，见到人后把话问清楚。"
+        "label": "自己守一晚，看清楚是谁，再好好谈。"
       }
     ],
     "item_effect": {},
@@ -433,7 +427,7 @@
         "outcome": "missed",
         "evidence": "sufficient",
         "feedback": "delayed",
-        "text": "被问到的人是小念。她说面包是给公交站那位老人带的。我后来才看见柜台上的硬币，心里很后悔。",
+        "text": "是小念。警察带她去问话，顾予安来接她的时候，两个人在门口吵了一架。后来她才说，面包是给公交站那位老人的。说真的，我看着那些硬币，心里很难受。",
         "delay_minutes": 180,
         "effects": []
       },
@@ -442,7 +436,7 @@
         "outcome": "met",
         "evidence": "sufficient",
         "feedback": "delayed",
-        "text": "纸条背面多了一句：“谢谢，他叫我小念。”今天她从正门进来，我们说上了话，也成了朋友。",
+        "text": "第二天，纸条背面多了一行字：“谢谢。我叫顾念。”今天早上她从正门进来，买了两条白面包，一条自己吃，一条带去公交站。我多送了她一个牛角包。",
         "delay_minutes": 180,
         "effects": []
       },
@@ -451,7 +445,7 @@
         "outcome": "met",
         "evidence": "sufficient",
         "feedback": "delayed",
-        "text": "我守到了小念。场面有点尴尬，不过她把老人的事和硬币都说清了，我们也终于坐下来谈了谈。",
+        "text": "我守到两点，看见一个女孩子从后窗爬进来，手里攥着一枚硬币。是小念。她吓坏了，我也吓了一跳。后来我们坐在面粉袋上，把话说开了。",
         "delay_minutes": 180,
         "effects": []
       }

@@ -32,7 +32,7 @@
       "worst_advice_id": "police",
       "fragment": {
         "id": "bread_paper_bag",
-        "text": "公交站那只纸袋上，用铅笔写着一个“温”字。有人见过那位老人，常望着车站对面的零点杂货铺。"
+        "text": "公交站那位老人，每晚都在纸袋上写一个字。他总是望着车站对面，就是你们这家店。"
       }
     },
     "fixed_key": {
@@ -49,7 +49,7 @@
       "worst_advice_id": "sell",
       "fragment": {
         "id": "key_old_letter",
-        "text": "钥匙打开暗格后，我们读到我先生留下的旧信：“月说，等晴川回来，她就把店交给更合适的人。”温月曾在这间老屋借住过一年。"
+        "text": "琴凳里的旧信，是我先生和温月的通信。最上面一封写着：“月说，要让晴川一路被人帮着，才找得到她。”温月当年在这间屋子里借住过一年。"
       },
       "followup_npc_ids": [
         "npc_tao_shuning"
@@ -67,7 +67,7 @@
       "worst_advice_id": "accuse",
       "fragment": {
         "id": "music_box_half_letter",
-        "text": "盒中那张被小心包好的旧纸，是温月笔记里裁下的半页。开头写着：“晴川，如果你回来找我……”"
+        "text": "底板下面的半页信，开头是：“晴川，如果你回来找我……”字迹，和店里那本笔记一模一样。"
       },
       "defer_disclosure_advice_ids": [
         "accuse"
@@ -93,32 +93,32 @@
   "invitation_fragment": {
     "id": "invitation_binding",
     "case_id": "fixed_invitation",
-    "text": "店里那本前任店主的笔记，装订线是我以前修过的。最后两页是被人小心裁掉的，不是撕的。"
+    "text": "对了……店里那本旧笔记，装订线是我以前修过的。最后两页不是撕掉的，是有人用刀，沿着线小心裁下来的。"
   },
   "final_prelude": {
     "retrieve": {
       "id": "retrieve_letter",
-      "text": "笔记的后半页还在沈家的钢琴凳暗格里。先去取信，把地址接完整。",
+      "text": "后半页还锁在沈家的琴凳里。先去把它取回来。",
       "choice_id": "retrieve_letter",
-      "choice_text": "去沈家取回后半封信",
-      "disclosure": "沈念秋把暗格里的信交给了你。后半页写着：“……白沙，海边那排白房子，第三间。”旧信中还夹着温月当年借住时留下的笔记。",
+      "choice_text": "去沈家，取回另外半页信",
+      "disclosure": "沈老师把那叠旧信交到你手里，最底下压着半页纸：“……白沙，海边那排白房子，第三间。”",
       "note_id": "note_2"
     },
     "repair": {
       "id": "repair_pages",
       "npc_id": "npc_lin",
       "min_trust": 2,
-      "text": "两页信终于放在一起。可以请熟悉装订的照晚帮忙，也可以自己慢慢拼。",
+      "text": "两页纸终于放在了一起。可以请照晚按原来的装订线修好，也可以自己试着对齐。",
       "lin_choice_id": "repair_lin",
-      "lin_choice_text": "请照晚按原装订线修复",
+      "lin_choice_text": "请照晚按原装订线修好",
       "self_choice_id": "repair_self",
-      "self_choice_text": "自己对照纸纹和句子拼合",
-      "lin_disclosure": "照晚沿着旧装订线把两页接回：“裁口很整齐，是故意分开保存的。她希望晴川一路被人帮着找到她。”",
-      "self_disclosure": "你把纸纹与句子一点点对齐，发现两页的裁口能接上。它们是被小心分开保存的。"
+      "self_choice_text": "自己对着纸纹慢慢拼",
+      "lin_disclosure": "照晚把两页对齐，轻声说：“你看，裁口是一条直线。她是故意分开放的，想让他一路都有人帮。”",
+      "self_disclosure": "你把纸纹一点点对齐。两道裁口严丝合缝，是同一刀裁下的。"
     },
     "assembly": {
       "id": "assemble_pages",
-      "text": "前半页先留下称呼，后半页接着给出地址。试着把她还没说完的话接起来。",
+      "text": "先是称呼，再是地址。把她没说完的话接起来。",
       "correct_choice_id": "assemble_greeting_address",
       "choices": [
         {
@@ -134,15 +134,15 @@
           "text": "先空着地址，只拼好纸页边缘"
         }
       ],
-      "retry_text": "句子还没有接顺。照着称呼与地址再试一次，纸页和精力都不会少。",
-      "complete_text": "称呼、叮嘱和地址接在了一起。她没有消失，只是把一条能走到她身边的路留下了。",
+      "retry_text": "句子还没有接顺。看看称呼和地址，哪一句该在前面。",
+      "complete_text": "称呼接上了地址。她没有消失，她把一条能走到她身边的路，交给了路上的每一个人。",
       "energy": 0,
       "minutes": 0
     },
     "self_evidence_id": "deliberate_cut",
     "self_evidence_text": "你对齐了裁口与纸纹：两页是被小心分开保存的，接起来能读出完整的信。",
     "self_evidence_source": "纸纹与裁口的拼合观察",
-    "arrival_line": "雨落在店门前。夜灯亮起，一位老人站在门边，手里握着写过字的面包纸袋。"
+    "arrival_line": "雨下了一整天。打烊前，门上的铃响了一声。一位老人站在门边，没有撑伞，手里握着一只写满字的面包纸袋。"
   },
   "consequences": {
     "fixed_bread": {
@@ -202,27 +202,27 @@
     {
       "id": "epilogue_pieter",
       "npc_id": "npc_pieter",
-      "text": "说真的，听说晴川和姐姐见面了，我很替他们高兴。那只面包纸袋，也算陪他走过一段路。"
+      "text": "说真的，现在每天早上多烤一条白面包，已经成了我的习惯。"
     },
     {
       "id": "epilogue_shen",
       "npc_id": "npc_shen_nianqiu",
-      "text": "那封信总算到了该来的人手里。想到有人把没说完的话接了下去，我也安心些了。"
+      "text": "图书室开张那天，书宁请我剪彩。“春风又绿江南岸”，老屋也算换了一身新衣裳。"
     },
     {
       "id": "epilogue_marianne",
       "npc_id": "npc_marianne",
-      "text": "最近又听见有人哼《月光光》。想到盒子里的半封信终于到了收信人手里，我也很高兴。"
+      "text": "“月光光”那支香，我送了一盒去白沙。她回信说，闻起来像从前的店。"
     },
     {
       "id": "epilogue_lin",
       "npc_id": "npc_lin",
-      "text": "笔记翻到最后一页了，装订却还好好的。也许以后还可以慢慢添上新的纸。"
+      "text": "那本笔记，我帮你重新装订好了。最后两页接回去了，裁口几乎看不出来。"
     },
     {
       "id": "epilogue_gu_nian",
       "npc_id": "npc_gu_nian",
-      "text": "公交站那位爷爷有地方去了。我把最后一只纸袋折好，想留给他带路上吃。"
+      "text": "晴川爷爷搬去海边了。他走之前，在最后一只纸袋上写了“谢谢”。"
     }
   ],
   "g3_copy": {
