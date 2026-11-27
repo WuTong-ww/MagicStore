@@ -1,0 +1,2 @@
+COVER ASSET RESULT: 124 checks, 1 failures
+thumbnail width: thumbnails_300w.png

@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "title": "零点杂货铺",
+  "square_lines": ["零点", "杂货铺"],
+  "subtitle": "客人带来的，是一段还没说完的故事",
+  "output_width": 1600,
+  "em": 360,
+  "advance_em": 0.88,
+  "line_height_em": 1.02,
+  "padding": 28,
+  "glyphs": [
+    {"char": "零", "dx": 0, "dy": 5, "angle": -1.7},
+    {"char": "点", "dx": -5, "dy": -5, "angle": 1.0},
+    {"char": "杂", "dx": 2, "dy": 7, "angle": -2.1},
+    {"char": "货", "dx": -4, "dy": 0, "angle": 1.5},
+    {"char": "铺", "dx": -1, "dy": 3, "angle": -0.8}
+  ],
+  "ink": {
+    "color": "#2B1E16",
+    "seed": 271127,
+    "variation": 0.05,
+    "dry_threshold": 0.76,
+    "dry_strength": 0.74,
+    "edge_width": 5
+  },
+  "readability": {
+    "paper": "#F7EEDB",
+    "outline_px": 4,
+    "outline_opacity": 0.6,
+    "outline_blur": 0.9,
+    "shadow": "#84634A",
+    "shadow_offset": [3, 3],
+    "shadow_blur": 6,
+    "shadow_opacity": 0.25
+  },
+  "seal": {
+    "text": "零點",
+    "color": "#B5654D",
+    "paper": "#FFF7E8",
+    "angle": -3,
+    "size_em": 0.25,
+    "seed": 113,
+    "font": "assets/fonts/LXGWWenKai-Regular.ttf"
+  },
+  "subtitle_font": "assets/fonts/LXGWWenKai-Regular.ttf",
+  "subtitle_ratio": 0.1666666667,
+  "webp_quality": 85,
+  "fonts": {
+    "zhimangxing": {
+      "name": "志莽行书",
+      "file": "ZhiMangXing-Regular.ttf",
+      "page": "https://fonts.google.com/specimen/Zhi+Mang+Xing",
+      "repo": "https://github.com/google/fonts/tree/main/ofl/zhimangxing"
+    },
+    "mashanzheng": {
+      "name": "马善政楷书",
+      "file": "MaShanZheng-Regular.ttf",
+      "page": "https://fonts.google.com/specimen/Ma+Shan+Zheng",
+      "repo": "https://github.com/google/fonts/tree/main/ofl/mashanzheng"
+    },
+    "longcang": {
+      "name": "龙藏体",
+      "file": "LongCang-Regular.ttf",
+      "page": "https://fonts.google.com/specimen/Long+Cang",
+      "repo": "https://github.com/google/fonts/tree/main/ofl/longcang"
+    }
+  },
+  "composites": {
+    "loading_1920x1080": {"size": [1920, 1080], "crop": [0, 0, 1, 1], "title_xy": [84, 170], "title_height": 184, "subtitle_gap": 18},
+    "capsule_1200x630": {"size": [1200, 630], "crop": [0.025, 0.02, 1, 0.96], "title_xy": [45, 106], "title_height": 151, "subtitle_gap": 12},
+    "capsule_630x500": {"size": [630, 500], "crop": [0.08, 0, 0.79, 1], "title_xy": [28, 60], "title_height": 120, "subtitle_gap": 10},
+    "square_1024": {"size": [1024, 1024], "crop": [0.443, 0.223, 0.88, 1], "title_xy": [512, 44], "title_height": 310, "subtitle_gap": 18, "arrangement": "square", "align": "center"}
+  },
+  "vertical": {"width": 400, "loading_xy": [1650, 72], "loading_height": 725},
+  "style_references": [
+    "assets/generated_scenes/v3_final/S01/night/v3r3/C.png",
+    "assets/generated_scenes/v3_final/S02/night/v3r3/C.png"
+  ],
+  "thumbnail_width": 300
+}

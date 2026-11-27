@@ -1,0 +1,11 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+OpenGL API 3.3.0 - Build 31.0.101.4502 - Compatibility - Using Device: Intel - Intel(R) Iris(R) Xe Graphics
+
+ERROR: C UI FAIL: C7 selected item configuration validates actual files, alpha support and provenance
+   at: push_error (core/variant/variant_utility.cpp:1024)
+   GDScript backtrace (most recent call first):
+       [0] check (res://tests/integration/shop_ui.gd:22)
+       [1] check_visual_manifest (res://tests/integration/shop_ui.gd:275)
+       [2] run (res://tests/integration/shop_ui.gd:44)
+       [3] settle (res://tests/integration/shop_ui.gd:26)
+C UI RESULT: 1401 checks, 1 failures, 22 graphical captures; renderer=Windows

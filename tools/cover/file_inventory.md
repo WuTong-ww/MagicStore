@@ -1,0 +1,64 @@
+# COVER 文件与 SHA256
+
+由 `python tools/cover/make_title.py` 生成；相对仓库根目录。
+
+| 文件 | 实际尺寸 | 字节 | SHA256 |
+|---|---|---:|---|
+| `assets/cover/capsule_1200x630.png` | 1200×630 | 1373827 | `a8849f6a6cf1a91ef98d359045830aa24d24b1ebc09bb4a723c0ad189e165f6f` |
+| `assets/cover/capsule_1200x630.webp` | 1200×630 | 182796 | `e95062184c1b4ad2aba02a28fe36f89a1dc6d3df1fd521c6d5c703b8abf2494c` |
+| `assets/cover/capsule_630x500.png` | 630×500 | 592042 | `62058eeb564a48fd86cad01c716a0822c7f0b8e0b8fb7f4135fea88271ee83e5` |
+| `assets/cover/capsule_630x500.webp` | 630×500 | 85856 | `cd81e3f721b3a96d250d6a1d2c004917cfc01c736beb6cdbc7adefb3dad29efc` |
+| `assets/cover/compare/loading_longcang_1920x1080.png` | 1920×1080 | 3390186 | `51771826fb6f610c6b8c0d4ff95bf666fb997a7449d59d10a48ad8bafbc11f31` |
+| `assets/cover/compare/loading_longcang_1920x1080.webp` | 1920×1080 | 372494 | `70ed013a4a76070d19160f197186558bad5f5ad6cb7317d16b059b8835fa0179` |
+| `assets/cover/compare/loading_mashanzheng_1920x1080.png` | 1920×1080 | 3384384 | `57fc0dafa7d79f3c01e3de084e09786aa3e36c337c4adaf266940cf24dee295d` |
+| `assets/cover/compare/loading_mashanzheng_1920x1080.webp` | 1920×1080 | 372652 | `1c7e24abbfdbdc6b979a3a7c1cf8ee2649d52b270b33bda8e4192f999b77fc78` |
+| `assets/cover/compare/loading_zhimangxing_1920x1080.png` | 1920×1080 | 3384596 | `6759fdd63a3eb2e0cd3cde0719463fd1fc32d054efa22d6031fb66ef24155b35` |
+| `assets/cover/compare/loading_zhimangxing_1920x1080.webp` | 1920×1080 | 370712 | `fd6204303af6787b95a8c17a3f89752c5705bfe53a2271dc8d8c3b3a300e6291` |
+| `assets/cover/fonts/longcang-OFL.md` | — | 4390 | `603546b7219a94bb59bf8294458194a5010119486354092b66a09a3fd61aeacc` |
+| `assets/cover/fonts/LongCang-Regular.ttf` | — | 5162508 | `e5bf2c3f24ef2327c6f136d8f73e2f9dfdf44896fdbeb35a9515f44777bb91bc` |
+| `assets/cover/fonts/mashanzheng-OFL.md` | — | 4397 | `d7bdb1cee215b689e23c2f95672a6084c790542170648267a55114103d756a08` |
+| `assets/cover/fonts/MaShanZheng-Regular.ttf` | — | 5857936 | `6d2546bb189c732a8ca29af9e22457b152387d158aa459e4ac2ce1e51788b7fb` |
+| `assets/cover/fonts/zhimangxing-OFL.md` | — | 4397 | `10947328199e369a3e6b4a67e8e5507ed99d5bbb264a1f156415aa9b665e4d15` |
+| `assets/cover/fonts/ZhiMangXing-Regular.ttf` | — | 4063532 | `644e0cae9b40f0b10ab729a01bd32032e3973bac22be3dccae01bf6ae7fde969` |
+| `assets/cover/key_art_a_2560x1440.png` | 1672×941 | 2901356 | `4e0db36b92ad453da2e8c9d85f99619d64ec9941a1bc3a3ae3172fb1c0f8bc1b` |
+| `assets/cover/key_art_a_2560x1440.webp` | 1672×941 | 298410 | `09904e02986495d149768a65f95de54826098a935ac6c90f9ca822b4e1a6c192` |
+| `assets/cover/key_art_b_2560x1440.png` | 1672×941 | 2568982 | `1b82b828b2aefcf99237d98bf05df269a0abbb55c9d1e51b2e9cc2ae36bdad07` |
+| `assets/cover/key_art_b_2560x1440.webp` | 1672×941 | 192590 | `f099b10f331e636f53ce61a91ffa3f0394e5b2a116658cede68f4ae299e686f8` |
+| `assets/cover/loading_1920x1080.png` | 1920×1080 | 3384596 | `6759fdd63a3eb2e0cd3cde0719463fd1fc32d054efa22d6031fb66ef24155b35` |
+| `assets/cover/loading_1920x1080.webp` | 1920×1080 | 370712 | `fd6204303af6787b95a8c17a3f89752c5705bfe53a2271dc8d8c3b3a300e6291` |
+| `assets/cover/loading_vertical_1920x1080.png` | 1920×1080 | 3376736 | `5ca23262201f4561b0ed17319c7d99941c4154f94467b93d97bcb4578b96ac9e` |
+| `assets/cover/loading_vertical_1920x1080.webp` | 1920×1080 | 359822 | `63f8fb2c130dbc95adf0c50595aa20c4b7843218c64f314497821bfe144953d7` |
+| `assets/cover/review/capsule_1200x630_300w.png` | 300×158 | 99927 | `95b55d2b3193ba97629244ab61adbd2ec21c86b323c0b1b35fcbd122386b7363` |
+| `assets/cover/review/capsule_1200x630_300w.webp` | 300×158 | 16252 | `c73bd5112f9fb6fd33d7b37320f2915cb18e42ee303eafe02660d0beb1f0195e` |
+| `assets/cover/review/capsule_630x500_300w.png` | 300×238 | 147090 | `7416afc377a7252aeafac0364b3ae4e499d4e2ccef7dfc9234f9d114f1228a17` |
+| `assets/cover/review/capsule_630x500_300w.webp` | 300×238 | 23168 | `879a41e3eda66f54be7d31f2f529b0c1aa3fd42bfb9ee085accb3661b5fe2478` |
+| `assets/cover/review/font_comparison.png` | 1440×332 | 302557 | `d6c24ae351c22126ef5c1966116f05780ef2ade911958877a9fd1b4b9cdd81df` |
+| `assets/cover/review/font_comparison.webp` | 1440×332 | 112922 | `1ede929327e690f21ebc8aaeca0bf6e87e0a4b8f7039f09b994788972c23036f` |
+| `assets/cover/review/loading_1920x1080_300w.png` | 300×169 | 105259 | `1be27a9131f57fb0ad68b876e084b70e56d72c944b45d444da6ffbaf53c6c2ca` |
+| `assets/cover/review/loading_1920x1080_300w.webp` | 300×169 | 17104 | `350694e56da66bebb33db94086fb9e3d10392d1a9cdaf7f849d63fe2f527c37f` |
+| `assets/cover/review/loading_longcang_1920x1080_300w.png` | 300×169 | 105353 | `ae9b6190a05c64a963d4aa1bc964cbd41ec031477f1e99b89e24b2ced134dec4` |
+| `assets/cover/review/loading_longcang_1920x1080_300w.webp` | 300×169 | 17166 | `441ea1658ffc66c20a4743ac6533fecd2cb66bc9730111aed54feca8f29411d9` |
+| `assets/cover/review/loading_mashanzheng_1920x1080_300w.png` | 300×169 | 105438 | `8b54b5d95d7f1aa91a68b0e12701e9b5e3478f75cc3a43346f74702671e29751` |
+| `assets/cover/review/loading_mashanzheng_1920x1080_300w.webp` | 300×169 | 17058 | `5658caa187f1f90fdfec101be8e70767c6940685e6158c130ba724dfc1e65e27` |
+| `assets/cover/review/loading_vertical_1920x1080_300w.png` | 300×169 | 103401 | `f194a6d7cbc08909e71f5d627d897304c2abe6921fcbf95af1841ebd4c3c90f7` |
+| `assets/cover/review/loading_vertical_1920x1080_300w.webp` | 300×169 | 15906 | `0b881c295e55650c91db21fdb1edd8342ee2d04a6d182d35003aa7faf285d38f` |
+| `assets/cover/review/loading_zhimangxing_1920x1080_300w.png` | 300×169 | 105259 | `1be27a9131f57fb0ad68b876e084b70e56d72c944b45d444da6ffbaf53c6c2ca` |
+| `assets/cover/review/loading_zhimangxing_1920x1080_300w.webp` | 300×169 | 17104 | `350694e56da66bebb33db94086fb9e3d10392d1a9cdaf7f849d63fe2f527c37f` |
+| `assets/cover/review/square_1024_300w.png` | 300×300 | 191942 | `f2e1e308258a700989c68b063f4408a55c1a4f421fc40e15ba4040e11cef5431` |
+| `assets/cover/review/square_1024_300w.webp` | 300×300 | 33234 | `d7b5e3e6b67cef0c48027c72cdf057f5e1a3ff15a5f1e3399cabc234b6cfd811` |
+| `assets/cover/review/style_comparison_a.png` | 1440×332 | 644143 | `d50acabdb955046ef64b8165f6a4597dcc891333c2fd74bf175264de9cdf2f6b` |
+| `assets/cover/review/style_comparison_a.webp` | 1440×332 | 79604 | `29eda87d92578d88ec2ddb9d71fbb3d335328a31e824f862672318ad3fb27ff1` |
+| `assets/cover/review/style_comparison_b.png` | 1440×332 | 599038 | `e02db910ba999e0752f92473b68a9456827c7c27743632f7fef3c493ea57777f` |
+| `assets/cover/review/style_comparison_b.webp` | 1440×332 | 67500 | `d7ddc58e568b0a15eb67b7c5559ce72b91f436c9a709e5d393e816d1da9a6875` |
+| `assets/cover/review/thumbnails_300w.png` | 1320×660 | 705146 | `97bd23b69f486f6269fdd55df3842287cba170bfa80498dc04ecba0c1c34d74b` |
+| `assets/cover/review/thumbnails_300w.webp` | 1320×660 | 155458 | `291f6dbc8ff4fb4d5762653ee0a32c5252ca183b444a18951a1a2bc2f4a48720` |
+| `assets/cover/square_1024.png` | 1024×1024 | 1703527 | `e78edd05cc6a467e7f2047b17f5edb7b3d63501c17d75a0527a19155ecd115b1` |
+| `assets/cover/square_1024.webp` | 1024×1024 | 201030 | `51aea744f0b189a511249a06b8cff3316b292c0190216767b6d55c492732bb4b` |
+| `assets/cover/title_longcang.png` | 1600×332 | 160489 | `38735d3bbd52527accd97995f92af83d4910c4d37ceeaed2e0e894e2ae8c825a` |
+| `assets/cover/title_longcang.webp` | 1600×332 | 70506 | `42390122d5e55770f2449a6a05192bcd2b5d12c6947b8a2ee16f2e5a49638296` |
+| `assets/cover/title_mashanzheng.png` | 1600×369 | 179565 | `408e444367c6be58b60b56416200bb40a763f7ffab0882dae45123cf00ff981d` |
+| `assets/cover/title_mashanzheng.webp` | 1600×369 | 76548 | `11e6f043f8cb9bda97a9038df7a3559b57be7cf3dc1d31618df0a7c69e7d5572` |
+| `assets/cover/title_zhimangxing.png` | 1600×359 | 165082 | `7af01ab88eea4cb415a60610bf06d222a945342dce5acb971fc31ced9175d5b6` |
+| `assets/cover/title_zhimangxing.webp` | 1600×359 | 70768 | `92b749d8e03bf0b05d7c388745860a6fcdb5219ff2915a0a3d801f3e9b9d1981` |
+| `assets/cover/title_zhimangxing_vertical.png` | 400×1492 | 135422 | `064ee6d5108fd72855f2d9333ef05ff894aadf403aed2607bf48d96f66c3f479` |
+| `assets/cover/title_zhimangxing_vertical.webp` | 400×1492 | 59502 | `238abf125fc177d15646884395e19afd42ee86b7076f49c8152fef12bab6fa11` |
