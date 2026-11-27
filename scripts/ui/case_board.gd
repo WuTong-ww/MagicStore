@@ -14,7 +14,11 @@ const ResponsiveConfig = preload("res://scripts/ui/responsive_config.gd")
 const ViewportMetrics = preload("res://scripts/ui/viewport_metrics.gd")
 const ResponsiveLayout = preload("res://scripts/ui/responsive_layout.gd")
 const Flow = preload("res://scripts/ui/case_flow.gd")
+const CardArt = preload("res://scripts/ui/case_card_art.gd")
+const CardZoom = preload("res://scripts/ui/case_card_zoom.gd")
 var flow: Control
+var card_art_index: Dictionary = {}
+var card_zoom: Control
 signal story_choice_saved
 var host
 var config: Dictionary = {}
@@ -72,6 +76,7 @@ var _slot_signatures: Dictionary = {}
 
 func _ready() -> void:
 	config = Config.load_config()
+	card_art_index = CardArt.load_index()
 	learning_copy = preload("res://scripts/learning/learning_rules.gd").load_config().get("ui",{}).get("copy",{})
 	story_config = StoryUI.load_config()
 	if config.is_empty():
@@ -263,13 +268,16 @@ func _button_row(node_name: String) -> HBoxContainer:
 	return row
 
 func _build_card(index: int) -> void:
-	var button := _button("",func(): await _submit("case_flip_card",{"card_index":index}))
+	var button := _button("",func():
+		if button_card_revealed(index): show_card_zoom(index)
+		else: await _submit("case_flip_card",{"card_index":index}))
 	button.name = "CaseCard_"+str(index)
 	button.custom_minimum_size = Vector2(config.layout.card_width,config.layout.card_height)
 	button.tooltip_text = config.copy.card_tooltip
 	cards_row.add_child(button)
 	var art := TextureRect.new()
 	art.name = "CardArt"
+	art.set_meta("case_card_ratio",true)
 	art.texture = load(config.assets.card_back)
 	art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
@@ -299,6 +307,18 @@ func _build_card(index: int) -> void:
 	name_label.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
 	name_label.offset_top = -float(config.layout.card_name_height)
 	name_label.offset_bottom = -float(config.layout.slot_padding)
+	var rank := _label("",int(config.layout.title_font))
+	rank.name = "CardRank"
+	rank.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	button.add_child(rank)
+	var strip := UI.rich()
+	strip.name = "CardClueStrip"
+	strip.fit_content = false
+	strip.scroll_active = true
+	strip.mouse_filter = Control.MOUSE_FILTER_PASS
+	strip.add_theme_font_size_override("normal_font_size",int(config.flow.font_size))
+	button.add_child(strip)
+	strip.hide()
 	card_nodes.append(button)
 	Materials.apply_tarot_card(button,art,"case_card_"+str(index))
 
@@ -320,22 +340,39 @@ func _queue_table_layout() -> void:
 
 func _layout_cards_on_table() -> void:
 	if not is_inside_tree() or not is_instance_valid(cards_row): return
-	var parent: Node = get_parent()
-	if parent == null: return
-	var room: Variant = parent.get("room_art")
-	if not room is Control or not room.has_method("projected_rect"): return
-	# Share the room's cover/crop projection, so the cards stay on the physical
-	# table at every aspect ratio rather than floating over the guest's body.
-	var projected: Rect2 = room.call("projected_rect",config.layout.table_surface_rect)
-	var canvas_transform := canvas.get_global_transform()
-	if is_zero_approx(canvas_transform.determinant()): return
-	var to_canvas: Transform2D = canvas_transform.affine_inverse()*room.get_global_transform()
-	var surface: Rect2 = to_canvas*projected
-	var natural := Vector2(float(config.layout.card_width)*float(config.layout.card_count)+float(config.layout.card_gap)*float(config.layout.card_count-1),float(config.layout.card_height)).max(cards_row.get_combined_minimum_size())
-	var factor := minf(surface.size.x/natural.x,surface.size.y/natural.y)
-	if factor <= 0: return
-	cards_row.scale = Vector2.ONE*factor
-	cards_row.position = surface.position+(surface.size-natural*factor)*0.5
+	var metrics := ViewportMetrics.measure(self)
+	if not ViewportMetrics.valid(metrics): return
+	var height: float = maxf(float(config.card_view.minimum_height)*minf(1.0,metrics.visible_css.y/float(config.layout.base_height)),metrics.visible_css.y*float(config.card_view.height_ratio))
+	var width: float = height*float(config.card_view.ratio)
+	var strip_height: float = float(config.flow.button_height) if metrics.short else float(config.card_view.strip_height)
+	var extra: float = float(config.layout.card_name_height)+strip_height
+	var row_size := Vector2(width*card_nodes.size()+float(config.layout.card_gap)*(card_nodes.size()-1),height+extra)
+	var bottom: float = metrics.visible_css.y-float(config.flow.bottom)
+	if is_instance_valid(host) and host.shell_dock != null: bottom = ViewportMetrics.css_rect(host.shell_dock,metrics).position.y-float(config.flow.gap)
+	ResponsiveLayout.apply(cards_row,ResponsiveLayout.fit_minimum(row_size,Rect2(Vector2(float(config.flow.gap),bottom-row_size.y),row_size),metrics))
+	var tools_size := Vector2(maxf(row_size.x,utility_buttons.get_combined_minimum_size().x),maxf(float(config.flow.button_height),utility_buttons.get_combined_minimum_size().y))
+	ResponsiveLayout.apply(utility_buttons,ResponsiveLayout.fit_minimum(tools_size,Rect2(Vector2(float(config.flow.gap),bottom-row_size.y-tools_size.y-float(config.flow.gap)),tools_size),metrics))
+	for button: Button in card_nodes:
+		button.custom_minimum_size = Vector2(width,height+extra)
+		button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		var art: TextureRect = button.get_node("CardArt")
+		art.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+		art.position = Vector2.ZERO
+		art.size = Vector2(width,height)
+		var blank: Control = button.get_node("CardBlankFace")
+		blank.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+		blank.position = Vector2.ZERO
+		blank.size = art.size
+		var name_text: Label = button.get_node("CardName")
+		name_text.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+		name_text.position = Vector2(0,height)
+		name_text.size = Vector2(width,float(config.layout.card_name_height))
+		var rank: Label = button.get_node("CardRank")
+		rank.position = Vector2(0,height*0.35)
+		rank.size = Vector2(width,height*0.3)
+		var strip: RichTextLabel = button.get_node("CardClueStrip")
+		strip.position = Vector2(0,height+float(config.layout.card_name_height))
+		strip.size = Vector2(width,strip_height)
 	_layout_material_speech()
 
 func refresh() -> void:
@@ -405,17 +442,32 @@ func _refresh_cards() -> void:
 		var row: Dictionary = cards[index] if index < cards.size() else {"index":index,"revealed":false}
 		var revealed := bool(row.get("revealed",false))
 		button.set_meta("revealed",revealed)
-		button.set_meta("available",bool(row.get("enabled",false)) and not public_view.get("closed",false) and _blocking_prelude().is_empty())
+		button.set_meta("available",revealed or (bool(row.get("enabled",false)) and not public_view.get("closed",false) and _blocking_prelude().is_empty()))
 		var art: TextureRect = button.get_node("CardArt")
-		var path: String = str(row.get("image","")) if revealed else str(config.assets.card_back)
-		if revealed and path.is_empty():
-			path = str(config.assets.faces.get(str(row.get("deck_id","")),""))
-		art.texture = load(path) if not path.is_empty() and ResourceLoader.exists(path) else null
+		art.texture = CardArt.texture(str(row.get("deck_id","")),card_art_index) if revealed else load(str(config.assets.card_back))
 		button.get_node("CardBlankFace").visible = revealed and art.texture == null
-		button.get_node("CardOrnament").visible = revealed and art.texture == null
-		button.get_node("CardName").text = str(row.get("name","")) if revealed else ""
+		button.get_node("CardOrnament").hide()
+		button.get_node("CardRank").text = str(row.get("mark",row.get("suit",""))) if revealed and art.texture == null else ""
+		var display_name := str(row.get("name",""))
+		if display_name.is_empty(): display_name = str(config.card_view.fallback)
+		button.get_node("CardName").text = display_name if revealed else ""
+		var strip: RichTextLabel = button.get_node("CardClueStrip")
+		strip.text = str(row.get("text","")) if revealed else ""
+		strip.visible = revealed
 		button.tooltip_text = str(row.get("name",""))+"\n"+str(row.get("text","")) if revealed else config.copy.card_tooltip
 		Materials.apply_tarot_card(button,art,"case_card_"+str(index))
+	_queue_table_layout()
+
+func button_card_revealed(index: int) -> bool:
+	return index >= 0 and index < public_view.get("cards",[]).size() and public_view.cards[index].get("revealed",false)
+
+func show_card_zoom(index: int) -> void:
+	if not button_card_revealed(index): return
+	if is_instance_valid(card_zoom): card_zoom.queue_free()
+	card_zoom = CardZoom.new()
+	card_zoom.board = self
+	card_zoom.row = public_view.cards[index].duplicate(true)
+	add_child(card_zoom)
 
 func _refresh_questions() -> void:
 	if _method_open:
@@ -563,7 +615,7 @@ func _refresh_evidence() -> void:
 		token.add_theme_font_size_override("font_size",int(config.layout.small_font))
 		token.custom_minimum_size.y = float(config.layout.evidence_height)
 		token.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		token.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+		token.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
 		token.set_meta("available",public_view.get("phase") == "deduction" and not public_view.get("closed",false))
 		Materials.apply_evidence(token,kind,str(row.id))
 		token.toggle_mode = true
@@ -645,7 +697,10 @@ func _submit(action: String, values: Dictionary) -> void:
 			_extra_open = false
 		if action == "case_attach_evidence":
 			_selected_evidence = ""
-		refresh()
+		if action == "case_flip_card":
+			_feedback("card_flip",target,true)
+			await _animate_saved_flip(target)
+		else: refresh()
 		if action == "story_choice":
 			story_choice_saved.emit()
 		if action == "case_attach_evidence":
@@ -655,10 +710,39 @@ func _submit(action: String, values: Dictionary) -> void:
 			for token: Node in evidence_box.get_children():
 				if token.get("evidence_id") is String and token.evidence_id not in before_evidence:
 					_fly_material(reply_origin,token,token.text)
-		_feedback("page" if action in ["case_flip_card","case_question","case_extra_question"] else "confirm",target,true,action)
+		if action != "case_flip_card": _feedback("paper" if action in ["case_question","case_extra_question"] else "confirm",target,true,action)
 	else:
 		refresh()
 		_feedback("cancel",target,false)
+
+func _animate_saved_flip(target: Control) -> void:
+	var wind := get_node_or_null("/root/WindField")
+	if wind != null and wind.reduced_motion:
+		refresh()
+		return
+	_pending = true
+	_set_busy(true)
+	if is_instance_valid(flow): flow.refresh()
+	target.pivot_offset = target.size/2.0
+	var half: float = float(config.layout.flip_seconds)*0.5
+	var shrink := create_tween()
+	shrink.tween_property(target,"scale:x",0.0,half)
+	await shrink.finished
+	if not is_inside_tree(): return
+	_pending = false
+	refresh()
+	_pending = true
+	_set_busy(true)
+	if is_instance_valid(flow): flow.refresh()
+	var expand := create_tween()
+	expand.tween_property(target,"scale:x",1.0,half)
+	await expand.finished
+	_pending = false
+	refresh()
+	var strip: Control = target.get_node("CardClueStrip")
+	var origin := strip.position
+	strip.position.y -= float(config.card_view.strip_slide)
+	create_tween().tween_property(strip,"position",origin,float(config.card_view.strip_seconds))
 
 func _fly_material(origin: Vector2, target: Control, text: String) -> void:
 	var reduced := get_node_or_null("/root/WindField")
@@ -672,9 +756,9 @@ func _fly_material(origin: Vector2, target: Control, text: String) -> void:
 	canvas.add_child(paper_token)
 	paper_token.position = origin-paper_token.size/2.0
 	var label := _label(text,int(config.layout.small_font))
-	label.max_lines_visible = 2
-	label.clip_text = true
+	label.clip_text = false
 	paper_token.add_child(label)
+	label.custom_minimum_size.x = float(config.layout.fly_width)
 	var destination: Vector2 = canvas.get_global_transform().affine_inverse()*target.get_global_rect().get_center()-paper_token.size/2.0
 	var tween := create_tween()
 	tween.tween_property(paper_token,"position",destination,float(config.layout.feedback_seconds)).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)

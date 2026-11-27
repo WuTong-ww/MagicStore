@@ -66,7 +66,7 @@ func run() -> void:
 		role(card,"tarot_card","tabletop tarot hit target")
 		check(card.get_theme_stylebox("normal") is StyleBoxEmpty,"tarot is not surrounded by another paper frame")
 		var art: TextureRect = card.get_node("CardArt")
-		check(art.material is ShaderMaterial or art.scale.y < 1.0,"actual card art has the configured tabletop flattening")
+		check(is_equal_approx(art.scale.y,1.0) and art.get_meta("case_card_ratio",false),"case cards preserve upright 7:12 art without flattening")
 		check(card.get_children().any(func(node: Node) -> bool: return bool(node.get_meta("material_contact_shadow",false))),"actual tarot contact shadow is installed")
 	if materials != null and materials.has_method("evidence_role"):
 		check(materials.call("evidence_role","misleading") == "neutral" and materials.call("evidence_role","unknown") == "neutral","unknown/public misleading kinds gain no correctness marker")

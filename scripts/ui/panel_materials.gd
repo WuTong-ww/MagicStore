@@ -362,7 +362,7 @@ static func _sync_stamp(button: Variant, stamp: Variant, size: Array) -> void:
 static func _sync_card(button: Variant, art: Variant, shadow: Variant, config: Dictionary) -> void:
 	if not is_instance_valid(button) or not is_instance_valid(art) or not is_instance_valid(shadow) or not button is BaseButton or not art is TextureRect or not shadow is Panel: return
 	art.pivot_offset = Vector2(art.size.x/2.0,art.size.y)
-	art.scale.y = config.effects.card_y_scale
+	art.scale.y = 1.0 if art.get_meta("case_card_ratio",false) else float(config.effects.card_y_scale)
 	shadow.size = Vector2(art.size.x*float(config.effects.contact_shadow_width_ratio),float(config.effects.contact_shadow_height))
 	shadow.position = art.position+Vector2((art.size.x-shadow.size.x)/2.0,art.size.y-shadow.size.y/2.0)
 
@@ -372,8 +372,8 @@ static func apply_tarot_card(button: BaseButton, art: TextureRect, _key: String 
 	for state: String in ["normal","hover","pressed","disabled","focus"]: button.add_theme_stylebox_override(state,StyleBoxEmpty.new())
 	button.set_meta("material_role","tarot_card")
 	art.pivot_offset = Vector2(art.size.x/2.0,art.size.y)
-	art.scale.y = config.effects.card_y_scale
-	art.set_meta("material_card_y_scale",config.effects.card_y_scale)
+	art.scale.y = 1.0 if art.get_meta("case_card_ratio",false) else float(config.effects.card_y_scale)
+	art.set_meta("material_card_y_scale",art.scale.y)
 	var shadow := button.get_node_or_null("MaterialContactShadow") as Panel
 	if shadow == null:
 		shadow = Panel.new()

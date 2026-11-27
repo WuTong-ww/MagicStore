@@ -267,7 +267,7 @@ static func public_view(state: Dictionary, visit: Dictionary, case: Dictionary, 
 		if row.revealed:
 			var card: Dictionary = definition.cards[int(board.card_order[index])]
 			var face := _find(deck,card.deck_id)
-			row.merge({"deck_id":card.deck_id,"name":face.get("name",""),"text":card.text,"image":card.get("image","")})
+			row.merge({"deck_id":card.deck_id,"name":face.get("name",""),"text":card.text,"mark":face.get("mark",""),"suit":face.get("suit",""),"face":"reversed" if card.get("is_reversed",false) else "upright"})
 		view.cards.append(row)
 	for slot: Dictionary in definition.deduction_slots:
 		var unlocked := _unlocked(board,definition,slot)

@@ -1,1 +1,2 @@
 res://tests/ui/case_flow_clarity.gd
+res://tests/ui/card_faces.gd

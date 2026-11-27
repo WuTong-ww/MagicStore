@@ -10,6 +10,11 @@ static func config_valid(value: Variant) -> bool:
 	var flow: Dictionary = value.flow
 	for key: String in ["back_cards","back_deduction"]:
 		if not flow.get(key) is String or flow[key].is_empty(): return false
+	if not value.get("card_view") is Dictionary: return false
+	for key: String in ["ratio","minimum_height","height_ratio","zoom_height_ratio","zoom_z","strip_height","strip_slide","strip_seconds"]:
+		if not (value.card_view.get(key) is int or value.card_view.get(key) is float) or not is_finite(float(value.card_view[key])) or float(value.card_view[key]) <= 0: return false
+	for key: String in ["upright","reversed","close","fallback"]:
+		if not value.card_view.get(key) is String or value.card_view[key].is_empty(): return false
 	if not flow.get("reaction_hints") is Dictionary: return false
 	for mood: String in ["smile","hesitant","neutral","sad"]:
 		if not flow.reaction_hints.get(mood) is String or flow.reaction_hints[mood].is_empty(): return false

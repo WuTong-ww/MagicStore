@@ -146,7 +146,7 @@
     "card_height": 180,
     "card_gap": 10,
     "card_art_height": 142,
-    "card_name_height": 30,
+    "card_name_height": 48,
     "question_height": 70,
     "question_gap": 8,
     "evidence_height": 48,
@@ -169,7 +169,7 @@
       630
     ],
     "settings_minimum_height": 36,
-    "flip_seconds": 0.22,
+    "flip_seconds": 0.35,
     "feedback_seconds": 0.2,
     "reject_offset": 8,
     "evidence_fly_offset": 20,
@@ -180,6 +180,20 @@
     "movie_drag_seconds": 0.5,
     "movie_end_seconds": 3.0
   },
+  "card_view": {
+    "ratio": 0.5833333333,
+    "minimum_height": 150,
+    "height_ratio": 0.24,
+    "zoom_height_ratio": 0.7,
+    "zoom_z": 1000,
+    "strip_height": 72,
+    "strip_slide": 18,
+    "strip_seconds": 0.2,
+    "upright": "正位",
+    "reversed": "逆位",
+    "close": "点任意处收起牌面",
+    "fallback": "塔罗牌"
+  },
   "colors": {
     "paper": "#F3E9D6",
     "paper_soft": "#E2D2B4",
@@ -187,6 +201,7 @@
     "muted": "#7A6450",
     "gold": "#C99A4B",
     "seal": "#B5654D",
+    "zoom_backdrop": "#18231BEF",
     "selected": "#E6D4AC",
     "tool": "#E3DEE9",
     "testimony": "#DFE4D4",
