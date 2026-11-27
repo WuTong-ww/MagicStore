@@ -3,8 +3,7 @@ extends RefCounted
 const CONFIG_PATH := "res://data/ui/shop_content.json"
 
 static func load_config() -> Dictionary:
-	var value: Variant = JSON.parse_string(FileAccess.get_file_as_string(CONFIG_PATH))
-	return value if value is Dictionary and config_valid(value) else {}
+	return preload("res://scripts/ui/packed_ui_data.gd").load_web(CONFIG_PATH,config_valid)
 
 static func _keys(value: Variant, expected: Array) -> bool:
 	return value is Dictionary and value.size() == expected.size() and expected.all(func(key: String) -> bool: return value.has(key))

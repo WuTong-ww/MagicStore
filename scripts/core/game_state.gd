@@ -155,6 +155,20 @@ func player_snapshot() -> Dictionary:
 func daily_loop_view() -> Dictionary:
 	return DailyLoop.public_view(state,daily_loop_config)
 
+func next_guest_portrait_view() -> Dictionary:
+	# Read-only UI preparation from committed reservations. No case definition,
+	# facts, testimony or future outcome is part of this visual projection.
+	if state.is_empty(): return {}
+	if not _sequential():
+		var queue: Array = people_view().get("queue",[])
+		if queue.is_empty(): return {}
+		return {"npc_id":str(queue[0].npc_id),"appearance":queue[0].appearance.duplicate(true)}
+	var id := DailyLoop.next_arrival(state)
+	if id.is_empty(): return {}
+	var npc_id := str(state.people.arrivals[id].npc_id)
+	var profile: Dictionary = state.people.profiles[npc_id]
+	return {"npc_id":npc_id,"appearance":Appearance.for_display(profile.get("appearance",{}),npc_id)}
+
 func story_view() -> Dictionary:
 	var view: Dictionary = StoryProgress.public_view(state,story_config)
 	for row: Dictionary in view.get("notes",[]):
@@ -839,7 +853,9 @@ func _new_game(action: Dictionary) -> Dictionary:
 	if not creation_id.is_empty():
 		reply["action_type"] = "new_game"
 		candidate.processed_actions[creation_id] = reply.duplicate(true)
+	var save_started := preload("res://scripts/ui/r4_performance.gd").begin()
 	var saved: Dictionary = SaveService.write_save(candidate) if creation_id.is_empty() else SaveService.write_new_game(candidate,creation_id)
+	preload("res://scripts/ui/r4_performance.gd").record("save",str(action.type),save_started,saved.get("success",false))
 	if not saved.success:
 		return _fail(saved.get("error_code", "SAVE_FAILED"), str(rules.copy.write_failed_prefix) + saved.get("message", ""))
 	_publish_case_session(prepared.session)
@@ -1245,7 +1261,9 @@ func _commit(candidate: Dictionary, action: Dictionary, message: String, result:
 	candidate.processed_actions[action.action_id] = reply.duplicate(true)
 	if int(candidate.schema_version) >= 18 and not LearningStore.sync_action(candidate,action,prepared.session.data): return _fail("LEARNING_INVALID",LearningStore.message())
 	if practice and LearningStore.world_projection(candidate) != LearningStore.world_projection(state): return _fail("PRACTICE_WORLD_CHANGED",LearningStore.message())
+	var save_started := preload("res://scripts/ui/r4_performance.gd").begin()
 	var saved: Dictionary = SaveService.write_save(candidate)
+	preload("res://scripts/ui/r4_performance.gd").record("save",str(action.type),save_started,saved.get("success",false))
 	if not saved.success:
 		return _fail(saved.get("error_code", "SAVE_FAILED"), "未能保存，本次动作未生效，可重试。" + saved.get("message", ""))
 	# Capture this commit's identity before state_changed: a listener may

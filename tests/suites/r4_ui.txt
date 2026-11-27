@@ -3,3 +3,4 @@ res://tests/ui/card_faces.gd
 res://tests/ui/note_tabs.gd
 res://tests/ui/note_read_receipts.gd
 res://tests/ui/no_clipped_text.gd
+res://tests/ui/web_performance.gd

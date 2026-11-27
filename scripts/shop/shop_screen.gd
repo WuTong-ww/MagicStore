@@ -31,6 +31,7 @@ var selected_inventory_item := ""
 const ShelfView = preload("res://scripts/shop/shelf_view.gd")
 var side_panel: PanelContainer
 var drawer: Control
+var _content_signature := ""
 
 func _ready() -> void:
 	visuals = ItemArt.load_config()
@@ -62,13 +63,17 @@ func _layout_scene_controls() -> void:
 func refresh() -> void:
 	if not is_instance_valid(body):
 		return
+	scene_visual.refresh()
+	var view: Dictionary = GameState.shop_view()
+	if preload("res://scripts/ui/performance_config.gd").active("cache_pages"):
+		var signature := JSON.stringify([view,GameState.player_snapshot(),show_details,cabinet_open,inventory_filter,market_mode,market_quantity,selected_variants,expanded_uses,selected_inventory_item,content_action_pending])
+		if signature == _content_signature: return
+		_content_signature = signature
 	drawer.begin_content_update()
 	for child: Node in body.get_children():
 		body.remove_child(child)
 		child.queue_free()
 	text(TITLES.get(page, "店铺"), 26)
-	scene_visual.refresh()
-	var view: Dictionary = GameState.shop_view()
 	if view.is_empty():
 		if is_instance_valid(shelf_view):
 			shelf_view.update_inventory({},GameState.player_snapshot(),false)

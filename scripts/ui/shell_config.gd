@@ -67,5 +67,4 @@ static func _format_valid(value: String, expected: Array) -> bool:
 	return found == expected
 
 static func load_config() -> Dictionary:
-	var value: Variant = JSON.parse_string(FileAccess.get_file_as_string(PATH))
-	return value if value is Dictionary and config_valid(value) else {}
+	return preload("res://scripts/ui/packed_ui_data.gd").load_web(PATH,config_valid)

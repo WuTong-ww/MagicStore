@@ -64,9 +64,18 @@ const CaseBoardConfig = preload("res://scripts/ui/case_board_config.gd")
 const Readability = preload("res://scripts/ui/readability.gd")
 var readability_config: Dictionary = {}
 var _note_reads_pending: Dictionary = {}
+const Perf = preload("res://scripts/ui/r4_performance.gd")
+var performance_probe: Node
+const PerformanceConfig = preload("res://scripts/ui/performance_config.gd")
+var _page_cache: Dictionary = {}
+var _page_cache_empty_origin := false
+var web_ui_enabled := OS.has_feature("web")
+var _performance_ui: Dictionary = {}
 const PAGES := {"exterior": "店外", "front": "前台", "consultation": "咨询区", "inventory": "储物柜", "workshop": "工坊", "market": "原料商店", "gathering": "采集"}
 var people_window: Window
 var people_panel: Control
+var _people_story_only := false
+var _opening_story_notes := false
 var provider_badge: Label
 
 var busy := false
@@ -118,6 +127,8 @@ func _ready() -> void:
 	readable.host = self
 	add_child(readable)
 	motion_settings = MotionConfig.load_settings()
+	_performance_ui = PerformanceConfig.load_config().get("ui",{})
+	preload("res://scripts/shop/scene_visual.gd").warm_textures()
 	var responsive: Dictionary = ResponsiveConfig.load_config()
 	var native_minimum: Array = responsive.get("native_minimum",shell_config.screen_minimum)
 	DisplayServer.window_set_min_size(Vector2i(native_minimum[0],native_minimum[1]))
@@ -139,10 +150,14 @@ func _ready() -> void:
 	GameState.action_failed.connect(show_notice)
 	_build_people_window()
 	_build_title()
+	_warm_web_pages()
 	show_screen("exterior")
 	set_title_blocking(true)
 	call_deferred("_open_title_if_unresolved")
 	_web_wheel_pointer.attach()
+	performance_probe = Perf.new()
+	performance_probe.host = self
+	add_child(performance_probe)
 
 func _exit_tree() -> void:
 	_web_wheel_pointer.detach()
@@ -302,18 +317,30 @@ func _build_shell() -> void:
 	provider_badge.visible = false
 	add_child(provider_badge)
 
+func _web_ui(flag: String) -> bool:
+	return web_ui_enabled and bool(_performance_ui.get(flag,false))
+
 func show_screen(which: String, silent_motion: bool = false) -> void:
+	var perf_started := Perf.begin()
+	var perf_input := Perf.input_begin()
 	var previous := current_screen if is_instance_valid(screen) else ""
 	current_screen = which
 	if is_instance_valid(screen):
-		scene_holder.remove_child(screen)
-		screen.queue_free()
-	if which in ["front", "consultation"]:
-		screen = (CONSULTATION if which == "consultation" else FRONT).instantiate()
+		if _web_ui("cache_pages"):
+			screen.hide()
+			screen.process_mode = Node.PROCESS_MODE_DISABLED
+		else:
+			scene_holder.remove_child(screen)
+			screen.queue_free()
+	if _web_ui("cache_pages") and is_instance_valid(_page_cache.get(which)):
+		screen = _page_cache[which]
 	else:
-		screen = load("res://scenes/shop/%s.tscn" % which).instantiate()
-	screen.set("host", self)
-	scene_holder.add_child(screen)
+		screen = (CONSULTATION if which == "consultation" else FRONT).instantiate() if which in ["front","consultation"] else load("res://scenes/shop/%s.tscn" % which).instantiate()
+		screen.set("host", self)
+		scene_holder.add_child(screen)
+		if _web_ui("cache_pages"): _page_cache[which] = screen
+	screen.process_mode = Node.PROCESS_MODE_INHERIT
+	screen.show()
 	screen.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_bind_drawer_input_order()
 	screen.modulate.a = 0.0
@@ -324,8 +351,47 @@ func show_screen(which: String, silent_motion: bool = false) -> void:
 		var motion := _current_motion()
 		if is_instance_valid(motion):
 			motion.on_scene_changed(previous,which)
+	if is_instance_valid(performance_probe): performance_probe.presented("page",which,perf_started,true,perf_input)
+
+func _warm_web_pages() -> void:
+	if not _web_ui("cache_pages"): return
+	_page_cache_empty_origin = GameState.player_snapshot().is_empty()
+	for page: String in PerformanceConfig.load_config().get("pages",[]):
+		var control: Control = (CONSULTATION if page == "consultation" else FRONT).instantiate() if page in ["front","consultation"] else load("res://scenes/shop/%s.tscn" % page).instantiate()
+		control.set("host",self)
+		control.hide()
+		control.process_mode = Node.PROCESS_MODE_DISABLED
+		scene_holder.add_child(control)
+		control.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		_page_cache[page] = control
+
+func _discard_web_pages() -> void:
+	# The opening cache contains no save data. It may serve the first committed
+	# save; every later new/load operation must discard the previous save's UI.
+	if _page_cache_empty_origin:
+		_page_cache_empty_origin = false
+		return
+	if _page_cache.is_empty(): return
+	for page: Control in _page_cache.values():
+		if not is_instance_valid(page): continue
+		if page == screen: screen = null
+		scene_holder.remove_child(page)
+		page.queue_free()
+	_page_cache.clear()
+
+func _prewarm_next_guest_portrait() -> void:
+	if not _web_ui("warm_scene_textures") or not is_instance_valid(_page_cache.get("consultation")): return
+	var started := Perf.begin()
+	var guest: Dictionary = {}
+	if not GameState.active_visit().is_empty():
+		guest = GameState.divination_view().get("guest",{})
+	else:
+		guest = GameState.next_guest_portrait_view()
+	if not guest.is_empty(): _page_cache.consultation.prepare_guest_portrait(guest)
+	Perf.record("prepare","next_guest_portrait",started)
 
 func _refresh() -> void:
+	var perf_status := Perf.begin()
 	var snapshot: Dictionary = GameState.player_snapshot()
 	energy_bar.visible = not snapshot.is_empty()
 	energy_label.visible = not snapshot.is_empty()
@@ -333,8 +399,9 @@ func _refresh() -> void:
 	location.text = PAGES.get(current_screen, "店铺")
 	var mode: Dictionary = GameState.provider_status()
 	provider_badge.text = "在线对话" if mode.get("mode") == "online" else "离线对话 · 本地话题"
-	if is_instance_valid(people_panel):
-		people_panel.set_view(GameState.people_view(),str(snapshot.get("save_id","")))
+	if is_instance_valid(people_panel) and (not _web_ui("refresh_visible_only") or people_window.visible):
+		if not _web_ui("refresh_visible_only") or not _people_story_only:
+			people_panel.set_view(GameState.people_view(),str(snapshot.get("save_id","")))
 		_sync_story_archive()
 	if is_instance_valid(history_window) and history_window.visible and _history_save_id != str(snapshot.get("save_id","")):
 		show_history()
@@ -364,15 +431,22 @@ func _refresh() -> void:
 			energy_fill.bg_color = UI.Palette.ROSE if energy_bar.ratio < float(shell_config.layout.low_energy_ratio) else UI.Palette.MOSS
 			energy_bar.add_theme_stylebox_override("fill",energy_fill)
 
+	Perf.section("main.status:"+current_screen,perf_status)
+	var perf_screen := Perf.begin()
 	if is_instance_valid(screen):
 		screen.call("refresh")
+	Perf.section("main.screen:"+current_screen,perf_screen)
+	var perf_chrome := Perf.begin()
 	if is_instance_valid(learning_panel): learning_panel.refresh()
 	if is_instance_valid(practice_room) and practice_room.visible: practice_room.board.refresh()
 	_refresh_music()
 	_sync_material_backdrop()
 	if _title_blocking: _isolate_gameplay_inputs()
+	Perf.section("main.chrome:"+current_screen,perf_chrome)
 
 func run_action(action_type: String, extra: Dictionary = {}, command_id: String = "") -> Dictionary:
+	var perf_started := Perf.begin()
+	var perf_input := Perf.input_begin()
 	if busy or _closing:
 		return {"success": false, "error_code": "BUSY", "message": "正在处理，请稍候。"}
 	busy = true
@@ -386,15 +460,32 @@ func run_action(action_type: String, extra: Dictionary = {}, command_id: String 
 	if not snapshot.is_empty() and not action.has("expected_version"):
 		action["expected_version"] = snapshot.get("state_version", 0)
 	show_notice("正在等对方回应…" if action_type == "talk" else "正在保存…")
+	if _web_ui("present_busy_frame"):
+		if DisplayServer.get_name() == "headless": await get_tree().process_frame
+		else: await RenderingServer.frame_post_draw
+		Perf.record("feedback",action_type,perf_started)
+		if perf_input > 0: Perf.record("input_feedback",action_type,perf_input)
+		# Let the browser receive the pending frame before synchronous save work.
+		await get_tree().process_frame
 	var result: Dictionary = await GameState.execute_action_async(action)
+	if result.get("success",false) and _web_ui("warm_scene_textures"):
+		if action_type in ["new_game","load_game"]:
+			_discard_web_pages()
+			if _page_cache.is_empty(): _warm_web_pages()
+			_prewarm_next_guest_portrait()
+		elif action_type in ["end_visit","next_day","read_morning_letters"]:
+			_prewarm_next_guest_portrait()
+	if is_instance_valid(performance_probe): performance_probe.presented("button",action_type,perf_started,result.get("success",false),perf_input)
 	busy = false
 	cancel_button.hide()
 	open_button.disabled = false
 	show_notice(str(result.get("message", "操作完成")))
+	var refresh_after_action := true
 	if result.get("success", false):
 		if is_instance_valid(presentation_audio) and not action_type.begins_with("case_") and action_type != "story_choice" and not (_entry_ui and action_type in ["new_game","load_game"]):
 			presentation_audio.play_ui("coin" if action_type in ["procure_item","sell_product","sell_material"] else "confirm")
 		if action_type in ["new_game", "load_game"]:
+			if not _web_ui("warm_scene_textures"): _discard_web_pages()
 			_learning_commands.clear()
 			if is_instance_valid(practice_room): practice_room.hide()
 			scene_holder.show()
@@ -410,8 +501,11 @@ func run_action(action_type: String, extra: Dictionary = {}, command_id: String 
 				_load_intent.clear()
 				set_title_blocking(false)
 		elif action_type in ["start_visit", "start_arrival", "next_customer"]:
-			show_screen("consultation")
 			people_window.hide()
+			show_screen("consultation")
+			# show_screen already refreshed this committed visit with busy=false.
+			# Repeating it before the same frame rebuilds the initial board twice.
+			refresh_after_action = not _web_ui("cache_pages")
 		elif action_type == "end_visit":
 			show_screen("front")
 		elif action_type == "delete_game":
@@ -425,7 +519,7 @@ func run_action(action_type: String, extra: Dictionary = {}, command_id: String 
 	else:
 		if save_window.visible:
 			save_note.text = str(result.get("message", "无法读取，请检查存档。"))
-	_refresh()
+	if refresh_after_action: _refresh()
 	return result
 
 func _title_available() -> bool:
@@ -678,6 +772,7 @@ func open_people() -> void:
 	if GameState.player_snapshot().is_empty():
 		show_notice("请先打开存档。")
 		return
+	_people_story_only = false
 	people_panel.set_view(GameState.people_view(),str(GameState.player_snapshot().get("save_id","")))
 	_sync_story_archive()
 	if not people_window.visible:
@@ -694,6 +789,21 @@ func _sync_story_archive() -> void:
 		notes.visibility_changed.connect(_music_story_visibility_changed)
 	if is_instance_valid(notes) and not notes.page_read_requested.is_connected(_mark_note_read):
 		notes.page_read_requested.connect(_mark_note_read)
+	if is_instance_valid(notes):
+		var pages := notes.get_parent() as TabContainer
+		if is_instance_valid(pages) and not pages.tab_changed.is_connected(_people_page_changed):
+			pages.tab_changed.connect(_people_page_changed)
+
+func _people_page_changed(_index: int) -> void:
+	if not _people_story_only or not people_window.visible: return
+	var notes: Control = people_panel.get("story_notes") as Control
+	if not is_instance_valid(notes): return
+	var pages := notes.get_parent() as TabContainer
+	if not is_instance_valid(pages) or pages.current_tab == notes.get_index(): return
+	# A notes-only entry leaves the other pages unbuilt until they are selected.
+	_people_story_only = false
+	people_panel.set_view(GameState.people_view(),str(GameState.player_snapshot().get("save_id","")))
+	_sync_story_archive()
 
 func _mark_note_read(id: String) -> void:
 	if busy or not GameState.story_view().get("notes",[]).any(func(row: Dictionary) -> bool: return row.id == id and row.unlocked and not row.get("read",false)): return
@@ -709,8 +819,42 @@ func _mark_note_read(id: String) -> void:
 
 func open_story_notes() -> bool:
 	# Reusable read-only entry. The formal TITLE entry can call this later.
+	if _web_ui("refresh_visible_only"):
+		if GameState.player_snapshot().is_empty():
+			open_people()
+			return false
+		if not GameState.story_view().get("enabled",false):
+			open_people()
+			return false
+		if _opening_story_notes: return true
+		_opening_story_notes = true
+		var started := Perf.begin()
+		var input_started := Perf.input_begin()
+		show_notice(str(PerformanceConfig.load_config().copy.opening_notes))
+		_open_web_story_notes(started,input_started,str(GameState.player_snapshot().save_id))
+		return true
 	open_people()
 	return bool(people_panel.call("open_story_notes")) if is_instance_valid(people_panel) and people_panel.has_method("open_story_notes") else false
+
+func _open_web_story_notes(started: int, input_started: int, save_id: String) -> void:
+	if DisplayServer.get_name() == "headless": await get_tree().process_frame
+	else: await RenderingServer.frame_post_draw
+	Perf.record("feedback","open_story_notes",started)
+	if input_started > 0: Perf.record("input_feedback","open_story_notes",input_started)
+	await get_tree().process_frame
+	if _closing or str(GameState.player_snapshot().get("save_id","")) != save_id:
+		_opening_story_notes = false
+		return
+	_people_story_only = true
+	var prepared := Perf.begin()
+	_sync_story_archive()
+	Perf.section("notes.data",prepared)
+	if is_instance_valid(people_panel) and people_panel.has_method("open_story_notes") and people_panel.open_story_notes():
+		if not people_window.visible:
+			_fit_window(people_window,Vector2i(shell_config.dialogs.people[0],shell_config.dialogs.people[1]))
+			people_window.popup_centered()
+		if is_instance_valid(performance_probe): performance_probe.presented("panel","story_notes",started,true,input_started)
+	_opening_story_notes = false
 
 func _fit_window(window: Window, desired: Vector2i) -> void:
 	var metrics: Dictionary = presentation_metrics()
@@ -1490,6 +1634,9 @@ func _layout_presentation_chrome() -> void:
 func _sync_material_backdrop() -> void:
 	if not is_instance_valid(_material_backdrop): return
 	_material_backdrop.visible = get_children().any(func(node: Node) -> bool: return node is Window and node.visible)
+	if _web_ui("pause_modal_motion"):
+		var motion := _current_motion()
+		if is_instance_valid(motion): motion.set_active(not _material_backdrop.visible and not _title_blocking)
 	# Preserve the scene artwork under the dimmer, but hide competing paper UI.
 	var save_open := is_instance_valid(save_window) and save_window.visible
 	if save_open and is_instance_valid(screen):

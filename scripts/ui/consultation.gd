@@ -12,6 +12,7 @@ const ResponsiveConfig = preload("res://scripts/ui/responsive_config.gd")
 const ViewportMetrics = preload("res://scripts/ui/viewport_metrics.gd")
 const ResponsiveLayout = preload("res://scripts/ui/responsive_layout.gd")
 const AppearanceEditorConfig = preload("res://scripts/people/appearance_editor_config.gd")
+const Perf = preload("res://scripts/ui/r4_performance.gd")
 
 const OracleGuide = preload("res://scripts/divination/oracle_guide.gd")
 const CaseBoard = preload("res://scripts/ui/case_board.gd")
@@ -44,6 +45,8 @@ var _history_signature := ""
 var _question_rows: Array = []
 var _question_visit_id := ""
 var _last_busy := false
+var _portrait_key: Dictionary = {}
+var portrait_preparations := 0
 var _submitting_question := false
 var _submitting_text := false
 var layout_config: Dictionary = {}
@@ -125,7 +128,29 @@ static func load_layout_config() -> Dictionary:
 
 func _process(_delta: float) -> void:
 	if is_instance_valid(transcript) and _interaction_busy() != _last_busy:
+		_refresh_busy()
+
+func _web_cached_ui() -> bool:
+	return is_instance_valid(host) and host.has_method("_web_ui") and host._web_ui("cache_pages")
+
+func prepare_guest_portrait(guest: Dictionary) -> void:
+	var key := {"appearance":guest_appearance(guest),"mood":presentation_mood(guest)}
+	if not _web_cached_ui() or _portrait_key != key:
+		guest_portrait.configure(key.appearance,key.mood)
+		_portrait_key = key.duplicate(true)
+		portrait_preparations += 1
+
+func _refresh_busy() -> void:
+	if not _web_cached_ui():
 		refresh()
+		return
+	_last_busy = _interaction_busy()
+	var active := not _rendered_visit_id.is_empty()
+	send_button.disabled = not active or _last_busy
+	input.editable = active and not _last_busy
+	for index: int in range(_question_rows.size()):
+		if index < questions.get_child_count():
+			questions.get_child(index).disabled = _last_busy or not _question_rows[index].get("enabled",false)
 
 func _ready() -> void:
 	layout_config = load_layout_config()
@@ -413,7 +438,7 @@ func _send_text() -> void:
 		host.show_notice(layout_config.copy.long_question % int(layout_config.text_limit))
 		return
 	_submitting_text = true
-	refresh()
+	_refresh_busy()
 	var result: Dictionary = await host.run_action("talk", {"text": text})
 	if result.get("success", false) and is_instance_valid(input):
 		input.text = ""
@@ -429,11 +454,21 @@ func refresh() -> void:
 	_last_busy = _interaction_busy()
 	var view: Dictionary = GameState.divination_view()
 	var guest: Dictionary = view.get("guest", {})
+	var perf_part := Perf.begin()
 	room_art.refresh()
 	room_art.visible = true
+	Perf.section("consultation.room",perf_part)
+	perf_part = Perf.begin()
 	guest_portrait.visible = active
 	if guest_portrait.visible:
-		guest_portrait.configure(guest_appearance(guest),presentation_mood(guest))
+		prepare_guest_portrait(guest)
+	Perf.section("consultation.portrait",perf_part)
+	# The board owns the visible conversation. Its legacy transcript includes
+	# costly CPU avatar composites and is only needed when free talk is shown.
+	if _web_cached_ui():
+		perf_part = Perf.begin()
+		_refresh_case_board()
+		Perf.section("consultation.board",perf_part)
 	title.text = layout_config.copy.guest_title % guest.get("name", "") if active else layout_config.copy.empty_title
 	visit_label.text = Nationality.information(guest)+"\n"+str(guest.get("case_title", "")) if active else layout_config.copy.empty_visit
 	guest_information.text = Nationality.information(guest) if active else ""
@@ -447,7 +482,10 @@ func refresh() -> void:
 	elif clue_count > _rendered_clue_count:
 		_new_clue_turn = visit.get("dialogue", []).size() - 1
 	_rendered_clue_count = clue_count
-	_render_history(visit.get("dialogue",[]),guest,_new_clue_turn)
+	perf_part = Perf.begin()
+	if not _web_cached_ui() or dialogue_panel.visible:
+		_render_history(visit.get("dialogue",[]),guest,_new_clue_turn)
+	Perf.section("consultation.history",perf_part)
 	clue_label.text = layout_config.copy.clues % (view.get("clues", []).size() + view.get("services", []).size())
 	var reading: Dictionary = visit.get("reading", {})
 	var paid := not reading.is_empty()
@@ -482,9 +520,10 @@ func refresh() -> void:
 	contact_button.visible = active and not GameState.contact_invitation().is_empty()
 	send_button.disabled = not active or _last_busy
 	input.editable = active and not _last_busy
-	_refresh_topics(_available_questions(),str(visit.get("visit_id","")))
-	_refresh_case_board()
-	_refresh_material_public_summary(view)
+	if not _web_cached_ui() or questions.visible:
+		_refresh_topics(_available_questions(),str(visit.get("visit_id","")))
+	if not _web_cached_ui(): _refresh_case_board()
+	if not _web_cached_ui() or drawer_panel.visible: _refresh_material_public_summary(view)
 
 func _case_board_enabled() -> bool:
 	return is_instance_valid(case_board) and not case_board.config.is_empty() and bool(GameState.case_board_view().get("enabled",false))
@@ -561,7 +600,7 @@ func _submit_question(visit_id: String, topic_id: String, label: String) -> void
 	if not _available_questions().any(func(row: Dictionary) -> bool: return row.topic_id == topic_id and row.label == label):
 		return
 	_submitting_question = true
-	refresh()
+	_refresh_busy()
 	await host.run_action("talk",{"text":label,"topic_id":topic_id})
 	if is_instance_valid(self):
 		_submitting_question = false

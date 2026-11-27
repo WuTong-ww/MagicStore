@@ -83,5 +83,4 @@ static func config_valid(value: Variant) -> bool:
 	return _button_materials_valid(value)
 
 static func load_config() -> Dictionary:
-	var value: Variant = JSON.parse_string(FileAccess.get_file_as_string(PATH))
-	return value if config_valid(value) else {}
+	return preload("res://scripts/ui/packed_ui_data.gd").load_web(PATH,config_valid)

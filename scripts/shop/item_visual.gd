@@ -87,10 +87,11 @@ static func settings_valid(settings: Dictionary) -> bool:
 	return preview.receipt_path.ends_with(".json")
 
 static func load_settings() -> Dictionary:
-	var settings: Variant = JSON.parse_string(FileAccess.get_file_as_string(SETTINGS_PATH))
-	return settings if settings is Dictionary and settings_valid(settings) else {}
+	return preload("res://scripts/ui/packed_ui_data.gd").load_web(SETTINGS_PATH,settings_valid)
 
 static func load_config(verify_files: bool = false) -> Dictionary:
+	if not verify_files:
+		return preload("res://scripts/ui/packed_ui_data.gd").load_web(CONFIG_PATH,func(value: Dictionary) -> bool: return config_valid(value,false))
 	var data: Variant = JSON.parse_string(FileAccess.get_file_as_string(CONFIG_PATH))
 	return data if data is Dictionary and config_valid(data,verify_files) else {}
 

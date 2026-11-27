@@ -15,8 +15,7 @@ static func valid(value: Variant) -> bool:
 		if not value.header_icons.get(role) is String or value.header_icons[role].is_empty(): return false
 	return value.capture_sizes.size() == 4 and value.capture_sizes.all(func(s: Variant) -> bool: return s is Array and s.size() == 2 and s.all(func(n: Variant) -> bool: return (n is int or n is float) and is_finite(float(n)) and n > 0))
 static func load_config() -> Dictionary:
-	var value: Variant = JSON.parse_string(FileAccess.get_file_as_string(PATH))
-	return value if valid(value) else {}
+	return preload("res://scripts/ui/packed_ui_data.gd").load_web(PATH,valid)
 static func css_scale(control: Control) -> Vector2:
 	var metrics := Metrics.measure(control)
 	if not Metrics.valid(metrics): return Vector2.ONE

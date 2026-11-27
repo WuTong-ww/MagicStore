@@ -56,8 +56,19 @@ static func _hotspot_paper(settings: Dictionary, highlighted: bool) -> StyleBoxF
 	return paper
 
 static func load_config() -> Dictionary:
-	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(CONFIG_PATH))
-	return parsed if parsed is Dictionary and config_valid(parsed) else {}
+	return preload("res://scripts/ui/packed_ui_data.gd").load_web(CONFIG_PATH,config_valid)
+
+static var _texture_refs: Dictionary = {}
+static func warm_textures() -> void:
+	if not preload("res://scripts/ui/performance_config.gd").active("warm_scene_textures"): return
+	var settings := load_config()
+	for scene: Dictionary in settings.get("scenes",{}).values():
+		for variant: String in ["day","night","closed"]:
+			if not scene.has(variant): continue
+			for state: String in ["open","closed"]: texture_for(background_path(scene,variant,state))
+		for layer: Dictionary in scene.get("layers",{}).values():
+			if layer.get("display","") in ["cell","hidden"]: continue
+			for variant: String in ["day","night","closed"]: texture_for(layer_path(layer,variant),layer.get("source_region",[]))
 
 static func _positive_number(value: Variant) -> bool:
 	return (value is int or value is float) and is_finite(float(value)) and value > 0
@@ -324,7 +335,9 @@ func setup(page: String, supplied_config: Dictionary = {}) -> void:
 static func texture_for(path: String, source_region: Array = []) -> Texture2D:
 	if not ResourceLoader.exists(path):
 		return null
-	var source := load(path) as Texture2D
+	var retain := preload("res://scripts/ui/performance_config.gd").active("warm_scene_textures")
+	var source: Texture2D = _texture_refs.get(path) if retain and _texture_refs.has(path) else load(path) as Texture2D
+	if retain and source != null: _texture_refs[path] = source
 	if source == null or source_region.is_empty():
 		return source
 	if not _region_valid(source_region):
