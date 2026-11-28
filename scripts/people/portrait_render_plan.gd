@@ -10,6 +10,57 @@ static func _number(value: Variant) -> bool:
 static func _whole(value: Variant) -> bool:
 	return _number(value) and value == floor(float(value))
 
+static func _point(value: Variant, canvas: Array) -> bool:
+	return value is Array and value.size() == 2 and _number(value[0]) and _number(value[1]) and value[0] >= 0 and value[0] < canvas[0] and value[1] >= 0 and value[1] < canvas[1]
+
+static func _mounted(value: Variant) -> bool:
+	if not value is Dictionary or not value.get("path") is String or not value.get("sha256") is String:
+		return false
+	return value.path.begins_with("res://assets/portraits/r4/") and value.path.ends_with(".png") and not ".." in value.path and value.sha256.length() == 64 and value.sha256.is_valid_hex_number(false)
+
+static func attachments_valid(config: Dictionary, layers: Dictionary) -> bool:
+	var anchors: Variant = config.get("anchors",{}).get("faces")
+	if not _keys(anchors,layers.face_shape.keys()):
+		return false
+	for face: String in anchors:
+		if not _keys(anchors[face],["crown","ear_l","ear_r","neck_base","chin"]):
+			return false
+		for point: Variant in anchors[face].values():
+			if not _point(point,config.canvas): return false
+		if not (anchors[face].crown[1] < anchors[face].ear_l[1] and anchors[face].ear_l[0] < anchors[face].ear_r[0] and anchors[face].ear_l[1] < anchors[face].chin[1] and anchors[face].chin[1] < anchors[face].neck_base[1]):
+			return false
+	var mount: Variant = config.rendering.get("attachments")
+	if not _keys(mount,["version","headphones","scarf","limits"]) or mount.version != 1:
+		return false
+	if not _keys(mount.limits,["ear_distance_px","back_visible_fraction"]) or mount.limits.ear_distance_px != 6 or mount.limits.back_visible_fraction != 0.05:
+		return false
+	var split: bool = config.rendering.version == 3
+	if not _keys(mount.headphones,["accessory_id","variants","split_y"] if split else ["accessory_id","variants"]) or mount.headphones.accessory_id != "accessory_14" or not _keys(mount.headphones.variants,layers.face_shape.keys()):
+		return false
+	if split and (not _whole(mount.headphones.split_y) or mount.headphones.split_y <= 0 or mount.headphones.split_y >= config.canvas[1]):
+		return false
+	for face: String in anchors:
+		var row: Variant = mount.headphones.variants[face]
+		if not _keys(row,["path","sha256","cushion_regions","crown"]) or not _mounted(row) or row.crown != anchors[face].crown or not _keys(row.cushion_regions,["ear_l","ear_r"]):
+			return false
+		for region: Variant in row.cushion_regions.values():
+			if not region is Array or region.size() != 4 or not region.all(func(v: Variant) -> bool: return _whole(v)):
+				return false
+			if region[0] < 0 or region[1] < 0 or region[2] > config.canvas[0] or region[3] > config.canvas[1] or region[2]-region[0] < 60 or region[3]-region[1] < 80:
+				return false
+			if split and mount.headphones.split_y >= region[1]: return false
+	if not _keys(mount.scarf,["accessory_id","front","back"]) or mount.scarf.accessory_id != "accessory_07" or not _keys(mount.scarf.back,["path","sha256"]) or not _mounted(mount.scarf.back):
+		return false
+	var front: Variant = mount.scarf.front
+	if not _keys(front,["path","sha256","knot","knot_region"]) or not _mounted(front) or not _point(front.knot,config.canvas):
+		return false
+	if not front.knot_region is Array or front.knot_region.size() != 4 or not front.knot_region.all(func(v: Variant) -> bool: return _whole(v)):
+		return false
+	var box: Array = front.knot_region
+	if not (box[0] >= 0 and box[1] >= 0 and box[2] <= config.canvas[0] and box[3] <= config.canvas[1] and box[0] < front.knot[0] and front.knot[0] < box[2] and box[1] < front.knot[1] and front.knot[1] < box[3]):
+		return false
+	return anchors.values().all(func(row: Dictionary) -> bool: return front.knot[1] > row.neck_base[1])
+
 static func _parts(config: Dictionary) -> Dictionary:
 	if not config.get("parts") is Dictionary:
 		return {}
@@ -32,25 +83,35 @@ static func config_valid(config: Dictionary) -> bool:
 	if not config.get("layer_order") is Array or not config.get("canvas") is Array or config.canvas.size() != 2 or not config.canvas.all(func(v: Variant) -> bool: return _whole(v) and v > 0):
 		return false
 	var policy: Variant = config.get("rendering")
-	if not _keys(policy,["version","render_order","accessories"]) or not _whole(policy.version) or policy.version != 1:
+	if not policy is Dictionary or not _whole(policy.get("version")) or (policy.version != 1 and policy.version != 2 and policy.version != 3):
 		return false
-	if not policy.render_order is Array or policy.render_order.size() != config.layer_order.size()+1 or not policy.render_order.all(func(v: Variant) -> bool: return v is String):
+	var mounted: bool = policy.version >= 2
+	if not _keys(policy,["version","render_order","accessories","attachments"] if mounted else ["version","render_order","accessories"]):
+		return false
+	var virtual: Array = ["scarf_back","scarf_front"] if mounted else ["neckwear"]
+	if policy.version == 3: virtual.append("headband")
+	if not policy.render_order is Array or policy.render_order.size() != config.layer_order.size()+virtual.size() or not policy.render_order.all(func(v: Variant) -> bool: return v is String):
 		return false
 	var order: Array = policy.render_order
 	var seen := {}
 	for layer: String in order:
-		if seen.has(layer) or (layer != "neckwear" and layer not in config.layer_order):
+		if seen.has(layer) or (layer not in virtual and layer not in config.layer_order):
 			return false
 		seen[layer] = true
-	if not seen.has("neckwear") or not config.layer_order.all(func(v: Variant) -> bool: return seen.has(v)):
+	if not virtual.all(func(v: String) -> bool: return seen.has(v)) or not config.layer_order.all(func(v: Variant) -> bool: return seen.has(v)):
 		return false
-	if not (order.find("hair_back") < order.find("outfit") and order.find("outfit") < order.find("neckwear") and order.find("neckwear") < order.find("hair_front")):
+	var front_layer: String = "scarf_front" if mounted else "neckwear"
+	if not (order.find("hair_back") < order.find("outfit") and order.find("outfit") < order.find(front_layer) and order.find(front_layer) < order.find("hair_front")):
+		return false
+	if mounted and not (order.find("hair_back") < order.find("scarf_back") and order.find("scarf_back") < order.find("body") and order.find("scarf_front") < order.find("face_shape") and order.find("hair_front") < order.find("accessory")):
+		return false
+	if policy.version == 3 and not (order.find("mouth_expr") < order.find("headband") and order.find("headband") < order.find("hair_front")):
 		return false
 	if not _keys(policy.accessories,layers.accessory.keys()):
 		return false
 	for accessory: String in policy.accessories:
 		var render: Variant = policy.accessories[accessory]
-		if not _keys(render,["layer","hides","incompatible_with"]) or render.layer not in ["accessory","neckwear"] or not render.hides is Array or not render.incompatible_with is Array:
+		if not _keys(render,["layer","hides","incompatible_with"]) or render.layer not in ["accessory",front_layer] or not render.hides is Array or not render.incompatible_with is Array:
 			return false
 		var replacements := {}
 		seen = {}
@@ -98,7 +159,7 @@ static func config_valid(config: Dictionary) -> bool:
 				return false
 		if accessory == "none" and (render.layer != "accessory" or not render.hides.is_empty() or not render.incompatible_with.is_empty()):
 			return false
-	return policy.accessories.get("accessory_07",{}).get("layer") == "neckwear"
+	return policy.accessories.get("accessory_07",{}).get("layer") == front_layer and (not mounted or attachments_valid(config,layers))
 
 static func selection_valid(value: Dictionary, config: Dictionary) -> bool:
 	var accessory: String = value.get("parts",{}).get("accessory","none")
@@ -117,6 +178,24 @@ static func build(records: Array, value: Dictionary, expression: String, config:
 		row.display_id = row.id
 		row.render_layer = render.layer if row.layer == "accessory" else row.layer
 		row.operations = []
+		if config.rendering.version >= 2 and row.layer == "accessory":
+			var mounts: Dictionary = config.rendering.attachments
+			if accessory == mounts.headphones.accessory_id:
+				row.path = mounts.headphones.variants[value.parts.face_shape].path
+				if config.rendering.version == 3:
+					row.operations = [{"mode":"slice","start_y":mounts.headphones.split_y,"end_y":config.canvas[1]}]
+					var band := row.duplicate(true)
+					band.render_layer = "headband"
+					band.node_name = "headband"
+					band.operations = [{"mode":"slice","start_y":0,"end_y":mounts.headphones.split_y}]
+					result.append(band)
+			elif accessory == mounts.scarf.accessory_id:
+				row.path = mounts.scarf.front.path
+				var back := row.duplicate(true)
+				back.path = mounts.scarf.back.path
+				back.render_layer = "scarf_back"
+				back.node_name = "scarf_back"
+				result.append(back)
 		for rule: Dictionary in render.hides:
 			if row.layer != rule.layer or row.id not in rule.when_ids:
 				continue
@@ -139,9 +218,15 @@ static func prepare_image(source: Image, operations: Array) -> Image:
 	var result: Image = source.duplicate()
 	result.convert(Image.FORMAT_RGBA8)
 	for rule: Dictionary in operations:
-		if rule.mode != "press":
+		if rule.mode == "slice":
+			if not _whole(rule.get("start_y")) or not _whole(rule.get("end_y")) or rule.start_y < 0 or rule.end_y > result.get_height() or rule.start_y >= rule.end_y:
+				return null
+			if rule.start_y > 0: result.fill_rect(Rect2i(0,0,result.get_width(),int(rule.start_y)),Color(0,0,0,0))
+			if rule.end_y < result.get_height(): result.fill_rect(Rect2i(0,int(rule.end_y),result.get_width(),result.get_height()-int(rule.end_y)),Color(0,0,0,0))
+		elif rule.mode == "press":
+			result = _press_image(result,rule)
+		else:
 			return null
-		result = _press_image(result,rule)
 	return result
 
 static func _press_image(source: Image, rule: Dictionary) -> Image:

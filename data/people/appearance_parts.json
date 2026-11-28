@@ -7,7 +7,141 @@
   "anchors": {
     "eye_y": 360,
     "center_x": 384,
-    "shoulder_y": 700
+    "shoulder_y": 700,
+    "faces": {
+      "face_01": {
+        "crown": [
+          398,
+          129
+        ],
+        "ear_l": [
+          236,
+          404
+        ],
+        "ear_r": [
+          563,
+          400
+        ],
+        "neck_base": [
+          386,
+          754
+        ],
+        "chin": [
+          387,
+          592
+        ]
+      },
+      "face_02": {
+        "crown": [
+          398,
+          126
+        ],
+        "ear_l": [
+          236,
+          404
+        ],
+        "ear_r": [
+          561,
+          400
+        ],
+        "neck_base": [
+          386,
+          754
+        ],
+        "chin": [
+          387,
+          594
+        ]
+      },
+      "face_03": {
+        "crown": [
+          398,
+          130
+        ],
+        "ear_l": [
+          238,
+          404
+        ],
+        "ear_r": [
+          560,
+          400
+        ],
+        "neck_base": [
+          386,
+          754
+        ],
+        "chin": [
+          390,
+          592
+        ]
+      },
+      "face_04": {
+        "crown": [
+          398,
+          129
+        ],
+        "ear_l": [
+          236,
+          404
+        ],
+        "ear_r": [
+          558,
+          400
+        ],
+        "neck_base": [
+          386,
+          754
+        ],
+        "chin": [
+          390,
+          596
+        ]
+      },
+      "face_05": {
+        "crown": [
+          398,
+          130
+        ],
+        "ear_l": [
+          236,
+          403
+        ],
+        "ear_r": [
+          562,
+          399
+        ],
+        "neck_base": [
+          386,
+          754
+        ],
+        "chin": [
+          389,
+          594
+        ]
+      },
+      "face_06": {
+        "crown": [
+          397,
+          130
+        ],
+        "ear_l": [
+          232,
+          408
+        ],
+        "ear_r": [
+          560,
+          403
+        ],
+        "neck_base": [
+          386,
+          754
+        ],
+        "chin": [
+          388,
+          598
+        ]
+      }
+    }
   },
   "layer_order": [
     "hair_back",
@@ -1672,17 +1806,19 @@
     }
   ],
   "rendering": {
-    "version": 1,
+    "version": 3,
     "render_order": [
       "hair_back",
+      "scarf_back",
       "body",
       "outfit",
-      "neckwear",
+      "scarf_front",
       "face_shape",
       "features",
       "eyes_expr",
       "brows_expr",
       "mouth_expr",
+      "headband",
       "hair_front",
       "accessory"
     ],
@@ -1723,7 +1859,7 @@
         "incompatible_with": []
       },
       "accessory_07": {
-        "layer": "neckwear",
+        "layer": "scarf_front",
         "hides": [],
         "incompatible_with": []
       },
@@ -1890,6 +2026,172 @@
         "layer": "accessory",
         "hides": [],
         "incompatible_with": []
+      }
+    },
+    "attachments": {
+      "version": 1,
+      "headphones": {
+        "accessory_id": "accessory_14",
+        "variants": {
+          "face_01": {
+            "path": "res://assets/portraits/r4/headphones-face_01.png",
+            "sha256": "4d7c981cae97140502fb8d6d2d68dd320f9854bd4ab0f7d1d7318c768e059adf",
+            "cushion_regions": {
+              "ear_l": [
+                179,
+                344,
+                299,
+                468
+              ],
+              "ear_r": [
+                503,
+                340,
+                623,
+                464
+              ]
+            },
+            "crown": [
+              398,
+              129
+            ]
+          },
+          "face_02": {
+            "path": "res://assets/portraits/r4/headphones-face_02.png",
+            "sha256": "6c6dea6cb01867afb6d9948f18364024553866aa938e5e945b3ace0c99a41239",
+            "cushion_regions": {
+              "ear_l": [
+                180,
+                344,
+                299,
+                469
+              ],
+              "ear_r": [
+                502,
+                340,
+                620,
+                465
+              ]
+            },
+            "crown": [
+              398,
+              126
+            ]
+          },
+          "face_03": {
+            "path": "res://assets/portraits/r4/headphones-face_03.png",
+            "sha256": "c2246dcb5432242eb3df3c35b826fe68a4dd77d43b23d6038d2d1af3f19da488",
+            "cushion_regions": {
+              "ear_l": [
+                182,
+                345,
+                300,
+                468
+              ],
+              "ear_r": [
+                501,
+                341,
+                619,
+                464
+              ]
+            },
+            "crown": [
+              398,
+              130
+            ]
+          },
+          "face_04": {
+            "path": "res://assets/portraits/r4/headphones-face_04.png",
+            "sha256": "db3a7fdafa6df55ab6dde71fa91dcd2d786db458d1c5987cc823ac387bf04269",
+            "cushion_regions": {
+              "ear_l": [
+                180,
+                344,
+                298,
+                468
+              ],
+              "ear_r": [
+                500,
+                340,
+                617,
+                464
+              ]
+            },
+            "crown": [
+              398,
+              129
+            ]
+          },
+          "face_05": {
+            "path": "res://assets/portraits/r4/headphones-face_05.png",
+            "sha256": "cba970216219b07df96e99695120ed65688c02be50d5a0f19c56b028ac79ced7",
+            "cushion_regions": {
+              "ear_l": [
+                179,
+                344,
+                299,
+                467
+              ],
+              "ear_r": [
+                503,
+                340,
+                622,
+                462
+              ]
+            },
+            "crown": [
+              398,
+              130
+            ]
+          },
+          "face_06": {
+            "path": "res://assets/portraits/r4/headphones-face_06.png",
+            "sha256": "d41ec9ab8a2b22c9791e5aa834f1a9d6a13ca18df0da8dc4d00ac5ba2a0b27ad",
+            "cushion_regions": {
+              "ear_l": [
+                175,
+                348,
+                295,
+                473
+              ],
+              "ear_r": [
+                501,
+                343,
+                620,
+                468
+              ]
+            },
+            "crown": [
+              397,
+              130
+            ]
+          }
+        },
+        "split_y": 300
+      },
+      "scarf": {
+        "accessory_id": "accessory_07",
+        "front": {
+          "path": "res://assets/portraits/r4/scarf-front.png",
+          "sha256": "5aaf1cef0021b73af26175ceb4cb1e208867c94313ec211b71c9ee52e1c28866",
+          "knot": [
+            460.03125,
+            787.2204899777283
+          ],
+          "knot_region": [
+            430,
+            749,
+            493,
+            825
+          ]
+        },
+        "back": {
+          "path": "res://assets/portraits/r4/scarf-back.png",
+          "sha256": "6faee9c5e3ead51a6c4584a2c132d146096afa213859bf4bdc0ff674bcac635c"
+        }
+      },
+      "limits": {
+        "ear_distance_px": 6,
+        "back_visible_fraction": 0.05
       }
     }
   },

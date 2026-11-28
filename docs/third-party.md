@@ -135,10 +135,14 @@ Fabric Of Life.ogg｜`8622ec2d6391153a52fe53cfc278a53fa62bf03a46ca6215df98a57f63
 | assets/audio/ui/r4/wood_alt2.ogg | rollover4.ogg | [Kenney](https://kenney.nl/assets/ui-audio) · CC0-1.0 | 7d0a737b1dd80735e056385650b06857702825a36e1a297a47cb72de2b5f1039 |
 
 每个用途一个主选和两个候选；若相同源与相同处理在不同用途复用，输出字节相同且来源逐份登记，不伪称不同录音。
-
 ## 第四轮 B1：Rider–Waite–Smith 1909 原版牌面
 
 - 作者 Pamela Colman Smith（1878–1951），Rider & Company，1909 Pam-A 原版；上游元数据标注 Public Domain。本项目只采用原始历史画作，不采用现代 U.S. Games 扫描。
 - 固定来源：[mixvlad/TarotCards，840b84d012c6b74dc1634fa2d00d1b21f5b28093](https://github.com/mixvlad/TarotCards/tree/840b84d012c6b74dc1634fa2d00d1b21f5b28093/tarot/rider-waite)。其当前 metadata.json / SOURCES.md 实际注明 [Steve P. 的 1909 Pam-A 修复扫描](https://steve-p.org/cards/RWSa.html)，与任务书中的 Wikimedia 描述不同，按真实来源记录。仓库的 MIT 仅适用于其代码，画作依据独立的公有领域标注。
 - 仅 78 张 `full-png` 牌面，封套和其他牌组未使用。每张源 Git blob、源 SHA256 与输出 SHA256 完整列于 `assets/oracle/rws/provenance.json`。
 - 处理：安全裁白边、饱和度 −10%、轻微暖色，等比容纳到 360×617（7:12 的最近整数），双线性缩小与固定 0.7px 抗锯齿，WebP quality 80 / method 6。保留原图内容、原版标题和边框；详情与复现方法见 `assets/oracle/rws/README.md`。
+
+## 第四轮 B3：自生成配饰
+
+耳机、围巾前片与后片由内置 image_gen.imagegen 各生成一次，无重做；原 v3 部件只作风格/尺度参考。六个脸型挂载输出与围巾前后层在 `assets/portraits/r4/`。提示词、实际原生尺寸、原稿 SHA256、输出 SHA256、挂载矩阵与版本均登记在 `assets/ART_ASSET_MANIFEST.json`，不冒用第三方素材授权。原稿保留在忽略的 `.tools/r4-b/generated/`，不提交候选。
+

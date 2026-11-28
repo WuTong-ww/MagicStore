@@ -51,7 +51,7 @@ func run() -> void:
 		finish()
 		return
 	check(plan.get("version") == 1 and plan.get("digest") is String and plan.digest.length() == 64,"render plan is versioned and has a content digest")
-	check(rows.size() == config.layer_order.size(),"virtual neckwear changes drawing order without inventing saved parts or dropping body/clothing")
+	check(rows.size() == config.layer_order.size()+1,"two scarf drawing instances share the same saved accessory without dropping body/clothing")
 	for row: Dictionary in rows:
 		check(row.get("id") == stored.parts.get(row.get("layer","")),"selected part ID stays the stored ID / "+str(row.get("layer")))
 		if not row.get("available",false):

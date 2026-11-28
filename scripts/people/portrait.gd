@@ -149,12 +149,13 @@ func _rebuild() -> void:
 		if entry.layer == "face_shape": face_record = entry
 	for record: Dictionary in records:
 		var layer := TextureRect.new()
-		layer.name = record.layer
+		layer.name = record.get("node_name",record.layer)
 		layer.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		layer.stretch_mode = TextureRect.STRETCH_SCALE
 		layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		layer.set_meta("part_id",record.id)
 		layer.set_meta("display_id",record.get("display_id",record.id))
+		layer.set_meta("render_layer",record.get("render_layer",record.layer))
 		layer.set_meta("render_plan_digest",render_plan_data.get("digest",""))
 		layer.set_meta("art_status",record.status)
 		layer_canvas.add_child(layer)

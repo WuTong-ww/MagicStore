@@ -79,17 +79,27 @@ def validate_rendering(config):
         need(len(layers[layer]) == len(rows), "PART_ID_DUPLICATE")
     policy = config.get("rendering")
     need(type(policy) is dict, "RENDER_METADATA_MISSING")
-    need(exact(policy, ("version", "render_order", "accessories")) and whole(policy["version"]) and policy["version"] == 1, "RENDER_METADATA_SHAPE")
+    mounted = policy.get("version") in (2,3)
+    split = policy.get('version') == 3
+    need(exact(policy, ("version", "render_order", "accessories", "attachments") if mounted else ("version", "render_order", "accessories")) and whole(policy["version"]) and policy["version"] in (1,2,3), "RENDER_METADATA_SHAPE")
     render_order = policy["render_order"]
     need(type(render_order) is list and all(type(x) is str for x in render_order), "RENDER_ORDER_TYPE")
-    need(len(render_order) == len(set(render_order)) and set(render_order) == set(order) | {"neckwear"}, "RENDER_ORDER_MEMBERS")
-    need(render_order.index("hair_back") < render_order.index("outfit") < render_order.index("neckwear") < render_order.index("hair_front"), "SCARF_DEPTH_INVALID")
+    front_layer = "scarf_front" if mounted else "neckwear"
+    virtual = {"scarf_back","scarf_front"} if mounted else {"neckwear"}
+    if split: virtual.add('headband')
+    need(len(render_order) == len(set(render_order)) and set(render_order) == set(order) | virtual, "RENDER_ORDER_MEMBERS")
+    need(render_order.index("hair_back") < render_order.index("outfit") < render_order.index(front_layer) < render_order.index("hair_front"), "SCARF_DEPTH_INVALID")
+    if mounted:
+        need(render_order.index("hair_back") < render_order.index("scarf_back") < render_order.index("body"), "SCARF_BACK_DEPTH_INVALID")
+        need(render_order.index("scarf_front") < render_order.index("face_shape") and render_order.index("hair_front") < render_order.index("accessory"), "MOUNT_DEPTH_INVALID")
+    if split:
+        need(render_order.index('mouth_expr')<render_order.index('headband')<render_order.index('hair_front'),'HEADBAND_DEPTH_INVALID')
     accessories = policy["accessories"]
     need(type(accessories) is dict and set(accessories) == set(layers["accessory"]), "ACCESSORY_RENDER_ROWS_INVALID")
     canvas = config.get("canvas")
     need(type(canvas) is list and len(canvas) == 2 and all(whole(x) and x > 0 for x in canvas), "CANVAS_INVALID")
     for accessory_id, render in accessories.items():
-        need(exact(render, ("layer", "hides", "incompatible_with")) and render["layer"] in ("accessory", "neckwear"), "ACCESSORY_RENDER_SHAPE")
+        need(exact(render, ("layer", "hides", "incompatible_with")) and render["layer"] in ("accessory", front_layer), "ACCESSORY_RENDER_SHAPE")
         need(type(render["hides"]) is list and type(render["incompatible_with"]) is list, "RENDER_RULE_ARRAYS")
         seen, graph = set(), {}
         for rule in render["hides"]:
@@ -133,8 +143,133 @@ def validate_rendering(config):
         need(accessory_id != "none" or (not render["hides"] and not render["incompatible_with"] and render["layer"] == "accessory"), "NONE_MUST_BE_IDENTITY")
         for layer in HAIR:
             need(any((layer, part_id) not in incompatible for part_id in layers[layer]), "BLANKET_HAIR_EXCLUSION")
-    need(accessories.get("accessory_07", {}).get("layer") == "neckwear", "SCARF_LAYER_INVALID")
+    need(accessories.get("accessory_07", {}).get("layer") == front_layer, "SCARF_LAYER_INVALID")
+    if mounted:
+        validate_attachments(config)
     return policy
+
+
+def validate_attachments(config):
+    faces = {r['id'] for r in config['parts']['face_shape']}
+    anchors = config.get('anchors',{}).get('faces')
+    need(exact(anchors,faces), 'FACE_ANCHORS_MISSING')
+    def point(p):
+        return type(p) is list and len(p)==2 and all(number(v) for v in p) and all(0<=p[i]<config['canvas'][i] for i in (0,1))
+    def mounted(row):
+        return type(row) is dict and type(row.get('path')) is str and row['path'].startswith('res://assets/portraits/r4/') and row['path'].endswith('.png') and '..' not in row['path'] and type(row.get('sha256')) is str and len(row['sha256'])==64 and all(c in '0123456789abcdef' for c in row['sha256'])
+    for row in anchors.values():
+        need(exact(row,('crown','ear_l','ear_r','neck_base','chin')) and all(point(p) for p in row.values()), 'FACE_ANCHOR_POINT_INVALID')
+        need(row['crown'][1]<row['ear_l'][1]<row['chin'][1]<row['neck_base'][1] and row['ear_l'][0]<row['ear_r'][0], 'FACE_ANCHOR_ORDER')
+    mount=config['rendering'].get('attachments')
+    need(exact(mount,('version','headphones','scarf','limits')) and whole(mount['version']) and mount['version']==1, 'ATTACHMENT_SHAPE')
+    need(mount['limits']==dict(ear_distance_px=6,back_visible_fraction=0.05), 'ATTACHMENT_LIMITS')
+    head=mount['headphones']
+    split=config['rendering']['version']==3
+    need(exact(head,('accessory_id','variants','split_y') if split else ('accessory_id','variants')) and head['accessory_id']=='accessory_14' and exact(head['variants'],faces), 'HEADPHONE_VARIANTS')
+    if split: need(whole(head['split_y']) and 0<head['split_y']<config['canvas'][1],'HEADPHONE_SPLIT_INVALID')
+    for face,row in head['variants'].items():
+        need(exact(row,('path','sha256','cushion_regions','crown')) and mounted(row) and row['crown']==anchors[face]['crown'] and exact(row['cushion_regions'],('ear_l','ear_r')), 'HEADPHONE_MOUNT')
+        for box in row['cushion_regions'].values():
+            need(type(box) is list and len(box)==4 and all(whole(v) for v in box) and 0<=box[0]<box[2]<=config['canvas'][0] and 0<=box[1]<box[3]<=config['canvas'][1] and box[2]-box[0]>=60 and box[3]-box[1]>=80, 'CUSHION_REGION_INVALID')
+            if split: need(head['split_y']<box[1],'SPLIT_CUTS_CUSHION')
+    scarf=mount['scarf']
+    need(exact(scarf,('accessory_id','front','back')) and scarf['accessory_id']=='accessory_07' and exact(scarf['back'],('path','sha256')) and mounted(scarf['back']), 'SCARF_BACK_MOUNT')
+    front=scarf['front']
+    need(exact(front,('path','sha256','knot','knot_region')) and mounted(front) and point(front['knot']), 'SCARF_FRONT_MOUNT')
+    box=front['knot_region']
+    need(type(box) is list and len(box)==4 and all(whole(v) for v in box) and 0<=box[0]<front['knot'][0]<box[2]<=config['canvas'][0] and 0<=box[1]<front['knot'][1]<box[3]<=config['canvas'][1], 'KNOT_REGION_INVALID')
+    need(all(front['knot'][1]>row['neck_base'][1] for row in anchors.values()), 'KNOT_ABOVE_NECK_BASE')
+    return mount
+
+
+def audit_semantics(config, rows, root=ROOT):
+    """Measure painted pixels, not just declared centers; cover every matrix row.
+
+    Rear-cloth visibility is measured on native alpha through ALL later layers.
+    Every outfit is considered as well as the requested face/hair/accessory
+    product. The region is cropped to the rear cloth bounds for bounded memory.
+    """
+    mount=validate_attachments(config)
+    manifest=json.loads((root/'assets/ART_ASSET_MANIFEST.json').read_text(encoding='utf-8'))
+    registered={r['path']:r['sha256'] for r in manifest['assets']}
+    cache={}
+    def alpha(path):
+        if path not in cache:
+            file=root/path.removeprefix('res://')
+            need(registered.get(file.relative_to(root).as_posix())==digest(file),'MOUNT_SOURCE_NOT_REGISTERED')
+            with Image.open(file) as image:
+                need(image.mode=='RGBA' and list(image.size)==config['canvas'],'MOUNT_IMAGE_FORMAT')
+                cache[path]=np.asarray(image)[:,:,3].copy()
+            need(np.count_nonzero(cache[path])>1000,'BLANK_MOUNT_NOT_A_FIX')
+        return cache[path]
+    def measured_center(pixels,box):
+        x0,y0,x1,y1=map(int,box); a=pixels[y0:y1,x0:x1].astype(float); y,x=np.indices(a.shape)
+        need(np.count_nonzero(a)>1000,'CUSHION_OR_KNOT_EMPTY')
+        return np.array([(x*a).sum()/a.sum()+x0,(y*a).sum()/a.sum()+y0])
+    ears={}
+    for face,row in mount['headphones']['variants'].items():
+        pixels=alpha(row['path']); anchors=config['anchors']['faces'][face]; ear_results={}
+        for key,box in row['cushion_regions'].items():
+            center=measured_center(pixels,box); distance=float(np.linalg.norm(center-np.array(anchors[key])))
+            need(distance<=6,'EARCUP_TOO_FAR: '+face+'/'+key)
+            # Not a tiny arbitrary window around the desired anchor: the whole
+            # painted cushion has meaningful height, area and a broad footprint.
+            ear_results[key]=dict(center=center.tolist(),distance_px=distance,region=box)
+        x,y=map(round,anchors['crown']); need(pixels[y,x]>=128,'HEADBAND_MISSES_CROWN')
+        ears[face]=ear_results
+    scarf=mount['scarf']; back=alpha(scarf['back']['path']); front=alpha(scarf['front']['path'])
+    knot=measured_center(front,scarf['front']['knot_region'])
+    kx,ky=map(round,scarf['front']['knot']); need(front[ky,kx]>=128,'DECLARED_KNOT_NOT_ON_CLOTH')
+    need(all(knot[1]>r['neck_base'][1] for r in config['anchors']['faces'].values()),'PAINTED_KNOT_ABOVE_NECK_BASE')
+    ys,xs=np.nonzero(back); box=(slice(ys.min(),ys.max()+1),slice(xs.min(),xs.max()+1))
+    rear=back[box]; own=rear>0; own_count=np.count_nonzero(own)
+    need(own_count>3000,'SCARF_BACK_TOO_SMALL')
+    front_y=int(np.nonzero(front)[0].min())
+    need(all(front_y>r['chin'][1] for r in config['anchors']['faces'].values()),'SCARF_FRONT_COVERS_CHIN')
+    parts={layer:{r['id']:r for r in items} for layer,items in config['parts'].items()}
+    body=alpha(parts['body']['body_01']['path'])[box]
+    visibility={}; measurements=[]; cap_results={}
+    for row in rows:
+        selected=row['selected']; face=selected['face_shape']; accessory=selected['accessory']
+        result=dict(selected=selected,legal=row['new_selection_valid'])
+        if accessory=='accessory_14':
+            result['ears']=ears[face]
+            if config['rendering']['version']==3:
+                key=(face,selected['hair_front'])
+                if key not in cap_results:
+                    source_hair=alpha(parts['hair_front'][selected['hair_front']]['path'])
+                    hair=source_hair
+                    for rule in config['rendering']['accessories']['accessory_14']['hides']:
+                        if rule['layer']=='hair_front' and selected['hair_front'] in rule['when_ids']:
+                            need(rule['mode']=='press','HEADPHONE_HAIR_MUST_RETAIN_ID')
+                            hair=press_pixels(hair,rule)
+                    # Hair may naturally cover a rear headband. Deforming it to
+                    # force the band into view exposes extra scalp. Preserve the
+                    # complete original alpha instead, not just a central strip.
+                    need(np.array_equal(hair,source_hair),'HEADPHONES_CHANGED_HAIR: '+str(key))
+                    cap_results[key]=True
+                result['hair_pixels_preserved']=cap_results[key]
+        elif accessory=='accessory_07':
+            key=(face,selected['hair_front'])
+            if key not in visibility:
+                post=[body,front[box],alpha(parts['face_shape'][face]['path'])[box],alpha(parts['hair_front'][selected['hair_front']]['path'])[box]]
+                transmittance=np.ones(rear.shape,dtype=float)
+                for layer in post: transmittance*=1-layer.astype(float)/255
+                worst=0.0
+                # Count a pixel as visible if at least one 8-bit alpha unit of
+                # this rear layer survives all actual later layers. Conservative
+                # at antialiased edges, rather than just comparing opaque masks.
+                for outfit in parts['outfit'].values():
+                    remaining=rear.astype(float)*transmittance*(1-alpha(outfit['path'])[box].astype(float)/255)
+                    worst=max(worst,np.count_nonzero(own & (remaining>=1))/own_count)
+                need(worst<=0.05,'SCARF_BACK_VISIBLE: '+str(key))
+                visibility[key]=worst
+            result.update(back_visible_fraction=visibility[key],knot_y=float(knot[1]))
+        measurements.append(result)
+    need(len(measurements)==10800,'SEMANTIC_MATRIX_INCOMPLETE')
+    return dict(matrix_count=len(measurements),headphones=ears,knot_center=knot.tolist(),
+                rear_pixels=int(own_count),maximum_back_visible_fraction=max(visibility.values()),
+                outfit_count=len(parts['outfit']),hair_preservation_pairs=len(cap_results),combinations=measurements)
 
 
 def audit_sources(config, root=ROOT):
@@ -185,8 +320,11 @@ def matrix(config, policy=None):
     ids = {layer: [row["id"] for row in config["parts"][layer]] for layer in ("accessory", *HAIR)}
     need(len(ids["accessory"]) == 15 and "none" in ids["accessory"] and len(ids["hair_front"]) == 12 and len(ids["hair_back"]) == 10, "MATRIX_DIMENSIONS_CHANGED")
     rows, reachable = [], {part_id: 0 for part_id in ids["accessory"]}
-    for accessory, front, back in itertools.product(ids["accessory"], ids["hair_front"], ids["hair_back"]):
+    faces = [row['id'] for row in config['parts']['face_shape']] if policy and policy['version']>=2 else [None]
+    for face, accessory, front, back in itertools.product(faces, ids["accessory"], ids["hair_front"], ids["hair_back"]):
         selected = {"accessory": accessory, "hair_front": front, "hair_back": back}
+        if face is not None:
+            selected['face_shape']=face
         mutual = any(all(selected.get(k) == v for k, v in rule.items()) for rule in config["mutual_exclusions"])
         excluded = any(all(selected.get(k) == v for k, v in rule.items()) for rule in config.get("selection_exclusions", []))
         render = policy["accessories"][accessory] if policy else {"hides": [], "incompatible_with": []}
@@ -198,7 +336,7 @@ def matrix(config, policy=None):
         valid = not (mutual or excluded or incompatible)
         reachable[accessory] += int(valid)
         rows.append({"selected": selected, "display": display, "appearance_valid": not mutual, "new_selection_valid": valid, "saved_ids_changed": False})
-    need(len(rows) == 1800 and sum(row["selected"]["accessory"] != "none" for row in rows) == 1680, "INCOMPLETE_MATRIX")
+    need(len(rows) == 1800*len(faces) and sum(row["selected"]["accessory"] != "none" for row in rows) == 1680*len(faces), "INCOMPLETE_MATRIX")
     need(all(reachable.values()), "ACCESSORY_HAS_NO_REACHABLE_HAIR")
     return rows, reachable
 
@@ -319,10 +457,12 @@ def main():
         except ValueError as error:
             failures.append(str(error))
         rows, reachable = matrix(config, policy)
-        result.update(config_sha256=digest(args.config), sources=sources, source_count=len(sources), source_sha_all_match_manifest=True, matrix=rows, matrix_count=len(rows), primary_count=1680, accessory_none_count=120, appearance_valid_count=sum(x["appearance_valid"] for x in rows), selection_valid_count=sum(x["new_selection_valid"] for x in rows), selection_reachability=reachable)
+        result.update(config_sha256=digest(args.config), sources=sources, source_count=len(sources), source_sha_all_match_manifest=True, matrix=rows, matrix_count=len(rows), primary_count=sum(x['selected']['accessory']!='none' for x in rows), accessory_none_count=sum(x['selected']['accessory']=='none' for x in rows), appearance_valid_count=sum(x["appearance_valid"] for x in rows), selection_valid_count=sum(x["new_selection_valid"] for x in rows), selection_reachability=reachable)
         if policy is not None:
             result["prepared_hair"] = audit_prepared_hair(config, policy, alphas)
             result["face_layers"] = audit_face_layers(config, alphas)
+            if policy['version']>=2:
+                result['semantics']=audit_semantics(config,rows)
             if args.godot_parity is not None:
                 result["godot_parity"] = validate_godot_parity(config, json.loads(args.godot_parity.read_text(encoding="utf-8-sig")))
                 result["godot_parity_receipt"] = {"path": str(args.godot_parity), "sha256": digest(args.godot_parity)}
