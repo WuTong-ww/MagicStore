@@ -1,0 +1,1511 @@
+{
+  "version": 1,
+  "repository": "https://github.com/mixvlad/TarotCards",
+  "revision": "840b84d012c6b74dc1634fa2d00d1b21f5b28093",
+  "original_source": "https://steve-p.org/cards/RWSa.html",
+  "artist": "Pamela Colman Smith (1878–1951)",
+  "publisher": "Rider & Company, 1909; Pam-A",
+  "license": "Public domain — original 1909 artwork",
+  "processing": {
+    "script": "tools/art/rws_cards.py",
+    "size": [
+      360,
+      617
+    ],
+    "webp_quality": 80,
+    "saturation": 0.9,
+    "rgb_multipliers": [
+      1.004,
+      1.0,
+      0.987
+    ],
+    "crop_threshold": 235,
+    "crop_safety_pixels": 3,
+    "resampling": "bilinear; fixed 0.7px Gaussian antialias",
+    "fit": "contain; warm ivory padding; no distortion"
+  },
+  "cards": [
+    {
+      "id": "fool",
+      "source_path": "tarot/rider-waite/full-png/00_Fool.png",
+      "source_sha256": "5d2f2246ba78bb0797ae9f8a4d98f44b4e45942eac4d7bf9de7c0ba5f8e867db",
+      "source_git_blob": "d364ad64f32cea6d374fca888ef2883174255c84",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        38,
+        22,
+        1049,
+        1787
+      ],
+      "output": "res://assets/oracle/rws/fool.webp",
+      "output_sha256": "1582e43577cc0ab5b2c2cfd259409a44d591613fde786443fede7889d1774bc7",
+      "bytes": 38140
+    },
+    {
+      "id": "magician",
+      "source_path": "tarot/rider-waite/full-png/01_Magician.png",
+      "source_sha256": "dc84cbfa41ede147501cd7ea43eb91bff7080a9c3ca07834d3807c443fb71c8a",
+      "source_git_blob": "ae20f16c9b0c8a6e077440e843397464bba3bf3d",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        38,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/magician.webp",
+      "output_sha256": "1fdbc45883b76921efee645490fa36abbb80e7094fe1ad88c419d80606f0640c",
+      "bytes": 39934
+    },
+    {
+      "id": "high_priestess",
+      "source_path": "tarot/rider-waite/full-png/02_High_Priestess.png",
+      "source_sha256": "9d38e6847631f8fe54d8fe599c3b83cb7ccc6a3559d4380fcd519cde922cf8fa",
+      "source_git_blob": "e173373a45cc08544779a7bb22377a3109dae26b",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1048,
+        1787
+      ],
+      "output": "res://assets/oracle/rws/high_priestess.webp",
+      "output_sha256": "89575d9b97147e3eebb8c080485798388afdd3b3584c37a9943baba2e291c97e",
+      "bytes": 42772
+    },
+    {
+      "id": "empress",
+      "source_path": "tarot/rider-waite/full-png/03_Empress.png",
+      "source_sha256": "79462efaebfa666a77847db2f1213aa40c8a77f1aaa737c1e19ba329f6e1aab9",
+      "source_git_blob": "1e5b760a0c244576b12d2d61d951d7ac4a89104b",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1787
+      ],
+      "output": "res://assets/oracle/rws/empress.webp",
+      "output_sha256": "5a2c6f1f6d414c23c62f42b5f3dbbd382a5bb4ad13c53a45be3e1a777c408eec",
+      "bytes": 57092
+    },
+    {
+      "id": "emperor",
+      "source_path": "tarot/rider-waite/full-png/04_Emperor.png",
+      "source_sha256": "90e3f1c3d621c09fd240380a8f6ffd1b9c88fea6f6d411919eb63a4948286b39",
+      "source_git_blob": "2b67ea01f7017c13e692189d220bfa1842324a4d",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/emperor.webp",
+      "output_sha256": "919ea74d852e554913494f8fae6a01a641106f0db217e6f247032bb87db043bb",
+      "bytes": 48572
+    },
+    {
+      "id": "hierophant",
+      "source_path": "tarot/rider-waite/full-png/05_Hierophant.png",
+      "source_sha256": "a840311409085bec3a360f4d2d211b277f24928bd52cea686df22f334c0feaec",
+      "source_git_blob": "68a85aca3fccb8fb9e05978d595791840f9c3e38",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        23,
+        1048,
+        1787
+      ],
+      "output": "res://assets/oracle/rws/hierophant.webp",
+      "output_sha256": "99ccc65b4bf4e69f7693959ab8a6e08076471ffc7c17ce6e2f1f0dbc12fa6f11",
+      "bytes": 50680
+    },
+    {
+      "id": "lovers",
+      "source_path": "tarot/rider-waite/full-png/06_Lovers.png",
+      "source_sha256": "79d01b48ac19bbd6409936983e71521e266d832d4e71c964ac30131b4ac0dc3e",
+      "source_git_blob": "2b4fb32fab12ac1e60af43c8d445822b645a62fe",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/lovers.webp",
+      "output_sha256": "6233e271b14454a3e8f19bd6af06919dafd3221f56ac904b04dd23252a15a103",
+      "bytes": 52164
+    },
+    {
+      "id": "chariot",
+      "source_path": "tarot/rider-waite/full-png/07_Chariot.png",
+      "source_sha256": "61ed158907043d7182614bdf60701980397d206b367487bee096966892714ba7",
+      "source_git_blob": "262ba91d44581ed0d40d1c56ffc1a0e12cdf0fd8",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        38,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/chariot.webp",
+      "output_sha256": "59c174522c61c1803ba11d1bf0f826843dd57e975b60b8658059e67321286df0",
+      "bytes": 46474
+    },
+    {
+      "id": "strength",
+      "source_path": "tarot/rider-waite/full-png/08_Strength.png",
+      "source_sha256": "9a8ef53a04c74897e4e1174af3f34c25c315bba6eaa6b5a232af7936a9603034",
+      "source_git_blob": "6183ac096a03694800ab54cf51cf317c5fbfe0ea",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        23,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/strength.webp",
+      "output_sha256": "360ab8e9636fd2d5a889ae2a37d3e53082ab1cf7fbd768027b1e3724006d626b",
+      "bytes": 33724
+    },
+    {
+      "id": "hermit",
+      "source_path": "tarot/rider-waite/full-png/09_Hermit.png",
+      "source_sha256": "196020eab0ab7b0961033227d4801c050607e1dcb5e47001b5a2414b73bf91e6",
+      "source_git_blob": "118f901acd7c8a8aad0cbbd8bcd39fc0b3225e01",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        40,
+        22,
+        1048,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/hermit.webp",
+      "output_sha256": "ea445740107699577943eef1614881172aeb670f0b473764ef9be63bfc5498aa",
+      "bytes": 22806
+    },
+    {
+      "id": "wheel",
+      "source_path": "tarot/rider-waite/full-png/10_Wheel_of_Fortune.png",
+      "source_sha256": "9c6f2f5f092ac525c813340b45b2ea0ee02fd01dfe2b3ce9dfb9fa7fbc9b77dc",
+      "source_git_blob": "3964ae57602c240e9406e5703f0fad43d4070f5e",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1787
+      ],
+      "output": "res://assets/oracle/rws/wheel.webp",
+      "output_sha256": "ab58c8a2cafd88642854ee2bd38eeb8b7e7ea6e562e9346909bd40ecd4aa2453",
+      "bytes": 43296
+    },
+    {
+      "id": "justice",
+      "source_path": "tarot/rider-waite/full-png/11_Justice.png",
+      "source_sha256": "f9dfc2234e9bf124a40315d169d44b31417d51d4b325cbc1a00753686c604c9d",
+      "source_git_blob": "a10ea408b07ef20721719aa7943a4c35fe63c3fe",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/justice.webp",
+      "output_sha256": "7e6c087a9ef6e3f8dca9c38a68d47d862fc7930114e0f6b9a9c4555d6e71666a",
+      "bytes": 47596
+    },
+    {
+      "id": "hanged_man",
+      "source_path": "tarot/rider-waite/full-png/12_Hanged_Man.png",
+      "source_sha256": "5ffac041d7500423daae087611b2e58831471af2defd601ce1c88106bd399e3d",
+      "source_git_blob": "cd35534388cc1b36c1fcf0899c1fe3854e122b6e",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/hanged_man.webp",
+      "output_sha256": "5d82d39fd2214f48b50633c6f708a7d6aadc8f004f9a41933317356d48149836",
+      "bytes": 26436
+    },
+    {
+      "id": "death",
+      "source_path": "tarot/rider-waite/full-png/13_Death.png",
+      "source_sha256": "dc2bf74a0d97c0b4e3235710c0f8c114695f1279e727e8417a9f192eb2228325",
+      "source_git_blob": "cc3af14411dc342bec6a50d21d5bc8e98b7ee79f",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        24,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/death.webp",
+      "output_sha256": "1f748e20b91843d9142137e01ec9fae9b26d61cf95ac35e20c20e9ca3977be14",
+      "bytes": 48590
+    },
+    {
+      "id": "temperance",
+      "source_path": "tarot/rider-waite/full-png/14_Temperance.png",
+      "source_sha256": "64d83623898d114bb69ddc25d3f56c43eb8e0ea216de98ba3f4bb748aadbdd0e",
+      "source_git_blob": "ea7108c46d78125f38fc30a0fbd47a5e5a65c58a",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/temperance.webp",
+      "output_sha256": "1b07fa3c57a726bfba27f988904503f3d780d39dd91019addee9a81204612f3e",
+      "bytes": 49142
+    },
+    {
+      "id": "devil",
+      "source_path": "tarot/rider-waite/full-png/15_Devil.png",
+      "source_sha256": "9f53ce1c4f33b0e78d1e0c3a40d57a11674d1cb81c09670c3eac9867e272ce35",
+      "source_git_blob": "4df2bed614e327dd3f4b911c4847b0eb258ef3ae",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        23,
+        1049,
+        1787
+      ],
+      "output": "res://assets/oracle/rws/devil.webp",
+      "output_sha256": "0b314c2cbe2e88ab4cd5d539b7444d202a4c711c7991142ee3f480fd7a108083",
+      "bytes": 34112
+    },
+    {
+      "id": "tower",
+      "source_path": "tarot/rider-waite/full-png/16_Tower.png",
+      "source_sha256": "8e6a47fff3109b0e895a9d8aad2bcbd99a3a551f2e06d247a6c5acada4a50d83",
+      "source_git_blob": "bed4eda3cccaa2472c8bbc0c02ef1ce46eaa69bf",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        24,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/tower.webp",
+      "output_sha256": "0730fbb0df36d4e787c165974c6e2efb8f6e1daa3974cd04edc9e06dd2011411",
+      "bytes": 31540
+    },
+    {
+      "id": "star",
+      "source_path": "tarot/rider-waite/full-png/17_Star.png",
+      "source_sha256": "670a34ba8875cc00492248a0f4a966822e9fcb5c506d7732706e459a811f6728",
+      "source_git_blob": "42805e9e932205aead507f43fe9ca8da4748b686",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        23,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/star.webp",
+      "output_sha256": "2966f50f89527e0324edd12056027527e4543562af2059660acebf71bbbd8e1d",
+      "bytes": 40076
+    },
+    {
+      "id": "moon",
+      "source_path": "tarot/rider-waite/full-png/18_Moon.png",
+      "source_sha256": "2c14800dc6a5e6883c8c7fbc40a9b644a79f7e8bccf6b0343ff174a9c923b6ee",
+      "source_git_blob": "e8035bde8192a265b38bb963c7c9a8693e5c436e",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/moon.webp",
+      "output_sha256": "b80e3c402511763566637db8784a70e045eb9cfa3b54500a5ec4fa81b49b98cc",
+      "bytes": 42104
+    },
+    {
+      "id": "sun",
+      "source_path": "tarot/rider-waite/full-png/19_Sun.png",
+      "source_sha256": "02d4ba312f59235503f7b673214706d7d97b937569d420101f4f99ad160cdfc0",
+      "source_git_blob": "68db34548fcd6c2e6fdae5de3ed086dba7649caa",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        38,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/sun.webp",
+      "output_sha256": "88b0fc25aea85cb38c2bf595e2950c2938c5ea381b16e170c90992ea4823eb84",
+      "bytes": 50710
+    },
+    {
+      "id": "judgement",
+      "source_path": "tarot/rider-waite/full-png/20_Judgement.png",
+      "source_sha256": "83507cb49ec38ce46e88f0ebbb6a438e2f9ba6ab4dcf0c5836b74291d7cf5417",
+      "source_git_blob": "ca4342eb3d264ed622b3efdec915393cffb15f27",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1048,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/judgement.webp",
+      "output_sha256": "a4021260bae776cfa9a988dad72f6aba1d239d2d030c93251c786dfa4fd88340",
+      "bytes": 46642
+    },
+    {
+      "id": "world",
+      "source_path": "tarot/rider-waite/full-png/21_World.png",
+      "source_sha256": "37a16311056f32e85b6fd04763d4c6896eda8f7192ef9823ecf5230f9306b413",
+      "source_git_blob": "94d91f4a507471413de45f7e038ff9976d496e5c",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/world.webp",
+      "output_sha256": "1d4e79284be6aba4fd33546ceb4595852373d7a0b9744dfa79e149f567b339f3",
+      "bytes": 46452
+    },
+    {
+      "id": "wands_1",
+      "source_path": "tarot/rider-waite/full-png/Wands01.png",
+      "source_sha256": "d15a55f055b722dbdd73c46df581243a75f41f59bb768c991e8c1292eb49e3ab",
+      "source_git_blob": "a4edbec1dd133981ca1fdd0307f6d16d639c9d7b",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1787
+      ],
+      "output": "res://assets/oracle/rws/wands_1.webp",
+      "output_sha256": "fcabc11afdfcfa8f5711cf6f0a9195f59c95f8f494974ab5d83677ae01308d78",
+      "bytes": 23522
+    },
+    {
+      "id": "wands_2",
+      "source_path": "tarot/rider-waite/full-png/Wands02.png",
+      "source_sha256": "848fc5e2bd66079ca374ce7203215ccca486027947de16f398485567a124c71b",
+      "source_git_blob": "45f8a24748bb5d416bc2334329c7ca1b2b0cce31",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/wands_2.webp",
+      "output_sha256": "6520b24af85423b05a147a8efd0d87471da3ce12f8143916b7a3793d70953de3",
+      "bytes": 27670
+    },
+    {
+      "id": "wands_3",
+      "source_path": "tarot/rider-waite/full-png/Wands03.png",
+      "source_sha256": "39834ac0acc0451c192a6f97b69924c7cb0a6141fae7963730f511f4613d9163",
+      "source_git_blob": "c496eab027bbdcc332954122fc682b040f8ff1f4",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/wands_3.webp",
+      "output_sha256": "59300708ae51179d95d2c46367c42fa10f0f81ab8b3668e02ee0febbb2534613",
+      "bytes": 30256
+    },
+    {
+      "id": "wands_4",
+      "source_path": "tarot/rider-waite/full-png/Wands04.png",
+      "source_sha256": "55fe6e81713d0a017fb41ac18e57d568f5eae1131e8941c9c08f7b6798da53a9",
+      "source_git_blob": "6d1a2f42bed1050c9e323a2348d864d7254b7917",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        38,
+        23,
+        1048,
+        1787
+      ],
+      "output": "res://assets/oracle/rws/wands_4.webp",
+      "output_sha256": "db0803df39bc5b7f24a5be3c784437ff1a69abaaddd478930824976695c53e9b",
+      "bytes": 32968
+    },
+    {
+      "id": "wands_5",
+      "source_path": "tarot/rider-waite/full-png/Wands05.png",
+      "source_sha256": "17bb2f3a745760b58dfc289f89af2d5b288747a83bb962b5a68cdbbbb164295c",
+      "source_git_blob": "7e76850684cbac351cce8e6cc07186aa6a41c17f",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1048,
+        1787
+      ],
+      "output": "res://assets/oracle/rws/wands_5.webp",
+      "output_sha256": "6d006013c5338144bcf9664054108c092311fa31fdb4ba40e277bfc972c9ee73",
+      "bytes": 34930
+    },
+    {
+      "id": "wands_6",
+      "source_path": "tarot/rider-waite/full-png/Wands06.png",
+      "source_sha256": "585654d17b3d73b4f38faab178ad9adcb9e8c122fdaca2a7949c407f9d59ca42",
+      "source_git_blob": "b70e0d796dbe5e41b7bec8ec99d73322345c1aa6",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        24,
+        1047,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/wands_6.webp",
+      "output_sha256": "df799b9140b592f97fef8bee9a3a5560bda1bc95a4d587ddf9377d39725d8c0c",
+      "bytes": 34368
+    },
+    {
+      "id": "wands_7",
+      "source_path": "tarot/rider-waite/full-png/Wands07.png",
+      "source_sha256": "d8d5e335c66990e8e8298eb89509cd20655932973d6f840619f73a4bdf64538f",
+      "source_git_blob": "61ef7bd3cc5366d44f957f0dc65932c3656bfad0",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        38,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/wands_7.webp",
+      "output_sha256": "f36647350726c2650ebb21df38d8270bef041b0b39d8d7f6bc94edd6ece88f3b",
+      "bytes": 29712
+    },
+    {
+      "id": "wands_8",
+      "source_path": "tarot/rider-waite/full-png/Wands08.png",
+      "source_sha256": "83ac2b550e677139a8e62c040e1d8f6288bcd56dd170ea4c844481ed99ec4205",
+      "source_git_blob": "14fc9c8ae270031fc77814f016c70d96ee683bfa",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        38,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/wands_8.webp",
+      "output_sha256": "153a8444e8e1c72853f6d2e1ccee1f99cd2f40259c04096a4171dfea0cfaa768",
+      "bytes": 29240
+    },
+    {
+      "id": "wands_9",
+      "source_path": "tarot/rider-waite/full-png/Wands09.png",
+      "source_sha256": "1b30bee849ed61c662b735e6e1222be74f477cc61354670c9d8b66ac19a20d07",
+      "source_git_blob": "a5e6135dcfd005b490d57bb54a2883f4486cae41",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/wands_9.webp",
+      "output_sha256": "e672e809ff466f89ad3901259c92298e5f364258beb0cd011cbbceea8b7ff645",
+      "bytes": 37162
+    },
+    {
+      "id": "wands_10",
+      "source_path": "tarot/rider-waite/full-png/Wands10.png",
+      "source_sha256": "e878773e6675f07a1c14d8a08d5080e7f9347d0dcc024ea0e0b3eec0badb04dd",
+      "source_git_blob": "28d5a0ac7dc0083138582c672ccc78c286215b2f",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        38,
+        22,
+        1049,
+        1787
+      ],
+      "output": "res://assets/oracle/rws/wands_10.webp",
+      "output_sha256": "ce4cfbec176fb27c471b5a8cb5a98796ab6ed961add5654198d35ceba935a73e",
+      "bytes": 33420
+    },
+    {
+      "id": "wands_11",
+      "source_path": "tarot/rider-waite/full-png/Wands11.png",
+      "source_sha256": "f08516eae4d492d647ebe876dd3cecf26a2b0e6d5fd9a194df672d3bd835db0d",
+      "source_git_blob": "bfee8e0f2042c0716ff1cb4cca387b766abb86c6",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/wands_11.webp",
+      "output_sha256": "bc40c6eb1eddfadf9470bbebcaa00823bc75d6189e7fcf4023503a30292300ee",
+      "bytes": 31200
+    },
+    {
+      "id": "wands_12",
+      "source_path": "tarot/rider-waite/full-png/Wands12.png",
+      "source_sha256": "0b89168e1b7299132df77af0505c586ece2b572f5f6ad8c2d5a221e91d214a08",
+      "source_git_blob": "251d3ce56acf4012497fe4be3dd44d6c74cb7f5d",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1047,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/wands_12.webp",
+      "output_sha256": "24650d1710db90058cca68ca6acec7001529cb2c224add01c79590e118373d86",
+      "bytes": 38996
+    },
+    {
+      "id": "wands_13",
+      "source_path": "tarot/rider-waite/full-png/Wands13.png",
+      "source_sha256": "c92bf142a4cf054d95afe4630e3c7b12f2e3f4ddc8ca476da5195a43e19723fa",
+      "source_git_blob": "10bc3987cbd7d3ad1e335070625e4a266276ac07",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/wands_13.webp",
+      "output_sha256": "037257aaa9b5e335090521ee92259f1ea10d3af936dd4dd2c46583c0ed48814a",
+      "bytes": 49302
+    },
+    {
+      "id": "wands_14",
+      "source_path": "tarot/rider-waite/full-png/Wands14.png",
+      "source_sha256": "8112a3874cff006a420582b292586beb72742a75662b154da169418bb0276055",
+      "source_git_blob": "eafc603f0130f3518f4b8ff5443584ffe3f75863",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        23,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/wands_14.webp",
+      "output_sha256": "b7906538a919add586fea72e8df41498326babedfd7c9601c16ea7826b30a27c",
+      "bytes": 43604
+    },
+    {
+      "id": "cups_1",
+      "source_path": "tarot/rider-waite/full-png/Cups01.png",
+      "source_sha256": "7302df3ad21eb33957b2c811d40b5304a5e75638f8d3eda64e280e1d7d8f0eef",
+      "source_git_blob": "82243dfdaffc208504d9c9396747e12e08b4c054",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        39,
+        22,
+        1048,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/cups_1.webp",
+      "output_sha256": "b27157cedbe803cbc1919a863df1ba6c2e87891d611b5f71b4a44a9fe8726a13",
+      "bytes": 30912
+    },
+    {
+      "id": "cups_2",
+      "source_path": "tarot/rider-waite/full-png/Cups02.png",
+      "source_sha256": "d985614c1083443043c11bd4af83f6194ca64e8e590737f990f4f457ce968d16",
+      "source_git_blob": "41cbc2578b2283375a1c3fea4ecb43875877ea16",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        23,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/cups_2.webp",
+      "output_sha256": "4c456d3e14bb89a2ab1d941dbaf387c3c2aac3a981c295e29398d5b6e8275209",
+      "bytes": 33784
+    },
+    {
+      "id": "cups_3",
+      "source_path": "tarot/rider-waite/full-png/Cups03.png",
+      "source_sha256": "1fad56a18ca1e0e772e3f73515ebf431e42f608f6acc36a57bbe0377e71f170e",
+      "source_git_blob": "704501650dbbda386a6f5f58d323c78fcac70d0f",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/cups_3.webp",
+      "output_sha256": "0e1b9e832f21b0f7c4d1a9dc0b5bdb59fce793770f6a6ee02df3e48e022f6029",
+      "bytes": 41490
+    },
+    {
+      "id": "cups_4",
+      "source_path": "tarot/rider-waite/full-png/Cups04.png",
+      "source_sha256": "189ef7c0db33c403bfde29630006d0ca78842240ef40cf961594d916dc02123e",
+      "source_git_blob": "8f1f3662dbc87d80da00fbda79e4e2ef9fd2a762",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1787
+      ],
+      "output": "res://assets/oracle/rws/cups_4.webp",
+      "output_sha256": "93b5f8999d6e2c2add9b9240c0b8d611e113e645837af99139673ddf75ba3d0a",
+      "bytes": 34116
+    },
+    {
+      "id": "cups_5",
+      "source_path": "tarot/rider-waite/full-png/Cups05.png",
+      "source_sha256": "3beba094aa1f8e92cc2abe193cbd90f5cc7e7825f28a51b1296f8f8f490726b7",
+      "source_git_blob": "b780423c28cd25f81d38590150141a8d44b5140a",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1044,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/cups_5.webp",
+      "output_sha256": "7284c62ad299c7245f3425de2690dd4724995d6f67642eb8536b0828994e635f",
+      "bytes": 19536
+    },
+    {
+      "id": "cups_6",
+      "source_path": "tarot/rider-waite/full-png/Cups06.png",
+      "source_sha256": "56f4b1a92875ec3af50b38a5fc97786468c78bd08b76a026b6b6299551fe832a",
+      "source_git_blob": "8c7f7cf3fc8601ed4b6f247feddea3a449444fe8",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/cups_6.webp",
+      "output_sha256": "0129da3201eb97f0b22129e08f7fef8a3e264b013f486e86fe0cddbb8962f9fe",
+      "bytes": 48672
+    },
+    {
+      "id": "cups_7",
+      "source_path": "tarot/rider-waite/full-png/Cups07.png",
+      "source_sha256": "3644e36ccf07ba67e9db16769c072cf56937c3bcc132e175a0d23740d160c8fc",
+      "source_git_blob": "31657b546fec1a3d9a7be2943d418e11b5ee4fac",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        38,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/cups_7.webp",
+      "output_sha256": "9b76160fef0f377368ba164f3a52f113973c86a653fadc73040e26b7f212353b",
+      "bytes": 40742
+    },
+    {
+      "id": "cups_8",
+      "source_path": "tarot/rider-waite/full-png/Cups08.png",
+      "source_sha256": "f259231bc27c6d901a96c21ed52c2df8835a6c160d19a47c61af19a310f1115a",
+      "source_git_blob": "f2f6421d079b602f5d4309fa5069c706c6a18f80",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1787
+      ],
+      "output": "res://assets/oracle/rws/cups_8.webp",
+      "output_sha256": "d37c51e299ed3a66e87c293caec91fa18877b38bbaf94efa37974d8e321aebef",
+      "bytes": 26116
+    },
+    {
+      "id": "cups_9",
+      "source_path": "tarot/rider-waite/full-png/Cups09.png",
+      "source_sha256": "106eef01dac84c9caeabe154049bb1bf6d073469a2155637f8c3c6be2afadbcd",
+      "source_git_blob": "54afea112e08c4702bef7ecaced5912e8c9fdf04",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1048,
+        1787
+      ],
+      "output": "res://assets/oracle/rws/cups_9.webp",
+      "output_sha256": "c4534879b3349a61e2cdeb86e3912f3aa5b769d0ba74881a15650f7c17e0ba91",
+      "bytes": 43856
+    },
+    {
+      "id": "cups_10",
+      "source_path": "tarot/rider-waite/full-png/Cups10.png",
+      "source_sha256": "70284798e0e27415115f55453dfd33a85d8bc517aab6fdf7957475ad6e1ab068",
+      "source_git_blob": "4fafcf7c2c4095a57d81da519390865eb86d0589",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        38,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/cups_10.webp",
+      "output_sha256": "f7d6278bfc900ad91da17b0a250f456fd1ed7c2ce4c44998135a92dcb132899a",
+      "bytes": 33014
+    },
+    {
+      "id": "cups_11",
+      "source_path": "tarot/rider-waite/full-png/Cups11.png",
+      "source_sha256": "1000d8fe7eb86a5e0c820274a86f5b0b5b0cedb04dadaa672e8797481947bd3c",
+      "source_git_blob": "a1080e7fcf89b8da3a31aef010243e693e865a99",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        23,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/cups_11.webp",
+      "output_sha256": "c49ec3d99ec70cf3d82d7da6a1640b78545a29f653b42af730855ca8eb3738c7",
+      "bytes": 28570
+    },
+    {
+      "id": "cups_12",
+      "source_path": "tarot/rider-waite/full-png/Cups12.png",
+      "source_sha256": "d1b352ab25eb3877369d23d86ceb529cae6e8a8a51c60224d38d3eedbb76e88e",
+      "source_git_blob": "2ae855343c8e297e3b76a86d1aa75dc0f5f54b52",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/cups_12.webp",
+      "output_sha256": "ddf97770629b1c72953161f1a383256ee4deeb491b1380afc2707a8198f1f450",
+      "bytes": 34626
+    },
+    {
+      "id": "cups_13",
+      "source_path": "tarot/rider-waite/full-png/Cups13.png",
+      "source_sha256": "ee6368037e29f1aa20eb46e932c7124b5c809c8bee6a14374b6e8948bf422255",
+      "source_git_blob": "38221d30f10d0d7a706ea1f1889eb939936e4a79",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/cups_13.webp",
+      "output_sha256": "e52590a4c905f9c04649cdcd629b4df4ede9caacfcba1e2cf7d798837ed9653f",
+      "bytes": 41810
+    },
+    {
+      "id": "cups_14",
+      "source_path": "tarot/rider-waite/full-png/Cups14.png",
+      "source_sha256": "389bb374a5e8f0f5a655bb1069954e5f0113667756eda39b7115b05cda6c2df9",
+      "source_git_blob": "1b11a7a9d77e4b2322d7f4f5b2daaad87c0d8d24",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/cups_14.webp",
+      "output_sha256": "7fe45ce6f091826ae73fad5d6e073fabd2c41af745c4b6de36eb1be2e8726108",
+      "bytes": 36814
+    },
+    {
+      "id": "swords_1",
+      "source_path": "tarot/rider-waite/full-png/Swords01.png",
+      "source_sha256": "8c5cc75991eabc136261d963d25e668fa2e290a7f5835493aef30b9b9f157944",
+      "source_git_blob": "ece6dd60832d7298cfb074ac49c48b9543b92500",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/swords_1.webp",
+      "output_sha256": "72c9f773d3445a7cf1a44ffdd57bd80b5d50c11ac92d5ef0226194b55c9fb19b",
+      "bytes": 24522
+    },
+    {
+      "id": "swords_2",
+      "source_path": "tarot/rider-waite/full-png/Swords02.png",
+      "source_sha256": "589b4fd60987d992f6028fc264ca6670d0cf3582dc6b94d96e989cb1d9285046",
+      "source_git_blob": "c734a6d620032730d00ab7a61afcad53088d9889",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/swords_2.webp",
+      "output_sha256": "3f0337aded3cdb96be500aea94f79b1ee023929a5073de998c3ee1d9912acafa",
+      "bytes": 23070
+    },
+    {
+      "id": "swords_3",
+      "source_path": "tarot/rider-waite/full-png/Swords03.png",
+      "source_sha256": "2e6f9b93c1a1f0b2bb91b7f2fe71e6412432378960605846adf8d335d441650c",
+      "source_git_blob": "2f20777426613834253a2158830849505ee56509",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1048,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/swords_3.webp",
+      "output_sha256": "0923127d99ce84bd51fcbefb3007d56bd29abce65e8b6700f7be2fb84a220d93",
+      "bytes": 21090
+    },
+    {
+      "id": "swords_4",
+      "source_path": "tarot/rider-waite/full-png/Swords04.png",
+      "source_sha256": "197787ea1415f8cee51ecf27108accb97885e42b4e5f154c3c6ef0992f919d0c",
+      "source_git_blob": "20e336ed338861b2efe23d1dba144e6617850ed1",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        38,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/swords_4.webp",
+      "output_sha256": "dc5ca5f436a2f87cb0c01b7c6a7c939a7a9b9532dcb815552d4b21727bd34850",
+      "bytes": 28890
+    },
+    {
+      "id": "swords_5",
+      "source_path": "tarot/rider-waite/full-png/Swords05.png",
+      "source_sha256": "cf13b9fe5fa774ccfa9ea6282e7307dfe2f05cbd96f77c3f42437ae3a1eabea8",
+      "source_git_blob": "0bfd74aa16be749f6c639bca7a79d6ea243f1795",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        23,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/swords_5.webp",
+      "output_sha256": "764ae58246f5b133df4d231d8ce22055cdea03cc843b54c7ac0f028a184e1337",
+      "bytes": 36074
+    },
+    {
+      "id": "swords_6",
+      "source_path": "tarot/rider-waite/full-png/Swords06.png",
+      "source_sha256": "6b92ca25fabbaea0a35fa634bd43ef290ac8c238e5c05ef40d19fa5639dc102f",
+      "source_git_blob": "bb2dd62dc94432c74d6ab31ec1d13172f86aad7a",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        39,
+        23,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/swords_6.webp",
+      "output_sha256": "e5385a5044e9f81971f902d2791f91064746e94d9958efae84ad6177f5db0093",
+      "bytes": 29866
+    },
+    {
+      "id": "swords_7",
+      "source_path": "tarot/rider-waite/full-png/Swords07.png",
+      "source_sha256": "db3a245f81185c6b497301d928f66616248bfcf70000f46a401b5df4607cfe88",
+      "source_git_blob": "8f3c67f816c607673a4f5702a6114d3b13ac644a",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1047,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/swords_7.webp",
+      "output_sha256": "05ae79408421251404f279cac90c2df8c12dea47e85ed56bbc60204353ec7227",
+      "bytes": 31522
+    },
+    {
+      "id": "swords_8",
+      "source_path": "tarot/rider-waite/full-png/Swords08.png",
+      "source_sha256": "4539d4d25b6a32bb9d1c96ae5523856b48a466e83a529c6cce771b69bbae62ac",
+      "source_git_blob": "4f1656d45665956d6c66e1cf6c5e1ba377307cd6",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        23,
+        1049,
+        1787
+      ],
+      "output": "res://assets/oracle/rws/swords_8.webp",
+      "output_sha256": "b59fcb0b73346125df5ce3f47c014faf0a1692d750ab5cee652b5c4c7cffcb9e",
+      "bytes": 33624
+    },
+    {
+      "id": "swords_9",
+      "source_path": "tarot/rider-waite/full-png/Swords09.png",
+      "source_sha256": "79f38b7263d5ca8229bbe9da9d9b5a215082397e762c7a9a5ffb9609e63e4920",
+      "source_git_blob": "71a2c5460c0b42227d0ea7e2bfe69cb6724a768e",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        38,
+        23,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/swords_9.webp",
+      "output_sha256": "8799569fe6805f103fc381e18c53d1e34aedb1c65cbe1bb54a42b9d8229aab69",
+      "bytes": 32926
+    },
+    {
+      "id": "swords_10",
+      "source_path": "tarot/rider-waite/full-png/Swords10.png",
+      "source_sha256": "1df7fb5430e049d4d21cb369407d2fc9c1992b1c1b6bcc4fed5f60a9532b0416",
+      "source_git_blob": "7f4566951ad420b5458768f047e4e2c9ac19d348",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1787
+      ],
+      "output": "res://assets/oracle/rws/swords_10.webp",
+      "output_sha256": "c8c9989312024683592ed8209711085979204dc39bef4281248dc51867b6fa90",
+      "bytes": 31862
+    },
+    {
+      "id": "swords_11",
+      "source_path": "tarot/rider-waite/full-png/Swords11.png",
+      "source_sha256": "e6e7d51123382e7dd901bb3084ac9c2de9a96c3a125fa0a464b128863c878993",
+      "source_git_blob": "59a4f8a3914602f31747fd83e9882e24de7f36d1",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1048,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/swords_11.webp",
+      "output_sha256": "9df5a138f40004b81e1c9f1bb38ec15290ad0a51a11d84e1f718720b5547bc87",
+      "bytes": 33538
+    },
+    {
+      "id": "swords_12",
+      "source_path": "tarot/rider-waite/full-png/Swords12.png",
+      "source_sha256": "39f25f5cdca3cbecceeba8245f469033a4bd713ba35104e5c07c06790cfa9e75",
+      "source_git_blob": "e596a8d34512876a03e1b3f3ab24f189e782a0c8",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1048,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/swords_12.webp",
+      "output_sha256": "0aadb29b5fb300ea6849538c23f7d30462e9686a39c4c3f8219436dc01766666",
+      "bytes": 38208
+    },
+    {
+      "id": "swords_13",
+      "source_path": "tarot/rider-waite/full-png/Swords13.png",
+      "source_sha256": "f4b8c2c31cf5b91b78905a49f7f834bf6cd176ddfa13c469ca3fc639c75cc86c",
+      "source_git_blob": "26f682887e899a366a0535ad0aa9a1302063fa93",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        38,
+        23,
+        1048,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/swords_13.webp",
+      "output_sha256": "8eccabb9874f9bfb4109ecbd2cb79455cf18afa1b02095ffc534c8d7a64dcbfa",
+      "bytes": 34198
+    },
+    {
+      "id": "swords_14",
+      "source_path": "tarot/rider-waite/full-png/Swords14.png",
+      "source_sha256": "d940beaa2acd73ef808be68cb8314270e96f15432725c87a8e7dca82b6829571",
+      "source_git_blob": "54bb970b0c3c6598666349f7c85278d9d0d24af3",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        23,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/swords_14.webp",
+      "output_sha256": "a1aa9d419b4ac9467cca518719f497ab4dbb58d1178349b23803d7531b7d3777",
+      "bytes": 36688
+    },
+    {
+      "id": "pentacles_1",
+      "source_path": "tarot/rider-waite/full-png/Pents01.png",
+      "source_sha256": "17029f1d47f13f652517cf8cb69ae7ab6bf0afeb1218dba6b911786aaefb7696",
+      "source_git_blob": "f115ce63cfeb1712c4c2693f20ae76846e846f35",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/pentacles_1.webp",
+      "output_sha256": "47da5d3bf6c18041ecfe8e6e45e8373884a6f294269990a6263ccc941620c8e5",
+      "bytes": 27960
+    },
+    {
+      "id": "pentacles_2",
+      "source_path": "tarot/rider-waite/full-png/Pents02.png",
+      "source_sha256": "e21f4ab9a7ab8876787e9e19c324ce4cb0b3d0d04516991c50d258d268e0af99",
+      "source_git_blob": "0a74f2e658eedd97a665890743b4bede797d8665",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/pentacles_2.webp",
+      "output_sha256": "f83d6a65c624a3cee748f437826008594a426e28986f8b0c2d9e6c6d59c94020",
+      "bytes": 25092
+    },
+    {
+      "id": "pentacles_3",
+      "source_path": "tarot/rider-waite/full-png/Pents03.png",
+      "source_sha256": "16c968114cf3625bc6ecdde4e0fbbf359ec6f10b8106cb7c8c4178f59056a539",
+      "source_git_blob": "8a0e238550b45c5015ac595c7fbb004d61ab5e08",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        38,
+        22,
+        1049,
+        1787
+      ],
+      "output": "res://assets/oracle/rws/pentacles_3.webp",
+      "output_sha256": "af4e3d0e0003e1897c5779c46e9401d133d14b32ee06d10c039e8a17a614865e",
+      "bytes": 42664
+    },
+    {
+      "id": "pentacles_4",
+      "source_path": "tarot/rider-waite/full-png/Pents04.png",
+      "source_sha256": "8e3052cd87ed5acb07c4b8e26fb0bab35d27126602b7aa99a399a84ddbedcee5",
+      "source_git_blob": "748b04084962b7d8cec61f796a0ede226cb41cd4",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        23,
+        1049,
+        1787
+      ],
+      "output": "res://assets/oracle/rws/pentacles_4.webp",
+      "output_sha256": "455bffdb2e00c7e85d5ad01f582b8051dde7467c0bb8c7897002db2de0cf2812",
+      "bytes": 19686
+    },
+    {
+      "id": "pentacles_5",
+      "source_path": "tarot/rider-waite/full-png/Pents05.png",
+      "source_sha256": "e7c43334b09227f34955ac4be9f2f0c5cea0ac73953538333808e9931d5a92f2",
+      "source_git_blob": "aa75baf4179d227e43e3bcf7df51e38566885c9d",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        25,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/pentacles_5.webp",
+      "output_sha256": "ad598bc5535711fb6fbeef512ff45153c0044941ebba5cfdf6d6ce40b1308f53",
+      "bytes": 53238
+    },
+    {
+      "id": "pentacles_6",
+      "source_path": "tarot/rider-waite/full-png/Pents06.png",
+      "source_sha256": "1da31037347063cff58225f02148913b93af5a8bfc426167645401aa9d64ef27",
+      "source_git_blob": "bc72cc0cfca4b88f31f9d98c5ce3fc58b906adaa",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/pentacles_6.webp",
+      "output_sha256": "ea1cbb4200e19a81a6aae0b6b1a3e2f335acb50529be6af7a78e6d6f0a60c5ee",
+      "bytes": 31842
+    },
+    {
+      "id": "pentacles_7",
+      "source_path": "tarot/rider-waite/full-png/Pents07.png",
+      "source_sha256": "b4366f0875300804f9d4bad52bd0c0adc4383483bd206ee8733b59c6869f145a",
+      "source_git_blob": "f4debbb28e7e2cf5f553daa8fd46b72d6ef7e975",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1048,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/pentacles_7.webp",
+      "output_sha256": "f1098e089a3ab9baf1d5b35a36f245cafe28953942f42073776eb34be0192698",
+      "bytes": 33206
+    },
+    {
+      "id": "pentacles_8",
+      "source_path": "tarot/rider-waite/full-png/Pents08.png",
+      "source_sha256": "e65e03b9dbeaaecc54543b64fb913f2ffa4d9d3e7c4dfaa01dd45b4eaaabc911",
+      "source_git_blob": "91961969ac5aeeb140dc59efb56433b8c41ed7d8",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/pentacles_8.webp",
+      "output_sha256": "62d1038a3c28727540ab9639affd299946ceec3b6d5e8f3d77aff1fd2dcb1fea",
+      "bytes": 26272
+    },
+    {
+      "id": "pentacles_9",
+      "source_path": "tarot/rider-waite/full-png/Pents09.png",
+      "source_sha256": "1fd141b448d2ec9fe553e4a7529d03aac35d49fe5ff079d568c4af3a391a868b",
+      "source_git_blob": "ba29ef3204d22c1d28f44e028e431481ecaaed89",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/pentacles_9.webp",
+      "output_sha256": "2c06f319814e57d569414fcfceb42286eb8b0427d146053656d0ad3b974f41b0",
+      "bytes": 43002
+    },
+    {
+      "id": "pentacles_10",
+      "source_path": "tarot/rider-waite/full-png/Pents10.png",
+      "source_sha256": "bfa6f54ceed5116c02e2a00441f9d045ab40517d9cd31d8a808ce3c7812cb4a1",
+      "source_git_blob": "a1af0a1de81ed2996fe2226e796282494044cbd1",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1048,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/pentacles_10.webp",
+      "output_sha256": "70fd45b7619b145e36960624ffa32330bf5d2d81f98613512eefed5fbd1aa93d",
+      "bytes": 52424
+    },
+    {
+      "id": "pentacles_11",
+      "source_path": "tarot/rider-waite/full-png/Pents11.png",
+      "source_sha256": "b80fdc0e593aa497a952f5b523c4c44b440559df90020b213d97aaf78ae2a459",
+      "source_git_blob": "5d706432b8d461e6b6287f44bded0f9f62230630",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        38,
+        23,
+        1049,
+        1787
+      ],
+      "output": "res://assets/oracle/rws/pentacles_11.webp",
+      "output_sha256": "b91e83a81f2b731a9c8f32448728e7dc073283ddb775410e0fc7a55fee6f27f1",
+      "bytes": 29408
+    },
+    {
+      "id": "pentacles_12",
+      "source_path": "tarot/rider-waite/full-png/Pents12.png",
+      "source_sha256": "5f19b0a7d91d0fe5fd3aea56533e2249b2d74494475555def720fec429248dd8",
+      "source_git_blob": "95270c926ad0a3fedd66a05b1c9d26f56f804672",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        38,
+        22,
+        1049,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/pentacles_12.webp",
+      "output_sha256": "47cb7532e8efe87c22f5717268017edd36ab56d96d9c735baff1308e22aaa32a",
+      "bytes": 28948
+    },
+    {
+      "id": "pentacles_13",
+      "source_path": "tarot/rider-waite/full-png/Pents13.png",
+      "source_sha256": "81f069f4a06d5f1ca6e0d041be89f08f48f9aaba7707c44878e365b6177ba76e",
+      "source_git_blob": "3c0e38563f5feb92c707d197f2ad020351bf7d29",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        24,
+        1048,
+        1788
+      ],
+      "output": "res://assets/oracle/rws/pentacles_13.webp",
+      "output_sha256": "7c8e0c2d1f138b3c8cf2f1bcd3fe78fa73612085527ce3f8fed1f2141425cde8",
+      "bytes": 58002
+    },
+    {
+      "id": "pentacles_14",
+      "source_path": "tarot/rider-waite/full-png/Pents14.png",
+      "source_sha256": "f340a6bb7cb5f142525fbd5c7ce4327b0262538bfa063eefa36459a7829c79b0",
+      "source_git_blob": "ba4e85eb1ee22ca7cc1c014307d09708a50406fd",
+      "source_size": [
+        1086,
+        1810
+      ],
+      "crop_box": [
+        37,
+        22,
+        1048,
+        1787
+      ],
+      "output": "res://assets/oracle/rws/pentacles_14.webp",
+      "output_sha256": "3f0315af694eeeaf436402a474f5bd0df677e5d9761df4d66b224a6a189c0705",
+      "bytes": 44590
+    }
+  ]
+}

@@ -1,6 +1,8 @@
 # stage | existing or B-owned test path; no shared runner is modified
 B2|tests/audio/ui_sounds.py
 B2|tests/audio/ui_sounds.gd
+B1|tests/art/test_rws_cards.py
+B1|tests/art/rws_cards.gd
 shared|tests/people/appearance.gd
 shared|tests/people/appearance_birth.gd
 shared|tests/people/appearance_description.gd

@@ -1,6 +1,6 @@
 # 第四轮 B 线分项审阅包
 
-用户分支 round4-B；基线 ee576ca。本提交为 B2 分项；完整三项审阅包随 B3 提交。
+用户分支 round4-B；基线 ee576ca。本提交为 B1 分项；完整三项审阅包随 B3 提交。
 
 ## B2 界面音效
 
@@ -58,6 +58,18 @@
 ### 试听
 
 Godot编辑器打开 scenes/dev/audio_preview.tscn，按F6。每行一个用途，主选及两个候选各一个按钮，附实际解码指标。试听固定音高，正常游戏音高随机±4%。换主选只改sounds对应一行，原主选仍保留在三选比较中。
+
+## B1 牌面
+
+已完成 78 张，ID 与原始 `data/oracle/decks.json` 完全一致。对照表 `data/oracle/card_art.json` 严格保持约定的 version/tarot 格式；B 线不修改显示界面，由 C 线接入。
+
+来源：[mixvlad/TarotCards 固定修订 840b84d012c6b74dc1634fa2d00d1b21f5b28093](https://github.com/mixvlad/TarotCards/tree/840b84d012c6b74dc1634fa2d00d1b21f5b28093/tarot/rider-waite)，仅使用 full-png 中 78 张历史画作，不含两个封套。作者 Pamela Colman Smith（1878–1951），Rider & Company 1909 Pam-A 原版。上游实际说明为 [Steve P. 修复扫描](https://steve-p.org/cards/RWSa.html)，并非任务书中描述的 Wikimedia 目录，按真实来源登记。画作的公有领域标注与上游代码的 MIT 分开说明；未使用现代 U.S. Games、lysator 或其他牌组。
+
+每张来源 Git blob、原图 SHA256、实际尺寸、裁切框和输出 SHA256 都记录在 `assets/oracle/rws/provenance.json`。构建工具 `tools/art/rws_cards.py` 校验源文件摘要后处理，原图与下载回执不提交。
+
+处理：保留黑框、原版标题与画面内容，只裁多余近白边并加 3px 安全边；饱和度乘 0.9、RGB 乘 1.004/1/0.987；等比容纳而不拉伸，360×617 是 7:12 的最近整数。原扫描网点很密，直接锐利缩小会超过预算；统一采用双线性缩小和固定 0.7px 抗锯齿，不改每张质量。WebP quality 80 / method 6，单张最大 58,002 字节，总计 2,861,874 字节，均低于 60,000 / 4,000,000 的十进制限制。
+
+一次完成自检：`.tools/r4-b/runs/20261128-074628-28312/`，Python 3 项和 Godot 实际导入/解码 235 项全部通过。`.tools/r4-b/rws-contact.png` 的 78 张接触表已查看，完整保留原版图案与边框；没有重拍。共用回归 16 目标中 3 个基线失败，未将专项通过表述为完整回归通过。
 
 
 ## 已知失败与用户授权
