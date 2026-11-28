@@ -9,20 +9,1123 @@
   "shutdown_timeout_seconds": 2.0,
   "shutdown_poll_frames": 1,
   "settings_path": "user://presentation.cfg",
-  "defaults": {"music": 0.5, "ui": 0.65},
-  "labels": {"music": "音乐音量", "ui": "界面音量", "save_failed": "音量设置未能保存。", "shutdown_failed": "声音资源尚未释放，请稍后再关闭。", "close_failed": "当前操作尚未结束，请稍后再关闭。"},
+  "defaults": {
+    "music": 0.5,
+    "ui": 0.45
+  },
+  "labels": {
+    "music": "音乐音量",
+    "ui": "界面音量",
+    "save_failed": "音量设置未能保存。",
+    "shutdown_failed": "声音资源尚未释放，请稍后再关闭。",
+    "close_failed": "当前操作尚未结束，请稍后再关闭。"
+  },
   "tracks": {
-    "day": {"path": "", "status": "missing", "expected_path": "res://assets/audio/music/day.ogg", "source": "https://pizzadoggy.itch.io/cozy-tunes"},
-    "night": {"path": "", "status": "missing", "expected_path": "res://assets/audio/music/night.ogg", "source": "https://pizzadoggy.itch.io/cozy-tunes"},
-    "consultation": {"path": "", "status": "missing", "expected_path": "res://assets/audio/music/consultation.ogg", "source": "https://pizzadoggy.itch.io/cozy-tunes"}
+    "day": {
+      "path": "",
+      "status": "missing",
+      "expected_path": "res://assets/audio/music/day.ogg",
+      "source": "https://pizzadoggy.itch.io/cozy-tunes"
+    },
+    "night": {
+      "path": "",
+      "status": "missing",
+      "expected_path": "res://assets/audio/music/night.ogg",
+      "source": "https://pizzadoggy.itch.io/cozy-tunes"
+    },
+    "consultation": {
+      "path": "",
+      "status": "missing",
+      "expected_path": "res://assets/audio/music/consultation.ogg",
+      "source": "https://pizzadoggy.itch.io/cozy-tunes"
+    }
   },
   "sounds": {
-    "click": "res://assets/audio/ui/click.ogg",
-    "page": "res://assets/audio/ui/page.ogg",
-    "confirm": "res://assets/audio/ui/confirm.ogg",
-    "cancel": "res://assets/audio/ui/cancel.ogg",
-    "coin": "res://assets/audio/ui/coin.ogg",
-    "notify": "res://assets/audio/ui/notify.ogg",
-    "entry_chime": "res://assets/audio/ui/notify.ogg"
+    "click": "res://assets/audio/ui/r4/click.ogg",
+    "page": "res://assets/audio/ui/r4/page.ogg",
+    "confirm": "res://assets/audio/ui/r4/confirm.ogg",
+    "cancel": "res://assets/audio/ui/r4/cancel.ogg",
+    "coin": "res://assets/audio/ui/r4/coin.ogg",
+    "notify": "res://assets/audio/ui/r4/notify.ogg",
+    "entry_chime": "res://assets/audio/ui/notify.ogg",
+    "stamp": "res://assets/audio/ui/r4/stamp.ogg",
+    "card_flip": "res://assets/audio/ui/r4/card_flip.ogg",
+    "card_slide": "res://assets/audio/ui/r4/card_slide.ogg",
+    "paper": "res://assets/audio/ui/r4/paper.ogg",
+    "wood": "res://assets/audio/ui/r4/wood.ogg"
+  },
+  "alternatives": {
+    "click": [
+      "res://assets/audio/ui/r4/click_alt1.ogg",
+      "res://assets/audio/ui/r4/click_alt2.ogg"
+    ],
+    "page": [
+      "res://assets/audio/ui/r4/page_alt1.ogg",
+      "res://assets/audio/ui/r4/page_alt2.ogg"
+    ],
+    "coin": [
+      "res://assets/audio/ui/r4/coin_alt1.ogg",
+      "res://assets/audio/ui/r4/coin_alt2.ogg"
+    ],
+    "confirm": [
+      "res://assets/audio/ui/r4/confirm_alt1.ogg",
+      "res://assets/audio/ui/r4/confirm_alt2.ogg"
+    ],
+    "cancel": [
+      "res://assets/audio/ui/r4/cancel_alt1.ogg",
+      "res://assets/audio/ui/r4/cancel_alt2.ogg"
+    ],
+    "notify": [
+      "res://assets/audio/ui/r4/notify_alt1.ogg",
+      "res://assets/audio/ui/r4/notify_alt2.ogg"
+    ],
+    "stamp": [
+      "res://assets/audio/ui/r4/stamp_alt1.ogg",
+      "res://assets/audio/ui/r4/stamp_alt2.ogg"
+    ],
+    "card_flip": [
+      "res://assets/audio/ui/r4/card_flip_alt1.ogg",
+      "res://assets/audio/ui/r4/card_flip_alt2.ogg"
+    ],
+    "card_slide": [
+      "res://assets/audio/ui/r4/card_slide_alt1.ogg",
+      "res://assets/audio/ui/r4/card_slide_alt2.ogg"
+    ],
+    "paper": [
+      "res://assets/audio/ui/r4/paper_alt1.ogg",
+      "res://assets/audio/ui/r4/paper_alt2.ogg"
+    ],
+    "wood": [
+      "res://assets/audio/ui/r4/wood_alt1.ogg",
+      "res://assets/audio/ui/r4/wood_alt2.ogg"
+    ]
+  },
+  "sound_catalog": {
+    "res://assets/audio/ui/r4/click.ogg": {
+      "label": "轻短叩击",
+      "key": "click",
+      "candidate": 0,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/ui-audio",
+      "source_file": "click1.ogg",
+      "source_archive_sha256": "946fc23a63d535d693eb31b2eabb80c8c28d6351e2186b344ceb71b2cb1d5eb6",
+      "source_sha256": "59175ac17cd49a68dd736285738441287636112a84a6f7ce0d89921bda5a5360",
+      "sha256": "fc012018bf38d91f38ef5ab1252a3fac76a1b174aaea89c76f52011c411f56c3",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 93.832,
+        "centroid_hz": 788.131,
+        "onset_peak_ratio": 0.028592,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -20.272,
+        "peak_dbfs": -1.388,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/click_alt1.ogg": {
+      "label": "低沉轻点",
+      "key": "click",
+      "candidate": 1,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/ui-audio",
+      "source_file": "rollover5.ogg",
+      "source_archive_sha256": "946fc23a63d535d693eb31b2eabb80c8c28d6351e2186b344ceb71b2cb1d5eb6",
+      "source_sha256": "3e1805b914a66e63695913d19ba98c5ec584cc69d29c7167d83c460ab752a5d3",
+      "sha256": "b3870b4ac334b24153211844f7b959623423a2128429d143380b140ef77ce9b0",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 111.746,
+        "centroid_hz": 715.936,
+        "onset_peak_ratio": 0.030686,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -20.297,
+        "peak_dbfs": -1.423,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/click_alt2.ogg": {
+      "label": "柔和触碰",
+      "key": "click",
+      "candidate": 2,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/ui-audio",
+      "source_file": "rollover4.ogg",
+      "source_archive_sha256": "946fc23a63d535d693eb31b2eabb80c8c28d6351e2186b344ceb71b2cb1d5eb6",
+      "source_sha256": "8b70e47aa1d51d220a3609a02cc50ceed6e05a20f51c6f8daaf5fd83eae42cf3",
+      "sha256": "7d0a737b1dd80735e056385650b06857702825a36e1a297a47cb72de2b5f1039",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 113.197,
+        "centroid_hz": 1125.461,
+        "onset_peak_ratio": 0.002035,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -20.178,
+        "peak_dbfs": -4.181,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/page.ogg": {
+      "label": "翻书起始段",
+      "key": "page",
+      "candidate": 0,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/rpg-audio",
+      "source_file": "bookFlip1.ogg",
+      "source_archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+      "source_sha256": "fa81ac2fedc8c641661b87e349630a36c9800e795e0c800e029214efdbe26a7d",
+      "sha256": "3d037b37326d78e653b94d0e68247973a60e1ae1b628943fa2d99c6a3a4958cd",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 330.0,
+        "centroid_hz": 1860.722,
+        "onset_peak_ratio": 0.002675,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -20.263,
+        "peak_dbfs": -4.819,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/page_alt1.ogg": {
+      "label": "轻轻打开书",
+      "key": "page",
+      "candidate": 1,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/rpg-audio",
+      "source_file": "bookOpen.ogg",
+      "source_archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+      "source_sha256": "953390534377222bee89ac8cd9e60a58fdc037c71a4d7c18c43cd647c7f34ba8",
+      "sha256": "91cc5f9c3310346c896bdeccfa546c2841d07aaafe1b457918b08e8e2c0fc705",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 153.741,
+        "centroid_hz": 379.6,
+        "onset_peak_ratio": 0.023625,
+        "tonal_frame_fraction": 0.142857,
+        "lufs_short_40ms": -20.564,
+        "peak_dbfs": -5.226,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/page_alt2.ogg": {
+      "label": "纸页轻合",
+      "key": "page",
+      "candidate": 2,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/rpg-audio",
+      "source_file": "bookClose.ogg",
+      "source_archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+      "source_sha256": "81e976532565f4372abd14e83d2684195fa548d0a28d345de221e56052454f32",
+      "sha256": "f0cb3a3d8687b210e8666d71239f8ee282db97747bc0f9967e6014ea6476686c",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 230.612,
+        "centroid_hz": 430.493,
+        "onset_peak_ratio": 0.001946,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -20.456,
+        "peak_dbfs": -3.418,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/coin.ogg": {
+      "label": "少量硬币轻碰",
+      "key": "coin",
+      "candidate": 0,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/rpg-audio",
+      "source_file": "handleCoins2.ogg",
+      "source_archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+      "source_sha256": "4b857968d64f9ac9336a10ffac6694d7547e1f01566ad6857b30bc8db3ee6c32",
+      "sha256": "133ed3485ed629e85f8314be5d274a14d6b759478bf0ed2124c18489229ad201",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 330.0,
+        "centroid_hz": 2444.65,
+        "onset_peak_ratio": 0.003323,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -20.222,
+        "peak_dbfs": -4.776,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 2200,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/coin_alt1.ogg": {
+      "label": "轻金属扣碰",
+      "key": "coin",
+      "candidate": 1,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/rpg-audio",
+      "source_file": "metalLatch.ogg",
+      "source_archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+      "source_sha256": "ba9ba60b172b3ebc131a940f25793cd2e207aca7af73dc80d637277f060f1708",
+      "sha256": "e767f6dd134a494a7ee79ec6d9869911065817ec13d7727d49f9f2e1df9bf6f8",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 261.338,
+        "centroid_hz": 1005.219,
+        "onset_peak_ratio": 0.002769,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -20.153,
+        "peak_dbfs": -2.137,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 2200,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/coin_alt2.ogg": {
+      "label": "短金属轻响",
+      "key": "coin",
+      "candidate": 2,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/rpg-audio",
+      "source_file": "metalClick.ogg",
+      "source_archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+      "source_sha256": "9851a69d0c613e13bceef08060ecc4148f098ef487927cbebe270d642398a3b3",
+      "sha256": "9f956a1713d12b59a9b4d6bd0f89010a98a05c57c500acc73194a95845292905",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 330.0,
+        "centroid_hz": 1058.566,
+        "onset_peak_ratio": 0.057068,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -20.026,
+        "peak_dbfs": -3.499,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 2200,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/confirm.ogg": {
+      "label": "书本轻合",
+      "key": "confirm",
+      "candidate": 0,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/rpg-audio",
+      "source_file": "bookClose.ogg",
+      "source_archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+      "source_sha256": "81e976532565f4372abd14e83d2684195fa548d0a28d345de221e56052454f32",
+      "sha256": "f0cb3a3d8687b210e8666d71239f8ee282db97747bc0f9967e6014ea6476686c",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 230.612,
+        "centroid_hz": 430.493,
+        "onset_peak_ratio": 0.001946,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -20.456,
+        "peak_dbfs": -3.418,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/confirm_alt1.ogg": {
+      "label": "柔和木感触碰",
+      "key": "confirm",
+      "candidate": 1,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/ui-audio",
+      "source_file": "rollover4.ogg",
+      "source_archive_sha256": "946fc23a63d535d693eb31b2eabb80c8c28d6351e2186b344ceb71b2cb1d5eb6",
+      "source_sha256": "8b70e47aa1d51d220a3609a02cc50ceed6e05a20f51c6f8daaf5fd83eae42cf3",
+      "sha256": "7d0a737b1dd80735e056385650b06857702825a36e1a297a47cb72de2b5f1039",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 113.197,
+        "centroid_hz": 1125.461,
+        "onset_peak_ratio": 0.002035,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -20.178,
+        "peak_dbfs": -4.181,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/confirm_alt2.ogg": {
+      "label": "柔和短回弹",
+      "key": "confirm",
+      "candidate": 2,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/interface-sounds",
+      "source_file": "back_004.ogg",
+      "source_archive_sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232",
+      "source_sha256": "c22e3c49f42c2a5ba6748e91283efe124f32822469c1258c3e5d7b3d7ab9361c",
+      "sha256": "fc066bde4f3374480d9c7cda502be73a8182f41aab2cf98489ce40ded38fa01f",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 72.993,
+        "centroid_hz": 905.412,
+        "onset_peak_ratio": 0.352326,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -19.97,
+        "peak_dbfs": -2.56,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/cancel.ogg": {
+      "label": "低沉轻点",
+      "key": "cancel",
+      "candidate": 0,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/ui-audio",
+      "source_file": "rollover5.ogg",
+      "source_archive_sha256": "946fc23a63d535d693eb31b2eabb80c8c28d6351e2186b344ceb71b2cb1d5eb6",
+      "source_sha256": "3e1805b914a66e63695913d19ba98c5ec584cc69d29c7167d83c460ab752a5d3",
+      "sha256": "b3870b4ac334b24153211844f7b959623423a2128429d143380b140ef77ce9b0",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 111.746,
+        "centroid_hz": 715.936,
+        "onset_peak_ratio": 0.030686,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -20.297,
+        "peak_dbfs": -1.423,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/cancel_alt1.ogg": {
+      "label": "低频短触碰",
+      "key": "cancel",
+      "candidate": 1,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/interface-sounds",
+      "source_file": "back_002.ogg",
+      "source_archive_sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232",
+      "source_sha256": "61581c58194e3f19f531072edabbc344204c7e0a2887b8ededce4357bcf09195",
+      "sha256": "8718c66007dfb2ae3c6f4e2fe5dd93f56bd6cc2a65b963dffa6740e37f79a500",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 69.841,
+        "centroid_hz": 664.631,
+        "onset_peak_ratio": 0.192732,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -20.15,
+        "peak_dbfs": -2.829,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/cancel_alt2.ogg": {
+      "label": "柔软布面收起",
+      "key": "cancel",
+      "candidate": 2,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/rpg-audio",
+      "source_file": "cloth3.ogg",
+      "source_archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+      "source_sha256": "a48632d17a4f1416541d261a32a31612e01267144c407fa3ecab3ff410f0085b",
+      "sha256": "508f3712d0c6d089ed95feef43a16deaad518e3330e941ecd4906e2d7a054d6b",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 330.0,
+        "centroid_hz": 280.614,
+        "onset_peak_ratio": 0.005559,
+        "tonal_frame_fraction": 0.181818,
+        "lufs_short_40ms": -20.107,
+        "peak_dbfs": -2.018,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/notify.ogg": {
+      "label": "玻璃轻碰提示",
+      "key": "notify",
+      "candidate": 0,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/interface-sounds",
+      "source_file": "glass_003.ogg",
+      "source_archive_sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232",
+      "source_sha256": "9a6f16e3c2eff6fe5d017a4755a28306b14555728831cd00d70308e8f9689566",
+      "sha256": "34ef49791d9ba48c901be4ee8dd8c696bcd1f2285b6448fd85a62c0a790992f8",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 123.673,
+        "centroid_hz": 1823.825,
+        "onset_peak_ratio": 0.015147,
+        "tonal_frame_fraction": 0.2,
+        "lufs_short_40ms": -20.158,
+        "peak_dbfs": -8.968,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/notify_alt1.ogg": {
+      "label": "柔化金属共鸣",
+      "key": "notify",
+      "candidate": 1,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/rpg-audio",
+      "source_file": "metalPot1.ogg",
+      "source_archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+      "source_sha256": "159def979e8e386c2c539f5e99cc30a080eb2dcb6c911fa2e4ccc0785b2522fd",
+      "sha256": "ce9aaaf8d7ef8e7739a20544d0fa6c08f78d2cc0d4e14f11acd0d189f400fe04",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 330.0,
+        "centroid_hz": 826.65,
+        "onset_peak_ratio": 0.000155,
+        "tonal_frame_fraction": 0.2,
+        "lufs_short_40ms": -20.088,
+        "peak_dbfs": -9.65,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/notify_alt2.ogg": {
+      "label": "短金属提示",
+      "key": "notify",
+      "candidate": 2,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/rpg-audio",
+      "source_file": "metalPot2.ogg",
+      "source_archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+      "source_sha256": "8e1f820d217d380fde10e969d109db34303e3f4d11c3951926eddef813d04ae2",
+      "sha256": "d9f6d0e4e9d4a8699bd035a6a270d631fb7722e212714049d32b1c4b7e4daba2",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 330.0,
+        "centroid_hz": 1691.882,
+        "onset_peak_ratio": 0.000198,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -20.209,
+        "peak_dbfs": -7.204,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/stamp.ogg": {
+      "label": "书本落桌",
+      "key": "stamp",
+      "candidate": 0,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/rpg-audio",
+      "source_file": "bookPlace1.ogg",
+      "source_archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+      "source_sha256": "26f3ce60fbde85b678b0ad7f6624d80535fe540d88232ad1e38e47a96662d977",
+      "sha256": "7f234ff06b1674517e2de6aba15e693ebc9aa80fa866b0f2e9cec3f060e6397d",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 276.712,
+        "centroid_hz": 604.984,
+        "onset_peak_ratio": 0.003067,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -20.192,
+        "peak_dbfs": -6.85,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/stamp_alt1.ogg": {
+      "label": "较轻落桌",
+      "key": "stamp",
+      "candidate": 1,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/rpg-audio",
+      "source_file": "bookPlace3.ogg",
+      "source_archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+      "source_sha256": "b1afa711e1cabfe5b2c56e20e20e0f9d82142d067727447fa992ddc43dbdb06e",
+      "sha256": "c4998106e50052d19860ef6636db0dfe43c4be3024d6e057ceca83b757e38016",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 261.338,
+        "centroid_hz": 746.651,
+        "onset_peak_ratio": 0.001026,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -19.997,
+        "peak_dbfs": -4.832,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/stamp_alt2.ogg": {
+      "label": "纸面轻合",
+      "key": "stamp",
+      "candidate": 2,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/rpg-audio",
+      "source_file": "bookClose.ogg",
+      "source_archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+      "source_sha256": "81e976532565f4372abd14e83d2684195fa548d0a28d345de221e56052454f32",
+      "sha256": "f0cb3a3d8687b210e8666d71239f8ee282db97747bc0f9967e6014ea6476686c",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 230.612,
+        "centroid_hz": 430.493,
+        "onset_peak_ratio": 0.001946,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -20.456,
+        "peak_dbfs": -3.418,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/card_flip.ogg": {
+      "label": "纸页翻动",
+      "key": "card_flip",
+      "candidate": 0,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/rpg-audio",
+      "source_file": "bookFlip1.ogg",
+      "source_archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+      "source_sha256": "fa81ac2fedc8c641661b87e349630a36c9800e795e0c800e029214efdbe26a7d",
+      "sha256": "3d037b37326d78e653b94d0e68247973a60e1ae1b628943fa2d99c6a3a4958cd",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 330.0,
+        "centroid_hz": 1860.722,
+        "onset_peak_ratio": 0.002675,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -20.263,
+        "peak_dbfs": -4.819,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/card_flip_alt1.ogg": {
+      "label": "薄纸打开",
+      "key": "card_flip",
+      "candidate": 1,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/rpg-audio",
+      "source_file": "bookOpen.ogg",
+      "source_archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+      "source_sha256": "953390534377222bee89ac8cd9e60a58fdc037c71a4d7c18c43cd647c7f34ba8",
+      "sha256": "91cc5f9c3310346c896bdeccfa546c2841d07aaafe1b457918b08e8e2c0fc705",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 153.741,
+        "centroid_hz": 379.6,
+        "onset_peak_ratio": 0.023625,
+        "tonal_frame_fraction": 0.142857,
+        "lufs_short_40ms": -20.564,
+        "peak_dbfs": -5.226,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/card_flip_alt2.ogg": {
+      "label": "柔软纸面翻动",
+      "key": "card_flip",
+      "candidate": 2,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/rpg-audio",
+      "source_file": "cloth4.ogg",
+      "source_archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+      "source_sha256": "e7ab9a6c4466dea874196c61f59bf1da05cfe58748f42fadd695d441a154a99b",
+      "sha256": "6dfc01d33c41a3a060aa527d6f3dedd8f0e37ca1f8b88d217e1dd9bbc12896aa",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 330.0,
+        "centroid_hz": 822.305,
+        "onset_peak_ratio": 0.012288,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -20.126,
+        "peak_dbfs": -0.801,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/card_slide.ogg": {
+      "label": "柔软表面滑动",
+      "key": "card_slide",
+      "candidate": 0,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/rpg-audio",
+      "source_file": "cloth2.ogg",
+      "source_archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+      "source_sha256": "8a7451193c38bc05483aec25dd193e163a15d44cf7fff04ac7912573231b0201",
+      "sha256": "47589a21f73041f36e043625643aab39559d9bae050340bc71652bbfa55036c4",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 330.0,
+        "centroid_hz": 643.326,
+        "onset_peak_ratio": 0.000529,
+        "tonal_frame_fraction": 0.111111,
+        "lufs_short_40ms": -20.07,
+        "peak_dbfs": -2.883,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/card_slide_alt1.ogg": {
+      "label": "柔和滚动提示",
+      "key": "card_slide",
+      "candidate": 1,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/interface-sounds",
+      "source_file": "scroll_003.ogg",
+      "source_archive_sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232",
+      "source_sha256": "c2fecaa6e37c73d7141d0bd303d1c2231428d97c19ce83d50236a56804818643",
+      "sha256": "1c5f43f76ba661ccec6e26f53c50c55e62941d02687abccab6f5e1a6a0c39beb",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 330.0,
+        "centroid_hz": 1334.581,
+        "onset_peak_ratio": 0.111952,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -20.334,
+        "peak_dbfs": -0.893,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/card_slide_alt2.ogg": {
+      "label": "低频纸布摩擦",
+      "key": "card_slide",
+      "candidate": 2,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/rpg-audio",
+      "source_file": "cloth3.ogg",
+      "source_archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+      "source_sha256": "a48632d17a4f1416541d261a32a31612e01267144c407fa3ecab3ff410f0085b",
+      "sha256": "508f3712d0c6d089ed95feef43a16deaad518e3330e941ecd4906e2d7a054d6b",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 330.0,
+        "centroid_hz": 280.614,
+        "onset_peak_ratio": 0.005559,
+        "tonal_frame_fraction": 0.181818,
+        "lufs_short_40ms": -20.107,
+        "peak_dbfs": -2.018,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/paper.ogg": {
+      "label": "薄册落桌",
+      "key": "paper",
+      "candidate": 0,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/rpg-audio",
+      "source_file": "bookPlace3.ogg",
+      "source_archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+      "source_sha256": "b1afa711e1cabfe5b2c56e20e20e0f9d82142d067727447fa992ddc43dbdb06e",
+      "sha256": "c4998106e50052d19860ef6636db0dfe43c4be3024d6e057ceca83b757e38016",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 261.338,
+        "centroid_hz": 746.651,
+        "onset_peak_ratio": 0.001026,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -19.997,
+        "peak_dbfs": -4.832,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/paper_alt1.ogg": {
+      "label": "轻软放下",
+      "key": "paper",
+      "candidate": 1,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/rpg-audio",
+      "source_file": "cloth4.ogg",
+      "source_archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+      "source_sha256": "e7ab9a6c4466dea874196c61f59bf1da05cfe58748f42fadd695d441a154a99b",
+      "sha256": "6dfc01d33c41a3a060aa527d6f3dedd8f0e37ca1f8b88d217e1dd9bbc12896aa",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 330.0,
+        "centroid_hz": 822.305,
+        "onset_peak_ratio": 0.012288,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -20.126,
+        "peak_dbfs": -0.801,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/paper_alt2.ogg": {
+      "label": "书本放下起始段",
+      "key": "paper",
+      "candidate": 2,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/rpg-audio",
+      "source_file": "bookPlace2.ogg",
+      "source_archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+      "source_sha256": "831874e8fd142d4d0a03ff009f1f83966338a7878c0f6f38c613ae5b80dd731e",
+      "sha256": "ec10ab70fd1d1af44f39b93071e4cc6832b4b2f6f2a86b5c4746ad66e374abbb",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 330.0,
+        "centroid_hz": 773.63,
+        "onset_peak_ratio": 0.002317,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -20.079,
+        "peak_dbfs": -5.425,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/wood.ogg": {
+      "label": "柔和木纸轻合",
+      "key": "wood",
+      "candidate": 0,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/rpg-audio",
+      "source_file": "bookClose.ogg",
+      "source_archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+      "source_sha256": "81e976532565f4372abd14e83d2684195fa548d0a28d345de221e56052454f32",
+      "sha256": "f0cb3a3d8687b210e8666d71239f8ee282db97747bc0f9967e6014ea6476686c",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 230.612,
+        "centroid_hz": 430.493,
+        "onset_peak_ratio": 0.001946,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -20.456,
+        "peak_dbfs": -3.418,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/wood_alt1.ogg": {
+      "label": "木桌轻叩",
+      "key": "wood",
+      "candidate": 1,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/rpg-audio",
+      "source_file": "bookPlace1.ogg",
+      "source_archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b",
+      "source_sha256": "26f3ce60fbde85b678b0ad7f6624d80535fe540d88232ad1e38e47a96662d977",
+      "sha256": "7f234ff06b1674517e2de6aba15e693ebc9aa80fa866b0f2e9cec3f060e6397d",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 276.712,
+        "centroid_hz": 604.984,
+        "onset_peak_ratio": 0.003067,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -20.192,
+        "peak_dbfs": -6.85,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    },
+    "res://assets/audio/ui/r4/wood_alt2.ogg": {
+      "label": "柔和木感触碰",
+      "key": "wood",
+      "candidate": 2,
+      "author": "Kenney Vleugels",
+      "license": "CC0-1.0",
+      "source_url": "https://kenney.nl/assets/ui-audio",
+      "source_file": "rollover4.ogg",
+      "source_archive_sha256": "946fc23a63d535d693eb31b2eabb80c8c28d6351e2186b344ceb71b2cb1d5eb6",
+      "source_sha256": "8b70e47aa1d51d220a3609a02cc50ceed6e05a20f51c6f8daaf5fd83eae42cf3",
+      "sha256": "7d0a737b1dd80735e056385650b06857702825a36e1a297a47cb72de2b5f1039",
+      "metrics": {
+        "sample_rate": 44100,
+        "duration_ms": 113.197,
+        "centroid_hz": 1125.461,
+        "onset_peak_ratio": 0.002035,
+        "tonal_frame_fraction": 0.0,
+        "lufs_short_40ms": -20.178,
+        "peak_dbfs": -4.181,
+        "passes": true
+      },
+      "processing": {
+        "lowpass_hz": 6000,
+        "soft_lowpass_hz": 0,
+        "fade_ms": 5,
+        "maximum_ms": 330,
+        "mono_rate": 44100,
+        "vorbis_quality": 4
+      }
+    }
+  },
+  "ui_policy": {
+    "version": 1,
+    "pitch_min": 0.96,
+    "pitch_max": 1.04,
+    "gain_db": {
+      "cancel": -3,
+      "notify": -2
+    },
+    "loudness_window_ms": 40,
+    "loudness_target": -20,
+    "measurement_note": "短音效采用40毫秒K加权门限窗口；不是广播节目400毫秒R128测量。",
+    "centroid_method": "power_weighted_fft",
+    "human_listened": false,
+    "preview_title": "纸与木的声音 · 第四轮试听",
+    "preview_notice": "正式播放音高随机±4%；此页固定音高比较。数值筛选不代替真人试听。",
+    "preview_columns": [
+      "用途",
+      "主选",
+      "候选一",
+      "候选二"
+    ],
+    "preview_metrics": "时长 {duration}ms · 重心 {centroid}Hz · 起音 {onset} · 响度 {loudness} LUFS（短窗）",
+    "labels": {
+      "click": "轻点",
+      "page": "翻书",
+      "coin": "硬币",
+      "confirm": "确认",
+      "cancel": "取消",
+      "notify": "轻铃提示",
+      "stamp": "盖章",
+      "card_flip": "翻牌",
+      "card_slide": "滑牌",
+      "paper": "纸张放下",
+      "wood": "木牌"
+    }
   }
 }

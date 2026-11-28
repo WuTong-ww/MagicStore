@@ -2,6 +2,7 @@ extends Node
 ## UNRUN R3-MUSIC runtime draft.
 ## Presentation preferences are deliberately separate from GameState and saves.
 const MusicCatalog = preload("res://scripts/audio/music_catalog.gd")
+const UISoundCatalog = preload("res://scripts/audio/ui_sound_catalog.gd")
 const CONFIG_PATH := "res://data/ui/audio.json"
 var config: Dictionary = {}
 var settings_path := ""
@@ -20,6 +21,8 @@ var next_voice := 0
 var fade: Tween
 var _shutting_down := false
 var _playbacks: Array[WeakRef] = []
+var _ui_streams: Dictionary = {}
+var _ui_random := RandomNumberGenerator.new()
 
 static func config_valid(data: Dictionary) -> bool:
 	if data.get("version") != 1:
@@ -58,7 +61,7 @@ static func config_valid(data: Dictionary) -> bool:
 			return false
 	if data.sounds.has("entry_chime") and not _audio_path(data.sounds.entry_chime):
 		return false
-	return true
+	return UISoundCatalog.valid(data)
 
 static func _valid_volume(value: Variant) -> bool:
 	return (value is int or value is float) and is_finite(float(value)) and value >= 0 and value <= 1
@@ -84,6 +87,7 @@ func _ready() -> void:
 	if settings_path.is_empty():
 		settings_path = config.settings_path
 	volumes = read_settings()
+	_ui_random.randomize()
 	for bus: String in ["Music", "UI"]:
 		if AudioServer.get_bus_index(bus) < 0:
 			AudioServer.add_bus()
@@ -259,6 +263,7 @@ func _stop_players() -> void:
 		_remember_playback(player)
 		player.stop()
 		player.stream = null
+	_ui_streams.clear()
 	active_player = -1
 	_requested_path = ""
 
@@ -283,16 +288,37 @@ func shutdown_async() -> bool:
 	return _pending_playbacks() == 0
 
 func play_ui(key: String = "click") -> void:
-	if _shutting_down or config.is_empty() or ui_players.is_empty() or not config.sounds.has(key):
+	if _shutting_down or config.is_empty() or ui_players.is_empty():
 		return
-	var path: String = config.sounds[key]
-	if not ResourceLoader.exists(path):
-		return
+	var resolved: String = key if config.sounds.has(key) else "click"
+	var policy: Dictionary = config.get("ui_policy",{})
+	var pitch := _ui_random.randf_range(float(policy.get("pitch_min",1.0)),float(policy.get("pitch_max",1.0)))
+	_play_ui_stream(str(config.sounds[resolved]),pitch,float(policy.get("gain_db",{}).get(resolved,0.0)))
+
+## Audition only registered candidates, at fixed pitch for fair comparison.
+func play_preview(path: String) -> bool:
+	if _shutting_down or config.is_empty() or not config.get("sound_catalog",{}).has(path):
+		return false
+	var key: String = config.sound_catalog[path].key
+	return _play_ui_stream(path,1.0,float(config.ui_policy.gain_db.get(key,0.0)))
+
+func _play_ui_stream(path: String, pitch: float, gain_db: float) -> bool:
+	if _shutting_down or ui_players.is_empty() or not UISoundCatalog.path_valid(path) or not ResourceLoader.exists(path):
+		return false
+	if not _ui_streams.has(path):
+		var stream := load(path) as AudioStream
+		if stream == null: return false
+		_ui_streams[path] = stream
 	var player: AudioStreamPlayer = ui_players[next_voice]
 	next_voice = (next_voice + 1) % ui_players.size()
-	player.stream = load(path)
+	_remember_playback(player)
+	player.stop()
+	player.stream = _ui_streams[path]
+	player.pitch_scale = pitch
+	player.volume_db = gain_db
 	player.play()
 	_remember_playback(player)
+	return true
 
 func add_settings_controls(parent: VBoxContainer) -> void:
 	for channel: String in ["music", "ui"]:

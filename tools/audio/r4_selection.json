@@ -1,0 +1,254 @@
+{
+  "version": 1,
+  "sample_rate": 44100,
+  "maximum_seconds": 0.33,
+  "lowpass_hz": 6000,
+  "fade_seconds": 0.005,
+  "target_lufs_short": -20,
+  "loudness_window_seconds": 0.04,
+  "vorbis_quality": 4,
+  "packs": {
+    "ui": {
+      "directory": "kenney_ui-audio",
+      "page": "https://kenney.nl/assets/ui-audio",
+      "author": "Kenney Vleugels",
+      "archive_sha256": "946fc23a63d535d693eb31b2eabb80c8c28d6351e2186b344ceb71b2cb1d5eb6"
+    },
+    "interface": {
+      "directory": "kenney_interface-sounds",
+      "page": "https://kenney.nl/assets/interface-sounds",
+      "author": "Kenney Vleugels",
+      "archive_sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232"
+    },
+    "rpg": {
+      "directory": "kenney_rpg-audio",
+      "page": "https://kenney.nl/assets/rpg-audio",
+      "author": "Kenney Vleugels",
+      "archive_sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b"
+    }
+  },
+  "selection": {
+    "click": {
+      "label": "轻点",
+      "choices": [
+        [
+          "ui",
+          "click1.ogg",
+          "轻短叩击"
+        ],
+        [
+          "ui",
+          "rollover5.ogg",
+          "低沉轻点"
+        ],
+        [
+          "ui",
+          "rollover4.ogg",
+          "柔和触碰"
+        ]
+      ]
+    },
+    "page": {
+      "label": "翻书",
+      "choices": [
+        [
+          "rpg",
+          "bookFlip1.ogg",
+          "翻书起始段"
+        ],
+        [
+          "rpg",
+          "bookOpen.ogg",
+          "轻轻打开书"
+        ],
+        [
+          "rpg",
+          "bookClose.ogg",
+          "纸页轻合"
+        ]
+      ]
+    },
+    "coin": {
+      "label": "硬币",
+      "soft_lowpass_hz": 2200,
+      "choices": [
+        [
+          "rpg",
+          "handleCoins2.ogg",
+          "少量硬币轻碰"
+        ],
+        [
+          "rpg",
+          "metalLatch.ogg",
+          "轻金属扣碰"
+        ],
+        [
+          "rpg",
+          "metalClick.ogg",
+          "短金属轻响"
+        ]
+      ]
+    },
+    "confirm": {
+      "label": "确认",
+      "choices": [
+        [
+          "rpg",
+          "bookClose.ogg",
+          "书本轻合"
+        ],
+        [
+          "ui",
+          "rollover4.ogg",
+          "柔和木感触碰"
+        ],
+        [
+          "interface",
+          "back_004.ogg",
+          "柔和短回弹"
+        ]
+      ]
+    },
+    "cancel": {
+      "label": "取消",
+      "choices": [
+        [
+          "ui",
+          "rollover5.ogg",
+          "低沉轻点"
+        ],
+        [
+          "interface",
+          "back_002.ogg",
+          "低频短触碰"
+        ],
+        [
+          "rpg",
+          "cloth3.ogg",
+          "柔软布面收起"
+        ]
+      ]
+    },
+    "notify": {
+      "label": "轻铃提示",
+      "choices": [
+        [
+          "interface",
+          "glass_003.ogg",
+          "玻璃轻碰提示"
+        ],
+        [
+          "rpg",
+          "metalPot1.ogg",
+          "柔化金属共鸣"
+        ],
+        [
+          "rpg",
+          "metalPot2.ogg",
+          "短金属提示"
+        ]
+      ]
+    },
+    "stamp": {
+      "label": "盖章",
+      "choices": [
+        [
+          "rpg",
+          "bookPlace1.ogg",
+          "书本落桌"
+        ],
+        [
+          "rpg",
+          "bookPlace3.ogg",
+          "较轻落桌"
+        ],
+        [
+          "rpg",
+          "bookClose.ogg",
+          "纸面轻合"
+        ]
+      ]
+    },
+    "card_flip": {
+      "label": "翻牌",
+      "choices": [
+        [
+          "rpg",
+          "bookFlip1.ogg",
+          "纸页翻动"
+        ],
+        [
+          "rpg",
+          "bookOpen.ogg",
+          "薄纸打开"
+        ],
+        [
+          "rpg",
+          "cloth4.ogg",
+          "柔软纸面翻动"
+        ]
+      ]
+    },
+    "card_slide": {
+      "label": "滑牌",
+      "choices": [
+        [
+          "rpg",
+          "cloth2.ogg",
+          "柔软表面滑动"
+        ],
+        [
+          "interface",
+          "scroll_003.ogg",
+          "柔和滚动提示"
+        ],
+        [
+          "rpg",
+          "cloth3.ogg",
+          "低频纸布摩擦"
+        ]
+      ]
+    },
+    "paper": {
+      "label": "纸张放下",
+      "choices": [
+        [
+          "rpg",
+          "bookPlace3.ogg",
+          "薄册落桌"
+        ],
+        [
+          "rpg",
+          "cloth4.ogg",
+          "轻软放下"
+        ],
+        [
+          "rpg",
+          "bookPlace2.ogg",
+          "书本放下起始段"
+        ]
+      ]
+    },
+    "wood": {
+      "label": "木牌",
+      "choices": [
+        [
+          "rpg",
+          "bookClose.ogg",
+          "柔和木纸轻合"
+        ],
+        [
+          "rpg",
+          "bookPlace1.ogg",
+          "木桌轻叩"
+        ],
+        [
+          "ui",
+          "rollover4.ogg",
+          "柔和木感触碰"
+        ]
+      ]
+    }
+  },
+  "retained_entry_chime": "res://assets/audio/ui/notify.ogg"
+}

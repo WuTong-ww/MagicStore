@@ -91,3 +91,47 @@ Fabric Of Life.ogg｜`8622ec2d6391153a52fe53cfc278a53fa62bf03a46ca6215df98a57f63
 数字及ASCII标点使用本项目从霞鹜文楷等宽 Regular v1.530 制作的子集，作者 LXGW / The Klee Project Authors；[固定版本原字体](https://raw.githubusercontent.com/lxgw/LxgwWenKai/v1.530/fonts/TTF/LXGWWenKaiMono-Regular.ttf)，[原许可](https://raw.githubusercontent.com/lxgw/LxgwWenKai/v1.530/OFL.txt)，SIL Open Font License 1.1。原字体SHA256 `895ce1d2fa00d5ca3bec0329d38e3190454f4b5fa7b4733f491c419faf9753a1`，仅保留U+0020–U+007E的95字形，统一原有500 advance；衍生字体改名Midnight Numeric以避开保留名称，原版权通知完整保留。
 
 项目字体 `assets/fonts/MidnightNumeric-Regular.ttf`（30944B）SHA256 `ff3dd9fce45675922f803bae772f0260e4fe126031862a0262a2c0bdcafde8d0`；完整许可 `assets/fonts/MidnightNumeric-OFL.txt` SHA256 `1a25e35da1031c6c3436fde545bb9cb5aca954e9873afe510c834b8b79bd21a0`。中文继续使用前述完整霞鹜文楷，两个FontFile均关闭系统字体回退；未向系统安装字体。
+
+## 第四轮 B2 界面音效（2026-11-28）
+
+作者：Kenney Vleugels（Kenney.nl）。来源包：[UI Audio](https://kenney.nl/assets/ui-audio)、[Interface Sounds](https://kenney.nl/assets/interface-sounds)、[RPG Audio](https://kenney.nl/assets/rpg-audio)。官方页面及包内 License.txt 均标 CC0 1.0；原始 ZIP 仅存工作区临时下载目录，未提交。三份许可证完整内容保存在 assets/audio/ui/r4/LICENSE-*.md，仅规范为LF换行。
+
+处理：取开头至多330ms、转单声道44.1kHz、6kHz低通、头尾5ms淡入淡出、40ms短窗K加权响度约−20 LUFS、Vorbis q4。硬币三候选额外2.2kHz低通；非广播节目R128测量。所有33份运行音效共179498字节。来源包/原文件SHA256、处理参数、音调/起音/响度指标见 data/ui/audio.json 的 sound_catalog，复现选择见 tools/audio/r4_selection.json。未作真人听感签收。
+
+| 文件 | 原文件 | 来源 | SHA256 |
+|---|---|---|---|
+| assets/audio/ui/r4/click.ogg | click1.ogg | [Kenney](https://kenney.nl/assets/ui-audio) · CC0-1.0 | fc012018bf38d91f38ef5ab1252a3fac76a1b174aaea89c76f52011c411f56c3 |
+| assets/audio/ui/r4/click_alt1.ogg | rollover5.ogg | [Kenney](https://kenney.nl/assets/ui-audio) · CC0-1.0 | b3870b4ac334b24153211844f7b959623423a2128429d143380b140ef77ce9b0 |
+| assets/audio/ui/r4/click_alt2.ogg | rollover4.ogg | [Kenney](https://kenney.nl/assets/ui-audio) · CC0-1.0 | 7d0a737b1dd80735e056385650b06857702825a36e1a297a47cb72de2b5f1039 |
+| assets/audio/ui/r4/page.ogg | bookFlip1.ogg | [Kenney](https://kenney.nl/assets/rpg-audio) · CC0-1.0 | 3d037b37326d78e653b94d0e68247973a60e1ae1b628943fa2d99c6a3a4958cd |
+| assets/audio/ui/r4/page_alt1.ogg | bookOpen.ogg | [Kenney](https://kenney.nl/assets/rpg-audio) · CC0-1.0 | 91cc5f9c3310346c896bdeccfa546c2841d07aaafe1b457918b08e8e2c0fc705 |
+| assets/audio/ui/r4/page_alt2.ogg | bookClose.ogg | [Kenney](https://kenney.nl/assets/rpg-audio) · CC0-1.0 | f0cb3a3d8687b210e8666d71239f8ee282db97747bc0f9967e6014ea6476686c |
+| assets/audio/ui/r4/coin.ogg | handleCoins2.ogg | [Kenney](https://kenney.nl/assets/rpg-audio) · CC0-1.0 | 133ed3485ed629e85f8314be5d274a14d6b759478bf0ed2124c18489229ad201 |
+| assets/audio/ui/r4/coin_alt1.ogg | metalLatch.ogg | [Kenney](https://kenney.nl/assets/rpg-audio) · CC0-1.0 | e767f6dd134a494a7ee79ec6d9869911065817ec13d7727d49f9f2e1df9bf6f8 |
+| assets/audio/ui/r4/coin_alt2.ogg | metalClick.ogg | [Kenney](https://kenney.nl/assets/rpg-audio) · CC0-1.0 | 9f956a1713d12b59a9b4d6bd0f89010a98a05c57c500acc73194a95845292905 |
+| assets/audio/ui/r4/confirm.ogg | bookClose.ogg | [Kenney](https://kenney.nl/assets/rpg-audio) · CC0-1.0 | f0cb3a3d8687b210e8666d71239f8ee282db97747bc0f9967e6014ea6476686c |
+| assets/audio/ui/r4/confirm_alt1.ogg | rollover4.ogg | [Kenney](https://kenney.nl/assets/ui-audio) · CC0-1.0 | 7d0a737b1dd80735e056385650b06857702825a36e1a297a47cb72de2b5f1039 |
+| assets/audio/ui/r4/confirm_alt2.ogg | back_004.ogg | [Kenney](https://kenney.nl/assets/interface-sounds) · CC0-1.0 | fc066bde4f3374480d9c7cda502be73a8182f41aab2cf98489ce40ded38fa01f |
+| assets/audio/ui/r4/cancel.ogg | rollover5.ogg | [Kenney](https://kenney.nl/assets/ui-audio) · CC0-1.0 | b3870b4ac334b24153211844f7b959623423a2128429d143380b140ef77ce9b0 |
+| assets/audio/ui/r4/cancel_alt1.ogg | back_002.ogg | [Kenney](https://kenney.nl/assets/interface-sounds) · CC0-1.0 | 8718c66007dfb2ae3c6f4e2fe5dd93f56bd6cc2a65b963dffa6740e37f79a500 |
+| assets/audio/ui/r4/cancel_alt2.ogg | cloth3.ogg | [Kenney](https://kenney.nl/assets/rpg-audio) · CC0-1.0 | 508f3712d0c6d089ed95feef43a16deaad518e3330e941ecd4906e2d7a054d6b |
+| assets/audio/ui/r4/notify.ogg | glass_003.ogg | [Kenney](https://kenney.nl/assets/interface-sounds) · CC0-1.0 | 34ef49791d9ba48c901be4ee8dd8c696bcd1f2285b6448fd85a62c0a790992f8 |
+| assets/audio/ui/r4/notify_alt1.ogg | metalPot1.ogg | [Kenney](https://kenney.nl/assets/rpg-audio) · CC0-1.0 | ce9aaaf8d7ef8e7739a20544d0fa6c08f78d2cc0d4e14f11acd0d189f400fe04 |
+| assets/audio/ui/r4/notify_alt2.ogg | metalPot2.ogg | [Kenney](https://kenney.nl/assets/rpg-audio) · CC0-1.0 | d9f6d0e4e9d4a8699bd035a6a270d631fb7722e212714049d32b1c4b7e4daba2 |
+| assets/audio/ui/r4/stamp.ogg | bookPlace1.ogg | [Kenney](https://kenney.nl/assets/rpg-audio) · CC0-1.0 | 7f234ff06b1674517e2de6aba15e693ebc9aa80fa866b0f2e9cec3f060e6397d |
+| assets/audio/ui/r4/stamp_alt1.ogg | bookPlace3.ogg | [Kenney](https://kenney.nl/assets/rpg-audio) · CC0-1.0 | c4998106e50052d19860ef6636db0dfe43c4be3024d6e057ceca83b757e38016 |
+| assets/audio/ui/r4/stamp_alt2.ogg | bookClose.ogg | [Kenney](https://kenney.nl/assets/rpg-audio) · CC0-1.0 | f0cb3a3d8687b210e8666d71239f8ee282db97747bc0f9967e6014ea6476686c |
+| assets/audio/ui/r4/card_flip.ogg | bookFlip1.ogg | [Kenney](https://kenney.nl/assets/rpg-audio) · CC0-1.0 | 3d037b37326d78e653b94d0e68247973a60e1ae1b628943fa2d99c6a3a4958cd |
+| assets/audio/ui/r4/card_flip_alt1.ogg | bookOpen.ogg | [Kenney](https://kenney.nl/assets/rpg-audio) · CC0-1.0 | 91cc5f9c3310346c896bdeccfa546c2841d07aaafe1b457918b08e8e2c0fc705 |
+| assets/audio/ui/r4/card_flip_alt2.ogg | cloth4.ogg | [Kenney](https://kenney.nl/assets/rpg-audio) · CC0-1.0 | 6dfc01d33c41a3a060aa527d6f3dedd8f0e37ca1f8b88d217e1dd9bbc12896aa |
+| assets/audio/ui/r4/card_slide.ogg | cloth2.ogg | [Kenney](https://kenney.nl/assets/rpg-audio) · CC0-1.0 | 47589a21f73041f36e043625643aab39559d9bae050340bc71652bbfa55036c4 |
+| assets/audio/ui/r4/card_slide_alt1.ogg | scroll_003.ogg | [Kenney](https://kenney.nl/assets/interface-sounds) · CC0-1.0 | 1c5f43f76ba661ccec6e26f53c50c55e62941d02687abccab6f5e1a6a0c39beb |
+| assets/audio/ui/r4/card_slide_alt2.ogg | cloth3.ogg | [Kenney](https://kenney.nl/assets/rpg-audio) · CC0-1.0 | 508f3712d0c6d089ed95feef43a16deaad518e3330e941ecd4906e2d7a054d6b |
+| assets/audio/ui/r4/paper.ogg | bookPlace3.ogg | [Kenney](https://kenney.nl/assets/rpg-audio) · CC0-1.0 | c4998106e50052d19860ef6636db0dfe43c4be3024d6e057ceca83b757e38016 |
+| assets/audio/ui/r4/paper_alt1.ogg | cloth4.ogg | [Kenney](https://kenney.nl/assets/rpg-audio) · CC0-1.0 | 6dfc01d33c41a3a060aa527d6f3dedd8f0e37ca1f8b88d217e1dd9bbc12896aa |
+| assets/audio/ui/r4/paper_alt2.ogg | bookPlace2.ogg | [Kenney](https://kenney.nl/assets/rpg-audio) · CC0-1.0 | ec10ab70fd1d1af44f39b93071e4cc6832b4b2f6f2a86b5c4746ad66e374abbb |
+| assets/audio/ui/r4/wood.ogg | bookClose.ogg | [Kenney](https://kenney.nl/assets/rpg-audio) · CC0-1.0 | f0cb3a3d8687b210e8666d71239f8ee282db97747bc0f9967e6014ea6476686c |
+| assets/audio/ui/r4/wood_alt1.ogg | bookPlace1.ogg | [Kenney](https://kenney.nl/assets/rpg-audio) · CC0-1.0 | 7f234ff06b1674517e2de6aba15e693ebc9aa80fa866b0f2e9cec3f060e6397d |
+| assets/audio/ui/r4/wood_alt2.ogg | rollover4.ogg | [Kenney](https://kenney.nl/assets/ui-audio) · CC0-1.0 | 7d0a737b1dd80735e056385650b06857702825a36e1a297a47cb72de2b5f1039 |
+
+每个用途一个主选和两个候选；若相同源与相同处理在不同用途复用，输出字节相同且来源逐份登记，不伪称不同录音。
